@@ -1,0 +1,63 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+#go
+go.mod
+go.sum
+
+build
+build-make
+cmake-build-debug
+.idea
+.DS_Store
+bazel-out
+bazel-*
+.clwb
+docs/xml
+.vscode
+shark/version.h
+tests/config.h
+Testing
+__pycache__/
+*.py[cod]
+_skbuild
+
+# kmcmake_cc_xxd generated assets (IDE-friendly source-tree output)
+*.xxd.h
+*.xxd.cc
+**/xxd_gen.h
+**/xxd_gen.cc
+
+# CPM (optional; lock file if written under source tree)
+cpm-package-lock.cmake
+

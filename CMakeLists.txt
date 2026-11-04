@@ -1,0 +1,165 @@
+# Copyright (C) Kumo inc. and its affiliates.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+####################################################################################
+# generate by kmcmake (vckgctl gencmake pro_name -o your/path)
+# https://github.com/koomx/kmcmake
+####################################################################################
+
+cmake_minimum_required(VERSION 3.31)
+
+project(shark CXX)
+
+option(${PROJECT_NAME}_IS_TOP_PROJECT "shark project is the top level project or not" ON)
+
+get_property(not_top DIRECTORY PROPERTY PARENT_DIRECTORY)
+if (not_top)
+    set(${PROJECT_NAME}_IS_TOP_PROJECT OFF)
+endif ()
+
+set(PROJECT_DESCRIPTION "Hercules is an ahead of time compiler for a subset of the Python language framework.")
+set(PROJECT_VERSION_MAJOR 0)
+set(PROJECT_VERSION_MINOR 0)
+set(PROJECT_VERSION_PATCH 5)
+set(PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
+
+set(${PROJECT_NAME}_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+set(${PROJECT_NAME}_VERSION_MINOR ${PROJECT_VERSION_MINOR})
+set(${PROJECT_NAME}_VERSION_PATCH ${PROJECT_VERSION_PATCH})
+set(${PROJECT_NAME}_VERSION ${PROJECT_VERSION})
+
+string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UP)
+
+option(PYTHON_EXTENSION "kmcmake set build shared library or not" OFF)
+set(KMCMAKE_VERSION 1.7.0)
+
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/kmcmake)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/kmcmake/tools)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/kmcmake/arch)
+##################################################################
+# add this for ${PROJECT_NAME} 's cmake include
+##################################################################
+list(APPEND CMAKE_MODULE_PATH ${${PROJECT_NAME}_SOURCE_DIR}/cmake)
+#######################################################################
+# warning
+# in kmcmake directory, caution to modify files in that dir
+######################################################################
+include(kmcmake_module)
+
+##################################################################
+#
+# your cmake directory ${PROJECT_SOURCE_DIR}/cmake, do things here
+#################################################################
+
+# User custom options/hooks (optional). Loaded first so overrides apply
+# to deps/cxx/test config includes below.
+include(shark_user_option OPTIONAL)
+
+include(shark_deps)
+include(shark_cxx_config)
+
+string(TOUPPER ${CMAKE_BUILD_TYPE} UPPERCASE_BUILD_TYPE)
+configure_file(${PROJECT_SOURCE_DIR}/shark/version.h.in ${PROJECT_SOURCE_DIR}/shark/version.h @ONLY)
+
+add_subdirectory(shark)
+####################################################################
+# belows are auto, edit it be cation
+####################################################################
+if (KMCMAKE_BUILD_TEST)
+    add_subdirectory(tests)
+endif ()
+
+if (KMCMAKE_BUILD_BENCHMARK)
+    add_subdirectory(benchmark)
+endif ()
+
+if (KMCMAKE_BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif ()
+if(NOT PYTHON_EXTENSION)
+    ##############################################
+    # header installing
+    #############################################
+    include(shark_install_header)
+
+    # Layout. This works for all platforms:
+    #   * <prefix>//cmake/<PROJECT-NAME>
+    #   * <prefix>/*/
+    #   * <prefix>/include/
+    set(config_install_dir "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
+
+    set(generated_dir "${CMAKE_CURRENT_BINARY_DIR}/generated")
+
+    # Configuration
+    set(version_config "${generated_dir}/${PROJECT_NAME}ConfigVersion.cmake")
+    set(project_config "${generated_dir}/${PROJECT_NAME}Config.cmake")
+    set(TARGETS_EXPORT_NAME "${PROJECT_NAME}Targets")
+    set(namespace "${PROJECT_NAME}::")
+
+    # Include module with fuction 'write_basic_package_version_file'
+    include(CMakePackageConfigHelpers)
+
+    # Configure '<PROJECT-NAME>ConfigVersion.cmake'
+    # Use:
+    #   * PROJECT_VERSION
+    write_basic_package_version_file(
+            "${version_config}" COMPATIBILITY SameMajorVersion
+    )
+
+    # Configure '<PROJECT-NAME>Config.cmake'
+    # Use variables:
+    #   * TARGETS_EXPORT_NAME
+    #   * PROJECT_NAME
+    configure_package_config_file(
+            "cmake/shark_config.cmake.in"
+            "${project_config}"
+            INSTALL_DESTINATION "${config_install_dir}"
+    )
+
+    #Targets:
+    #  * <prefix>/${CMAKE_INSTALL_LIBDIR}/libbar.a
+    #  * <prefix>/${CMAKE_INSTALL_LIBDIR}/libbaz.a
+    #  * header location after install: <prefix>/include/foo/Bar.hpp
+    #  * headers can be included by C++ code `#include <foo/Bar.hpp>`
+
+
+    # Config
+    #   * <prefix>/${CMAKE_INSTALL_LIBDIR}/cmake/Foo/FooConfig.cmake
+    #   * <prefix>/${CMAKE_INSTALL_LIBDIR}/cmake/Foo/FooConfigVersion.cmake
+    install(
+            FILES
+            "${project_config}" "${version_config}" "cmake/shark_user_option.cmake"
+            DESTINATION
+            "${config_install_dir}"
+    )
+
+    # Config
+    #   * <prefix>/${CMAKE_INSTALL_LIBDIR}/cmake/Foo/FooTargets.cmake
+
+    install(
+            EXPORT
+            "${TARGETS_EXPORT_NAME}"
+            NAMESPACE
+            "${namespace}"
+            DESTINATION
+            "${config_install_dir}"
+    )
+    configure_file(${PROJECT_SOURCE_DIR}/kmcmake/package/pkg_dump_template.pc.in
+            ${PROJECT_BINARY_DIR}/package/${PROJECT_NAME}.pc)
+
+    install(FILES ${PROJECT_BINARY_DIR}/package/${PROJECT_NAME}.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+endif()
+kmcmake_print("shark cmake build system is created by kmcmake")
+kmcmake_print("kmcmake: https://github.com/koomx/kmcmake")
+kmcmake_print("generate: vckgctl gencmake  or  cmake -S <kmcmake>/template")

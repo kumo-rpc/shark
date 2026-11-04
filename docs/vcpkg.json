@@ -1,0 +1,23 @@
+{
+  "name": "hadar",
+  "version": "1.2.1",
+  "description": "Library for fast text representation and classification.",
+  "homepage": "https://github.com/kumose/hadar",
+  "license": "Apache-2.0",
+  "dependencies": [
+    "darts",
+    "marisa-trie",
+    "rapidjson",
+    "tclap",
+    "turbo",
+    "xxd",
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ]
+}

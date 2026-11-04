@@ -1,0 +1,97 @@
+// Copyright (C) 2026 Kumo inc. and its affiliates. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+#pragma once
+
+// project name version
+#define @PROJECT_NAME_UP@_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define @PROJECT_NAME_UP@_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define @PROJECT_NAME_UP@_VERSION_PATCH @PROJECT_VERSION_PATCH@
+#define @PROJECT_NAME_UP@_VERSION ((PROJECT_VERSION_MAJOR * 1000) + PROJECT_VERSION_MINOR) * 1000 + PROJECT_VERSION_PATCH
+
+#define @PROJECT_NAME_UP@_VERSION_STRING "@PROJECT_VERSION@"
+
+// build system
+#define @PROJECT_NAME_UP@_BUILD_SYSTEM "@LC_KMCMAKE_PRETTY_NAME@"
+
+// build system version
+#define @PROJECT_NAME_UP@_BUILD_SYSTEM_VERSION "@KMCMAKE_DISTRO_VERSION_ID@"
+
+
+// compiler gnu or clang
+#define @PROJECT_NAME_UP@_CXX_COMPILER_ID "@CMAKE_CXX_COMPILER_ID@"
+
+// compiler version
+#define @PROJECT_NAME_UP@_CXX_COMPILER_VERSION "@CMAKE_CXX_COMPILER_VERSION@"
+
+// cmake cxx compiler flags
+#define @PROJECT_NAME_UP@_CMAKE_CXX_COMPILER_FLAGS "@CMAKE_CXX_COMPILER_FLAGS@"
+
+// user defined cxx compiler flags
+#define @PROJECT_NAME_UP@_CXX_COMPILER_FLAGS "@KMCMAKE_CXX_OPTIONS@"
+
+// cxx standard
+#define @PROJECT_NAME_UP@_CXX_STANDARD "@CMAKE_CXX_STANDARD@"
+
+// build type
+#define @PROJECT_NAME_UP@_BUILD_TYPE_STRING "@UPPERCASE_BUILD_TYPE@"
+
+// build type
+#define @PROJECT_NAME_UP@_BUILD_@UPPERCASE_BUILD_TYPE@
+
+// build type
+#if defined(@PROJECT_NAME_UP@_BUILD_DEBUG)
+    #define IS_@PROJECT_NAME_UP@_BUILD_TYPE_DEBUG 1
+#else
+    #define IS_@PROJECT_NAME_UP@_BUILD_TYPE_DEBUG 0
+#endif
+
+////////////////////////////////////////////////////////////////////////////////
+/// simd region
+
+// SIMD target level string (NONE / SSE / SSE2 / ... / AVX512)
+#define @PROJECT_NAME_UP@_SIMD_LEVEL "@KMCMAKE_RUNTIME_SIMD_LEVEL@"
+
+// Per-feature SIMD enable flags
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_SSE     @KMCMAKE_ARCH_ENABLE_SSE@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_SSE2    @KMCMAKE_ARCH_ENABLE_SSE2@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_SSE3    @KMCMAKE_ARCH_ENABLE_SSE3@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_SSSE3   @KMCMAKE_ARCH_ENABLE_SSSE3@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_SSE4_1  @KMCMAKE_ARCH_ENABLE_SSE4_1@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_SSE4_2  @KMCMAKE_ARCH_ENABLE_SSE4_2@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_AVX     @KMCMAKE_ARCH_ENABLE_AVX@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_AVX2    @KMCMAKE_ARCH_ENABLE_AVX2@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_AVX512F @KMCMAKE_ARCH_ENABLE_AVX512F@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_BMI1    @KMCMAKE_ARCH_ENABLE_BMI1@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_BMI2     @KMCMAKE_ARCH_ENABLE_BMI2@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_FMA     @KMCMAKE_ARCH_ENABLE_FMA@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_F16C    @KMCMAKE_ARCH_ENABLE_F16C@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_POPCNT  @KMCMAKE_ARCH_ENABLE_POPCNT@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_LZCNT    @KMCMAKE_ARCH_ENABLE_LZCNT@
+#define @PROJECT_NAME_UP@_SIMD_ENABLE_MOVBE    @KMCMAKE_ARCH_ENABLE_MOVBE@
+
+///////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+/// Git Version Information
+////////////////////////////////////////////////////////////////////////////////
+// Full Git commit hash (e.g., "a1b2c3d4e5f67890abcdef1234567890abcdef12")
+#define @PROJECT_NAME_UP@_GIT_COMMIT_HASH "@GIT_COMMIT_HASH@"
+// Short Git commit hash (e.g., "a1b2c3d")
+#define @PROJECT_NAME_UP@_GIT_COMMIT_SHORT_HASH "@GIT_COMMIT_SHORT_HASH@"
+// Git dirty flag (0 = clean working tree, 1 = uncommitted changes)
+#define @PROJECT_NAME_UP@_GIT_IS_DIRTY @GIT_IS_DIRTY@
+// Combined Git version string (e.g., "0.6.0-a1b2c3d" or "0.6.0-a1b2c3d-dirty")
+#define @PROJECT_NAME_UP@_GIT_VERSION_STRING "@GIT_VERSION_STRING@"
