@@ -60,4 +60,5 @@ _skbuild
 
 # CPM (optional; lock file if written under source tree)
 cpm-package-lock.cmake
+refs
 
