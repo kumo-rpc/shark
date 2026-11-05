@@ -1,0 +1,980 @@
+// Copyright (c) 2013-2014 Sandstorm Development Group, Inc. and contributors
+// Licensed under the MIT License:
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+#include <shark/kj/array.h>
+#include <shark/kj/debug.h>
+#include <shark/kj/test.h>
+#include <shark/kj/function.h>
+#include <signal.h>
+#include <string>
+#include <list>
+#include <shark/kj/compat/gtest.h>
+#include <span>
+
+namespace kj {
+namespace {
+
+#if KJ_ASSERT_ARRAYPTR_COUNTERS
+KJ_TEST("Array rejects destruction with an active ArrayPtr") {
+  KJ_EXPECT_SIGNAL(SIGABRT, {
+    auto array = heapArray<int>(4);
+    auto ptr = new ArrayPtr<int>(array.asPtr().slice(1));
+    (void)ptr;
+  });
+}
+#endif
+
+struct CloneableElement {
+  int clone() const { return 123; }
+};
+
+struct NonConstCloneableElement {
+  int clone() { return 123; }
+};
+
+struct NonCloneableElement {};
+
+struct NonCloneableNonCopyableElement {
+  NonCloneableNonCopyableElement() = default;
+  NonCloneableNonCopyableElement(const NonCloneableNonCopyableElement&) = delete;
+};
+
+static_assert(Cloneable<Array<CloneableElement>>);
+static_assert(Cloneable<const Array<CloneableElement>>);
+static_assert(Cloneable<ArrayPtr<CloneableElement>>);
+static_assert(Cloneable<const ArrayPtr<CloneableElement>>);
+static_assert(Cloneable<Array<NonConstCloneableElement>>);
+static_assert(Cloneable<const Array<NonConstCloneableElement>>);
+static_assert(Cloneable<ArrayPtr<NonConstCloneableElement>>);
+static_assert(Cloneable<const ArrayPtr<NonConstCloneableElement>>);
+static_assert(Cloneable<Array<NonCloneableElement>>);
+static_assert(Cloneable<const Array<NonCloneableElement>>);
+static_assert(Cloneable<ArrayPtr<NonCloneableElement>>);
+static_assert(Cloneable<const ArrayPtr<NonCloneableElement>>);
+static_assert(Cloneable<Array<int>>);
+static_assert(Cloneable<const Array<int>>);
+static_assert(Cloneable<ArrayPtr<int>>);
+static_assert(Cloneable<const ArrayPtr<int>>);
+static_assert(!Cloneable<Array<NonCloneableNonCopyableElement>>);
+static_assert(!Cloneable<ArrayPtr<NonCloneableNonCopyableElement>>);
+
+struct TestObject {
+  TestObject() {
+    index = count;
+    KJ_ASSERT(index != throwAt);
+    ++count;
+  }
+  TestObject(const TestObject& other) {
+    KJ_ASSERT(other.index != throwAt);
+    index = -1;
+    copiedCount++;
+  }
+  ~TestObject() noexcept(false) {
+    if (index == -1) {
+      --copiedCount;
+    } else {
+      --count;
+      EXPECT_EQ(index, count);
+      KJ_ASSERT(count != throwAt);
+    }
+  }
+
+  int index;
+
+  static int count;
+  static int copiedCount;
+  static int throwAt;
+};
+
+int TestObject::count = 0;
+int TestObject::copiedCount = 0;
+int TestObject::throwAt = -1;
+
+struct TestNoexceptObject {
+  TestNoexceptObject() noexcept {
+    index = count;
+    ++count;
+  }
+  TestNoexceptObject(const TestNoexceptObject& other) noexcept {
+    index = -1;
+    copiedCount++;
+  }
+  ~TestNoexceptObject() noexcept {
+    if (index == -1) {
+      --copiedCount;
+    } else {
+      --count;
+      EXPECT_EQ(index, count);
+    }
+  }
+
+  int index;
+
+  static int count;
+  static int copiedCount;
+};
+
+int TestNoexceptObject::count = 0;
+int TestNoexceptObject::copiedCount = 0;
+
+KJ_TEST("swp Array") {
+  auto a = heapArray<int>({1, 2});
+  auto b = heapArray<int>({3, 4, 5});
+  auto aBegin = a.begin();
+  auto bBegin = b.begin();
+
+  kj::swp(a, b);
+
+  KJ_EXPECT(a.begin() == bBegin, a.size(), a[0], a[1], a[2]);
+  KJ_EXPECT(b.begin() == aBegin, b.size(), b[0], b[1]);
+  KJ_EXPECT(a.size() == 3 && a[0] == 3 && a[1] == 4 && a[2] == 5);
+  KJ_EXPECT(b.size() == 2 && b[0] == 1 && b[1] == 2);
+}
+
+TEST(Array, TrivialConstructor) {
+//  char* ptr;
+  {
+    Array<char> chars = heapArray<char>(32);
+//    ptr = chars.begin();
+    chars[0] = 12;
+    chars[1] = 34;
+  }
+
+  {
+    Array<char> chars = heapArray<char>(32);
+
+    // TODO(test):  The following doesn't work in opt mode -- I guess some allocators zero the
+    //   memory?  Is there some other way we can test this?  Maybe override malloc()?
+//    // Somewhat hacky:  We can't guarantee that the new array is allocated in the same place, but
+//    // any reasonable allocator is highly likely to do so.  If it does, then we expect that the
+//    // memory has not been initialized.
+//    if (chars.begin() == ptr) {
+//      EXPECT_NE(chars[0], 0);
+//      EXPECT_NE(chars[1], 0);
+//    }
+  }
+
+  {
+    Array<char> chars = heapArray<char>(32, 'x');
+    for (char c : chars) EXPECT_EQ('x', c);
+  }
+}
+
+TEST(Array, ComplexConstructor) {
+  TestObject::count = 0;
+  TestObject::throwAt = -1;
+
+  {
+    Array<TestObject> array = heapArray<TestObject>(32);
+    EXPECT_EQ(32, TestObject::count);
+  }
+  EXPECT_EQ(0, TestObject::count);
+}
+
+// SmallArray tests largely mirror the regular Array tests, with some minor modifications as
+// required. Several of the SmallArray tests have ...OverLimit varieties, which test the SmallArray
+// when it falls back to heapArray(). These are only a few, since heapArray() is already well-tested
+// by itself.
+
+constexpr auto SBO_TEST_SIZE = 32;
+
+TEST(SmallArray, TrivialConstructor) {
+  {
+    SmallArray<char, SBO_TEST_SIZE> chars(SBO_TEST_SIZE);
+    chars[0] = 12;
+    chars[1] = 34;
+  }
+
+  {
+    SmallArray<char, SBO_TEST_SIZE> chars(SBO_TEST_SIZE);
+    // TODO(test): See TEST(Array, TrivialConstructor) for why this ends abruptly.
+  }
+}
+
+TEST(SmallArray, TrivialConstructorOverLimit) {
+  {
+    SmallArray<char, SBO_TEST_SIZE> chars(SBO_TEST_SIZE * 2);
+    chars[0] = 12;
+    chars[1] = 34;
+  }
+
+  {
+    SmallArray<char, SBO_TEST_SIZE> chars(SBO_TEST_SIZE * 2);
+    // TODO(test): See TEST(Array, TrivialConstructor) for why this ends abruptly.
+  }
+}
+
+TEST(SmallArray, ComplexConstructor) {
+  TestObject::count = 0;
+  TestObject::throwAt = -1;
+
+  {
+    SmallArray<TestObject, SBO_TEST_SIZE> array(SBO_TEST_SIZE - 1);
+    // Despite requesting one fewer than `SBO_TEST_SIZE`, the entire `SBO_TEST_SIZE` is constructed.
+    EXPECT_EQ(SBO_TEST_SIZE, TestObject::count);
+  }
+  EXPECT_EQ(0, TestObject::count);
+}
+
+TEST(SmallArray, ComplexConstructorOverLimit) {
+  TestObject::count = 0;
+  TestObject::throwAt = -1;
+
+  {
+    SmallArray<TestObject, SBO_TEST_SIZE> array(SBO_TEST_SIZE * 2);
+    // We expect 3x `SBO_TEST_SIZE` TestObjects to be constructed: 1x for the unused SBO space, 2x
+    // for SmallArray's fallback heap Array.
+    EXPECT_EQ(SBO_TEST_SIZE * 3, TestObject::count);
+  }
+  EXPECT_EQ(0, TestObject::count);
+}
+
+TEST(Array, ThrowingConstructor) {
+  TestObject::count = 0;
+  TestObject::throwAt = 16;
+
+  // If a constructor throws, the previous elements should still be destroyed.
+  EXPECT_ANY_THROW(heapArray<TestObject>(32));
+  EXPECT_EQ(0, TestObject::count);
+}
+
+TEST(SmallArray, ThrowingConstructor) {
+  TestObject::count = 0;
+  TestObject::throwAt = 16;
+
+  // If a constructor throws, the previous elements should still be destroyed.
+  constexpr auto smallArray = []() {
+    SmallArray<TestObject, SBO_TEST_SIZE> arr(SBO_TEST_SIZE);
+  };
+  EXPECT_ANY_THROW(smallArray());
+  EXPECT_EQ(0, TestObject::count);
+}
+
+TEST(SmallArray, ThrowingConstructorOverLimit) {
+  TestObject::count = 0;
+  TestObject::throwAt = 16;
+
+  // If a constructor throws, the previous elements should still be destroyed.
+  constexpr auto smallArray = []() {
+    SmallArray<TestObject, SBO_TEST_SIZE> arr(SBO_TEST_SIZE * 2);
+  };
+  EXPECT_ANY_THROW(smallArray());
+  EXPECT_EQ(0, TestObject::count);
+}
+
+TEST(Array, ThrowingDestructor) {
+  TestObject::count = 0;
+  TestObject::throwAt = -1;
+
+  Array<TestObject> array = heapArray<TestObject>(32);
+  EXPECT_EQ(32, TestObject::count);
+
+  // If a destructor throws, all elements should still be destroyed.
+  TestObject::throwAt = 16;
+  EXPECT_ANY_THROW(array = nullptr);
+  EXPECT_EQ(0, TestObject::count);
+}
+
+#if KJ_ASSERT_ARRAYPTR_COUNTERS
+TEST(Array, ThrowingDestructorDoesNotLeakArrayPtrCounter) {
+  TestObject::count = 0;
+  TestObject::throwAt = -1;
+
+  auto destroyArray = []() {
+    auto array = heapArray<TestObject>(32);
+    EXPECT_EQ(32, TestObject::count);
+
+    // The Array destructor must release its separately-allocated pointer counter even when
+    // disposing the elements throws. ASAN's leak detector verifies the counter was released.
+    TestObject::throwAt = 16;
+  };
+
+  EXPECT_ANY_THROW(destroyArray());
+  EXPECT_EQ(0, TestObject::count);
+  TestObject::throwAt = -1;
+}
+#endif
+
+TEST(SmallArray, ThrowingDestructor) {
+  TestObject::count = 0;
+  TestObject::throwAt = -1;
+
+  SpaceFor<SmallArray<TestObject, SBO_TEST_SIZE>> spaceForArray;
+  auto array = spaceForArray.construct(SBO_TEST_SIZE);
+  EXPECT_EQ(SBO_TEST_SIZE, TestObject::count);
+
+  // If a destructor throws, all elements should still be destroyed.
+  TestObject::throwAt = 16;
+  EXPECT_ANY_THROW(array = nullptr);
+  EXPECT_EQ(0, TestObject::count);
+}
+
+TEST(Array, ArrayBuilder) {
+  TestObject::count = 0;
+  TestObject::throwAt = -1;
+
+  Array<TestObject> array;
+
+  {
+    ArrayBuilder<TestObject> builder = heapArrayBuilder<TestObject>(32);
+
+    for (int i = 0; i < 32; i++) {
+      EXPECT_EQ(i, TestObject::count);
+      builder.add();
+    }
+
+    EXPECT_EQ(32, TestObject::count);
+    array = builder.finish();
+    EXPECT_EQ(32, TestObject::count);
+  }
+
+  EXPECT_EQ(32, TestObject::count);
+  array = nullptr;
+  EXPECT_EQ(0, TestObject::count);
+}
+
+TEST(Array, AraryBuilderAddAll) {
+  {
+    // Trivial case.
+    char text[] = "foo";
+    ArrayBuilder<char> builder = heapArrayBuilder<char>(5);
+    builder.add('<');
+    builder.addAll(text, text + 3);
+    builder.add('>');
+    auto array = builder.finish();
+    EXPECT_EQ(kj::str(array), "<foo>"_kj);
+  }
+
+  {
+    // Trivial case, const.
+    const char* text = "foo";
+    ArrayBuilder<char> builder = heapArrayBuilder<char>(5);
+    builder.add('<');
+    builder.addAll(text, text + 3);
+    builder.add('>');
+    auto array = builder.finish();
+    EXPECT_EQ(kj::str(array), "<foo>"_kj);
+  }
+
+  {
+    // Trivial case, non-pointer iterator.
+    std::list<char> text = {'f', 'o', 'o'};
+    ArrayBuilder<char> builder = heapArrayBuilder<char>(5);
+    builder.add('<');
+    builder.addAll(text);
+    builder.add('>');
+    auto array = builder.finish();
+    EXPECT_EQ(kj::str(array), "<foo>"_kj);
+  }
+
+  {
+    // Complex case.
+    kj::StringPtr strs[] = {"foo"_kj, "bar"_kj, "baz"_kj};
+    ArrayBuilder<kj::StringPtr> builder = heapArrayBuilder<kj::StringPtr>(5);
+    builder.add("qux");
+    builder.addAll(strs, strs + 3);
+    builder.add("quux");
+    auto array = builder.finish();
+    EXPECT_EQ(array[0], "qux"_kj);
+    EXPECT_EQ(array[1], "foo"_kj);
+    EXPECT_EQ(array[2], "bar"_kj);
+    EXPECT_EQ(array[3], "baz"_kj);
+    EXPECT_EQ(array[4], "quux"_kj);
+  }
+
+  {
+    // Complex case, noexcept.
+    TestNoexceptObject::count = 0;
+    TestNoexceptObject::copiedCount = 0;
+    TestNoexceptObject objs[3];
+    EXPECT_EQ(3, TestNoexceptObject::count);
+    EXPECT_EQ(0, TestNoexceptObject::copiedCount);
+    ArrayBuilder<TestNoexceptObject> builder = heapArrayBuilder<TestNoexceptObject>(3);
+    EXPECT_EQ(3, TestNoexceptObject::count);
+    EXPECT_EQ(0, TestNoexceptObject::copiedCount);
+    builder.addAll(objs, objs + 3);
+    EXPECT_EQ(3, TestNoexceptObject::count);
+    EXPECT_EQ(3, TestNoexceptObject::copiedCount);
+    auto array = builder.finish();
+    EXPECT_EQ(3, TestNoexceptObject::count);
+    EXPECT_EQ(3, TestNoexceptObject::copiedCount);
+  }
+  EXPECT_EQ(0, TestNoexceptObject::count);
+  EXPECT_EQ(0, TestNoexceptObject::copiedCount);
+
+  {
+    // Complex case, exceptions possible.
+    TestObject::count = 0;
+    TestObject::copiedCount = 0;
+    TestObject::throwAt = -1;
+    TestObject objs[3];
+    EXPECT_EQ(3, TestObject::count);
+    EXPECT_EQ(0, TestObject::copiedCount);
+    ArrayBuilder<TestObject> builder = heapArrayBuilder<TestObject>(3);
+    EXPECT_EQ(3, TestObject::count);
+    EXPECT_EQ(0, TestObject::copiedCount);
+    builder.addAll(objs, objs + 3);
+    EXPECT_EQ(3, TestObject::count);
+    EXPECT_EQ(3, TestObject::copiedCount);
+    auto array = builder.finish();
+    EXPECT_EQ(3, TestObject::count);
+    EXPECT_EQ(3, TestObject::copiedCount);
+  }
+  EXPECT_EQ(0, TestObject::count);
+  EXPECT_EQ(0, TestObject::copiedCount);
+
+  {
+    // Complex case, exceptions occur.
+    TestObject::count = 0;
+    TestObject::copiedCount = 0;
+    TestObject::throwAt = -1;
+    TestObject objs[3];
+    EXPECT_EQ(3, TestObject::count);
+    EXPECT_EQ(0, TestObject::copiedCount);
+
+    TestObject::throwAt = 1;
+
+    ArrayBuilder<TestObject> builder = heapArrayBuilder<TestObject>(3);
+    EXPECT_EQ(3, TestObject::count);
+    EXPECT_EQ(0, TestObject::copiedCount);
+
+    EXPECT_ANY_THROW(builder.addAll(objs, objs + 3));
+    TestObject::throwAt = -1;
+
+    EXPECT_EQ(3, TestObject::count);
+    EXPECT_EQ(0, TestObject::copiedCount);
+  }
+  EXPECT_EQ(0, TestObject::count);
+  EXPECT_EQ(0, TestObject::copiedCount);
+}
+
+TEST(Array, HeapCopy) {
+  {
+    Array<char> copy = heapArray("foo", 3);
+    EXPECT_EQ(3u, copy.size());
+    EXPECT_EQ(kj::str(copy.first(3)), "foo"_kj);
+  }
+  {
+    Array<char> copy = heapArray(ArrayPtr<const char>("bar", 3));
+    EXPECT_EQ(3u, copy.size());
+    EXPECT_EQ(kj::str(copy.first(3)), "bar"_kj);
+  }
+  {
+    const char* ptr = "baz";
+    Array<char> copy = heapArray<char>(ptr, ptr + 3);
+    EXPECT_EQ(3u, copy.size());
+    EXPECT_EQ(kj::str(copy.first(3)), "baz"_kj);
+  }
+}
+
+KJ_TEST("ArrayPtr clone") {
+  StringPtr values[] = {"foo", "bar"};
+  ArrayPtr<const StringPtr> original(values);
+  Array<String> cloned = original.clone();
+  ASSERT_EQ(2u, cloned.size());
+  EXPECT_EQ(cloned[0], "foo");
+  EXPECT_EQ(cloned[1], "bar");
+  EXPECT_NE(cloned[0].begin(), original[0].begin());
+  EXPECT_NE(cloned[1].begin(), original[1].begin());
+}
+
+KJ_TEST("Array clone") {
+  Array<const StringPtr> original = heapArray<const StringPtr>({"baz", "qux"});
+  Array<String> cloned = original.clone();
+  ASSERT_EQ(2u, cloned.size());
+  EXPECT_EQ(cloned[0], "baz");
+  EXPECT_EQ(cloned[1], "qux");
+  EXPECT_NE(cloned[0].begin(), original[0].begin());
+  EXPECT_NE(cloned[1].begin(), original[1].begin());
+}
+
+KJ_TEST("ArrayPtr clone copies copyable elements") {
+  int values[] = {12, 34};
+  ArrayPtr<const int> original(values);
+  Array<int> cloned = original.clone();
+  ASSERT_EQ(2u, cloned.size());
+  EXPECT_EQ(cloned[0], 12);
+  EXPECT_EQ(cloned[1], 34);
+  EXPECT_NE(cloned.begin(), original.begin());
+
+  ArrayPtr<const int> movedOriginal(values);
+  Array<int> movedClone = kj::mv(movedOriginal).clone();
+  ASSERT_EQ(2u, movedClone.size());
+  EXPECT_EQ(movedClone[0], 12);
+  EXPECT_EQ(movedClone[1], 34);
+  EXPECT_EQ(nullptr, movedOriginal);
+  EXPECT_EQ(0u, movedOriginal.size());
+}
+
+KJ_TEST("converting an rvalue ArrayPtr to const consumes it") {
+  int values[] = {12, 34};
+  ArrayPtr<int> original(values);
+  ArrayPtr<const int> converted = kj::mv(original);
+
+  KJ_EXPECT(converted.begin() == values);
+  KJ_EXPECT(converted.size() == 2);
+  KJ_EXPECT(converted[0] == 12);
+  KJ_EXPECT(converted[1] == 34);
+  KJ_EXPECT(original == nullptr);
+  KJ_EXPECT(original.size() == 0);
+}
+
+KJ_TEST("Array clone copies copyable elements") {
+  Array<int> original = heapArray<int>({56, 78});
+  Array<int> cloned = original.clone();
+  ASSERT_EQ(2u, cloned.size());
+  EXPECT_EQ(cloned[0], 56);
+  EXPECT_EQ(cloned[1], 78);
+  EXPECT_NE(cloned.begin(), original.begin());
+}
+
+TEST(Array, OwnConst) {
+  ArrayBuilder<int> builder = heapArrayBuilder<int>(2);
+  int x[2] = {123, 234};
+  builder.addAll(x, x + 2);
+
+  Array<int> i = builder.finish(); //heapArray<int>({123, 234});
+  ASSERT_EQ(2u, i.size());
+  EXPECT_EQ(123, i[0]);
+  EXPECT_EQ(234, i[1]);
+
+  Array<const int> ci = mv(i);
+  ASSERT_EQ(2u, ci.size());
+  EXPECT_EQ(123, ci[0]);
+  EXPECT_EQ(234, ci[1]);
+
+  Array<const int> ci2 = heapArray<const int>({345, 456});
+  ASSERT_EQ(2u, ci2.size());
+  EXPECT_EQ(345, ci2[0]);
+  EXPECT_EQ(456, ci2[1]);
+}
+
+TEST(Array, Map) {
+  StringPtr foo = "abcd";
+  Array<char> bar = KJ_MAP(c, foo) -> char { return c + 1; };
+  EXPECT_STREQ("bcde", str(bar).cStr());
+}
+
+TEST(Array, MapRawArray) {
+  uint foo[4] = {1, 2, 3, 4};
+  Array<uint> bar = KJ_MAP(i, foo) -> uint { return i * i; };
+  ASSERT_EQ(4, bar.size());
+  EXPECT_EQ(1, bar[0]);
+  EXPECT_EQ(4, bar[1]);
+  EXPECT_EQ(9, bar[2]);
+  EXPECT_EQ(16, bar[3]);
+}
+
+TEST(Array, ReleaseAsBytesOrChars) {
+  {
+    Array<char> chars = kj::heapArray<char>("foo", 3);
+    Array<byte> bytes = chars.releaseAsBytes();
+    EXPECT_TRUE(chars == nullptr);
+    ASSERT_EQ(3, bytes.size());
+    EXPECT_EQ('f', bytes[0]);
+    EXPECT_EQ('o', bytes[1]);
+    EXPECT_EQ('o', bytes[2]);
+
+    chars = bytes.releaseAsChars();
+    EXPECT_TRUE(bytes == nullptr);
+    ASSERT_EQ(3, chars.size());
+    EXPECT_EQ('f', chars[0]);
+    EXPECT_EQ('o', chars[1]);
+    EXPECT_EQ('o', chars[2]);
+  }
+  {
+    Array<const char> chars = kj::heapArray<char>("foo", 3);
+    Array<const byte> bytes = chars.releaseAsBytes();
+    EXPECT_TRUE(chars == nullptr);
+    ASSERT_EQ(3, bytes.size());
+    EXPECT_EQ('f', bytes[0]);
+    EXPECT_EQ('o', bytes[1]);
+    EXPECT_EQ('o', bytes[2]);
+
+    chars = bytes.releaseAsChars();
+    EXPECT_TRUE(bytes == nullptr);
+    ASSERT_EQ(3, chars.size());
+    EXPECT_EQ('f', chars[0]);
+    EXPECT_EQ('o', chars[1]);
+    EXPECT_EQ('o', chars[2]);
+  }
+}
+
+KJ_TEST("kj::arr()") {
+  kj::Array<kj::String> array = kj::arr(kj::str("foo"), kj::str(123));
+  KJ_EXPECT(array == kj::ArrayPtr<const kj::StringPtr>({"foo", "123"}));
+}
+
+struct ImmovableInt {
+  ImmovableInt(int i): i(i) {}
+  KJ_DISALLOW_COPY_AND_MOVE(ImmovableInt);
+  int i;
+};
+
+KJ_TEST("kj::arrOf()") {
+  kj::Array<ImmovableInt> array = kj::arrOf<ImmovableInt>(123, 456, 789);
+  KJ_ASSERT(array.size() == 3);
+  KJ_EXPECT(array[0].i == 123);
+  KJ_EXPECT(array[1].i == 456);
+  KJ_EXPECT(array[2].i == 789);
+}
+
+struct DestructionOrderRecorder {
+  DestructionOrderRecorder(uint& counter, uint& recordTo)
+      : counter(counter), recordTo(recordTo) {}
+  ~DestructionOrderRecorder() {
+    recordTo = ++counter;
+  }
+
+  uint& counter;
+  uint& recordTo;
+};
+
+TEST(Array, Attach) {
+  uint counter = 0;
+  uint destroyed1 = 0;
+  uint destroyed2 = 0;
+  uint destroyed3 = 0;
+
+  auto obj1 = kj::heap<DestructionOrderRecorder>(counter, destroyed1);
+  auto obj2 = kj::heap<DestructionOrderRecorder>(counter, destroyed2);
+  auto obj3 = kj::heap<DestructionOrderRecorder>(counter, destroyed3);
+
+  auto builder = kj::heapArrayBuilder<Own<DestructionOrderRecorder>>(1);
+  builder.add(kj::mv(obj1));
+  auto arr = builder.finish();
+  auto ptr = arr.begin();
+
+  Array<Own<DestructionOrderRecorder>> combined = arr.attach(kj::mv(obj2), kj::mv(obj3));
+
+  KJ_EXPECT(combined.begin() == ptr);
+
+  KJ_EXPECT(obj1.get() == nullptr);
+  KJ_EXPECT(obj2.get() == nullptr);
+  KJ_EXPECT(obj3.get() == nullptr);
+  KJ_EXPECT(destroyed1 == 0);
+  KJ_EXPECT(destroyed2 == 0);
+  KJ_EXPECT(destroyed3 == 0);
+
+  combined = nullptr;
+
+  KJ_EXPECT(destroyed1 == 1, destroyed1);
+  KJ_EXPECT(destroyed2 == 2, destroyed2);
+  KJ_EXPECT(destroyed3 == 3, destroyed3);
+}
+
+TEST(Array, AttachNested) {
+  uint counter = 0;
+  uint destroyed1 = 0;
+  uint destroyed2 = 0;
+  uint destroyed3 = 0;
+
+  auto obj1 = kj::heap<DestructionOrderRecorder>(counter, destroyed1);
+  auto obj2 = kj::heap<DestructionOrderRecorder>(counter, destroyed2);
+  auto obj3 = kj::heap<DestructionOrderRecorder>(counter, destroyed3);
+
+  auto builder = kj::heapArrayBuilder<Own<DestructionOrderRecorder>>(1);
+  builder.add(kj::mv(obj1));
+  auto arr = builder.finish();
+  auto ptr = arr.begin();
+
+  Array<Own<DestructionOrderRecorder>> combined = arr.attach(kj::mv(obj2)).attach(kj::mv(obj3));
+
+  KJ_EXPECT(combined.begin() == ptr);
+  KJ_EXPECT(combined.size() == 1);
+
+  KJ_EXPECT(obj1.get() == nullptr);
+  KJ_EXPECT(obj2.get() == nullptr);
+  KJ_EXPECT(obj3.get() == nullptr);
+  KJ_EXPECT(destroyed1 == 0);
+  KJ_EXPECT(destroyed2 == 0);
+  KJ_EXPECT(destroyed3 == 0);
+
+  combined = nullptr;
+
+  KJ_EXPECT(destroyed1 == 1, destroyed1);
+  KJ_EXPECT(destroyed2 == 2, destroyed2);
+  KJ_EXPECT(destroyed3 == 3, destroyed3);
+}
+
+TEST(Array, AttachFromArrayPtr) {
+  uint counter = 0;
+  uint destroyed1 = 0;
+  uint destroyed2 = 0;
+  uint destroyed3 = 0;
+
+  auto obj1 = kj::heap<DestructionOrderRecorder>(counter, destroyed1);
+  auto obj2 = kj::heap<DestructionOrderRecorder>(counter, destroyed2);
+  auto obj3 = kj::heap<DestructionOrderRecorder>(counter, destroyed3);
+
+  auto builder = kj::heapArrayBuilder<Own<DestructionOrderRecorder>>(1);
+  builder.add(kj::mv(obj1));
+  auto arr = builder.finish();
+  auto ptr = arr.begin();
+
+  Array<Own<DestructionOrderRecorder>> combined =
+      arr.asPtr().attach(kj::mv(obj2)).attach(kj::mv(obj3));
+  KJ_EXPECT(arr != nullptr);
+
+  KJ_EXPECT(combined.begin() == ptr);
+
+  KJ_EXPECT(obj1.get() == nullptr);
+  KJ_EXPECT(obj2.get() == nullptr);
+  KJ_EXPECT(obj3.get() == nullptr);
+  KJ_EXPECT(destroyed1 == 0);
+  KJ_EXPECT(destroyed2 == 0);
+  KJ_EXPECT(destroyed3 == 0);
+
+  combined = nullptr;
+
+  KJ_EXPECT(destroyed2 == 1, destroyed2);
+  KJ_EXPECT(destroyed3 == 2, destroyed3);
+
+  arr = nullptr;
+
+  KJ_EXPECT(destroyed1 == 3, destroyed1);
+}
+
+struct Std {};
+
+template<typename T>
+static std::span<T> asImpl(Std*, Array<T>& arr) {
+  return std::span<T>(arr.begin(), arr.size());
+}
+
+template<typename T>
+static std::span<T> asImpl(Std*, ArrayPtr<T>&& arr) {
+  std::span<T> result(arr.begin(), arr.size());
+  arr = nullptr;
+  return result;
+}
+
+KJ_TEST("Array::as<Std>") {
+  kj::Array<int> arr = kj::arr(1, 2, 4);
+  std::span<int> stdArr = arr.as<Std>();
+  KJ_EXPECT(stdArr.size() == 3);
+}
+
+KJ_TEST("ArrayPtr move-aware as methods") {
+  int values[] = {1, 2, 4};
+
+  ArrayPtr<int> constSource(values);
+  ArrayPtr<const int> constResult = kj::mv(constSource).asConst();
+  KJ_EXPECT(constResult.begin() == values);
+  KJ_EXPECT(constResult.size() == 3);
+  KJ_EXPECT(constSource == nullptr);
+
+  ArrayPtr<int> bytesSource(values);
+  ArrayPtr<byte> bytesResult = kj::mv(bytesSource).asBytes();
+  KJ_EXPECT(bytesResult.begin() == reinterpret_cast<byte*>(values));
+  KJ_EXPECT(bytesResult.size() == sizeof(values));
+  KJ_EXPECT(bytesSource == nullptr);
+
+  ArrayPtr<int> charsSource(values);
+  ArrayPtr<char> charsResult = kj::mv(charsSource).asChars();
+  KJ_EXPECT(charsResult.begin() == reinterpret_cast<char*>(values));
+  KJ_EXPECT(charsResult.size() == sizeof(values));
+  KJ_EXPECT(charsSource == nullptr);
+
+  ArrayPtr<int> customSource(values);
+  std::span<int> customResult = kj::mv(customSource).as<Std>();
+  KJ_EXPECT(customResult.data() == values);
+  KJ_EXPECT(customResult.size() == 3);
+  KJ_EXPECT(customSource == nullptr);
+}
+
+KJ_TEST("Array::slice(start, end)") {
+  kj::Array<int> arr = kj::arr(0, 1, 2, 3);
+
+  // full slice
+  KJ_EXPECT(arr.slice(0, 4) == arr);
+  // slice from only start
+  KJ_EXPECT(arr.slice(1, 4) == kj::arr(1, 2, 3));
+  // slice from only end
+  KJ_EXPECT(arr.slice(0, 3) == kj::arr(0, 1, 2));
+  // slice from start and end
+  KJ_EXPECT(arr.slice(1, 3) == kj::arr(1, 2));
+
+  // empty slices
+  for (auto i : kj::zeroTo(arr.size())) {
+    KJ_EXPECT(arr.slice(i, i).size() == 0);
+  }
+
+#ifdef KJ_DEBUG
+  // start > end
+  KJ_EXPECT_THROW(FAILED, arr.slice(2, 1));
+  // end > size
+  KJ_EXPECT_THROW(FAILED, arr.slice(2, 5));
+#endif
+}
+
+KJ_TEST("Array::slice(start, end) const") {
+  const kj::Array<int> arr = kj::arr(0, 1, 2, 3);
+
+  // full slice
+  KJ_EXPECT(arr.slice(0, 4) == arr);
+  // slice from only start
+  KJ_EXPECT(arr.slice(1, 4) == kj::arr(1, 2, 3));
+  // slice from only end
+  KJ_EXPECT(arr.slice(0, 3) == kj::arr(0, 1, 2));
+  // slice from start and end
+  KJ_EXPECT(arr.slice(1, 3) == kj::arr(1, 2));
+
+  // empty slices
+  for (auto i : kj::zeroTo(arr.size())) {
+    KJ_EXPECT(arr.slice(i, i).size() == 0);
+  }
+
+#ifdef KJ_DEBUG
+  // start > end
+  KJ_EXPECT_THROW(FAILED, arr.slice(2, 1));
+  // end > size
+  KJ_EXPECT_THROW(FAILED, arr.slice(2, 5));
+#endif
+}
+
+KJ_TEST("Array::slice(start)") {
+  kj::Array<int> arr = kj::arr(0, 1, 2, 3);
+
+  KJ_EXPECT(arr.slice(0) == arr);
+  KJ_EXPECT(arr.slice(1) == kj::arr(1, 2, 3));
+  KJ_EXPECT(arr.slice(2) == kj::arr(2, 3));
+  KJ_EXPECT(arr.slice(3) == kj::arr(3));
+  KJ_EXPECT(arr.slice(4).size() == 0);
+
+#ifdef KJ_DEBUG
+  // start > size
+  KJ_EXPECT_THROW(FAILED, arr.slice(5));
+#endif
+}
+
+KJ_TEST("Array::slice(start) const") {
+  const kj::Array<int> arr = kj::arr(0, 1, 2, 3);
+
+  KJ_EXPECT(arr.slice(0) == arr);
+  KJ_EXPECT(arr.slice(1) == kj::arr(1, 2, 3));
+  KJ_EXPECT(arr.slice(2) == kj::arr(2, 3));
+  KJ_EXPECT(arr.slice(3) == kj::arr(3));
+  KJ_EXPECT(arr.slice(4).size() == 0);
+
+#ifdef KJ_DEBUG
+  // start > size
+  KJ_EXPECT_THROW(FAILED, arr.slice(5));
+#endif
+}
+
+KJ_TEST("ArrayPtr::split") {
+  {
+    const char text[] = "foo,,bar,";
+    StringPtr expected[] = {"foo", "", "bar", ""};
+
+    size_t i = 0;
+    for (auto part: kj::arrayPtr(text, sizeof(text) - 1).split(',')) {
+      ASSERT_LT(i, kj::size(expected));
+      KJ_EXPECT(part == expected[i], i, part, expected[i]);
+      ++i;
+    }
+
+    KJ_EXPECT(i == kj::size(expected));
+  }
+
+  {
+    const char text[] = "foobar";
+    size_t i = 0;
+    for (auto part: kj::arrayPtr(text, sizeof(text) - 1).split(',')) {
+      KJ_EXPECT(i == 0);
+      KJ_EXPECT(part == "foobar"_kj);
+      ++i;
+    }
+
+    KJ_EXPECT(i == 1);
+  }
+
+  {
+    size_t i = 0;
+    for (auto part: kj::ArrayPtr<const char>().split(',')) {
+      KJ_EXPECT(i == 0);
+      KJ_EXPECT(part == ""_kj);
+      ++i;
+    }
+
+    KJ_EXPECT(i == 1);
+  }
+}
+
+KJ_TEST("ArrayPtr::findFirst empty optimized types") {
+  KJ_EXPECT(kj::ArrayPtr<const char>().findFirst(',') == kj::none);
+  KJ_EXPECT(kj::ArrayPtr<char>().findFirst(',') == kj::none);
+  KJ_EXPECT(kj::ArrayPtr<const byte>().findFirst(byte{123}) == kj::none);
+  KJ_EXPECT(kj::ArrayPtr<byte>().findFirst(byte{123}) == kj::none);
+}
+
+KJ_TEST("ArrayPtr::split mutable") {
+  int values[] = {1, 0, 2, 3, 0, 4};
+  int expectedFirst[] = {11, 12, 14};
+
+  size_t i = 0;
+  for (auto part: kj::arrayPtr(values).split(0)) {
+    if (part.size() > 0) {
+      ASSERT_LT(i, kj::size(expectedFirst));
+      part[0] += 10;
+      KJ_EXPECT(part[0] == expectedFirst[i]);
+    }
+    ++i;
+  }
+
+  KJ_EXPECT(i == 3);
+  KJ_EXPECT(kj::ArrayPtr<const int>(values) == kj::arr(11, 0, 12, 3, 0, 14));
+}
+
+KJ_TEST("ArrayPtr::split const") {
+  const int values[] = {1, 0, 2};
+  const auto split = kj::arrayPtr(values).split(0);
+  static_assert(kj::isSameType<decltype(*split.begin()), kj::ArrayPtr<const int>>());
+
+  size_t i = 0;
+  for (auto part: split) {
+    KJ_ASSERT(i < 2);
+    KJ_EXPECT(part == kj::arr(i == 0 ? 1 : 2));
+    ++i;
+  }
+
+  KJ_EXPECT(i == 2);
+}
+
+KJ_TEST("FixedArray::fill") {
+  FixedArray<int64_t, 10> arr;
+  arr.fill(42);
+  for (int64_t x : arr) {
+    KJ_EXPECT(x == 42);
+  }
+}
+
+KJ_TEST("CappedArray::fill") {
+  CappedArray<int64_t, 10> arr;
+  arr.fill(42);
+  for (int64_t x : arr) {
+    KJ_EXPECT(x == 42);
+  }
+}
+
+}  // namespace
+}  // namespace kj

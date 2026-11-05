@@ -53,3 +53,11 @@ kmcmake_print_list_label("CXX_OPTIONS:" KMCMAKE_CXX_OPTIONS)
 #   list(APPEND KMCMAKE_CXX_OPTIONS "-fopenmp")
 #   list(APPEND KMCMAKE_CXX_OPTIONS "-mno-avx512f")
 ###############################
+if(NOT MSVC)
+    list(APPEND KMCMAKE_CXX_OPTIONS
+            -Wall -Wextra -Wsuggest-override
+            -Wno-strict-aliasing -Wno-sign-compare -Wno-unused-parameter)
+    if(NOT ANDROID)
+        list(APPEND KMCMAKE_CXX_OPTIONS -pthread)
+    endif()
+endif()

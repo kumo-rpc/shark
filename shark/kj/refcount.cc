@@ -1,0 +1,110 @@
+// Copyright (c) 2013-2014 Sandstorm Development Group, Inc. and contributors
+// Licensed under the MIT License:
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+#include "refcount.h"
+#include "debug.h"
+
+namespace kj {
+
+// =======================================================================================
+// Non-atomic (thread-unsafe) refcounting
+
+Refcounted::~Refcounted() noexcept(false) {
+  // A Refcounted object is born with a refcount of 1, so if a subclass constructor throws, the
+  // object is destroyed while refcount is still non-zero. Any weak references created and
+  // published by the constructor must observe that the referent has expired, just as they do when
+  // the last strong reference is dropped normally.
+  if (refcount != 0 && weakCell != nullptr) {
+    weakCell->refcounted = nullptr;
+    weakCell->decRef();
+    weakCell = nullptr;
+  }
+
+  // Suppress the assertion when we're unwinding due to a constructor exception. This is a
+  // debug-only assertion so that release builds do not do expensive unwinding checks.
+  KJ_DASSERT(refcount == 0 || UnwindDetector::uncaughtExceptionCount() > 0,
+      "Refcounted object deleted with non-zero refcount; it appears to have "
+      "been allocated without using kj::rc.");
+}
+
+void Refcounted::disposeImpl(void* pointer) const {
+  if (--refcount == 0) {
+    // Grab a local copy of the cell pointer; `this` (and therefore the `weakCell` member) is about
+    // to be destroyed.
+    _::RcWeakCell* cell = weakCell;
+    if (cell != nullptr) {
+      // The refcount has reached zero and will never be incremented again: we null the cell's
+      // back-pointer here, before destroying the object, so that any outstanding WeakRc<T> can
+      // observe expiration and will never attempt to revive a dead object (see
+      // WeakRc<T>::upgrade()).
+      cell->refcounted = nullptr;
+    }
+
+    // Note that we hold onto the strong-side reference to the cell across `delete this`. The
+    // referent is still "alive" (from the cell's perspective) until its destructor finishes
+    // running, and the destructor may legitimately manipulate weak references (e.g. clone a
+    // WeakRc<T> that it holds). If we released the strong-side reference first, the cell could be
+    // freed out from under such an operation whenever the last remaining WeakRc<T> was dropped,
+    // leading to a use-after-free. Keeping the strong-side reference alive until the destructor
+    // completes guarantees the cell stays valid throughout destruction.
+    delete this;
+
+    if (cell != nullptr) {
+      // Now that the object is fully destroyed, release the strong-side reference to the cell. The
+      // cell itself is freed once the last WeakRc<T> is gone.
+      cell->decRef();
+    }
+  }
+}
+
+// =======================================================================================
+// Atomic (thread-safe) refcounting
+
+AtomicRefcounted::~AtomicRefcounted() noexcept(false) {
+  KJ_ASSERT(kj::atomicLoad(&refcount, kj::AtomicMemoryOrder::RELAXED) == 0,
+      "Refcounted object deleted with non-zero refcount.");
+}
+
+void AtomicRefcounted::disposeImpl(void* pointer) const {
+  if (kj::atomicSubFetch(&refcount, 1, kj::AtomicMemoryOrder::RELEASE) == 0) {
+    kj::atomicThreadFence(&refcount, kj::AtomicMemoryOrder::ACQUIRE);
+    delete this;
+  }
+}
+
+bool AtomicRefcounted::addRefWeakInternal() const {
+  uint orig = kj::atomicLoad(&refcount, kj::AtomicMemoryOrder::RELAXED);
+
+  for (;;) {
+    if (orig == 0) {
+      // Refcount already hit zero. Destructor is already running so we can't revive the object.
+      return false;
+    }
+
+    if (kj::atomicCompareExchange(&refcount, &orig, orig + 1, true,
+        kj::AtomicMemoryOrder::RELAXED, kj::AtomicMemoryOrder::RELAXED)) {
+      // Successfully incremented refcount without letting it hit zero.
+      return true;
+    }
+  }
+}
+
+}  // namespace kj

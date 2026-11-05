@@ -1,0 +1,146 @@
+[0/1] Re-running CMake...
+-- Running vcpkg install
+Detecting compiler hash for triplet arm64-osx...
+Compiler found: /usr/bin/c++
+The following packages are already installed:
+    benchmark:arm64-osx@1.9.5
+    openssl:arm64-osx@3.6.3
+  * vcpkg-cmake:arm64-osx@2025-08-07
+  * vcpkg-cmake-config:arm64-osx@2026-07-21
+  * vcpkg-cmake-get-vars:arm64-osx@2025-05-29
+    zlib:arm64-osx@1.3.2#2
+benchmark provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(benchmark CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE benchmark::benchmark benchmark::benchmark_main)
+
+benchmark provides pkg-config modules:
+
+  # Google microbenchmark framework
+  benchmark
+
+  # Google microbenchmark framework (with main() function)
+  benchmark_main
+
+openssl is compatible with built-in CMake targets:
+
+  find_package(OpenSSL REQUIRED)
+  target_link_libraries(main PRIVATE OpenSSL::SSL)
+  target_link_libraries(main PRIVATE OpenSSL::Crypto)
+
+zlib is compatible with built-in CMake targets:
+
+  find_package(ZLIB REQUIRED)
+  target_link_libraries(main PRIVATE ZLIB::ZLIB)
+
+zlib provides pkg-config modules:
+
+  # zlib compression library
+  zlib
+
+All requested installations completed successfully in: 219 us
+-- Running vcpkg install - done
+-- Git Version: -98a173a-dirty
+-- Git Tag: , Hash: 98a173a, Dirty: 1
+-- [32m[kmcmake] ARM SIMD detection complete[m
+-- [32m[kmcmake] shark cmake build system is created by kmcmake[m
+-- [32m[kmcmake] kmcmake: https://github.com/koomx/kmcmake[m
+-- [32m[kmcmake] generate: vckgctl gencmake  or  cmake -S <kmcmake>/template[m
+-- Configuring done (2.4s)
+-- Generating done (0.1s)
+-- Build files have been written to: /Users/cyclone/github/koomx/shark/build
+[1/95] Building CXX object shark/CMakeFiles/capnp_OBJECT.dir/c++.skp.cc.o
+[2/95] Building CXX object shark/CMakeFiles/capnp_OBJECT.dir/stream.skp.cc.o
+[3/95] Building CXX object shark/CMakeFiles/capnp_OBJECT.dir/schema.skp.cc.o
+[4/95] Building CXX object shark/CMakeFiles/capnp-rpc_OBJECT.dir/rpc.skp.cc.o
+[5/95] Building CXX object shark/CMakeFiles/capnp-rpc_OBJECT.dir/rpc-twoparty.skp.cc.o
+[6/95] Building CXX object shark/CMakeFiles/capnp-rpc_OBJECT.dir/persistent.skp.cc.o
+[7/95] Building CXX object shark/CMakeFiles/capnp-json_OBJECT.dir/compat/json.skp.cc.o
+[8/95] Building CXX object shark/CMakeFiles/capnp-rpc_OBJECT.dir/dynamic-capability.cc.o
+[9/95] Building CXX object shark/CMakeFiles/capnpc_OBJECT.dir/compiler/lexer.skp.cc.o
+[10/95] Building CXX object shark/CMakeFiles/capnp_OBJECT.dir/stringify.cc.o
+[11/95] Building CXX object shark/CMakeFiles/capnpc_OBJECT.dir/compiler/grammar.skp.cc.o
+[12/95] Building CXX object shark/CMakeFiles/capnp_OBJECT.dir/schema.cc.o
+[13/95] Building CXX object shark/CMakeFiles/capnp-rpc_OBJECT.dir/rpc-twoparty.cc.o
+[14/95] Building CXX object shark/CMakeFiles/capnpc_OBJECT.dir/compiler/generics.cc.o
+[15/95] Building CXX object shark/CMakeFiles/capnp_OBJECT.dir/dynamic.cc.o
+[16/95] Building CXX object shark/CMakeFiles/capnpc_OBJECT.dir/serialize-text.cc.o
+[17/95] Building CXX object shark/CMakeFiles/capnpc_OBJECT.dir/compiler/lexer.cc.o
+[18/95] Building CXX object shark/CMakeFiles/capnp-rpc_OBJECT.dir/capability.cc.o
+[19/95] Building CXX object shark/CMakeFiles/capnpc_OBJECT.dir/schema-parser.cc.o
+[20/95] Building CXX object shark/CMakeFiles/capnp_OBJECT.dir/schema-loader.cc.o
+[21/95] Building CXX object shark/CMakeFiles/capnp-json_OBJECT.dir/compat/json.cc.o
+[22/95] Linking CXX static library shark/libcapnp.a
+[23/95] Building CXX object shark/CMakeFiles/capnp_tool.dir/compiler/module-loader.cc.o
+[24/95] Linking CXX static library shark/libcapnp-json.a
+[25/95] Building CXX object shark/CMakeFiles/capnp-http_OBJECT.dir/compat/byte-stream.skp.cc.o
+[26/95] Building CXX object shark/CMakeFiles/capnp-http_OBJECT.dir/compat/http-over-capnp.skp.cc.o
+[27/95] Building CXX object shark/CMakeFiles/capnpc_OBJECT.dir/compiler/node-translator.cc.o
+[28/95] Building CXX object shark/CMakeFiles/capnpc_OBJECT.dir/compiler/compiler.cc.o
+[29/95] Building CXX object benchmark/CMakeFiles/kj_http-bench.dir/kj/compat/http-bench.cc.o
+[30/95] Building CXX object shark/CMakeFiles/capnp_tool.dir/compiler/capnp.cc.o
+[31/95] Building CXX object benchmark/CMakeFiles/capnp_runner.dir/runner.cc.o
+[32/95] Building CXX object tests/CMakeFiles/capnp_capnp-evolution-tests.dir/capnp/compiler/evolution-test.cc.o
+[33/95] Linking CXX executable benchmark/capnp_runner
+[34/95] Building CXX object shark/CMakeFiles/capnp-http_OBJECT.dir/compat/byte-stream.cc.o
+[35/95] Building CXX object benchmark/CMakeFiles/capnp_http-over-capnp-bench.dir/capnp/compat/http-over-capnp-bench.cc.o
+[36/95] Building CXX object shark/CMakeFiles/capnpc_OBJECT.dir/compiler/parser.cc.o
+[37/95] Linking CXX static library shark/libcapnpc.a
+[38/95] Building CXX object shark/CMakeFiles/capnp-http_OBJECT.dir/compat/http-over-capnp.cc.o
+[39/95] Linking CXX executable tests/capnp_capnp-evolution-tests
+[40/95] Linking CXX executable shark/capnp_tool
+[41/95] Building CXX object shark/CMakeFiles/capnpc_capnp.dir/compiler/capnpc-capnp.cc.o
+[42/95] Linking CXX executable shark/capnpc_capnp
+[43/95] Building CXX object shark/CMakeFiles/capnp-rpc_OBJECT.dir/rpc.cc.o
+[44/95] Linking CXX static library shark/libcapnp-rpc.a
+[45/95] Linking CXX static library shark/libcapnp-http.a
+[46/95] Linking CXX executable benchmark/capnp_http-over-capnp-bench
+[47/95] Linking CXX executable benchmark/kj_http-bench
+[48/95] Building CXX object shark/CMakeFiles/capnpc_cpp.dir/compiler/capnpc-c++.cc.o
+[49/95] Linking CXX executable shark/capnpc_cpp
+[50/95] Compiling Cap'n Proto schema capnp/test-import.skp
+[51/95] Compiling Cap'n Proto schema capnp/test-import2.skp
+[52/95] Compiling Cap'n Proto schema capnp/compat/json-bench.skp
+[53/95] Compiling Cap'n Proto schema capnp/compat/json-test.skp
+[54/95] Compiling Cap'n Proto schema capnp/test.skp
+[55/95] Building CXX object benchmark/CMakeFiles/capnp_json-bench.dir/gen/capnp/compat/json-bench.skp.cc.o
+[56/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/capnp/common-test.cc.o
+[57/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/capnp/canonicalize-test.cc.o
+[58/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/capnp/message-test.cc.o
+[59/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/capnp/serialize-packed-test.cc.o
+[60/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/capnp/serialize-test.cc.o
+[61/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/capnp/any-test.cc.o
+[62/95] Building CXX object benchmark/CMakeFiles/capnp_json-bench.dir/capnp/compat/json-bench.cc.o
+[63/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/capnp/blob-test.cc.o
+[64/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/gen/capnp/compat/json-test.skp.cc.o
+[65/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/capnp/fuzz-test.cc.o
+[66/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/gen/capnp/test-import.skp.cc.o
+[67/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/gen/capnp/test-import2.skp.cc.o
+[68/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/gen/capnp/test.skp.cc.o
+[69/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/schema-parser-test.cc.o
+[70/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/schema-loader-test.cc.o
+[71/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/membrane-test.cc.o
+[72/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/schema-test.cc.o
+[73/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/capnp/orphan-test.cc.o
+[74/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/stringify-test.cc.o
+[75/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/compiler/lexer-test.cc.o
+[76/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/compiler/type-id-test.cc.o
+[77/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/serialize-text-test.cc.o
+[78/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/serialize-async-test.cc.o
+[79/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/dynamic-test.cc.o
+[80/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/gen/capnp/test-import.skp.cc.o
+[81/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/compat/websocket-rpc-test.cc.o
+[82/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/gen/capnp/compat/json-test.skp.cc.o
+[83/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/capnp/encoding-test.cc.o
+[84/95] Linking CXX executable benchmark/capnp_json-bench
+[85/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/gen/capnp/test.skp.cc.o
+[86/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/gen/capnp/test-import2.skp.cc.o
+[87/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/capability-test.cc.o
+[88/95] Building CXX object tests/CMakeFiles/capnp_capnp-tests.dir/capnp/test-util.cc.o
+[89/95] Linking CXX executable tests/capnp_capnp-tests
+[90/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/rpc-twoparty-test.cc.o
+[91/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/compat/json-test.cc.o
+[92/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/test-util.cc.o
+[93/95] Building CXX object tests/CMakeFiles/capnp_capnp-heavy-tests.dir/capnp/rpc-test.cc.o
+[94/95] Linking CXX executable tests/capnp_capnp-heavy-tests

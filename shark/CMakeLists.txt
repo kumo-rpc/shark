@@ -27,3 +27,6 @@ kmcmake_cc_interface(
         ${KMCMAKE_CXX_OPTIONS}
         PUBLIC
 )
+
+add_subdirectory(kj)
+include(${CMAKE_CURRENT_SOURCE_DIR}/capnp_libs.cmake)

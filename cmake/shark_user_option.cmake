@@ -31,3 +31,14 @@
 # list(APPEND KMCMAKE_CXX_OPTIONS "-fopenmp")
 # ------------------------------------------------------------------------------
 
+option(CAPNP_LITE "Compile without reflection APIs" OFF)
+option(EXTERNAL_CAPNP "Use an external capnp binary" OFF)
+set(WITH_OPENSSL "AUTO" CACHE STRING "Build libkj-tls against OpenSSL")
+set_property(CACHE WITH_OPENSSL PROPERTY STRINGS AUTO ON OFF)
+set(WITH_ZLIB "AUTO" CACHE STRING "Build libkj-gzip against zlib")
+set_property(CACHE WITH_ZLIB PROPERTY STRINGS AUTO ON OFF)
+set(WITH_FIBERS "AUTO" CACHE STRING "Build libkj-async with fibers")
+set_property(CACHE WITH_FIBERS PROPERTY STRINGS AUTO ON OFF)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_EXTENSIONS ON)
+
