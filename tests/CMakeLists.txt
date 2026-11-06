@@ -14,3 +14,110 @@
 #
 
 configure_file(${PROJECT_SOURCE_DIR}/tests/config.h.in ${PROJECT_SOURCE_DIR}/tests/config.h @ONLY)
+
+include(shark_cc_generate)
+
+add_subdirectory(base)
+
+
+shark_schema_generate(
+        TEST_FILES
+        TEST_HDRS
+        SCHEMAS
+        test-import.capnp
+        test-import2.capnp
+        test.capnp
+)
+
+kmcmake_cc_library(
+        NAME test_util
+        NAMESPACE shark
+        SOURCES
+        test-util.cc
+        ${TEST_FILES}
+        CXXOPTS
+        ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        shark::shark_base_static
+        ${KMCMAKE_DEPS_LINK}
+)
+
+shark_schema_generate(
+        COMP_FILES
+        COMP_HDRS
+        SCHEMAS
+        compat/json-test.capnp
+)
+
+kmcmake_cc_test(
+        NAME all_test
+        MODULE compat
+        SOURCES
+        ${COMP_FILES}
+        compat/byte-stream-test.cc
+        compat/http-over-capnp-old-test.cc
+        compat/http-over-capnp-perf-test.cc
+        compat/http-over-capnp-test.cc
+        compat/json-rpc-test.cc
+        compat/json-test.cc
+        compat/websocket-rpc-test.cc
+        CXXOPTS
+        ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        shark::testing_static
+        shark::test_util_static
+        shark::shark-rpc_static
+        shark::shark-format_static
+        shark::shark_static
+        shark::shark_base_static
+        ${KMCMAKE_DEPS_LINK}
+)
+
+set(TESTS_CASE
+        any-test
+        #afl-testcase
+        blob-test
+        canonicalize-test
+        capability-test
+        common-test
+        dynamic-test
+        encoding-test
+        ez-rpc-test
+        #fuzz-test
+        layout-test
+        membrane-test
+        message-test
+        orphan-test
+        reconnect-test
+        rpc-test
+        rpc-twoparty-test
+        schema-loader-test
+        schema-parser-test
+        schema-test
+        serialize-async-test
+        serialize-packed-test
+        serialize-text-test
+)
+
+
+foreach (case IN LISTS TESTS_CASE)
+
+    kmcmake_cc_test(
+            NAME ${case}
+            MODULE sk
+            SOURCES
+            ${case}.cc
+            CXXOPTS
+            ${KMCMAKE_CXX_OPTIONS}
+            LINKS
+            shark::testing_static
+            shark::test_util_static
+            shark::shark-rpc_static
+            shark::sharkc_static
+            shark::shark-format_static
+            shark::shark_static
+            shark::shark_base_static
+            ${KMCMAKE_DEPS_LINK}
+    )
+
+endforeach ()

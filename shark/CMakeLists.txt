@@ -27,3 +27,227 @@ kmcmake_cc_interface(
         ${KMCMAKE_CXX_OPTIONS}
         PUBLIC
 )
+
+set(BASE_SRC
+        base/arena.cc
+        base/array.cc
+        base/async-io-unix.cc
+        base/async-io-win32.cc
+        base/async-io.cc
+        base/async-unix.cc
+        base/async-win32.cc
+        base/async.cc
+        base/cidr.cc
+        base/common.cc
+        base/debug.cc
+        base/encoding.cc
+        base/exception.cc
+        base/filesystem-disk-unix.cc
+        base/filesystem-disk-win32.cc
+        base/filesystem.cc
+        base/hash.cc
+        base/io.cc
+        base/list.cc
+        base/main.cc
+        base/memory.cc
+        base/mutex.cc
+        base/refcount.cc
+        base/source-location.cc
+        base/string-tree.cc
+        base/string.cc
+        base/table.cc
+        base/thread.cc
+        base/time.cc
+        base/timer.cc
+        base/units.cc
+        base/compat/brotli.cc
+        base/compat/gzip.cc
+        base/compat/http.cc
+        base/compat/readiness-io.cc
+        base/compat/tls.cc
+        base/compat/url.cc
+        base/parse/char.cc
+)
+
+kmcmake_cc_library(
+        NAME shark_base
+        NAMESPACE shark
+        SOURCES
+        ${BASE_SRC}
+        CXXOPTS
+        ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        ${KMCMAKE_DEPS_LINK}
+        PUBLIC
+)
+
+
+set(LIB_SRCS
+        capability.cc
+        c++.capnp.cc
+        blob.cc
+        arena.cc
+        layout.cc
+        list.cc
+        any.cc
+        message.cc
+        schema.capnp.cc
+        stream.capnp.cc
+        serialize.cc
+        serialize-packed.cc
+        schema.cc
+        schema-loader.cc
+        dynamic.cc
+        reconnect.cc
+        stringify.cc
+)
+
+kmcmake_cc_library(
+        NAME shark
+        NAMESPACE shark
+        SOURCES
+        ${LIB_SRCS}
+        CXXOPTS
+        ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        shark::shark_base_static
+        ${KMCMAKE_DEPS_LINK}
+        PUBLIC
+)
+
+
+kmcmake_cc_library(
+        NAME shark-format
+        NAMESPACE shark
+        SOURCES
+        format/json/json.capnp.cc
+        format/json/json.cc
+        CXXOPTS
+        ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        shark::shark_static
+        shark::shark_base_static
+        ${KMCMAKE_DEPS_LINK}
+        PUBLIC
+)
+
+set(SHARKC_SRCS
+        compiler/type-id.cc
+        compiler/error-reporter.cc
+        compiler/lexer.capnp.cc
+        compiler/lexer.cc
+        compiler/grammar.capnp.cc
+        compiler/parser.cc
+        compiler/generics.cc
+        compiler/node-translator.cc
+        compiler/compiler.cc
+        schema-parser.cc
+        serialize-text.cc
+)
+
+
+kmcmake_cc_library(
+        NAME sharkc
+        NAMESPACE shark
+        SOURCES
+        ${SHARKC_SRCS}
+        CXXOPTS
+        ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        shark::shark-format_static
+        shark::shark_static
+        shark::shark_base_static
+        ${KMCMAKE_DEPS_LINK}
+        PUBLIC
+)
+
+kmcmake_cc_binary(
+        NAME shark
+        NAMESPACE shark
+        SOURCES
+        compiler/module-loader.cc
+        compiler/capnp.cc
+        CXXOPTS
+        ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        shark::sharkc_static
+        shark::shark_static
+        shark::shark_base_static
+        ${KMCMAKE_DEPS_LINK}
+        PUBLIC
+)
+
+
+kmcmake_cc_binary(
+        NAME shark-cpp
+        NAMESPACE shark
+        SOURCES
+        compiler/capnpc-c++.cc
+        CXXOPTS
+        ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        shark::shark_static
+        shark::shark_base_static
+        ${KMCMAKE_DEPS_LINK}
+        PUBLIC
+)
+
+kmcmake_cc_binary(
+        NAME shark-shark
+        NAMESPACE shark
+        SOURCES
+        compiler/capnpc-capnp.cc
+        CXXOPTS
+        ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        shark::shark_static
+        shark::shark_base_static
+        ${KMCMAKE_DEPS_LINK}
+        PUBLIC
+)
+
+include(shark_cc_generate)
+
+#########################################
+# rpc
+shark_schema_generate(
+        COM_FILES
+        COM_HDRS
+        SCHEMAS
+        rpc/persistent.capnp
+        rpc/rpc.capnp
+        rpc/rpc-twoparty.capnp
+        compat/byte-stream.capnp
+        compat/http-over-capnp.capnp
+        compat/json-rpc.capnp
+)
+
+set(RPC_SRC
+        ${COM_FILES}
+        rpc/serialize-async.cc
+        rpc/membrane.cc
+        rpc/dynamic-capability.cc
+        rpc/rpc.cc
+        rpc/rpc.capnp.cc
+        rpc/rpc-twoparty.cc
+        rpc/ez-rpc.cc
+        compat/byte-stream.cc
+        compat/http-over-capnp.cc
+        compat/json-rpc.cc
+        rpc/websocket-rpc.cc
+)
+
+
+kmcmake_cc_library(
+        NAME shark-rpc
+        NAMESPACE shark
+        SOURCES
+        ${RPC_SRC}
+        CXXOPTS
+        ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        shark::shark_static
+        shark::shark_base_static
+        ${KMCMAKE_DEPS_LINK}
+        PUBLIC
+)

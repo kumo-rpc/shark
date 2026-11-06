@@ -97,6 +97,8 @@ function(kmcmake_cc_binary)
             "$<BUILD_INTERFACE:${${PROJECT_NAME}_BINARY_DIR}>"
             "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
     )
+    add_executable(${PROJECT_NAME}::${exec_case} ALIAS ${exec_case})
+
     if (KMCMAKE_CC_BINARY_PUBLIC)
         install(TARGETS ${exec_case}
                 EXPORT ${PROJECT_NAME}Targets
