@@ -45,17 +45,17 @@ using addressbook::Person;
 using addressbook::AddressBook;
 
 void writeAddressBook(int fd) {
-  ::capnp::MallocMessageBuilder message;
+  ::shark::MallocMessageBuilder message;
 
   AddressBook::Builder addressBook = message.initRoot<AddressBook>();
-  ::capnp::List<Person>::Builder people = addressBook.initPeople(2);
+  ::shark::List<Person>::Builder people = addressBook.initPeople(2);
 
   Person::Builder alice = people[0];
   alice.setId(123);
   alice.setName("Alice");
   alice.setEmail("alice@example.com");
   // Type shown for explanation purposes; normally you'd use auto.
-  ::capnp::List<Person::PhoneNumber>::Builder alicePhones =
+  ::shark::List<Person::PhoneNumber>::Builder alicePhones =
       alice.initPhones(1);
   alicePhones[0].setNumber("555-1212");
   alicePhones[0].setType(Person::PhoneNumber::Type::MOBILE);
@@ -76,7 +76,7 @@ void writeAddressBook(int fd) {
 }
 
 void printAddressBook(int fd) {
-  ::capnp::PackedFdMessageReader message(fd);
+  ::shark::PackedFdMessageReader message(fd);
 
   AddressBook::Reader addressBook = message.getRoot<AddressBook>();
 
@@ -122,19 +122,19 @@ void printAddressBook(int fd) {
 #include <shark/schema.h>
 #include <shark/dynamic.h>
 
-using ::capnp::DynamicValue;
-using ::capnp::DynamicStruct;
-using ::capnp::DynamicEnum;
-using ::capnp::DynamicList;
-using ::capnp::List;
-using ::capnp::Schema;
-using ::capnp::StructSchema;
-using ::capnp::EnumSchema;
+using ::shark::DynamicValue;
+using ::shark::DynamicStruct;
+using ::shark::DynamicEnum;
+using ::shark::DynamicList;
+using ::shark::List;
+using ::shark::Schema;
+using ::shark::StructSchema;
+using ::shark::EnumSchema;
 
-using ::capnp::Void;
-using ::capnp::Text;
-using ::capnp::MallocMessageBuilder;
-using ::capnp::PackedFdMessageReader;
+using ::shark::Void;
+using ::shark::Text;
+using ::shark::MallocMessageBuilder;
+using ::shark::PackedFdMessageReader;
 
 void dynamicWriteAddressBook(int fd, StructSchema schema) {
   // Write a message using the dynamic API to set each
@@ -177,7 +177,7 @@ void dynamicWriteAddressBook(int fd, StructSchema schema) {
   bobPhones[1].setNumber("555-7654");
   bobPhones[1].setType(Person::PhoneNumber::Type::WORK);
   bob.get("employment").as<DynamicStruct>()
-     .set("unemployed", ::capnp::VOID);
+     .set("unemployed", ::shark::VOID);
 
   writePackedMessageToFd(fd, message);
 }

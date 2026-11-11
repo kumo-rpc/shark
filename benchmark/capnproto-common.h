@@ -402,17 +402,17 @@ struct BenchmarkMethods {
 };
 
 struct BenchmarkTypes {
-  typedef capnp::Uncompressed Uncompressed;
-  typedef capnp::Packed Packed;
+  typedef shark::Uncompressed Uncompressed;
+  typedef shark::Packed Packed;
 #if HAVE_SNAPPY
-  typedef capnp::SnappyCompressed SnappyCompressed;
+  typedef shark::SnappyCompressed SnappyCompressed;
 #endif  // HAVE_SNAPPY
 
-  typedef capnp::UseScratch ReusableResources;
-  typedef capnp::NoScratch SingleUseResources;
+  typedef shark::UseScratch ReusableResources;
+  typedef shark::NoScratch SingleUseResources;
 
   template <typename TestCase, typename ReuseStrategy, typename Compression>
-  struct BenchmarkMethods: public capnp::BenchmarkMethods<TestCase, ReuseStrategy, Compression> {};
+  struct BenchmarkMethods: public shark::BenchmarkMethods<TestCase, ReuseStrategy, Compression> {};
 };
 
 }  // namespace shark

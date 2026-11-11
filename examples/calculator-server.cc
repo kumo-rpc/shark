@@ -33,14 +33,14 @@ kj::Promise<double> readValue(Calculator::Value::Client value) {
   // include something like this automatically.)
 
   return value.readRequest().send()
-      .then([](capnp::Response<Calculator::Value::ReadResults> result) {
+      .then([](shark::Response<Calculator::Value::ReadResults> result) {
     return result.getValue();
   });
 }
 
 kj::Promise<double> evaluateImpl(
     Calculator::Expression::Reader expression,
-    capnp::List<double>::Reader params = capnp::List<double>::Reader()) {
+    shark::List<double>::Reader params = shark::List<double>::Reader()) {
   // Implementation of CalculatorImpl::evaluate(), also shared by
   // FunctionImpl::call().  In the latter case, `params` are the parameter
   // values passed to the function; in the former case, `params` is just an
@@ -78,7 +78,7 @@ kj::Promise<double> evaluateImpl(
         auto request = func.callRequest();
         request.setParams(paramValues);
         return request.send().then(
-            [](capnp::Response<Calculator::Function::CallResults>&& result) {
+            [](shark::Response<Calculator::Function::CallResults>&& result) {
           return result.getValue();
         });
       });
@@ -129,7 +129,7 @@ private:
   uint paramCount;
   // The function's arity.
 
-  capnp::MallocMessageBuilder body;
+  shark::MallocMessageBuilder body;
   // Stores a permanent copy of the function body.
 };
 
@@ -197,7 +197,7 @@ int main(int argc, const char* argv[]) {
   }
 
   // Set up a server.
-  capnp::EzRpcServer server(kj::heap<CalculatorImpl>(), argv[1]);
+  shark::EzRpcServer server(kj::heap<CalculatorImpl>(), argv[1]);
 
   // Write the port number to stdout, in case it was chosen automatically.
   auto& waitScope = server.getWaitScope();

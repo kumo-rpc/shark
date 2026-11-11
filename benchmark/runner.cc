@@ -644,5 +644,5 @@ int main(int argc, char* argv[]) {
 }  // namespace shark
 
 int main(int argc, char* argv[]) {
-  return capnp::benchmark::runner::main(argc, argv);
+  return shark::benchmark::runner::main(argc, argv);
 }

@@ -47,7 +47,7 @@ int main(int argc, const char* argv[]) {
     return 1;
   }
 
-  capnp::EzRpcClient client(argv[1]);
+  shark::EzRpcClient client(argv[1]);
   Calculator::Client calculator = client.getMain<Calculator>();
 
   // Keep an eye on `waitScope`.  Whenever you see it used is a place where we

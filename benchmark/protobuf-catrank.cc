@@ -126,9 +126,9 @@ public:
 }  // namespace shark
 
 int main(int argc, char* argv[]) {
-  return capnp::benchmark::benchmarkMain<
-      capnp::benchmark::protobuf::BenchmarkTypes,
-      capnp::benchmark::protobuf::CatRankTestCase>(argc, argv);
+  return shark::benchmark::benchmarkMain<
+      shark::benchmark::protobuf::BenchmarkTypes,
+      shark::benchmark::protobuf::CatRankTestCase>(argc, argv);
 }
 
 #endif  // !SHARK_NO_PROTOBUF_BENCHMARK

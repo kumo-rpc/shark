@@ -118,7 +118,7 @@ public:
 }  // namespace shark
 
 int main(int argc, char* argv[]) {
-  return capnp::benchmark::benchmarkMain<
-      capnp::benchmark::capnp::BenchmarkTypes,
-      capnp::benchmark::capnp::ExpressionTestCase>(argc, argv);
+  return shark::benchmark::benchmarkMain<
+      shark::benchmark::shark::BenchmarkTypes,
+      shark::benchmark::shark::ExpressionTestCase>(argc, argv);
 }
