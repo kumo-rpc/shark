@@ -21,97 +21,99 @@
 
 #pragma once
 
-#include <shark/common.h>
-#include <shark/base/string.h>
 #include <shark/base/exception.h>
-#include <shark/base/vector.h>
 #include <shark/base/filesystem.h>
 #include <shark/base/one-of.h>
+#include <shark/base/string.h>
+#include <shark/base/vector.h>
+#include <shark/common.h>
 
 SHARK_BEGIN_HEADER
 
 namespace capnp {
-namespace compiler {
+    namespace compiler {
 
-struct Resolution {
-  uint32_t startByte;
-  uint32_t endByte;
+        struct Resolution {
+            uint32_t startByte;
+            uint32_t endByte;
 
-  struct Type { uint64_t typeId; };
-  struct Member {
-    uint64_t parentTypeId;
-    uint16_t ordinal;
-  };
+            struct Type {
+                uint64_t typeId;
+            };
+            struct Member {
+                uint64_t parentTypeId;
+                uint16_t ordinal;
+            };
 
-  kj::OneOf<Type, Member> target;
-};
+            kj::OneOf<Type, Member> target;
+        };
 
-class ErrorReporter {
-  // Callback for reporting errors within a particular file.
+        class ErrorReporter {
+            // Callback for reporting errors within a particular file.
 
-public:
-  virtual void addError(uint32_t startByte, uint32_t endByte, kj::StringPtr message) = 0;
-  // Report an error at the given location in the input text.  `startByte` and `endByte` indicate
-  // the span of text that is erroneous.  They may be equal, in which case the parser was only
-  // able to identify where the error begins, not where it ends.
+        public:
+            virtual void addError(uint32_t startByte, uint32_t endByte, kj::StringPtr message) = 0;
+            // Report an error at the given location in the input text.  `startByte` and `endByte` indicate
+            // the span of text that is erroneous.  They may be equal, in which case the parser was only
+            // able to identify where the error begins, not where it ends.
 
-  template <typename T>
-  inline void addErrorOn(T&& decl, kj::StringPtr message) {
-    // Works for any `T` that defines `getStartByte()` and `getEndByte()` methods, which many
-    // of the Cap'n Proto types defined in `grammar.capnp` do.
+            template <typename T>
+            inline void addErrorOn(T&& decl, kj::StringPtr message) {
+                // Works for any `T` that defines `getStartByte()` and `getEndByte()` methods, which many
+                // of the Cap'n Proto types defined in `grammar.capnp` do.
 
-    addError(decl.getStartByte(), decl.getEndByte(), message);
-  }
+                addError(decl.getStartByte(), decl.getEndByte(), message);
+            }
 
-  virtual bool hadErrors() = 0;
-  // Return true if any errors have been reported, globally.  The main use case for this callback
-  // is to inhibit the reporting of errors which may have been caused by previous errors, or to
-  // allow the compiler to bail out entirely if it gets confused and thinks this could be because
-  // of previous errors.
+            virtual bool hadErrors() = 0;
+            // Return true if any errors have been reported, globally.  The main use case for this callback
+            // is to inhibit the reporting of errors which may have been caused by previous errors, or to
+            // allow the compiler to bail out entirely if it gets confused and thinks this could be because
+            // of previous errors.
 
-  virtual void reportResolution(Resolution resolution) {};
-  // Report that an identifier parsed from the input resolved to a particular declaration. This may
-  // be useful, for example, to implement a jump-to-definition in a code editor.
-  //
-  // This is not an error, but is reported through ErrorReporter because ErrorReporter tends to be
-  // passed to all the right places to collect this information.
-};
+            virtual void reportResolution(Resolution resolution) { };
+            // Report that an identifier parsed from the input resolved to a particular declaration. This may
+            // be useful, for example, to implement a jump-to-definition in a code editor.
+            //
+            // This is not an error, but is reported through ErrorReporter because ErrorReporter tends to be
+            // passed to all the right places to collect this information.
+        };
 
-class GlobalErrorReporter {
-  // Callback for reporting errors in any file.
+        class GlobalErrorReporter {
+            // Callback for reporting errors in any file.
 
-public:
-  struct SourcePos {
-    uint byte;
-    uint line;
-    uint column;
-  };
+        public:
+            struct SourcePos {
+                uint byte;
+                uint line;
+                uint column;
+            };
 
-  virtual void addError(const kj::ReadableDirectory& directory, kj::PathPtr path,
-                        SourcePos start, SourcePos end,
-                        kj::StringPtr message) = 0;
-  // Report an error at the given location in the given file.
+            virtual void addError(const kj::ReadableDirectory& directory, kj::PathPtr path,
+                SourcePos start, SourcePos end,
+                kj::StringPtr message) = 0;
+            // Report an error at the given location in the given file.
 
-  virtual bool hadErrors() = 0;
-  // Return true if any errors have been reported, globally.  The main use case for this callback
-  // is to inhibit the reporting of errors which may have been caused by previous errors, or to
-  // allow the compiler to bail out entirely if it gets confused and thinks this could be because
-  // of previous errors.
-};
+            virtual bool hadErrors() = 0;
+            // Return true if any errors have been reported, globally.  The main use case for this callback
+            // is to inhibit the reporting of errors which may have been caused by previous errors, or to
+            // allow the compiler to bail out entirely if it gets confused and thinks this could be because
+            // of previous errors.
+        };
 
-class LineBreakTable {
-public:
-  LineBreakTable(kj::ArrayPtr<const char> content);
+        class LineBreakTable {
+        public:
+            LineBreakTable(kj::ArrayPtr<const char> content);
 
-  GlobalErrorReporter::SourcePos toSourcePos(uint32_t byteOffset) const;
+            GlobalErrorReporter::SourcePos toSourcePos(uint32_t byteOffset) const;
 
-private:
-  kj::Vector<uint> lineBreaks;
-  // Byte offsets of the first byte in each source line.  The first element is always zero.
-  // Initialized the first time the module is loaded.
-};
+        private:
+            kj::Vector<uint> lineBreaks;
+            // Byte offsets of the first byte in each source line.  The first element is always zero.
+            // Initialized the first time the module is loaded.
+        };
 
-}  // namespace compiler
-}  // namespace capnp
+    } // namespace compiler
+} // namespace capnp
 
 SHARK_END_HEADER
