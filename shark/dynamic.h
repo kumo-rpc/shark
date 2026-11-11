@@ -41,7 +41,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
     class MessageReader;
     class MessageBuilder;
@@ -288,8 +288,8 @@ namespace capnp {
         friend struct DynamicList;
         friend class MessageReader;
         friend class MessageBuilder;
-        template <typename T, ::capnp::Kind k>
-        friend struct ::capnp::ToDynamic_;
+        template <typename T, ::shark::Kind k>
+        friend struct ::shark::ToDynamic_;
         friend kj::StringTree _::structString(
             _::StructReader reader, const _::RawBrandedSchema& schema);
         friend class Orphanage;
@@ -382,8 +382,8 @@ namespace capnp {
         friend struct DynamicList;
         friend class MessageReader;
         friend class MessageBuilder;
-        template <typename T, ::capnp::Kind k>
-        friend struct ::capnp::ToDynamic_;
+        template <typename T, ::shark::Kind k>
+        friend struct ::shark::ToDynamic_;
         friend class Orphanage;
         friend class Orphan<DynamicStruct>;
         friend class Orphan<DynamicValue>;
@@ -463,8 +463,8 @@ namespace capnp {
         friend struct _::PointerHelpers;
         friend struct DynamicStruct;
         friend class DynamicList::Builder;
-        template <typename T, ::capnp::Kind k>
-        friend struct ::capnp::ToDynamic_;
+        template <typename T, ::shark::Kind k>
+        friend struct ::shark::ToDynamic_;
         friend class Orphanage;
         friend class Orphan<DynamicList>;
         friend class Orphan<DynamicValue>;
@@ -520,8 +520,8 @@ namespace capnp {
         template <typename T, Kind k>
         friend struct _::PointerHelpers;
         friend struct DynamicStruct;
-        template <typename T, ::capnp::Kind k>
-        friend struct ::capnp::ToDynamic_;
+        template <typename T, ::shark::Kind k>
+        friend struct ::shark::ToDynamic_;
         friend class Orphanage;
         template <typename T, Kind k>
         friend struct _::OrphanGetImpl;
@@ -1824,6 +1824,6 @@ namespace capnp {
         return DynamicValue::Reader(*this).as<T>();
     }
 
-} // namespace capnp
+} // namespace shark
 
 SHARK_END_HEADER

@@ -25,7 +25,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 class StructSchema;
 class ListSchema;
@@ -432,6 +432,6 @@ inline Orphan<Data> Orphanage::referenceExternalData(Data::Reader data) const {
   return Orphan<Data>(_::OrphanBuilder::referenceExternalData(arena, data));
 }
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

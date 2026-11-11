@@ -29,11 +29,11 @@
 #include "compiler/node-translator.h"
 #include "compiler/parser.h"
 
-namespace capnp {
+namespace shark {
 
 namespace {
 
-class ThrowingErrorReporter final: public capnp::compiler::ErrorReporter {
+class ThrowingErrorReporter final: public shark::compiler::ErrorReporter {
   // Throws all errors as assertion failures.
 public:
   ThrowingErrorReporter(kj::StringPtr input): input(input) {}
@@ -61,16 +61,16 @@ private:
   kj::StringPtr input;
 };
 
-class ExternalResolver final: public capnp::compiler::ValueTranslator::Resolver {
+class ExternalResolver final: public shark::compiler::ValueTranslator::Resolver {
   // Throws all external resolution requests as assertion failures.
 public:
-  kj::Maybe<capnp::DynamicValue::Reader>
-  resolveConstant(capnp::compiler::Expression::Reader name) override {
+  kj::Maybe<shark::DynamicValue::Reader>
+  resolveConstant(shark::compiler::Expression::Reader name) override {
     KJ_FAIL_REQUIRE("External constants not allowed.");
   }
 
-  kj::Maybe<kj::Array<const capnp::byte>>
-  readEmbed(capnp::compiler::LocatedText::Reader filename) override {
+  kj::Maybe<kj::Array<const shark::byte>>
+  readEmbed(shark::compiler::LocatedText::Reader filename) override {
     KJ_FAIL_REQUIRE("External embeds not allowed.");
   }
 };
@@ -81,13 +81,13 @@ void lexAndParseExpression(kj::StringPtr input, Function f) {
 
   ThrowingErrorReporter errorReporter(input);
 
-  capnp::MallocMessageBuilder tokenArena;
-  auto lexedTokens = tokenArena.initRoot<capnp::compiler::LexedTokens>();
-  capnp::compiler::lex(input, lexedTokens, errorReporter);
+  shark::MallocMessageBuilder tokenArena;
+  auto lexedTokens = tokenArena.initRoot<shark::compiler::LexedTokens>();
+  shark::compiler::lex(input, lexedTokens, errorReporter);
 
-  capnp::compiler::CapnpParser parser(tokenArena.getOrphanage(), errorReporter);
+  shark::compiler::CapnpParser parser(tokenArena.getOrphanage(), errorReporter);
   auto tokens = lexedTokens.asReader().getTokens();
-  capnp::compiler::CapnpParser::ParserInput parserInput(tokens.begin(), tokens.end());
+  shark::compiler::CapnpParser::ParserInput parserInput(tokens.begin(), tokens.end());
 
   if (parserInput.getPosition() != tokens.end()) {
     KJ_IF_MAYBE(expression, parser.getParsers().expression(parserInput)) {
@@ -120,9 +120,9 @@ kj::String TextCodec::encode(DynamicValue::Reader value) const {
     return kj::str(value);
   } else {
     if (value.getType() == DynamicValue::Type::STRUCT) {
-      return capnp::prettyPrint(value.as<DynamicStruct>()).flatten();
+      return shark::prettyPrint(value.as<DynamicStruct>()).flatten();
     } else if (value.getType() == DynamicValue::Type::LIST) {
-      return capnp::prettyPrint(value.as<DynamicList>()).flatten();
+      return shark::prettyPrint(value.as<DynamicList>()).flatten();
     } else {
       return kj::str(value);
     }
@@ -160,4 +160,4 @@ Orphan<DynamicValue> TextCodec::decode(kj::StringPtr input, Type type, Orphanage
   return output;
 }
 
-}  // namespace capnp
+}  // namespace shark

@@ -23,7 +23,7 @@
 
 using Cxx = import "/shark/c++.shk";
 
-$Cxx.namespace("capnp::compiler");
+$Cxx.namespace("shark::compiler");
 
 struct Token {
   union {

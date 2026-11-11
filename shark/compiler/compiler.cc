@@ -31,7 +31,7 @@
 #include <shark/message.h>
 #include <unordered_map>
 
-namespace capnp {
+namespace shark {
     namespace compiler {
 
         typedef std::unordered_map<uint64_t, Orphan<schema::Node::SourceInfo::Reader>> SourceInfoMap;
@@ -1378,9 +1378,9 @@ namespace capnp {
         Compiler::ErrorIgnorer Compiler::ErrorIgnorer::instance;
 
         kj::Maybe<Type> Compiler::CompiledType::getSchema() {
-            capnp::word scratch[32];
+            shark::word scratch[32];
             memset(&scratch, 0, sizeof(scratch));
-            capnp::MallocMessageBuilder message(scratch);
+            shark::MallocMessageBuilder message(scratch);
             auto builder = message.getRoot<schema::Type>();
 
             {
@@ -1479,4 +1479,4 @@ namespace capnp {
         }
 
     } // namespace compiler
-} // namespace capnp
+} // namespace shark

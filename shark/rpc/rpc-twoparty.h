@@ -30,7 +30,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 namespace rpc {
   namespace twoparty {
@@ -260,6 +260,6 @@ private:
   RpcSystem<rpc::twoparty::VatId> rpcSystem;
 };
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

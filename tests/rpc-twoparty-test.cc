@@ -47,15 +47,15 @@
 #endif
 
 // TODO(cleanup): Auto-generate stringification functions for union discriminants.
-namespace capnp {
+namespace shark {
 namespace rpc {
 inline kj::String KJ_STRINGIFY(Message::Which which) {
   return kj::str(static_cast<uint16_t>(which));
 }
 }  // namespace rpc
-}  // namespace capnp
+}  // namespace shark
 
-namespace capnp {
+namespace shark {
 namespace _ {
 namespace {
 
@@ -134,7 +134,7 @@ TEST(TwoPartyNetwork, Basic) {
   int handleCount = 0;
 
   auto serverThread = runServer(*ioContext.provider, callCount, handleCount);
-  TwoPartyVatNetwork network(*serverThread.pipe, rpc::twoparty::Side::CLIENT, capnp::ReaderOptions(), clock);
+  TwoPartyVatNetwork network(*serverThread.pipe, rpc::twoparty::Side::CLIENT, shark::ReaderOptions(), clock);
   auto rpcClient = makeRpcClient(network);
 
   KJ_EXPECT(network.getCurrentQueueCount() == 0);
@@ -550,7 +550,7 @@ KJ_TEST("send FD over RPC") {
     kj::AutoCloseFd in2(pipeFds[0]);
     kj::AutoCloseFd out2(pipeFds[1]);
 
-    capnp::RemotePromise<test::TestMoreStuff::WriteToFdResults> promise = nullptr;
+    shark::RemotePromise<test::TestMoreStuff::WriteToFdResults> promise = nullptr;
     {
       auto req = cap.writeToFdRequest();
 
@@ -600,7 +600,7 @@ KJ_TEST("FD per message limit") {
   kj::AutoCloseFd in2(pipeFds[0]);
   kj::AutoCloseFd out2(pipeFds[1]);
 
-  capnp::RemotePromise<test::TestMoreStuff::WriteToFdResults> promise = nullptr;
+  shark::RemotePromise<test::TestMoreStuff::WriteToFdResults> promise = nullptr;
   {
     auto req = cap.writeToFdRequest();
 
@@ -1274,4 +1274,4 @@ KJ_TEST("Two-hop embargo") {
 
 }  // namespace
 }  // namespace _
-}  // namespace capnp
+}  // namespace shark

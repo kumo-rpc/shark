@@ -29,7 +29,7 @@
 #include <shark/message.h>
 #include <unordered_map>
 
-namespace capnp {
+namespace shark {
 namespace compiler {
 
 namespace {
@@ -300,4 +300,4 @@ void ModuleLoader::setFileIdsRequired(bool value) {
 }
 
 }  // namespace compiler
-}  // namespace capnp
+}  // namespace shark

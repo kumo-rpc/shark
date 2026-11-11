@@ -15,7 +15,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 namespace schemas {
 
 SHARK_DECLARE_SCHEMA(e75816b56529d464);
@@ -45,9 +45,9 @@ SHARK_DECLARE_SCHEMA(9cb9e86e3198037f);
 SHARK_DECLARE_SCHEMA(84e4f3f5a807605c);
 
 }  // namespace schemas
-}  // namespace capnp
+}  // namespace shark
 
-namespace capnp {
+namespace shark {
 namespace compiler {
 
 struct LocatedText {
@@ -60,7 +60,7 @@ struct LocatedText {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(e75816b56529d464, 1, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -75,7 +75,7 @@ struct LocatedInteger {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(991c7a3693d62cf2, 2, 0)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -90,7 +90,7 @@ struct LocatedFloat {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(90f2a60678fd2367, 2, 0)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -124,7 +124,7 @@ struct Expression {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(8e207d4dfe54d0de, 3, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -143,7 +143,7 @@ struct Expression::Param {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(c90246b71adedbaa, 1, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -158,7 +158,7 @@ struct Expression::Application {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(aee8397040b0df7a, 3, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -173,7 +173,7 @@ struct Expression::Member {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(aa28e1400d793359, 3, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -235,7 +235,7 @@ struct Declaration {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(96efe787c17e83bb, 2, 8)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -250,7 +250,7 @@ struct Declaration::BrandParameter {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(d5e71144af1ce175, 1, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -266,7 +266,7 @@ struct Declaration::AnnotationApplication {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(d00489d473826290, 1, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -285,7 +285,7 @@ struct Declaration::AnnotationApplication::Value {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(fb5aeed95cdf6af9, 1, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -305,7 +305,7 @@ struct Declaration::ParamList {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(b3f66e7a79d81bcd, 2, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -321,7 +321,7 @@ struct Declaration::Param {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(fffe08a9a697d2a5, 2, 4)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -340,7 +340,7 @@ struct Declaration::Param::DefaultValue {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(e5104515fd88ea47, 2, 4)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -360,7 +360,7 @@ struct Declaration::Id {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(89f0c973c103ae96, 2, 8)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -375,7 +375,7 @@ struct Declaration::Using {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(e93164a80bfe2ccf, 2, 8)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -390,7 +390,7 @@ struct Declaration::Const {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(b348322a8dcf0d0c, 2, 8)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -406,7 +406,7 @@ struct Declaration::Field {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(8f2622208fb358c8, 2, 8)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -425,7 +425,7 @@ struct Declaration::Field::DefaultValue {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(d0d1a21de617951f, 2, 8)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -440,7 +440,7 @@ struct Declaration::Interface {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(992a90eaf30235d3, 2, 8)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -456,7 +456,7 @@ struct Declaration::Method {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(eb971847d617c0b9, 2, 8)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -475,7 +475,7 @@ struct Declaration::Method::Results {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(c6238c7d62d65173, 2, 8)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -490,7 +490,7 @@ struct Declaration::Annotation {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(9cb9e86e3198037f, 2, 8)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -505,7 +505,7 @@ struct ParsedFile {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(84e4f3f5a807605c, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -517,35 +517,35 @@ public:
   typedef LocatedText Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasValue() const;
-  inline  ::capnp::Text::Reader getValue() const;
+  inline  ::shark::Text::Reader getValue() const;
 
   inline  ::uint32_t getStartByte() const;
 
   inline  ::uint32_t getEndByte() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class LocatedText::Builder {
@@ -555,21 +555,21 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasValue();
-  inline  ::capnp::Text::Builder getValue();
-  inline void setValue( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initValue(unsigned int size);
-  inline void adoptValue(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownValue();
+  inline  ::shark::Text::Builder getValue();
+  inline void setValue( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initValue(unsigned int size);
+  inline void adoptValue(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownValue();
 
   inline  ::uint32_t getStartByte();
   inline void setStartByte( ::uint32_t value);
@@ -578,12 +578,12 @@ public:
   inline void setEndByte( ::uint32_t value);
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -592,14 +592,14 @@ public:
   typedef LocatedText Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -608,15 +608,15 @@ public:
   typedef LocatedInteger Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -627,15 +627,15 @@ public:
   inline  ::uint32_t getEndByte() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class LocatedInteger::Builder {
@@ -645,11 +645,11 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
@@ -664,12 +664,12 @@ public:
   inline void setEndByte( ::uint32_t value);
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -678,14 +678,14 @@ public:
   typedef LocatedInteger Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -694,15 +694,15 @@ public:
   typedef LocatedFloat Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -713,15 +713,15 @@ public:
   inline  ::uint32_t getEndByte() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class LocatedFloat::Builder {
@@ -731,11 +731,11 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
@@ -750,12 +750,12 @@ public:
   inline void setEndByte( ::uint32_t value);
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -764,14 +764,14 @@ public:
   typedef LocatedFloat Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -780,21 +780,21 @@ public:
   typedef Expression Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isUnknown() const;
-  inline  ::capnp::Void getUnknown() const;
+  inline  ::shark::Void getUnknown() const;
 
   inline bool isPositiveInt() const;
   inline  ::uint64_t getPositiveInt() const;
@@ -807,19 +807,19 @@ public:
 
   inline bool isString() const;
   inline bool hasString() const;
-  inline  ::capnp::Text::Reader getString() const;
+  inline  ::shark::Text::Reader getString() const;
 
   inline bool isRelativeName() const;
   inline bool hasRelativeName() const;
-  inline  ::capnp::compiler::LocatedText::Reader getRelativeName() const;
+  inline  ::shark::compiler::LocatedText::Reader getRelativeName() const;
 
   inline bool isList() const;
   inline bool hasList() const;
-  inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Reader getList() const;
+  inline  ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Reader getList() const;
 
   inline bool isTuple() const;
   inline bool hasTuple() const;
-  inline  ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Reader getTuple() const;
+  inline  ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Reader getTuple() const;
 
   inline  ::uint32_t getStartByte() const;
 
@@ -827,7 +827,7 @@ public:
 
   inline bool isBinary() const;
   inline bool hasBinary() const;
-  inline  ::capnp::Data::Reader getBinary() const;
+  inline  ::shark::Data::Reader getBinary() const;
 
   inline bool isApplication() const;
   inline typename Application::Reader getApplication() const;
@@ -837,26 +837,26 @@ public:
 
   inline bool isAbsoluteName() const;
   inline bool hasAbsoluteName() const;
-  inline  ::capnp::compiler::LocatedText::Reader getAbsoluteName() const;
+  inline  ::shark::compiler::LocatedText::Reader getAbsoluteName() const;
 
   inline bool isImport() const;
   inline bool hasImport() const;
-  inline  ::capnp::compiler::LocatedText::Reader getImport() const;
+  inline  ::shark::compiler::LocatedText::Reader getImport() const;
 
   inline bool isEmbed() const;
   inline bool hasEmbed() const;
-  inline  ::capnp::compiler::LocatedText::Reader getEmbed() const;
+  inline  ::shark::compiler::LocatedText::Reader getEmbed() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Expression::Builder {
@@ -866,19 +866,19 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isUnknown();
-  inline  ::capnp::Void getUnknown();
-  inline void setUnknown( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getUnknown();
+  inline void setUnknown( ::shark::Void value = ::shark::VOID);
 
   inline bool isPositiveInt();
   inline  ::uint64_t getPositiveInt();
@@ -894,35 +894,35 @@ public:
 
   inline bool isString();
   inline bool hasString();
-  inline  ::capnp::Text::Builder getString();
-  inline void setString( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initString(unsigned int size);
-  inline void adoptString(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownString();
+  inline  ::shark::Text::Builder getString();
+  inline void setString( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initString(unsigned int size);
+  inline void adoptString(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownString();
 
   inline bool isRelativeName();
   inline bool hasRelativeName();
-  inline  ::capnp::compiler::LocatedText::Builder getRelativeName();
-  inline void setRelativeName( ::capnp::compiler::LocatedText::Reader value);
-  inline  ::capnp::compiler::LocatedText::Builder initRelativeName();
-  inline void adoptRelativeName(::capnp::Orphan< ::capnp::compiler::LocatedText>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::LocatedText> disownRelativeName();
+  inline  ::shark::compiler::LocatedText::Builder getRelativeName();
+  inline void setRelativeName( ::shark::compiler::LocatedText::Reader value);
+  inline  ::shark::compiler::LocatedText::Builder initRelativeName();
+  inline void adoptRelativeName(::shark::Orphan< ::shark::compiler::LocatedText>&& value);
+  inline ::shark::Orphan< ::shark::compiler::LocatedText> disownRelativeName();
 
   inline bool isList();
   inline bool hasList();
-  inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Builder getList();
-  inline void setList( ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Builder initList(unsigned int size);
-  inline void adoptList(::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>> disownList();
+  inline  ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Builder getList();
+  inline void setList( ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Reader value);
+  inline  ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Builder initList(unsigned int size);
+  inline void adoptList(::shark::Orphan< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>&& value);
+  inline ::shark::Orphan< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>> disownList();
 
   inline bool isTuple();
   inline bool hasTuple();
-  inline  ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Builder getTuple();
-  inline void setTuple( ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Builder initTuple(unsigned int size);
-  inline void adoptTuple(::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>> disownTuple();
+  inline  ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Builder getTuple();
+  inline void setTuple( ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Reader value);
+  inline  ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Builder initTuple(unsigned int size);
+  inline void adoptTuple(::shark::Orphan< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>&& value);
+  inline ::shark::Orphan< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>> disownTuple();
 
   inline  ::uint32_t getStartByte();
   inline void setStartByte( ::uint32_t value);
@@ -932,11 +932,11 @@ public:
 
   inline bool isBinary();
   inline bool hasBinary();
-  inline  ::capnp::Data::Builder getBinary();
-  inline void setBinary( ::capnp::Data::Reader value);
-  inline  ::capnp::Data::Builder initBinary(unsigned int size);
-  inline void adoptBinary(::capnp::Orphan< ::capnp::Data>&& value);
-  inline ::capnp::Orphan< ::capnp::Data> disownBinary();
+  inline  ::shark::Data::Builder getBinary();
+  inline void setBinary( ::shark::Data::Reader value);
+  inline  ::shark::Data::Builder initBinary(unsigned int size);
+  inline void adoptBinary(::shark::Orphan< ::shark::Data>&& value);
+  inline ::shark::Orphan< ::shark::Data> disownBinary();
 
   inline bool isApplication();
   inline typename Application::Builder getApplication();
@@ -948,35 +948,35 @@ public:
 
   inline bool isAbsoluteName();
   inline bool hasAbsoluteName();
-  inline  ::capnp::compiler::LocatedText::Builder getAbsoluteName();
-  inline void setAbsoluteName( ::capnp::compiler::LocatedText::Reader value);
-  inline  ::capnp::compiler::LocatedText::Builder initAbsoluteName();
-  inline void adoptAbsoluteName(::capnp::Orphan< ::capnp::compiler::LocatedText>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::LocatedText> disownAbsoluteName();
+  inline  ::shark::compiler::LocatedText::Builder getAbsoluteName();
+  inline void setAbsoluteName( ::shark::compiler::LocatedText::Reader value);
+  inline  ::shark::compiler::LocatedText::Builder initAbsoluteName();
+  inline void adoptAbsoluteName(::shark::Orphan< ::shark::compiler::LocatedText>&& value);
+  inline ::shark::Orphan< ::shark::compiler::LocatedText> disownAbsoluteName();
 
   inline bool isImport();
   inline bool hasImport();
-  inline  ::capnp::compiler::LocatedText::Builder getImport();
-  inline void setImport( ::capnp::compiler::LocatedText::Reader value);
-  inline  ::capnp::compiler::LocatedText::Builder initImport();
-  inline void adoptImport(::capnp::Orphan< ::capnp::compiler::LocatedText>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::LocatedText> disownImport();
+  inline  ::shark::compiler::LocatedText::Builder getImport();
+  inline void setImport( ::shark::compiler::LocatedText::Reader value);
+  inline  ::shark::compiler::LocatedText::Builder initImport();
+  inline void adoptImport(::shark::Orphan< ::shark::compiler::LocatedText>&& value);
+  inline ::shark::Orphan< ::shark::compiler::LocatedText> disownImport();
 
   inline bool isEmbed();
   inline bool hasEmbed();
-  inline  ::capnp::compiler::LocatedText::Builder getEmbed();
-  inline void setEmbed( ::capnp::compiler::LocatedText::Reader value);
-  inline  ::capnp::compiler::LocatedText::Builder initEmbed();
-  inline void adoptEmbed(::capnp::Orphan< ::capnp::compiler::LocatedText>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::LocatedText> disownEmbed();
+  inline  ::shark::compiler::LocatedText::Builder getEmbed();
+  inline void setEmbed( ::shark::compiler::LocatedText::Reader value);
+  inline  ::shark::compiler::LocatedText::Builder initEmbed();
+  inline void adoptEmbed(::shark::Orphan< ::shark::compiler::LocatedText>&& value);
+  inline ::shark::Orphan< ::shark::compiler::LocatedText> disownEmbed();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -985,14 +985,14 @@ public:
   typedef Expression Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1001,39 +1001,39 @@ public:
   typedef Param Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isUnnamed() const;
-  inline  ::capnp::Void getUnnamed() const;
+  inline  ::shark::Void getUnnamed() const;
 
   inline bool isNamed() const;
   inline bool hasNamed() const;
-  inline  ::capnp::compiler::LocatedText::Reader getNamed() const;
+  inline  ::shark::compiler::LocatedText::Reader getNamed() const;
 
   inline bool hasValue() const;
-  inline  ::capnp::compiler::Expression::Reader getValue() const;
+  inline  ::shark::compiler::Expression::Reader getValue() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Expression::Param::Builder {
@@ -1043,42 +1043,42 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isUnnamed();
-  inline  ::capnp::Void getUnnamed();
-  inline void setUnnamed( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getUnnamed();
+  inline void setUnnamed( ::shark::Void value = ::shark::VOID);
 
   inline bool isNamed();
   inline bool hasNamed();
-  inline  ::capnp::compiler::LocatedText::Builder getNamed();
-  inline void setNamed( ::capnp::compiler::LocatedText::Reader value);
-  inline  ::capnp::compiler::LocatedText::Builder initNamed();
-  inline void adoptNamed(::capnp::Orphan< ::capnp::compiler::LocatedText>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::LocatedText> disownNamed();
+  inline  ::shark::compiler::LocatedText::Builder getNamed();
+  inline void setNamed( ::shark::compiler::LocatedText::Reader value);
+  inline  ::shark::compiler::LocatedText::Builder initNamed();
+  inline void adoptNamed(::shark::Orphan< ::shark::compiler::LocatedText>&& value);
+  inline ::shark::Orphan< ::shark::compiler::LocatedText> disownNamed();
 
   inline bool hasValue();
-  inline  ::capnp::compiler::Expression::Builder getValue();
-  inline void setValue( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initValue();
-  inline void adoptValue(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownValue();
+  inline  ::shark::compiler::Expression::Builder getValue();
+  inline void setValue( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initValue();
+  inline void adoptValue(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownValue();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1087,15 +1087,15 @@ public:
   typedef Param Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::compiler::Expression::Pipeline getValue();
+  inline  ::shark::compiler::Expression::Pipeline getValue();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1104,34 +1104,34 @@ public:
   typedef Application Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasFunction() const;
-  inline  ::capnp::compiler::Expression::Reader getFunction() const;
+  inline  ::shark::compiler::Expression::Reader getFunction() const;
 
   inline bool hasParams() const;
-  inline  ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Reader getParams() const;
+  inline  ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Reader getParams() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Expression::Application::Builder {
@@ -1141,36 +1141,36 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasFunction();
-  inline  ::capnp::compiler::Expression::Builder getFunction();
-  inline void setFunction( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initFunction();
-  inline void adoptFunction(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownFunction();
+  inline  ::shark::compiler::Expression::Builder getFunction();
+  inline void setFunction( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initFunction();
+  inline void adoptFunction(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownFunction();
 
   inline bool hasParams();
-  inline  ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Builder getParams();
-  inline void setParams( ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Builder initParams(unsigned int size);
-  inline void adoptParams(::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>> disownParams();
+  inline  ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Builder getParams();
+  inline void setParams( ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Reader value);
+  inline  ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Builder initParams(unsigned int size);
+  inline void adoptParams(::shark::Orphan< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>&& value);
+  inline ::shark::Orphan< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>> disownParams();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1179,15 +1179,15 @@ public:
   typedef Application Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::compiler::Expression::Pipeline getFunction();
+  inline  ::shark::compiler::Expression::Pipeline getFunction();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1196,34 +1196,34 @@ public:
   typedef Member Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasParent() const;
-  inline  ::capnp::compiler::Expression::Reader getParent() const;
+  inline  ::shark::compiler::Expression::Reader getParent() const;
 
   inline bool hasName() const;
-  inline  ::capnp::compiler::LocatedText::Reader getName() const;
+  inline  ::shark::compiler::LocatedText::Reader getName() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Expression::Member::Builder {
@@ -1233,36 +1233,36 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasParent();
-  inline  ::capnp::compiler::Expression::Builder getParent();
-  inline void setParent( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initParent();
-  inline void adoptParent(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownParent();
+  inline  ::shark::compiler::Expression::Builder getParent();
+  inline void setParent( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initParent();
+  inline void adoptParent(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownParent();
 
   inline bool hasName();
-  inline  ::capnp::compiler::LocatedText::Builder getName();
-  inline void setName( ::capnp::compiler::LocatedText::Reader value);
-  inline  ::capnp::compiler::LocatedText::Builder initName();
-  inline void adoptName(::capnp::Orphan< ::capnp::compiler::LocatedText>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::LocatedText> disownName();
+  inline  ::shark::compiler::LocatedText::Builder getName();
+  inline void setName( ::shark::compiler::LocatedText::Reader value);
+  inline  ::shark::compiler::LocatedText::Builder initName();
+  inline void adoptName(::shark::Orphan< ::shark::compiler::LocatedText>&& value);
+  inline ::shark::Orphan< ::shark::compiler::LocatedText> disownName();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1271,16 +1271,16 @@ public:
   typedef Member Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::compiler::Expression::Pipeline getParent();
-  inline  ::capnp::compiler::LocatedText::Pipeline getName();
+  inline  ::shark::compiler::Expression::Pipeline getParent();
+  inline  ::shark::compiler::LocatedText::Pipeline getName();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1289,39 +1289,39 @@ public:
   typedef Declaration Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool hasName() const;
-  inline  ::capnp::compiler::LocatedText::Reader getName() const;
+  inline  ::shark::compiler::LocatedText::Reader getName() const;
 
   inline typename Id::Reader getId() const;
 
   inline bool hasNestedDecls() const;
-  inline  ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>::Reader getNestedDecls() const;
+  inline  ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>::Reader getNestedDecls() const;
 
   inline bool hasAnnotations() const;
-  inline  ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Reader getAnnotations() const;
+  inline  ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Reader getAnnotations() const;
 
   inline  ::uint32_t getStartByte() const;
 
   inline  ::uint32_t getEndByte() const;
 
   inline bool hasDocComment() const;
-  inline  ::capnp::Text::Reader getDocComment() const;
+  inline  ::shark::Text::Reader getDocComment() const;
 
   inline bool isFile() const;
-  inline  ::capnp::Void getFile() const;
+  inline  ::shark::Void getFile() const;
 
   inline bool isUsing() const;
   inline typename Using::Reader getUsing() const;
@@ -1330,22 +1330,22 @@ public:
   inline typename Const::Reader getConst() const;
 
   inline bool isEnum() const;
-  inline  ::capnp::Void getEnum() const;
+  inline  ::shark::Void getEnum() const;
 
   inline bool isEnumerant() const;
-  inline  ::capnp::Void getEnumerant() const;
+  inline  ::shark::Void getEnumerant() const;
 
   inline bool isStruct() const;
-  inline  ::capnp::Void getStruct() const;
+  inline  ::shark::Void getStruct() const;
 
   inline bool isField() const;
   inline typename Field::Reader getField() const;
 
   inline bool isUnion() const;
-  inline  ::capnp::Void getUnion() const;
+  inline  ::shark::Void getUnion() const;
 
   inline bool isGroup() const;
-  inline  ::capnp::Void getGroup() const;
+  inline  ::shark::Void getGroup() const;
 
   inline bool isInterface() const;
   inline typename Interface::Reader getInterface() const;
@@ -1358,85 +1358,85 @@ public:
 
   inline bool isNakedId() const;
   inline bool hasNakedId() const;
-  inline  ::capnp::compiler::LocatedInteger::Reader getNakedId() const;
+  inline  ::shark::compiler::LocatedInteger::Reader getNakedId() const;
 
   inline bool isNakedAnnotation() const;
   inline bool hasNakedAnnotation() const;
-  inline  ::capnp::compiler::Declaration::AnnotationApplication::Reader getNakedAnnotation() const;
+  inline  ::shark::compiler::Declaration::AnnotationApplication::Reader getNakedAnnotation() const;
 
   inline bool isBuiltinVoid() const;
-  inline  ::capnp::Void getBuiltinVoid() const;
+  inline  ::shark::Void getBuiltinVoid() const;
 
   inline bool isBuiltinBool() const;
-  inline  ::capnp::Void getBuiltinBool() const;
+  inline  ::shark::Void getBuiltinBool() const;
 
   inline bool isBuiltinInt8() const;
-  inline  ::capnp::Void getBuiltinInt8() const;
+  inline  ::shark::Void getBuiltinInt8() const;
 
   inline bool isBuiltinInt16() const;
-  inline  ::capnp::Void getBuiltinInt16() const;
+  inline  ::shark::Void getBuiltinInt16() const;
 
   inline bool isBuiltinInt32() const;
-  inline  ::capnp::Void getBuiltinInt32() const;
+  inline  ::shark::Void getBuiltinInt32() const;
 
   inline bool isBuiltinInt64() const;
-  inline  ::capnp::Void getBuiltinInt64() const;
+  inline  ::shark::Void getBuiltinInt64() const;
 
   inline bool isBuiltinUInt8() const;
-  inline  ::capnp::Void getBuiltinUInt8() const;
+  inline  ::shark::Void getBuiltinUInt8() const;
 
   inline bool isBuiltinUInt16() const;
-  inline  ::capnp::Void getBuiltinUInt16() const;
+  inline  ::shark::Void getBuiltinUInt16() const;
 
   inline bool isBuiltinUInt32() const;
-  inline  ::capnp::Void getBuiltinUInt32() const;
+  inline  ::shark::Void getBuiltinUInt32() const;
 
   inline bool isBuiltinUInt64() const;
-  inline  ::capnp::Void getBuiltinUInt64() const;
+  inline  ::shark::Void getBuiltinUInt64() const;
 
   inline bool isBuiltinFloat32() const;
-  inline  ::capnp::Void getBuiltinFloat32() const;
+  inline  ::shark::Void getBuiltinFloat32() const;
 
   inline bool isBuiltinFloat64() const;
-  inline  ::capnp::Void getBuiltinFloat64() const;
+  inline  ::shark::Void getBuiltinFloat64() const;
 
   inline bool isBuiltinText() const;
-  inline  ::capnp::Void getBuiltinText() const;
+  inline  ::shark::Void getBuiltinText() const;
 
   inline bool isBuiltinData() const;
-  inline  ::capnp::Void getBuiltinData() const;
+  inline  ::shark::Void getBuiltinData() const;
 
   inline bool isBuiltinList() const;
-  inline  ::capnp::Void getBuiltinList() const;
+  inline  ::shark::Void getBuiltinList() const;
 
   inline bool isBuiltinObject() const;
-  inline  ::capnp::Void getBuiltinObject() const;
+  inline  ::shark::Void getBuiltinObject() const;
 
   inline bool isBuiltinAnyPointer() const;
-  inline  ::capnp::Void getBuiltinAnyPointer() const;
+  inline  ::shark::Void getBuiltinAnyPointer() const;
 
   inline bool hasParameters() const;
-  inline  ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>::Reader getParameters() const;
+  inline  ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>::Reader getParameters() const;
 
   inline bool isBuiltinAnyStruct() const;
-  inline  ::capnp::Void getBuiltinAnyStruct() const;
+  inline  ::shark::Void getBuiltinAnyStruct() const;
 
   inline bool isBuiltinAnyList() const;
-  inline  ::capnp::Void getBuiltinAnyList() const;
+  inline  ::shark::Void getBuiltinAnyList() const;
 
   inline bool isBuiltinCapability() const;
-  inline  ::capnp::Void getBuiltinCapability() const;
+  inline  ::shark::Void getBuiltinCapability() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::Builder {
@@ -1446,39 +1446,39 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline Which which();
   inline bool hasName();
-  inline  ::capnp::compiler::LocatedText::Builder getName();
-  inline void setName( ::capnp::compiler::LocatedText::Reader value);
-  inline  ::capnp::compiler::LocatedText::Builder initName();
-  inline void adoptName(::capnp::Orphan< ::capnp::compiler::LocatedText>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::LocatedText> disownName();
+  inline  ::shark::compiler::LocatedText::Builder getName();
+  inline void setName( ::shark::compiler::LocatedText::Reader value);
+  inline  ::shark::compiler::LocatedText::Builder initName();
+  inline void adoptName(::shark::Orphan< ::shark::compiler::LocatedText>&& value);
+  inline ::shark::Orphan< ::shark::compiler::LocatedText> disownName();
 
   inline typename Id::Builder getId();
   inline typename Id::Builder initId();
 
   inline bool hasNestedDecls();
-  inline  ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>::Builder getNestedDecls();
-  inline void setNestedDecls( ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>::Builder initNestedDecls(unsigned int size);
-  inline void adoptNestedDecls(::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>> disownNestedDecls();
+  inline  ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>::Builder getNestedDecls();
+  inline void setNestedDecls( ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>::Reader value);
+  inline  ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>::Builder initNestedDecls(unsigned int size);
+  inline void adoptNestedDecls(::shark::Orphan< ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>>&& value);
+  inline ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>> disownNestedDecls();
 
   inline bool hasAnnotations();
-  inline  ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Builder getAnnotations();
-  inline void setAnnotations( ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Builder initAnnotations(unsigned int size);
-  inline void adoptAnnotations(::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>> disownAnnotations();
+  inline  ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Builder getAnnotations();
+  inline void setAnnotations( ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Reader value);
+  inline  ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Builder initAnnotations(unsigned int size);
+  inline void adoptAnnotations(::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>&& value);
+  inline ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>> disownAnnotations();
 
   inline  ::uint32_t getStartByte();
   inline void setStartByte( ::uint32_t value);
@@ -1487,15 +1487,15 @@ public:
   inline void setEndByte( ::uint32_t value);
 
   inline bool hasDocComment();
-  inline  ::capnp::Text::Builder getDocComment();
-  inline void setDocComment( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initDocComment(unsigned int size);
-  inline void adoptDocComment(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownDocComment();
+  inline  ::shark::Text::Builder getDocComment();
+  inline void setDocComment( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initDocComment(unsigned int size);
+  inline void adoptDocComment(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownDocComment();
 
   inline bool isFile();
-  inline  ::capnp::Void getFile();
-  inline void setFile( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getFile();
+  inline void setFile( ::shark::Void value = ::shark::VOID);
 
   inline bool isUsing();
   inline typename Using::Builder getUsing();
@@ -1506,28 +1506,28 @@ public:
   inline typename Const::Builder initConst();
 
   inline bool isEnum();
-  inline  ::capnp::Void getEnum();
-  inline void setEnum( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getEnum();
+  inline void setEnum( ::shark::Void value = ::shark::VOID);
 
   inline bool isEnumerant();
-  inline  ::capnp::Void getEnumerant();
-  inline void setEnumerant( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getEnumerant();
+  inline void setEnumerant( ::shark::Void value = ::shark::VOID);
 
   inline bool isStruct();
-  inline  ::capnp::Void getStruct();
-  inline void setStruct( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getStruct();
+  inline void setStruct( ::shark::Void value = ::shark::VOID);
 
   inline bool isField();
   inline typename Field::Builder getField();
   inline typename Field::Builder initField();
 
   inline bool isUnion();
-  inline  ::capnp::Void getUnion();
-  inline void setUnion( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getUnion();
+  inline void setUnion( ::shark::Void value = ::shark::VOID);
 
   inline bool isGroup();
-  inline  ::capnp::Void getGroup();
-  inline void setGroup( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getGroup();
+  inline void setGroup( ::shark::Void value = ::shark::VOID);
 
   inline bool isInterface();
   inline typename Interface::Builder getInterface();
@@ -1543,114 +1543,114 @@ public:
 
   inline bool isNakedId();
   inline bool hasNakedId();
-  inline  ::capnp::compiler::LocatedInteger::Builder getNakedId();
-  inline void setNakedId( ::capnp::compiler::LocatedInteger::Reader value);
-  inline  ::capnp::compiler::LocatedInteger::Builder initNakedId();
-  inline void adoptNakedId(::capnp::Orphan< ::capnp::compiler::LocatedInteger>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::LocatedInteger> disownNakedId();
+  inline  ::shark::compiler::LocatedInteger::Builder getNakedId();
+  inline void setNakedId( ::shark::compiler::LocatedInteger::Reader value);
+  inline  ::shark::compiler::LocatedInteger::Builder initNakedId();
+  inline void adoptNakedId(::shark::Orphan< ::shark::compiler::LocatedInteger>&& value);
+  inline ::shark::Orphan< ::shark::compiler::LocatedInteger> disownNakedId();
 
   inline bool isNakedAnnotation();
   inline bool hasNakedAnnotation();
-  inline  ::capnp::compiler::Declaration::AnnotationApplication::Builder getNakedAnnotation();
-  inline void setNakedAnnotation( ::capnp::compiler::Declaration::AnnotationApplication::Reader value);
-  inline  ::capnp::compiler::Declaration::AnnotationApplication::Builder initNakedAnnotation();
-  inline void adoptNakedAnnotation(::capnp::Orphan< ::capnp::compiler::Declaration::AnnotationApplication>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Declaration::AnnotationApplication> disownNakedAnnotation();
+  inline  ::shark::compiler::Declaration::AnnotationApplication::Builder getNakedAnnotation();
+  inline void setNakedAnnotation( ::shark::compiler::Declaration::AnnotationApplication::Reader value);
+  inline  ::shark::compiler::Declaration::AnnotationApplication::Builder initNakedAnnotation();
+  inline void adoptNakedAnnotation(::shark::Orphan< ::shark::compiler::Declaration::AnnotationApplication>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Declaration::AnnotationApplication> disownNakedAnnotation();
 
   inline bool isBuiltinVoid();
-  inline  ::capnp::Void getBuiltinVoid();
-  inline void setBuiltinVoid( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinVoid();
+  inline void setBuiltinVoid( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinBool();
-  inline  ::capnp::Void getBuiltinBool();
-  inline void setBuiltinBool( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinBool();
+  inline void setBuiltinBool( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinInt8();
-  inline  ::capnp::Void getBuiltinInt8();
-  inline void setBuiltinInt8( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinInt8();
+  inline void setBuiltinInt8( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinInt16();
-  inline  ::capnp::Void getBuiltinInt16();
-  inline void setBuiltinInt16( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinInt16();
+  inline void setBuiltinInt16( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinInt32();
-  inline  ::capnp::Void getBuiltinInt32();
-  inline void setBuiltinInt32( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinInt32();
+  inline void setBuiltinInt32( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinInt64();
-  inline  ::capnp::Void getBuiltinInt64();
-  inline void setBuiltinInt64( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinInt64();
+  inline void setBuiltinInt64( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinUInt8();
-  inline  ::capnp::Void getBuiltinUInt8();
-  inline void setBuiltinUInt8( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinUInt8();
+  inline void setBuiltinUInt8( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinUInt16();
-  inline  ::capnp::Void getBuiltinUInt16();
-  inline void setBuiltinUInt16( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinUInt16();
+  inline void setBuiltinUInt16( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinUInt32();
-  inline  ::capnp::Void getBuiltinUInt32();
-  inline void setBuiltinUInt32( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinUInt32();
+  inline void setBuiltinUInt32( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinUInt64();
-  inline  ::capnp::Void getBuiltinUInt64();
-  inline void setBuiltinUInt64( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinUInt64();
+  inline void setBuiltinUInt64( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinFloat32();
-  inline  ::capnp::Void getBuiltinFloat32();
-  inline void setBuiltinFloat32( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinFloat32();
+  inline void setBuiltinFloat32( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinFloat64();
-  inline  ::capnp::Void getBuiltinFloat64();
-  inline void setBuiltinFloat64( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinFloat64();
+  inline void setBuiltinFloat64( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinText();
-  inline  ::capnp::Void getBuiltinText();
-  inline void setBuiltinText( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinText();
+  inline void setBuiltinText( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinData();
-  inline  ::capnp::Void getBuiltinData();
-  inline void setBuiltinData( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinData();
+  inline void setBuiltinData( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinList();
-  inline  ::capnp::Void getBuiltinList();
-  inline void setBuiltinList( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinList();
+  inline void setBuiltinList( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinObject();
-  inline  ::capnp::Void getBuiltinObject();
-  inline void setBuiltinObject( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinObject();
+  inline void setBuiltinObject( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinAnyPointer();
-  inline  ::capnp::Void getBuiltinAnyPointer();
-  inline void setBuiltinAnyPointer( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinAnyPointer();
+  inline void setBuiltinAnyPointer( ::shark::Void value = ::shark::VOID);
 
   inline bool hasParameters();
-  inline  ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>::Builder getParameters();
-  inline void setParameters( ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>::Builder initParameters(unsigned int size);
-  inline void adoptParameters(::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>> disownParameters();
+  inline  ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>::Builder getParameters();
+  inline void setParameters( ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>::Reader value);
+  inline  ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>::Builder initParameters(unsigned int size);
+  inline void adoptParameters(::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>>&& value);
+  inline ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>> disownParameters();
 
   inline bool isBuiltinAnyStruct();
-  inline  ::capnp::Void getBuiltinAnyStruct();
-  inline void setBuiltinAnyStruct( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinAnyStruct();
+  inline void setBuiltinAnyStruct( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinAnyList();
-  inline  ::capnp::Void getBuiltinAnyList();
-  inline void setBuiltinAnyList( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinAnyList();
+  inline void setBuiltinAnyList( ::shark::Void value = ::shark::VOID);
 
   inline bool isBuiltinCapability();
-  inline  ::capnp::Void getBuiltinCapability();
-  inline void setBuiltinCapability( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getBuiltinCapability();
+  inline void setBuiltinCapability( ::shark::Void value = ::shark::VOID);
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1659,16 +1659,16 @@ public:
   typedef Declaration Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::compiler::LocatedText::Pipeline getName();
+  inline  ::shark::compiler::LocatedText::Pipeline getName();
   inline typename Id::Pipeline getId();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1677,35 +1677,35 @@ public:
   typedef BrandParameter Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasName() const;
-  inline  ::capnp::Text::Reader getName() const;
+  inline  ::shark::Text::Reader getName() const;
 
   inline  ::uint32_t getStartByte() const;
 
   inline  ::uint32_t getEndByte() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::BrandParameter::Builder {
@@ -1715,21 +1715,21 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasName();
-  inline  ::capnp::Text::Builder getName();
-  inline void setName( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initName(unsigned int size);
-  inline void adoptName(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownName();
+  inline  ::shark::Text::Builder getName();
+  inline void setName( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initName(unsigned int size);
+  inline void adoptName(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownName();
 
   inline  ::uint32_t getStartByte();
   inline void setStartByte( ::uint32_t value);
@@ -1738,12 +1738,12 @@ public:
   inline void setEndByte( ::uint32_t value);
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1752,14 +1752,14 @@ public:
   typedef BrandParameter Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1768,33 +1768,33 @@ public:
   typedef AnnotationApplication Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasName() const;
-  inline  ::capnp::compiler::Expression::Reader getName() const;
+  inline  ::shark::compiler::Expression::Reader getName() const;
 
   inline typename Value::Reader getValue() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::AnnotationApplication::Builder {
@@ -1804,32 +1804,32 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasName();
-  inline  ::capnp::compiler::Expression::Builder getName();
-  inline void setName( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initName();
-  inline void adoptName(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownName();
+  inline  ::shark::compiler::Expression::Builder getName();
+  inline void setName( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initName();
+  inline void adoptName(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownName();
 
   inline typename Value::Builder getValue();
   inline typename Value::Builder initValue();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1838,16 +1838,16 @@ public:
   typedef AnnotationApplication Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::compiler::Expression::Pipeline getName();
+  inline  ::shark::compiler::Expression::Pipeline getName();
   inline typename Value::Pipeline getValue();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1856,36 +1856,36 @@ public:
   typedef Value Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isNone() const;
-  inline  ::capnp::Void getNone() const;
+  inline  ::shark::Void getNone() const;
 
   inline bool isExpression() const;
   inline bool hasExpression() const;
-  inline  ::capnp::compiler::Expression::Reader getExpression() const;
+  inline  ::shark::compiler::Expression::Reader getExpression() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::AnnotationApplication::Value::Builder {
@@ -1895,35 +1895,35 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isNone();
-  inline  ::capnp::Void getNone();
-  inline void setNone( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getNone();
+  inline void setNone( ::shark::Void value = ::shark::VOID);
 
   inline bool isExpression();
   inline bool hasExpression();
-  inline  ::capnp::compiler::Expression::Builder getExpression();
-  inline void setExpression( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initExpression();
-  inline void adoptExpression(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownExpression();
+  inline  ::shark::compiler::Expression::Builder getExpression();
+  inline void setExpression( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initExpression();
+  inline void adoptExpression(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownExpression();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1932,14 +1932,14 @@ public:
   typedef Value Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1948,44 +1948,44 @@ public:
   typedef ParamList Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isNamedList() const;
   inline bool hasNamedList() const;
-  inline  ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>::Reader getNamedList() const;
+  inline  ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>::Reader getNamedList() const;
 
   inline bool isType() const;
   inline bool hasType() const;
-  inline  ::capnp::compiler::Expression::Reader getType() const;
+  inline  ::shark::compiler::Expression::Reader getType() const;
 
   inline  ::uint32_t getStartByte() const;
 
   inline  ::uint32_t getEndByte() const;
 
   inline bool isStream() const;
-  inline  ::capnp::Void getStream() const;
+  inline  ::shark::Void getStream() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::ParamList::Builder {
@@ -1995,11 +1995,11 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
@@ -2007,19 +2007,19 @@ public:
   inline Which which();
   inline bool isNamedList();
   inline bool hasNamedList();
-  inline  ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>::Builder getNamedList();
-  inline void setNamedList( ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>::Builder initNamedList(unsigned int size);
-  inline void adoptNamedList(::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>> disownNamedList();
+  inline  ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>::Builder getNamedList();
+  inline void setNamedList( ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>::Reader value);
+  inline  ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>::Builder initNamedList(unsigned int size);
+  inline void adoptNamedList(::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>>&& value);
+  inline ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>> disownNamedList();
 
   inline bool isType();
   inline bool hasType();
-  inline  ::capnp::compiler::Expression::Builder getType();
-  inline void setType( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initType();
-  inline void adoptType(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownType();
+  inline  ::shark::compiler::Expression::Builder getType();
+  inline void setType( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initType();
+  inline void adoptType(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownType();
 
   inline  ::uint32_t getStartByte();
   inline void setStartByte( ::uint32_t value);
@@ -2028,16 +2028,16 @@ public:
   inline void setEndByte( ::uint32_t value);
 
   inline bool isStream();
-  inline  ::capnp::Void getStream();
-  inline void setStream( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getStream();
+  inline void setStream( ::shark::Void value = ::shark::VOID);
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2046,14 +2046,14 @@ public:
   typedef ParamList Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2062,26 +2062,26 @@ public:
   typedef Param Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasName() const;
-  inline  ::capnp::compiler::LocatedText::Reader getName() const;
+  inline  ::shark::compiler::LocatedText::Reader getName() const;
 
   inline bool hasType() const;
-  inline  ::capnp::compiler::Expression::Reader getType() const;
+  inline  ::shark::compiler::Expression::Reader getType() const;
 
   inline bool hasAnnotations() const;
-  inline  ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Reader getAnnotations() const;
+  inline  ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Reader getAnnotations() const;
 
   inline typename DefaultValue::Reader getDefaultValue() const;
 
@@ -2090,15 +2090,15 @@ public:
   inline  ::uint32_t getEndByte() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::Param::Builder {
@@ -2108,35 +2108,35 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasName();
-  inline  ::capnp::compiler::LocatedText::Builder getName();
-  inline void setName( ::capnp::compiler::LocatedText::Reader value);
-  inline  ::capnp::compiler::LocatedText::Builder initName();
-  inline void adoptName(::capnp::Orphan< ::capnp::compiler::LocatedText>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::LocatedText> disownName();
+  inline  ::shark::compiler::LocatedText::Builder getName();
+  inline void setName( ::shark::compiler::LocatedText::Reader value);
+  inline  ::shark::compiler::LocatedText::Builder initName();
+  inline void adoptName(::shark::Orphan< ::shark::compiler::LocatedText>&& value);
+  inline ::shark::Orphan< ::shark::compiler::LocatedText> disownName();
 
   inline bool hasType();
-  inline  ::capnp::compiler::Expression::Builder getType();
-  inline void setType( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initType();
-  inline void adoptType(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownType();
+  inline  ::shark::compiler::Expression::Builder getType();
+  inline void setType( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initType();
+  inline void adoptType(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownType();
 
   inline bool hasAnnotations();
-  inline  ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Builder getAnnotations();
-  inline void setAnnotations( ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Builder initAnnotations(unsigned int size);
-  inline void adoptAnnotations(::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>> disownAnnotations();
+  inline  ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Builder getAnnotations();
+  inline void setAnnotations( ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Reader value);
+  inline  ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Builder initAnnotations(unsigned int size);
+  inline void adoptAnnotations(::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>&& value);
+  inline ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>> disownAnnotations();
 
   inline typename DefaultValue::Builder getDefaultValue();
   inline typename DefaultValue::Builder initDefaultValue();
@@ -2148,12 +2148,12 @@ public:
   inline void setEndByte( ::uint32_t value);
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2162,17 +2162,17 @@ public:
   typedef Param Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::compiler::LocatedText::Pipeline getName();
-  inline  ::capnp::compiler::Expression::Pipeline getType();
+  inline  ::shark::compiler::LocatedText::Pipeline getName();
+  inline  ::shark::compiler::Expression::Pipeline getType();
   inline typename DefaultValue::Pipeline getDefaultValue();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2181,36 +2181,36 @@ public:
   typedef DefaultValue Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isNone() const;
-  inline  ::capnp::Void getNone() const;
+  inline  ::shark::Void getNone() const;
 
   inline bool isValue() const;
   inline bool hasValue() const;
-  inline  ::capnp::compiler::Expression::Reader getValue() const;
+  inline  ::shark::compiler::Expression::Reader getValue() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::Param::DefaultValue::Builder {
@@ -2220,35 +2220,35 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isNone();
-  inline  ::capnp::Void getNone();
-  inline void setNone( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getNone();
+  inline void setNone( ::shark::Void value = ::shark::VOID);
 
   inline bool isValue();
   inline bool hasValue();
-  inline  ::capnp::compiler::Expression::Builder getValue();
-  inline void setValue( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initValue();
-  inline void adoptValue(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownValue();
+  inline  ::shark::compiler::Expression::Builder getValue();
+  inline void setValue( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initValue();
+  inline void adoptValue(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownValue();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2257,14 +2257,14 @@ public:
   typedef DefaultValue Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2273,40 +2273,40 @@ public:
   typedef Id Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isUnspecified() const;
-  inline  ::capnp::Void getUnspecified() const;
+  inline  ::shark::Void getUnspecified() const;
 
   inline bool isUid() const;
   inline bool hasUid() const;
-  inline  ::capnp::compiler::LocatedInteger::Reader getUid() const;
+  inline  ::shark::compiler::LocatedInteger::Reader getUid() const;
 
   inline bool isOrdinal() const;
   inline bool hasOrdinal() const;
-  inline  ::capnp::compiler::LocatedInteger::Reader getOrdinal() const;
+  inline  ::shark::compiler::LocatedInteger::Reader getOrdinal() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::Id::Builder {
@@ -2316,43 +2316,43 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isUnspecified();
-  inline  ::capnp::Void getUnspecified();
-  inline void setUnspecified( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getUnspecified();
+  inline void setUnspecified( ::shark::Void value = ::shark::VOID);
 
   inline bool isUid();
   inline bool hasUid();
-  inline  ::capnp::compiler::LocatedInteger::Builder getUid();
-  inline void setUid( ::capnp::compiler::LocatedInteger::Reader value);
-  inline  ::capnp::compiler::LocatedInteger::Builder initUid();
-  inline void adoptUid(::capnp::Orphan< ::capnp::compiler::LocatedInteger>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::LocatedInteger> disownUid();
+  inline  ::shark::compiler::LocatedInteger::Builder getUid();
+  inline void setUid( ::shark::compiler::LocatedInteger::Reader value);
+  inline  ::shark::compiler::LocatedInteger::Builder initUid();
+  inline void adoptUid(::shark::Orphan< ::shark::compiler::LocatedInteger>&& value);
+  inline ::shark::Orphan< ::shark::compiler::LocatedInteger> disownUid();
 
   inline bool isOrdinal();
   inline bool hasOrdinal();
-  inline  ::capnp::compiler::LocatedInteger::Builder getOrdinal();
-  inline void setOrdinal( ::capnp::compiler::LocatedInteger::Reader value);
-  inline  ::capnp::compiler::LocatedInteger::Builder initOrdinal();
-  inline void adoptOrdinal(::capnp::Orphan< ::capnp::compiler::LocatedInteger>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::LocatedInteger> disownOrdinal();
+  inline  ::shark::compiler::LocatedInteger::Builder getOrdinal();
+  inline void setOrdinal( ::shark::compiler::LocatedInteger::Reader value);
+  inline  ::shark::compiler::LocatedInteger::Builder initOrdinal();
+  inline void adoptOrdinal(::shark::Orphan< ::shark::compiler::LocatedInteger>&& value);
+  inline ::shark::Orphan< ::shark::compiler::LocatedInteger> disownOrdinal();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2361,14 +2361,14 @@ public:
   typedef Id Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2377,31 +2377,31 @@ public:
   typedef Using Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasTarget() const;
-  inline  ::capnp::compiler::Expression::Reader getTarget() const;
+  inline  ::shark::compiler::Expression::Reader getTarget() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::Using::Builder {
@@ -2411,29 +2411,29 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasTarget();
-  inline  ::capnp::compiler::Expression::Builder getTarget();
-  inline void setTarget( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initTarget();
-  inline void adoptTarget(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownTarget();
+  inline  ::shark::compiler::Expression::Builder getTarget();
+  inline void setTarget( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initTarget();
+  inline void adoptTarget(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownTarget();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2442,15 +2442,15 @@ public:
   typedef Using Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::compiler::Expression::Pipeline getTarget();
+  inline  ::shark::compiler::Expression::Pipeline getTarget();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2459,34 +2459,34 @@ public:
   typedef Const Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasType() const;
-  inline  ::capnp::compiler::Expression::Reader getType() const;
+  inline  ::shark::compiler::Expression::Reader getType() const;
 
   inline bool hasValue() const;
-  inline  ::capnp::compiler::Expression::Reader getValue() const;
+  inline  ::shark::compiler::Expression::Reader getValue() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::Const::Builder {
@@ -2496,36 +2496,36 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasType();
-  inline  ::capnp::compiler::Expression::Builder getType();
-  inline void setType( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initType();
-  inline void adoptType(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownType();
+  inline  ::shark::compiler::Expression::Builder getType();
+  inline void setType( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initType();
+  inline void adoptType(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownType();
 
   inline bool hasValue();
-  inline  ::capnp::compiler::Expression::Builder getValue();
-  inline void setValue( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initValue();
-  inline void adoptValue(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownValue();
+  inline  ::shark::compiler::Expression::Builder getValue();
+  inline void setValue( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initValue();
+  inline void adoptValue(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownValue();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2534,16 +2534,16 @@ public:
   typedef Const Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::compiler::Expression::Pipeline getType();
-  inline  ::capnp::compiler::Expression::Pipeline getValue();
+  inline  ::shark::compiler::Expression::Pipeline getType();
+  inline  ::shark::compiler::Expression::Pipeline getValue();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2552,33 +2552,33 @@ public:
   typedef Field Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasType() const;
-  inline  ::capnp::compiler::Expression::Reader getType() const;
+  inline  ::shark::compiler::Expression::Reader getType() const;
 
   inline typename DefaultValue::Reader getDefaultValue() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::Field::Builder {
@@ -2588,32 +2588,32 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasType();
-  inline  ::capnp::compiler::Expression::Builder getType();
-  inline void setType( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initType();
-  inline void adoptType(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownType();
+  inline  ::shark::compiler::Expression::Builder getType();
+  inline void setType( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initType();
+  inline void adoptType(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownType();
 
   inline typename DefaultValue::Builder getDefaultValue();
   inline typename DefaultValue::Builder initDefaultValue();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2622,16 +2622,16 @@ public:
   typedef Field Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::compiler::Expression::Pipeline getType();
+  inline  ::shark::compiler::Expression::Pipeline getType();
   inline typename DefaultValue::Pipeline getDefaultValue();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2640,36 +2640,36 @@ public:
   typedef DefaultValue Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isNone() const;
-  inline  ::capnp::Void getNone() const;
+  inline  ::shark::Void getNone() const;
 
   inline bool isValue() const;
   inline bool hasValue() const;
-  inline  ::capnp::compiler::Expression::Reader getValue() const;
+  inline  ::shark::compiler::Expression::Reader getValue() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::Field::DefaultValue::Builder {
@@ -2679,35 +2679,35 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isNone();
-  inline  ::capnp::Void getNone();
-  inline void setNone( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getNone();
+  inline void setNone( ::shark::Void value = ::shark::VOID);
 
   inline bool isValue();
   inline bool hasValue();
-  inline  ::capnp::compiler::Expression::Builder getValue();
-  inline void setValue( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initValue();
-  inline void adoptValue(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownValue();
+  inline  ::shark::compiler::Expression::Builder getValue();
+  inline void setValue( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initValue();
+  inline void adoptValue(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownValue();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2716,14 +2716,14 @@ public:
   typedef DefaultValue Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2732,31 +2732,31 @@ public:
   typedef Interface Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasSuperclasses() const;
-  inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Reader getSuperclasses() const;
+  inline  ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Reader getSuperclasses() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::Interface::Builder {
@@ -2766,29 +2766,29 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasSuperclasses();
-  inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Builder getSuperclasses();
-  inline void setSuperclasses( ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Builder initSuperclasses(unsigned int size);
-  inline void adoptSuperclasses(::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>> disownSuperclasses();
+  inline  ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Builder getSuperclasses();
+  inline void setSuperclasses( ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Reader value);
+  inline  ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Builder initSuperclasses(unsigned int size);
+  inline void adoptSuperclasses(::shark::Orphan< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>&& value);
+  inline ::shark::Orphan< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>> disownSuperclasses();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2797,14 +2797,14 @@ public:
   typedef Interface Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2813,33 +2813,33 @@ public:
   typedef Method Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasParams() const;
-  inline  ::capnp::compiler::Declaration::ParamList::Reader getParams() const;
+  inline  ::shark::compiler::Declaration::ParamList::Reader getParams() const;
 
   inline typename Results::Reader getResults() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::Method::Builder {
@@ -2849,32 +2849,32 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasParams();
-  inline  ::capnp::compiler::Declaration::ParamList::Builder getParams();
-  inline void setParams( ::capnp::compiler::Declaration::ParamList::Reader value);
-  inline  ::capnp::compiler::Declaration::ParamList::Builder initParams();
-  inline void adoptParams(::capnp::Orphan< ::capnp::compiler::Declaration::ParamList>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Declaration::ParamList> disownParams();
+  inline  ::shark::compiler::Declaration::ParamList::Builder getParams();
+  inline void setParams( ::shark::compiler::Declaration::ParamList::Reader value);
+  inline  ::shark::compiler::Declaration::ParamList::Builder initParams();
+  inline void adoptParams(::shark::Orphan< ::shark::compiler::Declaration::ParamList>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Declaration::ParamList> disownParams();
 
   inline typename Results::Builder getResults();
   inline typename Results::Builder initResults();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2883,16 +2883,16 @@ public:
   typedef Method Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::compiler::Declaration::ParamList::Pipeline getParams();
+  inline  ::shark::compiler::Declaration::ParamList::Pipeline getParams();
   inline typename Results::Pipeline getResults();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2901,36 +2901,36 @@ public:
   typedef Results Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isNone() const;
-  inline  ::capnp::Void getNone() const;
+  inline  ::shark::Void getNone() const;
 
   inline bool isExplicit() const;
   inline bool hasExplicit() const;
-  inline  ::capnp::compiler::Declaration::ParamList::Reader getExplicit() const;
+  inline  ::shark::compiler::Declaration::ParamList::Reader getExplicit() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::Method::Results::Builder {
@@ -2940,35 +2940,35 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isNone();
-  inline  ::capnp::Void getNone();
-  inline void setNone( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getNone();
+  inline void setNone( ::shark::Void value = ::shark::VOID);
 
   inline bool isExplicit();
   inline bool hasExplicit();
-  inline  ::capnp::compiler::Declaration::ParamList::Builder getExplicit();
-  inline void setExplicit( ::capnp::compiler::Declaration::ParamList::Reader value);
-  inline  ::capnp::compiler::Declaration::ParamList::Builder initExplicit();
-  inline void adoptExplicit(::capnp::Orphan< ::capnp::compiler::Declaration::ParamList>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Declaration::ParamList> disownExplicit();
+  inline  ::shark::compiler::Declaration::ParamList::Builder getExplicit();
+  inline void setExplicit( ::shark::compiler::Declaration::ParamList::Reader value);
+  inline  ::shark::compiler::Declaration::ParamList::Builder initExplicit();
+  inline void adoptExplicit(::shark::Orphan< ::shark::compiler::Declaration::ParamList>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Declaration::ParamList> disownExplicit();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2977,14 +2977,14 @@ public:
   typedef Results Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2993,20 +2993,20 @@ public:
   typedef Annotation Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasType() const;
-  inline  ::capnp::compiler::Expression::Reader getType() const;
+  inline  ::shark::compiler::Expression::Reader getType() const;
 
   inline bool getTargetsFile() const;
 
@@ -3033,15 +3033,15 @@ public:
   inline bool getTargetsAnnotation() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class Declaration::Annotation::Builder {
@@ -3051,21 +3051,21 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasType();
-  inline  ::capnp::compiler::Expression::Builder getType();
-  inline void setType( ::capnp::compiler::Expression::Reader value);
-  inline  ::capnp::compiler::Expression::Builder initType();
-  inline void adoptType(::capnp::Orphan< ::capnp::compiler::Expression>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Expression> disownType();
+  inline  ::shark::compiler::Expression::Builder getType();
+  inline void setType( ::shark::compiler::Expression::Reader value);
+  inline  ::shark::compiler::Expression::Builder initType();
+  inline void adoptType(::shark::Orphan< ::shark::compiler::Expression>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Expression> disownType();
 
   inline bool getTargetsFile();
   inline void setTargetsFile(bool value);
@@ -3104,12 +3104,12 @@ public:
   inline void setTargetsAnnotation(bool value);
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -3118,15 +3118,15 @@ public:
   typedef Annotation Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::compiler::Expression::Pipeline getType();
+  inline  ::shark::compiler::Expression::Pipeline getType();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -3135,31 +3135,31 @@ public:
   typedef ParsedFile Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasRoot() const;
-  inline  ::capnp::compiler::Declaration::Reader getRoot() const;
+  inline  ::shark::compiler::Declaration::Reader getRoot() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class ParsedFile::Builder {
@@ -3169,29 +3169,29 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasRoot();
-  inline  ::capnp::compiler::Declaration::Builder getRoot();
-  inline void setRoot( ::capnp::compiler::Declaration::Reader value);
-  inline  ::capnp::compiler::Declaration::Builder initRoot();
-  inline void adoptRoot(::capnp::Orphan< ::capnp::compiler::Declaration>&& value);
-  inline ::capnp::Orphan< ::capnp::compiler::Declaration> disownRoot();
+  inline  ::shark::compiler::Declaration::Builder getRoot();
+  inline void setRoot( ::shark::compiler::Declaration::Reader value);
+  inline  ::shark::compiler::Declaration::Builder initRoot();
+  inline void adoptRoot(::shark::Orphan< ::shark::compiler::Declaration>&& value);
+  inline ::shark::Orphan< ::shark::compiler::Declaration> disownRoot();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -3200,15 +3200,15 @@ public:
   typedef ParsedFile Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::compiler::Declaration::Pipeline getRoot();
+  inline  ::shark::compiler::Declaration::Pipeline getRoot();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -3216,157 +3216,157 @@ private:
 
 inline bool LocatedText::Reader::hasValue() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool LocatedText::Builder::hasValue() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader LocatedText::Reader::getValue() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader LocatedText::Reader::getValue() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder LocatedText::Builder::getValue() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder LocatedText::Builder::getValue() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void LocatedText::Builder::setValue( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void LocatedText::Builder::setValue( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder LocatedText::Builder::initValue(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder LocatedText::Builder::initValue(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void LocatedText::Builder::adoptValue(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> LocatedText::Builder::disownValue() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Text> LocatedText::Builder::disownValue() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline  ::uint32_t LocatedText::Reader::getStartByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t LocatedText::Builder::getStartByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 inline void LocatedText::Builder::setStartByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline  ::uint32_t LocatedText::Reader::getEndByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t LocatedText::Builder::getEndByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 inline void LocatedText::Builder::setEndByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, value);
 }
 
 inline  ::uint64_t LocatedInteger::Reader::getValue() const {
   return _reader.getDataField< ::uint64_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint64_t LocatedInteger::Builder::getValue() {
   return _builder.getDataField< ::uint64_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 inline void LocatedInteger::Builder::setValue( ::uint64_t value) {
   _builder.setDataField< ::uint64_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline  ::uint32_t LocatedInteger::Reader::getStartByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+      ::shark::bounded<2>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t LocatedInteger::Builder::getStartByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+      ::shark::bounded<2>() * ::shark::ELEMENTS);
 }
 inline void LocatedInteger::Builder::setStartByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<2>() * ::shark::ELEMENTS, value);
 }
 
 inline  ::uint32_t LocatedInteger::Reader::getEndByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+      ::shark::bounded<3>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t LocatedInteger::Builder::getEndByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+      ::shark::bounded<3>() * ::shark::ELEMENTS);
 }
 inline void LocatedInteger::Builder::setEndByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<3>() * ::shark::ELEMENTS, value);
 }
 
 inline double LocatedFloat::Reader::getValue() const {
   return _reader.getDataField<double>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline double LocatedFloat::Builder::getValue() {
   return _builder.getDataField<double>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 inline void LocatedFloat::Builder::setValue(double value) {
   _builder.setDataField<double>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline  ::uint32_t LocatedFloat::Reader::getStartByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+      ::shark::bounded<2>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t LocatedFloat::Builder::getStartByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+      ::shark::bounded<2>() * ::shark::ELEMENTS);
 }
 inline void LocatedFloat::Builder::setStartByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<2>() * ::shark::ELEMENTS, value);
 }
 
 inline  ::uint32_t LocatedFloat::Reader::getEndByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+      ::shark::bounded<3>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t LocatedFloat::Builder::getEndByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+      ::shark::bounded<3>() * ::shark::ELEMENTS);
 }
 inline void LocatedFloat::Builder::setEndByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<3>() * ::shark::ELEMENTS, value);
 }
 
-inline  ::capnp::compiler::Expression::Which Expression::Reader::which() const {
+inline  ::shark::compiler::Expression::Which Expression::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::compiler::Expression::Which Expression::Builder::which() {
+inline  ::shark::compiler::Expression::Which Expression::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline bool Expression::Reader::isUnknown() const {
@@ -3375,24 +3375,24 @@ inline bool Expression::Reader::isUnknown() const {
 inline bool Expression::Builder::isUnknown() {
   return which() == Expression::UNKNOWN;
 }
-inline  ::capnp::Void Expression::Reader::getUnknown() const {
+inline  ::shark::Void Expression::Reader::getUnknown() const {
   KJ_IREQUIRE((which() == Expression::UNKNOWN),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Expression::Builder::getUnknown() {
+inline  ::shark::Void Expression::Builder::getUnknown() {
   KJ_IREQUIRE((which() == Expression::UNKNOWN),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Expression::Builder::setUnknown( ::capnp::Void value) {
+inline void Expression::Builder::setUnknown( ::shark::Void value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::UNKNOWN);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::UNKNOWN);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Expression::Reader::isPositiveInt() const {
@@ -3405,20 +3405,20 @@ inline  ::uint64_t Expression::Reader::getPositiveInt() const {
   KJ_IREQUIRE((which() == Expression::POSITIVE_INT),
               "Must check which() before get()ing a union member.");
   return _reader.getDataField< ::uint64_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint64_t Expression::Builder::getPositiveInt() {
   KJ_IREQUIRE((which() == Expression::POSITIVE_INT),
               "Must check which() before get()ing a union member.");
   return _builder.getDataField< ::uint64_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 inline void Expression::Builder::setPositiveInt( ::uint64_t value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::POSITIVE_INT);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::POSITIVE_INT);
   _builder.setDataField< ::uint64_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Expression::Reader::isNegativeInt() const {
@@ -3431,20 +3431,20 @@ inline  ::uint64_t Expression::Reader::getNegativeInt() const {
   KJ_IREQUIRE((which() == Expression::NEGATIVE_INT),
               "Must check which() before get()ing a union member.");
   return _reader.getDataField< ::uint64_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint64_t Expression::Builder::getNegativeInt() {
   KJ_IREQUIRE((which() == Expression::NEGATIVE_INT),
               "Must check which() before get()ing a union member.");
   return _builder.getDataField< ::uint64_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 inline void Expression::Builder::setNegativeInt( ::uint64_t value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::NEGATIVE_INT);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::NEGATIVE_INT);
   _builder.setDataField< ::uint64_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Expression::Reader::isFloat() const {
@@ -3457,20 +3457,20 @@ inline double Expression::Reader::getFloat() const {
   KJ_IREQUIRE((which() == Expression::FLOAT),
               "Must check which() before get()ing a union member.");
   return _reader.getDataField<double>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline double Expression::Builder::getFloat() {
   KJ_IREQUIRE((which() == Expression::FLOAT),
               "Must check which() before get()ing a union member.");
   return _builder.getDataField<double>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 inline void Expression::Builder::setFloat(double value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::FLOAT);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::FLOAT);
   _builder.setDataField<double>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Expression::Reader::isString() const {
@@ -3482,49 +3482,49 @@ inline bool Expression::Builder::isString() {
 inline bool Expression::Reader::hasString() const {
   if (which() != Expression::STRING) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Builder::hasString() {
   if (which() != Expression::STRING) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader Expression::Reader::getString() const {
+inline  ::shark::Text::Reader Expression::Reader::getString() const {
   KJ_IREQUIRE((which() == Expression::STRING),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder Expression::Builder::getString() {
+inline  ::shark::Text::Builder Expression::Builder::getString() {
   KJ_IREQUIRE((which() == Expression::STRING),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void Expression::Builder::setString( ::capnp::Text::Reader value) {
+inline void Expression::Builder::setString( ::shark::Text::Reader value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::STRING);
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::STRING);
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder Expression::Builder::initString(unsigned int size) {
+inline  ::shark::Text::Builder Expression::Builder::initString(unsigned int size) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::STRING);
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::STRING);
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void Expression::Builder::adoptString(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
+    ::shark::Orphan< ::shark::Text>&& value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::STRING);
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::STRING);
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> Expression::Builder::disownString() {
+inline ::shark::Orphan< ::shark::Text> Expression::Builder::disownString() {
   KJ_IREQUIRE((which() == Expression::STRING),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool Expression::Reader::isRelativeName() const {
@@ -3536,49 +3536,49 @@ inline bool Expression::Builder::isRelativeName() {
 inline bool Expression::Reader::hasRelativeName() const {
   if (which() != Expression::RELATIVE_NAME) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Builder::hasRelativeName() {
   if (which() != Expression::RELATIVE_NAME) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::LocatedText::Reader Expression::Reader::getRelativeName() const {
+inline  ::shark::compiler::LocatedText::Reader Expression::Reader::getRelativeName() const {
   KJ_IREQUIRE((which() == Expression::RELATIVE_NAME),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::LocatedText::Builder Expression::Builder::getRelativeName() {
+inline  ::shark::compiler::LocatedText::Builder Expression::Builder::getRelativeName() {
   KJ_IREQUIRE((which() == Expression::RELATIVE_NAME),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void Expression::Builder::setRelativeName( ::capnp::compiler::LocatedText::Reader value) {
+inline void Expression::Builder::setRelativeName( ::shark::compiler::LocatedText::Reader value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::RELATIVE_NAME);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::RELATIVE_NAME);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::LocatedText::Builder Expression::Builder::initRelativeName() {
+inline  ::shark::compiler::LocatedText::Builder Expression::Builder::initRelativeName() {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::RELATIVE_NAME);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::RELATIVE_NAME);
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void Expression::Builder::adoptRelativeName(
-    ::capnp::Orphan< ::capnp::compiler::LocatedText>&& value) {
+    ::shark::Orphan< ::shark::compiler::LocatedText>&& value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::RELATIVE_NAME);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::RELATIVE_NAME);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::LocatedText> Expression::Builder::disownRelativeName() {
+inline ::shark::Orphan< ::shark::compiler::LocatedText> Expression::Builder::disownRelativeName() {
   KJ_IREQUIRE((which() == Expression::RELATIVE_NAME),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool Expression::Reader::isList() const {
@@ -3590,49 +3590,49 @@ inline bool Expression::Builder::isList() {
 inline bool Expression::Reader::hasList() const {
   if (which() != Expression::LIST) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Builder::hasList() {
   if (which() != Expression::LIST) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Reader Expression::Reader::getList() const {
+inline  ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Reader Expression::Reader::getList() const {
   KJ_IREQUIRE((which() == Expression::LIST),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Builder Expression::Builder::getList() {
+inline  ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Builder Expression::Builder::getList() {
   KJ_IREQUIRE((which() == Expression::LIST),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void Expression::Builder::setList( ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Reader value) {
+inline void Expression::Builder::setList( ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Reader value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::LIST);
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::LIST);
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Builder Expression::Builder::initList(unsigned int size) {
+inline  ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Builder Expression::Builder::initList(unsigned int size) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::LIST);
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::LIST);
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void Expression::Builder::adoptList(
-    ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>&& value) {
+    ::shark::Orphan< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>&& value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::LIST);
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::LIST);
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>> Expression::Builder::disownList() {
+inline ::shark::Orphan< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>> Expression::Builder::disownList() {
   KJ_IREQUIRE((which() == Expression::LIST),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool Expression::Reader::isTuple() const {
@@ -3644,77 +3644,77 @@ inline bool Expression::Builder::isTuple() {
 inline bool Expression::Reader::hasTuple() const {
   if (which() != Expression::TUPLE) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Builder::hasTuple() {
   if (which() != Expression::TUPLE) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Reader Expression::Reader::getTuple() const {
+inline  ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Reader Expression::Reader::getTuple() const {
   KJ_IREQUIRE((which() == Expression::TUPLE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Builder Expression::Builder::getTuple() {
+inline  ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Builder Expression::Builder::getTuple() {
   KJ_IREQUIRE((which() == Expression::TUPLE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void Expression::Builder::setTuple( ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Reader value) {
+inline void Expression::Builder::setTuple( ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Reader value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::TUPLE);
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::TUPLE);
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Builder Expression::Builder::initTuple(unsigned int size) {
+inline  ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Builder Expression::Builder::initTuple(unsigned int size) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::TUPLE);
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::TUPLE);
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void Expression::Builder::adoptTuple(
-    ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>&& value) {
+    ::shark::Orphan< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>&& value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::TUPLE);
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::TUPLE);
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>> Expression::Builder::disownTuple() {
+inline ::shark::Orphan< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>> Expression::Builder::disownTuple() {
   KJ_IREQUIRE((which() == Expression::TUPLE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline  ::uint32_t Expression::Reader::getStartByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t Expression::Builder::getStartByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 inline void Expression::Builder::setStartByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, value);
 }
 
 inline  ::uint32_t Expression::Reader::getEndByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+      ::shark::bounded<4>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t Expression::Builder::getEndByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+      ::shark::bounded<4>() * ::shark::ELEMENTS);
 }
 inline void Expression::Builder::setEndByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<4>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Expression::Reader::isBinary() const {
@@ -3726,49 +3726,49 @@ inline bool Expression::Builder::isBinary() {
 inline bool Expression::Reader::hasBinary() const {
   if (which() != Expression::BINARY) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Builder::hasBinary() {
   if (which() != Expression::BINARY) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Data::Reader Expression::Reader::getBinary() const {
+inline  ::shark::Data::Reader Expression::Reader::getBinary() const {
   KJ_IREQUIRE((which() == Expression::BINARY),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::Data>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Data::Builder Expression::Builder::getBinary() {
+inline  ::shark::Data::Builder Expression::Builder::getBinary() {
   KJ_IREQUIRE((which() == Expression::BINARY),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::Data>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void Expression::Builder::setBinary( ::capnp::Data::Reader value) {
+inline void Expression::Builder::setBinary( ::shark::Data::Reader value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::BINARY);
-  ::capnp::_::PointerHelpers< ::capnp::Data>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::BINARY);
+  ::shark::_::PointerHelpers< ::shark::Data>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Data::Builder Expression::Builder::initBinary(unsigned int size) {
+inline  ::shark::Data::Builder Expression::Builder::initBinary(unsigned int size) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::BINARY);
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::BINARY);
+  return ::shark::_::PointerHelpers< ::shark::Data>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void Expression::Builder::adoptBinary(
-    ::capnp::Orphan< ::capnp::Data>&& value) {
+    ::shark::Orphan< ::shark::Data>&& value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::BINARY);
-  ::capnp::_::PointerHelpers< ::capnp::Data>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::BINARY);
+  ::shark::_::PointerHelpers< ::shark::Data>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Data> Expression::Builder::disownBinary() {
+inline ::shark::Orphan< ::shark::Data> Expression::Builder::disownBinary() {
   KJ_IREQUIRE((which() == Expression::BINARY),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::Data>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool Expression::Reader::isApplication() const {
@@ -3789,9 +3789,9 @@ inline typename Expression::Application::Builder Expression::Builder::getApplica
 }
 inline typename Expression::Application::Builder Expression::Builder::initApplication() {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::APPLICATION);
-  _builder.getPointerField(::capnp::bounded<0>() * ::capnp::POINTERS).clear();
-  _builder.getPointerField(::capnp::bounded<1>() * ::capnp::POINTERS).clear();
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::APPLICATION);
+  _builder.getPointerField(::shark::bounded<0>() * ::shark::POINTERS).clear();
+  _builder.getPointerField(::shark::bounded<1>() * ::shark::POINTERS).clear();
   return typename Expression::Application::Builder(_builder);
 }
 inline bool Expression::Reader::isMember() const {
@@ -3812,9 +3812,9 @@ inline typename Expression::Member::Builder Expression::Builder::getMember() {
 }
 inline typename Expression::Member::Builder Expression::Builder::initMember() {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::MEMBER);
-  _builder.getPointerField(::capnp::bounded<0>() * ::capnp::POINTERS).clear();
-  _builder.getPointerField(::capnp::bounded<1>() * ::capnp::POINTERS).clear();
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::MEMBER);
+  _builder.getPointerField(::shark::bounded<0>() * ::shark::POINTERS).clear();
+  _builder.getPointerField(::shark::bounded<1>() * ::shark::POINTERS).clear();
   return typename Expression::Member::Builder(_builder);
 }
 inline bool Expression::Reader::isAbsoluteName() const {
@@ -3826,49 +3826,49 @@ inline bool Expression::Builder::isAbsoluteName() {
 inline bool Expression::Reader::hasAbsoluteName() const {
   if (which() != Expression::ABSOLUTE_NAME) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Builder::hasAbsoluteName() {
   if (which() != Expression::ABSOLUTE_NAME) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::LocatedText::Reader Expression::Reader::getAbsoluteName() const {
+inline  ::shark::compiler::LocatedText::Reader Expression::Reader::getAbsoluteName() const {
   KJ_IREQUIRE((which() == Expression::ABSOLUTE_NAME),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::LocatedText::Builder Expression::Builder::getAbsoluteName() {
+inline  ::shark::compiler::LocatedText::Builder Expression::Builder::getAbsoluteName() {
   KJ_IREQUIRE((which() == Expression::ABSOLUTE_NAME),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void Expression::Builder::setAbsoluteName( ::capnp::compiler::LocatedText::Reader value) {
+inline void Expression::Builder::setAbsoluteName( ::shark::compiler::LocatedText::Reader value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::ABSOLUTE_NAME);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::ABSOLUTE_NAME);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::LocatedText::Builder Expression::Builder::initAbsoluteName() {
+inline  ::shark::compiler::LocatedText::Builder Expression::Builder::initAbsoluteName() {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::ABSOLUTE_NAME);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::ABSOLUTE_NAME);
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void Expression::Builder::adoptAbsoluteName(
-    ::capnp::Orphan< ::capnp::compiler::LocatedText>&& value) {
+    ::shark::Orphan< ::shark::compiler::LocatedText>&& value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::ABSOLUTE_NAME);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::ABSOLUTE_NAME);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::LocatedText> Expression::Builder::disownAbsoluteName() {
+inline ::shark::Orphan< ::shark::compiler::LocatedText> Expression::Builder::disownAbsoluteName() {
   KJ_IREQUIRE((which() == Expression::ABSOLUTE_NAME),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool Expression::Reader::isImport() const {
@@ -3880,49 +3880,49 @@ inline bool Expression::Builder::isImport() {
 inline bool Expression::Reader::hasImport() const {
   if (which() != Expression::IMPORT) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Builder::hasImport() {
   if (which() != Expression::IMPORT) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::LocatedText::Reader Expression::Reader::getImport() const {
+inline  ::shark::compiler::LocatedText::Reader Expression::Reader::getImport() const {
   KJ_IREQUIRE((which() == Expression::IMPORT),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::LocatedText::Builder Expression::Builder::getImport() {
+inline  ::shark::compiler::LocatedText::Builder Expression::Builder::getImport() {
   KJ_IREQUIRE((which() == Expression::IMPORT),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void Expression::Builder::setImport( ::capnp::compiler::LocatedText::Reader value) {
+inline void Expression::Builder::setImport( ::shark::compiler::LocatedText::Reader value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::IMPORT);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::IMPORT);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::LocatedText::Builder Expression::Builder::initImport() {
+inline  ::shark::compiler::LocatedText::Builder Expression::Builder::initImport() {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::IMPORT);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::IMPORT);
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void Expression::Builder::adoptImport(
-    ::capnp::Orphan< ::capnp::compiler::LocatedText>&& value) {
+    ::shark::Orphan< ::shark::compiler::LocatedText>&& value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::IMPORT);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::IMPORT);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::LocatedText> Expression::Builder::disownImport() {
+inline ::shark::Orphan< ::shark::compiler::LocatedText> Expression::Builder::disownImport() {
   KJ_IREQUIRE((which() == Expression::IMPORT),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool Expression::Reader::isEmbed() const {
@@ -3934,58 +3934,58 @@ inline bool Expression::Builder::isEmbed() {
 inline bool Expression::Reader::hasEmbed() const {
   if (which() != Expression::EMBED) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Builder::hasEmbed() {
   if (which() != Expression::EMBED) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::LocatedText::Reader Expression::Reader::getEmbed() const {
+inline  ::shark::compiler::LocatedText::Reader Expression::Reader::getEmbed() const {
   KJ_IREQUIRE((which() == Expression::EMBED),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::LocatedText::Builder Expression::Builder::getEmbed() {
+inline  ::shark::compiler::LocatedText::Builder Expression::Builder::getEmbed() {
   KJ_IREQUIRE((which() == Expression::EMBED),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void Expression::Builder::setEmbed( ::capnp::compiler::LocatedText::Reader value) {
+inline void Expression::Builder::setEmbed( ::shark::compiler::LocatedText::Reader value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::EMBED);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::EMBED);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::LocatedText::Builder Expression::Builder::initEmbed() {
+inline  ::shark::compiler::LocatedText::Builder Expression::Builder::initEmbed() {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::EMBED);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::EMBED);
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void Expression::Builder::adoptEmbed(
-    ::capnp::Orphan< ::capnp::compiler::LocatedText>&& value) {
+    ::shark::Orphan< ::shark::compiler::LocatedText>&& value) {
   _builder.setDataField<Expression::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::EMBED);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::EMBED);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::LocatedText> Expression::Builder::disownEmbed() {
+inline ::shark::Orphan< ::shark::compiler::LocatedText> Expression::Builder::disownEmbed() {
   KJ_IREQUIRE((which() == Expression::EMBED),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
-inline  ::capnp::compiler::Expression::Param::Which Expression::Param::Reader::which() const {
+inline  ::shark::compiler::Expression::Param::Which Expression::Param::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::compiler::Expression::Param::Which Expression::Param::Builder::which() {
+inline  ::shark::compiler::Expression::Param::Which Expression::Param::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline bool Expression::Param::Reader::isUnnamed() const {
@@ -3994,24 +3994,24 @@ inline bool Expression::Param::Reader::isUnnamed() const {
 inline bool Expression::Param::Builder::isUnnamed() {
   return which() == Expression::Param::UNNAMED;
 }
-inline  ::capnp::Void Expression::Param::Reader::getUnnamed() const {
+inline  ::shark::Void Expression::Param::Reader::getUnnamed() const {
   KJ_IREQUIRE((which() == Expression::Param::UNNAMED),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Expression::Param::Builder::getUnnamed() {
+inline  ::shark::Void Expression::Param::Builder::getUnnamed() {
   KJ_IREQUIRE((which() == Expression::Param::UNNAMED),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Expression::Param::Builder::setUnnamed( ::capnp::Void value) {
+inline void Expression::Param::Builder::setUnnamed( ::shark::Void value) {
   _builder.setDataField<Expression::Param::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::Param::UNNAMED);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::Param::UNNAMED);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Expression::Param::Reader::isNamed() const {
@@ -4023,287 +4023,287 @@ inline bool Expression::Param::Builder::isNamed() {
 inline bool Expression::Param::Reader::hasNamed() const {
   if (which() != Expression::Param::NAMED) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Param::Builder::hasNamed() {
   if (which() != Expression::Param::NAMED) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::LocatedText::Reader Expression::Param::Reader::getNamed() const {
+inline  ::shark::compiler::LocatedText::Reader Expression::Param::Reader::getNamed() const {
   KJ_IREQUIRE((which() == Expression::Param::NAMED),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::LocatedText::Builder Expression::Param::Builder::getNamed() {
+inline  ::shark::compiler::LocatedText::Builder Expression::Param::Builder::getNamed() {
   KJ_IREQUIRE((which() == Expression::Param::NAMED),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void Expression::Param::Builder::setNamed( ::capnp::compiler::LocatedText::Reader value) {
+inline void Expression::Param::Builder::setNamed( ::shark::compiler::LocatedText::Reader value) {
   _builder.setDataField<Expression::Param::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::Param::NAMED);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::Param::NAMED);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::LocatedText::Builder Expression::Param::Builder::initNamed() {
+inline  ::shark::compiler::LocatedText::Builder Expression::Param::Builder::initNamed() {
   _builder.setDataField<Expression::Param::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::Param::NAMED);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::Param::NAMED);
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void Expression::Param::Builder::adoptNamed(
-    ::capnp::Orphan< ::capnp::compiler::LocatedText>&& value) {
+    ::shark::Orphan< ::shark::compiler::LocatedText>&& value) {
   _builder.setDataField<Expression::Param::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Expression::Param::NAMED);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Expression::Param::NAMED);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::LocatedText> Expression::Param::Builder::disownNamed() {
+inline ::shark::Orphan< ::shark::compiler::LocatedText> Expression::Param::Builder::disownNamed() {
   KJ_IREQUIRE((which() == Expression::Param::NAMED),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool Expression::Param::Reader::hasValue() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Param::Builder::hasValue() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Expression::Param::Reader::getValue() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Reader Expression::Param::Reader::getValue() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Expression::Param::Builder::getValue() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Expression::Param::Builder::getValue() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::Expression::Pipeline Expression::Param::Pipeline::getValue() {
-  return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(1));
+inline  ::shark::compiler::Expression::Pipeline Expression::Param::Pipeline::getValue() {
+  return  ::shark::compiler::Expression::Pipeline(_typeless.getPointerField(1));
 }
 #endif  // !SHARK_LITE
-inline void Expression::Param::Builder::setValue( ::capnp::compiler::Expression::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+inline void Expression::Param::Builder::setValue( ::shark::compiler::Expression::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Expression::Param::Builder::initValue() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Expression::Param::Builder::initValue() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 inline void Expression::Param::Builder::adoptValue(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Expression::Param::Builder::disownValue() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::Expression> Expression::Param::Builder::disownValue() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 
 inline bool Expression::Application::Reader::hasFunction() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Application::Builder::hasFunction() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Expression::Application::Reader::getFunction() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Reader Expression::Application::Reader::getFunction() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Expression::Application::Builder::getFunction() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Expression::Application::Builder::getFunction() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::Expression::Pipeline Expression::Application::Pipeline::getFunction() {
-  return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(0));
+inline  ::shark::compiler::Expression::Pipeline Expression::Application::Pipeline::getFunction() {
+  return  ::shark::compiler::Expression::Pipeline(_typeless.getPointerField(0));
 }
 #endif  // !SHARK_LITE
-inline void Expression::Application::Builder::setFunction( ::capnp::compiler::Expression::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void Expression::Application::Builder::setFunction( ::shark::compiler::Expression::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Expression::Application::Builder::initFunction() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Expression::Application::Builder::initFunction() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void Expression::Application::Builder::adoptFunction(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Expression::Application::Builder::disownFunction() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::Expression> Expression::Application::Builder::disownFunction() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool Expression::Application::Reader::hasParams() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Application::Builder::hasParams() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Reader Expression::Application::Reader::getParams() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Reader Expression::Application::Reader::getParams() const {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Builder Expression::Application::Builder::getParams() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Builder Expression::Application::Builder::getParams() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline void Expression::Application::Builder::setParams( ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+inline void Expression::Application::Builder::setParams( ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>::Builder Expression::Application::Builder::initParams(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+inline  ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>::Builder Expression::Application::Builder::initParams(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), size);
 }
 inline void Expression::Application::Builder::adoptParams(
-    ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>&& value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>> Expression::Application::Builder::disownParams() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression::Param,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>> Expression::Application::Builder::disownParams() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression::Param,  ::shark::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 
 inline bool Expression::Member::Reader::hasParent() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Member::Builder::hasParent() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Expression::Member::Reader::getParent() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Reader Expression::Member::Reader::getParent() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Expression::Member::Builder::getParent() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Expression::Member::Builder::getParent() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::Expression::Pipeline Expression::Member::Pipeline::getParent() {
-  return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(0));
+inline  ::shark::compiler::Expression::Pipeline Expression::Member::Pipeline::getParent() {
+  return  ::shark::compiler::Expression::Pipeline(_typeless.getPointerField(0));
 }
 #endif  // !SHARK_LITE
-inline void Expression::Member::Builder::setParent( ::capnp::compiler::Expression::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void Expression::Member::Builder::setParent( ::shark::compiler::Expression::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Expression::Member::Builder::initParent() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Expression::Member::Builder::initParent() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void Expression::Member::Builder::adoptParent(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Expression::Member::Builder::disownParent() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::Expression> Expression::Member::Builder::disownParent() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool Expression::Member::Reader::hasName() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool Expression::Member::Builder::hasName() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::LocatedText::Reader Expression::Member::Reader::getName() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::compiler::LocatedText::Reader Expression::Member::Reader::getName() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::LocatedText::Builder Expression::Member::Builder::getName() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::compiler::LocatedText::Builder Expression::Member::Builder::getName() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::LocatedText::Pipeline Expression::Member::Pipeline::getName() {
-  return  ::capnp::compiler::LocatedText::Pipeline(_typeless.getPointerField(1));
+inline  ::shark::compiler::LocatedText::Pipeline Expression::Member::Pipeline::getName() {
+  return  ::shark::compiler::LocatedText::Pipeline(_typeless.getPointerField(1));
 }
 #endif  // !SHARK_LITE
-inline void Expression::Member::Builder::setName( ::capnp::compiler::LocatedText::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+inline void Expression::Member::Builder::setName( ::shark::compiler::LocatedText::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::LocatedText::Builder Expression::Member::Builder::initName() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::compiler::LocatedText::Builder Expression::Member::Builder::initName() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::init(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 inline void Expression::Member::Builder::adoptName(
-    ::capnp::Orphan< ::capnp::compiler::LocatedText>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::LocatedText>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::LocatedText> Expression::Member::Builder::disownName() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::LocatedText> Expression::Member::Builder::disownName() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 
-inline  ::capnp::compiler::Declaration::Which Declaration::Reader::which() const {
+inline  ::shark::compiler::Declaration::Which Declaration::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::compiler::Declaration::Which Declaration::Builder::which() {
+inline  ::shark::compiler::Declaration::Which Declaration::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Reader::hasName() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Builder::hasName() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::LocatedText::Reader Declaration::Reader::getName() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::LocatedText::Reader Declaration::Reader::getName() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::LocatedText::Builder Declaration::Builder::getName() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::LocatedText::Builder Declaration::Builder::getName() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::LocatedText::Pipeline Declaration::Pipeline::getName() {
-  return  ::capnp::compiler::LocatedText::Pipeline(_typeless.getPointerField(0));
+inline  ::shark::compiler::LocatedText::Pipeline Declaration::Pipeline::getName() {
+  return  ::shark::compiler::LocatedText::Pipeline(_typeless.getPointerField(0));
 }
 #endif  // !SHARK_LITE
-inline void Declaration::Builder::setName( ::capnp::compiler::LocatedText::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void Declaration::Builder::setName( ::shark::compiler::LocatedText::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::LocatedText::Builder Declaration::Builder::initName() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::LocatedText::Builder Declaration::Builder::initName() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void Declaration::Builder::adoptName(
-    ::capnp::Orphan< ::capnp::compiler::LocatedText>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::LocatedText>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::LocatedText> Declaration::Builder::disownName() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::LocatedText> Declaration::Builder::disownName() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline typename Declaration::Id::Reader Declaration::Reader::getId() const {
@@ -4318,138 +4318,138 @@ inline typename Declaration::Id::Pipeline Declaration::Pipeline::getId() {
 }
 #endif  // !SHARK_LITE
 inline typename Declaration::Id::Builder Declaration::Builder::initId() {
-  _builder.setDataField< ::uint16_t>(::capnp::bounded<0>() * ::capnp::ELEMENTS, 0);
-  _builder.getPointerField(::capnp::bounded<1>() * ::capnp::POINTERS).clear();
+  _builder.setDataField< ::uint16_t>(::shark::bounded<0>() * ::shark::ELEMENTS, 0);
+  _builder.getPointerField(::shark::bounded<1>() * ::shark::POINTERS).clear();
   return typename Declaration::Id::Builder(_builder);
 }
 inline bool Declaration::Reader::hasNestedDecls() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<2>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Builder::hasNestedDecls() {
   return !_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<2>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>::Reader Declaration::Reader::getNestedDecls() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>::Reader Declaration::Reader::getNestedDecls() const {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS));
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>::Builder Declaration::Builder::getNestedDecls() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>::Builder Declaration::Builder::getNestedDecls() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS));
 }
-inline void Declaration::Builder::setNestedDecls( ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+inline void Declaration::Builder::setNestedDecls( ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>::Builder Declaration::Builder::initNestedDecls(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+inline  ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>::Builder Declaration::Builder::initNestedDecls(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS), size);
 }
 inline void Declaration::Builder::adoptNestedDecls(
-    ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>>&& value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>> Declaration::Builder::disownNestedDecls() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>> Declaration::Builder::disownNestedDecls() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration,  ::shark::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Reader::hasAnnotations() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<3>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Builder::hasAnnotations() {
   return !_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<3>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Reader Declaration::Reader::getAnnotations() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Reader Declaration::Reader::getAnnotations() const {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Builder Declaration::Builder::getAnnotations() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Builder Declaration::Builder::getAnnotations() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
-inline void Declaration::Builder::setAnnotations( ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
+inline void Declaration::Builder::setAnnotations( ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Builder Declaration::Builder::initAnnotations(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), size);
+inline  ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Builder Declaration::Builder::initAnnotations(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), size);
 }
 inline void Declaration::Builder::adoptAnnotations(
-    ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>&& value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>> Declaration::Builder::disownAnnotations() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>> Declaration::Builder::disownAnnotations() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
 
 inline  ::uint32_t Declaration::Reader::getStartByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t Declaration::Builder::getStartByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Builder::setStartByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, value);
 }
 
 inline  ::uint32_t Declaration::Reader::getEndByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+      ::shark::bounded<2>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t Declaration::Builder::getEndByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+      ::shark::bounded<2>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Builder::setEndByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<2>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::hasDocComment() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<4>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Builder::hasDocComment() {
   return !_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<4>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader Declaration::Reader::getDocComment() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader Declaration::Reader::getDocComment() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<4>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder Declaration::Builder::getDocComment() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder Declaration::Builder::getDocComment() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<4>() * ::shark::POINTERS));
 }
-inline void Declaration::Builder::setDocComment( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS), value);
+inline void Declaration::Builder::setDocComment( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<4>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder Declaration::Builder::initDocComment(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder Declaration::Builder::initDocComment(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<4>() * ::shark::POINTERS), size);
 }
 inline void Declaration::Builder::adoptDocComment(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<4>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> Declaration::Builder::disownDocComment() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Text> Declaration::Builder::disownDocComment() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<4>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Reader::isFile() const {
@@ -4458,24 +4458,24 @@ inline bool Declaration::Reader::isFile() const {
 inline bool Declaration::Builder::isFile() {
   return which() == Declaration::FILE;
 }
-inline  ::capnp::Void Declaration::Reader::getFile() const {
+inline  ::shark::Void Declaration::Reader::getFile() const {
   KJ_IREQUIRE((which() == Declaration::FILE),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getFile() {
+inline  ::shark::Void Declaration::Builder::getFile() {
   KJ_IREQUIRE((which() == Declaration::FILE),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setFile( ::capnp::Void value) {
+inline void Declaration::Builder::setFile( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::FILE);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::FILE);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isUsing() const {
@@ -4496,8 +4496,8 @@ inline typename Declaration::Using::Builder Declaration::Builder::getUsing() {
 }
 inline typename Declaration::Using::Builder Declaration::Builder::initUsing() {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::USING);
-  _builder.getPointerField(::capnp::bounded<5>() * ::capnp::POINTERS).clear();
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::USING);
+  _builder.getPointerField(::shark::bounded<5>() * ::shark::POINTERS).clear();
   return typename Declaration::Using::Builder(_builder);
 }
 inline bool Declaration::Reader::isConst() const {
@@ -4518,9 +4518,9 @@ inline typename Declaration::Const::Builder Declaration::Builder::getConst() {
 }
 inline typename Declaration::Const::Builder Declaration::Builder::initConst() {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::CONST);
-  _builder.getPointerField(::capnp::bounded<5>() * ::capnp::POINTERS).clear();
-  _builder.getPointerField(::capnp::bounded<6>() * ::capnp::POINTERS).clear();
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::CONST);
+  _builder.getPointerField(::shark::bounded<5>() * ::shark::POINTERS).clear();
+  _builder.getPointerField(::shark::bounded<6>() * ::shark::POINTERS).clear();
   return typename Declaration::Const::Builder(_builder);
 }
 inline bool Declaration::Reader::isEnum() const {
@@ -4529,24 +4529,24 @@ inline bool Declaration::Reader::isEnum() const {
 inline bool Declaration::Builder::isEnum() {
   return which() == Declaration::ENUM;
 }
-inline  ::capnp::Void Declaration::Reader::getEnum() const {
+inline  ::shark::Void Declaration::Reader::getEnum() const {
   KJ_IREQUIRE((which() == Declaration::ENUM),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getEnum() {
+inline  ::shark::Void Declaration::Builder::getEnum() {
   KJ_IREQUIRE((which() == Declaration::ENUM),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setEnum( ::capnp::Void value) {
+inline void Declaration::Builder::setEnum( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::ENUM);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::ENUM);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isEnumerant() const {
@@ -4555,24 +4555,24 @@ inline bool Declaration::Reader::isEnumerant() const {
 inline bool Declaration::Builder::isEnumerant() {
   return which() == Declaration::ENUMERANT;
 }
-inline  ::capnp::Void Declaration::Reader::getEnumerant() const {
+inline  ::shark::Void Declaration::Reader::getEnumerant() const {
   KJ_IREQUIRE((which() == Declaration::ENUMERANT),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getEnumerant() {
+inline  ::shark::Void Declaration::Builder::getEnumerant() {
   KJ_IREQUIRE((which() == Declaration::ENUMERANT),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setEnumerant( ::capnp::Void value) {
+inline void Declaration::Builder::setEnumerant( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::ENUMERANT);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::ENUMERANT);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isStruct() const {
@@ -4581,24 +4581,24 @@ inline bool Declaration::Reader::isStruct() const {
 inline bool Declaration::Builder::isStruct() {
   return which() == Declaration::STRUCT;
 }
-inline  ::capnp::Void Declaration::Reader::getStruct() const {
+inline  ::shark::Void Declaration::Reader::getStruct() const {
   KJ_IREQUIRE((which() == Declaration::STRUCT),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getStruct() {
+inline  ::shark::Void Declaration::Builder::getStruct() {
   KJ_IREQUIRE((which() == Declaration::STRUCT),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setStruct( ::capnp::Void value) {
+inline void Declaration::Builder::setStruct( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::STRUCT);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::STRUCT);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isField() const {
@@ -4619,10 +4619,10 @@ inline typename Declaration::Field::Builder Declaration::Builder::getField() {
 }
 inline typename Declaration::Field::Builder Declaration::Builder::initField() {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::FIELD);
-  _builder.setDataField< ::uint16_t>(::capnp::bounded<6>() * ::capnp::ELEMENTS, 0);
-  _builder.getPointerField(::capnp::bounded<5>() * ::capnp::POINTERS).clear();
-  _builder.getPointerField(::capnp::bounded<6>() * ::capnp::POINTERS).clear();
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::FIELD);
+  _builder.setDataField< ::uint16_t>(::shark::bounded<6>() * ::shark::ELEMENTS, 0);
+  _builder.getPointerField(::shark::bounded<5>() * ::shark::POINTERS).clear();
+  _builder.getPointerField(::shark::bounded<6>() * ::shark::POINTERS).clear();
   return typename Declaration::Field::Builder(_builder);
 }
 inline bool Declaration::Reader::isUnion() const {
@@ -4631,24 +4631,24 @@ inline bool Declaration::Reader::isUnion() const {
 inline bool Declaration::Builder::isUnion() {
   return which() == Declaration::UNION;
 }
-inline  ::capnp::Void Declaration::Reader::getUnion() const {
+inline  ::shark::Void Declaration::Reader::getUnion() const {
   KJ_IREQUIRE((which() == Declaration::UNION),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getUnion() {
+inline  ::shark::Void Declaration::Builder::getUnion() {
   KJ_IREQUIRE((which() == Declaration::UNION),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setUnion( ::capnp::Void value) {
+inline void Declaration::Builder::setUnion( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::UNION);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::UNION);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isGroup() const {
@@ -4657,24 +4657,24 @@ inline bool Declaration::Reader::isGroup() const {
 inline bool Declaration::Builder::isGroup() {
   return which() == Declaration::GROUP;
 }
-inline  ::capnp::Void Declaration::Reader::getGroup() const {
+inline  ::shark::Void Declaration::Reader::getGroup() const {
   KJ_IREQUIRE((which() == Declaration::GROUP),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getGroup() {
+inline  ::shark::Void Declaration::Builder::getGroup() {
   KJ_IREQUIRE((which() == Declaration::GROUP),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setGroup( ::capnp::Void value) {
+inline void Declaration::Builder::setGroup( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::GROUP);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::GROUP);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isInterface() const {
@@ -4695,8 +4695,8 @@ inline typename Declaration::Interface::Builder Declaration::Builder::getInterfa
 }
 inline typename Declaration::Interface::Builder Declaration::Builder::initInterface() {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::INTERFACE);
-  _builder.getPointerField(::capnp::bounded<5>() * ::capnp::POINTERS).clear();
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::INTERFACE);
+  _builder.getPointerField(::shark::bounded<5>() * ::shark::POINTERS).clear();
   return typename Declaration::Interface::Builder(_builder);
 }
 inline bool Declaration::Reader::isMethod() const {
@@ -4717,10 +4717,10 @@ inline typename Declaration::Method::Builder Declaration::Builder::getMethod() {
 }
 inline typename Declaration::Method::Builder Declaration::Builder::initMethod() {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::METHOD);
-  _builder.setDataField< ::uint16_t>(::capnp::bounded<6>() * ::capnp::ELEMENTS, 0);
-  _builder.getPointerField(::capnp::bounded<5>() * ::capnp::POINTERS).clear();
-  _builder.getPointerField(::capnp::bounded<6>() * ::capnp::POINTERS).clear();
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::METHOD);
+  _builder.setDataField< ::uint16_t>(::shark::bounded<6>() * ::shark::ELEMENTS, 0);
+  _builder.getPointerField(::shark::bounded<5>() * ::shark::POINTERS).clear();
+  _builder.getPointerField(::shark::bounded<6>() * ::shark::POINTERS).clear();
   return typename Declaration::Method::Builder(_builder);
 }
 inline bool Declaration::Reader::isAnnotation() const {
@@ -4741,20 +4741,20 @@ inline typename Declaration::Annotation::Builder Declaration::Builder::getAnnota
 }
 inline typename Declaration::Annotation::Builder Declaration::Builder::initAnnotation() {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::ANNOTATION);
-  _builder.setDataField<bool>(::capnp::bounded<96>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField<bool>(::capnp::bounded<97>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField<bool>(::capnp::bounded<98>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField<bool>(::capnp::bounded<99>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField<bool>(::capnp::bounded<100>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField<bool>(::capnp::bounded<101>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField<bool>(::capnp::bounded<102>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField<bool>(::capnp::bounded<103>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField<bool>(::capnp::bounded<104>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField<bool>(::capnp::bounded<105>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField<bool>(::capnp::bounded<106>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField<bool>(::capnp::bounded<107>() * ::capnp::ELEMENTS, 0);
-  _builder.getPointerField(::capnp::bounded<5>() * ::capnp::POINTERS).clear();
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::ANNOTATION);
+  _builder.setDataField<bool>(::shark::bounded<96>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField<bool>(::shark::bounded<97>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField<bool>(::shark::bounded<98>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField<bool>(::shark::bounded<99>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField<bool>(::shark::bounded<100>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField<bool>(::shark::bounded<101>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField<bool>(::shark::bounded<102>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField<bool>(::shark::bounded<103>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField<bool>(::shark::bounded<104>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField<bool>(::shark::bounded<105>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField<bool>(::shark::bounded<106>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField<bool>(::shark::bounded<107>() * ::shark::ELEMENTS, 0);
+  _builder.getPointerField(::shark::bounded<5>() * ::shark::POINTERS).clear();
   return typename Declaration::Annotation::Builder(_builder);
 }
 inline bool Declaration::Reader::isNakedId() const {
@@ -4766,49 +4766,49 @@ inline bool Declaration::Builder::isNakedId() {
 inline bool Declaration::Reader::hasNakedId() const {
   if (which() != Declaration::NAKED_ID) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Builder::hasNakedId() {
   if (which() != Declaration::NAKED_ID) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::LocatedInteger::Reader Declaration::Reader::getNakedId() const {
+inline  ::shark::compiler::LocatedInteger::Reader Declaration::Reader::getNakedId() const {
   KJ_IREQUIRE((which() == Declaration::NAKED_ID),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::get(_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::get(_reader.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::LocatedInteger::Builder Declaration::Builder::getNakedId() {
+inline  ::shark::compiler::LocatedInteger::Builder Declaration::Builder::getNakedId() {
   KJ_IREQUIRE((which() == Declaration::NAKED_ID),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::get(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::get(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
-inline void Declaration::Builder::setNakedId( ::capnp::compiler::LocatedInteger::Reader value) {
+inline void Declaration::Builder::setNakedId( ::shark::compiler::LocatedInteger::Reader value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::NAKED_ID);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::set(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::NAKED_ID);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::set(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::LocatedInteger::Builder Declaration::Builder::initNakedId() {
+inline  ::shark::compiler::LocatedInteger::Builder Declaration::Builder::initNakedId() {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::NAKED_ID);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::init(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::NAKED_ID);
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::init(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 inline void Declaration::Builder::adoptNakedId(
-    ::capnp::Orphan< ::capnp::compiler::LocatedInteger>&& value) {
+    ::shark::Orphan< ::shark::compiler::LocatedInteger>&& value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::NAKED_ID);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::adopt(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::NAKED_ID);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::adopt(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::LocatedInteger> Declaration::Builder::disownNakedId() {
+inline ::shark::Orphan< ::shark::compiler::LocatedInteger> Declaration::Builder::disownNakedId() {
   KJ_IREQUIRE((which() == Declaration::NAKED_ID),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::disown(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::disown(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Reader::isNakedAnnotation() const {
@@ -4820,49 +4820,49 @@ inline bool Declaration::Builder::isNakedAnnotation() {
 inline bool Declaration::Reader::hasNakedAnnotation() const {
   if (which() != Declaration::NAKED_ANNOTATION) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Builder::hasNakedAnnotation() {
   if (which() != Declaration::NAKED_ANNOTATION) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Declaration::AnnotationApplication::Reader Declaration::Reader::getNakedAnnotation() const {
+inline  ::shark::compiler::Declaration::AnnotationApplication::Reader Declaration::Reader::getNakedAnnotation() const {
   KJ_IREQUIRE((which() == Declaration::NAKED_ANNOTATION),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::AnnotationApplication>::get(_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration::AnnotationApplication>::get(_reader.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Declaration::AnnotationApplication::Builder Declaration::Builder::getNakedAnnotation() {
+inline  ::shark::compiler::Declaration::AnnotationApplication::Builder Declaration::Builder::getNakedAnnotation() {
   KJ_IREQUIRE((which() == Declaration::NAKED_ANNOTATION),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::AnnotationApplication>::get(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration::AnnotationApplication>::get(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
-inline void Declaration::Builder::setNakedAnnotation( ::capnp::compiler::Declaration::AnnotationApplication::Reader value) {
+inline void Declaration::Builder::setNakedAnnotation( ::shark::compiler::Declaration::AnnotationApplication::Reader value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::NAKED_ANNOTATION);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::AnnotationApplication>::set(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::NAKED_ANNOTATION);
+  ::shark::_::PointerHelpers< ::shark::compiler::Declaration::AnnotationApplication>::set(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Declaration::AnnotationApplication::Builder Declaration::Builder::initNakedAnnotation() {
+inline  ::shark::compiler::Declaration::AnnotationApplication::Builder Declaration::Builder::initNakedAnnotation() {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::NAKED_ANNOTATION);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::AnnotationApplication>::init(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::NAKED_ANNOTATION);
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration::AnnotationApplication>::init(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 inline void Declaration::Builder::adoptNakedAnnotation(
-    ::capnp::Orphan< ::capnp::compiler::Declaration::AnnotationApplication>&& value) {
+    ::shark::Orphan< ::shark::compiler::Declaration::AnnotationApplication>&& value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::NAKED_ANNOTATION);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::AnnotationApplication>::adopt(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::NAKED_ANNOTATION);
+  ::shark::_::PointerHelpers< ::shark::compiler::Declaration::AnnotationApplication>::adopt(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Declaration::AnnotationApplication> Declaration::Builder::disownNakedAnnotation() {
+inline ::shark::Orphan< ::shark::compiler::Declaration::AnnotationApplication> Declaration::Builder::disownNakedAnnotation() {
   KJ_IREQUIRE((which() == Declaration::NAKED_ANNOTATION),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::AnnotationApplication>::disown(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration::AnnotationApplication>::disown(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Reader::isBuiltinVoid() const {
@@ -4871,24 +4871,24 @@ inline bool Declaration::Reader::isBuiltinVoid() const {
 inline bool Declaration::Builder::isBuiltinVoid() {
   return which() == Declaration::BUILTIN_VOID;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinVoid() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinVoid() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_VOID),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinVoid() {
+inline  ::shark::Void Declaration::Builder::getBuiltinVoid() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_VOID),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinVoid( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinVoid( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_VOID);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_VOID);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinBool() const {
@@ -4897,24 +4897,24 @@ inline bool Declaration::Reader::isBuiltinBool() const {
 inline bool Declaration::Builder::isBuiltinBool() {
   return which() == Declaration::BUILTIN_BOOL;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinBool() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinBool() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_BOOL),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinBool() {
+inline  ::shark::Void Declaration::Builder::getBuiltinBool() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_BOOL),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinBool( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinBool( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_BOOL);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_BOOL);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinInt8() const {
@@ -4923,24 +4923,24 @@ inline bool Declaration::Reader::isBuiltinInt8() const {
 inline bool Declaration::Builder::isBuiltinInt8() {
   return which() == Declaration::BUILTIN_INT8;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinInt8() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinInt8() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_INT8),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinInt8() {
+inline  ::shark::Void Declaration::Builder::getBuiltinInt8() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_INT8),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinInt8( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinInt8( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_INT8);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_INT8);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinInt16() const {
@@ -4949,24 +4949,24 @@ inline bool Declaration::Reader::isBuiltinInt16() const {
 inline bool Declaration::Builder::isBuiltinInt16() {
   return which() == Declaration::BUILTIN_INT16;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinInt16() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinInt16() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_INT16),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinInt16() {
+inline  ::shark::Void Declaration::Builder::getBuiltinInt16() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_INT16),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinInt16( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinInt16( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_INT16);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_INT16);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinInt32() const {
@@ -4975,24 +4975,24 @@ inline bool Declaration::Reader::isBuiltinInt32() const {
 inline bool Declaration::Builder::isBuiltinInt32() {
   return which() == Declaration::BUILTIN_INT32;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinInt32() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinInt32() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_INT32),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinInt32() {
+inline  ::shark::Void Declaration::Builder::getBuiltinInt32() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_INT32),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinInt32( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinInt32( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_INT32);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_INT32);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinInt64() const {
@@ -5001,24 +5001,24 @@ inline bool Declaration::Reader::isBuiltinInt64() const {
 inline bool Declaration::Builder::isBuiltinInt64() {
   return which() == Declaration::BUILTIN_INT64;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinInt64() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinInt64() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_INT64),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinInt64() {
+inline  ::shark::Void Declaration::Builder::getBuiltinInt64() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_INT64),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinInt64( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinInt64( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_INT64);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_INT64);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinUInt8() const {
@@ -5027,24 +5027,24 @@ inline bool Declaration::Reader::isBuiltinUInt8() const {
 inline bool Declaration::Builder::isBuiltinUInt8() {
   return which() == Declaration::BUILTIN_U_INT8;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinUInt8() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinUInt8() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_U_INT8),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinUInt8() {
+inline  ::shark::Void Declaration::Builder::getBuiltinUInt8() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_U_INT8),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinUInt8( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinUInt8( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_U_INT8);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_U_INT8);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinUInt16() const {
@@ -5053,24 +5053,24 @@ inline bool Declaration::Reader::isBuiltinUInt16() const {
 inline bool Declaration::Builder::isBuiltinUInt16() {
   return which() == Declaration::BUILTIN_U_INT16;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinUInt16() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinUInt16() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_U_INT16),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinUInt16() {
+inline  ::shark::Void Declaration::Builder::getBuiltinUInt16() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_U_INT16),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinUInt16( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinUInt16( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_U_INT16);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_U_INT16);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinUInt32() const {
@@ -5079,24 +5079,24 @@ inline bool Declaration::Reader::isBuiltinUInt32() const {
 inline bool Declaration::Builder::isBuiltinUInt32() {
   return which() == Declaration::BUILTIN_U_INT32;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinUInt32() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinUInt32() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_U_INT32),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinUInt32() {
+inline  ::shark::Void Declaration::Builder::getBuiltinUInt32() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_U_INT32),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinUInt32( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinUInt32( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_U_INT32);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_U_INT32);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinUInt64() const {
@@ -5105,24 +5105,24 @@ inline bool Declaration::Reader::isBuiltinUInt64() const {
 inline bool Declaration::Builder::isBuiltinUInt64() {
   return which() == Declaration::BUILTIN_U_INT64;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinUInt64() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinUInt64() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_U_INT64),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinUInt64() {
+inline  ::shark::Void Declaration::Builder::getBuiltinUInt64() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_U_INT64),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinUInt64( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinUInt64( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_U_INT64);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_U_INT64);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinFloat32() const {
@@ -5131,24 +5131,24 @@ inline bool Declaration::Reader::isBuiltinFloat32() const {
 inline bool Declaration::Builder::isBuiltinFloat32() {
   return which() == Declaration::BUILTIN_FLOAT32;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinFloat32() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinFloat32() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_FLOAT32),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinFloat32() {
+inline  ::shark::Void Declaration::Builder::getBuiltinFloat32() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_FLOAT32),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinFloat32( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinFloat32( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_FLOAT32);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_FLOAT32);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinFloat64() const {
@@ -5157,24 +5157,24 @@ inline bool Declaration::Reader::isBuiltinFloat64() const {
 inline bool Declaration::Builder::isBuiltinFloat64() {
   return which() == Declaration::BUILTIN_FLOAT64;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinFloat64() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinFloat64() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_FLOAT64),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinFloat64() {
+inline  ::shark::Void Declaration::Builder::getBuiltinFloat64() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_FLOAT64),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinFloat64( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinFloat64( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_FLOAT64);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_FLOAT64);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinText() const {
@@ -5183,24 +5183,24 @@ inline bool Declaration::Reader::isBuiltinText() const {
 inline bool Declaration::Builder::isBuiltinText() {
   return which() == Declaration::BUILTIN_TEXT;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinText() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinText() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_TEXT),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinText() {
+inline  ::shark::Void Declaration::Builder::getBuiltinText() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_TEXT),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinText( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinText( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_TEXT);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_TEXT);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinData() const {
@@ -5209,24 +5209,24 @@ inline bool Declaration::Reader::isBuiltinData() const {
 inline bool Declaration::Builder::isBuiltinData() {
   return which() == Declaration::BUILTIN_DATA;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinData() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinData() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_DATA),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinData() {
+inline  ::shark::Void Declaration::Builder::getBuiltinData() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_DATA),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinData( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinData( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_DATA);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_DATA);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinList() const {
@@ -5235,24 +5235,24 @@ inline bool Declaration::Reader::isBuiltinList() const {
 inline bool Declaration::Builder::isBuiltinList() {
   return which() == Declaration::BUILTIN_LIST;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinList() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinList() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_LIST),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinList() {
+inline  ::shark::Void Declaration::Builder::getBuiltinList() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_LIST),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinList( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinList( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_LIST);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_LIST);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinObject() const {
@@ -5261,24 +5261,24 @@ inline bool Declaration::Reader::isBuiltinObject() const {
 inline bool Declaration::Builder::isBuiltinObject() {
   return which() == Declaration::BUILTIN_OBJECT;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinObject() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinObject() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_OBJECT),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinObject() {
+inline  ::shark::Void Declaration::Builder::getBuiltinObject() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_OBJECT),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinObject( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinObject( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_OBJECT);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_OBJECT);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinAnyPointer() const {
@@ -5287,58 +5287,58 @@ inline bool Declaration::Reader::isBuiltinAnyPointer() const {
 inline bool Declaration::Builder::isBuiltinAnyPointer() {
   return which() == Declaration::BUILTIN_ANY_POINTER;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinAnyPointer() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinAnyPointer() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_ANY_POINTER),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinAnyPointer() {
+inline  ::shark::Void Declaration::Builder::getBuiltinAnyPointer() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_ANY_POINTER),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinAnyPointer( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinAnyPointer( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_ANY_POINTER);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_ANY_POINTER);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::hasParameters() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<7>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<7>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Builder::hasParameters() {
   return !_builder.getPointerField(
-      ::capnp::bounded<7>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<7>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>::Reader Declaration::Reader::getParameters() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<7>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>::Reader Declaration::Reader::getParameters() const {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::shark::bounded<7>() * ::shark::POINTERS));
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>::Builder Declaration::Builder::getParameters() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<7>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>::Builder Declaration::Builder::getParameters() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::shark::bounded<7>() * ::shark::POINTERS));
 }
-inline void Declaration::Builder::setParameters( ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<7>() * ::capnp::POINTERS), value);
+inline void Declaration::Builder::setParameters( ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::shark::bounded<7>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>::Builder Declaration::Builder::initParameters(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<7>() * ::capnp::POINTERS), size);
+inline  ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>::Builder Declaration::Builder::initParameters(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::shark::bounded<7>() * ::shark::POINTERS), size);
 }
 inline void Declaration::Builder::adoptParameters(
-    ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<7>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>>&& value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::shark::bounded<7>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>> Declaration::Builder::disownParameters() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::BrandParameter,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<7>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>> Declaration::Builder::disownParameters() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::BrandParameter,  ::shark::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::shark::bounded<7>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Reader::isBuiltinAnyStruct() const {
@@ -5347,24 +5347,24 @@ inline bool Declaration::Reader::isBuiltinAnyStruct() const {
 inline bool Declaration::Builder::isBuiltinAnyStruct() {
   return which() == Declaration::BUILTIN_ANY_STRUCT;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinAnyStruct() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinAnyStruct() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_ANY_STRUCT),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinAnyStruct() {
+inline  ::shark::Void Declaration::Builder::getBuiltinAnyStruct() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_ANY_STRUCT),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinAnyStruct( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinAnyStruct( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_ANY_STRUCT);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_ANY_STRUCT);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinAnyList() const {
@@ -5373,24 +5373,24 @@ inline bool Declaration::Reader::isBuiltinAnyList() const {
 inline bool Declaration::Builder::isBuiltinAnyList() {
   return which() == Declaration::BUILTIN_ANY_LIST;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinAnyList() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinAnyList() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_ANY_LIST),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinAnyList() {
+inline  ::shark::Void Declaration::Builder::getBuiltinAnyList() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_ANY_LIST),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinAnyList( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinAnyList( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_ANY_LIST);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_ANY_LIST);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Reader::isBuiltinCapability() const {
@@ -5399,125 +5399,125 @@ inline bool Declaration::Reader::isBuiltinCapability() const {
 inline bool Declaration::Builder::isBuiltinCapability() {
   return which() == Declaration::BUILTIN_CAPABILITY;
 }
-inline  ::capnp::Void Declaration::Reader::getBuiltinCapability() const {
+inline  ::shark::Void Declaration::Reader::getBuiltinCapability() const {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_CAPABILITY),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Builder::getBuiltinCapability() {
+inline  ::shark::Void Declaration::Builder::getBuiltinCapability() {
   KJ_IREQUIRE((which() == Declaration::BUILTIN_CAPABILITY),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Builder::setBuiltinCapability( ::capnp::Void value) {
+inline void Declaration::Builder::setBuiltinCapability( ::shark::Void value) {
   _builder.setDataField<Declaration::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, Declaration::BUILTIN_CAPABILITY);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, Declaration::BUILTIN_CAPABILITY);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::BrandParameter::Reader::hasName() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::BrandParameter::Builder::hasName() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader Declaration::BrandParameter::Reader::getName() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader Declaration::BrandParameter::Reader::getName() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder Declaration::BrandParameter::Builder::getName() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder Declaration::BrandParameter::Builder::getName() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void Declaration::BrandParameter::Builder::setName( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void Declaration::BrandParameter::Builder::setName( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder Declaration::BrandParameter::Builder::initName(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder Declaration::BrandParameter::Builder::initName(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void Declaration::BrandParameter::Builder::adoptName(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> Declaration::BrandParameter::Builder::disownName() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Text> Declaration::BrandParameter::Builder::disownName() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline  ::uint32_t Declaration::BrandParameter::Reader::getStartByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t Declaration::BrandParameter::Builder::getStartByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 inline void Declaration::BrandParameter::Builder::setStartByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline  ::uint32_t Declaration::BrandParameter::Reader::getEndByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t Declaration::BrandParameter::Builder::getEndByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 inline void Declaration::BrandParameter::Builder::setEndByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::AnnotationApplication::Reader::hasName() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::AnnotationApplication::Builder::hasName() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Declaration::AnnotationApplication::Reader::getName() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Reader Declaration::AnnotationApplication::Reader::getName() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::AnnotationApplication::Builder::getName() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::AnnotationApplication::Builder::getName() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::Expression::Pipeline Declaration::AnnotationApplication::Pipeline::getName() {
-  return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(0));
+inline  ::shark::compiler::Expression::Pipeline Declaration::AnnotationApplication::Pipeline::getName() {
+  return  ::shark::compiler::Expression::Pipeline(_typeless.getPointerField(0));
 }
 #endif  // !SHARK_LITE
-inline void Declaration::AnnotationApplication::Builder::setName( ::capnp::compiler::Expression::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void Declaration::AnnotationApplication::Builder::setName( ::shark::compiler::Expression::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::AnnotationApplication::Builder::initName() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::AnnotationApplication::Builder::initName() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void Declaration::AnnotationApplication::Builder::adoptName(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Declaration::AnnotationApplication::Builder::disownName() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::Expression> Declaration::AnnotationApplication::Builder::disownName() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline typename Declaration::AnnotationApplication::Value::Reader Declaration::AnnotationApplication::Reader::getValue() const {
@@ -5532,17 +5532,17 @@ inline typename Declaration::AnnotationApplication::Value::Pipeline Declaration:
 }
 #endif  // !SHARK_LITE
 inline typename Declaration::AnnotationApplication::Value::Builder Declaration::AnnotationApplication::Builder::initValue() {
-  _builder.setDataField< ::uint16_t>(::capnp::bounded<0>() * ::capnp::ELEMENTS, 0);
-  _builder.getPointerField(::capnp::bounded<1>() * ::capnp::POINTERS).clear();
+  _builder.setDataField< ::uint16_t>(::shark::bounded<0>() * ::shark::ELEMENTS, 0);
+  _builder.getPointerField(::shark::bounded<1>() * ::shark::POINTERS).clear();
   return typename Declaration::AnnotationApplication::Value::Builder(_builder);
 }
-inline  ::capnp::compiler::Declaration::AnnotationApplication::Value::Which Declaration::AnnotationApplication::Value::Reader::which() const {
+inline  ::shark::compiler::Declaration::AnnotationApplication::Value::Which Declaration::AnnotationApplication::Value::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::compiler::Declaration::AnnotationApplication::Value::Which Declaration::AnnotationApplication::Value::Builder::which() {
+inline  ::shark::compiler::Declaration::AnnotationApplication::Value::Which Declaration::AnnotationApplication::Value::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::AnnotationApplication::Value::Reader::isNone() const {
@@ -5551,24 +5551,24 @@ inline bool Declaration::AnnotationApplication::Value::Reader::isNone() const {
 inline bool Declaration::AnnotationApplication::Value::Builder::isNone() {
   return which() == Declaration::AnnotationApplication::Value::NONE;
 }
-inline  ::capnp::Void Declaration::AnnotationApplication::Value::Reader::getNone() const {
+inline  ::shark::Void Declaration::AnnotationApplication::Value::Reader::getNone() const {
   KJ_IREQUIRE((which() == Declaration::AnnotationApplication::Value::NONE),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::AnnotationApplication::Value::Builder::getNone() {
+inline  ::shark::Void Declaration::AnnotationApplication::Value::Builder::getNone() {
   KJ_IREQUIRE((which() == Declaration::AnnotationApplication::Value::NONE),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::AnnotationApplication::Value::Builder::setNone( ::capnp::Void value) {
+inline void Declaration::AnnotationApplication::Value::Builder::setNone( ::shark::Void value) {
   _builder.setDataField<Declaration::AnnotationApplication::Value::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::AnnotationApplication::Value::NONE);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::AnnotationApplication::Value::NONE);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::AnnotationApplication::Value::Reader::isExpression() const {
@@ -5580,58 +5580,58 @@ inline bool Declaration::AnnotationApplication::Value::Builder::isExpression() {
 inline bool Declaration::AnnotationApplication::Value::Reader::hasExpression() const {
   if (which() != Declaration::AnnotationApplication::Value::EXPRESSION) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::AnnotationApplication::Value::Builder::hasExpression() {
   if (which() != Declaration::AnnotationApplication::Value::EXPRESSION) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Declaration::AnnotationApplication::Value::Reader::getExpression() const {
+inline  ::shark::compiler::Expression::Reader Declaration::AnnotationApplication::Value::Reader::getExpression() const {
   KJ_IREQUIRE((which() == Declaration::AnnotationApplication::Value::EXPRESSION),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::AnnotationApplication::Value::Builder::getExpression() {
+inline  ::shark::compiler::Expression::Builder Declaration::AnnotationApplication::Value::Builder::getExpression() {
   KJ_IREQUIRE((which() == Declaration::AnnotationApplication::Value::EXPRESSION),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline void Declaration::AnnotationApplication::Value::Builder::setExpression( ::capnp::compiler::Expression::Reader value) {
+inline void Declaration::AnnotationApplication::Value::Builder::setExpression( ::shark::compiler::Expression::Reader value) {
   _builder.setDataField<Declaration::AnnotationApplication::Value::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::AnnotationApplication::Value::EXPRESSION);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::AnnotationApplication::Value::EXPRESSION);
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::AnnotationApplication::Value::Builder::initExpression() {
+inline  ::shark::compiler::Expression::Builder Declaration::AnnotationApplication::Value::Builder::initExpression() {
   _builder.setDataField<Declaration::AnnotationApplication::Value::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::AnnotationApplication::Value::EXPRESSION);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::AnnotationApplication::Value::EXPRESSION);
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 inline void Declaration::AnnotationApplication::Value::Builder::adoptExpression(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
   _builder.setDataField<Declaration::AnnotationApplication::Value::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::AnnotationApplication::Value::EXPRESSION);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::AnnotationApplication::Value::EXPRESSION);
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Declaration::AnnotationApplication::Value::Builder::disownExpression() {
+inline ::shark::Orphan< ::shark::compiler::Expression> Declaration::AnnotationApplication::Value::Builder::disownExpression() {
   KJ_IREQUIRE((which() == Declaration::AnnotationApplication::Value::EXPRESSION),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 
-inline  ::capnp::compiler::Declaration::ParamList::Which Declaration::ParamList::Reader::which() const {
+inline  ::shark::compiler::Declaration::ParamList::Which Declaration::ParamList::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::compiler::Declaration::ParamList::Which Declaration::ParamList::Builder::which() {
+inline  ::shark::compiler::Declaration::ParamList::Which Declaration::ParamList::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::ParamList::Reader::isNamedList() const {
@@ -5643,49 +5643,49 @@ inline bool Declaration::ParamList::Builder::isNamedList() {
 inline bool Declaration::ParamList::Reader::hasNamedList() const {
   if (which() != Declaration::ParamList::NAMED_LIST) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::ParamList::Builder::hasNamedList() {
   if (which() != Declaration::ParamList::NAMED_LIST) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>::Reader Declaration::ParamList::Reader::getNamedList() const {
+inline  ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>::Reader Declaration::ParamList::Reader::getNamedList() const {
   KJ_IREQUIRE((which() == Declaration::ParamList::NAMED_LIST),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>::Builder Declaration::ParamList::Builder::getNamedList() {
+inline  ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>::Builder Declaration::ParamList::Builder::getNamedList() {
   KJ_IREQUIRE((which() == Declaration::ParamList::NAMED_LIST),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void Declaration::ParamList::Builder::setNamedList( ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>::Reader value) {
+inline void Declaration::ParamList::Builder::setNamedList( ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>::Reader value) {
   _builder.setDataField<Declaration::ParamList::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::ParamList::NAMED_LIST);
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::ParamList::NAMED_LIST);
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>::Builder Declaration::ParamList::Builder::initNamedList(unsigned int size) {
+inline  ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>::Builder Declaration::ParamList::Builder::initNamedList(unsigned int size) {
   _builder.setDataField<Declaration::ParamList::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::ParamList::NAMED_LIST);
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::ParamList::NAMED_LIST);
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void Declaration::ParamList::Builder::adoptNamedList(
-    ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>>&& value) {
+    ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>>&& value) {
   _builder.setDataField<Declaration::ParamList::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::ParamList::NAMED_LIST);
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::ParamList::NAMED_LIST);
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>> Declaration::ParamList::Builder::disownNamedList() {
+inline ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>> Declaration::ParamList::Builder::disownNamedList() {
   KJ_IREQUIRE((which() == Declaration::ParamList::NAMED_LIST),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::Param,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::Param,  ::shark::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::ParamList::Reader::isType() const {
@@ -5697,77 +5697,77 @@ inline bool Declaration::ParamList::Builder::isType() {
 inline bool Declaration::ParamList::Reader::hasType() const {
   if (which() != Declaration::ParamList::TYPE) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::ParamList::Builder::hasType() {
   if (which() != Declaration::ParamList::TYPE) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Declaration::ParamList::Reader::getType() const {
+inline  ::shark::compiler::Expression::Reader Declaration::ParamList::Reader::getType() const {
   KJ_IREQUIRE((which() == Declaration::ParamList::TYPE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::ParamList::Builder::getType() {
+inline  ::shark::compiler::Expression::Builder Declaration::ParamList::Builder::getType() {
   KJ_IREQUIRE((which() == Declaration::ParamList::TYPE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void Declaration::ParamList::Builder::setType( ::capnp::compiler::Expression::Reader value) {
+inline void Declaration::ParamList::Builder::setType( ::shark::compiler::Expression::Reader value) {
   _builder.setDataField<Declaration::ParamList::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::ParamList::TYPE);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::ParamList::TYPE);
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::ParamList::Builder::initType() {
+inline  ::shark::compiler::Expression::Builder Declaration::ParamList::Builder::initType() {
   _builder.setDataField<Declaration::ParamList::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::ParamList::TYPE);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::ParamList::TYPE);
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void Declaration::ParamList::Builder::adoptType(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
   _builder.setDataField<Declaration::ParamList::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::ParamList::TYPE);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::ParamList::TYPE);
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Declaration::ParamList::Builder::disownType() {
+inline ::shark::Orphan< ::shark::compiler::Expression> Declaration::ParamList::Builder::disownType() {
   KJ_IREQUIRE((which() == Declaration::ParamList::TYPE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline  ::uint32_t Declaration::ParamList::Reader::getStartByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t Declaration::ParamList::Builder::getStartByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 inline void Declaration::ParamList::Builder::setStartByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, value);
 }
 
 inline  ::uint32_t Declaration::ParamList::Reader::getEndByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+      ::shark::bounded<2>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t Declaration::ParamList::Builder::getEndByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+      ::shark::bounded<2>() * ::shark::ELEMENTS);
 }
 inline void Declaration::ParamList::Builder::setEndByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<2>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::ParamList::Reader::isStream() const {
@@ -5776,136 +5776,136 @@ inline bool Declaration::ParamList::Reader::isStream() const {
 inline bool Declaration::ParamList::Builder::isStream() {
   return which() == Declaration::ParamList::STREAM;
 }
-inline  ::capnp::Void Declaration::ParamList::Reader::getStream() const {
+inline  ::shark::Void Declaration::ParamList::Reader::getStream() const {
   KJ_IREQUIRE((which() == Declaration::ParamList::STREAM),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::ParamList::Builder::getStream() {
+inline  ::shark::Void Declaration::ParamList::Builder::getStream() {
   KJ_IREQUIRE((which() == Declaration::ParamList::STREAM),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::ParamList::Builder::setStream( ::capnp::Void value) {
+inline void Declaration::ParamList::Builder::setStream( ::shark::Void value) {
   _builder.setDataField<Declaration::ParamList::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::ParamList::STREAM);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::ParamList::STREAM);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Param::Reader::hasName() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Param::Builder::hasName() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::LocatedText::Reader Declaration::Param::Reader::getName() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::LocatedText::Reader Declaration::Param::Reader::getName() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::LocatedText::Builder Declaration::Param::Builder::getName() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::LocatedText::Builder Declaration::Param::Builder::getName() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::LocatedText::Pipeline Declaration::Param::Pipeline::getName() {
-  return  ::capnp::compiler::LocatedText::Pipeline(_typeless.getPointerField(0));
+inline  ::shark::compiler::LocatedText::Pipeline Declaration::Param::Pipeline::getName() {
+  return  ::shark::compiler::LocatedText::Pipeline(_typeless.getPointerField(0));
 }
 #endif  // !SHARK_LITE
-inline void Declaration::Param::Builder::setName( ::capnp::compiler::LocatedText::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void Declaration::Param::Builder::setName( ::shark::compiler::LocatedText::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::LocatedText::Builder Declaration::Param::Builder::initName() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::LocatedText::Builder Declaration::Param::Builder::initName() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void Declaration::Param::Builder::adoptName(
-    ::capnp::Orphan< ::capnp::compiler::LocatedText>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::LocatedText>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::LocatedText> Declaration::Param::Builder::disownName() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::LocatedText> Declaration::Param::Builder::disownName() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedText>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Param::Reader::hasType() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Param::Builder::hasType() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Declaration::Param::Reader::getType() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Reader Declaration::Param::Reader::getType() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Param::Builder::getType() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::Param::Builder::getType() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::Expression::Pipeline Declaration::Param::Pipeline::getType() {
-  return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(1));
+inline  ::shark::compiler::Expression::Pipeline Declaration::Param::Pipeline::getType() {
+  return  ::shark::compiler::Expression::Pipeline(_typeless.getPointerField(1));
 }
 #endif  // !SHARK_LITE
-inline void Declaration::Param::Builder::setType( ::capnp::compiler::Expression::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+inline void Declaration::Param::Builder::setType( ::shark::compiler::Expression::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Param::Builder::initType() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::Param::Builder::initType() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 inline void Declaration::Param::Builder::adoptType(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Declaration::Param::Builder::disownType() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::Expression> Declaration::Param::Builder::disownType() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Param::Reader::hasAnnotations() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<2>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Param::Builder::hasAnnotations() {
   return !_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<2>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Reader Declaration::Param::Reader::getAnnotations() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Reader Declaration::Param::Reader::getAnnotations() const {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS));
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Builder Declaration::Param::Builder::getAnnotations() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Builder Declaration::Param::Builder::getAnnotations() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS));
 }
-inline void Declaration::Param::Builder::setAnnotations( ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+inline void Declaration::Param::Builder::setAnnotations( ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>::Builder Declaration::Param::Builder::initAnnotations(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+inline  ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>::Builder Declaration::Param::Builder::initAnnotations(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS), size);
 }
 inline void Declaration::Param::Builder::adoptAnnotations(
-    ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>&& value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>> Declaration::Param::Builder::disownAnnotations() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Declaration::AnnotationApplication,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>> Declaration::Param::Builder::disownAnnotations() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Declaration::AnnotationApplication,  ::shark::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS));
 }
 
 inline typename Declaration::Param::DefaultValue::Reader Declaration::Param::Reader::getDefaultValue() const {
@@ -5920,45 +5920,45 @@ inline typename Declaration::Param::DefaultValue::Pipeline Declaration::Param::P
 }
 #endif  // !SHARK_LITE
 inline typename Declaration::Param::DefaultValue::Builder Declaration::Param::Builder::initDefaultValue() {
-  _builder.setDataField< ::uint16_t>(::capnp::bounded<0>() * ::capnp::ELEMENTS, 0);
-  _builder.getPointerField(::capnp::bounded<3>() * ::capnp::POINTERS).clear();
+  _builder.setDataField< ::uint16_t>(::shark::bounded<0>() * ::shark::ELEMENTS, 0);
+  _builder.getPointerField(::shark::bounded<3>() * ::shark::POINTERS).clear();
   return typename Declaration::Param::DefaultValue::Builder(_builder);
 }
 inline  ::uint32_t Declaration::Param::Reader::getStartByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t Declaration::Param::Builder::getStartByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Param::Builder::setStartByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, value);
 }
 
 inline  ::uint32_t Declaration::Param::Reader::getEndByte() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+      ::shark::bounded<2>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint32_t Declaration::Param::Builder::getEndByte() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+      ::shark::bounded<2>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Param::Builder::setEndByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<2>() * ::shark::ELEMENTS, value);
 }
 
-inline  ::capnp::compiler::Declaration::Param::DefaultValue::Which Declaration::Param::DefaultValue::Reader::which() const {
+inline  ::shark::compiler::Declaration::Param::DefaultValue::Which Declaration::Param::DefaultValue::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::compiler::Declaration::Param::DefaultValue::Which Declaration::Param::DefaultValue::Builder::which() {
+inline  ::shark::compiler::Declaration::Param::DefaultValue::Which Declaration::Param::DefaultValue::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Param::DefaultValue::Reader::isNone() const {
@@ -5967,24 +5967,24 @@ inline bool Declaration::Param::DefaultValue::Reader::isNone() const {
 inline bool Declaration::Param::DefaultValue::Builder::isNone() {
   return which() == Declaration::Param::DefaultValue::NONE;
 }
-inline  ::capnp::Void Declaration::Param::DefaultValue::Reader::getNone() const {
+inline  ::shark::Void Declaration::Param::DefaultValue::Reader::getNone() const {
   KJ_IREQUIRE((which() == Declaration::Param::DefaultValue::NONE),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Param::DefaultValue::Builder::getNone() {
+inline  ::shark::Void Declaration::Param::DefaultValue::Builder::getNone() {
   KJ_IREQUIRE((which() == Declaration::Param::DefaultValue::NONE),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Param::DefaultValue::Builder::setNone( ::capnp::Void value) {
+inline void Declaration::Param::DefaultValue::Builder::setNone( ::shark::Void value) {
   _builder.setDataField<Declaration::Param::DefaultValue::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::Param::DefaultValue::NONE);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::Param::DefaultValue::NONE);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Param::DefaultValue::Reader::isValue() const {
@@ -5996,58 +5996,58 @@ inline bool Declaration::Param::DefaultValue::Builder::isValue() {
 inline bool Declaration::Param::DefaultValue::Reader::hasValue() const {
   if (which() != Declaration::Param::DefaultValue::VALUE) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<3>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Param::DefaultValue::Builder::hasValue() {
   if (which() != Declaration::Param::DefaultValue::VALUE) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<3>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Declaration::Param::DefaultValue::Reader::getValue() const {
+inline  ::shark::compiler::Expression::Reader Declaration::Param::DefaultValue::Reader::getValue() const {
   KJ_IREQUIRE((which() == Declaration::Param::DefaultValue::VALUE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Param::DefaultValue::Builder::getValue() {
+inline  ::shark::compiler::Expression::Builder Declaration::Param::DefaultValue::Builder::getValue() {
   KJ_IREQUIRE((which() == Declaration::Param::DefaultValue::VALUE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
-inline void Declaration::Param::DefaultValue::Builder::setValue( ::capnp::compiler::Expression::Reader value) {
+inline void Declaration::Param::DefaultValue::Builder::setValue( ::shark::compiler::Expression::Reader value) {
   _builder.setDataField<Declaration::Param::DefaultValue::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::Param::DefaultValue::VALUE);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::Param::DefaultValue::VALUE);
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Param::DefaultValue::Builder::initValue() {
+inline  ::shark::compiler::Expression::Builder Declaration::Param::DefaultValue::Builder::initValue() {
   _builder.setDataField<Declaration::Param::DefaultValue::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::Param::DefaultValue::VALUE);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::Param::DefaultValue::VALUE);
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
 inline void Declaration::Param::DefaultValue::Builder::adoptValue(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
   _builder.setDataField<Declaration::Param::DefaultValue::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::Param::DefaultValue::VALUE);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::Param::DefaultValue::VALUE);
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Declaration::Param::DefaultValue::Builder::disownValue() {
+inline ::shark::Orphan< ::shark::compiler::Expression> Declaration::Param::DefaultValue::Builder::disownValue() {
   KJ_IREQUIRE((which() == Declaration::Param::DefaultValue::VALUE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
 
-inline  ::capnp::compiler::Declaration::Id::Which Declaration::Id::Reader::which() const {
+inline  ::shark::compiler::Declaration::Id::Which Declaration::Id::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::compiler::Declaration::Id::Which Declaration::Id::Builder::which() {
+inline  ::shark::compiler::Declaration::Id::Which Declaration::Id::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Id::Reader::isUnspecified() const {
@@ -6056,24 +6056,24 @@ inline bool Declaration::Id::Reader::isUnspecified() const {
 inline bool Declaration::Id::Builder::isUnspecified() {
   return which() == Declaration::Id::UNSPECIFIED;
 }
-inline  ::capnp::Void Declaration::Id::Reader::getUnspecified() const {
+inline  ::shark::Void Declaration::Id::Reader::getUnspecified() const {
   KJ_IREQUIRE((which() == Declaration::Id::UNSPECIFIED),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Id::Builder::getUnspecified() {
+inline  ::shark::Void Declaration::Id::Builder::getUnspecified() {
   KJ_IREQUIRE((which() == Declaration::Id::UNSPECIFIED),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Id::Builder::setUnspecified( ::capnp::Void value) {
+inline void Declaration::Id::Builder::setUnspecified( ::shark::Void value) {
   _builder.setDataField<Declaration::Id::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::Id::UNSPECIFIED);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::Id::UNSPECIFIED);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Id::Reader::isUid() const {
@@ -6085,49 +6085,49 @@ inline bool Declaration::Id::Builder::isUid() {
 inline bool Declaration::Id::Reader::hasUid() const {
   if (which() != Declaration::Id::UID) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Id::Builder::hasUid() {
   if (which() != Declaration::Id::UID) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::LocatedInteger::Reader Declaration::Id::Reader::getUid() const {
+inline  ::shark::compiler::LocatedInteger::Reader Declaration::Id::Reader::getUid() const {
   KJ_IREQUIRE((which() == Declaration::Id::UID),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::LocatedInteger::Builder Declaration::Id::Builder::getUid() {
+inline  ::shark::compiler::LocatedInteger::Builder Declaration::Id::Builder::getUid() {
   KJ_IREQUIRE((which() == Declaration::Id::UID),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline void Declaration::Id::Builder::setUid( ::capnp::compiler::LocatedInteger::Reader value) {
+inline void Declaration::Id::Builder::setUid( ::shark::compiler::LocatedInteger::Reader value) {
   _builder.setDataField<Declaration::Id::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::Id::UID);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::Id::UID);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::LocatedInteger::Builder Declaration::Id::Builder::initUid() {
+inline  ::shark::compiler::LocatedInteger::Builder Declaration::Id::Builder::initUid() {
   _builder.setDataField<Declaration::Id::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::Id::UID);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::Id::UID);
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::init(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 inline void Declaration::Id::Builder::adoptUid(
-    ::capnp::Orphan< ::capnp::compiler::LocatedInteger>&& value) {
+    ::shark::Orphan< ::shark::compiler::LocatedInteger>&& value) {
   _builder.setDataField<Declaration::Id::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::Id::UID);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::Id::UID);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::LocatedInteger> Declaration::Id::Builder::disownUid() {
+inline ::shark::Orphan< ::shark::compiler::LocatedInteger> Declaration::Id::Builder::disownUid() {
   KJ_IREQUIRE((which() == Declaration::Id::UID),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Id::Reader::isOrdinal() const {
@@ -6139,205 +6139,205 @@ inline bool Declaration::Id::Builder::isOrdinal() {
 inline bool Declaration::Id::Reader::hasOrdinal() const {
   if (which() != Declaration::Id::ORDINAL) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Id::Builder::hasOrdinal() {
   if (which() != Declaration::Id::ORDINAL) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::LocatedInteger::Reader Declaration::Id::Reader::getOrdinal() const {
+inline  ::shark::compiler::LocatedInteger::Reader Declaration::Id::Reader::getOrdinal() const {
   KJ_IREQUIRE((which() == Declaration::Id::ORDINAL),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::LocatedInteger::Builder Declaration::Id::Builder::getOrdinal() {
+inline  ::shark::compiler::LocatedInteger::Builder Declaration::Id::Builder::getOrdinal() {
   KJ_IREQUIRE((which() == Declaration::Id::ORDINAL),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline void Declaration::Id::Builder::setOrdinal( ::capnp::compiler::LocatedInteger::Reader value) {
+inline void Declaration::Id::Builder::setOrdinal( ::shark::compiler::LocatedInteger::Reader value) {
   _builder.setDataField<Declaration::Id::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::Id::ORDINAL);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::Id::ORDINAL);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::LocatedInteger::Builder Declaration::Id::Builder::initOrdinal() {
+inline  ::shark::compiler::LocatedInteger::Builder Declaration::Id::Builder::initOrdinal() {
   _builder.setDataField<Declaration::Id::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::Id::ORDINAL);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::Id::ORDINAL);
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::init(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 inline void Declaration::Id::Builder::adoptOrdinal(
-    ::capnp::Orphan< ::capnp::compiler::LocatedInteger>&& value) {
+    ::shark::Orphan< ::shark::compiler::LocatedInteger>&& value) {
   _builder.setDataField<Declaration::Id::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Declaration::Id::ORDINAL);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, Declaration::Id::ORDINAL);
+  ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::LocatedInteger> Declaration::Id::Builder::disownOrdinal() {
+inline ::shark::Orphan< ::shark::compiler::LocatedInteger> Declaration::Id::Builder::disownOrdinal() {
   KJ_IREQUIRE((which() == Declaration::Id::ORDINAL),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedInteger>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::LocatedInteger>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Using::Reader::hasTarget() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Using::Builder::hasTarget() {
   return !_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Declaration::Using::Reader::getTarget() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Reader Declaration::Using::Reader::getTarget() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Using::Builder::getTarget() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::Using::Builder::getTarget() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::Expression::Pipeline Declaration::Using::Pipeline::getTarget() {
-  return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(5));
+inline  ::shark::compiler::Expression::Pipeline Declaration::Using::Pipeline::getTarget() {
+  return  ::shark::compiler::Expression::Pipeline(_typeless.getPointerField(5));
 }
 #endif  // !SHARK_LITE
-inline void Declaration::Using::Builder::setTarget( ::capnp::compiler::Expression::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), value);
+inline void Declaration::Using::Builder::setTarget( ::shark::compiler::Expression::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Using::Builder::initTarget() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::Using::Builder::initTarget() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 inline void Declaration::Using::Builder::adoptTarget(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Declaration::Using::Builder::disownTarget() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::Expression> Declaration::Using::Builder::disownTarget() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Const::Reader::hasType() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Const::Builder::hasType() {
   return !_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Declaration::Const::Reader::getType() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Reader Declaration::Const::Reader::getType() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Const::Builder::getType() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::Const::Builder::getType() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::Expression::Pipeline Declaration::Const::Pipeline::getType() {
-  return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(5));
+inline  ::shark::compiler::Expression::Pipeline Declaration::Const::Pipeline::getType() {
+  return  ::shark::compiler::Expression::Pipeline(_typeless.getPointerField(5));
 }
 #endif  // !SHARK_LITE
-inline void Declaration::Const::Builder::setType( ::capnp::compiler::Expression::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), value);
+inline void Declaration::Const::Builder::setType( ::shark::compiler::Expression::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Const::Builder::initType() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::Const::Builder::initType() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 inline void Declaration::Const::Builder::adoptType(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Declaration::Const::Builder::disownType() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::Expression> Declaration::Const::Builder::disownType() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Const::Reader::hasValue() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<6>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Const::Builder::hasValue() {
   return !_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<6>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Declaration::Const::Reader::getValue() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Reader Declaration::Const::Reader::getValue() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Const::Builder::getValue() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::Const::Builder::getValue() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::Expression::Pipeline Declaration::Const::Pipeline::getValue() {
-  return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(6));
+inline  ::shark::compiler::Expression::Pipeline Declaration::Const::Pipeline::getValue() {
+  return  ::shark::compiler::Expression::Pipeline(_typeless.getPointerField(6));
 }
 #endif  // !SHARK_LITE
-inline void Declaration::Const::Builder::setValue( ::capnp::compiler::Expression::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS), value);
+inline void Declaration::Const::Builder::setValue( ::shark::compiler::Expression::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Const::Builder::initValue() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::Const::Builder::initValue() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS));
 }
 inline void Declaration::Const::Builder::adoptValue(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Declaration::Const::Builder::disownValue() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::Expression> Declaration::Const::Builder::disownValue() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Field::Reader::hasType() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Field::Builder::hasType() {
   return !_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Declaration::Field::Reader::getType() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Reader Declaration::Field::Reader::getType() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Field::Builder::getType() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::Field::Builder::getType() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::Expression::Pipeline Declaration::Field::Pipeline::getType() {
-  return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(5));
+inline  ::shark::compiler::Expression::Pipeline Declaration::Field::Pipeline::getType() {
+  return  ::shark::compiler::Expression::Pipeline(_typeless.getPointerField(5));
 }
 #endif  // !SHARK_LITE
-inline void Declaration::Field::Builder::setType( ::capnp::compiler::Expression::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), value);
+inline void Declaration::Field::Builder::setType( ::shark::compiler::Expression::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Field::Builder::initType() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::Field::Builder::initType() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 inline void Declaration::Field::Builder::adoptType(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Declaration::Field::Builder::disownType() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::Expression> Declaration::Field::Builder::disownType() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 
 inline typename Declaration::Field::DefaultValue::Reader Declaration::Field::Reader::getDefaultValue() const {
@@ -6352,17 +6352,17 @@ inline typename Declaration::Field::DefaultValue::Pipeline Declaration::Field::P
 }
 #endif  // !SHARK_LITE
 inline typename Declaration::Field::DefaultValue::Builder Declaration::Field::Builder::initDefaultValue() {
-  _builder.setDataField< ::uint16_t>(::capnp::bounded<6>() * ::capnp::ELEMENTS, 0);
-  _builder.getPointerField(::capnp::bounded<6>() * ::capnp::POINTERS).clear();
+  _builder.setDataField< ::uint16_t>(::shark::bounded<6>() * ::shark::ELEMENTS, 0);
+  _builder.getPointerField(::shark::bounded<6>() * ::shark::POINTERS).clear();
   return typename Declaration::Field::DefaultValue::Builder(_builder);
 }
-inline  ::capnp::compiler::Declaration::Field::DefaultValue::Which Declaration::Field::DefaultValue::Reader::which() const {
+inline  ::shark::compiler::Declaration::Field::DefaultValue::Which Declaration::Field::DefaultValue::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+      ::shark::bounded<6>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::compiler::Declaration::Field::DefaultValue::Which Declaration::Field::DefaultValue::Builder::which() {
+inline  ::shark::compiler::Declaration::Field::DefaultValue::Which Declaration::Field::DefaultValue::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+      ::shark::bounded<6>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Field::DefaultValue::Reader::isNone() const {
@@ -6371,24 +6371,24 @@ inline bool Declaration::Field::DefaultValue::Reader::isNone() const {
 inline bool Declaration::Field::DefaultValue::Builder::isNone() {
   return which() == Declaration::Field::DefaultValue::NONE;
 }
-inline  ::capnp::Void Declaration::Field::DefaultValue::Reader::getNone() const {
+inline  ::shark::Void Declaration::Field::DefaultValue::Reader::getNone() const {
   KJ_IREQUIRE((which() == Declaration::Field::DefaultValue::NONE),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Field::DefaultValue::Builder::getNone() {
+inline  ::shark::Void Declaration::Field::DefaultValue::Builder::getNone() {
   KJ_IREQUIRE((which() == Declaration::Field::DefaultValue::NONE),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Field::DefaultValue::Builder::setNone( ::capnp::Void value) {
+inline void Declaration::Field::DefaultValue::Builder::setNone( ::shark::Void value) {
   _builder.setDataField<Declaration::Field::DefaultValue::Which>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS, Declaration::Field::DefaultValue::NONE);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<6>() * ::shark::ELEMENTS, Declaration::Field::DefaultValue::NONE);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Field::DefaultValue::Reader::isValue() const {
@@ -6400,122 +6400,122 @@ inline bool Declaration::Field::DefaultValue::Builder::isValue() {
 inline bool Declaration::Field::DefaultValue::Reader::hasValue() const {
   if (which() != Declaration::Field::DefaultValue::VALUE) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<6>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Field::DefaultValue::Builder::hasValue() {
   if (which() != Declaration::Field::DefaultValue::VALUE) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<6>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Declaration::Field::DefaultValue::Reader::getValue() const {
+inline  ::shark::compiler::Expression::Reader Declaration::Field::DefaultValue::Reader::getValue() const {
   KJ_IREQUIRE((which() == Declaration::Field::DefaultValue::VALUE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Field::DefaultValue::Builder::getValue() {
+inline  ::shark::compiler::Expression::Builder Declaration::Field::DefaultValue::Builder::getValue() {
   KJ_IREQUIRE((which() == Declaration::Field::DefaultValue::VALUE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS));
 }
-inline void Declaration::Field::DefaultValue::Builder::setValue( ::capnp::compiler::Expression::Reader value) {
+inline void Declaration::Field::DefaultValue::Builder::setValue( ::shark::compiler::Expression::Reader value) {
   _builder.setDataField<Declaration::Field::DefaultValue::Which>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS, Declaration::Field::DefaultValue::VALUE);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS), value);
+      ::shark::bounded<6>() * ::shark::ELEMENTS, Declaration::Field::DefaultValue::VALUE);
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Field::DefaultValue::Builder::initValue() {
+inline  ::shark::compiler::Expression::Builder Declaration::Field::DefaultValue::Builder::initValue() {
   _builder.setDataField<Declaration::Field::DefaultValue::Which>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS, Declaration::Field::DefaultValue::VALUE);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS));
+      ::shark::bounded<6>() * ::shark::ELEMENTS, Declaration::Field::DefaultValue::VALUE);
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS));
 }
 inline void Declaration::Field::DefaultValue::Builder::adoptValue(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
   _builder.setDataField<Declaration::Field::DefaultValue::Which>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS, Declaration::Field::DefaultValue::VALUE);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<6>() * ::shark::ELEMENTS, Declaration::Field::DefaultValue::VALUE);
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Declaration::Field::DefaultValue::Builder::disownValue() {
+inline ::shark::Orphan< ::shark::compiler::Expression> Declaration::Field::DefaultValue::Builder::disownValue() {
   KJ_IREQUIRE((which() == Declaration::Field::DefaultValue::VALUE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Interface::Reader::hasSuperclasses() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Interface::Builder::hasSuperclasses() {
   return !_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Reader Declaration::Interface::Reader::getSuperclasses() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Reader Declaration::Interface::Reader::getSuperclasses() const {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
-inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Builder Declaration::Interface::Builder::getSuperclasses() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Builder Declaration::Interface::Builder::getSuperclasses() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
-inline void Declaration::Interface::Builder::setSuperclasses( ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), value);
+inline void Declaration::Interface::Builder::setSuperclasses( ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Builder Declaration::Interface::Builder::initSuperclasses(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), size);
+inline  ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>::Builder Declaration::Interface::Builder::initSuperclasses(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), size);
 }
 inline void Declaration::Interface::Builder::adoptSuperclasses(
-    ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>&& value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>> Declaration::Interface::Builder::disownSuperclasses() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>> Declaration::Interface::Builder::disownSuperclasses() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::compiler::Expression,  ::shark::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Method::Reader::hasParams() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Method::Builder::hasParams() {
   return !_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Declaration::ParamList::Reader Declaration::Method::Reader::getParams() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::get(_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Declaration::ParamList::Reader Declaration::Method::Reader::getParams() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration::ParamList>::get(_reader.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Declaration::ParamList::Builder Declaration::Method::Builder::getParams() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::get(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Declaration::ParamList::Builder Declaration::Method::Builder::getParams() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration::ParamList>::get(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::Declaration::ParamList::Pipeline Declaration::Method::Pipeline::getParams() {
-  return  ::capnp::compiler::Declaration::ParamList::Pipeline(_typeless.getPointerField(5));
+inline  ::shark::compiler::Declaration::ParamList::Pipeline Declaration::Method::Pipeline::getParams() {
+  return  ::shark::compiler::Declaration::ParamList::Pipeline(_typeless.getPointerField(5));
 }
 #endif  // !SHARK_LITE
-inline void Declaration::Method::Builder::setParams( ::capnp::compiler::Declaration::ParamList::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::set(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), value);
+inline void Declaration::Method::Builder::setParams( ::shark::compiler::Declaration::ParamList::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Declaration::ParamList>::set(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Declaration::ParamList::Builder Declaration::Method::Builder::initParams() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::init(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Declaration::ParamList::Builder Declaration::Method::Builder::initParams() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration::ParamList>::init(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 inline void Declaration::Method::Builder::adoptParams(
-    ::capnp::Orphan< ::capnp::compiler::Declaration::ParamList>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::adopt(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::Declaration::ParamList>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Declaration::ParamList>::adopt(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Declaration::ParamList> Declaration::Method::Builder::disownParams() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::disown(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::Declaration::ParamList> Declaration::Method::Builder::disownParams() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration::ParamList>::disown(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 
 inline typename Declaration::Method::Results::Reader Declaration::Method::Reader::getResults() const {
@@ -6530,17 +6530,17 @@ inline typename Declaration::Method::Results::Pipeline Declaration::Method::Pipe
 }
 #endif  // !SHARK_LITE
 inline typename Declaration::Method::Results::Builder Declaration::Method::Builder::initResults() {
-  _builder.setDataField< ::uint16_t>(::capnp::bounded<6>() * ::capnp::ELEMENTS, 0);
-  _builder.getPointerField(::capnp::bounded<6>() * ::capnp::POINTERS).clear();
+  _builder.setDataField< ::uint16_t>(::shark::bounded<6>() * ::shark::ELEMENTS, 0);
+  _builder.getPointerField(::shark::bounded<6>() * ::shark::POINTERS).clear();
   return typename Declaration::Method::Results::Builder(_builder);
 }
-inline  ::capnp::compiler::Declaration::Method::Results::Which Declaration::Method::Results::Reader::which() const {
+inline  ::shark::compiler::Declaration::Method::Results::Which Declaration::Method::Results::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+      ::shark::bounded<6>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::compiler::Declaration::Method::Results::Which Declaration::Method::Results::Builder::which() {
+inline  ::shark::compiler::Declaration::Method::Results::Which Declaration::Method::Results::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+      ::shark::bounded<6>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Method::Results::Reader::isNone() const {
@@ -6549,24 +6549,24 @@ inline bool Declaration::Method::Results::Reader::isNone() const {
 inline bool Declaration::Method::Results::Builder::isNone() {
   return which() == Declaration::Method::Results::NONE;
 }
-inline  ::capnp::Void Declaration::Method::Results::Reader::getNone() const {
+inline  ::shark::Void Declaration::Method::Results::Reader::getNone() const {
   KJ_IREQUIRE((which() == Declaration::Method::Results::NONE),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void Declaration::Method::Results::Builder::getNone() {
+inline  ::shark::Void Declaration::Method::Results::Builder::getNone() {
   KJ_IREQUIRE((which() == Declaration::Method::Results::NONE),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void Declaration::Method::Results::Builder::setNone( ::capnp::Void value) {
+inline void Declaration::Method::Results::Builder::setNone( ::shark::Void value) {
   _builder.setDataField<Declaration::Method::Results::Which>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS, Declaration::Method::Results::NONE);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<6>() * ::shark::ELEMENTS, Declaration::Method::Results::NONE);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Method::Results::Reader::isExplicit() const {
@@ -6578,295 +6578,295 @@ inline bool Declaration::Method::Results::Builder::isExplicit() {
 inline bool Declaration::Method::Results::Reader::hasExplicit() const {
   if (which() != Declaration::Method::Results::EXPLICIT) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<6>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Method::Results::Builder::hasExplicit() {
   if (which() != Declaration::Method::Results::EXPLICIT) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<6>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Declaration::ParamList::Reader Declaration::Method::Results::Reader::getExplicit() const {
+inline  ::shark::compiler::Declaration::ParamList::Reader Declaration::Method::Results::Reader::getExplicit() const {
   KJ_IREQUIRE((which() == Declaration::Method::Results::EXPLICIT),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::get(_reader.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration::ParamList>::get(_reader.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Declaration::ParamList::Builder Declaration::Method::Results::Builder::getExplicit() {
+inline  ::shark::compiler::Declaration::ParamList::Builder Declaration::Method::Results::Builder::getExplicit() {
   KJ_IREQUIRE((which() == Declaration::Method::Results::EXPLICIT),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::get(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration::ParamList>::get(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS));
 }
-inline void Declaration::Method::Results::Builder::setExplicit( ::capnp::compiler::Declaration::ParamList::Reader value) {
+inline void Declaration::Method::Results::Builder::setExplicit( ::shark::compiler::Declaration::ParamList::Reader value) {
   _builder.setDataField<Declaration::Method::Results::Which>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS, Declaration::Method::Results::EXPLICIT);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::set(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS), value);
+      ::shark::bounded<6>() * ::shark::ELEMENTS, Declaration::Method::Results::EXPLICIT);
+  ::shark::_::PointerHelpers< ::shark::compiler::Declaration::ParamList>::set(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Declaration::ParamList::Builder Declaration::Method::Results::Builder::initExplicit() {
+inline  ::shark::compiler::Declaration::ParamList::Builder Declaration::Method::Results::Builder::initExplicit() {
   _builder.setDataField<Declaration::Method::Results::Which>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS, Declaration::Method::Results::EXPLICIT);
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::init(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS));
+      ::shark::bounded<6>() * ::shark::ELEMENTS, Declaration::Method::Results::EXPLICIT);
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration::ParamList>::init(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS));
 }
 inline void Declaration::Method::Results::Builder::adoptExplicit(
-    ::capnp::Orphan< ::capnp::compiler::Declaration::ParamList>&& value) {
+    ::shark::Orphan< ::shark::compiler::Declaration::ParamList>&& value) {
   _builder.setDataField<Declaration::Method::Results::Which>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS, Declaration::Method::Results::EXPLICIT);
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::adopt(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<6>() * ::shark::ELEMENTS, Declaration::Method::Results::EXPLICIT);
+  ::shark::_::PointerHelpers< ::shark::compiler::Declaration::ParamList>::adopt(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Declaration::ParamList> Declaration::Method::Results::Builder::disownExplicit() {
+inline ::shark::Orphan< ::shark::compiler::Declaration::ParamList> Declaration::Method::Results::Builder::disownExplicit() {
   KJ_IREQUIRE((which() == Declaration::Method::Results::EXPLICIT),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::disown(_builder.getPointerField(
-      ::capnp::bounded<6>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration::ParamList>::disown(_builder.getPointerField(
+      ::shark::bounded<6>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Annotation::Reader::hasType() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
 inline bool Declaration::Annotation::Builder::hasType() {
   return !_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<5>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Expression::Reader Declaration::Annotation::Reader::getType() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_reader.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Reader Declaration::Annotation::Reader::getType() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_reader.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Annotation::Builder::getType() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::Annotation::Builder::getType() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::get(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::Expression::Pipeline Declaration::Annotation::Pipeline::getType() {
-  return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(5));
+inline  ::shark::compiler::Expression::Pipeline Declaration::Annotation::Pipeline::getType() {
+  return  ::shark::compiler::Expression::Pipeline(_typeless.getPointerField(5));
 }
 #endif  // !SHARK_LITE
-inline void Declaration::Annotation::Builder::setType( ::capnp::compiler::Expression::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), value);
+inline void Declaration::Annotation::Builder::setType( ::shark::compiler::Expression::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::set(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Expression::Builder Declaration::Annotation::Builder::initType() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::init(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Expression::Builder Declaration::Annotation::Builder::initType() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::init(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 inline void Declaration::Annotation::Builder::adoptType(
-    ::capnp::Orphan< ::capnp::compiler::Expression>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::adopt(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::Expression>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Expression>::adopt(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Expression> Declaration::Annotation::Builder::disownType() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::disown(_builder.getPointerField(
-      ::capnp::bounded<5>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::Expression> Declaration::Annotation::Builder::disownType() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Expression>::disown(_builder.getPointerField(
+      ::shark::bounded<5>() * ::shark::POINTERS));
 }
 
 inline bool Declaration::Annotation::Reader::getTargetsFile() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<96>() * ::capnp::ELEMENTS);
+      ::shark::bounded<96>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Annotation::Builder::getTargetsFile() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<96>() * ::capnp::ELEMENTS);
+      ::shark::bounded<96>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Annotation::Builder::setTargetsFile(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<96>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<96>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Annotation::Reader::getTargetsConst() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<97>() * ::capnp::ELEMENTS);
+      ::shark::bounded<97>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Annotation::Builder::getTargetsConst() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<97>() * ::capnp::ELEMENTS);
+      ::shark::bounded<97>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Annotation::Builder::setTargetsConst(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<97>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<97>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Annotation::Reader::getTargetsEnum() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<98>() * ::capnp::ELEMENTS);
+      ::shark::bounded<98>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Annotation::Builder::getTargetsEnum() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<98>() * ::capnp::ELEMENTS);
+      ::shark::bounded<98>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Annotation::Builder::setTargetsEnum(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<98>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<98>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Annotation::Reader::getTargetsEnumerant() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<99>() * ::capnp::ELEMENTS);
+      ::shark::bounded<99>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Annotation::Builder::getTargetsEnumerant() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<99>() * ::capnp::ELEMENTS);
+      ::shark::bounded<99>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Annotation::Builder::setTargetsEnumerant(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<99>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<99>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Annotation::Reader::getTargetsStruct() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<100>() * ::capnp::ELEMENTS);
+      ::shark::bounded<100>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Annotation::Builder::getTargetsStruct() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<100>() * ::capnp::ELEMENTS);
+      ::shark::bounded<100>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Annotation::Builder::setTargetsStruct(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<100>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<100>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Annotation::Reader::getTargetsField() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<101>() * ::capnp::ELEMENTS);
+      ::shark::bounded<101>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Annotation::Builder::getTargetsField() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<101>() * ::capnp::ELEMENTS);
+      ::shark::bounded<101>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Annotation::Builder::setTargetsField(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<101>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<101>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Annotation::Reader::getTargetsUnion() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<102>() * ::capnp::ELEMENTS);
+      ::shark::bounded<102>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Annotation::Builder::getTargetsUnion() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<102>() * ::capnp::ELEMENTS);
+      ::shark::bounded<102>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Annotation::Builder::setTargetsUnion(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<102>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<102>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Annotation::Reader::getTargetsGroup() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<103>() * ::capnp::ELEMENTS);
+      ::shark::bounded<103>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Annotation::Builder::getTargetsGroup() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<103>() * ::capnp::ELEMENTS);
+      ::shark::bounded<103>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Annotation::Builder::setTargetsGroup(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<103>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<103>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Annotation::Reader::getTargetsInterface() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<104>() * ::capnp::ELEMENTS);
+      ::shark::bounded<104>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Annotation::Builder::getTargetsInterface() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<104>() * ::capnp::ELEMENTS);
+      ::shark::bounded<104>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Annotation::Builder::setTargetsInterface(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<104>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<104>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Annotation::Reader::getTargetsMethod() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<105>() * ::capnp::ELEMENTS);
+      ::shark::bounded<105>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Annotation::Builder::getTargetsMethod() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<105>() * ::capnp::ELEMENTS);
+      ::shark::bounded<105>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Annotation::Builder::setTargetsMethod(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<105>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<105>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Annotation::Reader::getTargetsParam() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<106>() * ::capnp::ELEMENTS);
+      ::shark::bounded<106>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Annotation::Builder::getTargetsParam() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<106>() * ::capnp::ELEMENTS);
+      ::shark::bounded<106>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Annotation::Builder::setTargetsParam(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<106>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<106>() * ::shark::ELEMENTS, value);
 }
 
 inline bool Declaration::Annotation::Reader::getTargetsAnnotation() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<107>() * ::capnp::ELEMENTS);
+      ::shark::bounded<107>() * ::shark::ELEMENTS);
 }
 
 inline bool Declaration::Annotation::Builder::getTargetsAnnotation() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<107>() * ::capnp::ELEMENTS);
+      ::shark::bounded<107>() * ::shark::ELEMENTS);
 }
 inline void Declaration::Annotation::Builder::setTargetsAnnotation(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<107>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<107>() * ::shark::ELEMENTS, value);
 }
 
 inline bool ParsedFile::Reader::hasRoot() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool ParsedFile::Builder::hasRoot() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::compiler::Declaration::Reader ParsedFile::Reader::getRoot() const {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Declaration::Reader ParsedFile::Reader::getRoot() const {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::compiler::Declaration::Builder ParsedFile::Builder::getRoot() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Declaration::Builder ParsedFile::Builder::getRoot() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::compiler::Declaration::Pipeline ParsedFile::Pipeline::getRoot() {
-  return  ::capnp::compiler::Declaration::Pipeline(_typeless.getPointerField(0));
+inline  ::shark::compiler::Declaration::Pipeline ParsedFile::Pipeline::getRoot() {
+  return  ::shark::compiler::Declaration::Pipeline(_typeless.getPointerField(0));
 }
 #endif  // !SHARK_LITE
-inline void ParsedFile::Builder::setRoot( ::capnp::compiler::Declaration::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void ParsedFile::Builder::setRoot( ::shark::compiler::Declaration::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Declaration>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::compiler::Declaration::Builder ParsedFile::Builder::initRoot() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::compiler::Declaration::Builder ParsedFile::Builder::initRoot() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void ParsedFile::Builder::adoptRoot(
-    ::capnp::Orphan< ::capnp::compiler::Declaration>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::compiler::Declaration>&& value) {
+  ::shark::_::PointerHelpers< ::shark::compiler::Declaration>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::compiler::Declaration> ParsedFile::Builder::disownRoot() {
-  return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::compiler::Declaration> ParsedFile::Builder::disownRoot() {
+  return ::shark::_::PointerHelpers< ::shark::compiler::Declaration>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 }  // namespace

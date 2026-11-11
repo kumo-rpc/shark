@@ -21,7 +21,7 @@
 
 #include "reconnect.h"
 
-namespace capnp {
+namespace shark {
 
 namespace {
 
@@ -158,4 +158,4 @@ Capability::Client autoReconnect(kj::Function<Capability::Client()> connect) {
 Capability::Client lazyAutoReconnect(kj::Function<Capability::Client()> connect) {
   return Capability::Client(kj::refcounted<ReconnectHook>(kj::mv(connect), true));
 }
-}  // namespace capnp
+}  // namespace shark

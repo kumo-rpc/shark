@@ -27,7 +27,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 
 template <typename T>
@@ -543,7 +543,7 @@ private:
   friend struct _::PointerHelpers;
 };
 
-}  // namespace capnp
+}  // namespace shark
 
 #ifdef KJ_STD_COMPAT
 #include "compat/std-iterator.h"

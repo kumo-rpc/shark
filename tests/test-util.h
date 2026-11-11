@@ -35,7 +35,7 @@ SHARK_BEGIN_HEADER
 
 // TODO(cleanup): Auto-generate stringification functions for union discriminants.
 namespace capnproto_test {
-namespace capnp {
+namespace shark {
 namespace test {
 inline kj::String KJ_STRINGIFY(TestUnion::Union0::Which which) {
   return kj::str(static_cast<uint16_t>(which));
@@ -59,29 +59,29 @@ inline kj::String KJ_STRINGIFY(TestInterleavedGroups::Group1::Which which) {
   return kj::str(static_cast<uint16_t>(which));
 }
 }  // namespace test
-}  // namespace capnp
+}  // namespace shark
 }  // namespace capnproto_test
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 
 inline Data::Reader data(const char* str) {
   return Data::Reader(reinterpret_cast<const byte*>(str), strlen(str));
 }
 
-namespace test = capnproto_test::capnp::test;
+namespace test = capnproto_test::shark::test;
 
 // We don't use "using namespace" to pull these in because then things would still compile
 // correctly if they were generated in the global namespace.
-using ::capnproto_test::capnp::test::TestAllTypes;
-using ::capnproto_test::capnp::test::TestDefaults;
-using ::capnproto_test::capnp::test::TestEnum;
-using ::capnproto_test::capnp::test::TestUnion;
-using ::capnproto_test::capnp::test::TestUnionDefaults;
-using ::capnproto_test::capnp::test::TestNestedTypes;
-using ::capnproto_test::capnp::test::TestUsing;
-using ::capnproto_test::capnp::test::TestListDefaults;
-using ::capnproto_test::capnp::test::TestInterleavedGroups;
+using ::capnproto_test::shark::test::TestAllTypes;
+using ::capnproto_test::shark::test::TestDefaults;
+using ::capnproto_test::shark::test::TestEnum;
+using ::capnproto_test::shark::test::TestUnion;
+using ::capnproto_test::shark::test::TestUnionDefaults;
+using ::capnproto_test::shark::test::TestNestedTypes;
+using ::capnproto_test::shark::test::TestUsing;
+using ::capnproto_test::shark::test::TestListDefaults;
+using ::capnproto_test::shark::test::TestInterleavedGroups;
 
 void initTestMessage(TestAllTypes::Builder builder);
 void initTestMessage(TestDefaults::Builder builder);
@@ -362,6 +362,6 @@ public:
 #endif  // !SHARK_LITE
 
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

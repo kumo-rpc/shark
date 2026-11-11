@@ -34,7 +34,7 @@
 
 using namespace std;
 
-namespace capnp {
+namespace shark {
 namespace benchmark {
 namespace runner {
 
@@ -641,7 +641,7 @@ int main(int argc, char* argv[]) {
 
 }  // namespace runner
 }  // namespace benchmark
-}  // namespace capnp
+}  // namespace shark
 
 int main(int argc, char* argv[]) {
   return capnp::benchmark::runner::main(argc, argv);

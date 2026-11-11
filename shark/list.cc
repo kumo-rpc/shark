@@ -21,6 +21,6 @@
 
 #include "list.h"
 
-namespace capnp {
+namespace shark {
 
-}  // namespace capnp
+}  // namespace shark

@@ -25,7 +25,7 @@
 #include <shark/base/main.h>
 #include <unistd.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {
 namespace {
 
@@ -47,7 +47,7 @@ public:
   }
 
   kj::MainBuilder::Validity run() {
-    capnp::StreamFdMessageReader reader(STDIN_FILENO);
+    shark::StreamFdMessageReader reader(STDIN_FILENO);
     KJ_IF_MAYBE(e, kj::runCatchingExceptions([&]() {
       checkTestMessage(reader.getRoot<TestAllTypes>());
     })) {
@@ -67,7 +67,7 @@ public:
   }
 
   kj::MainBuilder::Validity runLists() {
-    capnp::StreamFdMessageReader reader(STDIN_FILENO);
+    shark::StreamFdMessageReader reader(STDIN_FILENO);
     KJ_IF_MAYBE(e, kj::runCatchingExceptions([&]() {
       kj::str(reader.getRoot<test::TestLists>());
     })) {
@@ -79,28 +79,28 @@ public:
   kj::MainBuilder::Validity canonicalize() {
     // (Test case contributed by David Renshaw.)
 
-    kj::Array<capnp::word> canonical;
+    kj::Array<shark::word> canonical;
     bool equal = false;
     KJ_IF_MAYBE(e, kj::runCatchingExceptions([&]() {
-      capnp::ReaderOptions options;
+      shark::ReaderOptions options;
 
       // The default traversal limit of 8 * 1024 * 1024 causes
       // AFL to think that it has found "hang" bugs.
       options.traversalLimitInWords = 8 * 1024;
 
-      capnp::StreamFdMessageReader message(0, options); // read from stdin
+      shark::StreamFdMessageReader message(0, options); // read from stdin
       TestAllTypes::Reader myStruct = message.getRoot<TestAllTypes>();
-      canonical = capnp::canonicalize(myStruct);
+      canonical = shark::canonicalize(myStruct);
 
-      kj::ArrayPtr<const capnp::word> segments[1] = {canonical.asPtr()};
-      capnp::SegmentArrayMessageReader reader(kj::arrayPtr(segments, 1));
+      kj::ArrayPtr<const shark::word> segments[1] = {canonical.asPtr()};
+      shark::SegmentArrayMessageReader reader(kj::arrayPtr(segments, 1));
 
-      auto originalAny = message.getRoot<capnp::AnyPointer>();
+      auto originalAny = message.getRoot<shark::AnyPointer>();
 
       // Discard cases where the original message is null.
       KJ_ASSERT(!originalAny.isNull());
 
-      equal = originalAny == reader.getRoot<capnp::AnyPointer>();
+      equal = originalAny == reader.getRoot<shark::AnyPointer>();
     })) {
       // Probably some kind of decoding exception.
       KJ_LOG(ERROR, "threw");
@@ -109,17 +109,17 @@ public:
 
     KJ_ASSERT(equal);
 
-    kj::ArrayPtr<const capnp::word> segments[1] = {canonical.asPtr()};
-    capnp::SegmentArrayMessageReader reader(kj::arrayPtr(segments, 1));
+    kj::ArrayPtr<const shark::word> segments[1] = {canonical.asPtr()};
+    shark::SegmentArrayMessageReader reader(kj::arrayPtr(segments, 1));
     KJ_ASSERT(reader.isCanonical());
 
-    kj::Array<capnp::word> canonical2;
+    kj::Array<shark::word> canonical2;
     {
-      capnp::ReaderOptions options;
+      shark::ReaderOptions options;
       options.traversalLimitInWords = 8 * 1024;
 
       TestAllTypes::Reader myStruct = reader.getRoot<TestAllTypes>();
-      canonical2 = capnp::canonicalize(myStruct);
+      canonical2 = shark::canonicalize(myStruct);
     }
 
     KJ_ASSERT(canonical.size() == canonical2.size());
@@ -138,6 +138,6 @@ private:
 
 }  // namespace
 }  // namespace _
-}  // namespace capnp
+}  // namespace shark
 
-KJ_MAIN(capnp::_::AflTestMain);
+KJ_MAIN(shark::_::AflTestMain);

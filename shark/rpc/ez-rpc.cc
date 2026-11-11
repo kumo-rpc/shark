@@ -27,7 +27,7 @@
 #include <shark/base/threadlocal.h>
 #include <shark/rpc/rpc.sk.h>
 
-namespace capnp {
+namespace shark {
 
 KJ_THREADLOCAL_PTR(EzRpcContext) threadEzContext = nullptr;
 
@@ -365,4 +365,4 @@ kj::LowLevelAsyncIoProvider& EzRpcServer::getLowLevelIoProvider() {
   return impl->context->getLowLevelIoProvider();
 }
 
-}  // namespace capnp
+}  // namespace shark

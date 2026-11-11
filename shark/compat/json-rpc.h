@@ -30,7 +30,7 @@ SHARK_BEGIN_HEADER
 
 namespace kj { class HttpInputStream; }
 
-namespace capnp {
+namespace shark {
 
 class JsonRpc: private kj::TaskSet::ErrorHandler {
   // An implementation of JSON-RPC 2.0: https://www.jsonrpc.org/specification
@@ -111,6 +111,6 @@ private:
   kj::ArrayPtr<const byte> parts[2];
 };
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

@@ -23,7 +23,7 @@
 #include <shark/base/debug.h>
 #include <shark/base/parse/char.h>
 
-namespace capnp {
+namespace shark {
     namespace compiler {
 
         namespace p = kj::parse;
@@ -359,4 +359,4 @@ namespace capnp {
         Lexer::~Lexer() noexcept(false) { }
 
     } // namespace compiler
-} // namespace capnp
+} // namespace shark

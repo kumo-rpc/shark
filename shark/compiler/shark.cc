@@ -74,7 +74,7 @@
 #define VERSION "(unknown)"
 #endif
 
-namespace capnp {
+namespace shark {
     namespace compiler {
 
         static const char VERSION_STRING[] = "Cap'n Proto version " VERSION;
@@ -191,8 +191,8 @@ namespace capnp {
                     .addOption({ 'p', "packed" }, KJ_BIND_METHOD(*this, codePacked),
                         "Expect the input to be packed using standard Cap'n Proto packing, which "
                         "deflates zero-valued bytes.  (This reads messages written with "
-                        "capnp::writePackedMessage*() from <shark/serialize-packed.h>.  Do not use "
-                        "this for messages written with capnp::writeMessage*() from "
+                        "shark::writePackedMessage*() from <shark/serialize-packed.h>.  Do not use "
+                        "this for messages written with shark::writeMessage*() from "
                         "<shark/serialize.h>.)")
                     .addOption({ "short" }, KJ_BIND_METHOD(*this, printShort),
                         "Print in short (non-pretty) format.  Each message will be printed on one "
@@ -233,8 +233,8 @@ namespace capnp {
                     .addOption({ 'p', "packed" }, KJ_BIND_METHOD(*this, codePacked),
                         "Pack the output message with standard Cap'n Proto packing, which "
                         "deflates zero-valued bytes.  (This writes messages using "
-                        "capnp::writePackedMessage() from <shark/serialize-packed.h>.  Without "
-                        "this, capnp::writeMessage() from <shark/serialize.h> is used.)")
+                        "shark::writePackedMessage() from <shark/serialize-packed.h>.  Without "
+                        "this, shark::writeMessage() from <shark/serialize.h> is used.)")
                     .addOptionWithArg({ "segment-size" }, KJ_BIND_METHOD(*this, setSegmentSize), "<n>",
                         "Sets the preferred segment size on the MallocMessageBuilder to <n> "
                         "words and turns off heuristic growth.  This flag is mainly useful "
@@ -1090,11 +1090,11 @@ namespace capnp {
 
                 switch (convertFrom) {
                 case Format::BINARY: {
-                    capnp::InputStreamMessageReader message(input, options);
+                    shark::InputStreamMessageReader message(input, options);
                     return writeConversion(message.getRoot<AnyStruct>(), output);
                 }
                 case Format::PACKED: {
-                    capnp::PackedMessageReader message(input, options);
+                    shark::PackedMessageReader message(input, options);
                     return writeConversion(message.getRoot<AnyStruct>(), output);
                 }
                 case Format::FLAT:
@@ -1120,7 +1120,7 @@ namespace capnp {
 
                     auto words = kj::heapArray<word>(computeUnpackedSizeInWords(allBytes));
                     kj::ArrayInputStream input(allBytes);
-                    capnp::_::PackedInputStream unpacker(input);
+                    shark::_::PackedInputStream unpacker(input);
                     unpacker.read(words.asBytes().begin(), words.asBytes().size());
                     word dummy;
                     KJ_ASSERT(unpacker.tryRead(&dummy, sizeof(dummy), sizeof(dummy)) == 0);
@@ -1160,7 +1160,7 @@ namespace capnp {
                         segmentSize == 0 ? SUGGESTED_FIRST_SEGMENT_WORDS : segmentSize,
                         segmentSize == 0 ? SUGGESTED_ALLOCATION_STRATEGY : AllocationStrategy::FIXED_SIZE);
                     message.setRoot(reader);
-                    capnp::writeMessage(output, message);
+                    shark::writeMessage(output, message);
                     return;
                 }
                 case Format::PACKED: {
@@ -1168,7 +1168,7 @@ namespace capnp {
                         segmentSize == 0 ? SUGGESTED_FIRST_SEGMENT_WORDS : segmentSize,
                         segmentSize == 0 ? SUGGESTED_ALLOCATION_STRATEGY : AllocationStrategy::FIXED_SIZE);
                     message.setRoot(reader);
-                    capnp::writePackedMessage(output, message);
+                    shark::writePackedMessage(output, message);
                     return;
                 }
                 case Format::FLAT: {
@@ -1183,7 +1183,7 @@ namespace capnp {
                     memset(words.begin(), 0, words.asBytes().size());
                     copyToUnchecked(reader, words);
                     kj::BufferedOutputStreamWrapper buffered(output);
-                    capnp::_::PackedOutputStream packed(buffered);
+                    shark::_::PackedOutputStream packed(buffered);
                     packed.write(words.begin(), words.asBytes().size());
                     return;
                 }
@@ -1288,8 +1288,8 @@ namespace capnp {
 
                 CliArgumentErrorReporter errorReporter;
 
-                capnp::MallocMessageBuilder tokenArena;
-                auto lexedTokens = tokenArena.initRoot<capnp::compiler::LexedTokens>();
+                shark::MallocMessageBuilder tokenArena;
+                auto lexedTokens = tokenArena.initRoot<shark::compiler::LexedTokens>();
                 lex(input, lexedTokens, errorReporter);
 
                 CapnpParser parser(tokenArena.getOrphanage(), errorReporter);
@@ -2088,7 +2088,7 @@ namespace capnp {
                     // are ones which we know do not produce output files. This is a hack.
                     for (auto& output : outputs) {
                         auto name = kj::str(output.name);
-                        if (name != "-" && name != "capnp") {
+                        if (name != "-" && name != "shark") {
                             context.warning(kj::str(pathStr,
                                 ": File is not in the current directory and does not match any prefix defined with "
                                 "--src-prefix. Please pass an appropriate --src-prefix so I can figure out where to "
@@ -2115,6 +2115,6 @@ namespace capnp {
         };
 
     } // namespace compiler
-} // namespace capnp
+} // namespace shark
 
-KJ_MAIN(capnp::compiler::CompilerMain);
+KJ_MAIN(shark::compiler::CompilerMain);

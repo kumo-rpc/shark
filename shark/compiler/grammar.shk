@@ -28,7 +28,7 @@
 
 using Cxx = import "/shark/c++.shk";
 
-$Cxx.namespace("capnp::compiler");
+$Cxx.namespace("shark::compiler");
 
 # TODO(someday):  Here's a case where parameterized types might be nice, but note that it would
 #   need to support primitive parameters...

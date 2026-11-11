@@ -28,7 +28,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
     namespace compiler {
 
         bool lex(kj::ArrayPtr<const char> input, LexedStatements::Builder result,
@@ -101,6 +101,6 @@ namespace capnp {
         };
 
     } // namespace compiler
-} // namespace capnp
+} // namespace shark
 
 SHARK_END_HEADER

@@ -26,7 +26,7 @@
 #include <stdlib.h>
 #include <string>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -587,4 +587,4 @@ TEST(Packed, RoundTripHugeStringEvenSegmentCountLazy) {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

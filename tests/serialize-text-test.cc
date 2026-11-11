@@ -28,7 +28,7 @@
 
 #include <tests/test.sk.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -93,7 +93,7 @@ KJ_TEST("TextCodec TestListDefaults") {
 }
 
 KJ_TEST("TextCodec raw text") {
-  using TestType = capnproto_test::capnp::test::TestLateUnion;
+  using TestType = capnproto_test::shark::test::TestLateUnion;
 
   kj::String message =
       kj::str(R"((
@@ -188,4 +188,4 @@ KJ_TEST("text format implicitly coerces struct value from first field type") {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

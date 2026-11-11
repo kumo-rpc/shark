@@ -23,7 +23,7 @@
 #include <shark/message.h>
 #include <tests/base/compat/gtest.h>
 
-namespace capnp {
+namespace shark {
 namespace compiler {
 namespace {
 
@@ -421,4 +421,4 @@ TEST(Lexer, DeeplyNestedInputDoesNotOverflowStack) {
 
 }  // namespace
 }  // namespace compiler
-}  // namespace capnp
+}  // namespace shark

@@ -34,7 +34,7 @@ SHARK_BEGIN_HEADER
 namespace std {
 
 template <typename Container, typename Element>
-struct iterator_traits<capnp::_::IndexingIterator<Container, Element>> {
+struct iterator_traits<shark::_::IndexingIterator<Container, Element>> {
   using iterator_category = std::random_access_iterator_tag;
   using value_type = Element;
   using difference_type	= int;

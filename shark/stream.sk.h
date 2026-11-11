@@ -15,15 +15,15 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 namespace schemas {
 
 SHARK_DECLARE_SCHEMA(995f9a3377c0b16e);
 
 }  // namespace schemas
-}  // namespace capnp
+}  // namespace shark
 
-namespace capnp {
+namespace shark {
 
 struct StreamResult {
   StreamResult() = delete;
@@ -35,7 +35,7 @@ struct StreamResult {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(995f9a3377c0b16e, 0, 0)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -47,28 +47,28 @@ public:
   typedef StreamResult Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class StreamResult::Builder {
@@ -78,22 +78,22 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -102,14 +102,14 @@ public:
   typedef StreamResult Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 

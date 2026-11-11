@@ -33,7 +33,7 @@
 #include <shark/capability.h>
 #endif  // !SHARK_LITE
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 
 Arena::~Arena() noexcept(false) {}
@@ -150,7 +150,7 @@ SegmentReader* ReaderArena::tryGetSegment(SegmentId id) {
 }
 
 void ReaderArena::reportReadLimitReached() {
-  KJ_FAIL_REQUIRE("Exceeded message traversal limit.  See capnp::ReaderOptions.") {
+  KJ_FAIL_REQUIRE("Exceeded message traversal limit.  See shark::ReaderOptions.") {
     return;
   }
 }
@@ -389,4 +389,4 @@ void BuilderArena::LocalCapTable::dropCap(uint index) {
 }
 
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

@@ -27,7 +27,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 class ParsedSchema;
 class SchemaFile;
@@ -288,6 +288,6 @@ private:
   class DiskSchemaFile;
 };
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

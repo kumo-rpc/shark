@@ -30,7 +30,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 class StructSchema;
 class ListSchema;
@@ -1126,6 +1126,6 @@ inline PipelineHook& PipelineHook::from(Pipeline& pipeline) {
 
 #endif  // !SHARK_LITE
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

@@ -43,7 +43,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-namespace capnp {
+namespace shark {
 namespace compiler {
 namespace {
 
@@ -910,6 +910,6 @@ private:
 
 }  // namespace
 }  // namespace compiler
-}  // namespace capnp
+}  // namespace shark
 
-KJ_MAIN(capnp::compiler::EvolutionTestMain);
+KJ_MAIN(shark::compiler::EvolutionTestMain);

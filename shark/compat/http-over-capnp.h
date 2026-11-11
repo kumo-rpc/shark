@@ -29,7 +29,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 class HttpOverCapnpFactory {
 public:
@@ -68,17 +68,17 @@ public:
   HttpOverCapnpFactory(ByteStreamFactory& streamFactory, HeaderIdBundle headerIds,
                        OptimizationLevel peerOptimizationLevel = LEVEL_1);
 
-  kj::Own<kj::HttpService> capnpToKj(capnp::HttpService::Client rpcService);
-  capnp::HttpService::Client kjToCapnp(kj::Own<kj::HttpService> service);
+  kj::Own<kj::HttpService> capnpToKj(shark::HttpService::Client rpcService);
+  shark::HttpService::Client kjToCapnp(kj::Own<kj::HttpService> service);
 
 private:
   ByteStreamFactory& streamFactory;
   const kj::HttpHeaderTable& headerTable;
   OptimizationLevel peerOptimizationLevel;
-  kj::Array<capnp::CommonHeaderName> nameKjToCapnp;
+  kj::Array<shark::CommonHeaderName> nameKjToCapnp;
   kj::Array<kj::HttpHeaderId> nameCapnpToKj;
   kj::Array<kj::StringPtr> valueCapnpToKj;
-  kj::HashMap<kj::StringPtr, capnp::CommonHeaderValue> valueKjToCapnp;
+  kj::HashMap<kj::StringPtr, shark::CommonHeaderValue> valueKjToCapnp;
 
   class RequestState;
 
@@ -94,13 +94,13 @@ private:
   class ServerRequestContextImpl;
   class CapnpToKjHttpServiceAdapter;
 
-  kj::HttpHeaders headersToKj(capnp::List<capnp::HttpHeader>::Reader capnpHeaders) const;
+  kj::HttpHeaders headersToKj(shark::List<shark::HttpHeader>::Reader capnpHeaders) const;
   // Returned headers may alias into `capnpHeaders`.
 
-  capnp::Orphan<capnp::List<capnp::HttpHeader>> headersToCapnp(
-      const kj::HttpHeaders& headers, capnp::Orphanage orphanage);
+  shark::Orphan<shark::List<shark::HttpHeader>> headersToCapnp(
+      const kj::HttpHeaders& headers, shark::Orphanage orphanage);
 };
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

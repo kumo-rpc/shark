@@ -26,7 +26,7 @@
 #include <tests/base/compat/gtest.h>
 #include <shark/base/debug.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -703,4 +703,4 @@ TEST(Stringify, Generics) {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

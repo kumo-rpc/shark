@@ -21,7 +21,7 @@
 
 #include "null-common.h"
 
-namespace capnp {
+namespace shark {
 namespace benchmark {
 namespace null {
 
@@ -146,7 +146,7 @@ public:
 
 }  // namespace null
 }  // namespace benchmark
-}  // namespace capnp
+}  // namespace shark
 
 int main(int argc, char* argv[]) {
   return capnp::benchmark::benchmarkMain<

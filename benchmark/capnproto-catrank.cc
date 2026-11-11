@@ -22,9 +22,9 @@
 #include "catrank.sk.h"
 #include "capnproto-common.h"
 
-namespace capnp {
+namespace shark {
 namespace benchmark {
-namespace capnp {
+namespace shark {
 
 struct ScoredResult {
   double score;
@@ -130,9 +130,9 @@ public:
   }
 };
 
-}  // namespace capnp
+}  // namespace shark
 }  // namespace benchmark
-}  // namespace capnp
+}  // namespace shark
 
 int main(int argc, char* argv[]) {
   return capnp::benchmark::benchmarkMain<

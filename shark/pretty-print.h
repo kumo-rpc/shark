@@ -26,7 +26,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 kj::StringTree prettyPrint(DynamicStruct::Reader value);
 kj::StringTree prettyPrint(DynamicStruct::Builder value);
@@ -39,6 +39,6 @@ kj::StringTree prettyPrint(DynamicList::Builder value);
 // If you don't want indentation, just use the value's KJ stringifier (e.g. pass it to kj::str(),
 // any of the KJ debug macros, etc.).
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

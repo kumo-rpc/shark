@@ -26,7 +26,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 template <typename ConnectFunc>
 auto autoReconnect(ConnectFunc&& connect);
@@ -75,6 +75,6 @@ auto lazyAutoReconnect(ConnectFunc&& connect) {
       .castAs<FromClient<kj::Decay<decltype(connect())>>>();
 }
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

@@ -22,7 +22,7 @@
 #include "error-reporter.h"
 #include <shark/base/debug.h>
 
-namespace capnp {
+namespace shark {
     namespace compiler {
 
         namespace {
@@ -65,4 +65,4 @@ namespace capnp {
         }
 
     } // namespace compiler
-} // namespace capnp
+} // namespace shark

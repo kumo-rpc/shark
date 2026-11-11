@@ -3,9 +3,9 @@
 
 #include "json-rpc.sk.h"
 
-namespace capnp {
+namespace shark {
 namespace schemas {
-static const ::capnp::_::AlignedData<140> b_d3a68cd48aa056ca = {
+static const ::shark::_::AlignedData<140> b_d3a68cd48aa056ca = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     202,  86, 160, 138, 212, 140, 166, 211,
      20,   0,   0,   0,   1,   0,   1,   0,
@@ -147,20 +147,20 @@ static const ::capnp::_::AlignedData<140> b_d3a68cd48aa056ca = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_d3a68cd48aa056ca = b_d3a68cd48aa056ca.words;
+::shark::word const* const bp_d3a68cd48aa056ca = b_d3a68cd48aa056ca.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_d3a68cd48aa056ca[] = {
+static const ::shark::_::RawSchema* const d_d3a68cd48aa056ca[] = {
   &s_a3fa7845f919dd83,
   &s_d0dd80fa25c37644,
 };
 static const uint16_t m_d3a68cd48aa056ca[] = {6, 1, 0, 2, 3, 4, 5};
 static const uint16_t i_d3a68cd48aa056ca[] = {3, 4, 5, 6, 0, 1, 2};
-const ::capnp::_::RawSchema s_d3a68cd48aa056ca = {
+const ::shark::_::RawSchema s_d3a68cd48aa056ca = {
   0xd3a68cd48aa056ca, b_d3a68cd48aa056ca.words, 140, d_d3a68cd48aa056ca, m_d3a68cd48aa056ca,
   2, 7, i_d3a68cd48aa056ca, nullptr, nullptr, { &s_d3a68cd48aa056ca, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<65> b_d0dd80fa25c37644 = {
+static const ::shark::_::AlignedData<65> b_d0dd80fa25c37644 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      68, 118, 195,  37, 250, 128, 221, 208,
      31,   0,   0,   0,   1,   0,   1,   0,
@@ -227,24 +227,24 @@ static const ::capnp::_::AlignedData<65> b_d0dd80fa25c37644 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_d0dd80fa25c37644 = b_d0dd80fa25c37644.words;
+::shark::word const* const bp_d0dd80fa25c37644 = b_d0dd80fa25c37644.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_d0dd80fa25c37644[] = {
+static const ::shark::_::RawSchema* const d_d0dd80fa25c37644[] = {
   &s_a3fa7845f919dd83,
 };
 static const uint16_t m_d0dd80fa25c37644[] = {0, 2, 1};
 static const uint16_t i_d0dd80fa25c37644[] = {0, 1, 2};
-const ::capnp::_::RawSchema s_d0dd80fa25c37644 = {
+const ::shark::_::RawSchema s_d0dd80fa25c37644 = {
   0xd0dd80fa25c37644, b_d0dd80fa25c37644.words, 65, d_d0dd80fa25c37644, m_d0dd80fa25c37644,
   1, 3, i_d0dd80fa25c37644, nullptr, nullptr, { &s_d0dd80fa25c37644, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
 }  // namespace schemas
-}  // namespace capnp
+}  // namespace shark
 
 // =======================================================================================
 
-namespace capnp {
+namespace shark {
 namespace json {
 
 // RpcMessage
@@ -254,8 +254,8 @@ constexpr uint16_t RpcMessage::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind RpcMessage::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* RpcMessage::_capnpPrivate::schema;
+constexpr ::shark::Kind RpcMessage::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* RpcMessage::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -266,8 +266,8 @@ constexpr uint16_t RpcMessage::Error::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind RpcMessage::Error::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* RpcMessage::Error::_capnpPrivate::schema;
+constexpr ::shark::Kind RpcMessage::Error::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* RpcMessage::Error::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 

@@ -1,2 +1,2 @@
-*.capnp.cc
-*.capnp.h
+*.sk.cc
+*.sk.h

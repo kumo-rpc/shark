@@ -3,9 +3,9 @@
 
 #include "schema.sk.h"
 
-namespace capnp {
+namespace shark {
 namespace schemas {
-static const ::capnp::_::AlignedData<257> b_e682ab4cf923a417 = {
+static const ::shark::_::AlignedData<257> b_e682ab4cf923a417 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      23, 164,  35, 249,  76, 171, 130, 230,
      17,   0,   0,   0,   1,   0,   6,   0,
@@ -264,9 +264,9 @@ static const ::capnp::_::AlignedData<257> b_e682ab4cf923a417 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_e682ab4cf923a417 = b_e682ab4cf923a417.words;
+::shark::word const* const bp_e682ab4cf923a417 = b_e682ab4cf923a417.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_e682ab4cf923a417[] = {
+static const ::shark::_::RawSchema* const d_e682ab4cf923a417[] = {
   &s_9ea0b19b37fb4435,
   &s_b18aa5ac7a0d9420,
   &s_b54ab3364333f598,
@@ -278,12 +278,12 @@ static const ::capnp::_::RawSchema* const d_e682ab4cf923a417[] = {
 };
 static const uint16_t m_e682ab4cf923a417[] = {11, 5, 10, 1, 2, 15, 8, 6, 0, 9, 13, 4, 12, 3, 14, 7};
 static const uint16_t i_e682ab4cf923a417[] = {6, 7, 8, 9, 10, 11, 0, 1, 2, 3, 4, 5, 12, 13, 14, 15};
-const ::capnp::_::RawSchema s_e682ab4cf923a417 = {
+const ::shark::_::RawSchema s_e682ab4cf923a417 = {
   0xe682ab4cf923a417, b_e682ab4cf923a417.words, 257, d_e682ab4cf923a417, m_e682ab4cf923a417,
   8, 16, i_e682ab4cf923a417, nullptr, nullptr, { &s_e682ab4cf923a417, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<34> b_b9521bccf10fa3b1 = {
+static const ::shark::_::AlignedData<34> b_b9521bccf10fa3b1 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     177, 163,  15, 241, 204,  27,  82, 185,
      22,   0,   0,   0,   1,   0,   0,   0,
@@ -319,16 +319,16 @@ static const ::capnp::_::AlignedData<34> b_b9521bccf10fa3b1 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_b9521bccf10fa3b1 = b_b9521bccf10fa3b1.words;
+::shark::word const* const bp_b9521bccf10fa3b1 = b_b9521bccf10fa3b1.words;
 #if !SHARK_LITE
 static const uint16_t m_b9521bccf10fa3b1[] = {0};
 static const uint16_t i_b9521bccf10fa3b1[] = {0};
-const ::capnp::_::RawSchema s_b9521bccf10fa3b1 = {
+const ::shark::_::RawSchema s_b9521bccf10fa3b1 = {
   0xb9521bccf10fa3b1, b_b9521bccf10fa3b1.words, 34, nullptr, m_b9521bccf10fa3b1,
   0, 1, i_b9521bccf10fa3b1, nullptr, nullptr, { &s_b9521bccf10fa3b1, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<50> b_debf55bbfa0fc242 = {
+static const ::shark::_::AlignedData<50> b_debf55bbfa0fc242 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      66, 194,  15, 250, 187,  85, 191, 222,
      22,   0,   0,   0,   1,   0,   1,   0,
@@ -380,16 +380,16 @@ static const ::capnp::_::AlignedData<50> b_debf55bbfa0fc242 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_debf55bbfa0fc242 = b_debf55bbfa0fc242.words;
+::shark::word const* const bp_debf55bbfa0fc242 = b_debf55bbfa0fc242.words;
 #if !SHARK_LITE
 static const uint16_t m_debf55bbfa0fc242[] = {1, 0};
 static const uint16_t i_debf55bbfa0fc242[] = {0, 1};
-const ::capnp::_::RawSchema s_debf55bbfa0fc242 = {
+const ::shark::_::RawSchema s_debf55bbfa0fc242 = {
   0xdebf55bbfa0fc242, b_debf55bbfa0fc242.words, 50, nullptr, m_debf55bbfa0fc242,
   0, 2, i_debf55bbfa0fc242, nullptr, nullptr, { &s_debf55bbfa0fc242, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<104> b_f38e1de3041357ae = {
+static const ::shark::_::AlignedData<104> b_f38e1de3041357ae = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     174,  87,  19,   4, 227,  29, 142, 243,
      22,   0,   0,   0,   1,   0,   2,   0,
@@ -495,19 +495,19 @@ static const ::capnp::_::AlignedData<104> b_f38e1de3041357ae = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_f38e1de3041357ae = b_f38e1de3041357ae.words;
+::shark::word const* const bp_f38e1de3041357ae = b_f38e1de3041357ae.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_f38e1de3041357ae[] = {
+static const ::shark::_::RawSchema* const d_f38e1de3041357ae[] = {
   &s_c2ba9038898e1fa2,
 };
 static const uint16_t m_f38e1de3041357ae[] = {1, 4, 0, 2, 3};
 static const uint16_t i_f38e1de3041357ae[] = {0, 1, 2, 3, 4};
-const ::capnp::_::RawSchema s_f38e1de3041357ae = {
+const ::shark::_::RawSchema s_f38e1de3041357ae = {
   0xf38e1de3041357ae, b_f38e1de3041357ae.words, 104, d_f38e1de3041357ae, m_f38e1de3041357ae,
   1, 5, i_f38e1de3041357ae, nullptr, nullptr, { &s_f38e1de3041357ae, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<36> b_c2ba9038898e1fa2 = {
+static const ::shark::_::AlignedData<36> b_c2ba9038898e1fa2 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     162,  31, 142, 137,  56, 144, 186, 194,
      33,   0,   0,   0,   1,   0,   0,   0,
@@ -545,16 +545,16 @@ static const ::capnp::_::AlignedData<36> b_c2ba9038898e1fa2 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_c2ba9038898e1fa2 = b_c2ba9038898e1fa2.words;
+::shark::word const* const bp_c2ba9038898e1fa2 = b_c2ba9038898e1fa2.words;
 #if !SHARK_LITE
 static const uint16_t m_c2ba9038898e1fa2[] = {0};
 static const uint16_t i_c2ba9038898e1fa2[] = {0};
-const ::capnp::_::RawSchema s_c2ba9038898e1fa2 = {
+const ::shark::_::RawSchema s_c2ba9038898e1fa2 = {
   0xc2ba9038898e1fa2, b_c2ba9038898e1fa2.words, 36, nullptr, m_c2ba9038898e1fa2,
   0, 1, i_c2ba9038898e1fa2, nullptr, nullptr, { &s_c2ba9038898e1fa2, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<135> b_9ea0b19b37fb4435 = {
+static const ::shark::_::AlignedData<135> b_9ea0b19b37fb4435 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      53,  68, 251,  55, 155, 177, 160, 158,
      22,   0,   0,   0,   1,   0,   6,   0,
@@ -691,21 +691,21 @@ static const ::capnp::_::AlignedData<135> b_9ea0b19b37fb4435 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_9ea0b19b37fb4435 = b_9ea0b19b37fb4435.words;
+::shark::word const* const bp_9ea0b19b37fb4435 = b_9ea0b19b37fb4435.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_9ea0b19b37fb4435[] = {
+static const ::shark::_::RawSchema* const d_9ea0b19b37fb4435[] = {
   &s_9aad50a41f4af45f,
   &s_d1958f7dba521926,
   &s_e682ab4cf923a417,
 };
 static const uint16_t m_9ea0b19b37fb4435[] = {0, 4, 5, 6, 3, 1, 2};
 static const uint16_t i_9ea0b19b37fb4435[] = {0, 1, 2, 3, 4, 5, 6};
-const ::capnp::_::RawSchema s_9ea0b19b37fb4435 = {
+const ::shark::_::RawSchema s_9ea0b19b37fb4435 = {
   0x9ea0b19b37fb4435, b_9ea0b19b37fb4435.words, 135, d_9ea0b19b37fb4435, m_9ea0b19b37fb4435,
   3, 7, i_9ea0b19b37fb4435, nullptr, nullptr, { &s_9ea0b19b37fb4435, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<38> b_b54ab3364333f598 = {
+static const ::shark::_::AlignedData<38> b_b54ab3364333f598 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     152, 245,  51,  67,  54, 179,  74, 181,
      22,   0,   0,   0,   1,   0,   6,   0,
@@ -745,20 +745,20 @@ static const ::capnp::_::AlignedData<38> b_b54ab3364333f598 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_b54ab3364333f598 = b_b54ab3364333f598.words;
+::shark::word const* const bp_b54ab3364333f598 = b_b54ab3364333f598.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_b54ab3364333f598[] = {
+static const ::shark::_::RawSchema* const d_b54ab3364333f598[] = {
   &s_978a7cebdc549a4d,
   &s_e682ab4cf923a417,
 };
 static const uint16_t m_b54ab3364333f598[] = {0};
 static const uint16_t i_b54ab3364333f598[] = {0};
-const ::capnp::_::RawSchema s_b54ab3364333f598 = {
+const ::shark::_::RawSchema s_b54ab3364333f598 = {
   0xb54ab3364333f598, b_b54ab3364333f598.words, 38, d_b54ab3364333f598, m_b54ab3364333f598,
   2, 1, i_b54ab3364333f598, nullptr, nullptr, { &s_b54ab3364333f598, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<57> b_e82753cff0c2218f = {
+static const ::shark::_::AlignedData<57> b_e82753cff0c2218f = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     143,  33, 194, 240, 207,  83,  39, 232,
      22,   0,   0,   0,   1,   0,   6,   0,
@@ -817,21 +817,21 @@ static const ::capnp::_::AlignedData<57> b_e82753cff0c2218f = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_e82753cff0c2218f = b_e82753cff0c2218f.words;
+::shark::word const* const bp_e82753cff0c2218f = b_e82753cff0c2218f.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_e82753cff0c2218f[] = {
+static const ::shark::_::RawSchema* const d_e82753cff0c2218f[] = {
   &s_9500cce23b334d80,
   &s_a9962a9ed0a4d7f8,
   &s_e682ab4cf923a417,
 };
 static const uint16_t m_e82753cff0c2218f[] = {0, 1};
 static const uint16_t i_e82753cff0c2218f[] = {0, 1};
-const ::capnp::_::RawSchema s_e82753cff0c2218f = {
+const ::shark::_::RawSchema s_e82753cff0c2218f = {
   0xe82753cff0c2218f, b_e82753cff0c2218f.words, 57, d_e82753cff0c2218f, m_e82753cff0c2218f,
   3, 2, i_e82753cff0c2218f, nullptr, nullptr, { &s_e82753cff0c2218f, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<48> b_b18aa5ac7a0d9420 = {
+static const ::shark::_::AlignedData<48> b_b18aa5ac7a0d9420 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      32, 148,  13, 122, 172, 165, 138, 177,
      22,   0,   0,   0,   1,   0,   6,   0,
@@ -881,21 +881,21 @@ static const ::capnp::_::AlignedData<48> b_b18aa5ac7a0d9420 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_b18aa5ac7a0d9420 = b_b18aa5ac7a0d9420.words;
+::shark::word const* const bp_b18aa5ac7a0d9420 = b_b18aa5ac7a0d9420.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_b18aa5ac7a0d9420[] = {
+static const ::shark::_::RawSchema* const d_b18aa5ac7a0d9420[] = {
   &s_ce23dcd2d7b00c9b,
   &s_d07378ede1f9cc60,
   &s_e682ab4cf923a417,
 };
 static const uint16_t m_b18aa5ac7a0d9420[] = {0, 1};
 static const uint16_t i_b18aa5ac7a0d9420[] = {0, 1};
-const ::capnp::_::RawSchema s_b18aa5ac7a0d9420 = {
+const ::shark::_::RawSchema s_b18aa5ac7a0d9420 = {
   0xb18aa5ac7a0d9420, b_b18aa5ac7a0d9420.words, 48, d_b18aa5ac7a0d9420, m_b18aa5ac7a0d9420,
   3, 2, i_b18aa5ac7a0d9420, nullptr, nullptr, { &s_b18aa5ac7a0d9420, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<229> b_ec1619d4400a0290 = {
+static const ::shark::_::AlignedData<229> b_ec1619d4400a0290 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     144,   2,  10,  64, 212,  25,  22, 236,
      22,   0,   0,   0,   1,   0,   6,   0,
@@ -1126,20 +1126,20 @@ static const ::capnp::_::AlignedData<229> b_ec1619d4400a0290 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_ec1619d4400a0290 = b_ec1619d4400a0290.words;
+::shark::word const* const bp_ec1619d4400a0290 = b_ec1619d4400a0290.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_ec1619d4400a0290[] = {
+static const ::shark::_::RawSchema* const d_ec1619d4400a0290[] = {
   &s_d07378ede1f9cc60,
   &s_e682ab4cf923a417,
 };
 static const uint16_t m_ec1619d4400a0290[] = {12, 2, 3, 4, 6, 1, 8, 9, 10, 11, 5, 7, 0};
 static const uint16_t i_ec1619d4400a0290[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-const ::capnp::_::RawSchema s_ec1619d4400a0290 = {
+const ::shark::_::RawSchema s_ec1619d4400a0290 = {
   0xec1619d4400a0290, b_ec1619d4400a0290.words, 229, d_ec1619d4400a0290, m_ec1619d4400a0290,
   2, 13, i_ec1619d4400a0290, nullptr, nullptr, { &s_ec1619d4400a0290, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<114> b_9aad50a41f4af45f = {
+static const ::shark::_::AlignedData<114> b_9aad50a41f4af45f = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      95, 244,  74,  31, 164,  80, 173, 154,
      17,   0,   0,   0,   1,   0,   3,   0,
@@ -1255,9 +1255,9 @@ static const ::capnp::_::AlignedData<114> b_9aad50a41f4af45f = {
     103, 114, 111, 117, 112,   0,   0,   0,
     111, 114, 100, 105, 110,  97, 108,   0, }
 };
-::capnp::word const* const bp_9aad50a41f4af45f = b_9aad50a41f4af45f.words;
+::shark::word const* const bp_9aad50a41f4af45f = b_9aad50a41f4af45f.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_9aad50a41f4af45f[] = {
+static const ::shark::_::RawSchema* const d_9aad50a41f4af45f[] = {
   &s_bb90d5c287870be6,
   &s_c42305476bb4746f,
   &s_cafccddb68db1d11,
@@ -1265,12 +1265,12 @@ static const ::capnp::_::RawSchema* const d_9aad50a41f4af45f[] = {
 };
 static const uint16_t m_9aad50a41f4af45f[] = {2, 1, 3, 5, 0, 6, 4};
 static const uint16_t i_9aad50a41f4af45f[] = {4, 5, 0, 1, 2, 3, 6};
-const ::capnp::_::RawSchema s_9aad50a41f4af45f = {
+const ::shark::_::RawSchema s_9aad50a41f4af45f = {
   0x9aad50a41f4af45f, b_9aad50a41f4af45f.words, 114, d_9aad50a41f4af45f, m_9aad50a41f4af45f,
   4, 7, i_9aad50a41f4af45f, nullptr, nullptr, { &s_9aad50a41f4af45f, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<26> b_97b14cbe7cfec712 = {
+static const ::shark::_::AlignedData<26> b_97b14cbe7cfec712 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      18, 199, 254, 124, 190,  76, 177, 151,
      23,   0,   0,   0,   4,   0,   0,   0,
@@ -1298,14 +1298,14 @@ static const ::capnp::_::AlignedData<26> b_97b14cbe7cfec712 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_97b14cbe7cfec712 = b_97b14cbe7cfec712.words;
+::shark::word const* const bp_97b14cbe7cfec712 = b_97b14cbe7cfec712.words;
 #if !SHARK_LITE
-const ::capnp::_::RawSchema s_97b14cbe7cfec712 = {
+const ::shark::_::RawSchema s_97b14cbe7cfec712 = {
   0x97b14cbe7cfec712, b_97b14cbe7cfec712.words, 26, nullptr, nullptr,
   0, 0, nullptr, nullptr, nullptr, { &s_97b14cbe7cfec712, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<81> b_c42305476bb4746f = {
+static const ::shark::_::AlignedData<81> b_c42305476bb4746f = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     111, 116, 180, 107,  71,   5,  35, 196,
      23,   0,   0,   0,   1,   0,   3,   0,
@@ -1388,21 +1388,21 @@ static const ::capnp::_::AlignedData<81> b_c42305476bb4746f = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_c42305476bb4746f = b_c42305476bb4746f.words;
+::shark::word const* const bp_c42305476bb4746f = b_c42305476bb4746f.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_c42305476bb4746f[] = {
+static const ::shark::_::RawSchema* const d_c42305476bb4746f[] = {
   &s_9aad50a41f4af45f,
   &s_ce23dcd2d7b00c9b,
   &s_d07378ede1f9cc60,
 };
 static const uint16_t m_c42305476bb4746f[] = {2, 3, 0, 1};
 static const uint16_t i_c42305476bb4746f[] = {0, 1, 2, 3};
-const ::capnp::_::RawSchema s_c42305476bb4746f = {
+const ::shark::_::RawSchema s_c42305476bb4746f = {
   0xc42305476bb4746f, b_c42305476bb4746f.words, 81, d_c42305476bb4746f, m_c42305476bb4746f,
   3, 4, i_c42305476bb4746f, nullptr, nullptr, { &s_c42305476bb4746f, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<33> b_cafccddb68db1d11 = {
+static const ::shark::_::AlignedData<33> b_cafccddb68db1d11 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      17,  29, 219, 104, 219, 205, 252, 202,
      23,   0,   0,   0,   1,   0,   3,   0,
@@ -1437,19 +1437,19 @@ static const ::capnp::_::AlignedData<33> b_cafccddb68db1d11 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_cafccddb68db1d11 = b_cafccddb68db1d11.words;
+::shark::word const* const bp_cafccddb68db1d11 = b_cafccddb68db1d11.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_cafccddb68db1d11[] = {
+static const ::shark::_::RawSchema* const d_cafccddb68db1d11[] = {
   &s_9aad50a41f4af45f,
 };
 static const uint16_t m_cafccddb68db1d11[] = {0};
 static const uint16_t i_cafccddb68db1d11[] = {0};
-const ::capnp::_::RawSchema s_cafccddb68db1d11 = {
+const ::shark::_::RawSchema s_cafccddb68db1d11 = {
   0xcafccddb68db1d11, b_cafccddb68db1d11.words, 33, d_cafccddb68db1d11, m_cafccddb68db1d11,
   1, 1, i_cafccddb68db1d11, nullptr, nullptr, { &s_cafccddb68db1d11, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<50> b_bb90d5c287870be6 = {
+static const ::shark::_::AlignedData<50> b_bb90d5c287870be6 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     230,  11, 135, 135, 194, 213, 144, 187,
      23,   0,   0,   0,   1,   0,   3,   0,
@@ -1501,19 +1501,19 @@ static const ::capnp::_::AlignedData<50> b_bb90d5c287870be6 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_bb90d5c287870be6 = b_bb90d5c287870be6.words;
+::shark::word const* const bp_bb90d5c287870be6 = b_bb90d5c287870be6.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_bb90d5c287870be6[] = {
+static const ::shark::_::RawSchema* const d_bb90d5c287870be6[] = {
   &s_9aad50a41f4af45f,
 };
 static const uint16_t m_bb90d5c287870be6[] = {1, 0};
 static const uint16_t i_bb90d5c287870be6[] = {0, 1};
-const ::capnp::_::RawSchema s_bb90d5c287870be6 = {
+const ::shark::_::RawSchema s_bb90d5c287870be6 = {
   0xbb90d5c287870be6, b_bb90d5c287870be6.words, 50, d_bb90d5c287870be6, m_bb90d5c287870be6,
   1, 2, i_bb90d5c287870be6, nullptr, nullptr, { &s_bb90d5c287870be6, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<70> b_978a7cebdc549a4d = {
+static const ::shark::_::AlignedData<70> b_978a7cebdc549a4d = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      77, 154,  84, 220, 235, 124, 138, 151,
      17,   0,   0,   0,   1,   0,   1,   0,
@@ -1585,19 +1585,19 @@ static const ::capnp::_::AlignedData<70> b_978a7cebdc549a4d = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_978a7cebdc549a4d = b_978a7cebdc549a4d.words;
+::shark::word const* const bp_978a7cebdc549a4d = b_978a7cebdc549a4d.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_978a7cebdc549a4d[] = {
+static const ::shark::_::RawSchema* const d_978a7cebdc549a4d[] = {
   &s_f1c8950dab257542,
 };
 static const uint16_t m_978a7cebdc549a4d[] = {2, 1, 0};
 static const uint16_t i_978a7cebdc549a4d[] = {0, 1, 2};
-const ::capnp::_::RawSchema s_978a7cebdc549a4d = {
+const ::shark::_::RawSchema s_978a7cebdc549a4d = {
   0x978a7cebdc549a4d, b_978a7cebdc549a4d.words, 70, d_978a7cebdc549a4d, m_978a7cebdc549a4d,
   1, 3, i_978a7cebdc549a4d, nullptr, nullptr, { &s_978a7cebdc549a4d, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<49> b_a9962a9ed0a4d7f8 = {
+static const ::shark::_::AlignedData<49> b_a9962a9ed0a4d7f8 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     248, 215, 164, 208, 158,  42, 150, 169,
      17,   0,   0,   0,   1,   0,   1,   0,
@@ -1648,19 +1648,19 @@ static const ::capnp::_::AlignedData<49> b_a9962a9ed0a4d7f8 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_a9962a9ed0a4d7f8 = b_a9962a9ed0a4d7f8.words;
+::shark::word const* const bp_a9962a9ed0a4d7f8 = b_a9962a9ed0a4d7f8.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_a9962a9ed0a4d7f8[] = {
+static const ::shark::_::RawSchema* const d_a9962a9ed0a4d7f8[] = {
   &s_903455f06065422b,
 };
 static const uint16_t m_a9962a9ed0a4d7f8[] = {1, 0};
 static const uint16_t i_a9962a9ed0a4d7f8[] = {0, 1};
-const ::capnp::_::RawSchema s_a9962a9ed0a4d7f8 = {
+const ::shark::_::RawSchema s_a9962a9ed0a4d7f8 = {
   0xa9962a9ed0a4d7f8, b_a9962a9ed0a4d7f8.words, 49, d_a9962a9ed0a4d7f8, m_a9962a9ed0a4d7f8,
   1, 2, i_a9962a9ed0a4d7f8, nullptr, nullptr, { &s_a9962a9ed0a4d7f8, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<155> b_9500cce23b334d80 = {
+static const ::shark::_::AlignedData<155> b_9500cce23b334d80 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     128,  77,  51,  59, 226, 204,   0, 149,
      17,   0,   0,   0,   1,   0,   3,   0,
@@ -1817,21 +1817,21 @@ static const ::capnp::_::AlignedData<155> b_9500cce23b334d80 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_9500cce23b334d80 = b_9500cce23b334d80.words;
+::shark::word const* const bp_9500cce23b334d80 = b_9500cce23b334d80.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_9500cce23b334d80[] = {
+static const ::shark::_::RawSchema* const d_9500cce23b334d80[] = {
   &s_903455f06065422b,
   &s_b9521bccf10fa3b1,
   &s_f1c8950dab257542,
 };
 static const uint16_t m_9500cce23b334d80[] = {4, 1, 7, 0, 5, 2, 6, 3};
 static const uint16_t i_9500cce23b334d80[] = {0, 1, 2, 3, 4, 5, 6, 7};
-const ::capnp::_::RawSchema s_9500cce23b334d80 = {
+const ::shark::_::RawSchema s_9500cce23b334d80 = {
   0x9500cce23b334d80, b_9500cce23b334d80.words, 155, d_9500cce23b334d80, m_9500cce23b334d80,
   3, 8, i_9500cce23b334d80, nullptr, nullptr, { &s_9500cce23b334d80, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<270> b_d07378ede1f9cc60 = {
+static const ::shark::_::AlignedData<270> b_d07378ede1f9cc60 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      96, 204, 249, 225, 237, 120, 115, 208,
      17,   0,   0,   0,   1,   0,   3,   0,
@@ -2103,9 +2103,9 @@ static const ::capnp::_::AlignedData<270> b_d07378ede1f9cc60 = {
      97, 110, 121,  80, 111, 105, 110, 116,
     101, 114,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_d07378ede1f9cc60 = b_d07378ede1f9cc60.words;
+::shark::word const* const bp_d07378ede1f9cc60 = b_d07378ede1f9cc60.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_d07378ede1f9cc60[] = {
+static const ::shark::_::RawSchema* const d_d07378ede1f9cc60[] = {
   &s_87e739250a60ea97,
   &s_9e0e78711a7f87a9,
   &s_ac3a6f60ef4cc6d3,
@@ -2114,12 +2114,12 @@ static const ::capnp::_::RawSchema* const d_d07378ede1f9cc60[] = {
 };
 static const uint16_t m_d07378ede1f9cc60[] = {18, 1, 13, 15, 10, 11, 3, 4, 5, 2, 17, 14, 16, 12, 7, 8, 9, 6, 0};
 static const uint16_t i_d07378ede1f9cc60[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
-const ::capnp::_::RawSchema s_d07378ede1f9cc60 = {
+const ::shark::_::RawSchema s_d07378ede1f9cc60 = {
   0xd07378ede1f9cc60, b_d07378ede1f9cc60.words, 270, d_d07378ede1f9cc60, m_d07378ede1f9cc60,
   5, 19, i_d07378ede1f9cc60, nullptr, nullptr, { &s_d07378ede1f9cc60, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<34> b_87e739250a60ea97 = {
+static const ::shark::_::AlignedData<34> b_87e739250a60ea97 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     151, 234,  96,  10,  37,  57, 231, 135,
      22,   0,   0,   0,   1,   0,   3,   0,
@@ -2155,19 +2155,19 @@ static const ::capnp::_::AlignedData<34> b_87e739250a60ea97 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_87e739250a60ea97 = b_87e739250a60ea97.words;
+::shark::word const* const bp_87e739250a60ea97 = b_87e739250a60ea97.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_87e739250a60ea97[] = {
+static const ::shark::_::RawSchema* const d_87e739250a60ea97[] = {
   &s_d07378ede1f9cc60,
 };
 static const uint16_t m_87e739250a60ea97[] = {0};
 static const uint16_t i_87e739250a60ea97[] = {0};
-const ::capnp::_::RawSchema s_87e739250a60ea97 = {
+const ::shark::_::RawSchema s_87e739250a60ea97 = {
   0x87e739250a60ea97, b_87e739250a60ea97.words, 34, d_87e739250a60ea97, m_87e739250a60ea97,
   1, 1, i_87e739250a60ea97, nullptr, nullptr, { &s_87e739250a60ea97, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<48> b_9e0e78711a7f87a9 = {
+static const ::shark::_::AlignedData<48> b_9e0e78711a7f87a9 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     169, 135, 127,  26, 113, 120,  14, 158,
      22,   0,   0,   0,   1,   0,   3,   0,
@@ -2217,20 +2217,20 @@ static const ::capnp::_::AlignedData<48> b_9e0e78711a7f87a9 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_9e0e78711a7f87a9 = b_9e0e78711a7f87a9.words;
+::shark::word const* const bp_9e0e78711a7f87a9 = b_9e0e78711a7f87a9.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_9e0e78711a7f87a9[] = {
+static const ::shark::_::RawSchema* const d_9e0e78711a7f87a9[] = {
   &s_903455f06065422b,
   &s_d07378ede1f9cc60,
 };
 static const uint16_t m_9e0e78711a7f87a9[] = {1, 0};
 static const uint16_t i_9e0e78711a7f87a9[] = {0, 1};
-const ::capnp::_::RawSchema s_9e0e78711a7f87a9 = {
+const ::shark::_::RawSchema s_9e0e78711a7f87a9 = {
   0x9e0e78711a7f87a9, b_9e0e78711a7f87a9.words, 48, d_9e0e78711a7f87a9, m_9e0e78711a7f87a9,
   2, 2, i_9e0e78711a7f87a9, nullptr, nullptr, { &s_9e0e78711a7f87a9, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<48> b_ac3a6f60ef4cc6d3 = {
+static const ::shark::_::AlignedData<48> b_ac3a6f60ef4cc6d3 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     211, 198,  76, 239,  96, 111,  58, 172,
      22,   0,   0,   0,   1,   0,   3,   0,
@@ -2280,20 +2280,20 @@ static const ::capnp::_::AlignedData<48> b_ac3a6f60ef4cc6d3 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_ac3a6f60ef4cc6d3 = b_ac3a6f60ef4cc6d3.words;
+::shark::word const* const bp_ac3a6f60ef4cc6d3 = b_ac3a6f60ef4cc6d3.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_ac3a6f60ef4cc6d3[] = {
+static const ::shark::_::RawSchema* const d_ac3a6f60ef4cc6d3[] = {
   &s_903455f06065422b,
   &s_d07378ede1f9cc60,
 };
 static const uint16_t m_ac3a6f60ef4cc6d3[] = {1, 0};
 static const uint16_t i_ac3a6f60ef4cc6d3[] = {0, 1};
-const ::capnp::_::RawSchema s_ac3a6f60ef4cc6d3 = {
+const ::shark::_::RawSchema s_ac3a6f60ef4cc6d3 = {
   0xac3a6f60ef4cc6d3, b_ac3a6f60ef4cc6d3.words, 48, d_ac3a6f60ef4cc6d3, m_ac3a6f60ef4cc6d3,
   2, 2, i_ac3a6f60ef4cc6d3, nullptr, nullptr, { &s_ac3a6f60ef4cc6d3, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<48> b_ed8bca69f7fb0cbf = {
+static const ::shark::_::AlignedData<48> b_ed8bca69f7fb0cbf = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     191,  12, 251, 247, 105, 202, 139, 237,
      22,   0,   0,   0,   1,   0,   3,   0,
@@ -2343,20 +2343,20 @@ static const ::capnp::_::AlignedData<48> b_ed8bca69f7fb0cbf = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_ed8bca69f7fb0cbf = b_ed8bca69f7fb0cbf.words;
+::shark::word const* const bp_ed8bca69f7fb0cbf = b_ed8bca69f7fb0cbf.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_ed8bca69f7fb0cbf[] = {
+static const ::shark::_::RawSchema* const d_ed8bca69f7fb0cbf[] = {
   &s_903455f06065422b,
   &s_d07378ede1f9cc60,
 };
 static const uint16_t m_ed8bca69f7fb0cbf[] = {1, 0};
 static const uint16_t i_ed8bca69f7fb0cbf[] = {0, 1};
-const ::capnp::_::RawSchema s_ed8bca69f7fb0cbf = {
+const ::shark::_::RawSchema s_ed8bca69f7fb0cbf = {
   0xed8bca69f7fb0cbf, b_ed8bca69f7fb0cbf.words, 48, d_ed8bca69f7fb0cbf, m_ed8bca69f7fb0cbf,
   2, 2, i_ed8bca69f7fb0cbf, nullptr, nullptr, { &s_ed8bca69f7fb0cbf, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<47> b_c2573fe8a23e49f1 = {
+static const ::shark::_::AlignedData<47> b_c2573fe8a23e49f1 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     241,  73,  62, 162, 232,  63,  87, 194,
      22,   0,   0,   0,   1,   0,   3,   0,
@@ -2405,9 +2405,9 @@ static const ::capnp::_::AlignedData<47> b_c2573fe8a23e49f1 = {
      77, 101, 116, 104, 111, 100,  80,  97,
     114,  97, 109, 101, 116, 101, 114,   0, }
 };
-::capnp::word const* const bp_c2573fe8a23e49f1 = b_c2573fe8a23e49f1.words;
+::shark::word const* const bp_c2573fe8a23e49f1 = b_c2573fe8a23e49f1.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_c2573fe8a23e49f1[] = {
+static const ::shark::_::RawSchema* const d_c2573fe8a23e49f1[] = {
   &s_8e3b5f79fe593656,
   &s_9dd1f724f4614a85,
   &s_baefc9120c56e274,
@@ -2415,12 +2415,12 @@ static const ::capnp::_::RawSchema* const d_c2573fe8a23e49f1[] = {
 };
 static const uint16_t m_c2573fe8a23e49f1[] = {2, 1, 0};
 static const uint16_t i_c2573fe8a23e49f1[] = {0, 1, 2};
-const ::capnp::_::RawSchema s_c2573fe8a23e49f1 = {
+const ::shark::_::RawSchema s_c2573fe8a23e49f1 = {
   0xc2573fe8a23e49f1, b_c2573fe8a23e49f1.words, 47, d_c2573fe8a23e49f1, m_c2573fe8a23e49f1,
   4, 3, i_c2573fe8a23e49f1, nullptr, nullptr, { &s_c2573fe8a23e49f1, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<81> b_8e3b5f79fe593656 = {
+static const ::shark::_::AlignedData<81> b_8e3b5f79fe593656 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      86,  54,  89, 254, 121,  95,  59, 142,
      33,   0,   0,   0,   1,   0,   3,   0,
@@ -2503,19 +2503,19 @@ static const ::capnp::_::AlignedData<81> b_8e3b5f79fe593656 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_8e3b5f79fe593656 = b_8e3b5f79fe593656.words;
+::shark::word const* const bp_8e3b5f79fe593656 = b_8e3b5f79fe593656.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_8e3b5f79fe593656[] = {
+static const ::shark::_::RawSchema* const d_8e3b5f79fe593656[] = {
   &s_c2573fe8a23e49f1,
 };
 static const uint16_t m_8e3b5f79fe593656[] = {0, 3, 2, 1};
 static const uint16_t i_8e3b5f79fe593656[] = {0, 1, 2, 3};
-const ::capnp::_::RawSchema s_8e3b5f79fe593656 = {
+const ::shark::_::RawSchema s_8e3b5f79fe593656 = {
   0x8e3b5f79fe593656, b_8e3b5f79fe593656.words, 81, d_8e3b5f79fe593656, m_8e3b5f79fe593656,
   1, 4, i_8e3b5f79fe593656, nullptr, nullptr, { &s_8e3b5f79fe593656, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<51> b_9dd1f724f4614a85 = {
+static const ::shark::_::AlignedData<51> b_9dd1f724f4614a85 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     133,  74,  97, 244,  36, 247, 209, 157,
      33,   0,   0,   0,   1,   0,   3,   0,
@@ -2568,19 +2568,19 @@ static const ::capnp::_::AlignedData<51> b_9dd1f724f4614a85 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_9dd1f724f4614a85 = b_9dd1f724f4614a85.words;
+::shark::word const* const bp_9dd1f724f4614a85 = b_9dd1f724f4614a85.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_9dd1f724f4614a85[] = {
+static const ::shark::_::RawSchema* const d_9dd1f724f4614a85[] = {
   &s_c2573fe8a23e49f1,
 };
 static const uint16_t m_9dd1f724f4614a85[] = {1, 0};
 static const uint16_t i_9dd1f724f4614a85[] = {0, 1};
-const ::capnp::_::RawSchema s_9dd1f724f4614a85 = {
+const ::shark::_::RawSchema s_9dd1f724f4614a85 = {
   0x9dd1f724f4614a85, b_9dd1f724f4614a85.words, 51, d_9dd1f724f4614a85, m_9dd1f724f4614a85,
   1, 2, i_9dd1f724f4614a85, nullptr, nullptr, { &s_9dd1f724f4614a85, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<38> b_baefc9120c56e274 = {
+static const ::shark::_::AlignedData<38> b_baefc9120c56e274 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     116, 226,  86,  12,  18, 201, 239, 186,
      33,   0,   0,   0,   1,   0,   3,   0,
@@ -2620,19 +2620,19 @@ static const ::capnp::_::AlignedData<38> b_baefc9120c56e274 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_baefc9120c56e274 = b_baefc9120c56e274.words;
+::shark::word const* const bp_baefc9120c56e274 = b_baefc9120c56e274.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_baefc9120c56e274[] = {
+static const ::shark::_::RawSchema* const d_baefc9120c56e274[] = {
   &s_c2573fe8a23e49f1,
 };
 static const uint16_t m_baefc9120c56e274[] = {0};
 static const uint16_t i_baefc9120c56e274[] = {0};
-const ::capnp::_::RawSchema s_baefc9120c56e274 = {
+const ::shark::_::RawSchema s_baefc9120c56e274 = {
   0xbaefc9120c56e274, b_baefc9120c56e274.words, 38, d_baefc9120c56e274, m_baefc9120c56e274,
   1, 1, i_baefc9120c56e274, nullptr, nullptr, { &s_baefc9120c56e274, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<43> b_903455f06065422b = {
+static const ::shark::_::AlignedData<43> b_903455f06065422b = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      43,  66, 101,  96, 240,  85,  52, 144,
      17,   0,   0,   0,   1,   0,   0,   0,
@@ -2677,19 +2677,19 @@ static const ::capnp::_::AlignedData<43> b_903455f06065422b = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_903455f06065422b = b_903455f06065422b.words;
+::shark::word const* const bp_903455f06065422b = b_903455f06065422b.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_903455f06065422b[] = {
+static const ::shark::_::RawSchema* const d_903455f06065422b[] = {
   &s_abd73485a9636bc9,
 };
 static const uint16_t m_903455f06065422b[] = {0};
 static const uint16_t i_903455f06065422b[] = {0};
-const ::capnp::_::RawSchema s_903455f06065422b = {
+const ::shark::_::RawSchema s_903455f06065422b = {
   0x903455f06065422b, b_903455f06065422b.words, 43, d_903455f06065422b, m_903455f06065422b,
   1, 1, i_903455f06065422b, nullptr, nullptr, { &s_903455f06065422b, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<68> b_abd73485a9636bc9 = {
+static const ::shark::_::AlignedData<68> b_abd73485a9636bc9 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     201, 107,  99, 169, 133,  52, 215, 171,
      23,   0,   0,   0,   1,   0,   2,   0,
@@ -2759,19 +2759,19 @@ static const ::capnp::_::AlignedData<68> b_abd73485a9636bc9 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_abd73485a9636bc9 = b_abd73485a9636bc9.words;
+::shark::word const* const bp_abd73485a9636bc9 = b_abd73485a9636bc9.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_abd73485a9636bc9[] = {
+static const ::shark::_::RawSchema* const d_abd73485a9636bc9[] = {
   &s_c863cd16969ee7fc,
 };
 static const uint16_t m_abd73485a9636bc9[] = {1, 2, 0};
 static const uint16_t i_abd73485a9636bc9[] = {1, 2, 0};
-const ::capnp::_::RawSchema s_abd73485a9636bc9 = {
+const ::shark::_::RawSchema s_abd73485a9636bc9 = {
   0xabd73485a9636bc9, b_abd73485a9636bc9.words, 68, d_abd73485a9636bc9, m_abd73485a9636bc9,
   1, 3, i_abd73485a9636bc9, nullptr, nullptr, { &s_abd73485a9636bc9, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<49> b_c863cd16969ee7fc = {
+static const ::shark::_::AlignedData<49> b_c863cd16969ee7fc = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     252, 231, 158, 150,  22, 205,  99, 200,
      23,   0,   0,   0,   1,   0,   1,   0,
@@ -2822,19 +2822,19 @@ static const ::capnp::_::AlignedData<49> b_c863cd16969ee7fc = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_c863cd16969ee7fc = b_c863cd16969ee7fc.words;
+::shark::word const* const bp_c863cd16969ee7fc = b_c863cd16969ee7fc.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_c863cd16969ee7fc[] = {
+static const ::shark::_::RawSchema* const d_c863cd16969ee7fc[] = {
   &s_d07378ede1f9cc60,
 };
 static const uint16_t m_c863cd16969ee7fc[] = {1, 0};
 static const uint16_t i_c863cd16969ee7fc[] = {0, 1};
-const ::capnp::_::RawSchema s_c863cd16969ee7fc = {
+const ::shark::_::RawSchema s_c863cd16969ee7fc = {
   0xc863cd16969ee7fc, b_c863cd16969ee7fc.words, 49, d_c863cd16969ee7fc, m_c863cd16969ee7fc,
   1, 2, i_c863cd16969ee7fc, nullptr, nullptr, { &s_c863cd16969ee7fc, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<305> b_ce23dcd2d7b00c9b = {
+static const ::shark::_::AlignedData<305> b_ce23dcd2d7b00c9b = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     155,  12, 176, 215, 210, 220,  35, 206,
      17,   0,   0,   0,   1,   0,   2,   0,
@@ -3141,16 +3141,16 @@ static const ::capnp::_::AlignedData<305> b_ce23dcd2d7b00c9b = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_ce23dcd2d7b00c9b = b_ce23dcd2d7b00c9b.words;
+::shark::word const* const bp_ce23dcd2d7b00c9b = b_ce23dcd2d7b00c9b.words;
 #if !SHARK_LITE
 static const uint16_t m_ce23dcd2d7b00c9b[] = {18, 1, 13, 15, 10, 11, 3, 4, 5, 2, 17, 14, 16, 12, 7, 8, 9, 6, 0};
 static const uint16_t i_ce23dcd2d7b00c9b[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
-const ::capnp::_::RawSchema s_ce23dcd2d7b00c9b = {
+const ::shark::_::RawSchema s_ce23dcd2d7b00c9b = {
   0xce23dcd2d7b00c9b, b_ce23dcd2d7b00c9b.words, 305, nullptr, m_ce23dcd2d7b00c9b,
   0, 19, i_ce23dcd2d7b00c9b, nullptr, nullptr, { &s_ce23dcd2d7b00c9b, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<64> b_f1c8950dab257542 = {
+static const ::shark::_::AlignedData<64> b_f1c8950dab257542 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      66, 117,  37, 171,  13, 149, 200, 241,
      17,   0,   0,   0,   1,   0,   1,   0,
@@ -3216,20 +3216,20 @@ static const ::capnp::_::AlignedData<64> b_f1c8950dab257542 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_f1c8950dab257542 = b_f1c8950dab257542.words;
+::shark::word const* const bp_f1c8950dab257542 = b_f1c8950dab257542.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_f1c8950dab257542[] = {
+static const ::shark::_::RawSchema* const d_f1c8950dab257542[] = {
   &s_903455f06065422b,
   &s_ce23dcd2d7b00c9b,
 };
 static const uint16_t m_f1c8950dab257542[] = {2, 0, 1};
 static const uint16_t i_f1c8950dab257542[] = {0, 1, 2};
-const ::capnp::_::RawSchema s_f1c8950dab257542 = {
+const ::shark::_::RawSchema s_f1c8950dab257542 = {
   0xf1c8950dab257542, b_f1c8950dab257542.words, 64, d_f1c8950dab257542, m_f1c8950dab257542,
   2, 3, i_f1c8950dab257542, nullptr, nullptr, { &s_f1c8950dab257542, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<55> b_d1958f7dba521926 = {
+static const ::shark::_::AlignedData<55> b_d1958f7dba521926 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      38,  25,  82, 186, 125, 143, 149, 209,
      17,   0,   0,   0,   2,   0,   0,   0,
@@ -3286,16 +3286,16 @@ static const ::capnp::_::AlignedData<55> b_d1958f7dba521926 = {
     105, 110, 108, 105, 110, 101,  67, 111,
     109, 112, 111, 115, 105, 116, 101,   0, }
 };
-::capnp::word const* const bp_d1958f7dba521926 = b_d1958f7dba521926.words;
+::shark::word const* const bp_d1958f7dba521926 = b_d1958f7dba521926.words;
 #if !SHARK_LITE
 static const uint16_t m_d1958f7dba521926[] = {1, 2, 5, 0, 4, 7, 6, 3};
-const ::capnp::_::RawSchema s_d1958f7dba521926 = {
+const ::shark::_::RawSchema s_d1958f7dba521926 = {
   0xd1958f7dba521926, b_d1958f7dba521926.words, 55, nullptr, m_d1958f7dba521926,
   0, 8, nullptr, nullptr, nullptr, { &s_d1958f7dba521926, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
 SHARK_DEFINE_ENUM(ElementSize_d1958f7dba521926, d1958f7dba521926);
-static const ::capnp::_::AlignedData<64> b_d85d305b7d839963 = {
+static const ::shark::_::AlignedData<64> b_d85d305b7d839963 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      99, 153, 131, 125,  91,  48,  93, 216,
      17,   0,   0,   0,   1,   0,   1,   0,
@@ -3361,16 +3361,16 @@ static const ::capnp::_::AlignedData<64> b_d85d305b7d839963 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_d85d305b7d839963 = b_d85d305b7d839963.words;
+::shark::word const* const bp_d85d305b7d839963 = b_d85d305b7d839963.words;
 #if !SHARK_LITE
 static const uint16_t m_d85d305b7d839963[] = {0, 2, 1};
 static const uint16_t i_d85d305b7d839963[] = {0, 1, 2};
-const ::capnp::_::RawSchema s_d85d305b7d839963 = {
+const ::shark::_::RawSchema s_d85d305b7d839963 = {
   0xd85d305b7d839963, b_d85d305b7d839963.words, 64, nullptr, m_d85d305b7d839963,
   0, 3, i_d85d305b7d839963, nullptr, nullptr, { &s_d85d305b7d839963, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<99> b_bfc546f6210ad7ce = {
+static const ::shark::_::AlignedData<99> b_bfc546f6210ad7ce = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     206, 215,  10,  33, 246,  70, 197, 191,
      17,   0,   0,   0,   1,   0,   0,   0,
@@ -3471,9 +3471,9 @@ static const ::capnp::_::AlignedData<99> b_bfc546f6210ad7ce = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_bfc546f6210ad7ce = b_bfc546f6210ad7ce.words;
+::shark::word const* const bp_bfc546f6210ad7ce = b_bfc546f6210ad7ce.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_bfc546f6210ad7ce[] = {
+static const ::shark::_::RawSchema* const d_bfc546f6210ad7ce[] = {
   &s_cfea0eb02e810062,
   &s_d85d305b7d839963,
   &s_e682ab4cf923a417,
@@ -3481,12 +3481,12 @@ static const ::capnp::_::RawSchema* const d_bfc546f6210ad7ce[] = {
 };
 static const uint16_t m_bfc546f6210ad7ce[] = {2, 0, 1, 3};
 static const uint16_t i_bfc546f6210ad7ce[] = {0, 1, 2, 3};
-const ::capnp::_::RawSchema s_bfc546f6210ad7ce = {
+const ::shark::_::RawSchema s_bfc546f6210ad7ce = {
   0xbfc546f6210ad7ce, b_bfc546f6210ad7ce.words, 99, d_bfc546f6210ad7ce, m_bfc546f6210ad7ce,
   4, 4, i_bfc546f6210ad7ce, nullptr, nullptr, { &s_bfc546f6210ad7ce, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<95> b_cfea0eb02e810062 = {
+static const ::shark::_::AlignedData<95> b_cfea0eb02e810062 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      98,   0, 129,  46, 176,  14, 234, 207,
      38,   0,   0,   0,   1,   0,   1,   0,
@@ -3583,20 +3583,20 @@ static const ::capnp::_::AlignedData<95> b_cfea0eb02e810062 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_cfea0eb02e810062 = b_cfea0eb02e810062.words;
+::shark::word const* const bp_cfea0eb02e810062 = b_cfea0eb02e810062.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_cfea0eb02e810062[] = {
+static const ::shark::_::RawSchema* const d_cfea0eb02e810062[] = {
   &s_ae504193122357e5,
   &s_f8ea2bf176925da0,
 };
 static const uint16_t m_cfea0eb02e810062[] = {3, 1, 0, 2};
 static const uint16_t i_cfea0eb02e810062[] = {0, 1, 2, 3};
-const ::capnp::_::RawSchema s_cfea0eb02e810062 = {
+const ::shark::_::RawSchema s_cfea0eb02e810062 = {
   0xcfea0eb02e810062, b_cfea0eb02e810062.words, 95, d_cfea0eb02e810062, m_cfea0eb02e810062,
   2, 4, i_cfea0eb02e810062, nullptr, nullptr, { &s_cfea0eb02e810062, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<53> b_ae504193122357e5 = {
+static const ::shark::_::AlignedData<53> b_ae504193122357e5 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     229,  87,  35,  18, 147,  65,  80, 174,
      52,   0,   0,   0,   1,   0,   1,   0,
@@ -3651,16 +3651,16 @@ static const ::capnp::_::AlignedData<53> b_ae504193122357e5 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_ae504193122357e5 = b_ae504193122357e5.words;
+::shark::word const* const bp_ae504193122357e5 = b_ae504193122357e5.words;
 #if !SHARK_LITE
 static const uint16_t m_ae504193122357e5[] = {0, 1};
 static const uint16_t i_ae504193122357e5[] = {0, 1};
-const ::capnp::_::RawSchema s_ae504193122357e5 = {
+const ::shark::_::RawSchema s_ae504193122357e5 = {
   0xae504193122357e5, b_ae504193122357e5.words, 53, nullptr, m_ae504193122357e5,
   0, 2, i_ae504193122357e5, nullptr, nullptr, { &s_ae504193122357e5, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<48> b_f8ea2bf176925da0 = {
+static const ::shark::_::AlignedData<48> b_f8ea2bf176925da0 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     160,  93, 146, 118, 241,  43, 234, 248,
      52,   0,   0,   0,   1,   0,   0,   0,
@@ -3710,19 +3710,19 @@ static const ::capnp::_::AlignedData<48> b_f8ea2bf176925da0 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_f8ea2bf176925da0 = b_f8ea2bf176925da0.words;
+::shark::word const* const bp_f8ea2bf176925da0 = b_f8ea2bf176925da0.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_f8ea2bf176925da0[] = {
+static const ::shark::_::RawSchema* const d_f8ea2bf176925da0[] = {
   &s_dda719892e0499bb,
 };
 static const uint16_t m_f8ea2bf176925da0[] = {0};
 static const uint16_t i_f8ea2bf176925da0[] = {0};
-const ::capnp::_::RawSchema s_f8ea2bf176925da0 = {
+const ::shark::_::RawSchema s_f8ea2bf176925da0 = {
   0xf8ea2bf176925da0, b_f8ea2bf176925da0.words, 48, d_f8ea2bf176925da0, m_f8ea2bf176925da0,
   1, 1, i_f8ea2bf176925da0, nullptr, nullptr, { &s_f8ea2bf176925da0, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<79> b_dda719892e0499bb = {
+static const ::shark::_::AlignedData<79> b_dda719892e0499bb = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     187, 153,   4,  46, 137,  25, 167, 221,
      67,   0,   0,   0,   1,   0,   3,   0,
@@ -3803,19 +3803,19 @@ static const ::capnp::_::AlignedData<79> b_dda719892e0499bb = {
       0,   0,   0,   0,   0,   0,   0,   0,
     109, 101, 109,  98, 101, 114,   0,   0, }
 };
-::capnp::word const* const bp_dda719892e0499bb = b_dda719892e0499bb.words;
+::shark::word const* const bp_dda719892e0499bb = b_dda719892e0499bb.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_dda719892e0499bb[] = {
+static const ::shark::_::RawSchema* const d_dda719892e0499bb[] = {
   &s_fc69d5e1d630a151,
 };
 static const uint16_t m_dda719892e0499bb[] = {1, 3, 0, 2};
 static const uint16_t i_dda719892e0499bb[] = {2, 3, 0, 1};
-const ::capnp::_::RawSchema s_dda719892e0499bb = {
+const ::shark::_::RawSchema s_dda719892e0499bb = {
   0xdda719892e0499bb, b_dda719892e0499bb.words, 79, d_dda719892e0499bb, m_dda719892e0499bb,
   1, 4, i_dda719892e0499bb, nullptr, nullptr, { &s_dda719892e0499bb, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<56> b_fc69d5e1d630a151 = {
+static const ::shark::_::AlignedData<56> b_fc69d5e1d630a151 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      81, 161,  48, 214, 225, 213, 105, 252,
      78,   0,   0,   0,   1,   0,   3,   0,
@@ -3873,24 +3873,24 @@ static const ::capnp::_::AlignedData<56> b_fc69d5e1d630a151 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_fc69d5e1d630a151 = b_fc69d5e1d630a151.words;
+::shark::word const* const bp_fc69d5e1d630a151 = b_fc69d5e1d630a151.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_fc69d5e1d630a151[] = {
+static const ::shark::_::RawSchema* const d_fc69d5e1d630a151[] = {
   &s_dda719892e0499bb,
 };
 static const uint16_t m_fc69d5e1d630a151[] = {1, 0};
 static const uint16_t i_fc69d5e1d630a151[] = {0, 1};
-const ::capnp::_::RawSchema s_fc69d5e1d630a151 = {
+const ::shark::_::RawSchema s_fc69d5e1d630a151 = {
   0xfc69d5e1d630a151, b_fc69d5e1d630a151.words, 56, d_fc69d5e1d630a151, m_fc69d5e1d630a151,
   1, 2, i_fc69d5e1d630a151, nullptr, nullptr, { &s_fc69d5e1d630a151, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
 }  // namespace schemas
-}  // namespace capnp
+}  // namespace shark
 
 // =======================================================================================
 
-namespace capnp {
+namespace shark {
 namespace schema {
 
 // Node
@@ -3900,8 +3900,8 @@ constexpr uint16_t Node::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Node::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Node::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -3912,8 +3912,8 @@ constexpr uint16_t Node::Parameter::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Node::Parameter::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Node::Parameter::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::Parameter::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::Parameter::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -3924,8 +3924,8 @@ constexpr uint16_t Node::NestedNode::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Node::NestedNode::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Node::NestedNode::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::NestedNode::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::NestedNode::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -3936,8 +3936,8 @@ constexpr uint16_t Node::SourceInfo::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Node::SourceInfo::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Node::SourceInfo::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::SourceInfo::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::SourceInfo::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -3948,8 +3948,8 @@ constexpr uint16_t Node::SourceInfo::Member::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Node::SourceInfo::Member::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Node::SourceInfo::Member::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::SourceInfo::Member::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::SourceInfo::Member::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -3960,8 +3960,8 @@ constexpr uint16_t Node::Struct::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Node::Struct::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Node::Struct::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::Struct::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::Struct::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -3972,8 +3972,8 @@ constexpr uint16_t Node::Enum::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Node::Enum::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Node::Enum::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::Enum::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::Enum::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -3984,8 +3984,8 @@ constexpr uint16_t Node::Interface::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Node::Interface::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Node::Interface::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::Interface::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::Interface::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -3996,8 +3996,8 @@ constexpr uint16_t Node::Const::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Node::Const::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Node::Const::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::Const::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::Const::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4008,8 +4008,8 @@ constexpr uint16_t Node::Annotation::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Node::Annotation::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Node::Annotation::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::Annotation::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::Annotation::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4020,8 +4020,8 @@ constexpr uint16_t Field::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Field::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Field::_capnpPrivate::schema;
+constexpr ::shark::Kind Field::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Field::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4035,8 +4035,8 @@ constexpr uint16_t Field::Slot::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Field::Slot::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Field::Slot::_capnpPrivate::schema;
+constexpr ::shark::Kind Field::Slot::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Field::Slot::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4047,8 +4047,8 @@ constexpr uint16_t Field::Group::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Field::Group::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Field::Group::_capnpPrivate::schema;
+constexpr ::shark::Kind Field::Group::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Field::Group::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4059,8 +4059,8 @@ constexpr uint16_t Field::Ordinal::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Field::Ordinal::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Field::Ordinal::_capnpPrivate::schema;
+constexpr ::shark::Kind Field::Ordinal::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Field::Ordinal::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4071,8 +4071,8 @@ constexpr uint16_t Enumerant::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Enumerant::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Enumerant::_capnpPrivate::schema;
+constexpr ::shark::Kind Enumerant::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Enumerant::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4083,8 +4083,8 @@ constexpr uint16_t Superclass::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Superclass::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Superclass::_capnpPrivate::schema;
+constexpr ::shark::Kind Superclass::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Superclass::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4095,8 +4095,8 @@ constexpr uint16_t Method::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Method::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Method::_capnpPrivate::schema;
+constexpr ::shark::Kind Method::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Method::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4107,8 +4107,8 @@ constexpr uint16_t Type::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Type::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Type::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4119,8 +4119,8 @@ constexpr uint16_t Type::List::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Type::List::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Type::List::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::List::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::List::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4131,8 +4131,8 @@ constexpr uint16_t Type::Enum::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Type::Enum::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Type::Enum::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::Enum::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::Enum::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4143,8 +4143,8 @@ constexpr uint16_t Type::Struct::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Type::Struct::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Type::Struct::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::Struct::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::Struct::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4155,8 +4155,8 @@ constexpr uint16_t Type::Interface::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Type::Interface::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Type::Interface::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::Interface::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::Interface::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4167,8 +4167,8 @@ constexpr uint16_t Type::AnyPointer::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Type::AnyPointer::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Type::AnyPointer::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::AnyPointer::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::AnyPointer::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4179,8 +4179,8 @@ constexpr uint16_t Type::AnyPointer::Unconstrained::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Type::AnyPointer::Unconstrained::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Type::AnyPointer::Unconstrained::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::AnyPointer::Unconstrained::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::AnyPointer::Unconstrained::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4191,8 +4191,8 @@ constexpr uint16_t Type::AnyPointer::Parameter::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Type::AnyPointer::Parameter::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Type::AnyPointer::Parameter::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::AnyPointer::Parameter::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::AnyPointer::Parameter::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4203,8 +4203,8 @@ constexpr uint16_t Type::AnyPointer::ImplicitMethodParameter::_capnpPrivate::poi
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Type::AnyPointer::ImplicitMethodParameter::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Type::AnyPointer::ImplicitMethodParameter::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::AnyPointer::ImplicitMethodParameter::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::AnyPointer::ImplicitMethodParameter::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4215,8 +4215,8 @@ constexpr uint16_t Brand::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Brand::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Brand::_capnpPrivate::schema;
+constexpr ::shark::Kind Brand::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Brand::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4227,8 +4227,8 @@ constexpr uint16_t Brand::Scope::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Brand::Scope::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Brand::Scope::_capnpPrivate::schema;
+constexpr ::shark::Kind Brand::Scope::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Brand::Scope::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4239,8 +4239,8 @@ constexpr uint16_t Brand::Binding::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Brand::Binding::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Brand::Binding::_capnpPrivate::schema;
+constexpr ::shark::Kind Brand::Binding::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Brand::Binding::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4251,8 +4251,8 @@ constexpr uint16_t Value::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Value::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Value::_capnpPrivate::schema;
+constexpr ::shark::Kind Value::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Value::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4263,8 +4263,8 @@ constexpr uint16_t Annotation::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind Annotation::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* Annotation::_capnpPrivate::schema;
+constexpr ::shark::Kind Annotation::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* Annotation::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4275,8 +4275,8 @@ constexpr uint16_t CapnpVersion::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind CapnpVersion::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* CapnpVersion::_capnpPrivate::schema;
+constexpr ::shark::Kind CapnpVersion::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* CapnpVersion::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4287,8 +4287,8 @@ constexpr uint16_t CodeGeneratorRequest::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind CodeGeneratorRequest::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* CodeGeneratorRequest::_capnpPrivate::schema;
+constexpr ::shark::Kind CodeGeneratorRequest::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4299,8 +4299,8 @@ constexpr uint16_t CodeGeneratorRequest::RequestedFile::_capnpPrivate::pointerCo
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind CodeGeneratorRequest::RequestedFile::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* CodeGeneratorRequest::RequestedFile::_capnpPrivate::schema;
+constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4311,8 +4311,8 @@ constexpr uint16_t CodeGeneratorRequest::RequestedFile::Import::_capnpPrivate::p
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind CodeGeneratorRequest::RequestedFile::Import::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* CodeGeneratorRequest::RequestedFile::Import::_capnpPrivate::schema;
+constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::Import::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::Import::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4323,8 +4323,8 @@ constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::_capnpPr
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::_capnpPrivate::schema;
+constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4335,8 +4335,8 @@ constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifi
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_capnpPrivate::schema;
+constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4347,8 +4347,8 @@ constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifi
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_capnpPrivate::schema;
+constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 

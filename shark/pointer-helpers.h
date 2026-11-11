@@ -26,7 +26,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 
 // PointerHelpers is a template class that assists in wrapping/unwrapping the low-level types in
@@ -152,6 +152,6 @@ struct PointerHelpers<UncheckedMessage> {
 };
 
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

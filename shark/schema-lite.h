@@ -26,7 +26,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 template <typename T, typename CapnpPrivate = typename T::_capnpPrivate>
 inline schema::Node::Reader schemaProto() {
@@ -40,6 +40,6 @@ inline schema::Node::Reader schemaProto() {
   return readMessageUnchecked<schema::Node>(schemas::EnumInfo<T>::encodedSchema());
 }
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

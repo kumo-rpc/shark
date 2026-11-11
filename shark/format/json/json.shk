@@ -21,7 +21,7 @@
 
 @0x8ef99297a43a5e34;
 
-$import "/shark/c++.shk".namespace("capnp::json");
+$import "/shark/c++.shk".namespace("shark::json");
 
 struct Value {
   union {

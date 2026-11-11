@@ -35,7 +35,7 @@
 #include <atomic>
 #endif
 
-namespace capnp {
+namespace shark {
 
 namespace {
 
@@ -1728,7 +1728,7 @@ void SchemaLoader::Impl::makeDep(_::RawBrandedSchema::Binding& result,
     schema::Brand::Reader brand, kj::StringPtr scopeName,
     kj::Maybe<kj::ArrayPtr<const _::RawBrandedSchema::Scope>> brandBindings) {
   const _::RawSchema* schema;
-  if (typeId == capnp::typeId<StreamResult>()) {
+  if (typeId == shark::typeId<StreamResult>()) {
     // StreamResult is a very special type that is used to mark when a method is declared as
     // streaming ("foo @0 () -> stream;"). We like to auto-load it if we see it as someone's
     // dependency.
@@ -2267,4 +2267,4 @@ void SchemaLoader::loadNative(const _::RawSchema* nativeSchema) {
   impl.lockExclusive()->get()->loadNative(nativeSchema);
 }
 
-}  // namespace capnp
+}  // namespace shark

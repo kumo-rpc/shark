@@ -22,7 +22,7 @@
 using Cxx = import "/shark/c++.shk";
 
 @0xff75ddc6a36723c9;
-$Cxx.namespace("capnp::benchmark::capnp");
+$Cxx.namespace("shark::benchmark::shark");
 
 struct ParkingLot {
   cars@0: List(Car);

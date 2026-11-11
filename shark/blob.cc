@@ -21,8 +21,8 @@
 
 #include "blob.h"
 
-namespace capnp {
+namespace shark {
 
 char Text::Builder::nulstr[1] = "";
 
-}  // namespace capnp
+}  // namespace shark

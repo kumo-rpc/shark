@@ -260,8 +260,8 @@ template <typename To, typename From>
 Array<To> coerceTo(Array<From>&& array) {
   static_assert(sizeof(To) == sizeof(From), "incompatible coercion");
   Array<wchar_t> result;
-  memcpy(&result, &array, sizeof(array));
-  memset(&array, 0, sizeof(array));
+  memcpy(reinterpret_cast<void*>(&result), &array, sizeof(array));
+  memset(reinterpret_cast<void*>(&array), 0, sizeof(array));
   return result;
 }
 

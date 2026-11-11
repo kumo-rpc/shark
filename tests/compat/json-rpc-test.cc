@@ -23,7 +23,7 @@
 #include <tests/test-util.h>
 #include <tests/base/test.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -97,4 +97,4 @@ KJ_TEST("json-rpc multiple calls") {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

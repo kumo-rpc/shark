@@ -49,7 +49,7 @@
 #define VERSION "(unknown)"
 #endif
 
-namespace capnp {
+namespace shark {
 namespace {
 
 bool hasDiscriminantValue(const schema::Field::Reader& reader) {
@@ -683,6 +683,6 @@ private:
 };
 
 }  // namespace
-}  // namespace capnp
+}  // namespace shark
 
-KJ_MAIN(capnp::CapnpcCapnpMain);
+KJ_MAIN(shark::CapnpcCapnpMain);

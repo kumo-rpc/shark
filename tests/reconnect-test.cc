@@ -26,7 +26,7 @@
 #include <shark/base/debug.h>
 #include <tests/base/test.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {
 namespace {
 
@@ -225,4 +225,4 @@ KJ_TEST("lazyAutoReconnect() initialies lazily") {
 
 }  // namespace
 }  // namespace _
-}  // namespace capnp
+}  // namespace shark

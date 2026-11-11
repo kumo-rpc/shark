@@ -22,7 +22,7 @@
 using Cxx = import "/shark/c++.shk";
 
 @0xe12dc4c3e70e9eda;
-$Cxx.namespace("capnp::benchmark::capnp");
+$Cxx.namespace("shark::benchmark::shark");
 
 enum Operation {
   add @0;

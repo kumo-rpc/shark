@@ -24,7 +24,7 @@
 #include <tests/base/test.h>
 #include <stdlib.h>
 
-namespace capnp {
+namespace shark {
 namespace {
 
 kj::Promise<void> expectRead(kj::AsyncInputStream& in, kj::StringPtr expected) {
@@ -302,10 +302,10 @@ KJ_TEST("KJ -> ByteStream RPC -> KJ pipe -> ByteStream RPC -> KJ with shortening
   auto backPumpPromise = backPipe.in->pumpTo(exactPointerWriter);
 
   auto rpcConnection = kj::newTwoWayPipe();
-  capnp::TwoPartyClient client(*rpcConnection.ends[0],
+  shark::TwoPartyClient client(*rpcConnection.ends[0],
       clientFactory.kjToCapnp(kj::mv(backPipe.out)),
       rpc::twoparty::Side::CLIENT);
-  capnp::TwoPartyClient server(*rpcConnection.ends[1],
+  shark::TwoPartyClient server(*rpcConnection.ends[1],
       serverFactory.kjToCapnp(kj::mv(middlePipe.out)),
       rpc::twoparty::Side::SERVER);
 
@@ -372,10 +372,10 @@ KJ_TEST("KJ -> ByteStream RPC -> KJ pipe -> ByteStream RPC -> KJ with concurrent
   auto backPumpPromise = backPipe.in->pumpTo(exactPointerWriter);
 
   auto rpcConnection = kj::newTwoWayPipe();
-  capnp::TwoPartyClient client(*rpcConnection.ends[0],
+  shark::TwoPartyClient client(*rpcConnection.ends[0],
       clientFactory.kjToCapnp(kj::mv(backPipe.out)),
       rpc::twoparty::Side::CLIENT);
-  capnp::TwoPartyClient server(*rpcConnection.ends[1],
+  shark::TwoPartyClient server(*rpcConnection.ends[1],
       serverFactory.kjToCapnp(kj::mv(middlePipe.out)),
       rpc::twoparty::Side::SERVER);
 
@@ -443,10 +443,10 @@ KJ_TEST("KJ -> KJ pipe -> ByteStream RPC -> KJ pipe -> ByteStream RPC -> KJ with
   auto backPumpPromise = backPipe.in->pumpTo(exactPointerWriter);
 
   auto rpcConnection = kj::newTwoWayPipe();
-  capnp::TwoPartyClient client(*rpcConnection.ends[0],
+  shark::TwoPartyClient client(*rpcConnection.ends[0],
       clientFactory.kjToCapnp(kj::mv(backPipe.out)),
       rpc::twoparty::Side::CLIENT);
-  capnp::TwoPartyClient server(*rpcConnection.ends[1],
+  shark::TwoPartyClient server(*rpcConnection.ends[1],
       serverFactory.kjToCapnp(kj::mv(middlePipe.out)),
       rpc::twoparty::Side::SERVER);
 
@@ -647,8 +647,8 @@ KJ_TEST("KJ -> ByteStream RPC -> KJ promise stream -> ByteStream -> KJ") {
   auto backCap = factory.kjToCapnp(kj::newPromisedStream(kj::mv(paf.promise)));
 
   auto rpcPipe = kj::newTwoWayPipe();
-  capnp::TwoPartyClient client(*rpcPipe.ends[0]);
-  capnp::TwoPartyClient server(*rpcPipe.ends[1], kj::mv(backCap), rpc::twoparty::Side::SERVER);
+  shark::TwoPartyClient client(*rpcPipe.ends[0]);
+  shark::TwoPartyClient server(*rpcPipe.ends[1], kj::mv(backCap), rpc::twoparty::Side::SERVER);
   auto front = factory.capnpToKj(client.bootstrap().castAs<ByteStream>());
 
   // These will all queue up in the RPC layer.
@@ -712,4 +712,4 @@ KJ_TEST("KJ -> ByteStream RPC -> KJ promise stream -> ByteStream -> KJ") {
 // - Again, but with shortening which only occurs after some promise resolve.
 
 }  // namespace
-}  // namespace capnp
+}  // namespace shark

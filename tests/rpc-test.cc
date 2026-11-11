@@ -33,15 +33,15 @@
 #include <shark/base/string-tree.h>
 
 // TODO(cleanup): Auto-generate stringification functions for union discriminants.
-namespace capnp {
+namespace shark {
 namespace rpc {
 inline kj::String KJ_STRINGIFY(Message::Which which) {
   return kj::str(static_cast<uint16_t>(which));
 }
 }  // namespace rpc
-}  // namespace capnp
+}  // namespace shark
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -1104,7 +1104,7 @@ TEST(Rpc, EmbargoUnwrap) {
 
   TestContext context;
 
-  capnp::CapabilityServerSet<test::TestCallOrder> capSet;
+  shark::CapabilityServerSet<test::TestCallOrder> capSet;
 
   auto client = context.connect(test::TestSturdyRefObjectId::Tag::TEST_MORE_STUFF)
       .castAs<test::TestMoreStuff>();
@@ -1249,7 +1249,7 @@ TEST(Rpc, CallBrokenPromise) {
 
   bool returned = false;
   auto req = client.callHeldRequest().send()
-      .then([&](capnp::Response<test::TestMoreStuff::CallHeldResults>&&) {
+      .then([&](shark::Response<test::TestMoreStuff::CallHeldResults>&&) {
     returned = true;
   }, [&](kj::Exception&& e) {
     returned = true;
@@ -1476,7 +1476,7 @@ KJ_TEST("when OutgoingRpcMessage::send() throws, we don't leak exports") {
     auto message = builder.getRoot<rpc::Message>().asReader();
     if (message.isCall()) {
       auto call = message.getCall();
-      if (call.getInterfaceId() == capnp::typeId<test::TestMoreStuff>() &&
+      if (call.getInterfaceId() == shark::typeId<test::TestMoreStuff>() &&
           call.getMethodId() == 0) {
         // callFoo() request, expect a capability in the param caps. Specifically we expect a
         // promise, because that's what we send below.
@@ -1586,7 +1586,7 @@ KJ_TEST("export the same promise twice") {
     auto message = builder.getRoot<rpc::Message>().asReader();
     if (message.isCall()) {
       auto call = message.getCall();
-      if (call.getInterfaceId() == capnp::typeId<test::TestMoreStuff>() &&
+      if (call.getInterfaceId() == shark::typeId<test::TestMoreStuff>() &&
           call.getMethodId() == 0) {
         // callFoo() request, expect a capability in the param caps. Specifically we expect a
         // promise, because that's what we send below.
@@ -1663,4 +1663,4 @@ KJ_TEST("export the same promise twice") {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

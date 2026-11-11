@@ -30,7 +30,7 @@
 #include  <shark/capability.h>
 #endif  // !SHARK_LITE
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 
 #if !SHARK_LITE
@@ -311,7 +311,7 @@ struct WirePointer {
 
 };
 static_assert(sizeof(WirePointer) == sizeof(word),
-    "capnp::WirePointer is not exactly one word.  This will probably break everything.");
+    "shark::WirePointer is not exactly one word.  This will probably break everything.");
 static_assert(unboundAs<size_t>(POINTERS * WORDS_PER_POINTER * BYTES_PER_WORD / BYTES) ==
               sizeof(WirePointer),
     "WORDS_PER_POINTER is wrong.");
@@ -1977,7 +1977,7 @@ struct WireHelpers {
     switch (src->kind()) {
       case WirePointer::STRUCT:
         KJ_REQUIRE(nestingLimit > 0,
-              "Message is too deeply-nested or contains cycles.  See capnp::ReaderOptions.") {
+              "Message is too deeply-nested or contains cycles.  See shark::ReaderOptions.") {
           goto useDefault;
         }
 
@@ -1998,7 +1998,7 @@ struct WireHelpers {
         ElementSize elementSize = src->listRef.elementSize();
 
         KJ_REQUIRE(nestingLimit > 0,
-              "Message is too deeply-nested or contains cycles.  See capnp::ReaderOptions.") {
+              "Message is too deeply-nested or contains cycles.  See shark::ReaderOptions.") {
           goto useDefault;
         }
 
@@ -2184,7 +2184,7 @@ struct WireHelpers {
     }
 
     KJ_REQUIRE(nestingLimit > 0,
-               "Message is too deeply-nested or contains cycles.  See capnp::ReaderOptions.") {
+               "Message is too deeply-nested or contains cycles.  See shark::ReaderOptions.") {
       goto useDefault;
     }
 
@@ -2275,7 +2275,7 @@ struct WireHelpers {
     }
 
     KJ_REQUIRE(nestingLimit > 0,
-               "Message is too deeply-nested or contains cycles.  See capnp::ReaderOptions.") {
+               "Message is too deeply-nested or contains cycles.  See shark::ReaderOptions.") {
       goto useDefault;
     }
 
@@ -3163,7 +3163,7 @@ kj::ArrayPtr<const byte> ListReader::asRawBytes() const {
 
 StructReader ListReader::getStructElement(ElementCount index) const {
   KJ_REQUIRE(nestingLimit > 0,
-             "Message is too deeply-nested or contains cycles.  See capnp::ReaderOptions.") {
+             "Message is too deeply-nested or contains cycles.  See shark::ReaderOptions.") {
     return StructReader();
   }
 
@@ -3890,4 +3890,4 @@ void OrphanBuilder::euthanize() {
 }
 
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

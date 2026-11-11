@@ -29,7 +29,7 @@
 #include <shark/base/io.h>
 #include <shark/base/miniposix.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -1195,4 +1195,4 @@ kj::Promise<void> TestMoreStuffImpl::throwRemoteException(ThrowRemoteExceptionCo
 #endif  // !SHARK_LITE
 
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

@@ -24,7 +24,7 @@
 #include "../dynamic.h"
 #include <shark/base/debug.h>
 
-namespace capnp {
+namespace shark {
 
 DynamicCapability::Client DynamicCapability::Client::upcast(InterfaceSchema requestedSchema) {
   KJ_REQUIRE(schema.extends(requestedSchema), "Can't upcast to non-superclass.") {}
@@ -107,4 +107,4 @@ kj::Promise<void> Request<DynamicStruct, DynamicStruct>::sendStreaming() {
   return promise;
 }
 
-}  // namespace capnp
+}  // namespace shark

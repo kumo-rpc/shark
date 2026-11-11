@@ -29,7 +29,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 class OutgoingRpcMessage;
 class IncomingRpcMessage;
@@ -98,10 +98,10 @@ private:
   void baseSetFlowLimit(size_t words);
 
   template <typename>
-  friend class capnp::RpcSystem;
+  friend class shark::RpcSystem;
 };
 
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

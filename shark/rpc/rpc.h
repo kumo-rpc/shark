@@ -28,7 +28,7 @@ SHARK_BEGIN_HEADER
 
 namespace kj { class AutoCloseFd; }
 
-namespace capnp {
+namespace shark {
 
 template <typename VatId, typename ProvisionId, typename RecipientId,
           typename ThirdPartyCapId, typename JoinResult>
@@ -238,7 +238,7 @@ class SturdyRefRestorer: public _::SturdyRefRestorerBase {
   // "bootstrap interface". That interface can itself have methods for obtaining other objects, of
   // course, but that is up to the app. `SturdyRefRestorer` exists for backwards-compatibility.
   //
-  // Hint:  Use SturdyRefRestorer<capnp::Text> to define a server that exports services under
+  // Hint:  Use SturdyRefRestorer<shark::Text> to define a server that exports services under
   //   string names.
 
 public:
@@ -597,6 +597,6 @@ RpcSystem<VatId> makeRpcClient(
   return RpcSystem<VatId>(network, nullptr);
 }
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

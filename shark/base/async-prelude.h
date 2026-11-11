@@ -83,8 +83,8 @@ Reduced reducePromiseType(T*, bool);
 template <typename T>
 using ReducePromises = decltype(reducePromiseType((T*)nullptr, false));
 // Like ChainPromises, but also takes into account whether T has a method `reducePromise` that
-// reduces Promise<T> to something else. In particular this allows Promise<capnp::RemotePromise<U>>
-// to reduce to capnp::RemotePromise<U>.
+// reduces Promise<T> to something else. In particular this allows Promise<shark::RemotePromise<U>>
+// to reduce to shark::RemotePromise<U>.
 
 template <typename T> struct UnwrapPromise_;
 template <typename T> struct UnwrapPromise_<Promise<T>> { typedef T Type; };

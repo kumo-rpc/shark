@@ -32,7 +32,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
     namespace compiler {
 
         class BrandedDecl;
@@ -324,6 +324,6 @@ namespace capnp {
         }
 
     } // namespace compiler
-} // namespace capnp
+} // namespace shark
 
 SHARK_END_HEADER

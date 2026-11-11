@@ -35,7 +35,7 @@
 #include <shark/base/debug.h>
 #include <shark/base/io.h>
 
-namespace capnp {
+namespace shark {
 
 namespace {
 
@@ -153,7 +153,7 @@ kj::Promise<void> AsyncMessageReader::readSegments(kj::AsyncInputStream& inputSt
   // size to make the receiver allocate excessive space and possibly crash.
   KJ_REQUIRE(totalWords <= getOptions().traversalLimitInWords,
              "Message is too large.  To increase the limit on the receiving end, see "
-             "capnp::ReaderOptions.") {
+             "shark::ReaderOptions.") {
     return kj::READY_NOW;  // exception will be propagated
   }
 
@@ -419,7 +419,7 @@ kj::Promise<kj::Maybe<MessageReaderAndFds>> AsyncIoMessageStream::tryReadMessage
     kj::ArrayPtr<kj::AutoCloseFd> fdSpace,
     ReaderOptions options,
     kj::ArrayPtr<word> scratchSpace) {
-  return capnp::tryReadMessage(stream, options, scratchSpace)
+  return shark::tryReadMessage(stream, options, scratchSpace)
     .then([](kj::Maybe<kj::Own<MessageReader>> maybeReader) -> kj::Maybe<MessageReaderAndFds> {
       KJ_IF_MAYBE(reader, maybeReader) {
         return MessageReaderAndFds { kj::mv(*reader), nullptr };
@@ -432,12 +432,12 @@ kj::Promise<kj::Maybe<MessageReaderAndFds>> AsyncIoMessageStream::tryReadMessage
 kj::Promise<void> AsyncIoMessageStream::writeMessage(
     kj::ArrayPtr<const int> fds,
     kj::ArrayPtr<const kj::ArrayPtr<const word>> segments) {
-  return capnp::writeMessage(stream, segments);
+  return shark::writeMessage(stream, segments);
 }
 
 kj::Promise<void> AsyncIoMessageStream::writeMessages(
     kj::ArrayPtr<kj::ArrayPtr<const kj::ArrayPtr<const word>>> messages) {
-  return capnp::writeMessages(stream, messages);
+  return shark::writeMessages(stream, messages);
 }
 
 kj::Maybe<int> getSendBufferSize(kj::AsyncIoStream& stream) {
@@ -468,7 +468,7 @@ kj::Promise<void> AsyncIoMessageStream::end() {
 }
 
 kj::Maybe<int> AsyncIoMessageStream::getSendBufferSize() {
-  return capnp::getSendBufferSize(stream);
+  return shark::getSendBufferSize(stream);
 }
 
 AsyncCapabilityMessageStream::AsyncCapabilityMessageStream(kj::AsyncCapabilityStream& stream)
@@ -478,22 +478,22 @@ kj::Promise<kj::Maybe<MessageReaderAndFds>> AsyncCapabilityMessageStream::tryRea
     kj::ArrayPtr<kj::AutoCloseFd> fdSpace,
     ReaderOptions options,
     kj::ArrayPtr<word> scratchSpace) {
-  return capnp::tryReadMessage(stream, fdSpace, options, scratchSpace);
+  return shark::tryReadMessage(stream, fdSpace, options, scratchSpace);
 }
 
 kj::Promise<void> AsyncCapabilityMessageStream::writeMessage(
     kj::ArrayPtr<const int> fds,
     kj::ArrayPtr<const kj::ArrayPtr<const word>> segments) {
-  return capnp::writeMessage(stream, fds, segments);
+  return shark::writeMessage(stream, fds, segments);
 }
 
 kj::Promise<void> AsyncCapabilityMessageStream::writeMessages(
     kj::ArrayPtr<kj::ArrayPtr<const kj::ArrayPtr<const word>>> messages) {
-  return capnp::writeMessages(stream, messages);
+  return shark::writeMessages(stream, messages);
 }
 
 kj::Maybe<int> AsyncCapabilityMessageStream::getSendBufferSize() {
-  return capnp::getSendBufferSize(stream);
+  return shark::getSendBufferSize(stream);
 }
 
 kj::Promise<void> AsyncCapabilityMessageStream::end() {
@@ -590,19 +590,19 @@ kj::Promise<void> BufferedMessageStream::writeMessage(
     kj::ArrayPtr<const int> fds,
     kj::ArrayPtr<const kj::ArrayPtr<const word>> segments) {
   KJ_IF_MAYBE(cs, capStream) {
-    return capnp::writeMessage(*cs, fds, segments);
+    return shark::writeMessage(*cs, fds, segments);
   } else {
-    return capnp::writeMessage(stream, segments);
+    return shark::writeMessage(stream, segments);
   }
 }
 
 kj::Promise<void> BufferedMessageStream::writeMessages(
     kj::ArrayPtr<kj::ArrayPtr<const kj::ArrayPtr<const word>>> messages) {
-  return capnp::writeMessages(stream, messages);
+  return shark::writeMessages(stream, messages);
 }
 
 kj::Maybe<int> BufferedMessageStream::getSendBufferSize() {
-  return capnp::getSendBufferSize(stream);
+  return shark::getSendBufferSize(stream);
 }
 
 kj::Promise<void> BufferedMessageStream::end() {
@@ -837,4 +837,4 @@ kj::Promise<kj::AsyncCapabilityStream::ReadResult> BufferedMessageStream::tryRea
   }
 }
 
-}  // namespace capnp
+}  // namespace shark

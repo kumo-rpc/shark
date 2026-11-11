@@ -25,7 +25,7 @@
 #include <tests/base/compat/gtest.h>
 #include <shark/base/debug.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -160,7 +160,7 @@ TEST(DynamicApi, AnyPointers) {
   }
 
   // Setting an AnyPointer to various types should work.
-  toDynamic(root).set("anyPointerField", capnp::Text::Reader("foo"));
+  toDynamic(root).set("anyPointerField", shark::Text::Reader("foo"));
   EXPECT_EQ("foo", root.getAnyPointerField().getAs<Text>());
 
   {
@@ -513,4 +513,4 @@ TEST(DynamicApi, SetGroup) {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

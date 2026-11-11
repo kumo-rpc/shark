@@ -42,7 +42,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 class Schema;
 class StructSchema;
@@ -75,7 +75,7 @@ extern const RawSchema NULL_CONST_SCHEMA;
 }  // namespace _ (private)
 
 class Schema {
-  // Convenience wrapper around capnp::schema::Node.
+  // Convenience wrapper around shark::schema::Node.
 
 public:
   inline Schema(): raw(&_::NULL_SCHEMA.defaultBrand) {}
@@ -1014,6 +1014,6 @@ inline Type Type::wrapInList(uint depth) const {
   return result;
 }
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

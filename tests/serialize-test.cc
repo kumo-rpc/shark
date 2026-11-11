@@ -32,7 +32,7 @@
 #include <stdlib.h>
 #include <string>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -497,4 +497,4 @@ KJ_TEST("large segment counts are rejected -- even UINT_MAX") {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

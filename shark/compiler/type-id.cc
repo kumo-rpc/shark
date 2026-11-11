@@ -23,7 +23,7 @@
 #include <shark/base/debug.h>
 #include <string.h>
 
-namespace capnp {
+namespace shark {
 namespace compiler {
 
 class TypeIdGenerator {
@@ -436,4 +436,4 @@ kj::ArrayPtr<const kj::byte> TypeIdGenerator::finish()
 
 
 }  // namespace compiler
-}  // namespace capnp
+}  // namespace shark

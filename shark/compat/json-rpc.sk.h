@@ -16,16 +16,16 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 namespace schemas {
 
 SHARK_DECLARE_SCHEMA(d3a68cd48aa056ca);
 SHARK_DECLARE_SCHEMA(d0dd80fa25c37644);
 
 }  // namespace schemas
-}  // namespace capnp
+}  // namespace shark
 
-namespace capnp {
+namespace shark {
 namespace json {
 
 struct RpcMessage {
@@ -45,7 +45,7 @@ struct RpcMessage {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(d3a68cd48aa056ca, 1, 4)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -60,7 +60,7 @@ struct RpcMessage::Error {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(d0dd80fa25c37644, 1, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -72,53 +72,53 @@ public:
   typedef RpcMessage Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool hasJsonrpc() const;
-  inline  ::capnp::Text::Reader getJsonrpc() const;
+  inline  ::shark::Text::Reader getJsonrpc() const;
 
   inline bool hasId() const;
-  inline  ::capnp::json::Value::Reader getId() const;
+  inline  ::shark::json::Value::Reader getId() const;
 
   inline bool hasMethod() const;
-  inline  ::capnp::Text::Reader getMethod() const;
+  inline  ::shark::Text::Reader getMethod() const;
 
   inline bool isNone() const;
-  inline  ::capnp::Void getNone() const;
+  inline  ::shark::Void getNone() const;
 
   inline bool isParams() const;
   inline bool hasParams() const;
-  inline  ::capnp::json::Value::Reader getParams() const;
+  inline  ::shark::json::Value::Reader getParams() const;
 
   inline bool isResult() const;
   inline bool hasResult() const;
-  inline  ::capnp::json::Value::Reader getResult() const;
+  inline  ::shark::json::Value::Reader getResult() const;
 
   inline bool isError() const;
   inline bool hasError() const;
-  inline  ::capnp::json::RpcMessage::Error::Reader getError() const;
+  inline  ::shark::json::RpcMessage::Error::Reader getError() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class RpcMessage::Builder {
@@ -128,72 +128,72 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline Which which();
   inline bool hasJsonrpc();
-  inline  ::capnp::Text::Builder getJsonrpc();
-  inline void setJsonrpc( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initJsonrpc(unsigned int size);
-  inline void adoptJsonrpc(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownJsonrpc();
+  inline  ::shark::Text::Builder getJsonrpc();
+  inline void setJsonrpc( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initJsonrpc(unsigned int size);
+  inline void adoptJsonrpc(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownJsonrpc();
 
   inline bool hasId();
-  inline  ::capnp::json::Value::Builder getId();
-  inline void setId( ::capnp::json::Value::Reader value);
-  inline  ::capnp::json::Value::Builder initId();
-  inline void adoptId(::capnp::Orphan< ::capnp::json::Value>&& value);
-  inline ::capnp::Orphan< ::capnp::json::Value> disownId();
+  inline  ::shark::json::Value::Builder getId();
+  inline void setId( ::shark::json::Value::Reader value);
+  inline  ::shark::json::Value::Builder initId();
+  inline void adoptId(::shark::Orphan< ::shark::json::Value>&& value);
+  inline ::shark::Orphan< ::shark::json::Value> disownId();
 
   inline bool hasMethod();
-  inline  ::capnp::Text::Builder getMethod();
-  inline void setMethod( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initMethod(unsigned int size);
-  inline void adoptMethod(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownMethod();
+  inline  ::shark::Text::Builder getMethod();
+  inline void setMethod( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initMethod(unsigned int size);
+  inline void adoptMethod(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownMethod();
 
   inline bool isNone();
-  inline  ::capnp::Void getNone();
-  inline void setNone( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getNone();
+  inline void setNone( ::shark::Void value = ::shark::VOID);
 
   inline bool isParams();
   inline bool hasParams();
-  inline  ::capnp::json::Value::Builder getParams();
-  inline void setParams( ::capnp::json::Value::Reader value);
-  inline  ::capnp::json::Value::Builder initParams();
-  inline void adoptParams(::capnp::Orphan< ::capnp::json::Value>&& value);
-  inline ::capnp::Orphan< ::capnp::json::Value> disownParams();
+  inline  ::shark::json::Value::Builder getParams();
+  inline void setParams( ::shark::json::Value::Reader value);
+  inline  ::shark::json::Value::Builder initParams();
+  inline void adoptParams(::shark::Orphan< ::shark::json::Value>&& value);
+  inline ::shark::Orphan< ::shark::json::Value> disownParams();
 
   inline bool isResult();
   inline bool hasResult();
-  inline  ::capnp::json::Value::Builder getResult();
-  inline void setResult( ::capnp::json::Value::Reader value);
-  inline  ::capnp::json::Value::Builder initResult();
-  inline void adoptResult(::capnp::Orphan< ::capnp::json::Value>&& value);
-  inline ::capnp::Orphan< ::capnp::json::Value> disownResult();
+  inline  ::shark::json::Value::Builder getResult();
+  inline void setResult( ::shark::json::Value::Reader value);
+  inline  ::shark::json::Value::Builder initResult();
+  inline void adoptResult(::shark::Orphan< ::shark::json::Value>&& value);
+  inline ::shark::Orphan< ::shark::json::Value> disownResult();
 
   inline bool isError();
   inline bool hasError();
-  inline  ::capnp::json::RpcMessage::Error::Builder getError();
-  inline void setError( ::capnp::json::RpcMessage::Error::Reader value);
-  inline  ::capnp::json::RpcMessage::Error::Builder initError();
-  inline void adoptError(::capnp::Orphan< ::capnp::json::RpcMessage::Error>&& value);
-  inline ::capnp::Orphan< ::capnp::json::RpcMessage::Error> disownError();
+  inline  ::shark::json::RpcMessage::Error::Builder getError();
+  inline void setError( ::shark::json::RpcMessage::Error::Reader value);
+  inline  ::shark::json::RpcMessage::Error::Builder initError();
+  inline void adoptError(::shark::Orphan< ::shark::json::RpcMessage::Error>&& value);
+  inline ::shark::Orphan< ::shark::json::RpcMessage::Error> disownError();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -202,15 +202,15 @@ public:
   typedef RpcMessage Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::json::Value::Pipeline getId();
+  inline  ::shark::json::Value::Pipeline getId();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -219,36 +219,36 @@ public:
   typedef Error Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline  ::int32_t getCode() const;
 
   inline bool hasMessage() const;
-  inline  ::capnp::Text::Reader getMessage() const;
+  inline  ::shark::Text::Reader getMessage() const;
 
   inline bool hasData() const;
-  inline  ::capnp::json::Value::Reader getData() const;
+  inline  ::shark::json::Value::Reader getData() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class RpcMessage::Error::Builder {
@@ -258,11 +258,11 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
@@ -271,26 +271,26 @@ public:
   inline void setCode( ::int32_t value);
 
   inline bool hasMessage();
-  inline  ::capnp::Text::Builder getMessage();
-  inline void setMessage( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initMessage(unsigned int size);
-  inline void adoptMessage(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownMessage();
+  inline  ::shark::Text::Builder getMessage();
+  inline void setMessage( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initMessage(unsigned int size);
+  inline void adoptMessage(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownMessage();
 
   inline bool hasData();
-  inline  ::capnp::json::Value::Builder getData();
-  inline void setData( ::capnp::json::Value::Reader value);
-  inline  ::capnp::json::Value::Builder initData();
-  inline void adoptData(::capnp::Orphan< ::capnp::json::Value>&& value);
-  inline ::capnp::Orphan< ::capnp::json::Value> disownData();
+  inline  ::shark::json::Value::Builder getData();
+  inline void setData( ::shark::json::Value::Reader value);
+  inline  ::shark::json::Value::Builder initData();
+  inline void adoptData(::shark::Orphan< ::shark::json::Value>&& value);
+  inline ::shark::Orphan< ::shark::json::Value> disownData();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -299,134 +299,134 @@ public:
   typedef Error Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::json::Value::Pipeline getData();
+  inline  ::shark::json::Value::Pipeline getData();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
 // =======================================================================================
 
-inline  ::capnp::json::RpcMessage::Which RpcMessage::Reader::which() const {
+inline  ::shark::json::RpcMessage::Which RpcMessage::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::json::RpcMessage::Which RpcMessage::Builder::which() {
+inline  ::shark::json::RpcMessage::Which RpcMessage::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline bool RpcMessage::Reader::hasJsonrpc() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool RpcMessage::Builder::hasJsonrpc() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader RpcMessage::Reader::getJsonrpc() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader RpcMessage::Reader::getJsonrpc() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder RpcMessage::Builder::getJsonrpc() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder RpcMessage::Builder::getJsonrpc() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void RpcMessage::Builder::setJsonrpc( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void RpcMessage::Builder::setJsonrpc( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder RpcMessage::Builder::initJsonrpc(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder RpcMessage::Builder::initJsonrpc(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void RpcMessage::Builder::adoptJsonrpc(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> RpcMessage::Builder::disownJsonrpc() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Text> RpcMessage::Builder::disownJsonrpc() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool RpcMessage::Reader::hasId() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool RpcMessage::Builder::hasId() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::json::Value::Reader RpcMessage::Reader::getId() const {
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::json::Value::Reader RpcMessage::Reader::getId() const {
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::json::Value::Builder RpcMessage::Builder::getId() {
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::json::Value::Builder RpcMessage::Builder::getId() {
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::json::Value::Pipeline RpcMessage::Pipeline::getId() {
-  return  ::capnp::json::Value::Pipeline(_typeless.getPointerField(1));
+inline  ::shark::json::Value::Pipeline RpcMessage::Pipeline::getId() {
+  return  ::shark::json::Value::Pipeline(_typeless.getPointerField(1));
 }
 #endif  // !SHARK_LITE
-inline void RpcMessage::Builder::setId( ::capnp::json::Value::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::json::Value>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+inline void RpcMessage::Builder::setId( ::shark::json::Value::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::json::Value>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::json::Value::Builder RpcMessage::Builder::initId() {
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::json::Value::Builder RpcMessage::Builder::initId() {
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::init(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 inline void RpcMessage::Builder::adoptId(
-    ::capnp::Orphan< ::capnp::json::Value>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::json::Value>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::json::Value>&& value) {
+  ::shark::_::PointerHelpers< ::shark::json::Value>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::json::Value> RpcMessage::Builder::disownId() {
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::json::Value> RpcMessage::Builder::disownId() {
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 
 inline bool RpcMessage::Reader::hasMethod() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<2>() * ::shark::POINTERS).isNull();
 }
 inline bool RpcMessage::Builder::hasMethod() {
   return !_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<2>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader RpcMessage::Reader::getMethod() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader RpcMessage::Reader::getMethod() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder RpcMessage::Builder::getMethod() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder RpcMessage::Builder::getMethod() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS));
 }
-inline void RpcMessage::Builder::setMethod( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+inline void RpcMessage::Builder::setMethod( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder RpcMessage::Builder::initMethod(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder RpcMessage::Builder::initMethod(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS), size);
 }
 inline void RpcMessage::Builder::adoptMethod(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> RpcMessage::Builder::disownMethod() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Text> RpcMessage::Builder::disownMethod() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS));
 }
 
 inline bool RpcMessage::Reader::isNone() const {
@@ -435,24 +435,24 @@ inline bool RpcMessage::Reader::isNone() const {
 inline bool RpcMessage::Builder::isNone() {
   return which() == RpcMessage::NONE;
 }
-inline  ::capnp::Void RpcMessage::Reader::getNone() const {
+inline  ::shark::Void RpcMessage::Reader::getNone() const {
   KJ_IREQUIRE((which() == RpcMessage::NONE),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void RpcMessage::Builder::getNone() {
+inline  ::shark::Void RpcMessage::Builder::getNone() {
   KJ_IREQUIRE((which() == RpcMessage::NONE),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void RpcMessage::Builder::setNone( ::capnp::Void value) {
+inline void RpcMessage::Builder::setNone( ::shark::Void value) {
   _builder.setDataField<RpcMessage::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, RpcMessage::NONE);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, RpcMessage::NONE);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool RpcMessage::Reader::isParams() const {
@@ -464,49 +464,49 @@ inline bool RpcMessage::Builder::isParams() {
 inline bool RpcMessage::Reader::hasParams() const {
   if (which() != RpcMessage::PARAMS) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<3>() * ::shark::POINTERS).isNull();
 }
 inline bool RpcMessage::Builder::hasParams() {
   if (which() != RpcMessage::PARAMS) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<3>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::json::Value::Reader RpcMessage::Reader::getParams() const {
+inline  ::shark::json::Value::Reader RpcMessage::Reader::getParams() const {
   KJ_IREQUIRE((which() == RpcMessage::PARAMS),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::get(_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::get(_reader.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
-inline  ::capnp::json::Value::Builder RpcMessage::Builder::getParams() {
+inline  ::shark::json::Value::Builder RpcMessage::Builder::getParams() {
   KJ_IREQUIRE((which() == RpcMessage::PARAMS),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::get(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::get(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
-inline void RpcMessage::Builder::setParams( ::capnp::json::Value::Reader value) {
+inline void RpcMessage::Builder::setParams( ::shark::json::Value::Reader value) {
   _builder.setDataField<RpcMessage::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, RpcMessage::PARAMS);
-  ::capnp::_::PointerHelpers< ::capnp::json::Value>::set(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, RpcMessage::PARAMS);
+  ::shark::_::PointerHelpers< ::shark::json::Value>::set(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::json::Value::Builder RpcMessage::Builder::initParams() {
+inline  ::shark::json::Value::Builder RpcMessage::Builder::initParams() {
   _builder.setDataField<RpcMessage::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, RpcMessage::PARAMS);
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::init(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, RpcMessage::PARAMS);
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::init(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
 inline void RpcMessage::Builder::adoptParams(
-    ::capnp::Orphan< ::capnp::json::Value>&& value) {
+    ::shark::Orphan< ::shark::json::Value>&& value) {
   _builder.setDataField<RpcMessage::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, RpcMessage::PARAMS);
-  ::capnp::_::PointerHelpers< ::capnp::json::Value>::adopt(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, RpcMessage::PARAMS);
+  ::shark::_::PointerHelpers< ::shark::json::Value>::adopt(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::json::Value> RpcMessage::Builder::disownParams() {
+inline ::shark::Orphan< ::shark::json::Value> RpcMessage::Builder::disownParams() {
   KJ_IREQUIRE((which() == RpcMessage::PARAMS),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::disown(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::disown(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
 
 inline bool RpcMessage::Reader::isResult() const {
@@ -518,49 +518,49 @@ inline bool RpcMessage::Builder::isResult() {
 inline bool RpcMessage::Reader::hasResult() const {
   if (which() != RpcMessage::RESULT) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<3>() * ::shark::POINTERS).isNull();
 }
 inline bool RpcMessage::Builder::hasResult() {
   if (which() != RpcMessage::RESULT) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<3>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::json::Value::Reader RpcMessage::Reader::getResult() const {
+inline  ::shark::json::Value::Reader RpcMessage::Reader::getResult() const {
   KJ_IREQUIRE((which() == RpcMessage::RESULT),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::get(_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::get(_reader.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
-inline  ::capnp::json::Value::Builder RpcMessage::Builder::getResult() {
+inline  ::shark::json::Value::Builder RpcMessage::Builder::getResult() {
   KJ_IREQUIRE((which() == RpcMessage::RESULT),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::get(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::get(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
-inline void RpcMessage::Builder::setResult( ::capnp::json::Value::Reader value) {
+inline void RpcMessage::Builder::setResult( ::shark::json::Value::Reader value) {
   _builder.setDataField<RpcMessage::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, RpcMessage::RESULT);
-  ::capnp::_::PointerHelpers< ::capnp::json::Value>::set(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, RpcMessage::RESULT);
+  ::shark::_::PointerHelpers< ::shark::json::Value>::set(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::json::Value::Builder RpcMessage::Builder::initResult() {
+inline  ::shark::json::Value::Builder RpcMessage::Builder::initResult() {
   _builder.setDataField<RpcMessage::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, RpcMessage::RESULT);
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::init(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, RpcMessage::RESULT);
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::init(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
 inline void RpcMessage::Builder::adoptResult(
-    ::capnp::Orphan< ::capnp::json::Value>&& value) {
+    ::shark::Orphan< ::shark::json::Value>&& value) {
   _builder.setDataField<RpcMessage::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, RpcMessage::RESULT);
-  ::capnp::_::PointerHelpers< ::capnp::json::Value>::adopt(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, RpcMessage::RESULT);
+  ::shark::_::PointerHelpers< ::shark::json::Value>::adopt(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::json::Value> RpcMessage::Builder::disownResult() {
+inline ::shark::Orphan< ::shark::json::Value> RpcMessage::Builder::disownResult() {
   KJ_IREQUIRE((which() == RpcMessage::RESULT),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::disown(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::disown(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
 
 inline bool RpcMessage::Reader::isError() const {
@@ -572,136 +572,136 @@ inline bool RpcMessage::Builder::isError() {
 inline bool RpcMessage::Reader::hasError() const {
   if (which() != RpcMessage::ERROR) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<3>() * ::shark::POINTERS).isNull();
 }
 inline bool RpcMessage::Builder::hasError() {
   if (which() != RpcMessage::ERROR) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<3>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::json::RpcMessage::Error::Reader RpcMessage::Reader::getError() const {
+inline  ::shark::json::RpcMessage::Error::Reader RpcMessage::Reader::getError() const {
   KJ_IREQUIRE((which() == RpcMessage::ERROR),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::json::RpcMessage::Error>::get(_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::json::RpcMessage::Error>::get(_reader.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
-inline  ::capnp::json::RpcMessage::Error::Builder RpcMessage::Builder::getError() {
+inline  ::shark::json::RpcMessage::Error::Builder RpcMessage::Builder::getError() {
   KJ_IREQUIRE((which() == RpcMessage::ERROR),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::json::RpcMessage::Error>::get(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::json::RpcMessage::Error>::get(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
-inline void RpcMessage::Builder::setError( ::capnp::json::RpcMessage::Error::Reader value) {
+inline void RpcMessage::Builder::setError( ::shark::json::RpcMessage::Error::Reader value) {
   _builder.setDataField<RpcMessage::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, RpcMessage::ERROR);
-  ::capnp::_::PointerHelpers< ::capnp::json::RpcMessage::Error>::set(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, RpcMessage::ERROR);
+  ::shark::_::PointerHelpers< ::shark::json::RpcMessage::Error>::set(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::json::RpcMessage::Error::Builder RpcMessage::Builder::initError() {
+inline  ::shark::json::RpcMessage::Error::Builder RpcMessage::Builder::initError() {
   _builder.setDataField<RpcMessage::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, RpcMessage::ERROR);
-  return ::capnp::_::PointerHelpers< ::capnp::json::RpcMessage::Error>::init(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, RpcMessage::ERROR);
+  return ::shark::_::PointerHelpers< ::shark::json::RpcMessage::Error>::init(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
 inline void RpcMessage::Builder::adoptError(
-    ::capnp::Orphan< ::capnp::json::RpcMessage::Error>&& value) {
+    ::shark::Orphan< ::shark::json::RpcMessage::Error>&& value) {
   _builder.setDataField<RpcMessage::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, RpcMessage::ERROR);
-  ::capnp::_::PointerHelpers< ::capnp::json::RpcMessage::Error>::adopt(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<0>() * ::shark::ELEMENTS, RpcMessage::ERROR);
+  ::shark::_::PointerHelpers< ::shark::json::RpcMessage::Error>::adopt(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::json::RpcMessage::Error> RpcMessage::Builder::disownError() {
+inline ::shark::Orphan< ::shark::json::RpcMessage::Error> RpcMessage::Builder::disownError() {
   KJ_IREQUIRE((which() == RpcMessage::ERROR),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::json::RpcMessage::Error>::disown(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::json::RpcMessage::Error>::disown(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
 
 inline  ::int32_t RpcMessage::Error::Reader::getCode() const {
   return _reader.getDataField< ::int32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline  ::int32_t RpcMessage::Error::Builder::getCode() {
   return _builder.getDataField< ::int32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 inline void RpcMessage::Error::Builder::setCode( ::int32_t value) {
   _builder.setDataField< ::int32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool RpcMessage::Error::Reader::hasMessage() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool RpcMessage::Error::Builder::hasMessage() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader RpcMessage::Error::Reader::getMessage() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader RpcMessage::Error::Reader::getMessage() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder RpcMessage::Error::Builder::getMessage() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder RpcMessage::Error::Builder::getMessage() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void RpcMessage::Error::Builder::setMessage( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void RpcMessage::Error::Builder::setMessage( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder RpcMessage::Error::Builder::initMessage(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder RpcMessage::Error::Builder::initMessage(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void RpcMessage::Error::Builder::adoptMessage(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> RpcMessage::Error::Builder::disownMessage() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Text> RpcMessage::Error::Builder::disownMessage() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool RpcMessage::Error::Reader::hasData() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool RpcMessage::Error::Builder::hasData() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::json::Value::Reader RpcMessage::Error::Reader::getData() const {
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::json::Value::Reader RpcMessage::Error::Reader::getData() const {
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::json::Value::Builder RpcMessage::Error::Builder::getData() {
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::json::Value::Builder RpcMessage::Error::Builder::getData() {
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::json::Value::Pipeline RpcMessage::Error::Pipeline::getData() {
-  return  ::capnp::json::Value::Pipeline(_typeless.getPointerField(1));
+inline  ::shark::json::Value::Pipeline RpcMessage::Error::Pipeline::getData() {
+  return  ::shark::json::Value::Pipeline(_typeless.getPointerField(1));
 }
 #endif  // !SHARK_LITE
-inline void RpcMessage::Error::Builder::setData( ::capnp::json::Value::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::json::Value>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+inline void RpcMessage::Error::Builder::setData( ::shark::json::Value::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::json::Value>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::json::Value::Builder RpcMessage::Error::Builder::initData() {
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::json::Value::Builder RpcMessage::Error::Builder::initData() {
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::init(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 inline void RpcMessage::Error::Builder::adoptData(
-    ::capnp::Orphan< ::capnp::json::Value>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::json::Value>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::json::Value>&& value) {
+  ::shark::_::PointerHelpers< ::shark::json::Value>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::json::Value> RpcMessage::Error::Builder::disownData() {
-  return ::capnp::_::PointerHelpers< ::capnp::json::Value>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::json::Value> RpcMessage::Error::Builder::disownData() {
+  return ::shark::_::PointerHelpers< ::shark::json::Value>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 
 }  // namespace

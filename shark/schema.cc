@@ -24,7 +24,7 @@
 #include <shark/base/debug.h>
 #include <shark/stream.sk.h>
 
-namespace capnp {
+namespace shark {
 
 namespace schema {
   uint KJ_HASHCODE(Type::Which w) { return kj::hashCode(static_cast<uint16_t>(w)); }
@@ -981,4 +981,4 @@ void Type::requireUsableAs(Type expected) const {
   }
 }
 
-}  // namespace capnp
+}  // namespace shark

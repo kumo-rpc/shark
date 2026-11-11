@@ -30,7 +30,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
     namespace compiler {
 
         struct Resolution {
@@ -114,6 +114,6 @@ namespace capnp {
         };
 
     } // namespace compiler
-} // namespace capnp
+} // namespace shark
 
 SHARK_END_HEADER

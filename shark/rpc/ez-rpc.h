@@ -30,7 +30,7 @@ struct sockaddr;
 
 namespace kj { class AsyncIoProvider; class LowLevelAsyncIoProvider; }
 
-namespace capnp {
+namespace shark {
 
 class EzRpcContext;
 
@@ -44,7 +44,7 @@ class EzRpcClient {
   //
   //     // C++ client
   //     int main() {
-  //       capnp::EzRpcClient client("localhost:3456");
+  //       shark::EzRpcClient client("localhost:3456");
   //       Adder::Client adder = client.getMain<Adder>();
   //       auto request = adder.addRequest();
   //       request.setLeft(12);
@@ -65,7 +65,7 @@ class EzRpcClient {
   //     };
   //
   //     int main() {
-  //       capnp::EzRpcServer server(kj::heap<AdderImpl>(), "*:3456");
+  //       shark::EzRpcServer server(kj::heap<AdderImpl>(), "*:3456");
   //       kj::NEVER_DONE.wait(server.getWaitScope());
   //     }
   //
@@ -246,6 +246,6 @@ inline typename Type::Client EzRpcClient::importCap(kj::StringPtr name) {
   return importCap(name).castAs<Type>();
 }
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

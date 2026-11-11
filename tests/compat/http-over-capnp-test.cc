@@ -26,13 +26,13 @@
 #define TEST_PEER_OPTIMIZATION_LEVEL HttpOverCapnpFactory::LEVEL_2
 #endif
 
-namespace capnp {
+namespace shark {
 namespace {
 
 KJ_TEST("KJ and RPC HTTP method enums match") {
 #define EXPECT_MATCH(METHOD) \
   KJ_EXPECT(static_cast<uint>(kj::HttpMethod::METHOD) == \
-            static_cast<uint>(capnp::HttpMethod::METHOD));
+            static_cast<uint>(shark::HttpMethod::METHOD));
 
   KJ_HTTP_FOR_EACH_METHOD(EXPECT_MATCH);
 #undef EXPECT_MATCH
@@ -659,7 +659,7 @@ KJ_TEST("HttpService isn't destroyed while call outstanding") {
 
   auto req = service.startRequestRequest();
   auto httpReq = req.initRequest();
-  httpReq.setMethod(capnp::HttpMethod::GET);
+  httpReq.setMethod(shark::HttpMethod::GET);
   httpReq.setUrl("/");
   auto serverContext = req.send().wait(waitScope).getContext();
   service = nullptr;
@@ -778,7 +778,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect with close") {
 
   auto client = newHttpClient(*table, *pipe.ends[1]);
 
-  capnp::HttpService::Client httpService = factory.kjToCapnp(newHttpService(*client));
+  shark::HttpService::Client httpService = factory.kjToCapnp(newHttpService(*client));
   auto frontCapnpHttpService = factory.capnpToKj(httpService);
 
   struct ResponseImpl final: public kj::HttpService::ConnectResponse {
@@ -853,7 +853,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect Reject") {
 
   auto client = newHttpClient(*table, *pipe.ends[1]);
 
-  capnp::HttpService::Client httpService = factory.kjToCapnp(newHttpService(*client));
+  shark::HttpService::Client httpService = factory.kjToCapnp(newHttpService(*client));
   auto frontCapnpHttpService = factory.capnpToKj(httpService);
 
   struct ResponseImpl final: public kj::HttpService::ConnectResponse {
@@ -951,7 +951,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect with startTls") {
 
   // Only need this wrapper to define a dummy tlsStarter.
   auto wrappedClient = kj::heap<WrapperHttpClient>(*client);
-  capnp::HttpService::Client httpService = factory.kjToCapnp(newHttpService(*wrappedClient));
+  shark::HttpService::Client httpService = factory.kjToCapnp(newHttpService(*wrappedClient));
   auto frontCapnpHttpService = factory.capnpToKj(httpService);
 
   auto frontCapnpHttpClient = kj::newHttpClient(*frontCapnpHttpService);
@@ -986,4 +986,4 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect with startTls") {
 }
 
 }  // namespace
-}  // namespace capnp
+}  // namespace shark

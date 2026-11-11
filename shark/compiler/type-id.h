@@ -27,7 +27,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 namespace compiler {
 
 uint64_t generateChildId(uint64_t parentId, kj::StringPtr childName);
@@ -41,6 +41,6 @@ uint64_t generateMethodParamsId(uint64_t parentId, uint16_t methodOrdinal, bool 
 // IDs.
 
 }  // namespace compiler
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

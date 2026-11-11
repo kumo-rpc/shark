@@ -27,7 +27,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 class SchemaLoader {
   // Class which can be used to construct Schema objects from schema::Nodes as defined in
@@ -178,6 +178,6 @@ inline void SchemaLoader::loadCompiledTypeAndDependencies() {
   loadNative(&_::rawSchema<T>());
 }
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

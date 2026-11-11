@@ -25,7 +25,7 @@
 #include <tests/test-util.h>
 #include <tests/base/compat/gtest.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {
 namespace {
 
@@ -72,4 +72,4 @@ TEST(EzRpc, DeprecatedNames) {
 
 }  // namespace
 }  // namespace _
-}  // namespace capnp
+}  // namespace shark

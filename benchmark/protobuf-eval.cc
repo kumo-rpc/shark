@@ -24,7 +24,7 @@
 #include "eval.pb.h"
 #include "protobuf-common.h"
 
-namespace capnp {
+namespace shark {
 namespace benchmark {
 namespace protobuf {
 
@@ -111,7 +111,7 @@ public:
 
 }  // namespace protobuf
 }  // namespace benchmark
-}  // namespace capnp
+}  // namespace shark
 
 int main(int argc, char* argv[]) {
   return capnp::benchmark::benchmarkMain<

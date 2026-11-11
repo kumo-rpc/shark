@@ -29,7 +29,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 
 struct RawSchema;
@@ -237,6 +237,6 @@ inline bool RawBrandedSchema::isUnbound() const {
 }
 
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

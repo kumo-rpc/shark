@@ -52,7 +52,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 class MembranePolicy {
   // Applications may implement this interface to define a membrane policy, which allows some
@@ -294,6 +294,6 @@ Orphan<typename kj::Decay<Reader>::Reads> copyOutOfMembrane(
       to, kj::mv(policy), false);
 }
 
-} // namespace capnp
+} // namespace shark
 
 SHARK_END_HEADER

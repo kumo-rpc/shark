@@ -28,7 +28,7 @@
 #include <tests/base/compat/gtest.h>
 #include <shark/base/debug.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -2009,7 +2009,7 @@ TEST(Encoding, ListSize) {
 
   auto structSize = lists.totalSize();
 
-  auto shallowSize = unbound(capnp::_::structSize<test::TestLists>().total() / WORDS);
+  auto shallowSize = unbound(shark::_::structSize<test::TestLists>().total() / WORDS);
 
   EXPECT_EQ(structSize.wordCount - shallowSize, listSizes.wordCount);
 }
@@ -2104,4 +2104,4 @@ KJ_TEST("Copying ListList downgraded from ListStruct does not get corrupted") {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

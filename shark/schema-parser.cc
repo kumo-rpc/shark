@@ -33,7 +33,7 @@
 #include <shark/base/io.h>
 #include <map>
 
-namespace capnp {
+namespace shark {
 
 namespace {
 
@@ -452,4 +452,4 @@ kj::Own<SchemaFile> SchemaFile::newFromDirectory(
                                   kj::mv(displayNameOverride));
 }
 
-}  // namespace capnp
+}  // namespace shark

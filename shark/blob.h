@@ -28,7 +28,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 struct Data {
   Data() = delete;
@@ -216,6 +216,6 @@ inline kj::ArrayPtr<char> Text::Builder::slice(size_t start, size_t end) {
   return content.slice(start, end);
 }
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

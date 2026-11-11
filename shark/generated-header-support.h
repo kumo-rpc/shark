@@ -35,7 +35,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 class MessageBuilder;  // So that it can be declared a friend.
 
@@ -313,7 +313,7 @@ inline constexpr uint sizeInWords() {
       _::structSize<T>().pointers * WORDS_PER_POINTER) / WORDS);
 }
 
-}  // namespace capnp
+}  // namespace shark
 
 #if _MSC_VER && !defined(__clang__)
 // MSVC doesn't understand floating-point constexpr yet.
@@ -344,7 +344,7 @@ inline constexpr uint sizeInWords() {
 #if SHARK_LITE
 
 #define SHARK_DECLARE_SCHEMA(id) \
-    extern ::capnp::word const* const bp_##id
+    extern ::shark::word const* const bp_##id
 
 #define SHARK_DECLARE_ENUM(type, id) \
     inline ::kj::String KJ_STRINGIFY(type##_##id value) { \
@@ -353,7 +353,7 @@ inline constexpr uint sizeInWords() {
     template <> struct EnumInfo<type##_##id> { \
       struct IsEnum; \
       static constexpr uint64_t typeId = 0x##id; \
-      static inline ::capnp::word const* encodedSchema() { return bp_##id; } \
+      static inline ::shark::word const* encodedSchema() { return bp_##id; } \
     }
 
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
@@ -368,29 +368,29 @@ inline constexpr uint sizeInWords() {
       static constexpr uint64_t typeId = 0x##id; \
       static constexpr uint16_t dataWordSize = dataWordSize_; \
       static constexpr uint16_t pointerCount = pointerCount_; \
-      static inline ::capnp::word const* encodedSchema() { return ::capnp::schemas::bp_##id; }
+      static inline ::shark::word const* encodedSchema() { return ::shark::schemas::bp_##id; }
 
 #else  // SHARK_LITE
 
 #define SHARK_DECLARE_SCHEMA(id) \
-    extern ::capnp::word const* const bp_##id; \
-    extern const ::capnp::_::RawSchema s_##id
+    extern ::shark::word const* const bp_##id; \
+    extern const ::shark::_::RawSchema s_##id
 
 #define SHARK_DECLARE_ENUM(type, id) \
     inline ::kj::String KJ_STRINGIFY(type##_##id value) { \
-      return ::capnp::_::enumString(value); \
+      return ::shark::_::enumString(value); \
     } \
     template <> struct EnumInfo<type##_##id> { \
       struct IsEnum; \
       static constexpr uint64_t typeId = 0x##id; \
-      static inline ::capnp::word const* encodedSchema() { return bp_##id; } \
-      static constexpr ::capnp::_::RawSchema const* schema = &s_##id; \
+      static inline ::shark::word const* encodedSchema() { return bp_##id; } \
+      static constexpr ::shark::_::RawSchema const* schema = &s_##id; \
     }
 
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #define SHARK_DEFINE_ENUM(type, id) \
     constexpr uint64_t EnumInfo<type>::typeId; \
-    constexpr ::capnp::_::RawSchema const* EnumInfo<type>::schema
+    constexpr ::shark::_::RawSchema const* EnumInfo<type>::schema
 #else
 #define SHARK_DEFINE_ENUM(type, id)
 #endif
@@ -398,22 +398,22 @@ inline constexpr uint sizeInWords() {
 #define SHARK_DECLARE_STRUCT_HEADER(id, dataWordSize_, pointerCount_) \
       struct IsStruct; \
       static constexpr uint64_t typeId = 0x##id; \
-      static constexpr ::capnp::Kind kind = ::capnp::Kind::STRUCT; \
+      static constexpr ::shark::Kind kind = ::shark::Kind::STRUCT; \
       static constexpr uint16_t dataWordSize = dataWordSize_; \
       static constexpr uint16_t pointerCount = pointerCount_; \
-      static inline ::capnp::word const* encodedSchema() { return ::capnp::schemas::bp_##id; } \
-      static constexpr ::capnp::_::RawSchema const* schema = &::capnp::schemas::s_##id;
+      static inline ::shark::word const* encodedSchema() { return ::shark::schemas::bp_##id; } \
+      static constexpr ::shark::_::RawSchema const* schema = &::shark::schemas::s_##id;
 
 #define SHARK_DECLARE_INTERFACE_HEADER(id) \
       struct IsInterface; \
       static constexpr uint64_t typeId = 0x##id; \
-      static constexpr ::capnp::Kind kind = ::capnp::Kind::INTERFACE; \
-      static inline ::capnp::word const* encodedSchema() { return ::capnp::schemas::bp_##id; } \
-      static constexpr ::capnp::_::RawSchema const* schema = &::capnp::schemas::s_##id;
+      static constexpr ::shark::Kind kind = ::shark::Kind::INTERFACE; \
+      static inline ::shark::word const* encodedSchema() { return ::shark::schemas::bp_##id; } \
+      static constexpr ::shark::_::RawSchema const* schema = &::shark::schemas::s_##id;
 
 #endif  // SHARK_LITE, else
 
-namespace capnp {
+namespace shark {
 namespace schemas {
 SHARK_DECLARE_SCHEMA(995f9a3377c0b16e);
 // HACK: Forward-declare the RawSchema for StreamResult, from stream.shk. This allows capnp

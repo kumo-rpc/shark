@@ -45,7 +45,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 class FlatArrayMessageReader: public MessageReader {
   // Parses a message from a flat array.  Note that it makes sense to use this together with mmap()
@@ -92,7 +92,7 @@ kj::Array<word> messageToFlatArray(MessageBuilder& builder);
 // `asBytes()` returns an ArrayPtr, so you have to save the Array as well to prevent it from being
 // deleted. For example:
 //
-//     kj::Array<capnp::word> words = messageToFlatArray(myMessage);
+//     kj::Array<shark::word> words = messageToFlatArray(myMessage);
 //     kj::ArrayPtr<kj::byte> bytes = words.asBytes();
 //     write(fd, bytes.begin(), bytes.size());
 
@@ -229,6 +229,6 @@ inline void writeMessageToFd(int fd, MessageBuilder& builder) {
   writeMessageToFd(fd, builder.getSegmentsForOutput());
 }
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

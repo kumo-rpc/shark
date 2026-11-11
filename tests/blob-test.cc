@@ -28,7 +28,7 @@
 // TODO(test):  This test is outdated -- it predates the retrofit of Text and Data on top of
 //   kj::ArrayPtr/kj::StringPtr.  Clean it up.
 
-namespace capnp {
+namespace shark {
 namespace {
 
 TEST(Blob, Text) {
@@ -126,4 +126,4 @@ TEST(Blob, StlInterop) {
 #endif
 
 }  // namespace
-}  // namespace capnp
+}  // namespace shark

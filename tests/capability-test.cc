@@ -36,7 +36,7 @@
 #include <tests/base/compat/gtest.h>
 #include <shark/base/debug.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {
 namespace {
 
@@ -642,7 +642,7 @@ public:
       request.set("j", true);
 
       return request.send().then(
-          [this,KJ_CPCAP(context)](capnp::Response<DynamicStruct>&& response) mutable {
+          [this,KJ_CPCAP(context)](shark::Response<DynamicStruct>&& response) mutable {
             EXPECT_EQ("foo", response.get("x").as<Text>());
 
             auto result = context.getResults();
@@ -936,7 +936,7 @@ TEST(Capability, Generics) {
   initTestMessage(request.initInnerBound().initFoo());
   initTestMessage(request.initInnerUnbound().getFoo().initAs<TestAllTypes>());
 
-  auto promise = request.send().then([](capnp::Response<Interface::CallResults>&& response) {
+  auto promise = request.send().then([](shark::Response<Interface::CallResults>&& response) {
     // This doesn't actually execute; we're just checking that it compiles.
     List<uint32_t>::Reader qux = response.getQux();
     qux.size();
@@ -968,14 +968,14 @@ TEST(Capability, ImplicitParams) {
   typedef test::TestImplicitMethodParams Interface;
   Interface::Client client = nullptr;
 
-  capnp::Request<Interface::CallParams<Text, TestAllTypes>,
+  shark::Request<Interface::CallParams<Text, TestAllTypes>,
                  test::TestGenerics<Text, TestAllTypes>> request =
       client.callRequest<Text, TestAllTypes>();
   request.setFoo("hello");
   initTestMessage(request.initBar());
 
   auto promise = request.send()
-      .then([](capnp::Response<test::TestGenerics<Text, TestAllTypes>>&& response) {
+      .then([](shark::Response<test::TestGenerics<Text, TestAllTypes>>&& response) {
     // This doesn't actually execute; we're just checking that it compiles.
     Text::Reader text = response.getFoo();
     text.size();
@@ -1421,4 +1421,4 @@ KJ_TEST("RevocableServer") {
 
 }  // namespace
 }  // namespace _
-}  // namespace capnp
+}  // namespace shark

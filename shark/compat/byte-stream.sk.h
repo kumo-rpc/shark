@@ -18,7 +18,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 namespace schemas {
 
 SHARK_DECLARE_SCHEMA(d2e7d8a0dc0a9766);
@@ -35,9 +35,9 @@ SHARK_DECLARE_SCHEMA(8d198ede6d27756a);
 SHARK_DECLARE_SCHEMA(ea8253a695da1ab8);
 
 }  // namespace schemas
-}  // namespace capnp
+}  // namespace shark
 
-namespace capnp {
+namespace shark {
 
 struct ByteStream {
   ByteStream() = delete;
@@ -58,7 +58,7 @@ struct ByteStream {
   #if !SHARK_LITE
   struct _capnpPrivate {
     SHARK_DECLARE_INTERFACE_HEADER(d2e7d8a0dc0a9766)
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
   };
   #endif  // !SHARK_LITE
 };
@@ -79,7 +79,7 @@ struct ByteStream::SubstreamCallback {
   #if !SHARK_LITE
   struct _capnpPrivate {
     SHARK_DECLARE_INTERFACE_HEADER(b23c0a13cf65c36e)
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
   };
   #endif  // !SHARK_LITE
 };
@@ -94,7 +94,7 @@ struct ByteStream::SubstreamCallback::EndedParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(ccb18eca8acafbe7, 1, 0)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -109,7 +109,7 @@ struct ByteStream::SubstreamCallback::EndedResults {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(ba8feb56b5b6922d, 0, 0)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -124,7 +124,7 @@ struct ByteStream::SubstreamCallback::ReachedLimitParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(d80bf35671585f44, 0, 0)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -139,7 +139,7 @@ struct ByteStream::SubstreamCallback::ReachedLimitResults {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(ddd06638ed144353, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -154,7 +154,7 @@ struct ByteStream::WriteParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(a45d8c4c07bb36d2, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -169,7 +169,7 @@ struct ByteStream::EndParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(cbd32047945c0144, 0, 0)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -184,7 +184,7 @@ struct ByteStream::EndResults {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(e7e2ddbc3c63d594, 0, 0)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -199,7 +199,7 @@ struct ByteStream::GetSubstreamParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(c5b18e80fc80d9f8, 1, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -214,7 +214,7 @@ struct ByteStream::GetSubstreamResults {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(8d198ede6d27756a, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -229,7 +229,7 @@ struct ByteStream::StartTlsParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(ea8253a695da1ab8, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -238,13 +238,13 @@ struct ByteStream::StartTlsParams {
 
 #if !SHARK_LITE
 class ByteStream::Client
-    : public virtual ::capnp::Capability::Client {
+    : public virtual ::shark::Capability::Client {
 public:
   typedef ByteStream Calls;
   typedef ByteStream Reads;
 
   Client(decltype(nullptr));
-  explicit Client(::kj::Own< ::capnp::ClientHook>&& hook);
+  explicit Client(::kj::Own< ::shark::ClientHook>&& hook);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Server*>()>>
   Client(::kj::Own<_t>&& server);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Client*>()>>
@@ -255,65 +255,65 @@ public:
   Client& operator=(Client& other);
   Client& operator=(Client&& other);
 
-  ::capnp::StreamingRequest< ::capnp::ByteStream::WriteParams> writeRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
-  ::capnp::Request< ::capnp::ByteStream::EndParams,  ::capnp::ByteStream::EndResults> endRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
-  ::capnp::Request< ::capnp::ByteStream::GetSubstreamParams,  ::capnp::ByteStream::GetSubstreamResults> getSubstreamRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
-  ::capnp::StreamingRequest< ::capnp::ByteStream::StartTlsParams> startTlsRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
+  ::shark::StreamingRequest< ::shark::ByteStream::WriteParams> writeRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
+  ::shark::Request< ::shark::ByteStream::EndParams,  ::shark::ByteStream::EndResults> endRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
+  ::shark::Request< ::shark::ByteStream::GetSubstreamParams,  ::shark::ByteStream::GetSubstreamResults> getSubstreamRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
+  ::shark::StreamingRequest< ::shark::ByteStream::StartTlsParams> startTlsRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
 
 protected:
   Client() = default;
 };
 
 class ByteStream::Server
-    : public virtual ::capnp::Capability::Server {
+    : public virtual ::shark::Capability::Server {
 public:
   typedef ByteStream Serves;
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCall(
+  ::shark::Capability::Server::DispatchCallResult dispatchCall(
       uint64_t interfaceId, uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context)
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context)
       override;
 
 protected:
-  typedef  ::capnp::ByteStream::WriteParams WriteParams;
-  typedef ::capnp::StreamingCallContext<WriteParams> WriteContext;
+  typedef  ::shark::ByteStream::WriteParams WriteParams;
+  typedef ::shark::StreamingCallContext<WriteParams> WriteContext;
   virtual ::kj::Promise<void> write(WriteContext context);
-  typedef  ::capnp::ByteStream::EndParams EndParams;
-  typedef  ::capnp::ByteStream::EndResults EndResults;
-  typedef ::capnp::CallContext<EndParams, EndResults> EndContext;
+  typedef  ::shark::ByteStream::EndParams EndParams;
+  typedef  ::shark::ByteStream::EndResults EndResults;
+  typedef ::shark::CallContext<EndParams, EndResults> EndContext;
   virtual ::kj::Promise<void> end(EndContext context);
-  typedef  ::capnp::ByteStream::GetSubstreamParams GetSubstreamParams;
-  typedef  ::capnp::ByteStream::GetSubstreamResults GetSubstreamResults;
-  typedef ::capnp::CallContext<GetSubstreamParams, GetSubstreamResults> GetSubstreamContext;
+  typedef  ::shark::ByteStream::GetSubstreamParams GetSubstreamParams;
+  typedef  ::shark::ByteStream::GetSubstreamResults GetSubstreamResults;
+  typedef ::shark::CallContext<GetSubstreamParams, GetSubstreamResults> GetSubstreamContext;
   virtual ::kj::Promise<void> getSubstream(GetSubstreamContext context);
-  typedef  ::capnp::ByteStream::StartTlsParams StartTlsParams;
-  typedef ::capnp::StreamingCallContext<StartTlsParams> StartTlsContext;
+  typedef  ::shark::ByteStream::StartTlsParams StartTlsParams;
+  typedef ::shark::StreamingCallContext<StartTlsParams> StartTlsContext;
   virtual ::kj::Promise<void> startTls(StartTlsContext context);
 
-  inline  ::capnp::ByteStream::Client thisCap() {
-    return ::capnp::Capability::Server::thisCap()
-        .template castAs< ::capnp::ByteStream>();
+  inline  ::shark::ByteStream::Client thisCap() {
+    return ::shark::Capability::Server::thisCap()
+        .template castAs< ::shark::ByteStream>();
   }
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCallInternal(
+  ::shark::Capability::Server::DispatchCallResult dispatchCallInternal(
       uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context);
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context);
 };
 #endif  // !SHARK_LITE
 
 #if !SHARK_LITE
 class ByteStream::SubstreamCallback::Client
-    : public virtual ::capnp::Capability::Client {
+    : public virtual ::shark::Capability::Client {
 public:
   typedef SubstreamCallback Calls;
   typedef SubstreamCallback Reads;
 
   Client(decltype(nullptr));
-  explicit Client(::kj::Own< ::capnp::ClientHook>&& hook);
+  explicit Client(::kj::Own< ::shark::ClientHook>&& hook);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Server*>()>>
   Client(::kj::Own<_t>&& server);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Client*>()>>
@@ -324,43 +324,43 @@ public:
   Client& operator=(Client& other);
   Client& operator=(Client&& other);
 
-  ::capnp::Request< ::capnp::ByteStream::SubstreamCallback::EndedParams,  ::capnp::ByteStream::SubstreamCallback::EndedResults> endedRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
-  ::capnp::Request< ::capnp::ByteStream::SubstreamCallback::ReachedLimitParams,  ::capnp::ByteStream::SubstreamCallback::ReachedLimitResults> reachedLimitRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
+  ::shark::Request< ::shark::ByteStream::SubstreamCallback::EndedParams,  ::shark::ByteStream::SubstreamCallback::EndedResults> endedRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
+  ::shark::Request< ::shark::ByteStream::SubstreamCallback::ReachedLimitParams,  ::shark::ByteStream::SubstreamCallback::ReachedLimitResults> reachedLimitRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
 
 protected:
   Client() = default;
 };
 
 class ByteStream::SubstreamCallback::Server
-    : public virtual ::capnp::Capability::Server {
+    : public virtual ::shark::Capability::Server {
 public:
   typedef SubstreamCallback Serves;
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCall(
+  ::shark::Capability::Server::DispatchCallResult dispatchCall(
       uint64_t interfaceId, uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context)
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context)
       override;
 
 protected:
-  typedef  ::capnp::ByteStream::SubstreamCallback::EndedParams EndedParams;
-  typedef  ::capnp::ByteStream::SubstreamCallback::EndedResults EndedResults;
-  typedef ::capnp::CallContext<EndedParams, EndedResults> EndedContext;
+  typedef  ::shark::ByteStream::SubstreamCallback::EndedParams EndedParams;
+  typedef  ::shark::ByteStream::SubstreamCallback::EndedResults EndedResults;
+  typedef ::shark::CallContext<EndedParams, EndedResults> EndedContext;
   virtual ::kj::Promise<void> ended(EndedContext context);
-  typedef  ::capnp::ByteStream::SubstreamCallback::ReachedLimitParams ReachedLimitParams;
-  typedef  ::capnp::ByteStream::SubstreamCallback::ReachedLimitResults ReachedLimitResults;
-  typedef ::capnp::CallContext<ReachedLimitParams, ReachedLimitResults> ReachedLimitContext;
+  typedef  ::shark::ByteStream::SubstreamCallback::ReachedLimitParams ReachedLimitParams;
+  typedef  ::shark::ByteStream::SubstreamCallback::ReachedLimitResults ReachedLimitResults;
+  typedef ::shark::CallContext<ReachedLimitParams, ReachedLimitResults> ReachedLimitContext;
   virtual ::kj::Promise<void> reachedLimit(ReachedLimitContext context);
 
-  inline  ::capnp::ByteStream::SubstreamCallback::Client thisCap() {
-    return ::capnp::Capability::Server::thisCap()
-        .template castAs< ::capnp::ByteStream::SubstreamCallback>();
+  inline  ::shark::ByteStream::SubstreamCallback::Client thisCap() {
+    return ::shark::Capability::Server::thisCap()
+        .template castAs< ::shark::ByteStream::SubstreamCallback>();
   }
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCallInternal(
+  ::shark::Capability::Server::DispatchCallResult dispatchCallInternal(
       uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context);
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context);
 };
 #endif  // !SHARK_LITE
 
@@ -369,30 +369,30 @@ public:
   typedef EndedParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline  ::uint64_t getByteCount() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class ByteStream::SubstreamCallback::EndedParams::Builder {
@@ -402,11 +402,11 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
@@ -415,12 +415,12 @@ public:
   inline void setByteCount( ::uint64_t value);
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -429,14 +429,14 @@ public:
   typedef EndedParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -445,28 +445,28 @@ public:
   typedef EndedResults Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class ByteStream::SubstreamCallback::EndedResults::Builder {
@@ -476,22 +476,22 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -500,14 +500,14 @@ public:
   typedef EndedResults Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -516,28 +516,28 @@ public:
   typedef ReachedLimitParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class ByteStream::SubstreamCallback::ReachedLimitParams::Builder {
@@ -547,22 +547,22 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -571,14 +571,14 @@ public:
   typedef ReachedLimitParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -587,33 +587,33 @@ public:
   typedef ReachedLimitResults Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasNext() const;
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getNext() const;
+  inline  ::shark::ByteStream::Client getNext() const;
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class ByteStream::SubstreamCallback::ReachedLimitResults::Builder {
@@ -623,31 +623,31 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasNext();
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getNext();
-  inline void setNext( ::capnp::ByteStream::Client&& value);
-  inline void setNext( ::capnp::ByteStream::Client& value);
-  inline void adoptNext(::capnp::Orphan< ::capnp::ByteStream>&& value);
-  inline ::capnp::Orphan< ::capnp::ByteStream> disownNext();
+  inline  ::shark::ByteStream::Client getNext();
+  inline void setNext( ::shark::ByteStream::Client&& value);
+  inline void setNext( ::shark::ByteStream::Client& value);
+  inline void adoptNext(::shark::Orphan< ::shark::ByteStream>&& value);
+  inline ::shark::Orphan< ::shark::ByteStream> disownNext();
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -656,15 +656,15 @@ public:
   typedef ReachedLimitResults Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::ByteStream::Client getNext();
+  inline  ::shark::ByteStream::Client getNext();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -673,31 +673,31 @@ public:
   typedef WriteParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasBytes() const;
-  inline  ::capnp::Data::Reader getBytes() const;
+  inline  ::shark::Data::Reader getBytes() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class ByteStream::WriteParams::Builder {
@@ -707,29 +707,29 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasBytes();
-  inline  ::capnp::Data::Builder getBytes();
-  inline void setBytes( ::capnp::Data::Reader value);
-  inline  ::capnp::Data::Builder initBytes(unsigned int size);
-  inline void adoptBytes(::capnp::Orphan< ::capnp::Data>&& value);
-  inline ::capnp::Orphan< ::capnp::Data> disownBytes();
+  inline  ::shark::Data::Builder getBytes();
+  inline void setBytes( ::shark::Data::Reader value);
+  inline  ::shark::Data::Builder initBytes(unsigned int size);
+  inline void adoptBytes(::shark::Orphan< ::shark::Data>&& value);
+  inline ::shark::Orphan< ::shark::Data> disownBytes();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -738,14 +738,14 @@ public:
   typedef WriteParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -754,28 +754,28 @@ public:
   typedef EndParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class ByteStream::EndParams::Builder {
@@ -785,22 +785,22 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -809,14 +809,14 @@ public:
   typedef EndParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -825,28 +825,28 @@ public:
   typedef EndResults Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class ByteStream::EndResults::Builder {
@@ -856,22 +856,22 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -880,14 +880,14 @@ public:
   typedef EndResults Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -896,35 +896,35 @@ public:
   typedef GetSubstreamParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasCallback() const;
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::SubstreamCallback::Client getCallback() const;
+  inline  ::shark::ByteStream::SubstreamCallback::Client getCallback() const;
 #endif  // !SHARK_LITE
 
   inline  ::uint64_t getLimit() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class ByteStream::GetSubstreamParams::Builder {
@@ -934,34 +934,34 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasCallback();
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::SubstreamCallback::Client getCallback();
-  inline void setCallback( ::capnp::ByteStream::SubstreamCallback::Client&& value);
-  inline void setCallback( ::capnp::ByteStream::SubstreamCallback::Client& value);
-  inline void adoptCallback(::capnp::Orphan< ::capnp::ByteStream::SubstreamCallback>&& value);
-  inline ::capnp::Orphan< ::capnp::ByteStream::SubstreamCallback> disownCallback();
+  inline  ::shark::ByteStream::SubstreamCallback::Client getCallback();
+  inline void setCallback( ::shark::ByteStream::SubstreamCallback::Client&& value);
+  inline void setCallback( ::shark::ByteStream::SubstreamCallback::Client& value);
+  inline void adoptCallback(::shark::Orphan< ::shark::ByteStream::SubstreamCallback>&& value);
+  inline ::shark::Orphan< ::shark::ByteStream::SubstreamCallback> disownCallback();
 #endif  // !SHARK_LITE
 
   inline  ::uint64_t getLimit();
   inline void setLimit( ::uint64_t value);
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -970,15 +970,15 @@ public:
   typedef GetSubstreamParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::ByteStream::SubstreamCallback::Client getCallback();
+  inline  ::shark::ByteStream::SubstreamCallback::Client getCallback();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -987,33 +987,33 @@ public:
   typedef GetSubstreamResults Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasSubstream() const;
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getSubstream() const;
+  inline  ::shark::ByteStream::Client getSubstream() const;
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class ByteStream::GetSubstreamResults::Builder {
@@ -1023,31 +1023,31 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasSubstream();
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getSubstream();
-  inline void setSubstream( ::capnp::ByteStream::Client&& value);
-  inline void setSubstream( ::capnp::ByteStream::Client& value);
-  inline void adoptSubstream(::capnp::Orphan< ::capnp::ByteStream>&& value);
-  inline ::capnp::Orphan< ::capnp::ByteStream> disownSubstream();
+  inline  ::shark::ByteStream::Client getSubstream();
+  inline void setSubstream( ::shark::ByteStream::Client&& value);
+  inline void setSubstream( ::shark::ByteStream::Client& value);
+  inline void adoptSubstream(::shark::Orphan< ::shark::ByteStream>&& value);
+  inline ::shark::Orphan< ::shark::ByteStream> disownSubstream();
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1056,15 +1056,15 @@ public:
   typedef GetSubstreamResults Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::ByteStream::Client getSubstream();
+  inline  ::shark::ByteStream::Client getSubstream();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1073,31 +1073,31 @@ public:
   typedef StartTlsParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasExpectedServerHostname() const;
-  inline  ::capnp::Text::Reader getExpectedServerHostname() const;
+  inline  ::shark::Text::Reader getExpectedServerHostname() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class ByteStream::StartTlsParams::Builder {
@@ -1107,29 +1107,29 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasExpectedServerHostname();
-  inline  ::capnp::Text::Builder getExpectedServerHostname();
-  inline void setExpectedServerHostname( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initExpectedServerHostname(unsigned int size);
-  inline void adoptExpectedServerHostname(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownExpectedServerHostname();
+  inline  ::shark::Text::Builder getExpectedServerHostname();
+  inline void setExpectedServerHostname( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initExpectedServerHostname(unsigned int size);
+  inline void adoptExpectedServerHostname(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownExpectedServerHostname();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1138,14 +1138,14 @@ public:
   typedef StartTlsParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1153,263 +1153,263 @@ private:
 
 #if !SHARK_LITE
 inline ByteStream::Client::Client(decltype(nullptr))
-    : ::capnp::Capability::Client(nullptr) {}
+    : ::shark::Capability::Client(nullptr) {}
 inline ByteStream::Client::Client(
-    ::kj::Own< ::capnp::ClientHook>&& hook)
-    : ::capnp::Capability::Client(::kj::mv(hook)) {}
+    ::kj::Own< ::shark::ClientHook>&& hook)
+    : ::shark::Capability::Client(::kj::mv(hook)) {}
 template <typename _t, typename>
 inline ByteStream::Client::Client(::kj::Own<_t>&& server)
-    : ::capnp::Capability::Client(::kj::mv(server)) {}
+    : ::shark::Capability::Client(::kj::mv(server)) {}
 template <typename _t, typename>
 inline ByteStream::Client::Client(::kj::Promise<_t>&& promise)
-    : ::capnp::Capability::Client(::kj::mv(promise)) {}
+    : ::shark::Capability::Client(::kj::mv(promise)) {}
 inline ByteStream::Client::Client(::kj::Exception&& exception)
-    : ::capnp::Capability::Client(::kj::mv(exception)) {}
-inline  ::capnp::ByteStream::Client& ByteStream::Client::operator=(Client& other) {
-  ::capnp::Capability::Client::operator=(other);
+    : ::shark::Capability::Client(::kj::mv(exception)) {}
+inline  ::shark::ByteStream::Client& ByteStream::Client::operator=(Client& other) {
+  ::shark::Capability::Client::operator=(other);
   return *this;
 }
-inline  ::capnp::ByteStream::Client& ByteStream::Client::operator=(Client&& other) {
-  ::capnp::Capability::Client::operator=(kj::mv(other));
+inline  ::shark::ByteStream::Client& ByteStream::Client::operator=(Client&& other) {
+  ::shark::Capability::Client::operator=(kj::mv(other));
   return *this;
 }
 
 #endif  // !SHARK_LITE
 #if !SHARK_LITE
 inline ByteStream::SubstreamCallback::Client::Client(decltype(nullptr))
-    : ::capnp::Capability::Client(nullptr) {}
+    : ::shark::Capability::Client(nullptr) {}
 inline ByteStream::SubstreamCallback::Client::Client(
-    ::kj::Own< ::capnp::ClientHook>&& hook)
-    : ::capnp::Capability::Client(::kj::mv(hook)) {}
+    ::kj::Own< ::shark::ClientHook>&& hook)
+    : ::shark::Capability::Client(::kj::mv(hook)) {}
 template <typename _t, typename>
 inline ByteStream::SubstreamCallback::Client::Client(::kj::Own<_t>&& server)
-    : ::capnp::Capability::Client(::kj::mv(server)) {}
+    : ::shark::Capability::Client(::kj::mv(server)) {}
 template <typename _t, typename>
 inline ByteStream::SubstreamCallback::Client::Client(::kj::Promise<_t>&& promise)
-    : ::capnp::Capability::Client(::kj::mv(promise)) {}
+    : ::shark::Capability::Client(::kj::mv(promise)) {}
 inline ByteStream::SubstreamCallback::Client::Client(::kj::Exception&& exception)
-    : ::capnp::Capability::Client(::kj::mv(exception)) {}
-inline  ::capnp::ByteStream::SubstreamCallback::Client& ByteStream::SubstreamCallback::Client::operator=(Client& other) {
-  ::capnp::Capability::Client::operator=(other);
+    : ::shark::Capability::Client(::kj::mv(exception)) {}
+inline  ::shark::ByteStream::SubstreamCallback::Client& ByteStream::SubstreamCallback::Client::operator=(Client& other) {
+  ::shark::Capability::Client::operator=(other);
   return *this;
 }
-inline  ::capnp::ByteStream::SubstreamCallback::Client& ByteStream::SubstreamCallback::Client::operator=(Client&& other) {
-  ::capnp::Capability::Client::operator=(kj::mv(other));
+inline  ::shark::ByteStream::SubstreamCallback::Client& ByteStream::SubstreamCallback::Client::operator=(Client&& other) {
+  ::shark::Capability::Client::operator=(kj::mv(other));
   return *this;
 }
 
 #endif  // !SHARK_LITE
 inline  ::uint64_t ByteStream::SubstreamCallback::EndedParams::Reader::getByteCount() const {
   return _reader.getDataField< ::uint64_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint64_t ByteStream::SubstreamCallback::EndedParams::Builder::getByteCount() {
   return _builder.getDataField< ::uint64_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 inline void ByteStream::SubstreamCallback::EndedParams::Builder::setByteCount( ::uint64_t value) {
   _builder.setDataField< ::uint64_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool ByteStream::SubstreamCallback::ReachedLimitResults::Reader::hasNext() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool ByteStream::SubstreamCallback::ReachedLimitResults::Builder::hasNext() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::ByteStream::Client ByteStream::SubstreamCallback::ReachedLimitResults::Reader::getNext() const {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client ByteStream::SubstreamCallback::ReachedLimitResults::Reader::getNext() const {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client ByteStream::SubstreamCallback::ReachedLimitResults::Builder::getNext() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client ByteStream::SubstreamCallback::ReachedLimitResults::Builder::getNext() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client ByteStream::SubstreamCallback::ReachedLimitResults::Pipeline::getNext() {
-  return  ::capnp::ByteStream::Client(_typeless.getPointerField(0).asCap());
+inline  ::shark::ByteStream::Client ByteStream::SubstreamCallback::ReachedLimitResults::Pipeline::getNext() {
+  return  ::shark::ByteStream::Client(_typeless.getPointerField(0).asCap());
 }
-inline void ByteStream::SubstreamCallback::ReachedLimitResults::Builder::setNext( ::capnp::ByteStream::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(cap));
+inline void ByteStream::SubstreamCallback::ReachedLimitResults::Builder::setNext( ::shark::ByteStream::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void ByteStream::SubstreamCallback::ReachedLimitResults::Builder::setNext( ::capnp::ByteStream::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), cap);
+inline void ByteStream::SubstreamCallback::ReachedLimitResults::Builder::setNext( ::shark::ByteStream::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), cap);
 }
 inline void ByteStream::SubstreamCallback::ReachedLimitResults::Builder::adoptNext(
-    ::capnp::Orphan< ::capnp::ByteStream>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::ByteStream>&& value) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::ByteStream> ByteStream::SubstreamCallback::ReachedLimitResults::Builder::disownNext() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::ByteStream> ByteStream::SubstreamCallback::ReachedLimitResults::Builder::disownNext() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 inline bool ByteStream::WriteParams::Reader::hasBytes() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool ByteStream::WriteParams::Builder::hasBytes() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Data::Reader ByteStream::WriteParams::Reader::getBytes() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Data::Reader ByteStream::WriteParams::Reader::getBytes() const {
+  return ::shark::_::PointerHelpers< ::shark::Data>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Data::Builder ByteStream::WriteParams::Builder::getBytes() {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Data::Builder ByteStream::WriteParams::Builder::getBytes() {
+  return ::shark::_::PointerHelpers< ::shark::Data>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void ByteStream::WriteParams::Builder::setBytes( ::capnp::Data::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Data>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void ByteStream::WriteParams::Builder::setBytes( ::shark::Data::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Data>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Data::Builder ByteStream::WriteParams::Builder::initBytes(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::Data::Builder ByteStream::WriteParams::Builder::initBytes(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Data>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void ByteStream::WriteParams::Builder::adoptBytes(
-    ::capnp::Orphan< ::capnp::Data>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Data>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Data>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Data>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Data> ByteStream::WriteParams::Builder::disownBytes() {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Data> ByteStream::WriteParams::Builder::disownBytes() {
+  return ::shark::_::PointerHelpers< ::shark::Data>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool ByteStream::GetSubstreamParams::Reader::hasCallback() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool ByteStream::GetSubstreamParams::Builder::hasCallback() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::ByteStream::SubstreamCallback::Client ByteStream::GetSubstreamParams::Reader::getCallback() const {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream::SubstreamCallback>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::SubstreamCallback::Client ByteStream::GetSubstreamParams::Reader::getCallback() const {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream::SubstreamCallback>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::SubstreamCallback::Client ByteStream::GetSubstreamParams::Builder::getCallback() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream::SubstreamCallback>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::SubstreamCallback::Client ByteStream::GetSubstreamParams::Builder::getCallback() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream::SubstreamCallback>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::SubstreamCallback::Client ByteStream::GetSubstreamParams::Pipeline::getCallback() {
-  return  ::capnp::ByteStream::SubstreamCallback::Client(_typeless.getPointerField(0).asCap());
+inline  ::shark::ByteStream::SubstreamCallback::Client ByteStream::GetSubstreamParams::Pipeline::getCallback() {
+  return  ::shark::ByteStream::SubstreamCallback::Client(_typeless.getPointerField(0).asCap());
 }
-inline void ByteStream::GetSubstreamParams::Builder::setCallback( ::capnp::ByteStream::SubstreamCallback::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream::SubstreamCallback>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(cap));
+inline void ByteStream::GetSubstreamParams::Builder::setCallback( ::shark::ByteStream::SubstreamCallback::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream::SubstreamCallback>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void ByteStream::GetSubstreamParams::Builder::setCallback( ::capnp::ByteStream::SubstreamCallback::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream::SubstreamCallback>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), cap);
+inline void ByteStream::GetSubstreamParams::Builder::setCallback( ::shark::ByteStream::SubstreamCallback::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream::SubstreamCallback>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), cap);
 }
 inline void ByteStream::GetSubstreamParams::Builder::adoptCallback(
-    ::capnp::Orphan< ::capnp::ByteStream::SubstreamCallback>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream::SubstreamCallback>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::ByteStream::SubstreamCallback>&& value) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream::SubstreamCallback>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::ByteStream::SubstreamCallback> ByteStream::GetSubstreamParams::Builder::disownCallback() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream::SubstreamCallback>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::ByteStream::SubstreamCallback> ByteStream::GetSubstreamParams::Builder::disownCallback() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream::SubstreamCallback>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 inline  ::uint64_t ByteStream::GetSubstreamParams::Reader::getLimit() const {
   return _reader.getDataField< ::uint64_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, 18446744073709551615ull);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, 18446744073709551615ull);
 }
 
 inline  ::uint64_t ByteStream::GetSubstreamParams::Builder::getLimit() {
   return _builder.getDataField< ::uint64_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, 18446744073709551615ull);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, 18446744073709551615ull);
 }
 inline void ByteStream::GetSubstreamParams::Builder::setLimit( ::uint64_t value) {
   _builder.setDataField< ::uint64_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value, 18446744073709551615ull);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value, 18446744073709551615ull);
 }
 
 inline bool ByteStream::GetSubstreamResults::Reader::hasSubstream() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool ByteStream::GetSubstreamResults::Builder::hasSubstream() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::ByteStream::Client ByteStream::GetSubstreamResults::Reader::getSubstream() const {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client ByteStream::GetSubstreamResults::Reader::getSubstream() const {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client ByteStream::GetSubstreamResults::Builder::getSubstream() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client ByteStream::GetSubstreamResults::Builder::getSubstream() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client ByteStream::GetSubstreamResults::Pipeline::getSubstream() {
-  return  ::capnp::ByteStream::Client(_typeless.getPointerField(0).asCap());
+inline  ::shark::ByteStream::Client ByteStream::GetSubstreamResults::Pipeline::getSubstream() {
+  return  ::shark::ByteStream::Client(_typeless.getPointerField(0).asCap());
 }
-inline void ByteStream::GetSubstreamResults::Builder::setSubstream( ::capnp::ByteStream::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(cap));
+inline void ByteStream::GetSubstreamResults::Builder::setSubstream( ::shark::ByteStream::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void ByteStream::GetSubstreamResults::Builder::setSubstream( ::capnp::ByteStream::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), cap);
+inline void ByteStream::GetSubstreamResults::Builder::setSubstream( ::shark::ByteStream::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), cap);
 }
 inline void ByteStream::GetSubstreamResults::Builder::adoptSubstream(
-    ::capnp::Orphan< ::capnp::ByteStream>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::ByteStream>&& value) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::ByteStream> ByteStream::GetSubstreamResults::Builder::disownSubstream() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::ByteStream> ByteStream::GetSubstreamResults::Builder::disownSubstream() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 inline bool ByteStream::StartTlsParams::Reader::hasExpectedServerHostname() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool ByteStream::StartTlsParams::Builder::hasExpectedServerHostname() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader ByteStream::StartTlsParams::Reader::getExpectedServerHostname() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader ByteStream::StartTlsParams::Reader::getExpectedServerHostname() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder ByteStream::StartTlsParams::Builder::getExpectedServerHostname() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder ByteStream::StartTlsParams::Builder::getExpectedServerHostname() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void ByteStream::StartTlsParams::Builder::setExpectedServerHostname( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void ByteStream::StartTlsParams::Builder::setExpectedServerHostname( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder ByteStream::StartTlsParams::Builder::initExpectedServerHostname(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder ByteStream::StartTlsParams::Builder::initExpectedServerHostname(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void ByteStream::StartTlsParams::Builder::adoptExpectedServerHostname(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> ByteStream::StartTlsParams::Builder::disownExpectedServerHostname() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Text> ByteStream::StartTlsParams::Builder::disownExpectedServerHostname() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 }  // namespace

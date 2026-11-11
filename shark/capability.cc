@@ -30,7 +30,7 @@
 #include <shark/base/refcount.h>
 #include <shark/base/vector.h>
 
-namespace capnp {
+namespace shark {
 
 namespace _ {
 
@@ -46,10 +46,10 @@ static kj::Own<ClientHook> newNullCap();
 class BrokenCapFactoryImpl: public _::BrokenCapFactory {
 public:
   kj::Own<ClientHook> newBrokenCap(kj::StringPtr description) override {
-    return capnp::newBrokenCap(description);
+    return shark::newBrokenCap(description);
   }
   kj::Own<ClientHook> newNullCap() override {
-    return capnp::newNullCap();
+    return shark::newNullCap();
   }
 };
 
@@ -1189,4 +1189,4 @@ kj::Promise<void*> CapabilityServerSetBase::getLocalServerInternal(Capability::C
 
 }  // namespace _ (private)
 
-}  // namespace capnp
+}  // namespace shark

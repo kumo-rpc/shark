@@ -33,7 +33,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 template <typename Results>
 class Response;
@@ -383,13 +383,13 @@ public:
   //       auto barPromise = charlie.barRequest().send();
   //
   //       // Set up the final pipeline using pipelined capabilities from `barPromise`.
-  //       capnp::PipelineBuilder<FooResults> pipeline;
+  //       shark::PipelineBuilder<FooResults> pipeline;
   //       pipeline.setResultCap(barPromise.getSomeCap());
   //       context.setPipeline(pipeline.build());
   //
   //       // Now actually wait for the results and process them.
   //       return barPromise
-  //           .then([context](capnp::Response<BarResults> response) mutable {
+  //           .then([context](shark::Response<BarResults> response) mutable {
   //         auto results = context.initResults();
   //
   //         // Make sure to set up the capabilities exactly as we did in the pipeline.
@@ -695,7 +695,7 @@ class CapabilityServerSet: private _::CapabilityServerSetBase {
   // underlying Server objects associated with them.
   //
   // All objects in the set must have the same interface type T. The objects may implement various
-  // interfaces derived from T (and in fact T can be `capnp::Capability` to accept all objects),
+  // interfaces derived from T (and in fact T can be `shark::Capability` to accept all objects),
   // but note that if you compile with RTTI disabled then you will not be able to down-cast through
   // virtual inheritance, and all inheritance between server interfaces is virtual. So, with RTTI
   // disabled, you will likely need to set T to be the most-derived Cap'n Proto interface type,
@@ -1290,6 +1290,6 @@ struct Orphanage::GetInnerReader<T, Kind::INTERFACE> {
 
 #define SHARK_CAPABILITY_H_INCLUDED  // for testing includes in unit test
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

@@ -34,7 +34,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 namespace compiler {
 
 class NodeTranslator {
@@ -225,6 +225,6 @@ private:
 };
 
 }  // namespace compiler
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

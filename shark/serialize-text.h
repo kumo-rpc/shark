@@ -28,7 +28,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 class TextCodec {
   // Reads and writes Cap'n Proto objects in a plain text format (as used in the schema
@@ -41,7 +41,7 @@ class TextCodec {
   //
   // Note that definitions or references (to constants, other fields, or files) are not
   // permitted in this format. To evaluate declarations with the full expressiveness of the
-  // schema language, see `capnp::SchemaParser`.
+  // schema language, see `shark::SchemaParser`.
   //
   // Requires linking with the capnpc library.
 
@@ -88,6 +88,6 @@ inline Orphan<T> TextCodec::decode(kj::StringPtr input, Orphanage orphanage) con
   return decode(input, Type::from<T>(), orphanage).template releaseAs<T>();
 }
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

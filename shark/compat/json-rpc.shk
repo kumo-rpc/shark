@@ -1,6 +1,6 @@
 @0xd04299800d6725ba;
 
-$import "/shark/c++.shk".namespace("capnp::json");
+$import "/shark/c++.shk".namespace("shark::json");
 
 using Json = import "/shark/format/json/json.shk";
 

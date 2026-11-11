@@ -23,7 +23,7 @@
 #include <shark/base/compat/http.h>
 #include <shark/compat/json-rpc.sk.h>
 
-namespace capnp {
+namespace shark {
 
 static constexpr uint64_t JSON_NAME_ANNOTATION_ID = 0xfa5b1fd61c2e7c3dull;
 static constexpr uint64_t JSON_NOTIFICATION_ANNOTATION_ID = 0xa0a054dea32fd98cull;
@@ -49,7 +49,7 @@ public:
       }
     }
 
-    capnp::MallocMessageBuilder message;
+    shark::MallocMessageBuilder message;
     auto value = message.getRoot<json::Value>();
     auto list = value.initObject(3 + !isNotification);
 
@@ -337,4 +337,4 @@ kj::Promise<kj::String> JsonRpc::ContentLengthTransport::receive() {
   });
 }
 
-}  // namespace capnp
+}  // namespace shark

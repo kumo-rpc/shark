@@ -29,7 +29,7 @@
 #include "config.h"
 #endif
 
-namespace capnp {
+namespace shark {
 namespace {
 
 TEST(Common, Version) {
@@ -71,8 +71,8 @@ struct EqualTypes_<T, T> { static constexpr bool value = true; };
 template <typename T, typename U>
 inline constexpr bool equalTypes() { return EqualTypes_<T, U>::value; }
 
-using capnproto_test::capnp::test::TestAllTypes;
-using capnproto_test::capnp::test::TestInterface;
+using capnproto_test::shark::test::TestAllTypes;
+using capnproto_test::shark::test::TestInterface;
 
 static_assert(equalTypes<FromAny<int>, int>(), "");
 static_assert(equalTypes<FromAny<TestAllTypes::Reader>, TestAllTypes>(), "");
@@ -84,4 +84,4 @@ static_assert(equalTypes<FromAny<kj::Own<TestInterface::Server>>, TestInterface>
 #endif
 
 }  // namespace
-}  // namespace capnp
+}  // namespace shark

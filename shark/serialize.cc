@@ -28,7 +28,7 @@
 #include <fcntl.h>
 #endif
 
-namespace capnp {
+namespace shark {
 
 FlatArrayMessageReader::FlatArrayMessageReader(
     kj::ArrayPtr<const word> array, ReaderOptions options)
@@ -213,7 +213,7 @@ InputStreamMessageReader::InputStreamMessageReader(
   // size to make the receiver allocate excessive space and possibly crash.
   KJ_REQUIRE(totalWords <= options.traversalLimitInWords,
              "Message is too large.  To increase the limit on the receiving end, see "
-             "capnp::ReaderOptions.") {
+             "shark::ReaderOptions.") {
     segmentCount = 1;
     segment0Size = kj::min(segment0Size, options.traversalLimitInWords);
     totalWords = segment0Size;
@@ -339,4 +339,4 @@ void readMessageCopyFromFd(int fd, MessageBuilder& target,
   readMessageCopy(stream, target, options, scratchSpace);
 }
 
-}  // namespace capnp
+}  // namespace shark

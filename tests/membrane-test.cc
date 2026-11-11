@@ -26,7 +26,7 @@
 #include <shark/base/function.h>
 #include <tests/base/test.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {
 namespace {
 
@@ -102,7 +102,7 @@ public:
 
   kj::Maybe<Capability::Client> inboundCall(uint64_t interfaceId, uint16_t methodId,
                                             Capability::Client target) override {
-    if (interfaceId == capnp::typeId<Thing>() && methodId == 1) {
+    if (interfaceId == shark::typeId<Thing>() && methodId == 1) {
       return Capability::Client(kj::heap<ThingImpl>("inbound"));
     } else {
       return nullptr;
@@ -111,7 +111,7 @@ public:
 
   kj::Maybe<Capability::Client> outboundCall(uint64_t interfaceId, uint16_t methodId,
                                              Capability::Client target) override {
-    if (interfaceId == capnp::typeId<Thing>() && methodId == 1) {
+    if (interfaceId == shark::typeId<Thing>() && methodId == 1) {
       return Capability::Client(kj::heap<ThingImpl>("outbound"));
     } else {
       return nullptr;
@@ -409,4 +409,4 @@ KJ_TEST("revoke membrane") {
 
 }  // namespace
 }  // namespace _
-}  // namespace capnp
+}  // namespace shark

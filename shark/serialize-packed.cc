@@ -24,7 +24,7 @@
 #include "layout.h"
 #include <vector>
 
-namespace capnp {
+namespace shark {
 
 namespace _ {  // private
 
@@ -505,4 +505,4 @@ size_t computeUnpackedSizeInWords(kj::ArrayPtr<const byte> packedBytes) {
   return total;
 }
 
-}  // namespace capnp
+}  // namespace shark

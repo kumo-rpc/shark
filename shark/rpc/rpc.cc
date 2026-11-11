@@ -34,7 +34,7 @@
 #include <shark/base/vector.h>
 #include <unordered_map>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 
 namespace {
@@ -2381,7 +2381,7 @@ private:
         return ptr->addRef();
       } else {
         return newBrokenCap(
-            "An RPC call's capnp::PipelineHook object resolved a pipelined capability to a "
+            "An RPC call's shark::PipelineHook object resolved a pipelined capability to a "
             "different final object than what was returned in the actual response. This could "
             "be a bug in Cap'n Proto, or could be due to a use of context.setPipeline() that "
             "was inconsistent with the later results.");
@@ -3723,7 +3723,7 @@ public:
   }
 
   kj::Promise<void> send(kj::Own<OutgoingRpcMessage> message, kj::Promise<void> ack) override {
-    auto size = message->sizeInWords() * sizeof(capnp::word);
+    auto size = message->sizeInWords() * sizeof(shark::word);
     maxMessageSize = kj::max(size, maxMessageSize);
 
     // We are REQUIRED to send the message NOW to maintain correct ordering.
@@ -3868,4 +3868,4 @@ kj::Function<bool(MessageReader&)> IncomingRpcMessage::getShortLivedCallback() {
   };
 }
 
-}  // namespace capnp
+}  // namespace shark

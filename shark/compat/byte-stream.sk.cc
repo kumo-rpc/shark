@@ -3,9 +3,9 @@
 
 #include "byte-stream.sk.h"
 
-namespace capnp {
+namespace shark {
 namespace schemas {
-static const ::capnp::_::AlignedData<68> b_d2e7d8a0dc0a9766 = {
+static const ::shark::_::AlignedData<68> b_d2e7d8a0dc0a9766 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     102, 151,  10, 220, 160, 216, 231, 210,
      23,   0,   0,   0,   3,   0,   0,   0,
@@ -75,9 +75,9 @@ static const ::capnp::_::AlignedData<68> b_d2e7d8a0dc0a9766 = {
       0,   0,   0,   0,   0,   0,   1,   0,
       0,   0,   0,   0,   1,   0,   1,   0, }
 };
-::capnp::word const* const bp_d2e7d8a0dc0a9766 = b_d2e7d8a0dc0a9766.words;
+::shark::word const* const bp_d2e7d8a0dc0a9766 = b_d2e7d8a0dc0a9766.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_d2e7d8a0dc0a9766[] = {
+static const ::shark::_::RawSchema* const d_d2e7d8a0dc0a9766[] = {
   &s_8d198ede6d27756a,
   &s_995f9a3377c0b16e,
   &s_a45d8c4c07bb36d2,
@@ -87,12 +87,12 @@ static const ::capnp::_::RawSchema* const d_d2e7d8a0dc0a9766[] = {
   &s_ea8253a695da1ab8,
 };
 static const uint16_t m_d2e7d8a0dc0a9766[] = {1, 2, 3, 0};
-const ::capnp::_::RawSchema s_d2e7d8a0dc0a9766 = {
+const ::shark::_::RawSchema s_d2e7d8a0dc0a9766 = {
   0xd2e7d8a0dc0a9766, b_d2e7d8a0dc0a9766.words, 68, d_d2e7d8a0dc0a9766, m_d2e7d8a0dc0a9766,
   7, 4, nullptr, nullptr, nullptr, { &s_d2e7d8a0dc0a9766, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<44> b_b23c0a13cf65c36e = {
+static const ::shark::_::AlignedData<44> b_b23c0a13cf65c36e = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     110, 195, 101, 207,  19,  10,  60, 178,
      34,   0,   0,   0,   3,   0,   0,   0,
@@ -138,21 +138,21 @@ static const ::capnp::_::AlignedData<44> b_b23c0a13cf65c36e = {
       0,   0,   0,   0,   0,   0,   1,   0,
       0,   0,   0,   0,   1,   0,   1,   0, }
 };
-::capnp::word const* const bp_b23c0a13cf65c36e = b_b23c0a13cf65c36e.words;
+::shark::word const* const bp_b23c0a13cf65c36e = b_b23c0a13cf65c36e.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_b23c0a13cf65c36e[] = {
+static const ::shark::_::RawSchema* const d_b23c0a13cf65c36e[] = {
   &s_ba8feb56b5b6922d,
   &s_ccb18eca8acafbe7,
   &s_d80bf35671585f44,
   &s_ddd06638ed144353,
 };
 static const uint16_t m_b23c0a13cf65c36e[] = {0, 1};
-const ::capnp::_::RawSchema s_b23c0a13cf65c36e = {
+const ::shark::_::RawSchema s_b23c0a13cf65c36e = {
   0xb23c0a13cf65c36e, b_b23c0a13cf65c36e.words, 44, d_b23c0a13cf65c36e, m_b23c0a13cf65c36e,
   4, 2, nullptr, nullptr, nullptr, { &s_b23c0a13cf65c36e, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<39> b_ccb18eca8acafbe7 = {
+static const ::shark::_::AlignedData<39> b_ccb18eca8acafbe7 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     231, 251, 202, 138, 202, 142, 177, 204,
      52,   0,   0,   0,   1,   0,   1,   0,
@@ -193,16 +193,16 @@ static const ::capnp::_::AlignedData<39> b_ccb18eca8acafbe7 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_ccb18eca8acafbe7 = b_ccb18eca8acafbe7.words;
+::shark::word const* const bp_ccb18eca8acafbe7 = b_ccb18eca8acafbe7.words;
 #if !SHARK_LITE
 static const uint16_t m_ccb18eca8acafbe7[] = {0};
 static const uint16_t i_ccb18eca8acafbe7[] = {0};
-const ::capnp::_::RawSchema s_ccb18eca8acafbe7 = {
+const ::shark::_::RawSchema s_ccb18eca8acafbe7 = {
   0xccb18eca8acafbe7, b_ccb18eca8acafbe7.words, 39, nullptr, m_ccb18eca8acafbe7,
   0, 1, i_ccb18eca8acafbe7, nullptr, nullptr, { &s_ccb18eca8acafbe7, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<22> b_ba8feb56b5b6922d = {
+static const ::shark::_::AlignedData<22> b_ba8feb56b5b6922d = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      45, 146, 182, 181,  86, 235, 143, 186,
      52,   0,   0,   0,   1,   0,   0,   0,
@@ -226,14 +226,14 @@ static const ::capnp::_::AlignedData<22> b_ba8feb56b5b6922d = {
     100,  36,  82, 101, 115, 117, 108, 116,
     115,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_ba8feb56b5b6922d = b_ba8feb56b5b6922d.words;
+::shark::word const* const bp_ba8feb56b5b6922d = b_ba8feb56b5b6922d.words;
 #if !SHARK_LITE
-const ::capnp::_::RawSchema s_ba8feb56b5b6922d = {
+const ::shark::_::RawSchema s_ba8feb56b5b6922d = {
   0xba8feb56b5b6922d, b_ba8feb56b5b6922d.words, 22, nullptr, nullptr,
   0, 0, nullptr, nullptr, nullptr, { &s_ba8feb56b5b6922d, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<22> b_d80bf35671585f44 = {
+static const ::shark::_::AlignedData<22> b_d80bf35671585f44 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      68,  95,  88, 113,  86, 243,  11, 216,
      52,   0,   0,   0,   1,   0,   0,   0,
@@ -257,14 +257,14 @@ static const ::capnp::_::AlignedData<22> b_d80bf35671585f44 = {
     104, 101, 100,  76, 105, 109, 105, 116,
      36,  80,  97, 114,  97, 109, 115,   0, }
 };
-::capnp::word const* const bp_d80bf35671585f44 = b_d80bf35671585f44.words;
+::shark::word const* const bp_d80bf35671585f44 = b_d80bf35671585f44.words;
 #if !SHARK_LITE
-const ::capnp::_::RawSchema s_d80bf35671585f44 = {
+const ::shark::_::RawSchema s_d80bf35671585f44 = {
   0xd80bf35671585f44, b_d80bf35671585f44.words, 22, nullptr, nullptr,
   0, 0, nullptr, nullptr, nullptr, { &s_d80bf35671585f44, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<39> b_ddd06638ed144353 = {
+static const ::shark::_::AlignedData<39> b_ddd06638ed144353 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      83,  67,  20, 237,  56, 102, 208, 221,
      52,   0,   0,   0,   1,   0,   0,   0,
@@ -305,19 +305,19 @@ static const ::capnp::_::AlignedData<39> b_ddd06638ed144353 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_ddd06638ed144353 = b_ddd06638ed144353.words;
+::shark::word const* const bp_ddd06638ed144353 = b_ddd06638ed144353.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_ddd06638ed144353[] = {
+static const ::shark::_::RawSchema* const d_ddd06638ed144353[] = {
   &s_d2e7d8a0dc0a9766,
 };
 static const uint16_t m_ddd06638ed144353[] = {0};
 static const uint16_t i_ddd06638ed144353[] = {0};
-const ::capnp::_::RawSchema s_ddd06638ed144353 = {
+const ::shark::_::RawSchema s_ddd06638ed144353 = {
   0xddd06638ed144353, b_ddd06638ed144353.words, 39, d_ddd06638ed144353, m_ddd06638ed144353,
   1, 1, i_ddd06638ed144353, nullptr, nullptr, { &s_ddd06638ed144353, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<35> b_a45d8c4c07bb36d2 = {
+static const ::shark::_::AlignedData<35> b_a45d8c4c07bb36d2 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     210,  54, 187,   7,  76, 140,  93, 164,
      34,   0,   0,   0,   1,   0,   0,   0,
@@ -354,16 +354,16 @@ static const ::capnp::_::AlignedData<35> b_a45d8c4c07bb36d2 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_a45d8c4c07bb36d2 = b_a45d8c4c07bb36d2.words;
+::shark::word const* const bp_a45d8c4c07bb36d2 = b_a45d8c4c07bb36d2.words;
 #if !SHARK_LITE
 static const uint16_t m_a45d8c4c07bb36d2[] = {0};
 static const uint16_t i_a45d8c4c07bb36d2[] = {0};
-const ::capnp::_::RawSchema s_a45d8c4c07bb36d2 = {
+const ::shark::_::RawSchema s_a45d8c4c07bb36d2 = {
   0xa45d8c4c07bb36d2, b_a45d8c4c07bb36d2.words, 35, nullptr, m_a45d8c4c07bb36d2,
   0, 1, i_a45d8c4c07bb36d2, nullptr, nullptr, { &s_a45d8c4c07bb36d2, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<19> b_cbd32047945c0144 = {
+static const ::shark::_::AlignedData<19> b_cbd32047945c0144 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
      68,   1,  92, 148,  71,  32, 211, 203,
      34,   0,   0,   0,   1,   0,   0,   0,
@@ -384,14 +384,14 @@ static const ::capnp::_::AlignedData<19> b_cbd32047945c0144 = {
     109,  46, 101, 110, 100,  36,  80,  97,
     114,  97, 109, 115,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_cbd32047945c0144 = b_cbd32047945c0144.words;
+::shark::word const* const bp_cbd32047945c0144 = b_cbd32047945c0144.words;
 #if !SHARK_LITE
-const ::capnp::_::RawSchema s_cbd32047945c0144 = {
+const ::shark::_::RawSchema s_cbd32047945c0144 = {
   0xcbd32047945c0144, b_cbd32047945c0144.words, 19, nullptr, nullptr,
   0, 0, nullptr, nullptr, nullptr, { &s_cbd32047945c0144, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<19> b_e7e2ddbc3c63d594 = {
+static const ::shark::_::AlignedData<19> b_e7e2ddbc3c63d594 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     148, 213,  99,  60, 188, 221, 226, 231,
      34,   0,   0,   0,   1,   0,   0,   0,
@@ -412,14 +412,14 @@ static const ::capnp::_::AlignedData<19> b_e7e2ddbc3c63d594 = {
     109,  46, 101, 110, 100,  36,  82, 101,
     115, 117, 108, 116, 115,   0,   0,   0, }
 };
-::capnp::word const* const bp_e7e2ddbc3c63d594 = b_e7e2ddbc3c63d594.words;
+::shark::word const* const bp_e7e2ddbc3c63d594 = b_e7e2ddbc3c63d594.words;
 #if !SHARK_LITE
-const ::capnp::_::RawSchema s_e7e2ddbc3c63d594 = {
+const ::shark::_::RawSchema s_e7e2ddbc3c63d594 = {
   0xe7e2ddbc3c63d594, b_e7e2ddbc3c63d594.words, 19, nullptr, nullptr,
   0, 0, nullptr, nullptr, nullptr, { &s_e7e2ddbc3c63d594, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<52> b_c5b18e80fc80d9f8 = {
+static const ::shark::_::AlignedData<52> b_c5b18e80fc80d9f8 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     248, 217, 128, 252, 128, 142, 177, 197,
      34,   0,   0,   0,   1,   0,   1,   0,
@@ -473,19 +473,19 @@ static const ::capnp::_::AlignedData<52> b_c5b18e80fc80d9f8 = {
     255, 255, 255, 255, 255, 255, 255, 255,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_c5b18e80fc80d9f8 = b_c5b18e80fc80d9f8.words;
+::shark::word const* const bp_c5b18e80fc80d9f8 = b_c5b18e80fc80d9f8.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_c5b18e80fc80d9f8[] = {
+static const ::shark::_::RawSchema* const d_c5b18e80fc80d9f8[] = {
   &s_b23c0a13cf65c36e,
 };
 static const uint16_t m_c5b18e80fc80d9f8[] = {0, 1};
 static const uint16_t i_c5b18e80fc80d9f8[] = {0, 1};
-const ::capnp::_::RawSchema s_c5b18e80fc80d9f8 = {
+const ::shark::_::RawSchema s_c5b18e80fc80d9f8 = {
   0xc5b18e80fc80d9f8, b_c5b18e80fc80d9f8.words, 52, d_c5b18e80fc80d9f8, m_c5b18e80fc80d9f8,
   1, 2, i_c5b18e80fc80d9f8, nullptr, nullptr, { &s_c5b18e80fc80d9f8, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<37> b_8d198ede6d27756a = {
+static const ::shark::_::AlignedData<37> b_8d198ede6d27756a = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     106, 117,  39, 109, 222, 142,  25, 141,
      34,   0,   0,   0,   1,   0,   0,   0,
@@ -524,19 +524,19 @@ static const ::capnp::_::AlignedData<37> b_8d198ede6d27756a = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_8d198ede6d27756a = b_8d198ede6d27756a.words;
+::shark::word const* const bp_8d198ede6d27756a = b_8d198ede6d27756a.words;
 #if !SHARK_LITE
-static const ::capnp::_::RawSchema* const d_8d198ede6d27756a[] = {
+static const ::shark::_::RawSchema* const d_8d198ede6d27756a[] = {
   &s_d2e7d8a0dc0a9766,
 };
 static const uint16_t m_8d198ede6d27756a[] = {0};
 static const uint16_t i_8d198ede6d27756a[] = {0};
-const ::capnp::_::RawSchema s_8d198ede6d27756a = {
+const ::shark::_::RawSchema s_8d198ede6d27756a = {
   0x8d198ede6d27756a, b_8d198ede6d27756a.words, 37, d_8d198ede6d27756a, m_8d198ede6d27756a,
   1, 1, i_8d198ede6d27756a, nullptr, nullptr, { &s_8d198ede6d27756a, nullptr, nullptr, 0, 0, nullptr }, true
 };
 #endif  // !SHARK_LITE
-static const ::capnp::_::AlignedData<38> b_ea8253a695da1ab8 = {
+static const ::shark::_::AlignedData<38> b_ea8253a695da1ab8 = {
   {   0,   0,   0,   0,   6,   0,   6,   0,
     184,  26, 218, 149, 166,  83, 130, 234,
      34,   0,   0,   0,   1,   0,   0,   0,
@@ -576,66 +576,66 @@ static const ::capnp::_::AlignedData<38> b_ea8253a695da1ab8 = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
-::capnp::word const* const bp_ea8253a695da1ab8 = b_ea8253a695da1ab8.words;
+::shark::word const* const bp_ea8253a695da1ab8 = b_ea8253a695da1ab8.words;
 #if !SHARK_LITE
 static const uint16_t m_ea8253a695da1ab8[] = {0};
 static const uint16_t i_ea8253a695da1ab8[] = {0};
-const ::capnp::_::RawSchema s_ea8253a695da1ab8 = {
+const ::shark::_::RawSchema s_ea8253a695da1ab8 = {
   0xea8253a695da1ab8, b_ea8253a695da1ab8.words, 38, nullptr, m_ea8253a695da1ab8,
   0, 1, i_ea8253a695da1ab8, nullptr, nullptr, { &s_ea8253a695da1ab8, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !SHARK_LITE
 }  // namespace schemas
-}  // namespace capnp
+}  // namespace shark
 
 // =======================================================================================
 
-namespace capnp {
+namespace shark {
 
 #if !SHARK_LITE
-::capnp::StreamingRequest< ::capnp::ByteStream::WriteParams>
-ByteStream::Client::writeRequest(::kj::Maybe< ::capnp::MessageSize> sizeHint) {
-  return newStreamingCall< ::capnp::ByteStream::WriteParams>(
+::shark::StreamingRequest< ::shark::ByteStream::WriteParams>
+ByteStream::Client::writeRequest(::kj::Maybe< ::shark::MessageSize> sizeHint) {
+  return newStreamingCall< ::shark::ByteStream::WriteParams>(
       0xd2e7d8a0dc0a9766ull, 0, sizeHint, {true});
 }
 ::kj::Promise<void> ByteStream::Server::write(WriteContext) {
-  return ::capnp::Capability::Server::internalUnimplemented(
+  return ::shark::Capability::Server::internalUnimplemented(
       "compat/byte-stream.shk:ByteStream", "write",
       0xd2e7d8a0dc0a9766ull, 0);
 }
-::capnp::Request< ::capnp::ByteStream::EndParams,  ::capnp::ByteStream::EndResults>
-ByteStream::Client::endRequest(::kj::Maybe< ::capnp::MessageSize> sizeHint) {
-  return newCall< ::capnp::ByteStream::EndParams,  ::capnp::ByteStream::EndResults>(
+::shark::Request< ::shark::ByteStream::EndParams,  ::shark::ByteStream::EndResults>
+ByteStream::Client::endRequest(::kj::Maybe< ::shark::MessageSize> sizeHint) {
+  return newCall< ::shark::ByteStream::EndParams,  ::shark::ByteStream::EndResults>(
       0xd2e7d8a0dc0a9766ull, 1, sizeHint, {true});
 }
 ::kj::Promise<void> ByteStream::Server::end(EndContext) {
-  return ::capnp::Capability::Server::internalUnimplemented(
+  return ::shark::Capability::Server::internalUnimplemented(
       "compat/byte-stream.shk:ByteStream", "end",
       0xd2e7d8a0dc0a9766ull, 1);
 }
-::capnp::Request< ::capnp::ByteStream::GetSubstreamParams,  ::capnp::ByteStream::GetSubstreamResults>
-ByteStream::Client::getSubstreamRequest(::kj::Maybe< ::capnp::MessageSize> sizeHint) {
-  return newCall< ::capnp::ByteStream::GetSubstreamParams,  ::capnp::ByteStream::GetSubstreamResults>(
+::shark::Request< ::shark::ByteStream::GetSubstreamParams,  ::shark::ByteStream::GetSubstreamResults>
+ByteStream::Client::getSubstreamRequest(::kj::Maybe< ::shark::MessageSize> sizeHint) {
+  return newCall< ::shark::ByteStream::GetSubstreamParams,  ::shark::ByteStream::GetSubstreamResults>(
       0xd2e7d8a0dc0a9766ull, 2, sizeHint, {false});
 }
 ::kj::Promise<void> ByteStream::Server::getSubstream(GetSubstreamContext) {
-  return ::capnp::Capability::Server::internalUnimplemented(
+  return ::shark::Capability::Server::internalUnimplemented(
       "compat/byte-stream.shk:ByteStream", "getSubstream",
       0xd2e7d8a0dc0a9766ull, 2);
 }
-::capnp::StreamingRequest< ::capnp::ByteStream::StartTlsParams>
-ByteStream::Client::startTlsRequest(::kj::Maybe< ::capnp::MessageSize> sizeHint) {
-  return newStreamingCall< ::capnp::ByteStream::StartTlsParams>(
+::shark::StreamingRequest< ::shark::ByteStream::StartTlsParams>
+ByteStream::Client::startTlsRequest(::kj::Maybe< ::shark::MessageSize> sizeHint) {
+  return newStreamingCall< ::shark::ByteStream::StartTlsParams>(
       0xd2e7d8a0dc0a9766ull, 3, sizeHint, {true});
 }
 ::kj::Promise<void> ByteStream::Server::startTls(StartTlsContext) {
-  return ::capnp::Capability::Server::internalUnimplemented(
+  return ::shark::Capability::Server::internalUnimplemented(
       "compat/byte-stream.shk:ByteStream", "startTls",
       0xd2e7d8a0dc0a9766ull, 3);
 }
-::capnp::Capability::Server::DispatchCallResult ByteStream::Server::dispatchCall(
+::shark::Capability::Server::DispatchCallResult ByteStream::Server::dispatchCall(
     uint64_t interfaceId, uint16_t methodId,
-    ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context) {
+    ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context) {
   switch (interfaceId) {
     case 0xd2e7d8a0dc0a9766ull:
       return dispatchCallInternal(methodId, context);
@@ -643,45 +643,45 @@ ByteStream::Client::startTlsRequest(::kj::Maybe< ::capnp::MessageSize> sizeHint)
       return internalUnimplemented("compat/byte-stream.shk:ByteStream", interfaceId);
   }
 }
-::capnp::Capability::Server::DispatchCallResult ByteStream::Server::dispatchCallInternal(
+::shark::Capability::Server::DispatchCallResult ByteStream::Server::dispatchCallInternal(
     uint16_t methodId,
-    ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context) {
+    ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context) {
   switch (methodId) {
     case 0:
       return {
         kj::evalNow([&]() {
-          return write(::capnp::Capability::Server::internalGetTypedStreamingContext<
-               ::capnp::ByteStream::WriteParams>(context));
+          return write(::shark::Capability::Server::internalGetTypedStreamingContext<
+               ::shark::ByteStream::WriteParams>(context));
         }),
         true,
         true
       };
     case 1:
       return {
-        end(::capnp::Capability::Server::internalGetTypedContext<
-             ::capnp::ByteStream::EndParams,  ::capnp::ByteStream::EndResults>(context)),
+        end(::shark::Capability::Server::internalGetTypedContext<
+             ::shark::ByteStream::EndParams,  ::shark::ByteStream::EndResults>(context)),
         false,
         true
       };
     case 2:
       return {
-        getSubstream(::capnp::Capability::Server::internalGetTypedContext<
-             ::capnp::ByteStream::GetSubstreamParams,  ::capnp::ByteStream::GetSubstreamResults>(context)),
+        getSubstream(::shark::Capability::Server::internalGetTypedContext<
+             ::shark::ByteStream::GetSubstreamParams,  ::shark::ByteStream::GetSubstreamResults>(context)),
         false,
         true
       };
     case 3:
       return {
         kj::evalNow([&]() {
-          return startTls(::capnp::Capability::Server::internalGetTypedStreamingContext<
-               ::capnp::ByteStream::StartTlsParams>(context));
+          return startTls(::shark::Capability::Server::internalGetTypedStreamingContext<
+               ::shark::ByteStream::StartTlsParams>(context));
         }),
         true,
         true
       };
     default:
       (void)context;
-      return ::capnp::Capability::Server::internalUnimplemented(
+      return ::shark::Capability::Server::internalUnimplemented(
           "compat/byte-stream.shk:ByteStream",
           0xd2e7d8a0dc0a9766ull, methodId);
   }
@@ -691,35 +691,35 @@ ByteStream::Client::startTlsRequest(::kj::Maybe< ::capnp::MessageSize> sizeHint)
 // ByteStream
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind ByteStream::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* ByteStream::_capnpPrivate::schema;
+constexpr ::shark::Kind ByteStream::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* ByteStream::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 #if !SHARK_LITE
-::capnp::Request< ::capnp::ByteStream::SubstreamCallback::EndedParams,  ::capnp::ByteStream::SubstreamCallback::EndedResults>
-ByteStream::SubstreamCallback::Client::endedRequest(::kj::Maybe< ::capnp::MessageSize> sizeHint) {
-  return newCall< ::capnp::ByteStream::SubstreamCallback::EndedParams,  ::capnp::ByteStream::SubstreamCallback::EndedResults>(
+::shark::Request< ::shark::ByteStream::SubstreamCallback::EndedParams,  ::shark::ByteStream::SubstreamCallback::EndedResults>
+ByteStream::SubstreamCallback::Client::endedRequest(::kj::Maybe< ::shark::MessageSize> sizeHint) {
+  return newCall< ::shark::ByteStream::SubstreamCallback::EndedParams,  ::shark::ByteStream::SubstreamCallback::EndedResults>(
       0xb23c0a13cf65c36eull, 0, sizeHint, {true});
 }
 ::kj::Promise<void> ByteStream::SubstreamCallback::Server::ended(EndedContext) {
-  return ::capnp::Capability::Server::internalUnimplemented(
+  return ::shark::Capability::Server::internalUnimplemented(
       "compat/byte-stream.shk:ByteStream.SubstreamCallback", "ended",
       0xb23c0a13cf65c36eull, 0);
 }
-::capnp::Request< ::capnp::ByteStream::SubstreamCallback::ReachedLimitParams,  ::capnp::ByteStream::SubstreamCallback::ReachedLimitResults>
-ByteStream::SubstreamCallback::Client::reachedLimitRequest(::kj::Maybe< ::capnp::MessageSize> sizeHint) {
-  return newCall< ::capnp::ByteStream::SubstreamCallback::ReachedLimitParams,  ::capnp::ByteStream::SubstreamCallback::ReachedLimitResults>(
+::shark::Request< ::shark::ByteStream::SubstreamCallback::ReachedLimitParams,  ::shark::ByteStream::SubstreamCallback::ReachedLimitResults>
+ByteStream::SubstreamCallback::Client::reachedLimitRequest(::kj::Maybe< ::shark::MessageSize> sizeHint) {
+  return newCall< ::shark::ByteStream::SubstreamCallback::ReachedLimitParams,  ::shark::ByteStream::SubstreamCallback::ReachedLimitResults>(
       0xb23c0a13cf65c36eull, 1, sizeHint, {false});
 }
 ::kj::Promise<void> ByteStream::SubstreamCallback::Server::reachedLimit(ReachedLimitContext) {
-  return ::capnp::Capability::Server::internalUnimplemented(
+  return ::shark::Capability::Server::internalUnimplemented(
       "compat/byte-stream.shk:ByteStream.SubstreamCallback", "reachedLimit",
       0xb23c0a13cf65c36eull, 1);
 }
-::capnp::Capability::Server::DispatchCallResult ByteStream::SubstreamCallback::Server::dispatchCall(
+::shark::Capability::Server::DispatchCallResult ByteStream::SubstreamCallback::Server::dispatchCall(
     uint64_t interfaceId, uint16_t methodId,
-    ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context) {
+    ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context) {
   switch (interfaceId) {
     case 0xb23c0a13cf65c36eull:
       return dispatchCallInternal(methodId, context);
@@ -727,27 +727,27 @@ ByteStream::SubstreamCallback::Client::reachedLimitRequest(::kj::Maybe< ::capnp:
       return internalUnimplemented("compat/byte-stream.shk:ByteStream.SubstreamCallback", interfaceId);
   }
 }
-::capnp::Capability::Server::DispatchCallResult ByteStream::SubstreamCallback::Server::dispatchCallInternal(
+::shark::Capability::Server::DispatchCallResult ByteStream::SubstreamCallback::Server::dispatchCallInternal(
     uint16_t methodId,
-    ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context) {
+    ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context) {
   switch (methodId) {
     case 0:
       return {
-        ended(::capnp::Capability::Server::internalGetTypedContext<
-             ::capnp::ByteStream::SubstreamCallback::EndedParams,  ::capnp::ByteStream::SubstreamCallback::EndedResults>(context)),
+        ended(::shark::Capability::Server::internalGetTypedContext<
+             ::shark::ByteStream::SubstreamCallback::EndedParams,  ::shark::ByteStream::SubstreamCallback::EndedResults>(context)),
         false,
         true
       };
     case 1:
       return {
-        reachedLimit(::capnp::Capability::Server::internalGetTypedContext<
-             ::capnp::ByteStream::SubstreamCallback::ReachedLimitParams,  ::capnp::ByteStream::SubstreamCallback::ReachedLimitResults>(context)),
+        reachedLimit(::shark::Capability::Server::internalGetTypedContext<
+             ::shark::ByteStream::SubstreamCallback::ReachedLimitParams,  ::shark::ByteStream::SubstreamCallback::ReachedLimitResults>(context)),
         false,
         true
       };
     default:
       (void)context;
-      return ::capnp::Capability::Server::internalUnimplemented(
+      return ::shark::Capability::Server::internalUnimplemented(
           "compat/byte-stream.shk:ByteStream.SubstreamCallback",
           0xb23c0a13cf65c36eull, methodId);
   }
@@ -757,8 +757,8 @@ ByteStream::SubstreamCallback::Client::reachedLimitRequest(::kj::Maybe< ::capnp:
 // ByteStream::SubstreamCallback
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind ByteStream::SubstreamCallback::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* ByteStream::SubstreamCallback::_capnpPrivate::schema;
+constexpr ::shark::Kind ByteStream::SubstreamCallback::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* ByteStream::SubstreamCallback::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -769,8 +769,8 @@ constexpr uint16_t ByteStream::SubstreamCallback::EndedParams::_capnpPrivate::po
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind ByteStream::SubstreamCallback::EndedParams::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* ByteStream::SubstreamCallback::EndedParams::_capnpPrivate::schema;
+constexpr ::shark::Kind ByteStream::SubstreamCallback::EndedParams::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* ByteStream::SubstreamCallback::EndedParams::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -781,8 +781,8 @@ constexpr uint16_t ByteStream::SubstreamCallback::EndedResults::_capnpPrivate::p
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind ByteStream::SubstreamCallback::EndedResults::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* ByteStream::SubstreamCallback::EndedResults::_capnpPrivate::schema;
+constexpr ::shark::Kind ByteStream::SubstreamCallback::EndedResults::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* ByteStream::SubstreamCallback::EndedResults::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -793,8 +793,8 @@ constexpr uint16_t ByteStream::SubstreamCallback::ReachedLimitParams::_capnpPriv
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind ByteStream::SubstreamCallback::ReachedLimitParams::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* ByteStream::SubstreamCallback::ReachedLimitParams::_capnpPrivate::schema;
+constexpr ::shark::Kind ByteStream::SubstreamCallback::ReachedLimitParams::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* ByteStream::SubstreamCallback::ReachedLimitParams::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -805,8 +805,8 @@ constexpr uint16_t ByteStream::SubstreamCallback::ReachedLimitResults::_capnpPri
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind ByteStream::SubstreamCallback::ReachedLimitResults::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* ByteStream::SubstreamCallback::ReachedLimitResults::_capnpPrivate::schema;
+constexpr ::shark::Kind ByteStream::SubstreamCallback::ReachedLimitResults::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* ByteStream::SubstreamCallback::ReachedLimitResults::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -817,8 +817,8 @@ constexpr uint16_t ByteStream::WriteParams::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind ByteStream::WriteParams::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* ByteStream::WriteParams::_capnpPrivate::schema;
+constexpr ::shark::Kind ByteStream::WriteParams::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* ByteStream::WriteParams::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -829,8 +829,8 @@ constexpr uint16_t ByteStream::EndParams::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind ByteStream::EndParams::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* ByteStream::EndParams::_capnpPrivate::schema;
+constexpr ::shark::Kind ByteStream::EndParams::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* ByteStream::EndParams::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -841,8 +841,8 @@ constexpr uint16_t ByteStream::EndResults::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind ByteStream::EndResults::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* ByteStream::EndResults::_capnpPrivate::schema;
+constexpr ::shark::Kind ByteStream::EndResults::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* ByteStream::EndResults::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -853,8 +853,8 @@ constexpr uint16_t ByteStream::GetSubstreamParams::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind ByteStream::GetSubstreamParams::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* ByteStream::GetSubstreamParams::_capnpPrivate::schema;
+constexpr ::shark::Kind ByteStream::GetSubstreamParams::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* ByteStream::GetSubstreamParams::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -865,8 +865,8 @@ constexpr uint16_t ByteStream::GetSubstreamResults::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind ByteStream::GetSubstreamResults::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* ByteStream::GetSubstreamResults::_capnpPrivate::schema;
+constexpr ::shark::Kind ByteStream::GetSubstreamResults::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* ByteStream::GetSubstreamResults::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -877,8 +877,8 @@ constexpr uint16_t ByteStream::StartTlsParams::_capnpPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::capnp::Kind ByteStream::StartTlsParams::_capnpPrivate::kind;
-constexpr ::capnp::_::RawSchema const* ByteStream::StartTlsParams::_capnpPrivate::schema;
+constexpr ::shark::Kind ByteStream::StartTlsParams::_capnpPrivate::kind;
+constexpr ::shark::_::RawSchema const* ByteStream::StartTlsParams::_capnpPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 

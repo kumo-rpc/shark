@@ -29,7 +29,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 namespace compiler {
 
 void parseFile(List<Statement>::Reader statements, ParsedFile::Builder result,
@@ -146,6 +146,6 @@ kj::String expressionString(Expression::Reader name);
 // Stringify the expression as code.
 
 }  // namespace compiler
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

@@ -15,7 +15,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 namespace schemas {
 
 SHARK_DECLARE_SCHEMA(b9c6f99ebf805f2c);
@@ -23,9 +23,9 @@ SHARK_DECLARE_SCHEMA(f264a779fef191ce);
 SHARK_DECLARE_SCHEMA(ac7096ff8cfc9dce);
 
 }  // namespace schemas
-}  // namespace capnp
+}  // namespace shark
 
-namespace capnp {
+namespace shark {
 namespace annotations {
 
 // =======================================================================================

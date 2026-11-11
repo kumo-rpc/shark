@@ -27,7 +27,7 @@
 #include <shark/base/string.h>
 #include <tests/base/test.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -917,15 +917,15 @@ R"({
   "names-can_contain!anything Really": "foo"
 })"_kj;
 
-class PrefixAdder: public JsonCodec::Handler<capnp::Text> {
+class PrefixAdder: public JsonCodec::Handler<shark::Text> {
 public:
-  void encode(const JsonCodec& codec, capnp::Text::Reader input, JsonValue::Builder output) const {
+  void encode(const JsonCodec& codec, shark::Text::Reader input, JsonValue::Builder output) const {
     output.setString(kj::str("add-prefix-", input));
   }
 
-  Orphan<capnp::Text> decode(const JsonCodec& codec, JsonValue::Reader input,
+  Orphan<shark::Text> decode(const JsonCodec& codec, JsonValue::Reader input,
                              Orphanage orphanage) const {
-    return orphanage.newOrphanCopy(capnp::Text::Reader(input.getString().slice(11)));
+    return orphanage.newOrphanCopy(shark::Text::Reader(input.getString().slice(11)));
   }
 };
 
@@ -1031,4 +1031,4 @@ KJ_TEST("base64 union encoded correctly") {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

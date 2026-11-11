@@ -27,7 +27,7 @@
 #include  <shark/capability.h>
 #endif  // !SHARK_LITE
 
-namespace capnp {
+namespace shark {
 
 #if !SHARK_LITE
 
@@ -266,4 +266,4 @@ bool AnyList::Reader::operator==(AnyList::Reader right) const {
   KJ_UNREACHABLE;
 }
 
-}  // namespace capnp
+}  // namespace shark

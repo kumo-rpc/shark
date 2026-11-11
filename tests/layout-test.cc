@@ -45,7 +45,7 @@ namespace kj {
 }
 #endif
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -411,4 +411,4 @@ TEST(WireFormat, NanPatching) {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

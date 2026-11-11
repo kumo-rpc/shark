@@ -30,7 +30,7 @@
 #include <stdlib.h>
 #include <shark/stream.sk.h>
 
-namespace capnp {
+namespace shark {
 namespace compiler {
 
 bool shouldDetectIssue344() {
@@ -2439,4 +2439,4 @@ Orphan<List<schema::Annotation>> NodeTranslator::compileAnnotationApplications(
 }
 
 }  // namespace compiler
-}  // namespace capnp
+}  // namespace shark

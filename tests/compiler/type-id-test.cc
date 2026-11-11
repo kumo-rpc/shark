@@ -23,7 +23,7 @@
 #include <shark/schema.sk.h>
 #include <tests/base/test.h>
 
-namespace capnp {
+namespace shark {
 namespace compiler {
 namespace {
 
@@ -45,4 +45,4 @@ KJ_TEST("type ID generation hasn't changed") {
 
 }  // namespace
 }  // namespace compiler
-}  // namespace capnp
+}  // namespace shark

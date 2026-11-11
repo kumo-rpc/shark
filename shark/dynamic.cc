@@ -22,7 +22,7 @@
 #include "dynamic.h"
 #include <shark/base/debug.h>
 
-namespace capnp {
+namespace shark {
 
     namespace {
 
@@ -1445,7 +1445,7 @@ namespace capnp {
         auto value = constant.getProto().getConst().getValue();
         switch (type.which()) {
         case schema::Type::VOID:
-            *this = capnp::VOID;
+            *this = shark::VOID;
             break;
         case schema::Type::BOOL:
             *this = value.getBool();
@@ -2290,4 +2290,4 @@ namespace capnp {
         KJ_UNREACHABLE;
     }
 
-} // namespace capnp
+} // namespace shark

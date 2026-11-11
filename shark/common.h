@@ -44,7 +44,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 #define SHARK_VERSION_MAJOR 1
 #define SHARK_VERSION_MINOR 5
@@ -175,12 +175,12 @@ inline constexpr Kind kind() {
 
 #if _MSC_VER && !defined(__clang__)
 
-#define SHARK_KIND(T) ::capnp::_::Kind_<T>::kind
+#define SHARK_KIND(T) ::shark::_::Kind_<T>::kind
 // Avoid constexpr methods in MSVC (it remains buggy in many situations).
 
 #else  // _MSC_VER
 
-#define SHARK_KIND(T) ::capnp::kind<T>()
+#define SHARK_KIND(T) ::shark::kind<T>()
 // Use this macro rather than kind<T>() in any code which must work in MSVC.
 
 #endif  // _MSC_VER, else
@@ -746,6 +746,6 @@ inline constexpr kj::ArrayPtr<U> arrayPtr(U* ptr, T size) {
 
 #endif
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

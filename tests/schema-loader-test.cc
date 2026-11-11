@@ -26,7 +26,7 @@
 #include <tests/base/compat/gtest.h>
 #include <shark/base/debug.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -457,4 +457,4 @@ KJ_TEST("SchemaLoader placeholders are assumed to have caps") {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

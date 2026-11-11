@@ -19,7 +19,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 namespace schemas {
 
 SHARK_DECLARE_SCHEMA(92963bfdad2beb6a);
@@ -144,9 +144,9 @@ SHARK_DECLARE_SCHEMA(ed5334c41abc0375);
 SHARK_DECLARE_SCHEMA(e971001e4ade4a2a);
 
 }  // namespace schemas
-}  // namespace capnp
+}  // namespace shark
 
-namespace capnp {
+namespace shark {
 
 struct HttpService {
   HttpService() = delete;
@@ -169,7 +169,7 @@ struct HttpService {
   #if !SHARK_LITE
   struct _capnpPrivate {
     SHARK_DECLARE_INTERFACE_HEADER(92963bfdad2beb6a)
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
   };
   #endif  // !SHARK_LITE
 };
@@ -190,7 +190,7 @@ struct HttpService::ClientRequestContext {
   #if !SHARK_LITE
   struct _capnpPrivate {
     SHARK_DECLARE_INTERFACE_HEADER(ea3256705c0b63ba)
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
   };
   #endif  // !SHARK_LITE
 };
@@ -205,7 +205,7 @@ struct HttpService::ClientRequestContext::StartResponseParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(81e666258a901e30, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -220,7 +220,7 @@ struct HttpService::ClientRequestContext::StartResponseResults {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(955c85d7a557d8e9, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -235,7 +235,7 @@ struct HttpService::ClientRequestContext::StartWebSocketParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(f6850b405e21d2c1, 0, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -250,7 +250,7 @@ struct HttpService::ClientRequestContext::StartWebSocketResults {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(bd146efdadd86c3d, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -271,7 +271,7 @@ struct HttpService::ConnectClientRequestContext {
   #if !SHARK_LITE
   struct _capnpPrivate {
     SHARK_DECLARE_INTERFACE_HEADER(da572939a4c3d728)
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
   };
   #endif  // !SHARK_LITE
 };
@@ -286,7 +286,7 @@ struct HttpService::ConnectClientRequestContext::StartConnectParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(d0eab1ea093a6673, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -301,7 +301,7 @@ struct HttpService::ConnectClientRequestContext::StartConnectResults {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(fa73959a9a2b477d, 0, 0)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -316,7 +316,7 @@ struct HttpService::ConnectClientRequestContext::StartErrorParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(fe0ea4cde5df8164, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -331,7 +331,7 @@ struct HttpService::ConnectClientRequestContext::StartErrorResults {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(b92efa728643f0ed, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -348,7 +348,7 @@ struct HttpService::ServerRequestContext {
   #if !SHARK_LITE
   struct _capnpPrivate {
     SHARK_DECLARE_INTERFACE_HEADER(99ae26bfd34f3f3b)
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
   };
   #endif  // !SHARK_LITE
 };
@@ -363,7 +363,7 @@ struct HttpService::StartRequestParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(ccefbf23794af7b3, 0, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -378,7 +378,7 @@ struct HttpService::StartRequestResults {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(a9da072c30fec5de, 0, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -393,7 +393,7 @@ struct HttpService::RequestParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(ccc73319af8d2a1b, 0, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -408,7 +408,7 @@ struct HttpService::RequestResults {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(fd030bd777152c43, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -423,7 +423,7 @@ struct HttpService::ConnectParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(a8d63d909cead201, 0, 5)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -438,7 +438,7 @@ struct HttpService::ConnectResults {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(bf2721059c3d9248, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -453,7 +453,7 @@ struct ConnectSettings {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(f981e8428b86f885, 1, 0)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -474,7 +474,7 @@ struct WebSocket {
   #if !SHARK_LITE
   struct _capnpPrivate {
     SHARK_DECLARE_INTERFACE_HEADER(b09c33a9f4caa823)
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
   };
   #endif  // !SHARK_LITE
 };
@@ -489,7 +489,7 @@ struct WebSocket::SendTextParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(dcf946892e5778c3, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -504,7 +504,7 @@ struct WebSocket::SendDataParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(a9b84fb6432f030f, 0, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -519,7 +519,7 @@ struct WebSocket::CloseParams {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(ba1fca454f465e9a, 1, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -534,7 +534,7 @@ struct WebSocket::CloseResults {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(913fe85057da9522, 0, 0)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -550,7 +550,7 @@ struct HttpRequest {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(deb08db1052a4866, 2, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -569,7 +569,7 @@ struct HttpRequest::BodySize {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(be541ecc63c9b2ba, 2, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -585,7 +585,7 @@ struct HttpResponse {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(f235351cf1531299, 2, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -604,16 +604,16 @@ struct HttpResponse::BodySize {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(ca02437e5f995e08, 2, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
 
-typedef ::capnp::schemas::HttpMethod_8dbd3c007383731e HttpMethod;
+typedef ::shark::schemas::HttpMethod_8dbd3c007383731e HttpMethod;
 
-typedef ::capnp::schemas::CommonHeaderName_ee4db03aab7fb4be CommonHeaderName;
+typedef ::shark::schemas::CommonHeaderName_ee4db03aab7fb4be CommonHeaderName;
 
-typedef ::capnp::schemas::CommonHeaderValue_83e5f307c4d3785f CommonHeaderValue;
+typedef ::shark::schemas::CommonHeaderValue_83e5f307c4d3785f CommonHeaderValue;
 
 struct HttpHeader {
   HttpHeader() = delete;
@@ -631,7 +631,7 @@ struct HttpHeader {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(b39047580b6fd228, 2, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -646,7 +646,7 @@ struct HttpHeader::NameValue {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(ed5334c41abc0375, 0, 2)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -665,7 +665,7 @@ struct HttpHeader::Common {
   struct _capnpPrivate {
     SHARK_DECLARE_STRUCT_HEADER(e971001e4ade4a2a, 2, 1)
     #if !SHARK_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !SHARK_LITE
   };
 };
@@ -674,13 +674,13 @@ struct HttpHeader::Common {
 
 #if !SHARK_LITE
 class HttpService::Client
-    : public virtual ::capnp::Capability::Client {
+    : public virtual ::shark::Capability::Client {
 public:
   typedef HttpService Calls;
   typedef HttpService Reads;
 
   Client(decltype(nullptr));
-  explicit Client(::kj::Own< ::capnp::ClientHook>&& hook);
+  explicit Client(::kj::Own< ::shark::ClientHook>&& hook);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Server*>()>>
   Client(::kj::Own<_t>&& server);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Client*>()>>
@@ -691,61 +691,61 @@ public:
   Client& operator=(Client& other);
   Client& operator=(Client&& other);
 
-  ::capnp::Request< ::capnp::HttpService::StartRequestParams,  ::capnp::HttpService::StartRequestResults> startRequestRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
-  ::capnp::Request< ::capnp::HttpService::RequestParams,  ::capnp::HttpService::RequestResults> requestRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
-  ::capnp::Request< ::capnp::HttpService::ConnectParams,  ::capnp::HttpService::ConnectResults> connectRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
+  ::shark::Request< ::shark::HttpService::StartRequestParams,  ::shark::HttpService::StartRequestResults> startRequestRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
+  ::shark::Request< ::shark::HttpService::RequestParams,  ::shark::HttpService::RequestResults> requestRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
+  ::shark::Request< ::shark::HttpService::ConnectParams,  ::shark::HttpService::ConnectResults> connectRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
 
 protected:
   Client() = default;
 };
 
 class HttpService::Server
-    : public virtual ::capnp::Capability::Server {
+    : public virtual ::shark::Capability::Server {
 public:
   typedef HttpService Serves;
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCall(
+  ::shark::Capability::Server::DispatchCallResult dispatchCall(
       uint64_t interfaceId, uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context)
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context)
       override;
 
 protected:
-  typedef  ::capnp::HttpService::StartRequestParams StartRequestParams;
-  typedef  ::capnp::HttpService::StartRequestResults StartRequestResults;
-  typedef ::capnp::CallContext<StartRequestParams, StartRequestResults> StartRequestContext;
+  typedef  ::shark::HttpService::StartRequestParams StartRequestParams;
+  typedef  ::shark::HttpService::StartRequestResults StartRequestResults;
+  typedef ::shark::CallContext<StartRequestParams, StartRequestResults> StartRequestContext;
   virtual ::kj::Promise<void> startRequest(StartRequestContext context);
-  typedef  ::capnp::HttpService::RequestParams RequestParams;
-  typedef  ::capnp::HttpService::RequestResults RequestResults;
-  typedef ::capnp::CallContext<RequestParams, RequestResults> RequestContext;
+  typedef  ::shark::HttpService::RequestParams RequestParams;
+  typedef  ::shark::HttpService::RequestResults RequestResults;
+  typedef ::shark::CallContext<RequestParams, RequestResults> RequestContext;
   virtual ::kj::Promise<void> request(RequestContext context);
-  typedef  ::capnp::HttpService::ConnectParams ConnectParams;
-  typedef  ::capnp::HttpService::ConnectResults ConnectResults;
-  typedef ::capnp::CallContext<ConnectParams, ConnectResults> ConnectContext;
+  typedef  ::shark::HttpService::ConnectParams ConnectParams;
+  typedef  ::shark::HttpService::ConnectResults ConnectResults;
+  typedef ::shark::CallContext<ConnectParams, ConnectResults> ConnectContext;
   virtual ::kj::Promise<void> connect(ConnectContext context);
 
-  inline  ::capnp::HttpService::Client thisCap() {
-    return ::capnp::Capability::Server::thisCap()
-        .template castAs< ::capnp::HttpService>();
+  inline  ::shark::HttpService::Client thisCap() {
+    return ::shark::Capability::Server::thisCap()
+        .template castAs< ::shark::HttpService>();
   }
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCallInternal(
+  ::shark::Capability::Server::DispatchCallResult dispatchCallInternal(
       uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context);
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context);
 };
 #endif  // !SHARK_LITE
 
 #if !SHARK_LITE
 class HttpService::ClientRequestContext::Client
-    : public virtual ::capnp::Capability::Client {
+    : public virtual ::shark::Capability::Client {
 public:
   typedef ClientRequestContext Calls;
   typedef ClientRequestContext Reads;
 
   Client(decltype(nullptr));
-  explicit Client(::kj::Own< ::capnp::ClientHook>&& hook);
+  explicit Client(::kj::Own< ::shark::ClientHook>&& hook);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Server*>()>>
   Client(::kj::Own<_t>&& server);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Client*>()>>
@@ -756,43 +756,43 @@ public:
   Client& operator=(Client& other);
   Client& operator=(Client&& other);
 
-  ::capnp::Request< ::capnp::HttpService::ClientRequestContext::StartResponseParams,  ::capnp::HttpService::ClientRequestContext::StartResponseResults> startResponseRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
-  ::capnp::Request< ::capnp::HttpService::ClientRequestContext::StartWebSocketParams,  ::capnp::HttpService::ClientRequestContext::StartWebSocketResults> startWebSocketRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
+  ::shark::Request< ::shark::HttpService::ClientRequestContext::StartResponseParams,  ::shark::HttpService::ClientRequestContext::StartResponseResults> startResponseRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
+  ::shark::Request< ::shark::HttpService::ClientRequestContext::StartWebSocketParams,  ::shark::HttpService::ClientRequestContext::StartWebSocketResults> startWebSocketRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
 
 protected:
   Client() = default;
 };
 
 class HttpService::ClientRequestContext::Server
-    : public virtual ::capnp::Capability::Server {
+    : public virtual ::shark::Capability::Server {
 public:
   typedef ClientRequestContext Serves;
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCall(
+  ::shark::Capability::Server::DispatchCallResult dispatchCall(
       uint64_t interfaceId, uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context)
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context)
       override;
 
 protected:
-  typedef  ::capnp::HttpService::ClientRequestContext::StartResponseParams StartResponseParams;
-  typedef  ::capnp::HttpService::ClientRequestContext::StartResponseResults StartResponseResults;
-  typedef ::capnp::CallContext<StartResponseParams, StartResponseResults> StartResponseContext;
+  typedef  ::shark::HttpService::ClientRequestContext::StartResponseParams StartResponseParams;
+  typedef  ::shark::HttpService::ClientRequestContext::StartResponseResults StartResponseResults;
+  typedef ::shark::CallContext<StartResponseParams, StartResponseResults> StartResponseContext;
   virtual ::kj::Promise<void> startResponse(StartResponseContext context);
-  typedef  ::capnp::HttpService::ClientRequestContext::StartWebSocketParams StartWebSocketParams;
-  typedef  ::capnp::HttpService::ClientRequestContext::StartWebSocketResults StartWebSocketResults;
-  typedef ::capnp::CallContext<StartWebSocketParams, StartWebSocketResults> StartWebSocketContext;
+  typedef  ::shark::HttpService::ClientRequestContext::StartWebSocketParams StartWebSocketParams;
+  typedef  ::shark::HttpService::ClientRequestContext::StartWebSocketResults StartWebSocketResults;
+  typedef ::shark::CallContext<StartWebSocketParams, StartWebSocketResults> StartWebSocketContext;
   virtual ::kj::Promise<void> startWebSocket(StartWebSocketContext context);
 
-  inline  ::capnp::HttpService::ClientRequestContext::Client thisCap() {
-    return ::capnp::Capability::Server::thisCap()
-        .template castAs< ::capnp::HttpService::ClientRequestContext>();
+  inline  ::shark::HttpService::ClientRequestContext::Client thisCap() {
+    return ::shark::Capability::Server::thisCap()
+        .template castAs< ::shark::HttpService::ClientRequestContext>();
   }
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCallInternal(
+  ::shark::Capability::Server::DispatchCallResult dispatchCallInternal(
       uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context);
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context);
 };
 #endif  // !SHARK_LITE
 
@@ -801,31 +801,31 @@ public:
   typedef StartResponseParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasResponse() const;
-  inline  ::capnp::HttpResponse::Reader getResponse() const;
+  inline  ::shark::HttpResponse::Reader getResponse() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::ClientRequestContext::StartResponseParams::Builder {
@@ -835,29 +835,29 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasResponse();
-  inline  ::capnp::HttpResponse::Builder getResponse();
-  inline void setResponse( ::capnp::HttpResponse::Reader value);
-  inline  ::capnp::HttpResponse::Builder initResponse();
-  inline void adoptResponse(::capnp::Orphan< ::capnp::HttpResponse>&& value);
-  inline ::capnp::Orphan< ::capnp::HttpResponse> disownResponse();
+  inline  ::shark::HttpResponse::Builder getResponse();
+  inline void setResponse( ::shark::HttpResponse::Reader value);
+  inline  ::shark::HttpResponse::Builder initResponse();
+  inline void adoptResponse(::shark::Orphan< ::shark::HttpResponse>&& value);
+  inline ::shark::Orphan< ::shark::HttpResponse> disownResponse();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -866,15 +866,15 @@ public:
   typedef StartResponseParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::HttpResponse::Pipeline getResponse();
+  inline  ::shark::HttpResponse::Pipeline getResponse();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -883,33 +883,33 @@ public:
   typedef StartResponseResults Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasBody() const;
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getBody() const;
+  inline  ::shark::ByteStream::Client getBody() const;
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::ClientRequestContext::StartResponseResults::Builder {
@@ -919,31 +919,31 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasBody();
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getBody();
-  inline void setBody( ::capnp::ByteStream::Client&& value);
-  inline void setBody( ::capnp::ByteStream::Client& value);
-  inline void adoptBody(::capnp::Orphan< ::capnp::ByteStream>&& value);
-  inline ::capnp::Orphan< ::capnp::ByteStream> disownBody();
+  inline  ::shark::ByteStream::Client getBody();
+  inline void setBody( ::shark::ByteStream::Client&& value);
+  inline void setBody( ::shark::ByteStream::Client& value);
+  inline void adoptBody(::shark::Orphan< ::shark::ByteStream>&& value);
+  inline ::shark::Orphan< ::shark::ByteStream> disownBody();
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -952,15 +952,15 @@ public:
   typedef StartResponseResults Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::ByteStream::Client getBody();
+  inline  ::shark::ByteStream::Client getBody();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -969,36 +969,36 @@ public:
   typedef StartWebSocketParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasHeaders() const;
-  inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader getHeaders() const;
+  inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader getHeaders() const;
 
   inline bool hasUpSocket() const;
 #if !SHARK_LITE
-  inline  ::capnp::WebSocket::Client getUpSocket() const;
+  inline  ::shark::WebSocket::Client getUpSocket() const;
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::ClientRequestContext::StartWebSocketParams::Builder {
@@ -1008,38 +1008,38 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasHeaders();
-  inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder getHeaders();
-  inline void setHeaders( ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder initHeaders(unsigned int size);
-  inline void adoptHeaders(::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>> disownHeaders();
+  inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder getHeaders();
+  inline void setHeaders( ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader value);
+  inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder initHeaders(unsigned int size);
+  inline void adoptHeaders(::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>&& value);
+  inline ::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>> disownHeaders();
 
   inline bool hasUpSocket();
 #if !SHARK_LITE
-  inline  ::capnp::WebSocket::Client getUpSocket();
-  inline void setUpSocket( ::capnp::WebSocket::Client&& value);
-  inline void setUpSocket( ::capnp::WebSocket::Client& value);
-  inline void adoptUpSocket(::capnp::Orphan< ::capnp::WebSocket>&& value);
-  inline ::capnp::Orphan< ::capnp::WebSocket> disownUpSocket();
+  inline  ::shark::WebSocket::Client getUpSocket();
+  inline void setUpSocket( ::shark::WebSocket::Client&& value);
+  inline void setUpSocket( ::shark::WebSocket::Client& value);
+  inline void adoptUpSocket(::shark::Orphan< ::shark::WebSocket>&& value);
+  inline ::shark::Orphan< ::shark::WebSocket> disownUpSocket();
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1048,15 +1048,15 @@ public:
   typedef StartWebSocketParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::WebSocket::Client getUpSocket();
+  inline  ::shark::WebSocket::Client getUpSocket();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1065,33 +1065,33 @@ public:
   typedef StartWebSocketResults Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasDownSocket() const;
 #if !SHARK_LITE
-  inline  ::capnp::WebSocket::Client getDownSocket() const;
+  inline  ::shark::WebSocket::Client getDownSocket() const;
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::ClientRequestContext::StartWebSocketResults::Builder {
@@ -1101,31 +1101,31 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasDownSocket();
 #if !SHARK_LITE
-  inline  ::capnp::WebSocket::Client getDownSocket();
-  inline void setDownSocket( ::capnp::WebSocket::Client&& value);
-  inline void setDownSocket( ::capnp::WebSocket::Client& value);
-  inline void adoptDownSocket(::capnp::Orphan< ::capnp::WebSocket>&& value);
-  inline ::capnp::Orphan< ::capnp::WebSocket> disownDownSocket();
+  inline  ::shark::WebSocket::Client getDownSocket();
+  inline void setDownSocket( ::shark::WebSocket::Client&& value);
+  inline void setDownSocket( ::shark::WebSocket::Client& value);
+  inline void adoptDownSocket(::shark::Orphan< ::shark::WebSocket>&& value);
+  inline ::shark::Orphan< ::shark::WebSocket> disownDownSocket();
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1134,27 +1134,27 @@ public:
   typedef StartWebSocketResults Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::WebSocket::Client getDownSocket();
+  inline  ::shark::WebSocket::Client getDownSocket();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
 #if !SHARK_LITE
 class HttpService::ConnectClientRequestContext::Client
-    : public virtual ::capnp::Capability::Client {
+    : public virtual ::shark::Capability::Client {
 public:
   typedef ConnectClientRequestContext Calls;
   typedef ConnectClientRequestContext Reads;
 
   Client(decltype(nullptr));
-  explicit Client(::kj::Own< ::capnp::ClientHook>&& hook);
+  explicit Client(::kj::Own< ::shark::ClientHook>&& hook);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Server*>()>>
   Client(::kj::Own<_t>&& server);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Client*>()>>
@@ -1165,43 +1165,43 @@ public:
   Client& operator=(Client& other);
   Client& operator=(Client&& other);
 
-  ::capnp::Request< ::capnp::HttpService::ConnectClientRequestContext::StartConnectParams,  ::capnp::HttpService::ConnectClientRequestContext::StartConnectResults> startConnectRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
-  ::capnp::Request< ::capnp::HttpService::ConnectClientRequestContext::StartErrorParams,  ::capnp::HttpService::ConnectClientRequestContext::StartErrorResults> startErrorRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
+  ::shark::Request< ::shark::HttpService::ConnectClientRequestContext::StartConnectParams,  ::shark::HttpService::ConnectClientRequestContext::StartConnectResults> startConnectRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
+  ::shark::Request< ::shark::HttpService::ConnectClientRequestContext::StartErrorParams,  ::shark::HttpService::ConnectClientRequestContext::StartErrorResults> startErrorRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
 
 protected:
   Client() = default;
 };
 
 class HttpService::ConnectClientRequestContext::Server
-    : public virtual ::capnp::Capability::Server {
+    : public virtual ::shark::Capability::Server {
 public:
   typedef ConnectClientRequestContext Serves;
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCall(
+  ::shark::Capability::Server::DispatchCallResult dispatchCall(
       uint64_t interfaceId, uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context)
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context)
       override;
 
 protected:
-  typedef  ::capnp::HttpService::ConnectClientRequestContext::StartConnectParams StartConnectParams;
-  typedef  ::capnp::HttpService::ConnectClientRequestContext::StartConnectResults StartConnectResults;
-  typedef ::capnp::CallContext<StartConnectParams, StartConnectResults> StartConnectContext;
+  typedef  ::shark::HttpService::ConnectClientRequestContext::StartConnectParams StartConnectParams;
+  typedef  ::shark::HttpService::ConnectClientRequestContext::StartConnectResults StartConnectResults;
+  typedef ::shark::CallContext<StartConnectParams, StartConnectResults> StartConnectContext;
   virtual ::kj::Promise<void> startConnect(StartConnectContext context);
-  typedef  ::capnp::HttpService::ConnectClientRequestContext::StartErrorParams StartErrorParams;
-  typedef  ::capnp::HttpService::ConnectClientRequestContext::StartErrorResults StartErrorResults;
-  typedef ::capnp::CallContext<StartErrorParams, StartErrorResults> StartErrorContext;
+  typedef  ::shark::HttpService::ConnectClientRequestContext::StartErrorParams StartErrorParams;
+  typedef  ::shark::HttpService::ConnectClientRequestContext::StartErrorResults StartErrorResults;
+  typedef ::shark::CallContext<StartErrorParams, StartErrorResults> StartErrorContext;
   virtual ::kj::Promise<void> startError(StartErrorContext context);
 
-  inline  ::capnp::HttpService::ConnectClientRequestContext::Client thisCap() {
-    return ::capnp::Capability::Server::thisCap()
-        .template castAs< ::capnp::HttpService::ConnectClientRequestContext>();
+  inline  ::shark::HttpService::ConnectClientRequestContext::Client thisCap() {
+    return ::shark::Capability::Server::thisCap()
+        .template castAs< ::shark::HttpService::ConnectClientRequestContext>();
   }
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCallInternal(
+  ::shark::Capability::Server::DispatchCallResult dispatchCallInternal(
       uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context);
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context);
 };
 #endif  // !SHARK_LITE
 
@@ -1210,31 +1210,31 @@ public:
   typedef StartConnectParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasResponse() const;
-  inline  ::capnp::HttpResponse::Reader getResponse() const;
+  inline  ::shark::HttpResponse::Reader getResponse() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::ConnectClientRequestContext::StartConnectParams::Builder {
@@ -1244,29 +1244,29 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasResponse();
-  inline  ::capnp::HttpResponse::Builder getResponse();
-  inline void setResponse( ::capnp::HttpResponse::Reader value);
-  inline  ::capnp::HttpResponse::Builder initResponse();
-  inline void adoptResponse(::capnp::Orphan< ::capnp::HttpResponse>&& value);
-  inline ::capnp::Orphan< ::capnp::HttpResponse> disownResponse();
+  inline  ::shark::HttpResponse::Builder getResponse();
+  inline void setResponse( ::shark::HttpResponse::Reader value);
+  inline  ::shark::HttpResponse::Builder initResponse();
+  inline void adoptResponse(::shark::Orphan< ::shark::HttpResponse>&& value);
+  inline ::shark::Orphan< ::shark::HttpResponse> disownResponse();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1275,15 +1275,15 @@ public:
   typedef StartConnectParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::HttpResponse::Pipeline getResponse();
+  inline  ::shark::HttpResponse::Pipeline getResponse();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1292,28 +1292,28 @@ public:
   typedef StartConnectResults Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::ConnectClientRequestContext::StartConnectResults::Builder {
@@ -1323,22 +1323,22 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1347,14 +1347,14 @@ public:
   typedef StartConnectResults Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1363,31 +1363,31 @@ public:
   typedef StartErrorParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasResponse() const;
-  inline  ::capnp::HttpResponse::Reader getResponse() const;
+  inline  ::shark::HttpResponse::Reader getResponse() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::ConnectClientRequestContext::StartErrorParams::Builder {
@@ -1397,29 +1397,29 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasResponse();
-  inline  ::capnp::HttpResponse::Builder getResponse();
-  inline void setResponse( ::capnp::HttpResponse::Reader value);
-  inline  ::capnp::HttpResponse::Builder initResponse();
-  inline void adoptResponse(::capnp::Orphan< ::capnp::HttpResponse>&& value);
-  inline ::capnp::Orphan< ::capnp::HttpResponse> disownResponse();
+  inline  ::shark::HttpResponse::Builder getResponse();
+  inline void setResponse( ::shark::HttpResponse::Reader value);
+  inline  ::shark::HttpResponse::Builder initResponse();
+  inline void adoptResponse(::shark::Orphan< ::shark::HttpResponse>&& value);
+  inline ::shark::Orphan< ::shark::HttpResponse> disownResponse();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1428,15 +1428,15 @@ public:
   typedef StartErrorParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::HttpResponse::Pipeline getResponse();
+  inline  ::shark::HttpResponse::Pipeline getResponse();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1445,33 +1445,33 @@ public:
   typedef StartErrorResults Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasBody() const;
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getBody() const;
+  inline  ::shark::ByteStream::Client getBody() const;
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::ConnectClientRequestContext::StartErrorResults::Builder {
@@ -1481,31 +1481,31 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasBody();
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getBody();
-  inline void setBody( ::capnp::ByteStream::Client&& value);
-  inline void setBody( ::capnp::ByteStream::Client& value);
-  inline void adoptBody(::capnp::Orphan< ::capnp::ByteStream>&& value);
-  inline ::capnp::Orphan< ::capnp::ByteStream> disownBody();
+  inline  ::shark::ByteStream::Client getBody();
+  inline void setBody( ::shark::ByteStream::Client&& value);
+  inline void setBody( ::shark::ByteStream::Client& value);
+  inline void adoptBody(::shark::Orphan< ::shark::ByteStream>&& value);
+  inline ::shark::Orphan< ::shark::ByteStream> disownBody();
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1514,27 +1514,27 @@ public:
   typedef StartErrorResults Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::ByteStream::Client getBody();
+  inline  ::shark::ByteStream::Client getBody();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
 #if !SHARK_LITE
 class HttpService::ServerRequestContext::Client
-    : public virtual ::capnp::Capability::Client {
+    : public virtual ::shark::Capability::Client {
 public:
   typedef ServerRequestContext Calls;
   typedef ServerRequestContext Reads;
 
   Client(decltype(nullptr));
-  explicit Client(::kj::Own< ::capnp::ClientHook>&& hook);
+  explicit Client(::kj::Own< ::shark::ClientHook>&& hook);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Server*>()>>
   Client(::kj::Own<_t>&& server);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Client*>()>>
@@ -1551,25 +1551,25 @@ protected:
 };
 
 class HttpService::ServerRequestContext::Server
-    : public virtual ::capnp::Capability::Server {
+    : public virtual ::shark::Capability::Server {
 public:
   typedef ServerRequestContext Serves;
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCall(
+  ::shark::Capability::Server::DispatchCallResult dispatchCall(
       uint64_t interfaceId, uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context)
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context)
       override;
 
 protected:
 
-  inline  ::capnp::HttpService::ServerRequestContext::Client thisCap() {
-    return ::capnp::Capability::Server::thisCap()
-        .template castAs< ::capnp::HttpService::ServerRequestContext>();
+  inline  ::shark::HttpService::ServerRequestContext::Client thisCap() {
+    return ::shark::Capability::Server::thisCap()
+        .template castAs< ::shark::HttpService::ServerRequestContext>();
   }
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCallInternal(
+  ::shark::Capability::Server::DispatchCallResult dispatchCallInternal(
       uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context);
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context);
 };
 #endif  // !SHARK_LITE
 
@@ -1578,36 +1578,36 @@ public:
   typedef StartRequestParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasRequest() const;
-  inline  ::capnp::HttpRequest::Reader getRequest() const;
+  inline  ::shark::HttpRequest::Reader getRequest() const;
 
   inline bool hasContext() const;
 #if !SHARK_LITE
-  inline  ::capnp::HttpService::ClientRequestContext::Client getContext() const;
+  inline  ::shark::HttpService::ClientRequestContext::Client getContext() const;
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::StartRequestParams::Builder {
@@ -1617,38 +1617,38 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasRequest();
-  inline  ::capnp::HttpRequest::Builder getRequest();
-  inline void setRequest( ::capnp::HttpRequest::Reader value);
-  inline  ::capnp::HttpRequest::Builder initRequest();
-  inline void adoptRequest(::capnp::Orphan< ::capnp::HttpRequest>&& value);
-  inline ::capnp::Orphan< ::capnp::HttpRequest> disownRequest();
+  inline  ::shark::HttpRequest::Builder getRequest();
+  inline void setRequest( ::shark::HttpRequest::Reader value);
+  inline  ::shark::HttpRequest::Builder initRequest();
+  inline void adoptRequest(::shark::Orphan< ::shark::HttpRequest>&& value);
+  inline ::shark::Orphan< ::shark::HttpRequest> disownRequest();
 
   inline bool hasContext();
 #if !SHARK_LITE
-  inline  ::capnp::HttpService::ClientRequestContext::Client getContext();
-  inline void setContext( ::capnp::HttpService::ClientRequestContext::Client&& value);
-  inline void setContext( ::capnp::HttpService::ClientRequestContext::Client& value);
-  inline void adoptContext(::capnp::Orphan< ::capnp::HttpService::ClientRequestContext>&& value);
-  inline ::capnp::Orphan< ::capnp::HttpService::ClientRequestContext> disownContext();
+  inline  ::shark::HttpService::ClientRequestContext::Client getContext();
+  inline void setContext( ::shark::HttpService::ClientRequestContext::Client&& value);
+  inline void setContext( ::shark::HttpService::ClientRequestContext::Client& value);
+  inline void adoptContext(::shark::Orphan< ::shark::HttpService::ClientRequestContext>&& value);
+  inline ::shark::Orphan< ::shark::HttpService::ClientRequestContext> disownContext();
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1657,16 +1657,16 @@ public:
   typedef StartRequestParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::HttpRequest::Pipeline getRequest();
-  inline  ::capnp::HttpService::ClientRequestContext::Client getContext();
+  inline  ::shark::HttpRequest::Pipeline getRequest();
+  inline  ::shark::HttpService::ClientRequestContext::Client getContext();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1675,38 +1675,38 @@ public:
   typedef StartRequestResults Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasRequestBody() const;
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getRequestBody() const;
+  inline  ::shark::ByteStream::Client getRequestBody() const;
 #endif  // !SHARK_LITE
 
   inline bool hasContext() const;
 #if !SHARK_LITE
-  inline  ::capnp::HttpService::ServerRequestContext::Client getContext() const;
+  inline  ::shark::HttpService::ServerRequestContext::Client getContext() const;
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::StartRequestResults::Builder {
@@ -1716,40 +1716,40 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasRequestBody();
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getRequestBody();
-  inline void setRequestBody( ::capnp::ByteStream::Client&& value);
-  inline void setRequestBody( ::capnp::ByteStream::Client& value);
-  inline void adoptRequestBody(::capnp::Orphan< ::capnp::ByteStream>&& value);
-  inline ::capnp::Orphan< ::capnp::ByteStream> disownRequestBody();
+  inline  ::shark::ByteStream::Client getRequestBody();
+  inline void setRequestBody( ::shark::ByteStream::Client&& value);
+  inline void setRequestBody( ::shark::ByteStream::Client& value);
+  inline void adoptRequestBody(::shark::Orphan< ::shark::ByteStream>&& value);
+  inline ::shark::Orphan< ::shark::ByteStream> disownRequestBody();
 #endif  // !SHARK_LITE
 
   inline bool hasContext();
 #if !SHARK_LITE
-  inline  ::capnp::HttpService::ServerRequestContext::Client getContext();
-  inline void setContext( ::capnp::HttpService::ServerRequestContext::Client&& value);
-  inline void setContext( ::capnp::HttpService::ServerRequestContext::Client& value);
-  inline void adoptContext(::capnp::Orphan< ::capnp::HttpService::ServerRequestContext>&& value);
-  inline ::capnp::Orphan< ::capnp::HttpService::ServerRequestContext> disownContext();
+  inline  ::shark::HttpService::ServerRequestContext::Client getContext();
+  inline void setContext( ::shark::HttpService::ServerRequestContext::Client&& value);
+  inline void setContext( ::shark::HttpService::ServerRequestContext::Client& value);
+  inline void adoptContext(::shark::Orphan< ::shark::HttpService::ServerRequestContext>&& value);
+  inline ::shark::Orphan< ::shark::HttpService::ServerRequestContext> disownContext();
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1758,16 +1758,16 @@ public:
   typedef StartRequestResults Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::ByteStream::Client getRequestBody();
-  inline  ::capnp::HttpService::ServerRequestContext::Client getContext();
+  inline  ::shark::ByteStream::Client getRequestBody();
+  inline  ::shark::HttpService::ServerRequestContext::Client getContext();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1776,36 +1776,36 @@ public:
   typedef RequestParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasRequest() const;
-  inline  ::capnp::HttpRequest::Reader getRequest() const;
+  inline  ::shark::HttpRequest::Reader getRequest() const;
 
   inline bool hasContext() const;
 #if !SHARK_LITE
-  inline  ::capnp::HttpService::ClientRequestContext::Client getContext() const;
+  inline  ::shark::HttpService::ClientRequestContext::Client getContext() const;
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::RequestParams::Builder {
@@ -1815,38 +1815,38 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasRequest();
-  inline  ::capnp::HttpRequest::Builder getRequest();
-  inline void setRequest( ::capnp::HttpRequest::Reader value);
-  inline  ::capnp::HttpRequest::Builder initRequest();
-  inline void adoptRequest(::capnp::Orphan< ::capnp::HttpRequest>&& value);
-  inline ::capnp::Orphan< ::capnp::HttpRequest> disownRequest();
+  inline  ::shark::HttpRequest::Builder getRequest();
+  inline void setRequest( ::shark::HttpRequest::Reader value);
+  inline  ::shark::HttpRequest::Builder initRequest();
+  inline void adoptRequest(::shark::Orphan< ::shark::HttpRequest>&& value);
+  inline ::shark::Orphan< ::shark::HttpRequest> disownRequest();
 
   inline bool hasContext();
 #if !SHARK_LITE
-  inline  ::capnp::HttpService::ClientRequestContext::Client getContext();
-  inline void setContext( ::capnp::HttpService::ClientRequestContext::Client&& value);
-  inline void setContext( ::capnp::HttpService::ClientRequestContext::Client& value);
-  inline void adoptContext(::capnp::Orphan< ::capnp::HttpService::ClientRequestContext>&& value);
-  inline ::capnp::Orphan< ::capnp::HttpService::ClientRequestContext> disownContext();
+  inline  ::shark::HttpService::ClientRequestContext::Client getContext();
+  inline void setContext( ::shark::HttpService::ClientRequestContext::Client&& value);
+  inline void setContext( ::shark::HttpService::ClientRequestContext::Client& value);
+  inline void adoptContext(::shark::Orphan< ::shark::HttpService::ClientRequestContext>&& value);
+  inline ::shark::Orphan< ::shark::HttpService::ClientRequestContext> disownContext();
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1855,16 +1855,16 @@ public:
   typedef RequestParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::HttpRequest::Pipeline getRequest();
-  inline  ::capnp::HttpService::ClientRequestContext::Client getContext();
+  inline  ::shark::HttpRequest::Pipeline getRequest();
+  inline  ::shark::HttpService::ClientRequestContext::Client getContext();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1873,33 +1873,33 @@ public:
   typedef RequestResults Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasRequestBody() const;
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getRequestBody() const;
+  inline  ::shark::ByteStream::Client getRequestBody() const;
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::RequestResults::Builder {
@@ -1909,31 +1909,31 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasRequestBody();
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getRequestBody();
-  inline void setRequestBody( ::capnp::ByteStream::Client&& value);
-  inline void setRequestBody( ::capnp::ByteStream::Client& value);
-  inline void adoptRequestBody(::capnp::Orphan< ::capnp::ByteStream>&& value);
-  inline ::capnp::Orphan< ::capnp::ByteStream> disownRequestBody();
+  inline  ::shark::ByteStream::Client getRequestBody();
+  inline void setRequestBody( ::shark::ByteStream::Client&& value);
+  inline void setRequestBody( ::shark::ByteStream::Client& value);
+  inline void adoptRequestBody(::shark::Orphan< ::shark::ByteStream>&& value);
+  inline ::shark::Orphan< ::shark::ByteStream> disownRequestBody();
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -1942,15 +1942,15 @@ public:
   typedef RequestResults Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::ByteStream::Client getRequestBody();
+  inline  ::shark::ByteStream::Client getRequestBody();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -1959,47 +1959,47 @@ public:
   typedef ConnectParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasHost() const;
-  inline  ::capnp::Text::Reader getHost() const;
+  inline  ::shark::Text::Reader getHost() const;
 
   inline bool hasHeaders() const;
-  inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader getHeaders() const;
+  inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader getHeaders() const;
 
   inline bool hasDown() const;
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getDown() const;
+  inline  ::shark::ByteStream::Client getDown() const;
 #endif  // !SHARK_LITE
 
   inline bool hasContext() const;
 #if !SHARK_LITE
-  inline  ::capnp::HttpService::ConnectClientRequestContext::Client getContext() const;
+  inline  ::shark::HttpService::ConnectClientRequestContext::Client getContext() const;
 #endif  // !SHARK_LITE
 
   inline bool hasSettings() const;
-  inline  ::capnp::ConnectSettings::Reader getSettings() const;
+  inline  ::shark::ConnectSettings::Reader getSettings() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::ConnectParams::Builder {
@@ -2009,61 +2009,61 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasHost();
-  inline  ::capnp::Text::Builder getHost();
-  inline void setHost( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initHost(unsigned int size);
-  inline void adoptHost(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownHost();
+  inline  ::shark::Text::Builder getHost();
+  inline void setHost( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initHost(unsigned int size);
+  inline void adoptHost(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownHost();
 
   inline bool hasHeaders();
-  inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder getHeaders();
-  inline void setHeaders( ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder initHeaders(unsigned int size);
-  inline void adoptHeaders(::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>> disownHeaders();
+  inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder getHeaders();
+  inline void setHeaders( ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader value);
+  inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder initHeaders(unsigned int size);
+  inline void adoptHeaders(::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>&& value);
+  inline ::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>> disownHeaders();
 
   inline bool hasDown();
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getDown();
-  inline void setDown( ::capnp::ByteStream::Client&& value);
-  inline void setDown( ::capnp::ByteStream::Client& value);
-  inline void adoptDown(::capnp::Orphan< ::capnp::ByteStream>&& value);
-  inline ::capnp::Orphan< ::capnp::ByteStream> disownDown();
+  inline  ::shark::ByteStream::Client getDown();
+  inline void setDown( ::shark::ByteStream::Client&& value);
+  inline void setDown( ::shark::ByteStream::Client& value);
+  inline void adoptDown(::shark::Orphan< ::shark::ByteStream>&& value);
+  inline ::shark::Orphan< ::shark::ByteStream> disownDown();
 #endif  // !SHARK_LITE
 
   inline bool hasContext();
 #if !SHARK_LITE
-  inline  ::capnp::HttpService::ConnectClientRequestContext::Client getContext();
-  inline void setContext( ::capnp::HttpService::ConnectClientRequestContext::Client&& value);
-  inline void setContext( ::capnp::HttpService::ConnectClientRequestContext::Client& value);
-  inline void adoptContext(::capnp::Orphan< ::capnp::HttpService::ConnectClientRequestContext>&& value);
-  inline ::capnp::Orphan< ::capnp::HttpService::ConnectClientRequestContext> disownContext();
+  inline  ::shark::HttpService::ConnectClientRequestContext::Client getContext();
+  inline void setContext( ::shark::HttpService::ConnectClientRequestContext::Client&& value);
+  inline void setContext( ::shark::HttpService::ConnectClientRequestContext::Client& value);
+  inline void adoptContext(::shark::Orphan< ::shark::HttpService::ConnectClientRequestContext>&& value);
+  inline ::shark::Orphan< ::shark::HttpService::ConnectClientRequestContext> disownContext();
 #endif  // !SHARK_LITE
 
   inline bool hasSettings();
-  inline  ::capnp::ConnectSettings::Builder getSettings();
-  inline void setSettings( ::capnp::ConnectSettings::Reader value);
-  inline  ::capnp::ConnectSettings::Builder initSettings();
-  inline void adoptSettings(::capnp::Orphan< ::capnp::ConnectSettings>&& value);
-  inline ::capnp::Orphan< ::capnp::ConnectSettings> disownSettings();
+  inline  ::shark::ConnectSettings::Builder getSettings();
+  inline void setSettings( ::shark::ConnectSettings::Reader value);
+  inline  ::shark::ConnectSettings::Builder initSettings();
+  inline void adoptSettings(::shark::Orphan< ::shark::ConnectSettings>&& value);
+  inline ::shark::Orphan< ::shark::ConnectSettings> disownSettings();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2072,17 +2072,17 @@ public:
   typedef ConnectParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::ByteStream::Client getDown();
-  inline  ::capnp::HttpService::ConnectClientRequestContext::Client getContext();
-  inline  ::capnp::ConnectSettings::Pipeline getSettings();
+  inline  ::shark::ByteStream::Client getDown();
+  inline  ::shark::HttpService::ConnectClientRequestContext::Client getContext();
+  inline  ::shark::ConnectSettings::Pipeline getSettings();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2091,33 +2091,33 @@ public:
   typedef ConnectResults Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasUp() const;
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getUp() const;
+  inline  ::shark::ByteStream::Client getUp() const;
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpService::ConnectResults::Builder {
@@ -2127,31 +2127,31 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasUp();
 #if !SHARK_LITE
-  inline  ::capnp::ByteStream::Client getUp();
-  inline void setUp( ::capnp::ByteStream::Client&& value);
-  inline void setUp( ::capnp::ByteStream::Client& value);
-  inline void adoptUp(::capnp::Orphan< ::capnp::ByteStream>&& value);
-  inline ::capnp::Orphan< ::capnp::ByteStream> disownUp();
+  inline  ::shark::ByteStream::Client getUp();
+  inline void setUp( ::shark::ByteStream::Client&& value);
+  inline void setUp( ::shark::ByteStream::Client& value);
+  inline void adoptUp(::shark::Orphan< ::shark::ByteStream>&& value);
+  inline ::shark::Orphan< ::shark::ByteStream> disownUp();
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2160,15 +2160,15 @@ public:
   typedef ConnectResults Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::capnp::ByteStream::Client getUp();
+  inline  ::shark::ByteStream::Client getUp();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2177,30 +2177,30 @@ public:
   typedef ConnectSettings Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool getUseTls() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class ConnectSettings::Builder {
@@ -2210,11 +2210,11 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
@@ -2223,12 +2223,12 @@ public:
   inline void setUseTls(bool value);
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2237,26 +2237,26 @@ public:
   typedef ConnectSettings Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
 #if !SHARK_LITE
 class WebSocket::Client
-    : public virtual ::capnp::Capability::Client {
+    : public virtual ::shark::Capability::Client {
 public:
   typedef WebSocket Calls;
   typedef WebSocket Reads;
 
   Client(decltype(nullptr));
-  explicit Client(::kj::Own< ::capnp::ClientHook>&& hook);
+  explicit Client(::kj::Own< ::shark::ClientHook>&& hook);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Server*>()>>
   Client(::kj::Own<_t>&& server);
   template <typename _t, typename = ::kj::EnableIf< ::kj::canConvert<_t*, Client*>()>>
@@ -2267,47 +2267,47 @@ public:
   Client& operator=(Client& other);
   Client& operator=(Client&& other);
 
-  ::capnp::StreamingRequest< ::capnp::WebSocket::SendTextParams> sendTextRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
-  ::capnp::StreamingRequest< ::capnp::WebSocket::SendDataParams> sendDataRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
-  ::capnp::Request< ::capnp::WebSocket::CloseParams,  ::capnp::WebSocket::CloseResults> closeRequest(
-      ::kj::Maybe< ::capnp::MessageSize> sizeHint = nullptr);
+  ::shark::StreamingRequest< ::shark::WebSocket::SendTextParams> sendTextRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
+  ::shark::StreamingRequest< ::shark::WebSocket::SendDataParams> sendDataRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
+  ::shark::Request< ::shark::WebSocket::CloseParams,  ::shark::WebSocket::CloseResults> closeRequest(
+      ::kj::Maybe< ::shark::MessageSize> sizeHint = nullptr);
 
 protected:
   Client() = default;
 };
 
 class WebSocket::Server
-    : public virtual ::capnp::Capability::Server {
+    : public virtual ::shark::Capability::Server {
 public:
   typedef WebSocket Serves;
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCall(
+  ::shark::Capability::Server::DispatchCallResult dispatchCall(
       uint64_t interfaceId, uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context)
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context)
       override;
 
 protected:
-  typedef  ::capnp::WebSocket::SendTextParams SendTextParams;
-  typedef ::capnp::StreamingCallContext<SendTextParams> SendTextContext;
+  typedef  ::shark::WebSocket::SendTextParams SendTextParams;
+  typedef ::shark::StreamingCallContext<SendTextParams> SendTextContext;
   virtual ::kj::Promise<void> sendText(SendTextContext context);
-  typedef  ::capnp::WebSocket::SendDataParams SendDataParams;
-  typedef ::capnp::StreamingCallContext<SendDataParams> SendDataContext;
+  typedef  ::shark::WebSocket::SendDataParams SendDataParams;
+  typedef ::shark::StreamingCallContext<SendDataParams> SendDataContext;
   virtual ::kj::Promise<void> sendData(SendDataContext context);
-  typedef  ::capnp::WebSocket::CloseParams CloseParams;
-  typedef  ::capnp::WebSocket::CloseResults CloseResults;
-  typedef ::capnp::CallContext<CloseParams, CloseResults> CloseContext;
+  typedef  ::shark::WebSocket::CloseParams CloseParams;
+  typedef  ::shark::WebSocket::CloseResults CloseResults;
+  typedef ::shark::CallContext<CloseParams, CloseResults> CloseContext;
   virtual ::kj::Promise<void> close(CloseContext context);
 
-  inline  ::capnp::WebSocket::Client thisCap() {
-    return ::capnp::Capability::Server::thisCap()
-        .template castAs< ::capnp::WebSocket>();
+  inline  ::shark::WebSocket::Client thisCap() {
+    return ::shark::Capability::Server::thisCap()
+        .template castAs< ::shark::WebSocket>();
   }
 
-  ::capnp::Capability::Server::DispatchCallResult dispatchCallInternal(
+  ::shark::Capability::Server::DispatchCallResult dispatchCallInternal(
       uint16_t methodId,
-      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context);
+      ::shark::CallContext< ::shark::AnyPointer, ::shark::AnyPointer> context);
 };
 #endif  // !SHARK_LITE
 
@@ -2316,31 +2316,31 @@ public:
   typedef SendTextParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasText() const;
-  inline  ::capnp::Text::Reader getText() const;
+  inline  ::shark::Text::Reader getText() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class WebSocket::SendTextParams::Builder {
@@ -2350,29 +2350,29 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasText();
-  inline  ::capnp::Text::Builder getText();
-  inline void setText( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initText(unsigned int size);
-  inline void adoptText(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownText();
+  inline  ::shark::Text::Builder getText();
+  inline void setText( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initText(unsigned int size);
+  inline void adoptText(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownText();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2381,14 +2381,14 @@ public:
   typedef SendTextParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2397,31 +2397,31 @@ public:
   typedef SendDataParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasData() const;
-  inline  ::capnp::Data::Reader getData() const;
+  inline  ::shark::Data::Reader getData() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class WebSocket::SendDataParams::Builder {
@@ -2431,29 +2431,29 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasData();
-  inline  ::capnp::Data::Builder getData();
-  inline void setData( ::capnp::Data::Reader value);
-  inline  ::capnp::Data::Builder initData(unsigned int size);
-  inline void adoptData(::capnp::Orphan< ::capnp::Data>&& value);
-  inline ::capnp::Orphan< ::capnp::Data> disownData();
+  inline  ::shark::Data::Builder getData();
+  inline void setData( ::shark::Data::Reader value);
+  inline  ::shark::Data::Builder initData(unsigned int size);
+  inline void adoptData(::shark::Orphan< ::shark::Data>&& value);
+  inline ::shark::Orphan< ::shark::Data> disownData();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2462,14 +2462,14 @@ public:
   typedef SendDataParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2478,33 +2478,33 @@ public:
   typedef CloseParams Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline  ::uint16_t getCode() const;
 
   inline bool hasReason() const;
-  inline  ::capnp::Text::Reader getReason() const;
+  inline  ::shark::Text::Reader getReason() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class WebSocket::CloseParams::Builder {
@@ -2514,11 +2514,11 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
@@ -2527,19 +2527,19 @@ public:
   inline void setCode( ::uint16_t value);
 
   inline bool hasReason();
-  inline  ::capnp::Text::Builder getReason();
-  inline void setReason( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initReason(unsigned int size);
-  inline void adoptReason(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownReason();
+  inline  ::shark::Text::Builder getReason();
+  inline void setReason( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initReason(unsigned int size);
+  inline void adoptReason(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownReason();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2548,14 +2548,14 @@ public:
   typedef CloseParams Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2564,28 +2564,28 @@ public:
   typedef CloseResults Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class WebSocket::CloseResults::Builder {
@@ -2595,22 +2595,22 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2619,14 +2619,14 @@ public:
   typedef CloseResults Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2635,38 +2635,38 @@ public:
   typedef HttpRequest Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
-  inline  ::capnp::HttpMethod getMethod() const;
+  inline  ::shark::HttpMethod getMethod() const;
 
   inline bool hasUrl() const;
-  inline  ::capnp::Text::Reader getUrl() const;
+  inline  ::shark::Text::Reader getUrl() const;
 
   inline bool hasHeaders() const;
-  inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader getHeaders() const;
+  inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader getHeaders() const;
 
   inline typename BodySize::Reader getBodySize() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpRequest::Builder {
@@ -2676,42 +2676,42 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
-  inline  ::capnp::HttpMethod getMethod();
-  inline void setMethod( ::capnp::HttpMethod value);
+  inline  ::shark::HttpMethod getMethod();
+  inline void setMethod( ::shark::HttpMethod value);
 
   inline bool hasUrl();
-  inline  ::capnp::Text::Builder getUrl();
-  inline void setUrl( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initUrl(unsigned int size);
-  inline void adoptUrl(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownUrl();
+  inline  ::shark::Text::Builder getUrl();
+  inline void setUrl( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initUrl(unsigned int size);
+  inline void adoptUrl(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownUrl();
 
   inline bool hasHeaders();
-  inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder getHeaders();
-  inline void setHeaders( ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder initHeaders(unsigned int size);
-  inline void adoptHeaders(::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>> disownHeaders();
+  inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder getHeaders();
+  inline void setHeaders( ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader value);
+  inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder initHeaders(unsigned int size);
+  inline void adoptHeaders(::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>&& value);
+  inline ::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>> disownHeaders();
 
   inline typename BodySize::Builder getBodySize();
   inline typename BodySize::Builder initBodySize();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2720,15 +2720,15 @@ public:
   typedef HttpRequest Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
   inline typename BodySize::Pipeline getBodySize();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2737,35 +2737,35 @@ public:
   typedef BodySize Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isUnknown() const;
-  inline  ::capnp::Void getUnknown() const;
+  inline  ::shark::Void getUnknown() const;
 
   inline bool isFixed() const;
   inline  ::uint64_t getFixed() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpRequest::BodySize::Builder {
@@ -2775,31 +2775,31 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isUnknown();
-  inline  ::capnp::Void getUnknown();
-  inline void setUnknown( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getUnknown();
+  inline void setUnknown( ::shark::Void value = ::shark::VOID);
 
   inline bool isFixed();
   inline  ::uint64_t getFixed();
   inline void setFixed( ::uint64_t value);
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2808,14 +2808,14 @@ public:
   typedef BodySize Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2824,38 +2824,38 @@ public:
   typedef HttpResponse Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline  ::uint16_t getStatusCode() const;
 
   inline bool hasStatusText() const;
-  inline  ::capnp::Text::Reader getStatusText() const;
+  inline  ::shark::Text::Reader getStatusText() const;
 
   inline bool hasHeaders() const;
-  inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader getHeaders() const;
+  inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader getHeaders() const;
 
   inline typename BodySize::Reader getBodySize() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpResponse::Builder {
@@ -2865,11 +2865,11 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
@@ -2878,29 +2878,29 @@ public:
   inline void setStatusCode( ::uint16_t value);
 
   inline bool hasStatusText();
-  inline  ::capnp::Text::Builder getStatusText();
-  inline void setStatusText( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initStatusText(unsigned int size);
-  inline void adoptStatusText(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownStatusText();
+  inline  ::shark::Text::Builder getStatusText();
+  inline void setStatusText( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initStatusText(unsigned int size);
+  inline void adoptStatusText(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownStatusText();
 
   inline bool hasHeaders();
-  inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder getHeaders();
-  inline void setHeaders( ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder initHeaders(unsigned int size);
-  inline void adoptHeaders(::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>> disownHeaders();
+  inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder getHeaders();
+  inline void setHeaders( ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader value);
+  inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder initHeaders(unsigned int size);
+  inline void adoptHeaders(::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>&& value);
+  inline ::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>> disownHeaders();
 
   inline typename BodySize::Builder getBodySize();
   inline typename BodySize::Builder initBodySize();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2909,15 +2909,15 @@ public:
   typedef HttpResponse Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
   inline typename BodySize::Pipeline getBodySize();
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -2926,35 +2926,35 @@ public:
   typedef BodySize Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isUnknown() const;
-  inline  ::capnp::Void getUnknown() const;
+  inline  ::shark::Void getUnknown() const;
 
   inline bool isFixed() const;
   inline  ::uint64_t getFixed() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpResponse::BodySize::Builder {
@@ -2964,31 +2964,31 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isUnknown();
-  inline  ::capnp::Void getUnknown();
-  inline void setUnknown( ::capnp::Void value = ::capnp::VOID);
+  inline  ::shark::Void getUnknown();
+  inline void setUnknown( ::shark::Void value = ::shark::VOID);
 
   inline bool isFixed();
   inline  ::uint64_t getFixed();
   inline void setFixed( ::uint64_t value);
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -2997,14 +2997,14 @@ public:
   typedef BodySize Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -3013,15 +3013,15 @@ public:
   typedef HttpHeader Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -3031,18 +3031,18 @@ public:
 
   inline bool isUncommon() const;
   inline bool hasUncommon() const;
-  inline  ::capnp::HttpHeader::NameValue::Reader getUncommon() const;
+  inline  ::shark::HttpHeader::NameValue::Reader getUncommon() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpHeader::Builder {
@@ -3052,11 +3052,11 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
@@ -3068,19 +3068,19 @@ public:
 
   inline bool isUncommon();
   inline bool hasUncommon();
-  inline  ::capnp::HttpHeader::NameValue::Builder getUncommon();
-  inline void setUncommon( ::capnp::HttpHeader::NameValue::Reader value);
-  inline  ::capnp::HttpHeader::NameValue::Builder initUncommon();
-  inline void adoptUncommon(::capnp::Orphan< ::capnp::HttpHeader::NameValue>&& value);
-  inline ::capnp::Orphan< ::capnp::HttpHeader::NameValue> disownUncommon();
+  inline  ::shark::HttpHeader::NameValue::Builder getUncommon();
+  inline void setUncommon( ::shark::HttpHeader::NameValue::Reader value);
+  inline  ::shark::HttpHeader::NameValue::Builder initUncommon();
+  inline void adoptUncommon(::shark::Orphan< ::shark::HttpHeader::NameValue>&& value);
+  inline ::shark::Orphan< ::shark::HttpHeader::NameValue> disownUncommon();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -3089,14 +3089,14 @@ public:
   typedef HttpHeader Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -3105,34 +3105,34 @@ public:
   typedef NameValue Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline bool hasName() const;
-  inline  ::capnp::Text::Reader getName() const;
+  inline  ::shark::Text::Reader getName() const;
 
   inline bool hasValue() const;
-  inline  ::capnp::Text::Reader getValue() const;
+  inline  ::shark::Text::Reader getValue() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpHeader::NameValue::Builder {
@@ -3142,36 +3142,36 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline bool hasName();
-  inline  ::capnp::Text::Builder getName();
-  inline void setName( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initName(unsigned int size);
-  inline void adoptName(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownName();
+  inline  ::shark::Text::Builder getName();
+  inline void setName( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initName(unsigned int size);
+  inline void adoptName(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownName();
 
   inline bool hasValue();
-  inline  ::capnp::Text::Builder getValue();
-  inline void setValue( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initValue(unsigned int size);
-  inline void adoptValue(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownValue();
+  inline  ::shark::Text::Builder getValue();
+  inline void setValue( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initValue(unsigned int size);
+  inline void adoptValue(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownValue();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -3180,14 +3180,14 @@ public:
   typedef NameValue Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -3196,38 +3196,38 @@ public:
   typedef Common Reads;
 
   Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+  inline explicit Reader(::shark::_::StructReader base): _reader(base) {}
 
-  inline ::capnp::MessageSize totalSize() const {
+  inline ::shark::MessageSize totalSize() const {
     return _reader.totalSize().asPublic();
   }
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
   inline Which which() const;
-  inline  ::capnp::CommonHeaderName getName() const;
+  inline  ::shark::CommonHeaderName getName() const;
 
   inline bool isCommonValue() const;
-  inline  ::capnp::CommonHeaderValue getCommonValue() const;
+  inline  ::shark::CommonHeaderValue getCommonValue() const;
 
   inline bool isValue() const;
   inline bool hasValue() const;
-  inline  ::capnp::Text::Reader getValue() const;
+  inline  ::shark::Text::Reader getValue() const;
 
 private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
+  ::shark::_::StructReader _reader;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::List;
+  friend class ::shark::MessageBuilder;
+  friend class ::shark::Orphanage;
 };
 
 class HttpHeader::Common::Builder {
@@ -3237,38 +3237,38 @@ public:
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
   inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline explicit Builder(::shark::_::StructBuilder base): _builder(base) {}
   inline operator Reader() const { return Reader(_builder.asReader()); }
   inline Reader asReader() const { return *this; }
 
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+  inline ::shark::MessageSize totalSize() const { return asReader().totalSize(); }
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !SHARK_LITE
 
   inline Which which();
-  inline  ::capnp::CommonHeaderName getName();
-  inline void setName( ::capnp::CommonHeaderName value);
+  inline  ::shark::CommonHeaderName getName();
+  inline void setName( ::shark::CommonHeaderName value);
 
   inline bool isCommonValue();
-  inline  ::capnp::CommonHeaderValue getCommonValue();
-  inline void setCommonValue( ::capnp::CommonHeaderValue value);
+  inline  ::shark::CommonHeaderValue getCommonValue();
+  inline void setCommonValue( ::shark::CommonHeaderValue value);
 
   inline bool isValue();
   inline bool hasValue();
-  inline  ::capnp::Text::Builder getValue();
-  inline void setValue( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initValue(unsigned int size);
-  inline void adoptValue(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownValue();
+  inline  ::shark::Text::Builder getValue();
+  inline void setValue( ::shark::Text::Reader value);
+  inline  ::shark::Text::Builder initValue(unsigned int size);
+  inline void adoptValue(::shark::Orphan< ::shark::Text>&& value);
+  inline ::shark::Orphan< ::shark::Text> disownValue();
 
 private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
+  ::shark::_::StructBuilder _builder;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
+  friend class ::shark::Orphanage;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::_::PointerHelpers;
 };
 
 #if !SHARK_LITE
@@ -3277,14 +3277,14 @@ public:
   typedef Common Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+  inline explicit Pipeline(::shark::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
 private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
+  ::shark::AnyPointer::Pipeline _typeless;
+  friend class ::shark::PipelineHook;
+  template <typename, ::shark::Kind>
+  friend struct ::shark::ToDynamic_;
 };
 #endif  // !SHARK_LITE
 
@@ -3292,1138 +3292,1138 @@ private:
 
 #if !SHARK_LITE
 inline HttpService::Client::Client(decltype(nullptr))
-    : ::capnp::Capability::Client(nullptr) {}
+    : ::shark::Capability::Client(nullptr) {}
 inline HttpService::Client::Client(
-    ::kj::Own< ::capnp::ClientHook>&& hook)
-    : ::capnp::Capability::Client(::kj::mv(hook)) {}
+    ::kj::Own< ::shark::ClientHook>&& hook)
+    : ::shark::Capability::Client(::kj::mv(hook)) {}
 template <typename _t, typename>
 inline HttpService::Client::Client(::kj::Own<_t>&& server)
-    : ::capnp::Capability::Client(::kj::mv(server)) {}
+    : ::shark::Capability::Client(::kj::mv(server)) {}
 template <typename _t, typename>
 inline HttpService::Client::Client(::kj::Promise<_t>&& promise)
-    : ::capnp::Capability::Client(::kj::mv(promise)) {}
+    : ::shark::Capability::Client(::kj::mv(promise)) {}
 inline HttpService::Client::Client(::kj::Exception&& exception)
-    : ::capnp::Capability::Client(::kj::mv(exception)) {}
-inline  ::capnp::HttpService::Client& HttpService::Client::operator=(Client& other) {
-  ::capnp::Capability::Client::operator=(other);
+    : ::shark::Capability::Client(::kj::mv(exception)) {}
+inline  ::shark::HttpService::Client& HttpService::Client::operator=(Client& other) {
+  ::shark::Capability::Client::operator=(other);
   return *this;
 }
-inline  ::capnp::HttpService::Client& HttpService::Client::operator=(Client&& other) {
-  ::capnp::Capability::Client::operator=(kj::mv(other));
+inline  ::shark::HttpService::Client& HttpService::Client::operator=(Client&& other) {
+  ::shark::Capability::Client::operator=(kj::mv(other));
   return *this;
 }
 
 #endif  // !SHARK_LITE
 #if !SHARK_LITE
 inline HttpService::ClientRequestContext::Client::Client(decltype(nullptr))
-    : ::capnp::Capability::Client(nullptr) {}
+    : ::shark::Capability::Client(nullptr) {}
 inline HttpService::ClientRequestContext::Client::Client(
-    ::kj::Own< ::capnp::ClientHook>&& hook)
-    : ::capnp::Capability::Client(::kj::mv(hook)) {}
+    ::kj::Own< ::shark::ClientHook>&& hook)
+    : ::shark::Capability::Client(::kj::mv(hook)) {}
 template <typename _t, typename>
 inline HttpService::ClientRequestContext::Client::Client(::kj::Own<_t>&& server)
-    : ::capnp::Capability::Client(::kj::mv(server)) {}
+    : ::shark::Capability::Client(::kj::mv(server)) {}
 template <typename _t, typename>
 inline HttpService::ClientRequestContext::Client::Client(::kj::Promise<_t>&& promise)
-    : ::capnp::Capability::Client(::kj::mv(promise)) {}
+    : ::shark::Capability::Client(::kj::mv(promise)) {}
 inline HttpService::ClientRequestContext::Client::Client(::kj::Exception&& exception)
-    : ::capnp::Capability::Client(::kj::mv(exception)) {}
-inline  ::capnp::HttpService::ClientRequestContext::Client& HttpService::ClientRequestContext::Client::operator=(Client& other) {
-  ::capnp::Capability::Client::operator=(other);
+    : ::shark::Capability::Client(::kj::mv(exception)) {}
+inline  ::shark::HttpService::ClientRequestContext::Client& HttpService::ClientRequestContext::Client::operator=(Client& other) {
+  ::shark::Capability::Client::operator=(other);
   return *this;
 }
-inline  ::capnp::HttpService::ClientRequestContext::Client& HttpService::ClientRequestContext::Client::operator=(Client&& other) {
-  ::capnp::Capability::Client::operator=(kj::mv(other));
+inline  ::shark::HttpService::ClientRequestContext::Client& HttpService::ClientRequestContext::Client::operator=(Client&& other) {
+  ::shark::Capability::Client::operator=(kj::mv(other));
   return *this;
 }
 
 #endif  // !SHARK_LITE
 inline bool HttpService::ClientRequestContext::StartResponseParams::Reader::hasResponse() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ClientRequestContext::StartResponseParams::Builder::hasResponse() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::HttpResponse::Reader HttpService::ClientRequestContext::StartResponseParams::Reader::getResponse() const {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpResponse::Reader HttpService::ClientRequestContext::StartResponseParams::Reader::getResponse() const {
+  return ::shark::_::PointerHelpers< ::shark::HttpResponse>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpResponse::Builder HttpService::ClientRequestContext::StartResponseParams::Builder::getResponse() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpResponse::Builder HttpService::ClientRequestContext::StartResponseParams::Builder::getResponse() {
+  return ::shark::_::PointerHelpers< ::shark::HttpResponse>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::HttpResponse::Pipeline HttpService::ClientRequestContext::StartResponseParams::Pipeline::getResponse() {
-  return  ::capnp::HttpResponse::Pipeline(_typeless.getPointerField(0));
+inline  ::shark::HttpResponse::Pipeline HttpService::ClientRequestContext::StartResponseParams::Pipeline::getResponse() {
+  return  ::shark::HttpResponse::Pipeline(_typeless.getPointerField(0));
 }
 #endif  // !SHARK_LITE
-inline void HttpService::ClientRequestContext::StartResponseParams::Builder::setResponse( ::capnp::HttpResponse::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void HttpService::ClientRequestContext::StartResponseParams::Builder::setResponse( ::shark::HttpResponse::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::HttpResponse>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::HttpResponse::Builder HttpService::ClientRequestContext::StartResponseParams::Builder::initResponse() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpResponse::Builder HttpService::ClientRequestContext::StartResponseParams::Builder::initResponse() {
+  return ::shark::_::PointerHelpers< ::shark::HttpResponse>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void HttpService::ClientRequestContext::StartResponseParams::Builder::adoptResponse(
-    ::capnp::Orphan< ::capnp::HttpResponse>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::HttpResponse>&& value) {
+  ::shark::_::PointerHelpers< ::shark::HttpResponse>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::HttpResponse> HttpService::ClientRequestContext::StartResponseParams::Builder::disownResponse() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::HttpResponse> HttpService::ClientRequestContext::StartResponseParams::Builder::disownResponse() {
+  return ::shark::_::PointerHelpers< ::shark::HttpResponse>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool HttpService::ClientRequestContext::StartResponseResults::Reader::hasBody() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ClientRequestContext::StartResponseResults::Builder::hasBody() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::ByteStream::Client HttpService::ClientRequestContext::StartResponseResults::Reader::getBody() const {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client HttpService::ClientRequestContext::StartResponseResults::Reader::getBody() const {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client HttpService::ClientRequestContext::StartResponseResults::Builder::getBody() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client HttpService::ClientRequestContext::StartResponseResults::Builder::getBody() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client HttpService::ClientRequestContext::StartResponseResults::Pipeline::getBody() {
-  return  ::capnp::ByteStream::Client(_typeless.getPointerField(0).asCap());
+inline  ::shark::ByteStream::Client HttpService::ClientRequestContext::StartResponseResults::Pipeline::getBody() {
+  return  ::shark::ByteStream::Client(_typeless.getPointerField(0).asCap());
 }
-inline void HttpService::ClientRequestContext::StartResponseResults::Builder::setBody( ::capnp::ByteStream::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(cap));
+inline void HttpService::ClientRequestContext::StartResponseResults::Builder::setBody( ::shark::ByteStream::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void HttpService::ClientRequestContext::StartResponseResults::Builder::setBody( ::capnp::ByteStream::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), cap);
+inline void HttpService::ClientRequestContext::StartResponseResults::Builder::setBody( ::shark::ByteStream::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), cap);
 }
 inline void HttpService::ClientRequestContext::StartResponseResults::Builder::adoptBody(
-    ::capnp::Orphan< ::capnp::ByteStream>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::ByteStream>&& value) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::ByteStream> HttpService::ClientRequestContext::StartResponseResults::Builder::disownBody() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::ByteStream> HttpService::ClientRequestContext::StartResponseResults::Builder::disownBody() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 inline bool HttpService::ClientRequestContext::StartWebSocketParams::Reader::hasHeaders() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ClientRequestContext::StartWebSocketParams::Builder::hasHeaders() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader HttpService::ClientRequestContext::StartWebSocketParams::Reader::getHeaders() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader HttpService::ClientRequestContext::StartWebSocketParams::Reader::getHeaders() const {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder HttpService::ClientRequestContext::StartWebSocketParams::Builder::getHeaders() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder HttpService::ClientRequestContext::StartWebSocketParams::Builder::getHeaders() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void HttpService::ClientRequestContext::StartWebSocketParams::Builder::setHeaders( ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void HttpService::ClientRequestContext::StartWebSocketParams::Builder::setHeaders( ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder HttpService::ClientRequestContext::StartWebSocketParams::Builder::initHeaders(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder HttpService::ClientRequestContext::StartWebSocketParams::Builder::initHeaders(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void HttpService::ClientRequestContext::StartWebSocketParams::Builder::adoptHeaders(
-    ::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>&& value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>> HttpService::ClientRequestContext::StartWebSocketParams::Builder::disownHeaders() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>> HttpService::ClientRequestContext::StartWebSocketParams::Builder::disownHeaders() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool HttpService::ClientRequestContext::StartWebSocketParams::Reader::hasUpSocket() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ClientRequestContext::StartWebSocketParams::Builder::hasUpSocket() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::WebSocket::Client HttpService::ClientRequestContext::StartWebSocketParams::Reader::getUpSocket() const {
-  return ::capnp::_::PointerHelpers< ::capnp::WebSocket>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::WebSocket::Client HttpService::ClientRequestContext::StartWebSocketParams::Reader::getUpSocket() const {
+  return ::shark::_::PointerHelpers< ::shark::WebSocket>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::WebSocket::Client HttpService::ClientRequestContext::StartWebSocketParams::Builder::getUpSocket() {
-  return ::capnp::_::PointerHelpers< ::capnp::WebSocket>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::WebSocket::Client HttpService::ClientRequestContext::StartWebSocketParams::Builder::getUpSocket() {
+  return ::shark::_::PointerHelpers< ::shark::WebSocket>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::WebSocket::Client HttpService::ClientRequestContext::StartWebSocketParams::Pipeline::getUpSocket() {
-  return  ::capnp::WebSocket::Client(_typeless.getPointerField(1).asCap());
+inline  ::shark::WebSocket::Client HttpService::ClientRequestContext::StartWebSocketParams::Pipeline::getUpSocket() {
+  return  ::shark::WebSocket::Client(_typeless.getPointerField(1).asCap());
 }
-inline void HttpService::ClientRequestContext::StartWebSocketParams::Builder::setUpSocket( ::capnp::WebSocket::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::WebSocket>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(cap));
+inline void HttpService::ClientRequestContext::StartWebSocketParams::Builder::setUpSocket( ::shark::WebSocket::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::WebSocket>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void HttpService::ClientRequestContext::StartWebSocketParams::Builder::setUpSocket( ::capnp::WebSocket::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::WebSocket>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), cap);
+inline void HttpService::ClientRequestContext::StartWebSocketParams::Builder::setUpSocket( ::shark::WebSocket::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::WebSocket>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), cap);
 }
 inline void HttpService::ClientRequestContext::StartWebSocketParams::Builder::adoptUpSocket(
-    ::capnp::Orphan< ::capnp::WebSocket>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::WebSocket>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::WebSocket>&& value) {
+  ::shark::_::PointerHelpers< ::shark::WebSocket>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::WebSocket> HttpService::ClientRequestContext::StartWebSocketParams::Builder::disownUpSocket() {
-  return ::capnp::_::PointerHelpers< ::capnp::WebSocket>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::WebSocket> HttpService::ClientRequestContext::StartWebSocketParams::Builder::disownUpSocket() {
+  return ::shark::_::PointerHelpers< ::shark::WebSocket>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 inline bool HttpService::ClientRequestContext::StartWebSocketResults::Reader::hasDownSocket() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ClientRequestContext::StartWebSocketResults::Builder::hasDownSocket() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::WebSocket::Client HttpService::ClientRequestContext::StartWebSocketResults::Reader::getDownSocket() const {
-  return ::capnp::_::PointerHelpers< ::capnp::WebSocket>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::WebSocket::Client HttpService::ClientRequestContext::StartWebSocketResults::Reader::getDownSocket() const {
+  return ::shark::_::PointerHelpers< ::shark::WebSocket>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::WebSocket::Client HttpService::ClientRequestContext::StartWebSocketResults::Builder::getDownSocket() {
-  return ::capnp::_::PointerHelpers< ::capnp::WebSocket>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::WebSocket::Client HttpService::ClientRequestContext::StartWebSocketResults::Builder::getDownSocket() {
+  return ::shark::_::PointerHelpers< ::shark::WebSocket>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::WebSocket::Client HttpService::ClientRequestContext::StartWebSocketResults::Pipeline::getDownSocket() {
-  return  ::capnp::WebSocket::Client(_typeless.getPointerField(0).asCap());
+inline  ::shark::WebSocket::Client HttpService::ClientRequestContext::StartWebSocketResults::Pipeline::getDownSocket() {
+  return  ::shark::WebSocket::Client(_typeless.getPointerField(0).asCap());
 }
-inline void HttpService::ClientRequestContext::StartWebSocketResults::Builder::setDownSocket( ::capnp::WebSocket::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::WebSocket>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(cap));
+inline void HttpService::ClientRequestContext::StartWebSocketResults::Builder::setDownSocket( ::shark::WebSocket::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::WebSocket>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void HttpService::ClientRequestContext::StartWebSocketResults::Builder::setDownSocket( ::capnp::WebSocket::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::WebSocket>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), cap);
+inline void HttpService::ClientRequestContext::StartWebSocketResults::Builder::setDownSocket( ::shark::WebSocket::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::WebSocket>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), cap);
 }
 inline void HttpService::ClientRequestContext::StartWebSocketResults::Builder::adoptDownSocket(
-    ::capnp::Orphan< ::capnp::WebSocket>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::WebSocket>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::WebSocket>&& value) {
+  ::shark::_::PointerHelpers< ::shark::WebSocket>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::WebSocket> HttpService::ClientRequestContext::StartWebSocketResults::Builder::disownDownSocket() {
-  return ::capnp::_::PointerHelpers< ::capnp::WebSocket>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::WebSocket> HttpService::ClientRequestContext::StartWebSocketResults::Builder::disownDownSocket() {
+  return ::shark::_::PointerHelpers< ::shark::WebSocket>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 #if !SHARK_LITE
 inline HttpService::ConnectClientRequestContext::Client::Client(decltype(nullptr))
-    : ::capnp::Capability::Client(nullptr) {}
+    : ::shark::Capability::Client(nullptr) {}
 inline HttpService::ConnectClientRequestContext::Client::Client(
-    ::kj::Own< ::capnp::ClientHook>&& hook)
-    : ::capnp::Capability::Client(::kj::mv(hook)) {}
+    ::kj::Own< ::shark::ClientHook>&& hook)
+    : ::shark::Capability::Client(::kj::mv(hook)) {}
 template <typename _t, typename>
 inline HttpService::ConnectClientRequestContext::Client::Client(::kj::Own<_t>&& server)
-    : ::capnp::Capability::Client(::kj::mv(server)) {}
+    : ::shark::Capability::Client(::kj::mv(server)) {}
 template <typename _t, typename>
 inline HttpService::ConnectClientRequestContext::Client::Client(::kj::Promise<_t>&& promise)
-    : ::capnp::Capability::Client(::kj::mv(promise)) {}
+    : ::shark::Capability::Client(::kj::mv(promise)) {}
 inline HttpService::ConnectClientRequestContext::Client::Client(::kj::Exception&& exception)
-    : ::capnp::Capability::Client(::kj::mv(exception)) {}
-inline  ::capnp::HttpService::ConnectClientRequestContext::Client& HttpService::ConnectClientRequestContext::Client::operator=(Client& other) {
-  ::capnp::Capability::Client::operator=(other);
+    : ::shark::Capability::Client(::kj::mv(exception)) {}
+inline  ::shark::HttpService::ConnectClientRequestContext::Client& HttpService::ConnectClientRequestContext::Client::operator=(Client& other) {
+  ::shark::Capability::Client::operator=(other);
   return *this;
 }
-inline  ::capnp::HttpService::ConnectClientRequestContext::Client& HttpService::ConnectClientRequestContext::Client::operator=(Client&& other) {
-  ::capnp::Capability::Client::operator=(kj::mv(other));
+inline  ::shark::HttpService::ConnectClientRequestContext::Client& HttpService::ConnectClientRequestContext::Client::operator=(Client&& other) {
+  ::shark::Capability::Client::operator=(kj::mv(other));
   return *this;
 }
 
 #endif  // !SHARK_LITE
 inline bool HttpService::ConnectClientRequestContext::StartConnectParams::Reader::hasResponse() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ConnectClientRequestContext::StartConnectParams::Builder::hasResponse() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::HttpResponse::Reader HttpService::ConnectClientRequestContext::StartConnectParams::Reader::getResponse() const {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpResponse::Reader HttpService::ConnectClientRequestContext::StartConnectParams::Reader::getResponse() const {
+  return ::shark::_::PointerHelpers< ::shark::HttpResponse>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpResponse::Builder HttpService::ConnectClientRequestContext::StartConnectParams::Builder::getResponse() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpResponse::Builder HttpService::ConnectClientRequestContext::StartConnectParams::Builder::getResponse() {
+  return ::shark::_::PointerHelpers< ::shark::HttpResponse>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::HttpResponse::Pipeline HttpService::ConnectClientRequestContext::StartConnectParams::Pipeline::getResponse() {
-  return  ::capnp::HttpResponse::Pipeline(_typeless.getPointerField(0));
+inline  ::shark::HttpResponse::Pipeline HttpService::ConnectClientRequestContext::StartConnectParams::Pipeline::getResponse() {
+  return  ::shark::HttpResponse::Pipeline(_typeless.getPointerField(0));
 }
 #endif  // !SHARK_LITE
-inline void HttpService::ConnectClientRequestContext::StartConnectParams::Builder::setResponse( ::capnp::HttpResponse::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void HttpService::ConnectClientRequestContext::StartConnectParams::Builder::setResponse( ::shark::HttpResponse::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::HttpResponse>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::HttpResponse::Builder HttpService::ConnectClientRequestContext::StartConnectParams::Builder::initResponse() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpResponse::Builder HttpService::ConnectClientRequestContext::StartConnectParams::Builder::initResponse() {
+  return ::shark::_::PointerHelpers< ::shark::HttpResponse>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void HttpService::ConnectClientRequestContext::StartConnectParams::Builder::adoptResponse(
-    ::capnp::Orphan< ::capnp::HttpResponse>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::HttpResponse>&& value) {
+  ::shark::_::PointerHelpers< ::shark::HttpResponse>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::HttpResponse> HttpService::ConnectClientRequestContext::StartConnectParams::Builder::disownResponse() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::HttpResponse> HttpService::ConnectClientRequestContext::StartConnectParams::Builder::disownResponse() {
+  return ::shark::_::PointerHelpers< ::shark::HttpResponse>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool HttpService::ConnectClientRequestContext::StartErrorParams::Reader::hasResponse() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ConnectClientRequestContext::StartErrorParams::Builder::hasResponse() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::HttpResponse::Reader HttpService::ConnectClientRequestContext::StartErrorParams::Reader::getResponse() const {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpResponse::Reader HttpService::ConnectClientRequestContext::StartErrorParams::Reader::getResponse() const {
+  return ::shark::_::PointerHelpers< ::shark::HttpResponse>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpResponse::Builder HttpService::ConnectClientRequestContext::StartErrorParams::Builder::getResponse() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpResponse::Builder HttpService::ConnectClientRequestContext::StartErrorParams::Builder::getResponse() {
+  return ::shark::_::PointerHelpers< ::shark::HttpResponse>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::HttpResponse::Pipeline HttpService::ConnectClientRequestContext::StartErrorParams::Pipeline::getResponse() {
-  return  ::capnp::HttpResponse::Pipeline(_typeless.getPointerField(0));
+inline  ::shark::HttpResponse::Pipeline HttpService::ConnectClientRequestContext::StartErrorParams::Pipeline::getResponse() {
+  return  ::shark::HttpResponse::Pipeline(_typeless.getPointerField(0));
 }
 #endif  // !SHARK_LITE
-inline void HttpService::ConnectClientRequestContext::StartErrorParams::Builder::setResponse( ::capnp::HttpResponse::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void HttpService::ConnectClientRequestContext::StartErrorParams::Builder::setResponse( ::shark::HttpResponse::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::HttpResponse>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::HttpResponse::Builder HttpService::ConnectClientRequestContext::StartErrorParams::Builder::initResponse() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpResponse::Builder HttpService::ConnectClientRequestContext::StartErrorParams::Builder::initResponse() {
+  return ::shark::_::PointerHelpers< ::shark::HttpResponse>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void HttpService::ConnectClientRequestContext::StartErrorParams::Builder::adoptResponse(
-    ::capnp::Orphan< ::capnp::HttpResponse>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::HttpResponse>&& value) {
+  ::shark::_::PointerHelpers< ::shark::HttpResponse>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::HttpResponse> HttpService::ConnectClientRequestContext::StartErrorParams::Builder::disownResponse() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpResponse>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::HttpResponse> HttpService::ConnectClientRequestContext::StartErrorParams::Builder::disownResponse() {
+  return ::shark::_::PointerHelpers< ::shark::HttpResponse>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool HttpService::ConnectClientRequestContext::StartErrorResults::Reader::hasBody() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ConnectClientRequestContext::StartErrorResults::Builder::hasBody() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::ByteStream::Client HttpService::ConnectClientRequestContext::StartErrorResults::Reader::getBody() const {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client HttpService::ConnectClientRequestContext::StartErrorResults::Reader::getBody() const {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client HttpService::ConnectClientRequestContext::StartErrorResults::Builder::getBody() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client HttpService::ConnectClientRequestContext::StartErrorResults::Builder::getBody() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client HttpService::ConnectClientRequestContext::StartErrorResults::Pipeline::getBody() {
-  return  ::capnp::ByteStream::Client(_typeless.getPointerField(0).asCap());
+inline  ::shark::ByteStream::Client HttpService::ConnectClientRequestContext::StartErrorResults::Pipeline::getBody() {
+  return  ::shark::ByteStream::Client(_typeless.getPointerField(0).asCap());
 }
-inline void HttpService::ConnectClientRequestContext::StartErrorResults::Builder::setBody( ::capnp::ByteStream::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(cap));
+inline void HttpService::ConnectClientRequestContext::StartErrorResults::Builder::setBody( ::shark::ByteStream::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void HttpService::ConnectClientRequestContext::StartErrorResults::Builder::setBody( ::capnp::ByteStream::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), cap);
+inline void HttpService::ConnectClientRequestContext::StartErrorResults::Builder::setBody( ::shark::ByteStream::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), cap);
 }
 inline void HttpService::ConnectClientRequestContext::StartErrorResults::Builder::adoptBody(
-    ::capnp::Orphan< ::capnp::ByteStream>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::ByteStream>&& value) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::ByteStream> HttpService::ConnectClientRequestContext::StartErrorResults::Builder::disownBody() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::ByteStream> HttpService::ConnectClientRequestContext::StartErrorResults::Builder::disownBody() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 #if !SHARK_LITE
 inline HttpService::ServerRequestContext::Client::Client(decltype(nullptr))
-    : ::capnp::Capability::Client(nullptr) {}
+    : ::shark::Capability::Client(nullptr) {}
 inline HttpService::ServerRequestContext::Client::Client(
-    ::kj::Own< ::capnp::ClientHook>&& hook)
-    : ::capnp::Capability::Client(::kj::mv(hook)) {}
+    ::kj::Own< ::shark::ClientHook>&& hook)
+    : ::shark::Capability::Client(::kj::mv(hook)) {}
 template <typename _t, typename>
 inline HttpService::ServerRequestContext::Client::Client(::kj::Own<_t>&& server)
-    : ::capnp::Capability::Client(::kj::mv(server)) {}
+    : ::shark::Capability::Client(::kj::mv(server)) {}
 template <typename _t, typename>
 inline HttpService::ServerRequestContext::Client::Client(::kj::Promise<_t>&& promise)
-    : ::capnp::Capability::Client(::kj::mv(promise)) {}
+    : ::shark::Capability::Client(::kj::mv(promise)) {}
 inline HttpService::ServerRequestContext::Client::Client(::kj::Exception&& exception)
-    : ::capnp::Capability::Client(::kj::mv(exception)) {}
-inline  ::capnp::HttpService::ServerRequestContext::Client& HttpService::ServerRequestContext::Client::operator=(Client& other) {
-  ::capnp::Capability::Client::operator=(other);
+    : ::shark::Capability::Client(::kj::mv(exception)) {}
+inline  ::shark::HttpService::ServerRequestContext::Client& HttpService::ServerRequestContext::Client::operator=(Client& other) {
+  ::shark::Capability::Client::operator=(other);
   return *this;
 }
-inline  ::capnp::HttpService::ServerRequestContext::Client& HttpService::ServerRequestContext::Client::operator=(Client&& other) {
-  ::capnp::Capability::Client::operator=(kj::mv(other));
+inline  ::shark::HttpService::ServerRequestContext::Client& HttpService::ServerRequestContext::Client::operator=(Client&& other) {
+  ::shark::Capability::Client::operator=(kj::mv(other));
   return *this;
 }
 
 #endif  // !SHARK_LITE
 inline bool HttpService::StartRequestParams::Reader::hasRequest() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::StartRequestParams::Builder::hasRequest() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::HttpRequest::Reader HttpService::StartRequestParams::Reader::getRequest() const {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpRequest>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpRequest::Reader HttpService::StartRequestParams::Reader::getRequest() const {
+  return ::shark::_::PointerHelpers< ::shark::HttpRequest>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpRequest::Builder HttpService::StartRequestParams::Builder::getRequest() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpRequest>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpRequest::Builder HttpService::StartRequestParams::Builder::getRequest() {
+  return ::shark::_::PointerHelpers< ::shark::HttpRequest>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::HttpRequest::Pipeline HttpService::StartRequestParams::Pipeline::getRequest() {
-  return  ::capnp::HttpRequest::Pipeline(_typeless.getPointerField(0));
+inline  ::shark::HttpRequest::Pipeline HttpService::StartRequestParams::Pipeline::getRequest() {
+  return  ::shark::HttpRequest::Pipeline(_typeless.getPointerField(0));
 }
 #endif  // !SHARK_LITE
-inline void HttpService::StartRequestParams::Builder::setRequest( ::capnp::HttpRequest::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpRequest>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void HttpService::StartRequestParams::Builder::setRequest( ::shark::HttpRequest::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::HttpRequest>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::HttpRequest::Builder HttpService::StartRequestParams::Builder::initRequest() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpRequest>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpRequest::Builder HttpService::StartRequestParams::Builder::initRequest() {
+  return ::shark::_::PointerHelpers< ::shark::HttpRequest>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void HttpService::StartRequestParams::Builder::adoptRequest(
-    ::capnp::Orphan< ::capnp::HttpRequest>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpRequest>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::HttpRequest>&& value) {
+  ::shark::_::PointerHelpers< ::shark::HttpRequest>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::HttpRequest> HttpService::StartRequestParams::Builder::disownRequest() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpRequest>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::HttpRequest> HttpService::StartRequestParams::Builder::disownRequest() {
+  return ::shark::_::PointerHelpers< ::shark::HttpRequest>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool HttpService::StartRequestParams::Reader::hasContext() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::StartRequestParams::Builder::hasContext() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::HttpService::ClientRequestContext::Client HttpService::StartRequestParams::Reader::getContext() const {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpService::ClientRequestContext>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::HttpService::ClientRequestContext::Client HttpService::StartRequestParams::Reader::getContext() const {
+  return ::shark::_::PointerHelpers< ::shark::HttpService::ClientRequestContext>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpService::ClientRequestContext::Client HttpService::StartRequestParams::Builder::getContext() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpService::ClientRequestContext>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::HttpService::ClientRequestContext::Client HttpService::StartRequestParams::Builder::getContext() {
+  return ::shark::_::PointerHelpers< ::shark::HttpService::ClientRequestContext>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpService::ClientRequestContext::Client HttpService::StartRequestParams::Pipeline::getContext() {
-  return  ::capnp::HttpService::ClientRequestContext::Client(_typeless.getPointerField(1).asCap());
+inline  ::shark::HttpService::ClientRequestContext::Client HttpService::StartRequestParams::Pipeline::getContext() {
+  return  ::shark::HttpService::ClientRequestContext::Client(_typeless.getPointerField(1).asCap());
 }
-inline void HttpService::StartRequestParams::Builder::setContext( ::capnp::HttpService::ClientRequestContext::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpService::ClientRequestContext>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(cap));
+inline void HttpService::StartRequestParams::Builder::setContext( ::shark::HttpService::ClientRequestContext::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::HttpService::ClientRequestContext>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void HttpService::StartRequestParams::Builder::setContext( ::capnp::HttpService::ClientRequestContext::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpService::ClientRequestContext>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), cap);
+inline void HttpService::StartRequestParams::Builder::setContext( ::shark::HttpService::ClientRequestContext::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::HttpService::ClientRequestContext>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), cap);
 }
 inline void HttpService::StartRequestParams::Builder::adoptContext(
-    ::capnp::Orphan< ::capnp::HttpService::ClientRequestContext>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpService::ClientRequestContext>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::HttpService::ClientRequestContext>&& value) {
+  ::shark::_::PointerHelpers< ::shark::HttpService::ClientRequestContext>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::HttpService::ClientRequestContext> HttpService::StartRequestParams::Builder::disownContext() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpService::ClientRequestContext>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::HttpService::ClientRequestContext> HttpService::StartRequestParams::Builder::disownContext() {
+  return ::shark::_::PointerHelpers< ::shark::HttpService::ClientRequestContext>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 inline bool HttpService::StartRequestResults::Reader::hasRequestBody() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::StartRequestResults::Builder::hasRequestBody() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::ByteStream::Client HttpService::StartRequestResults::Reader::getRequestBody() const {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client HttpService::StartRequestResults::Reader::getRequestBody() const {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client HttpService::StartRequestResults::Builder::getRequestBody() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client HttpService::StartRequestResults::Builder::getRequestBody() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client HttpService::StartRequestResults::Pipeline::getRequestBody() {
-  return  ::capnp::ByteStream::Client(_typeless.getPointerField(0).asCap());
+inline  ::shark::ByteStream::Client HttpService::StartRequestResults::Pipeline::getRequestBody() {
+  return  ::shark::ByteStream::Client(_typeless.getPointerField(0).asCap());
 }
-inline void HttpService::StartRequestResults::Builder::setRequestBody( ::capnp::ByteStream::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(cap));
+inline void HttpService::StartRequestResults::Builder::setRequestBody( ::shark::ByteStream::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void HttpService::StartRequestResults::Builder::setRequestBody( ::capnp::ByteStream::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), cap);
+inline void HttpService::StartRequestResults::Builder::setRequestBody( ::shark::ByteStream::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), cap);
 }
 inline void HttpService::StartRequestResults::Builder::adoptRequestBody(
-    ::capnp::Orphan< ::capnp::ByteStream>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::ByteStream>&& value) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::ByteStream> HttpService::StartRequestResults::Builder::disownRequestBody() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::ByteStream> HttpService::StartRequestResults::Builder::disownRequestBody() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 inline bool HttpService::StartRequestResults::Reader::hasContext() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::StartRequestResults::Builder::hasContext() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::HttpService::ServerRequestContext::Client HttpService::StartRequestResults::Reader::getContext() const {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpService::ServerRequestContext>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::HttpService::ServerRequestContext::Client HttpService::StartRequestResults::Reader::getContext() const {
+  return ::shark::_::PointerHelpers< ::shark::HttpService::ServerRequestContext>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpService::ServerRequestContext::Client HttpService::StartRequestResults::Builder::getContext() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpService::ServerRequestContext>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::HttpService::ServerRequestContext::Client HttpService::StartRequestResults::Builder::getContext() {
+  return ::shark::_::PointerHelpers< ::shark::HttpService::ServerRequestContext>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpService::ServerRequestContext::Client HttpService::StartRequestResults::Pipeline::getContext() {
-  return  ::capnp::HttpService::ServerRequestContext::Client(_typeless.getPointerField(1).asCap());
+inline  ::shark::HttpService::ServerRequestContext::Client HttpService::StartRequestResults::Pipeline::getContext() {
+  return  ::shark::HttpService::ServerRequestContext::Client(_typeless.getPointerField(1).asCap());
 }
-inline void HttpService::StartRequestResults::Builder::setContext( ::capnp::HttpService::ServerRequestContext::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpService::ServerRequestContext>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(cap));
+inline void HttpService::StartRequestResults::Builder::setContext( ::shark::HttpService::ServerRequestContext::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::HttpService::ServerRequestContext>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void HttpService::StartRequestResults::Builder::setContext( ::capnp::HttpService::ServerRequestContext::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpService::ServerRequestContext>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), cap);
+inline void HttpService::StartRequestResults::Builder::setContext( ::shark::HttpService::ServerRequestContext::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::HttpService::ServerRequestContext>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), cap);
 }
 inline void HttpService::StartRequestResults::Builder::adoptContext(
-    ::capnp::Orphan< ::capnp::HttpService::ServerRequestContext>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpService::ServerRequestContext>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::HttpService::ServerRequestContext>&& value) {
+  ::shark::_::PointerHelpers< ::shark::HttpService::ServerRequestContext>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::HttpService::ServerRequestContext> HttpService::StartRequestResults::Builder::disownContext() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpService::ServerRequestContext>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::HttpService::ServerRequestContext> HttpService::StartRequestResults::Builder::disownContext() {
+  return ::shark::_::PointerHelpers< ::shark::HttpService::ServerRequestContext>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 inline bool HttpService::RequestParams::Reader::hasRequest() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::RequestParams::Builder::hasRequest() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::HttpRequest::Reader HttpService::RequestParams::Reader::getRequest() const {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpRequest>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpRequest::Reader HttpService::RequestParams::Reader::getRequest() const {
+  return ::shark::_::PointerHelpers< ::shark::HttpRequest>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpRequest::Builder HttpService::RequestParams::Builder::getRequest() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpRequest>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpRequest::Builder HttpService::RequestParams::Builder::getRequest() {
+  return ::shark::_::PointerHelpers< ::shark::HttpRequest>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::HttpRequest::Pipeline HttpService::RequestParams::Pipeline::getRequest() {
-  return  ::capnp::HttpRequest::Pipeline(_typeless.getPointerField(0));
+inline  ::shark::HttpRequest::Pipeline HttpService::RequestParams::Pipeline::getRequest() {
+  return  ::shark::HttpRequest::Pipeline(_typeless.getPointerField(0));
 }
 #endif  // !SHARK_LITE
-inline void HttpService::RequestParams::Builder::setRequest( ::capnp::HttpRequest::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpRequest>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void HttpService::RequestParams::Builder::setRequest( ::shark::HttpRequest::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::HttpRequest>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::HttpRequest::Builder HttpService::RequestParams::Builder::initRequest() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpRequest>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::HttpRequest::Builder HttpService::RequestParams::Builder::initRequest() {
+  return ::shark::_::PointerHelpers< ::shark::HttpRequest>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void HttpService::RequestParams::Builder::adoptRequest(
-    ::capnp::Orphan< ::capnp::HttpRequest>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpRequest>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::HttpRequest>&& value) {
+  ::shark::_::PointerHelpers< ::shark::HttpRequest>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::HttpRequest> HttpService::RequestParams::Builder::disownRequest() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpRequest>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::HttpRequest> HttpService::RequestParams::Builder::disownRequest() {
+  return ::shark::_::PointerHelpers< ::shark::HttpRequest>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool HttpService::RequestParams::Reader::hasContext() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::RequestParams::Builder::hasContext() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::HttpService::ClientRequestContext::Client HttpService::RequestParams::Reader::getContext() const {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpService::ClientRequestContext>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::HttpService::ClientRequestContext::Client HttpService::RequestParams::Reader::getContext() const {
+  return ::shark::_::PointerHelpers< ::shark::HttpService::ClientRequestContext>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpService::ClientRequestContext::Client HttpService::RequestParams::Builder::getContext() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpService::ClientRequestContext>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::HttpService::ClientRequestContext::Client HttpService::RequestParams::Builder::getContext() {
+  return ::shark::_::PointerHelpers< ::shark::HttpService::ClientRequestContext>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpService::ClientRequestContext::Client HttpService::RequestParams::Pipeline::getContext() {
-  return  ::capnp::HttpService::ClientRequestContext::Client(_typeless.getPointerField(1).asCap());
+inline  ::shark::HttpService::ClientRequestContext::Client HttpService::RequestParams::Pipeline::getContext() {
+  return  ::shark::HttpService::ClientRequestContext::Client(_typeless.getPointerField(1).asCap());
 }
-inline void HttpService::RequestParams::Builder::setContext( ::capnp::HttpService::ClientRequestContext::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpService::ClientRequestContext>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(cap));
+inline void HttpService::RequestParams::Builder::setContext( ::shark::HttpService::ClientRequestContext::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::HttpService::ClientRequestContext>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void HttpService::RequestParams::Builder::setContext( ::capnp::HttpService::ClientRequestContext::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpService::ClientRequestContext>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), cap);
+inline void HttpService::RequestParams::Builder::setContext( ::shark::HttpService::ClientRequestContext::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::HttpService::ClientRequestContext>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), cap);
 }
 inline void HttpService::RequestParams::Builder::adoptContext(
-    ::capnp::Orphan< ::capnp::HttpService::ClientRequestContext>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpService::ClientRequestContext>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::HttpService::ClientRequestContext>&& value) {
+  ::shark::_::PointerHelpers< ::shark::HttpService::ClientRequestContext>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::HttpService::ClientRequestContext> HttpService::RequestParams::Builder::disownContext() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpService::ClientRequestContext>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::HttpService::ClientRequestContext> HttpService::RequestParams::Builder::disownContext() {
+  return ::shark::_::PointerHelpers< ::shark::HttpService::ClientRequestContext>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 inline bool HttpService::RequestResults::Reader::hasRequestBody() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::RequestResults::Builder::hasRequestBody() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::ByteStream::Client HttpService::RequestResults::Reader::getRequestBody() const {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client HttpService::RequestResults::Reader::getRequestBody() const {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client HttpService::RequestResults::Builder::getRequestBody() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client HttpService::RequestResults::Builder::getRequestBody() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client HttpService::RequestResults::Pipeline::getRequestBody() {
-  return  ::capnp::ByteStream::Client(_typeless.getPointerField(0).asCap());
+inline  ::shark::ByteStream::Client HttpService::RequestResults::Pipeline::getRequestBody() {
+  return  ::shark::ByteStream::Client(_typeless.getPointerField(0).asCap());
 }
-inline void HttpService::RequestResults::Builder::setRequestBody( ::capnp::ByteStream::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(cap));
+inline void HttpService::RequestResults::Builder::setRequestBody( ::shark::ByteStream::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void HttpService::RequestResults::Builder::setRequestBody( ::capnp::ByteStream::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), cap);
+inline void HttpService::RequestResults::Builder::setRequestBody( ::shark::ByteStream::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), cap);
 }
 inline void HttpService::RequestResults::Builder::adoptRequestBody(
-    ::capnp::Orphan< ::capnp::ByteStream>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::ByteStream>&& value) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::ByteStream> HttpService::RequestResults::Builder::disownRequestBody() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::ByteStream> HttpService::RequestResults::Builder::disownRequestBody() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 inline bool HttpService::ConnectParams::Reader::hasHost() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ConnectParams::Builder::hasHost() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader HttpService::ConnectParams::Reader::getHost() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader HttpService::ConnectParams::Reader::getHost() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder HttpService::ConnectParams::Builder::getHost() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder HttpService::ConnectParams::Builder::getHost() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void HttpService::ConnectParams::Builder::setHost( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void HttpService::ConnectParams::Builder::setHost( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder HttpService::ConnectParams::Builder::initHost(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder HttpService::ConnectParams::Builder::initHost(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void HttpService::ConnectParams::Builder::adoptHost(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> HttpService::ConnectParams::Builder::disownHost() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Text> HttpService::ConnectParams::Builder::disownHost() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool HttpService::ConnectParams::Reader::hasHeaders() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ConnectParams::Builder::hasHeaders() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader HttpService::ConnectParams::Reader::getHeaders() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader HttpService::ConnectParams::Reader::getHeaders() const {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder HttpService::ConnectParams::Builder::getHeaders() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder HttpService::ConnectParams::Builder::getHeaders() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline void HttpService::ConnectParams::Builder::setHeaders( ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+inline void HttpService::ConnectParams::Builder::setHeaders( ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder HttpService::ConnectParams::Builder::initHeaders(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder HttpService::ConnectParams::Builder::initHeaders(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), size);
 }
 inline void HttpService::ConnectParams::Builder::adoptHeaders(
-    ::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>&& value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>> HttpService::ConnectParams::Builder::disownHeaders() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>> HttpService::ConnectParams::Builder::disownHeaders() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 
 inline bool HttpService::ConnectParams::Reader::hasDown() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<2>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ConnectParams::Builder::hasDown() {
   return !_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<2>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::ByteStream::Client HttpService::ConnectParams::Reader::getDown() const {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client HttpService::ConnectParams::Reader::getDown() const {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_reader.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client HttpService::ConnectParams::Builder::getDown() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client HttpService::ConnectParams::Builder::getDown() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client HttpService::ConnectParams::Pipeline::getDown() {
-  return  ::capnp::ByteStream::Client(_typeless.getPointerField(2).asCap());
+inline  ::shark::ByteStream::Client HttpService::ConnectParams::Pipeline::getDown() {
+  return  ::shark::ByteStream::Client(_typeless.getPointerField(2).asCap());
 }
-inline void HttpService::ConnectParams::Builder::setDown( ::capnp::ByteStream::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(cap));
+inline void HttpService::ConnectParams::Builder::setDown( ::shark::ByteStream::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void HttpService::ConnectParams::Builder::setDown( ::capnp::ByteStream::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), cap);
+inline void HttpService::ConnectParams::Builder::setDown( ::shark::ByteStream::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS), cap);
 }
 inline void HttpService::ConnectParams::Builder::adoptDown(
-    ::capnp::Orphan< ::capnp::ByteStream>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::adopt(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::ByteStream>&& value) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::adopt(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::ByteStream> HttpService::ConnectParams::Builder::disownDown() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::disown(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::ByteStream> HttpService::ConnectParams::Builder::disownDown() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::disown(_builder.getPointerField(
+      ::shark::bounded<2>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 inline bool HttpService::ConnectParams::Reader::hasContext() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<3>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ConnectParams::Builder::hasContext() {
   return !_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<3>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::HttpService::ConnectClientRequestContext::Client HttpService::ConnectParams::Reader::getContext() const {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpService::ConnectClientRequestContext>::get(_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+inline  ::shark::HttpService::ConnectClientRequestContext::Client HttpService::ConnectParams::Reader::getContext() const {
+  return ::shark::_::PointerHelpers< ::shark::HttpService::ConnectClientRequestContext>::get(_reader.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpService::ConnectClientRequestContext::Client HttpService::ConnectParams::Builder::getContext() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpService::ConnectClientRequestContext>::get(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+inline  ::shark::HttpService::ConnectClientRequestContext::Client HttpService::ConnectParams::Builder::getContext() {
+  return ::shark::_::PointerHelpers< ::shark::HttpService::ConnectClientRequestContext>::get(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpService::ConnectClientRequestContext::Client HttpService::ConnectParams::Pipeline::getContext() {
-  return  ::capnp::HttpService::ConnectClientRequestContext::Client(_typeless.getPointerField(3).asCap());
+inline  ::shark::HttpService::ConnectClientRequestContext::Client HttpService::ConnectParams::Pipeline::getContext() {
+  return  ::shark::HttpService::ConnectClientRequestContext::Client(_typeless.getPointerField(3).asCap());
 }
-inline void HttpService::ConnectParams::Builder::setContext( ::capnp::HttpService::ConnectClientRequestContext::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpService::ConnectClientRequestContext>::set(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(cap));
+inline void HttpService::ConnectParams::Builder::setContext( ::shark::HttpService::ConnectClientRequestContext::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::HttpService::ConnectClientRequestContext>::set(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void HttpService::ConnectParams::Builder::setContext( ::capnp::HttpService::ConnectClientRequestContext::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpService::ConnectClientRequestContext>::set(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), cap);
+inline void HttpService::ConnectParams::Builder::setContext( ::shark::HttpService::ConnectClientRequestContext::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::HttpService::ConnectClientRequestContext>::set(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), cap);
 }
 inline void HttpService::ConnectParams::Builder::adoptContext(
-    ::capnp::Orphan< ::capnp::HttpService::ConnectClientRequestContext>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::HttpService::ConnectClientRequestContext>::adopt(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::HttpService::ConnectClientRequestContext>&& value) {
+  ::shark::_::PointerHelpers< ::shark::HttpService::ConnectClientRequestContext>::adopt(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::HttpService::ConnectClientRequestContext> HttpService::ConnectParams::Builder::disownContext() {
-  return ::capnp::_::PointerHelpers< ::capnp::HttpService::ConnectClientRequestContext>::disown(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::HttpService::ConnectClientRequestContext> HttpService::ConnectParams::Builder::disownContext() {
+  return ::shark::_::PointerHelpers< ::shark::HttpService::ConnectClientRequestContext>::disown(_builder.getPointerField(
+      ::shark::bounded<3>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 inline bool HttpService::ConnectParams::Reader::hasSettings() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<4>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ConnectParams::Builder::hasSettings() {
   return !_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<4>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::ConnectSettings::Reader HttpService::ConnectParams::Reader::getSettings() const {
-  return ::capnp::_::PointerHelpers< ::capnp::ConnectSettings>::get(_reader.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS));
+inline  ::shark::ConnectSettings::Reader HttpService::ConnectParams::Reader::getSettings() const {
+  return ::shark::_::PointerHelpers< ::shark::ConnectSettings>::get(_reader.getPointerField(
+      ::shark::bounded<4>() * ::shark::POINTERS));
 }
-inline  ::capnp::ConnectSettings::Builder HttpService::ConnectParams::Builder::getSettings() {
-  return ::capnp::_::PointerHelpers< ::capnp::ConnectSettings>::get(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS));
+inline  ::shark::ConnectSettings::Builder HttpService::ConnectParams::Builder::getSettings() {
+  return ::shark::_::PointerHelpers< ::shark::ConnectSettings>::get(_builder.getPointerField(
+      ::shark::bounded<4>() * ::shark::POINTERS));
 }
 #if !SHARK_LITE
-inline  ::capnp::ConnectSettings::Pipeline HttpService::ConnectParams::Pipeline::getSettings() {
-  return  ::capnp::ConnectSettings::Pipeline(_typeless.getPointerField(4));
+inline  ::shark::ConnectSettings::Pipeline HttpService::ConnectParams::Pipeline::getSettings() {
+  return  ::shark::ConnectSettings::Pipeline(_typeless.getPointerField(4));
 }
 #endif  // !SHARK_LITE
-inline void HttpService::ConnectParams::Builder::setSettings( ::capnp::ConnectSettings::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::ConnectSettings>::set(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS), value);
+inline void HttpService::ConnectParams::Builder::setSettings( ::shark::ConnectSettings::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::ConnectSettings>::set(_builder.getPointerField(
+      ::shark::bounded<4>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::ConnectSettings::Builder HttpService::ConnectParams::Builder::initSettings() {
-  return ::capnp::_::PointerHelpers< ::capnp::ConnectSettings>::init(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS));
+inline  ::shark::ConnectSettings::Builder HttpService::ConnectParams::Builder::initSettings() {
+  return ::shark::_::PointerHelpers< ::shark::ConnectSettings>::init(_builder.getPointerField(
+      ::shark::bounded<4>() * ::shark::POINTERS));
 }
 inline void HttpService::ConnectParams::Builder::adoptSettings(
-    ::capnp::Orphan< ::capnp::ConnectSettings>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::ConnectSettings>::adopt(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::ConnectSettings>&& value) {
+  ::shark::_::PointerHelpers< ::shark::ConnectSettings>::adopt(_builder.getPointerField(
+      ::shark::bounded<4>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::ConnectSettings> HttpService::ConnectParams::Builder::disownSettings() {
-  return ::capnp::_::PointerHelpers< ::capnp::ConnectSettings>::disown(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::ConnectSettings> HttpService::ConnectParams::Builder::disownSettings() {
+  return ::shark::_::PointerHelpers< ::shark::ConnectSettings>::disown(_builder.getPointerField(
+      ::shark::bounded<4>() * ::shark::POINTERS));
 }
 
 inline bool HttpService::ConnectResults::Reader::hasUp() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpService::ConnectResults::Builder::hasUp() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 #if !SHARK_LITE
-inline  ::capnp::ByteStream::Client HttpService::ConnectResults::Reader::getUp() const {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client HttpService::ConnectResults::Reader::getUp() const {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client HttpService::ConnectResults::Builder::getUp() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::ByteStream::Client HttpService::ConnectResults::Builder::getUp() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::ByteStream::Client HttpService::ConnectResults::Pipeline::getUp() {
-  return  ::capnp::ByteStream::Client(_typeless.getPointerField(0).asCap());
+inline  ::shark::ByteStream::Client HttpService::ConnectResults::Pipeline::getUp() {
+  return  ::shark::ByteStream::Client(_typeless.getPointerField(0).asCap());
 }
-inline void HttpService::ConnectResults::Builder::setUp( ::capnp::ByteStream::Client&& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(cap));
+inline void HttpService::ConnectResults::Builder::setUp( ::shark::ByteStream::Client&& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(cap));
 }
-inline void HttpService::ConnectResults::Builder::setUp( ::capnp::ByteStream::Client& cap) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), cap);
+inline void HttpService::ConnectResults::Builder::setUp( ::shark::ByteStream::Client& cap) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), cap);
 }
 inline void HttpService::ConnectResults::Builder::adoptUp(
-    ::capnp::Orphan< ::capnp::ByteStream>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::ByteStream>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::ByteStream>&& value) {
+  ::shark::_::PointerHelpers< ::shark::ByteStream>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::ByteStream> HttpService::ConnectResults::Builder::disownUp() {
-  return ::capnp::_::PointerHelpers< ::capnp::ByteStream>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::ByteStream> HttpService::ConnectResults::Builder::disownUp() {
+  return ::shark::_::PointerHelpers< ::shark::ByteStream>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 #endif  // !SHARK_LITE
 
 inline bool ConnectSettings::Reader::getUseTls() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline bool ConnectSettings::Builder::getUseTls() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 inline void ConnectSettings::Builder::setUseTls(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 #if !SHARK_LITE
 inline WebSocket::Client::Client(decltype(nullptr))
-    : ::capnp::Capability::Client(nullptr) {}
+    : ::shark::Capability::Client(nullptr) {}
 inline WebSocket::Client::Client(
-    ::kj::Own< ::capnp::ClientHook>&& hook)
-    : ::capnp::Capability::Client(::kj::mv(hook)) {}
+    ::kj::Own< ::shark::ClientHook>&& hook)
+    : ::shark::Capability::Client(::kj::mv(hook)) {}
 template <typename _t, typename>
 inline WebSocket::Client::Client(::kj::Own<_t>&& server)
-    : ::capnp::Capability::Client(::kj::mv(server)) {}
+    : ::shark::Capability::Client(::kj::mv(server)) {}
 template <typename _t, typename>
 inline WebSocket::Client::Client(::kj::Promise<_t>&& promise)
-    : ::capnp::Capability::Client(::kj::mv(promise)) {}
+    : ::shark::Capability::Client(::kj::mv(promise)) {}
 inline WebSocket::Client::Client(::kj::Exception&& exception)
-    : ::capnp::Capability::Client(::kj::mv(exception)) {}
-inline  ::capnp::WebSocket::Client& WebSocket::Client::operator=(Client& other) {
-  ::capnp::Capability::Client::operator=(other);
+    : ::shark::Capability::Client(::kj::mv(exception)) {}
+inline  ::shark::WebSocket::Client& WebSocket::Client::operator=(Client& other) {
+  ::shark::Capability::Client::operator=(other);
   return *this;
 }
-inline  ::capnp::WebSocket::Client& WebSocket::Client::operator=(Client&& other) {
-  ::capnp::Capability::Client::operator=(kj::mv(other));
+inline  ::shark::WebSocket::Client& WebSocket::Client::operator=(Client&& other) {
+  ::shark::Capability::Client::operator=(kj::mv(other));
   return *this;
 }
 
 #endif  // !SHARK_LITE
 inline bool WebSocket::SendTextParams::Reader::hasText() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool WebSocket::SendTextParams::Builder::hasText() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader WebSocket::SendTextParams::Reader::getText() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader WebSocket::SendTextParams::Reader::getText() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder WebSocket::SendTextParams::Builder::getText() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder WebSocket::SendTextParams::Builder::getText() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void WebSocket::SendTextParams::Builder::setText( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void WebSocket::SendTextParams::Builder::setText( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder WebSocket::SendTextParams::Builder::initText(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder WebSocket::SendTextParams::Builder::initText(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void WebSocket::SendTextParams::Builder::adoptText(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> WebSocket::SendTextParams::Builder::disownText() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Text> WebSocket::SendTextParams::Builder::disownText() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool WebSocket::SendDataParams::Reader::hasData() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool WebSocket::SendDataParams::Builder::hasData() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Data::Reader WebSocket::SendDataParams::Reader::getData() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Data::Reader WebSocket::SendDataParams::Reader::getData() const {
+  return ::shark::_::PointerHelpers< ::shark::Data>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Data::Builder WebSocket::SendDataParams::Builder::getData() {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Data::Builder WebSocket::SendDataParams::Builder::getData() {
+  return ::shark::_::PointerHelpers< ::shark::Data>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void WebSocket::SendDataParams::Builder::setData( ::capnp::Data::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Data>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void WebSocket::SendDataParams::Builder::setData( ::shark::Data::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Data>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Data::Builder WebSocket::SendDataParams::Builder::initData(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::Data::Builder WebSocket::SendDataParams::Builder::initData(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Data>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void WebSocket::SendDataParams::Builder::adoptData(
-    ::capnp::Orphan< ::capnp::Data>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Data>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Data>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Data>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Data> WebSocket::SendDataParams::Builder::disownData() {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Data> WebSocket::SendDataParams::Builder::disownData() {
+  return ::shark::_::PointerHelpers< ::shark::Data>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline  ::uint16_t WebSocket::CloseParams::Reader::getCode() const {
   return _reader.getDataField< ::uint16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint16_t WebSocket::CloseParams::Builder::getCode() {
   return _builder.getDataField< ::uint16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 inline void WebSocket::CloseParams::Builder::setCode( ::uint16_t value) {
   _builder.setDataField< ::uint16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool WebSocket::CloseParams::Reader::hasReason() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool WebSocket::CloseParams::Builder::hasReason() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader WebSocket::CloseParams::Reader::getReason() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader WebSocket::CloseParams::Reader::getReason() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder WebSocket::CloseParams::Builder::getReason() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder WebSocket::CloseParams::Builder::getReason() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void WebSocket::CloseParams::Builder::setReason( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void WebSocket::CloseParams::Builder::setReason( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder WebSocket::CloseParams::Builder::initReason(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder WebSocket::CloseParams::Builder::initReason(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void WebSocket::CloseParams::Builder::adoptReason(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> WebSocket::CloseParams::Builder::disownReason() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline  ::capnp::HttpMethod HttpRequest::Reader::getMethod() const {
-  return _reader.getDataField< ::capnp::HttpMethod>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+inline ::shark::Orphan< ::shark::Text> WebSocket::CloseParams::Builder::disownReason() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
-inline  ::capnp::HttpMethod HttpRequest::Builder::getMethod() {
-  return _builder.getDataField< ::capnp::HttpMethod>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+inline  ::shark::HttpMethod HttpRequest::Reader::getMethod() const {
+  return _reader.getDataField< ::shark::HttpMethod>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void HttpRequest::Builder::setMethod( ::capnp::HttpMethod value) {
-  _builder.setDataField< ::capnp::HttpMethod>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+
+inline  ::shark::HttpMethod HttpRequest::Builder::getMethod() {
+  return _builder.getDataField< ::shark::HttpMethod>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
+}
+inline void HttpRequest::Builder::setMethod( ::shark::HttpMethod value) {
+  _builder.setDataField< ::shark::HttpMethod>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool HttpRequest::Reader::hasUrl() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpRequest::Builder::hasUrl() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader HttpRequest::Reader::getUrl() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader HttpRequest::Reader::getUrl() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder HttpRequest::Builder::getUrl() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder HttpRequest::Builder::getUrl() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void HttpRequest::Builder::setUrl( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void HttpRequest::Builder::setUrl( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder HttpRequest::Builder::initUrl(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder HttpRequest::Builder::initUrl(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void HttpRequest::Builder::adoptUrl(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> HttpRequest::Builder::disownUrl() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Text> HttpRequest::Builder::disownUrl() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool HttpRequest::Reader::hasHeaders() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpRequest::Builder::hasHeaders() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader HttpRequest::Reader::getHeaders() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader HttpRequest::Reader::getHeaders() const {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder HttpRequest::Builder::getHeaders() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder HttpRequest::Builder::getHeaders() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline void HttpRequest::Builder::setHeaders( ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+inline void HttpRequest::Builder::setHeaders( ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder HttpRequest::Builder::initHeaders(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder HttpRequest::Builder::initHeaders(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), size);
 }
 inline void HttpRequest::Builder::adoptHeaders(
-    ::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>&& value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>> HttpRequest::Builder::disownHeaders() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>> HttpRequest::Builder::disownHeaders() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 
 inline typename HttpRequest::BodySize::Reader HttpRequest::Reader::getBodySize() const {
@@ -4438,17 +4438,17 @@ inline typename HttpRequest::BodySize::Pipeline HttpRequest::Pipeline::getBodySi
 }
 #endif  // !SHARK_LITE
 inline typename HttpRequest::BodySize::Builder HttpRequest::Builder::initBodySize() {
-  _builder.setDataField< ::uint16_t>(::capnp::bounded<1>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField< ::uint64_t>(::capnp::bounded<1>() * ::capnp::ELEMENTS, 0);
+  _builder.setDataField< ::uint16_t>(::shark::bounded<1>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField< ::uint64_t>(::shark::bounded<1>() * ::shark::ELEMENTS, 0);
   return typename HttpRequest::BodySize::Builder(_builder);
 }
-inline  ::capnp::HttpRequest::BodySize::Which HttpRequest::BodySize::Reader::which() const {
+inline  ::shark::HttpRequest::BodySize::Which HttpRequest::BodySize::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::HttpRequest::BodySize::Which HttpRequest::BodySize::Builder::which() {
+inline  ::shark::HttpRequest::BodySize::Which HttpRequest::BodySize::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline bool HttpRequest::BodySize::Reader::isUnknown() const {
@@ -4457,24 +4457,24 @@ inline bool HttpRequest::BodySize::Reader::isUnknown() const {
 inline bool HttpRequest::BodySize::Builder::isUnknown() {
   return which() == HttpRequest::BodySize::UNKNOWN;
 }
-inline  ::capnp::Void HttpRequest::BodySize::Reader::getUnknown() const {
+inline  ::shark::Void HttpRequest::BodySize::Reader::getUnknown() const {
   KJ_IREQUIRE((which() == HttpRequest::BodySize::UNKNOWN),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void HttpRequest::BodySize::Builder::getUnknown() {
+inline  ::shark::Void HttpRequest::BodySize::Builder::getUnknown() {
   KJ_IREQUIRE((which() == HttpRequest::BodySize::UNKNOWN),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void HttpRequest::BodySize::Builder::setUnknown( ::capnp::Void value) {
+inline void HttpRequest::BodySize::Builder::setUnknown( ::shark::Void value) {
   _builder.setDataField<HttpRequest::BodySize::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, HttpRequest::BodySize::UNKNOWN);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, HttpRequest::BodySize::UNKNOWN);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool HttpRequest::BodySize::Reader::isFixed() const {
@@ -4487,102 +4487,102 @@ inline  ::uint64_t HttpRequest::BodySize::Reader::getFixed() const {
   KJ_IREQUIRE((which() == HttpRequest::BodySize::FIXED),
               "Must check which() before get()ing a union member.");
   return _reader.getDataField< ::uint64_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint64_t HttpRequest::BodySize::Builder::getFixed() {
   KJ_IREQUIRE((which() == HttpRequest::BodySize::FIXED),
               "Must check which() before get()ing a union member.");
   return _builder.getDataField< ::uint64_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 inline void HttpRequest::BodySize::Builder::setFixed( ::uint64_t value) {
   _builder.setDataField<HttpRequest::BodySize::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, HttpRequest::BodySize::FIXED);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, HttpRequest::BodySize::FIXED);
   _builder.setDataField< ::uint64_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, value);
 }
 
 inline  ::uint16_t HttpResponse::Reader::getStatusCode() const {
   return _reader.getDataField< ::uint16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint16_t HttpResponse::Builder::getStatusCode() {
   return _builder.getDataField< ::uint16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 inline void HttpResponse::Builder::setStatusCode( ::uint16_t value) {
   _builder.setDataField< ::uint16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool HttpResponse::Reader::hasStatusText() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpResponse::Builder::hasStatusText() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader HttpResponse::Reader::getStatusText() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader HttpResponse::Reader::getStatusText() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder HttpResponse::Builder::getStatusText() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder HttpResponse::Builder::getStatusText() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void HttpResponse::Builder::setStatusText( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void HttpResponse::Builder::setStatusText( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder HttpResponse::Builder::initStatusText(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder HttpResponse::Builder::initStatusText(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void HttpResponse::Builder::adoptStatusText(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> HttpResponse::Builder::disownStatusText() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Text> HttpResponse::Builder::disownStatusText() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool HttpResponse::Reader::hasHeaders() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpResponse::Builder::hasHeaders() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader HttpResponse::Reader::getHeaders() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader HttpResponse::Reader::getHeaders() const {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder HttpResponse::Builder::getHeaders() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder HttpResponse::Builder::getHeaders() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline void HttpResponse::Builder::setHeaders( ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+inline void HttpResponse::Builder::setHeaders( ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>::Builder HttpResponse::Builder::initHeaders(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+inline  ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>::Builder HttpResponse::Builder::initHeaders(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), size);
 }
 inline void HttpResponse::Builder::adoptHeaders(
-    ::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>&& value) {
+  ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>> HttpResponse::Builder::disownHeaders() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::HttpHeader,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>> HttpResponse::Builder::disownHeaders() {
+  return ::shark::_::PointerHelpers< ::shark::List< ::shark::HttpHeader,  ::shark::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 
 inline typename HttpResponse::BodySize::Reader HttpResponse::Reader::getBodySize() const {
@@ -4597,17 +4597,17 @@ inline typename HttpResponse::BodySize::Pipeline HttpResponse::Pipeline::getBody
 }
 #endif  // !SHARK_LITE
 inline typename HttpResponse::BodySize::Builder HttpResponse::Builder::initBodySize() {
-  _builder.setDataField< ::uint16_t>(::capnp::bounded<1>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField< ::uint64_t>(::capnp::bounded<1>() * ::capnp::ELEMENTS, 0);
+  _builder.setDataField< ::uint16_t>(::shark::bounded<1>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField< ::uint64_t>(::shark::bounded<1>() * ::shark::ELEMENTS, 0);
   return typename HttpResponse::BodySize::Builder(_builder);
 }
-inline  ::capnp::HttpResponse::BodySize::Which HttpResponse::BodySize::Reader::which() const {
+inline  ::shark::HttpResponse::BodySize::Which HttpResponse::BodySize::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::HttpResponse::BodySize::Which HttpResponse::BodySize::Builder::which() {
+inline  ::shark::HttpResponse::BodySize::Which HttpResponse::BodySize::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline bool HttpResponse::BodySize::Reader::isUnknown() const {
@@ -4616,24 +4616,24 @@ inline bool HttpResponse::BodySize::Reader::isUnknown() const {
 inline bool HttpResponse::BodySize::Builder::isUnknown() {
   return which() == HttpResponse::BodySize::UNKNOWN;
 }
-inline  ::capnp::Void HttpResponse::BodySize::Reader::getUnknown() const {
+inline  ::shark::Void HttpResponse::BodySize::Reader::getUnknown() const {
   KJ_IREQUIRE((which() == HttpResponse::BodySize::UNKNOWN),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::Void HttpResponse::BodySize::Builder::getUnknown() {
+inline  ::shark::Void HttpResponse::BodySize::Builder::getUnknown() {
   KJ_IREQUIRE((which() == HttpResponse::BodySize::UNKNOWN),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void HttpResponse::BodySize::Builder::setUnknown( ::capnp::Void value) {
+inline void HttpResponse::BodySize::Builder::setUnknown( ::shark::Void value) {
   _builder.setDataField<HttpResponse::BodySize::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, HttpResponse::BodySize::UNKNOWN);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, HttpResponse::BodySize::UNKNOWN);
+  _builder.setDataField< ::shark::Void>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool HttpResponse::BodySize::Reader::isFixed() const {
@@ -4646,29 +4646,29 @@ inline  ::uint64_t HttpResponse::BodySize::Reader::getFixed() const {
   KJ_IREQUIRE((which() == HttpResponse::BodySize::FIXED),
               "Must check which() before get()ing a union member.");
   return _reader.getDataField< ::uint64_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
 inline  ::uint64_t HttpResponse::BodySize::Builder::getFixed() {
   KJ_IREQUIRE((which() == HttpResponse::BodySize::FIXED),
               "Must check which() before get()ing a union member.");
   return _builder.getDataField< ::uint64_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 inline void HttpResponse::BodySize::Builder::setFixed( ::uint64_t value) {
   _builder.setDataField<HttpResponse::BodySize::Which>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, HttpResponse::BodySize::FIXED);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, HttpResponse::BodySize::FIXED);
   _builder.setDataField< ::uint64_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<1>() * ::shark::ELEMENTS, value);
 }
 
-inline  ::capnp::HttpHeader::Which HttpHeader::Reader::which() const {
+inline  ::shark::HttpHeader::Which HttpHeader::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+      ::shark::bounded<4>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::HttpHeader::Which HttpHeader::Builder::which() {
+inline  ::shark::HttpHeader::Which HttpHeader::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+      ::shark::bounded<4>() * ::shark::ELEMENTS);
 }
 
 inline bool HttpHeader::Reader::isCommon() const {
@@ -4689,11 +4689,11 @@ inline typename HttpHeader::Common::Builder HttpHeader::Builder::getCommon() {
 }
 inline typename HttpHeader::Common::Builder HttpHeader::Builder::initCommon() {
   _builder.setDataField<HttpHeader::Which>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS, HttpHeader::COMMON);
-  _builder.setDataField< ::uint16_t>(::capnp::bounded<0>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField< ::uint16_t>(::capnp::bounded<1>() * ::capnp::ELEMENTS, 0);
-  _builder.setDataField< ::uint16_t>(::capnp::bounded<2>() * ::capnp::ELEMENTS, 0);
-  _builder.getPointerField(::capnp::bounded<0>() * ::capnp::POINTERS).clear();
+      ::shark::bounded<4>() * ::shark::ELEMENTS, HttpHeader::COMMON);
+  _builder.setDataField< ::uint16_t>(::shark::bounded<0>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField< ::uint16_t>(::shark::bounded<1>() * ::shark::ELEMENTS, 0);
+  _builder.setDataField< ::uint16_t>(::shark::bounded<2>() * ::shark::ELEMENTS, 0);
+  _builder.getPointerField(::shark::bounded<0>() * ::shark::POINTERS).clear();
   return typename HttpHeader::Common::Builder(_builder);
 }
 inline bool HttpHeader::Reader::isUncommon() const {
@@ -4705,140 +4705,140 @@ inline bool HttpHeader::Builder::isUncommon() {
 inline bool HttpHeader::Reader::hasUncommon() const {
   if (which() != HttpHeader::UNCOMMON) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpHeader::Builder::hasUncommon() {
   if (which() != HttpHeader::UNCOMMON) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::HttpHeader::NameValue::Reader HttpHeader::Reader::getUncommon() const {
+inline  ::shark::HttpHeader::NameValue::Reader HttpHeader::Reader::getUncommon() const {
   KJ_IREQUIRE((which() == HttpHeader::UNCOMMON),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::HttpHeader::NameValue>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::HttpHeader::NameValue>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::HttpHeader::NameValue::Builder HttpHeader::Builder::getUncommon() {
+inline  ::shark::HttpHeader::NameValue::Builder HttpHeader::Builder::getUncommon() {
   KJ_IREQUIRE((which() == HttpHeader::UNCOMMON),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::HttpHeader::NameValue>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::HttpHeader::NameValue>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void HttpHeader::Builder::setUncommon( ::capnp::HttpHeader::NameValue::Reader value) {
+inline void HttpHeader::Builder::setUncommon( ::shark::HttpHeader::NameValue::Reader value) {
   _builder.setDataField<HttpHeader::Which>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS, HttpHeader::UNCOMMON);
-  ::capnp::_::PointerHelpers< ::capnp::HttpHeader::NameValue>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+      ::shark::bounded<4>() * ::shark::ELEMENTS, HttpHeader::UNCOMMON);
+  ::shark::_::PointerHelpers< ::shark::HttpHeader::NameValue>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::HttpHeader::NameValue::Builder HttpHeader::Builder::initUncommon() {
+inline  ::shark::HttpHeader::NameValue::Builder HttpHeader::Builder::initUncommon() {
   _builder.setDataField<HttpHeader::Which>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS, HttpHeader::UNCOMMON);
-  return ::capnp::_::PointerHelpers< ::capnp::HttpHeader::NameValue>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+      ::shark::bounded<4>() * ::shark::ELEMENTS, HttpHeader::UNCOMMON);
+  return ::shark::_::PointerHelpers< ::shark::HttpHeader::NameValue>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 inline void HttpHeader::Builder::adoptUncommon(
-    ::capnp::Orphan< ::capnp::HttpHeader::NameValue>&& value) {
+    ::shark::Orphan< ::shark::HttpHeader::NameValue>&& value) {
   _builder.setDataField<HttpHeader::Which>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS, HttpHeader::UNCOMMON);
-  ::capnp::_::PointerHelpers< ::capnp::HttpHeader::NameValue>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<4>() * ::shark::ELEMENTS, HttpHeader::UNCOMMON);
+  ::shark::_::PointerHelpers< ::shark::HttpHeader::NameValue>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::HttpHeader::NameValue> HttpHeader::Builder::disownUncommon() {
+inline ::shark::Orphan< ::shark::HttpHeader::NameValue> HttpHeader::Builder::disownUncommon() {
   KJ_IREQUIRE((which() == HttpHeader::UNCOMMON),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::HttpHeader::NameValue>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::HttpHeader::NameValue>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool HttpHeader::NameValue::Reader::hasName() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpHeader::NameValue::Builder::hasName() {
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader HttpHeader::NameValue::Reader::getName() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader HttpHeader::NameValue::Reader::getName() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder HttpHeader::NameValue::Builder::getName() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder HttpHeader::NameValue::Builder::getName() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void HttpHeader::NameValue::Builder::setName( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline void HttpHeader::NameValue::Builder::setName( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder HttpHeader::NameValue::Builder::initName(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder HttpHeader::NameValue::Builder::initName(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void HttpHeader::NameValue::Builder::adoptName(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> HttpHeader::NameValue::Builder::disownName() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Text> HttpHeader::NameValue::Builder::disownName() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 inline bool HttpHeader::NameValue::Reader::hasValue() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpHeader::NameValue::Builder::hasValue() {
   return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<1>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader HttpHeader::NameValue::Reader::getValue() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::Text::Reader HttpHeader::NameValue::Reader::getValue() const {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder HttpHeader::NameValue::Builder::getValue() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline  ::shark::Text::Builder HttpHeader::NameValue::Builder::getValue() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
-inline void HttpHeader::NameValue::Builder::setValue( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+inline void HttpHeader::NameValue::Builder::setValue( ::shark::Text::Reader value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder HttpHeader::NameValue::Builder::initValue(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+inline  ::shark::Text::Builder HttpHeader::NameValue::Builder::initValue(unsigned int size) {
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), size);
 }
 inline void HttpHeader::NameValue::Builder::adoptValue(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+    ::shark::Orphan< ::shark::Text>&& value) {
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> HttpHeader::NameValue::Builder::disownValue() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline ::shark::Orphan< ::shark::Text> HttpHeader::NameValue::Builder::disownValue() {
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<1>() * ::shark::POINTERS));
 }
 
-inline  ::capnp::HttpHeader::Common::Which HttpHeader::Common::Reader::which() const {
+inline  ::shark::HttpHeader::Common::Which HttpHeader::Common::Reader::which() const {
   return _reader.getDataField<Which>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+      ::shark::bounded<2>() * ::shark::ELEMENTS);
 }
-inline  ::capnp::HttpHeader::Common::Which HttpHeader::Common::Builder::which() {
+inline  ::shark::HttpHeader::Common::Which HttpHeader::Common::Builder::which() {
   return _builder.getDataField<Which>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+      ::shark::bounded<2>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::CommonHeaderName HttpHeader::Common::Reader::getName() const {
-  return _reader.getDataField< ::capnp::CommonHeaderName>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+inline  ::shark::CommonHeaderName HttpHeader::Common::Reader::getName() const {
+  return _reader.getDataField< ::shark::CommonHeaderName>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::CommonHeaderName HttpHeader::Common::Builder::getName() {
-  return _builder.getDataField< ::capnp::CommonHeaderName>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+inline  ::shark::CommonHeaderName HttpHeader::Common::Builder::getName() {
+  return _builder.getDataField< ::shark::CommonHeaderName>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS);
 }
-inline void HttpHeader::Common::Builder::setName( ::capnp::CommonHeaderName value) {
-  _builder.setDataField< ::capnp::CommonHeaderName>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+inline void HttpHeader::Common::Builder::setName( ::shark::CommonHeaderName value) {
+  _builder.setDataField< ::shark::CommonHeaderName>(
+      ::shark::bounded<0>() * ::shark::ELEMENTS, value);
 }
 
 inline bool HttpHeader::Common::Reader::isCommonValue() const {
@@ -4847,24 +4847,24 @@ inline bool HttpHeader::Common::Reader::isCommonValue() const {
 inline bool HttpHeader::Common::Builder::isCommonValue() {
   return which() == HttpHeader::Common::COMMON_VALUE;
 }
-inline  ::capnp::CommonHeaderValue HttpHeader::Common::Reader::getCommonValue() const {
+inline  ::shark::CommonHeaderValue HttpHeader::Common::Reader::getCommonValue() const {
   KJ_IREQUIRE((which() == HttpHeader::Common::COMMON_VALUE),
               "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::CommonHeaderValue>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+  return _reader.getDataField< ::shark::CommonHeaderValue>(
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
 
-inline  ::capnp::CommonHeaderValue HttpHeader::Common::Builder::getCommonValue() {
+inline  ::shark::CommonHeaderValue HttpHeader::Common::Builder::getCommonValue() {
   KJ_IREQUIRE((which() == HttpHeader::Common::COMMON_VALUE),
               "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::CommonHeaderValue>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+  return _builder.getDataField< ::shark::CommonHeaderValue>(
+      ::shark::bounded<1>() * ::shark::ELEMENTS);
 }
-inline void HttpHeader::Common::Builder::setCommonValue( ::capnp::CommonHeaderValue value) {
+inline void HttpHeader::Common::Builder::setCommonValue( ::shark::CommonHeaderValue value) {
   _builder.setDataField<HttpHeader::Common::Which>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS, HttpHeader::Common::COMMON_VALUE);
-  _builder.setDataField< ::capnp::CommonHeaderValue>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::shark::bounded<2>() * ::shark::ELEMENTS, HttpHeader::Common::COMMON_VALUE);
+  _builder.setDataField< ::shark::CommonHeaderValue>(
+      ::shark::bounded<1>() * ::shark::ELEMENTS, value);
 }
 
 inline bool HttpHeader::Common::Reader::isValue() const {
@@ -4876,49 +4876,49 @@ inline bool HttpHeader::Common::Builder::isValue() {
 inline bool HttpHeader::Common::Reader::hasValue() const {
   if (which() != HttpHeader::Common::VALUE) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
 inline bool HttpHeader::Common::Builder::hasValue() {
   if (which() != HttpHeader::Common::VALUE) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+      ::shark::bounded<0>() * ::shark::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader HttpHeader::Common::Reader::getValue() const {
+inline  ::shark::Text::Reader HttpHeader::Common::Reader::getValue() const {
   KJ_IREQUIRE((which() == HttpHeader::Common::VALUE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_reader.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline  ::capnp::Text::Builder HttpHeader::Common::Builder::getValue() {
+inline  ::shark::Text::Builder HttpHeader::Common::Builder::getValue() {
   KJ_IREQUIRE((which() == HttpHeader::Common::VALUE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::Text>::get(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
-inline void HttpHeader::Common::Builder::setValue( ::capnp::Text::Reader value) {
+inline void HttpHeader::Common::Builder::setValue( ::shark::Text::Reader value) {
   _builder.setDataField<HttpHeader::Common::Which>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS, HttpHeader::Common::VALUE);
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+      ::shark::bounded<2>() * ::shark::ELEMENTS, HttpHeader::Common::VALUE);
+  ::shark::_::PointerHelpers< ::shark::Text>::set(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), value);
 }
-inline  ::capnp::Text::Builder HttpHeader::Common::Builder::initValue(unsigned int size) {
+inline  ::shark::Text::Builder HttpHeader::Common::Builder::initValue(unsigned int size) {
   _builder.setDataField<HttpHeader::Common::Which>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS, HttpHeader::Common::VALUE);
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+      ::shark::bounded<2>() * ::shark::ELEMENTS, HttpHeader::Common::VALUE);
+  return ::shark::_::PointerHelpers< ::shark::Text>::init(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), size);
 }
 inline void HttpHeader::Common::Builder::adoptValue(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
+    ::shark::Orphan< ::shark::Text>&& value) {
   _builder.setDataField<HttpHeader::Common::Which>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS, HttpHeader::Common::VALUE);
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+      ::shark::bounded<2>() * ::shark::ELEMENTS, HttpHeader::Common::VALUE);
+  ::shark::_::PointerHelpers< ::shark::Text>::adopt(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> HttpHeader::Common::Builder::disownValue() {
+inline ::shark::Orphan< ::shark::Text> HttpHeader::Common::Builder::disownValue() {
   KJ_IREQUIRE((which() == HttpHeader::Common::VALUE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return ::shark::_::PointerHelpers< ::shark::Text>::disown(_builder.getPointerField(
+      ::shark::bounded<0>() * ::shark::POINTERS));
 }
 
 }  // namespace

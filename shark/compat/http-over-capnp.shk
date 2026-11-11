@@ -25,7 +25,7 @@
 using import "byte-stream.shk".ByteStream;
 
 using Cxx = import "/shark/c++.shk";
-$Cxx.namespace("capnp");
+$Cxx.namespace("shark");
 $Cxx.allowCancellation;
 
 interface HttpService {

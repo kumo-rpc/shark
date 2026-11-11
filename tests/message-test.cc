@@ -26,7 +26,7 @@
 #include <shark/base/debug.h>
 #include <shark/base/vector.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -193,7 +193,7 @@ KJ_TEST("disallow unaligned") {
 #endif
 
 KJ_TEST("MessageBuilder::sizeInWords()") {
-  capnp::MallocMessageBuilder builder;
+  shark::MallocMessageBuilder builder;
   auto root = builder.initRoot<TestAllTypes>();
   initTestMessage(root);
 
@@ -208,7 +208,7 @@ KJ_TEST("MessageBuilder::sizeInWords()") {
   }
   KJ_EXPECT(total == expected);
 
-  capnp::SegmentArrayMessageReader reader(segments);
+  shark::SegmentArrayMessageReader reader(segments);
   checkTestMessage(reader.getRoot<TestAllTypes>());
   KJ_EXPECT(reader.sizeInWords() == expected);
 }
@@ -217,4 +217,4 @@ KJ_TEST("MessageBuilder::sizeInWords()") {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

@@ -27,7 +27,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 typedef json::Value JsonValue;
 // For backwards-compatibility.
@@ -524,6 +524,6 @@ void JsonCodec::handleByAnnotation() {
   return handleByAnnotation(Schema::from<T>());
 }
 
-} // namespace capnp
+} // namespace shark
 
 SHARK_END_HEADER

@@ -42,7 +42,7 @@
 #include <shark/base/windows-sanity.h>
 #endif
 
-namespace capnp {
+namespace shark {
     namespace compiler {
 
         uint64_t generateRandomId() {
@@ -1185,4 +1185,4 @@ namespace capnp {
         }
 
     } // namespace compiler
-} // namespace capnp
+} // namespace shark

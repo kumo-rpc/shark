@@ -28,7 +28,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 class ExplicitEndOutputStream: public kj::AsyncOutputStream {
   // HACK: KJ's AsyncOutputStream has a known serious design flaw in that EOF is signaled by
@@ -54,15 +54,15 @@ class ByteStreamFactory {
   // between RPC ByteStreams and KJ streams.
 
 public:
-  capnp::ByteStream::Client kjToCapnp(kj::Own<kj::AsyncOutputStream> kjStream);
-  capnp::ByteStream::Client kjToCapnp(
+  shark::ByteStream::Client kjToCapnp(kj::Own<kj::AsyncOutputStream> kjStream);
+  shark::ByteStream::Client kjToCapnp(
       kj::Own<kj::AsyncOutputStream> kjStream, kj::Maybe<kj::Own<kj::TlsStarterCallback>> tlsStarter);
-  kj::Own<kj::AsyncOutputStream> capnpToKj(capnp::ByteStream::Client capnpStream);
+  kj::Own<kj::AsyncOutputStream> capnpToKj(shark::ByteStream::Client capnpStream);
 
-  kj::Own<ExplicitEndOutputStream> capnpToKjExplicitEnd(capnp::ByteStream::Client capnpStream);
+  kj::Own<ExplicitEndOutputStream> capnpToKjExplicitEnd(shark::ByteStream::Client capnpStream);
 
 private:
-  CapabilityServerSet<capnp::ByteStream> streamSet;
+  CapabilityServerSet<shark::ByteStream> streamSet;
 
   class StreamServerBase;
   class SubstreamImpl;
@@ -70,6 +70,6 @@ private:
   class KjToCapnpStreamAdapter;
 };
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

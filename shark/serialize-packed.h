@@ -25,7 +25,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 namespace _ {  // private
 
@@ -123,6 +123,6 @@ inline void writePackedMessageToFd(int fd, MessageBuilder& builder) {
   writePackedMessageToFd(fd, builder.getSegmentsForOutput());
 }
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

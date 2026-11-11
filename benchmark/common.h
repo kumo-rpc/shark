@@ -41,7 +41,7 @@
 #include <string>
 #include <vector>
 
-namespace capnp {
+namespace shark {
 namespace benchmark {
 
 // Use a 128-bit Xorshift algorithm.
@@ -290,5 +290,5 @@ int benchmarkMain(int argc, char* argv[]) {
   return 0;
 }
 
-}  // namespace capnp
+}  // namespace shark
 }  // namespace benchmark

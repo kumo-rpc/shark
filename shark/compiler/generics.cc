@@ -22,7 +22,7 @@
 #include "generics.h"
 #include "parser.h" // for expressionString()
 
-namespace capnp {
+namespace shark {
     namespace compiler {
 
         BrandedDecl::BrandedDecl(BrandedDecl& other)
@@ -724,4 +724,4 @@ namespace capnp {
         }
 
     } // namespace compiler
-} // namespace capnp
+} // namespace shark

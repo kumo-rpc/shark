@@ -27,7 +27,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 
 // WireValue
@@ -301,6 +301,6 @@ using WireValue = ShiftingWireValue<T>;
 #endif
 
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

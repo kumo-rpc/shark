@@ -31,7 +31,7 @@
 
 #if KJ_HAS_COROUTINE
 
-namespace capnp {
+namespace shark {
 namespace {
 
 // =======================================================================================
@@ -433,7 +433,7 @@ KJ_TEST("Benchmark HTTP-over-capnp full RPC") {
 
   TwoPartyClient client(pair.client);
 
-  auto roundTrip = hocFactory2.capnpToKj(client.bootstrap().castAs<capnp::HttpService>());
+  auto roundTrip = hocFactory2.capnpToKj(client.bootstrap().castAs<shark::HttpService>());
 
   doBenchmark([&]() {
     sender.sendRequest(*roundTrip).wait(waitScope);
@@ -441,6 +441,6 @@ KJ_TEST("Benchmark HTTP-over-capnp full RPC") {
 }
 
 }  // namespace
-}  // namespace capnp
+}  // namespace shark
 
 #endif  // KJ_HAS_COROUTINE

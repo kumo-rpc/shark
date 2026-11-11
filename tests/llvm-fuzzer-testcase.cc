@@ -15,10 +15,10 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* Data, size_t Size) {
   kj::ArrayInputStream ais(array);
 
   KJ_IF_MAYBE(e, kj::runCatchingExceptions([&]() {
-    capnp::InputStreamMessageReader reader(ais);
-    capnp::_::checkTestMessage(reader.getRoot<capnp::_::TestAllTypes>());
-    capnp::_::checkDynamicTestMessage(reader.getRoot<capnp::DynamicStruct>(capnp::Schema::from<capnp::_::TestAllTypes>()));
-    kj::str(reader.getRoot<capnp::_::TestAllTypes>());
+    shark::InputStreamMessageReader reader(ais);
+    shark::_::checkTestMessage(reader.getRoot<shark::_::TestAllTypes>());
+    shark::_::checkDynamicTestMessage(reader.getRoot<shark::DynamicStruct>(shark::Schema::from<shark::_::TestAllTypes>()));
+    kj::str(reader.getRoot<shark::_::TestAllTypes>());
   })) {
     KJ_LOG(ERROR, "threw");
   }

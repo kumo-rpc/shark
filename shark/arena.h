@@ -39,7 +39,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 #if !SHARK_LITE
 class ClientHook;
@@ -516,6 +516,6 @@ inline bool SegmentBuilder::tryExtend(word* from, word* to) {
 }
 
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

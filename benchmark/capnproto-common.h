@@ -34,9 +34,9 @@
 #endif  // HAVE_SNAPPY
 #include <thread>
 
-namespace capnp {
+namespace shark {
 namespace benchmark {
-namespace capnp {
+namespace shark {
 
 class CountingOutputStream: public kj::FdOutputStream {
 public:
@@ -415,6 +415,6 @@ struct BenchmarkTypes {
   struct BenchmarkMethods: public capnp::BenchmarkMethods<TestCase, ReuseStrategy, Compression> {};
 };
 
-}  // namespace capnp
+}  // namespace shark
 }  // namespace benchmark
-}  // namespace capnp
+}  // namespace shark

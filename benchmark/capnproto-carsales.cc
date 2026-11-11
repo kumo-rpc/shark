@@ -22,9 +22,9 @@
 #include "carsales.sk.h"
 #include "capnproto-common.h"
 
-namespace capnp {
+namespace shark {
 namespace benchmark {
-namespace capnp {
+namespace shark {
 
 template <typename ReaderOrBuilder>
 uint64_t carValue(ReaderOrBuilder car) {
@@ -128,9 +128,9 @@ public:
   }
 };
 
-}  // namespace capnp
+}  // namespace shark
 }  // namespace benchmark
-}  // namespace capnp
+}  // namespace shark
 
 int main(int argc, char* argv[]) {
   return capnp::benchmark::benchmarkMain<

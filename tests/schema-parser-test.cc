@@ -27,7 +27,7 @@
 #include <tests/base/compat/gtest.h>
 #include <shark/base/debug.h>
 
-namespace capnp {
+namespace shark {
 namespace {
 
 #if _WIN32
@@ -295,4 +295,4 @@ TEST(SchemaParser, SetFileIdsRequired) {
 }
 
 }  // namespace
-}  // namespace capnp
+}  // namespace shark

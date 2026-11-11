@@ -26,15 +26,15 @@
 #include <tests/base/compat/gtest.h>
 
 // TODO(cleanup): Auto-generate stringification functions for union discriminants.
-namespace capnp {
+namespace shark {
 namespace schema {
 inline kj::String KJ_STRINGIFY(Type::Which which) {
   return kj::str(static_cast<uint16_t>(which));
 }
 }  // namespace schema
-}  // namespace capnp
+}  // namespace shark
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -410,4 +410,4 @@ KJ_TEST("list-of-enum as generic type parameter has working schema") {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

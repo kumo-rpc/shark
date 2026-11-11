@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <errno.h>
 
-namespace capnp {
+namespace shark {
 
 namespace {
 
@@ -305,4 +305,4 @@ kj::ArrayPtr<word> FlatMessageBuilder::allocateSegment(uint minimumSize) {
   return array;
 }
 
-}  // namespace capnp
+}  // namespace shark

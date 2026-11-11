@@ -24,7 +24,7 @@
 #include <tests/test-util.h>
 #include <tests/base/compat/gtest.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -436,4 +436,4 @@ KJ_TEST("Truncating non-null pointer fields does not preserve equality") {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark

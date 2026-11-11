@@ -27,7 +27,7 @@
 
 SHARK_BEGIN_HEADER
 
-namespace capnp {
+namespace shark {
 
 struct MessageReaderAndFds {
   kj::Own<MessageReader> reader;
@@ -315,6 +315,6 @@ inline kj::Promise<void> MessageStream::writeMessage(
   return writeMessage(fds, builder.getSegmentsForOutput());
 }
 
-}  // namespace capnp
+}  // namespace shark
 
 SHARK_END_HEADER

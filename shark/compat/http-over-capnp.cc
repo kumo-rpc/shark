@@ -24,7 +24,7 @@
 #include <shark/schema.h>
 #include <shark/message.h>
 
-namespace capnp {
+namespace shark {
 
 using kj::uint;
 using kj::byte;
@@ -108,7 +108,7 @@ private:
 
 // =======================================================================================
 
-class HttpOverCapnpFactory::CapnpToKjWebSocketAdapter final: public capnp::WebSocket::Server {
+class HttpOverCapnpFactory::CapnpToKjWebSocketAdapter final: public shark::WebSocket::Server {
 public:
   CapnpToKjWebSocketAdapter(kj::Own<RequestState> state, kj::WebSocket& webSocket,
                             kj::Promise<Capability::Client> shorteningPromise)
@@ -147,7 +147,7 @@ private:
 class HttpOverCapnpFactory::KjToCapnpWebSocketAdapter final: public kj::WebSocket {
 public:
   KjToCapnpWebSocketAdapter(
-      kj::Maybe<kj::Own<kj::WebSocket>> in, capnp::WebSocket::Client out,
+      kj::Maybe<kj::Own<kj::WebSocket>> in, shark::WebSocket::Client out,
       kj::Own<kj::PromiseFulfiller<kj::Promise<Capability::Client>>> shorteningFulfiller)
       : in(kj::mv(in)), out(kj::mv(out)), shorteningFulfiller(kj::mv(shorteningFulfiller)) {}
   ~KjToCapnpWebSocketAdapter() noexcept(false) {
@@ -236,7 +236,7 @@ public:
 
 private:
   kj::Maybe<kj::Own<kj::WebSocket>> in;   // One end of a WebSocketPipe, used only for receiving.
-  kj::Maybe<capnp::WebSocket::Client> out;  // Used only for sending.
+  kj::Maybe<shark::WebSocket::Client> out;  // Used only for sending.
   kj::Own<kj::PromiseFulfiller<kj::Promise<Capability::Client>>> shorteningFulfiller;
   uint64_t sentBytes = 0;
 };
@@ -244,7 +244,7 @@ private:
 // =======================================================================================
 
 class HttpOverCapnpFactory::ClientRequestContextImpl final
-    : public capnp::HttpService::ClientRequestContext::Server {
+    : public shark::HttpService::ClientRequestContext::Server {
 public:
   ClientRequestContextImpl(HttpOverCapnpFactory& factory,
                            kj::Own<RequestState> state,
@@ -328,7 +328,7 @@ private:
 };
 
 class HttpOverCapnpFactory::ConnectClientRequestContextImpl final
-    : public capnp::HttpService::ConnectClientRequestContext::Server {
+    : public shark::HttpService::ConnectClientRequestContext::Server {
 public:
   ConnectClientRequestContextImpl(HttpOverCapnpFactory& factory,
       kj::HttpService::ConnectResponse& connResponse)
@@ -379,7 +379,7 @@ private:
 
 class HttpOverCapnpFactory::KjToCapnpHttpServiceAdapter final: public kj::HttpService {
 public:
-  KjToCapnpHttpServiceAdapter(HttpOverCapnpFactory& factory, capnp::HttpService::Client inner)
+  KjToCapnpHttpServiceAdapter(HttpOverCapnpFactory& factory, shark::HttpService::Client inner)
       : factory(factory), inner(kj::mv(inner)) {}
 
   template <typename Params, typename Results, typename AwaitCompletionFunc>
@@ -395,7 +395,7 @@ public:
     //   callback.
 
     auto metadata = rpcRequest.initRequest();
-    metadata.setMethod(static_cast<capnp::HttpMethod>(method));
+    metadata.setMethod(static_cast<shark::HttpMethod>(method));
     metadata.setUrl(url);
     metadata.adoptHeaders(factory.headersToCapnp(
         headers, Orphanage::getForMessageContaining(metadata)));
@@ -483,15 +483,15 @@ public:
     rpcRequest.initSettings().setUseTls(settings.useTls);
 
     auto context = kj::heap<ConnectClientRequestContextImpl>(factory, tunnel);
-    RevocableServer<capnp::HttpService::ConnectClientRequestContext> revocableContext(*context);
+    RevocableServer<shark::HttpService::ConnectClientRequestContext> revocableContext(*context);
 
-    auto builder = capnp::Request<
-        capnp::HttpService::ConnectParams,
-        capnp::HttpService::ConnectResults>::Builder(rpcRequest);
+    auto builder = shark::Request<
+        shark::HttpService::ConnectParams,
+        shark::HttpService::ConnectResults>::Builder(rpcRequest);
     rpcRequest.adoptHeaders(factory.headersToCapnp(headers,
         Orphanage::getForMessageContaining(builder)));
     rpcRequest.setContext(revocableContext.getClient());
-    RemotePromise<capnp::HttpService::ConnectResults> pipeline = rpcRequest.send();
+    RemotePromise<shark::HttpService::ConnectResults> pipeline = rpcRequest.send();
 
     // We read from `downPipe` (the other side writes into it.)
     auto downPumpTask = downPipe.in->pumpTo(connection)
@@ -533,10 +533,10 @@ public:
 
 private:
   HttpOverCapnpFactory& factory;
-  capnp::HttpService::Client inner;
+  shark::HttpService::Client inner;
 };
 
-kj::Own<kj::HttpService> HttpOverCapnpFactory::capnpToKj(capnp::HttpService::Client rpcService) {
+kj::Own<kj::HttpService> HttpOverCapnpFactory::capnpToKj(shark::HttpService::Client rpcService) {
   return kj::heap<KjToCapnpHttpServiceAdapter>(*this, kj::mv(rpcService));
 }
 
@@ -580,7 +580,7 @@ public:
   // We can't really optimize tryPumpFrom() unless AsyncInputStream grows a skip() method.
 };
 
-class ResolvedServerRequestContext final: public capnp::HttpService::ServerRequestContext::Server {
+class ResolvedServerRequestContext final: public shark::HttpService::ServerRequestContext::Server {
 public:
   // Nothing! It's done.
 };
@@ -591,8 +591,8 @@ class HttpOverCapnpFactory::HttpServiceResponseImpl
     : public kj::HttpService::Response {
 public:
   HttpServiceResponseImpl(HttpOverCapnpFactory& factory,
-                          capnp::HttpRequest::Reader request,
-                          capnp::HttpService::ClientRequestContext::Client clientContext)
+                          shark::HttpRequest::Reader request,
+                          shark::HttpService::ClientRequestContext::Client clientContext)
       : factory(factory),
         method(validateMethod(request.getMethod())),
         url(request.getUrl()),
@@ -647,7 +647,7 @@ public:
 
     req.adoptHeaders(factory.headersToCapnp(
         headers, Orphanage::getForMessageContaining(
-            capnp::HttpService::ClientRequestContext::StartWebSocketParams::Builder(req))));
+            shark::HttpService::ClientRequestContext::StartWebSocketParams::Builder(req))));
 
     auto pipe = kj::newWebSocketPipe();
     auto shorteningPaf = kj::newPromiseAndFulfiller<kj::Promise<Capability::Client>>();
@@ -681,11 +681,11 @@ public:
   kj::HttpMethod method;
   kj::StringPtr url;
   kj::HttpHeaders headers;
-  capnp::HttpService::ClientRequestContext::Client clientContext;
+  shark::HttpService::ClientRequestContext::Client clientContext;
   kj::Maybe<kj::Promise<void>> replyTask;
 
-  static kj::HttpMethod validateMethod(capnp::HttpMethod method) {
-    KJ_REQUIRE(method <= capnp::HttpMethod::UNSUBSCRIBE, "unknown method", method);
+  static kj::HttpMethod validateMethod(shark::HttpMethod method) {
+    KJ_REQUIRE(method <= shark::HttpMethod::UNSUBSCRIBE, "unknown method", method);
     return static_cast<kj::HttpMethod>(method);
   }
 };
@@ -695,7 +695,7 @@ class HttpOverCapnpFactory::HttpOverCapnpConnectResponseImpl final :
 public:
   HttpOverCapnpConnectResponseImpl(
       HttpOverCapnpFactory& factory,
-      capnp::HttpService::ConnectClientRequestContext::Client context) :
+      shark::HttpService::ConnectClientRequestContext::Client context) :
       context(context), factory(factory) {}
 
   void accept(uint statusCode, kj::StringPtr statusText, const kj::HttpHeaders& headers) override {
@@ -744,20 +744,20 @@ public:
     return kj::mv(pipe.out);
   }
 
-  capnp::HttpService::ConnectClientRequestContext::Client context;
-  capnp::HttpOverCapnpFactory& factory;
+  shark::HttpService::ConnectClientRequestContext::Client context;
+  shark::HttpOverCapnpFactory& factory;
   kj::Maybe<kj::Promise<void>> replyTask;
 };
 
 
 class HttpOverCapnpFactory::ServerRequestContextImpl final
-    : public capnp::HttpService::ServerRequestContext::Server,
+    : public shark::HttpService::ServerRequestContext::Server,
       public HttpServiceResponseImpl {
 public:
   ServerRequestContextImpl(HttpOverCapnpFactory& factory,
                            HttpService::Client serviceCap,
-                           kj::Own<capnp::HttpRequest::Reader> request,
-                           capnp::HttpService::ClientRequestContext::Client clientContext,
+                           kj::Own<shark::HttpRequest::Reader> request,
+                           shark::HttpService::ClientRequestContext::Client clientContext,
                            kj::Own<kj::AsyncInputStream> requestBodyIn,
                            kj::HttpService& kjService)
       : HttpServiceResponseImpl(factory, *request, kj::mv(clientContext)),
@@ -782,12 +782,12 @@ public:
   KJ_DISALLOW_COPY_AND_MOVE(ServerRequestContextImpl);
 
 private:
-  kj::Own<capnp::HttpRequest::Reader> request;
+  kj::Own<shark::HttpRequest::Reader> request;
   HttpService::Client serviceCap;  // ensures the inner kj::HttpService isn't destroyed
   kj::Promise<void> task;
 };
 
-class HttpOverCapnpFactory::CapnpToKjHttpServiceAdapter final: public capnp::HttpService::Server {
+class HttpOverCapnpFactory::CapnpToKjHttpServiceAdapter final: public shark::HttpService::Server {
 public:
   CapnpToKjHttpServiceAdapter(HttpOverCapnpFactory& factory, kj::Own<kj::HttpService> inner)
       : factory(factory), inner(kj::mv(inner)) {}
@@ -853,7 +853,7 @@ public:
     return requestImpl(kj::mv(context),
         [&](auto& results, auto& metadata, auto& params, auto& requestBody) {
       results.setContext(kj::heap<ServerRequestContextImpl>(
-          factory, thisCap(), capnp::clone(metadata), params.getContext(), kj::mv(requestBody),
+          factory, thisCap(), shark::clone(metadata), params.getContext(), kj::mv(requestBody),
           *inner));
 
       return kj::READY_NOW;
@@ -920,7 +920,7 @@ public:
     pb.setUp(kj::cp(up));
 
     context.setPipeline(pb.build());
-    context.initResults(capnp::MessageSize { 4, 1 }).setUp(kj::mv(up));
+    context.initResults(shark::MessageSize { 4, 1 }).setUp(kj::mv(up));
 
     auto response = kj::heap<HttpOverCapnpConnectResponseImpl>(
         factory, context.getParams().getContext());
@@ -935,7 +935,7 @@ private:
   kj::Own<kj::HttpService> inner;
 };
 
-capnp::HttpService::Client HttpOverCapnpFactory::kjToCapnp(kj::Own<kj::HttpService> service) {
+shark::HttpService::Client HttpOverCapnpFactory::kjToCapnp(kj::Own<kj::HttpService> service) {
   return kj::heap<CapnpToKjHttpServiceAdapter>(*this, kj::mv(service));
 }
 
@@ -947,7 +947,7 @@ static constexpr uint64_t COMMON_TEXT_ANNOTATION = 0x857745131db6fc83ull;
 
 HttpOverCapnpFactory::HeaderIdBundle::HeaderIdBundle(kj::HttpHeaderTable::Builder& builder)
     : table(builder.getFutureTable()) {
-  auto commonHeaderNames = Schema::from<capnp::CommonHeaderName>().getEnumerants();
+  auto commonHeaderNames = Schema::from<shark::CommonHeaderName>().getEnumerants();
   nameCapnpToKj = kj::heapArray<kj::HttpHeaderId>(commonHeaderNames.size());
   for (size_t i = 1; i < commonHeaderNames.size(); i++) {
     kj::StringPtr nameText;
@@ -978,17 +978,17 @@ HttpOverCapnpFactory::HttpOverCapnpFactory(ByteStreamFactory& streamFactory,
     : streamFactory(streamFactory), headerTable(headerIds.table),
       peerOptimizationLevel(peerOptimizationLevel),
       nameCapnpToKj(kj::mv(headerIds.nameCapnpToKj)) {
-  auto commonHeaderNames = Schema::from<capnp::CommonHeaderName>().getEnumerants();
-  nameKjToCapnp = kj::heapArray<capnp::CommonHeaderName>(headerIds.maxHeaderId + 1);
-  for (auto& slot: nameKjToCapnp) slot = capnp::CommonHeaderName::INVALID;
+  auto commonHeaderNames = Schema::from<shark::CommonHeaderName>().getEnumerants();
+  nameKjToCapnp = kj::heapArray<shark::CommonHeaderName>(headerIds.maxHeaderId + 1);
+  for (auto& slot: nameKjToCapnp) slot = shark::CommonHeaderName::INVALID;
 
   for (size_t i = 1; i < commonHeaderNames.size(); i++) {
     auto& slot = nameKjToCapnp[nameCapnpToKj[i].hashCode()];
-    KJ_ASSERT(slot == capnp::CommonHeaderName::INVALID);
-    slot = static_cast<capnp::CommonHeaderName>(i);
+    KJ_ASSERT(slot == shark::CommonHeaderName::INVALID);
+    slot = static_cast<shark::CommonHeaderName>(i);
   }
 
-  auto commonHeaderValues = Schema::from<capnp::CommonHeaderValue>().getEnumerants();
+  auto commonHeaderValues = Schema::from<shark::CommonHeaderValue>().getEnumerants();
   valueCapnpToKj = kj::heapArray<kj::StringPtr>(commonHeaderValues.size());
   for (size_t i = 1; i < commonHeaderValues.size(); i++) {
     kj::StringPtr valueText;
@@ -1000,20 +1000,20 @@ HttpOverCapnpFactory::HttpOverCapnpFactory(ByteStreamFactory& streamFactory,
     }
     KJ_ASSERT(valueText != nullptr);
     valueCapnpToKj[i] = valueText;
-    valueKjToCapnp.insert(valueText, static_cast<capnp::CommonHeaderValue>(i));
+    valueKjToCapnp.insert(valueText, static_cast<shark::CommonHeaderValue>(i));
   }
 }
 
-Orphan<List<capnp::HttpHeader>> HttpOverCapnpFactory::headersToCapnp(
+Orphan<List<shark::HttpHeader>> HttpOverCapnpFactory::headersToCapnp(
     const kj::HttpHeaders& headers, Orphanage orphanage) {
-  auto result = orphanage.newOrphan<List<capnp::HttpHeader>>(headers.size());
+  auto result = orphanage.newOrphan<List<shark::HttpHeader>>(headers.size());
   auto rpcHeaders = result.get();
   uint i = 0;
   headers.forEach([&](kj::HttpHeaderId id, kj::StringPtr value) {
     auto capnpName = id.hashCode() < nameKjToCapnp.size()
         ? nameKjToCapnp[id.hashCode()]
-        : capnp::CommonHeaderName::INVALID;
-    if (capnpName == capnp::CommonHeaderName::INVALID) {
+        : shark::CommonHeaderName::INVALID;
+    if (capnpName == shark::CommonHeaderName::INVALID) {
       auto header = rpcHeaders[i++].initUncommon();
       header.setName(id.toString());
       header.setValue(value);
@@ -1032,25 +1032,25 @@ Orphan<List<capnp::HttpHeader>> HttpOverCapnpFactory::headersToCapnp(
 }
 
 kj::HttpHeaders HttpOverCapnpFactory::headersToKj(
-    List<capnp::HttpHeader>::Reader capnpHeaders) const {
+    List<shark::HttpHeader>::Reader capnpHeaders) const {
   kj::HttpHeaders result(headerTable);
 
   for (auto header: capnpHeaders) {
     switch (header.which()) {
-      case capnp::HttpHeader::COMMON: {
+      case shark::HttpHeader::COMMON: {
         auto nv = header.getCommon();
         auto nameInt = static_cast<uint>(nv.getName());
         KJ_REQUIRE(nameInt < nameCapnpToKj.size(), "unknown common header name", nv.getName());
 
         switch (nv.which()) {
-          case capnp::HttpHeader::Common::COMMON_VALUE: {
+          case shark::HttpHeader::Common::COMMON_VALUE: {
             auto cvInt = static_cast<uint>(nv.getCommonValue());
             KJ_REQUIRE(nameInt < valueCapnpToKj.size(),
                 "unknown common header value", nv.getCommonValue());
             result.set(nameCapnpToKj[nameInt], valueCapnpToKj[cvInt]);
             break;
           }
-          case capnp::HttpHeader::Common::VALUE: {
+          case shark::HttpHeader::Common::VALUE: {
             auto headerId = nameCapnpToKj[nameInt];
             if (result.get(headerId) == nullptr) {
               result.set(headerId, nv.getValue());
@@ -1065,7 +1065,7 @@ kj::HttpHeaders HttpOverCapnpFactory::headersToKj(
         }
         break;
       }
-      case capnp::HttpHeader::UNCOMMON: {
+      case shark::HttpHeader::UNCOMMON: {
         auto nv = header.getUncommon();
         result.add(nv.getName(), nv.getValue());
       }
@@ -1075,4 +1075,4 @@ kj::HttpHeaders HttpOverCapnpFactory::headersToKj(
   return result;
 }
 
-}  // namespace capnp
+}  // namespace shark

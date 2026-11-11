@@ -22,7 +22,7 @@
 #include "membrane.h"
 #include <shark/base/debug.h>
 
-namespace capnp {
+namespace shark {
 
 namespace {
 
@@ -613,5 +613,5 @@ _::OrphanBuilder copyOutOfMembrane(ListReader from, Orphanage to,
 
 }  // namespace _ (private)
 
-}  // namespace capnp
+}  // namespace shark
 

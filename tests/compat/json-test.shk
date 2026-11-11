@@ -23,7 +23,7 @@
 
 using Json = import "/shark/format/json/json.shk";
 
-$import "/shark/c++.shk".namespace("capnp");
+$import "/shark/c++.shk".namespace("shark");
 
 struct TestJsonAnnotations {
   someField @0 :Text $Json.name("names-can_contain!anything Really");

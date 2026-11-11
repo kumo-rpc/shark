@@ -24,7 +24,7 @@
 #include <shark/base/debug.h>
 #include <shark/base/io.h>
 
-namespace capnp {
+namespace shark {
 
 TwoPartyVatNetwork::TwoPartyVatNetwork(
     kj::OneOf<MessageStream*, kj::Own<MessageStream>>&& stream,
@@ -50,13 +50,13 @@ TwoPartyVatNetwork::TwoPartyVatNetwork(
   disconnectFulfiller.fulfiller = kj::mv(paf.fulfiller);
 }
 
-TwoPartyVatNetwork::TwoPartyVatNetwork(capnp::MessageStream& stream,
+TwoPartyVatNetwork::TwoPartyVatNetwork(shark::MessageStream& stream,
                    rpc::twoparty::Side side, ReaderOptions receiveOptions,
                    const kj::MonotonicClock& clock)
   : TwoPartyVatNetwork(stream, 0, side, receiveOptions, clock) {}
 
 TwoPartyVatNetwork::TwoPartyVatNetwork(
-    capnp::MessageStream& stream,
+    shark::MessageStream& stream,
     uint maxFdsPerMessage,
     rpc::twoparty::Side side,
     ReaderOptions receiveOptions,
@@ -460,9 +460,9 @@ TwoPartyClient::TwoPartyClient(kj::AsyncCapabilityStream& connection, uint maxFd
       rpcSystem(network, bootstrapInterface) {}
 
 Capability::Client TwoPartyClient::bootstrap() {
-  capnp::word scratch[4];
+  shark::word scratch[4];
   memset(&scratch, 0, sizeof(scratch));
-  capnp::MallocMessageBuilder message(scratch);
+  shark::MallocMessageBuilder message(scratch);
   auto vatId = message.getRoot<rpc::twoparty::VatId>();
   vatId.setSide(network.getSide() == rpc::twoparty::Side::CLIENT
                 ? rpc::twoparty::Side::SERVER
@@ -474,4 +474,4 @@ void TwoPartyClient::setTraceEncoder(kj::Function<kj::String(const kj::Exception
   rpcSystem.setTraceEncoder(kj::mv(func));
 }
 
-}  // namespace capnp
+}  // namespace shark

@@ -24,7 +24,7 @@
 #include <shark/base/vector.h>
 #include <shark/base/encoding.h>
 
-namespace capnp {
+namespace shark {
 
 namespace {
 
@@ -266,4 +266,4 @@ kj::String enumString(uint16_t value, const RawBrandedSchema& schema) {
 
 }  // namespace _ (private)
 
-}  // namespace capnp
+}  // namespace shark

@@ -22,7 +22,7 @@
 using Cxx = import "/shark/c++.shk";
 
 @0xa93fc509624c72d9;
-$Cxx.namespace("capnp::schema");
+$Cxx.namespace("shark::schema");
 
 using Id = UInt64;
 # The globally-unique ID of a file, type, or annotation.

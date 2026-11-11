@@ -29,7 +29,7 @@
 #include "../shark/endian.h"
 #include <tests/base/compat/gtest.h>
 
-namespace capnp {
+namespace shark {
 namespace _ {  // private
 namespace {
 
@@ -107,6 +107,6 @@ TEST(EndianReverse, EightBytes) {
 
 }  // namespace
 }  // namespace _ (private)
-}  // namespace capnp
+}  // namespace shark
 
 #endif  // !_MSC_VER
