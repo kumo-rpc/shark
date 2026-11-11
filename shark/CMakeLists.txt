@@ -166,7 +166,7 @@ kmcmake_cc_binary(
         NAMESPACE shark
         SOURCES
         compiler/module-loader.cc
-        compiler/capnp.cc
+        compiler/shark.cc
         CXXOPTS
         ${KMCMAKE_CXX_OPTIONS}
         LINKS
@@ -182,7 +182,7 @@ kmcmake_cc_binary(
         NAME shark-cpp
         NAMESPACE shark
         SOURCES
-        compiler/capnpc-c++.cc
+        compiler/sharkc-cpp.cc
         CXXOPTS
         ${KMCMAKE_CXX_OPTIONS}
         LINKS
@@ -196,7 +196,7 @@ kmcmake_cc_binary(
         NAME shark-shark
         NAMESPACE shark
         SOURCES
-        compiler/capnpc-capnp.cc
+        compiler/sharkc-shark.cc
         CXXOPTS
         ${KMCMAKE_CXX_OPTIONS}
         LINKS
