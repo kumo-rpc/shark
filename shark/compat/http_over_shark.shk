@@ -24,7 +24,7 @@
 
 using import "byte-stream.shk".ByteStream;
 
-using Cxx = import "/shark/c++.shk";
+using Cxx = import "/shark/cpp.shk";
 $Cxx.namespace("shark");
 $Cxx.allowCancellation;
 

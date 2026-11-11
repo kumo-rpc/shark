@@ -14,7 +14,7 @@ if [[ ! -f shark/schema.shk ]]; then
 fi
 
 runtime_protos=(
-  shark/c++.shk
+  shark/cpp.shk
   shark/schema.shk
   shark/stream.shk
   shark/format/json/json.shk

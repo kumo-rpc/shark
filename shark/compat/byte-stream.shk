@@ -1,6 +1,6 @@
 @0x8f5d14e1c273738d;
 
-using Cxx = import "/shark/c++.shk";
+using Cxx = import "/shark/cpp.shk";
 $Cxx.namespace("shark");
 $Cxx.allowCancellation;
 

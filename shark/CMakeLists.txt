@@ -84,7 +84,7 @@ kmcmake_cc_library(
 
 set(LIB_SRCS
         capability.cc
-        c++.sk.cc
+        cpp.sk.cc
         blob.cc
         arena.cc
         layout.cc

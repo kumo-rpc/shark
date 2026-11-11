@@ -495,7 +495,7 @@ public:
     // for ensuring that cancellation is prevented and that `context` remains valid until the
     // call completes normally.
     //
-    // See the `allowCancellation` annotation defined in `c++.shk`.
+    // See the `allowCancellation` annotation defined in `cpp.shk`.
   };
 
   virtual DispatchCallResult dispatchCall(uint64_t interfaceId, uint16_t methodId,

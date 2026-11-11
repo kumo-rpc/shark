@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-using Cxx = import "/shark/c++.shk";
+using Cxx = import "/shark/cpp.shk";
 
 @0x82beb8e37ff79aba;
 $Cxx.namespace("shark::benchmark::shark");

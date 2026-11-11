@@ -26,7 +26,7 @@
 # convenient than defining data classes in C++, particularly where variant types (unions) are
 # needed.  Over time, this file may change in backwards-incompatible ways.
 
-using Cxx = import "/shark/c++.shk";
+using Cxx = import "/shark/cpp.shk";
 
 $Cxx.namespace("shark::compiler");
 

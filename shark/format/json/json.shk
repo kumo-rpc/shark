@@ -21,7 +21,7 @@
 
 @0x8ef99297a43a5e34;
 
-$import "/shark/c++.shk".namespace("shark::json");
+$import "/shark/cpp.shk".namespace("shark::json");
 
 struct Value {
   union {

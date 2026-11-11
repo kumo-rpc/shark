@@ -136,7 +136,7 @@ namespace shark {
                 // Only parse the schemas we actually need for decoding.
                 compileEagerness = Compiler::NODE;
 
-                // Drop annotations since we don't need them.  This avoids importing files like c++.shk.
+                // Drop annotations since we don't need them.  This avoids importing files like cpp.shk.
                 annotationFlag = Compiler::DROP_ANNOTATIONS;
 
                 kj::MainBuilder builder(context, VERSION_STRING,
@@ -177,7 +177,7 @@ namespace shark {
                 // Only parse the schemas we actually need for decoding.
                 compileEagerness = Compiler::NODE;
 
-                // Drop annotations since we don't need them.  This avoids importing files like c++.shk.
+                // Drop annotations since we don't need them.  This avoids importing files like cpp.shk.
                 annotationFlag = Compiler::DROP_ANNOTATIONS;
 
                 kj::MainBuilder builder(context, VERSION_STRING,
@@ -211,7 +211,7 @@ namespace shark {
                 // Only parse the schemas we actually need for decoding.
                 compileEagerness = Compiler::NODE;
 
-                // Drop annotations since we don't need them.  This avoids importing files like c++.shk.
+                // Drop annotations since we don't need them.  This avoids importing files like cpp.shk.
                 annotationFlag = Compiler::DROP_ANNOTATIONS;
 
                 kj::MainBuilder builder(context, VERSION_STRING,
@@ -250,7 +250,7 @@ namespace shark {
                 // Only parse the schemas we actually need for decoding.
                 compileEagerness = Compiler::NODE;
 
-                // Drop annotations since we don't need them.  This avoids importing files like c++.shk.
+                // Drop annotations since we don't need them.  This avoids importing files like cpp.shk.
                 annotationFlag = Compiler::DROP_ANNOTATIONS;
 
                 // Default convert to text unless -o is given.
@@ -776,7 +776,7 @@ namespace shark {
                     if (convertFrom == Format::JSON || convertTo == Format::JSON) {
                         // We need annotations to process JSON.
                         // TODO(someday): Find a way that we can process annotations from json.shk without
-                        //   requiring other annotation-only imports like c++.shk
+                        //   requiring other annotation-only imports like cpp.shk
                         annotationFlag = Compiler::COMPILE_ANNOTATIONS;
                     }
 

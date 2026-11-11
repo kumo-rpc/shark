@@ -21,7 +21,7 @@
 
 @0x9eb32e19f86ee174;
 
-using Cxx = import "/shark/c++.shk";
+using Cxx = import "/shark/cpp.shk";
 $Cxx.namespace("addressbook");
 
 struct Person {

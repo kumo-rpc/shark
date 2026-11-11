@@ -109,7 +109,7 @@
 # bother implementing any other vat network protocol -- just use the correct container type and get
 # it for free.
 
-using Cxx = import "/shark/c++.shk";
+using Cxx = import "/shark/cpp.shk";
 $Cxx.namespace("shark::rpc");
 
 # ========================================================================================
@@ -600,7 +600,7 @@ struct Finish {
   # If true, if the RPC system receives this Finish message before the original call has even been
   # delivered, it should defer cancellation util after delivery. In particular, this gives the
   # destination object a chance to opt out of cancellation, e.g. as controlled by the
-  # `allowCancellation` annotation defined in `c++.shk`.
+  # `allowCancellation` annotation defined in `cpp.shk`.
   #
   # This is a work-around. Versions 1.0 and up of Cap'n Proto always set this to false. However,
   # older versions of Cap'n Proto unintentionally exhibited this errant behavior by default, and

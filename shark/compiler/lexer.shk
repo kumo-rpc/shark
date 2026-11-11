@@ -21,7 +21,7 @@
 
 @0xa73956d2621fc3ee;
 
-using Cxx = import "/shark/c++.shk";
+using Cxx = import "/shark/cpp.shk";
 
 $Cxx.namespace("shark::compiler");
 
