@@ -6,19 +6,19 @@
 #include <shark/generated-header-support.h>
 #include <shark/base/windows-sanity.h>
 
-#ifndef CAPNP_VERSION
-#error "CAPNP_VERSION is not defined, is capnp/generated-header-support.h missing?"
-#elif CAPNP_VERSION != 1005000
+#ifndef SHARK_VERSION
+#error "SHARK_VERSION is not defined, is capnp/generated-header-support.h missing?"
+#elif SHARK_VERSION != 1005000
 #error "Version mismatch between generated code and library headers.  You must use the same version of the Cap'n Proto compiler and library."
 #endif
 
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 namespace schemas {
 
-CAPNP_DECLARE_SCHEMA(995f9a3377c0b16e);
+SHARK_DECLARE_SCHEMA(995f9a3377c0b16e);
 
 }  // namespace schemas
 }  // namespace capnp
@@ -33,10 +33,10 @@ struct StreamResult {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(995f9a3377c0b16e, 0, 0)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(995f9a3377c0b16e, 0, 0)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -53,11 +53,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 private:
   ::capnp::_::StructReader _reader;
@@ -83,9 +83,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -96,7 +96,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class StreamResult::Pipeline {
 public:
   typedef StreamResult Pipelines;
@@ -111,11 +111,11 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 // =======================================================================================
 
 }  // namespace
 
-CAPNP_END_HEADER
+SHARK_END_HEADER
 

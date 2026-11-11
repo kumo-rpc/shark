@@ -26,7 +26,7 @@
 #include "common.h"
 #include <string.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -218,4 +218,4 @@ inline kj::ArrayPtr<char> Text::Builder::slice(size_t start, size_t end) {
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

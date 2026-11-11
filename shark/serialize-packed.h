@@ -23,7 +23,7 @@
 
 #include "serialize.h"
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -125,4 +125,4 @@ inline void writePackedMessageToFd(int fd, MessageBuilder& builder) {
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

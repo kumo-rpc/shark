@@ -853,7 +853,7 @@ KJ_TEST("DiskDirectory replace file with directory") {
   KJ_EXPECT(dir->openFile(Path({"foo", "bar"}))->readAllText() == "bazqux");
 }
 
-#if !defined(HOLES_NOT_SUPPORTED) && (CAPNP_DEBUG_TYPES || CAPNP_EXPENSIVE_TESTS)
+#if !defined(HOLES_NOT_SUPPORTED) && (SHARK_DEBUG_TYPES || SHARK_EXPENSIVE_TESTS)
 // Not all filesystems support sparse files, and if they do, they don't necessarily support
 // copying them in a way that preserves holes. We don't want the capnp test suite to fail just
 // because it was run on the wrong filesystem. We could design the test to check first if the

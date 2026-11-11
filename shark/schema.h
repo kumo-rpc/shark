@@ -21,7 +21,7 @@
 
 #pragma once
 
-#if CAPNP_LITE
+#if SHARK_LITE
 #error "Reflection APIs, including this header, are not available in lite mode."
 #endif
 
@@ -40,7 +40,7 @@
 #include <shark/base/hash.h>
 #include <shark/base/windows-sanity.h>  // work-around macro conflict with `VOID`
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -92,7 +92,7 @@ public:
   // Get the encoded schema node content as a single message segment.  It is safe to read as an
   // unchecked message.
 
-  Schema getDependency(uint64_t id) const CAPNP_DEPRECATED("Does not handle generics correctly.");
+  Schema getDependency(uint64_t id) const SHARK_DEPRECATED("Does not handle generics correctly.");
   // DEPRECATED: This method cannot correctly account for generic type parameter bindings that
   //   may apply to the dependency. Instead of using this method, use a method of the Schema API
   //   that corresponds to the exact kind of dependency. For example, to get a field type, use
@@ -753,7 +753,7 @@ public:
   // Construct the schema for a list of the given type.
 
   static ListSchema of(schema::Type::Reader elementType, Schema context)
-      CAPNP_DEPRECATED("Does not handle generics correctly.");
+      SHARK_DEPRECATED("Does not handle generics correctly.");
   // DEPRECATED: This method cannot correctly account for generic type parameter bindings that
   //   may apply to the input type. Instead of using this method, use a method of the Schema API
   //   that corresponds to the exact kind of dependency. For example, to get a field type, use
@@ -1016,4 +1016,4 @@ inline Type Type::wrapInList(uint depth) const {
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

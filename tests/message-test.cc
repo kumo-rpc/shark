@@ -176,7 +176,7 @@ KJ_TEST("clone()") {
   checkTestMessage(*copy);
 }
 
-#if !CAPNP_ALLOW_UNALIGNED
+#if !SHARK_ALLOW_UNALIGNED
 KJ_TEST("disallow unaligned") {
   union {
     char buffer[16];

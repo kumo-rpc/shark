@@ -23,13 +23,13 @@
 
 #include <shark/base/debug.h>
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 #include  <shark/capability.h>
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 namespace capnp {
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 kj::Own<ClientHook> PipelineHook::getPipelinedCap(kj::Array<PipelineOp>&& ops) {
   return getPipelinedCap(ops.asPtr());
@@ -77,7 +77,7 @@ kj::Own<ClientHook> AnyPointer::Pipeline::asCap() {
   return hook->getPipelinedCap(ops);
 }
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 Equality AnyStruct::Reader::equals(AnyStruct::Reader right) const {
   auto dataL = getDataSection();

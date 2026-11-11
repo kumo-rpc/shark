@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#define CAPNP_PRIVATE
+#define SHARK_PRIVATE
 #include "arena.h"
 #include "message.h"
 #include <shark/base/debug.h>
@@ -29,9 +29,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 #include <shark/capability.h>
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 namespace capnp {
 namespace _ {  // private
@@ -72,7 +72,7 @@ static SegmentWordCount verifySegmentSize(size_t size) {
 }
 
 static SegmentWordCount verifySegment(kj::ArrayPtr<const word> segment) {
-#if !CAPNP_ALLOW_UNALIGNED
+#if !SHARK_ALLOW_UNALIGNED
   KJ_REQUIRE(reinterpret_cast<uintptr_t>(segment.begin()) % sizeof(void*) == 0,
       "Detected unaligned data in Cap'n Proto message. Messages must be aligned to the "
       "architecture's word size. Yes, even on x86: Unaligned access is undefined behavior "
@@ -80,7 +80,7 @@ static SegmentWordCount verifySegment(kj::ArrayPtr<const word> segment) {
       "purpose of optimizations. Unaligned access may lead to crashes or subtle corruption. "
       "For example, GCC will use SIMD instructions in optimizations, and those instrsuctions "
       "require alignment. If you really insist on taking your changes with unaligned data, "
-      "compile the Cap'n Proto library with -DCAPNP_ALLOW_UNALIGNED to remove this check.") {
+      "compile the Cap'n Proto library with -DSHARK_ALLOW_UNALIGNED to remove this check.") {
     break;
   }
 #endif
@@ -356,7 +356,7 @@ void BuilderArena::reportReadLimitReached() {
 }
 
 kj::Maybe<kj::Own<ClientHook>> BuilderArena::LocalCapTable::extractCap(uint index) {
-#if CAPNP_LITE
+#if SHARK_LITE
   KJ_UNIMPLEMENTED("no cap tables in lite mode");
 #else
   if (index < capTable.size()) {
@@ -368,7 +368,7 @@ kj::Maybe<kj::Own<ClientHook>> BuilderArena::LocalCapTable::extractCap(uint inde
 }
 
 uint BuilderArena::LocalCapTable::injectCap(kj::Own<ClientHook>&& cap) {
-#if CAPNP_LITE
+#if SHARK_LITE
   KJ_UNIMPLEMENTED("no cap tables in lite mode");
 #else
   uint result = capTable.size();
@@ -378,7 +378,7 @@ uint BuilderArena::LocalCapTable::injectCap(kj::Own<ClientHook>&& cap) {
 }
 
 void BuilderArena::LocalCapTable::dropCap(uint index) {
-#if CAPNP_LITE
+#if SHARK_LITE
   KJ_UNIMPLEMENTED("no cap tables in lite mode");
 #else
   KJ_ASSERT(index < capTable.size(), "Invalid capability descriptor in message.") {

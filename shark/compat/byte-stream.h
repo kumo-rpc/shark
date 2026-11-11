@@ -26,7 +26,7 @@
 #include <shark/base/async-io.h>
 #include <shark/base/compat/http.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -72,4 +72,4 @@ private:
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

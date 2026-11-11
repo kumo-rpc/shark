@@ -21,7 +21,7 @@
 
 #pragma once
 
-#if defined(__GNUC__) && !defined(CAPNP_HEADER_WARNINGS)
+#if defined(__GNUC__) && !defined(SHARK_HEADER_WARNINGS)
 #pragma GCC system_header
 #endif
 

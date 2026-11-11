@@ -82,7 +82,7 @@ struct TestResult {
 };
 
 enum class Product {
-  CAPNPROTO,
+  SHARKROTO,
   PROTOBUF,
   NULLCASE
 };
@@ -132,7 +132,7 @@ TestResult runTest(Product product, TestCase testCase, Mode mode, Reuse reuse,
   string progName;
 
   switch (product) {
-    case Product::CAPNPROTO:
+    case Product::SHARKROTO:
       progName = "capnproto-";
       break;
     case Product::PROTOBUF:
@@ -473,9 +473,9 @@ int main(int argc, char* argv[]) {
   reportResults("Protobuf pass-by-object", iters, protobufBase);
 
   TestResult capnpBase = runTest(
-      Product::CAPNPROTO, testCase, Mode::OBJECTS, Reuse::YES, compression, iters);
+      Product::SHARKROTO, testCase, Mode::OBJECTS, Reuse::YES, compression, iters);
   capnpBase.objectSize = runTest(
-      Product::CAPNPROTO, testCase, Mode::OBJECT_SIZE, Reuse::YES, compression, iters).objectSize;
+      Product::SHARKROTO, testCase, Mode::OBJECT_SIZE, Reuse::YES, compression, iters).objectSize;
   reportResults("Cap'n Proto pass-by-object", iters, capnpBase);
 
   TestResult nullCaseNoReuse = runTest(
@@ -489,9 +489,9 @@ int main(int argc, char* argv[]) {
   reportResults("Protobuf w/o object reuse", iters, protobufNoReuse);
 
   TestResult capnpNoReuse = runTest(
-      Product::CAPNPROTO, testCase, Mode::OBJECTS, Reuse::NO, compression, iters);
+      Product::SHARKROTO, testCase, Mode::OBJECTS, Reuse::NO, compression, iters);
   capnpNoReuse.objectSize = runTest(
-      Product::CAPNPROTO, testCase, Mode::OBJECT_SIZE, Reuse::NO, compression, iters).objectSize;
+      Product::SHARKROTO, testCase, Mode::OBJECT_SIZE, Reuse::NO, compression, iters).objectSize;
   reportResults("Cap'n Proto w/o object reuse", iters, capnpNoReuse);
 
   TestResult protobuf = runTest(
@@ -499,12 +499,12 @@ int main(int argc, char* argv[]) {
   protobuf.objectSize = protobufBase.objectSize;
   reportResults("Protobuf I/O", iters, protobuf);
 
-  TestResult capnp = runTest(
-      Product::CAPNPROTO, testCase, mode, Reuse::YES, compression, iters);
-  capnp.objectSize = capnpBase.objectSize;
-  reportResults("Cap'n Proto I/O", iters, capnp);
+  TestResult sk = runTest(
+      Product::SHARKROTO, testCase, mode, Reuse::YES, compression, iters);
+  sk.objectSize = capnpBase.objectSize;
+  reportResults("Cap'n Proto I/O", iters, sk);
   TestResult capnpPacked = runTest(
-      Product::CAPNPROTO, testCase, mode, Reuse::YES, Compression::PACKED, iters);
+      Product::SHARKROTO, testCase, mode, Reuse::YES, Compression::PACKED, iters);
   capnpPacked.objectSize = capnpBase.objectSize;
   reportResults("Cap'n Proto packed I/O", iters, capnpPacked);
 
@@ -512,7 +512,7 @@ int main(int argc, char* argv[]) {
   size_t capnpBinarySize = fileSize("capnproto-" + std::string(testCaseName(testCase)));
   size_t protobufCodeSize = fileSize(std::string(testCaseName(testCase)) + ".pb.cc")
                           + fileSize(std::string(testCaseName(testCase)) + ".pb.h");
-  size_t capnpCodeSize = fileSize(std::string(testCaseName(testCase)) + ".capnp.c++")
+  size_t capnpCodeSize = fileSize(std::string(testCaseName(testCase)) + ".capnp.cc")
                        + fileSize(std::string(testCaseName(testCase)) + ".capnp.h");
   size_t protobufObjSize = fileSize(std::string(testCaseName(testCase)) + ".pb.o");
   size_t capnpObjSize = fileSize(std::string(testCaseName(testCase)) + ".capnp.o");
@@ -541,9 +541,9 @@ int main(int argc, char* argv[]) {
     reportResults("Old theoretical best pass-by-object", iters, nullCase);
 
     oldCapnpBase = runTest(
-        Product::CAPNPROTO, testCase, Mode::OBJECTS, Reuse::YES, compression, iters);
+        Product::SHARKROTO, testCase, Mode::OBJECTS, Reuse::YES, compression, iters);
     oldCapnpBase.objectSize = runTest(
-        Product::CAPNPROTO, testCase, Mode::OBJECT_SIZE, Reuse::YES, compression, iters)
+        Product::SHARKROTO, testCase, Mode::OBJECT_SIZE, Reuse::YES, compression, iters)
         .objectSize;
     reportResults("Old Cap'n Proto pass-by-object", iters, oldCapnpBase);
 
@@ -552,17 +552,17 @@ int main(int argc, char* argv[]) {
     reportResults("Old theoretical best w/o object reuse", iters, oldNullCaseNoReuse);
 
     oldCapnpNoReuse = runTest(
-        Product::CAPNPROTO, testCase, Mode::OBJECTS, Reuse::NO, compression, iters);
+        Product::SHARKROTO, testCase, Mode::OBJECTS, Reuse::NO, compression, iters);
     oldCapnpNoReuse.objectSize = runTest(
-        Product::CAPNPROTO, testCase, Mode::OBJECT_SIZE, Reuse::NO, compression, iters).objectSize;
+        Product::SHARKROTO, testCase, Mode::OBJECT_SIZE, Reuse::NO, compression, iters).objectSize;
     reportResults("Old Cap'n Proto w/o object reuse", iters, oldCapnpNoReuse);
 
     oldCapnp = runTest(
-        Product::CAPNPROTO, testCase, mode, Reuse::YES, compression, iters);
+        Product::SHARKROTO, testCase, mode, Reuse::YES, compression, iters);
     oldCapnp.objectSize = oldCapnpBase.objectSize;
     reportResults("Old Cap'n Proto I/O", iters, oldCapnp);
     oldCapnpPacked = runTest(
-        Product::CAPNPROTO, testCase, mode, Reuse::YES, Compression::PACKED, iters);
+        Product::SHARKROTO, testCase, mode, Reuse::YES, Compression::PACKED, iters);
     oldCapnpPacked.objectSize = oldCapnpBase.objectSize;
     reportResults("Old Cap'n Proto packed I/O", iters, oldCapnpPacked);
 

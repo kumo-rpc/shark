@@ -21,7 +21,7 @@
 
 #pragma once
 
-#if CAPNP_LITE
+#if SHARK_LITE
 #error "RPC APIs, including this header, are not available in lite mode."
 #endif
 
@@ -31,7 +31,7 @@
 #include <shark/base/async.h>
 #include <shark/base/vector.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -1288,8 +1288,8 @@ struct Orphanage::GetInnerReader<T, Kind::INTERFACE> {
   }
 };
 
-#define CAPNP_CAPABILITY_H_INCLUDED  // for testing includes in unit test
+#define SHARK_CAPABILITY_H_INCLUDED  // for testing includes in unit test
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

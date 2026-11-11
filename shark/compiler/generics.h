@@ -30,7 +30,7 @@
 #include "error-reporter.h"
 #include "resolver.h"
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 namespace compiler {
@@ -318,4 +318,4 @@ void BrandScope::compile(InitBrandFunc&& initBrand) {
 }  // namespace compiler
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

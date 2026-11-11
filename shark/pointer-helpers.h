@@ -24,7 +24,7 @@
 #include "layout.h"
 #include "list.h"
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 namespace _ {  // private
@@ -154,4 +154,4 @@ struct PointerHelpers<UncheckedMessage> {
 }  // namespace _ (private)
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

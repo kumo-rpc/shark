@@ -28,7 +28,7 @@
 #include <shark/base/windows-sanity.h>  // work-around macro conflict with `VOID`
 #include <shark/base/hash.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -126,11 +126,11 @@ struct AnyPointer {
     inline ReaderFor<T> getAs(InterfaceSchema schema) const;
     // Only valid for T = DynamicCapability.  Requires `#include <shark/dynamic.h>`.
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
     kj::Own<ClientHook> getPipelinedCap(kj::ArrayPtr<const PipelineOp> ops) const;
     // Used by RPC system to implement pipelining.  Applications generally shouldn't use this
     // directly.
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   private:
     _::PointerReader reader;
@@ -262,7 +262,7 @@ struct AnyPointer {
     friend struct _::PointerHelpers<AnyPointer>;
   };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   class Pipeline {
   public:
     typedef AnyPointer Pipelines;
@@ -284,7 +284,7 @@ struct AnyPointer {
     inline kj::Own<PipelineHook> releasePipelineHook() { return kj::mv(hook); }
     // For use by RPC implementations.
 
-    template <typename T, typename = kj::EnableIf<CAPNP_KIND(FromClient<T>) == Kind::INTERFACE>>
+    template <typename T, typename = kj::EnableIf<SHARK_KIND(FromClient<T>) == Kind::INTERFACE>>
     inline operator T() { return T(asCap()); }
 
   private:
@@ -298,7 +298,7 @@ struct AnyPointer {
     friend class PipelineHook;
     friend class AnyStruct::Pipeline;
   };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 };
 
 template <>
@@ -370,7 +370,7 @@ template <> struct AnyTypeFor_<Kind::STRUCT> { typedef AnyStruct Type; };
 template <> struct AnyTypeFor_<Kind::LIST> { typedef AnyList Type; };
 
 template <typename T>
-using AnyTypeFor = typename AnyTypeFor_<CAPNP_KIND(T)>::Type;
+using AnyTypeFor = typename AnyTypeFor_<SHARK_KIND(T)>::Type;
 
 template <typename T>
 inline ReaderFor<AnyTypeFor<FromReader<T>>> toAny(T&& value) {
@@ -460,7 +460,7 @@ public:
   Reader() = default;
   inline Reader(_::StructReader reader): _reader(reader) {}
 
-  template <typename T, typename = kj::EnableIf<CAPNP_KIND(FromReader<T>) == Kind::STRUCT>>
+  template <typename T, typename = kj::EnableIf<SHARK_KIND(FromReader<T>) == Kind::STRUCT>>
   inline Reader(T&& value)
       : _reader(_::PointerHelpers<FromReader<T>>::getInternalReader(kj::fwd<T>(value))) {}
 
@@ -509,7 +509,7 @@ public:
   inline Builder(_::StructBuilder builder): _builder(builder) {}
 
 #if !_MSC_VER || defined(__clang__) // TODO(msvc): MSVC ICEs on this. Try restoring when compiler improves.
-  template <typename T, typename = kj::EnableIf<CAPNP_KIND(FromBuilder<T>) == Kind::STRUCT>>
+  template <typename T, typename = kj::EnableIf<SHARK_KIND(FromBuilder<T>) == Kind::STRUCT>>
   inline Builder(T&& value)
       : _builder(_::PointerHelpers<FromBuilder<T>>::getInternalBuilder(kj::fwd<T>(value))) {}
 #endif
@@ -550,7 +550,7 @@ private:
   friend class CapBuilderContext;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class AnyStruct::Pipeline {
 public:
   inline Pipeline(decltype(nullptr)): typeless(nullptr) {}
@@ -569,7 +569,7 @@ public:
 private:
   AnyPointer::Pipeline typeless;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class List<AnyStruct, Kind::OTHER>::Reader {
 public:
@@ -641,7 +641,7 @@ public:
   inline Reader(_::ListReader reader): _reader(reader) {}
 
 #if !_MSC_VER || defined(__clang__) // TODO(msvc): MSVC ICEs on this. Try restoring when compiler improves.
-  template <typename T, typename = kj::EnableIf<CAPNP_KIND(FromReader<T>) == Kind::LIST>>
+  template <typename T, typename = kj::EnableIf<SHARK_KIND(FromReader<T>) == Kind::LIST>>
   inline Reader(T&& value)
       : _reader(_::PointerHelpers<FromReader<T>>::getInternalReader(kj::fwd<T>(value))) {}
 #endif
@@ -681,7 +681,7 @@ public:
   inline Builder(_::ListBuilder builder): _builder(builder) {}
 
 #if !_MSC_VER || defined(__clang__) // TODO(msvc): MSVC ICEs on this. Try restoring when compiler improves.
-  template <typename T, typename = kj::EnableIf<CAPNP_KIND(FromBuilder<T>) == Kind::LIST>>
+  template <typename T, typename = kj::EnableIf<SHARK_KIND(FromBuilder<T>) == Kind::LIST>>
   inline Builder(T&& value)
       : _builder(_::PointerHelpers<FromBuilder<T>>::getInternalBuilder(kj::fwd<T>(value))) {}
 #endif
@@ -717,7 +717,7 @@ private:
 // These relate to capabilities, but we don't declare them in capability.h because generated code
 // for structs needs to know about these, even in files that contain no interfaces.
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 struct PipelineOp {
   // Corresponds to rpc.capnp's PromisedAnswer.Op.
@@ -781,7 +781,7 @@ private:
   template <typename T> struct FromImpl;
 };
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 // =======================================================================================
 // Inline implementation details
@@ -1092,7 +1092,7 @@ struct OrphanGetImpl<AnyList, Kind::OTHER> {
 
 }  // namespace _ (private)
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 template <typename T>
 struct PipelineHook::FromImpl {
@@ -1124,8 +1124,8 @@ inline PipelineHook& PipelineHook::from(Pipeline& pipeline) {
   return FromImpl<T>::apply(pipeline);
 }
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

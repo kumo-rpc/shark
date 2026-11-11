@@ -25,7 +25,7 @@
 #include <shark/base/array.h>
 #include <shark/common.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 namespace compiler {
@@ -43,4 +43,4 @@ uint64_t generateMethodParamsId(uint64_t parentId, uint16_t methodOrdinal, bool 
 }  // namespace compiler
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

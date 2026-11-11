@@ -25,7 +25,7 @@
 #include <shark/base/memory.h>
 #include <shark/base/mutex.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -180,4 +180,4 @@ inline void SchemaLoader::loadCompiledTypeAndDependencies() {
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

@@ -1040,10 +1040,10 @@ KJ_TEST("cross-thread fulfiller multiple fulfills") {
   kj::Thread thread4(func);
 }
 
-#if CAPNP_EXPENSIVE_TESTS && !KJ_NO_EXCEPTIONS
+#if SHARK_EXPENSIVE_TESTS && !KJ_NO_EXCEPTIONS
 KJ_TEST("executeSync() called during executor shutdown doesn't hang") {
   // Exact timing is tricky. With 1000 loops the problem usually reproduces, but the test takes
-  // 10 seconds in debug mode, so we only run when CAPNP_EXPENSIVE_TESTS is set (release tests).
+  // 10 seconds in debug mode, so we only run when SHARK_EXPENSIVE_TESTS is set (release tests).
   for (size_t i = 0; i < 1000; ++i) {
     MutexGuarded<bool> setup(false);
     Own<const Executor> exec;
@@ -1075,7 +1075,7 @@ KJ_TEST("executeSync() called during executor shutdown doesn't hang") {
     })();
   }
 }
-#endif  // CAPNP_EXPENSIVE_TESTS
+#endif  // SHARK_EXPENSIVE_TESTS
 
 }  // namespace
 }  // namespace kj

@@ -6,22 +6,22 @@
 #include <shark/generated-header-support.h>
 #include <shark/base/windows-sanity.h>
 
-#ifndef CAPNP_VERSION
-#error "CAPNP_VERSION is not defined, is shark/generated-header-support.h missing?"
-#elif CAPNP_VERSION != 1005000
+#ifndef SHARK_VERSION
+#error "SHARK_VERSION is not defined, is shark/generated-header-support.h missing?"
+#elif SHARK_VERSION != 1005000
 #error "Version mismatch between generated code and library headers.  You must use the same version of the Cap'n Proto compiler and library."
 #endif
 
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 namespace schemas {
 
-CAPNP_DECLARE_SCHEMA(91cc55cd57de5419);
-CAPNP_DECLARE_SCHEMA(c6725e678d60fa37);
-CAPNP_DECLARE_SCHEMA(9e69a92512b19d18);
-CAPNP_DECLARE_SCHEMA(a11f97b9d6c73dd4);
+SHARK_DECLARE_SCHEMA(91cc55cd57de5419);
+SHARK_DECLARE_SCHEMA(c6725e678d60fa37);
+SHARK_DECLARE_SCHEMA(9e69a92512b19d18);
+SHARK_DECLARE_SCHEMA(a11f97b9d6c73dd4);
 
 }  // namespace schemas
 }  // namespace capnp
@@ -47,10 +47,10 @@ struct Token {
   };
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(91cc55cd57de5419, 3, 1)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(91cc55cd57de5419, 3, 1)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -66,10 +66,10 @@ struct Statement {
   };
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(c6725e678d60fa37, 2, 3)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(c6725e678d60fa37, 2, 3)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -81,10 +81,10 @@ struct LexedTokens {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(9e69a92512b19d18, 0, 1)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(9e69a92512b19d18, 0, 1)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -96,10 +96,10 @@ struct LexedStatements {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(a11f97b9d6c73dd4, 0, 1)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(a11f97b9d6c73dd4, 0, 1)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -116,11 +116,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isIdentifier() const;
@@ -181,9 +181,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isIdentifier();
@@ -259,7 +259,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Token::Pipeline {
 public:
   typedef Token Pipelines;
@@ -274,7 +274,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Statement::Reader {
 public:
@@ -287,11 +287,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool hasTokens() const;
@@ -335,9 +335,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which();
   inline bool hasTokens();
@@ -381,7 +381,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Statement::Pipeline {
 public:
   typedef Statement Pipelines;
@@ -396,7 +396,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class LexedTokens::Reader {
 public:
@@ -409,11 +409,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasTokens() const;
   inline  ::capnp::List< ::capnp::compiler::Token,  ::capnp::Kind::STRUCT>::Reader getTokens() const;
@@ -442,9 +442,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasTokens();
   inline  ::capnp::List< ::capnp::compiler::Token,  ::capnp::Kind::STRUCT>::Builder getTokens();
@@ -462,7 +462,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class LexedTokens::Pipeline {
 public:
   typedef LexedTokens Pipelines;
@@ -477,7 +477,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class LexedStatements::Reader {
 public:
@@ -490,11 +490,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasStatements() const;
   inline  ::capnp::List< ::capnp::compiler::Statement,  ::capnp::Kind::STRUCT>::Reader getStatements() const;
@@ -523,9 +523,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasStatements();
   inline  ::capnp::List< ::capnp::compiler::Statement,  ::capnp::Kind::STRUCT>::Builder getStatements();
@@ -543,7 +543,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class LexedStatements::Pipeline {
 public:
   typedef LexedStatements Pipelines;
@@ -558,7 +558,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 // =======================================================================================
 
@@ -1243,5 +1243,5 @@ inline ::capnp::Orphan< ::capnp::List< ::capnp::compiler::Statement,  ::capnp::K
 }  // namespace
 }  // namespace
 
-CAPNP_END_HEADER
+SHARK_END_HEADER
 

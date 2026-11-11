@@ -25,7 +25,7 @@
 
 // Test that the code for the opposite endianness of our CPU works.  E.g. on x86 this will test
 // the bswap-based code.
-#define CAPNP_REVERSE_ENDIAN 1
+#define SHARK_REVERSE_ENDIAN 1
 #include "../shark/endian.h"
 #include <tests/base/compat/gtest.h>
 

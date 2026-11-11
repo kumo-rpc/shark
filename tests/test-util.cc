@@ -121,7 +121,7 @@ void genericInitTestMessage(Builder builder) {
   builder.setEnumList({TestEnum::FOO, TestEnum::GARPLY});
 }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 void dynamicInitTestMessage(DynamicStruct::Builder builder) {
   builder.set("voidField", VOID);
@@ -209,7 +209,7 @@ void dynamicInitTestMessage(DynamicStruct::Builder builder) {
   builder.set("enumList", {"foo", "garply"});
 }
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 inline bool isNaN(float f) { return f != f; }
 inline bool isNaN(double f) { return f != f; }
@@ -317,7 +317,7 @@ void genericCheckTestMessage(Reader reader) {
   checkList(reader.getEnumList(), {TestEnum::FOO, TestEnum::GARPLY});
 }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 // Hack because as<>() is a template-parameter-dependent lookup everywhere below...
 #define as template as
@@ -445,7 +445,7 @@ void dynamicCheckTestMessage(Reader reader) {
 
 #undef as
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 template <typename Reader>
 void genericCheckTestMessageAllZero(Reader reader) {
@@ -519,7 +519,7 @@ void genericCheckTestMessageAllZero(Reader reader) {
   EXPECT_EQ(0u, reader.getStructList().size());
 }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 // Hack because as<>() is a template-parameter-dependent lookup everywhere below...
 #define as template as
@@ -599,7 +599,7 @@ void dynamicCheckTestMessageAllZero(Reader reader) {
 
 #undef as
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 template <typename Builder>
 void genericInitListDefaults(Builder builder) {
@@ -654,7 +654,7 @@ void genericInitListDefaults(Builder builder) {
   }
 }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 void dynamicInitListDefaults(DynamicStruct::Builder builder) {
   auto lists = builder.init("lists").as<DynamicStruct>();
@@ -708,7 +708,7 @@ void dynamicInitListDefaults(DynamicStruct::Builder builder) {
   }
 }
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 template <typename Reader>
 void genericCheckListDefaults(Reader reader) {
@@ -768,7 +768,7 @@ void genericCheckListDefaults(Reader reader) {
   }
 }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 // Hack because as<>() is a template-parameter-dependent lookup everywhere below...
 #define as template as
@@ -833,7 +833,7 @@ void dynamicCheckListDefaults(Reader reader) {
 
 #undef as
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 }  // namespace
 
@@ -856,7 +856,7 @@ void checkTestMessageAllZero(TestAllTypes::Reader reader) {
   genericCheckTestMessageAllZero(reader);
 }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 void initDynamicTestMessage(DynamicStruct::Builder builder) {
   dynamicInitTestMessage(builder);
@@ -883,12 +883,12 @@ void checkDynamicTestMessageAllZero(DynamicStruct::Reader reader) {
   dynamicCheckTestMessageAllZero(reader);
 }
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 // =======================================================================================
 // Interface implementations.
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 TestInterfaceImpl::TestInterfaceImpl(int& callCount): callCount(callCount) {}
 
@@ -1192,7 +1192,7 @@ kj::Promise<void> TestMoreStuffImpl::throwRemoteException(ThrowRemoteExceptionCo
   return KJ_EXCEPTION(FAILED, "remote exception: test exception");
 }
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 }  // namespace _ (private)
 }  // namespace capnp

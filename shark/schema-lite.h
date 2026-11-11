@@ -24,7 +24,7 @@
 #include <shark/schema.capnp.h>
 #include "message.h"
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -42,4 +42,4 @@ inline schema::Node::Reader schemaProto() {
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

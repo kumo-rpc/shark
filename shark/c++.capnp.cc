@@ -29,12 +29,12 @@ static const ::capnp::_::AlignedData<21> b_b9c6f99ebf805f2c = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_b9c6f99ebf805f2c = b_b9c6f99ebf805f2c.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 const ::capnp::_::RawSchema s_b9c6f99ebf805f2c = {
   0xb9c6f99ebf805f2c, b_b9c6f99ebf805f2c.words, 21, nullptr, nullptr,
   0, 0, nullptr, nullptr, nullptr, { &s_b9c6f99ebf805f2c, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<20> b_f264a779fef191ce = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     206, 145, 241, 254, 121, 167, 100, 242,
@@ -58,12 +58,12 @@ static const ::capnp::_::AlignedData<20> b_f264a779fef191ce = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_f264a779fef191ce = b_f264a779fef191ce.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 const ::capnp::_::RawSchema s_f264a779fef191ce = {
   0xf264a779fef191ce, b_f264a779fef191ce.words, 20, nullptr, nullptr,
   0, 0, nullptr, nullptr, nullptr, { &s_f264a779fef191ce, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<22> b_ac7096ff8cfc9dce = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     206, 157, 252, 140, 255, 150, 112, 172,
@@ -89,11 +89,11 @@ static const ::capnp::_::AlignedData<22> b_ac7096ff8cfc9dce = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_ac7096ff8cfc9dce = b_ac7096ff8cfc9dce.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 const ::capnp::_::RawSchema s_ac7096ff8cfc9dce = {
   0xac7096ff8cfc9dce, b_ac7096ff8cfc9dce.words, 22, nullptr, nullptr,
   0, 0, nullptr, nullptr, nullptr, { &s_ac7096ff8cfc9dce, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 }  // namespace schemas
 }  // namespace capnp

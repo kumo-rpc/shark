@@ -113,7 +113,7 @@ void printAddressBook(int fd) {
   }
 }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 #include "addressbook.capnp.h"
 #include <shark/message.h>
@@ -262,7 +262,7 @@ void dynamicPrintMessage(int fd, StructSchema schema) {
   std::cout << std::endl;
 }
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 int main(int argc, char* argv[]) {
   if (argc != 2) {
@@ -272,7 +272,7 @@ int main(int argc, char* argv[]) {
     writeAddressBook(1);
   } else if (strcmp(argv[1], "read") == 0) {
     printAddressBook(0);
-#if !CAPNP_LITE
+#if !SHARK_LITE
   } else if (strcmp(argv[1], "dwrite") == 0) {
     StructSchema schema = Schema::from<AddressBook>();
     dynamicWriteAddressBook(1, schema);

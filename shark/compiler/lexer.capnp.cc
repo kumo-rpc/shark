@@ -203,7 +203,7 @@ static const ::capnp::_::AlignedData<195> b_91cc55cd57de5419 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_91cc55cd57de5419 = b_91cc55cd57de5419.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_91cc55cd57de5419[] = {
   &s_91cc55cd57de5419,
 };
@@ -213,7 +213,7 @@ const ::capnp::_::RawSchema s_91cc55cd57de5419 = {
   0x91cc55cd57de5419, b_91cc55cd57de5419.words, 195, d_91cc55cd57de5419, m_91cc55cd57de5419,
   1, 10, i_91cc55cd57de5419, nullptr, nullptr, { &s_91cc55cd57de5419, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<119> b_c6725e678d60fa37 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      55, 250,  96, 141, 103,  94, 114, 198,
@@ -336,7 +336,7 @@ static const ::capnp::_::AlignedData<119> b_c6725e678d60fa37 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_c6725e678d60fa37 = b_c6725e678d60fa37.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_c6725e678d60fa37[] = {
   &s_91cc55cd57de5419,
   &s_c6725e678d60fa37,
@@ -347,7 +347,7 @@ const ::capnp::_::RawSchema s_c6725e678d60fa37 = {
   0xc6725e678d60fa37, b_c6725e678d60fa37.words, 119, d_c6725e678d60fa37, m_c6725e678d60fa37,
   2, 6, i_c6725e678d60fa37, nullptr, nullptr, { &s_c6725e678d60fa37, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<38> b_9e69a92512b19d18 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      24, 157, 177,  18,  37, 169, 105, 158,
@@ -389,7 +389,7 @@ static const ::capnp::_::AlignedData<38> b_9e69a92512b19d18 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_9e69a92512b19d18 = b_9e69a92512b19d18.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_9e69a92512b19d18[] = {
   &s_91cc55cd57de5419,
 };
@@ -399,7 +399,7 @@ const ::capnp::_::RawSchema s_9e69a92512b19d18 = {
   0x9e69a92512b19d18, b_9e69a92512b19d18.words, 38, d_9e69a92512b19d18, m_9e69a92512b19d18,
   1, 1, i_9e69a92512b19d18, nullptr, nullptr, { &s_9e69a92512b19d18, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<40> b_a11f97b9d6c73dd4 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     212,  61, 199, 214, 185, 151,  31, 161,
@@ -443,7 +443,7 @@ static const ::capnp::_::AlignedData<40> b_a11f97b9d6c73dd4 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_a11f97b9d6c73dd4 = b_a11f97b9d6c73dd4.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_a11f97b9d6c73dd4[] = {
   &s_c6725e678d60fa37,
 };
@@ -453,7 +453,7 @@ const ::capnp::_::RawSchema s_a11f97b9d6c73dd4 = {
   0xa11f97b9d6c73dd4, b_a11f97b9d6c73dd4.words, 40, d_a11f97b9d6c73dd4, m_a11f97b9d6c73dd4,
   1, 1, i_a11f97b9d6c73dd4, nullptr, nullptr, { &s_a11f97b9d6c73dd4, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 }  // namespace schemas
 }  // namespace capnp
 
@@ -463,52 +463,52 @@ namespace capnp {
 namespace compiler {
 
 // Token
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Token::_capnpPrivate::dataWordSize;
 constexpr uint16_t Token::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Token::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Token::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Statement
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Statement::_capnpPrivate::dataWordSize;
 constexpr uint16_t Statement::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Statement::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Statement::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // LexedTokens
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t LexedTokens::_capnpPrivate::dataWordSize;
 constexpr uint16_t LexedTokens::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind LexedTokens::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* LexedTokens::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // LexedStatements
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t LexedStatements::_capnpPrivate::dataWordSize;
 constexpr uint16_t LexedStatements::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind LexedStatements::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* LexedStatements::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 
 }  // namespace

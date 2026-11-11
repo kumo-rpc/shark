@@ -50,7 +50,7 @@
 #include <shark/capability.h>
 #include <shark/base/map.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -296,4 +296,4 @@ Orphan<typename kj::Decay<Reader>::Reads> copyOutOfMembrane(
 
 } // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

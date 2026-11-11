@@ -27,7 +27,7 @@
 #include "persistent.capnp.h"
 #include  <shark/capability.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -104,4 +104,4 @@ private:
 }  // namespace _ (private)
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

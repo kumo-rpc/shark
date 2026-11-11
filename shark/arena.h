@@ -21,7 +21,7 @@
 
 #pragma once
 
-#ifndef CAPNP_PRIVATE
+#ifndef SHARK_PRIVATE
 #error "This header is only meant to be included by Cap'n Proto's own source code."
 #endif
 
@@ -37,13 +37,13 @@
 #include <shark/base/memory.h>
 #include <shark/capability.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class ClientHook;
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 namespace _ {  // private
 
@@ -116,7 +116,7 @@ private:
   }
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class BrokenCapFactory {
   // Callback for constructing broken caps.  We use this so that we can avoid arena.cc having a
   // link-time dependency on capability code that lives in libcapnp-rpc.
@@ -125,7 +125,7 @@ public:
   virtual kj::Own<ClientHook> newBrokenCap(kj::StringPtr description) = 0;
   virtual kj::Own<ClientHook> newNullCap() = 0;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class SegmentReader {
 public:
@@ -351,10 +351,10 @@ private:
     uint injectCap(kj::Own<ClientHook>&& cap) override;
     void dropCap(uint index) override;
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   private:
     kj::Vector<kj::Maybe<kj::Own<ClientHook>>> capTable;
-#endif // ! CAPNP_LITE
+#endif // ! SHARK_LITE
   };
 
   LocalCapTable localCapTable;
@@ -518,4 +518,4 @@ inline bool SegmentBuilder::tryExtend(word* from, word* to) {
 }  // namespace _ (private)
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

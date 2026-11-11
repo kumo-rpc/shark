@@ -6,43 +6,43 @@
 #include <shark/generated-header-support.h>
 #include <shark/base/windows-sanity.h>
 
-#ifndef CAPNP_VERSION
-#error "CAPNP_VERSION is not defined, is shark/generated-header-support.h missing?"
-#elif CAPNP_VERSION != 1005000
+#ifndef SHARK_VERSION
+#error "SHARK_VERSION is not defined, is shark/generated-header-support.h missing?"
+#elif SHARK_VERSION != 1005000
 #error "Version mismatch between generated code and library headers.  You must use the same version of the Cap'n Proto compiler and library."
 #endif
 
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 namespace schemas {
 
-CAPNP_DECLARE_SCHEMA(e75816b56529d464);
-CAPNP_DECLARE_SCHEMA(991c7a3693d62cf2);
-CAPNP_DECLARE_SCHEMA(90f2a60678fd2367);
-CAPNP_DECLARE_SCHEMA(8e207d4dfe54d0de);
-CAPNP_DECLARE_SCHEMA(c90246b71adedbaa);
-CAPNP_DECLARE_SCHEMA(aee8397040b0df7a);
-CAPNP_DECLARE_SCHEMA(aa28e1400d793359);
-CAPNP_DECLARE_SCHEMA(96efe787c17e83bb);
-CAPNP_DECLARE_SCHEMA(d5e71144af1ce175);
-CAPNP_DECLARE_SCHEMA(d00489d473826290);
-CAPNP_DECLARE_SCHEMA(fb5aeed95cdf6af9);
-CAPNP_DECLARE_SCHEMA(94099c3f9eb32d6b);
-CAPNP_DECLARE_SCHEMA(b3f66e7a79d81bcd);
-CAPNP_DECLARE_SCHEMA(fffe08a9a697d2a5);
-CAPNP_DECLARE_SCHEMA(e5104515fd88ea47);
-CAPNP_DECLARE_SCHEMA(89f0c973c103ae96);
-CAPNP_DECLARE_SCHEMA(e93164a80bfe2ccf);
-CAPNP_DECLARE_SCHEMA(b348322a8dcf0d0c);
-CAPNP_DECLARE_SCHEMA(8f2622208fb358c8);
-CAPNP_DECLARE_SCHEMA(d0d1a21de617951f);
-CAPNP_DECLARE_SCHEMA(992a90eaf30235d3);
-CAPNP_DECLARE_SCHEMA(eb971847d617c0b9);
-CAPNP_DECLARE_SCHEMA(c6238c7d62d65173);
-CAPNP_DECLARE_SCHEMA(9cb9e86e3198037f);
-CAPNP_DECLARE_SCHEMA(84e4f3f5a807605c);
+SHARK_DECLARE_SCHEMA(e75816b56529d464);
+SHARK_DECLARE_SCHEMA(991c7a3693d62cf2);
+SHARK_DECLARE_SCHEMA(90f2a60678fd2367);
+SHARK_DECLARE_SCHEMA(8e207d4dfe54d0de);
+SHARK_DECLARE_SCHEMA(c90246b71adedbaa);
+SHARK_DECLARE_SCHEMA(aee8397040b0df7a);
+SHARK_DECLARE_SCHEMA(aa28e1400d793359);
+SHARK_DECLARE_SCHEMA(96efe787c17e83bb);
+SHARK_DECLARE_SCHEMA(d5e71144af1ce175);
+SHARK_DECLARE_SCHEMA(d00489d473826290);
+SHARK_DECLARE_SCHEMA(fb5aeed95cdf6af9);
+SHARK_DECLARE_SCHEMA(94099c3f9eb32d6b);
+SHARK_DECLARE_SCHEMA(b3f66e7a79d81bcd);
+SHARK_DECLARE_SCHEMA(fffe08a9a697d2a5);
+SHARK_DECLARE_SCHEMA(e5104515fd88ea47);
+SHARK_DECLARE_SCHEMA(89f0c973c103ae96);
+SHARK_DECLARE_SCHEMA(e93164a80bfe2ccf);
+SHARK_DECLARE_SCHEMA(b348322a8dcf0d0c);
+SHARK_DECLARE_SCHEMA(8f2622208fb358c8);
+SHARK_DECLARE_SCHEMA(d0d1a21de617951f);
+SHARK_DECLARE_SCHEMA(992a90eaf30235d3);
+SHARK_DECLARE_SCHEMA(eb971847d617c0b9);
+SHARK_DECLARE_SCHEMA(c6238c7d62d65173);
+SHARK_DECLARE_SCHEMA(9cb9e86e3198037f);
+SHARK_DECLARE_SCHEMA(84e4f3f5a807605c);
 
 }  // namespace schemas
 }  // namespace capnp
@@ -58,10 +58,10 @@ struct LocatedText {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(e75816b56529d464, 1, 1)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(e75816b56529d464, 1, 1)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -73,10 +73,10 @@ struct LocatedInteger {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(991c7a3693d62cf2, 2, 0)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(991c7a3693d62cf2, 2, 0)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -88,10 +88,10 @@ struct LocatedFloat {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(90f2a60678fd2367, 2, 0)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(90f2a60678fd2367, 2, 0)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -122,10 +122,10 @@ struct Expression {
   struct Member;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(8e207d4dfe54d0de, 3, 2)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(8e207d4dfe54d0de, 3, 2)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -141,10 +141,10 @@ struct Expression::Param {
   };
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(c90246b71adedbaa, 1, 2)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(c90246b71adedbaa, 1, 2)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -156,10 +156,10 @@ struct Expression::Application {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(aee8397040b0df7a, 3, 2)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(aee8397040b0df7a, 3, 2)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -171,10 +171,10 @@ struct Expression::Member {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(aa28e1400d793359, 3, 2)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(aa28e1400d793359, 3, 2)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -233,10 +233,10 @@ struct Declaration {
   struct Annotation;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(96efe787c17e83bb, 2, 8)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(96efe787c17e83bb, 2, 8)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -248,10 +248,10 @@ struct Declaration::BrandParameter {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(d5e71144af1ce175, 1, 1)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(d5e71144af1ce175, 1, 1)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -264,10 +264,10 @@ struct Declaration::AnnotationApplication {
   struct Value;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(d00489d473826290, 1, 2)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(d00489d473826290, 1, 2)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -283,10 +283,10 @@ struct Declaration::AnnotationApplication::Value {
   };
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(fb5aeed95cdf6af9, 1, 2)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(fb5aeed95cdf6af9, 1, 2)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -303,10 +303,10 @@ struct Declaration::ParamList {
   };
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(b3f66e7a79d81bcd, 2, 1)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(b3f66e7a79d81bcd, 2, 1)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -319,10 +319,10 @@ struct Declaration::Param {
   struct DefaultValue;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(fffe08a9a697d2a5, 2, 4)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(fffe08a9a697d2a5, 2, 4)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -338,10 +338,10 @@ struct Declaration::Param::DefaultValue {
   };
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(e5104515fd88ea47, 2, 4)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(e5104515fd88ea47, 2, 4)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -358,10 +358,10 @@ struct Declaration::Id {
   };
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(89f0c973c103ae96, 2, 8)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(89f0c973c103ae96, 2, 8)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -373,10 +373,10 @@ struct Declaration::Using {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(e93164a80bfe2ccf, 2, 8)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(e93164a80bfe2ccf, 2, 8)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -388,10 +388,10 @@ struct Declaration::Const {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(b348322a8dcf0d0c, 2, 8)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(b348322a8dcf0d0c, 2, 8)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -404,10 +404,10 @@ struct Declaration::Field {
   struct DefaultValue;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(8f2622208fb358c8, 2, 8)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(8f2622208fb358c8, 2, 8)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -423,10 +423,10 @@ struct Declaration::Field::DefaultValue {
   };
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(d0d1a21de617951f, 2, 8)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(d0d1a21de617951f, 2, 8)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -438,10 +438,10 @@ struct Declaration::Interface {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(992a90eaf30235d3, 2, 8)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(992a90eaf30235d3, 2, 8)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -454,10 +454,10 @@ struct Declaration::Method {
   struct Results;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(eb971847d617c0b9, 2, 8)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(eb971847d617c0b9, 2, 8)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -473,10 +473,10 @@ struct Declaration::Method::Results {
   };
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(c6238c7d62d65173, 2, 8)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(c6238c7d62d65173, 2, 8)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -488,10 +488,10 @@ struct Declaration::Annotation {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(9cb9e86e3198037f, 2, 8)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(9cb9e86e3198037f, 2, 8)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -503,10 +503,10 @@ struct ParsedFile {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(84e4f3f5a807605c, 0, 1)
-    #if !CAPNP_LITE
+    SHARK_DECLARE_STRUCT_HEADER(84e4f3f5a807605c, 0, 1)
+    #if !SHARK_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
+    #endif  // !SHARK_LITE
   };
 };
 
@@ -523,11 +523,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasValue() const;
   inline  ::capnp::Text::Reader getValue() const;
@@ -560,9 +560,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasValue();
   inline  ::capnp::Text::Builder getValue();
@@ -586,7 +586,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class LocatedText::Pipeline {
 public:
   typedef LocatedText Pipelines;
@@ -601,7 +601,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class LocatedInteger::Reader {
 public:
@@ -614,11 +614,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline  ::uint64_t getValue() const;
 
@@ -650,9 +650,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline  ::uint64_t getValue();
   inline void setValue( ::uint64_t value);
@@ -672,7 +672,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class LocatedInteger::Pipeline {
 public:
   typedef LocatedInteger Pipelines;
@@ -687,7 +687,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class LocatedFloat::Reader {
 public:
@@ -700,11 +700,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline double getValue() const;
 
@@ -736,9 +736,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline double getValue();
   inline void setValue(double value);
@@ -758,7 +758,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class LocatedFloat::Pipeline {
 public:
   typedef LocatedFloat Pipelines;
@@ -773,7 +773,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Expression::Reader {
 public:
@@ -786,11 +786,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isUnknown() const;
@@ -871,9 +871,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isUnknown();
@@ -979,7 +979,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Expression::Pipeline {
 public:
   typedef Expression Pipelines;
@@ -994,7 +994,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Expression::Param::Reader {
 public:
@@ -1007,11 +1007,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isUnnamed() const;
@@ -1048,9 +1048,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isUnnamed();
@@ -1081,7 +1081,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Expression::Param::Pipeline {
 public:
   typedef Param Pipelines;
@@ -1097,7 +1097,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Expression::Application::Reader {
 public:
@@ -1110,11 +1110,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasFunction() const;
   inline  ::capnp::compiler::Expression::Reader getFunction() const;
@@ -1146,9 +1146,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasFunction();
   inline  ::capnp::compiler::Expression::Builder getFunction();
@@ -1173,7 +1173,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Expression::Application::Pipeline {
 public:
   typedef Application Pipelines;
@@ -1189,7 +1189,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Expression::Member::Reader {
 public:
@@ -1202,11 +1202,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasParent() const;
   inline  ::capnp::compiler::Expression::Reader getParent() const;
@@ -1238,9 +1238,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasParent();
   inline  ::capnp::compiler::Expression::Builder getParent();
@@ -1265,7 +1265,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Expression::Member::Pipeline {
 public:
   typedef Member Pipelines;
@@ -1282,7 +1282,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::Reader {
 public:
@@ -1295,11 +1295,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool hasName() const;
@@ -1451,9 +1451,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which();
   inline bool hasName();
@@ -1653,7 +1653,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::Pipeline {
 public:
   typedef Declaration Pipelines;
@@ -1670,7 +1670,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::BrandParameter::Reader {
 public:
@@ -1683,11 +1683,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasName() const;
   inline  ::capnp::Text::Reader getName() const;
@@ -1720,9 +1720,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasName();
   inline  ::capnp::Text::Builder getName();
@@ -1746,7 +1746,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::BrandParameter::Pipeline {
 public:
   typedef BrandParameter Pipelines;
@@ -1761,7 +1761,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::AnnotationApplication::Reader {
 public:
@@ -1774,11 +1774,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasName() const;
   inline  ::capnp::compiler::Expression::Reader getName() const;
@@ -1809,9 +1809,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasName();
   inline  ::capnp::compiler::Expression::Builder getName();
@@ -1832,7 +1832,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::AnnotationApplication::Pipeline {
 public:
   typedef AnnotationApplication Pipelines;
@@ -1849,7 +1849,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::AnnotationApplication::Value::Reader {
 public:
@@ -1862,11 +1862,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isNone() const;
@@ -1900,9 +1900,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isNone();
@@ -1926,7 +1926,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::AnnotationApplication::Value::Pipeline {
 public:
   typedef Value Pipelines;
@@ -1941,7 +1941,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::ParamList::Reader {
 public:
@@ -1954,11 +1954,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isNamedList() const;
@@ -2000,9 +2000,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isNamedList();
@@ -2040,7 +2040,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::ParamList::Pipeline {
 public:
   typedef ParamList Pipelines;
@@ -2055,7 +2055,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::Param::Reader {
 public:
@@ -2068,11 +2068,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasName() const;
   inline  ::capnp::compiler::LocatedText::Reader getName() const;
@@ -2113,9 +2113,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasName();
   inline  ::capnp::compiler::LocatedText::Builder getName();
@@ -2156,7 +2156,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::Param::Pipeline {
 public:
   typedef Param Pipelines;
@@ -2174,7 +2174,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::Param::DefaultValue::Reader {
 public:
@@ -2187,11 +2187,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isNone() const;
@@ -2225,9 +2225,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isNone();
@@ -2251,7 +2251,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::Param::DefaultValue::Pipeline {
 public:
   typedef DefaultValue Pipelines;
@@ -2266,7 +2266,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::Id::Reader {
 public:
@@ -2279,11 +2279,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isUnspecified() const;
@@ -2321,9 +2321,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isUnspecified();
@@ -2355,7 +2355,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::Id::Pipeline {
 public:
   typedef Id Pipelines;
@@ -2370,7 +2370,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::Using::Reader {
 public:
@@ -2383,11 +2383,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasTarget() const;
   inline  ::capnp::compiler::Expression::Reader getTarget() const;
@@ -2416,9 +2416,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasTarget();
   inline  ::capnp::compiler::Expression::Builder getTarget();
@@ -2436,7 +2436,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::Using::Pipeline {
 public:
   typedef Using Pipelines;
@@ -2452,7 +2452,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::Const::Reader {
 public:
@@ -2465,11 +2465,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasType() const;
   inline  ::capnp::compiler::Expression::Reader getType() const;
@@ -2501,9 +2501,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasType();
   inline  ::capnp::compiler::Expression::Builder getType();
@@ -2528,7 +2528,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::Const::Pipeline {
 public:
   typedef Const Pipelines;
@@ -2545,7 +2545,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::Field::Reader {
 public:
@@ -2558,11 +2558,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasType() const;
   inline  ::capnp::compiler::Expression::Reader getType() const;
@@ -2593,9 +2593,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasType();
   inline  ::capnp::compiler::Expression::Builder getType();
@@ -2616,7 +2616,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::Field::Pipeline {
 public:
   typedef Field Pipelines;
@@ -2633,7 +2633,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::Field::DefaultValue::Reader {
 public:
@@ -2646,11 +2646,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isNone() const;
@@ -2684,9 +2684,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isNone();
@@ -2710,7 +2710,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::Field::DefaultValue::Pipeline {
 public:
   typedef DefaultValue Pipelines;
@@ -2725,7 +2725,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::Interface::Reader {
 public:
@@ -2738,11 +2738,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasSuperclasses() const;
   inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Reader getSuperclasses() const;
@@ -2771,9 +2771,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasSuperclasses();
   inline  ::capnp::List< ::capnp::compiler::Expression,  ::capnp::Kind::STRUCT>::Builder getSuperclasses();
@@ -2791,7 +2791,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::Interface::Pipeline {
 public:
   typedef Interface Pipelines;
@@ -2806,7 +2806,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::Method::Reader {
 public:
@@ -2819,11 +2819,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasParams() const;
   inline  ::capnp::compiler::Declaration::ParamList::Reader getParams() const;
@@ -2854,9 +2854,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasParams();
   inline  ::capnp::compiler::Declaration::ParamList::Builder getParams();
@@ -2877,7 +2877,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::Method::Pipeline {
 public:
   typedef Method Pipelines;
@@ -2894,7 +2894,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::Method::Results::Reader {
 public:
@@ -2907,11 +2907,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which() const;
   inline bool isNone() const;
@@ -2945,9 +2945,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline Which which();
   inline bool isNone();
@@ -2971,7 +2971,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::Method::Results::Pipeline {
 public:
   typedef Results Pipelines;
@@ -2986,7 +2986,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class Declaration::Annotation::Reader {
 public:
@@ -2999,11 +2999,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasType() const;
   inline  ::capnp::compiler::Expression::Reader getType() const;
@@ -3056,9 +3056,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasType();
   inline  ::capnp::compiler::Expression::Builder getType();
@@ -3112,7 +3112,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class Declaration::Annotation::Pipeline {
 public:
   typedef Annotation Pipelines;
@@ -3128,7 +3128,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 class ParsedFile::Reader {
 public:
@@ -3141,11 +3141,11 @@ public:
     return _reader.totalSize().asPublic();
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const {
     return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
   }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasRoot() const;
   inline  ::capnp::compiler::Declaration::Reader getRoot() const;
@@ -3174,9 +3174,9 @@ public:
   inline Reader asReader() const { return *this; }
 
   inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
+#if !SHARK_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   inline bool hasRoot();
   inline  ::capnp::compiler::Declaration::Builder getRoot();
@@ -3194,7 +3194,7 @@ private:
   friend struct ::capnp::_::PointerHelpers;
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 class ParsedFile::Pipeline {
 public:
   typedef ParsedFile Pipelines;
@@ -3210,7 +3210,7 @@ private:
   template <typename, ::capnp::Kind>
   friend struct ::capnp::ToDynamic_;
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 // =======================================================================================
 
@@ -4084,11 +4084,11 @@ inline  ::capnp::compiler::Expression::Builder Expression::Param::Builder::getVa
   return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::Expression::Pipeline Expression::Param::Pipeline::getValue() {
   return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(1));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Expression::Param::Builder::setValue( ::capnp::compiler::Expression::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS), value);
@@ -4123,11 +4123,11 @@ inline  ::capnp::compiler::Expression::Builder Expression::Application::Builder:
   return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::Expression::Pipeline Expression::Application::Pipeline::getFunction() {
   return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(0));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Expression::Application::Builder::setFunction( ::capnp::compiler::Expression::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
@@ -4196,11 +4196,11 @@ inline  ::capnp::compiler::Expression::Builder Expression::Member::Builder::getP
   return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::Expression::Pipeline Expression::Member::Pipeline::getParent() {
   return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(0));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Expression::Member::Builder::setParent( ::capnp::compiler::Expression::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
@@ -4235,11 +4235,11 @@ inline  ::capnp::compiler::LocatedText::Builder Expression::Member::Builder::get
   return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::LocatedText::Pipeline Expression::Member::Pipeline::getName() {
   return  ::capnp::compiler::LocatedText::Pipeline(_typeless.getPointerField(1));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Expression::Member::Builder::setName( ::capnp::compiler::LocatedText::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::set(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS), value);
@@ -4283,11 +4283,11 @@ inline  ::capnp::compiler::LocatedText::Builder Declaration::Builder::getName() 
   return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::LocatedText::Pipeline Declaration::Pipeline::getName() {
   return  ::capnp::compiler::LocatedText::Pipeline(_typeless.getPointerField(0));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Declaration::Builder::setName( ::capnp::compiler::LocatedText::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
@@ -4312,11 +4312,11 @@ inline typename Declaration::Id::Reader Declaration::Reader::getId() const {
 inline typename Declaration::Id::Builder Declaration::Builder::getId() {
   return typename Declaration::Id::Builder(_builder);
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline typename Declaration::Id::Pipeline Declaration::Pipeline::getId() {
   return typename Declaration::Id::Pipeline(_typeless.noop());
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline typename Declaration::Id::Builder Declaration::Builder::initId() {
   _builder.setDataField< ::uint16_t>(::capnp::bounded<0>() * ::capnp::ELEMENTS, 0);
   _builder.getPointerField(::capnp::bounded<1>() * ::capnp::POINTERS).clear();
@@ -5497,11 +5497,11 @@ inline  ::capnp::compiler::Expression::Builder Declaration::AnnotationApplicatio
   return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::Expression::Pipeline Declaration::AnnotationApplication::Pipeline::getName() {
   return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(0));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Declaration::AnnotationApplication::Builder::setName( ::capnp::compiler::Expression::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
@@ -5526,11 +5526,11 @@ inline typename Declaration::AnnotationApplication::Value::Reader Declaration::A
 inline typename Declaration::AnnotationApplication::Value::Builder Declaration::AnnotationApplication::Builder::getValue() {
   return typename Declaration::AnnotationApplication::Value::Builder(_builder);
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline typename Declaration::AnnotationApplication::Value::Pipeline Declaration::AnnotationApplication::Pipeline::getValue() {
   return typename Declaration::AnnotationApplication::Value::Pipeline(_typeless.noop());
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline typename Declaration::AnnotationApplication::Value::Builder Declaration::AnnotationApplication::Builder::initValue() {
   _builder.setDataField< ::uint16_t>(::capnp::bounded<0>() * ::capnp::ELEMENTS, 0);
   _builder.getPointerField(::capnp::bounded<1>() * ::capnp::POINTERS).clear();
@@ -5812,11 +5812,11 @@ inline  ::capnp::compiler::LocatedText::Builder Declaration::Param::Builder::get
   return ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::LocatedText::Pipeline Declaration::Param::Pipeline::getName() {
   return  ::capnp::compiler::LocatedText::Pipeline(_typeless.getPointerField(0));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Declaration::Param::Builder::setName( ::capnp::compiler::LocatedText::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::LocatedText>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
@@ -5851,11 +5851,11 @@ inline  ::capnp::compiler::Expression::Builder Declaration::Param::Builder::getT
   return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::Expression::Pipeline Declaration::Param::Pipeline::getType() {
   return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(1));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Declaration::Param::Builder::setType( ::capnp::compiler::Expression::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS), value);
@@ -5914,11 +5914,11 @@ inline typename Declaration::Param::DefaultValue::Reader Declaration::Param::Rea
 inline typename Declaration::Param::DefaultValue::Builder Declaration::Param::Builder::getDefaultValue() {
   return typename Declaration::Param::DefaultValue::Builder(_builder);
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline typename Declaration::Param::DefaultValue::Pipeline Declaration::Param::Pipeline::getDefaultValue() {
   return typename Declaration::Param::DefaultValue::Pipeline(_typeless.noop());
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline typename Declaration::Param::DefaultValue::Builder Declaration::Param::Builder::initDefaultValue() {
   _builder.setDataField< ::uint16_t>(::capnp::bounded<0>() * ::capnp::ELEMENTS, 0);
   _builder.getPointerField(::capnp::bounded<3>() * ::capnp::POINTERS).clear();
@@ -6200,11 +6200,11 @@ inline  ::capnp::compiler::Expression::Builder Declaration::Using::Builder::getT
   return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
       ::capnp::bounded<5>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::Expression::Pipeline Declaration::Using::Pipeline::getTarget() {
   return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(5));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Declaration::Using::Builder::setTarget( ::capnp::compiler::Expression::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
       ::capnp::bounded<5>() * ::capnp::POINTERS), value);
@@ -6239,11 +6239,11 @@ inline  ::capnp::compiler::Expression::Builder Declaration::Const::Builder::getT
   return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
       ::capnp::bounded<5>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::Expression::Pipeline Declaration::Const::Pipeline::getType() {
   return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(5));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Declaration::Const::Builder::setType( ::capnp::compiler::Expression::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
       ::capnp::bounded<5>() * ::capnp::POINTERS), value);
@@ -6278,11 +6278,11 @@ inline  ::capnp::compiler::Expression::Builder Declaration::Const::Builder::getV
   return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
       ::capnp::bounded<6>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::Expression::Pipeline Declaration::Const::Pipeline::getValue() {
   return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(6));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Declaration::Const::Builder::setValue( ::capnp::compiler::Expression::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
       ::capnp::bounded<6>() * ::capnp::POINTERS), value);
@@ -6317,11 +6317,11 @@ inline  ::capnp::compiler::Expression::Builder Declaration::Field::Builder::getT
   return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
       ::capnp::bounded<5>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::Expression::Pipeline Declaration::Field::Pipeline::getType() {
   return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(5));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Declaration::Field::Builder::setType( ::capnp::compiler::Expression::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
       ::capnp::bounded<5>() * ::capnp::POINTERS), value);
@@ -6346,11 +6346,11 @@ inline typename Declaration::Field::DefaultValue::Reader Declaration::Field::Rea
 inline typename Declaration::Field::DefaultValue::Builder Declaration::Field::Builder::getDefaultValue() {
   return typename Declaration::Field::DefaultValue::Builder(_builder);
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline typename Declaration::Field::DefaultValue::Pipeline Declaration::Field::Pipeline::getDefaultValue() {
   return typename Declaration::Field::DefaultValue::Pipeline(_typeless.noop());
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline typename Declaration::Field::DefaultValue::Builder Declaration::Field::Builder::initDefaultValue() {
   _builder.setDataField< ::uint16_t>(::capnp::bounded<6>() * ::capnp::ELEMENTS, 0);
   _builder.getPointerField(::capnp::bounded<6>() * ::capnp::POINTERS).clear();
@@ -6495,11 +6495,11 @@ inline  ::capnp::compiler::Declaration::ParamList::Builder Declaration::Method::
   return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::get(_builder.getPointerField(
       ::capnp::bounded<5>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::Declaration::ParamList::Pipeline Declaration::Method::Pipeline::getParams() {
   return  ::capnp::compiler::Declaration::ParamList::Pipeline(_typeless.getPointerField(5));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Declaration::Method::Builder::setParams( ::capnp::compiler::Declaration::ParamList::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration::ParamList>::set(_builder.getPointerField(
       ::capnp::bounded<5>() * ::capnp::POINTERS), value);
@@ -6524,11 +6524,11 @@ inline typename Declaration::Method::Results::Reader Declaration::Method::Reader
 inline typename Declaration::Method::Results::Builder Declaration::Method::Builder::getResults() {
   return typename Declaration::Method::Results::Builder(_builder);
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline typename Declaration::Method::Results::Pipeline Declaration::Method::Pipeline::getResults() {
   return typename Declaration::Method::Results::Pipeline(_typeless.noop());
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline typename Declaration::Method::Results::Builder Declaration::Method::Builder::initResults() {
   _builder.setDataField< ::uint16_t>(::capnp::bounded<6>() * ::capnp::ELEMENTS, 0);
   _builder.getPointerField(::capnp::bounded<6>() * ::capnp::POINTERS).clear();
@@ -6639,11 +6639,11 @@ inline  ::capnp::compiler::Expression::Builder Declaration::Annotation::Builder:
   return ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::get(_builder.getPointerField(
       ::capnp::bounded<5>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::Expression::Pipeline Declaration::Annotation::Pipeline::getType() {
   return  ::capnp::compiler::Expression::Pipeline(_typeless.getPointerField(5));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void Declaration::Annotation::Builder::setType( ::capnp::compiler::Expression::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::Expression>::set(_builder.getPointerField(
       ::capnp::bounded<5>() * ::capnp::POINTERS), value);
@@ -6846,11 +6846,11 @@ inline  ::capnp::compiler::Declaration::Builder ParsedFile::Builder::getRoot() {
   return ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-#if !CAPNP_LITE
+#if !SHARK_LITE
 inline  ::capnp::compiler::Declaration::Pipeline ParsedFile::Pipeline::getRoot() {
   return  ::capnp::compiler::Declaration::Pipeline(_typeless.getPointerField(0));
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 inline void ParsedFile::Builder::setRoot( ::capnp::compiler::Declaration::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::compiler::Declaration>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
@@ -6872,5 +6872,5 @@ inline ::capnp::Orphan< ::capnp::compiler::Declaration> ParsedFile::Builder::dis
 }  // namespace
 }  // namespace
 
-CAPNP_END_HEADER
+SHARK_END_HEADER
 

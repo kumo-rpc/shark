@@ -516,14 +516,14 @@ struct DisallowConstCopy {
   // type that contains or inherits from a type that disallows const copies will also automatically
   // disallow const copies.  Hey, cool, that's exactly what we want.
 
-#if CAPNP_DEBUG_TYPES
+#if SHARK_DEBUG_TYPES
   // Alas! Declaring a defaulted non-const copy constructor tickles a bug which causes GCC and
   // Clang to disagree on ABI, using different calling conventions to pass this type, leading to
   // immediate segfaults. See:
   //     https://bugs.llvm.org/show_bug.cgi?id=23764
   //     https://gcc.gnu.org/bugzilla/show_bug.cgi?id=58074
   //
-  // Because of this, we can't use this technique. We guard it by CAPNP_DEBUG_TYPES so that it
+  // Because of this, we can't use this technique. We guard it by SHARK_DEBUG_TYPES so that it
   // still applies to the Cap'n Proto developers during internal testing.
 
   DisallowConstCopy() = default;
@@ -818,7 +818,7 @@ inline constexpr unsigned long long maxValueForBits() {
 struct ThrowOverflow {
   // Functor which throws an exception complaining about integer overflow. Usually this is used
   // with the interfaces in units.h, but is defined here because Cap'n Proto wants to avoid
-  // including units.h when not using CAPNP_DEBUG_TYPES.
+  // including units.h when not using SHARK_DEBUG_TYPES.
   [[noreturn]] void operator()() const;
 };
 

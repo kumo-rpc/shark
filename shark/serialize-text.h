@@ -26,7 +26,7 @@
 #include "orphan.h"
 #include "schema.h"
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -90,4 +90,4 @@ inline Orphan<T> TextCodec::decode(kj::StringPtr input, Orphanage orphanage) con
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

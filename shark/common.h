@@ -30,37 +30,37 @@
 #include <shark/base/memory.h>
 #include <shark/base/windows-sanity.h>  // work-around macro conflict with `VOID`
 
-#if CAPNP_DEBUG_TYPES
+#if SHARK_DEBUG_TYPES
 #include <shark/base/units.h>
 #endif
 
-#if !defined(CAPNP_HEADER_WARNINGS) || !CAPNP_HEADER_WARNINGS
-#define CAPNP_BEGIN_HEADER KJ_BEGIN_SYSTEM_HEADER
-#define CAPNP_END_HEADER KJ_END_SYSTEM_HEADER
+#if !defined(SHARK_HEADER_WARNINGS) || !SHARK_HEADER_WARNINGS
+#define SHARK_BEGIN_HEADER KJ_BEGIN_SYSTEM_HEADER
+#define SHARK_END_HEADER KJ_END_SYSTEM_HEADER
 #else
-#define CAPNP_BEGIN_HEADER
-#define CAPNP_END_HEADER
+#define SHARK_BEGIN_HEADER
+#define SHARK_END_HEADER
 #endif
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
-#define CAPNP_VERSION_MAJOR 1
-#define CAPNP_VERSION_MINOR 5
-#define CAPNP_VERSION_MICRO 0
+#define SHARK_VERSION_MAJOR 1
+#define SHARK_VERSION_MINOR 5
+#define SHARK_VERSION_MICRO 0
 
-#define CAPNP_VERSION \
-  (CAPNP_VERSION_MAJOR * 1000000 + CAPNP_VERSION_MINOR * 1000 + CAPNP_VERSION_MICRO)
+#define SHARK_VERSION \
+  (SHARK_VERSION_MAJOR * 1000000 + SHARK_VERSION_MINOR * 1000 + SHARK_VERSION_MICRO)
 
-#ifndef CAPNP_LITE
-#define CAPNP_LITE 0
+#ifndef SHARK_LITE
+#define SHARK_LITE 0
 #endif
 
-#if CAPNP_TESTING_CAPNP  // defined in Cap'n Proto's own unit tests; others should not define this
-#define CAPNP_DEPRECATED(reason)
+#if SHARK_TESTING_SHARK  // defined in Cap'n Proto's own unit tests; others should not define this
+#define SHARK_DEPRECATED(reason)
 #else
-#define CAPNP_DEPRECATED KJ_DEPRECATED
+#define SHARK_DEPRECATED KJ_DEPRECATED
 #endif
 
 typedef unsigned int uint;
@@ -175,17 +175,17 @@ inline constexpr Kind kind() {
 
 #if _MSC_VER && !defined(__clang__)
 
-#define CAPNP_KIND(T) ::capnp::_::Kind_<T>::kind
+#define SHARK_KIND(T) ::capnp::_::Kind_<T>::kind
 // Avoid constexpr methods in MSVC (it remains buggy in many situations).
 
 #else  // _MSC_VER
 
-#define CAPNP_KIND(T) ::capnp::kind<T>()
+#define SHARK_KIND(T) ::capnp::kind<T>()
 // Use this macro rather than kind<T>() in any code which must work in MSVC.
 
 #endif  // _MSC_VER, else
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 template <typename T, Kind k = kind<T>()>
 inline constexpr Style style() {
@@ -194,9 +194,9 @@ inline constexpr Style style() {
        : k == Kind::INTERFACE ? Style::CAPABILITY : Style::POINTER;
 }
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
-template <typename T, Kind k = CAPNP_KIND(T)>
+template <typename T, Kind k = SHARK_KIND(T)>
 struct List;
 
 #if _MSC_VER && !defined(__clang__)
@@ -220,25 +220,25 @@ template <typename T, Kind k> struct Kind_<List<T, k>> {
 };
 }  // namespace _ (private)
 
-template <typename T, Kind k = CAPNP_KIND(T)> struct ReaderFor_ { typedef typename T::Reader Type; };
+template <typename T, Kind k = SHARK_KIND(T)> struct ReaderFor_ { typedef typename T::Reader Type; };
 template <typename T> struct ReaderFor_<T, Kind::PRIMITIVE> { typedef T Type; };
 template <typename T> struct ReaderFor_<T, Kind::ENUM> { typedef T Type; };
 template <typename T> struct ReaderFor_<T, Kind::INTERFACE> { typedef typename T::Client Type; };
 template <typename T> using ReaderFor = typename ReaderFor_<T>::Type;
 // The type returned by List<T>::Reader::operator[].
 
-template <typename T, Kind k = CAPNP_KIND(T)> struct BuilderFor_ { typedef typename T::Builder Type; };
+template <typename T, Kind k = SHARK_KIND(T)> struct BuilderFor_ { typedef typename T::Builder Type; };
 template <typename T> struct BuilderFor_<T, Kind::PRIMITIVE> { typedef T Type; };
 template <typename T> struct BuilderFor_<T, Kind::ENUM> { typedef T Type; };
 template <typename T> struct BuilderFor_<T, Kind::INTERFACE> { typedef typename T::Client Type; };
 template <typename T> using BuilderFor = typename BuilderFor_<T>::Type;
 // The type returned by List<T>::Builder::operator[].
 
-template <typename T, Kind k = CAPNP_KIND(T)> struct PipelineFor_ { typedef typename T::Pipeline Type;};
+template <typename T, Kind k = SHARK_KIND(T)> struct PipelineFor_ { typedef typename T::Pipeline Type;};
 template <typename T> struct PipelineFor_<T, Kind::INTERFACE> { typedef typename T::Client Type; };
 template <typename T> using PipelineFor = typename PipelineFor_<T>::Type;
 
-template <typename T, Kind k = CAPNP_KIND(T)> struct TypeIfEnum_;
+template <typename T, Kind k = SHARK_KIND(T)> struct TypeIfEnum_;
 template <typename T> struct TypeIfEnum_<T, Kind::ENUM> { typedef T Type; };
 
 template <typename T>
@@ -311,7 +311,7 @@ using FromAny = typename FromAny_<T>::Type;
 
 namespace _ {  // private
 
-template <typename T, Kind k = CAPNP_KIND(T)>
+template <typename T, Kind k = SHARK_KIND(T)>
 struct PointerHelpers;
 
 #if _MSC_VER && !defined(__clang__)
@@ -368,8 +368,8 @@ private:
 static_assert(sizeof(byte) == 1, "uint8_t is not one byte?");
 static_assert(sizeof(word) == 8, "uint64_t is not 8 bytes?");
 
-#if CAPNP_DEBUG_TYPES
-// Set CAPNP_DEBUG_TYPES to 1 to use kj::Quantity for "count" types.  Otherwise, plain integers are
+#if SHARK_DEBUG_TYPES
+// Set SHARK_DEBUG_TYPES to 1 to use kj::Quantity for "count" types.  Otherwise, plain integers are
 // used.  All the code should still operate exactly the same, we just lose compile-time checking.
 // Note that this will also change symbol names, so it's important that the library and any clients
 // be compiled with the same setting here.
@@ -748,4 +748,4 @@ inline constexpr kj::ArrayPtr<U> arrayPtr(U* ptr, T size) {
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

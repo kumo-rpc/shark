@@ -24,7 +24,7 @@
 #include "rpc-prelude.h"
 #include  <shark/capability.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace kj { class AutoCloseFd; }
 
@@ -98,7 +98,7 @@ public:
   // Connect to the given vat and return its bootstrap interface.
 
   Capability::Client restore(typename VatId::Reader hostId, AnyPointer::Reader objectId)
-      CAPNP_DEPRECATED("Please transition to using a bootstrap interface instead.");
+      SHARK_DEPRECATED("Please transition to using a bootstrap interface instead.");
   // ** DEPRECATED **
   //
   // Restores the given SturdyRef from the network and return the capability representing it.
@@ -195,7 +195,7 @@ template <typename VatId, typename LocalSturdyRefObjectId,
 RpcSystem<VatId> makeRpcServer(
     VatNetwork<VatId, ProvisionId, RecipientId, ThirdPartyCapId, JoinResult>& network,
     SturdyRefRestorer<LocalSturdyRefObjectId>& restorer)
-    CAPNP_DEPRECATED("Please transition to using a bootstrap interface instead.");
+    SHARK_DEPRECATED("Please transition to using a bootstrap interface instead.");
 // ** DEPRECATED **
 //
 // Create an RPC server which exports multiple main interfaces by object ID. The `restorer` object
@@ -242,7 +242,7 @@ class SturdyRefRestorer: public _::SturdyRefRestorerBase {
   //   string names.
 
 public:
-  virtual Capability::Client restore(typename SturdyRefObjectId::Reader ref) CAPNP_DEPRECATED(
+  virtual Capability::Client restore(typename SturdyRefObjectId::Reader ref) SHARK_DEPRECATED(
       "Please transition to using bootstrap interfaces instead of SturdyRefRestorer.") = 0;
   // Restore the given object, returning a capability representing it.
 
@@ -599,4 +599,4 @@ RpcSystem<VatId> makeRpcClient(
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

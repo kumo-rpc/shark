@@ -265,7 +265,7 @@ TEST(Any, AnyStructListCapInSchema) {
     checkList(root.getAnyListField().as<List<int>>(), {123, 456, 789});
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   // This portion of the test relies on a Client, not present in lite-mode.
   {
     kj::EventLoop loop;

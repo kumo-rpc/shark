@@ -34,7 +34,7 @@ namespace capnp {
 namespace compiler {
 
 bool shouldDetectIssue344() {
-  return getenv("CAPNP_IGNORE_ISSUE_344") == nullptr;
+  return getenv("SHARK_IGNORE_ISSUE_344") == nullptr;
 }
 
 class NodeTranslator::StructLayout {

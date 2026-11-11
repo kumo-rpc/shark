@@ -35,10 +35,10 @@
 #include "endian.h"
 #include <shark/base/windows-sanity.h>  // work-around macro conflict with `VOID`
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
-#if (defined(__mips__) || defined(__hppa__)) && !defined(CAPNP_CANONICALIZE_NAN)
-#define CAPNP_CANONICALIZE_NAN 1
+#if (defined(__mips__) || defined(__hppa__)) && !defined(SHARK_CANONICALIZE_NAN)
+#define SHARK_CANONICALIZE_NAN 1
 // Explicitly detect NaNs and canonicalize them to the quiet NaN value as would be returned by
 // __builtin_nan("") on systems implementing the IEEE-754 recommended (but not required) NaN
 // signalling/quiet differentiation (such as x86).  Unfortunately, some architectures -- in
@@ -78,7 +78,7 @@ class BuilderArena;
 
 // =============================================================================
 
-#if CAPNP_DEBUG_TYPES
+#if SHARK_DEBUG_TYPES
 typedef kj::UnitRatio<kj::Bounded<64, uint>, BitLabel, ElementLabel> BitsPerElementTableType;
 #else
 typedef uint BitsPerElementTableType;
@@ -129,9 +129,9 @@ template <> struct ElementSizeForByteSize<8> { static constexpr ElementSize valu
 template <typename T> struct ElementSizeForType {
   static constexpr ElementSize value =
       // Primitive types that aren't special-cased below can be determined from sizeof().
-      CAPNP_KIND(T) == Kind::PRIMITIVE ? ElementSizeForByteSize<sizeof(T)>::value :
-      CAPNP_KIND(T) == Kind::ENUM ? ElementSize::TWO_BYTES :
-      CAPNP_KIND(T) == Kind::STRUCT ? ElementSize::INLINE_COMPOSITE :
+      SHARK_KIND(T) == Kind::PRIMITIVE ? ElementSizeForByteSize<sizeof(T)>::value :
+      SHARK_KIND(T) == Kind::ENUM ? ElementSize::TWO_BYTES :
+      SHARK_KIND(T) == Kind::STRUCT ? ElementSize::INLINE_COMPOSITE :
 
       // Everything else is a pointer.
       ElementSize::POINTER;
@@ -207,7 +207,7 @@ inline constexpr StructSize structSize() {
 }
 
 template <typename T, typename CapnpPrivate = typename T::_capnpPrivate,
-          typename = kj::EnableIf<CAPNP_KIND(T) == Kind::STRUCT>>
+          typename = kj::EnableIf<SHARK_KIND(T) == Kind::STRUCT>>
 inline constexpr StructSize minStructSizeForElement() {
   // If T is a struct, return its struct size. Otherwise return the minimum struct size big enough
   // to hold a T.
@@ -216,7 +216,7 @@ inline constexpr StructSize minStructSizeForElement() {
                     bounded(CapnpPrivate::pointerCount) * POINTERS);
 }
 
-template <typename T, typename = kj::EnableIf<CAPNP_KIND(T) != Kind::STRUCT>>
+template <typename T, typename = kj::EnableIf<SHARK_KIND(T) != Kind::STRUCT>>
 inline constexpr StructSize minStructSizeForElement() {
   // If T is a struct, return its struct size. Otherwise return the minimum struct size big enough
   // to hold a T.
@@ -230,7 +230,7 @@ inline constexpr StructSize minStructSizeForElement() {
 // -------------------------------------------------------------------
 // Masking of default values
 
-template <typename T, Kind kind = CAPNP_KIND(T)> struct Mask_;
+template <typename T, Kind kind = SHARK_KIND(T)> struct Mask_;
 template <typename T> struct Mask_<T, Kind::PRIMITIVE> { typedef T Type; };
 template <typename T> struct Mask_<T, Kind::ENUM> { typedef uint16_t Type; };
 template <> struct Mask_<float, Kind::PRIMITIVE> { typedef uint32_t Type; };
@@ -257,7 +257,7 @@ inline Mask<T> mask(T value, Mask<T> mask) {
 
 template <>
 inline uint32_t mask<float>(float value, uint32_t mask) {
-#if CAPNP_CANONICALIZE_NAN
+#if SHARK_CANONICALIZE_NAN
   if (value != value) {
     return 0x7fc00000u ^ mask;
   }
@@ -271,7 +271,7 @@ inline uint32_t mask<float>(float value, uint32_t mask) {
 
 template <>
 inline uint64_t mask<double>(double value, uint64_t mask) {
-#if CAPNP_CANONICALIZE_NAN
+#if SHARK_CANONICALIZE_NAN
   if (value != value) {
     return 0x7ff8000000000000ull ^ mask;
   }
@@ -347,9 +347,9 @@ public:
   ListBuilder getListAnySize(const word* defaultValue);
   template <typename T> typename T::Builder getBlob(
       const void* defaultValue, ByteCount defaultSize);
-#if !CAPNP_LITE
+#if !SHARK_LITE
   kj::Own<ClientHook> getCapability();
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
   // Get methods:  Get the value.  If it is null, initialize it to a copy of the default value.
   // The default value is encoded as an "unchecked message" for structs, lists, and objects, or a
   // simple byte array for blobs.
@@ -364,9 +364,9 @@ public:
   void setStruct(const StructReader& value, bool canonical = false);
   void setList(const ListReader& value, bool canonical = false);
   template <typename T> void setBlob(typename T::Reader value);
-#if !CAPNP_LITE
+#if !SHARK_LITE
   void setCapability(kj::Own<ClientHook>&& cap);
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
   // Set methods:  Initialize the pointer to a newly-allocated copy of the given value, discarding
   // the existing object.
 
@@ -439,9 +439,9 @@ public:
   ListReader getListAnySize(const word* defaultValue) const;
   template <typename T>
   typename T::Reader getBlob(const void* defaultValue, ByteCount defaultSize) const;
-#if !CAPNP_LITE
+#if !SHARK_LITE
   kj::Own<ClientHook> getCapability() const;
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
   // Get methods:  Get the value.  If it is null, return the default value instead.
   // The default value is encoded as an "unchecked message" for structs, lists, and objects, or a
   // simple byte array for blobs.
@@ -863,10 +863,10 @@ public:
   static OrphanBuilder copy(BuilderArena* arena, CapTableBuilder* capTable, PointerReader copyFrom);
   static OrphanBuilder copy(BuilderArena* arena, CapTableBuilder* capTable, Text::Reader copyFrom);
   static OrphanBuilder copy(BuilderArena* arena, CapTableBuilder* capTable, Data::Reader copyFrom);
-#if !CAPNP_LITE
+#if !SHARK_LITE
   static OrphanBuilder copy(BuilderArena* arena, CapTableBuilder* capTable,
                             kj::Own<ClientHook> copyFrom);
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
   static OrphanBuilder concat(BuilderArena* arena, CapTableBuilder* capTable,
                               ElementSize expectedElementSize, StructSize expectedStructSize,
@@ -900,9 +900,9 @@ public:
   StructReader asStructReader(StructSize size) const;
   ListReader asListReader(ElementSize elementSize) const;
   ListReader asListReaderAnySize() const;
-#if !CAPNP_LITE
+#if !SHARK_LITE
   kj::Own<ClientHook> asCapability() const;
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
   Text::Reader asTextReader() const;
   Data::Reader asDataReader() const;
 
@@ -1035,7 +1035,7 @@ inline void StructBuilder::setDataField(StructDataOffset offset, kj::NoInfer<T> 
   reinterpret_cast<WireValue<T>*>(data)[unbound(offset / ELEMENTS)].set(value);
 }
 
-#if CAPNP_CANONICALIZE_NAN
+#if SHARK_CANONICALIZE_NAN
 // Use mask() on floats and doubles to make sure we canonicalize NaNs.
 template <>
 inline void StructBuilder::setDataField<float>(StructDataOffset offset, float value) {
@@ -1172,7 +1172,7 @@ inline void ListBuilder::setDataElement(ElementCount index, kj::NoInfer<T> value
       ptr + upgradeBound<uint64_t>(index) * step / BITS_PER_BYTE)->set(value);
 }
 
-#if CAPNP_CANONICALIZE_NAN
+#if SHARK_CANONICALIZE_NAN
 // Use mask() on floats and doubles to make sure we canonicalize NaNs.
 template <>
 inline void ListBuilder::setDataElement<float>(ElementCount index, float value) {
@@ -1268,4 +1268,4 @@ inline OrphanBuilder& OrphanBuilder::operator=(OrphanBuilder&& other) {
 }  // namespace _ (private)
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

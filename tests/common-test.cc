@@ -35,14 +35,14 @@ namespace {
 TEST(Common, Version) {
 #ifdef VERSION
   auto expectedVersion =
-      kj::str(CAPNP_VERSION_MAJOR, '.', CAPNP_VERSION_MINOR, '.', CAPNP_VERSION_MICRO);
+      kj::str(SHARK_VERSION_MAJOR, '.', SHARK_VERSION_MINOR, '.', SHARK_VERSION_MICRO);
   auto devVersion =
-      kj::str(CAPNP_VERSION_MAJOR, '.', CAPNP_VERSION_MINOR, "-dev");
+      kj::str(SHARK_VERSION_MAJOR, '.', SHARK_VERSION_MINOR, "-dev");
   kj::StringPtr actualVersion = VERSION;
   KJ_ASSERT(actualVersion == expectedVersion ||
             actualVersion.startsWith(kj::str(expectedVersion, '-')) ||
             actualVersion.startsWith(kj::str(expectedVersion, '.')) ||
-            (actualVersion == devVersion && CAPNP_VERSION_MICRO == 0),
+            (actualVersion == devVersion && SHARK_VERSION_MICRO == 0),
             expectedVersion, actualVersion);
 #endif
 }
@@ -77,7 +77,7 @@ using capnproto_test::capnp::test::TestInterface;
 static_assert(equalTypes<FromAny<int>, int>(), "");
 static_assert(equalTypes<FromAny<TestAllTypes::Reader>, TestAllTypes>(), "");
 static_assert(equalTypes<FromAny<TestAllTypes::Builder>, TestAllTypes>(), "");
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static_assert(equalTypes<FromAny<TestAllTypes::Pipeline>, TestAllTypes>(), "");
 static_assert(equalTypes<FromAny<TestInterface::Client>, TestInterface>(), "");
 static_assert(equalTypes<FromAny<kj::Own<TestInterface::Server>>, TestInterface>(), "");

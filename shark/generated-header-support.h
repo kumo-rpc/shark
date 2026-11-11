@@ -33,13 +33,13 @@
 #include <shark/base/string-tree.h>
 #include <shark/base/hash.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
 class MessageBuilder;  // So that it can be declared a friend.
 
-template <typename T, Kind k = CAPNP_KIND(T)>
+template <typename T, Kind k = SHARK_KIND(T)>
 struct ToDynamic_;   // Defined in dynamic.h, needs to be declared as everyone's friend.
 
 struct DynamicStruct;  // So that it can be declared a friend.
@@ -48,7 +48,7 @@ struct Capability;  // To declare brandBindingFor<Capability>()
 
 namespace _ {  // private
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 template <typename T, typename CapnpPrivate = typename T::_capnpPrivate, bool = false>
 inline const RawSchema& rawSchema() {
@@ -202,7 +202,7 @@ inline kj::String enumString(T value) {
   return enumString(static_cast<uint16_t>(value), rawBrandedSchema<T>());
 }
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 // TODO(cleanup):  Unify ConstStruct and ConstList.
 template <typename T>
@@ -319,34 +319,34 @@ inline constexpr uint sizeInWords() {
 // MSVC doesn't understand floating-point constexpr yet.
 //
 // TODO(msvc): Remove this hack when MSVC is fixed.
-#define CAPNP_NON_INT_CONSTEXPR_DECL_INIT(value)
-#define CAPNP_NON_INT_CONSTEXPR_DEF_INIT(value) = value
+#define SHARK_NON_INT_CONSTEXPR_DECL_INIT(value)
+#define SHARK_NON_INT_CONSTEXPR_DEF_INIT(value) = value
 #else
-#define CAPNP_NON_INT_CONSTEXPR_DECL_INIT(value) = value
-#define CAPNP_NON_INT_CONSTEXPR_DEF_INIT(value)
+#define SHARK_NON_INT_CONSTEXPR_DECL_INIT(value) = value
+#define SHARK_NON_INT_CONSTEXPR_DEF_INIT(value)
 #endif
 
 #if _MSC_VER && !defined(__clang__)
 // TODO(msvc): A little hack to allow MSVC to use C++14 return type deduction in cases where the
 // explicit type exposes bugs in the compiler.
-#define CAPNP_AUTO_IF_MSVC(...) auto
+#define SHARK_AUTO_IF_MSVC(...) auto
 #else
-#define CAPNP_AUTO_IF_MSVC(...) __VA_ARGS__
+#define SHARK_AUTO_IF_MSVC(...) __VA_ARGS__
 #endif
 
 // TODO(msvc): MSVC does not even expect constexprs to have definitions below C++17.
 #if (KJ_CPP_STD < 201703L) && !(defined(_MSC_VER) && !defined(__clang__))
-#define CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL 1
+#define SHARK_NEED_REDUNDANT_CONSTEXPR_DECL 1
 #else
-#define CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL 0
+#define SHARK_NEED_REDUNDANT_CONSTEXPR_DECL 0
 #endif
 
-#if CAPNP_LITE
+#if SHARK_LITE
 
-#define CAPNP_DECLARE_SCHEMA(id) \
+#define SHARK_DECLARE_SCHEMA(id) \
     extern ::capnp::word const* const bp_##id
 
-#define CAPNP_DECLARE_ENUM(type, id) \
+#define SHARK_DECLARE_ENUM(type, id) \
     inline ::kj::String KJ_STRINGIFY(type##_##id value) { \
       return ::kj::str(static_cast<uint16_t>(value)); \
     } \
@@ -356,27 +356,27 @@ inline constexpr uint sizeInWords() {
       static inline ::capnp::word const* encodedSchema() { return bp_##id; } \
     }
 
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#define CAPNP_DEFINE_ENUM(type, id) \
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#define SHARK_DEFINE_ENUM(type, id) \
     constexpr uint64_t EnumInfo<type>::typeId
 #else
-#define CAPNP_DEFINE_ENUM(type, id)
+#define SHARK_DEFINE_ENUM(type, id)
 #endif
 
-#define CAPNP_DECLARE_STRUCT_HEADER(id, dataWordSize_, pointerCount_) \
+#define SHARK_DECLARE_STRUCT_HEADER(id, dataWordSize_, pointerCount_) \
       struct IsStruct; \
       static constexpr uint64_t typeId = 0x##id; \
       static constexpr uint16_t dataWordSize = dataWordSize_; \
       static constexpr uint16_t pointerCount = pointerCount_; \
       static inline ::capnp::word const* encodedSchema() { return ::capnp::schemas::bp_##id; }
 
-#else  // CAPNP_LITE
+#else  // SHARK_LITE
 
-#define CAPNP_DECLARE_SCHEMA(id) \
+#define SHARK_DECLARE_SCHEMA(id) \
     extern ::capnp::word const* const bp_##id; \
     extern const ::capnp::_::RawSchema s_##id
 
-#define CAPNP_DECLARE_ENUM(type, id) \
+#define SHARK_DECLARE_ENUM(type, id) \
     inline ::kj::String KJ_STRINGIFY(type##_##id value) { \
       return ::capnp::_::enumString(value); \
     } \
@@ -387,15 +387,15 @@ inline constexpr uint sizeInWords() {
       static constexpr ::capnp::_::RawSchema const* schema = &s_##id; \
     }
 
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#define CAPNP_DEFINE_ENUM(type, id) \
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#define SHARK_DEFINE_ENUM(type, id) \
     constexpr uint64_t EnumInfo<type>::typeId; \
     constexpr ::capnp::_::RawSchema const* EnumInfo<type>::schema
 #else
-#define CAPNP_DEFINE_ENUM(type, id)
+#define SHARK_DEFINE_ENUM(type, id)
 #endif
 
-#define CAPNP_DECLARE_STRUCT_HEADER(id, dataWordSize_, pointerCount_) \
+#define SHARK_DECLARE_STRUCT_HEADER(id, dataWordSize_, pointerCount_) \
       struct IsStruct; \
       static constexpr uint64_t typeId = 0x##id; \
       static constexpr ::capnp::Kind kind = ::capnp::Kind::STRUCT; \
@@ -404,21 +404,21 @@ inline constexpr uint sizeInWords() {
       static inline ::capnp::word const* encodedSchema() { return ::capnp::schemas::bp_##id; } \
       static constexpr ::capnp::_::RawSchema const* schema = &::capnp::schemas::s_##id;
 
-#define CAPNP_DECLARE_INTERFACE_HEADER(id) \
+#define SHARK_DECLARE_INTERFACE_HEADER(id) \
       struct IsInterface; \
       static constexpr uint64_t typeId = 0x##id; \
       static constexpr ::capnp::Kind kind = ::capnp::Kind::INTERFACE; \
       static inline ::capnp::word const* encodedSchema() { return ::capnp::schemas::bp_##id; } \
       static constexpr ::capnp::_::RawSchema const* schema = &::capnp::schemas::s_##id;
 
-#endif  // CAPNP_LITE, else
+#endif  // SHARK_LITE, else
 
 namespace capnp {
 namespace schemas {
-CAPNP_DECLARE_SCHEMA(995f9a3377c0b16e);
+SHARK_DECLARE_SCHEMA(995f9a3377c0b16e);
 // HACK: Forward-declare the RawSchema for StreamResult, from stream.capnp. This allows capnp
 //   files which declare streaming methods to avoid including stream.capnp.h.
 }
 }
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#define CAPNP_PRIVATE
+#define SHARK_PRIVATE
 #include "schema-loader.h"
 #include "message.h"
 #include "arena.h"

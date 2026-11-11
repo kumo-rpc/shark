@@ -24,7 +24,7 @@
 #include <shark/capability.h>
 #include <shark/base/function.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -77,4 +77,4 @@ auto lazyAutoReconnect(ConnectFunc&& connect) {
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

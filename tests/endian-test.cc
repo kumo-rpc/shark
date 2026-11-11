@@ -26,7 +26,7 @@ namespace capnp {
 namespace _ {  // private
 namespace {
 
-#if CAPNP_DISABLE_ENDIAN_DETECTION
+#if SHARK_DISABLE_ENDIAN_DETECTION
 #define Endian EndianUnoptimized
 #endif
 

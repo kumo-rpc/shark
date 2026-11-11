@@ -19,13 +19,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#define CAPNP_PRIVATE
+#define SHARK_PRIVATE
 #include "../shark/arena.h"
 #include "../shark/layout.h"
 #include <shark/message.h>
 #include <tests/base/compat/gtest.h>
 
-#if CAPNP_DEBUG_TYPES
+#if SHARK_DEBUG_TYPES
 namespace kj {
   template <typename T, typename U>
   String KJ_STRINGIFY(kj::Quantity<T, U> value) {

@@ -268,14 +268,14 @@ TEST(Encoding, UnnamedUnion) {
   EXPECT_DEBUG_ANY_THROW(root.getBar());
   EXPECT_DEBUG_ANY_THROW(root.asReader().getBar());
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
   StructSchema schema = Schema::from<test::TestUnnamedUnion>();
 
   // The discriminant is allocated just before allocating "bar".
   EXPECT_EQ(2u, schema.getProto().getStruct().getDiscriminantOffset());
   EXPECT_EQ(0u, schema.getFieldByName("foo").getProto().getSlot().getOffset());
   EXPECT_EQ(2u, schema.getFieldByName("bar").getProto().getSlot().getOffset());
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 }
 
 TEST(Encoding, Groups) {
@@ -591,7 +591,7 @@ TEST(Encoding, SetListToEmpty) {
 #undef CHECK_EMPTY_NONNULL
 }
 
-#if CAPNP_EXPENSIVE_TESTS
+#if SHARK_EXPENSIVE_TESTS
 TEST(Encoding, LongList) {
   // This test allocates 512MB of contiguous memory and takes several seconds, so we usually don't
   // run it. It is run before release, though.
@@ -1755,7 +1755,7 @@ TEST(Encoding, Embeds) {
     checkTestMessage(reader.getRoot<TestAllTypes>());
   }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
   {
     MallocMessageBuilder builder;
@@ -1765,7 +1765,7 @@ TEST(Encoding, Embeds) {
     EXPECT_EQ(kj::str(root, text.endsWith("\r\n") ? "\r\n" : "\n"), text);
   }
 
-#endif // CAPNP_LITE
+#endif // SHARK_LITE
 
   {
     checkTestMessage(test::EMBEDDED_STRUCT);

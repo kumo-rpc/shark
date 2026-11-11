@@ -233,7 +233,7 @@ static const ::capnp::_::AlignedData<225> b_e682ab4cf923a417 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_e682ab4cf923a417 = b_e682ab4cf923a417.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_e682ab4cf923a417[] = {
   &s_9ea0b19b37fb4435,
   &s_b18aa5ac7a0d9420,
@@ -250,7 +250,7 @@ const ::capnp::_::RawSchema s_e682ab4cf923a417 = {
   0xe682ab4cf923a417, b_e682ab4cf923a417.words, 225, d_e682ab4cf923a417, m_e682ab4cf923a417,
   8, 14, i_e682ab4cf923a417, nullptr, nullptr, { &s_e682ab4cf923a417, nullptr, nullptr, 0, 0, nullptr }, true
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<33> b_b9521bccf10fa3b1 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     177, 163,  15, 241, 204,  27,  82, 185,
@@ -287,14 +287,14 @@ static const ::capnp::_::AlignedData<33> b_b9521bccf10fa3b1 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_b9521bccf10fa3b1 = b_b9521bccf10fa3b1.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const uint16_t m_b9521bccf10fa3b1[] = {0};
 static const uint16_t i_b9521bccf10fa3b1[] = {0};
 const ::capnp::_::RawSchema s_b9521bccf10fa3b1 = {
   0xb9521bccf10fa3b1, b_b9521bccf10fa3b1.words, 33, nullptr, m_b9521bccf10fa3b1,
   0, 1, i_b9521bccf10fa3b1, nullptr, nullptr, { &s_b9521bccf10fa3b1, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<48> b_debf55bbfa0fc242 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      66, 194,  15, 250, 187,  85, 191, 222,
@@ -346,14 +346,14 @@ static const ::capnp::_::AlignedData<48> b_debf55bbfa0fc242 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_debf55bbfa0fc242 = b_debf55bbfa0fc242.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const uint16_t m_debf55bbfa0fc242[] = {1, 0};
 static const uint16_t i_debf55bbfa0fc242[] = {0, 1};
 const ::capnp::_::RawSchema s_debf55bbfa0fc242 = {
   0xdebf55bbfa0fc242, b_debf55bbfa0fc242.words, 48, nullptr, m_debf55bbfa0fc242,
   0, 2, i_debf55bbfa0fc242, nullptr, nullptr, { &s_debf55bbfa0fc242, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<102> b_f38e1de3041357ae = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     174,  87,  19,   4, 227,  29, 142, 243,
@@ -459,7 +459,7 @@ static const ::capnp::_::AlignedData<102> b_f38e1de3041357ae = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_f38e1de3041357ae = b_f38e1de3041357ae.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_f38e1de3041357ae[] = {
   &s_c2ba9038898e1fa2,
 };
@@ -469,7 +469,7 @@ const ::capnp::_::RawSchema s_f38e1de3041357ae = {
   0xf38e1de3041357ae, b_f38e1de3041357ae.words, 102, d_f38e1de3041357ae, m_f38e1de3041357ae,
   1, 5, i_f38e1de3041357ae, nullptr, nullptr, { &s_f38e1de3041357ae, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<35> b_c2ba9038898e1fa2 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     162,  31, 142, 137,  56, 144, 186, 194,
@@ -508,14 +508,14 @@ static const ::capnp::_::AlignedData<35> b_c2ba9038898e1fa2 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_c2ba9038898e1fa2 = b_c2ba9038898e1fa2.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const uint16_t m_c2ba9038898e1fa2[] = {0};
 static const uint16_t i_c2ba9038898e1fa2[] = {0};
 const ::capnp::_::RawSchema s_c2ba9038898e1fa2 = {
   0xc2ba9038898e1fa2, b_c2ba9038898e1fa2.words, 35, nullptr, m_c2ba9038898e1fa2,
   0, 1, i_c2ba9038898e1fa2, nullptr, nullptr, { &s_c2ba9038898e1fa2, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<134> b_9ea0b19b37fb4435 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      53,  68, 251,  55, 155, 177, 160, 158,
@@ -653,7 +653,7 @@ static const ::capnp::_::AlignedData<134> b_9ea0b19b37fb4435 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_9ea0b19b37fb4435 = b_9ea0b19b37fb4435.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_9ea0b19b37fb4435[] = {
   &s_9aad50a41f4af45f,
   &s_d1958f7dba521926,
@@ -665,7 +665,7 @@ const ::capnp::_::RawSchema s_9ea0b19b37fb4435 = {
   0x9ea0b19b37fb4435, b_9ea0b19b37fb4435.words, 134, d_9ea0b19b37fb4435, m_9ea0b19b37fb4435,
   3, 7, i_9ea0b19b37fb4435, nullptr, nullptr, { &s_9ea0b19b37fb4435, nullptr, nullptr, 0, 0, nullptr }, true
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<36> b_b54ab3364333f598 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     152, 245,  51,  67,  54, 179,  74, 181,
@@ -705,7 +705,7 @@ static const ::capnp::_::AlignedData<36> b_b54ab3364333f598 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_b54ab3364333f598 = b_b54ab3364333f598.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_b54ab3364333f598[] = {
   &s_978a7cebdc549a4d,
   &s_e682ab4cf923a417,
@@ -716,7 +716,7 @@ const ::capnp::_::RawSchema s_b54ab3364333f598 = {
   0xb54ab3364333f598, b_b54ab3364333f598.words, 36, d_b54ab3364333f598, m_b54ab3364333f598,
   2, 1, i_b54ab3364333f598, nullptr, nullptr, { &s_b54ab3364333f598, nullptr, nullptr, 0, 0, nullptr }, true
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<56> b_e82753cff0c2218f = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     143,  33, 194, 240, 207,  83,  39, 232,
@@ -776,7 +776,7 @@ static const ::capnp::_::AlignedData<56> b_e82753cff0c2218f = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_e82753cff0c2218f = b_e82753cff0c2218f.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_e82753cff0c2218f[] = {
   &s_9500cce23b334d80,
   &s_a9962a9ed0a4d7f8,
@@ -788,7 +788,7 @@ const ::capnp::_::RawSchema s_e82753cff0c2218f = {
   0xe82753cff0c2218f, b_e82753cff0c2218f.words, 56, d_e82753cff0c2218f, m_e82753cff0c2218f,
   3, 2, i_e82753cff0c2218f, nullptr, nullptr, { &s_e82753cff0c2218f, nullptr, nullptr, 0, 0, nullptr }, true
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<46> b_b18aa5ac7a0d9420 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      32, 148,  13, 122, 172, 165, 138, 177,
@@ -838,7 +838,7 @@ static const ::capnp::_::AlignedData<46> b_b18aa5ac7a0d9420 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_b18aa5ac7a0d9420 = b_b18aa5ac7a0d9420.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_b18aa5ac7a0d9420[] = {
   &s_ce23dcd2d7b00c9b,
   &s_d07378ede1f9cc60,
@@ -850,7 +850,7 @@ const ::capnp::_::RawSchema s_b18aa5ac7a0d9420 = {
   0xb18aa5ac7a0d9420, b_b18aa5ac7a0d9420.words, 46, d_b18aa5ac7a0d9420, m_b18aa5ac7a0d9420,
   3, 2, i_b18aa5ac7a0d9420, nullptr, nullptr, { &s_b18aa5ac7a0d9420, nullptr, nullptr, 0, 0, nullptr }, true
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<227> b_ec1619d4400a0290 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     144,   2,  10,  64, 212,  25,  22, 236,
@@ -1081,7 +1081,7 @@ static const ::capnp::_::AlignedData<227> b_ec1619d4400a0290 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_ec1619d4400a0290 = b_ec1619d4400a0290.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_ec1619d4400a0290[] = {
   &s_d07378ede1f9cc60,
   &s_e682ab4cf923a417,
@@ -1092,7 +1092,7 @@ const ::capnp::_::RawSchema s_ec1619d4400a0290 = {
   0xec1619d4400a0290, b_ec1619d4400a0290.words, 227, d_ec1619d4400a0290, m_ec1619d4400a0290,
   2, 13, i_ec1619d4400a0290, nullptr, nullptr, { &s_ec1619d4400a0290, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<113> b_9aad50a41f4af45f = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      95, 244,  74,  31, 164,  80, 173, 154,
@@ -1209,7 +1209,7 @@ static const ::capnp::_::AlignedData<113> b_9aad50a41f4af45f = {
     111, 114, 100, 105, 110,  97, 108,   0, }
 };
 ::capnp::word const* const bp_9aad50a41f4af45f = b_9aad50a41f4af45f.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_9aad50a41f4af45f[] = {
   &s_bb90d5c287870be6,
   &s_c42305476bb4746f,
@@ -1222,7 +1222,7 @@ const ::capnp::_::RawSchema s_9aad50a41f4af45f = {
   0x9aad50a41f4af45f, b_9aad50a41f4af45f.words, 113, d_9aad50a41f4af45f, m_9aad50a41f4af45f,
   4, 7, i_9aad50a41f4af45f, nullptr, nullptr, { &s_9aad50a41f4af45f, nullptr, nullptr, 0, 0, nullptr }, true
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<25> b_97b14cbe7cfec712 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      18, 199, 254, 124, 190,  76, 177, 151,
@@ -1251,12 +1251,12 @@ static const ::capnp::_::AlignedData<25> b_97b14cbe7cfec712 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_97b14cbe7cfec712 = b_97b14cbe7cfec712.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 const ::capnp::_::RawSchema s_97b14cbe7cfec712 = {
   0x97b14cbe7cfec712, b_97b14cbe7cfec712.words, 25, nullptr, nullptr,
   0, 0, nullptr, nullptr, nullptr, { &s_97b14cbe7cfec712, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<79> b_c42305476bb4746f = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     111, 116, 180, 107,  71,   5,  35, 196,
@@ -1339,7 +1339,7 @@ static const ::capnp::_::AlignedData<79> b_c42305476bb4746f = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_c42305476bb4746f = b_c42305476bb4746f.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_c42305476bb4746f[] = {
   &s_9aad50a41f4af45f,
   &s_ce23dcd2d7b00c9b,
@@ -1351,7 +1351,7 @@ const ::capnp::_::RawSchema s_c42305476bb4746f = {
   0xc42305476bb4746f, b_c42305476bb4746f.words, 79, d_c42305476bb4746f, m_c42305476bb4746f,
   3, 4, i_c42305476bb4746f, nullptr, nullptr, { &s_c42305476bb4746f, nullptr, nullptr, 0, 0, nullptr }, true
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<32> b_cafccddb68db1d11 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      17,  29, 219, 104, 219, 205, 252, 202,
@@ -1387,7 +1387,7 @@ static const ::capnp::_::AlignedData<32> b_cafccddb68db1d11 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_cafccddb68db1d11 = b_cafccddb68db1d11.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_cafccddb68db1d11[] = {
   &s_9aad50a41f4af45f,
 };
@@ -1397,7 +1397,7 @@ const ::capnp::_::RawSchema s_cafccddb68db1d11 = {
   0xcafccddb68db1d11, b_cafccddb68db1d11.words, 32, d_cafccddb68db1d11, m_cafccddb68db1d11,
   1, 1, i_cafccddb68db1d11, nullptr, nullptr, { &s_cafccddb68db1d11, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<49> b_bb90d5c287870be6 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     230,  11, 135, 135, 194, 213, 144, 187,
@@ -1450,7 +1450,7 @@ static const ::capnp::_::AlignedData<49> b_bb90d5c287870be6 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_bb90d5c287870be6 = b_bb90d5c287870be6.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_bb90d5c287870be6[] = {
   &s_9aad50a41f4af45f,
 };
@@ -1460,7 +1460,7 @@ const ::capnp::_::RawSchema s_bb90d5c287870be6 = {
   0xbb90d5c287870be6, b_bb90d5c287870be6.words, 49, d_bb90d5c287870be6, m_bb90d5c287870be6,
   1, 2, i_bb90d5c287870be6, nullptr, nullptr, { &s_bb90d5c287870be6, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<68> b_978a7cebdc549a4d = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      77, 154,  84, 220, 235, 124, 138, 151,
@@ -1532,7 +1532,7 @@ static const ::capnp::_::AlignedData<68> b_978a7cebdc549a4d = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_978a7cebdc549a4d = b_978a7cebdc549a4d.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_978a7cebdc549a4d[] = {
   &s_f1c8950dab257542,
 };
@@ -1542,7 +1542,7 @@ const ::capnp::_::RawSchema s_978a7cebdc549a4d = {
   0x978a7cebdc549a4d, b_978a7cebdc549a4d.words, 68, d_978a7cebdc549a4d, m_978a7cebdc549a4d,
   1, 3, i_978a7cebdc549a4d, nullptr, nullptr, { &s_978a7cebdc549a4d, nullptr, nullptr, 0, 0, nullptr }, true
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<47> b_a9962a9ed0a4d7f8 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     248, 215, 164, 208, 158,  42, 150, 169,
@@ -1593,7 +1593,7 @@ static const ::capnp::_::AlignedData<47> b_a9962a9ed0a4d7f8 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_a9962a9ed0a4d7f8 = b_a9962a9ed0a4d7f8.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_a9962a9ed0a4d7f8[] = {
   &s_903455f06065422b,
 };
@@ -1603,7 +1603,7 @@ const ::capnp::_::RawSchema s_a9962a9ed0a4d7f8 = {
   0xa9962a9ed0a4d7f8, b_a9962a9ed0a4d7f8.words, 47, d_a9962a9ed0a4d7f8, m_a9962a9ed0a4d7f8,
   1, 2, i_a9962a9ed0a4d7f8, nullptr, nullptr, { &s_a9962a9ed0a4d7f8, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<154> b_9500cce23b334d80 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     128,  77,  51,  59, 226, 204,   0, 149,
@@ -1761,7 +1761,7 @@ static const ::capnp::_::AlignedData<154> b_9500cce23b334d80 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_9500cce23b334d80 = b_9500cce23b334d80.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_9500cce23b334d80[] = {
   &s_903455f06065422b,
   &s_b9521bccf10fa3b1,
@@ -1773,7 +1773,7 @@ const ::capnp::_::RawSchema s_9500cce23b334d80 = {
   0x9500cce23b334d80, b_9500cce23b334d80.words, 154, d_9500cce23b334d80, m_9500cce23b334d80,
   3, 8, i_9500cce23b334d80, nullptr, nullptr, { &s_9500cce23b334d80, nullptr, nullptr, 0, 0, nullptr }, true
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<269> b_d07378ede1f9cc60 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      96, 204, 249, 225, 237, 120, 115, 208,
@@ -2046,7 +2046,7 @@ static const ::capnp::_::AlignedData<269> b_d07378ede1f9cc60 = {
     101, 114,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_d07378ede1f9cc60 = b_d07378ede1f9cc60.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_d07378ede1f9cc60[] = {
   &s_87e739250a60ea97,
   &s_9e0e78711a7f87a9,
@@ -2060,7 +2060,7 @@ const ::capnp::_::RawSchema s_d07378ede1f9cc60 = {
   0xd07378ede1f9cc60, b_d07378ede1f9cc60.words, 269, d_d07378ede1f9cc60, m_d07378ede1f9cc60,
   5, 19, i_d07378ede1f9cc60, nullptr, nullptr, { &s_d07378ede1f9cc60, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<32> b_87e739250a60ea97 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     151, 234,  96,  10,  37,  57, 231, 135,
@@ -2096,7 +2096,7 @@ static const ::capnp::_::AlignedData<32> b_87e739250a60ea97 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_87e739250a60ea97 = b_87e739250a60ea97.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_87e739250a60ea97[] = {
   &s_d07378ede1f9cc60,
 };
@@ -2106,7 +2106,7 @@ const ::capnp::_::RawSchema s_87e739250a60ea97 = {
   0x87e739250a60ea97, b_87e739250a60ea97.words, 32, d_87e739250a60ea97, m_87e739250a60ea97,
   1, 1, i_87e739250a60ea97, nullptr, nullptr, { &s_87e739250a60ea97, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<46> b_9e0e78711a7f87a9 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     169, 135, 127,  26, 113, 120,  14, 158,
@@ -2156,7 +2156,7 @@ static const ::capnp::_::AlignedData<46> b_9e0e78711a7f87a9 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_9e0e78711a7f87a9 = b_9e0e78711a7f87a9.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_9e0e78711a7f87a9[] = {
   &s_903455f06065422b,
   &s_d07378ede1f9cc60,
@@ -2167,7 +2167,7 @@ const ::capnp::_::RawSchema s_9e0e78711a7f87a9 = {
   0x9e0e78711a7f87a9, b_9e0e78711a7f87a9.words, 46, d_9e0e78711a7f87a9, m_9e0e78711a7f87a9,
   2, 2, i_9e0e78711a7f87a9, nullptr, nullptr, { &s_9e0e78711a7f87a9, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<47> b_ac3a6f60ef4cc6d3 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     211, 198,  76, 239,  96, 111,  58, 172,
@@ -2218,7 +2218,7 @@ static const ::capnp::_::AlignedData<47> b_ac3a6f60ef4cc6d3 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_ac3a6f60ef4cc6d3 = b_ac3a6f60ef4cc6d3.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_ac3a6f60ef4cc6d3[] = {
   &s_903455f06065422b,
   &s_d07378ede1f9cc60,
@@ -2229,7 +2229,7 @@ const ::capnp::_::RawSchema s_ac3a6f60ef4cc6d3 = {
   0xac3a6f60ef4cc6d3, b_ac3a6f60ef4cc6d3.words, 47, d_ac3a6f60ef4cc6d3, m_ac3a6f60ef4cc6d3,
   2, 2, i_ac3a6f60ef4cc6d3, nullptr, nullptr, { &s_ac3a6f60ef4cc6d3, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<47> b_ed8bca69f7fb0cbf = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     191,  12, 251, 247, 105, 202, 139, 237,
@@ -2280,7 +2280,7 @@ static const ::capnp::_::AlignedData<47> b_ed8bca69f7fb0cbf = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_ed8bca69f7fb0cbf = b_ed8bca69f7fb0cbf.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_ed8bca69f7fb0cbf[] = {
   &s_903455f06065422b,
   &s_d07378ede1f9cc60,
@@ -2291,7 +2291,7 @@ const ::capnp::_::RawSchema s_ed8bca69f7fb0cbf = {
   0xed8bca69f7fb0cbf, b_ed8bca69f7fb0cbf.words, 47, d_ed8bca69f7fb0cbf, m_ed8bca69f7fb0cbf,
   2, 2, i_ed8bca69f7fb0cbf, nullptr, nullptr, { &s_ed8bca69f7fb0cbf, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<45> b_c2573fe8a23e49f1 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     241,  73,  62, 162, 232,  63,  87, 194,
@@ -2340,7 +2340,7 @@ static const ::capnp::_::AlignedData<45> b_c2573fe8a23e49f1 = {
     114,  97, 109, 101, 116, 101, 114,   0, }
 };
 ::capnp::word const* const bp_c2573fe8a23e49f1 = b_c2573fe8a23e49f1.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_c2573fe8a23e49f1[] = {
   &s_8e3b5f79fe593656,
   &s_9dd1f724f4614a85,
@@ -2353,7 +2353,7 @@ const ::capnp::_::RawSchema s_c2573fe8a23e49f1 = {
   0xc2573fe8a23e49f1, b_c2573fe8a23e49f1.words, 45, d_c2573fe8a23e49f1, m_c2573fe8a23e49f1,
   4, 3, i_c2573fe8a23e49f1, nullptr, nullptr, { &s_c2573fe8a23e49f1, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<80> b_8e3b5f79fe593656 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      86,  54,  89, 254, 121,  95,  59, 142,
@@ -2437,7 +2437,7 @@ static const ::capnp::_::AlignedData<80> b_8e3b5f79fe593656 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_8e3b5f79fe593656 = b_8e3b5f79fe593656.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_8e3b5f79fe593656[] = {
   &s_c2573fe8a23e49f1,
 };
@@ -2447,7 +2447,7 @@ const ::capnp::_::RawSchema s_8e3b5f79fe593656 = {
   0x8e3b5f79fe593656, b_8e3b5f79fe593656.words, 80, d_8e3b5f79fe593656, m_8e3b5f79fe593656,
   1, 4, i_8e3b5f79fe593656, nullptr, nullptr, { &s_8e3b5f79fe593656, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<49> b_9dd1f724f4614a85 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     133,  74,  97, 244,  36, 247, 209, 157,
@@ -2500,7 +2500,7 @@ static const ::capnp::_::AlignedData<49> b_9dd1f724f4614a85 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_9dd1f724f4614a85 = b_9dd1f724f4614a85.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_9dd1f724f4614a85[] = {
   &s_c2573fe8a23e49f1,
 };
@@ -2510,7 +2510,7 @@ const ::capnp::_::RawSchema s_9dd1f724f4614a85 = {
   0x9dd1f724f4614a85, b_9dd1f724f4614a85.words, 49, d_9dd1f724f4614a85, m_9dd1f724f4614a85,
   1, 2, i_9dd1f724f4614a85, nullptr, nullptr, { &s_9dd1f724f4614a85, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<36> b_baefc9120c56e274 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     116, 226,  86,  12,  18, 201, 239, 186,
@@ -2550,7 +2550,7 @@ static const ::capnp::_::AlignedData<36> b_baefc9120c56e274 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_baefc9120c56e274 = b_baefc9120c56e274.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_baefc9120c56e274[] = {
   &s_c2573fe8a23e49f1,
 };
@@ -2560,7 +2560,7 @@ const ::capnp::_::RawSchema s_baefc9120c56e274 = {
   0xbaefc9120c56e274, b_baefc9120c56e274.words, 36, d_baefc9120c56e274, m_baefc9120c56e274,
   1, 1, i_baefc9120c56e274, nullptr, nullptr, { &s_baefc9120c56e274, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<42> b_903455f06065422b = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      43,  66, 101,  96, 240,  85,  52, 144,
@@ -2606,7 +2606,7 @@ static const ::capnp::_::AlignedData<42> b_903455f06065422b = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_903455f06065422b = b_903455f06065422b.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_903455f06065422b[] = {
   &s_abd73485a9636bc9,
 };
@@ -2616,7 +2616,7 @@ const ::capnp::_::RawSchema s_903455f06065422b = {
   0x903455f06065422b, b_903455f06065422b.words, 42, d_903455f06065422b, m_903455f06065422b,
   1, 1, i_903455f06065422b, nullptr, nullptr, { &s_903455f06065422b, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<67> b_abd73485a9636bc9 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     201, 107,  99, 169, 133,  52, 215, 171,
@@ -2687,7 +2687,7 @@ static const ::capnp::_::AlignedData<67> b_abd73485a9636bc9 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_abd73485a9636bc9 = b_abd73485a9636bc9.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_abd73485a9636bc9[] = {
   &s_c863cd16969ee7fc,
 };
@@ -2697,7 +2697,7 @@ const ::capnp::_::RawSchema s_abd73485a9636bc9 = {
   0xabd73485a9636bc9, b_abd73485a9636bc9.words, 67, d_abd73485a9636bc9, m_abd73485a9636bc9,
   1, 3, i_abd73485a9636bc9, nullptr, nullptr, { &s_abd73485a9636bc9, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<48> b_c863cd16969ee7fc = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     252, 231, 158, 150,  22, 205,  99, 200,
@@ -2749,7 +2749,7 @@ static const ::capnp::_::AlignedData<48> b_c863cd16969ee7fc = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_c863cd16969ee7fc = b_c863cd16969ee7fc.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_c863cd16969ee7fc[] = {
   &s_d07378ede1f9cc60,
 };
@@ -2759,7 +2759,7 @@ const ::capnp::_::RawSchema s_c863cd16969ee7fc = {
   0xc863cd16969ee7fc, b_c863cd16969ee7fc.words, 48, d_c863cd16969ee7fc, m_c863cd16969ee7fc,
   1, 2, i_c863cd16969ee7fc, nullptr, nullptr, { &s_c863cd16969ee7fc, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<304> b_ce23dcd2d7b00c9b = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     155,  12, 176, 215, 210, 220,  35, 206,
@@ -3067,14 +3067,14 @@ static const ::capnp::_::AlignedData<304> b_ce23dcd2d7b00c9b = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_ce23dcd2d7b00c9b = b_ce23dcd2d7b00c9b.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const uint16_t m_ce23dcd2d7b00c9b[] = {18, 1, 13, 15, 10, 11, 3, 4, 5, 2, 17, 14, 16, 12, 7, 8, 9, 6, 0};
 static const uint16_t i_ce23dcd2d7b00c9b[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
 const ::capnp::_::RawSchema s_ce23dcd2d7b00c9b = {
   0xce23dcd2d7b00c9b, b_ce23dcd2d7b00c9b.words, 304, nullptr, m_ce23dcd2d7b00c9b,
   0, 19, i_ce23dcd2d7b00c9b, nullptr, nullptr, { &s_ce23dcd2d7b00c9b, nullptr, nullptr, 0, 0, nullptr }, true
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<62> b_f1c8950dab257542 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      66, 117,  37, 171,  13, 149, 200, 241,
@@ -3140,7 +3140,7 @@ static const ::capnp::_::AlignedData<62> b_f1c8950dab257542 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_f1c8950dab257542 = b_f1c8950dab257542.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_f1c8950dab257542[] = {
   &s_903455f06065422b,
   &s_ce23dcd2d7b00c9b,
@@ -3151,7 +3151,7 @@ const ::capnp::_::RawSchema s_f1c8950dab257542 = {
   0xf1c8950dab257542, b_f1c8950dab257542.words, 62, d_f1c8950dab257542, m_f1c8950dab257542,
   2, 3, i_f1c8950dab257542, nullptr, nullptr, { &s_f1c8950dab257542, nullptr, nullptr, 0, 0, nullptr }, true
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<54> b_d1958f7dba521926 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      38,  25,  82, 186, 125, 143, 149, 209,
@@ -3209,14 +3209,14 @@ static const ::capnp::_::AlignedData<54> b_d1958f7dba521926 = {
     109, 112, 111, 115, 105, 116, 101,   0, }
 };
 ::capnp::word const* const bp_d1958f7dba521926 = b_d1958f7dba521926.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const uint16_t m_d1958f7dba521926[] = {1, 2, 5, 0, 4, 7, 6, 3};
 const ::capnp::_::RawSchema s_d1958f7dba521926 = {
   0xd1958f7dba521926, b_d1958f7dba521926.words, 54, nullptr, m_d1958f7dba521926,
   0, 8, nullptr, nullptr, nullptr, { &s_d1958f7dba521926, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
-CAPNP_DEFINE_ENUM(ElementSize_d1958f7dba521926, d1958f7dba521926);
+#endif  // !SHARK_LITE
+SHARK_DEFINE_ENUM(ElementSize_d1958f7dba521926, d1958f7dba521926);
 static const ::capnp::_::AlignedData<63> b_d85d305b7d839963 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      99, 153, 131, 125,  91,  48,  93, 216,
@@ -3283,14 +3283,14 @@ static const ::capnp::_::AlignedData<63> b_d85d305b7d839963 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_d85d305b7d839963 = b_d85d305b7d839963.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const uint16_t m_d85d305b7d839963[] = {0, 2, 1};
 static const uint16_t i_d85d305b7d839963[] = {0, 1, 2};
 const ::capnp::_::RawSchema s_d85d305b7d839963 = {
   0xd85d305b7d839963, b_d85d305b7d839963.words, 63, nullptr, m_d85d305b7d839963,
   0, 3, i_d85d305b7d839963, nullptr, nullptr, { &s_d85d305b7d839963, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<98> b_bfc546f6210ad7ce = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     206, 215,  10,  33, 246,  70, 197, 191,
@@ -3392,7 +3392,7 @@ static const ::capnp::_::AlignedData<98> b_bfc546f6210ad7ce = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_bfc546f6210ad7ce = b_bfc546f6210ad7ce.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_bfc546f6210ad7ce[] = {
   &s_cfea0eb02e810062,
   &s_d85d305b7d839963,
@@ -3405,7 +3405,7 @@ const ::capnp::_::RawSchema s_bfc546f6210ad7ce = {
   0xbfc546f6210ad7ce, b_bfc546f6210ad7ce.words, 98, d_bfc546f6210ad7ce, m_bfc546f6210ad7ce,
   4, 4, i_bfc546f6210ad7ce, nullptr, nullptr, { &s_bfc546f6210ad7ce, nullptr, nullptr, 0, 0, nullptr }, true
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<93> b_cfea0eb02e810062 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      98,   0, 129,  46, 176,  14, 234, 207,
@@ -3502,7 +3502,7 @@ static const ::capnp::_::AlignedData<93> b_cfea0eb02e810062 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_cfea0eb02e810062 = b_cfea0eb02e810062.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_cfea0eb02e810062[] = {
   &s_ae504193122357e5,
   &s_f8ea2bf176925da0,
@@ -3513,7 +3513,7 @@ const ::capnp::_::RawSchema s_cfea0eb02e810062 = {
   0xcfea0eb02e810062, b_cfea0eb02e810062.words, 93, d_cfea0eb02e810062, m_cfea0eb02e810062,
   2, 4, i_cfea0eb02e810062, nullptr, nullptr, { &s_cfea0eb02e810062, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<51> b_ae504193122357e5 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     229,  87,  35,  18, 147,  65,  80, 174,
@@ -3568,14 +3568,14 @@ static const ::capnp::_::AlignedData<51> b_ae504193122357e5 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_ae504193122357e5 = b_ae504193122357e5.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const uint16_t m_ae504193122357e5[] = {0, 1};
 static const uint16_t i_ae504193122357e5[] = {0, 1};
 const ::capnp::_::RawSchema s_ae504193122357e5 = {
   0xae504193122357e5, b_ae504193122357e5.words, 51, nullptr, m_ae504193122357e5,
   0, 2, i_ae504193122357e5, nullptr, nullptr, { &s_ae504193122357e5, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<46> b_f8ea2bf176925da0 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     160,  93, 146, 118, 241,  43, 234, 248,
@@ -3625,7 +3625,7 @@ static const ::capnp::_::AlignedData<46> b_f8ea2bf176925da0 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_f8ea2bf176925da0 = b_f8ea2bf176925da0.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_f8ea2bf176925da0[] = {
   &s_dda719892e0499bb,
 };
@@ -3635,7 +3635,7 @@ const ::capnp::_::RawSchema s_f8ea2bf176925da0 = {
   0xf8ea2bf176925da0, b_f8ea2bf176925da0.words, 46, d_f8ea2bf176925da0, m_f8ea2bf176925da0,
   1, 1, i_f8ea2bf176925da0, nullptr, nullptr, { &s_f8ea2bf176925da0, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<78> b_dda719892e0499bb = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
     187, 153,   4,  46, 137,  25, 167, 221,
@@ -3717,7 +3717,7 @@ static const ::capnp::_::AlignedData<78> b_dda719892e0499bb = {
     109, 101, 109,  98, 101, 114,   0,   0, }
 };
 ::capnp::word const* const bp_dda719892e0499bb = b_dda719892e0499bb.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_dda719892e0499bb[] = {
   &s_fc69d5e1d630a151,
 };
@@ -3727,7 +3727,7 @@ const ::capnp::_::RawSchema s_dda719892e0499bb = {
   0xdda719892e0499bb, b_dda719892e0499bb.words, 78, d_dda719892e0499bb, m_dda719892e0499bb,
   1, 4, i_dda719892e0499bb, nullptr, nullptr, { &s_dda719892e0499bb, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 static const ::capnp::_::AlignedData<55> b_fc69d5e1d630a151 = {
   {   0,   0,   0,   0,   5,   0,   6,   0,
      81, 161,  48, 214, 225, 213, 105, 252,
@@ -3786,7 +3786,7 @@ static const ::capnp::_::AlignedData<55> b_fc69d5e1d630a151 = {
       0,   0,   0,   0,   0,   0,   0,   0, }
 };
 ::capnp::word const* const bp_fc69d5e1d630a151 = b_fc69d5e1d630a151.words;
-#if !CAPNP_LITE
+#if !SHARK_LITE
 static const ::capnp::_::RawSchema* const d_fc69d5e1d630a151[] = {
   &s_dda719892e0499bb,
 };
@@ -3796,7 +3796,7 @@ const ::capnp::_::RawSchema s_fc69d5e1d630a151 = {
   0xfc69d5e1d630a151, b_fc69d5e1d630a151.words, 55, d_fc69d5e1d630a151, m_fc69d5e1d630a151,
   1, 2, i_fc69d5e1d630a151, nullptr, nullptr, { &s_fc69d5e1d630a151, nullptr, nullptr, 0, 0, nullptr }, false
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 }  // namespace schemas
 }  // namespace capnp
 
@@ -3806,463 +3806,463 @@ namespace capnp {
 namespace schema {
 
 // Node
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Node::_capnpPrivate::dataWordSize;
 constexpr uint16_t Node::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Node::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Node::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Node::Parameter
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Node::Parameter::_capnpPrivate::dataWordSize;
 constexpr uint16_t Node::Parameter::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Node::Parameter::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Node::Parameter::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Node::NestedNode
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Node::NestedNode::_capnpPrivate::dataWordSize;
 constexpr uint16_t Node::NestedNode::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Node::NestedNode::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Node::NestedNode::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Node::SourceInfo
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Node::SourceInfo::_capnpPrivate::dataWordSize;
 constexpr uint16_t Node::SourceInfo::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Node::SourceInfo::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Node::SourceInfo::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Node::SourceInfo::Member
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Node::SourceInfo::Member::_capnpPrivate::dataWordSize;
 constexpr uint16_t Node::SourceInfo::Member::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Node::SourceInfo::Member::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Node::SourceInfo::Member::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Node::Struct
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Node::Struct::_capnpPrivate::dataWordSize;
 constexpr uint16_t Node::Struct::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Node::Struct::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Node::Struct::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Node::Enum
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Node::Enum::_capnpPrivate::dataWordSize;
 constexpr uint16_t Node::Enum::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Node::Enum::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Node::Enum::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Node::Interface
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Node::Interface::_capnpPrivate::dataWordSize;
 constexpr uint16_t Node::Interface::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Node::Interface::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Node::Interface::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Node::Const
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Node::Const::_capnpPrivate::dataWordSize;
 constexpr uint16_t Node::Const::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Node::Const::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Node::Const::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Node::Annotation
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Node::Annotation::_capnpPrivate::dataWordSize;
 constexpr uint16_t Node::Annotation::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Node::Annotation::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Node::Annotation::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Field
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Field::_capnpPrivate::dataWordSize;
 constexpr uint16_t Field::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Field::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Field::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr  ::uint16_t Field::NO_DISCRIMINANT;
 #endif
 // Field::Slot
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Field::Slot::_capnpPrivate::dataWordSize;
 constexpr uint16_t Field::Slot::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Field::Slot::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Field::Slot::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Field::Group
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Field::Group::_capnpPrivate::dataWordSize;
 constexpr uint16_t Field::Group::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Field::Group::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Field::Group::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Field::Ordinal
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Field::Ordinal::_capnpPrivate::dataWordSize;
 constexpr uint16_t Field::Ordinal::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Field::Ordinal::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Field::Ordinal::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Enumerant
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Enumerant::_capnpPrivate::dataWordSize;
 constexpr uint16_t Enumerant::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Enumerant::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Enumerant::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Superclass
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Superclass::_capnpPrivate::dataWordSize;
 constexpr uint16_t Superclass::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Superclass::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Superclass::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Method
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Method::_capnpPrivate::dataWordSize;
 constexpr uint16_t Method::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Method::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Method::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Type
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Type::_capnpPrivate::dataWordSize;
 constexpr uint16_t Type::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Type::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Type::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Type::List
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Type::List::_capnpPrivate::dataWordSize;
 constexpr uint16_t Type::List::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Type::List::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Type::List::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Type::Enum
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Type::Enum::_capnpPrivate::dataWordSize;
 constexpr uint16_t Type::Enum::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Type::Enum::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Type::Enum::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Type::Struct
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Type::Struct::_capnpPrivate::dataWordSize;
 constexpr uint16_t Type::Struct::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Type::Struct::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Type::Struct::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Type::Interface
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Type::Interface::_capnpPrivate::dataWordSize;
 constexpr uint16_t Type::Interface::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Type::Interface::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Type::Interface::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Type::AnyPointer
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Type::AnyPointer::_capnpPrivate::dataWordSize;
 constexpr uint16_t Type::AnyPointer::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Type::AnyPointer::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Type::AnyPointer::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Type::AnyPointer::Unconstrained
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Type::AnyPointer::Unconstrained::_capnpPrivate::dataWordSize;
 constexpr uint16_t Type::AnyPointer::Unconstrained::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Type::AnyPointer::Unconstrained::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Type::AnyPointer::Unconstrained::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Type::AnyPointer::Parameter
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Type::AnyPointer::Parameter::_capnpPrivate::dataWordSize;
 constexpr uint16_t Type::AnyPointer::Parameter::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Type::AnyPointer::Parameter::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Type::AnyPointer::Parameter::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Type::AnyPointer::ImplicitMethodParameter
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Type::AnyPointer::ImplicitMethodParameter::_capnpPrivate::dataWordSize;
 constexpr uint16_t Type::AnyPointer::ImplicitMethodParameter::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Type::AnyPointer::ImplicitMethodParameter::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Type::AnyPointer::ImplicitMethodParameter::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Brand
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Brand::_capnpPrivate::dataWordSize;
 constexpr uint16_t Brand::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Brand::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Brand::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Brand::Scope
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Brand::Scope::_capnpPrivate::dataWordSize;
 constexpr uint16_t Brand::Scope::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Brand::Scope::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Brand::Scope::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Brand::Binding
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Brand::Binding::_capnpPrivate::dataWordSize;
 constexpr uint16_t Brand::Binding::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Brand::Binding::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Brand::Binding::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Value
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Value::_capnpPrivate::dataWordSize;
 constexpr uint16_t Value::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Value::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Value::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // Annotation
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t Annotation::_capnpPrivate::dataWordSize;
 constexpr uint16_t Annotation::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind Annotation::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* Annotation::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // CapnpVersion
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t CapnpVersion::_capnpPrivate::dataWordSize;
 constexpr uint16_t CapnpVersion::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind CapnpVersion::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* CapnpVersion::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // CodeGeneratorRequest
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t CodeGeneratorRequest::_capnpPrivate::dataWordSize;
 constexpr uint16_t CodeGeneratorRequest::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind CodeGeneratorRequest::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* CodeGeneratorRequest::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // CodeGeneratorRequest::RequestedFile
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t CodeGeneratorRequest::RequestedFile::_capnpPrivate::dataWordSize;
 constexpr uint16_t CodeGeneratorRequest::RequestedFile::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind CodeGeneratorRequest::RequestedFile::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* CodeGeneratorRequest::RequestedFile::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // CodeGeneratorRequest::RequestedFile::Import
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t CodeGeneratorRequest::RequestedFile::Import::_capnpPrivate::dataWordSize;
 constexpr uint16_t CodeGeneratorRequest::RequestedFile::Import::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind CodeGeneratorRequest::RequestedFile::Import::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* CodeGeneratorRequest::RequestedFile::Import::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // CodeGeneratorRequest::RequestedFile::FileSourceInfo
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::_capnpPrivate::dataWordSize;
 constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_capnpPrivate::dataWordSize;
 constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 // CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_capnpPrivate::dataWordSize;
 constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_capnpPrivate::pointerCount;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#if !CAPNP_LITE
-#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#if !SHARK_LITE
+#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_capnpPrivate::schema;
-#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
+#endif  // !SHARK_LITE
 
 
 }  // namespace

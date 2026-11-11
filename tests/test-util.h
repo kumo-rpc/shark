@@ -26,12 +26,12 @@
 #include <iostream>
 #include <tests/base/compat/gtest.h>
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 #include <shark/dynamic.h>
 #include <shark/base/io.h>
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 // TODO(cleanup): Auto-generate stringification functions for union discriminants.
 namespace capnproto_test {
@@ -98,7 +98,7 @@ void checkTestMessage(TestListDefaults::Reader reader);
 void checkTestMessageAllZero(TestAllTypes::Builder builder);
 void checkTestMessageAllZero(TestAllTypes::Reader reader);
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 void initDynamicTestMessage(DynamicStruct::Builder builder);
 void initDynamicTestLists(DynamicStruct::Builder builder);
 void checkDynamicTestMessage(DynamicStruct::Builder builder);
@@ -107,7 +107,7 @@ void checkDynamicTestMessage(DynamicStruct::Reader reader);
 void checkDynamicTestLists(DynamicStruct::Reader reader);
 void checkDynamicTestMessageAllZero(DynamicStruct::Builder builder);
 void checkDynamicTestMessageAllZero(DynamicStruct::Reader reader);
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 template <typename T>
 inline void checkElement(T a, T b) {
@@ -159,7 +159,7 @@ inline void expectPrimitiveEq(double a, double b) { EXPECT_DOUBLE_EQ(a, b); }
 inline void expectPrimitiveEq(Text::Reader a, Text::Builder b) { EXPECT_EQ(a, b); }
 inline void expectPrimitiveEq(Data::Reader a, Data::Builder b) { EXPECT_EQ(a, b); }
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 template <typename Element, typename T>
 void checkList(T reader, std::initializer_list<ReaderFor<Element>> expected) {
   auto list = reader.as<DynamicList>();
@@ -174,14 +174,14 @@ void checkList(T reader, std::initializer_list<ReaderFor<Element>> expected) {
     expectPrimitiveEq(expected.begin()[i], typed[i]);
   }
 }
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 #undef as
 
 // =======================================================================================
 // Interface implementations.
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 
 class TestInterfaceImpl final: public test::TestInterface::Server {
 public:
@@ -359,9 +359,9 @@ public:
   }
 };
 
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 }  // namespace _ (private)
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

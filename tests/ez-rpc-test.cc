@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#define CAPNP_TESTING_CAPNP 1
+#define SHARK_TESTING_SHARK 1
 
 #include <shark/rpc/ez-rpc.h>
 #include <tests/test-util.h>

@@ -24,7 +24,7 @@
 #include "dynamic.h"
 #include <shark/base/string-tree.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -41,4 +41,4 @@ kj::StringTree prettyPrint(DynamicList::Builder value);
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

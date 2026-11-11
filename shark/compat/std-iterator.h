@@ -29,7 +29,7 @@
 #include "../list.h"
 #include <iterator>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace std {
 
@@ -44,4 +44,4 @@ struct iterator_traits<capnp::_::IndexingIterator<Container, Element>> {
 
 }  // namespace std
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

@@ -37,8 +37,8 @@ namespace _ {  // private
 namespace {
 
 bool skipFuzzTest() {
-  if (getenv("CAPNP_SKIP_FUZZ_TEST") != nullptr) {
-    KJ_LOG(WARNING, "Skipping test because CAPNP_SKIP_FUZZ_TEST is set in environment.");
+  if (getenv("SHARK_SKIP_FUZZ_TEST") != nullptr) {
+    KJ_LOG(WARNING, "Skipping test because SHARK_SKIP_FUZZ_TEST is set in environment.");
     return true;
   } else {
     return false;

@@ -30,7 +30,7 @@
 #include "layout.h"
 #include "any.h"
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -555,4 +555,4 @@ kj::Array<word> canonicalize(T&& reader) {
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

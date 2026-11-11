@@ -26,7 +26,7 @@
 #include <shark/schema.h>
 #include <shark/base/one-of.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 namespace compiler {
@@ -129,4 +129,4 @@ public:
 }  // namespace compiler
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

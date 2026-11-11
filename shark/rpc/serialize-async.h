@@ -25,7 +25,7 @@
 #include <shark/base/async-io.h>
 #include <shark/base/io.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -317,4 +317,4 @@ inline kj::Promise<void> MessageStream::writeMessage(
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

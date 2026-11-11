@@ -1234,12 +1234,12 @@ private:
                 "  return typename ", scope, titleCase, "::Builder(_builder);\n"
                 "}\n",
                 hasDiscriminantValue(proto) ? kj::strTree() : kj::strTree(
-                  "#if !CAPNP_LITE\n",
+                  "#if !SHARK_LITE\n",
                   templateContext.allDecls(),
                   "inline typename ", scope, titleCase, "::Pipeline ", scope, "Pipeline::get", titleCase, "() {\n",
                   "  return typename ", scope, titleCase, "::Pipeline(_typeless.noop());\n"
                   "}\n"
-                  "#endif  // !CAPNP_LITE\n"),
+                  "#endif  // !SHARK_LITE\n"),
                 templateContext.allDecls(),
                 "inline typename ", scope, titleCase, "::Builder ", scope, "Builder::init", titleCase, "() {\n",
                 unionDiscrim.set,
@@ -1439,21 +1439,21 @@ private:
         kj::strTree(
             kj::mv(unionDiscrim.readerIsDecl),
             "  inline bool has", titleCase, "() const;\n"
-            "#if !CAPNP_LITE\n"
+            "#if !SHARK_LITE\n"
             "  inline ", clientType, " get", titleCase, "() const;\n"
-            "#endif  // !CAPNP_LITE\n"
+            "#endif  // !SHARK_LITE\n"
             "\n"),
 
         kj::strTree(
             kj::mv(unionDiscrim.builderIsDecl),
             "  inline bool has", titleCase, "();\n"
-            "#if !CAPNP_LITE\n"
+            "#if !SHARK_LITE\n"
             "  inline ", clientType, " get", titleCase, "();\n"
             "  inline void set", titleCase, "(", clientType, "&& value);\n",
             "  inline void set", titleCase, "(", clientType, "& value);\n",
             "  inline void adopt", titleCase, "(::capnp::Orphan<", type, ">&& value);\n"
             "  inline ::capnp::Orphan<", type, "> disown", titleCase, "();\n"
-            "#endif  // !CAPNP_LITE\n"
+            "#endif  // !SHARK_LITE\n"
             "\n"),
 
         kj::strTree(
@@ -1474,7 +1474,7 @@ private:
             "  return !_builder.getPointerField(\n"
             "      ::capnp::bounded<", offset, ">() * ::capnp::POINTERS).isNull();\n"
             "}\n"
-            "#if !CAPNP_LITE\n",
+            "#if !SHARK_LITE\n",
             templateContext.allDecls(),
             "inline ", clientType, " ", scope, "Reader::get", titleCase, "() const {\n",
             unionDiscrim.check,
@@ -1517,7 +1517,7 @@ private:
             "  return ::capnp::_::PointerHelpers<", type, ">::disown(_builder.getPointerField(\n"
             "      ::capnp::bounded<", offset, ">() * ::capnp::POINTERS));\n"
             "}\n"
-            "#endif  // !CAPNP_LITE\n"
+            "#endif  // !SHARK_LITE\n"
             "\n")
       };
 
@@ -1673,15 +1673,15 @@ private:
         kj::strTree(
             kj::mv(unionDiscrim.readerIsDecl),
             "  inline bool has", titleCase, "() const;\n",
-            COND(shouldExcludeInLiteMode, "#if !CAPNP_LITE\n"),
+            COND(shouldExcludeInLiteMode, "#if !SHARK_LITE\n"),
             "  inline ", readerType, " get", titleCase, "() const;\n",
-            COND(shouldExcludeInLiteMode, "#endif  // !CAPNP_LITE\n"),
+            COND(shouldExcludeInLiteMode, "#endif  // !SHARK_LITE\n"),
             "\n"),
 
         kj::strTree(
             kj::mv(unionDiscrim.builderIsDecl),
             "  inline bool has", titleCase, "();\n",
-            COND(shouldExcludeInLiteMode, "#if !CAPNP_LITE\n"),
+            COND(shouldExcludeInLiteMode, "#if !SHARK_LITE\n"),
             "  inline ", builderType, " get", titleCase, "();\n"
             "  inline void set", titleCase, "(", readerType, " value);\n",
             COND(shouldIncludeArrayInitializer,
@@ -1700,7 +1700,7 @@ private:
                 "  inline ", builderType, " init", titleCase, "(unsigned int size);\n")),
             "  inline void adopt", titleCase, "(::capnp::Orphan<", type, ">&& value);\n"
             "  inline ::capnp::Orphan<", type, "> disown", titleCase, "();\n",
-            COND(shouldExcludeInLiteMode, "#endif  // !CAPNP_LITE\n"),
+            COND(shouldExcludeInLiteMode, "#endif  // !SHARK_LITE\n"),
             "\n"),
 
         kj::strTree(
@@ -1721,7 +1721,7 @@ private:
             "  return !_builder.getPointerField(\n"
             "      ::capnp::bounded<", offset, ">() * ::capnp::POINTERS).isNull();\n"
             "}\n",
-            COND(shouldExcludeInLiteMode, "#if !CAPNP_LITE\n"),
+            COND(shouldExcludeInLiteMode, "#if !SHARK_LITE\n"),
             templateContext.allDecls(),
             "inline ", readerType, " ", scope, "Reader::get", titleCase, "() const {\n",
             unionDiscrim.check,
@@ -1735,12 +1735,12 @@ private:
             "      ::capnp::bounded<", offset, ">() * ::capnp::POINTERS)", defaultParam, ");\n"
             "}\n",
             COND(shouldIncludePipelineGetter,
-              "#if !CAPNP_LITE\n",
+              "#if !SHARK_LITE\n",
               templateContext.allDecls(),
               "inline ", pipelineType, " ", scope, "Pipeline::get", titleCase, "() {\n",
               "  return ", pipelineType, "(_typeless.getPointerField(", offset, "));\n"
               "}\n"
-              "#endif  // !CAPNP_LITE\n"),
+              "#endif  // !SHARK_LITE\n"),
             templateContext.allDecls(),
             "inline void ", scope, "Builder::set", titleCase, "(", readerType, " value) {\n",
             unionDiscrim.set,
@@ -1807,7 +1807,7 @@ private:
             "      ::capnp::bounded<", offset, ">() * ::capnp::POINTERS));\n"
             "}\n",
             COND(type.hasDisambiguatedTemplate(), "#endif  // !_MSC_VER || __clang__\n"),
-            COND(shouldExcludeInLiteMode, "#endif  // !CAPNP_LITE\n"),
+            COND(shouldExcludeInLiteMode, "#endif  // !SHARK_LITE\n"),
             "\n")
       };
 
@@ -1891,11 +1891,11 @@ private:
         "    return _reader.totalSize().asPublic();\n"
         "  }\n"
         "\n"
-        "#if !CAPNP_LITE\n"
+        "#if !SHARK_LITE\n"
         "  inline ::kj::StringTree toString() const {\n"
         "    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());\n"
         "  }\n"
-        "#endif  // !CAPNP_LITE\n"
+        "#endif  // !SHARK_LITE\n"
         "\n",
         makeAsGenericDef(AsGenericRole::READER, templateContext, unqualifiedParentType),
         isUnion ? kj::strTree("  inline Which which() const;\n") : kj::strTree(),
@@ -1931,9 +1931,9 @@ private:
         "  inline Reader asReader() const { return *this; }\n"
         "\n"
         "  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }\n"
-        "#if !CAPNP_LITE\n"
+        "#if !SHARK_LITE\n"
         "  inline ::kj::StringTree toString() const { return asReader().toString(); }\n"
-        "#endif  // !CAPNP_LITE\n"
+        "#endif  // !SHARK_LITE\n"
         "\n",
         makeAsGenericDef(AsGenericRole::BUILDER, templateContext, unqualifiedParentType),
         isUnion ? kj::strTree("  inline Which which();\n") : kj::strTree(),
@@ -1953,7 +1953,7 @@ private:
                                  const TemplateContext& templateContext, bool isUnion,
                                  kj::Array<kj::StringTree>&& methodDecls) {
     return kj::strTree(
-        "#if !CAPNP_LITE\n",
+        "#if !SHARK_LITE\n",
         templateContext.allDecls(),
         "class ", fullName, "::Pipeline {\n"
         "public:\n"
@@ -1970,7 +1970,7 @@ private:
         "  template <typename, ::capnp::Kind>\n"
         "  friend struct ::capnp::ToDynamic_;\n"
         "};\n"
-        "#endif  // !CAPNP_LITE\n"
+        "#endif  // !SHARK_LITE\n"
         "\n");
   }
 
@@ -2041,42 +2041,42 @@ private:
     // Private members struct
     kj::StringTree declareText = kj::strTree(
          "  struct _capnpPrivate {\n"
-         "    CAPNP_DECLARE_STRUCT_HEADER(", hexId, ", ", structNode.getDataWordCount(), ", ",
+         "    SHARK_DECLARE_STRUCT_HEADER(", hexId, ", ", structNode.getDataWordCount(), ", ",
          structNode.getPointerCount(), ")\n");
 
     kj::StringTree defineText = kj::strTree(
         "// ", fullName, "\n",
-        "#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL\n",
+        "#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL\n",
         templates, "constexpr uint16_t ", fullName, "::_capnpPrivate::dataWordSize;\n",
         templates, "constexpr uint16_t ", fullName, "::_capnpPrivate::pointerCount;\n",
-        "#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL\n",
-        "#if !CAPNP_LITE\n",
-        "#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL\n",
+        "#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL\n",
+        "#if !SHARK_LITE\n",
+        "#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL\n",
         templates, "constexpr ::capnp::Kind ", fullName, "::_capnpPrivate::kind;\n",
         templates, "constexpr ::capnp::_::RawSchema const* ", fullName, "::_capnpPrivate::schema;\n",
-        "#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL\n");
+        "#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL\n");
 
     if (templateContext.isGeneric()) {
       auto brandInitializers = makeBrandInitializers(templateContext, schema);
       bool hasDeps = (brandInitializers.dependencies.size() != 0);
 
       declareText = kj::strTree(kj::mv(declareText),
-          "    #if !CAPNP_LITE\n",
+          "    #if !SHARK_LITE\n",
           makeGenericDeclarations(templateContext, hasDeps),
-          "    #endif  // !CAPNP_LITE\n");
+          "    #endif  // !SHARK_LITE\n");
 
       defineText = kj::strTree(kj::mv(defineText),
           makeGenericDefinitions(
               templateContext, fullName, kj::str(hexId), kj::mv(brandInitializers)));
     } else {
       declareText = kj::strTree(kj::mv(declareText),
-          "    #if !CAPNP_LITE\n"
+          "    #if !SHARK_LITE\n"
           "    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }\n"
-          "    #endif  // !CAPNP_LITE\n");
+          "    #endif  // !SHARK_LITE\n");
     }
 
     declareText = kj::strTree(kj::mv(declareText), "  };");
-    defineText = kj::strTree(kj::mv(defineText), "#endif  // !CAPNP_LITE\n\n");
+    defineText = kj::strTree(kj::mv(defineText), "#endif  // !SHARK_LITE\n\n");
 
     // Name of the ::Which type, when applicable.
     CppTypeName whichName;
@@ -2238,7 +2238,7 @@ private:
     // conditions this bug occurs, but it commonly crops up in test.capnp.h.
     //
     // The easiest (and only) workaround I found is to use C++14's return type deduction here, thus
-    // the `CAPNP_AUTO_IF_MSVC()` hackery in the return type declarations below. We're depending on
+    // the `SHARK_AUTO_IF_MSVC()` hackery in the return type declarations below. We're depending on
     // the fact that that this function has an inline implementation for the deduction to work.
 
     bool noPromisePipelining = !resultSchema.mayContainCapabilities();
@@ -2246,7 +2246,7 @@ private:
     auto requestMethodImpl = kj::strTree(
         templateContext.allDecls(),
         implicitParamsTemplateDecl,
-        templateContext.isGeneric() ? "CAPNP_AUTO_IF_MSVC(" : "",
+        templateContext.isGeneric() ? "SHARK_AUTO_IF_MSVC(" : "",
         isStreaming ? kj::strTree("::capnp::StreamingRequest<", paramType, ">")
                     : kj::strTree("::capnp::Request<", paramType, ", ", resultType, ">"),
         templateContext.isGeneric() ? ")\n" : "\n",
@@ -2275,7 +2275,7 @@ private:
     return MethodText {
       kj::strTree(
           implicitParamsTemplateDecl.size() == 0 ? "" : "  ", implicitParamsTemplateDecl,
-          templateContext.isGeneric() ? "  CAPNP_AUTO_IF_MSVC(" : "  ",
+          templateContext.isGeneric() ? "  SHARK_AUTO_IF_MSVC(" : "  ",
           isStreaming ? kj::strTree("::capnp::StreamingRequest<", paramType, ">")
                       : kj::strTree("::capnp::Request<", paramType, ", ", resultType, ">"),
           templateContext.isGeneric() ? ")" : "",
@@ -2389,17 +2389,17 @@ private:
 
     // Private members struct
     kj::StringTree declareText = kj::strTree(
-         "  #if !CAPNP_LITE\n"
+         "  #if !SHARK_LITE\n"
          "  struct _capnpPrivate {\n"
-         "    CAPNP_DECLARE_INTERFACE_HEADER(", hexId, ")\n");
+         "    SHARK_DECLARE_INTERFACE_HEADER(", hexId, ")\n");
 
     kj::StringTree defineText = kj::strTree(
         "// ", fullName, "\n",
-        "#if !CAPNP_LITE\n",
-        "#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL\n",
+        "#if !SHARK_LITE\n",
+        "#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL\n",
         templates, "constexpr ::capnp::Kind ", fullName, "::_capnpPrivate::kind;\n",
         templates, "constexpr ::capnp::_::RawSchema const* ", fullName, "::_capnpPrivate::schema;\n"
-        "#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL\n");
+        "#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL\n");
 
     if (templateContext.isGeneric()) {
       auto brandInitializers = makeBrandInitializers(templateContext, schema);
@@ -2416,8 +2416,8 @@ private:
         "    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }\n");
     }
 
-    declareText = kj::strTree(kj::mv(declareText), "  };\n  #endif  // !CAPNP_LITE");
-    defineText = kj::strTree(kj::mv(defineText), "#endif  // !CAPNP_LITE\n\n");
+    declareText = kj::strTree(kj::mv(declareText), "  };\n  #endif  // !SHARK_LITE");
+    defineText = kj::strTree(kj::mv(defineText), "#endif  // !SHARK_LITE\n\n");
 
     return InterfaceText {
       kj::strTree(
@@ -2430,10 +2430,10 @@ private:
           "struct ", scope, name, " {\n",
           "  ", name, "() = delete;\n"
           "\n"
-          "#if !CAPNP_LITE\n"
+          "#if !SHARK_LITE\n"
           "  class Client;\n"
           "  class Server;\n"
-          "#endif  // !CAPNP_LITE\n"
+          "#endif  // !SHARK_LITE\n"
           "\n",
           KJ_MAP(n, nestedTypeDecls) { return kj::mv(n); },
           "\n",
@@ -2442,7 +2442,7 @@ private:
           "\n"),
 
       kj::strTree(
-          "#if !CAPNP_LITE\n",
+          "#if !SHARK_LITE\n",
           templateContext.allDecls(),
           "class ", fullName, "::Client\n"
           "    : public virtual ::capnp::Capability::Client",
@@ -2498,11 +2498,11 @@ private:
           "      uint16_t methodId,\n"
           "      ::capnp::CallContext< ::capnp::AnyPointer, ::capnp::AnyPointer> context);\n"
           "};\n"
-          "#endif  // !CAPNP_LITE\n"
+          "#endif  // !SHARK_LITE\n"
           "\n"),
 
       kj::strTree(
-          "#if !CAPNP_LITE\n",
+          "#if !SHARK_LITE\n",
           templateContext.allDecls(),
           "inline ", fullName, "::Client::Client(decltype(nullptr))\n"
           "    : ::capnp::Capability::Client(nullptr) {}\n",
@@ -2533,10 +2533,10 @@ private:
           "}\n"
           "\n",
           KJ_MAP(m, methods) { return kj::mv(m.inlineDefs); },
-          "#endif  // !CAPNP_LITE\n"),
+          "#endif  // !SHARK_LITE\n"),
 
       kj::strTree(
-          "#if !CAPNP_LITE\n",
+          "#if !SHARK_LITE\n",
           KJ_MAP(m, methods) { return kj::mv(m.sourceDefs); },
           templateContext.allDecls(),
           "::capnp::Capability::Server::DispatchCallResult ", fullName, "::Server::dispatchCall(\n"
@@ -2568,7 +2568,7 @@ private:
           "          0x", kj::hex(proto.getId()), "ull, methodId);\n"
           "  }\n"
           "}\n"
-          "#endif  // !CAPNP_LITE\n"
+          "#endif  // !SHARK_LITE\n"
           "\n",
           kj::mv(defineText))
     };
@@ -2609,7 +2609,7 @@ private:
           kj::strTree("static constexpr ", typeName_, ' ', upperCase, " = ",
               literalValue(schema.getType(), constProto.getValue()), ";\n"),
           scope.size() == 0 ? kj::strTree() : kj::strTree(
-              "#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL\n"
+              "#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL\n"
               "constexpr ", typeName_, ' ', scope, upperCase, ";\n"
               "#endif\n")
         };
@@ -2623,10 +2623,10 @@ private:
         return ConstText {
           false,
           kj::strTree("static KJ_CONSTEXPR(const) ", typeName_, ' ', upperCase,
-              " CAPNP_NON_INT_CONSTEXPR_DECL_INIT(", value, ");\n"),
+              " SHARK_NON_INT_CONSTEXPR_DECL_INIT(", value, ");\n"),
           scope.size() == 0 ? kj::strTree() : kj::strTree(
               "KJ_CONSTEXPR(const) ", typeName_, ' ', scope, upperCase,
-              " CAPNP_NON_INT_CONSTEXPR_DEF_INIT(", value, ");\n")
+              " SHARK_NON_INT_CONSTEXPR_DEF_INIT(", value, ");\n")
         };
       }
 
@@ -2761,7 +2761,7 @@ private:
     }, "\n   ");
 
     auto schemaDecl = kj::strTree(
-        "CAPNP_DECLARE_SCHEMA(", hexId, ");\n");
+        "SHARK_DECLARE_SCHEMA(", hexId, ");\n");
 
     std::set<uint64_t> deps;
     enumerateDeps(proto, deps);
@@ -2802,7 +2802,7 @@ private:
         "  {", kj::mv(schemaLiteral), " }\n"
         "};\n"
         "::capnp::word const* const bp_", hexId, " = b_", hexId, ".words;\n"
-        "#if !CAPNP_LITE\n",
+        "#if !SHARK_LITE\n",
         deps.size() == 0 ? kj::strTree() : kj::strTree(
             "static const ::capnp::_::RawSchema* const d_", hexId, "[] = {\n",
             KJ_MAP(depId, deps) {
@@ -2831,7 +2831,7 @@ private:
             "bd_", hexId, ", 0, " "sizeof(bd_", hexId, ") / sizeof(bd_", hexId, "[0])"),
         ", nullptr }, ", mayContainCapabilities, "\n"
         "};\n"
-        "#endif  // !CAPNP_LITE\n");
+        "#endif  // !SHARK_LITE\n");
 
     NodeText top = makeNodeTextWithoutNested(
         namespace_, scope, name, schema,
@@ -2933,9 +2933,9 @@ private:
                 return kj::strTree("  ", toUpperCase(protoName(e.getProto())), ",\n");
               },
               "};\n"
-              "CAPNP_DECLARE_ENUM(", name, ", ", hexId, ");\n"),
+              "SHARK_DECLARE_ENUM(", name, ", ", hexId, ");\n"),
           kj::strTree(
-              "CAPNP_DEFINE_ENUM(", name, "_", hexId, ", ", hexId, ");\n"),
+              "SHARK_DEFINE_ENUM(", name, "_", hexId, ", ", hexId, ");\n"),
 
           kj::strTree(),
         };
@@ -3063,14 +3063,14 @@ private:
           "#include <shark/generated-header-support.h>\n"
           "#include <shark/base/windows-sanity.h>\n",  // work-around macro conflict with VOID
           hasInterfaces ? kj::strTree(
-            "#if !CAPNP_LITE\n"
+            "#if !SHARK_LITE\n"
             "#include <shark/capability.h>\n"
-            "#endif  // !CAPNP_LITE\n"
+            "#endif  // !SHARK_LITE\n"
           ) : kj::strTree(),
           "\n"
-          "#ifndef CAPNP_VERSION\n"
-          "#error \"CAPNP_VERSION is not defined, is shark/generated-header-support.h missing?\"\n"
-          "#elif CAPNP_VERSION != ", CAPNP_VERSION, "\n"
+          "#ifndef SHARK_VERSION\n"
+          "#error \"SHARK_VERSION is not defined, is shark/generated-header-support.h missing?\"\n"
+          "#elif SHARK_VERSION != ", SHARK_VERSION, "\n"
           "#error \"Version mismatch between generated code and library headers.  You must "
               "use the same version of the Cap'n Proto compiler and library.\"\n"
           "#endif\n"
@@ -3083,7 +3083,7 @@ private:
             }
           },
           "\n"
-          "CAPNP_BEGIN_HEADER\n"
+          "SHARK_BEGIN_HEADER\n"
           "\n"
           "namespace capnp {\n"
           "namespace schemas {\n"
@@ -3102,7 +3102,7 @@ private:
           KJ_MAP(n, nodeTexts) { return kj::mv(n.inlineMethodDefs); },
           KJ_MAP(n, namespaceParts) { return kj::strTree("}  // namespace\n"); },
           "\n"
-          "CAPNP_END_HEADER\n"
+          "SHARK_END_HEADER\n"
           "\n"),
 
       kj::strTree(
@@ -3157,15 +3157,15 @@ private:
 
     auto capnpVersion = request.getCapnpVersion();
 
-    if (capnpVersion.getMajor() != CAPNP_VERSION_MAJOR ||
-        capnpVersion.getMinor() != CAPNP_VERSION_MINOR ||
-        capnpVersion.getMicro() != CAPNP_VERSION_MICRO) {
+    if (capnpVersion.getMajor() != SHARK_VERSION_MAJOR ||
+        capnpVersion.getMinor() != SHARK_VERSION_MINOR ||
+        capnpVersion.getMicro() != SHARK_VERSION_MICRO) {
       auto compilerVersion = request.hasCapnpVersion()
           ? kj::str(capnpVersion.getMajor(), '.', capnpVersion.getMinor(), '.',
                     capnpVersion.getMicro())
           : kj::str("pre-0.6");  // pre-0.6 didn't send the version.
       auto generatorVersion = kj::str(
-          CAPNP_VERSION_MAJOR, '.', CAPNP_VERSION_MINOR, '.', CAPNP_VERSION_MICRO);
+          SHARK_VERSION_MAJOR, '.', SHARK_VERSION_MINOR, '.', SHARK_VERSION_MICRO);
 
       KJ_LOG(WARNING,
           "You appear to be using different versions of 'capnp' (the compiler) and "

@@ -25,7 +25,7 @@
 #include <inttypes.h>
 #include <string.h>  // memcpy
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 namespace _ {  // private
@@ -43,8 +43,8 @@ namespace _ {  // private
 #if _MSC_VER
 // Assume Windows is little-endian.
 //
-// TODO(msvc): This is ugly. Maybe refactor later checks to be based on CAPNP_BYTE_ORDER or
-//   CAPNP_SWAP_BYTES or something, and define that in turn based on _MSC_VER or the GCC
+// TODO(msvc): This is ugly. Maybe refactor later checks to be based on SHARK_BYTE_ORDER or
+//   SHARK_SWAP_BYTES or something, and define that in turn based on _MSC_VER or the GCC
 //   intrinsics.
 
 #ifndef __ORDER_BIG_ENDIAN__
@@ -58,17 +58,17 @@ namespace _ {  // private
 #endif
 #endif
 
-#if CAPNP_REVERSE_ENDIAN
-#define CAPNP_WIRE_BYTE_ORDER __ORDER_BIG_ENDIAN__
-#define CAPNP_OPPOSITE_OF_WIRE_BYTE_ORDER __ORDER_LITTLE_ENDIAN__
+#if SHARK_REVERSE_ENDIAN
+#define SHARK_WIRE_BYTE_ORDER __ORDER_BIG_ENDIAN__
+#define SHARK_OPPOSITE_OF_WIRE_BYTE_ORDER __ORDER_LITTLE_ENDIAN__
 #else
-#define CAPNP_WIRE_BYTE_ORDER __ORDER_LITTLE_ENDIAN__
-#define CAPNP_OPPOSITE_OF_WIRE_BYTE_ORDER __ORDER_BIG_ENDIAN__
+#define SHARK_WIRE_BYTE_ORDER __ORDER_LITTLE_ENDIAN__
+#define SHARK_OPPOSITE_OF_WIRE_BYTE_ORDER __ORDER_BIG_ENDIAN__
 #endif
 
 #if defined(__BYTE_ORDER__) && \
-    __BYTE_ORDER__ == CAPNP_WIRE_BYTE_ORDER && \
-    !CAPNP_DISABLE_ENDIAN_DETECTION
+    __BYTE_ORDER__ == SHARK_WIRE_BYTE_ORDER && \
+    !SHARK_DISABLE_ENDIAN_DETECTION
 // CPU is little-endian.  We can just read/write the memory directly.
 
 template <typename T>
@@ -88,8 +88,8 @@ using WireValue = DirectWireValue<T>;
 // one we want to use.
 
 #elif defined(__BYTE_ORDER__) && \
-      __BYTE_ORDER__ == CAPNP_OPPOSITE_OF_WIRE_BYTE_ORDER && \
-      defined(__GNUC__) && !CAPNP_DISABLE_ENDIAN_DETECTION
+      __BYTE_ORDER__ == SHARK_OPPOSITE_OF_WIRE_BYTE_ORDER && \
+      defined(__GNUC__) && !SHARK_DISABLE_ENDIAN_DETECTION
 // Big-endian, but GCC's __builtin_bswap() is available.
 
 // TODO(perf):  Use dedicated instructions to read little-endian data on big-endian CPUs that have
@@ -181,7 +181,7 @@ using WireValue = SwappingWireValue<T>;
 #else
 // Unknown endianness.  Fall back to bit shifts.
 
-#if !CAPNP_DISABLE_ENDIAN_DETECTION
+#if !SHARK_DISABLE_ENDIAN_DETECTION
 #if _MSC_VER
 #pragma message("Couldn't detect endianness of your platform.  Using unoptimized fallback implementation.")
 #pragma message("Consider changing this code to detect your platform and send us a patch!")
@@ -189,7 +189,7 @@ using WireValue = SwappingWireValue<T>;
 #warning "Couldn't detect endianness of your platform.  Using unoptimized fallback implementation."
 #warning "Consider changing this code to detect your platform and send us a patch!"
 #endif
-#endif  // !CAPNP_DISABLE_ENDIAN_DETECTION
+#endif  // !SHARK_DISABLE_ENDIAN_DETECTION
 
 template <typename T, size_t size = sizeof(T)>
 class ShiftingWireValue;
@@ -303,4 +303,4 @@ using WireValue = ShiftingWireValue<T>;
 }  // namespace _ (private)
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

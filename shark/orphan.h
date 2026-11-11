@@ -23,7 +23,7 @@
 
 #include "layout.h"
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -179,9 +179,9 @@ private:
   inline explicit Orphanage(_::BuilderArena* arena, _::CapTableBuilder* capTable)
       : arena(arena), capTable(capTable) {}
 
-  template <typename T, Kind = CAPNP_KIND(T)>
+  template <typename T, Kind = SHARK_KIND(T)>
   struct GetInnerBuilder;
-  template <typename T, Kind = CAPNP_KIND(T)>
+  template <typename T, Kind = SHARK_KIND(T)>
   struct GetInnerReader;
   template <typename T>
   struct NewOrphanListImpl;
@@ -195,7 +195,7 @@ private:
 
 namespace _ {  // private
 
-template <typename T, Kind = CAPNP_KIND(T)>
+template <typename T, Kind = SHARK_KIND(T)>
 struct OrphanGetImpl;
 
 template <typename T>
@@ -218,7 +218,7 @@ struct OrphanGetImpl<T, Kind::STRUCT> {
   }
 };
 
-#if !CAPNP_LITE
+#if !SHARK_LITE
 template <typename T>
 struct OrphanGetImpl<T, Kind::INTERFACE> {
   static inline typename T::Client apply(_::OrphanBuilder& builder) {
@@ -231,7 +231,7 @@ struct OrphanGetImpl<T, Kind::INTERFACE> {
     builder.truncate(size, ElementSize::POINTER);
   }
 };
-#endif  // !CAPNP_LITE
+#endif  // !SHARK_LITE
 
 template <typename T, Kind k>
 struct OrphanGetImpl<List<T, k>, Kind::LIST> {
@@ -434,4 +434,4 @@ inline Orphan<Data> Orphanage::referenceExternalData(Data::Reader data) const {
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

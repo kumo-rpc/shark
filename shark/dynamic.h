@@ -39,7 +39,7 @@
 #include <shark/base/windows-sanity.h> // work-around macro conflict with `VOID`
 #include <shark/capability.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -1439,7 +1439,7 @@ namespace capnp {
     inline DynamicValue::Builder::Builder(std::nullptr_t n)
         : type(UNKNOWN) { }
 
-#define CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(cppType, typeTag, fieldName) \
+#define SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(cppType, typeTag, fieldName) \
     inline DynamicValue::Reader::Reader(cppType value)                       \
         : type(typeTag)                                                      \
         , fieldName##Value(value) { }                                        \
@@ -1450,25 +1450,25 @@ namespace capnp {
         : type(DynamicValue::typeTag)                                        \
         , fieldName##Value(value) { }
 
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(Void, VOID, void);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(bool, BOOL, bool);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(char, INT, int);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(signed char, INT, int);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(short, INT, int);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(int, INT, int);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(long, INT, int);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(long long, INT, int);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(unsigned char, UINT, uint);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(unsigned short, UINT, uint);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(unsigned int, UINT, uint);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(unsigned long, UINT, uint);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(unsigned long long, UINT, uint);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(float, FLOAT, float);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(double, FLOAT, float);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(DynamicEnum, ENUM, enum);
-#undef CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(Void, VOID, void);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(bool, BOOL, bool);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(char, INT, int);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(signed char, INT, int);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(short, INT, int);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(int, INT, int);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(long, INT, int);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(long long, INT, int);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(unsigned char, UINT, uint);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(unsigned short, UINT, uint);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(unsigned int, UINT, uint);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(unsigned long, UINT, uint);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(unsigned long long, UINT, uint);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(float, FLOAT, float);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(double, FLOAT, float);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(DynamicEnum, ENUM, enum);
+#undef SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR
 
-#define CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(cppType, typeTag, fieldName) \
+#define SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(cppType, typeTag, fieldName) \
     inline DynamicValue::Reader::Reader(const cppType::Reader& value)        \
         : type(typeTag)                                                      \
         , fieldName##Value(value) { }                                        \
@@ -1476,13 +1476,13 @@ namespace capnp {
         : type(typeTag)                                                      \
         , fieldName##Value(value) { }
 
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(Text, TEXT, text);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(Data, DATA, data);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(DynamicList, LIST, list);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(DynamicStruct, STRUCT, struct);
-    CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(AnyPointer, ANY_POINTER, anyPointer);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(Text, TEXT, text);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(Data, DATA, data);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(DynamicList, LIST, list);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(DynamicStruct, STRUCT, struct);
+    SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR(AnyPointer, ANY_POINTER, anyPointer);
 
-#undef CAPNP_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR
+#undef SHARK_DECLARE_DYNAMIC_VALUE_CONSTRUCTOR
 
     inline DynamicValue::Reader::Reader(DynamicCapability::Client& value)
         : type(CAPABILITY)
@@ -1504,7 +1504,7 @@ namespace capnp {
     inline DynamicValue::Reader::Reader(const char* value)
         : Reader(Text::Reader(value)) { }
 
-#define CAPNP_DECLARE_TYPE(discrim, typeName)                   \
+#define SHARK_DECLARE_TYPE(discrim, typeName)                   \
     template <>                                                 \
     struct DynamicValue::Reader::AsImpl<typeName> {             \
         static ReaderFor<typeName> apply(const Reader& reader); \
@@ -1514,29 +1514,29 @@ namespace capnp {
         static BuilderFor<typeName> apply(Builder& builder);    \
     };
 
-    // CAPNP_DECLARE_TYPE(VOID, Void)
-    CAPNP_DECLARE_TYPE(BOOL, bool)
-    CAPNP_DECLARE_TYPE(INT8, int8_t)
-    CAPNP_DECLARE_TYPE(INT16, int16_t)
-    CAPNP_DECLARE_TYPE(INT32, int32_t)
-    CAPNP_DECLARE_TYPE(INT64, int64_t)
-    CAPNP_DECLARE_TYPE(UINT8, uint8_t)
-    CAPNP_DECLARE_TYPE(UINT16, uint16_t)
-    CAPNP_DECLARE_TYPE(UINT32, uint32_t)
-    CAPNP_DECLARE_TYPE(UINT64, uint64_t)
-    CAPNP_DECLARE_TYPE(FLOAT32, float)
-    CAPNP_DECLARE_TYPE(FLOAT64, double)
+    // SHARK_DECLARE_TYPE(VOID, Void)
+    SHARK_DECLARE_TYPE(BOOL, bool)
+    SHARK_DECLARE_TYPE(INT8, int8_t)
+    SHARK_DECLARE_TYPE(INT16, int16_t)
+    SHARK_DECLARE_TYPE(INT32, int32_t)
+    SHARK_DECLARE_TYPE(INT64, int64_t)
+    SHARK_DECLARE_TYPE(UINT8, uint8_t)
+    SHARK_DECLARE_TYPE(UINT16, uint16_t)
+    SHARK_DECLARE_TYPE(UINT32, uint32_t)
+    SHARK_DECLARE_TYPE(UINT64, uint64_t)
+    SHARK_DECLARE_TYPE(FLOAT32, float)
+    SHARK_DECLARE_TYPE(FLOAT64, double)
 
-    CAPNP_DECLARE_TYPE(TEXT, Text)
-    CAPNP_DECLARE_TYPE(DATA, Data)
-    CAPNP_DECLARE_TYPE(LIST, DynamicList)
-    CAPNP_DECLARE_TYPE(STRUCT, DynamicStruct)
-    CAPNP_DECLARE_TYPE(INTERFACE, DynamicCapability)
-    CAPNP_DECLARE_TYPE(ENUM, DynamicEnum)
-    CAPNP_DECLARE_TYPE(ANY_POINTER, AnyPointer)
-#undef CAPNP_DECLARE_TYPE
+    SHARK_DECLARE_TYPE(TEXT, Text)
+    SHARK_DECLARE_TYPE(DATA, Data)
+    SHARK_DECLARE_TYPE(LIST, DynamicList)
+    SHARK_DECLARE_TYPE(STRUCT, DynamicStruct)
+    SHARK_DECLARE_TYPE(INTERFACE, DynamicCapability)
+    SHARK_DECLARE_TYPE(ENUM, DynamicEnum)
+    SHARK_DECLARE_TYPE(ANY_POINTER, AnyPointer)
+#undef SHARK_DECLARE_TYPE
 
-    // CAPNP_DECLARE_TYPE(Void) causes gcc 4.7 to segfault.  If I do it manually and remove the
+    // SHARK_DECLARE_TYPE(Void) causes gcc 4.7 to segfault.  If I do it manually and remove the
     // ReaderFor<> and BuilderFor<> wrappers, it works.
     template <>
     struct DynamicValue::Reader::AsImpl<Void> {
@@ -1826,4 +1826,4 @@ namespace capnp {
 
 } // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

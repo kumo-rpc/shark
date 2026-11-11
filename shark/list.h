@@ -25,7 +25,7 @@
 #include "orphan.h"
 #include <initializer_list>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 namespace _ {  // private
@@ -549,4 +549,4 @@ private:
 #include "compat/std-iterator.h"
 #endif  // KJ_STD_COMPAT
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

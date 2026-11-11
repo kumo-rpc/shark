@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#define CAPNP_PRIVATE
+#define SHARK_PRIVATE
 #include "message.h"
 #include <shark/base/debug.h>
 #include "arena.h"
@@ -34,7 +34,7 @@ namespace {
 class DummyCapTableReader: public _::CapTableReader {
 public:
   kj::Maybe<kj::Own<ClientHook>> extractCap(uint index) override {
-#if CAPNP_LITE
+#if SHARK_LITE
     KJ_UNIMPLEMENTED("no cap tables in lite mode");
 #else
     return nullptr;

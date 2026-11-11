@@ -28,7 +28,7 @@
 #include <shark/rpc/rpc-twoparty.capnp.h>
 #include <shark/rpc/serialize-async.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -262,4 +262,4 @@ private:
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

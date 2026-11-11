@@ -24,7 +24,7 @@
 #include  <shark/rpc/rpc.h>
 #include <shark/message.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 struct sockaddr;
 
@@ -127,9 +127,9 @@ public:
   // Get the server's main (aka "bootstrap") interface.
 
   template <typename Type>
-  typename Type::Client importCap(kj::StringPtr name) CAPNP_DEPRECATED(
+  typename Type::Client importCap(kj::StringPtr name) SHARK_DEPRECATED(
       "Change your server to export a main interface, then use getMain() instead.");
-  Capability::Client importCap(kj::StringPtr name) CAPNP_DEPRECATED(
+  Capability::Client importCap(kj::StringPtr name) SHARK_DEPRECATED(
       "Change your server to export a main interface, then use getMain() instead.");
   // ** DEPRECATED **
   //
@@ -195,12 +195,12 @@ public:
 
   explicit EzRpcServer(kj::StringPtr bindAddress, uint defaultPort = 0,
                        ReaderOptions readerOpts = ReaderOptions())
-      CAPNP_DEPRECATED("Please specify a main interface for your server.");
+      SHARK_DEPRECATED("Please specify a main interface for your server.");
   EzRpcServer(struct sockaddr* bindAddress, uint addrSize,
               ReaderOptions readerOpts = ReaderOptions())
-      CAPNP_DEPRECATED("Please specify a main interface for your server.");
+      SHARK_DEPRECATED("Please specify a main interface for your server.");
   EzRpcServer(int socketFd, uint port, ReaderOptions readerOpts = ReaderOptions())
-      CAPNP_DEPRECATED("Please specify a main interface for your server.");
+      SHARK_DEPRECATED("Please specify a main interface for your server.");
 
   ~EzRpcServer() noexcept(false);
 
@@ -248,4 +248,4 @@ inline typename Type::Client EzRpcClient::importCap(kj::StringPtr name) {
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

@@ -351,8 +351,8 @@ public:
       static constexpr kj::StringPtr STANDARD_IMPORT_PATHS[] = {
         "/usr/local/include"_kj,
         "/usr/include"_kj,
-#ifdef CAPNP_INCLUDE_DIR
-        KJ_CONCAT(CAPNP_INCLUDE_DIR, _kj),
+#ifdef SHARK_INCLUDE_DIR
+        KJ_CONCAT(SHARK_INCLUDE_DIR, _kj),
 #endif
       };
       for (auto path: STANDARD_IMPORT_PATHS) {
@@ -483,9 +483,9 @@ public:
     auto request = message.initRoot<schema::CodeGeneratorRequest>();
 
     auto version = request.getCapnpVersion();
-    version.setMajor(CAPNP_VERSION_MAJOR);
-    version.setMinor(CAPNP_VERSION_MINOR);
-    version.setMicro(CAPNP_VERSION_MICRO);
+    version.setMajor(SHARK_VERSION_MAJOR);
+    version.setMinor(SHARK_VERSION_MINOR);
+    version.setMicro(SHARK_VERSION_MICRO);
 
     auto schemas = compiler->getLoader().getAllLoaded();
     auto nodes = request.initNodes(schemas.size());

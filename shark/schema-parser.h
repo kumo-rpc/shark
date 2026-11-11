@@ -25,7 +25,7 @@
 #include <shark/base/string.h>
 #include <shark/base/filesystem.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace capnp {
 
@@ -100,7 +100,7 @@ public:
 
   ParsedSchema parseDiskFile(kj::StringPtr displayName, kj::StringPtr diskPath,
                              kj::ArrayPtr<const kj::StringPtr> importPath) const
-      CAPNP_DEPRECATED("Use parseFromDirectory() instead.");
+      SHARK_DEPRECATED("Use parseFromDirectory() instead.");
   // Creates a private kj::Filesystem and uses it to parse files from the real disk.
   //
   // DO NOT USE in new code. Use parseFromDirectory() instead.
@@ -111,7 +111,7 @@ public:
   // particular directory, or even set up a dummy filesystem where other files are not visible.
 
   void setDiskFilesystem(kj::Filesystem& fs)
-      CAPNP_DEPRECATED("Use parseFromDirectory() instead.");
+      SHARK_DEPRECATED("Use parseFromDirectory() instead.");
   // Call before calling parseDiskFile() to choose an alternative disk filesystem implementation.
   // This exists mostly for testing purposes; new code should use parseFromDirectory() instead.
   //
@@ -290,4 +290,4 @@ private:
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER

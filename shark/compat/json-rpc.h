@@ -26,7 +26,7 @@
 #include <shark/base/async-io.h>
 #include <shark/base/map.h>
 
-CAPNP_BEGIN_HEADER
+SHARK_BEGIN_HEADER
 
 namespace kj { class HttpInputStream; }
 
@@ -113,4 +113,4 @@ private:
 
 }  // namespace capnp
 
-CAPNP_END_HEADER
+SHARK_END_HEADER
