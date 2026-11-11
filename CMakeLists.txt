@@ -144,6 +144,13 @@ if(NOT PYTHON_EXTENSION)
             "${config_install_dir}"
     )
 
+    install(
+            FILES
+            cmake/shark_cc_generate.cmake
+            DESTINATION
+            "${config_install_dir}"
+    )
+
     # Config
     #   * <prefix>/${CMAKE_INSTALL_LIBDIR}/cmake/Foo/FooTargets.cmake
 
