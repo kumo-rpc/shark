@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-// This file contains the parts of dynamic.h that live in capnp-rpc.so.
+// This file contains the parts of dynamic.h that live in shark-rpc.so.
 
 #include "../dynamic.h"
 #include <shark/base/debug.h>

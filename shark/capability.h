@@ -429,7 +429,7 @@ public:
   void allowCancellation()
       KJ_UNAVAILABLE(
           "As of Cap'n Proto 1.0, allowCancellation must be applied statically using an "
-          "annotation in the schema. See annotations defined in /capnp/c++.shk. For "
+          "annotation in the schema. See annotations defined in /shark/cpp.shk. For "
           "DynamicCapability::Server, use the constructor option (the annotation does not apply "
           "to DynamicCapability). This change was made to gain a significant performance boost -- "
           "dynamically allowing cancellation required excessive bookkeeping.");
@@ -460,7 +460,7 @@ public:
   void allowCancellation()
       KJ_UNAVAILABLE(
           "As of Cap'n Proto 1.0, allowCancellation must be applied statically using an "
-          "annotation in the schema. See annotations defined in /capnp/c++.shk. For "
+          "annotation in the schema. See annotations defined in /shark/cpp.shk. For "
           "DynamicCapability::Server, use the constructor option (the annotation does not apply "
           "to DynamicCapability). This change was made to gain a significant performance boost -- "
           "dynamically allowing cancellation required excessive bookkeeping.");

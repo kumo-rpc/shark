@@ -56,9 +56,9 @@ kmcmake_cc_test(
         SOURCES
         ${COMP_FILES}
         compat/byte-stream-test.cc
-        compat/http-over-capnp-old-test.cc
-        compat/http-over-capnp-perf-test.cc
-        compat/http-over-capnp-test.cc
+        compat/http_over_shark_old_test.cc
+        compat/http_over_shark_perf_test.cc
+        compat/http_over_shark_test.cc
         compat/json-rpc-test.cc
         compat/json-test.cc
         compat/websocket-rpc-test.cc

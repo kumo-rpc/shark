@@ -147,7 +147,7 @@ public:
   }
 
   void setFileIdsRequired(bool value) { fileIdsRequired = value; }
-  // By befault, capnp files must declare a file-level type ID (like `@0xbe702824338d3f7f;`).
+  // By befault, shark files must declare a file-level type ID (like `@0xbe702824338d3f7f;`).
   // Use `setFileIdsReqired(false)` to lift this requirement.
   //
   // If no ID is specified, a random one will be assigned. This will cause all types declared in
@@ -158,7 +158,7 @@ public:
   //
   // Setting this false is particularly useful when using Cap'n Proto as a config format. Typically
   // type IDs are irrelevant for config files, and the requirement to specify one is cumbersome.
-  // For this reason, `capnp eval` does not require type ID to be present.
+  // For this reason, `shark eval` does not require type ID to be present.
 
 private:
   struct Impl;

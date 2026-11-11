@@ -21,7 +21,7 @@ file:39:15-16: error: Duplicate ordinal number.
 file:38:15-16: error: Ordinal @2 originally used here.
 file:41:18-19: error: Skipped ordinal @3.  Ordinals must be sequential with no holes.
 file:69:15-17: error: Union ordinal, if specified, must be greater than no more than one of its member ordinals (i.e. there can only be one field retroactively unionized).
-file:117:31-50: error: Import failed: noshuchfile.capnp
+file:117:31-48: error: Import failed: noshuchfile.shk
 file:119:26-32: error: Not defined: NoSuch
 file:120:28-34: error: 'Foo' has no member named 'NoSuch'
 file:97:25-29: error: 'List' requires exactly one parameter.
@@ -62,4 +62,4 @@ file:162:23-27: error: Only pointer parameters can declare their default as 'nul
 file:163:10-16: error: 'stream' can only appear after '->', not before.
 file:163:10-16: error: A method declaration uses streaming, but '/shark/stream.shk' is not found in the import path. This is a standard file that should always be installed with the Cap'n Proto compiler.
 file:173:8-22: error: Not defined: undefinedValue
-file:158:20-45: error: Import failed: nosuchfile-unused.capnp
+file:158:20-43: error: Import failed: nosuchfile-unused.shk

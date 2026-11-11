@@ -326,7 +326,7 @@ public:
   //
   //     1. An ICE.
   //     2. 'error C2672: 'operator __surrogate_func': no matching overloaded function found)',
-  //        which crops up in numerous places when trying to build the capnp command line tools.
+  //        which crops up in numerous places when trying to build the shark command line tools.
   //
   //   The only workaround I found for both bugs is to omit the trailing return types and instead
   //   rely on C++14's return type deduction.

@@ -955,7 +955,7 @@ private:
   // Did the creator promise to explicitly call end()?
 
   kj::Promise<void> findShorterPath(shark::ByteStream::Client& capnpClient) {
-    // If the capnp stream turns out to resolve back to this process, shorten the path.
+    // If the shark stream turns out to resolve back to this process, shorten the path.
     // Also, implement whenWriteDisconnected() based on this.
     return factory.streamSet.getLocalServer(capnpClient)
         .then([this](kj::Maybe<shark::ByteStream::Server&> server) -> kj::Promise<void> {
@@ -992,7 +992,7 @@ private:
         });
       }
       KJ_CASE_ONEOF(kjStream, StreamServerBase::BorrowedStream) {
-        // The ByteStream::Server wraps a regular KJ stream that does not wrap another capnp
+        // The ByteStream::Server wraps a regular KJ stream that does not wrap another shark
         // stream.
         if (kjStream.limit < (uint64_t)kj::maxValue / 2) {
           // But it isn't wrapping that stream forever. Eventually it plans to redirect back to

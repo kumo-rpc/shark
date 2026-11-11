@@ -19,10 +19,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "http-over-capnp.h"
+#include <shark/compat/http_over_shark.h>
 #include <shark/base/debug.h>
-#include <shark/schema.h>
 #include <shark/message.h>
+#include <shark/schema.h>
 
 namespace shark {
 
@@ -502,7 +502,7 @@ public:
     // We write to `up` (the other side reads from it).
     auto up = pipeline.getUp();
 
-    // We need to create a tlsStarter callback which sends a startTls request to the capnp server.
+    // We need to create a tlsStarter callback which sends a startTls request to the shark server.
     KJ_IF_MAYBE(tlsStarter, settings.tlsStarter) {
       kj::Function<kj::Promise<void>(kj::StringPtr)> cb =
           [upForStartTls = kj::cp(up)]

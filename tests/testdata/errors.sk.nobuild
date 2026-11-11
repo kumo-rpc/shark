@@ -21,7 +21,7 @@
 
 # This file is intended to test that various error cases are detected as errors.  The error
 # output is matched against a golden file.  The file name has the .nobuild extension to make
-# sure that a build system which automatically builds .capnp files does not try to build this one.
+# sure that a build system which automatically builds .shk files does not try to build this one.
 
 #
 
@@ -114,7 +114,7 @@ struct Foo {
   badAnnotation @45 :Int32 $notFieldAnnotation(123);
   notVoidAnnotation @46 :Int32 $fieldAnnotation;
 
-  undefinedImport @17 :import "noshuchfile.capnp".Bar;
+  undefinedImport @17 :import "noshuchfile.shk".Bar;
   undefinedAbsolute @47 : .NoSuch;
   undefinedRelative @29 :NoSuch;
   undefinedMember @30 :Foo.NoSuch;
@@ -155,7 +155,7 @@ struct UseGeneric {
 const embedBadType :UInt32 = embed "binary";
 const embedNoSuchFile :Data = embed "no-such-file";
 
-using Baz = import "nosuchfile-unused.capnp".Baz;
+using Baz = import "nosuchfile-unused.shk".Baz;
 # Check that an import in an unused `using` still reports error.
 
 interface TestInterface {

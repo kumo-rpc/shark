@@ -36,7 +36,7 @@ namespace _ {  // private
 
 // Null schemas generated using the below schema file with:
 //
-//     capnp eval -Isrc null-schemas.shk node --flat |
+//     shark eval -Isrc null-schemas.shk node --flat |
 //         hexdump -v -e '8/1 "0x%02x, "' -e '1/8 "\n"'; echo
 //
 // I totally don't understand hexdump format strings and came up with this command based on trial

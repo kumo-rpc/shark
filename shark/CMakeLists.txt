@@ -218,7 +218,7 @@ shark_schema_generate(
         rpc/rpc.shk
         rpc/rpc-twoparty.shk
         compat/byte-stream.shk
-        compat/http-over-capnp.shk
+        compat/http_over_shark.shk
         compat/json-rpc.shk
 )
 
@@ -232,7 +232,7 @@ set(RPC_SRC
         rpc/rpc-twoparty.cc
         rpc/ez-rpc.cc
         compat/byte-stream.cc
-        compat/http-over-capnp.cc
+        compat/http_over_shark.cc
         compat/json-rpc.cc
         rpc/websocket-rpc.cc
 )

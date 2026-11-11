@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-// This program is a code generator plugin for `capnp compile` which writes the schema back to
+// This program is a code generator plugin for `shark compile` which writes the schema back to
 // stdout in roughly capnpc format.
 
 #ifndef _GNU_SOURCE
@@ -97,7 +97,7 @@ public:
           "This is a Cap'n Proto compiler plugin which \"de-compiles\" the schema back into "
           "Cap'n Proto schema language format, with comments showing the offsets chosen by the "
           "compiler.  This is meant to be run using the Cap'n Proto compiler, e.g.:\n"
-          "    capnp compile -ocapnp foo.shk")
+          "    shark compile -ocapnp foo.shk")
         .callAfterParsing(KJ_BIND_METHOD(*this, run))
         .build();
   }

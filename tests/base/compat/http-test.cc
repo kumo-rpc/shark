@@ -473,7 +473,7 @@ KJ_TEST("HttpHeaders validation") {
 
 KJ_TEST("HttpHeaders serialization validation") {
   // The serialization functions must reject request URLs and status texts containing characters
-  // that would allow HTTP desync / request smuggling (e.g. when http-over-capnp forwards untrusted
+  // that would allow HTTP desync / request smuggling (e.g. when http_sharkover_shark forwards untrusted
   // metadata to a plain-HTTP connection). See GHSL-2026-146.
   auto table = HttpHeaderTable::Builder().build();
   HttpHeaders headers(*table);

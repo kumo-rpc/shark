@@ -256,9 +256,9 @@ namespace shark {
                 // Default convert to text unless -o is given.
                 convertTo = Format::TEXT;
 
-                // When using `capnp eval`, type IDs don't really matter, because `eval` won't actually use
+                // When using `shark eval`, type IDs don't really matter, because `eval` won't actually use
                 // them for anything. When using Cap'n Proto an a config format -- the common use case for
-                // `capnp eval` -- the exercise of adding a file ID to every file is pointless busy work. So,
+                // `shark eval` -- the exercise of adding a file ID to every file is pointless busy work. So,
                 // we don't require it.
                 loader.setFileIdsRequired(false);
 
@@ -266,11 +266,11 @@ namespace shark {
                     "Prints (or encodes) the value of <name>, which must be defined in <schema-file>.  "
                     "<name> must refer to a const declaration, a field of a struct type (prints the default "
                     "value), or a field or list element nested within some other value.  Examples:\n"
-                    "    capnp eval myschema.shk MyType.someField\n"
-                    "    capnp eval myschema.shk someConstant\n"
-                    "    capnp eval myschema.shk someConstant.someField\n"
-                    "    capnp eval myschema.shk someConstant.someList[4]\n"
-                    "    capnp eval myschema.shk someConstant.someList[4].anotherField[1][2][3]\n"
+                    "    shark eval myschema.shk MyType.someField\n"
+                    "    shark eval myschema.shk someConstant\n"
+                    "    shark eval myschema.shk someConstant.someField\n"
+                    "    shark eval myschema.shk someConstant.someList[4]\n"
+                    "    shark eval myschema.shk someConstant.someList[4].anotherField[1][2][3]\n"
                     "Since consts can have complex struct types, and since you can define a const using "
                     "import and variable substitution, this can be a convenient way to write text-format "
                     "config files which are compiled to binary before deployment.",
@@ -280,7 +280,7 @@ namespace shark {
                     "type.");
                 addGlobalOptions(builder);
                 builder.addOptionWithArg({ 'o', "output" }, KJ_BIND_METHOD(*this, setEvalOutputFormat),
-                           "<format>", "Encode the output in the given format. See `capnp help convert` "
+                           "<format>", "Encode the output in the given format. See `shark help convert` "
                                        "for a list of formats. Defaults to \"text\".")
                     .addOption({ 'b', "binary" }, KJ_BIND_METHOD(*this, codeBinary),
                         "same as -obinary")
@@ -320,7 +320,7 @@ namespace shark {
                         "If a file specified for compilation starts with <prefix>, remove "
                         "the prefix for the purpose of deciding the names of output files.  "
                         "For example, the following command:\n"
-                        "    capnp compile --src-prefix=foo/bar -oc++:corge foo/bar/baz/qux.shk\n"
+                        "    shark compile --src-prefix=foo/bar -ocpp:corge foo/bar/baz/qux.shk\n"
                         "would generate the files corge/baz/qux.shk.{h,cc}.")
                     .expectOneOrMoreArgs("<source>", KJ_BIND_METHOD(*this, addSource))
                     .callAfterParsing(KJ_BIND_METHOD(*this, generateOutput));
@@ -405,7 +405,7 @@ namespace shark {
                         KJ_IF_MAYBE (split2, dir.findFirst(':')) {
                             // There are two colons. The first ':' was the second char, and was followed by '/' or
                             // '\', e.g.:
-                            //     capnp compile -o c:/foo.exe:bar
+                            //     shark compile -o c:/foo.exe:bar
                             //
                             // In this case we can conclude that the second colon is actually meant to be the
                             // plugin/location separator, and the first colon was simply signifying a drive letter.
@@ -433,7 +433,7 @@ namespace shark {
                         } else {
                             // The user wrote something like:
                             //
-                            //     capnp compile -o c:/foo/bar
+                            //     shark compile -o c:/foo/bar
                             //
                             // What does this mean? It depends on what system we're on. On a Unix system, the above
                             // clearly is a request to run the `capnpc-c` plugin (perhaps to output C code) and write

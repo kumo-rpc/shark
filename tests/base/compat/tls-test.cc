@@ -1272,7 +1272,7 @@ KJ_TEST("TLS to capnproto.org") {
       "HEAD / HTTP/1.1\r\n"
       "Host: capnproto.org\r\n"
       "Connection: close\r\n"
-      "User-Agent: capnp-test/0.6\r\n"
+      "User-Agent: shark-test/0.6\r\n"
       "\r\n";
 
   stream->write(request.begin(), request.size()).wait(io.waitScope);

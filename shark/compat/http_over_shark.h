@@ -20,9 +20,8 @@
 // THE SOFTWARE.
 
 #pragma once
-// Bridges from KJ HTTP to Cap'n Proto HTTP-over-RPC.
 
-#include <shark/compat/http-over-capnp.sk.h>
+#include <shark/compat/http_over_shark.sk.h>
 #include <shark/base/compat/http.h>
 #include <shark/base/map.h>
 #include "byte-stream.h"

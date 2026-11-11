@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <shark/compat/http-over-capnp.h>
+#include <shark/compat/http_over_shark.h>
 #include <tests/base/test.h>
 
 #ifndef TEST_PEER_OPTIMIZATION_LEVEL
@@ -429,7 +429,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto E2E, with path shortening") {
 KJ_TEST("HTTP-over-Cap'n-Proto 205 bug with HttpClientAdapter") {
   // Test that a 205 with a hanging body doesn't prevent headers from being delivered. (This was
   // a bug at one point. See, 205 responses are supposed to have empty bodies. But they must
-  // explicitly indicate an empty body. http-over-capnp, though, *assumed* an empty body when it
+  // explicitly indicate an empty body. http-over-shark, though, *assumed* an empty body when it
   // saw a 205. But, on the client side, when HttpClientAdapter sees an empty body, it blocks
   // delivery of the *headers* until the service promise resolves, in order to avoid prematurely
   // cancelling the service. But on the server side, the service method is left hanging because

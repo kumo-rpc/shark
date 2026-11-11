@@ -19,12 +19,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <shark/compat/http-over-capnp.h>
-#include <shark/rpc/rpc-twoparty.h>
 #include <shark/base/compat/http.h>
 #include <shark/base/debug.h>
-#include <tests/base/test.h>
+#include <shark/compat/http_over_shark.h>
+#include <shark/rpc/rpc-twoparty.h>
 #include <stdlib.h>
+#include <tests/base/test.h>
 #if KJ_BENCHMARK_MALLOC
 #include <dlfcn.h>
 #endif
@@ -383,7 +383,7 @@ KJ_TEST("Benchmark KJ HTTP full protocol") {
   });
 }
 
-KJ_TEST("Benchmark HTTP-over-capnp local call") {
+KJ_TEST("Benchmark HTTP-over-sharkshark local call") {
   kj::EventLoop loop;
   kj::WaitScope waitScope(loop);
   Metrics metrics;
@@ -408,7 +408,7 @@ KJ_TEST("Benchmark HTTP-over-capnp local call") {
   });
 }
 
-KJ_TEST("Benchmark HTTP-over-capnp full RPC") {
+KJ_TEST("Benchmark HTTP-over-shark full RPC") {
   kj::EventLoop loop;
   kj::WaitScope waitScope(loop);
   Metrics metrics;

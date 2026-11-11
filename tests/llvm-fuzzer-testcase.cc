@@ -6,7 +6,7 @@
 
 /* This is the entry point of a fuzz target to be used with libFuzzer
  * or another fuzz driver.
- * Such a fuzz driver is used by the autotools target capnp-llvm-fuzzer-testcase
+ * Such a fuzz driver is used by the autotools target shark-llvm-fuzzer-testcase
  * when the environment variable LIB_FUZZING_ENGINE is defined
  * for instance LIB_FUZZING_ENGINE=-fsanitize=fuzzer for libFuzzer
  */

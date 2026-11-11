@@ -27,9 +27,9 @@ kmcmake_cc_test(
         SOURCES
         ${COMP_FILES}
         byte-stream-test.cc
-        http-over-capnp-old-test.cc
-        http-over-capnp-perf-test.cc
-        http-over-capnp-test.cc
+        http_over_shark_old_test.cc
+        http_over_shark_perf_test.cc
+        http_over_shark_test.cc
         json-rpc-test.cc
         json-test.cc
         websocket-rpc-test.cc

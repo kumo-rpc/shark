@@ -669,7 +669,7 @@ KJ_TEST("KJ -> ByteStream RPC -> KJ promise stream -> ByteStream -> KJ") {
   // - "foo" should have made it all the way down to the final output stream.
   // - "bar", "baz", and "qux" are queued on the CapnpToKjStreamAdapter immediately wrapping the
   //   KJ promise stream.
-  // - But that stream adapter has discovered that there's another capnp stream downstream and has
+  // - But that stream adapter has discovered that there's another shark stream downstream and has
   //   resolved itself to the later stream.
   // - A new call at this time should NOT be allowed to hop the queue.
 
@@ -707,7 +707,7 @@ KJ_TEST("KJ -> ByteStream RPC -> KJ promise stream -> ByteStream -> KJ") {
 
 // TODO:
 // - Parallel writes (requires streaming)
-// - Write to KJ -> capnp -> RPC -> capnp -> KJ loopback without shortening, verify we can write
+// - Write to KJ -> shark -> RPC -> shark -> KJ loopback without shortening, verify we can write
 //   several things to buffer (requires streaming).
 // - Again, but with shortening which only occurs after some promise resolve.
 

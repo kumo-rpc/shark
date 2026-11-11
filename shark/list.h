@@ -47,7 +47,7 @@ private:
 };
 
 // By default this isn't compatible with STL algorithms. To add STL support either define
-// KJ_STD_COMPAT at the top of your compilation unit or include capnp/compat/std-iterator.h.
+// KJ_STD_COMPAT at the top of your compilation unit or include shark/compat/std-iterator.h.
 template <typename Container, typename Element>
 class IndexingIterator {
 public:

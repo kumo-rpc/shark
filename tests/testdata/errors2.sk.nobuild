@@ -20,8 +20,8 @@
 # THE SOFTWARE.
 
 @0xea7dcf0ca9acfa97;
-# This is much like errors.capnp.nobuild but expresses errors that occur in a later phase of
-# compilation, which is never reached when building errors.capnp.nobuild because the compiler
+# This is much like errors.sk.nobuild but expresses errors that occur in a later phase of
+# compilation, which is never reached when building errors.sk.nobuild because the compiler
 # bails out after other errors.
 
 struct DummyType {}

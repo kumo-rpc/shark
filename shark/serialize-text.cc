@@ -50,7 +50,7 @@ public:
     }
 
     kj::throwRecoverableException(kj::Exception(
-      kj::Exception::Type::FAILED, "(capnp text input)", line,
+      kj::Exception::Type::FAILED, "(shark text input)", line,
       kj::str(startByte - lineStart, "-", endByte - lineStart, ": ", message)
     ));
   }

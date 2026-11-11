@@ -33,7 +33,7 @@ namespace shark {
 class TextCodec {
   // Reads and writes Cap'n Proto objects in a plain text format (as used in the schema
   // language for constants, and read/written by the 'decode' and 'encode' commands of
-  // the capnp tool).
+  // the shark tool).
   //
   // This format is useful for debugging or human input, but it is not a robust alternative
   // to the binary format. Changes to a schema's types or names that are permitted in a

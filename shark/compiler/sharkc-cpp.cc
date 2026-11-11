@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-// This program is a code generator plugin for `capnp compile` which generates C++ code.
+// This program is a code generator plugin for `shark compile` which generates C++ code.
 
 #if _WIN32
 #include <shark/base/win32-api-version.h>
@@ -366,7 +366,7 @@ public:
     return kj::MainBuilder(context, "Cap'n Proto C++ plugin version " VERSION,
           "This is a Cap'n Proto compiler plugin which generates C++ code. "
           "It is meant to be run using the Cap'n Proto compiler, e.g.:\n"
-          "    capnp compile -oc++ foo.shk")
+          "    shark compile -ocpp foo.shk")
         .callAfterParsing(KJ_BIND_METHOD(*this, run))
         .build();
   }
@@ -3177,9 +3177,9 @@ private:
           SHARK_VERSION_MAJOR, '.', SHARK_VERSION_MINOR, '.', SHARK_VERSION_MICRO);
 
       KJ_LOG(WARNING,
-          "You appear to be using different versions of 'capnp' (the compiler) and "
+          "You appear to be using different versions of 'shark' (the compiler) and "
           "'capnpc-c++' (the code generator). This can happen, for example, if you built "
-          "a custom version of 'capnp' but then ran it with '-oc++', which invokes "
+          "a custom version of 'shark' but then ran it with '-oc++', which invokes "
           "'capnpc-c++' from your PATH (i.e. the installed version). To specify an alternate "
           "'capnpc-c++' executable, try something like '-o/path/to/capnpc-c++' instead.",
           compilerVersion, generatorVersion);

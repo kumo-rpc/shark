@@ -114,7 +114,7 @@ function(shark_schema_generate OUT_FILES OUT_HEADERS)
 
         string(SUBSTRING "${file_path}" ${prefix_len} -1 output_path)
         set(output_base "${SHARK_SCHEMA_GEN_OUTDIR}${output_path}")
-        string(REGEX REPLACE "\\.(capnp|shk)$" "" output_stem "${output_base}")
+        string(REGEX REPLACE "\\.shk$" "" output_stem "${output_base}")
         message(STATUS "output_path: ${output_path}")
         message(STATUS "output_base: ${output_stem}")
         message(STATUS "${SHARK_CXX_EXECUTABLE}${output_dir}")

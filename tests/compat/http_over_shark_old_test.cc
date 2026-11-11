@@ -1,2 +1,2 @@
 #define TEST_PEER_OPTIMIZATION_LEVEL HttpOverCapnpFactory::LEVEL_1
-#include "http-over-capnp-test.cc"
+#include "http_over_shark_test.cc"

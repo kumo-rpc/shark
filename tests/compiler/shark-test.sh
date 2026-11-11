@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# Tests the `capnp` tool's various commands, other than `compile`.
+# Tests the `shark` tool's various commands, other than `compile`.
 
 set -eu
 
