@@ -5,9 +5,6 @@
 
 #include <shark/generated-header-support.h>
 #include <shark/base/windows-sanity.h>
-#if !SHARK_LITE
-#include <shark/capability.h>
-#endif  // !SHARK_LITE
 
 #ifndef SHARK_VERSION
 #error "SHARK_VERSION is not defined, is shark/generated-header-support.h missing?"
@@ -1148,12 +1145,12 @@ inline bool FlattenOptions::Builder::hasPrefix() {
 inline  ::capnp::Text::Reader FlattenOptions::Reader::getPrefix() const {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS),
-        ::capnp::schemas::bp_c4df13257bc2ea61 + 34);
+        ::capnp::schemas::bp_c4df13257bc2ea61 + 36);
 }
 inline  ::capnp::Text::Builder FlattenOptions::Builder::getPrefix() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS),
-        ::capnp::schemas::bp_c4df13257bc2ea61 + 34);
+        ::capnp::schemas::bp_c4df13257bc2ea61 + 36);
 }
 inline void FlattenOptions::Builder::setPrefix( ::capnp::Text::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(

@@ -7,7 +7,7 @@
 #include <shark/base/windows-sanity.h>
 
 #ifndef SHARK_VERSION
-#error "SHARK_VERSION is not defined, is capnp/generated-header-support.h missing?"
+#error "SHARK_VERSION is not defined, is shark/generated-header-support.h missing?"
 #elif SHARK_VERSION != 1005000
 #error "Version mismatch between generated code and library headers.  You must use the same version of the Cap'n Proto compiler and library."
 #endif

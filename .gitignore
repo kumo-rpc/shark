@@ -37,6 +37,7 @@ go.sum
 
 build
 build-make
+build-bootstrap
 cmake-build-debug
 .idea
 .DS_Store

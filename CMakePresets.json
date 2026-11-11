@@ -14,6 +14,12 @@
       "binaryDir": "${sourceDir}/build-make"
     },
     {
+      "name": "gen-bootstrap",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build-bootstrap"
+    },
+    {
       "name": "deps-cpm",
       "hidden": true,
       "description": "CPM: small projects, or test-only deps (gtest/doctest) not shipped with the product.",
@@ -163,6 +169,10 @@
     {
       "name": "vcpkg-all-make",
       "inherits": ["gen-make", "deps-vcpkg", "feat-all"]
+    },
+    {
+      "name": "bootstrap",
+      "inherits": ["gen-bootstrap", "deps-vcpkg", "feat-lib"]
     }
   ]
 }
