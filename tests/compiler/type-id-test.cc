@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 #include <shark/compiler/type-id.h>
-#include <shark/schema.capnp.h>
+#include <shark/schema.sk.h>
 #include <tests/base/test.h>
 
 namespace capnp {

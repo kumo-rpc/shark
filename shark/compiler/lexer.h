@@ -24,7 +24,7 @@
 #include "error-reporter.h"
 #include <shark/base/arena.h>
 #include <shark/base/parse/common.h>
-#include <shark/compiler/lexer.capnp.h>
+#include <shark/compiler/lexer.sk.h>
 
 SHARK_BEGIN_HEADER
 

@@ -25,10 +25,10 @@
 #include "resolver.h"
 #include <shark/base/one-of.h>
 #include <shark/base/vector.h>
-#include <shark/compiler/grammar.capnp.h>
+#include <shark/compiler/grammar.sk.h>
 #include <shark/dynamic.h>
 #include <shark/orphan.h>
-#include <shark/schema.capnp.h>
+#include <shark/schema.sk.h>
 
 SHARK_BEGIN_HEADER
 
@@ -198,7 +198,7 @@ namespace capnp {
             kj::Maybe<BrandedDecl> lookupParameter(Resolver& resolver, uint64_t scopeId, uint index);
             // Search up the scope chain for the scope matching `scopeId`, and return its `index`th parameter
             // binding. Returns null if the parameter is from a scope that we are currently compiling, and
-            // hasn't otherwise been bound to any argument (see Brand.Scope.inherit in schema.capnp).
+            // hasn't otherwise been bound to any argument (see Brand.Scope.inherit in schema.shk).
             //
             // In the case that a parameter wasn't specified, but isn't part of the current scope, this
             // returns the declaration for `AnyPointer`.

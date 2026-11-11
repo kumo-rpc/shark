@@ -429,7 +429,7 @@ public:
   void allowCancellation()
       KJ_UNAVAILABLE(
           "As of Cap'n Proto 1.0, allowCancellation must be applied statically using an "
-          "annotation in the schema. See annotations defined in /capnp/c++.capnp. For "
+          "annotation in the schema. See annotations defined in /capnp/c++.shk. For "
           "DynamicCapability::Server, use the constructor option (the annotation does not apply "
           "to DynamicCapability). This change was made to gain a significant performance boost -- "
           "dynamically allowing cancellation required excessive bookkeeping.");
@@ -460,7 +460,7 @@ public:
   void allowCancellation()
       KJ_UNAVAILABLE(
           "As of Cap'n Proto 1.0, allowCancellation must be applied statically using an "
-          "annotation in the schema. See annotations defined in /capnp/c++.capnp. For "
+          "annotation in the schema. See annotations defined in /capnp/c++.shk. For "
           "DynamicCapability::Server, use the constructor option (the annotation does not apply "
           "to DynamicCapability). This change was made to gain a significant performance boost -- "
           "dynamically allowing cancellation required excessive bookkeeping.");
@@ -495,7 +495,7 @@ public:
     // for ensuring that cancellation is prevented and that `context` remains valid until the
     // call completes normally.
     //
-    // See the `allowCancellation` annotation defined in `c++.capnp`.
+    // See the `allowCancellation` annotation defined in `c++.shk`.
   };
 
   virtual DispatchCallResult dispatchCall(uint64_t interfaceId, uint16_t methodId,

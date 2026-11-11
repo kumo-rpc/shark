@@ -26,8 +26,8 @@
 #include <shark/message.h>
 #include <shark/serialize.h>
 #include <tests/test-util.h>
-#include <tests/test-import.capnp.h>
-#include <tests/test-import2.capnp.h>
+#include <tests/test-import.sk.h>
+#include <tests/test-import2.sk.h>
 #include <shark/base/miniposix.h>
 #include <tests/base/test.h>
 #include <stdlib.h>

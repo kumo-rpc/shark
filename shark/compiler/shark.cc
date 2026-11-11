@@ -49,7 +49,7 @@
 #include <shark/format/json/json.h>
 #include <shark/message.h>
 #include <shark/pretty-print.h>
-#include <shark/schema.capnp.h>
+#include <shark/schema.sk.h>
 #include <shark/serialize-packed.h>
 #include <shark/serialize-text.h>
 #include <shark/serialize.h>
@@ -136,7 +136,7 @@ namespace capnp {
                 // Only parse the schemas we actually need for decoding.
                 compileEagerness = Compiler::NODE;
 
-                // Drop annotations since we don't need them.  This avoids importing files like c++.capnp.
+                // Drop annotations since we don't need them.  This avoids importing files like c++.shk.
                 annotationFlag = Compiler::DROP_ANNOTATIONS;
 
                 kj::MainBuilder builder(context, VERSION_STRING,
@@ -177,7 +177,7 @@ namespace capnp {
                 // Only parse the schemas we actually need for decoding.
                 compileEagerness = Compiler::NODE;
 
-                // Drop annotations since we don't need them.  This avoids importing files like c++.capnp.
+                // Drop annotations since we don't need them.  This avoids importing files like c++.shk.
                 annotationFlag = Compiler::DROP_ANNOTATIONS;
 
                 kj::MainBuilder builder(context, VERSION_STRING,
@@ -211,7 +211,7 @@ namespace capnp {
                 // Only parse the schemas we actually need for decoding.
                 compileEagerness = Compiler::NODE;
 
-                // Drop annotations since we don't need them.  This avoids importing files like c++.capnp.
+                // Drop annotations since we don't need them.  This avoids importing files like c++.shk.
                 annotationFlag = Compiler::DROP_ANNOTATIONS;
 
                 kj::MainBuilder builder(context, VERSION_STRING,
@@ -250,7 +250,7 @@ namespace capnp {
                 // Only parse the schemas we actually need for decoding.
                 compileEagerness = Compiler::NODE;
 
-                // Drop annotations since we don't need them.  This avoids importing files like c++.capnp.
+                // Drop annotations since we don't need them.  This avoids importing files like c++.shk.
                 annotationFlag = Compiler::DROP_ANNOTATIONS;
 
                 // Default convert to text unless -o is given.
@@ -266,11 +266,11 @@ namespace capnp {
                     "Prints (or encodes) the value of <name>, which must be defined in <schema-file>.  "
                     "<name> must refer to a const declaration, a field of a struct type (prints the default "
                     "value), or a field or list element nested within some other value.  Examples:\n"
-                    "    capnp eval myschema.capnp MyType.someField\n"
-                    "    capnp eval myschema.capnp someConstant\n"
-                    "    capnp eval myschema.capnp someConstant.someField\n"
-                    "    capnp eval myschema.capnp someConstant.someList[4]\n"
-                    "    capnp eval myschema.capnp someConstant.someList[4].anotherField[1][2][3]\n"
+                    "    capnp eval myschema.shk MyType.someField\n"
+                    "    capnp eval myschema.shk someConstant\n"
+                    "    capnp eval myschema.shk someConstant.someField\n"
+                    "    capnp eval myschema.shk someConstant.someList[4]\n"
+                    "    capnp eval myschema.shk someConstant.someList[4].anotherField[1][2][3]\n"
                     "Since consts can have complex struct types, and since you can define a const using "
                     "import and variable substitution, this can be a convenient way to write text-format "
                     "config files which are compiled to binary before deployment.",
@@ -320,8 +320,8 @@ namespace capnp {
                         "If a file specified for compilation starts with <prefix>, remove "
                         "the prefix for the purpose of deciding the names of output files.  "
                         "For example, the following command:\n"
-                        "    capnp compile --src-prefix=foo/bar -oc++:corge foo/bar/baz/qux.capnp\n"
-                        "would generate the files corge/baz/qux.capnp.{h,cc}.")
+                        "    capnp compile --src-prefix=foo/bar -oc++:corge foo/bar/baz/qux.shk\n"
+                        "would generate the files corge/baz/qux.shk.{h,cc}.")
                     .expectOneOrMoreArgs("<source>", KJ_BIND_METHOD(*this, addSource))
                     .callAfterParsing(KJ_BIND_METHOD(*this, generateOutput));
             }
@@ -775,8 +775,8 @@ namespace capnp {
 
                     if (convertFrom == Format::JSON || convertTo == Format::JSON) {
                         // We need annotations to process JSON.
-                        // TODO(someday): Find a way that we can process annotations from json.capnp without
-                        //   requiring other annotation-only imports like c++.capnp
+                        // TODO(someday): Find a way that we can process annotations from json.shk without
+                        //   requiring other annotation-only imports like c++.shk
                         annotationFlag = Compiler::COMPILE_ANNOTATIONS;
                     }
 

@@ -24,7 +24,7 @@
 #include <shark/base/debug.h>
 
 #include "pretty-print.h"
-#include "compiler/lexer.capnp.h"
+#include "compiler/lexer.sk.h"
 #include "compiler/lexer.h"
 #include "compiler/node-translator.h"
 #include "compiler/parser.h"

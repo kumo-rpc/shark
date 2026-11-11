@@ -26,7 +26,7 @@
 #define _GNU_SOURCE
 #endif
 
-#include <shark/schema.capnp.h>
+#include <shark/schema.sk.h>
 #include "../serialize.h"
 #include <shark/base/debug.h>
 #include <shark/base/io.h>
@@ -39,7 +39,7 @@
 #include <shark/base/main.h>
 #include <algorithm>
 #include <map>
-#include <shark/stream.capnp.h>
+#include <shark/stream.sk.h>
 
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -97,7 +97,7 @@ public:
           "This is a Cap'n Proto compiler plugin which \"de-compiles\" the schema back into "
           "Cap'n Proto schema language format, with comments showing the offsets chosen by the "
           "compiler.  This is meant to be run using the Cap'n Proto compiler, e.g.:\n"
-          "    capnp compile -ocapnp foo.capnp")
+          "    capnp compile -ocapnp foo.shk")
         .callAfterParsing(KJ_BIND_METHOD(*this, run))
         .build();
   }

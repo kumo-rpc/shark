@@ -23,7 +23,7 @@
 
 #include <shark/schema.h>
 #include <shark/dynamic.h>
-#include <shark/format/json/json.capnp.h>
+#include <shark/format/json/json.sk.h>
 
 SHARK_BEGIN_HEADER
 
@@ -211,7 +211,7 @@ public:
   void handleByAnnotation(Schema schema);
   template <typename T> void handleByAnnotation();
   // Inspects the given type (as specified by type parameter or dynamic schema) and all its
-  // dependencies looking for JSON annotations (see json.capnp), building and registering Handlers
+  // dependencies looking for JSON annotations (see json.shk), building and registering Handlers
   // based on these annotations.
   //
   // If you'd like to use annotations to control JSON, you must call these functions before you

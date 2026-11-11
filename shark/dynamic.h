@@ -588,7 +588,7 @@ namespace capnp {
 
         struct Options {
             bool allowCancellation = false;
-            // See the `allowCancellation` annotation defined in `c++.capnp`.
+            // See the `allowCancellation` annotation defined in `c++.shk`.
             //
             // This option applies to all calls made to this server object. The annotation in the schema
             // is NOT used for dynamic servers.

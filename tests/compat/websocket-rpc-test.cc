@@ -22,7 +22,7 @@
 #include <shark/rpc/websocket-rpc.h>
 #include <tests/base/test.h>
 
-#include <tests/test.capnp.h>
+#include <tests/test.sk.h>
 
 KJ_TEST("WebSocketMessageStream") {
   kj::EventLoop loop;

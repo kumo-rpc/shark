@@ -27,7 +27,7 @@
 
 #undef CONST
 // For some ridiculous reason, Windows defines CONST to const. We have an enum value called CONST
-// in schema.capnp.h, so if this is defined, compilation is gonna fail. So we undef it because
+// in schema.sk.h, so if this is defined, compilation is gonna fail. So we undef it because
 // that seems strictly better than failing entirely. But this could cause trouble for people later
 // on if they, say, include windows.h, then include schema.h, then include another windows API
 // header that uses CONST. I suppose they may have to re-#define CONST in between, or change the
@@ -36,7 +36,7 @@
 // Please don't file a bug report telling us to change our enum naming style. You are at least
 // seven years too late.
 
-#include <shark/schema.capnp.h>
+#include <shark/schema.sk.h>
 #include <shark/base/hash.h>
 #include <shark/base/windows-sanity.h>  // work-around macro conflict with `VOID`
 

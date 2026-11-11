@@ -22,14 +22,14 @@ project("Cap'n Proto Samples" CXX)
 
 find_package(CapnProto CONFIG REQUIRED)
 
-capnp_generate_cpp(addressbookSources addressbookHeaders addressbook.capnp)
+capnp_generate_cpp(addressbookSources addressbookHeaders addressbook.shk)
 add_executable(addressbook addressbook.c++ ${addressbookSources})
 target_link_libraries(addressbook PRIVATE CapnProto::capnp)
 target_include_directories(addressbook PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
 # Don't build the rpc sample if find_package() found an installation of Cap'n Proto lite.
 if(TARGET CapnProto::capnp-rpc)
-    capnp_generate_cpp(calculatorSources calculatorHeaders calculator.capnp)
+    capnp_generate_cpp(calculatorSources calculatorHeaders calculator.shk)
     add_executable(calculator-client calculator-client.c++ ${calculatorSources})
     add_executable(calculator-server calculator-server.c++ ${calculatorSources})
     target_link_libraries(calculator-client PRIVATE CapnProto::capnp-rpc)

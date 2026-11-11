@@ -65,27 +65,27 @@ TEST(SchemaParser, Basic) {
   SchemaParser parser;
   parser.setDiskFilesystem(reader);
 
-  reader.add("src/foo/bar.capnp",
+  reader.add("src/foo/bar.shk",
       "@0x8123456789abcdef;\n"
       "struct Bar {\n"
-      "  baz @0: import \"baz.capnp\".Baz;\n"
-      "  corge @1: import \"../qux/corge.capnp\".Corge;\n"
-      "  grault @2: import \"/grault.capnp\".Grault;\n"
-      "  garply @3: import \"/garply.capnp\".Garply;\n"
+      "  baz @0: import \"baz.shk\".Baz;\n"
+      "  corge @1: import \"../qux/corge.shk\".Corge;\n"
+      "  grault @2: import \"/grault.shk\".Grault;\n"
+      "  garply @3: import \"/garply.shk\".Garply;\n"
       "}\n");
-  reader.add("src/foo/baz.capnp",
+  reader.add("src/foo/baz.shk",
       "@0x823456789abcdef1;\n"
       "struct Baz {}\n");
-  reader.add("src/qux/corge.capnp",
+  reader.add("src/qux/corge.shk",
       "@0x83456789abcdef12;\n"
       "struct Corge {}\n");
-  reader.add(ABS("usr/include/grault.capnp"),
+  reader.add(ABS("usr/include/grault.shk"),
       "@0x8456789abcdef123;\n"
       "struct Grault {}\n");
-  reader.add(ABS("opt/include/grault.capnp"),
+  reader.add(ABS("opt/include/grault.shk"),
       "@0x8000000000000001;\n"
       "struct WrongGrault {}\n");
-  reader.add(ABS("usr/local/include/garply.capnp"),
+  reader.add(ABS("usr/local/include/garply.shk"),
       "@0x856789abcdef1234;\n"
       "struct Garply {}\n");
 
@@ -94,11 +94,11 @@ TEST(SchemaParser, Basic) {
   };
 
   ParsedSchema barSchema = parser.parseDiskFile(
-      "foo2/bar2.capnp", "src/foo/bar.capnp", importPath);
+      "foo2/bar2.shk", "src/foo/bar.shk", importPath);
 
   auto barProto = barSchema.getProto();
   EXPECT_EQ(0x8123456789abcdefull, barProto.getId());
-  EXPECT_EQ("foo2/bar2.capnp", barProto.getDisplayName());
+  EXPECT_EQ("foo2/bar2.shk", barProto.getDisplayName());
 
   auto barStruct = barSchema.getNested("Bar");
   auto barFields = barStruct.asStruct().getFields();
@@ -122,35 +122,35 @@ TEST(SchemaParser, Basic) {
 
   auto bazSchema = parser.parseDiskFile(
       "not/used/because/already/loaded",
-      "src/foo/baz.capnp", importPath);
+      "src/foo/baz.shk", importPath);
   EXPECT_EQ(0x823456789abcdef1ull, bazSchema.getProto().getId());
-  EXPECT_EQ("foo2/baz.capnp", bazSchema.getProto().getDisplayName());
+  EXPECT_EQ("foo2/baz.shk", bazSchema.getProto().getDisplayName());
   auto bazStruct = bazSchema.getNested("Baz").asStruct();
   EXPECT_EQ(bazStruct, barStruct.getDependency(bazStruct.getProto().getId()));
 
   auto corgeSchema = parser.parseDiskFile(
       "not/used/because/already/loaded",
-      "src/qux/corge.capnp", importPath);
+      "src/qux/corge.shk", importPath);
   EXPECT_EQ(0x83456789abcdef12ull, corgeSchema.getProto().getId());
-  EXPECT_EQ("qux/corge.capnp", corgeSchema.getProto().getDisplayName());
+  EXPECT_EQ("qux/corge.shk", corgeSchema.getProto().getDisplayName());
   auto corgeStruct = corgeSchema.getNested("Corge").asStruct();
   EXPECT_EQ(corgeStruct, barStruct.getDependency(corgeStruct.getProto().getId()));
 
   auto graultSchema = parser.parseDiskFile(
       "not/used/because/already/loaded",
-      ABS("usr/include/grault.capnp"), importPath);
+      ABS("usr/include/grault.shk"), importPath);
   EXPECT_EQ(0x8456789abcdef123ull, graultSchema.getProto().getId());
-  EXPECT_EQ("grault.capnp", graultSchema.getProto().getDisplayName());
+  EXPECT_EQ("grault.shk", graultSchema.getProto().getDisplayName());
   auto graultStruct = graultSchema.getNested("Grault").asStruct();
   EXPECT_EQ(graultStruct, barStruct.getDependency(graultStruct.getProto().getId()));
 
-  // Try importing the other grault.capnp directly.  It'll get the display name we specify since
+  // Try importing the other grault.shk directly.  It'll get the display name we specify since
   // it wasn't imported before.
   auto wrongGraultSchema = parser.parseDiskFile(
-      "weird/display/name.capnp",
-      ABS("opt/include/grault.capnp"), importPath);
+      "weird/display/name.shk",
+      ABS("opt/include/grault.shk"), importPath);
   EXPECT_EQ(0x8000000000000001ull, wrongGraultSchema.getProto().getId());
-  EXPECT_EQ("weird/display/name.capnp", wrongGraultSchema.getProto().getDisplayName());
+  EXPECT_EQ("weird/display/name.shk", wrongGraultSchema.getProto().getDisplayName());
 }
 
 TEST(SchemaParser, Constants) {
@@ -162,7 +162,7 @@ TEST(SchemaParser, Constants) {
   SchemaParser parser;
   parser.setDiskFilesystem(reader);
 
-  reader.add("const.capnp",
+  reader.add("const.shk",
       "@0x8123456789abcdef;\n"
       "const uint32Const :UInt32 = 1234;\n"
       "const listConst :List(Float32) = [1.25, 2.5, 3e4];\n"
@@ -177,7 +177,7 @@ TEST(SchemaParser, Constants) {
       "}\n");
 
   ParsedSchema fileSchema = parser.parseDiskFile(
-      "const.capnp", "const.capnp", nullptr);
+      "const.shk", "const.shk", nullptr);
 
   EXPECT_EQ(1234, fileSchema.getNested("uint32Const").asConst().as<uint32_t>());
 
@@ -214,7 +214,7 @@ TEST(SchemaParser, SourceInfo) {
   SchemaParser parser;
   parser.setDiskFilesystem(reader);
 
-  reader.add("foo.capnp",
+  reader.add("foo.shk",
       "@0x84a2c6051e1061ed;\n"
       "# file doc comment\n"
       "\n"
@@ -248,7 +248,7 @@ TEST(SchemaParser, SourceInfo) {
       "# post-comment\n");
 
   ParsedSchema file = parser.parseDiskFile(
-      "foo.capnp", "foo.capnp", nullptr);
+      "foo.shk", "foo.shk", nullptr);
   ParsedSchema foo = file.getNested("Foo");
 
   expectSourceInfo(file.getSourceInfo(), 0x84a2c6051e1061edull, "file doc comment\n", {});
@@ -274,7 +274,7 @@ TEST(SchemaParser, SourceInfo) {
 
 TEST(SchemaParser, SetFileIdsRequired) {
   FakeFileReader reader;
-  reader.add("no-file-id.capnp",
+  reader.add("no-file-id.shk",
       "const foo :Int32 = 123;\n");
 
   {
@@ -282,14 +282,14 @@ TEST(SchemaParser, SetFileIdsRequired) {
     parser.setDiskFilesystem(reader);
 
     KJ_EXPECT_THROW_RECOVERABLE_MESSAGE("File does not declare an ID.",
-        parser.parseDiskFile("no-file-id.capnp", "no-file-id.capnp", nullptr));
+        parser.parseDiskFile("no-file-id.shk", "no-file-id.shk", nullptr));
   }
   {
     SchemaParser parser;
     parser.setDiskFilesystem(reader);
     parser.setFileIdsRequired(false);
 
-    auto fileSchema = parser.parseDiskFile("no-file-id.capnp", "no-file-id.capnp", nullptr);
+    auto fileSchema = parser.parseDiskFile("no-file-id.shk", "no-file-id.shk", nullptr);
     KJ_EXPECT(fileSchema.getNested("foo").asConst().as<int32_t>() == 123);
   }
 }

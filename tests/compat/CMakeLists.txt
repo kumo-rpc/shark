@@ -18,7 +18,7 @@ shark_schema_generate(
         COMP_FILES
         COMP_HDRS
         SCHEMAS
-        json-test.capnp
+        json-test.shk
 )
 
 kmcmake_cc_test(

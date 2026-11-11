@@ -22,7 +22,7 @@
 #pragma once
 
 #include <shark/blob.h>
-#include <tests/test.capnp.h>
+#include <tests/test.sk.h>
 #include <iostream>
 #include <tests/base/compat/gtest.h>
 

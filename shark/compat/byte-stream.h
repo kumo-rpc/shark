@@ -22,7 +22,7 @@
 #pragma once
 // Bridges from KJ streams to Cap'n Proto ByteStream RPC protocol.
 
-#include <shark/compat/byte-stream.capnp.h>
+#include <shark/compat/byte-stream.sk.h>
 #include <shark/base/async-io.h>
 #include <shark/base/compat/http.h>
 

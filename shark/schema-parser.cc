@@ -22,9 +22,9 @@
 #include "schema-parser.h"
 #include "message.h"
 #include <shark/compiler/compiler.h>
-#include <shark/compiler/lexer.capnp.h>
+#include <shark/compiler/lexer.sk.h>
 #include <shark/compiler/lexer.h>
-#include <shark/compiler/grammar.capnp.h>
+#include <shark/compiler/grammar.sk.h>
 #include <shark/compiler/parser.h>
 #include <unordered_map>
 #include <shark/base/mutex.h>

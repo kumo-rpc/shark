@@ -22,7 +22,7 @@
 #include "schema.h"
 #include "message.h"
 #include <shark/base/debug.h>
-#include <shark/stream.capnp.h>
+#include <shark/stream.sk.h>
 
 namespace capnp {
 
@@ -36,7 +36,7 @@ namespace _ {  // private
 
 // Null schemas generated using the below schema file with:
 //
-//     capnp eval -Isrc null-schemas.capnp node --flat |
+//     capnp eval -Isrc null-schemas.shk node --flat |
 //         hexdump -v -e '8/1 "0x%02x, "' -e '1/8 "\n"'; echo
 //
 // I totally don't understand hexdump format strings and came up with this command based on trial
@@ -44,7 +44,7 @@ namespace _ {  // private
 //
 //     @0x879863d4b2cc4a1e;
 //
-//     using Node = import "/shark/schema.capnp".Node;
+//     using Node = import "/shark/schema.shk".Node;
 //
 //     const node :Node = (
 //         id = 0x0000000000000000,

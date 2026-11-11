@@ -18,15 +18,16 @@ configure_file(${PROJECT_SOURCE_DIR}/tests/config.h.in ${PROJECT_SOURCE_DIR}/tes
 include(shark_cc_generate)
 
 add_subdirectory(base)
+add_subdirectory(compiler)
 
 
 shark_schema_generate(
         TEST_FILES
         TEST_HDRS
         SCHEMAS
-        test-import.capnp
-        test-import2.capnp
-        test.capnp
+        test-import.shk
+        test-import2.shk
+        test.shk
 )
 
 kmcmake_cc_library(
@@ -46,7 +47,7 @@ shark_schema_generate(
         COMP_FILES
         COMP_HDRS
         SCHEMAS
-        compat/json-test.capnp
+        compat/json-test.shk
 )
 
 kmcmake_cc_test(

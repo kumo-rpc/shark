@@ -21,7 +21,7 @@
 
 #include "json-rpc.h"
 #include <shark/base/compat/http.h>
-#include <shark/compat/json-rpc.capnp.h>
+#include <shark/compat/json-rpc.sk.h>
 
 namespace capnp {
 

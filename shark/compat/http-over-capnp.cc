@@ -942,7 +942,7 @@ capnp::HttpService::Client HttpOverCapnpFactory::kjToCapnp(kj::Own<kj::HttpServi
 // =======================================================================================
 
 static constexpr uint64_t COMMON_TEXT_ANNOTATION = 0x857745131db6fc83ull;
-// Type ID of `commonText` from `http.capnp`.
+// Type ID of `commonText` from `http.shk`.
 // TODO(cleanup): Cap'n Proto should auto-generate constants for these.
 
 HttpOverCapnpFactory::HeaderIdBundle::HeaderIdBundle(kj::HttpHeaderTable::Builder& builder)

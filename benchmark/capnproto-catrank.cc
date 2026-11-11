@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "catrank.capnp.h"
+#include "catrank.sk.h"
 #include "capnproto-common.h"
 
 namespace capnp {

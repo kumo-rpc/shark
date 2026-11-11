@@ -25,7 +25,7 @@
 #include <shark/base/async-io.h>
 #include <shark/base/debug.h>
 #include <shark/base/threadlocal.h>
-#include <shark/rpc/rpc.capnp.h>
+#include <shark/rpc/rpc.sk.h>
 
 namespace capnp {
 

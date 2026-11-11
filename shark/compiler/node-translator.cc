@@ -28,7 +28,7 @@
 #include <set>
 #include <map>
 #include <stdlib.h>
-#include <shark/stream.capnp.h>
+#include <shark/stream.sk.h>
 
 namespace capnp {
 namespace compiler {
@@ -1699,15 +1699,15 @@ uint64_t NodeTranslator::compileParamList(
       }
       return 0;
     case Declaration::ParamList::STREAM:
-      KJ_IF_MAYBE(streamCapnp, resolver.resolveImport("/shark/stream.capnp")) {
+      KJ_IF_MAYBE(streamCapnp, resolver.resolveImport("/shark/stream.shk")) {
         if (streamCapnp->resolver->resolveMember("StreamResult") == nullptr) {
           errorReporter.addErrorOn(paramList,
-              "The version of '/shark/stream.capnp' found in your import path does not appear "
+              "The version of '/shark/stream.shk' found in your import path does not appear "
               "to be the official one; it is missing the declaration of StreamResult.");
         }
       } else {
         errorReporter.addErrorOn(paramList,
-            "A method declaration uses streaming, but '/shark/stream.capnp' is not found "
+            "A method declaration uses streaming, but '/shark/stream.shk' is not found "
             "in the import path. This is a standard file that should always be installed "
             "with the Cap'n Proto compiler.");
       }

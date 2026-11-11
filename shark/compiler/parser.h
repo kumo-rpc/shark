@@ -21,8 +21,8 @@
 
 #pragma once
 
-#include <shark/compiler/grammar.capnp.h>
-#include <shark/compiler/lexer.capnp.h>
+#include <shark/compiler/grammar.sk.h>
+#include <shark/compiler/lexer.sk.h>
 #include <shark/base/parse/common.h>
 #include <shark/base/arena.h>
 #include "error-reporter.h"

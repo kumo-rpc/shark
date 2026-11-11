@@ -25,7 +25,7 @@
 #include <shark/base/async-io.h>
 #include <shark/base/one-of.h>
 #include <shark/message.h>
-#include <shark/rpc/rpc-twoparty.capnp.h>
+#include <shark/rpc/rpc-twoparty.sk.h>
 #include <shark/rpc/serialize-async.h>
 
 SHARK_BEGIN_HEADER

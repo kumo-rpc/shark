@@ -23,8 +23,8 @@
 #include "../shark/schema-lite.h"
 #include "../shark/serialize-packed.h"
 #include <tests/test-util.h>
-#include <tests/test-import.capnp.h>
-#include <tests/test-import2.capnp.h>
+#include <tests/test-import.sk.h>
+#include <tests/test-import2.sk.h>
 #include <tests/base/compat/gtest.h>
 #include <shark/base/debug.h>
 

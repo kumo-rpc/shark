@@ -8,18 +8,18 @@ set -eu
 root=$(cd "$(dirname "$0")" && pwd)
 cd "$root"
 
-if [[ ! -f shark/schema.capnp ]]; then
-  echo "Could not find shark/schema.capnp. Run this script from the repository." >&2
+if [[ ! -f shark/schema.shk ]]; then
+  echo "Could not find shark/schema.shk. Run this script from the repository." >&2
   exit 1
 fi
 
 runtime_protos=(
-  shark/c++.capnp
-  shark/schema.capnp
-  shark/stream.capnp
-  shark/format/json/json.capnp
-  shark/compiler/lexer.capnp
-  shark/compiler/grammar.capnp
+  shark/c++.shk
+  shark/schema.shk
+  shark/stream.shk
+  shark/format/json/json.shk
+  shark/compiler/lexer.shk
+  shark/compiler/grammar.shk
 )
 
 build_dir=build-bootstrap
@@ -34,7 +34,7 @@ trap 'rm -rf "$tmp"' EXIT
 round=1
 while true; do
   echo "Round $round"
-  cmake --build "$build_dir"
+  cmake --build "$build_dir" --target shark shark-cpp
 
   sources=()
   for proto in "${runtime_protos[@]}"; do
@@ -44,10 +44,10 @@ while true; do
 
   changed=0
   for proto in "${runtime_protos[@]}"; do
-    base=${proto%.capnp}
-    if ! cmp -s "$base.capnp.h" "$tmp/$base.capnp.h" || ! cmp -s "$base.capnp.cc" "$tmp/$base.capnp.cc"; then
-      cp "$tmp/$base.capnp.h" "$base.capnp.h"
-      cp "$tmp/$base.capnp.cc" "$base.capnp.cc"
+    base=${proto%.shk}
+    if ! cmp -s "$base.sk.h" "$tmp/$base.sk.h" || ! cmp -s "$base.sk.cc" "$tmp/$base.sk.cc"; then
+      cp "$tmp/$base.sk.h" "$base.sk.h"
+      cp "$tmp/$base.sk.cc" "$base.sk.cc"
       changed=1
     fi
   done

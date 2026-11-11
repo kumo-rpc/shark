@@ -22,13 +22,13 @@
 // This sample code appears in the documentation for the C++ implementation.
 //
 // If Cap'n Proto is installed, build the sample like:
-//   capnp compile -oc++ addressbook.capnp
-//   c++ -std=c++14 -Wall addressbook.c++ addressbook.capnp.c++ `pkg-config --cflags --libs capnp` -o addressbook
+//   capnp compile -oc++ addressbook.shk
+//   c++ -std=c++14 -Wall addressbook.c++ addressbook.shk.c++ `pkg-config --cflags --libs capnp` -o addressbook
 //
 // If Cap'n Proto is not installed, but the source is located at $SRC and has been
 // compiled in $BUILD (often both are simply ".." from here), you can do:
-//   $BUILD/capnp compile -I$SRC/src -o$BUILD/capnpc-c++ addressbook.capnp
-//   c++ -std=c++14 -Wall addressbook.c++ addressbook.capnp.c++ -I$SRC/src -L$BUILD/.libs -lcapnp -lkj -o addressbook
+//   $BUILD/capnp compile -I$SRC/src -o$BUILD/capnpc-c++ addressbook.shk
+//   c++ -std=c++14 -Wall addressbook.c++ addressbook.shk.c++ -I$SRC/src -L$BUILD/.libs -lcapnp -lkj -o addressbook
 //
 // Run like:
 //   ./addressbook write | ./addressbook read
@@ -36,7 +36,7 @@
 
 // TODO(test):  Needs cleanup.
 
-#include "addressbook.capnp.h"
+#include "addressbook.sk.h"
 #include <shark/message.h>
 #include <shark/serialize-packed.h>
 #include <iostream>
@@ -115,7 +115,7 @@ void printAddressBook(int fd) {
 
 #if !SHARK_LITE
 
-#include "addressbook.capnp.h"
+#include "addressbook.sk.h"
 #include <shark/message.h>
 #include <shark/serialize-packed.h>
 #include <iostream>

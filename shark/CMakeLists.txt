@@ -84,15 +84,15 @@ kmcmake_cc_library(
 
 set(LIB_SRCS
         capability.cc
-        c++.capnp.cc
+        c++.sk.cc
         blob.cc
         arena.cc
         layout.cc
         list.cc
         any.cc
         message.cc
-        schema.capnp.cc
-        stream.capnp.cc
+        schema.sk.cc
+        stream.sk.cc
         serialize.cc
         serialize-packed.cc
         schema.cc
@@ -120,7 +120,7 @@ kmcmake_cc_library(
         NAME shark-format
         NAMESPACE shark
         SOURCES
-        format/json/json.capnp.cc
+        format/json/json.sk.cc
         format/json/json.cc
         CXXOPTS
         ${KMCMAKE_CXX_OPTIONS}
@@ -134,9 +134,9 @@ kmcmake_cc_library(
 set(SHARKC_SRCS
         compiler/type-id.cc
         compiler/error-reporter.cc
-        compiler/lexer.capnp.cc
+        compiler/lexer.sk.cc
         compiler/lexer.cc
-        compiler/grammar.capnp.cc
+        compiler/grammar.sk.cc
         compiler/parser.cc
         compiler/generics.cc
         compiler/node-translator.cc
@@ -214,12 +214,12 @@ shark_schema_generate(
         COM_FILES
         COM_HDRS
         SCHEMAS
-        rpc/persistent.capnp
-        rpc/rpc.capnp
-        rpc/rpc-twoparty.capnp
-        compat/byte-stream.capnp
-        compat/http-over-capnp.capnp
-        compat/json-rpc.capnp
+        rpc/persistent.shk
+        rpc/rpc.shk
+        rpc/rpc-twoparty.shk
+        compat/byte-stream.shk
+        compat/http-over-capnp.shk
+        compat/json-rpc.shk
 )
 
 set(RPC_SRC
@@ -228,7 +228,7 @@ set(RPC_SRC
         rpc/membrane.cc
         rpc/dynamic-capability.cc
         rpc/rpc.cc
-        rpc/rpc.capnp.cc
+        rpc/rpc.sk.cc
         rpc/rpc-twoparty.cc
         rpc/ez-rpc.cc
         compat/byte-stream.cc

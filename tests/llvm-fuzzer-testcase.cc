@@ -1,6 +1,6 @@
 #include <shark/serialize.h>
 #include <tests/test-util.h>
-#include <tests/test.capnp.h>
+#include <tests/test.sk.h>
 #include <shark/base/main.h>
 #include <unistd.h>
 

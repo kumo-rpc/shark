@@ -416,8 +416,8 @@ inline constexpr uint sizeInWords() {
 namespace capnp {
 namespace schemas {
 SHARK_DECLARE_SCHEMA(995f9a3377c0b16e);
-// HACK: Forward-declare the RawSchema for StreamResult, from stream.capnp. This allows capnp
-//   files which declare streaming methods to avoid including stream.capnp.h.
+// HACK: Forward-declare the RawSchema for StreamResult, from stream.shk. This allows capnp
+//   files which declare streaming methods to avoid including stream.sk.h.
 }
 }
 

@@ -21,8 +21,8 @@
 
 #pragma once
 
-#include <shark/compiler/grammar.capnp.h>
-#include <shark/schema.capnp.h>
+#include <shark/compiler/grammar.sk.h>
+#include <shark/schema.sk.h>
 #include <shark/schema.h>
 #include <shark/base/one-of.h>
 

@@ -512,10 +512,10 @@ int main(int argc, char* argv[]) {
   size_t capnpBinarySize = fileSize("capnproto-" + std::string(testCaseName(testCase)));
   size_t protobufCodeSize = fileSize(std::string(testCaseName(testCase)) + ".pb.cc")
                           + fileSize(std::string(testCaseName(testCase)) + ".pb.h");
-  size_t capnpCodeSize = fileSize(std::string(testCaseName(testCase)) + ".capnp.cc")
-                       + fileSize(std::string(testCaseName(testCase)) + ".capnp.h");
+  size_t capnpCodeSize = fileSize(std::string(testCaseName(testCase)) + ".sk.cc")
+                       + fileSize(std::string(testCaseName(testCase)) + ".sk.h");
   size_t protobufObjSize = fileSize(std::string(testCaseName(testCase)) + ".pb.o");
-  size_t capnpObjSize = fileSize(std::string(testCaseName(testCase)) + ".capnp.o");
+  size_t capnpObjSize = fileSize(std::string(testCaseName(testCase)) + ".shk.o");
 
   TestResult oldNullCase;
   TestResult oldNullCaseNoReuse;
@@ -567,9 +567,9 @@ int main(int argc, char* argv[]) {
     reportResults("Old Cap'n Proto packed I/O", iters, oldCapnpPacked);
 
     oldCapnpBinarySize = fileSize("capnproto-" + std::string(testCaseName(testCase)));
-    oldCapnpCodeSize = fileSize(std::string(testCaseName(testCase)) + ".capnp.c++")
-                     + fileSize(std::string(testCaseName(testCase)) + ".capnp.h");
-    oldCapnpObjSize = fileSize(std::string(testCaseName(testCase)) + ".capnp.o");
+    oldCapnpCodeSize = fileSize(std::string(testCaseName(testCase)) + ".shk.c++")
+                     + fileSize(std::string(testCaseName(testCase)) + ".sk.h");
+    oldCapnpObjSize = fileSize(std::string(testCaseName(testCase)) + ".shk.o");
   }
 
   cout << endl;

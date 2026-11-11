@@ -60,7 +60,7 @@ namespace capnp {
             template <typename T>
             inline void addErrorOn(T&& decl, kj::StringPtr message) {
                 // Works for any `T` that defines `getStartByte()` and `getEndByte()` methods, which many
-                // of the Cap'n Proto types defined in `grammar.capnp` do.
+                // of the Cap'n Proto types defined in `grammar.shk` do.
 
                 addError(decl.getStartByte(), decl.getEndByte(), message);
             }

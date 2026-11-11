@@ -114,11 +114,12 @@ function(shark_schema_generate OUT_FILES OUT_HEADERS)
 
         string(SUBSTRING "${file_path}" ${prefix_len} -1 output_path)
         set(output_base "${SHARK_SCHEMA_GEN_OUTDIR}${output_path}")
+        string(REGEX REPLACE "\\.(capnp|shk)$" "" output_stem "${output_base}")
         message(STATUS "output_path: ${output_path}")
-        message(STATUS "output_base: ${output_base}")
+        message(STATUS "output_base: ${output_stem}")
         message(STATUS "${SHARK_CXX_EXECUTABLE}${output_dir}")
         add_custom_command(
-                OUTPUT "${output_base}.cc" "${output_base}.h"
+                OUTPUT "${output_stem}.sk.cc" "${output_stem}.sk.h"
                 COMMAND "${SHARK_EXECUTABLE}"
                 ARGS compile
                 -o ${SHARK_CXX_EXECUTABLE}${output_dir}
@@ -131,8 +132,8 @@ function(shark_schema_generate OUT_FILES OUT_HEADERS)
                 VERBATIM
         )
 
-        list(APPEND ${OUT_FILES} "${output_base}.cc")
-        list(APPEND ${OUT_HEADERS} "${output_base}.h")
+        list(APPEND ${OUT_FILES} "${output_stem}.sk.cc")
+        list(APPEND ${OUT_HEADERS} "${output_stem}.sk.h")
     endforeach ()
 
     set_source_files_properties(${${OUT_FILES}} ${${OUT_HEADERS}} PROPERTIES GENERATED TRUE)

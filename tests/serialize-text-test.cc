@@ -26,7 +26,7 @@
 #include <tests/base/compat/gtest.h>
 #include <shark/base/string.h>
 
-#include <tests/test.capnp.h>
+#include <tests/test.sk.h>
 
 namespace capnp {
 namespace _ {  // private
@@ -144,7 +144,7 @@ KJ_TEST("TextCodec parse error") {
 
 KJ_TEST("text format implicitly coerces struct value from first field type") {
   // We don't actually use TextCodec here, but rather check how the compiler handled some constants
-  // defined in test.capnp. It's the same parser code either way but this is easier.
+  // defined in test.shk. It's the same parser code either way but this is easier.
 
   {
     auto s = test::TestImpliedFirstField::Reader().getTextStruct();

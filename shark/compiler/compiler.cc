@@ -1081,7 +1081,7 @@ namespace capnp {
                 findImports(paramList.getType(), output);
                 break;
             case Declaration::ParamList::STREAM:
-                output.insert("/shark/stream.capnp");
+                output.insert("/shark/stream.shk");
                 break;
             }
         }

@@ -25,7 +25,7 @@
 #include <shark/schema.h>
 #include <shark/serialize.h>
 #include <tests/test-util.h>
-#include <shark/rpc/rpc.capnp.h>
+#include <shark/rpc/rpc.sk.h>
 #include <map>
 #include <queue>
 #include <tests/base/compat/gtest.h>

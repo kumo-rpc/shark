@@ -33,7 +33,7 @@ class ParsedSchema;
 class SchemaFile;
 
 class SchemaParser {
-  // Parses `.capnp` files to produce `Schema` objects.
+  // Parses `.shk` files to produce `Schema` objects.
   //
   // This class is thread-safe, hence all its methods are const.
 
@@ -72,13 +72,13 @@ public:
   //     auto fs = kj::newDiskFilesystem();
   //     SchemaParser parser;
   //     auto schema = parser.parseFromDirectory(fs->getCurrent(),
-  //         kj::Path::parse("foo/bar.capnp"), nullptr);
+  //         kj::Path::parse("foo/bar.shk"), nullptr);
   //
   // Hint: To use in-memory data rather than real disk, you can use kj::newInMemoryDirectory(),
   //   write the files you want, then pass it to SchemaParser. Example:
   //
   //     auto dir = kj::newInMemoryDirectory(kj::nullClock());
-  //     auto path = kj::Path::parse("foo/bar.capnp");
+  //     auto path = kj::Path::parse("foo/bar.shk");
   //     dir->openFile(path, kj::WriteMode::CREATE | kj::WriteMode::CREATE_PARENT)
   //        ->writeAll("struct Foo {}");
   //     auto schema = parser.parseFromDirectory(*dir, path, nullptr);
@@ -89,8 +89,8 @@ public:
   //
   //     auto fs = kj::newDiskFilesystem();
   //     auto dir = kj::newInMemoryDirectory(kj::nullClock());
-  //     auto fakePath = kj::Path::parse("foo/bar.capnp");
-  //     auto realPath = kj::Path::parse("path/to/some/file.capnp");
+  //     auto fakePath = kj::Path::parse("foo/bar.shk");
+  //     auto realPath = kj::Path::parse("path/to/some/file.shk");
   //     dir->transfer(fakePath, kj::WriteMode::CREATE | kj::WriteMode::CREATE_PARENT,
   //                   fs->getCurrent(), realPath, kj::TransferMode::LINK);
   //     auto schema = parser.parseFromDirectory(*dir, fakePath, nullptr);

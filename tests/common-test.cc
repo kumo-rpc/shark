@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 #include "../shark/common.h"
-#include <tests/test.capnp.h>
+#include <tests/test.sk.h>
 #include <tests/base/compat/gtest.h>
 #include <shark/base/debug.h>
 #include <shark/base/string.h>

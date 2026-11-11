@@ -20,8 +20,8 @@
 // THE SOFTWARE.
 
 #include <shark/format/json/json.h>
-#include <tests/compat/json-test.capnp.h>
-#include <shark/format/json/json.capnp.h>
+#include <tests/compat/json-test.sk.h>
+#include <shark/format/json/json.sk.h>
 #include <tests/test-util.h>
 #include <shark/base/debug.h>
 #include <shark/base/string.h>

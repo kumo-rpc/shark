@@ -19,16 +19,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "../shark/schema.capnp.h"
+#include "../shark/schema.sk.h"
 
 #ifdef SHARK_CAPABILITY_H_INCLUDED
-#error "schema.capnp should not depend on capability.h, because it contains no interfaces."
+#error "schema.shk should not depend on capability.h, because it contains no interfaces."
 #endif
 
-#include <tests/test.capnp.h>
+#include <tests/test.sk.h>
 
 #ifndef SHARK_CAPABILITY_H_INCLUDED
-#error "test.capnp did not include capability.h."
+#error "test.shk did not include capability.h."
 #endif
 
 #include "../shark/capability.h"

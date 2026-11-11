@@ -31,7 +31,7 @@
 #endif
 
 #include <shark/compiler/compiler.h>
-#include <shark/compiler/grammar.capnp.h>
+#include <shark/compiler/grammar.sk.h>
 #include <shark/message.h>
 #include <shark/pretty-print.h>
 #include <shark/schema-loader.h>
@@ -643,7 +643,7 @@ class ModuleImpl final: public Module {
 public:
   explicit ModuleImpl(ParsedFile::Reader content): content(content) {}
 
-  kj::StringPtr getSourceName() override { return "evolving-schema.capnp"; }
+  kj::StringPtr getSourceName() override { return "evolving-schema.shk"; }
   Orphan<ParsedFile> loadContent(Orphanage orphanage) override {
     return orphanage.newOrphanCopy(content);
   }

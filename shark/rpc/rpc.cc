@@ -24,7 +24,7 @@
 #include <functional> // std::greater
 #include <map>
 #include <queue>
-#include  <shark/rpc/rpc.capnp.h>
+#include  <shark/rpc/rpc.sk.h>
 #include <shark/base/async.h>
 #include <shark/base/debug.h>
 #include <shark/base/function.h>
@@ -559,7 +559,7 @@ private:
   typedef QuestionId AnswerId;
   typedef uint32_t ExportId;
   typedef ExportId ImportId;
-  // See equivalent definitions in rpc.capnp.
+  // See equivalent definitions in rpc.shk.
   //
   // We always use the type that refers to the local table of the same name.  So e.g. although
   // QuestionId and AnswerId are the same type, we use QuestionId when referring to an entry in
@@ -1387,7 +1387,7 @@ private:
       // PipelineClient, so that we get a remote promise that might resolve later.  This is
       // important to make sure that if the peer sends a `Disembargo` back to us, it bounces back
       // correctly instead of going to the result of some future resolution.  See the documentation
-      // for `Disembargo` in `rpc.capnp`.
+      // for `Disembargo` in `rpc.shk`.
       resolution = getInnermostClient(*resolution);
 
       // Update the export table to point at this object instead.  We know that our entry in the
@@ -1502,7 +1502,7 @@ private:
 
   class TribbleRaceBlocker: public ClientHook, public kj::Refcounted {
     // Hack to work around a problem that arises during the Tribble 4-way Race Condition as
-    // described in rpc.capnp in the documentation for the `Disembargo` message.
+    // described in rpc.shk in the documentation for the `Disembargo` message.
     //
     // Consider a remote promise that is resolved by a `Resolve` message. PromiseClient::resolve()
     // is eventually called and given the `ClientHook` for the resolution. Imagine that the
@@ -2290,7 +2290,7 @@ private:
     // For each capability in `capTable` as of the time when the call returned, this map stores
     // the result of calling `getInnermostClient()` on that capability. This is needed in order
     // to solve the Tribble 4-way race condition described in the documentation for `Disembargo`
-    // in `rpc.capnp`. `PostReturnRpcPipeline`, below, uses this.
+    // in `rpc.shk`. `PostReturnRpcPipeline`, below, uses this.
     //
     // As an optimization, if the innermost client is exactly the same object then nothing is
     // stored in the map.
@@ -3507,7 +3507,7 @@ private:
             // a `Resolve` message.  But `writeTarget` only ever returns non-null when called on
             // a PromiseClient.  The code which sends `Resolve` and `Return` should have replaced
             // any promise with a direct node in order to solve the Tribble 4-way race condition.
-            // See the documentation of Disembargo in rpc.capnp for more.
+            // See the documentation of Disembargo in rpc.shk for more.
             KJ_REQUIRE(redirect == nullptr,
                       "'Disembargo' of type 'senderLoopback' sent to an object that does not "
                       "appear to have been the subject of a previous 'Resolve' message.") {

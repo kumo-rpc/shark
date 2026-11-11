@@ -259,7 +259,7 @@ class OutgoingRpcMessage {
 public:
   virtual AnyPointer::Builder getBody() = 0;
   // Get the message body, which the caller may fill in any way it wants.  (The standard RPC
-  // implementation initializes it as a Message as defined in rpc.capnp.)
+  // implementation initializes it as a Message as defined in rpc.shk.)
 
   virtual void setFds(kj::Array<int> fds) {}
   // Set the list of file descriptors to send along with this message, if FD passing is supported.
@@ -281,7 +281,7 @@ class IncomingRpcMessage {
 public:
   virtual AnyPointer::Reader getBody() = 0;
   // Get the message body, to be interpreted by the caller.  (The standard RPC implementation
-  // interprets it as a Message as defined in rpc.capnp.)
+  // interprets it as a Message as defined in rpc.shk.)
 
   virtual kj::ArrayPtr<kj::AutoCloseFd> getAttachedFds() { return nullptr; }
   // If the transport supports attached file descriptors and some were attached to this message,

@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include <shark/schema.capnp.h>
+#include <shark/schema.sk.h>
 #include "message.h"
 
 SHARK_BEGIN_HEADER

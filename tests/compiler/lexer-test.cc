@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 #include <shark/compiler/lexer.h>
-#include "../message.h"
+#include <shark/message.h>
 #include <tests/base/compat/gtest.h>
 
 namespace capnp {

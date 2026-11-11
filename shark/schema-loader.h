@@ -31,7 +31,7 @@ namespace capnp {
 
 class SchemaLoader {
   // Class which can be used to construct Schema objects from schema::Nodes as defined in
-  // schema.capnp.
+  // schema.shk.
   //
   // It is a bad idea to use this class on untrusted input with exceptions disabled -- you may
   // be exposing yourself to denial-of-service attacks, as attackers can easily construct schemas

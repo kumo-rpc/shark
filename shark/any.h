@@ -720,7 +720,7 @@ private:
 #if !SHARK_LITE
 
 struct PipelineOp {
-  // Corresponds to rpc.capnp's PromisedAnswer.Op.
+  // Corresponds to rpc.shk's PromisedAnswer.Op.
 
   enum Type {
     NOOP,  // for convenience

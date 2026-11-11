@@ -24,7 +24,7 @@
 
 #pragma once
 
-#include "persistent.capnp.h"
+#include "persistent.sk.h"
 #include  <shark/capability.h>
 
 SHARK_BEGIN_HEADER

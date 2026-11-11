@@ -29,7 +29,7 @@
 #include <shark/base/vector.h>
 #include <algorithm>
 #include <shark/base/map.h>
-#include <shark/stream.capnp.h>
+#include <shark/stream.sk.h>
 
 #if _MSC_VER && !defined(__clang__)
 #include <atomic>

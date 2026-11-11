@@ -32,7 +32,7 @@
 
 #include <shark/rpc/rpc-twoparty.h>
 #include <tests/test-util.h>
-#include <shark/rpc/rpc.capnp.h>
+#include <shark/rpc/rpc.sk.h>
 #include <tests/base/compat/gtest.h>
 #include <shark/base/debug.h>
 #include <shark/base/miniposix.h>
