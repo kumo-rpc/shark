@@ -16,7 +16,7 @@
 # Stub. Teaching binaries are in CMakeLists.examples.txt
 # (installed when generating with -DKMCMAKE_GEN_EXAMPLES=ON).
 
-
+#[[
 cmake_minimum_required(VERSION 3.16)
 project("Cap'n Proto Samples" CXX)
 
@@ -37,3 +37,4 @@ if(TARGET CapnProto::capnp-rpc)
     target_include_directories(calculator-client PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
     target_include_directories(calculator-server PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 endif()
+]]
