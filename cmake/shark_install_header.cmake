@@ -5,4 +5,5 @@ install(DIRECTORY ${PROJECT_NAME}
         PATTERN "*.inc"
         PATTERN "*.h"
         PATTERN "*.hpp"
+        PATTERN "*.shk"
 )
