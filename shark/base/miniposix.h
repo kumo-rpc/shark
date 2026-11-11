@@ -44,7 +44,7 @@
 #endif
 
 // To get KJ_BEGIN_HEADER/KJ_END_HEADER
-#include "common.h"
+#include <shark/base/common.h>
 
 KJ_BEGIN_HEADER
 

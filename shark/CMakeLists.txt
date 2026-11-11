@@ -96,7 +96,7 @@ set(LIB_SRCS
         serialize.cc
         serialize-packed.cc
         schema.cc
-        schema-loader.cc
+        schema_loader.cc
         dynamic.cc
         reconnect.cc
         stringify.cc
@@ -141,7 +141,7 @@ set(SHARKC_SRCS
         compiler/generics.cc
         compiler/node-translator.cc
         compiler/compiler.cc
-        schema-parser.cc
+        schema_parser.cc
         serialize-text.cc
 )
 

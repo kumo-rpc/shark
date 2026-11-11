@@ -23,7 +23,7 @@
 #include "win32-api-version.h"
 #endif
 
-#include "debug.h"
+#include <shark/base/debug.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>

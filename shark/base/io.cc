@@ -28,7 +28,7 @@
 #endif
 
 #include "io.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 #include "miniposix.h"
 #include <algorithm>
 #include <errno.h>

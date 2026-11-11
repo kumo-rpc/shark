@@ -21,8 +21,8 @@
 
 #pragma once
 
-#include "table.h"
-#include "hash.h"
+#include <shark/base/table.h>
+#include <shark/base/hash.h>
 
 KJ_BEGIN_HEADER
 

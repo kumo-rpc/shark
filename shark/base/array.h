@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include "memory.h"
+#include <shark/base/memory.h>
 #include <string.h>
 #include <initializer_list>
 

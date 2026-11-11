@@ -21,11 +21,11 @@
 
 #define SHARK_TESTING_SHARK 1
 
-#include "../shark/schema-parser.h"
-#include <tests/test-util.h>
+#include "../shark/schema_parser.h"
 #include <map>
-#include <tests/base/compat/gtest.h>
 #include <shark/base/debug.h>
+#include <tests/base/compat/gtest.h>
+#include <tests/test-util.h>
 
 namespace shark {
 namespace {

@@ -40,7 +40,7 @@
 #endif
 
 #include "async.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 #include "vector.h"
 #include "threadlocal.h"
 #include "mutex.h"

@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 #include "timer.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 #include <set>
 
 namespace kj {

@@ -26,7 +26,7 @@
 // - URI encoding
 // - Base64
 
-#include "string.h"
+#include <shark/base/string.h>
 
 KJ_BEGIN_HEADER
 

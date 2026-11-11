@@ -34,9 +34,9 @@
 #define KJ_USE_WIN32_DBGHELP 1
 #endif
 
-#include "exception.h"
-#include "string.h"
-#include "debug.h"
+#include <shark/base/exception.h>
+#include <shark/base/string.h>
+#include <shark/base/debug.h>
 #include "threadlocal.h"
 #include "miniposix.h"
 #include "function.h"

@@ -34,7 +34,7 @@
 
 #include "any.h"
 #include "layout.h"
-#include "message.h"
+#include <shark/message.h>
 #include "schema.h"
 #include <shark/base/windows-sanity.h> // work-around macro conflict with `VOID`
 #include <shark/capability.h>

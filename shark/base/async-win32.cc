@@ -25,7 +25,7 @@
 #include <shark/base/win32-api-version.h>
 
 #include "async-win32.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 #include <atomic>
 #include "time.h"
 #include "refcount.h"

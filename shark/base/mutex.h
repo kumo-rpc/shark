@@ -21,8 +21,8 @@
 
 #pragma once
 
-#include "debug.h"
-#include "memory.h"
+#include <shark/base/debug.h>
+#include <shark/base/memory.h>
 #include <inttypes.h>
 #include "time.h"
 #include "source-location.h"

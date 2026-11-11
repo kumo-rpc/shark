@@ -21,7 +21,7 @@
 
 #include "encoding.h"
 #include "vector.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 
 namespace kj {
 

@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 #include <shark/base/array.h>
-#include "exception.h"
+#include <shark/base/exception.h>
 
 namespace kj {
 

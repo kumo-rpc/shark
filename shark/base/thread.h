@@ -21,9 +21,9 @@
 
 #pragma once
 
-#include "common.h"
+#include <shark/base/common.h>
 #include "function.h"
-#include "exception.h"
+#include <shark/base/exception.h>
 
 KJ_BEGIN_HEADER
 

@@ -22,7 +22,7 @@
 #pragma once
 
 #include <shark/schema.sk.h>
-#include "message.h"
+#include <shark/message.h>
 
 SHARK_BEGIN_HEADER
 

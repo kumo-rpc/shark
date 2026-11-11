@@ -24,7 +24,7 @@
 #include <shark/base/win32-api-version.h>
 #endif
 
-#include "debug.h"
+#include <shark/base/debug.h>
 #include "cidr.h"
 
 #if _WIN32

@@ -21,7 +21,7 @@
 
 #include "filesystem.h"
 #include "vector.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 #include "one-of.h"
 #include "encoding.h"
 #include "refcount.h"

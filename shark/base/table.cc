@@ -19,8 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "table.h"
-#include "debug.h"
+#include <shark/base/table.h>
+#include <shark/base/debug.h>
 #include <stdlib.h>
 
 #if KJ_DEBUG_TABLE_IMPL

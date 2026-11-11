@@ -21,9 +21,9 @@
 
 #pragma once
 
-#include "memory.h"
+#include <shark/base/memory.h>
 #include <shark/base/array.h>
-#include "string.h"
+#include <shark/base/string.h>
 
 KJ_BEGIN_HEADER
 

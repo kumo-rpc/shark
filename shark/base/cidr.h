@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include "common.h"
+#include <shark/base/common.h>
 #include <cstdint>
 
 KJ_BEGIN_HEADER

@@ -24,7 +24,7 @@
 #endif
 
 #include "mutex.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 
 #if !_WIN32 && !__CYGWIN__
 #include <time.h>

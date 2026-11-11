@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 #include "schema.h"
-#include "message.h"
+#include <shark/message.h>
 #include <shark/base/debug.h>
 #include <shark/stream.sk.h>
 

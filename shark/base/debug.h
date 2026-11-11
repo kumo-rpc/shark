@@ -114,8 +114,8 @@
 
 #pragma once
 
-#include "string.h"
-#include "exception.h"
+#include <shark/base/string.h>
+#include <shark/base/exception.h>
 #include "windows-sanity.h"  // work-around macro conflict with `ERROR`
 
 KJ_BEGIN_HEADER

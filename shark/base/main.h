@@ -22,7 +22,7 @@
 #pragma once
 
 #include <shark/base/array.h>
-#include "string.h"
+#include <shark/base/string.h>
 #include "vector.h"
 #include "function.h"
 

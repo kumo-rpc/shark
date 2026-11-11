@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 #include "thread.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 
 #if _WIN32
 #include <windows.h>

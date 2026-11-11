@@ -25,7 +25,7 @@
 
 #pragma once
 
-#include "common.h"
+#include <shark/base/common.h>
 #include <inttypes.h>
 
 KJ_BEGIN_HEADER

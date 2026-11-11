@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include "memory.h"
+#include <shark/base/memory.h>
 
 #if _MSC_VER
 #if _MSC_VER < 1910

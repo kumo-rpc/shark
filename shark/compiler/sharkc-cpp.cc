@@ -25,23 +25,23 @@
 #include <shark/base/win32-api-version.h>
 #endif
 
-#include <shark/schema.sk.h>
+#include "../dynamic.h"
+#include "../schema_loader.h"
 #include "../serialize.h"
+#include <algorithm>
+#include <map>
+#include <set>
 #include <shark/base/debug.h>
+#include <shark/base/filesystem.h>
 #include <shark/base/io.h>
+#include <shark/base/main.h>
 #include <shark/base/string-tree.h>
 #include <shark/base/tuple.h>
 #include <shark/base/vector.h>
-#include <shark/base/filesystem.h>
-#include "../schema-loader.h"
-#include "../dynamic.h"
+#include <shark/schema.sk.h>
+#include <shark/stream.sk.h>
 #include <unordered_map>
 #include <unordered_set>
-#include <map>
-#include <set>
-#include <shark/base/main.h>
-#include <algorithm>
-#include <shark/stream.sk.h>
 
 #if _WIN32
 #include <windows.h>

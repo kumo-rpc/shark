@@ -24,7 +24,7 @@
 
 #include "units.h"
 #include <inttypes.h>
-#include "string.h"
+#include <shark/base/string.h>
 
 KJ_BEGIN_HEADER
 

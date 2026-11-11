@@ -25,7 +25,7 @@
 #endif
 
 #include "time.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 #include <set>
 
 #if _WIN32

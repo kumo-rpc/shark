@@ -31,7 +31,7 @@
 #include <shark/base/vector.h>
 #include <shark/base/units.h>
 #include "common.h"
-#include "message.h"
+#include <shark/message.h>
 #include "layout.h"
 #include <shark/base/map.h>
 #include <shark/base/memory.h>

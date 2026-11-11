@@ -24,8 +24,8 @@
 
 #pragma once
 
-#include "common.h"
-#include "../string.h"
+#include <shark/base/parse/common.h>
+#include <shark/base/string.h>
 #include <inttypes.h>
 
 KJ_BEGIN_HEADER

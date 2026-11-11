@@ -26,7 +26,7 @@
 #include "win32-api-version.h"
 
 #include "filesystem.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 #include "encoding.h"
 #include "vector.h"
 #include <algorithm>

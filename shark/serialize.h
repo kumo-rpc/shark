@@ -40,7 +40,7 @@
 
 #pragma once
 
-#include "message.h"
+#include <shark/message.h>
 #include <shark/base/io.h>
 
 SHARK_BEGIN_HEADER

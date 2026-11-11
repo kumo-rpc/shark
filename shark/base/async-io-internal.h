@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include "string.h"
+#include <shark/base/string.h>
 #include "vector.h"
 #include "async-io.h"
 #include <stdint.h>

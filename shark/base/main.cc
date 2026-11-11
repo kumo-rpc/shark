@@ -28,8 +28,8 @@
 #endif
 
 #include "main.h"
-#include "debug.h"
-#include "arena.h"
+#include <shark/base/debug.h>
+#include <shark/base/arena.h>
 #include "miniposix.h"
 #include <map>
 #include <set>

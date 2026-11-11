@@ -21,10 +21,10 @@
 
 #define SHARK_TESTING_SHARK 1
 
-#include "../shark/schema-loader.h"
-#include <tests/test-util.h>
-#include <tests/base/compat/gtest.h>
+#include "../shark/schema_loader.h"
 #include <shark/base/debug.h>
+#include <tests/base/compat/gtest.h>
+#include <tests/test-util.h>
 
 namespace shark {
 namespace _ {  // private

@@ -26,20 +26,20 @@
 #define _GNU_SOURCE
 #endif
 
-#include <shark/schema.sk.h>
-#include "../serialize.h"
-#include <shark/base/debug.h>
-#include <shark/base/io.h>
-#include <shark/base/string-tree.h>
-#include <shark/base/vector.h>
-#include "../schema-loader.h"
 #include "../dynamic.h"
-#include <shark/base/miniposix.h>
-#include <unordered_map>
-#include <shark/base/main.h>
+#include "../schema_loader.h"
+#include "../serialize.h"
 #include <algorithm>
 #include <map>
+#include <shark/base/debug.h>
+#include <shark/base/io.h>
+#include <shark/base/main.h>
+#include <shark/base/miniposix.h>
+#include <shark/base/string-tree.h>
+#include <shark/base/vector.h>
+#include <shark/schema.sk.h>
 #include <shark/stream.sk.h>
+#include <unordered_map>
 
 #if HAVE_CONFIG_H
 #include "config.h"

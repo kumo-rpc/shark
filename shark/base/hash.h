@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include "string.h"
+#include <shark/base/string.h>
 
 KJ_BEGIN_HEADER
 

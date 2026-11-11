@@ -20,8 +20,8 @@
 // THE SOFTWARE.
 
 #define SHARK_PRIVATE
-#include "arena.h"
-#include "message.h"
+#include <shark/arena.h>
+#include <shark/message.h>
 #include <shark/base/debug.h>
 #include <shark/base/refcount.h>
 #include <vector>

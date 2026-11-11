@@ -22,7 +22,7 @@
 #if !_WIN32
 
 #include "async-unix.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 #include "threadlocal.h"
 #include <setjmp.h>
 #include <errno.h>

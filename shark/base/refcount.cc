@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 #include "refcount.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 
 #if _MSC_VER && !defined(__clang__)
 // Annoyingly, MSVC only implements the C++ atomic libs, not the C libs, so the only useful

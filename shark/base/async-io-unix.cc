@@ -35,7 +35,7 @@
 #include "async-io.h"
 #include "async-io-internal.h"
 #include "async-unix.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 #include "thread.h"
 #include "io.h"
 #include "miniposix.h"

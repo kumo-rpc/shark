@@ -21,9 +21,9 @@
 
 #pragma once
 
-#include "memory.h"
+#include <shark/base/memory.h>
 #include <shark/base/array.h>
-#include "string.h"
+#include <shark/base/string.h>
 #include "windows-sanity.h"  // work-around macro conflict with `ERROR`
 
 KJ_BEGIN_HEADER

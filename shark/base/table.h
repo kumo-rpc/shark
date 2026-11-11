@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include "common.h"
+#include <shark/base/common.h>
 #include "tuple.h"
 #include "vector.h"
 #include "function.h"
@@ -36,7 +36,7 @@
 #endif
 
 #if KJ_DEBUG_TABLE_IMPL
-#include "debug.h"
+#include <shark/base/debug.h>
 #define KJ_TABLE_IREQUIRE KJ_REQUIRE
 #define KJ_TABLE_IASSERT KJ_ASSERT
 #else

@@ -34,7 +34,7 @@
 #include <shark/compiler/grammar.sk.h>
 #include <shark/message.h>
 #include <shark/pretty-print.h>
-#include <shark/schema-loader.h>
+#include <shark/schema_loader.h>
 #include <shark/base/debug.h>
 #include <shark/base/function.h>
 #include <shark/base/io.h>

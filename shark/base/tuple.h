@@ -37,7 +37,7 @@
 
 #pragma once
 
-#include "common.h"
+#include <shark/base/common.h>
 
 KJ_BEGIN_HEADER
 

@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 #include "units.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 
 namespace kj {
 

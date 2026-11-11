@@ -32,7 +32,7 @@
 #endif
 
 #include "filesystem.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>

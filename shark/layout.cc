@@ -22,7 +22,7 @@
 #define SHARK_PRIVATE
 #include "layout.h"
 #include <shark/base/debug.h>
-#include "arena.h"
+#include <shark/arena.h>
 #include <string.h>
 #include <stdlib.h>
 

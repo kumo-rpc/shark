@@ -22,9 +22,9 @@
 #pragma once
 
 #include <stddef.h>
-#include "common.h"
+#include <shark/base/common.h>
 #include <shark/base/array.h>
-#include "exception.h"
+#include <shark/base/exception.h>
 #include <stdint.h>
 
 KJ_BEGIN_HEADER

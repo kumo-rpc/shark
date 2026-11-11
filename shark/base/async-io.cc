@@ -26,7 +26,7 @@
 
 #include "async-io.h"
 #include "async-io-internal.h"
-#include "debug.h"
+#include <shark/base/debug.h>
 #include "vector.h"
 #include "io.h"
 #include "one-of.h"

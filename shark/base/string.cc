@@ -19,8 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "string.h"
-#include "debug.h"
+#include <shark/base/string.h>
+#include <shark/base/debug.h>
 #include <stdio.h>
 #include <float.h>
 #include <errno.h>

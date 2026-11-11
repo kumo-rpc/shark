@@ -21,12 +21,12 @@
 
 #pragma once
 
-#include "memory.h"
+#include <shark/base/memory.h>
 #include "io.h"
 #include <inttypes.h>
 #include "time.h"
 #include "function.h"
-#include "hash.h"
+#include <shark/base/hash.h>
 
 KJ_BEGIN_HEADER
 

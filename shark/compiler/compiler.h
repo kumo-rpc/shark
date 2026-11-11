@@ -24,8 +24,8 @@
 #include "error-reporter.h"
 #include "generics.h"
 #include <shark/compiler/grammar.sk.h>
-#include <shark/schema-loader.h>
 #include <shark/schema.sk.h>
+#include <shark/schema_loader.h>
 
 SHARK_BEGIN_HEADER
 
