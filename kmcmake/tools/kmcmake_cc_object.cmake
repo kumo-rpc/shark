@@ -182,11 +182,6 @@ function(kmcmake_cc_object)
         set(KMCMAKE_LIB_INFO "${KMCMAKE_CC_OBJECT_NAMESPACE}::${KMCMAKE_CC_OBJECT_NAME}  OBJECT")
     endif ()
 
-    set(${KMCMAKE_CC_OBJECT_NAME}_INCLUDE_SYSTEM SYSTEM)
-    if (KMCMAKE_CC_OBJECT_EXCLUDE_SYSTEM)
-        set(${KMCMAKE_CC_OBJECT_NAME}_INCLUDE_SYSTEM "")
-    endif ()
-
     kmcmake_print_label("Create Library" "${KMCMAKE_LIB_INFO}")
     kmcmake_raw("-----------------------------------")
     if (VERBOSE_KMCMAKE_BUILD)
@@ -240,13 +235,13 @@ function(kmcmake_cc_object)
     # INTERNAL (library compile unit): caller puts compile paths in PINCLUDES only.
     if (KMCMAKE_CC_OBJECT_INTERNAL)
         target_include_directories(${KMCMAKE_CC_OBJECT_NAME}
-                ${${KMCMAKE_CC_OBJECT_NAME}_INCLUDE_SYSTEM}
+                BEFORE
                 PRIVATE
                 ${KMCMAKE_CC_OBJECT_PINCLUDES}
         )
     else ()
         target_include_directories(${KMCMAKE_CC_OBJECT_NAME}
-                ${${KMCMAKE_CC_OBJECT_NAME}_INCLUDE_SYSTEM}
+                BEFORE
                 PRIVATE
                 ${_obj_pub_incs}
                 ${KMCMAKE_CC_OBJECT_PINCLUDES}
