@@ -145,11 +145,8 @@ kmcmake_cc_test(
         NAME compat_test
         MODULE base
         SOURCES
-        compat/brotli-test.cc
-        compat/gzip-test.cc
         compat/http-test.cc
         compat/readiness-io-test.cc
-        compat/tls-test.cc
         compat/url-test.cc
         CXXOPTS
         CXXOPTS

@@ -60,11 +60,8 @@ set(BASE_SRC
         base/time.cc
         base/timer.cc
         base/units.cc
-        base/compat/brotli.cc
-        base/compat/gzip.cc
         base/compat/http.cc
         base/compat/readiness-io.cc
-        base/compat/tls.cc
         base/compat/url.cc
         base/parse/char.cc
 )

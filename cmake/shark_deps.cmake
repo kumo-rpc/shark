@@ -61,8 +61,7 @@ endif (KMCMAKE_BUILD_TEST)
 find_package(Threads REQUIRED)
 kmcmake_private_find_package(Threads REQUIRED)
 list(APPEND KMCMAKE_SYSTEM_DYLINK Threads::Threads)
-find_package(ZLIB REQUIRED)
-find_package(OpenSSL REQUIRED)
+
 ############################################################
 #
 # add you libs to the KMCMAKE_DEPS_LINK variable eg as turbo
@@ -72,9 +71,6 @@ find_package(OpenSSL REQUIRED)
 ##########################################################
 list(APPEND KMCMAKE_DEPS_LINK
         #${TURBO_LIB}
-        ZLIB::ZLIB
-        OpenSSL::SSL
-        OpenSSL::Crypto
         ${KMCMAKE_SYSTEM_DYLINK}
         )
 list(REMOVE_DUPLICATES KMCMAKE_DEPS_LINK)
