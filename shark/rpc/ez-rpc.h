@@ -35,9 +35,9 @@ namespace shark {
 class EzRpcContext;
 
 class EzRpcClient {
-  // Super-simple interface for setting up a Cap'n Proto RPC client.  Example:
+  // Super-simple interface for setting up a Shark Proto RPC client.  Example:
   //
-  //     # Cap'n Proto schema
+  //     # Shark Proto schema
   //     interface Adder {
   //       add @0 (left :Int32, right :Int32) -> (value :Int32);
   //     }
@@ -73,7 +73,7 @@ class EzRpcClient {
   // classes:
   // - The server can only export a small set of public, singleton capabilities under well-known
   //   string names.  This is fine for transient services where no state needs to be kept between
-  //   connections, but hides the power of Cap'n Proto when it comes to long-lived resources.
+  //   connections, but hides the power of Shark Proto when it comes to long-lived resources.
   // - EzRpcClient/EzRpcServer automatically set up a `kj::EventLoop` and make it current for the
   //   thread.  Only one `kj::EventLoop` can exist per thread, so you cannot use these interfaces
   //   if you wish to set up your own event loop.  (However, you can safely create multiple

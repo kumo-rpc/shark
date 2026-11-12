@@ -109,7 +109,7 @@ class Request: public Params::Builder {
   // A call that hasn't been sent yet.  This class extends a Builder for the call's "Params"
   // structure with a method send() that actually sends it.
   //
-  // Given a Cap'n Proto method `foo(a :A, b :B): C`, the generated client interface will have
+  // Given a Shark Proto method `foo(a :A, b :B): C`, the generated client interface will have
   // a method `Request<FooParams, C> fooRequest()` (as well as a convenience method
   // `RemotePromise<C> foo(A::Reader a, B::Reader b)`).
 
@@ -428,7 +428,7 @@ public:
 
   void allowCancellation()
       KJ_UNAVAILABLE(
-          "As of Cap'n Proto 1.0, allowCancellation must be applied statically using an "
+          "As of Shark Proto 1.0, allowCancellation must be applied statically using an "
           "annotation in the schema. See annotations defined in /shark/cpp.shk. For "
           "DynamicCapability::Server, use the constructor option (the annotation does not apply "
           "to DynamicCapability). This change was made to gain a significant performance boost -- "
@@ -459,7 +459,7 @@ public:
 
   void allowCancellation()
       KJ_UNAVAILABLE(
-          "As of Cap'n Proto 1.0, allowCancellation must be applied statically using an "
+          "As of Shark Proto 1.0, allowCancellation must be applied statically using an "
           "annotation in the schema. See annotations defined in /shark/cpp.shk. For "
           "DynamicCapability::Server, use the constructor option (the annotation does not apply "
           "to DynamicCapability). This change was made to gain a significant performance boost -- "
@@ -474,7 +474,7 @@ private:
 };
 
 class Capability::Server {
-  // Objects implementing a Cap'n Proto interface must subclass this.  Typically, such objects
+  // Objects implementing a Shark Proto interface must subclass this.  Typically, such objects
   // will instead subclass a typed Server interface which will take care of implementing
   // dispatchCall().
 
@@ -626,7 +626,7 @@ private:
 class ReaderCapabilityTable: private _::CapTableReader {
   // Class which imbues Readers with the ability to read capabilities.
   //
-  // In Cap'n Proto format, the encoding of a capability pointer is simply an integer index into
+  // In Shark Proto format, the encoding of a capability pointer is simply an integer index into
   // an external table. Since these pointers fundamentally point outside the message, a
   // MessageReader by default has no idea what they point at, and therefore reading capabilities
   // from such a reader will throw exceptions.
@@ -635,7 +635,7 @@ class ReaderCapabilityTable: private _::CapTableReader {
   // this class. By "imbuing" a Reader, you get a new Reader which will interpret capability
   // pointers by treating them as indexes into the ReaderCapabilityTable.
   //
-  // Note that when using Cap'n Proto's RPC system, this is handled automatically.
+  // Note that when using Shark Proto's RPC system, this is handled automatically.
 
 public:
   explicit ReaderCapabilityTable(kj::Array<kj::Maybe<kj::Own<ClientHook>>> table);
@@ -698,7 +698,7 @@ class CapabilityServerSet: private _::CapabilityServerSetBase {
   // interfaces derived from T (and in fact T can be `shark::Capability` to accept all objects),
   // but note that if you compile with RTTI disabled then you will not be able to down-cast through
   // virtual inheritance, and all inheritance between server interfaces is virtual. So, with RTTI
-  // disabled, you will likely need to set T to be the most-derived Cap'n Proto interface type,
+  // disabled, you will likely need to set T to be the most-derived Shark Proto interface type,
   // and you server class will need to be directly derived from that, so that you can use
   // static_cast (or kj::downcast) to cast to it after calling getLocalServer(). (If you compile
   // with RTTI, then you can freely dynamic_cast and ignore this issue!)
@@ -832,7 +832,7 @@ public:
 
   inline bool isNull() { return getBrand() == &NULL_CAPABILITY_BRAND; }
   // Returns true if the capability was created as a result of assigning a Client to null or by
-  // reading a null pointer out of a Cap'n Proto message.
+  // reading a null pointer out of a Shark Proto message.
 
   inline bool isError() { return getBrand() == &BROKEN_CAPABILITY_BRAND; }
   // Returns true if the capability was created by newBrokenCap().

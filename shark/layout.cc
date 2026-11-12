@@ -324,7 +324,7 @@ static_assert(unboundAs<size_t>(POINTERS * BITS_PER_POINTER / BITS_PER_BYTE / BY
 #define OUT_OF_BOUNDS_ERROR_DETAIL \
     "This usually indicates that " \
     "the input data was corrupted, used a different encoding than specified (e.g. " \
-    "packed vs. non-packed), or was not a Cap'n Proto message to begin with. Note " \
+    "packed vs. non-packed), or was not a Shark Proto message to begin with. Note " \
     "that this error is NOT due to a schema mismatch; the input is invalid " \
     "regardless of schema."
 
@@ -2226,7 +2226,7 @@ struct WireHelpers {
     KJ_REQUIRE(brokenCapFactory != nullptr,
                "Trying to read capabilities without ever having created a capability context.  "
                "To read capabilities from a message, you must imbue it with CapReaderContext, or "
-               "use the Cap'n Proto RPC system.");
+               "use the Shark Proto RPC system.");
 
     if (ref->isNull()) {
       return brokenCapFactory->newNullCap();

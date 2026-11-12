@@ -1326,7 +1326,7 @@ template <>
 struct IdentityFunc<Promise<void>> {
   Promise<void> operator()() const;
   // This can't be inline because it will make the translation unit depend on kj-async. Awkwardly,
-  // Cap'n Proto relies on being able to include this header without creating such a link-time
+  // Shark Proto relies on being able to include this header without creating such a link-time
   // dependency.
 };
 

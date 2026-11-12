@@ -1033,7 +1033,7 @@ namespace shark {
                 return;
             }
 
-            // We assume unknown types (from newer versions of Cap'n Proto?) are equivalent.
+            // We assume unknown types (from newer versions of Shark Proto?) are equivalent.
         }
 
         void checkUpgradeToStruct(const schema::Type::Reader& type, uint64_t structTypeId,

@@ -943,7 +943,7 @@ shark::HttpService::Client HttpOverSharkFactory::kjToShark(kj::Own<kj::HttpServi
 
 static constexpr uint64_t COMMON_TEXT_ANNOTATION = 0x857745131db6fc83ull;
 // Type ID of `commonText` from `http.shk`.
-// TODO(cleanup): Cap'n Proto should auto-generate constants for these.
+// TODO(cleanup): Shark Proto should auto-generate constants for these.
 
 HttpOverSharkFactory::HeaderIdBundle::HeaderIdBundle(kj::HttpHeaderTable::Builder& builder)
     : table(builder.getFutureTable()) {

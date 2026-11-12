@@ -191,7 +191,7 @@ namespace shark {
                 // For example, the flag combo:
                 //     EAGER_NODE | EAGER_CHILDREN | EAGER_DEPENDENCIES | EAGER_DEPENDENCY_PARENTS
                 // will compile the entire given module, plus all direct dependencies of anything in that
-                // module, plus all lexical ancestors of those dependencies.  This is what the Cap'n Proto
+                // module, plus all lexical ancestors of those dependencies.  This is what the Shark Proto
                 // compiler uses when building initial code generator requests.
 
                 ALL_RELATED_NODES = ~0u,

@@ -31,7 +31,7 @@ SHARK_BEGIN_HEADER
 namespace shark {
 
 class TextCodec {
-  // Reads and writes Cap'n Proto objects in a plain text format (as used in the schema
+  // Reads and writes Shark Proto objects in a plain text format (as used in the schema
   // language for constants, and read/written by the 'decode' and 'encode' commands of
   // the shark tool).
   //
@@ -56,11 +56,11 @@ public:
   template <typename T>
   kj::String encode(T&& value) const;
   kj::String encode(DynamicValue::Reader value) const;
-  // Encode any Cap'n Proto value.
+  // Encode any Shark Proto value.
 
   template <typename T>
   Orphan<T> decode(kj::StringPtr input, Orphanage orphanage) const;
-  // Decode a text message into a Cap'n Proto object of type T, allocated in the given
+  // Decode a text message into a Shark Proto object of type T, allocated in the given
   // orphanage. Any errors parsing the input or assigning the fields of T are thrown as
   // exceptions.
 

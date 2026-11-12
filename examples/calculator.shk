@@ -24,7 +24,7 @@
 interface Calculator {
   # A "simple" mathematical calculator, callable via RPC.
   #
-  # But, to show off Cap'n Proto, we add some twists:
+  # But, to show off Shark Proto, we add some twists:
   #
   # - You can use the result from one call as the input to the next
   #   without a network round trip.  To accomplish this, evaluate()

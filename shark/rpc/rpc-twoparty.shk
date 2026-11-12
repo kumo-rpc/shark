@@ -65,7 +65,7 @@
 # native participant.  In other words, an application which implements only the two-party protocol
 # can be paired with a proxy app in order to participate in any network.
 #
-# So, when implementing Cap'n Proto in a new language, it makes sense to implement only the
+# So, when implementing Shark Proto in a new language, it makes sense to implement only the
 # two-party protocol initially, and then pair applications with an appropriate proxy written in
 # C++, rather than implement other parameterizations of the RPC protocol directly.
 

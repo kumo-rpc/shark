@@ -57,7 +57,7 @@ namespace shark {
 #define SHARK_LITE 0
 #endif
 
-#if SHARK_TESTING_SHARK  // defined in Cap'n Proto's own unit tests; others should not define this
+#if SHARK_TESTING_SHARK  // defined in Shark Proto's own unit tests; others should not define this
 #define SHARK_DEPRECATED(reason)
 #else
 #define SHARK_DEPRECATED KJ_DEPRECATED
@@ -91,7 +91,7 @@ enum class Kind: uint8_t {
   LIST,
 
   OTHER
-  // Some other type which is often a type parameter to Cap'n Proto templates, but which needs
+  // Some other type which is often a type parameter to Shark Proto templates, but which needs
   // special handling. This includes types like AnyPointer, Dynamic*, etc.
 };
 
@@ -246,23 +246,23 @@ using TypeIfEnum = typename TypeIfEnum_<kj::Decay<T>>::Type;
 
 template <typename T>
 using FromReader = typename kj::Decay<T>::Reads;
-// FromReader<MyType::Reader> = MyType (for any Cap'n Proto type).
+// FromReader<MyType::Reader> = MyType (for any Shark Proto type).
 
 template <typename T>
 using FromBuilder = typename kj::Decay<T>::Builds;
-// FromBuilder<MyType::Builder> = MyType (for any Cap'n Proto type).
+// FromBuilder<MyType::Builder> = MyType (for any Shark Proto type).
 
 template <typename T>
 using FromPipeline = typename kj::Decay<T>::Pipelines;
-// FromBuilder<MyType::Pipeline> = MyType (for any Cap'n Proto type).
+// FromBuilder<MyType::Pipeline> = MyType (for any Shark Proto type).
 
 template <typename T>
 using FromClient = typename kj::Decay<T>::Calls;
-// FromReader<MyType::Client> = MyType (for any Cap'n Proto interface type).
+// FromReader<MyType::Client> = MyType (for any Shark Proto interface type).
 
 template <typename T>
 using FromServer = typename kj::Decay<T>::Serves;
-// FromBuilder<MyType::Server> = MyType (for any Cap'n Proto interface type).
+// FromBuilder<MyType::Server> = MyType (for any Shark Proto interface type).
 
 template <typename T, typename = void>
 struct FromAny_;
@@ -300,7 +300,7 @@ struct FromAny_<T,
 
 template <typename T>
 using FromAny = typename FromAny_<T>::Type;
-// Given any Cap'n Proto value type as an input, return the Cap'n Proto base type. That is:
+// Given any Shark Proto value type as an input, return the Shark Proto base type. That is:
 //
 //     Foo::Reader -> Foo
 //     Foo::Builder -> Foo
@@ -375,7 +375,7 @@ static_assert(sizeof(word) == 8, "uint64_t is not 8 bytes?");
 // be compiled with the same setting here.
 //
 // We disable this by default to reduce symbol name size and avoid any possibility of the compiler
-// failing to fully-optimize the types, but anyone modifying Cap'n Proto itself should enable this
+// failing to fully-optimize the types, but anyone modifying Shark Proto itself should enable this
 // during development and testing.
 
 namespace _ { class BitLabel; class ElementLabel; struct WirePointer; }

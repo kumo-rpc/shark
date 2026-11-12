@@ -77,7 +77,7 @@
 namespace shark {
     namespace compiler {
 
-        static const char VERSION_STRING[] = "Cap'n Proto version " VERSION;
+        static const char VERSION_STRING[] = "Shark Proto version " VERSION;
 
         class CompilerMain final : public GlobalErrorReporter {
         public:
@@ -88,7 +88,7 @@ namespace shark {
 
             kj::MainFunc getMain() {
                 kj::MainBuilder builder(context, VERSION_STRING,
-                    "Command-line tool for Cap'n Proto development and debugging.");
+                    "Command-line tool for Shark Proto development and debugging.");
                 builder.addSubCommand("compile", KJ_BIND_METHOD(*this, getCompileMain),
                            "Generate source code from schema files.")
                     .addSubCommand("id", KJ_BIND_METHOD(*this, getGenIdMain),
@@ -107,7 +107,7 @@ namespace shark {
 
             kj::MainFunc getCompileMain() {
                 kj::MainBuilder builder(context, VERSION_STRING,
-                    "Compiles Cap'n Proto schema files and generates corresponding source code in one or "
+                    "Compiles Shark Proto schema files and generates corresponding source code in one or "
                     "more languages.");
                 addGlobalOptions(builder);
                 addCompileOptions(builder);
@@ -116,7 +116,7 @@ namespace shark {
 
             kj::MainFunc getGenIdMain() {
                 return kj::MainBuilder(context, VERSION_STRING,
-                    "Generates a new 64-bit unique ID for use in a Cap'n Proto schema.")
+                    "Generates a new 64-bit unique ID for use in a Shark Proto schema.")
                     .callAfterParsing(KJ_BIND_METHOD(*this, generateId))
                     .build();
             }
@@ -170,15 +170,15 @@ namespace shark {
                 annotationFlag = Compiler::DROP_ANNOTATIONS;
 
                 kj::MainBuilder builder(context, VERSION_STRING,
-                    "Decodes one or more encoded Cap'n Proto messages as text.  The messages have root "
+                    "Decodes one or more encoded Shark Proto messages as text.  The messages have root "
                     "type <type> defined in <schema-file>.  Messages are read from standard input and "
-                    "by default are expected to be in standard Cap'n Proto serialization format.");
+                    "by default are expected to be in standard Shark Proto serialization format.");
                 addGlobalOptions(builder);
                 builder.addOption({ "flat" }, KJ_BIND_METHOD(*this, codeFlat),
                            "Interpret the input as one large single-segment message rather than a "
                            "stream in standard serialization format.  (Rarely used.)")
                     .addOption({ 'p', "packed" }, KJ_BIND_METHOD(*this, codePacked),
-                        "Expect the input to be packed using standard Cap'n Proto packing, which "
+                        "Expect the input to be packed using standard Shark Proto packing, which "
                         "deflates zero-valued bytes.  (This reads messages written with "
                         "shark::writePackedMessage*() from <shark/serialize-packed.h>.  Do not use "
                         "this for messages written with shark::writeMessage*() from "
@@ -204,7 +204,7 @@ namespace shark {
                 annotationFlag = Compiler::DROP_ANNOTATIONS;
 
                 kj::MainBuilder builder(context, VERSION_STRING,
-                    "Encodes one or more textual Cap'n Proto messages to binary.  The messages have root "
+                    "Encodes one or more textual Shark Proto messages to binary.  The messages have root "
                     "type <type> defined in <schema-file>.  Messages are read from standard input.  Each "
                     "message is a parenthesized struct literal, like the format used to specify constants "
                     "and default values of struct type in the schema language.  For example:\n"
@@ -220,7 +220,7 @@ namespace shark {
                            "Expect only one input value, serializing it as a single-segment message "
                            "with no framing.")
                     .addOption({ 'p', "packed" }, KJ_BIND_METHOD(*this, codePacked),
-                        "Pack the output message with standard Cap'n Proto packing, which "
+                        "Pack the output message with standard Shark Proto packing, which "
                         "deflates zero-valued bytes.  (This writes messages using "
                         "shark::writePackedMessage() from <shark/serialize-packed.h>.  Without "
                         "this, shark::writeMessage() from <shark/serialize.h> is used.)")
@@ -246,7 +246,7 @@ namespace shark {
                 convertTo = Format::TEXT;
 
                 // When using `shark eval`, type IDs don't really matter, because `eval` won't actually use
-                // them for anything. When using Cap'n Proto an a config format -- the common use case for
+                // them for anything. When using Shark Proto an a config format -- the common use case for
                 // `shark eval` -- the exercise of adding a file ID to every file is pointless busy work. So,
                 // we don't require it.
                 loader.setFileIdsRequired(false);

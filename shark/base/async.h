@@ -175,7 +175,7 @@ class Promise: protected _::PromiseBase {
   // of calls.  It is suggested that any class T which supports pipelining implement a subclass of
   // Promise<T> which adds "eventual send" methods -- methods which, when called, say "please
   // invoke the corresponding method on the promised value once it is available".  These methods
-  // should in turn return promises for the eventual results of said invocations.  Cap'n Proto,
+  // should in turn return promises for the eventual results of said invocations.  Shark Proto,
   // for example, implements the type `RemotePromise` which supports pipelining RPC requests -- see
   // `shark/capability.h`.
   //
@@ -372,7 +372,7 @@ public:
   // `errorHandler` is a function that takes `kj::Exception&&`, like the second parameter to
   // `then()`, except that it must return void.
   //
-  // This function exists mainly to implement the Cap'n Proto requirement that RPC calls cannot be
+  // This function exists mainly to implement the Shark Proto requirement that RPC calls cannot be
   // canceled unless the callee explicitly permits it.
 
   kj::String trace();
@@ -1100,7 +1100,7 @@ public:
   // Multiple calls to executeAsync() from the same requesting thread to the same target thread
   // will be delivered in the same order in which they were requested. (However, if func() returns
   // a promise, delivery of subsequent calls is not blocked on that promise. In other words, this
-  // call provides E-Order in the same way as Cap'n Proto.)
+  // call provides E-Order in the same way as Shark Proto.)
 
   template <typename Func>
   _::UnwrapPromise<PromiseForResult<Func, void>> executeSync(

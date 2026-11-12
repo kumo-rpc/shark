@@ -65,7 +65,7 @@ public:
 
     // IF YOU ADD A NEW VALUE:
     // - Update the stringifier.
-    // - Update Cap'n Proto's RPC protocol's Exception.Type enum.
+    // - Update Shark Proto's RPC protocol's Exception.Type enum.
   };
 
   Exception(Type type, const char* file, int line, String description = nullptr) noexcept;

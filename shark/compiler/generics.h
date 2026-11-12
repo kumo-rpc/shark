@@ -211,7 +211,7 @@ namespace shark {
             //
             // Note that it's possible that not all declared parameters were actually specified for a given
             // scope. For example, if you declare a generic `Foo(T, U)`, and then you intiantiate it
-            // somewhere as `Foo(Text)`, then `U` is unspecified -- this is not an error, because Cap'n
+            // somewhere as `Foo(Text)`, then `U` is unspecified -- this is not an error, because Shark
             // Proto allows new type parameters to be added over time. `U` should be treated as `AnyPointer`
             // in this case, but `getParams()` doesn't know how many parameters are expected, so it will
             // return an array that only contains one item. Use `lookupParameter()` if you want unspecified

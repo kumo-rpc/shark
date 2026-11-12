@@ -24,7 +24,7 @@
 //
 // This file must be #included some time after windows.h has been #included but before any attempt
 // to use the names for other purposes. However, this can be difficult to determine in header
-// files. Typically KJ / Cap'n Proto headers avoid including windows.h at all, but may use
+// files. Typically KJ / Shark Proto headers avoid including windows.h at all, but may use
 // conflicting identifiers. In order to relieve application developers from the need to include
 // windows-sanity.h themselves, we would like these headers to conditionally apply the fixes if
 // and only if windows.h was already included. Therefore, this header checks if windows.h has been

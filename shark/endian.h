@@ -37,7 +37,7 @@ namespace _ {  // private
 //
 // Note:  In general, code that depends cares about byte ordering is bad.  See:
 //     http://commandcenter.blogspot.com/2012/04/byte-order-fallacy.html
-//   Cap'n Proto is special because it is essentially doing compiler-like things, fussing over
+//   Shark Proto is special because it is essentially doing compiler-like things, fussing over
 //   allocation and layout of memory, in order to squeeze out every last drop of performance.
 
 #if _MSC_VER

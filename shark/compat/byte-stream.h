@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 #pragma once
-// Bridges from KJ streams to Cap'n Proto ByteStream RPC protocol.
+// Bridges from KJ streams to Shark Proto ByteStream RPC protocol.
 
 #include <shark/compat/byte-stream.sk.h>
 #include <shark/base/async-io.h>

@@ -37,7 +37,7 @@ namespace shark {
         // be exposing yourself to denial-of-service attacks, as attackers can easily construct schemas
         // that are subtly inconsistent in a way that causes exceptions to be thrown either by
         // SchemaLoader or by the dynamic API when the schemas are subsequently used.  If you enable and
-        // properly catch exceptions, you should be OK -- assuming no bugs in the Cap'n Proto
+        // properly catch exceptions, you should be OK -- assuming no bugs in the Shark Proto
         // implementation, of course.
 
     public:
@@ -124,7 +124,7 @@ namespace shark {
         // - Content of default/constant values of pointer type.  (Validating these would require knowing
         //   their schema, but even if the schemas are available at validation time, they could be
         //   updated by a subsequent load(), invalidating existing values.  Instead, these values are
-        //   validated at the time they are used, as usual for Cap'n Proto objects.)
+        //   validated at the time they are used, as usual for Shark Proto objects.)
         //
         // Also note that unknown types are not considered invalid.  Instead, the dynamic API returns
         // a DynamicValue with type UNKNOWN for these.

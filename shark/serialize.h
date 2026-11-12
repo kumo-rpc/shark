@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-// This file implements a simple serialization format for Cap'n Proto messages.  The format
+// This file implements a simple serialization format for Shark Proto messages.  The format
 // is as follows:
 //
 // * 32-bit little-endian segment count (4 bytes).

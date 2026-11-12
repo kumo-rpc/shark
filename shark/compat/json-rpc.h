@@ -35,7 +35,7 @@ namespace shark {
 class JsonRpc: private kj::TaskSet::ErrorHandler {
   // An implementation of JSON-RPC 2.0: https://www.jsonrpc.org/specification
   //
-  // This allows you to use Cap'n Proto interface declarations to implement JSON-RPC protocols.
+  // This allows you to use Shark Proto interface declarations to implement JSON-RPC protocols.
   // Of course, JSON-RPC does not support capabilities. So, the client and server each expose
   // exactly one object to the other.
 

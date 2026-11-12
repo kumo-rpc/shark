@@ -93,7 +93,7 @@ int win32Socketpair(SOCKET socks[2]) {
   //    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   //    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-  // Note: This function is called from some Cap'n Proto unit tests, despite not having a public
+  // Note: This function is called from some Shark Proto unit tests, despite not having a public
   //   header declaration.
 
   initWinsockOnce();
@@ -490,7 +490,7 @@ public:
     if (isStream && (addr.generic.sa_family == AF_INET ||
                      addr.generic.sa_family == AF_INET6)) {
       // TODO(perf):  As a hack for the 0.4 release we are always setting
-      //   TCP_NODELAY because Nagle's algorithm pretty much kills Cap'n Proto's
+      //   TCP_NODELAY because Nagle's algorithm pretty much kills Shark Proto's
       //   RPC protocol.  Later, we should extend the interface to provide more
       //   control over this.  Perhaps write() should have a flag which
       //   specifies whether to pass MSG_MORE.

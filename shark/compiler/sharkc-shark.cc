@@ -93,10 +93,10 @@ public:
   SharkcSharkMain(kj::ProcessContext& context): context(context) {}
 
   kj::MainFunc getMain() {
-    return kj::MainBuilder(context, "Cap'n Proto loopback plugin version " VERSION,
-          "This is a Cap'n Proto compiler plugin which \"de-compiles\" the schema back into "
-          "Cap'n Proto schema language format, with comments showing the offsets chosen by the "
-          "compiler.  This is meant to be run using the Cap'n Proto compiler, e.g.:\n"
+    return kj::MainBuilder(context, "Shark Proto loopback plugin version " VERSION,
+          "This is a Shark Proto compiler plugin which \"de-compiles\" the schema back into "
+          "Shark Proto schema language format, with comments showing the offsets chosen by the "
+          "compiler.  This is meant to be run using the Shark Proto compiler, e.g.:\n"
           "    shark compile -oshark foo.shk")
         .callAfterParsing(KJ_BIND_METHOD(*this, run))
         .build();

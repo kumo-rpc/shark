@@ -859,7 +859,7 @@ KJ_TEST("DiskDirectory replace file with directory") {
 // because it was run on the wrong filesystem. We could design the test to check first if the
 // filesystem supports holes, but the code to do that would be almost the same as the code being
 // tested... Instead, we've marked this test so it only runs when building this library using
-// defines that only the Cap'n Proto maintainers use. So, we run the test ourselves but we don't
+// defines that only the Shark Proto maintainers use. So, we run the test ourselves but we don't
 // make other people run it.
 
 KJ_TEST("DiskFile holes") {

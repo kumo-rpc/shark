@@ -281,7 +281,7 @@ namespace shark {
 
                 MallocMessageBuilder message;
                 Orphanage orphanage;
-                // Orphanage for allocating temporary Cap'n Proto objects.
+                // Orphanage for allocating temporary Shark Proto objects.
 
                 kj::Arena arena;
                 // Arena for allocating temporary native objects.  Note that objects in `arena` may contain

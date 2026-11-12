@@ -269,7 +269,7 @@ void reportResults(const char* name, uint64_t iters, TestResult results) {
 void reportComparisonHeader() {
   cout << setw(40) << left << "Measure"
        << setw(15) << right << "Protobuf"
-       << setw(15) << right << "Cap'n Proto"
+       << setw(15) << right << "Shark Proto"
        << setw(15) << right << "Improvement"
        << endl;
   cout << setfill('=') << setw(85) << "" << setfill(' ') << endl;
@@ -450,7 +450,7 @@ int main(int argc, char* argv[]) {
       cout << "* no compression" << endl;
       break;
     case Compression::PACKED:
-      cout << "* de-zero packing for Cap'n Proto" << endl;
+      cout << "* de-zero packing for Shark Proto" << endl;
       cout << "* standard packing for Protobuf" << endl;
       break;
     case Compression::SNAPPY:
@@ -476,7 +476,7 @@ int main(int argc, char* argv[]) {
       Product::SHARKROTO, testCase, Mode::OBJECTS, Reuse::YES, compression, iters);
   sharkBase.objectSize = runTest(
       Product::SHARKROTO, testCase, Mode::OBJECT_SIZE, Reuse::YES, compression, iters).objectSize;
-  reportResults("Cap'n Proto pass-by-object", iters, sharkBase);
+  reportResults("Shark Proto pass-by-object", iters, sharkBase);
 
   TestResult nullCaseNoReuse = runTest(
       Product::NULLCASE, testCase, Mode::OBJECT_SIZE, Reuse::NO, compression, iters);
@@ -492,7 +492,7 @@ int main(int argc, char* argv[]) {
       Product::SHARKROTO, testCase, Mode::OBJECTS, Reuse::NO, compression, iters);
   sharkNoReuse.objectSize = runTest(
       Product::SHARKROTO, testCase, Mode::OBJECT_SIZE, Reuse::NO, compression, iters).objectSize;
-  reportResults("Cap'n Proto w/o object reuse", iters, sharkNoReuse);
+  reportResults("Shark Proto w/o object reuse", iters, sharkNoReuse);
 
   TestResult protobuf = runTest(
       Product::PROTOBUF, testCase, mode, Reuse::YES, compression, iters);
@@ -502,11 +502,11 @@ int main(int argc, char* argv[]) {
   TestResult sk = runTest(
       Product::SHARKROTO, testCase, mode, Reuse::YES, compression, iters);
   sk.objectSize = sharkBase.objectSize;
-  reportResults("Cap'n Proto I/O", iters, sk);
+  reportResults("Shark Proto I/O", iters, sk);
   TestResult sharkPacked = runTest(
       Product::SHARKROTO, testCase, mode, Reuse::YES, Compression::PACKED, iters);
   sharkPacked.objectSize = sharkBase.objectSize;
-  reportResults("Cap'n Proto packed I/O", iters, sharkPacked);
+  reportResults("Shark Proto packed I/O", iters, sharkPacked);
 
   size_t protobufBinarySize = fileSize("protobuf-" + std::string(testCaseName(testCase)));
   size_t sharkBinarySize = fileSize("sharkproto-" + std::string(testCaseName(testCase)));
@@ -545,7 +545,7 @@ int main(int argc, char* argv[]) {
     oldSharkBase.objectSize = runTest(
         Product::SHARKROTO, testCase, Mode::OBJECT_SIZE, Reuse::YES, compression, iters)
         .objectSize;
-    reportResults("Old Cap'n Proto pass-by-object", iters, oldSharkBase);
+    reportResults("Old Shark Proto pass-by-object", iters, oldSharkBase);
 
     oldNullCaseNoReuse = runTest(
         Product::NULLCASE, testCase, Mode::OBJECT_SIZE, Reuse::NO, compression, iters);
@@ -555,16 +555,16 @@ int main(int argc, char* argv[]) {
         Product::SHARKROTO, testCase, Mode::OBJECTS, Reuse::NO, compression, iters);
     oldSharkNoReuse.objectSize = runTest(
         Product::SHARKROTO, testCase, Mode::OBJECT_SIZE, Reuse::NO, compression, iters).objectSize;
-    reportResults("Old Cap'n Proto w/o object reuse", iters, oldSharkNoReuse);
+    reportResults("Old Shark Proto w/o object reuse", iters, oldSharkNoReuse);
 
     oldShark = runTest(
         Product::SHARKROTO, testCase, mode, Reuse::YES, compression, iters);
     oldShark.objectSize = oldSharkBase.objectSize;
-    reportResults("Old Cap'n Proto I/O", iters, oldShark);
+    reportResults("Old Shark Proto I/O", iters, oldShark);
     oldSharkPacked = runTest(
         Product::SHARKROTO, testCase, mode, Reuse::YES, Compression::PACKED, iters);
     oldSharkPacked.objectSize = oldSharkBase.objectSize;
-    reportResults("Old Cap'n Proto packed I/O", iters, oldSharkPacked);
+    reportResults("Old Shark Proto packed I/O", iters, oldSharkPacked);
 
     oldSharkBinarySize = fileSize("sharkproto-" + std::string(testCaseName(testCase)));
     oldSharkCodeSize = fileSize(std::string(testCaseName(testCase)) + ".shk.c++")

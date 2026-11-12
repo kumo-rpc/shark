@@ -85,7 +85,7 @@ public:
   // Get the Schema for a particular compiled-in type.
 
   schema::Node::Reader getProto() const;
-  // Get the underlying Cap'n Proto representation of the schema node.  (Note that this accessor
+  // Get the underlying Shark Proto representation of the schema node.  (Note that this accessor
   // has performance comparable to accessors of struct-typed fields on Reader classes.)
 
   kj::ArrayPtr<const word> asUncheckedMessage() const;

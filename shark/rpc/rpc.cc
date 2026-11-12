@@ -120,7 +120,7 @@ kj::Exception toException(const rpc::Exception::Reader& exception) {
     }
   }();
 
-  // Cap'n Proto enums are encoded as raw UInt16 on the wire, so a peer can send any value 0-65535.
+  // Shark Proto enums are encoded as raw UInt16 on the wire, so a peer can send any value 0-65535.
   // We must clamp to valid kj::Exception::Type values to avoid undefined behavior (e.g. out-of-
   // bounds array access when stringifying the exception type).
   kj::Exception::Type type = kj::Exception::Type::FAILED;
@@ -2383,7 +2383,7 @@ private:
         return newBrokenCap(
             "An RPC call's shark::PipelineHook object resolved a pipelined capability to a "
             "different final object than what was returned in the actual response. This could "
-            "be a bug in Cap'n Proto, or could be due to a use of context.setPipeline() that "
+            "be a bug in Shark Proto, or could be due to a use of context.setPipeline() that "
             "was inconsistent with the later results.");
       }
     }
@@ -2963,7 +2963,7 @@ private:
           cap = r->baseRestore(bootstrap.getDeprecatedObjectId());
         } else {
           KJ_FAIL_REQUIRE("This vat only supports a bootstrap interface, not the old "
-                          "Cap'n-Proto-0.4-style named exports.") { return; }
+                          "Shark-Proto-0.4-style named exports.") { return; }
         }
       } else {
         cap = bootstrapFactory.baseCreateFor(conn.baseGetPeerVatId());
@@ -3176,7 +3176,7 @@ private:
         // somehow.
         KJ_LOG(ERROR,
             "sendForPipeline() was used when sending an RPC to a peer, the parameters of that "
-            "RPC included capabilities, but the peer seems to implement Cap'n Proto at level 0, "
+            "RPC included capabilities, but the peer seems to implement Shark Proto at level 0, "
             "meaning it does not support capability passing (or, at least, it sent a `Return` "
             "with `releaseParamCaps = true`). The capabilities that were sent may have been "
             "leaked (they won't be dropped until the connection closes).");
@@ -3345,7 +3345,7 @@ private:
     if (finish.getRequireEarlyCancellationWorkaround()) {
       // Defer actual cancellation of the call until the end of the event loop queue.
       //
-      // This is needed for compatibility with older versions of Cap'n Proto (0.10 and prior) in
+      // This is needed for compatibility with older versions of Shark Proto (0.10 and prior) in
       // which the default was to prohibit cancellation until it was explicitly allowed. In newer
       // versions (1.0 and later) cancellation is allowed until explicitly prohibited, that is, if
       // we haven't actually delivered the call yet, it can be canceled. This requires less
@@ -3595,7 +3595,7 @@ public:
       return r->baseRestore(objectId);
     } else {
       return Capability::Client(newBrokenCap(
-          "This vat only supports a bootstrap interface, not the old Cap'n-Proto-0.4-style "
+          "This vat only supports a bootstrap interface, not the old Shark-Proto-0.4-style "
           "named exports."));
     }
   }

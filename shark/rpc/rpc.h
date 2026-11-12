@@ -106,7 +106,7 @@ public:
   // `hostId` identifies the host from which to request the ref, in the format specified by the
   // `VatNetwork` in use.  `objectId` is the object ID in whatever format is expected by said host.
   //
-  // This method will be removed in a future version of Cap'n Proto. Instead, please transition
+  // This method will be removed in a future version of Shark Proto. Instead, please transition
   // to using bootstrap(), which is equivalent to calling restore() with a null `objectId`.
   // You may emulate the old concept of object IDs by exporting a bootstrap interface which has
   // methods that can be used to obtain other capabilities by ID.
@@ -229,7 +229,7 @@ template <typename SturdyRefObjectId>
 class SturdyRefRestorer: public _::SturdyRefRestorerBase {
   // ** DEPRECATED **
   //
-  // In Cap'n Proto 0.4.x, applications could export multiple main interfaces identified by
+  // In Shark Proto 0.4.x, applications could export multiple main interfaces identified by
   // object IDs. The callback used to map object IDs to objects was `SturdyRefRestorer`, as we
   // imagined this would eventually be used for restoring SturdyRefs as well. In practice, it was
   // never used for real SturdyRefs, only for exporting singleton objects under well-known names.
@@ -362,8 +362,8 @@ public:
 template <typename VatId, typename ProvisionId, typename RecipientId,
           typename ThirdPartyCapId, typename JoinResult>
 class VatNetwork: public _::VatNetworkBase {
-  // Cap'n Proto RPC operates between vats, where a "vat" is some sort of host of objects.
-  // Typically one Cap'n Proto process (in the Unix sense) is one vat.  The RPC system is what
+  // Shark Proto RPC operates between vats, where a "vat" is some sort of host of objects.
+  // Typically one Shark Proto process (in the Unix sense) is one vat.  The RPC system is what
   // allows calls between objects hosted in different vats.
   //
   // The RPC implementation sits on top of an implementation of `VatNetwork`.  The `VatNetwork`

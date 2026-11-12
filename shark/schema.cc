@@ -28,7 +28,7 @@ namespace shark {
 
 namespace schema {
   uint KJ_HASHCODE(Type::Which w) { return kj::hashCode(static_cast<uint16_t>(w)); }
-  // TODO(cleanup): Cap'n Proto does not declare stringifiers nor hashers for `Which` enums, unlike
+  // TODO(cleanup): Shark Proto does not declare stringifiers nor hashers for `Which` enums, unlike
   //   all other enums. Fix that and remove this.
 }
 

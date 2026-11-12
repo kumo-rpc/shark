@@ -73,7 +73,7 @@ public:
         //
         // TODO(cleanup): ERROR_INVALID_HANDLE really shouldn't be allowed. Unfortunately, the
         //   refcounted nature of capabilities and the RPC system seems to mean that objects
-        //   are unwound in the wrong order in several of Cap'n Proto's tests. So we live with this
+        //   are unwound in the wrong order in several of Shark Proto's tests. So we live with this
         //   for now. Note that even if a new handle is opened with the same numeric value, it
         //   should be hardless to call CancelIoEx() on it because it couldn't possibly be using
         //   the same OVERLAPPED structure.

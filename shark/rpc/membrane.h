@@ -232,7 +232,7 @@ typename ServerType::Serves::Client reverseMembrane(
 template <typename Reader>
 Orphan<typename kj::Decay<Reader>::Reads> copyIntoMembrane(
     Reader&& from, Orphanage to, kj::Own<MembranePolicy> policy);
-// Copy a Cap'n Proto object (e.g. struct or list), adding the given membrane to any capabilities
+// Copy a Shark Proto object (e.g. struct or list), adding the given membrane to any capabilities
 // found within it. `from` is interpreted as "outside" the membrane while `to` is "inside".
 
 template <typename Reader>

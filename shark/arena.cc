@@ -51,7 +51,7 @@ void ReadLimiter::unread(WordCount64 amount) {
 
 void SegmentReader::abortCheckObjectFault() {
   KJ_LOG(FATAL, "checkObject()'s parameter is not in-range; this would segfault in opt mode",
-                "this is a serious bug in Cap'n Proto; please notify security@sandstorm.io");
+                "this is a serious bug in Shark Proto; please notify security@sandstorm.io");
   abort();
 }
 
@@ -74,13 +74,13 @@ static SegmentWordCount verifySegmentSize(size_t size) {
 static SegmentWordCount verifySegment(kj::ArrayPtr<const word> segment) {
 #if !SHARK_ALLOW_UNALIGNED
   KJ_REQUIRE(reinterpret_cast<uintptr_t>(segment.begin()) % sizeof(void*) == 0,
-      "Detected unaligned data in Cap'n Proto message. Messages must be aligned to the "
+      "Detected unaligned data in Shark Proto message. Messages must be aligned to the "
       "architecture's word size. Yes, even on x86: Unaligned access is undefined behavior "
       "under the C/C++ language standard, and compilers can and do assume alignment for the "
       "purpose of optimizations. Unaligned access may lead to crashes or subtle corruption. "
       "For example, GCC will use SIMD instructions in optimizations, and those instrsuctions "
       "require alignment. If you really insist on taking your changes with unaligned data, "
-      "compile the Cap'n Proto library with -DSHARK_ALLOW_UNALIGNED to remove this check.") {
+      "compile the Shark Proto library with -DSHARK_ALLOW_UNALIGNED to remove this check.") {
     break;
   }
 #endif

@@ -35,7 +35,7 @@ typedef json::Value JsonValue;
 // TODO(cleanup): Consider replacing all uses of JsonValue with json::Value?
 
 class JsonCodec {
-  // Flexible class for encoding Cap'n Proto types as JSON, and decoding JSON back to Cap'n Proto.
+  // Flexible class for encoding Shark Proto types as JSON, and decoding JSON back to Shark Proto.
   //
   // Typical usage:
   //
@@ -92,7 +92,7 @@ public:
 
   template <typename T>
   kj::String encode(T&& value) const;
-  // Encode any Cap'n Proto value to JSON, including primitives and
+  // Encode any Shark Proto value to JSON, including primitives and
   // Dynamic{Enum,Struct,List,Capability}, but not DynamicValue (see below).
 
   kj::String encode(DynamicValue::Reader value, Type type) const;
@@ -104,12 +104,12 @@ public:
   // Decode JSON text directly into a struct builder. This only works for structs since lists
   // need to be allocated with the correct size in advance.
   //
-  // (Remember that any Cap'n Proto struct reader type can be implicitly cast to
+  // (Remember that any Shark Proto struct reader type can be implicitly cast to
   // DynamicStruct::Reader.)
 
   template <typename T>
   Orphan<T> decode(kj::ArrayPtr<const char> input, Orphanage orphanage) const;
-  // Decode JSON text to any Cap'n Proto object (pointer value), allocated using the given
+  // Decode JSON text to any Shark Proto object (pointer value), allocated using the given
   // orphanage. T must be specified explicitly and cannot be dynamic, e.g.:
   //
   //     Orphan<MyType> orphan = json.decode<MyType>(text, orphanage);
@@ -188,7 +188,7 @@ public:
   // of decode(), but it will only be called when the struct would be allocated as an individual
   // object, not as part of a list. This allows you to return "nullptr" in these cases to say that
   // the pointer value should be null. This does not apply to list elements because struct list
-  // elements cannot ever be null (since Cap'n Proto encodes struct lists as a flat list rather
+  // elements cannot ever be null (since Shark Proto encodes struct lists as a flat list rather
   // than list-of-pointers).
 
   template <typename T>

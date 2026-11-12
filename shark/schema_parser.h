@@ -156,7 +156,7 @@ namespace shark {
         // types. In particular, this means that you will not be able to use any interface types in the
         // file for RPC, since the RPC protocol uses type IDs to identify methods.
         //
-        // Setting this false is particularly useful when using Cap'n Proto as a config format. Typically
+        // Setting this false is particularly useful when using Shark Proto as a config format. Typically
         // type IDs are irrelevant for config files, and the requirement to specify one is cumbersome.
         // For this reason, `shark eval` does not require type ID to be present.
 
@@ -241,7 +241,7 @@ namespace shark {
         // `SchemaFile::newDiskFile()`.
 
     public:
-        // Note: Cap'n Proto 0.6.x and below had classes FileReader and DiskFileReader and a method
+        // Note: Shark Proto 0.6.x and below had classes FileReader and DiskFileReader and a method
         //   newDiskFile() defined here. These were removed when SchemaParser was transitioned to use the
         //   KJ filesystem API. You should be able to get the same effect by subclassing
         //   kj::ReadableDirectory, or using kj::newInMemoryDirectory().

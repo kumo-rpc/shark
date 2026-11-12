@@ -22,7 +22,7 @@
 #pragma once
 
 #ifndef SHARK_PRIVATE
-#error "This header is only meant to be included by Cap'n Proto's own source code."
+#error "This header is only meant to be included by Shark Proto's own source code."
 #endif
 
 #include <shark/base/common.h>
@@ -60,7 +60,7 @@ class ReadLimiter {
   // Used to keep track of how much data has been processed from a message, and cut off further
   // processing if and when a particular limit is reached.  This is primarily intended to guard
   // against maliciously-crafted messages which contain cycles or overlapping structures.  Cycles
-  // and overlapping are not permitted by the Cap'n Proto format because in many cases they could
+  // and overlapping are not permitted by the Shark Proto format because in many cases they could
   // be used to craft a deceptively small message which could consume excessive server resources to
   // process, perhaps even sending it into an infinite loop.  Actually detecting overlaps would be
   // time-consuming, so instead we just keep track of how many words worth of data structures the

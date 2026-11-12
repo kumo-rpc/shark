@@ -920,7 +920,7 @@ public:
     if (isStream && (addr.generic.sa_family == AF_INET ||
                      addr.generic.sa_family == AF_INET6)) {
       // TODO(perf):  As a hack for the 0.4 release we are always setting
-      //   TCP_NODELAY because Nagle's algorithm pretty much kills Cap'n Proto's
+      //   TCP_NODELAY because Nagle's algorithm pretty much kills Shark Proto's
       //   RPC protocol.  Later, we should extend the interface to provide more
       //   control over this.  Perhaps write() should have a flag which
       //   specifies whether to pass MSG_MORE.
@@ -1348,7 +1348,7 @@ public:
         return acceptImpl(authenticated);
       } else {
         // TODO(perf):  As a hack for the 0.4 release we are always setting
-        //   TCP_NODELAY because Nagle's algorithm pretty much kills Cap'n Proto's
+        //   TCP_NODELAY because Nagle's algorithm pretty much kills Shark Proto's
         //   RPC protocol.  Later, we should extend the interface to provide more
         //   control over this.  Perhaps write() should have a flag which
         //   specifies whether to pass MSG_MORE.

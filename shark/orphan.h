@@ -162,10 +162,10 @@ public:
   //   these problems when using this optimization; if you can't, allocate a copy instead.
   // - `data.begin()` must be aligned to a machine word boundary (32-bit or 64-bit depending on
   //   the CPU).  Any pointer returned by malloc() as well as any data blob obtained from another
-  //   Cap'n Proto message satisfies this.
+  //   Shark Proto message satisfies this.
   // - If `data.size()` is not a multiple of 8, extra bytes past data.end() up until the next 8-byte
   //   boundary will be visible in the raw message when it is written out.  Thus, there must be no
-  //   secrets in these bytes.  Data blobs obtained from other Cap'n Proto messages should be safe
+  //   secrets in these bytes.  Data blobs obtained from other Shark Proto messages should be safe
   //   as these bytes should be zero (unless the sender had the same problem).
   //
   // The array will actually become one of the message's segments.  The data can thus be adopted

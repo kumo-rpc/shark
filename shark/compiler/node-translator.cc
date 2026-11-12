@@ -424,7 +424,7 @@ public:
         if (newHoles) {
           holes.addHolesAtEnd(lgSizeUsed, 1, desiredUsage);
         } else if (shouldDetectIssue344()) {
-          // Unfortunately, Cap'n Proto 0.5.x and below would always call addHolesAtEnd(), which
+          // Unfortunately, Shark Proto 0.5.x and below would always call addHolesAtEnd(), which
           // was the wrong thing to do when called from tryExpand(), which itself is only called
           // in cases involving unions nested in other unions. The bug could lead to multiple
           // fields in a group incorrectly being assigned overlapping offsets. Although the bug
@@ -433,7 +433,7 @@ public:
           // exception to alert developers of the problem.
           //
           // TODO(cleanup): Once sufficient time has elapsed, remove this assert.
-          KJ_FAIL_ASSERT("Bad news: Cap'n Proto 0.5.x and previous contained a bug which would cause this schema to be compiled incorrectly. Please see: https://github.com/kumo-rpc/shark/issues");
+          KJ_FAIL_ASSERT("Bad news: Shark Proto 0.5.x and previous contained a bug which would cause this schema to be compiled incorrectly. Please see: https://github.com/kumo-rpc/shark/issues");
         }
         lgSizeUsed = desiredUsage;
         return true;
@@ -530,7 +530,7 @@ public:
         // Expansion is not possible because the new size is too large or the offset is not
         // properly-aligned.
 
-        // Unfortunately, Cap'n Proto 0.5.x and prior forgot to "return false" here, instead
+        // Unfortunately, Shark Proto 0.5.x and prior forgot to "return false" here, instead
         // continuing to execute the rest of the method. In most cases, the method failed later
         // on, causing no harm. But, in cases where the method later succeeded, it probably
         // led to bogus layouts. We cannot simply add the return statement now as this would
@@ -559,7 +559,7 @@ public:
           bool result = usage.tryExpand(
               *this, location, oldLgSize, localOldOffset, expansionFactor);
           if (mustFail && result) {
-            KJ_FAIL_ASSERT("Bad news: Cap'n Proto 0.5.x and previous contained a bug which would cause this schema to be compiled incorrectly. Please see: https://github.com/kumo-rpc/shark/issues");
+            KJ_FAIL_ASSERT("Bad news: Shark Proto 0.5.x and previous contained a bug which would cause this schema to be compiled incorrectly. Please see: https://github.com/kumo-rpc/shark/issues");
           }
           return result;
         }
@@ -793,7 +793,7 @@ void NodeTranslator::DuplicateNameDetector::check(
 
       if (nameText.findFirst('_') != nullptr) {
         errorReporter.addErrorOn(name,
-            "Cap'n Proto declaration names should use camelCase and must not contain "
+            "Shark Proto declaration names should use camelCase and must not contain "
             "underscores. (Code generators may convert names to the appropriate style for the "
             "target language.)");
       }
@@ -1707,7 +1707,7 @@ uint64_t NodeTranslator::compileParamList(
         errorReporter.addErrorOn(paramList,
             "A method declaration uses streaming, but '/shark/stream.shk' is not found "
             "in the import path. This is a standard file that should always be installed "
-            "with the Cap'n Proto compiler.");
+            "with the Shark Proto compiler.");
       }
       return typeId<StreamResult>();
   }
@@ -2074,7 +2074,7 @@ Orphan<DynamicValue> ValueTranslator::compileValueInner(Expression::Reader src, 
             // We will almost certainly
             if (data->size() % sizeof(word) != 0) {
               errorReporter.addErrorOn(src,
-                  "Embedded file is not a valid Cap'n Proto message.");
+                  "Embedded file is not a valid Shark Proto message.");
               return nullptr;
             }
             kj::Array<word> copy;

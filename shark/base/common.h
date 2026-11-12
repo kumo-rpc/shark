@@ -524,7 +524,7 @@ struct DisallowConstCopy {
   //     https://gcc.gnu.org/bugzilla/show_bug.cgi?id=58074
   //
   // Because of this, we can't use this technique. We guard it by SHARK_DEBUG_TYPES so that it
-  // still applies to the Cap'n Proto developers during internal testing.
+  // still applies to the Shark Proto developers during internal testing.
 
   DisallowConstCopy() = default;
   DisallowConstCopy(DisallowConstCopy&) = default;
@@ -817,7 +817,7 @@ inline constexpr unsigned long long maxValueForBits() {
 
 struct ThrowOverflow {
   // Functor which throws an exception complaining about integer overflow. Usually this is used
-  // with the interfaces in units.h, but is defined here because Cap'n Proto wants to avoid
+  // with the interfaces in units.h, but is defined here because Shark Proto wants to avoid
   // including units.h when not using SHARK_DEBUG_TYPES.
   [[noreturn]] void operator()() const;
 };

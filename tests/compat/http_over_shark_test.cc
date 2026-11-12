@@ -398,7 +398,7 @@ void runEndToEndTests(kj::Timer& timer, kj::HttpHeaderTable& headerTable,
   KJ_EXPECT(lastRead.wait(waitScope) == nullptr);
 }
 
-KJ_TEST("HTTP-over-Cap'n-Proto E2E, no path shortening") {
+KJ_TEST("HTTP-over-Shark-Proto E2E, no path shortening") {
   kj::EventLoop eventLoop;
   kj::WaitScope waitScope(eventLoop);
   kj::TimerImpl timer(kj::origin<kj::TimePoint>());
@@ -413,7 +413,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto E2E, no path shortening") {
   runEndToEndTests(timer, *headerTable, factory1, factory2, waitScope);
 }
 
-KJ_TEST("HTTP-over-Cap'n-Proto E2E, with path shortening") {
+KJ_TEST("HTTP-over-Shark-Proto E2E, with path shortening") {
   kj::EventLoop eventLoop;
   kj::WaitScope waitScope(eventLoop);
   kj::TimerImpl timer(kj::origin<kj::TimePoint>());
@@ -426,7 +426,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto E2E, with path shortening") {
   runEndToEndTests(timer, *headerTable, factory, factory, waitScope);
 }
 
-KJ_TEST("HTTP-over-Cap'n-Proto 205 bug with HttpClientAdapter") {
+KJ_TEST("HTTP-over-Shark-Proto 205 bug with HttpClientAdapter") {
   // Test that a 205 with a hanging body doesn't prevent headers from being delivered. (This was
   // a bug at one point. See, 205 responses are supposed to have empty bodies. But they must
   // explicitly indicate an empty body. http-over-shark, though, *assumed* an empty body when it
@@ -592,7 +592,7 @@ void runWebSocketTests(kj::HttpHeaderTable& headerTable,
   }
 }
 
-KJ_TEST("HTTP-over-Cap'n Proto WebSocket, no path shortening") {
+KJ_TEST("HTTP-over-Shark Proto WebSocket, no path shortening") {
   kj::EventLoop eventLoop;
   kj::WaitScope waitScope(eventLoop);
 
@@ -606,7 +606,7 @@ KJ_TEST("HTTP-over-Cap'n Proto WebSocket, no path shortening") {
   runWebSocketTests(*headerTable, factory1, factory2, waitScope);
 }
 
-KJ_TEST("HTTP-over-Cap'n Proto WebSocket, with path shortening") {
+KJ_TEST("HTTP-over-Shark Proto WebSocket, with path shortening") {
   kj::EventLoop eventLoop;
   kj::WaitScope waitScope(eventLoop);
 
@@ -759,7 +759,7 @@ private:
   kj::HttpHeaderTable& headerTable;
 };
 
-KJ_TEST("HTTP-over-Cap'n-Proto Connect with close") {
+KJ_TEST("HTTP-over-Shark-Proto Connect with close") {
   kj::EventLoop eventLoop;
   kj::WaitScope waitScope(eventLoop);
 
@@ -834,7 +834,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect with close") {
 }
 
 
-KJ_TEST("HTTP-over-Cap'n-Proto Connect Reject") {
+KJ_TEST("HTTP-over-Shark-Proto Connect Reject") {
   kj::EventLoop eventLoop;
   kj::WaitScope waitScope(eventLoop);
 
@@ -907,7 +907,7 @@ kj::Promise<void> expectEnd(kj::AsyncInputStream& in) {
   });
 }
 
-KJ_TEST("HTTP-over-Cap'n-Proto Connect with startTls") {
+KJ_TEST("HTTP-over-Shark-Proto Connect with startTls") {
   kj::EventLoop eventLoop;
   kj::WaitScope waitScope(eventLoop);
 

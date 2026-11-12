@@ -1,7 +1,7 @@
-file:74:30-32: error: As of Cap'n Proto v0.3, it is no longer necessary to assign numbers to unions. However, removing the number will break binary compatibility. If this is an old protocol and you need to retain compatibility, please add an exclamation point after the number to indicate that it is really needed, e.g. `foo @1! :union {`. If this is a new protocol or compatibility doesn't matter, just remove the @n entirely. Sorry for the inconvenience, and thanks for being an early adopter!  :)
-file:74:30-32: error: As of Cap'n Proto v0.3, the 'union' keyword should be prefixed with a colon for named unions, e.g. `foo :union {`.
-file:79:23-25: error: As of Cap'n Proto v0.3, it is no longer necessary to assign numbers to unions. However, removing the number will break binary compatibility. If this is an old protocol and you need to retain compatibility, please add an exclamation point after the number to indicate that it is really needed, e.g. `foo @1! :union {`. If this is a new protocol or compatibility doesn't matter, just remove the @n entirely. Sorry for the inconvenience, and thanks for being an early adopter!  :)
-file:84:17-19: error: As of Cap'n Proto v0.3, the 'union' keyword should be prefixed with a colon for named unions, e.g. `foo :union {`.
+file:74:30-32: error: As of Shark Proto v0.3, it is no longer necessary to assign numbers to unions. However, removing the number will break binary compatibility. If this is an old protocol and you need to retain compatibility, please add an exclamation point after the number to indicate that it is really needed, e.g. `foo @1! :union {`. If this is a new protocol or compatibility doesn't matter, just remove the @n entirely. Sorry for the inconvenience, and thanks for being an early adopter!  :)
+file:74:30-32: error: As of Shark Proto v0.3, the 'union' keyword should be prefixed with a colon for named unions, e.g. `foo :union {`.
+file:79:23-25: error: As of Shark Proto v0.3, it is no longer necessary to assign numbers to unions. However, removing the number will break binary compatibility. If this is an old protocol and you need to retain compatibility, please add an exclamation point after the number to indicate that it is really needed, e.g. `foo @1! :union {`. If this is a new protocol or compatibility doesn't matter, just remove the @n entirely. Sorry for the inconvenience, and thanks for being an early adopter!  :)
+file:84:17-19: error: As of Shark Proto v0.3, the 'union' keyword should be prefixed with a colon for named unions, e.g. `foo :union {`.
 file:133:7-10: error: 'using' declaration without '=' must specify a named declaration from a different scope.
 file:37:3-10: error: 'dupName' is already defined in this scope.
 file:36:3-10: error: 'dupName' previously defined here.
@@ -11,7 +11,7 @@ file:55:3-8: error: An unnamed union is already defined in this scope.
 file:51:3-8: error: Previously defined here.
 file:60:10-24: error: Type names must begin with a capital letter.
 file:61:3-18: error: Non-type names must begin with a lower-case letter.
-file:62:3-14: error: Cap'n Proto declaration names should use camelCase and must not contain underscores. (Code generators may convert names to the appropriate style for the target language.)
+file:62:3-14: error: Shark Proto declaration names should use camelCase and must not contain underscores. (Code generators may convert names to the appropriate style for the target language.)
 file:66:5-27: error: This kind of declaration doesn't belong here.
 file:44:3-23: error: Union must have at least two members.
 file:45:3-23: error: Group must have at least one member.
@@ -60,6 +60,6 @@ file:155:30-44: error: Embeds can only be used when Text, Data, or a struct is e
 file:156:37-51: error: Couldn't read file for embed: no-such-file
 file:162:23-27: error: Only pointer parameters can declare their default as 'null'.
 file:163:10-16: error: 'stream' can only appear after '->', not before.
-file:163:10-16: error: A method declaration uses streaming, but '/shark/stream.shk' is not found in the import path. This is a standard file that should always be installed with the Cap'n Proto compiler.
+file:163:10-16: error: A method declaration uses streaming, but '/shark/stream.shk' is not found in the import path. This is a standard file that should always be installed with the Shark Proto compiler.
 file:173:8-22: error: Not defined: undefinedValue
 file:158:20-43: error: Import failed: nosuchfile-unused.shk

@@ -285,7 +285,7 @@ namespace shark {
                                              sequence(p::exactChar<'\x00'>())),
                                          [&errorReporter](Location loc) -> kj::Maybe<Orphan<Token>> {
                                              errorReporter.addError(loc.begin(), loc.end(),
-                                                 "Non-UTF-8 input detected. Cap'n Proto schema files must be UTF-8 text.");
+                                                 "Non-UTF-8 input detected. Shark Proto schema files must be UTF-8 text.");
                                              return nullptr;
                                          }),
                     [](kj::Maybe<Orphan<Token>> param) { return param; })));

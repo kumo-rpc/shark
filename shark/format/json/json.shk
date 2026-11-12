@@ -80,7 +80,7 @@ struct Value {
 
 annotation name @0xfa5b1fd61c2e7c3d (field, enumerant, method, group, union) :Text;
 # Define an alternative name to use when encoding the given item in JSON. This can be used, for
-# example, to use snake_case names where needed, even though Cap'n Proto uses strictly camelCase.
+# example, to use snake_case names where needed, even though Shark Proto uses strictly camelCase.
 #
 # (However, because JSON is derived from JavaScript, you *should* use camelCase names when
 # defining JSON-based APIs. But, when supporting a pre-existing API you may not have a choice.)

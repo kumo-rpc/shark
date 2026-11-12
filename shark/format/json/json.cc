@@ -662,7 +662,7 @@ public:
   void parseArray(JsonValue::Builder& output) {
     // TODO(perf): Using orphans leaves holes in the message. It's expected
     // that a JsonValue is used for interop, and won't be sent or written as a
-    // Cap'n Proto message.  This also applies to parseObject below.
+    // Shark Proto message.  This also applies to parseObject below.
     kj::Vector<Orphan<JsonValue>> values;
     auto orphanage = Orphanage::getForMessageContaining(output);
     bool expectComma = false;

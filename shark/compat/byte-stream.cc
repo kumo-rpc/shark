@@ -321,7 +321,7 @@ private:
 // =======================================================================================
 
 class ByteStreamFactory::SharkToKjStreamAdapter final: public StreamServerBase {
-  // Implements Cap'n Proto ByteStream as a wrapper around a KJ stream.
+  // Implements Shark Proto ByteStream as a wrapper around a KJ stream.
 
   class SubstreamCallbackImpl;
 
@@ -928,7 +928,7 @@ public:
       kj::AsyncInputStream& input, uint64_t amount = kj::maxValue) override {
     KJ_IF_MAYBE(rpc, kj::dynamicDowncastIfAvailable<SharkToKjStreamAdapter::PathProber>(input)) {
       // Oh interesting, it turns we're hosting an incoming ByteStream which is pumping to this
-      // outgoing ByteStream. We can let the Cap'n Proto RPC layer know that it can shorten the
+      // outgoing ByteStream. We can let the Shark Proto RPC layer know that it can shorten the
       // path from one to the other.
       return rpc->pumpToShorterPath(inner, amount);
     } else {

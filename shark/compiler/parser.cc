@@ -769,7 +769,7 @@ namespace shark {
                     -> DeclParserResult {
                     if (missingExclamation) {
                         errorReporter.addErrorOn(KJ_ASSERT_NONNULL(ordinal).getReader(),
-                            "As of Cap'n Proto v0.3, it is no longer necessary to assign numbers to "
+                            "As of Shark Proto v0.3, it is no longer necessary to assign numbers to "
                             "unions. However, removing the number will break binary compatibility. "
                             "If this is an old protocol and you need to retain compatibility, please "
                             "add an exclamation point after the number to indicate that it is really "
@@ -779,7 +779,7 @@ namespace shark {
                     }
                     if (missingColon) {
                         errorReporter.addErrorOn(KJ_ASSERT_NONNULL(ordinal).getReader(),
-                            "As of Cap'n Proto v0.3, the 'union' keyword should be prefixed with a colon "
+                            "As of Shark Proto v0.3, the 'union' keyword should be prefixed with a colon "
                             "for named unions, e.g. `foo :union {`.");
                     }
 

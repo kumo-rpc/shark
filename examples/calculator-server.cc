@@ -91,7 +91,7 @@ kj::Promise<double> evaluateImpl(
 }
 
 class ValueImpl final: public Calculator::Value::Server {
-  // Simple implementation of the Calculator.Value Cap'n Proto interface.
+  // Simple implementation of the Calculator.Value Shark Proto interface.
 
 public:
   ValueImpl(double value): value(value) {}
@@ -106,7 +106,7 @@ private:
 };
 
 class FunctionImpl final: public Calculator::Function::Server {
-  // Implementation of the Calculator.Function Cap'n Proto interface, where the
+  // Implementation of the Calculator.Function Shark Proto interface, where the
   // function is defined by a Calculator.Expression.
 
 public:
@@ -134,7 +134,7 @@ private:
 };
 
 class OperatorImpl final: public Calculator::Function::Server {
-  // Implementation of the Calculator.Function Cap'n Proto interface, wrapping
+  // Implementation of the Calculator.Function Shark Proto interface, wrapping
   // basic binary arithmetic operators.
 
 public:
@@ -163,7 +163,7 @@ private:
 };
 
 class CalculatorImpl final: public Calculator::Server {
-  // Implementation of the Calculator Cap'n Proto interface.
+  // Implementation of the Calculator Shark Proto interface.
 
 public:
   kj::Promise<void> evaluate(EvaluateContext context) override {

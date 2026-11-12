@@ -50,7 +50,7 @@ class RpcDumper {
   // results based on the call's interface and method IDs and extracting cap descriptors.
   //
   // TODO(cleanup):  Clean this code up and move it to someplace reusable, so it can be used as
-  //   a packet inspector / debugging tool for Cap'n Proto network traffic.
+  //   a packet inspector / debugging tool for Shark Proto network traffic.
 
 public:
   void addSchema(InterfaceSchema schema) {
@@ -1206,7 +1206,7 @@ TEST(Rpc, EmbargoError) {
 
 TEST(Rpc, EmbargoNull) {
   // Set up a situation where we pipeline on a capability that ends up coming back null. This
-  // should NOT cause a Disembargo to be sent, but due to a bug in earlier versions of Cap'n Proto,
+  // should NOT cause a Disembargo to be sent, but due to a bug in earlier versions of Shark Proto,
   // a Disembargo was indeed sent to the null capability, which caused the server to disconnect
   // due to protocol error.
 
@@ -1313,7 +1313,7 @@ TEST(Rpc, Abort) {
 
 KJ_TEST("abort with invalid exception type") {
   // Regression test: a peer sends an abort message with an out-of-range Exception::type.
-  // Cap'n Proto enums are raw UInt16 on the wire, so any value 0-65535 is possible.
+  // Shark Proto enums are raw UInt16 on the wire, so any value 0-65535 is possible.
   // The server must handle this gracefully (clamp to FAILED) rather than crashing
   // due to an out-of-bounds array access in KJ_STRINGIFY(Exception::Type).
 

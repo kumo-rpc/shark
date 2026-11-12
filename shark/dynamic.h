@@ -52,7 +52,7 @@ namespace shark {
         enum Type {
             UNKNOWN,
             // Means that the value has unknown type and content because it comes from a newer version of
-            // the schema, or from a newer version of Cap'n Proto that has new features that this version
+            // the schema, or from a newer version of Shark Proto that has new features that this version
             // doesn't understand.
 
             VOID,
@@ -762,7 +762,7 @@ namespace shark {
 
         template <typename T>
         inline ReaderFor<T> as() const { return AsImpl<T>::apply(*this); }
-        // Use to interpret the value as some Cap'n Proto type.  Allowed types are:
+        // Use to interpret the value as some Shark Proto type.  Allowed types are:
         // - Void, bool, [u]int{8,16,32,64}_t, float, double, any enum:  Returns the raw value.
         // - Text, Data, AnyPointer, any struct type:  Returns the corresponding Reader.
         // - List<T> for any T listed above:  Returns List<T>::Reader.

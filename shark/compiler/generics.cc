@@ -194,7 +194,7 @@ namespace shark {
 
                 case Declaration::BUILTIN_OBJECT:
                     addError(errorReporter,
-                        "As of Cap'n Proto 0.4, 'Object' has been renamed to 'AnyPointer'.  Sorry for the "
+                        "As of Shark Proto 0.4, 'Object' has been renamed to 'AnyPointer'.  Sorry for the "
                         "inconvenience, and thanks for being an early adopter.  :)");
                     KJ_FALLTHROUGH;
                 case Declaration::BUILTIN_ANY_POINTER:

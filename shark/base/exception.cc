@@ -1271,7 +1271,7 @@ uint uncaughtExceptionCount() {
 #else
 uint uncaughtExceptionCount() {
   // Since the above doesn't work, fall back to uncaught_exception(). This will produce incorrect
-  // results in very obscure cases that Cap'n Proto doesn't really rely on anyway.
+  // results in very obscure cases that Shark Proto doesn't really rely on anyway.
   return std::uncaught_exception();
 }
 #endif
