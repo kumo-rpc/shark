@@ -53,11 +53,6 @@ function(kmcmake_cc_test)
     kmcmake_print_label("Building Test" "${KMCMAKE_CC_TEST_NAME}")
     kmcmake_raw("-----------------------------------")
 
-    set(${KMCMAKE_CC_TEST_NAME}_INCLUDE_SYSTEM SYSTEM)
-    if (KMCMAKE_CC_TEST_EXCLUDE_SYSTEM)
-        set(${KMCMAKE_CC_TEST_NAME}_INCLUDE_SYSTEM "")
-    endif ()
-
     if (VERBOSE_KMCMAKE_BUILD)
         kmcmake_print_list_label("Sources" KMCMAKE_CC_TEST_SOURCES)
         kmcmake_print_list_label("Deps" KMCMAKE_CC_TEST_DEPS)
@@ -103,7 +98,8 @@ function(kmcmake_cc_test)
             ${KMCMAKE_CC_TEST_DEFINES}
     )
 
-    target_include_directories(${testcase} ${${KMCMAKE_CC_TEST_NAME}_INCLUDE_SYSTEM}
+    target_include_directories(${testcase}
+            BEFORE
             PUBLIC
             ${KMCMAKE_CC_TEST_INCLUDES}
             "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>"

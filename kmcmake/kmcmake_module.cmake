@@ -89,7 +89,7 @@ endif ()
 
 if (KMCMAKE_USE_CXX11_ABI)
     add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
-elseif ()
+else ()
     add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
 endif ()
 
