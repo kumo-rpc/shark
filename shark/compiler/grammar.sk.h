@@ -57,7 +57,7 @@ struct LocatedText {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(e75816b56529d464, 1, 1)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -72,7 +72,7 @@ struct LocatedInteger {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(991c7a3693d62cf2, 2, 0)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -87,7 +87,7 @@ struct LocatedFloat {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(90f2a60678fd2367, 2, 0)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -121,7 +121,7 @@ struct Expression {
   struct Application;
   struct Member;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(8e207d4dfe54d0de, 3, 2)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -140,7 +140,7 @@ struct Expression::Param {
     NAMED,
   };
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(c90246b71adedbaa, 1, 2)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -155,7 +155,7 @@ struct Expression::Application {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(aee8397040b0df7a, 3, 2)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -170,7 +170,7 @@ struct Expression::Member {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(aa28e1400d793359, 3, 2)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -232,7 +232,7 @@ struct Declaration {
   struct Method;
   struct Annotation;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(96efe787c17e83bb, 2, 8)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -247,7 +247,7 @@ struct Declaration::BrandParameter {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(d5e71144af1ce175, 1, 1)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -263,7 +263,7 @@ struct Declaration::AnnotationApplication {
   class Pipeline;
   struct Value;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(d00489d473826290, 1, 2)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -282,7 +282,7 @@ struct Declaration::AnnotationApplication::Value {
     EXPRESSION,
   };
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(fb5aeed95cdf6af9, 1, 2)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -302,7 +302,7 @@ struct Declaration::ParamList {
     STREAM,
   };
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(b3f66e7a79d81bcd, 2, 1)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -318,7 +318,7 @@ struct Declaration::Param {
   class Pipeline;
   struct DefaultValue;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(fffe08a9a697d2a5, 2, 4)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -337,7 +337,7 @@ struct Declaration::Param::DefaultValue {
     VALUE,
   };
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(e5104515fd88ea47, 2, 4)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -357,7 +357,7 @@ struct Declaration::Id {
     ORDINAL,
   };
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(89f0c973c103ae96, 2, 8)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -372,7 +372,7 @@ struct Declaration::Using {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(e93164a80bfe2ccf, 2, 8)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -387,7 +387,7 @@ struct Declaration::Const {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(b348322a8dcf0d0c, 2, 8)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -403,7 +403,7 @@ struct Declaration::Field {
   class Pipeline;
   struct DefaultValue;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(8f2622208fb358c8, 2, 8)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -422,7 +422,7 @@ struct Declaration::Field::DefaultValue {
     VALUE,
   };
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(d0d1a21de617951f, 2, 8)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -437,7 +437,7 @@ struct Declaration::Interface {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(992a90eaf30235d3, 2, 8)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -453,7 +453,7 @@ struct Declaration::Method {
   class Pipeline;
   struct Results;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(eb971847d617c0b9, 2, 8)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -472,7 +472,7 @@ struct Declaration::Method::Results {
     EXPLICIT,
   };
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(c6238c7d62d65173, 2, 8)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -487,7 +487,7 @@ struct Declaration::Annotation {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(9cb9e86e3198037f, 2, 8)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -502,7 +502,7 @@ struct ParsedFile {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(84e4f3f5a807605c, 0, 1)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -525,7 +525,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -616,7 +616,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -702,7 +702,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -788,7 +788,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -1009,7 +1009,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -1112,7 +1112,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -1204,7 +1204,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -1297,7 +1297,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -1685,7 +1685,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -1776,7 +1776,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -1864,7 +1864,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -1956,7 +1956,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -2070,7 +2070,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -2189,7 +2189,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -2281,7 +2281,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -2385,7 +2385,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -2467,7 +2467,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -2560,7 +2560,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -2648,7 +2648,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -2740,7 +2740,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -2821,7 +2821,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -2909,7 +2909,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -3001,7 +3001,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -3143,7 +3143,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 

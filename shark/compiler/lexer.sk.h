@@ -46,7 +46,7 @@ struct Token {
     BINARY_LITERAL,
   };
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(91cc55cd57de5419, 3, 1)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -65,7 +65,7 @@ struct Statement {
     BLOCK,
   };
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(c6725e678d60fa37, 2, 3)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -80,7 +80,7 @@ struct LexedTokens {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(9e69a92512b19d18, 0, 1)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -95,7 +95,7 @@ struct LexedStatements {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(a11f97b9d6c73dd4, 0, 1)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -118,7 +118,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -289,7 +289,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -411,7 +411,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -492,7 +492,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 

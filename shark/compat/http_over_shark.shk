@@ -56,7 +56,7 @@ interface HttpService {
   #   `request()` instead of `startRequest()`. The new approach is more intuitive and avoids some
   #   unnecessary bookkeeping.
   #
-  #   `HttpOverCapnpFactory` will continue to support both methods. Use the `peerOptimizationLevel`
+  #   `HttpOverSharkFactory` will continue to support both methods. Use the `peerOptimizationLevel`
   #   constructor parameter to specify which method to use, for backwards-compatibiltiy purposes.
 
   connect @2 (host :Text, headers :List(HttpHeader), down :ByteStream,

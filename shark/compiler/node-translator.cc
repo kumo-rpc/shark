@@ -433,7 +433,7 @@ public:
           // exception to alert developers of the problem.
           //
           // TODO(cleanup): Once sufficient time has elapsed, remove this assert.
-          KJ_FAIL_ASSERT("Bad news: Cap'n Proto 0.5.x and previous contained a bug which would cause this schema to be compiled incorrectly. Please see: https://github.com/capnproto/capnproto/issues/344");
+          KJ_FAIL_ASSERT("Bad news: Cap'n Proto 0.5.x and previous contained a bug which would cause this schema to be compiled incorrectly. Please see: https://github.com/kumo-rpc/shark/issues");
         }
         lgSizeUsed = desiredUsage;
         return true;
@@ -559,7 +559,7 @@ public:
           bool result = usage.tryExpand(
               *this, location, oldLgSize, localOldOffset, expansionFactor);
           if (mustFail && result) {
-            KJ_FAIL_ASSERT("Bad news: Cap'n Proto 0.5.x and previous contained a bug which would cause this schema to be compiled incorrectly. Please see: https://github.com/capnproto/capnproto/issues/344");
+            KJ_FAIL_ASSERT("Bad news: Cap'n Proto 0.5.x and previous contained a bug which would cause this schema to be compiled incorrectly. Please see: https://github.com/kumo-rpc/shark/issues");
           }
           return result;
         }
@@ -1375,8 +1375,6 @@ private:
     for (auto& entry: membersByOrdinal) {
       MemberInfo& member = *entry.second;
 
-      // Make sure the exceptions added relating to
-      // https://github.com/capnproto/capnproto/issues/344 identify the affected field.
       KJ_CONTEXT(member.name);
 
       if (member.declId.isOrdinal()) {
@@ -1699,8 +1697,8 @@ uint64_t NodeTranslator::compileParamList(
       }
       return 0;
     case Declaration::ParamList::STREAM:
-      KJ_IF_MAYBE(streamCapnp, resolver.resolveImport("/shark/stream.shk")) {
-        if (streamCapnp->resolver->resolveMember("StreamResult") == nullptr) {
+      KJ_IF_MAYBE(streamShark, resolver.resolveImport("/shark/stream.shk")) {
+        if (streamShark->resolver->resolveMember("StreamResult") == nullptr) {
           errorReporter.addErrorOn(paramList,
               "The version of '/shark/stream.shk' found in your import path does not appear "
               "to be the official one; it is missing the declaration of StreamResult.");

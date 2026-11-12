@@ -93,7 +93,7 @@ KJ_TEST("TextCodec TestListDefaults") {
 }
 
 KJ_TEST("TextCodec raw text") {
-  using TestType = capnproto_test::shark::test::TestLateUnion;
+  using TestType = sharkproto_test::shark::test::TestLateUnion;
 
   kj::String message =
       kj::str(R"((

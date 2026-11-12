@@ -54,8 +54,8 @@ class ByteStreamFactory {
   // between RPC ByteStreams and KJ streams.
 
 public:
-  shark::ByteStream::Client kjToCapnp(kj::Own<kj::AsyncOutputStream> kjStream);
-  shark::ByteStream::Client kjToCapnp(
+  shark::ByteStream::Client kjToShark(kj::Own<kj::AsyncOutputStream> kjStream);
+  shark::ByteStream::Client kjToShark(
       kj::Own<kj::AsyncOutputStream> kjStream, kj::Maybe<kj::Own<kj::TlsStarterCallback>> tlsStarter);
   kj::Own<kj::AsyncOutputStream> sharkToKj(shark::ByteStream::Client sharkStream);
 
@@ -66,8 +66,8 @@ private:
 
   class StreamServerBase;
   class SubstreamImpl;
-  class CapnpToKjStreamAdapter;
-  class KjToCapnpStreamAdapter;
+  class SharkToKjStreamAdapter;
+  class KjToSharkStreamAdapter;
 };
 
 }  // namespace shark

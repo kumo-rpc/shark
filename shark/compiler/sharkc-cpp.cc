@@ -358,9 +358,9 @@ CppTypeName whichKind(Type type) {
 
 // =======================================================================================
 
-class CapnpcCppMain {
+class SharkcCppMain {
 public:
-  CapnpcCppMain(kj::ProcessContext& context): context(context) {}
+  SharkcCppMain(kj::ProcessContext& context): context(context) {}
 
   kj::MainFunc getMain() {
     return kj::MainBuilder(context, "Cap'n Proto C++ plugin version " VERSION,
@@ -749,8 +749,8 @@ private:
     size_t dependencyCount;
     // TODO(msvc):  `dependencyCount` is the number of individual dependency definitions in
     //   `dependencies`. It's a hack to allow makeGenericDefinitions to hard-code the size of the
-    //   `_capnpPrivate::brandDependencies` array into the definition of
-    //   `_capnpPrivate::specificBrand::dependencyCount`. This is necessary because MSVC cannot
+    //   `_sharkPrivate::brandDependencies` array into the definition of
+    //   `_sharkPrivate::specificBrand::dependencyCount`. This is necessary because MSVC cannot
     //   deduce the size of `brandDependencies` if it is nested under a class template. It's
     //   probably this demoralizingly deferred bug:
     //   https://connect.microsoft.com/VisualStudio/feedback/details/759407/can-not-get-size-of-static-array-defined-in-class-template
@@ -884,7 +884,7 @@ private:
 
   kj::Maybe<kj::StringTree> makeBrandDepInitializer(Schema type, CppTypeName name) {
     if (type.isBranded()) {
-      name.addMemberType("_capnpPrivate");
+      name.addMemberType("_sharkPrivate");
       name.addMemberValue("brand");
       return kj::strTree(name, "()");
     } else {
@@ -1900,7 +1900,7 @@ private:
         "\n"
         "#if !SHARK_LITE\n"
         "  inline ::kj::StringTree toString() const {\n"
-        "    return ::shark::_::structString(_reader, *_capnpPrivate::brand());\n"
+        "    return ::shark::_::structString(_reader, *_sharkPrivate::brand());\n"
         "  }\n"
         "#endif  // !SHARK_LITE\n"
         "\n",
@@ -1992,7 +1992,7 @@ private:
             "    static const ::shark::_::RawBrandedSchema::Dependency brandDependencies[];\n"),
         "    static const ::shark::_::RawBrandedSchema specificBrand;\n"
         "    static constexpr ::shark::_::RawBrandedSchema const* brand() { "
-        "return ::shark::_::ChooseBrand<_capnpPrivate, ", templateContext.allArgs(), ">::brand(); }\n");
+        "return ::shark::_::ChooseBrand<_sharkPrivate, ", templateContext.allArgs(), ">::brand(); }\n");
   }
 
   kj::StringTree makeGenericDefinitions(
@@ -2008,17 +2008,17 @@ private:
 
     return kj::strTree(
         templates, "const ::shark::_::RawBrandedSchema::Scope ", fullName,
-        "::_capnpPrivate::brandScopes[] = ", kj::mv(brandInitializers.scopes), ";\n",
+        "::_sharkPrivate::brandScopes[] = ", kj::mv(brandInitializers.scopes), ";\n",
 
         templates, "const ::shark::_::RawBrandedSchema::Binding ", fullName,
-        "::_capnpPrivate::brandBindings[] = ", kj::mv(brandInitializers.bindings), ";\n",
+        "::_sharkPrivate::brandBindings[] = ", kj::mv(brandInitializers.bindings), ";\n",
 
         (!hasBrandDependencies ? kj::strTree("") : kj::strTree(
             templates, "const ::shark::_::RawBrandedSchema::Dependency ", fullName,
-            "::_capnpPrivate::brandDependencies[] = ", kj::mv(brandInitializers.dependencies),
+            "::_sharkPrivate::brandDependencies[] = ", kj::mv(brandInitializers.dependencies),
             ";\n")),
 
-        templates, "const ::shark::_::RawBrandedSchema ", fullName, "::_capnpPrivate::specificBrand = {\n",
+        templates, "const ::shark::_::RawBrandedSchema ", fullName, "::_sharkPrivate::specificBrand = {\n",
         "  &::shark::schemas::s_", hexId, ", brandScopes, ",
         (!hasBrandDependencies ? "nullptr" : "brandDependencies"), ",\n",
         "  ", scopeCount, ", ", dependencyCount,
@@ -2047,20 +2047,20 @@ private:
 
     // Private members struct
     kj::StringTree declareText = kj::strTree(
-         "  struct _capnpPrivate {\n"
+         "  struct _sharkPrivate {\n"
          "    SHARK_DECLARE_STRUCT_HEADER(", hexId, ", ", structNode.getDataWordCount(), ", ",
          structNode.getPointerCount(), ")\n");
 
     kj::StringTree defineText = kj::strTree(
         "// ", fullName, "\n",
         "#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL\n",
-        templates, "constexpr uint16_t ", fullName, "::_capnpPrivate::dataWordSize;\n",
-        templates, "constexpr uint16_t ", fullName, "::_capnpPrivate::pointerCount;\n",
+        templates, "constexpr uint16_t ", fullName, "::_sharkPrivate::dataWordSize;\n",
+        templates, "constexpr uint16_t ", fullName, "::_sharkPrivate::pointerCount;\n",
         "#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL\n",
         "#if !SHARK_LITE\n",
         "#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL\n",
-        templates, "constexpr ::shark::Kind ", fullName, "::_capnpPrivate::kind;\n",
-        templates, "constexpr ::shark::_::RawSchema const* ", fullName, "::_capnpPrivate::schema;\n",
+        templates, "constexpr ::shark::Kind ", fullName, "::_sharkPrivate::kind;\n",
+        templates, "constexpr ::shark::_::RawSchema const* ", fullName, "::_sharkPrivate::schema;\n",
         "#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL\n");
 
     if (templateContext.isGeneric()) {
@@ -2397,15 +2397,15 @@ private:
     // Private members struct
     kj::StringTree declareText = kj::strTree(
          "  #if !SHARK_LITE\n"
-         "  struct _capnpPrivate {\n"
+         "  struct _sharkPrivate {\n"
          "    SHARK_DECLARE_INTERFACE_HEADER(", hexId, ")\n");
 
     kj::StringTree defineText = kj::strTree(
         "// ", fullName, "\n",
         "#if !SHARK_LITE\n",
         "#if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL\n",
-        templates, "constexpr ::shark::Kind ", fullName, "::_capnpPrivate::kind;\n",
-        templates, "constexpr ::shark::_::RawSchema const* ", fullName, "::_capnpPrivate::schema;\n"
+        templates, "constexpr ::shark::Kind ", fullName, "::_sharkPrivate::kind;\n",
+        templates, "constexpr ::shark::_::RawSchema const* ", fullName, "::_sharkPrivate::schema;\n"
         "#endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL\n");
 
     if (templateContext.isGeneric()) {
@@ -2697,8 +2697,8 @@ private:
     kj::StringTree outerTypeDef;
     kj::StringTree readerBuilderDefs;
     kj::StringTree inlineMethodDefs;
-    kj::StringTree capnpSchemaDecls;
-    kj::StringTree capnpSchemaDefs;
+    kj::StringTree sharkSchemaDecls;
+    kj::StringTree sharkSchemaDefs;
     kj::StringTree sourceFileDefs;
   };
 
@@ -2862,13 +2862,13 @@ private:
 
       kj::strTree(
           kj::mv(schemaDecl),
-          kj::mv(top.capnpSchemaDecls),
-          KJ_MAP(n, nestedTexts) { return kj::mv(n.capnpSchemaDecls); }),
+          kj::mv(top.sharkSchemaDecls),
+          KJ_MAP(n, nestedTexts) { return kj::mv(n.sharkSchemaDecls); }),
 
       kj::strTree(
           kj::mv(schemaDef),
-          kj::mv(top.capnpSchemaDefs),
-          KJ_MAP(n, nestedTexts) { return kj::mv(n.capnpSchemaDefs); }),
+          kj::mv(top.sharkSchemaDefs),
+          KJ_MAP(n, nestedTexts) { return kj::mv(n.sharkSchemaDefs); }),
 
       kj::strTree(
           kj::mv(top.sourceFileDefs),
@@ -3097,7 +3097,7 @@ private:
           "namespace shark {\n"
           "namespace schemas {\n"
           "\n",
-          KJ_MAP(n, nodeTexts) { return kj::mv(n.capnpSchemaDecls); },
+          KJ_MAP(n, nodeTexts) { return kj::mv(n.sharkSchemaDecls); },
           "\n"
           "}  // namespace schemas\n"
           "}  // namespace shark\n"
@@ -3122,7 +3122,7 @@ private:
           "\n"
           "namespace shark {\n"
           "namespace schemas {\n",
-          KJ_MAP(n, nodeTexts) { return kj::mv(n.capnpSchemaDefs); },
+          KJ_MAP(n, nodeTexts) { return kj::mv(n.sharkSchemaDefs); },
           "}  // namespace schemas\n"
           "}  // namespace shark\n",
           sourceDefs.size() == 0 ? kj::strTree() : kj::strTree(
@@ -3164,14 +3164,14 @@ private:
     StreamFdMessageReader reader(0, options);
     auto request = reader.getRoot<schema::CodeGeneratorRequest>();
 
-    auto capnpVersion = request.getCapnpVersion();
+    auto sharkVersion = request.getSharkVersion();
 
-    if (capnpVersion.getMajor() != SHARK_VERSION_MAJOR ||
-        capnpVersion.getMinor() != SHARK_VERSION_MINOR ||
-        capnpVersion.getMicro() != SHARK_VERSION_MICRO) {
-      auto compilerVersion = request.hasCapnpVersion()
-          ? kj::str(capnpVersion.getMajor(), '.', capnpVersion.getMinor(), '.',
-                    capnpVersion.getMicro())
+    if (sharkVersion.getMajor() != SHARK_VERSION_MAJOR ||
+        sharkVersion.getMinor() != SHARK_VERSION_MINOR ||
+        sharkVersion.getMicro() != SHARK_VERSION_MICRO) {
+      auto compilerVersion = request.hasSharkVersion()
+          ? kj::str(sharkVersion.getMajor(), '.', sharkVersion.getMinor(), '.',
+                    sharkVersion.getMicro())
           : kj::str("pre-0.6");  // pre-0.6 didn't send the version.
       auto generatorVersion = kj::str(
           SHARK_VERSION_MAJOR, '.', SHARK_VERSION_MINOR, '.', SHARK_VERSION_MICRO);
@@ -3207,4 +3207,4 @@ private:
 }  // namespace
 }  // namespace shark
 
-KJ_MAIN(shark::CapnpcCppMain);
+KJ_MAIN(shark::SharkcCppMain);

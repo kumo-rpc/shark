@@ -23,7 +23,7 @@
 #include <tests/base/test.h>
 
 #ifndef TEST_PEER_OPTIMIZATION_LEVEL
-#define TEST_PEER_OPTIMIZATION_LEVEL HttpOverCapnpFactory::LEVEL_2
+#define TEST_PEER_OPTIMIZATION_LEVEL HttpOverSharkFactory::LEVEL_2
 #endif
 
 namespace shark {
@@ -343,7 +343,7 @@ private:
 };
 
 void runEndToEndTests(kj::Timer& timer, kj::HttpHeaderTable& headerTable,
-                      HttpOverCapnpFactory& clientFactory, HttpOverCapnpFactory& serverFactory,
+                      HttpOverSharkFactory& clientFactory, HttpOverSharkFactory& serverFactory,
                       kj::WaitScope& waitScope) {
   auto clientPipe = kj::newTwoWayPipe();
   auto serverPipe = kj::newTwoWayPipe();
@@ -351,9 +351,9 @@ void runEndToEndTests(kj::Timer& timer, kj::HttpHeaderTable& headerTable,
   OneConnectNetworkAddress oneConnectAddr(kj::mv(serverPipe.ends[0]));
 
   auto backHttp = kj::newHttpClient(timer, headerTable, oneConnectAddr);
-  auto backCapnp = serverFactory.kjToCapnp(kj::newHttpService(*backHttp));
-  auto frontCapnp = clientFactory.sharkToKj(backCapnp);
-  kj::HttpServer frontKj(timer, headerTable, *frontCapnp);
+  auto backShark = serverFactory.kjToShark(kj::newHttpService(*backHttp));
+  auto frontShark = clientFactory.sharkToKj(backShark);
+  kj::HttpServer frontKj(timer, headerTable, *frontShark);
   auto listenTask = frontKj.listenHttp(kj::mv(clientPipe.ends[1]))
       .eagerlyEvaluate([](kj::Exception&& e) { KJ_LOG(ERROR, e); });
 
@@ -406,8 +406,8 @@ KJ_TEST("HTTP-over-Cap'n-Proto E2E, no path shortening") {
   ByteStreamFactory streamFactory1;
   ByteStreamFactory streamFactory2;
   kj::HttpHeaderTable::Builder tableBuilder;
-  HttpOverCapnpFactory factory1(streamFactory1, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
-  HttpOverCapnpFactory factory2(streamFactory2, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
+  HttpOverSharkFactory factory1(streamFactory1, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
+  HttpOverSharkFactory factory2(streamFactory2, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
   auto headerTable = tableBuilder.build();
 
   runEndToEndTests(timer, *headerTable, factory1, factory2, waitScope);
@@ -420,7 +420,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto E2E, with path shortening") {
 
   ByteStreamFactory streamFactory;
   kj::HttpHeaderTable::Builder tableBuilder;
-  HttpOverCapnpFactory factory(streamFactory, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
+  HttpOverSharkFactory factory(streamFactory, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
   auto headerTable = tableBuilder.build();
 
   runEndToEndTests(timer, *headerTable, factory, factory, waitScope);
@@ -442,7 +442,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto 205 bug with HttpClientAdapter") {
 
   ByteStreamFactory streamFactory;
   kj::HttpHeaderTable::Builder tableBuilder;
-  HttpOverCapnpFactory factory(streamFactory, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
+  HttpOverSharkFactory factory(streamFactory, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
   auto headerTable = tableBuilder.build();
 
   auto pipe = kj::newTwoWayPipe();
@@ -450,10 +450,10 @@ KJ_TEST("HTTP-over-Cap'n-Proto 205 bug with HttpClientAdapter") {
   OneConnectNetworkAddress oneConnectAddr(kj::mv(pipe.ends[0]));
 
   auto backHttp = kj::newHttpClient(timer, *headerTable, oneConnectAddr);
-  auto backCapnp = factory.kjToCapnp(kj::newHttpService(*backHttp));
-  auto frontCapnp = factory.sharkToKj(backCapnp);
+  auto backShark = factory.kjToShark(kj::newHttpService(*backHttp));
+  auto frontShark = factory.sharkToKj(backShark);
 
-  auto frontClient = kj::newHttpClient(*frontCapnp);
+  auto frontClient = kj::newHttpClient(*frontShark);
 
   auto req = frontClient->request(kj::HttpMethod::GET, "/", kj::HttpHeaders(*headerTable));
 
@@ -565,7 +565,7 @@ void runWebSocketAbortTestCase(
 }
 
 void runWebSocketTests(kj::HttpHeaderTable& headerTable,
-                       HttpOverCapnpFactory& clientFactory, HttpOverCapnpFactory& serverFactory,
+                       HttpOverSharkFactory& clientFactory, HttpOverSharkFactory& serverFactory,
                        kj::WaitScope& waitScope) {
   // We take a different approach here, because writing out raw WebSocket frames is a pain.
   // It's easier to test WebSockets at the KJ API level.
@@ -577,7 +577,7 @@ void runWebSocketTests(kj::HttpHeaderTable& headerTable,
     auto wsPaf = kj::newPromiseAndFulfiller<kj::Own<kj::WebSocket>>();
     auto donePaf = kj::newPromiseAndFulfiller<void>();
 
-    auto back = serverFactory.kjToCapnp(kj::heap<WebSocketAccepter>(
+    auto back = serverFactory.kjToShark(kj::heap<WebSocketAccepter>(
       headerTable, kj::mv(wsPaf.fulfiller), kj::mv(donePaf.promise)));
     auto front = clientFactory.sharkToKj(back);
     auto client = kj::newHttpClient(*front);
@@ -599,8 +599,8 @@ KJ_TEST("HTTP-over-Cap'n Proto WebSocket, no path shortening") {
   ByteStreamFactory streamFactory1;
   ByteStreamFactory streamFactory2;
   kj::HttpHeaderTable::Builder tableBuilder;
-  HttpOverCapnpFactory factory1(streamFactory1, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
-  HttpOverCapnpFactory factory2(streamFactory2, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
+  HttpOverSharkFactory factory1(streamFactory1, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
+  HttpOverSharkFactory factory2(streamFactory2, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
   auto headerTable = tableBuilder.build();
 
   runWebSocketTests(*headerTable, factory1, factory2, waitScope);
@@ -612,7 +612,7 @@ KJ_TEST("HTTP-over-Cap'n Proto WebSocket, with path shortening") {
 
   ByteStreamFactory streamFactory;
   kj::HttpHeaderTable::Builder tableBuilder;
-  HttpOverCapnpFactory factory(streamFactory, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
+  HttpOverSharkFactory factory(streamFactory, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
   auto headerTable = tableBuilder.build();
 
   runWebSocketTests(*headerTable, factory, factory, waitScope);
@@ -647,12 +647,12 @@ KJ_TEST("HttpService isn't destroyed while call outstanding") {
 
   ByteStreamFactory streamFactory;
   kj::HttpHeaderTable::Builder tableBuilder;
-  HttpOverCapnpFactory factory(streamFactory, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
+  HttpOverSharkFactory factory(streamFactory, tableBuilder, TEST_PEER_OPTIMIZATION_LEVEL);
   auto headerTable = tableBuilder.build();
 
   bool called = false;
   bool destroyed = false;
-  auto service = factory.kjToCapnp(kj::heap<HangingHttpService>(called, destroyed));
+  auto service = factory.kjToShark(kj::heap<HangingHttpService>(called, destroyed));
 
   KJ_EXPECT(!called);
   KJ_EXPECT(!destroyed);
@@ -769,7 +769,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect with close") {
 
   ByteStreamFactory streamFactory;
   kj::HttpHeaderTable::Builder tableBuilder;
-  HttpOverCapnpFactory factory(streamFactory, tableBuilder);
+  HttpOverSharkFactory factory(streamFactory, tableBuilder);
   kj::Own<kj::HttpHeaderTable> table = tableBuilder.build();
   ConnectWriteCloseService service(*table);
   kj::HttpServer server(timer, *table, service);
@@ -778,8 +778,8 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect with close") {
 
   auto client = newHttpClient(*table, *pipe.ends[1]);
 
-  shark::HttpService::Client httpService = factory.kjToCapnp(newHttpService(*client));
-  auto frontCapnpHttpService = factory.sharkToKj(httpService);
+  shark::HttpService::Client httpService = factory.kjToShark(newHttpService(*client));
+  auto frontSharkHttpService = factory.sharkToKj(httpService);
 
   struct ResponseImpl final: public kj::HttpService::ConnectResponse {
     kj::Own<kj::PromiseFulfiller<kj::HttpClient::ConnectRequest::Status>> fulfiller;
@@ -810,7 +810,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect with close") {
   auto paf = kj::newPromiseAndFulfiller<kj::HttpClient::ConnectRequest::Status>();
   ResponseImpl response(kj::mv(paf.fulfiller));
 
-  auto promise = frontCapnpHttpService->connect(
+  auto promise = frontSharkHttpService->connect(
       "https://example.org"_kj, kj::HttpHeaders(*table), *clientPipe.ends[0],
       response, {}).attach(kj::mv(clientPipe.ends[0]));
 
@@ -844,7 +844,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect Reject") {
 
   ByteStreamFactory streamFactory;
   kj::HttpHeaderTable::Builder tableBuilder;
-  HttpOverCapnpFactory factory(streamFactory, tableBuilder);
+  HttpOverSharkFactory factory(streamFactory, tableBuilder);
   kj::Own<kj::HttpHeaderTable> table = tableBuilder.build();
   ConnectRejectService service(*table);
   kj::HttpServer server(timer, *table, service);
@@ -853,8 +853,8 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect Reject") {
 
   auto client = newHttpClient(*table, *pipe.ends[1]);
 
-  shark::HttpService::Client httpService = factory.kjToCapnp(newHttpService(*client));
-  auto frontCapnpHttpService = factory.sharkToKj(httpService);
+  shark::HttpService::Client httpService = factory.kjToShark(newHttpService(*client));
+  auto frontSharkHttpService = factory.sharkToKj(httpService);
 
   struct ResponseImpl final: public kj::HttpService::ConnectResponse {
     kj::Own<kj::PromiseFulfiller<kj::Own<kj::AsyncInputStream>>> fulfiller;
@@ -882,7 +882,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect Reject") {
   auto paf = kj::newPromiseAndFulfiller<kj::Own<kj::AsyncInputStream>>();
   ResponseImpl response(kj::mv(paf.fulfiller));
 
-  auto promise = frontCapnpHttpService->connect(
+  auto promise = frontSharkHttpService->connect(
       "https://example.org"_kj, kj::HttpHeaders(*table), *clientPipe.ends[0],
       response, {}).attach(kj::mv(clientPipe.ends[0]));
 
@@ -917,7 +917,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect with startTls") {
 
   ByteStreamFactory streamFactory;
   kj::HttpHeaderTable::Builder tableBuilder;
-  HttpOverCapnpFactory factory(streamFactory, tableBuilder);
+  HttpOverSharkFactory factory(streamFactory, tableBuilder);
   kj::Own<kj::HttpHeaderTable> table = tableBuilder.build();
   ConnectWriteRespService service(*table);
   kj::HttpServer server(timer, *table, service);
@@ -951,16 +951,16 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect with startTls") {
 
   // Only need this wrapper to define a dummy tlsStarter.
   auto wrappedClient = kj::heap<WrapperHttpClient>(*client);
-  shark::HttpService::Client httpService = factory.kjToCapnp(newHttpService(*wrappedClient));
-  auto frontCapnpHttpService = factory.sharkToKj(httpService);
+  shark::HttpService::Client httpService = factory.kjToShark(newHttpService(*wrappedClient));
+  auto frontSharkHttpService = factory.sharkToKj(httpService);
 
-  auto frontCapnpHttpClient = kj::newHttpClient(*frontCapnpHttpService);
+  auto frontSharkHttpClient = kj::newHttpClient(*frontSharkHttpService);
 
   kj::Own<kj::TlsStarterCallback> tlsStarter = kj::heap<kj::TlsStarterCallback>();
   kj::HttpConnectSettings settings = { .useTls = false };
   settings.tlsStarter = tlsStarter;
 
-  auto request = frontCapnpHttpClient->connect(
+  auto request = frontSharkHttpClient->connect(
       "https://example.org"_kj, kj::HttpHeaders(*table), settings);
 
   KJ_ASSERT_NONNULL(*tlsStarter);

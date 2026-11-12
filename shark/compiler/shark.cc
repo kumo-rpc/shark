@@ -473,7 +473,7 @@ namespace shark {
                 MallocMessageBuilder message;
                 auto request = message.initRoot<schema::CodeGeneratorRequest>();
 
-                auto version = request.getCapnpVersion();
+                auto version = request.getSharkVersion();
                 version.setMajor(SHARK_VERSION_MAJOR);
                 version.setMinor(SHARK_VERSION_MINOR);
                 version.setMicro(SHARK_VERSION_MICRO);
@@ -1281,9 +1281,9 @@ namespace shark {
                 auto lexedTokens = tokenArena.initRoot<shark::compiler::LexedTokens>();
                 lex(input, lexedTokens, errorReporter);
 
-                CapnpParser parser(tokenArena.getOrphanage(), errorReporter);
+                SharkParser parser(tokenArena.getOrphanage(), errorReporter);
                 auto tokens = lexedTokens.asReader().getTokens();
-                CapnpParser::ParserInput parserInput(tokens.begin(), tokens.end());
+                SharkParser::ParserInput parserInput(tokens.begin(), tokens.end());
 
                 bool success = false;
 

@@ -48,12 +48,12 @@ TEST(Common, Version) {
 }
 
 struct ExampleStruct {
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     struct IsStruct;
   };
 };
 struct ExampleInterface {
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     struct IsInterface;
   };
 };
@@ -71,8 +71,8 @@ struct EqualTypes_<T, T> { static constexpr bool value = true; };
 template <typename T, typename U>
 inline constexpr bool equalTypes() { return EqualTypes_<T, U>::value; }
 
-using capnproto_test::shark::test::TestAllTypes;
-using capnproto_test::shark::test::TestInterface;
+using sharkproto_test::shark::test::TestAllTypes;
+using sharkproto_test::shark::test::TestInterface;
 
 static_assert(equalTypes<FromAny<int>, int>(), "");
 static_assert(equalTypes<FromAny<TestAllTypes::Reader>, TestAllTypes>(), "");

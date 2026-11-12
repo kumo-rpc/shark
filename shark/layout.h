@@ -200,20 +200,20 @@ struct StructSize {
       : data(data), pointers(pointers) {}
 };
 
-template <typename T, typename CapnpPrivate = typename T::_capnpPrivate>
+template <typename T, typename SharkPrivate = typename T::_sharkPrivate>
 inline constexpr StructSize structSize() {
-  return StructSize(bounded(CapnpPrivate::dataWordSize) * WORDS,
-                    bounded(CapnpPrivate::pointerCount) * POINTERS);
+  return StructSize(bounded(SharkPrivate::dataWordSize) * WORDS,
+                    bounded(SharkPrivate::pointerCount) * POINTERS);
 }
 
-template <typename T, typename CapnpPrivate = typename T::_capnpPrivate,
+template <typename T, typename SharkPrivate = typename T::_sharkPrivate,
           typename = kj::EnableIf<SHARK_KIND(T) == Kind::STRUCT>>
 inline constexpr StructSize minStructSizeForElement() {
   // If T is a struct, return its struct size. Otherwise return the minimum struct size big enough
   // to hold a T.
 
-  return StructSize(bounded(CapnpPrivate::dataWordSize) * WORDS,
-                    bounded(CapnpPrivate::pointerCount) * POINTERS);
+  return StructSize(bounded(SharkPrivate::dataWordSize) * WORDS,
+                    bounded(SharkPrivate::pointerCount) * POINTERS);
 }
 
 template <typename T, typename = kj::EnableIf<SHARK_KIND(T) != Kind::STRUCT>>

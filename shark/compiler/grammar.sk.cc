@@ -2807,289 +2807,289 @@ namespace compiler {
 
 // LocatedText
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t LocatedText::_capnpPrivate::dataWordSize;
-constexpr uint16_t LocatedText::_capnpPrivate::pointerCount;
+constexpr uint16_t LocatedText::_sharkPrivate::dataWordSize;
+constexpr uint16_t LocatedText::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind LocatedText::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* LocatedText::_capnpPrivate::schema;
+constexpr ::shark::Kind LocatedText::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* LocatedText::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // LocatedInteger
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t LocatedInteger::_capnpPrivate::dataWordSize;
-constexpr uint16_t LocatedInteger::_capnpPrivate::pointerCount;
+constexpr uint16_t LocatedInteger::_sharkPrivate::dataWordSize;
+constexpr uint16_t LocatedInteger::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind LocatedInteger::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* LocatedInteger::_capnpPrivate::schema;
+constexpr ::shark::Kind LocatedInteger::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* LocatedInteger::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // LocatedFloat
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t LocatedFloat::_capnpPrivate::dataWordSize;
-constexpr uint16_t LocatedFloat::_capnpPrivate::pointerCount;
+constexpr uint16_t LocatedFloat::_sharkPrivate::dataWordSize;
+constexpr uint16_t LocatedFloat::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind LocatedFloat::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* LocatedFloat::_capnpPrivate::schema;
+constexpr ::shark::Kind LocatedFloat::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* LocatedFloat::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Expression
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Expression::_capnpPrivate::dataWordSize;
-constexpr uint16_t Expression::_capnpPrivate::pointerCount;
+constexpr uint16_t Expression::_sharkPrivate::dataWordSize;
+constexpr uint16_t Expression::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Expression::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Expression::_capnpPrivate::schema;
+constexpr ::shark::Kind Expression::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Expression::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Expression::Param
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Expression::Param::_capnpPrivate::dataWordSize;
-constexpr uint16_t Expression::Param::_capnpPrivate::pointerCount;
+constexpr uint16_t Expression::Param::_sharkPrivate::dataWordSize;
+constexpr uint16_t Expression::Param::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Expression::Param::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Expression::Param::_capnpPrivate::schema;
+constexpr ::shark::Kind Expression::Param::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Expression::Param::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Expression::Application
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Expression::Application::_capnpPrivate::dataWordSize;
-constexpr uint16_t Expression::Application::_capnpPrivate::pointerCount;
+constexpr uint16_t Expression::Application::_sharkPrivate::dataWordSize;
+constexpr uint16_t Expression::Application::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Expression::Application::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Expression::Application::_capnpPrivate::schema;
+constexpr ::shark::Kind Expression::Application::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Expression::Application::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Expression::Member
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Expression::Member::_capnpPrivate::dataWordSize;
-constexpr uint16_t Expression::Member::_capnpPrivate::pointerCount;
+constexpr uint16_t Expression::Member::_sharkPrivate::dataWordSize;
+constexpr uint16_t Expression::Member::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Expression::Member::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Expression::Member::_capnpPrivate::schema;
+constexpr ::shark::Kind Expression::Member::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Expression::Member::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::BrandParameter
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::BrandParameter::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::BrandParameter::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::BrandParameter::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::BrandParameter::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::BrandParameter::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::BrandParameter::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::BrandParameter::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::BrandParameter::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::AnnotationApplication
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::AnnotationApplication::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::AnnotationApplication::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::AnnotationApplication::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::AnnotationApplication::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::AnnotationApplication::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::AnnotationApplication::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::AnnotationApplication::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::AnnotationApplication::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::AnnotationApplication::Value
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::AnnotationApplication::Value::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::AnnotationApplication::Value::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::AnnotationApplication::Value::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::AnnotationApplication::Value::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::AnnotationApplication::Value::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::AnnotationApplication::Value::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::AnnotationApplication::Value::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::AnnotationApplication::Value::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::ParamList
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::ParamList::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::ParamList::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::ParamList::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::ParamList::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::ParamList::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::ParamList::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::ParamList::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::ParamList::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::Param
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::Param::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::Param::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::Param::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::Param::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::Param::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::Param::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::Param::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::Param::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::Param::DefaultValue
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::Param::DefaultValue::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::Param::DefaultValue::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::Param::DefaultValue::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::Param::DefaultValue::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::Param::DefaultValue::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::Param::DefaultValue::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::Param::DefaultValue::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::Param::DefaultValue::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::Id
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::Id::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::Id::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::Id::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::Id::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::Id::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::Id::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::Id::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::Id::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::Using
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::Using::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::Using::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::Using::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::Using::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::Using::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::Using::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::Using::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::Using::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::Const
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::Const::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::Const::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::Const::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::Const::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::Const::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::Const::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::Const::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::Const::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::Field
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::Field::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::Field::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::Field::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::Field::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::Field::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::Field::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::Field::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::Field::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::Field::DefaultValue
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::Field::DefaultValue::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::Field::DefaultValue::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::Field::DefaultValue::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::Field::DefaultValue::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::Field::DefaultValue::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::Field::DefaultValue::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::Field::DefaultValue::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::Field::DefaultValue::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::Interface
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::Interface::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::Interface::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::Interface::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::Interface::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::Interface::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::Interface::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::Interface::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::Interface::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::Method
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::Method::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::Method::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::Method::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::Method::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::Method::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::Method::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::Method::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::Method::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::Method::Results
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::Method::Results::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::Method::Results::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::Method::Results::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::Method::Results::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::Method::Results::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::Method::Results::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::Method::Results::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::Method::Results::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Declaration::Annotation
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Declaration::Annotation::_capnpPrivate::dataWordSize;
-constexpr uint16_t Declaration::Annotation::_capnpPrivate::pointerCount;
+constexpr uint16_t Declaration::Annotation::_sharkPrivate::dataWordSize;
+constexpr uint16_t Declaration::Annotation::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Declaration::Annotation::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Declaration::Annotation::_capnpPrivate::schema;
+constexpr ::shark::Kind Declaration::Annotation::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Declaration::Annotation::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // ParsedFile
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t ParsedFile::_capnpPrivate::dataWordSize;
-constexpr uint16_t ParsedFile::_capnpPrivate::pointerCount;
+constexpr uint16_t ParsedFile::_sharkPrivate::dataWordSize;
+constexpr uint16_t ParsedFile::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind ParsedFile::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* ParsedFile::_capnpPrivate::schema;
+constexpr ::shark::Kind ParsedFile::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* ParsedFile::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 

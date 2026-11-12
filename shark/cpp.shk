@@ -41,8 +41,6 @@ annotation allowCancellation(interface, method, file) :Void;
 # It's generally recommended that this annotation be applied to all methods. However, when doing
 # so, it is important that the server implementation use cancellation-safe code. See:
 #
-#     https://github.com/capnproto/capnproto/blob/master/kjdoc/tour.md#cancellation
-#
 # If your code is not cancellation-safe, then allowing cancellation might give a malicious client
 # an easy way to induce use-after-free or other bugs in your server, by requesting cancellation
 # when not expected.

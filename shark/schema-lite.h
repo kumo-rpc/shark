@@ -28,10 +28,10 @@ SHARK_BEGIN_HEADER
 
 namespace shark {
 
-template <typename T, typename CapnpPrivate = typename T::_capnpPrivate>
+template <typename T, typename SharkPrivate = typename T::_sharkPrivate>
 inline schema::Node::Reader schemaProto() {
   // Get the schema::Node for this type's schema. This function works even in lite mode.
-  return readMessageUnchecked<schema::Node>(CapnpPrivate::encodedSchema());
+  return readMessageUnchecked<schema::Node>(SharkPrivate::encodedSchema());
 }
 
 template <typename T, uint64_t id = schemas::EnumInfo<T>::typeId>

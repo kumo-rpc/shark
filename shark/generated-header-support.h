@@ -50,18 +50,18 @@ namespace _ {  // private
 
 #if !SHARK_LITE
 
-template <typename T, typename CapnpPrivate = typename T::_capnpPrivate, bool = false>
+template <typename T, typename SharkPrivate = typename T::_sharkPrivate, bool = false>
 inline const RawSchema& rawSchema() {
-  return *CapnpPrivate::schema;
+  return *SharkPrivate::schema;
 }
 template <typename T, uint64_t id = schemas::EnumInfo<T>::typeId>
 inline const RawSchema& rawSchema() {
   return *schemas::EnumInfo<T>::schema;
 }
 
-template <typename T, typename CapnpPrivate = typename T::_capnpPrivate>
+template <typename T, typename SharkPrivate = typename T::_sharkPrivate>
 inline const RawBrandedSchema& rawBrandedSchema() {
-  return *CapnpPrivate::brand();
+  return *SharkPrivate::brand();
 }
 template <typename T, uint64_t id = schemas::EnumInfo<T>::typeId>
 inline const RawBrandedSchema& rawBrandedSchema() {
@@ -71,7 +71,7 @@ inline const RawBrandedSchema& rawBrandedSchema() {
 template <typename TypeTag, typename... Params>
 struct ChooseBrand;
 // If all of `Params` are `AnyPointer`, return the type's default brand. Otherwise, return a
-// specific brand instance. TypeTag is the _capnpPrivate struct for the type in question.
+// specific brand instance. TypeTag is the _sharkPrivate struct for the type in question.
 
 template <typename TypeTag>
 struct ChooseBrand<TypeTag> {
@@ -144,14 +144,14 @@ struct BrandBindingFor_<T, Kind::ENUM> {
 template <typename T>
 struct BrandBindingFor_<T, Kind::STRUCT> {
   static constexpr RawBrandedSchema::Binding get(uint16_t listDepth) {
-    return { 16, listDepth, T::_capnpPrivate::brand() };
+    return { 16, listDepth, T::_sharkPrivate::brand() };
   }
 };
 
 template <typename T>
 struct BrandBindingFor_<T, Kind::INTERFACE> {
   static constexpr RawBrandedSchema::Binding get(uint16_t listDepth) {
-    return { 17, listDepth, T::_capnpPrivate::brand() };
+    return { 17, listDepth, T::_sharkPrivate::brand() };
   }
 };
 
@@ -297,8 +297,8 @@ inline auto KJ_STRINGIFY(const ConstData<size>& s) -> decltype(kj::toCharSequenc
 
 }  // namespace _ (private)
 
-template <typename T, typename CapnpPrivate = typename T::_capnpPrivate>
-inline constexpr uint64_t typeId() { return CapnpPrivate::typeId; }
+template <typename T, typename SharkPrivate = typename T::_sharkPrivate>
+inline constexpr uint64_t typeId() { return SharkPrivate::typeId; }
 template <typename T, uint64_t id = schemas::EnumInfo<T>::typeId>
 inline constexpr uint64_t typeId() { return id; }
 // typeId<MyType>() returns the type ID as defined in the schema.  Works with structs, enums, and

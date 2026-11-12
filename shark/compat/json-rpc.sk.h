@@ -42,7 +42,7 @@ struct RpcMessage {
   };
   struct Error;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(d3a68cd48aa056ca, 1, 4)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -57,7 +57,7 @@ struct RpcMessage::Error {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(d0dd80fa25c37644, 1, 2)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -80,7 +80,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -227,7 +227,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 

@@ -28,7 +28,7 @@
 // If Cap'n Proto is not installed, but the source is located at $SRC and has been
 // compiled in $BUILD (often both are simply ".." from here), you can do:
 //   $BUILD/shark compile -I$SRC/src -o$BUILD/shark-cpp addressbook.shk
-//   c++ -std=c++14 -Wall addressbook.c++ addressbook.shk.c++ -I$SRC/src -L$BUILD/.libs -lcapnp -lkj -o addressbook
+//   c++ -std=c++14 -Wall addressbook.c++ addressbook.shk.c++ -I$SRC/src -L$BUILD/.libs -lshark -lkj -o addressbook
 //
 // Run like:
 //   ./addressbook write | ./addressbook read

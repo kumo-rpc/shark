@@ -32,7 +32,7 @@ namespace shark {
 class WebSocketMessageStream final : public MessageStream {
   // An implementation of MessageStream that sends messages over a websocket.
   //
-  // Each capnproto message is sent in a single binary websocket frame.
+  // Each shark message is sent in a single binary websocket frame.
 public:
   WebSocketMessageStream(kj::WebSocket& socket);
 

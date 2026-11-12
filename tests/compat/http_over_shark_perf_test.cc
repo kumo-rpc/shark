@@ -391,16 +391,16 @@ KJ_TEST("Benchmark HTTP-over-sharkshark local call") {
   kj::HttpHeaderTable::Builder headerTableBuilder;
   MockService service(headerTableBuilder);
   MockSender sender(headerTableBuilder);
-  HttpOverCapnpFactory::HeaderIdBundle headerIds(headerTableBuilder);
+  HttpOverSharkFactory::HeaderIdBundle headerIds(headerTableBuilder);
   auto headerTable = headerTableBuilder.build();
 
-  // Client and server use different HttpOverCapnpFactory instances to block path-shortening.
+  // Client and server use different HttpOverSharkFactory instances to block path-shortening.
   ByteStreamFactory bsFactory;
-  HttpOverCapnpFactory hocFactory(bsFactory, headerIds.clone(), HttpOverCapnpFactory::LEVEL_2);
+  HttpOverSharkFactory hocFactory(bsFactory, headerIds.clone(), HttpOverSharkFactory::LEVEL_2);
   ByteStreamFactory bsFactory2;
-  HttpOverCapnpFactory hocFactory2(bsFactory2, kj::mv(headerIds), HttpOverCapnpFactory::LEVEL_2);
+  HttpOverSharkFactory hocFactory2(bsFactory2, kj::mv(headerIds), HttpOverSharkFactory::LEVEL_2);
 
-  auto cap = hocFactory.kjToCapnp(kj::attachRef(service));
+  auto cap = hocFactory.kjToShark(kj::attachRef(service));
   auto roundTrip = hocFactory2.sharkToKj(kj::mv(cap));
 
   doBenchmark([&]() {
@@ -417,16 +417,16 @@ KJ_TEST("Benchmark HTTP-over-shark full RPC") {
   kj::HttpHeaderTable::Builder headerTableBuilder;
   MockService service(headerTableBuilder);
   MockSender sender(headerTableBuilder);
-  HttpOverCapnpFactory::HeaderIdBundle headerIds(headerTableBuilder);
+  HttpOverSharkFactory::HeaderIdBundle headerIds(headerTableBuilder);
   auto headerTable = headerTableBuilder.build();
 
-  // Client and server use different HttpOverCapnpFactory instances to block path-shortening.
+  // Client and server use different HttpOverSharkFactory instances to block path-shortening.
   ByteStreamFactory bsFactory;
-  HttpOverCapnpFactory hocFactory(bsFactory, headerIds.clone(), HttpOverCapnpFactory::LEVEL_2);
+  HttpOverSharkFactory hocFactory(bsFactory, headerIds.clone(), HttpOverSharkFactory::LEVEL_2);
   ByteStreamFactory bsFactory2;
-  HttpOverCapnpFactory hocFactory2(bsFactory2, kj::mv(headerIds), HttpOverCapnpFactory::LEVEL_2);
+  HttpOverSharkFactory hocFactory2(bsFactory2, kj::mv(headerIds), HttpOverSharkFactory::LEVEL_2);
 
-  TwoPartyServer server(hocFactory.kjToCapnp(kj::attachRef(service)));
+  TwoPartyServer server(hocFactory.kjToShark(kj::attachRef(service)));
 
   auto pipe = kj::newTwoWayPipe();
   auto listenLoop = server.accept(pair.server);

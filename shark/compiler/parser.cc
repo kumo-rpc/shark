@@ -71,7 +71,7 @@ namespace shark {
 
         void parseFile(List<Statement>::Reader statements, ParsedFile::Builder result,
             ErrorReporter& errorReporter, bool requiresId) {
-            CapnpParser parser(Orphanage::getForMessageContaining(result), errorReporter);
+            SharkParser parser(Orphanage::getForMessageContaining(result), errorReporter);
 
             kj::Vector<Orphan<Declaration>> decls(statements.size());
             kj::Vector<Orphan<Declaration::AnnotationApplication>> annotations;
@@ -261,13 +261,13 @@ namespace shark {
                     : itemParser(p::sequence(kj::fwd<ItemParser>(itemParser), p::endOfInput))
                     , errorReporter(errorReporter) { }
 
-                Located<kj::Array<kj::Maybe<p::OutputType<ItemParser, CapnpParser::ParserInput>>>> operator()(
+                Located<kj::Array<kj::Maybe<p::OutputType<ItemParser, SharkParser::ParserInput>>>> operator()(
                     Located<List<List<Token>>::Reader>&& items) const {
-                    auto result = kj::heapArray<kj::Maybe<p::OutputType<ItemParser, CapnpParser::ParserInput>>>(
+                    auto result = kj::heapArray<kj::Maybe<p::OutputType<ItemParser, SharkParser::ParserInput>>>(
                         items.value.size());
                     for (uint i = 0; i < items.value.size(); i++) {
                         auto item = items.value[i];
-                        CapnpParser::ParserInput input(item.begin(), item.end());
+                        SharkParser::ParserInput input(item.begin(), item.end());
                         result[i] = itemParser(input);
                         if (result[i] == nullptr) {
                             // Parsing failed.  Report an error.
@@ -289,7 +289,7 @@ namespace shark {
                             }
                         }
                     }
-                    return Located<kj::Array<kj::Maybe<p::OutputType<ItemParser, CapnpParser::ParserInput>>>>(
+                    return Located<kj::Array<kj::Maybe<p::OutputType<ItemParser, SharkParser::ParserInput>>>>(
                         kj::mv(result), items.startByte, items.endByte);
                 }
 
@@ -379,7 +379,7 @@ namespace shark {
 
         // =======================================================================================
 
-        CapnpParser::CapnpParser(Orphanage orphanageParam, ErrorReporter& errorReporterParam)
+        SharkParser::SharkParser(Orphanage orphanageParam, ErrorReporter& errorReporterParam)
             : orphanage(orphanageParam)
             , errorReporter(errorReporterParam) {
             auto& tupleElement = arena.copy(p::transform(
@@ -616,7 +616,7 @@ namespace shark {
                 [this](Located<uint64_t>&& value) {
                     if (value.value < (1ull << 63)) {
                         errorReporter.addError(value.startByte, value.endByte,
-                            "Invalid ID.  Please generate a new one with 'capnpc -i'.");
+                            "Invalid ID.  Please generate a new one with 'shark -i'.");
                     }
                     return value.asProto<LocatedInteger>(orphanage);
                 }));
@@ -1030,9 +1030,9 @@ namespace shark {
                 parsers.methodDecl, parsers.genericDecl));
         }
 
-        CapnpParser::~CapnpParser() noexcept(false) { }
+        SharkParser::~SharkParser() noexcept(false) { }
 
-        kj::Maybe<Orphan<Declaration>> CapnpParser::parseStatement(
+        kj::Maybe<Orphan<Declaration>> SharkParser::parseStatement(
             Statement::Reader statement, const DeclParser& parser) {
             auto fullParser = p::sequence(parser, p::endOfInput);
 

@@ -3895,133 +3895,133 @@ namespace schema {
 
 // Node
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Node::_capnpPrivate::dataWordSize;
-constexpr uint16_t Node::_capnpPrivate::pointerCount;
+constexpr uint16_t Node::_sharkPrivate::dataWordSize;
+constexpr uint16_t Node::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Node::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Node::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Node::Parameter
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Node::Parameter::_capnpPrivate::dataWordSize;
-constexpr uint16_t Node::Parameter::_capnpPrivate::pointerCount;
+constexpr uint16_t Node::Parameter::_sharkPrivate::dataWordSize;
+constexpr uint16_t Node::Parameter::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Node::Parameter::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Node::Parameter::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::Parameter::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::Parameter::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Node::NestedNode
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Node::NestedNode::_capnpPrivate::dataWordSize;
-constexpr uint16_t Node::NestedNode::_capnpPrivate::pointerCount;
+constexpr uint16_t Node::NestedNode::_sharkPrivate::dataWordSize;
+constexpr uint16_t Node::NestedNode::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Node::NestedNode::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Node::NestedNode::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::NestedNode::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::NestedNode::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Node::SourceInfo
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Node::SourceInfo::_capnpPrivate::dataWordSize;
-constexpr uint16_t Node::SourceInfo::_capnpPrivate::pointerCount;
+constexpr uint16_t Node::SourceInfo::_sharkPrivate::dataWordSize;
+constexpr uint16_t Node::SourceInfo::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Node::SourceInfo::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Node::SourceInfo::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::SourceInfo::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::SourceInfo::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Node::SourceInfo::Member
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Node::SourceInfo::Member::_capnpPrivate::dataWordSize;
-constexpr uint16_t Node::SourceInfo::Member::_capnpPrivate::pointerCount;
+constexpr uint16_t Node::SourceInfo::Member::_sharkPrivate::dataWordSize;
+constexpr uint16_t Node::SourceInfo::Member::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Node::SourceInfo::Member::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Node::SourceInfo::Member::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::SourceInfo::Member::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::SourceInfo::Member::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Node::Struct
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Node::Struct::_capnpPrivate::dataWordSize;
-constexpr uint16_t Node::Struct::_capnpPrivate::pointerCount;
+constexpr uint16_t Node::Struct::_sharkPrivate::dataWordSize;
+constexpr uint16_t Node::Struct::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Node::Struct::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Node::Struct::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::Struct::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::Struct::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Node::Enum
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Node::Enum::_capnpPrivate::dataWordSize;
-constexpr uint16_t Node::Enum::_capnpPrivate::pointerCount;
+constexpr uint16_t Node::Enum::_sharkPrivate::dataWordSize;
+constexpr uint16_t Node::Enum::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Node::Enum::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Node::Enum::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::Enum::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::Enum::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Node::Interface
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Node::Interface::_capnpPrivate::dataWordSize;
-constexpr uint16_t Node::Interface::_capnpPrivate::pointerCount;
+constexpr uint16_t Node::Interface::_sharkPrivate::dataWordSize;
+constexpr uint16_t Node::Interface::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Node::Interface::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Node::Interface::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::Interface::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::Interface::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Node::Const
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Node::Const::_capnpPrivate::dataWordSize;
-constexpr uint16_t Node::Const::_capnpPrivate::pointerCount;
+constexpr uint16_t Node::Const::_sharkPrivate::dataWordSize;
+constexpr uint16_t Node::Const::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Node::Const::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Node::Const::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::Const::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::Const::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Node::Annotation
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Node::Annotation::_capnpPrivate::dataWordSize;
-constexpr uint16_t Node::Annotation::_capnpPrivate::pointerCount;
+constexpr uint16_t Node::Annotation::_sharkPrivate::dataWordSize;
+constexpr uint16_t Node::Annotation::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Node::Annotation::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Node::Annotation::_capnpPrivate::schema;
+constexpr ::shark::Kind Node::Annotation::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Node::Annotation::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Field
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Field::_capnpPrivate::dataWordSize;
-constexpr uint16_t Field::_capnpPrivate::pointerCount;
+constexpr uint16_t Field::_sharkPrivate::dataWordSize;
+constexpr uint16_t Field::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Field::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Field::_capnpPrivate::schema;
+constexpr ::shark::Kind Field::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Field::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
@@ -4030,325 +4030,325 @@ constexpr  ::uint16_t Field::NO_DISCRIMINANT;
 #endif
 // Field::Slot
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Field::Slot::_capnpPrivate::dataWordSize;
-constexpr uint16_t Field::Slot::_capnpPrivate::pointerCount;
+constexpr uint16_t Field::Slot::_sharkPrivate::dataWordSize;
+constexpr uint16_t Field::Slot::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Field::Slot::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Field::Slot::_capnpPrivate::schema;
+constexpr ::shark::Kind Field::Slot::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Field::Slot::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Field::Group
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Field::Group::_capnpPrivate::dataWordSize;
-constexpr uint16_t Field::Group::_capnpPrivate::pointerCount;
+constexpr uint16_t Field::Group::_sharkPrivate::dataWordSize;
+constexpr uint16_t Field::Group::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Field::Group::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Field::Group::_capnpPrivate::schema;
+constexpr ::shark::Kind Field::Group::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Field::Group::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Field::Ordinal
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Field::Ordinal::_capnpPrivate::dataWordSize;
-constexpr uint16_t Field::Ordinal::_capnpPrivate::pointerCount;
+constexpr uint16_t Field::Ordinal::_sharkPrivate::dataWordSize;
+constexpr uint16_t Field::Ordinal::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Field::Ordinal::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Field::Ordinal::_capnpPrivate::schema;
+constexpr ::shark::Kind Field::Ordinal::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Field::Ordinal::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Enumerant
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Enumerant::_capnpPrivate::dataWordSize;
-constexpr uint16_t Enumerant::_capnpPrivate::pointerCount;
+constexpr uint16_t Enumerant::_sharkPrivate::dataWordSize;
+constexpr uint16_t Enumerant::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Enumerant::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Enumerant::_capnpPrivate::schema;
+constexpr ::shark::Kind Enumerant::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Enumerant::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Superclass
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Superclass::_capnpPrivate::dataWordSize;
-constexpr uint16_t Superclass::_capnpPrivate::pointerCount;
+constexpr uint16_t Superclass::_sharkPrivate::dataWordSize;
+constexpr uint16_t Superclass::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Superclass::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Superclass::_capnpPrivate::schema;
+constexpr ::shark::Kind Superclass::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Superclass::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Method
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Method::_capnpPrivate::dataWordSize;
-constexpr uint16_t Method::_capnpPrivate::pointerCount;
+constexpr uint16_t Method::_sharkPrivate::dataWordSize;
+constexpr uint16_t Method::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Method::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Method::_capnpPrivate::schema;
+constexpr ::shark::Kind Method::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Method::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Type
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Type::_capnpPrivate::dataWordSize;
-constexpr uint16_t Type::_capnpPrivate::pointerCount;
+constexpr uint16_t Type::_sharkPrivate::dataWordSize;
+constexpr uint16_t Type::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Type::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Type::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Type::List
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Type::List::_capnpPrivate::dataWordSize;
-constexpr uint16_t Type::List::_capnpPrivate::pointerCount;
+constexpr uint16_t Type::List::_sharkPrivate::dataWordSize;
+constexpr uint16_t Type::List::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Type::List::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Type::List::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::List::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::List::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Type::Enum
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Type::Enum::_capnpPrivate::dataWordSize;
-constexpr uint16_t Type::Enum::_capnpPrivate::pointerCount;
+constexpr uint16_t Type::Enum::_sharkPrivate::dataWordSize;
+constexpr uint16_t Type::Enum::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Type::Enum::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Type::Enum::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::Enum::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::Enum::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Type::Struct
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Type::Struct::_capnpPrivate::dataWordSize;
-constexpr uint16_t Type::Struct::_capnpPrivate::pointerCount;
+constexpr uint16_t Type::Struct::_sharkPrivate::dataWordSize;
+constexpr uint16_t Type::Struct::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Type::Struct::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Type::Struct::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::Struct::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::Struct::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Type::Interface
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Type::Interface::_capnpPrivate::dataWordSize;
-constexpr uint16_t Type::Interface::_capnpPrivate::pointerCount;
+constexpr uint16_t Type::Interface::_sharkPrivate::dataWordSize;
+constexpr uint16_t Type::Interface::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Type::Interface::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Type::Interface::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::Interface::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::Interface::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Type::AnyPointer
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Type::AnyPointer::_capnpPrivate::dataWordSize;
-constexpr uint16_t Type::AnyPointer::_capnpPrivate::pointerCount;
+constexpr uint16_t Type::AnyPointer::_sharkPrivate::dataWordSize;
+constexpr uint16_t Type::AnyPointer::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Type::AnyPointer::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Type::AnyPointer::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::AnyPointer::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::AnyPointer::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Type::AnyPointer::Unconstrained
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Type::AnyPointer::Unconstrained::_capnpPrivate::dataWordSize;
-constexpr uint16_t Type::AnyPointer::Unconstrained::_capnpPrivate::pointerCount;
+constexpr uint16_t Type::AnyPointer::Unconstrained::_sharkPrivate::dataWordSize;
+constexpr uint16_t Type::AnyPointer::Unconstrained::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Type::AnyPointer::Unconstrained::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Type::AnyPointer::Unconstrained::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::AnyPointer::Unconstrained::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::AnyPointer::Unconstrained::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Type::AnyPointer::Parameter
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Type::AnyPointer::Parameter::_capnpPrivate::dataWordSize;
-constexpr uint16_t Type::AnyPointer::Parameter::_capnpPrivate::pointerCount;
+constexpr uint16_t Type::AnyPointer::Parameter::_sharkPrivate::dataWordSize;
+constexpr uint16_t Type::AnyPointer::Parameter::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Type::AnyPointer::Parameter::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Type::AnyPointer::Parameter::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::AnyPointer::Parameter::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::AnyPointer::Parameter::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Type::AnyPointer::ImplicitMethodParameter
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Type::AnyPointer::ImplicitMethodParameter::_capnpPrivate::dataWordSize;
-constexpr uint16_t Type::AnyPointer::ImplicitMethodParameter::_capnpPrivate::pointerCount;
+constexpr uint16_t Type::AnyPointer::ImplicitMethodParameter::_sharkPrivate::dataWordSize;
+constexpr uint16_t Type::AnyPointer::ImplicitMethodParameter::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Type::AnyPointer::ImplicitMethodParameter::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Type::AnyPointer::ImplicitMethodParameter::_capnpPrivate::schema;
+constexpr ::shark::Kind Type::AnyPointer::ImplicitMethodParameter::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Type::AnyPointer::ImplicitMethodParameter::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Brand
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Brand::_capnpPrivate::dataWordSize;
-constexpr uint16_t Brand::_capnpPrivate::pointerCount;
+constexpr uint16_t Brand::_sharkPrivate::dataWordSize;
+constexpr uint16_t Brand::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Brand::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Brand::_capnpPrivate::schema;
+constexpr ::shark::Kind Brand::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Brand::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Brand::Scope
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Brand::Scope::_capnpPrivate::dataWordSize;
-constexpr uint16_t Brand::Scope::_capnpPrivate::pointerCount;
+constexpr uint16_t Brand::Scope::_sharkPrivate::dataWordSize;
+constexpr uint16_t Brand::Scope::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Brand::Scope::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Brand::Scope::_capnpPrivate::schema;
+constexpr ::shark::Kind Brand::Scope::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Brand::Scope::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Brand::Binding
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Brand::Binding::_capnpPrivate::dataWordSize;
-constexpr uint16_t Brand::Binding::_capnpPrivate::pointerCount;
+constexpr uint16_t Brand::Binding::_sharkPrivate::dataWordSize;
+constexpr uint16_t Brand::Binding::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Brand::Binding::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Brand::Binding::_capnpPrivate::schema;
+constexpr ::shark::Kind Brand::Binding::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Brand::Binding::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Value
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Value::_capnpPrivate::dataWordSize;
-constexpr uint16_t Value::_capnpPrivate::pointerCount;
+constexpr uint16_t Value::_sharkPrivate::dataWordSize;
+constexpr uint16_t Value::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Value::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Value::_capnpPrivate::schema;
+constexpr ::shark::Kind Value::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Value::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Annotation
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Annotation::_capnpPrivate::dataWordSize;
-constexpr uint16_t Annotation::_capnpPrivate::pointerCount;
+constexpr uint16_t Annotation::_sharkPrivate::dataWordSize;
+constexpr uint16_t Annotation::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Annotation::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Annotation::_capnpPrivate::schema;
+constexpr ::shark::Kind Annotation::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Annotation::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
-// CapnpVersion
+// SharkVersion
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t CapnpVersion::_capnpPrivate::dataWordSize;
-constexpr uint16_t CapnpVersion::_capnpPrivate::pointerCount;
+constexpr uint16_t SharkVersion::_sharkPrivate::dataWordSize;
+constexpr uint16_t SharkVersion::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind CapnpVersion::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* CapnpVersion::_capnpPrivate::schema;
+constexpr ::shark::Kind SharkVersion::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* SharkVersion::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // CodeGeneratorRequest
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t CodeGeneratorRequest::_capnpPrivate::dataWordSize;
-constexpr uint16_t CodeGeneratorRequest::_capnpPrivate::pointerCount;
+constexpr uint16_t CodeGeneratorRequest::_sharkPrivate::dataWordSize;
+constexpr uint16_t CodeGeneratorRequest::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind CodeGeneratorRequest::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::_capnpPrivate::schema;
+constexpr ::shark::Kind CodeGeneratorRequest::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // CodeGeneratorRequest::RequestedFile
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t CodeGeneratorRequest::RequestedFile::_capnpPrivate::dataWordSize;
-constexpr uint16_t CodeGeneratorRequest::RequestedFile::_capnpPrivate::pointerCount;
+constexpr uint16_t CodeGeneratorRequest::RequestedFile::_sharkPrivate::dataWordSize;
+constexpr uint16_t CodeGeneratorRequest::RequestedFile::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::_capnpPrivate::schema;
+constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // CodeGeneratorRequest::RequestedFile::Import
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t CodeGeneratorRequest::RequestedFile::Import::_capnpPrivate::dataWordSize;
-constexpr uint16_t CodeGeneratorRequest::RequestedFile::Import::_capnpPrivate::pointerCount;
+constexpr uint16_t CodeGeneratorRequest::RequestedFile::Import::_sharkPrivate::dataWordSize;
+constexpr uint16_t CodeGeneratorRequest::RequestedFile::Import::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::Import::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::Import::_capnpPrivate::schema;
+constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::Import::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::Import::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // CodeGeneratorRequest::RequestedFile::FileSourceInfo
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::_capnpPrivate::dataWordSize;
-constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::_capnpPrivate::pointerCount;
+constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::_sharkPrivate::dataWordSize;
+constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::_capnpPrivate::schema;
+constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_capnpPrivate::dataWordSize;
-constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_capnpPrivate::pointerCount;
+constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_sharkPrivate::dataWordSize;
+constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_capnpPrivate::schema;
+constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_capnpPrivate::dataWordSize;
-constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_capnpPrivate::pointerCount;
+constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_sharkPrivate::dataWordSize;
+constexpr uint16_t CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_capnpPrivate::schema;
+constexpr ::shark::Kind CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Member::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 

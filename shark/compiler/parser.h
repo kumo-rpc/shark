@@ -53,18 +53,18 @@ uint64_t generateMethodParamsId(uint64_t parentId, uint16_t methodOrdinal, bool 
 //
 // TODO(cleanup):  Move generate*Id() somewhere more sensible.
 
-class CapnpParser {
+class SharkParser {
   // Advanced parser interface.  This interface exposes the inner parsers so that you can embed
   // them into your own parsers.
 
 public:
-  CapnpParser(Orphanage orphanage, ErrorReporter& errorReporter);
+  SharkParser(Orphanage orphanage, ErrorReporter& errorReporter);
   // `orphanage` is used to allocate Cap'n Proto message objects in the result.  `inputStart` is
   // a pointer to the beginning of the input, used to compute byte offsets.
 
-  ~CapnpParser() noexcept(false);
+  ~SharkParser() noexcept(false);
 
-  KJ_DISALLOW_COPY_AND_MOVE(CapnpParser);
+  KJ_DISALLOW_COPY_AND_MOVE(SharkParser);
 
   using ParserInput = kj::parse::IteratorInput<Token::Reader, List<Token>::Reader::Iterator>;
   struct DeclParserResult;

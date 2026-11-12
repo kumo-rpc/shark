@@ -620,61 +620,61 @@ namespace json {
 
 // Value
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Value::_capnpPrivate::dataWordSize;
-constexpr uint16_t Value::_capnpPrivate::pointerCount;
+constexpr uint16_t Value::_sharkPrivate::dataWordSize;
+constexpr uint16_t Value::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Value::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Value::_capnpPrivate::schema;
+constexpr ::shark::Kind Value::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Value::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Value::Field
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Value::Field::_capnpPrivate::dataWordSize;
-constexpr uint16_t Value::Field::_capnpPrivate::pointerCount;
+constexpr uint16_t Value::Field::_sharkPrivate::dataWordSize;
+constexpr uint16_t Value::Field::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Value::Field::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Value::Field::_capnpPrivate::schema;
+constexpr ::shark::Kind Value::Field::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Value::Field::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Value::Call
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Value::Call::_capnpPrivate::dataWordSize;
-constexpr uint16_t Value::Call::_capnpPrivate::pointerCount;
+constexpr uint16_t Value::Call::_sharkPrivate::dataWordSize;
+constexpr uint16_t Value::Call::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Value::Call::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Value::Call::_capnpPrivate::schema;
+constexpr ::shark::Kind Value::Call::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Value::Call::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // FlattenOptions
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t FlattenOptions::_capnpPrivate::dataWordSize;
-constexpr uint16_t FlattenOptions::_capnpPrivate::pointerCount;
+constexpr uint16_t FlattenOptions::_sharkPrivate::dataWordSize;
+constexpr uint16_t FlattenOptions::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind FlattenOptions::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* FlattenOptions::_capnpPrivate::schema;
+constexpr ::shark::Kind FlattenOptions::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* FlattenOptions::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // DiscriminatorOptions
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t DiscriminatorOptions::_capnpPrivate::dataWordSize;
-constexpr uint16_t DiscriminatorOptions::_capnpPrivate::pointerCount;
+constexpr uint16_t DiscriminatorOptions::_sharkPrivate::dataWordSize;
+constexpr uint16_t DiscriminatorOptions::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind DiscriminatorOptions::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* DiscriminatorOptions::_capnpPrivate::schema;
+constexpr ::shark::Kind DiscriminatorOptions::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* DiscriminatorOptions::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 

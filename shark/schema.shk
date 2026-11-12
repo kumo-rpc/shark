@@ -493,14 +493,14 @@ enum ElementSize {
   inlineComposite @7;
 }
 
-struct CapnpVersion {
+struct SharkVersion {
   major @0 :UInt16;
   minor @1 :UInt8;
   micro @2 :UInt8;
 }
 
 struct CodeGeneratorRequest {
-  capnpVersion @2 :CapnpVersion;
+  sharkVersion @2 :SharkVersion;
   # Version of the `shark` executable. Generally, code generators should ignore this, but the code
   # generators that ship with `shark` itself will print a warning if this mismatches since that
   # probably indicates something is misconfigured.

@@ -55,7 +55,7 @@ struct Value {
   struct Field;
   struct Call;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(a3fa7845f919dd83, 2, 1)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -70,7 +70,7 @@ struct Value::Field {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(e31026e735d69ddf, 0, 2)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -85,7 +85,7 @@ struct Value::Call {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(a0d9f6eca1c93d48, 0, 2)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -100,7 +100,7 @@ struct FlattenOptions {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(c4df13257bc2ea61, 0, 1)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -115,7 +115,7 @@ struct DiscriminatorOptions {
   class Builder;
   class Pipeline;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     SHARK_DECLARE_STRUCT_HEADER(c2f8c20c293e5319, 0, 2)
     #if !SHARK_LITE
     static constexpr ::shark::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
@@ -138,7 +138,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -292,7 +292,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -384,7 +384,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -475,7 +475,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 
@@ -556,7 +556,7 @@ public:
 
 #if !SHARK_LITE
   inline ::kj::StringTree toString() const {
-    return ::shark::_::structString(_reader, *_capnpPrivate::brand());
+    return ::shark::_::structString(_reader, *_sharkPrivate::brand());
   }
 #endif  // !SHARK_LITE
 

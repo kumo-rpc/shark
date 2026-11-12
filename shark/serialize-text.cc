@@ -85,9 +85,9 @@ void lexAndParseExpression(kj::StringPtr input, Function f) {
   auto lexedTokens = tokenArena.initRoot<shark::compiler::LexedTokens>();
   shark::compiler::lex(input, lexedTokens, errorReporter);
 
-  shark::compiler::CapnpParser parser(tokenArena.getOrphanage(), errorReporter);
+  shark::compiler::SharkParser parser(tokenArena.getOrphanage(), errorReporter);
   auto tokens = lexedTokens.asReader().getTokens();
-  shark::compiler::CapnpParser::ParserInput parserInput(tokens.begin(), tokens.end());
+  shark::compiler::SharkParser::ParserInput parserInput(tokens.begin(), tokens.end());
 
   if (parserInput.getPosition() != tokens.end()) {
     KJ_IF_MAYBE(expression, parser.getParsers().expression(parserInput)) {

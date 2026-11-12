@@ -30,7 +30,7 @@ SHARK_BEGIN_HEADER
 
 namespace shark {
 
-class HttpOverCapnpFactory {
+class HttpOverSharkFactory {
 public:
   class HeaderIdBundle {
   public:
@@ -39,16 +39,16 @@ public:
     HeaderIdBundle clone() const;
 
   private:
-    HeaderIdBundle(const kj::HttpHeaderTable& table, kj::Array<kj::HttpHeaderId> nameCapnpToKj,
+    HeaderIdBundle(const kj::HttpHeaderTable& table, kj::Array<kj::HttpHeaderId> nameSharkToKj,
         size_t maxHeaderId);
     // Constructor for clone().
 
     const kj::HttpHeaderTable& table;
 
-    kj::Array<kj::HttpHeaderId> nameCapnpToKj;
+    kj::Array<kj::HttpHeaderId> nameSharkToKj;
     size_t maxHeaderId = 0;
 
-    friend class HttpOverCapnpFactory;
+    friend class HttpOverSharkFactory;
   };
 
   enum OptimizationLevel {
@@ -64,39 +64,39 @@ public:
     // only implement startRequest().
   };
 
-  HttpOverCapnpFactory(ByteStreamFactory& streamFactory, HeaderIdBundle headerIds,
+  HttpOverSharkFactory(ByteStreamFactory& streamFactory, HeaderIdBundle headerIds,
                        OptimizationLevel peerOptimizationLevel = LEVEL_1);
 
   kj::Own<kj::HttpService> sharkToKj(shark::HttpService::Client rpcService);
-  shark::HttpService::Client kjToCapnp(kj::Own<kj::HttpService> service);
+  shark::HttpService::Client kjToShark(kj::Own<kj::HttpService> service);
 
 private:
   ByteStreamFactory& streamFactory;
   const kj::HttpHeaderTable& headerTable;
   OptimizationLevel peerOptimizationLevel;
-  kj::Array<shark::CommonHeaderName> nameKjToCapnp;
-  kj::Array<kj::HttpHeaderId> nameCapnpToKj;
-  kj::Array<kj::StringPtr> valueCapnpToKj;
-  kj::HashMap<kj::StringPtr, shark::CommonHeaderValue> valueKjToCapnp;
+  kj::Array<shark::CommonHeaderName> nameKjToShark;
+  kj::Array<kj::HttpHeaderId> nameSharkToKj;
+  kj::Array<kj::StringPtr> valueSharkToKj;
+  kj::HashMap<kj::StringPtr, shark::CommonHeaderValue> valueKjToShark;
 
   class RequestState;
 
-  class CapnpToKjWebSocketAdapter;
-  class KjToCapnpWebSocketAdapter;
+  class SharkToKjWebSocketAdapter;
+  class KjToSharkWebSocketAdapter;
 
   class ClientRequestContextImpl;
   class ConnectClientRequestContextImpl;
-  class KjToCapnpHttpServiceAdapter;
+  class KjToSharkHttpServiceAdapter;
 
   class HttpServiceResponseImpl;
-  class HttpOverCapnpConnectResponseImpl;
+  class HttpOverSharkConnectResponseImpl;
   class ServerRequestContextImpl;
-  class CapnpToKjHttpServiceAdapter;
+  class SharkToKjHttpServiceAdapter;
 
-  kj::HttpHeaders headersToKj(shark::List<shark::HttpHeader>::Reader capnpHeaders) const;
-  // Returned headers may alias into `capnpHeaders`.
+  kj::HttpHeaders headersToKj(shark::List<shark::HttpHeader>::Reader sharkHeaders) const;
+  // Returned headers may alias into `sharkHeaders`.
 
-  shark::Orphan<shark::List<shark::HttpHeader>> headersToCapnp(
+  shark::Orphan<shark::List<shark::HttpHeader>> headersToShark(
       const kj::HttpHeaders& headers, shark::Orphanage orphanage);
 };
 

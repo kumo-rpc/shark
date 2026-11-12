@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 // This program is a code generator plugin for `shark compile` which writes the schema back to
-// stdout in roughly capnpc format.
+// stdout in roughly shark format.
 
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
@@ -88,16 +88,16 @@ inline Indent KJ_STRINGIFY(const Indent& indent) {
 
 // =======================================================================================
 
-class CapnpcCapnpMain {
+class SharkcSharkMain {
 public:
-  CapnpcCapnpMain(kj::ProcessContext& context): context(context) {}
+  SharkcSharkMain(kj::ProcessContext& context): context(context) {}
 
   kj::MainFunc getMain() {
     return kj::MainBuilder(context, "Cap'n Proto loopback plugin version " VERSION,
           "This is a Cap'n Proto compiler plugin which \"de-compiles\" the schema back into "
           "Cap'n Proto schema language format, with comments showing the offsets chosen by the "
           "compiler.  This is meant to be run using the Cap'n Proto compiler, e.g.:\n"
-          "    shark compile -ocapnp foo.shk")
+          "    shark compile -oshark foo.shk")
         .callAfterParsing(KJ_BIND_METHOD(*this, run))
         .build();
   }
@@ -685,4 +685,4 @@ private:
 }  // namespace
 }  // namespace shark
 
-KJ_MAIN(shark::CapnpcCapnpMain);
+KJ_MAIN(shark::SharkcSharkMain);

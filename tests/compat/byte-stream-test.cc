@@ -65,7 +65,7 @@ KJ_TEST("KJ -> ByteStream -> KJ without shortening") {
 
   auto pipe = kj::newOneWayPipe();
 
-  auto wrapped = factory1.sharkToKj(factory2.kjToCapnp(kj::mv(pipe.out)));
+  auto wrapped = factory1.sharkToKj(factory2.kjToShark(kj::mv(pipe.out)));
 
   {
     auto promise = wrapped->write("foo", 3);
@@ -153,7 +153,7 @@ KJ_TEST("KJ -> ByteStream -> KJ with shortening") {
   ExactPointerWriter exactPointerWriter;
   auto pumpPromise = pipe.in->pumpTo(exactPointerWriter);
 
-  auto wrapped = factory.sharkToKj(factory.kjToCapnp(kj::mv(pipe.out)));
+  auto wrapped = factory.sharkToKj(factory.kjToShark(kj::mv(pipe.out)));
 
   {
     char buffer[4] = "foo";
@@ -195,8 +195,8 @@ KJ_TEST("KJ -> ByteStream -> KJ -> ByteStream -> KJ with shortening") {
   ExactPointerWriter exactPointerWriter;
   auto pumpPromise = pipe.in->pumpTo(exactPointerWriter);
 
-  auto wrapped = factory.sharkToKj(factory.kjToCapnp(
-                 factory.sharkToKj(factory.kjToCapnp(kj::mv(pipe.out)))));
+  auto wrapped = factory.sharkToKj(factory.kjToShark(
+                 factory.sharkToKj(factory.kjToShark(kj::mv(pipe.out)))));
 
   {
     char buffer[4] = "foo";
@@ -239,10 +239,10 @@ KJ_TEST("KJ -> ByteStream -> KJ pipe -> ByteStream -> KJ with shortening") {
   ExactPointerWriter exactPointerWriter;
   auto backPumpPromise = backPipe.in->pumpTo(exactPointerWriter);
 
-  auto backWrapped = factory.sharkToKj(factory.kjToCapnp(kj::mv(backPipe.out)));
+  auto backWrapped = factory.sharkToKj(factory.kjToShark(kj::mv(backPipe.out)));
   auto midPumpPormise = middlePipe.in->pumpTo(*backWrapped, 3);
 
-  auto wrapped = factory.sharkToKj(factory.kjToCapnp(kj::mv(middlePipe.out)));
+  auto wrapped = factory.sharkToKj(factory.kjToShark(kj::mv(middlePipe.out)));
 
   // Poll whenWriteDisconnected(), mainly as a way to let all the path-shortening settle.
   auto disconnectPromise = wrapped->whenWriteDisconnected();
@@ -303,10 +303,10 @@ KJ_TEST("KJ -> ByteStream RPC -> KJ pipe -> ByteStream RPC -> KJ with shortening
 
   auto rpcConnection = kj::newTwoWayPipe();
   shark::TwoPartyClient client(*rpcConnection.ends[0],
-      clientFactory.kjToCapnp(kj::mv(backPipe.out)),
+      clientFactory.kjToShark(kj::mv(backPipe.out)),
       rpc::twoparty::Side::CLIENT);
   shark::TwoPartyClient server(*rpcConnection.ends[1],
-      serverFactory.kjToCapnp(kj::mv(middlePipe.out)),
+      serverFactory.kjToShark(kj::mv(middlePipe.out)),
       rpc::twoparty::Side::SERVER);
 
   auto backWrapped = serverFactory.sharkToKj(server.bootstrap().castAs<ByteStream>());
@@ -373,10 +373,10 @@ KJ_TEST("KJ -> ByteStream RPC -> KJ pipe -> ByteStream RPC -> KJ with concurrent
 
   auto rpcConnection = kj::newTwoWayPipe();
   shark::TwoPartyClient client(*rpcConnection.ends[0],
-      clientFactory.kjToCapnp(kj::mv(backPipe.out)),
+      clientFactory.kjToShark(kj::mv(backPipe.out)),
       rpc::twoparty::Side::CLIENT);
   shark::TwoPartyClient server(*rpcConnection.ends[1],
-      serverFactory.kjToCapnp(kj::mv(middlePipe.out)),
+      serverFactory.kjToShark(kj::mv(middlePipe.out)),
       rpc::twoparty::Side::SERVER);
 
   auto backWrapped = serverFactory.sharkToKj(server.bootstrap().castAs<ByteStream>());
@@ -427,7 +427,7 @@ KJ_TEST("KJ -> ByteStream RPC -> KJ pipe -> ByteStream RPC -> KJ with concurrent
 
 KJ_TEST("KJ -> KJ pipe -> ByteStream RPC -> KJ pipe -> ByteStream RPC -> KJ with concurrent shortening") {
   // Same as previous test, except we add a KJ pipe at the beginning and pump it into the top of
-  // the pipe, which invokes tryPumpFrom() on the KjToCapnpStreamAdapter.
+  // the pipe, which invokes tryPumpFrom() on the KjToSharkStreamAdapter.
 
   kj::EventLoop eventLoop;
   kj::WaitScope waitScope(eventLoop);
@@ -444,10 +444,10 @@ KJ_TEST("KJ -> KJ pipe -> ByteStream RPC -> KJ pipe -> ByteStream RPC -> KJ with
 
   auto rpcConnection = kj::newTwoWayPipe();
   shark::TwoPartyClient client(*rpcConnection.ends[0],
-      clientFactory.kjToCapnp(kj::mv(backPipe.out)),
+      clientFactory.kjToShark(kj::mv(backPipe.out)),
       rpc::twoparty::Side::CLIENT);
   shark::TwoPartyClient server(*rpcConnection.ends[1],
-      serverFactory.kjToCapnp(kj::mv(middlePipe.out)),
+      serverFactory.kjToShark(kj::mv(middlePipe.out)),
       rpc::twoparty::Side::SERVER);
 
   auto backWrapped = serverFactory.sharkToKj(server.bootstrap().castAs<ByteStream>());
@@ -510,10 +510,10 @@ KJ_TEST("Two Substreams on one destination") {
   ExactPointerWriter exactPointerWriter;
   auto backPumpPromise = backPipe.in->pumpTo(exactPointerWriter);
 
-  auto backWrapped = factory.sharkToKj(factory.kjToCapnp(kj::mv(backPipe.out)));
+  auto backWrapped = factory.sharkToKj(factory.kjToShark(kj::mv(backPipe.out)));
 
-  auto wrapped1 = factory.sharkToKj(factory.kjToCapnp(kj::mv(middlePipe1.out)));
-  auto wrapped2 = factory.sharkToKj(factory.kjToCapnp(kj::mv(middlePipe2.out)));
+  auto wrapped1 = factory.sharkToKj(factory.kjToShark(kj::mv(middlePipe1.out)));
+  auto wrapped2 = factory.sharkToKj(factory.kjToShark(kj::mv(middlePipe2.out)));
 
   // Declare these buffers out here so that they can't possibly end up with the same address.
   char buffer1[4] = "foo";
@@ -577,10 +577,10 @@ KJ_TEST("Two Substreams on one destination no limits (pump to EOF)") {
   ExactPointerWriter exactPointerWriter;
   auto backPumpPromise = backPipe.in->pumpTo(exactPointerWriter);
 
-  auto backWrapped = factory.sharkToKj(factory.kjToCapnp(kj::mv(backPipe.out)));
+  auto backWrapped = factory.sharkToKj(factory.kjToShark(kj::mv(backPipe.out)));
 
-  auto wrapped1 = factory.sharkToKj(factory.kjToCapnp(kj::mv(middlePipe1.out)));
-  auto wrapped2 = factory.sharkToKj(factory.kjToCapnp(kj::mv(middlePipe2.out)));
+  auto wrapped1 = factory.sharkToKj(factory.kjToShark(kj::mv(middlePipe1.out)));
+  auto wrapped2 = factory.sharkToKj(factory.kjToShark(kj::mv(middlePipe2.out)));
 
   // Declare these buffers out here so that they can't possibly end up with the same address.
   char buffer1[4] = "foo";
@@ -644,7 +644,7 @@ KJ_TEST("KJ -> ByteStream RPC -> KJ promise stream -> ByteStream -> KJ") {
   ExactPointerWriter exactPointerWriter;
 
   auto paf = kj::newPromiseAndFulfiller<kj::Own<kj::AsyncOutputStream>>();
-  auto backCap = factory.kjToCapnp(kj::newPromisedStream(kj::mv(paf.promise)));
+  auto backCap = factory.kjToShark(kj::newPromisedStream(kj::mv(paf.promise)));
 
   auto rpcPipe = kj::newTwoWayPipe();
   shark::TwoPartyClient client(*rpcPipe.ends[0]);
@@ -658,16 +658,16 @@ KJ_TEST("KJ -> ByteStream RPC -> KJ promise stream -> ByteStream -> KJ") {
   front->write("qux", 3).wait(waitScope);
 
   // Make sure those writes manage to get all the way through the RPC system and queue up in the
-  // LocalClient wrapping the CapnpToKjStreamAdapter at the other end.
+  // LocalClient wrapping the SharkToKjStreamAdapter at the other end.
   waitScope.poll();
 
   // Fulfill the promise.
-  paf.fulfiller->fulfill(factory.sharkToKj(factory.kjToCapnp(kj::attachRef(exactPointerWriter))));
+  paf.fulfiller->fulfill(factory.sharkToKj(factory.kjToShark(kj::attachRef(exactPointerWriter))));
   waitScope.poll();
 
   // Now:
   // - "foo" should have made it all the way down to the final output stream.
-  // - "bar", "baz", and "qux" are queued on the CapnpToKjStreamAdapter immediately wrapping the
+  // - "bar", "baz", and "qux" are queued on the SharkToKjStreamAdapter immediately wrapping the
   //   KJ promise stream.
   // - But that stream adapter has discovered that there's another shark stream downstream and has
   //   resolved itself to the later stream.

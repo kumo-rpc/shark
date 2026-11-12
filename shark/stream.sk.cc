@@ -41,13 +41,13 @@ namespace shark {
 
 // StreamResult
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t StreamResult::_capnpPrivate::dataWordSize;
-constexpr uint16_t StreamResult::_capnpPrivate::pointerCount;
+constexpr uint16_t StreamResult::_sharkPrivate::dataWordSize;
+constexpr uint16_t StreamResult::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind StreamResult::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* StreamResult::_capnpPrivate::schema;
+constexpr ::shark::Kind StreamResult::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* StreamResult::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 

@@ -36,7 +36,7 @@ namespace _ {  // private
 #if !SHARK_LITE
 static BrokenCapFactory* globalBrokenCapFactory = nullptr;
 // Horrible hack:  We need to be able to construct broken caps without any capability context,
-// but we can't have a link-time dependency on libcapnp-rpc.
+// but we can't have a link-time dependency on shark-rpc.
 
 void setGlobalBrokenCapFactoryForLayoutCpp(BrokenCapFactory& factory) {
   // Called from capability.cc when the capability API is used, to make sure that layout.cc
@@ -53,7 +53,7 @@ void setGlobalBrokenCapFactoryForLayoutCpp(BrokenCapFactory& factory) {
 static BrokenCapFactory* readGlobalBrokenCapFactoryForLayoutCpp() {
 #if __GNUC__ || defined(__clang__)
   // Thread-sanitizer doesn't have the right information to know this is safe without doing an
-  // atomic read. https://groups.google.com/g/capnproto/c/634juhn5ap0/m/pyRiwWl1AAAJ
+  // atomic read.
   return __atomic_load_n(&globalBrokenCapFactory, __ATOMIC_RELAXED);
 #else
   return globalBrokenCapFactory;

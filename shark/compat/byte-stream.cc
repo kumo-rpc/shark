@@ -48,13 +48,13 @@ public:
   typedef kj::OneOf<kj::Promise<void>, shark::ByteStream::Client*, BorrowedStream> ShortestPath;
 
   virtual ShortestPath getShortestPath() = 0;
-  // Called by KjToCapnpStreamAdapter when it has determined that its inner ByteStream::Client
+  // Called by KjToSharkStreamAdapter when it has determined that its inner ByteStream::Client
   // actually points back to a StreamServerBase in the same process created by the same
   // ByteStreamFactory. Returns the best shortened path to use, or a promise that resolves when the
   // shortest path is known.
 
   virtual void directEnd() = 0;
-  // Called by KjToCapnpStreamAdapter's destructor when it has determined that its inner
+  // Called by KjToSharkStreamAdapter's destructor when it has determined that its inner
   // ByteStream::Client actually points back to a StreamServerBase in the same process created by
   // the same ByteStreamFactory. Since destruction of a KJ stream signals EOF, we need to propagate
   // that by destroying our underlying stream.
@@ -320,7 +320,7 @@ private:
 
 // =======================================================================================
 
-class ByteStreamFactory::CapnpToKjStreamAdapter final: public StreamServerBase {
+class ByteStreamFactory::SharkToKjStreamAdapter final: public StreamServerBase {
   // Implements Cap'n Proto ByteStream as a wrapper around a KJ stream.
 
   class SubstreamCallbackImpl;
@@ -328,14 +328,14 @@ class ByteStreamFactory::CapnpToKjStreamAdapter final: public StreamServerBase {
 public:
   class PathProber;
 
-  CapnpToKjStreamAdapter(ByteStreamFactory& factory,
+  SharkToKjStreamAdapter(ByteStreamFactory& factory,
                          kj::Own<kj::AsyncOutputStream> inner)
       : factory(factory),
         state(kj::heap<PathProber>(*this, kj::mv(inner))) {
     state.get<kj::Own<PathProber>>()->startProbing();
   }
 
-  CapnpToKjStreamAdapter(ByteStreamFactory& factory,
+  SharkToKjStreamAdapter(ByteStreamFactory& factory,
                          kj::Own<kj::AsyncOutputStream> inner,
                          kj::Maybe<kj::Own<kj::TlsStarterCallback>> starter)
       : factory(factory),
@@ -344,7 +344,7 @@ public:
     state.get<kj::Own<PathProber>>()->startProbing();
   }
 
-  CapnpToKjStreamAdapter(ByteStreamFactory& factory,
+  SharkToKjStreamAdapter(ByteStreamFactory& factory,
                          kj::Own<PathProber> pathProber)
       : factory(factory),
         state(kj::mv(pathProber)) {
@@ -360,8 +360,8 @@ public:
   }
 
   ShortestPath getShortestPath() override {
-    // Called by KjToCapnpStreamAdapter when it has determined that its inner ByteStream::Client
-    // actually points back to a CapnpToKjStreamAdapter in the same process. Returns the best
+    // Called by KjToSharkStreamAdapter when it has determined that its inner ByteStream::Client
+    // actually points back to a SharkToKjStreamAdapter in the same process. Returns the best
     // shortened path to use, or a promise that resolves when the shortest path is known.
 
     KJ_SWITCH_ONEOF(state) {
@@ -440,7 +440,7 @@ public:
 
   class PathProber final: public kj::AsyncInputStream {
   public:
-    PathProber(CapnpToKjStreamAdapter& parent, kj::Own<kj::AsyncOutputStream> inner,
+    PathProber(SharkToKjStreamAdapter& parent, kj::Own<kj::AsyncOutputStream> inner,
                kj::PromiseFulfillerPair<void> paf = kj::newPromiseAndFulfiller<void>())
         : parent(parent), inner(kj::mv(inner)),
           readyPromise(paf.promise.fork()),
@@ -451,7 +451,7 @@ public:
       task = probeForShorterPath();
     }
 
-    void setNewParent(CapnpToKjStreamAdapter& newParent) {
+    void setNewParent(SharkToKjStreamAdapter& newParent) {
       KJ_ASSERT(parent == nullptr);
       parent = newParent;
       auto paf = kj::newPromiseAndFulfiller<void>();
@@ -464,7 +464,7 @@ public:
     }
 
     kj::Promise<uint64_t> pumpToShorterPath(shark::ByteStream::Client target, uint64_t limit) {
-      // If our probe succeeds in finding a KjToCapnpStreamAdapter somewhere down the stack, that
+      // If our probe succeeds in finding a KjToSharkStreamAdapter somewhere down the stack, that
       // will call this method to provide the shortened path.
 
       KJ_IF_MAYBE(currentParent, parent) {
@@ -484,7 +484,7 @@ public:
         // Now we hook up the incoming stream adapter to point directly to this substream, yay.
         currentParent->state = req.send().getSubstream();
 
-        // Let the original CapnpToKjStreamAdapter know that it's safe to handle incoming requests.
+        // Let the original SharkToKjStreamAdapter know that it's safe to handle incoming requests.
         readyFulfiller->fulfill();
 
         // It's now up to the SubstreamCallbackImpl to signal when the pump is done.
@@ -500,7 +500,7 @@ public:
     kj::Promise<size_t> tryRead(void* buffer, size_t minBytes, size_t maxBytes) override {
       // If this is called, it means the tryPumpFrom() in probeForShorterPath() eventually invoked
       // code that tries to read manually from the source. We don't know what this code is doing
-      // exactly, but we do know for sure that the endpoint is not a KjToCapnpStreamAdapter, so
+      // exactly, but we do know for sure that the endpoint is not a KjToSharkStreamAdapter, so
       // we can't optimize. Instead, we pretend that we immediately hit EOF, ending the pump. This
       // works because pumps do not propagate EOF -- the destination can still receive further
       // writes and pumps. Basically our probing pump becomes a no-op, and then we revert to having
@@ -522,7 +522,7 @@ public:
     }
 
   private:
-    kj::Maybe<CapnpToKjStreamAdapter&> parent;
+    kj::Maybe<SharkToKjStreamAdapter&> parent;
     kj::Own<kj::AsyncOutputStream> inner;
     kj::ForkedPromise<void> readyPromise;
     kj::Own<kj::PromiseFulfiller<void>> readyFulfiller;
@@ -774,11 +774,11 @@ private:
       // Allow the shortened stream to redirect back to our original underlying stream.
       auto results = context.getResults(shark::MessageSize { 4, 1 });
       results.setNext(factory.streamSet.add(
-          kj::heap<CapnpToKjStreamAdapter>(factory, kj::mv(pathProber))));
+          kj::heap<SharkToKjStreamAdapter>(factory, kj::mv(pathProber))));
 
       // The full pump completed. Note that it's important that we fulfill this after the
-      // PathProber has been attached to the new CapnpToKjStreamAdapter, which will have happened
-      // in CapnpToKjStreamAdapter's constructor, which calls pathProber->setNewParent().
+      // PathProber has been attached to the new SharkToKjStreamAdapter, which will have happened
+      // in SharkToKjStreamAdapter's constructor, which calls pathProber->setNewParent().
       originalPumpfulfiller->fulfill(kj::cp(originalPumpLimit));
 
       return kj::READY_NOW;
@@ -795,16 +795,16 @@ private:
 
 // =======================================================================================
 
-class ByteStreamFactory::KjToCapnpStreamAdapter final: public ExplicitEndOutputStream {
+class ByteStreamFactory::KjToSharkStreamAdapter final: public ExplicitEndOutputStream {
 public:
-  KjToCapnpStreamAdapter(ByteStreamFactory& factory, shark::ByteStream::Client innerParam,
+  KjToSharkStreamAdapter(ByteStreamFactory& factory, shark::ByteStream::Client innerParam,
                          bool explicitEnd)
       : factory(factory),
         inner(kj::mv(innerParam)),
         findShorterPathTask(findShorterPath(inner).fork()),
         explicitEnd(explicitEnd) {}
 
-  ~KjToCapnpStreamAdapter() noexcept(false) {
+  ~KjToSharkStreamAdapter() noexcept(false) {
     if (!explicitEnd) {
       // HACK: KJ streams are implicitly ended on destruction, but the RPC stream needs a call. We
       //   use a detached promise for now, which is probably OK since capabilities are refcounted and
@@ -926,7 +926,7 @@ public:
 
   kj::Maybe<kj::Promise<uint64_t>> tryPumpFrom(
       kj::AsyncInputStream& input, uint64_t amount = kj::maxValue) override {
-    KJ_IF_MAYBE(rpc, kj::dynamicDowncastIfAvailable<CapnpToKjStreamAdapter::PathProber>(input)) {
+    KJ_IF_MAYBE(rpc, kj::dynamicDowncastIfAvailable<SharkToKjStreamAdapter::PathProber>(input)) {
       // Oh interesting, it turns we're hosting an incoming ByteStream which is pumping to this
       // outgoing ByteStream. We can let the Cap'n Proto RPC layer know that it can shorten the
       // path from one to the other.
@@ -954,10 +954,10 @@ private:
   bool explicitEnd;
   // Did the creator promise to explicitly call end()?
 
-  kj::Promise<void> findShorterPath(shark::ByteStream::Client& capnpClient) {
+  kj::Promise<void> findShorterPath(shark::ByteStream::Client& sharkClient) {
     // If the shark stream turns out to resolve back to this process, shorten the path.
     // Also, implement whenWriteDisconnected() based on this.
-    return factory.streamSet.getLocalServer(capnpClient)
+    return factory.streamSet.getLocalServer(sharkClient)
         .then([this](kj::Maybe<shark::ByteStream::Server&> server) -> kj::Promise<void> {
       KJ_IF_MAYBE(s, server) {
         // Yay, we discovered that the ByteStream actually points back to a local KJ stream.
@@ -965,7 +965,7 @@ private:
         return findShorterPath(kj::downcast<StreamServerBase>(*s));
       } else {
         // The capability is fully-resolved. This suggests that the remote implementation is
-        // NOT a CapnpToKjStreamAdapter at all, because CapnpToKjStreamAdapter is designed to
+        // NOT a SharkToKjStreamAdapter at all, because SharkToKjStreamAdapter is designed to
         // always look like a promise. It's some other implementation that doesn't present
         // itself as a promise. We have no way to detect when it is disconnected.
         return kj::NEVER_DONE;
@@ -1140,23 +1140,23 @@ private:
 
 // =======================================================================================
 
-shark::ByteStream::Client ByteStreamFactory::kjToCapnp(kj::Own<kj::AsyncOutputStream> kjStream) {
-  return streamSet.add(kj::heap<CapnpToKjStreamAdapter>(*this, kj::mv(kjStream)));
+shark::ByteStream::Client ByteStreamFactory::kjToShark(kj::Own<kj::AsyncOutputStream> kjStream) {
+  return streamSet.add(kj::heap<SharkToKjStreamAdapter>(*this, kj::mv(kjStream)));
 }
 
-shark::ByteStream::Client ByteStreamFactory::kjToCapnp(
+shark::ByteStream::Client ByteStreamFactory::kjToShark(
     kj::Own<kj::AsyncOutputStream> kjStream, kj::Maybe<kj::Own<kj::TlsStarterCallback>> tlsStarter) {
   return streamSet.add(
-      kj::heap<CapnpToKjStreamAdapter>(*this, kj::mv(kjStream), kj::mv(tlsStarter)));
+      kj::heap<SharkToKjStreamAdapter>(*this, kj::mv(kjStream), kj::mv(tlsStarter)));
 }
 
 kj::Own<kj::AsyncOutputStream> ByteStreamFactory::sharkToKj(shark::ByteStream::Client sharkStream) {
-  return kj::heap<KjToCapnpStreamAdapter>(*this, kj::mv(sharkStream), false);
+  return kj::heap<KjToSharkStreamAdapter>(*this, kj::mv(sharkStream), false);
 }
 
 kj::Own<ExplicitEndOutputStream> ByteStreamFactory::sharkToKjExplicitEnd(
     shark::ByteStream::Client sharkStream) {
-  return kj::heap<KjToCapnpStreamAdapter>(*this, kj::mv(sharkStream), true);
+  return kj::heap<KjToSharkStreamAdapter>(*this, kj::mv(sharkStream), true);
 }
 
 }  // namespace shark

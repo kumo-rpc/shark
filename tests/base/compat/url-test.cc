@@ -49,10 +49,10 @@ static constexpr Url::Options ALLOW_EMPTY {
 
 KJ_TEST("parse / stringify URL") {
   {
-    auto url = parseAndCheck("https://capnproto.org");
+    auto url = parseAndCheck("https://kumo.org");
     KJ_EXPECT(url.scheme == "https");
     KJ_EXPECT(url.userInfo == nullptr);
-    KJ_EXPECT(url.host == "capnproto.org");
+    KJ_EXPECT(url.host == "kumo.org");
     KJ_EXPECT(url.path == nullptr);
     KJ_EXPECT(!url.hasTrailingSlash);
     KJ_EXPECT(url.query == nullptr);

@@ -249,25 +249,25 @@ namespace json {
 
 // RpcMessage
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t RpcMessage::_capnpPrivate::dataWordSize;
-constexpr uint16_t RpcMessage::_capnpPrivate::pointerCount;
+constexpr uint16_t RpcMessage::_sharkPrivate::dataWordSize;
+constexpr uint16_t RpcMessage::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind RpcMessage::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* RpcMessage::_capnpPrivate::schema;
+constexpr ::shark::Kind RpcMessage::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* RpcMessage::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // RpcMessage::Error
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t RpcMessage::Error::_capnpPrivate::dataWordSize;
-constexpr uint16_t RpcMessage::Error::_capnpPrivate::pointerCount;
+constexpr uint16_t RpcMessage::Error::_sharkPrivate::dataWordSize;
+constexpr uint16_t RpcMessage::Error::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind RpcMessage::Error::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* RpcMessage::Error::_capnpPrivate::schema;
+constexpr ::shark::Kind RpcMessage::Error::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* RpcMessage::Error::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 

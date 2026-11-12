@@ -35,7 +35,7 @@ KJ_TEST("WebSocketMessageStream") {
 
   // Make a message, fill it with some stuff
   shark::MallocMessageBuilder originalMsg;
-  auto object = originalMsg.initRoot<capnproto_test::shark::test::TestAllTypes>().initStructList(10);
+  auto object = originalMsg.initRoot<sharkproto_test::shark::test::TestAllTypes>().initStructList(10);
   object[0].setTextField("Test");
   object[1].initStructField().setTextField("A string");
   object[2].setTextField("Another field");
@@ -91,7 +91,7 @@ KJ_TEST("WebSocketMessageStreamByteCount") {
   auto pumpTask = pipe1.ends[1]->pumpTo(*pipe2.ends[0]);
 
   shark::MallocMessageBuilder originalMsg;
-  auto object = originalMsg.initRoot<capnproto_test::shark::test::TestAllTypes>().initStructList(10);
+  auto object = originalMsg.initRoot<sharkproto_test::shark::test::TestAllTypes>().initStructList(10);
   object[0].setTextField("Test");
   object[1].initStructField().setTextField("A string");
   object[2].setTextField("Another field");

@@ -43,7 +43,7 @@ class TextCodec {
   // permitted in this format. To evaluate declarations with the full expressiveness of the
   // schema language, see `shark::SchemaParser`.
   //
-  // Requires linking with the capnpc library.
+  // Requires linking with the shark library.
 
 public:
   TextCodec();

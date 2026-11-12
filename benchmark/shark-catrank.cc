@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 #include "catrank.sk.h"
-#include "capnproto-common.h"
+#include "shark-common.h"
 
 namespace shark {
 namespace benchmark {

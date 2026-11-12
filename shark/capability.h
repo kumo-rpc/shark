@@ -82,7 +82,7 @@ struct Capability {
   class Client;
   class Server;
 
-  struct _capnpPrivate {
+  struct _sharkPrivate {
     struct IsInterface;
     static constexpr uint64_t typeId = 0x3;
     static constexpr Kind kind = Kind::INTERFACE;

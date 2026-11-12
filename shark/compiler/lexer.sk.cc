@@ -467,49 +467,49 @@ namespace compiler {
 
 // Token
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Token::_capnpPrivate::dataWordSize;
-constexpr uint16_t Token::_capnpPrivate::pointerCount;
+constexpr uint16_t Token::_sharkPrivate::dataWordSize;
+constexpr uint16_t Token::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Token::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Token::_capnpPrivate::schema;
+constexpr ::shark::Kind Token::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Token::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // Statement
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t Statement::_capnpPrivate::dataWordSize;
-constexpr uint16_t Statement::_capnpPrivate::pointerCount;
+constexpr uint16_t Statement::_sharkPrivate::dataWordSize;
+constexpr uint16_t Statement::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind Statement::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* Statement::_capnpPrivate::schema;
+constexpr ::shark::Kind Statement::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* Statement::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // LexedTokens
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t LexedTokens::_capnpPrivate::dataWordSize;
-constexpr uint16_t LexedTokens::_capnpPrivate::pointerCount;
+constexpr uint16_t LexedTokens::_sharkPrivate::dataWordSize;
+constexpr uint16_t LexedTokens::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind LexedTokens::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* LexedTokens::_capnpPrivate::schema;
+constexpr ::shark::Kind LexedTokens::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* LexedTokens::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 
 // LexedStatements
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr uint16_t LexedStatements::_capnpPrivate::dataWordSize;
-constexpr uint16_t LexedStatements::_capnpPrivate::pointerCount;
+constexpr uint16_t LexedStatements::_sharkPrivate::dataWordSize;
+constexpr uint16_t LexedStatements::_sharkPrivate::pointerCount;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !SHARK_LITE
 #if SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
-constexpr ::shark::Kind LexedStatements::_capnpPrivate::kind;
-constexpr ::shark::_::RawSchema const* LexedStatements::_capnpPrivate::schema;
+constexpr ::shark::Kind LexedStatements::_sharkPrivate::kind;
+constexpr ::shark::_::RawSchema const* LexedStatements::_sharkPrivate::schema;
 #endif  // !SHARK_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !SHARK_LITE
 

@@ -154,10 +154,10 @@ template <> struct Kind_<double> { static constexpr Kind kind = Kind::PRIMITIVE;
 template <> struct Kind_<Text> { static constexpr Kind kind = Kind::BLOB; };
 template <> struct Kind_<Data> { static constexpr Kind kind = Kind::BLOB; };
 
-template <typename T> struct Kind_<T, kj::VoidSfinae<typename T::_capnpPrivate::IsStruct>> {
+template <typename T> struct Kind_<T, kj::VoidSfinae<typename T::_sharkPrivate::IsStruct>> {
   static constexpr Kind kind = Kind::STRUCT;
 };
-template <typename T> struct Kind_<T, kj::VoidSfinae<typename T::_capnpPrivate::IsInterface>> {
+template <typename T> struct Kind_<T, kj::VoidSfinae<typename T::_sharkPrivate::IsInterface>> {
   static constexpr Kind kind = Kind::INTERFACE;
 };
 template <typename T> struct Kind_<T, kj::VoidSfinae<typename schemas::EnumInfo<T>::IsEnum>> {

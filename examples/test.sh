@@ -5,14 +5,14 @@
 
 set -exuo pipefail
 
-capnpc -oc++ addressbook.shk
+shark -ocpp addressbook.shk
 c++ -std=c++14 -Wall addressbook.c++ addressbook.shk.c++ \
     $(pkg-config --cflags --libs shark) -o addressbook
 ./addressbook write | ./addressbook read
 ./addressbook dwrite | ./addressbook dread
 rm addressbook addressbook.shk.c++ addressbook.sk.h
 
-capnpc -oc++ calculator.shk
+shark -ocpp calculator.shk
 c++ -std=c++14 -Wall calculator-client.c++ calculator.shk.c++ \
     $(pkg-config --cflags --libs shark-rpc) -o calculator-client
 c++ -std=c++14 -Wall calculator-server.c++ calculator.shk.c++ \

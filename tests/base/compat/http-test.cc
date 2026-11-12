@@ -6027,9 +6027,6 @@ KJ_TEST("HttpClient to capnproto.org") {
   }).wait(io.waitScope);
 
   KJ_IF_MAYBE(conn, maybeConn) {
-    // Successfully connected to capnproto.org. Try doing GET /. We expect to get a redirect to
-    // HTTPS, because what kind of horrible web site would serve in plaintext, really?
-
     HttpHeaderTable table;
     auto client = newHttpClient(table, **conn);
 

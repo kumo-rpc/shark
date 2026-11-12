@@ -34,7 +34,7 @@
 SHARK_BEGIN_HEADER
 
 // TODO(cleanup): Auto-generate stringification functions for union discriminants.
-namespace capnproto_test {
+namespace sharkproto_test {
 namespace shark {
 namespace test {
 inline kj::String KJ_STRINGIFY(TestUnion::Union0::Which which) {
@@ -60,7 +60,7 @@ inline kj::String KJ_STRINGIFY(TestInterleavedGroups::Group1::Which which) {
 }
 }  // namespace test
 }  // namespace shark
-}  // namespace capnproto_test
+}  // namespace sharkproto_test
 
 namespace shark {
 namespace _ {  // private
@@ -69,19 +69,19 @@ inline Data::Reader data(const char* str) {
   return Data::Reader(reinterpret_cast<const byte*>(str), strlen(str));
 }
 
-namespace test = capnproto_test::shark::test;
+namespace test = sharkproto_test::shark::test;
 
 // We don't use "using namespace" to pull these in because then things would still compile
 // correctly if they were generated in the global namespace.
-using ::capnproto_test::shark::test::TestAllTypes;
-using ::capnproto_test::shark::test::TestDefaults;
-using ::capnproto_test::shark::test::TestEnum;
-using ::capnproto_test::shark::test::TestUnion;
-using ::capnproto_test::shark::test::TestUnionDefaults;
-using ::capnproto_test::shark::test::TestNestedTypes;
-using ::capnproto_test::shark::test::TestUsing;
-using ::capnproto_test::shark::test::TestListDefaults;
-using ::capnproto_test::shark::test::TestInterleavedGroups;
+using ::sharkproto_test::shark::test::TestAllTypes;
+using ::sharkproto_test::shark::test::TestDefaults;
+using ::sharkproto_test::shark::test::TestEnum;
+using ::sharkproto_test::shark::test::TestUnion;
+using ::sharkproto_test::shark::test::TestUnionDefaults;
+using ::sharkproto_test::shark::test::TestNestedTypes;
+using ::sharkproto_test::shark::test::TestUsing;
+using ::sharkproto_test::shark::test::TestListDefaults;
+using ::sharkproto_test::shark::test::TestInterleavedGroups;
 
 void initTestMessage(TestAllTypes::Builder builder);
 void initTestMessage(TestDefaults::Builder builder);
