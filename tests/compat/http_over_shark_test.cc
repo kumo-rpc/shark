@@ -352,7 +352,7 @@ void runEndToEndTests(kj::Timer& timer, kj::HttpHeaderTable& headerTable,
 
   auto backHttp = kj::newHttpClient(timer, headerTable, oneConnectAddr);
   auto backCapnp = serverFactory.kjToCapnp(kj::newHttpService(*backHttp));
-  auto frontCapnp = clientFactory.capnpToKj(backCapnp);
+  auto frontCapnp = clientFactory.sharkToKj(backCapnp);
   kj::HttpServer frontKj(timer, headerTable, *frontCapnp);
   auto listenTask = frontKj.listenHttp(kj::mv(clientPipe.ends[1]))
       .eagerlyEvaluate([](kj::Exception&& e) { KJ_LOG(ERROR, e); });
@@ -451,7 +451,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto 205 bug with HttpClientAdapter") {
 
   auto backHttp = kj::newHttpClient(timer, *headerTable, oneConnectAddr);
   auto backCapnp = factory.kjToCapnp(kj::newHttpService(*backHttp));
-  auto frontCapnp = factory.capnpToKj(backCapnp);
+  auto frontCapnp = factory.sharkToKj(backCapnp);
 
   auto frontClient = kj::newHttpClient(*frontCapnp);
 
@@ -579,7 +579,7 @@ void runWebSocketTests(kj::HttpHeaderTable& headerTable,
 
     auto back = serverFactory.kjToCapnp(kj::heap<WebSocketAccepter>(
       headerTable, kj::mv(wsPaf.fulfiller), kj::mv(donePaf.promise)));
-    auto front = clientFactory.capnpToKj(back);
+    auto front = clientFactory.sharkToKj(back);
     auto client = kj::newHttpClient(*front);
 
     auto resp = client->openWebSocket("/ws", kj::HttpHeaders(headerTable)).wait(waitScope);
@@ -779,7 +779,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect with close") {
   auto client = newHttpClient(*table, *pipe.ends[1]);
 
   shark::HttpService::Client httpService = factory.kjToCapnp(newHttpService(*client));
-  auto frontCapnpHttpService = factory.capnpToKj(httpService);
+  auto frontCapnpHttpService = factory.sharkToKj(httpService);
 
   struct ResponseImpl final: public kj::HttpService::ConnectResponse {
     kj::Own<kj::PromiseFulfiller<kj::HttpClient::ConnectRequest::Status>> fulfiller;
@@ -854,7 +854,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect Reject") {
   auto client = newHttpClient(*table, *pipe.ends[1]);
 
   shark::HttpService::Client httpService = factory.kjToCapnp(newHttpService(*client));
-  auto frontCapnpHttpService = factory.capnpToKj(httpService);
+  auto frontCapnpHttpService = factory.sharkToKj(httpService);
 
   struct ResponseImpl final: public kj::HttpService::ConnectResponse {
     kj::Own<kj::PromiseFulfiller<kj::Own<kj::AsyncInputStream>>> fulfiller;
@@ -952,7 +952,7 @@ KJ_TEST("HTTP-over-Cap'n-Proto Connect with startTls") {
   // Only need this wrapper to define a dummy tlsStarter.
   auto wrappedClient = kj::heap<WrapperHttpClient>(*client);
   shark::HttpService::Client httpService = factory.kjToCapnp(newHttpService(*wrappedClient));
-  auto frontCapnpHttpService = factory.capnpToKj(httpService);
+  auto frontCapnpHttpService = factory.sharkToKj(httpService);
 
   auto frontCapnpHttpClient = kj::newHttpClient(*frontCapnpHttpService);
 

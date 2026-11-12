@@ -133,7 +133,7 @@ TestResult runTest(Product product, TestCase testCase, Mode mode, Reuse reuse,
 
   switch (product) {
     case Product::SHARKROTO:
-      progName = "capnproto-";
+      progName = "sharkproto-";
       break;
     case Product::PROTOBUF:
       progName = "protobuf-";
@@ -307,34 +307,34 @@ ostream& operator<<(ostream& os, Gain gain) {
   return os;
 }
 
-void reportComparison(const char* name, double base, double protobuf, double capnproto,
+void reportComparison(const char* name, double base, double protobuf, double sharkproto,
                       uint64_t iters) {
   cout << setw(40) << left << name
        << setw(14) << right << Gain(base, protobuf)
-       << setw(14) << right << Gain(base, capnproto);
+       << setw(14) << right << Gain(base, sharkproto);
 
-  // Since smaller is better, the "improvement" is the "gain" from capnproto to protobuf.
-  cout << setw(14) << right << Gain(capnproto - base, protobuf - base) << endl;
+  // Since smaller is better, the "improvement" is the "gain" from sharkproto to protobuf.
+  cout << setw(14) << right << Gain(sharkproto - base, protobuf - base) << endl;
 }
 
-void reportComparison(const char* name, const char* unit, double protobuf, double capnproto,
+void reportComparison(const char* name, const char* unit, double protobuf, double sharkproto,
                       uint64_t iters) {
   cout << setw(40) << left << name
        << setw(15-strlen(unit)) << fixed << right << setprecision(2) << (protobuf / iters) << unit
-       << setw(15-strlen(unit)) << fixed << right << setprecision(2) << (capnproto / iters) << unit;
+       << setw(15-strlen(unit)) << fixed << right << setprecision(2) << (sharkproto / iters) << unit;
 
-  // Since smaller is better, the "improvement" is the "gain" from capnproto to protobuf.
-  cout << setw(14) << right << Gain(capnproto, protobuf) << endl;
+  // Since smaller is better, the "improvement" is the "gain" from sharkproto to protobuf.
+  cout << setw(14) << right << Gain(sharkproto, protobuf) << endl;
 }
 
-void reportIntComparison(const char* name, const char* unit, uint64_t protobuf, uint64_t capnproto,
+void reportIntComparison(const char* name, const char* unit, uint64_t protobuf, uint64_t sharkproto,
                          uint64_t iters) {
   cout << setw(40) << left << name
        << setw(15-strlen(unit)) << right << (protobuf / iters) << unit
-       << setw(15-strlen(unit)) << right << (capnproto / iters) << unit;
+       << setw(15-strlen(unit)) << right << (sharkproto / iters) << unit;
 
-  // Since smaller is better, the "improvement" is the "gain" from capnproto to protobuf.
-  cout << setw(14) << right << Gain(capnproto, protobuf) << endl;
+  // Since smaller is better, the "improvement" is the "gain" from sharkproto to protobuf.
+  cout << setw(14) << right << Gain(sharkproto, protobuf) << endl;
 }
 
 size_t fileSize(const std::string& name) {
@@ -472,11 +472,11 @@ int main(int argc, char* argv[]) {
       Product::PROTOBUF, testCase, Mode::OBJECT_SIZE, Reuse::YES, compression, iters).objectSize;
   reportResults("Protobuf pass-by-object", iters, protobufBase);
 
-  TestResult capnpBase = runTest(
+  TestResult sharkBase = runTest(
       Product::SHARKROTO, testCase, Mode::OBJECTS, Reuse::YES, compression, iters);
-  capnpBase.objectSize = runTest(
+  sharkBase.objectSize = runTest(
       Product::SHARKROTO, testCase, Mode::OBJECT_SIZE, Reuse::YES, compression, iters).objectSize;
-  reportResults("Cap'n Proto pass-by-object", iters, capnpBase);
+  reportResults("Cap'n Proto pass-by-object", iters, sharkBase);
 
   TestResult nullCaseNoReuse = runTest(
       Product::NULLCASE, testCase, Mode::OBJECT_SIZE, Reuse::NO, compression, iters);
@@ -488,11 +488,11 @@ int main(int argc, char* argv[]) {
       Product::PROTOBUF, testCase, Mode::OBJECT_SIZE, Reuse::NO, compression, iters).objectSize;
   reportResults("Protobuf w/o object reuse", iters, protobufNoReuse);
 
-  TestResult capnpNoReuse = runTest(
+  TestResult sharkNoReuse = runTest(
       Product::SHARKROTO, testCase, Mode::OBJECTS, Reuse::NO, compression, iters);
-  capnpNoReuse.objectSize = runTest(
+  sharkNoReuse.objectSize = runTest(
       Product::SHARKROTO, testCase, Mode::OBJECT_SIZE, Reuse::NO, compression, iters).objectSize;
-  reportResults("Cap'n Proto w/o object reuse", iters, capnpNoReuse);
+  reportResults("Cap'n Proto w/o object reuse", iters, sharkNoReuse);
 
   TestResult protobuf = runTest(
       Product::PROTOBUF, testCase, mode, Reuse::YES, compression, iters);
@@ -501,15 +501,15 @@ int main(int argc, char* argv[]) {
 
   TestResult sk = runTest(
       Product::SHARKROTO, testCase, mode, Reuse::YES, compression, iters);
-  sk.objectSize = capnpBase.objectSize;
+  sk.objectSize = sharkBase.objectSize;
   reportResults("Cap'n Proto I/O", iters, sk);
   TestResult capnpPacked = runTest(
       Product::SHARKROTO, testCase, mode, Reuse::YES, Compression::PACKED, iters);
-  capnpPacked.objectSize = capnpBase.objectSize;
+  capnpPacked.objectSize = sharkBase.objectSize;
   reportResults("Cap'n Proto packed I/O", iters, capnpPacked);
 
   size_t protobufBinarySize = fileSize("protobuf-" + std::string(testCaseName(testCase)));
-  size_t capnpBinarySize = fileSize("capnproto-" + std::string(testCaseName(testCase)));
+  size_t capnpBinarySize = fileSize("sharkproto-" + std::string(testCaseName(testCase)));
   size_t protobufCodeSize = fileSize(std::string(testCaseName(testCase)) + ".pb.cc")
                           + fileSize(std::string(testCaseName(testCase)) + ".pb.h");
   size_t capnpCodeSize = fileSize(std::string(testCaseName(testCase)) + ".sk.cc")
@@ -566,7 +566,7 @@ int main(int argc, char* argv[]) {
     oldCapnpPacked.objectSize = oldCapnpBase.objectSize;
     reportResults("Old Cap'n Proto packed I/O", iters, oldCapnpPacked);
 
-    oldCapnpBinarySize = fileSize("capnproto-" + std::string(testCaseName(testCase)));
+    oldCapnpBinarySize = fileSize("sharkproto-" + std::string(testCaseName(testCase)));
     oldCapnpCodeSize = fileSize(std::string(testCaseName(testCase)) + ".shk.c++")
                      + fileSize(std::string(testCaseName(testCase)) + ".sk.h");
     oldCapnpObjSize = fileSize(std::string(testCaseName(testCase)) + ".shk.o");
@@ -576,23 +576,23 @@ int main(int argc, char* argv[]) {
 
   reportComparisonHeader();
   reportComparison("memory overhead (vs ideal)",
-      nullCase.objectSize, protobufBase.objectSize, capnpBase.objectSize, iters);
+      nullCase.objectSize, protobufBase.objectSize, sharkBase.objectSize, iters);
   reportComparison("memory overhead w/o object reuse",
-      nullCaseNoReuse.objectSize, protobufNoReuse.objectSize, capnpNoReuse.objectSize, iters);
+      nullCaseNoReuse.objectSize, protobufNoReuse.objectSize, sharkNoReuse.objectSize, iters);
   reportComparison("object manipulation time (us)", "",
       ((int64_t)protobufBase.time.user - (int64_t)nullCase.time.user) / 1000.0,
-      ((int64_t)capnpBase.time.user - (int64_t)nullCase.time.user) / 1000.0, iters);
+      ((int64_t)sharkBase.time.user - (int64_t)nullCase.time.user) / 1000.0, iters);
   reportComparison("object manipulation time w/o reuse (us)", "",
       ((int64_t)protobufNoReuse.time.user - (int64_t)nullCaseNoReuse.time.user) / 1000.0,
-      ((int64_t)capnpNoReuse.time.user - (int64_t)nullCaseNoReuse.time.user) / 1000.0, iters);
+      ((int64_t)sharkNoReuse.time.user - (int64_t)nullCaseNoReuse.time.user) / 1000.0, iters);
   reportComparison("I/O time (us)", "",
       ((int64_t)protobuf.time.user - (int64_t)protobufBase.time.user) / 1000.0,
-      ((int64_t)capnp.time.user - (int64_t)capnpBase.time.user) / 1000.0, iters);
+      ((int64_t)shark.time.user - (int64_t)sharkBase.time.user) / 1000.0, iters);
   reportComparison("packed I/O time (us)", "",
       ((int64_t)protobuf.time.user - (int64_t)protobufBase.time.user) / 1000.0,
-      ((int64_t)capnpPacked.time.user - (int64_t)capnpBase.time.user) / 1000.0, iters);
+      ((int64_t)capnpPacked.time.user - (int64_t)sharkBase.time.user) / 1000.0, iters);
 
-  reportIntComparison("message size (bytes)", "", protobuf.messageSize, capnp.messageSize, iters);
+  reportIntComparison("message size (bytes)", "", protobuf.messageSize, shark.messageSize, iters);
   reportIntComparison("packed message size (bytes)", "",
                       protobuf.messageSize, capnpPacked.messageSize, iters);
 
@@ -608,23 +608,23 @@ int main(int argc, char* argv[]) {
     reportOldNewComparisonHeader();
 
     reportComparison("memory overhead",
-        oldNullCase.objectSize, oldCapnpBase.objectSize, capnpBase.objectSize, iters);
+        oldNullCase.objectSize, oldCapnpBase.objectSize, sharkBase.objectSize, iters);
     reportComparison("memory overhead w/o object reuse",
-        oldNullCaseNoReuse.objectSize, oldCapnpNoReuse.objectSize, capnpNoReuse.objectSize, iters);
+        oldNullCaseNoReuse.objectSize, oldCapnpNoReuse.objectSize, sharkNoReuse.objectSize, iters);
     reportComparison("object manipulation time (us)", "",
         ((int64_t)oldCapnpBase.time.user - (int64_t)oldNullCase.time.user) / 1000.0,
-        ((int64_t)capnpBase.time.user - (int64_t)oldNullCase.time.user) / 1000.0, iters);
+        ((int64_t)sharkBase.time.user - (int64_t)oldNullCase.time.user) / 1000.0, iters);
     reportComparison("object manipulation time w/o reuse (us)", "",
         ((int64_t)oldCapnpNoReuse.time.user - (int64_t)oldNullCaseNoReuse.time.user) / 1000.0,
-        ((int64_t)capnpNoReuse.time.user - (int64_t)oldNullCaseNoReuse.time.user) / 1000.0, iters);
+        ((int64_t)sharkNoReuse.time.user - (int64_t)oldNullCaseNoReuse.time.user) / 1000.0, iters);
     reportComparison("I/O time (us)", "",
         ((int64_t)oldCapnp.time.user - (int64_t)oldCapnpBase.time.user) / 1000.0,
-        ((int64_t)capnp.time.user - (int64_t)capnpBase.time.user) / 1000.0, iters);
+        ((int64_t)shark.time.user - (int64_t)sharkBase.time.user) / 1000.0, iters);
     reportComparison("packed I/O time (us)", "",
         ((int64_t)oldCapnpPacked.time.user - (int64_t)oldCapnpBase.time.user) / 1000.0,
-        ((int64_t)capnpPacked.time.user - (int64_t)capnpBase.time.user) / 1000.0, iters);
+        ((int64_t)capnpPacked.time.user - (int64_t)sharkBase.time.user) / 1000.0, iters);
 
-    reportIntComparison("message size (bytes)", "", oldCapnp.messageSize, capnp.messageSize, iters);
+    reportIntComparison("message size (bytes)", "", oldCapnp.messageSize, shark.messageSize, iters);
     reportIntComparison("packed message size (bytes)", "",
                         oldCapnpPacked.messageSize, capnpPacked.messageSize, iters);
 

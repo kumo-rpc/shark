@@ -3178,10 +3178,10 @@ private:
 
       KJ_LOG(WARNING,
           "You appear to be using different versions of 'shark' (the compiler) and "
-          "'capnpc-c++' (the code generator). This can happen, for example, if you built "
+          "'shark-cpp' (the code generator). This can happen, for example, if you built "
           "a custom version of 'shark' but then ran it with '-oc++', which invokes "
-          "'capnpc-c++' from your PATH (i.e. the installed version). To specify an alternate "
-          "'capnpc-c++' executable, try something like '-o/path/to/capnpc-c++' instead.",
+          "'shark-cpp' from your PATH (i.e. the installed version). To specify an alternate "
+          "'shark-cpp' executable, try something like '-o/path/to/shark-cpp' instead.",
           compilerVersion, generatorVersion);
     }
 

@@ -386,7 +386,6 @@ public:
         // ERROR_INVALID_FUNCTION (not ERROR_CALL_NOT_IMPLEMENTED).
         break;
       case ERROR_INVALID_PARAMETER:
-        // Probably VeraCrypt. See https://github.com/capnproto/capnproto/issues/2176
         break;
       default:
         KJ_FAIL_WIN32("GetFileInformationByHandleEx(FileCompressionInfo)", error) { break; }

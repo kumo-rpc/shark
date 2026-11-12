@@ -119,7 +119,7 @@ private:
 #if !SHARK_LITE
 class BrokenCapFactory {
   // Callback for constructing broken caps.  We use this so that we can avoid arena.cc having a
-  // link-time dependency on capability code that lives in libcapnp-rpc.
+  // link-time dependency on capability code that lives in libshark-rpc.
 
 public:
   virtual kj::Own<ClientHook> newBrokenCap(kj::StringPtr description) = 0;

@@ -373,8 +373,8 @@ public:
         state = Borrowed { kj::mv(kjStream) };
         return StreamServerBase::BorrowedStream { *this, streamRef, kj::maxValue };
       }
-      KJ_CASE_ONEOF(capnpStream, shark::ByteStream::Client) {
-        return &capnpStream;
+      KJ_CASE_ONEOF(sharkStream, shark::ByteStream::Client) {
+        return &sharkStream;
       }
       KJ_CASE_ONEOF(b, Borrowed) {
         KJ_FAIL_REQUIRE("concurrent streaming calls disallowed") { break; }
@@ -396,9 +396,9 @@ public:
       KJ_CASE_ONEOF(kjStream, kj::Own<kj::AsyncOutputStream>) {
         state = Ended();
       }
-      KJ_CASE_ONEOF(capnpStream, shark::ByteStream::Client) {
+      KJ_CASE_ONEOF(sharkStream, shark::ByteStream::Client) {
         // Ugh I guess we need to send a real end() request here.
-        capnpStream.endRequest(MessageSize {2, 0}).send().detach([](kj::Exception&&){});
+        sharkStream.endRequest(MessageSize {2, 0}).send().detach([](kj::Exception&&){});
       }
       KJ_CASE_ONEOF(b, Borrowed) {
         // Fine, ignore.
@@ -419,9 +419,9 @@ public:
         state = Ended();
         return kj::READY_NOW;
       }
-      KJ_CASE_ONEOF(capnpStream, shark::ByteStream::Client) {
+      KJ_CASE_ONEOF(sharkStream, shark::ByteStream::Client) {
         // Ugh I guess we need to send a real end() request here.
-        return capnpStream.endRequest(MessageSize {2, 0}).send().ignoreResult();
+        return sharkStream.endRequest(MessageSize {2, 0}).send().ignoreResult();
       }
       KJ_CASE_ONEOF(b, Borrowed) {
         // Fine, ignore.
@@ -580,8 +580,8 @@ protected:
         // to us forever.
         return kj::NEVER_DONE;
       }
-      KJ_CASE_ONEOF(capnpStream, shark::ByteStream::Client) {
-        return Capability::Client(capnpStream);
+      KJ_CASE_ONEOF(sharkStream, shark::ByteStream::Client) {
+        return Capability::Client(sharkStream);
       }
       KJ_CASE_ONEOF(b, Borrowed) {
         KJ_FAIL_REQUIRE("concurrent streaming calls disallowed") { break; }
@@ -608,9 +608,9 @@ protected:
         auto data = context.getParams().getBytes();
         return kjStream->write(data.begin(), data.size());
       }
-      KJ_CASE_ONEOF(capnpStream, shark::ByteStream::Client) {
+      KJ_CASE_ONEOF(sharkStream, shark::ByteStream::Client) {
         auto params = context.getParams();
-        auto req = capnpStream.writeRequest(params.totalSize());
+        auto req = sharkStream.writeRequest(params.totalSize());
         req.setBytes(params.getBytes());
         return req.send();
       }
@@ -644,9 +644,9 @@ protected:
         state = Ended();
         return kj::READY_NOW;
       }
-      KJ_CASE_ONEOF(capnpStream, shark::ByteStream::Client) {
+      KJ_CASE_ONEOF(sharkStream, shark::ByteStream::Client) {
         auto params = context.getParams();
-        auto req = capnpStream.endRequest(params.totalSize());
+        auto req = sharkStream.endRequest(params.totalSize());
         return context.tailCall(kj::mv(req));
       }
       KJ_CASE_ONEOF(b, Borrowed) {
@@ -671,7 +671,7 @@ protected:
         KJ_CASE_ONEOF(kjStream, kj::Own<kj::AsyncOutputStream>) {
           return KJ_ASSERT_NONNULL(*s->get())(params.getExpectedServerHostname());
         }
-        KJ_CASE_ONEOF(capnpStream, shark::ByteStream::Client) {
+        KJ_CASE_ONEOF(sharkStream, shark::ByteStream::Client) {
           return KJ_ASSERT_NONNULL(*s->get())(params.getExpectedServerHostname());
         }
         KJ_CASE_ONEOF(e, Ended) {
@@ -706,9 +706,9 @@ protected:
         state = Borrowed { kj::mv(kjStream) };
         return kj::READY_NOW;
       }
-      KJ_CASE_ONEOF(capnpStream, shark::ByteStream::Client) {
+      KJ_CASE_ONEOF(sharkStream, shark::ByteStream::Client) {
         auto params = context.getParams();
-        auto req = capnpStream.getSubstreamRequest(params.totalSize());
+        auto req = sharkStream.getSubstreamRequest(params.totalSize());
         req.setCallback(params.getCallback());
         req.setLimit(params.getLimit());
         return context.tailCall(kj::mv(req));
@@ -851,13 +851,13 @@ public:
           });
         }
       }
-      KJ_CASE_ONEOF(capnpStream, shark::ByteStream::Client*) {
+      KJ_CASE_ONEOF(sharkStream, shark::ByteStream::Client*) {
         if (size <= MAX_BYTES_PER_WRITE) {
-          auto req = capnpStream->writeRequest(MessageSize { 8 + size / sizeof(word), 0 });
+          auto req = sharkStream->writeRequest(MessageSize { 8 + size / sizeof(word), 0 });
           req.setBytes(kj::arrayPtr(reinterpret_cast<const byte*>(buffer), size));
           return req.send();
         } else {
-          auto req = capnpStream->writeRequest(
+          auto req = sharkStream->writeRequest(
               MessageSize { 8 + MAX_BYTES_PER_WRITE / sizeof(word), 0 });
           req.setBytes(kj::arrayPtr(reinterpret_cast<const byte*>(buffer), MAX_BYTES_PER_WRITE));
           return req.send().then([this,buffer,size]() mutable {
@@ -896,11 +896,11 @@ public:
           });
         }
       }
-      KJ_CASE_ONEOF(capnpStream, shark::ByteStream::Client*) {
-        auto writePieces = [capnpStream](kj::ArrayPtr<const kj::ArrayPtr<const byte>> pieces) {
+      KJ_CASE_ONEOF(sharkStream, shark::ByteStream::Client*) {
+        auto writePieces = [sharkStream](kj::ArrayPtr<const kj::ArrayPtr<const byte>> pieces) {
           size_t size = 0;
           for (auto& piece: pieces) size += piece.size();
-          auto req = capnpStream->writeRequest(MessageSize { 8 + size / sizeof(word), 0 });
+          auto req = sharkStream->writeRequest(MessageSize { 8 + size / sizeof(word), 0 });
           auto out = req.initBytes(size);
           byte* ptr = out.begin();
           for (auto& piece: pieces) {
@@ -981,14 +981,14 @@ private:
     });
   }
 
-  kj::Promise<void> findShorterPath(StreamServerBase& capnpServer) {
+  kj::Promise<void> findShorterPath(StreamServerBase& sharkServer) {
     // We found a shorter path back to this process. Record it.
-    optimized = capnpServer;
+    optimized = sharkServer;
 
-    KJ_SWITCH_ONEOF(capnpServer.getShortestPath()) {
+    KJ_SWITCH_ONEOF(sharkServer.getShortestPath()) {
       KJ_CASE_ONEOF(promise, kj::Promise<void>) {
-        return promise.then([this,&capnpServer]() {
-          return findShorterPath(capnpServer);
+        return promise.then([this,&sharkServer]() {
+          return findShorterPath(sharkServer);
         });
       }
       KJ_CASE_ONEOF(kjStream, StreamServerBase::BorrowedStream) {
@@ -998,9 +998,9 @@ private:
           // But it isn't wrapping that stream forever. Eventually it plans to redirect back to
           // some other stream. So, let's wait for that, and possibly shorten again.
           kjStream.lender.returnStream(0);
-          return KJ_ASSERT_NONNULL(capnpServer.shortenPath())
-              .then([this, &capnpServer](auto&&) {
-            return findShorterPath(capnpServer);
+          return KJ_ASSERT_NONNULL(sharkServer.shortenPath())
+              .then([this, &sharkServer](auto&&) {
+            return findShorterPath(sharkServer);
           });
         } else {
           // This KJ stream is (effectively) the permanent endpoint. We can't get any shorter
@@ -1010,8 +1010,8 @@ private:
           return promise;
         }
       }
-      KJ_CASE_ONEOF(capnpStream, shark::ByteStream::Client*) {
-        return findShorterPath(*capnpStream);
+      KJ_CASE_ONEOF(sharkStream, shark::ByteStream::Client*) {
+        return findShorterPath(*sharkStream);
       }
     }
     KJ_UNREACHABLE;
@@ -1059,11 +1059,11 @@ private:
           });
         }
       }
-      KJ_CASE_ONEOF(capnpStream, shark::ByteStream::Client*) {
+      KJ_CASE_ONEOF(sharkStream, shark::ByteStream::Client*) {
         // Pumping from some other kind of stream. Optimize the pump by reading from the input
         // directly into outgoing RPC messages.
         size_t size = kj::min(remaining, 8192);
-        auto req = capnpStream->writeRequest(MessageSize { 8 + size / sizeof(word), 0 });
+        auto req = sharkStream->writeRequest(MessageSize { 8 + size / sizeof(word), 0 });
 
         auto orphanage = Orphanage::getForMessageContaining(
             shark::ByteStream::WriteParams::Builder(req));
@@ -1150,13 +1150,13 @@ shark::ByteStream::Client ByteStreamFactory::kjToCapnp(
       kj::heap<CapnpToKjStreamAdapter>(*this, kj::mv(kjStream), kj::mv(tlsStarter)));
 }
 
-kj::Own<kj::AsyncOutputStream> ByteStreamFactory::capnpToKj(shark::ByteStream::Client capnpStream) {
-  return kj::heap<KjToCapnpStreamAdapter>(*this, kj::mv(capnpStream), false);
+kj::Own<kj::AsyncOutputStream> ByteStreamFactory::sharkToKj(shark::ByteStream::Client sharkStream) {
+  return kj::heap<KjToCapnpStreamAdapter>(*this, kj::mv(sharkStream), false);
 }
 
-kj::Own<ExplicitEndOutputStream> ByteStreamFactory::capnpToKjExplicitEnd(
-    shark::ByteStream::Client capnpStream) {
-  return kj::heap<KjToCapnpStreamAdapter>(*this, kj::mv(capnpStream), true);
+kj::Own<ExplicitEndOutputStream> ByteStreamFactory::sharkToKjExplicitEnd(
+    shark::ByteStream::Client sharkStream) {
+  return kj::heap<KjToCapnpStreamAdapter>(*this, kj::mv(sharkStream), true);
 }
 
 }  // namespace shark

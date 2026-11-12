@@ -30,7 +30,6 @@ KJ_BEGIN_HEADER
 // pressing need for this for MSVC & writing the write compiler version check is annoying.
 // Checking for clang version is problematic due to the way that XCode lies about __clang_major__.
 // Instead we use __has_builtin as the feature check to check clang.
-// Context: https://github.com/capnproto/capnproto/issues/1305
 #ifdef __has_builtin
 #if __has_builtin(__builtin_COLUMN)
 #define KJ_CALLER_COLUMN() __builtin_COLUMN()

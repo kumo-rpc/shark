@@ -6048,7 +6048,6 @@ public:
       kj::StringPtr host, const HttpHeaders& headers,
       HttpConnectSettings connectSettings) override {
     // We want to connect directly instead of going through a proxy here.
-    // https://github.com/capnproto/capnproto/pull/1454#discussion_r900414879
     kj::Maybe<kj::Promise<kj::Own<kj::NetworkAddress>>> addr;
     if (connectSettings.useTls) {
       kj::Network& tlsNet = KJ_REQUIRE_NONNULL(tlsNetwork, "this HttpClient doesn't support TLS");

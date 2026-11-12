@@ -42,7 +42,7 @@ class ExplicitEndOutputStream: public kj::AsyncOutputStream {
   //
   //   In lieu of an actual deep refactoring of KJ, ByteStreamFactory allows its caller to
   //   explicily specify when it is able to promise that it will make an explicit `end()` call.
-  //   capnpToKjExplicitEnd() returns an ExplicitEndOutputStream, which expect to receive an
+  //   sharkToKjExplicitEnd() returns an ExplicitEndOutputStream, which expect to receive an
   //   `end()` call on clean EOF, and treats destruction without `end()` as an abort. This is used
   //   in particular within http-over-shark to improve behavior somewhat.
 public:
@@ -57,9 +57,9 @@ public:
   shark::ByteStream::Client kjToCapnp(kj::Own<kj::AsyncOutputStream> kjStream);
   shark::ByteStream::Client kjToCapnp(
       kj::Own<kj::AsyncOutputStream> kjStream, kj::Maybe<kj::Own<kj::TlsStarterCallback>> tlsStarter);
-  kj::Own<kj::AsyncOutputStream> capnpToKj(shark::ByteStream::Client capnpStream);
+  kj::Own<kj::AsyncOutputStream> sharkToKj(shark::ByteStream::Client sharkStream);
 
-  kj::Own<ExplicitEndOutputStream> capnpToKjExplicitEnd(shark::ByteStream::Client capnpStream);
+  kj::Own<ExplicitEndOutputStream> sharkToKjExplicitEnd(shark::ByteStream::Client sharkStream);
 
 private:
   CapabilityServerSet<shark::ByteStream> streamSet;

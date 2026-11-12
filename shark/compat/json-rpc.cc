@@ -148,8 +148,8 @@ kj::Promise<void> JsonRpc::queueWrite(kj::String text) {
 }
 
 void JsonRpc::queueError(kj::Maybe<json::Value::Reader> id, int code, kj::StringPtr message) {
-  MallocMessageBuilder capnpMessage;
-  auto jsonResponse = capnpMessage.getRoot<json::RpcMessage>();
+  MallocMessageBuilder sharkMessage;
+  auto jsonResponse = sharkMessage.getRoot<json::RpcMessage>();
   jsonResponse.setJsonrpc("2.0");
   KJ_IF_MAYBE(i, id) {
     jsonResponse.setId(*i);
@@ -166,8 +166,8 @@ void JsonRpc::queueError(kj::Maybe<json::Value::Reader> id, int code, kj::String
 
 kj::Promise<void> JsonRpc::readLoop() {
   return transport.receive().then([this](kj::String message) -> kj::Promise<void> {
-    MallocMessageBuilder capnpMessage;
-    auto rpcMessageBuilder = capnpMessage.getRoot<json::RpcMessage>();
+    MallocMessageBuilder sharkMessage;
+    auto rpcMessageBuilder = sharkMessage.getRoot<json::RpcMessage>();
 
     KJ_IF_MAYBE(exception, kj::runCatchingExceptions([&]() {
       codec.decode(message, rpcMessageBuilder);
@@ -217,15 +217,15 @@ kj::Promise<void> JsonRpc::readLoop() {
 
             auto promise = req.send()
                 .then([this,idPtr](Response<DynamicStruct> response) mutable {
-              MallocMessageBuilder capnpMessage;
-              auto jsonResponse = capnpMessage.getRoot<json::RpcMessage>();
+              MallocMessageBuilder sharkMessage;
+              auto jsonResponse = sharkMessage.getRoot<json::RpcMessage>();
               jsonResponse.setJsonrpc("2.0");
               jsonResponse.setId(idPtr);
               codec.encode(DynamicStruct::Reader(response), jsonResponse.initResult());
               return queueWrite(codec.encode(jsonResponse));
             }, [this,idPtr](kj::Exception&& e) {
-              MallocMessageBuilder capnpMessage;
-              auto jsonResponse = capnpMessage.getRoot<json::RpcMessage>();
+              MallocMessageBuilder sharkMessage;
+              auto jsonResponse = sharkMessage.getRoot<json::RpcMessage>();
               jsonResponse.setJsonrpc("2.0");
               jsonResponse.setId(idPtr);
               auto error = jsonResponse.initError();

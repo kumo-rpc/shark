@@ -87,33 +87,22 @@ namespace shark {
                 , loader(*this) { }
 
             kj::MainFunc getMain() {
-                if (context.getProgramName().endsWith("capnpc") || context.getProgramName().endsWith("capnpc.exe")) {
-                    kj::MainBuilder builder(context, VERSION_STRING,
-                        "Compiles Cap'n Proto schema files and generates corresponding source code in one or "
-                        "more languages.");
-                    addGlobalOptions(builder);
-                    addCompileOptions(builder);
-                    builder.addOption({ 'i', "generate-id" }, KJ_BIND_METHOD(*this, generateId),
-                        "Generate a new 64-bit unique ID for use in a Cap'n Proto schema.");
-                    return builder.build();
-                } else {
-                    kj::MainBuilder builder(context, VERSION_STRING,
-                        "Command-line tool for Cap'n Proto development and debugging.");
-                    builder.addSubCommand("compile", KJ_BIND_METHOD(*this, getCompileMain),
-                               "Generate source code from schema files.")
-                        .addSubCommand("id", KJ_BIND_METHOD(*this, getGenIdMain),
-                            "Generate a new unique ID.")
-                        .addSubCommand("convert", KJ_BIND_METHOD(*this, getConvertMain),
-                            "Convert messages between binary, text, JSON, etc.")
-                        .addSubCommand("decode", KJ_BIND_METHOD(*this, getDecodeMain),
-                            "DEPRECATED (use `convert`)")
-                        .addSubCommand("encode", KJ_BIND_METHOD(*this, getEncodeMain),
-                            "DEPRECATED (use `convert`)")
-                        .addSubCommand("eval", KJ_BIND_METHOD(*this, getEvalMain),
-                            "Evaluate a const from a schema file.");
-                    addGlobalOptions(builder);
-                    return builder.build();
-                }
+                kj::MainBuilder builder(context, VERSION_STRING,
+                    "Command-line tool for Cap'n Proto development and debugging.");
+                builder.addSubCommand("compile", KJ_BIND_METHOD(*this, getCompileMain),
+                           "Generate source code from schema files.")
+                    .addSubCommand("id", KJ_BIND_METHOD(*this, getGenIdMain),
+                        "Generate a new unique ID.")
+                    .addSubCommand("convert", KJ_BIND_METHOD(*this, getConvertMain),
+                        "Convert messages between binary, text, JSON, etc.")
+                    .addSubCommand("decode", KJ_BIND_METHOD(*this, getDecodeMain),
+                        "DEPRECATED (use `convert`)")
+                    .addSubCommand("encode", KJ_BIND_METHOD(*this, getEncodeMain),
+                        "DEPRECATED (use `convert`)")
+                    .addSubCommand("eval", KJ_BIND_METHOD(*this, getEvalMain),
+                        "Evaluate a const from a schema file.");
+                addGlobalOptions(builder);
+                return builder.build();
             }
 
             kj::MainFunc getCompileMain() {
@@ -312,7 +301,7 @@ namespace shark {
                            "Generate source code for language <lang> in directory <dir> "
                            "(default: current directory).  <lang> actually specifies a plugin "
                            "to use.  If <lang> is a simple word, the compiler searches for a plugin "
-                           "called 'capnpc-<lang>' in $PATH.  If <lang> is a file path "
+                           "called 'shark-<lang>' in $PATH.  If <lang> is a file path "
                            "containing slashes, it is interpreted as the exact plugin "
                            "executable file name, and $PATH is not searched.  If <lang> is '-', "
                            "the compiler dumps the request to standard output.")
@@ -436,7 +425,7 @@ namespace shark {
                             //     shark compile -o c:/foo/bar
                             //
                             // What does this mean? It depends on what system we're on. On a Unix system, the above
-                            // clearly is a request to run the `capnpc-c` plugin (perhaps to output C code) and write
+                            // clearly is a request to run the `shark-c` plugin (perhaps to output C code) and write
                             // to the directory /foo/bar. But on Windows, absolute paths do not start with '/', and
                             // the above is actually a request to run the plugin `c:/foo/bar`, outputting to the
                             // current directory.
@@ -548,7 +537,7 @@ namespace shark {
                         }
                     }
                     if (shouldSearchPath) {
-                        exeName = kj::str("capnpc-", output.name);
+                        exeName = kj::str("shark-", output.name);
                     } else {
                         exeName = kj::heapString(output.name);
                     }

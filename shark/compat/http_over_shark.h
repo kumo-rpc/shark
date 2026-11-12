@@ -67,7 +67,7 @@ public:
   HttpOverCapnpFactory(ByteStreamFactory& streamFactory, HeaderIdBundle headerIds,
                        OptimizationLevel peerOptimizationLevel = LEVEL_1);
 
-  kj::Own<kj::HttpService> capnpToKj(shark::HttpService::Client rpcService);
+  kj::Own<kj::HttpService> sharkToKj(shark::HttpService::Client rpcService);
   shark::HttpService::Client kjToCapnp(kj::Own<kj::HttpService> service);
 
 private:

@@ -431,7 +431,7 @@ public:
     // Pump upstream -- unless we don't expect a request body.
     kj::Maybe<kj::Promise<void>> pumpRequestTask;
     KJ_IF_MAYBE(rb, maybeRequestBody) {
-      auto bodyOut = factory.streamFactory.capnpToKjExplicitEnd(pipeline.getRequestBody());
+      auto bodyOut = factory.streamFactory.sharkToKjExplicitEnd(pipeline.getRequestBody());
       pumpRequestTask = rb->pumpTo(*bodyOut)
           .then([&bodyOut = *bodyOut](uint64_t) mutable {
         return bodyOut.end();
@@ -515,7 +515,7 @@ public:
       *tlsStarter = kj::mv(cb);
     }
 
-    auto upStream = factory.streamFactory.capnpToKjExplicitEnd(up);
+    auto upStream = factory.streamFactory.sharkToKjExplicitEnd(up);
     auto upPumpTask = connection.pumpTo(*upStream)
         .then([&upStream = *upStream](uint64_t) mutable {
       return upStream.end();
@@ -536,7 +536,7 @@ private:
   shark::HttpService::Client inner;
 };
 
-kj::Own<kj::HttpService> HttpOverCapnpFactory::capnpToKj(shark::HttpService::Client rpcService) {
+kj::Own<kj::HttpService> HttpOverCapnpFactory::sharkToKj(shark::HttpService::Client rpcService) {
   return kj::heap<KjToCapnpHttpServiceAdapter>(*this, kj::mv(rpcService));
 }
 
@@ -627,7 +627,7 @@ public:
     };
     if (hasBody) {
       auto pipeline = req.send();
-      auto result = factory.streamFactory.capnpToKj(pipeline.getBody());
+      auto result = factory.streamFactory.sharkToKj(pipeline.getBody());
       replyTask = pipeline.ignoreResult().eagerlyEvaluate(kj::mv(logError));
       return result;
     } else {
@@ -734,7 +734,7 @@ public:
 
     replyTask = req.send().then(
         [this, errorBody = kj::mv(errorBody)](auto resp) mutable -> kj::Promise<void> {
-      auto body = factory.streamFactory.capnpToKjExplicitEnd(resp.getBody());
+      auto body = factory.streamFactory.sharkToKjExplicitEnd(resp.getBody());
       return errorBody->pumpTo(*body)
           .then([&body = *body](uint64_t) mutable {
         return body.end();
@@ -897,7 +897,7 @@ public:
       kj::Own<kj::AsyncIoStream> inner;
     };
 
-    auto stream = factory.streamFactory.capnpToKjExplicitEnd(context.getParams().getDown());
+    auto stream = factory.streamFactory.sharkToKjExplicitEnd(context.getParams().getDown());
 
     // We want to keep the stream alive even after EofDetector is destroyed, so we need to create
     // a refcounted AsyncIoStream.
@@ -1010,16 +1010,16 @@ Orphan<List<shark::HttpHeader>> HttpOverCapnpFactory::headersToCapnp(
   auto rpcHeaders = result.get();
   uint i = 0;
   headers.forEach([&](kj::HttpHeaderId id, kj::StringPtr value) {
-    auto capnpName = id.hashCode() < nameKjToCapnp.size()
+    auto sharkName = id.hashCode() < nameKjToCapnp.size()
         ? nameKjToCapnp[id.hashCode()]
         : shark::CommonHeaderName::INVALID;
-    if (capnpName == shark::CommonHeaderName::INVALID) {
+    if (sharkName == shark::CommonHeaderName::INVALID) {
       auto header = rpcHeaders[i++].initUncommon();
       header.setName(id.toString());
       header.setValue(value);
     } else {
       auto header = rpcHeaders[i++].initCommon();
-      header.setName(capnpName);
+      header.setName(sharkName);
       header.setValue(value);
     }
   }, [&](kj::StringPtr name, kj::StringPtr value) {

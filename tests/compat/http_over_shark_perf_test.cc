@@ -401,7 +401,7 @@ KJ_TEST("Benchmark HTTP-over-sharkshark local call") {
   HttpOverCapnpFactory hocFactory2(bsFactory2, kj::mv(headerIds), HttpOverCapnpFactory::LEVEL_2);
 
   auto cap = hocFactory.kjToCapnp(kj::attachRef(service));
-  auto roundTrip = hocFactory2.capnpToKj(kj::mv(cap));
+  auto roundTrip = hocFactory2.sharkToKj(kj::mv(cap));
 
   doBenchmark([&]() {
     sender.sendRequest(*roundTrip).wait(waitScope);
@@ -433,7 +433,7 @@ KJ_TEST("Benchmark HTTP-over-shark full RPC") {
 
   TwoPartyClient client(pair.client);
 
-  auto roundTrip = hocFactory2.capnpToKj(client.bootstrap().castAs<shark::HttpService>());
+  auto roundTrip = hocFactory2.sharkToKj(client.bootstrap().castAs<shark::HttpService>());
 
   doBenchmark([&]() {
     sender.sendRequest(*roundTrip).wait(waitScope);
