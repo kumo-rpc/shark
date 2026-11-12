@@ -160,17 +160,6 @@ TEST(AsyncUnixTest, Signals) {
 
 #if defined(SIGRTMIN) && !__BIONIC__ && !(__linux__ && __mips__)
 TEST(AsyncUnixTest, SignalWithValue) {
-  // This tests that if we use sigqueue() to attach a value to the signal, that value is received
-  // correctly.  Note that this only works on platforms that support real-time signals -- even
-  // though the signal we're sending is SIGURG, the sigqueue() system call is introduced by RT
-  // signals.  Hence this test won't run on e.g. Mac OSX.
-  //
-  // Also, Android's bionic does not appear to support sigqueue() even though the kernel does.
-  //
-  // Also, this test fails on Linux on mipsel. si_value comes back as zero. No one with a mips
-  // machine wants to debug the problem but they demand a patch fixing it, so we disable the test.
-  // Sad. https://github.com/capnproto/capnproto/issues/204
-
   if (BROKEN_QEMU) return;
 
   captureSignals();
@@ -600,7 +589,6 @@ TEST(AsyncUnixTest, WriteObserver) {
 }
 
 #if !__APPLE__ && !(KJ_USE_KQUEUE && !defined(EVFILT_EXCEPT))
-// Disabled on macOS due to https://github.com/capnproto/capnproto/issues/374.
 // Disabled on kqueue systems that lack EVFILT_EXCEPT because it doesn't work there.
 TEST(AsyncUnixTest, UrgentObserver) {
   // Verify that FdObserver correctly detects availability of out-of-band data.
