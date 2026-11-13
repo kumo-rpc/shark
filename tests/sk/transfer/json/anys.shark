@@ -1,0 +1,118 @@
+// Protocol Buffers - Google's data interchange format
+// Copyright 2008 Google Inc.  All rights reserved.
+// https://developers.google.com/protocol-buffers/
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//     * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//     * Neither the name of Google Inc. nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+syntax = "proto2";
+
+package proto_util_converter.testing;
+
+import "shark/types/any.shark";
+import "shark/types/duration.shark";
+import "shark/types/empty.shark";
+import "shark/types/struct.shark";
+import "shark/types/timestamp.shark";
+import "shark/types/wrappers.shark";
+
+// Top-level test cases proto used by MarshallingTest. See description
+// at the top of the class MarshallingTest for details on how to write
+// test cases.
+message AnyTestCases {
+  optional AnyWrapper empty_any = 1;
+  optional AnyWrapper type_only_any = 2;
+  optional AnyWrapper wrapper_any = 3;
+  optional AnyWrapper any_with_timestamp_value = 4;
+  optional AnyWrapper any_with_duration_value = 5;
+  optional AnyWrapper any_with_struct_value = 6;
+  optional AnyWrapper recursive_any = 7;
+  optional AnyWrapper any_with_message_value = 8;
+  optional AnyWrapper any_with_nested_message = 9;
+  optional AnyWrapper any_with_message_with_wrapper_type = 10;
+  optional AnyWrapper any_with_message_with_timestamp = 11;
+  optional AnyWrapper any_with_message_containing_map = 12;
+  optional AnyWrapper any_with_message_containing_struct = 13;
+  optional AnyWrapper any_with_message_containing_repeated_message = 14;
+  optional AnyWrapper recursive_any_with_type_field_at_end = 15;
+  optional AnyWrapper repeated_any = 16;
+  optional AnyWrapper empty_any_with_null_type_url = 17;
+  optional AnyWrapper any_with_empty = 18;
+  optional AnyWrapper any_with_default_timestamp = 19;
+
+  optional shark.Any top_level_any = 50;
+  optional shark.Any top_level_any_with_type_field_at_end = 51;
+  optional shark.Any top_level_any_with_pivot_one = 52;
+  optional shark.Any top_level_any_with_pivot_two = 53;
+  optional shark.Any top_level_any_unordered = 54;
+}
+
+message AnyWrapper {
+  optional shark.Any any = 1;
+}
+
+// Hack to make sure the types we put into the any are included in the types.
+// Real solution is to add these types to the service config.
+message Imports {
+  optional shark.DoubleValue dbl = 1;
+  optional shark.Struct struct = 2;
+  optional shark.Timestamp timestamp = 3;
+  optional shark.Duration duration = 4;
+  optional shark.Int32Value i32 = 5;
+  optional shark.Empty empty = 6;
+  optional Data data = 100;
+}
+
+message Data {
+  optional int32 attr = 1;
+  optional string str = 2;
+  list<string> msgs = 3;
+  optional Data nested_data = 4;
+  optional shark.Int32Value int_wrapper = 5;
+  optional shark.Timestamp time = 6;
+  map<string, string> map_data = 7;
+  optional shark.Struct struct_data = 8;
+  list<Data> repeated_data = 9;
+  list<shark.Any> repeated_any = 10;
+}
+
+service AnyTestService {
+  rpc Call(AnyTestCases) returns (AnyTestCases);
+  rpc Call1(Imports) returns (Imports);
+}
+
+message AnyIn {
+  optional string something = 1;
+  optional shark.Any any = 2;
+}
+
+message AnyOut {
+  optional shark.Any any = 1;
+}
+
+message AnyM {
+  optional string foo = 1;
+}

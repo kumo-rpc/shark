@@ -1,0 +1,170 @@
+// Protocol Buffers - Google's data interchange format
+// Copyright 2008 Google Inc.  All rights reserved.
+// https://developers.google.com/protocol-buffers/
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//     * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//     * Neither the name of Google Inc. nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+syntax = "proto2";
+
+package proto_util_converter.testing;
+
+import "shark/types/any.shark";
+import "shark/types/struct.shark";
+import "shark/types/wrappers.shark";
+
+message DefaultValueTestCases {
+  optional DoubleMessage empty_double = 1;
+  optional DoubleMessage double_with_default_value = 2;
+  optional DoubleMessage double_with_nondefault_value = 3;
+  optional DoubleMessage repeated_double = 4;
+  optional DoubleMessage nested_message = 5;
+  optional DoubleMessage repeated_nested_message = 6;
+  optional DoubleMessage double_message_with_oneof = 7;
+  optional StructMessage empty_struct = 201;
+  optional StructMessage empty_struct2 = 202;
+  optional StructMessage struct_with_null_value = 203;
+  optional StructMessage struct_with_values = 204;
+  optional StructMessage struct_with_nested_struct = 205;
+  optional StructMessage struct_with_nested_list = 206;
+  optional StructMessage struct_with_list_of_nulls = 207;
+  optional StructMessage struct_with_list_of_lists = 208;
+  optional StructMessage struct_with_list_of_structs = 209;
+  optional shark.Struct top_level_struct = 210;
+  optional ValueMessage value_wrapper_simple = 212;
+  optional ValueMessage value_wrapper_with_struct = 213;
+  optional ValueMessage value_wrapper_with_list = 214;
+  optional ListValueMessage list_value_wrapper = 215;
+  optional shark.Value top_level_value_simple = 216;
+  optional shark.Value top_level_value_with_struct = 217;
+  optional shark.Value top_level_value_with_list = 218;
+  optional shark.ListValue top_level_listvalue = 219;
+  optional AnyMessage empty_any = 301;
+  optional AnyMessage type_only_any = 302;
+  optional AnyMessage recursive_any = 303;
+  optional AnyMessage any_with_message_value = 304;
+  optional AnyMessage any_with_nested_message = 305;
+  optional AnyMessage any_with_message_containing_map = 306;
+  optional AnyMessage any_with_message_containing_struct = 307;
+  optional shark.Any top_level_any = 308;
+  optional StringtoIntMap empty_map = 401;
+  optional StringtoIntMap string_to_int = 402;
+  optional IntToStringMap int_to_string = 403;
+  optional MixedMap mixed1 = 404;
+  optional MixedMap2 mixed2 = 405;
+  optional MixedMap2 empty_mixed2 = 406;
+  optional MessageMap map_of_objects = 407;
+  optional MixedMap mixed_empty = 408;
+  optional MessageMap message_map_empty = 409;
+  optional DoubleValueMessage double_value = 501;
+  optional DoubleValueMessage double_value_default = 502;
+}
+
+message DoubleMessage {
+  optional double double_value = 1;
+  list<double> repeated_double = 2;
+  optional DoubleMessage nested_message = 3;
+  list<DoubleMessage> repeated_nested_message = 4;
+  optional shark.DoubleValue double_wrapper = 100;
+  oneof value {
+    string str_value = 112;
+    int64 num_value = 113;
+  }
+}
+
+message StructMessage {
+  optional shark.Struct struct = 1;
+}
+
+message ValueMessage {
+  optional shark.Value value = 1;
+}
+
+message ListValueMessage {
+  optional shark.ListValue shopping_list = 1;
+}
+message RequestMessage {
+  optional string content = 1;
+}
+
+// A test service.
+service DefaultValueTestService {
+  // A test method.
+  rpc Call(RequestMessage) returns (DefaultValueTestCases);
+}
+
+message AnyMessage {
+  optional shark.Any any = 1;
+  optional AnyData data = 2;
+}
+
+message AnyData {
+  optional int32 attr = 1;
+  optional string str = 2;
+  list<string> msgs = 3;
+  optional AnyData nested_data = 4;
+  map<string, string> map_data = 7;
+  optional shark.Struct struct_data = 8;
+  list<AnyData> repeated_data = 9;
+}
+
+message StringtoIntMap {
+  map<string, int32> map = 1;
+}
+
+message IntToStringMap {
+  map<int32, string> map = 1;
+}
+
+message MixedMap {
+  optional string msg = 1;
+  map<string, float> map = 2;
+  optional int32 int_value = 3;
+}
+
+message MixedMap2 {
+  enum E {
+    E0 = 0;
+    E1 = 1;
+    E2 = 2;
+    E3 = 3;
+  }
+  map<int32, bool> map = 1;
+  optional E ee = 2;
+  optional string msg = 4;
+}
+
+message MessageMap {
+  message M {
+    optional int32 inner_int = 1;
+    optional string inner_text = 2;
+  }
+  map<string, M> map = 1;
+}
+
+message DoubleValueMessage {
+  optional shark.DoubleValue double = 1;
+}

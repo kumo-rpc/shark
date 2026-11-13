@@ -25,7 +25,7 @@
 # ------------------------------------------------------------------------------
 
 include(CPM)
-
+#[[
 CPMAddPackage(
         NAME fmt
         GITHUB_REPOSITORY fmtlib/fmt
@@ -36,3 +36,4 @@ CPMAddPackage(
         "FMT_DOC OFF"
 )
 list(APPEND KMCMAKE_DEPS_LINK fmt::fmt)
+]]

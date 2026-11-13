@@ -1,0 +1,107 @@
+// Protocol Buffers - Google's data interchange format
+// Copyright 2008 Google Inc.  All rights reserved.
+// https://developers.google.com/protocol-buffers/
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//     * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//     * Neither the name of Google Inc. nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+// Benchmark messages for proto3.
+
+syntax = "proto2";
+
+package benchmarks.proto3;
+
+// This is the default, but we specify it here explicitly.
+option optimize_for = SPEED;
+
+option cc_enable_arenas = true;
+
+message GoogleMessage1 {
+  optional string field1 = 1;
+  optional string field9 = 9;
+  optional string field18 = 18;
+  optional bool field80 = 80;
+  optional bool field81 = 81;
+  optional int32 field2 = 2;
+  optional int32 field3 = 3;
+  optional int32 field280 = 280;
+  optional int32 field6 = 6;
+  optional int64 field22 = 22;
+  optional string field4 = 4;
+  list<fixed64> field5 = 5;
+  optional bool field59 = 59;
+  optional string field7 = 7;
+  optional int32 field16 = 16;
+  optional int32 field130 = 130;
+  optional bool field12 = 12;
+  optional bool field17 = 17;
+  optional bool field13 = 13;
+  optional bool field14 = 14;
+  optional int32 field104 = 104;
+  optional int32 field100 = 100;
+  optional int32 field101 = 101;
+  optional string field102 = 102;
+  optional string field103 = 103;
+  optional int32 field29 = 29;
+  optional bool field30 = 30;
+  optional int32 field60 = 60;
+  optional int32 field271 = 271;
+  optional int32 field272 = 272;
+  optional int32 field150 = 150;
+  optional int32 field23 = 23;
+  optional bool field24 = 24;
+  optional int32 field25 = 25;
+  optional GoogleMessage1SubMessage field15 = 15;
+  optional bool field78 = 78;
+  optional int32 field67 = 67;
+  optional int32 field68 = 68;
+  optional int32 field128 = 128;
+  optional string field129 = 129;
+  optional int32 field131 = 131;
+}
+
+message GoogleMessage1SubMessage {
+  optional int32 field1 = 1;
+  optional int32 field2 = 2;
+  optional int32 field3 = 3;
+  optional string field15 = 15;
+  optional bool field12 = 12;
+  optional int64 field13 = 13;
+  optional int64 field14 = 14;
+  optional int32 field16 = 16;
+  optional int32 field19 = 19;
+  optional bool field20  = 20;
+  optional bool field28 = 28;
+  optional fixed64 field21 = 21;
+  optional int32 field22 = 22;
+  optional bool field23 = 23;
+  optional bool field206 = 206;
+  optional fixed32 field203 = 203;
+  optional int32 field204 = 204;
+  optional string field205 = 205;
+  optional uint64 field207 = 207;
+  optional uint64 field300 = 300;
+}

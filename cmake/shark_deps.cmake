@@ -62,6 +62,10 @@ find_package(Threads REQUIRED)
 kmcmake_private_find_package(Threads REQUIRED)
 list(APPEND KMCMAKE_SYSTEM_DYLINK Threads::Threads)
 
+find_package(ZLIB REQUIRED)
+kmcmake_private_find_package(ZLIB REQUIRED)
+list(APPEND KMCMAKE_SYSTEM_DYLINK ZLIB::ZLIB)
+
 ############################################################
 #
 # add you libs to the KMCMAKE_DEPS_LINK variable eg as turbo

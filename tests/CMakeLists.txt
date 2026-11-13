@@ -14,3 +14,20 @@
 #
 
 configure_file(${PROJECT_SOURCE_DIR}/tests/config.h.in ${PROJECT_SOURCE_DIR}/tests/config.h @ONLY)
+include(kmcmake_cpp_test_sk.cmake)
+
+find_package(GTest REQUIRED)
+
+add_subdirectory(sk)
+
+add_subdirectory(common)
+
+add_subdirectory(compiler)
+add_subdirectory(format)
+add_subdirectory(io)
+add_subdirectory(lib)
+add_subdirectory(memory)
+add_subdirectory(stubs)
+add_subdirectory(types)
+add_subdirectory(util)
+add_subdirectory(transfer)

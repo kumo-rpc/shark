@@ -46,10 +46,5 @@ set(KMCMAKE_CXX_OPTIONS
 list(REMOVE_DUPLICATES KMCMAKE_CXX_OPTIONS)
 kmcmake_print_list_label("CXX_OPTIONS:" KMCMAKE_CXX_OPTIONS)
 
-###############################
-# User custom flags (optional)
-# =============================
-# Examples:
-#   list(APPEND KMCMAKE_CXX_OPTIONS "-fopenmp")
-#   list(APPEND KMCMAKE_CXX_OPTIONS "-mno-avx512f")
-###############################
+# zlib is a required dependency of this tree.
+list(APPEND KMCMAKE_CXX_OPTIONS -DHAVE_ZLIB)

@@ -1,0 +1,168 @@
+// Protocol Buffers - Google's data interchange format
+// Copyright 2008 Google Inc.  All rights reserved.
+// https://developers.google.com/protocol-buffers/
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//     * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//     * Neither the name of Google Inc. nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+syntax = "proto2";
+
+package shark;
+
+import "shark/types/any.shark";
+import "shark/types/source_context.shark";
+
+option cc_enable_arenas = true;
+option go_package = "google.golang.org/protobuf/types/known/typepb";
+
+// A protocol buffer message type.
+message Type {
+  // The fully qualified message name.
+  optional string name = 1;
+  // The list of fields.
+  list<Field> fields = 2;
+  // The list of types appearing in `oneof` definitions in this type.
+  list<string> oneofs = 3;
+  // The protocol buffer options.
+  list<Option> options = 4;
+  // The source context.
+  optional SourceContext source_context = 5;
+  // The source syntax.
+  optional Syntax syntax = 6;
+}
+
+// A single field of a message type.
+message Field {
+  // Basic field types.
+  enum Kind {
+    TYPE_UNKNOWN = 0;
+    TYPE_BOOL = 1;
+    TYPE_INT8 = 2;
+    TYPE_UINT8 = 3;
+    TYPE_INT16 = 4;
+    TYPE_UINT16 = 5;
+    TYPE_INT32 = 6;
+    TYPE_UINT32 = 7;
+    TYPE_INT64 = 8;
+    TYPE_UINT64 = 9;
+    TYPE_FLOAT = 10;
+    TYPE_FLOAT16 = 11;
+    TYPE_FLOAT8 = 12;
+    TYPE_DOUBLE = 13;
+    TYPE_ENUM = 14;
+    TYPE_MESSAGE = 15;
+    TYPE_STRING = 16;
+    TYPE_BYTES = 17;
+    TYPE_FIXED32 = 18;
+    TYPE_FIXED64 = 19;
+    TYPE_SFIXED32 = 20;
+    TYPE_SFIXED64 = 21;
+    TYPE_SINT32 = 22;
+    TYPE_SINT64 = 23;
+  }
+
+  // Whether a field is optional, required, or repeated.
+  enum Cardinality {
+    // For fields with unknown cardinality.
+    UNKNOWN = 0;
+    // For optional fields.
+    OPTIONAL = 1;
+    // For required fields. Proto2 syntax only.
+    REQUIRED = 2;
+    // For list<fields>.
+    REPEATED = 3;
+  }
+
+  // The field type.
+  optional Kind kind = 1;
+  // The field cardinality.
+  optional Cardinality cardinality = 2;
+  // The field number.
+  optional int32 number = 3;
+  // The field name.
+  optional string name = 4;
+  // The field type URL, without the scheme, for message or enumeration
+  // types. Example: `"type.googleapis.com/google.sharkbuf.Timestamp"`.
+  optional string type_url = 6;
+  // The index of the field type in `Type.oneofs`, for message or enumeration
+  // types. The first type has index 1; zero means the type is not in the list.
+  optional int32 oneof_index = 7;
+  // Whether to use alternative packed wire representation.
+  optional bool packed = 8;
+  // The protocol buffer options.
+  list<Option> options = 9;
+  // The field JSON name.
+  optional string json_name = 10;
+  // The string value of the default value of this field. Proto2 syntax only.
+  optional string default_value = 11;
+}
+
+// Enum type definition.
+message Enum {
+  // Enum type name.
+  optional string name = 1;
+  // Enum value definitions.
+  list<EnumValue> enumvalue = 2;
+  // Protocol buffer options.
+  list<Option> options = 3;
+  // The source context.
+  optional SourceContext source_context = 4;
+  // The source syntax.
+  optional Syntax syntax = 5;
+}
+
+// Enum value definition.
+message EnumValue {
+  // Enum value name.
+  optional string name = 1;
+  // Enum value number.
+  optional int32 number = 2;
+  // Protocol buffer options.
+  list<Option> options = 3;
+}
+
+// A protocol buffer option, which can be attached to a message, field,
+// enumeration, etc.
+message Option {
+  // The option's name. For protobuf built-in options (options defined in
+  // descriptor.shark), this is the short name. For example, `"map_entry"`.
+  // For custom options, it should be the fully-qualified name. For example,
+  // `"google.api.http"`.
+  optional string name = 1;
+  // The option's value packed in an Any message. If the value is a primitive,
+  // the corresponding wrapper type defined in shark/types/wrappers.shark
+  // should be used. If the value is an enum, it should be stored as an int32
+  // value using the shark.Int32Value type.
+  optional Any value = 2;
+}
+
+// The syntax in which a protocol buffer element is defined.
+enum Syntax {
+  // Syntax `proto2`.
+  SYNTAX_PROTO2 = 0;
+  // Syntax `proto3`.
+  SYNTAX_PROTO3 = 1;
+}

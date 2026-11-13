@@ -1,0 +1,81 @@
+load("@jps_dynamic_deps_ultimate//:targets.bzl", "dev_dist_plugin")
+load("@rules_jvm//:jvm.bzl", "jvm_library")
+
+### auto-generated section `dev intellij.protoeditor` start
+dev_dist_plugin(
+    content_modules = [
+        # do not sort,
+        "intellij.protoeditor.go",
+        "intellij.protoeditor.python",
+        "intellij.protoeditor.jvm",
+        "intellij.protoeditor.core",
+    ],
+    descriptor = "resources/META-INF/plugin.xml",
+    jars = {
+        "lib/protoeditor.jar": [
+            "intellij.protoeditor",
+            "intellij.protoeditor.go",
+            "intellij.protoeditor.jvm",
+            "intellij.protoeditor.core",
+        ],
+    },
+    main_module = "intellij.protoeditor",
+    mode_refused_content_modules = {
+        "frontend": [
+            "intellij.protoeditor.go",
+            "intellij.protoeditor.python",
+            "intellij.protoeditor.jvm",
+        ],
+    },
+)
+### auto-generated section `dev intellij.protoeditor` end
+
+### auto-generated section `build intellij.protoeditor` start
+jvm_library(
+    name = "protoeditor",
+    srcs = glob(
+        [],
+        allow_empty = True,
+    ),
+    module_name = "intellij.protoeditor",
+    resource_strip_prefix = "resources",
+    resources = glob(
+        ["resources/**/*"],
+    ),
+    visibility = ["//visibility:public"],
+    runtime_deps = [
+        # do not sort,
+        "//contrib/protobuf/protoeditor-core",
+        "@community//libraries/protobuf-java-util",
+        "@community//platform/structure-view-impl:structureView",
+    ],
+)
+
+jvm_library(
+    name = "protoeditor_test_lib",
+    testonly = True,
+    srcs = glob(
+        [],
+        allow_empty = True,
+    ),
+    module_name = "intellij.protoeditor",
+    visibility = ["//visibility:public"],
+    runtime_deps = [
+        # do not sort,
+        ":protoeditor",
+        "//contrib/protobuf/protoeditor-core:protoeditor-core_test_lib",
+        "@community//libraries/protobuf-java-util:protobuf-java-util_test_lib",
+        "@community//platform/structure-view-impl:structureView_test_lib",
+    ],
+)
+### auto-generated section `build intellij.protoeditor` end
+
+### auto-generated section `iml intellij.protoeditor` start
+exports_files(
+    [
+        "intellij.protoeditor.iml",
+        "resources/META-INF/plugin.xml",
+    ],
+    visibility = ["//visibility:public"],
+)
+### auto-generated section `iml intellij.protoeditor` end

@@ -1,0 +1,41 @@
+package com.intellij.protobuf.lang.intentions
+
+import com.intellij.openapi.command.undo.DocumentReference
+import com.intellij.openapi.command.undo.DocumentReferenceManager
+import com.intellij.openapi.command.undo.UndoableAction
+import com.intellij.openapi.project.Project
+import com.intellij.protobuf.ide.settings.PbProjectSettings
+import com.intellij.protobuf.lang.intentions.util.ImportPathData
+
+internal class PbAddImportPathUndoableAction(pathToAdd: ImportPathData, private val project: Project) : UndoableAction {
+  private val currentDocumentReference = DocumentReferenceManager.getInstance().create(pathToAdd.originalPbVirtualFile)
+  private val importPath = PbProjectSettings.ImportPathEntry(pathToAdd.effectiveImportPathUrl, "")
+
+  override fun undo() {
+    if (project.isDisposed) return
+    val projectSettings = PbProjectSettings.getInstance(project)
+    projectSettings.importPathEntries = projectSettings.importPathEntries.filter { it != importPath }
+    PbProjectSettings.notifyUpdated(project)
+  }
+
+  override fun redo() {
+    if (project.isDisposed) return
+    val projectSettings = PbProjectSettings.getInstance(project)
+    projectSettings.importPathEntries = listOf(importPath) + projectSettings.importPathEntries
+    PbProjectSettings.notifyUpdated(project)
+  }
+
+  private var performedNanoTime: Long = -1
+
+  override fun getPerformedNanoTime(): Long {
+    return performedNanoTime
+  }
+
+  override fun setPerformedNanoTime(l: Long) {
+    performedNanoTime = l
+  }
+
+  override fun getAffectedDocuments(): Array<DocumentReference> = arrayOf(currentDocumentReference)
+
+  override fun isGlobal(): Boolean = true
+}

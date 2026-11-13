@@ -1,0 +1,111 @@
+syntax = "proto2";
+
+package sharkbuf_unittest;
+
+
+import "shark/types/any.shark";
+import "shark/types/api.shark";
+import "shark/types/duration.shark";
+import "shark/types/empty.shark";
+import "shark/types/field_mask.shark";
+import "shark/types/source_context.shark";
+import "shark/types/struct.shark";
+import "shark/types/timestamp.shark";
+import "shark/types/type.shark";
+import "shark/types/wrappers.shark";
+
+// Test that we can include all well-known types.
+// Each wrapper type is included separately, as languages
+// map handle different wrappers in different ways.
+message TestWellKnownTypes {
+  optional shark.Any any_field = 1;
+  optional shark.Api api_field = 2;
+  optional shark.Duration duration_field = 3;
+  optional shark.Empty empty_field = 4;
+  optional shark.FieldMask field_mask_field = 5;
+  optional shark.SourceContext source_context_field = 6;
+  optional shark.Struct struct_field = 7;
+  optional shark.Timestamp timestamp_field = 8;
+  optional shark.Type type_field = 9;
+  optional shark.DoubleValue double_field = 10;
+  optional shark.FloatValue float_field = 11;
+  optional shark.Int64Value int64_field = 12;
+  optional shark.UInt64Value uint64_field = 13;
+  optional shark.Int32Value int32_field = 14;
+  optional shark.UInt32Value uint32_field = 15;
+  optional shark.BoolValue bool_field = 16;
+  optional shark.StringValue string_field = 17;
+  optional shark.BytesValue bytes_field = 18;
+  // Part of struct, but useful to be able to test separately
+  optional shark.Value value_field = 19;
+}
+
+// A list<field> for each well-known type.
+message RepeatedWellKnownTypes {
+  list<shark.Any> any_field = 1;
+  list<shark.Api> api_field = 2;
+  list<shark.Duration> duration_field = 3;
+  list<shark.Empty> empty_field = 4;
+  list<shark.FieldMask> field_mask_field = 5;
+  list<shark.SourceContext> source_context_field = 6;
+  list<shark.Struct> struct_field = 7;
+  list<shark.Timestamp> timestamp_field = 8;
+  list<shark.Type> type_field = 9;
+  // These don't actually make a lot of sense, but they're not prohibited...
+  list<shark.DoubleValue> double_field = 10;
+  list<shark.FloatValue> float_field = 11;
+  list<shark.Int64Value> int64_field = 12;
+  list<shark.UInt64Value> uint64_field = 13;
+  list<shark.Int32Value> int32_field = 14;
+  list<shark.UInt32Value> uint32_field = 15;
+  list<shark.BoolValue> bool_field = 16;
+  list<shark.StringValue> string_field = 17;
+  list<shark.BytesValue> bytes_field = 18;
+}
+
+message OneofWellKnownTypes {
+  oneof oneof_field {
+    shark.Any any_field = 1;
+    shark.Api api_field = 2;
+    shark.Duration duration_field = 3;
+    shark.Empty empty_field = 4;
+    shark.FieldMask field_mask_field = 5;
+    shark.SourceContext source_context_field = 6;
+    shark.Struct struct_field = 7;
+    shark.Timestamp timestamp_field = 8;
+    shark.Type type_field = 9;
+    shark.DoubleValue double_field = 10;
+    shark.FloatValue float_field = 11;
+    shark.Int64Value int64_field = 12;
+    shark.UInt64Value uint64_field = 13;
+    shark.Int32Value int32_field = 14;
+    shark.UInt32Value uint32_field = 15;
+    shark.BoolValue bool_field = 16;
+    shark.StringValue string_field = 17;
+    shark.BytesValue bytes_field = 18;
+  }
+}
+
+// A map field for each well-known type. We only
+// need to worry about the value part of the map being the
+// well-known types, as messages can't be map keys.
+message MapWellKnownTypes {
+  map<int32,shark.Any> any_field = 1;
+  map<int32,shark.Api> api_field = 2;
+  map<int32,shark.Duration> duration_field = 3;
+  map<int32,shark.Empty> empty_field = 4;
+  map<int32,shark.FieldMask> field_mask_field = 5;
+  map<int32,shark.SourceContext> source_context_field = 6;
+  map<int32,shark.Struct> struct_field = 7;
+  map<int32,shark.Timestamp> timestamp_field = 8;
+  map<int32,shark.Type> type_field = 9;
+  map<int32,shark.DoubleValue> double_field = 10;
+  map<int32,shark.FloatValue> float_field = 11;
+  map<int32,shark.Int64Value> int64_field = 12;
+  map<int32,shark.UInt64Value> uint64_field = 13;
+  map<int32,shark.Int32Value> int32_field = 14;
+  map<int32,shark.UInt32Value> uint32_field = 15;
+  map<int32,shark.BoolValue> bool_field = 16;
+  map<int32,shark.StringValue> string_field = 17;
+  map<int32,shark.BytesValue> bytes_field = 18;
+}

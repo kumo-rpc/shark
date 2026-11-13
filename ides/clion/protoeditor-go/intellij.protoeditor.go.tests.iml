@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/test">
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="TEST" name="kotlin-stdlib" level="project" />
+    <orderEntry type="module" module-name="intellij.platform.core.impl" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.platform.analysis" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.platform.core.ui" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.platform.editor.ui" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.platform.core" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.platform.indexing" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.platform.testFramework" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.protoeditor.core" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.go.impl" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.libraries.guava" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.platform.ide.core.impl" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.platform.lang.impl" scope="TEST" />
+    <orderEntry type="library" scope="TEST" name="truth" level="project" />
+    <orderEntry type="module" module-name="intellij.go.testFramework" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.go.plugin" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.go.frontback" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.libraries.kotlinx.collections.immutable" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.platform.statistics" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.protoeditor.go" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.protoeditor.core.tests" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.idea.ultimate.customization" scope="RUNTIME" />
+    <orderEntry type="module" module-name="intellij.protoeditor" scope="RUNTIME" />
+    <orderEntry type="module" module-name="intellij.httpClient.grpc" scope="RUNTIME" />
+    <orderEntry type="module" module-name="intellij.platform.execution.serviceView.plugin" scope="RUNTIME" />
+    <orderEntry type="module" module-name="intellij.platform.navbar.plugin" scope="RUNTIME" />
+    <orderEntry type="module" module-name="intellij.ultimate.plugin" scope="RUNTIME" />
+    <orderEntry type="module" module-name="intellij.xml.plugin" scope="RUNTIME" />
+    <orderEntry type="module" module-name="intellij.platform.structureView.plugin" scope="RUNTIME" />
+    <orderEntry type="module" module-name="intellij.platform.testRunner.plugin" scope="RUNTIME" />
+    <orderEntry type="module" module-name="intellij.diagram.impl" scope="RUNTIME" />
+    <orderEntry type="module" module-name="intellij.libraries.junit4" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.restClient.plugin" scope="RUNTIME" />
+    <orderEntry type="module" module-name="intellij.platform.scratch.plugin" scope="TEST" />
+  </component>
+  <component name="TestModuleProperties" production-module="intellij.protoeditor.go" />
+</module>

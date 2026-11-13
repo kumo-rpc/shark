@@ -1,0 +1,100 @@
+// Protocol Buffers - Google's data interchange format
+// Copyright 2008 Google Inc.  All rights reserved.
+// https://developers.google.com/protocol-buffers/
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//     * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//     * Neither the name of Google Inc. nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+syntax = "proto2";
+
+package proto_util_converter.testing;
+
+import "shark/types/wrappers.shark";
+
+// Top-level test cases proto used by MarshallingTest. See description
+// at the top of the class MarshallingTest for details on how to write
+// test cases.
+message WrappersTestCases {
+  optional DoubleWrapper double_wrapper = 1;
+  optional FloatWrapper float_wrapper = 2;
+  optional Int64Wrapper int64_wrapper = 3;
+  optional UInt64Wrapper uint64_wrapper = 4;
+  optional Int32Wrapper int32_wrapper = 5;
+  optional UInt32Wrapper uint32_wrapper = 6;
+  optional BoolWrapper bool_wrapper = 7;
+  optional StringWrapper string_wrapper = 8;
+  optional BytesWrapper bytes_wrapper = 9;
+
+  optional DoubleWrapper double_wrapper_default = 10;
+  optional FloatWrapper float_wrapper_default = 11;
+  optional Int64Wrapper int64_wrapper_default = 12;
+  optional UInt64Wrapper uint64_wrapper_default = 13;
+  optional Int32Wrapper int32_wrapper_default = 14;
+  optional UInt32Wrapper uint32_wrapper_default = 15;
+  optional BoolWrapper bool_wrapper_default = 16;
+  optional StringWrapper string_wrapper_default = 17;
+  optional BytesWrapper bytes_wrapper_default = 18;
+}
+
+message DoubleWrapper {
+  optional shark.DoubleValue double = 1;
+}
+
+message FloatWrapper {
+  optional shark.FloatValue float = 1;
+}
+
+message Int64Wrapper {
+  optional shark.Int64Value int64 = 1;
+}
+
+message UInt64Wrapper {
+  optional shark.UInt64Value uint64 = 1;
+}
+
+message Int32Wrapper {
+  optional shark.Int32Value int32 = 1;
+}
+
+message UInt32Wrapper {
+  optional shark.UInt32Value uint32 = 1;
+}
+
+message BoolWrapper {
+  optional shark.BoolValue bool = 1;
+}
+
+message StringWrapper {
+  optional shark.StringValue string = 1;
+}
+
+message BytesWrapper {
+  optional shark.BytesValue bytes = 1;
+}
+
+service WrappersTestService {
+  rpc Call(WrappersTestCases) returns (WrappersTestCases);
+}

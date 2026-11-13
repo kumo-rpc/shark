@@ -1,0 +1,168 @@
+{
+  "name": "shark",
+  "displayName": "shark",
+  "description": "Shark syntax support for Visual Studio Code",
+  "version": "0.5.10",
+  "publisher": "zxh404",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "icon": "images/vscode_extension_icon.png",
+  "homepage": "https://github.com/zxh0/vscode-proto3/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zxh0/vscode-proto3"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "activationEvents": [
+    "onLanguage:proto3",
+    "onCommand:proto3.compile.one",
+    "onCommand:proto3.compile.all",
+    "onCommand:proto3.renumber.scope"
+  ],
+  "main": "./out/src/proto3Main",
+  "contributes": {
+    "commands": [
+      {
+        "command": "proto3.compile.one",
+        "title": "proto3: Compile This Proto"
+      },
+      {
+        "command": "proto3.compile.all",
+        "title": "proto3: Compile All Protos"
+      },
+      {
+        "command": "proto3.renumber.scope",
+        "title": "proto3: Renumber Fields/Enum Values"
+      }
+    ],
+    "languages": [
+      {
+        "id": "proto3",
+        "extensions": [
+          ".shark"
+        ],
+        "aliases": [
+          "Protocol Buffers"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "proto3",
+        "scopeName": "source.proto",
+        "path": "./syntaxes/proto3.tmLanguage.json"
+      },
+      {
+        "scopeName": "markdown.codeblock.proto",
+        "path": "./syntaxes/proto3.codeblock.json",
+        "injectTo": [
+          "text.html.markdown"
+        ]
+      }
+    ],
+    "snippets": [
+      {
+        "language": "proto3",
+        "path": "./snippets/proto3.json"
+      },
+      {
+        "language": "proto3",
+        "path": "./snippets/google-api.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "vscode-proto3 configuration",
+      "properties": {
+        "protoc": {
+          "type": "object",
+          "description": "vscode-proto3 configuration",
+          "scope": "resource",
+          "properties": {
+            "path": {
+              "type": "string",
+              "default": "protoc",
+              "description": "Path to protoc command"
+            },
+            "options": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [],
+              "description": "Command line options for protoc"
+            },
+            "renumber_on_save": {
+              "type": "boolean",
+              "default": false,
+              "description": "Automatically renumber message fields and enum values whenever a proto3 file is saved"
+            },
+            "compile_on_save": {
+              "type": "boolean",
+              "default": false,
+              "description": "Compile proto file on save using protoc"
+            }
+          }
+        },
+        "clang-format.style": {
+          "type": "string",
+          "default": "file",
+          "description": "Clang-format style for formatting proto files. Can be 'file' to use .clang-format, or a style name like 'Google', 'LLVM', 'Chromium', 'Mozilla', 'WebKit', or an inline style configuration."
+        },
+        "clang-format.executable": {
+          "type": "string",
+          "default": "clang-format",
+          "description": "Path to the clang-format executable"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "compile": "tsc -watch -p ./",
+    "build": "tsc -p ./",
+    "test": "npm run build && mocha --ui tdd \"out/test/**/*.test.js\"",
+    "test:coverage": "npm run build && c8 --reporter=lcov --reporter=text mocha --ui tdd \"out/test/**/*.test.js\"",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "lint:md": "markdownlint **/*.md --ignore node_modules",
+    "lint:md:fix": "markdownlint **/*.md --ignore node_modules --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
+    "verify": "npm run lint && npm run lint:md && npm run format:check && npm test -- --forbid-only",
+    "package:vsix": "vsce package --out shark-${npm_package_version}.vsix"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^2.32.0",
+    "@eslint/js": "^9.39.1",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.17.12",
+    "@types/vscode": "^1.75.0",
+    "@typescript-eslint/eslint-plugin": "^8.19.1",
+    "@typescript-eslint/parser": "^8.19.1",
+    "c8": "^10.1.3",
+    "eslint": "^9.17.0",
+    "lint-staged": "^16.2.7",
+    "markdownlint-cli": "^0.46.0",
+    "mocha": "^11.0.1",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.49.0"
+  },
+  "dependencies": {
+    "fast-glob": "^3.3.3",
+    "protobufjs": "^7.5.0"
+  },
+  "lint-staged": {
+    "*.{ts,js,json}": "prettier --write",
+    "*.md": [
+      "markdownlint --fix",
+      "prettier --write"
+    ]
+  }
+}

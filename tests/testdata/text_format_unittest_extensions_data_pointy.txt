@@ -1,0 +1,128 @@
+[sharkbuf_unittest.optional_int32_extension]: 101
+[sharkbuf_unittest.optional_int64_extension]: 102
+[sharkbuf_unittest.optional_uint32_extension]: 103
+[sharkbuf_unittest.optional_uint64_extension]: 104
+[sharkbuf_unittest.optional_sint32_extension]: 105
+[sharkbuf_unittest.optional_sint64_extension]: 106
+[sharkbuf_unittest.optional_fixed32_extension]: 107
+[sharkbuf_unittest.optional_fixed64_extension]: 108
+[sharkbuf_unittest.optional_sfixed32_extension]: 109
+[sharkbuf_unittest.optional_sfixed64_extension]: 110
+[sharkbuf_unittest.optional_float_extension]: 111
+[sharkbuf_unittest.optional_double_extension]: 112
+[sharkbuf_unittest.optional_bool_extension]: true
+[sharkbuf_unittest.optional_string_extension]: "115"
+[sharkbuf_unittest.optional_bytes_extension]: "116"
+[sharkbuf_unittest.optional_nested_message_extension] <
+  bb: 118
+>
+[sharkbuf_unittest.optional_foreign_message_extension] <
+  c: 119
+>
+[sharkbuf_unittest.optional_import_message_extension] <
+  d: 120
+>
+[sharkbuf_unittest.optional_nested_enum_extension]: BAZ
+[sharkbuf_unittest.optional_foreign_enum_extension]: FOREIGN_BAZ
+[sharkbuf_unittest.optional_import_enum_extension]: IMPORT_BAZ
+[sharkbuf_unittest.optional_string_piece_extension]: "124"
+[sharkbuf_unittest.optional_cord_extension]: "125"
+[sharkbuf_unittest.optional_public_import_message_extension] <
+  e: 126
+>
+[sharkbuf_unittest.optional_lazy_message_extension] <
+  bb: 127
+>
+[sharkbuf_unittest.optional_unverified_lazy_message_extension] <
+  bb: 128
+>
+[sharkbuf_unittest.repeated_int32_extension]: 201
+[sharkbuf_unittest.repeated_int32_extension]: 301
+[sharkbuf_unittest.repeated_int64_extension]: 202
+[sharkbuf_unittest.repeated_int64_extension]: 302
+[sharkbuf_unittest.repeated_uint32_extension]: 203
+[sharkbuf_unittest.repeated_uint32_extension]: 303
+[sharkbuf_unittest.repeated_uint64_extension]: 204
+[sharkbuf_unittest.repeated_uint64_extension]: 304
+[sharkbuf_unittest.repeated_sint32_extension]: 205
+[sharkbuf_unittest.repeated_sint32_extension]: 305
+[sharkbuf_unittest.repeated_sint64_extension]: 206
+[sharkbuf_unittest.repeated_sint64_extension]: 306
+[sharkbuf_unittest.repeated_fixed32_extension]: 207
+[sharkbuf_unittest.repeated_fixed32_extension]: 307
+[sharkbuf_unittest.repeated_fixed64_extension]: 208
+[sharkbuf_unittest.repeated_fixed64_extension]: 308
+[sharkbuf_unittest.repeated_sfixed32_extension]: 209
+[sharkbuf_unittest.repeated_sfixed32_extension]: 309
+[sharkbuf_unittest.repeated_sfixed64_extension]: 210
+[sharkbuf_unittest.repeated_sfixed64_extension]: 310
+[sharkbuf_unittest.repeated_float_extension]: 211
+[sharkbuf_unittest.repeated_float_extension]: 311
+[sharkbuf_unittest.repeated_double_extension]: 212
+[sharkbuf_unittest.repeated_double_extension]: 312
+[sharkbuf_unittest.repeated_bool_extension]: true
+[sharkbuf_unittest.repeated_bool_extension]: false
+[sharkbuf_unittest.repeated_string_extension]: "215"
+[sharkbuf_unittest.repeated_string_extension]: "315"
+[sharkbuf_unittest.repeated_bytes_extension]: "216"
+[sharkbuf_unittest.repeated_bytes_extension]: "316"
+[sharkbuf_unittest.repeated_nested_message_extension] <
+  bb: 218
+>
+[sharkbuf_unittest.repeated_nested_message_extension] <
+  bb: 318
+>
+[sharkbuf_unittest.repeated_foreign_message_extension] <
+  c: 219
+>
+[sharkbuf_unittest.repeated_foreign_message_extension] <
+  c: 319
+>
+[sharkbuf_unittest.repeated_import_message_extension] <
+  d: 220
+>
+[sharkbuf_unittest.repeated_import_message_extension] <
+  d: 320
+>
+[sharkbuf_unittest.repeated_nested_enum_extension]: BAR
+[sharkbuf_unittest.repeated_nested_enum_extension]: BAZ
+[sharkbuf_unittest.repeated_foreign_enum_extension]: FOREIGN_BAR
+[sharkbuf_unittest.repeated_foreign_enum_extension]: FOREIGN_BAZ
+[sharkbuf_unittest.repeated_import_enum_extension]: IMPORT_BAR
+[sharkbuf_unittest.repeated_import_enum_extension]: IMPORT_BAZ
+[sharkbuf_unittest.repeated_string_piece_extension]: "224"
+[sharkbuf_unittest.repeated_string_piece_extension]: "324"
+[sharkbuf_unittest.repeated_cord_extension]: "225"
+[sharkbuf_unittest.repeated_cord_extension]: "325"
+[sharkbuf_unittest.repeated_lazy_message_extension] <
+  bb: 227
+>
+[sharkbuf_unittest.repeated_lazy_message_extension] <
+  bb: 327
+>
+[sharkbuf_unittest.default_int32_extension]: 401
+[sharkbuf_unittest.default_int64_extension]: 402
+[sharkbuf_unittest.default_uint32_extension]: 403
+[sharkbuf_unittest.default_uint64_extension]: 404
+[sharkbuf_unittest.default_sint32_extension]: 405
+[sharkbuf_unittest.default_sint64_extension]: 406
+[sharkbuf_unittest.default_fixed32_extension]: 407
+[sharkbuf_unittest.default_fixed64_extension]: 408
+[sharkbuf_unittest.default_sfixed32_extension]: 409
+[sharkbuf_unittest.default_sfixed64_extension]: 410
+[sharkbuf_unittest.default_float_extension]: 411
+[sharkbuf_unittest.default_double_extension]: 412
+[sharkbuf_unittest.default_bool_extension]: false
+[sharkbuf_unittest.default_string_extension]: "415"
+[sharkbuf_unittest.default_bytes_extension]: "416"
+[sharkbuf_unittest.default_nested_enum_extension]: FOO
+[sharkbuf_unittest.default_foreign_enum_extension]: FOREIGN_FOO
+[sharkbuf_unittest.default_import_enum_extension]: IMPORT_FOO
+[sharkbuf_unittest.default_string_piece_extension]: "424"
+[sharkbuf_unittest.default_cord_extension]: "425"
+[sharkbuf_unittest.oneof_uint32_extension]: 601
+[sharkbuf_unittest.oneof_nested_message_extension] <
+  bb: 602
+>
+[sharkbuf_unittest.oneof_string_extension]: "603"
+[sharkbuf_unittest.oneof_bytes_extension]: "604"

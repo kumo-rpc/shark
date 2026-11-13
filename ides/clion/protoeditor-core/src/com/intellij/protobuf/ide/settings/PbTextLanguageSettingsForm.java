@@ -1,0 +1,77 @@
+/*
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.intellij.protobuf.ide.settings;
+
+import com.intellij.openapi.options.ConfigurableUi;
+import com.intellij.openapi.project.Project;
+import com.intellij.protobuf.ide.PbIdeBundle;
+import com.intellij.ui.components.JBCheckBox;
+import com.intellij.util.ui.components.BorderLayoutPanel;
+import org.jetbrains.annotations.NotNull;
+
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+
+/** The protobuf text format language settings panel. */
+public class PbTextLanguageSettingsForm implements ConfigurableUi<PbTextLanguageSettings> {
+
+  private final Project project;
+  private JPanel panel;
+  private JCheckBox missingSchemaWarningCheckbox;
+
+  PbTextLanguageSettingsForm(Project project) {
+    this.project = project;
+    initComponent();
+  }
+
+  @Override
+  public void reset(@NotNull PbTextLanguageSettings settings) {
+    setMissingSchemaWarningEnabled(settings.isMissingSchemaWarningEnabled());
+  }
+
+  @Override
+  public boolean isModified(@NotNull PbTextLanguageSettings settings) {
+    return isMissingSchemaWarningEnabled() != settings.isMissingSchemaWarningEnabled();
+  }
+
+  @Override
+  public void apply(@NotNull PbTextLanguageSettings settings) {
+    settings.setMissingSchemaWarningEnabled(isMissingSchemaWarningEnabled());
+    PbTextLanguageSettings.notifyUpdated(project);
+  }
+
+  @Override
+  public @NotNull JComponent getComponent() {
+    return panel;
+  }
+
+  private boolean isMissingSchemaWarningEnabled() {
+    return missingSchemaWarningCheckbox.isSelected();
+  }
+
+  private void setMissingSchemaWarningEnabled(boolean value) {
+    missingSchemaWarningCheckbox.setSelected(value);
+  }
+
+  private void initComponent() {
+    missingSchemaWarningCheckbox =
+        new JBCheckBox(PbIdeBundle.message("prototext.settings.missing.schema"));
+    panel = new BorderLayoutPanel();
+    panel.add(missingSchemaWarningCheckbox, BorderLayout.NORTH);
+  }
+}

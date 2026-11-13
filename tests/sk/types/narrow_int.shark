@@ -1,0 +1,52 @@
+syntax = "proto2";
+
+package shark_unittest;
+
+message NarrowInt {
+  optional int8 i8 = 1;
+  optional uint8 u8 = 2;
+  optional int16 i16 = 3;
+  optional uint16 u16 = 4;
+  list<int8> ri8 = 5 [packed = true];
+  list<uint16> ru16 = 6 [packed = true];
+  extensions 100 to 199;
+}
+
+extend NarrowInt {
+  optional int8 ei8 = 100;
+  list<int8> eri8 = 101 [packed = true];
+}
+
+message I8Entry {
+  optional int8 key = 1;
+  optional int32 value = 2;
+}
+message U8Entry {
+  optional uint8 key = 1;
+  optional int32 value = 2;
+}
+message I16Entry {
+  optional int16 key = 1;
+  optional int32 value = 2;
+}
+message U16Entry {
+  optional uint16 key = 1;
+  optional int32 value = 2;
+}
+message NarrowMaps {
+  map<int8, int32> i8 = 1;
+  map<uint8, int32> u8 = 2;
+  map<int16, int32> i16 = 3;
+  map<uint16, int32> u16 = 4;
+  map<int32, int8> vi8 = 5;
+  map<int32, uint8> vu8 = 6;
+  map<int32, int16> vi16 = 7;
+  map<int32, uint16> vu16 = 8;
+}
+
+message NarrowKeyList {
+  list<I8Entry> i8 = 1;
+  list<U8Entry> u8 = 2;
+  list<I16Entry> i16 = 3;
+  list<U16Entry> u16 = 4;
+}

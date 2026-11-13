@@ -1,0 +1,7 @@
+gen/
+out/
+node_modules/
+.DS_Store
+coverage/
+*.lcov
+*.vsix

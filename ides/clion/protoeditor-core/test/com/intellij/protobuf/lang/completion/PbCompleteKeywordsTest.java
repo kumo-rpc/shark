@@ -1,0 +1,167 @@
+/*
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.intellij.protobuf.lang.completion;
+
+import com.intellij.testFramework.junit5.TestApplication;
+import org.junit.jupiter.api.Test;
+
+import java.util.Collection;
+import java.util.List;
+
+import static com.google.common.truth.Truth.assertThat;
+import static com.intellij.testFramework.EditorTestUtil.CARET_TAG;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+/** Tests for various keywords (message, enum) completion (see {@link PbCompletionContributor}). */
+@TestApplication
+public class PbCompleteKeywordsTest extends PbCompletionContributorTestCase {
+
+  @Test
+  public void testMessageAtTopLevel() {
+    setInput("mes" + CARET_TAG);
+    assertTrue(completeWithUniqueChoice());
+    assertResult("message ");
+  }
+
+  @Test
+  public void testNoMessageAsMessageIdentifier() {
+    setInput("message mes" + CARET_TAG);
+    assertNoCompletions();
+  }
+
+  @Test
+  public void testEnumAtTopLevel() {
+    setInput("enu" + CARET_TAG);
+    assertTrue(completeWithUniqueChoice());
+    assertResult("enum ");
+  }
+
+  @Test
+  public void testServiceAtTopLevel() {
+    setInput("ser" + CARET_TAG);
+    assertTrue(completeWithUniqueChoice());
+    assertResult("service ");
+  }
+
+  @Test
+  public void testExtendAtTopLevel() {
+    setInput("ext" + CARET_TAG);
+    assertTrue(completeWithUniqueChoice());
+    assertResult("extend ");
+  }
+
+  @Test
+  public void testOptionAtTopLevel() {
+    setInput("opt" + CARET_TAG);
+    assertTrue(completeWithUniqueChoice());
+    assertResult("option ");
+  }
+
+  @Test
+  public void testImportAtTopLevel() {
+    setInput("imp" + CARET_TAG);
+    assertTrue(completeWithUniqueChoice());
+    assertResult("import ");
+  }
+
+  @Test
+  public void testMessageInMessageAutoInsertSpace() {
+    setInput("message Foo {", "  mes" + CARET_TAG, "}");
+    assertTrue(completeWithUniqueChoice());
+    assertResult("message Foo {", "  message ", "}");
+  }
+
+  @Test
+  public void testNoMessageAsMessageIdentifierInMessage() {
+    setInput("message Foo {", "  message mes" + CARET_TAG, "}");
+    assertNoCompletions();
+  }
+
+  @Test
+  public void testNoMessageAsFieldIdentifier() {
+    setInput("message Foo {", "  int32 mes" + CARET_TAG, "}");
+    assertNoCompletions();
+  }
+
+  @Test
+  public void testNoMessageInEnum() {
+    setInput("enum Foo {", "  mes" + CARET_TAG, "}");
+    assertNoCompletions();
+  }
+
+  @Test
+  public void testNoGroupAsFullyQualifiedType() {
+    withSyntax("proto2");
+    withPackage("com.bar");
+    setInput("message Foo {", "  optional ." + CARET_TAG, "}");
+    assertTrue(completeWithUniqueChoice());
+    assertResult("message Foo {", "  optional .com.", "}");
+  }
+
+  @Test
+  public void testNoMessageInExtend() {
+    setInput(
+        "message Foo {",
+        "  int32 field123 = 123;",
+        "  extensions 10000 to max;",
+        "}",
+        "extend Foo {",
+        "  mes" + CARET_TAG,
+        "}");
+    assertNoCompletions();
+  }
+
+  @Test
+  public void testExtendExtensionsInMessage() {
+    setInput("message Foo {", "  ext" + CARET_TAG, "}");
+    List<String> completions = getCompletionItemsAsStrings();
+    assertNotNull(completions);
+    assertThat(completions).containsExactly("extend", "extensions");
+  }
+
+  @Test
+  public void testMapInMessageNoAutoInsertSpace() {
+    setInput("message Foo {", "  ma" + CARET_TAG, "}");
+    assertTrue(completeWithUniqueChoice());
+    assertResult("message Foo {", "  map", "}");
+  }
+
+  @Test
+  public void testListInMessageNoAutoInsertSpace() {
+    setInput("message Foo {", "  li" + CARET_TAG, "}");
+    assertTrue(completeWithUniqueChoice());
+    assertResult("message Foo {", "  list", "}");
+  }
+
+  @Test
+  public void testOptionOrOptionalForProto2() {
+    withSyntax("proto2");
+    setInput("message Foo {", "  list<int32> field1 = 1;", "  opt" + CARET_TAG, "}");
+    Collection<String> completions = getCompletionItemsAsStrings();
+    assertNotNull(completions);
+    assertThat(completions).containsExactly("option", "optional");
+  }
+
+  @Test
+  public void testOptionOrOptionalForProto3() {
+    withSyntax("proto3");
+    setInput("message Foo {", "  list<int32> field1 = 1;", "  opt" + CARET_TAG, "}");
+    Collection<String> completions = getCompletionItemsAsStrings();
+    assertNotNull(completions);
+    assertThat(completions).containsExactly("option", "optional");
+  }
+}

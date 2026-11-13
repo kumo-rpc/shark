@@ -61,7 +61,5 @@ _skbuild
 # CPM (optional; lock file if written under source tree)
 cpm-package-lock.cmake
 refs
-benchmark/config.h
-build-bootstrap
 
-
+build-upgrade

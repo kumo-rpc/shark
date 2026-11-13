@@ -15,3 +15,31 @@
 #
 
 configure_file(${PROJECT_SOURCE_DIR}/benchmark/config.h.in ${PROJECT_SOURCE_DIR}/benchmark/config.h @ONLY)
+
+find_package(benchmark REQUIRED)
+
+file(GLOB_RECURSE BENCH_PROTOS CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.shark)
+set(bench_proto_files)
+foreach (proto_file ${BENCH_PROTOS})
+    string(REPLACE .shark .skp.cc pb_file ${proto_file})
+    string(REPLACE .shark .skp.h pb_hdr ${proto_file})
+    add_custom_command(
+            OUTPUT ${pb_file} ${pb_hdr}
+            DEPENDS sharkc ${proto_file}
+            COMMAND sharkc ${proto_file}
+            --proto_path=${PROJECT_SOURCE_DIR}
+            --cpp_out=${PROJECT_SOURCE_DIR}
+            --experimental_allow_proto3_optional
+    )
+    list(APPEND bench_proto_files ${pb_file})
+endforeach ()
+
+kmcmake_cc_benchmark(
+        NAME suite_bm
+        MODULE ${PROJECT_NAME}
+        SOURCES
+        cpp_benchmark.cc
+        ${bench_proto_files}
+        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
+        LINKS ${PROJECT_NAME}::shark_static benchmark::benchmark
+)
