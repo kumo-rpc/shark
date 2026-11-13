@@ -300,7 +300,7 @@ class DynamicMessage : public Message {
 
   const DynamicMessageFactory::TypeInfo* type_info_;
   mutable std::atomic<int> cached_byte_size_;
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(DynamicMessage);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(DynamicMessage);
 };
 
 struct DynamicMessageFactory::TypeInfo {

@@ -372,7 +372,7 @@ namespace shark::io {
         // generated code.
         AnnotationCollector* const annotation_collector_;
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Printer);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(Printer);
     };
 
 } // namespace shark::io

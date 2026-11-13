@@ -75,7 +75,7 @@ namespace shark::compiler::cpp {
 
     private:
         bool inlined_;
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(StringFieldGenerator);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(StringFieldGenerator);
     };
 
     class StringOneofFieldGenerator : public StringFieldGenerator {
@@ -95,7 +95,7 @@ namespace shark::compiler::cpp {
         void GenerateConstructorCode(io::Printer* printer) const override;
 
     private:
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(StringOneofFieldGenerator);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(StringOneofFieldGenerator);
     };
 
     class RepeatedStringFieldGenerator : public FieldGenerator {
@@ -121,7 +121,7 @@ namespace shark::compiler::cpp {
         void GenerateByteSize(io::Printer* printer) const override;
 
     private:
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(RepeatedStringFieldGenerator);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(RepeatedStringFieldGenerator);
     };
 
 } // namespace shark::compiler::cpp

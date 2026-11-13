@@ -80,7 +80,7 @@ namespace shark {
 
                 std::map<std::string, std::string> variables_;
 
-                GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ExtensionGenerator);
+                SHARK_DISALLOW_EVIL_CONSTRUCTORS(ExtensionGenerator);
             };
 
         } // namespace cpp

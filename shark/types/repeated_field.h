@@ -473,7 +473,7 @@ namespace shark {
             int capacity_;
             Element* buffer_;
 
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FastAdderImpl);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(FastAdderImpl);
         };
 
         // FastAdder is a wrapper for adding fields. The specialization above handles
@@ -487,7 +487,7 @@ namespace shark {
 
         private:
             RepeatedField* repeated_field_;
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FastAdderImpl);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(FastAdderImpl);
         };
 
         using FastAdder = FastAdderImpl<>;

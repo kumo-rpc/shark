@@ -70,7 +70,7 @@ class SHARK_EXPORT ErrorListener {
 
  private:
   // Do not add any data members to this class.
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ErrorListener);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ErrorListener);
 };
 
 // An error listener that ignores all errors.
@@ -91,7 +91,7 @@ class SHARK_EXPORT NoopErrorListener : public ErrorListener {
                     StringPiece /* missing_name */) override {}
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(NoopErrorListener);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(NoopErrorListener);
 };
 
 

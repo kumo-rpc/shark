@@ -100,7 +100,7 @@ class SHARK_EXPORT GzipInputStream SHARK_FUTURE_FINAL
   int Inflate(int flush);
   void DoNextOutput(const void** data, int* size);
 
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(GzipInputStream);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(GzipInputStream);
 };
 
 class SHARK_EXPORT GzipOutputStream SHARK_FUTURE_FINAL
@@ -190,7 +190,7 @@ class SHARK_EXPORT GzipOutputStream SHARK_FUTURE_FINAL
   // Returns zlib error code.
   int Deflate(int flush);
 
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(GzipOutputStream);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(GzipOutputStream);
 };
 
 }  // namespace shark::io

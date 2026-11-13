@@ -178,7 +178,7 @@ class SHARK_EXPORT JsonObjectWriter : public StructuredObjectWriter {
    private:
     io::CodedOutputStream* stream_;
 
-    GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ByteSinkWrapper);
+    SHARK_DISALLOW_EVIL_CONSTRUCTORS(ByteSinkWrapper);
   };
 
   // Renders a simple value as a string. By default all non-string Render

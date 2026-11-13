@@ -177,7 +177,7 @@ namespace shark::io {
         virtual int64_t ByteCount() const = 0;
 
     private:
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ZeroCopyInputStream);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ZeroCopyInputStream);
     };
 
     // Abstract interface similar to an output stream but designed to minimize
@@ -241,7 +241,7 @@ namespace shark::io {
         virtual bool AllowsAliasing() const { return false; }
 
     private:
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ZeroCopyOutputStream);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ZeroCopyOutputStream);
     };
 
 } // namespace shark::io

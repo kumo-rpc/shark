@@ -105,7 +105,7 @@ namespace shark {
                 mutable Mutex mutex_;
                 mutable const FileDescriptor* file_; // Set in Generate().  Under mutex_.
                 mutable io::Printer* printer_; // Set in Generate().  Under mutex_.
-                GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(PyiGenerator);
+                SHARK_DISALLOW_EVIL_CONSTRUCTORS(PyiGenerator);
             };
 
         } // namespace python

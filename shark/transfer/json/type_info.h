@@ -80,7 +80,7 @@ class SHARK_EXPORT TypeInfo {
   static TypeInfo* NewTypeInfo(TypeResolver* type_resolver);
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(TypeInfo);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(TypeInfo);
 };
 
 }  // namespace shark::util::converter

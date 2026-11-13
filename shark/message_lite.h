@@ -485,7 +485,7 @@ namespace shark {
 
         bool MergeFromImpl(io::CodedInputStream* input, ParseFlags parse_flags);
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MessageLite);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(MessageLite);
     };
 
     namespace internal {

@@ -206,7 +206,7 @@ class SHARK_EXPORT UnknownFieldSet {
   }
 
   std::vector<UnknownField> fields_;
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(UnknownFieldSet);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(UnknownFieldSet);
 };
 
 namespace internal {

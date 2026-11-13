@@ -117,7 +117,7 @@ class ReflectionTester {
   void ExpectAllFieldsSetViaReflection2(const Message& message);
   void ExpectAllFieldsSetViaReflection3(const Message& message);
 
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ReflectionTester);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ReflectionTester);
 };
 
 inline TestUtil::ReflectionTester::ReflectionTester(

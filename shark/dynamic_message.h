@@ -136,7 +136,7 @@ class SHARK_EXPORT DynamicMessageFactory : public MessageFactory {
   friend class DynamicMessage;
   const Message* GetPrototypeNoLock(const Descriptor* type);
 
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(DynamicMessageFactory);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(DynamicMessageFactory);
 };
 
 // Helper for computing a sorted list of map entries via reflection.

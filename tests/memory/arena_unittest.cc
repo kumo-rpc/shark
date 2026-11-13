@@ -105,7 +105,7 @@ class PleaseDontCopyMe {
 
  private:
   int value_;
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(PleaseDontCopyMe);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(PleaseDontCopyMe);
 };
 
 // A class that takes four different types as constructor arguments.
@@ -122,7 +122,7 @@ class MustBeConstructedWithOneThroughFour {
   const PleaseDontCopyMe* four_;
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MustBeConstructedWithOneThroughFour);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(MustBeConstructedWithOneThroughFour);
 };
 
 // A class that takes eight different types as constructor arguments.
@@ -153,7 +153,7 @@ class MustBeConstructedWithOneThroughEight {
   std::string eight_;
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MustBeConstructedWithOneThroughEight);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(MustBeConstructedWithOneThroughEight);
 };
 
 TEST(ArenaTest, ArenaConstructable) {

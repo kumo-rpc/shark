@@ -363,7 +363,7 @@ namespace shark {
         static constexpr int64_t kint64max = std::numeric_limits<int64_t>::max();
         static constexpr uint64_t kuint64max = std::numeric_limits<uint64_t>::max();
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ParserImpl);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ParserImpl);
 
         // Reports an error with the given message with information indicating
         // the position (as derived from the current token).
@@ -1281,7 +1281,7 @@ namespace shark {
             }
 
         private:
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ParserErrorCollector);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(ParserErrorCollector);
             TextFormat::Parser::ParserImpl* parser_;
         };
 
@@ -1408,7 +1408,7 @@ namespace shark {
         }
 
     private:
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(TextGenerator);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(TextGenerator);
 
         void Write(const char* data, size_t size) {
             if (failed_)

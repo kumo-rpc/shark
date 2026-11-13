@@ -1196,7 +1196,7 @@ namespace shark {
             size_type index_of_first_non_null_;
             void** table_; // an array with num_buckets_ entries
             Allocator alloc_;
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(InnerMap);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(InnerMap);
         }; // end of class InnerMap
 
         template <typename LookupKey>

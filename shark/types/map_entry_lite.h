@@ -428,7 +428,7 @@ namespace shark::internal {
             SharkFieldType>
         friend class internal::MapFieldLite;
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MapEntryImpl);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(MapEntryImpl);
     };
 
     template <typename T, typename Key, typename Value,
@@ -449,7 +449,7 @@ namespace shark::internal {
         void MergeFrom(const MapEntryLite& other) { MergeFromInternal(other); }
 
     private:
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MapEntryLite);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(MapEntryLite);
     };
 
     // Helpers for deterministic serialization =============================

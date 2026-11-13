@@ -85,7 +85,7 @@ class SHARK_EXPORT CriticalSectionLock {
  private:
   CRITICAL_SECTION critical_section_;
 
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(CriticalSectionLock);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(CriticalSectionLock);
 };
 
 #endif
@@ -149,7 +149,7 @@ class SHARK_SCOPED_CAPABILITY SHARK_EXPORT MutexLock {
 
  private:
   Mutex *const mu_;
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MutexLock);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(MutexLock);
 };
 
 // TODO(kenton):  Implement these?  Hard to implement portably.
@@ -164,7 +164,7 @@ class SHARK_EXPORT MutexLockMaybe {
   ~MutexLockMaybe() { if (this->mu_ != nullptr) { this->mu_->Unlock(); } }
  private:
   Mutex *const mu_;
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MutexLockMaybe);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(MutexLockMaybe);
 };
 
 #if defined(SHARK_NO_THREADLOCAL)
@@ -191,7 +191,7 @@ class ThreadLocalStorage {
   }
   pthread_key_t key_;
 
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ThreadLocalStorage);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ThreadLocalStorage);
 };
 #endif
 

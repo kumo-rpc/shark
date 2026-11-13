@@ -32,8 +32,8 @@
 
 namespace shark {
 
-#undef GOOGLE_DISALLOW_EVIL_CONSTRUCTORS
-#define GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(TypeName) \
+#undef SHARK_DISALLOW_EVIL_CONSTRUCTORS
+#define SHARK_DISALLOW_EVIL_CONSTRUCTORS(TypeName) \
   TypeName(const TypeName&) = delete;               \
   void operator=(const TypeName&) = delete
 

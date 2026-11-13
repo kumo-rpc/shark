@@ -194,7 +194,7 @@ namespace shark {
                 std::vector<std::unique_ptr<ServiceGenerator>> service_generators_;
                 std::vector<std::unique_ptr<ExtensionGenerator>> extension_generators_;
 
-                GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FileGenerator);
+                SHARK_DISALLOW_EVIL_CONSTRUCTORS(FileGenerator);
             };
 
         } // namespace cpp

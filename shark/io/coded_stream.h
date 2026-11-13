@@ -516,7 +516,7 @@ class SHARK_EXPORT CodedInputStream {
   MessageFactory* GetExtensionFactory();
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(CodedInputStream);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(CodedInputStream);
 
   const uint8_t* buffer_;
   const uint8_t* buffer_end_;  // pointer to the end of the buffer.
@@ -1308,7 +1308,7 @@ class SHARK_EXPORT CodedOutputStream {
   // REQUIRES: value >= 0x80, and that (value & 7f) has been written to *target.
   static uint8_t* WriteVarint32ToArrayOutOfLineHelper(uint32_t value,
                                                       uint8_t* target);
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(CodedOutputStream);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(CodedOutputStream);
 };
 
 // inline methods ====================================================

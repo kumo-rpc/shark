@@ -76,7 +76,7 @@ namespace shark {
         virtual void Run() = 0;
 
     private:
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Closure);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(Closure);
     };
 
     template <typename R>
@@ -88,7 +88,7 @@ namespace shark {
         virtual R Run() = 0;
 
     private:
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ResultCallback);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ResultCallback);
     };
 
     template <typename R, typename A1>
@@ -100,7 +100,7 @@ namespace shark {
         virtual R Run(A1) = 0;
 
     private:
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ResultCallback1);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ResultCallback1);
     };
 
     template <typename R, typename A1, typename A2>
@@ -112,7 +112,7 @@ namespace shark {
         virtual R Run(A1, A2) = 0;
 
     private:
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ResultCallback2);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ResultCallback2);
     };
 
     namespace internal {

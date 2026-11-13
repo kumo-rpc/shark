@@ -118,7 +118,7 @@ namespace shark {
                 SharkFieldType k_wire_type, SharkFieldType>
             friend class internal::MapField;
 
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MapEntry);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(MapEntry);
         };
 
     } // namespace internal

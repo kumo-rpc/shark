@@ -189,7 +189,7 @@ class SHARK_EXPORT ZeroCopyStreamByteSink : public strings::ByteSink {
   void* buffer_;
   int buffer_size_;
 
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ZeroCopyStreamByteSink);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ZeroCopyStreamByteSink);
 };
 }  // namespace internal
 

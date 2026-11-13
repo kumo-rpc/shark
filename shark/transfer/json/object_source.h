@@ -68,7 +68,7 @@ class SHARK_EXPORT ObjectSource {
 
  private:
   // Do not add any data members to this class.
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ObjectSource);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ObjectSource);
 };
 
 }  // namespace shark::util::converter

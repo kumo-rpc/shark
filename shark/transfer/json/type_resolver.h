@@ -63,7 +63,7 @@ class SHARK_EXPORT TypeResolver {
                                        shark::Enum* enum_type) = 0;
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(TypeResolver);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(TypeResolver);
 };
 
 }  // namespace util

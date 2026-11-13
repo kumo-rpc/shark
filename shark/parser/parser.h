@@ -547,7 +547,7 @@ class SHARK_EXPORT Parser {
   // ConsumeEndOfDeclaration() is called.
   std::vector<std::string> upcoming_detached_comments_;
 
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Parser);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(Parser);
 };
 
 // A table mapping (descriptor, ErrorLocation) pairs -- as reported by

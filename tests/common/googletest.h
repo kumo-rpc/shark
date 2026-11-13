@@ -93,7 +93,7 @@ class ScopedMemoryLog {
 
   static ScopedMemoryLog* active_log_;
 
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ScopedMemoryLog);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ScopedMemoryLog);
 };
 
 }  // namespace shark

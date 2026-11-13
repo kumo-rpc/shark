@@ -49,7 +49,7 @@ class ObjectLocationTracker : public LocationTrackerInterface {
   std::string ToString() const override { return ""; }
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ObjectLocationTracker);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ObjectLocationTracker);
 };
 
 }  // namespace shark::util::converter

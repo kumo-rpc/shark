@@ -90,7 +90,7 @@ class TestUtilLite {
       const unittest::TestPackedExtensionsLite& message);
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(TestUtilLite);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(TestUtilLite);
 };
 
 }  // namespace shark

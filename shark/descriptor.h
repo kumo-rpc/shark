@@ -67,6 +67,7 @@
 #include <shark/stubs/mutex.h>
 #include <shark/stubs/once.h>
 #include <shark/enum_traits.h>
+#include <shark/schema/fwd.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -81,179 +82,6 @@
 #endif
 
 namespace shark {
-
-    // Defined in this file.
-    class Descriptor;
-    class FieldDescriptor;
-    class OneofDescriptor;
-    class EnumDescriptor;
-    class EnumValueDescriptor;
-    class ServiceDescriptor;
-    class MethodDescriptor;
-    class FileDescriptor;
-    class DescriptorDatabase;
-    class DescriptorPool;
-
-    // Defined in descriptor.shark
-    class DescriptorProto;
-    class DescriptorProto_ExtensionRange;
-    class FieldDescriptorProto;
-    class OneofDescriptorProto;
-    class EnumDescriptorProto;
-    class EnumValueDescriptorProto;
-    class ServiceDescriptorProto;
-    class MethodDescriptorProto;
-    class FileDescriptorProto;
-    class MessageOptions;
-    class FieldOptions;
-    class OneofOptions;
-    class EnumOptions;
-    class EnumValueOptions;
-    class ExtensionRangeOptions;
-    class ServiceOptions;
-    class MethodOptions;
-    class FileOptions;
-    class UninterpretedOption;
-    class SourceCodeInfo;
-
-    // Defined in message.h
-    class Message;
-    class Reflection;
-
-    // Defined in descriptor.cc
-    class DescriptorBuilder;
-    class FileDescriptorTables;
-    class Symbol;
-
-    // Defined in unknown_field_set.h.
-    class UnknownField;
-
-    // Defined in command_line_interface.cc
-    namespace compiler {
-        class CommandLineInterface;
-        namespace cpp {
-            // Defined in helpers.h
-            class Formatter;
-        } // namespace cpp
-        namespace cc {
-            // Defined in helpers.h
-            class Formatter;
-        } // namespace cpp
-    } // namespace compiler
-
-    namespace descriptor_unittest {
-        class DescriptorTest;
-    } // namespace descriptor_unittest
-
-    // Defined in printer.h
-    namespace io {
-        class Printer;
-    } // namespace io
-
-    // NB, all indices are zero-based.
-    struct SourceLocation {
-        int start_line;
-        int end_line;
-        int start_column;
-        int end_column;
-
-        // Doc comments found at the source location.
-        // See the comments in SourceCodeInfo.Location (descriptor.shark) for details.
-        std::string leading_comments;
-        std::string trailing_comments;
-        std::vector<std::string> leading_detached_comments;
-    };
-
-    // Options when generating machine-parsable output from a descriptor with
-    // DebugString().
-    struct DebugStringOptions {
-        // include original user comments as recorded in SourceLocation entries. N.B.
-        // that this must be |false| by default: several other pieces of code (for
-        // example, the C++ code generation for fields in the proto compiler) rely on
-        // DebugString() output being unobstructed by user comments.
-        bool include_comments;
-        // If true, elide the braced body in the debug string.
-        bool elide_group_body;
-        bool elide_oneof_body;
-
-        DebugStringOptions()
-            : include_comments(false)
-            , elide_group_body(false)
-            , elide_oneof_body(false) {
-        }
-    };
-
-    // A class to handle the simplest cases of a lazily linked descriptor
-    // for a message type that isn't built at the time of cross linking,
-    // which is needed when a pool has lazily_build_dependencies_ set.
-    // Must be instantiated as mutable in a descriptor.
-    namespace internal {
-
-        // The classes in this file represent a significant memory footprint for the
-        // library. We make sure we are not accidentally making them larger by
-        // hardcoding the struct size for a specific platform. Use as:
-        //
-        //   SHARK_INTERNAL_CHECK_CLASS_SIZE(type, expected_size_in_x84-64);
-        //
-
-#if !defined(SHARK_INTERNAL_CHECK_CLASS_SIZE)
-#define SHARK_INTERNAL_CHECK_CLASS_SIZE(t, expected)
-#endif
-
-        class FlatAllocator;
-
-        class SHARK_EXPORT LazyDescriptor {
-        public:
-            // Init function to be called at init time of a descriptor containing
-            // a LazyDescriptor.
-            void Init() {
-                descriptor_ = nullptr;
-                once_ = nullptr;
-            }
-
-            // Sets the value of the descriptor if it is known during the descriptor
-            // building process. Not thread safe, should only be called during the
-            // descriptor build process. Should not be called after SetLazy has been
-            // called.
-            void Set(const Descriptor* descriptor);
-
-            // Sets the information needed to lazily cross link the descriptor at a later
-            // time, SetLazy is not thread safe, should be called only once at descriptor
-            // build time if the symbol wasn't found and building of the file containing
-            // that type is delayed because lazily_build_dependencies_ is set on the pool.
-            // Should not be called after Set() has been called.
-            void SetLazy(StringPiece name, const FileDescriptor* file);
-
-            // Returns the current value of the descriptor, thread-safe. If SetLazy(...)
-            // has been called, will do a one-time cross link of the type specified,
-            // building the descriptor file that contains the type if necessary.
-            inline const Descriptor* Get(const ServiceDescriptor* service) {
-                Once(service);
-                return descriptor_;
-            }
-
-        private:
-            void Once(const ServiceDescriptor* service);
-
-            const Descriptor* descriptor_;
-            // The once_ flag is followed by a NUL terminated string for the type name.
-            internal::once_flag* once_;
-        };
-
-        class SHARK_EXPORT SymbolBase {
-        private:
-            friend class shark::Symbol;
-            uint8_t symbol_type_;
-        };
-
-        // Some types have more than one SymbolBase because they have multiple
-        // identities in the table. We can't have duplicate direct bases, so we use this
-        // intermediate base to do so.
-        // See BuildEnumValue for details.
-        template <int N>
-        class SHARK_EXPORT SymbolBaseN : public SymbolBase { };
-
-    } // namespace internal
 
     // Describes a type of protocol message, or a particular group within a
     // message.  To obtain the Descriptor for a given message object, call
@@ -612,7 +440,7 @@ namespace shark {
         friend class OneofDescriptor;
         friend class MethodDescriptor;
         friend class FileDescriptor;
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Descriptor);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(Descriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(Descriptor, 136);
@@ -920,7 +748,7 @@ namespace shark {
         friend class FileDescriptor;
         friend class Descriptor;
         friend class OneofDescriptor;
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FieldDescriptor);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(FieldDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(FieldDescriptor, 72);
@@ -1002,7 +830,7 @@ namespace shark {
         OneofDescriptor() { }
         friend class DescriptorBuilder;
         friend class Descriptor;
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(OneofDescriptor);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(OneofDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(OneofDescriptor, 40);
@@ -1174,7 +1002,7 @@ namespace shark {
         friend class FileDescriptor;
         friend class DescriptorPool;
         friend class Reflection;
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EnumDescriptor);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(EnumDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(EnumDescriptor, 72);
@@ -1260,7 +1088,7 @@ namespace shark {
         friend class DescriptorPool;
         friend class FileDescriptorTables;
         friend class Reflection;
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EnumValueDescriptor);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(EnumValueDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(EnumValueDescriptor, 32);
@@ -1344,7 +1172,7 @@ namespace shark {
         friend class DescriptorBuilder;
         friend class FileDescriptor;
         friend class MethodDescriptor;
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ServiceDescriptor);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ServiceDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(ServiceDescriptor, 48);
@@ -1433,7 +1261,7 @@ namespace shark {
         MethodDescriptor() { }
         friend class DescriptorBuilder;
         friend class ServiceDescriptor;
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MethodDescriptor);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(MethodDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(MethodDescriptor, 64);
@@ -1631,7 +1459,7 @@ namespace shark {
         friend class EnumValueDescriptor;
         friend class MethodDescriptor;
         friend class ServiceDescriptor;
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FileDescriptor);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(FileDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(FileDescriptor, 144);
@@ -1797,7 +1625,7 @@ namespace shark {
             ) { }
 
         private:
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ErrorCollector);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(ErrorCollector);
         };
 
         // Convert the FileDescriptorProto to real descriptors and place them in
@@ -2002,7 +1830,7 @@ namespace shark {
         // unused imports are treated as errors (and as warnings when false).
         std::map<std::string, bool> unused_import_track_files_;
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(DescriptorPool);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(DescriptorPool);
     };
 
 // inline methods ====================================================

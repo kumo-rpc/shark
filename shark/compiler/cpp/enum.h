@@ -96,7 +96,7 @@ namespace shark {
                 bool inner_ = false;
 
                 friend class FileGenerator;
-                GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EnumGenerator);
+                SHARK_DISALLOW_EVIL_CONSTRUCTORS(EnumGenerator);
             };
 
         } // namespace cpp

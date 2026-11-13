@@ -104,7 +104,7 @@ class SHARK_EXPORT StructuredObjectWriter : public ObjectWriter {
 
  private:
   // Do not add any data members to this class.
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(StructuredObjectWriter);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(StructuredObjectWriter);
 };
 
 }  // namespace shark::util::converter

@@ -168,7 +168,7 @@ class StatusErrorListener : public converter::ErrorListener {
     return loc_string;
   }
 
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(StatusErrorListener);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(StatusErrorListener);
 };
 }  // namespace
 

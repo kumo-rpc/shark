@@ -719,7 +719,7 @@ namespace shark::internal {
         static void WriteSubMessageMaybeToArray(int size, const MessageLite& value,
             io::CodedOutputStream* output);
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(WireFormatLite);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(WireFormatLite);
     };
 
     // A class which deals with unknown values.  The default implementation just

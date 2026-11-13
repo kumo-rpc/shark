@@ -186,7 +186,7 @@ namespace shark {
             SourceTreeDescriptorDatabase database_;
             DescriptorPool pool_;
 
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Importer);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(Importer);
         };
 
         // If the importer encounters problems while trying to import the proto files,
@@ -205,7 +205,7 @@ namespace shark {
                 int /* column */, const std::string& /* message */) { }
 
         private:
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MultiFileErrorCollector);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(MultiFileErrorCollector);
         };
 
         // Abstract interface which represents a directory tree containing proto files.
@@ -231,7 +231,7 @@ namespace shark {
             virtual std::string GetLastErrorMessage();
 
         private:
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(SourceTree);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(SourceTree);
         };
 
         // An implementation of SourceTree which loads files from locations on disk.
@@ -324,7 +324,7 @@ namespace shark {
             // Like Open() but given the actual on-disk path.
             io::ZeroCopyInputStream* OpenDiskFile(const std::string& filename);
 
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(DiskSourceTree);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(DiskSourceTree);
         };
 
     } // namespace compiler

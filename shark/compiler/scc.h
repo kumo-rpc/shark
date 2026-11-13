@@ -150,7 +150,7 @@ class PROTOC_EXPORT SCCAnalyzer {
   }
 
   // This is necessary for compiler bug in msvc2015.
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(SCCAnalyzer);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(SCCAnalyzer);
 };
 
 }  // namespace shark::compiler

@@ -83,7 +83,7 @@ class JsonEscaping {
   static void Escape(StringPiece input, strings::ByteSink* output);
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(JsonEscaping);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(JsonEscaping);
 };
 
 }  // namespace shark::util::converter

@@ -120,13 +120,13 @@ namespace shark::io {
             // doesn't support seeking and won't try again.
             bool previous_seek_failed_;
 
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(CopyingFileInputStream);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(CopyingFileInputStream);
         };
 
         CopyingFileInputStream copying_input_;
         CopyingInputStreamAdaptor impl_;
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FileInputStream);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(FileInputStream);
     };
 
     // ===================================================================
@@ -190,12 +190,12 @@ namespace shark::io {
             // The errno of the I/O error, if one has occurred.  Otherwise, zero.
             int errno_;
 
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(CopyingFileOutputStream);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(CopyingFileOutputStream);
         };
 
         CopyingFileOutputStream copying_output_;
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FileOutputStream);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(FileOutputStream);
     };
 
     // ===================================================================
@@ -234,13 +234,13 @@ namespace shark::io {
             // The stream.
             std::istream* input_;
 
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(CopyingIstreamInputStream);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(CopyingIstreamInputStream);
         };
 
         CopyingIstreamInputStream copying_input_;
         CopyingInputStreamAdaptor impl_;
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(IstreamInputStream);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(IstreamInputStream);
     };
 
     // ===================================================================
@@ -278,13 +278,13 @@ namespace shark::io {
             // The stream.
             std::ostream* output_;
 
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(CopyingOstreamOutputStream);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(CopyingOstreamOutputStream);
         };
 
         CopyingOstreamOutputStream copying_output_;
         CopyingOutputStreamAdaptor impl_;
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(OstreamOutputStream);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(OstreamOutputStream);
     };
 
     // ===================================================================
@@ -317,7 +317,7 @@ namespace shark::io {
         int stream_count_;
         int64_t bytes_retired_; // Bytes read from previous streams.
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ConcatenatingInputStream);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ConcatenatingInputStream);
     };
 
     // ===================================================================

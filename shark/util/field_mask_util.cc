@@ -258,7 +258,7 @@ class FieldMaskTree {
     std::map<std::string, Node*> children;
 
    private:
-    GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Node);
+    SHARK_DISALLOW_EVIL_CONSTRUCTORS(Node);
   };
 
   // Merge a sub-tree to mask. This method adds the field paths represented
@@ -287,7 +287,7 @@ class FieldMaskTree {
 
   Node root_;
 
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FieldMaskTree);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(FieldMaskTree);
 };
 
 FieldMaskTree::FieldMaskTree() {}

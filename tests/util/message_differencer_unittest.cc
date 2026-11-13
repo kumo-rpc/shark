@@ -2552,7 +2552,7 @@ class MatchingTest : public testing::Test {
   }
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MatchingTest);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(MatchingTest);
 };
 
 TEST_F(MatchingTest, StreamReporterMatching) {

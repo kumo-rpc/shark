@@ -68,7 +68,7 @@ namespace shark::compiler::cpp {
     private:
         const bool has_required_fields_;
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MapFieldGenerator);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(MapFieldGenerator);
     };
 
 } // namespace shark::compiler::cpp

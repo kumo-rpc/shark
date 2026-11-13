@@ -96,7 +96,7 @@ class File {
   }
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(File);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(File);
 };
 
 }  // namespace shark

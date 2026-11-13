@@ -7330,7 +7330,7 @@ namespace shark {
             }
 
         private:
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(AbortingErrorCollector);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(AbortingErrorCollector);
         };
 
         // A source tree containing only one file.
@@ -7350,7 +7350,7 @@ namespace shark {
             const std::string filename_;
             const std::string contents_;
 
-            GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(SingletonSourceTree);
+            SHARK_DISALLOW_EVIL_CONSTRUCTORS(SingletonSourceTree);
         };
 
         const char* const kSourceLocationTestInput = "syntax = \"proto2\";\n"

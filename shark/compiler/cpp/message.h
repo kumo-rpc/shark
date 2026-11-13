@@ -217,7 +217,7 @@ namespace shark {
                 std::map<std::string, std::string> variables_;
 
                 friend class FileGenerator;
-                GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MessageGenerator);
+                SHARK_DISALLOW_EVIL_CONSTRUCTORS(MessageGenerator);
             };
 
         } // namespace cpp

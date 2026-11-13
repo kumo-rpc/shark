@@ -114,7 +114,7 @@ namespace shark::compiler::cpp {
         format(
             "\n"
             " private:\n"
-            "  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS($classname$);\n"
+            "  SHARK_DISALLOW_EVIL_CONSTRUCTORS($classname$);\n"
             "};\n"
             "\n");
     }
@@ -145,7 +145,7 @@ namespace shark::compiler::cpp {
             " private:\n"
             "  ::$proto_ns$::RpcChannel* channel_;\n"
             "  bool owns_channel_;\n"
-            "  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS($classname$_Stub);\n"
+            "  SHARK_DISALLOW_EVIL_CONSTRUCTORS($classname$_Stub);\n"
             "};\n"
             "\n");
     }

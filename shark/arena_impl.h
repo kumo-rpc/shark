@@ -664,7 +664,7 @@ namespace shark::internal {
 
         ThreadSafeArenaStatsHandle arena_stats_;
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ThreadSafeArena);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ThreadSafeArena);
         // All protos have pointers back to the arena hence Arena must have
         // pointer stability.
         ThreadSafeArena(ThreadSafeArena&&) = delete;

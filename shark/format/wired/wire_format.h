@@ -296,7 +296,7 @@ namespace shark::internal {
             const Reflection* reflection,
             const FieldDescriptor* field);
 
-        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(WireFormat);
+        SHARK_DISALLOW_EVIL_CONSTRUCTORS(WireFormat);
     };
 
     // Subclass of FieldSkipper which saves skipped fields to an UnknownFieldSet.

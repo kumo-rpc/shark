@@ -122,7 +122,7 @@ class FlushingByteSink : public StringByteSink {
   explicit FlushingByteSink(std::string* dest) : StringByteSink(dest) {}
   virtual void Flush() { Append("z", 1); }
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FlushingByteSink);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(FlushingByteSink);
 };
 
 // Write and Flush via the ByteSink superclass interface.

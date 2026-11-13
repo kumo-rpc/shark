@@ -92,7 +92,7 @@ class SHARK_EXPORT FieldComparator {
                                    const util::FieldContext* field_context) = 0;
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FieldComparator);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(FieldComparator);
 };
 
 // Basic implementation of FieldComparator.  Supports three modes of floating
@@ -256,7 +256,7 @@ class SHARK_EXPORT SimpleFieldComparator : public FieldComparator {
   // those particular fields.
   ToleranceMap map_tolerance_;
 
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(SimpleFieldComparator);
+  SHARK_DISALLOW_EVIL_CONSTRUCTORS(SimpleFieldComparator);
 };
 
 // Default field comparison: use the basic implementation of FieldComparator.
