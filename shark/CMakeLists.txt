@@ -48,6 +48,9 @@ kmcmake_cc_library(
         io/zero_copy_stream.cc
         io/zero_copy_stream_impl.cc
         io/zero_copy_stream_impl_lite.cc
+        schema/file_descriptor.cc
+        schema/field_descriptor.cc
+        schema/descriptor_pool.cc
         stubs/bytestream.cc
         stubs/common.cc
         stubs/int128.cc
