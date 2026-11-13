@@ -47,4 +47,4 @@ list(REMOVE_DUPLICATES KMCMAKE_CXX_OPTIONS)
 kmcmake_print_list_label("CXX_OPTIONS:" KMCMAKE_CXX_OPTIONS)
 
 # zlib is a required dependency of this tree.
-list(APPEND KMCMAKE_CXX_OPTIONS -DHAVE_ZLIB)
+list(APPEND KMCMAKE_CXX_OPTIONS -DHAVE_ZLIB -Wno-switch)

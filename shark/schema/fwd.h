@@ -15,6 +15,21 @@
 
 #pragma once
 
+
+#include <atomic>
+#include <map>
+#include <memory>
+#include <set>
+#include <string>
+#include <vector>
+
+#include <shark/port.h>
+#include <shark/meta.h>
+#include <shark/stubs/common.h>
+#include <shark/stubs/logging.h>
+#include <shark/stubs/mutex.h>
+#include <shark/stubs/once.h>
+#include <shark/enum_traits.h>
 #include <cstdint>
 
 // Must be included last.
