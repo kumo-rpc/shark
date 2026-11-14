@@ -48,7 +48,7 @@ option go_package = "google.golang.org/protobuf/types/known/wrapperspb";
 // Wrapper message for `double`.
 //
 // The JSON representation for `DoubleValue` is JSON number.
-message DoubleValue {
+struct DoubleValue {
   // The double value.
   optional double value = 1;
 }
@@ -56,7 +56,7 @@ message DoubleValue {
 // Wrapper message for `float`.
 //
 // The JSON representation for `FloatValue` is JSON number.
-message FloatValue {
+struct FloatValue {
   // The float value.
   optional float value = 1;
 }
@@ -64,7 +64,7 @@ message FloatValue {
 // Wrapper message for `int64`.
 //
 // The JSON representation for `Int64Value` is JSON string.
-message Int64Value {
+struct Int64Value {
   // The int64 value.
   optional int64 value = 1;
 }
@@ -72,7 +72,7 @@ message Int64Value {
 // Wrapper message for `uint64`.
 //
 // The JSON representation for `UInt64Value` is JSON string.
-message UInt64Value {
+struct UInt64Value {
   // The uint64 value.
   optional uint64 value = 1;
 }
@@ -80,7 +80,7 @@ message UInt64Value {
 // Wrapper message for `int32`.
 //
 // The JSON representation for `Int32Value` is JSON number.
-message Int32Value {
+struct Int32Value {
   // The int32 value.
   optional int32 value = 1;
 }
@@ -88,7 +88,7 @@ message Int32Value {
 // Wrapper message for `uint32`.
 //
 // The JSON representation for `UInt32Value` is JSON number.
-message UInt32Value {
+struct UInt32Value {
   // The uint32 value.
   optional uint32 value = 1;
 }
@@ -96,7 +96,7 @@ message UInt32Value {
 // Wrapper message for `bool`.
 //
 // The JSON representation for `BoolValue` is JSON `true` and `false`.
-message BoolValue {
+struct BoolValue {
   // The bool value.
   optional bool value = 1;
 }
@@ -104,7 +104,7 @@ message BoolValue {
 // Wrapper message for `string`.
 //
 // The JSON representation for `StringValue` is JSON string.
-message StringValue {
+struct StringValue {
   // The string value.
   optional string value = 1;
 }
@@ -112,7 +112,7 @@ message StringValue {
 // Wrapper message for `bytes`.
 //
 // The JSON representation for `BytesValue` is JSON string.
-message BytesValue {
+struct BytesValue {
   // The bytes value.
   optional bytes value = 1;
 }

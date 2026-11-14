@@ -8,7 +8,7 @@ const kwSyntax = createCompletionKeyword('syntax');
 const kwPackage = createCompletionKeyword('package');
 const kwOption = createCompletionKeyword('option');
 const kwImport = createCompletionKeyword('import');
-const kwMessage = createCompletionKeyword('message');
+const kwMessage = createCompletionKeyword('struct');
 const kwEnum = createCompletionKeyword('enum');
 const kwReserved = createCompletionKeyword('reserved');
 const kwRpc = createCompletionKeyword('rpc');
@@ -381,13 +381,12 @@ function findMessageEnum(
 
   const tokenizer = tokenize(document.getText(), false);
   for (let tok = tokenizer.next(); tok !== null; tok = tokenizer.next()) {
-    if (tok === 'message' || tok === 'enum') {
-      // find identifiers after `message` keyword
+    if (tok === 'struct' || tok === 'enum') {
       const identifier = tokenizer.peek();
       if (identifier !== null && /^[a-zA-Z_]+\w*$/.test(identifier)) {
-        if (tok === 'message') {
+        if (tok === 'struct') {
           const item = new vscode.CompletionItem(identifier, vscode.CompletionItemKind.Struct);
-          item.detail = 'message ' + identifier;
+          item.detail = 'struct ' + identifier;
           // should extract message declaration and comments here
           msgCompletionItems.push(item);
         } else {

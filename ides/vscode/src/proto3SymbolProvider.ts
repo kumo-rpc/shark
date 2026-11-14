@@ -42,7 +42,7 @@ export class Proto3DocumentSymbolProvider implements DocumentSymbolProvider {
     let tok = tokenizer.next();
     while (tok !== null) {
       switch (tok) {
-        case 'message':
+        case 'struct':
           const msgSymbol = this.parseMessage(doc, tokenizer);
           if (msgSymbol) symbols.push(msgSymbol);
           break;
@@ -88,7 +88,7 @@ export class Proto3DocumentSymbolProvider implements DocumentSymbolProvider {
       } else if (braceDepth === 1) {
         // Only parse direct children
         switch (tok) {
-          case 'message':
+          case 'struct':
             const nestedMsg = this.parseMessage(doc, tokenizer);
             if (nestedMsg) children.push(nestedMsg);
             break;

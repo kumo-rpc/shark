@@ -52,8 +52,8 @@ option cc_enable_arenas = true;
 // submessages of this message.  So for example, a fuzz test of TestAllTypes
 // could trigger bugs that occur in any message type in this file.  We verify
 // this stays true in a unit test.
-message TestAllTypesProto2 {
-  message NestedMessage {
+struct TestAllTypesProto2 {
+  struct NestedMessage {
     optional int32 a = 1;
     optional TestAllTypesProto2 corecursive = 2;
   }
@@ -231,20 +231,20 @@ message TestAllTypesProto2 {
   reserved 1000 to 9999;
 
   // message_set test case.
-  message MessageSetCorrect {
+  struct MessageSetCorrect {
     option message_set_wire_format = true;
 
     extensions 4 to max;
   }
 
-  message MessageSetCorrectExtension1 {
+  struct MessageSetCorrectExtension1 {
     extend MessageSetCorrect {
       optional MessageSetCorrectExtension1 message_set_extension = 1547769;
     }
     optional string str = 25;
   }
 
-  message MessageSetCorrectExtension2 {
+  struct MessageSetCorrectExtension2 {
     extend MessageSetCorrect {
       optional MessageSetCorrectExtension2 message_set_extension = 4135312;
     }
@@ -252,7 +252,7 @@ message TestAllTypesProto2 {
   }
 }
 
-message ForeignMessageProto2 {
+struct ForeignMessageProto2 {
   optional int32 c = 1;
 }
 
@@ -266,7 +266,7 @@ extend TestAllTypesProto2 {
   optional int32 extension_int32 = 120;
 }
 
-message UnknownToTestAllTypes {
+struct UnknownToTestAllTypes {
   optional int32 optional_int32 = 1001;
   optional string optional_string = 1002;
   optional ForeignMessageProto2 nested_message = 1003;
@@ -274,16 +274,16 @@ message UnknownToTestAllTypes {
   list<int32> repeated_int32 = 1011;
 }
 
-message NullHypothesisProto2 {
+struct NullHypothesisProto2 {
 }
 
-message EnumOnlyProto2 {
+struct EnumOnlyProto2 {
   enum Bool {
     kFalse = 0;
     kTrue = 1;
   }
 }
 
-message OneStringProto2 {
+struct OneStringProto2 {
   optional string data = 1;
 }

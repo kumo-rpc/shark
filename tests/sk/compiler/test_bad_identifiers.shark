@@ -49,9 +49,9 @@ package sharkbuf_unittest;
 
 // Test that fields can have names like "input" and "i" which are also used
 // internally by the code generator for local variables.
-message TestConflictingSymbolNames {
-  message BuildDescriptors {}
-  message TypeTraits {}
+struct TestConflictingSymbolNames {
+  struct BuildDescriptors {}
+  struct TypeTraits {}
 
   optional int32 input = 1;
   optional int32 output = 2;
@@ -62,22 +62,22 @@ message TestConflictingSymbolNames {
   optional int32 tag = 7;
 
   enum TestEnum { FOO = 0; }
-  message Data1 {
+  struct Data1 {
     list<int32> data = 1;
   }
-  message Data2 {
+  struct Data2 {
     list<TestEnum> data = 1;
   }
-  message Data3 {
+  struct Data3 {
     list<string> data = 1;
   }
-  message Data4 {
+  struct Data4 {
     list<Data4> data = 1;
   }
-  message Data5 {
+  struct Data5 {
     list<string> data = 1 [ctype = STRING_PIECE];
   }
-  message Data6 {
+  struct Data6 {
     list<string> data = 1 [ctype = CORD];
   }
 
@@ -104,10 +104,10 @@ message TestConflictingSymbolNames {
   optional uint32 offsets = 26;
   optional uint32 reflection = 27;
 
-  message Cord {}
+  struct Cord {}
   optional string some_cord = 28 [ctype = CORD];
 
-  message StringPiece {}
+  struct StringPiece {}
   optional string some_string_piece = 29 [ctype = STRING_PIECE];
 
   // Some keywords.
@@ -118,7 +118,7 @@ message TestConflictingSymbolNames {
   optional uint32 auto = 40;
 
   // The generator used to #define a macro called "DO" inside the .cc file.
-  message DO {}
+  struct DO {}
   optional DO do = 32;
 
   // Some template parameter names for extensions.
@@ -139,13 +139,13 @@ message TestConflictingSymbolNames {
   extensions 1000 to max;  // NO_PROTO3
 }
 
-message TestConflictingSymbolNamesExtension {                      // NO_PROTO3
+struct TestConflictingSymbolNamesExtension {                      // NO_PROTO3
   extend TestConflictingSymbolNames {                              // NO_PROTO3
     list<int32> repeated_int32_ext = 20423638 [packed = true];  // NO_PROTO3
   }                                                                // NO_PROTO3
 }  // NO_PROTO3
 
-message TestConflictingEnumNames {  // NO_PROTO3
+struct TestConflictingEnumNames {  // NO_PROTO3
   enum while {                      // NO_PROTO3
     default = 0;                    // NO_PROTO3
     and = 1;                        // NO_PROTO3
@@ -165,9 +165,9 @@ enum bool {      // NO_PROTO3
   return = 3;    // NO_PROTO3
 }  // NO_PROTO3
 
-message DummyMessage {}
+struct DummyMessage {}
 
-message NULL {
+struct NULL {
   optional int32 int = 1;
 }
 
@@ -176,8 +176,8 @@ extend TestConflictingSymbolNames {  // NO_PROTO3
 }  // NO_PROTO3
 
 // Message names that could conflict.
-message Shutdown {}
-message TableStruct {}
+struct Shutdown {}
+struct TableStruct {}
 
 service TestConflictingMethodNames {
   rpc Closure(DummyMessage) returns (DummyMessage);

@@ -133,7 +133,7 @@ TEST_F(ImporterTest, Import) {
   // Test normal importing.
   AddFile("foo.shark",
           "syntax = \"proto2\";\n"
-          "message Foo {}\n");
+          "struct Foo {}\n");
 
   const FileDescriptor* file = importer_.Import("foo.shark");
   EXPECT_EQ("", error_collector_.text_);
@@ -151,12 +151,12 @@ TEST_F(ImporterTest, ImportNested) {
   AddFile("foo.shark",
           "syntax = \"proto2\";\n"
           "import \"bar.shark\";\n"
-          "message Foo {\n"
+          "struct Foo {\n"
           "  optional Bar bar = 1;\n"
           "}\n");
   AddFile("bar.shark",
           "syntax = \"proto2\";\n"
-          "message Bar {}\n");
+          "struct Bar {}\n");
 
   // Note that both files are actually parsed by the first call to Import()
   // here, since foo.shark imports bar.shark.  The second call just returns

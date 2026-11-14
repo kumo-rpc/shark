@@ -37,7 +37,7 @@ import "shark/types/any.shark";
 import "shark/types/struct.shark";
 import "shark/types/timestamp.shark";
 
-message OneOfsRequest {
+struct OneOfsRequest {
   optional string value = 1;
   oneof data {
     string str_data = 2;
@@ -54,7 +54,7 @@ message OneOfsRequest {
   optional shark.Any any_data = 19;
 }
 
-message RequestWithSimpleOneof {
+struct RequestWithSimpleOneof {
   optional string value = 1;
   oneof data {
     string str_data = 2;
@@ -64,14 +64,14 @@ message RequestWithSimpleOneof {
   }
 }
 
-message Data {
+struct Data {
   optional int32 data_value = 1;
 }
 
-message MoreData {
+struct MoreData {
   optional string str_value = 1;
 }
 
-message Response {
+struct Response {
   optional string value = 1;
 }

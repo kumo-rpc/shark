@@ -238,7 +238,7 @@ namespace shark {
         comment_printer.AddPreComment(contents);
 
         if (include_opening_clause) {
-            strings::SubstituteAndAppend(contents, "$0message $1", prefix, name());
+            strings::SubstituteAndAppend(contents, "$0struct $1", prefix, name());
         }
         contents->append(" {\n");
 

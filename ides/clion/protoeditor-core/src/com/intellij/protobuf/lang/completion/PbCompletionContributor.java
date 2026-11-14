@@ -151,7 +151,7 @@ public class PbCompletionContributor extends CompletionContributor {
   private static class TopLevelStartKeywords extends CompletionProvider<CompletionParameters> {
 
     private static List<LookupElement> createTopLevelEntryStart() {
-      return Stream.of("message", "enum", "service", "extend", "import", "package", "option")
+      return Stream.of("struct", "enum", "service", "extend", "import", "package", "option")
           .map(PbCompletionContributor::lookupElementWithSpace)
           .collect(Collectors.toList());
     }
@@ -169,7 +169,7 @@ public class PbCompletionContributor extends CompletionContributor {
   private static class NonTopLevelKeywords extends CompletionProvider<CompletionParameters> {
 
     private static List<LookupElement> createMessageEntryStart() {
-      return Stream.of("message", "enum", "extensions", "reserved", "extend", "option", "oneof")
+      return Stream.of("struct", "enum", "extensions", "reserved", "extend", "option", "oneof")
         .map(PbCompletionContributor::lookupElementWithSpace)
         .collect(Collectors.toList());
     }

@@ -809,7 +809,7 @@ public class _ProtoLexer implements FlexLexer {
           // fall through
           case 76: break;
           case 18:
-            { return ProtoTokenTypes.IDENTIFIER_LITERAL;
+            { return returnKeywords && "struct".contentEquals(yytext()) ? ProtoTokenTypes.MESSAGE : ProtoTokenTypes.IDENTIFIER_LITERAL;
             }
           // fall through
           case 77: break;
@@ -928,7 +928,7 @@ public class _ProtoLexer implements FlexLexer {
           // fall through
           case 96: break;
           case 38:
-            { return ProtoTokenTypes.IDENTIFIER_LITERAL;
+            { return returnKeywords && "struct".contentEquals(yytext()) ? ProtoTokenTypes.MESSAGE : ProtoTokenTypes.IDENTIFIER_LITERAL;
             }
           // fall through
           case 97: break;
@@ -988,7 +988,7 @@ public class _ProtoLexer implements FlexLexer {
           // fall through
           case 108: break;
           case 50:
-            { return keyword(ProtoTokenTypes.MESSAGE);
+            { return ProtoTokenTypes.IDENTIFIER_LITERAL;
             }
           // fall through
           case 109: break;
@@ -1013,7 +1013,7 @@ public class _ProtoLexer implements FlexLexer {
           // fall through
           case 113: break;
           case 55:
-            { return ProtoTokenTypes.IDENTIFIER_LITERAL;
+            { return returnKeywords && "struct".contentEquals(yytext()) ? ProtoTokenTypes.MESSAGE : ProtoTokenTypes.IDENTIFIER_LITERAL;
             }
           // fall through
           case 114: break;

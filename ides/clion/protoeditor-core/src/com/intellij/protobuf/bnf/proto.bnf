@@ -298,7 +298,7 @@ private TopLevelEntry ::=
   | ';'
   { recoverWhile = TopLevelRecovery }
 
-private TopLevelRecovery ::= !(export | local | message | enum | service | extend | import | package | option | ';')
+private TopLevelRecovery ::= !(export | local | struct | enum | service | extend | import | package | option | ';')
 
 /*
  * Package statement.
@@ -336,7 +336,7 @@ SymbolVisibility ::= export | local
 /*
  * Message definition.
  */
-MessageDefinition ::= message Identifier MessageBody {
+MessageDefinition ::= struct Identifier MessageBody {
   pin = 1
   implements = [
     'com.intellij.protobuf.lang.psi.PbDefinition'
@@ -376,7 +376,7 @@ private MessageEntry ::=
   | ';' { recoverWhile = MessageRecovery }
 
 private MessageRecovery ::=
-  !(export | local | message | enum | extensions | reserved | extend | option | oneof
+  !(export | local | struct | enum | extensions | reserved | extend | option | oneof
   | FieldLabel | map | TypeName | '}' | ';')
 
 /*

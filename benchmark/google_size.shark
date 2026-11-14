@@ -4,7 +4,7 @@ package benchmarks;
 
 option optimize_for = CODE_SIZE;
 
-message SizeMessage1 {
+struct SizeMessage1 {
   required string field1 = 1;
   optional string field9 = 9;
   optional string field18 = 18;
@@ -48,7 +48,7 @@ message SizeMessage1 {
   optional int32 field131 = 131 [default=0];
 }
 
-message SizeMessage1SubMessage {
+struct SizeMessage1SubMessage {
   optional int32 field1 = 1 [default=0];
   optional int32 field2 = 2 [default=0];
   optional int32 field3 = 3 [default=0];
@@ -71,7 +71,7 @@ message SizeMessage1SubMessage {
   optional uint64 field300 = 300;
 }
 
-message SizeMessage2 {
+struct SizeMessage2 {
   optional string field1 = 1;
   optional int64 field3 = 3;
   optional int64 field4 = 4;
@@ -104,7 +104,7 @@ message SizeMessage2 {
   optional bool field206 = 206 [default=false];
 }
 
-message SizeMessage2GroupedMessage {
+struct SizeMessage2GroupedMessage {
   optional float field1 = 1;
   optional float field2 = 2;
   optional float field3 = 3 [default=0.0];

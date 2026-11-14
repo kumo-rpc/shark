@@ -102,7 +102,7 @@ const char kSmallTestFile[] =
     "syntax = \"proto2\";\n"
     "package foo;\n"
     "enum Enum { VALUE = 0; }\n"
-    "message Message { }\n";
+    "struct Message { }\n";
 
 TEST_F(CppMetadataTest, CapturesEnumNames) {
   FileDescriptorProto file;

@@ -42,7 +42,7 @@ import "shark/types/wrappers.shark";
 // Top-level test cases proto used by MarshallingTest. See description
 // at the top of the class MarshallingTest for details on how to write
 // test cases.
-message AnyTestCases {
+struct AnyTestCases {
   optional AnyWrapper empty_any = 1;
   optional AnyWrapper type_only_any = 2;
   optional AnyWrapper wrapper_any = 3;
@@ -70,13 +70,13 @@ message AnyTestCases {
   optional shark.Any top_level_any_unordered = 54;
 }
 
-message AnyWrapper {
+struct AnyWrapper {
   optional shark.Any any = 1;
 }
 
 // Hack to make sure the types we put into the any are included in the types.
 // Real solution is to add these types to the service config.
-message Imports {
+struct Imports {
   optional shark.DoubleValue dbl = 1;
   optional shark.Struct struct = 2;
   optional shark.Timestamp timestamp = 3;
@@ -86,7 +86,7 @@ message Imports {
   optional Data data = 100;
 }
 
-message Data {
+struct Data {
   optional int32 attr = 1;
   optional string str = 2;
   list<string> msgs = 3;
@@ -104,15 +104,15 @@ service AnyTestService {
   rpc Call1(Imports) returns (Imports);
 }
 
-message AnyIn {
+struct AnyIn {
   optional string something = 1;
   optional shark.Any any = 2;
 }
 
-message AnyOut {
+struct AnyOut {
   optional shark.Any any = 1;
 }
 
-message AnyM {
+struct AnyM {
   optional string foo = 1;
 }

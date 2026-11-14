@@ -40,7 +40,7 @@ option optimize_for = LITE_RUNTIME;
 
 import public "tests/sk/unittest_import_public_lite.shark";
 
-message ImportMessageLite {
+struct ImportMessageLite {
   optional int32 d = 1;
 }
 

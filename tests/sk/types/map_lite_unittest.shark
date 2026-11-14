@@ -37,7 +37,7 @@ import "tests/sk/unittest_lite.shark";
 option cc_enable_arenas = true;
 option optimize_for = LITE_RUNTIME;
 
-message TestMapLite {
+struct TestMapLite {
   map<int32, int32> map_int32_int32 = 1;
   map<int64, int64> map_int64_int64 = 2;
   map<uint32, uint32> map_uint32_uint32 = 3;
@@ -58,7 +58,7 @@ message TestMapLite {
   map<int32, int32> teboring = 18;
 }
 
-message TestArenaMapLite {
+struct TestArenaMapLite {
   map<int32, int32> map_int32_int32 = 1;
   map<int64, int64> map_int64_int64 = 2;
   map<uint32, uint32> map_uint32_uint32 = 3;
@@ -79,21 +79,21 @@ message TestArenaMapLite {
 }
 
 // Test embedded message with required fields
-message TestRequiredMessageMapLite {
+struct TestRequiredMessageMapLite {
   map<int32, TestRequiredLite> map_field = 1;
 }
 
-message TestEnumMapLite {
+struct TestEnumMapLite {
   map<int32, Proto2MapEnumLite> known_map_field = 101;
   map<int32, Proto2MapEnumLite> unknown_map_field = 102;
 }
 
-message TestEnumMapPlusExtraLite {
+struct TestEnumMapPlusExtraLite {
   map<int32, Proto2MapEnumPlusExtraLite> known_map_field = 101;
   map<int32, Proto2MapEnumPlusExtraLite> unknown_map_field = 102;
 }
 
-message TestMessageMapLite {
+struct TestMessageMapLite {
   map<int32, TestAllTypesLite> map_int32_message = 1;
 }
 
@@ -116,7 +116,7 @@ enum MapEnumLite {
   MAP_ENUM_BAZ_LITE = 2;
 }
 
-message TestRequiredLite {
+struct TestRequiredLite {
   required int32 a = 1;
   required int32 b = 2;
   required int32 c = 3;
@@ -126,6 +126,6 @@ message TestRequiredLite {
   }
 }
 
-message ForeignMessageArenaLite {
+struct ForeignMessageArenaLite {
   optional int32 c = 1;
 }

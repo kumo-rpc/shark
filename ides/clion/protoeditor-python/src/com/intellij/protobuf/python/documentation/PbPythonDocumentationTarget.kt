@@ -163,7 +163,7 @@ internal class PbPythonDocumentationTarget(pbSymbol: PbSymbol, sourceElement: Py
 
   private fun renderMessage(out: StringBuilder, message: PbMessageType, indent: Int = 0) {
     out.repeat(" ", indent)
-    val keyword = if (message is PbGroupDefinition) "group" else "message"
+    val keyword = if (message is PbGroupDefinition) "group" else "struct"
     renderHighlighted(out, keyword, PbSyntaxHighlighter.KEYWORD)
     out.append(" ")
     out.append(message.name ?: "")

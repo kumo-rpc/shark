@@ -37,7 +37,7 @@ import "shark/types/any.shark";
 // Top-level test cases proto used by MarshallingTest. See description
 // at the top of the class MarshallingTest for details on how to write
 // test cases.
-message MapsTestCases {
+struct MapsTestCases {
   optional EmptyMap empty_map = 1;
   optional StringtoInt string_to_int = 2;
   optional IntToString int_to_string = 3;
@@ -55,28 +55,28 @@ message MapsTestCases {
   optional MapOfObjects empty_key_map_objects = 13;
 }
 
-message EmptyMap {
+struct EmptyMap {
   map<int32, int32> map = 1;
 }
 
-message StringtoInt {
+struct StringtoInt {
   map<string, int32> map = 1;
 }
 
-message IntToString {
+struct IntToString {
   map<int32, string> map = 1;
 }
 
-message BoolToString {
+struct BoolToString {
   map<bool, string> map = 1;
 }
 
-message Mixed1 {
+struct Mixed1 {
   optional string msg = 1;
   map<string, float> map = 2;
 }
 
-message Mixed2 {
+struct Mixed2 {
   enum E {
     E0 = 0;
     E1 = 1;
@@ -87,27 +87,27 @@ message Mixed2 {
   optional E ee = 2;
 }
 
-message MapOfObjects {
-  message M {
+struct MapOfObjects {
+  struct M {
     optional string inner_text = 1;
   }
   map<string, M> map = 1;
 }
 
-message DummyRequest {}
+struct DummyRequest {}
 
 service MapsTestService {
   rpc Call(DummyRequest) returns (MapsTestCases);
 }
 
-message MapIn {
+struct MapIn {
   optional string other = 1;
   list<string> things = 2;
   map<string, string> map_input = 3;
   map<string, shark.Any> map_any = 4;
 }
 
-message MapOut {
+struct MapOut {
   map<string, MapM> map1 = 1;
   map<string, MapOut> map2 = 2;
   map<int32, string> map3 = 3;
@@ -119,23 +119,23 @@ message MapOut {
 // list<message> fields instead of map fields. We use this message to test
 // the wire-format compatibility of the JSON transcoder (e.g., whether it
 // handles missing keys correctly).
-message MapOutWireFormat {
-  message Map1Entry {
+struct MapOutWireFormat {
+  struct Map1Entry {
     optional string key = 1;
     optional MapM value = 2;
   }
   list<Map1Entry> map1 = 1;
-  message Map2Entry {
+  struct Map2Entry {
     optional string key = 1;
     optional MapOut value = 2;
   }
   list<Map2Entry> map2 = 2;
-  message Map3Entry {
+  struct Map3Entry {
     optional int32 key = 1;
     optional string value = 2;
   }
   list<Map3Entry> map3 = 3;
-  message Map4Entry {
+  struct Map4Entry {
     optional bool key = 1;
     optional string value = 2;
   }
@@ -143,6 +143,6 @@ message MapOutWireFormat {
   optional string bar = 4;
 }
 
-message MapM {
+struct MapM {
   optional string foo = 1;
 }

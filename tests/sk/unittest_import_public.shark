@@ -35,6 +35,6 @@ syntax = "proto2";
 package sharkbuf_unittest_import;
 
 
-message PublicImportMessage {
+struct PublicImportMessage {
   optional int32 e = 1;
 }

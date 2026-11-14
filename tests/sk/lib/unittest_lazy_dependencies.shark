@@ -61,13 +61,13 @@ option optimize_for = SPEED;
 // that calling message_type() etc will build the correct
 // descriptor lazily and return it.
 
-message ImportedMessage {
+struct ImportedMessage {
   optional LazyMessage lazy_message = 1;
 }
 
-message MessageCustomOption {
+struct MessageCustomOption {
 }
 
-message MessageCustomOption2 {
+struct MessageCustomOption2 {
   option (lazy_enum_option) = LAZY_ENUM_0;
 }

@@ -143,7 +143,7 @@ String = {SingleQuotedString} | {DoubleQuotedString}
   "local"                   { return keyword(ProtoTokenTypes.LOCAL); }
   "map"                     { return keyword(ProtoTokenTypes.MAP); }
   "max"                     { return keyword(ProtoTokenTypes.MAX); }
-  "message"                 { return keyword(ProtoTokenTypes.MESSAGE); }
+  "struct"                  { return keyword(ProtoTokenTypes.MESSAGE); }
   "oneof"                   { return keyword(ProtoTokenTypes.ONEOF); }
   "option"                  { return keyword(ProtoTokenTypes.OPTION); }
   "optional"                { return keyword(ProtoTokenTypes.OPTIONAL); }

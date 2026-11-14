@@ -90,7 +90,7 @@ namespace shark {
 
             TEST_F(ParserTest, ErrorIfSyntaxIdentifierOmitted) {
                 supply_syntax_ = false;
-                SetupParser("message A {}");
+                SetupParser("struct A {}");
                 FileDescriptorProto file;
                 EXPECT_FALSE(parser_->Parse(input_.get(), &file));
                 EXPECT_EQ(
@@ -102,7 +102,7 @@ namespace shark {
             TEST_F(ParserTest, WarnIfFieldNameIsNotUpperCamel) {
                 SetupParser(
                     "syntax = \"proto2\";"
-                    "message abc {}");
+                    "struct abc {}");
                 FileDescriptorProto file;
                 EXPECT_TRUE(parser_->Parse(input_.get(), &file));
                 EXPECT_TRUE(error_collector_.warning_.find(
@@ -113,7 +113,7 @@ namespace shark {
             TEST_F(ParserTest, WarnIfFieldNameIsNotLowerUnderscore) {
                 SetupParser(
                     "syntax = \"proto2\";"
-                    "message A {"
+                    "struct A {"
                     "  optional string SongName = 1;"
                     "}");
                 FileDescriptorProto file;
@@ -126,7 +126,7 @@ namespace shark {
             TEST_F(ParserTest, WarnIfFieldNameContainsNumberImmediatelyFollowUnderscore) {
                 SetupParser(
                     "syntax = \"proto2\";"
-                    "message A {"
+                    "struct A {"
                     "  optional string song_name_1 = 1;"
                     "}");
                 FileDescriptorProto file;
@@ -143,7 +143,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, IgnoreBOM) {
                 char input[] = "   syntax = \"proto2\";\n"
-                               "message TestMessage {\n"
+                               "struct TestMessage {\n"
                                "  required int32 foo = 1;\n"
                                "}\n";
                 // Set UTF-8 BOM.
@@ -161,7 +161,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, BOMError) {
                 char input[] = "   syntax = \"proto2\";\n"
-                               "message TestMessage {\n"
+                               "struct TestMessage {\n"
                                "  required int32 foo = 1;\n"
                                "}\n";
                 input[0] = (char)0xEF;
@@ -174,7 +174,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, SimpleMessage) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  required int32 foo = 1;\n"
                     "}\n",
 
@@ -187,7 +187,7 @@ namespace shark {
             TEST_F(ParseMessageTest, ImplicitSyntaxIdentifier) {
                 supply_syntax_ = false;
                 ExpectHasEarlyExitErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  required int32 foo = 1;\n"
                     "}\n",
                     "0:0: File must begin with a syntax statement, e.g. 'syntax = "
@@ -198,7 +198,7 @@ namespace shark {
             TEST_F(ParseMessageTest, ExplicitSyntaxIdentifier) {
                 ExpectParsesTo(
                     "syntax = \"proto2\";\n"
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  required int32 foo = 1;\n"
                     "}\n",
 
@@ -214,7 +214,7 @@ namespace shark {
                 require_syntax_identifier_ = true;
                 ExpectParsesTo(
                     "syntax = \"proto2\";\n"
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  required int32 foo = 1;\n"
                     "}\n",
 
@@ -228,7 +228,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, SimpleFields) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  required int32 foo = 15;\n"
                     "  optional int32 bar = 34;\n"
                     "  list<int32> baz = 3;\n"
@@ -244,7 +244,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, PrimitiveFieldTypes) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  required int32    foo = 1;\n"
                     "  required int64    foo = 1;\n"
                     "  required uint32   foo = 1;\n"
@@ -299,7 +299,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, FieldDefaults) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  required int32  foo = 1 [default=  1  ];\n"
                     "  required int32  foo = 1 [default= -2  ];\n"
                     "  required int64  foo = 1 [default=  3  ];\n"
@@ -404,7 +404,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, FieldJsonName) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional string foo = 1 [json_name = \"@type\"];\n"
                     "}\n",
                     "message_type {"
@@ -418,7 +418,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, FieldOptions) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional string foo = 1\n"
                     "      [ctype=CORD, (foo)=7, foo.(.bar.baz).qux.quux.(corge)=-33, \n"
                     "       (quux)=\"x\040y\", (baz.qux)=hey];\n"
@@ -465,7 +465,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, Oneof) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  oneof foo {\n"
                     "    int32 a = 1;\n"
                     "    string b = 2;\n"
@@ -489,7 +489,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, MultipleOneofs) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  oneof foo {\n"
                     "    int32 a = 1;\n"
                     "    string b = 2;\n"
@@ -521,7 +521,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, Maps) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  map<int32, string> primitive_type_map = 1;\n"
                     "  map<KeyType, ValueType> composite_type_map = 2;\n"
                     "}\n",
@@ -569,8 +569,8 @@ namespace shark {
 
             TEST_F(ParseMessageTest, NestedMessage) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
-                    "  message Nested {}\n"
+                    "struct TestMessage {\n"
+                    "  struct Nested {}\n"
                     "  optional Nested test_nested = 1;\n"
                     "}\n",
 
@@ -584,7 +584,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, NestedEnum) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  enum NestedEnum {}\n"
                     "  optional NestedEnum test_enum = 1;\n"
                     "}\n",
@@ -602,7 +602,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, ReservedRange) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  required int32 foo = 1;\n"
                     "  reserved 2, 15, 9 to 11, 3, 20 to max;\n"
                     "}\n",
@@ -620,7 +620,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, ReservedRangeOnMessageSet) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  option message_set_wire_format = true;\n"
                     "  reserved 20 to max;\n"
                     "}\n",
@@ -642,7 +642,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, ReservedNames) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  reserved \"foo\", \"bar\";\n"
                     "}\n",
 
@@ -655,7 +655,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, ExtensionRange) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  extensions 10 to 19;\n"
                     "  extensions 30 to max;\n"
                     "}\n",
@@ -669,7 +669,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, ExtensionRangeWithOptions) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  extensions 10 to 19 [(i) = 5];\n"
                     "}\n",
 
@@ -693,7 +693,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, CompoundExtensionRange) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  extensions 2, 15, 9 to 11, 100 to max, 3;\n"
                     "}\n",
 
@@ -709,7 +709,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, CompoundExtensionRangeWithOptions) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  extensions 2, 15, 9 to 11, 100 to max, 3 [(i) = 5];\n"
                     "}\n",
 
@@ -788,7 +788,7 @@ namespace shark {
                 // extension numbers, as the numbers are not encoded as int32 field values
                 // rather than tags.
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  extensions 4 to max;\n"
                     "  option message_set_wire_format = true;\n"
                     "}\n",
@@ -821,7 +821,7 @@ namespace shark {
 
             TEST_F(ParseMessageTest, ExtensionsInMessageScope) {
                 ExpectParsesTo(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  extend Extendee1 { optional int32 foo = 12; }\n"
                     "  extend Extendee2 { list<TestMessage> bar = 22; }\n"
                     "}\n",
@@ -852,7 +852,7 @@ namespace shark {
             TEST_F(ParseMessageTest, OptionalLabelProto3) {
                 ExpectHasEarlyExitErrors(
                     "syntax = \"proto3\";\n"
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  int32 foo = 1;\n"
                     "}\n",
                     "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
@@ -862,7 +862,7 @@ namespace shark {
             TEST_F(ParseMessageTest, ExplicitOptionalLabelProto3) {
                 ExpectHasEarlyExitErrors(
                     "syntax = 'proto3';\n"
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional int32 foo = 1;\n"
                     "}\n",
                     "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
@@ -979,7 +979,7 @@ namespace shark {
             TEST_F(ParseErrorTest, MissingSyntaxIdentifier) {
                 supply_syntax_ = false;
                 require_syntax_identifier_ = true;
-                ExpectHasEarlyExitErrors("message TestMessage {}",
+                ExpectHasEarlyExitErrors("struct TestMessage {}",
                     "0:0: File must begin with a syntax statement, e.g. "
                     "'syntax = \"proto2\";'.\n");
                 EXPECT_EQ("", parser_->GetSyntaxIdentifier());
@@ -994,20 +994,20 @@ namespace shark {
             }
 
             TEST_F(ParseErrorTest, SimpleSyntaxError) {
-                ExpectHasErrors("message TestMessage @#$ { blah }",
-                    "0:20: Expected \"{\".\n");
+                ExpectHasErrors("struct TestMessage @#$ { blah }",
+                    "0:19: Expected \"{\".\n");
                 EXPECT_EQ("proto2", parser_->GetSyntaxIdentifier());
             }
 
             TEST_F(ParseErrorTest, ExpectedTopLevel) {
                 ExpectHasErrors("blah;",
-                    "0:0: Expected top-level statement (e.g. \"message\").\n");
+                    "0:0: Expected top-level statement (e.g. \"struct\").\n");
             }
 
             TEST_F(ParseErrorTest, UnmatchedCloseBrace) {
                 // This used to cause an infinite loop.  Doh.
                 ExpectHasErrors("}",
-                    "0:0: Expected top-level statement (e.g. \"message\").\n"
+                    "0:0: Expected top-level statement (e.g. \"struct\").\n"
                     "0:0: Unmatched \"}\".\n");
             }
 
@@ -1015,22 +1015,22 @@ namespace shark {
             // Message errors
 
             TEST_F(ParseErrorTest, MessageMissingName) {
-                ExpectHasErrors("message {}", "0:8: Expected message name.\n");
+                ExpectHasErrors("struct {}", "0:7: Expected message name.\n");
             }
 
             TEST_F(ParseErrorTest, MessageMissingBody) {
-                ExpectHasErrors("message TestMessage;", "0:19: Expected \"{\".\n");
+                ExpectHasErrors("struct TestMessage;", "0:18: Expected \"{\".\n");
             }
 
             TEST_F(ParseErrorTest, EofInMessage) {
                 ExpectHasErrors(
-                    "message TestMessage {",
-                    "0:21: Reached end of input in message definition (missing '}').\n");
+                    "struct TestMessage {",
+                    "0:20: Reached end of input in message definition (missing '}').\n");
             }
 
             TEST_F(ParseErrorTest, MissingFieldNumber) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional int32 foo;\n"
                     "}\n",
                     "1:20: Missing field number.\n");
@@ -1038,7 +1038,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, ExpectedFieldNumber) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional int32 foo = ;\n"
                     "}\n",
                     "1:23: Expected field number.\n");
@@ -1046,7 +1046,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, FieldNumberOutOfRange) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional int32 foo = 0x100000000;\n"
                     "}\n",
                     "1:23: Integer out of range.\n");
@@ -1054,7 +1054,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, MissingLabel) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  int32 foo = 1;\n"
                     "}\n",
                     "1:2: Expected \"required\" or \"optional\".\n");
@@ -1062,7 +1062,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, ExpectedOptionName) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional uint32 foo = 1 [];\n"
                     "}\n",
                     "1:27: Expected identifier.\n");
@@ -1070,7 +1070,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, NonExtensionOptionNameBeginningWithDot) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional uint32 foo = 1 [.foo=1];\n"
                     "}\n",
                     "1:27: Expected identifier.\n");
@@ -1078,7 +1078,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, DefaultValueTypeMismatch) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional uint32 foo = 1 [default=true];\n"
                     "}\n",
                     "1:35: Expected integer for field default value.\n");
@@ -1086,7 +1086,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, DefaultValueNotBoolean) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional bool foo = 1 [default=blah];\n"
                     "}\n",
                     "1:33: Expected \"true\" or \"false\".\n");
@@ -1094,7 +1094,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, DefaultValueNotString) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional string foo = 1 [default=1];\n"
                     "}\n",
                     "1:35: Expected string for field default value.\n");
@@ -1102,7 +1102,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, DefaultValueUnsignedNegative) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional uint32 foo = 1 [default=-1];\n"
                     "}\n",
                     "1:36: Unsigned field can't have negative default value.\n");
@@ -1110,7 +1110,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, DefaultValueTooLarge) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional int32  foo = 1 [default= 0x80000000];\n"
                     "  optional int32  foo = 1 [default=-0x80000001];\n"
                     "  optional uint32 foo = 1 [default= 0x100000000];\n"
@@ -1128,7 +1128,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, JsonNameNotString) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional string foo = 1 [json_name=1];\n"
                     "}\n",
                     "1:37: Expected string for JSON name.\n");
@@ -1136,7 +1136,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, DuplicateJsonName) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional uint32 foo = 1 [json_name=\"a\",json_name=\"b\"];\n"
                     "}\n",
                     "1:41: Already set option \"json_name\".\n");
@@ -1144,7 +1144,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, DefaultValueMissing) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional uint32 foo = 1 [default=];\n"
                     "}\n",
                     "1:35: Expected integer for field default value.\n");
@@ -1152,7 +1152,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, DuplicateDefaultValue) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional uint32 foo = 1 [default=1,default=2];\n"
                     "}\n",
                     "1:37: Already set option \"default\".\n");
@@ -1160,7 +1160,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, MissingOneofName) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  oneof {\n"
                     "    int32 bar = 1;\n"
                     "  }\n"
@@ -1170,7 +1170,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, LabelInOneof) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  oneof foo {\n"
                     "    optional int32 bar = 1;\n"
                     "  }\n"
@@ -1180,7 +1180,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, MapInOneof) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  oneof foo {\n"
                     "    map<int32, int32> foo_map = 1;\n"
                     "    map message_field = 2;\n" // a normal message field is OK
@@ -1191,7 +1191,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, LabelForMap) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional map<int32, int32> int_map = 1;\n"
                     "  required map<int32, int32> int_map2 = 2;\n"
                     "  optional map map_message = 4;\n" // a normal message field is OK
@@ -1204,7 +1204,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, MalformedMaps) {
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  map map_message = 1;\n" // a normal message field lacking label
                     "  map<string> str_map = 2;\n"
                     "  map<string,> str_map2 = 3;\n"
@@ -1231,7 +1231,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, ErrorInExtension) {
                 ExpectHasErrors(
-                    "message Foo { extensions 100 to 199; }\n"
+                    "struct Foo { extensions 100 to 199; }\n"
                     "extend Foo { optional string foo; }\n",
                     "1:32: Missing field number.\n");
             }
@@ -1240,7 +1240,7 @@ namespace shark {
                 // When a statement has a parse error, the parser should be able to continue
                 // parsing at the next statement.
                 ExpectHasErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  optional int32 foo;\n"
                     "  !invalid statement ending in a block { blah blah { blah } blah }\n"
                     "  optional int32 bar = 3 {}\n"
@@ -1262,7 +1262,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, ReservedStandaloneMaxNotAllowed) {
                 ExpectHasErrors(
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  reserved max;\n"
                     "}\n",
                     "1:11: Expected field name or number range.\n");
@@ -1270,7 +1270,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, ReservedMixNameAndNumber) {
                 ExpectHasErrors(
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  reserved 10, \"foo\";\n"
                     "}\n",
                     "1:15: Expected field number range.\n");
@@ -1278,7 +1278,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, ReservedMissingQuotes) {
                 ExpectHasErrors(
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  reserved foo;\n"
                     "}\n",
                     "1:11: Expected field name or number range.\n");
@@ -1286,7 +1286,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, ReservedNegativeNumber) {
                 ExpectHasErrors(
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  reserved -10;\n"
                     "}\n",
                     "1:11: Expected field name or number range.\n");
@@ -1294,7 +1294,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, ReservedNumberOutOfRange) {
                 ExpectHasErrors(
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  reserved 2147483648;\n"
                     "}\n",
                     "1:11: Integer out of range.\n");
@@ -1337,7 +1337,7 @@ namespace shark {
             TEST_F(ParseErrorTest, MethodOptionTypeError) {
                 // This used to cause an infinite loop.
                 ExpectHasErrors(
-                    "message Baz {}\n"
+                    "struct Baz {}\n"
                     "service Foo {\n"
                     "  rpc Bar(Baz) returns(Baz) { option invalid syntax; }\n"
                     "}\n",
@@ -1415,14 +1415,14 @@ namespace shark {
 
             TEST_F(ParserValidationErrorTest, MessageNameError) {
                 ExpectHasValidationErrors(
-                    "message Foo {}\n"
-                    "message Foo {}\n",
-                    "1:8: \"Foo\" is already defined.\n");
+                    "struct Foo {}\n"
+                    "struct Foo {}\n",
+                    "1:7: \"Foo\" is already defined.\n");
             }
 
             TEST_F(ParserValidationErrorTest, FieldNameError) {
                 ExpectHasValidationErrors(
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional int32 bar = 1;\n"
                     "  optional int32 bar = 2;\n"
                     "}\n",
@@ -1431,7 +1431,7 @@ namespace shark {
 
             TEST_F(ParserValidationErrorTest, FieldTypeError) {
                 ExpectHasValidationErrors(
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional Baz bar = 1;\n"
                     "}\n",
                     "1:11: \"Baz\" is not defined.\n");
@@ -1439,7 +1439,7 @@ namespace shark {
 
             TEST_F(ParserValidationErrorTest, FieldNumberError) {
                 ExpectHasValidationErrors(
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional int32 bar = 0;\n"
                     "}\n",
                     "1:23: Field numbers must be positive integers.\n"
@@ -1453,7 +1453,7 @@ namespace shark {
 
             TEST_F(ParserValidationErrorTest, ExtensionJsonNameError) {
                 ExpectHasValidationErrors(
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  extensions 1 to 100;\n"
                     "}\n"
                     "extend TestMessage {\n"
@@ -1465,7 +1465,7 @@ namespace shark {
             TEST_F(ParserValidationErrorTest, FieldDefaultValueError) {
                 ExpectHasValidationErrors(
                     "enum Baz { QUX = 1; }\n"
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional Baz bar = 1 [default=NO_SUCH_VALUE];\n"
                     "}\n",
                     "2:32: Enum type \"Baz\" has no value named \"NO_SUCH_VALUE\".\n");
@@ -1487,7 +1487,7 @@ namespace shark {
 
             TEST_F(ParserValidationErrorTest, FieldOptionNameError) {
                 ExpectHasValidationErrors(
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional bool bar = 1 [foo=1];\n"
                     "}\n",
                     "1:25: Option \"foo\" unknown. Ensure that your proto definition file "
@@ -1496,7 +1496,7 @@ namespace shark {
 
             TEST_F(ParserValidationErrorTest, FieldOptionValueError) {
                 ExpectHasValidationErrors(
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional int32 bar = 1 [ctype=1];\n"
                     "}\n",
                     "1:32: Value must be identifier for enum-valued option "
@@ -1505,7 +1505,7 @@ namespace shark {
 
             TEST_F(ParserValidationErrorTest, ExtensionRangeNumberError) {
                 ExpectHasValidationErrors(
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  extensions 0;\n"
                     "}\n",
                     "1:13: Extension numbers must be positive integers.\n"
@@ -1515,7 +1515,7 @@ namespace shark {
             TEST_F(ParserValidationErrorTest, Proto3ExtensionError) {
                 ExpectHasEarlyExitErrors(
                     "syntax = 'proto3';\n"
-                    "message Foo { \n"
+                    "struct Foo { \n"
                     "  extensions 100 to 199;\n"
                     "}\n"
                     "extend Foo { string foo = 101; }\n",
@@ -1526,7 +1526,7 @@ namespace shark {
             TEST_F(ParserValidationErrorTest, Proto3MessageSet) {
                 ExpectHasEarlyExitErrors(
                     "syntax = 'proto3';\n"
-                    "message Foo { \n"
+                    "struct Foo { \n"
                     "  option message_set_wire_format = true;\n"
                     "}\n",
                     "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
@@ -1536,7 +1536,7 @@ namespace shark {
             TEST_F(ParserValidationErrorTest, Proto3Required) {
                 ExpectHasEarlyExitErrors(
                     "syntax = 'proto3';\n"
-                    "message Foo { \n"
+                    "struct Foo { \n"
                     "  required int32 field = 1;"
                     "}\n",
                     "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
@@ -1546,7 +1546,7 @@ namespace shark {
             TEST_F(ParserValidationErrorTest, Proto3Default) {
                 ExpectHasEarlyExitErrors(
                     "syntax = 'proto3';\n"
-                    "message Foo { \n"
+                    "struct Foo { \n"
                     "  int32 field = 1 [default = 12];"
                     "}\n",
                     "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
@@ -1556,7 +1556,7 @@ namespace shark {
             TEST_F(ParserValidationErrorTest, Proto3JsonConflictError) {
                 ExpectHasEarlyExitErrors(
                     "syntax = 'proto3';\n"
-                    "message TestMessage {\n"
+                    "struct TestMessage {\n"
                     "  uint32 foo = 1;\n"
                     "  uint32 Foo = 2;\n"
                     "}\n",
@@ -1566,8 +1566,8 @@ namespace shark {
 
             TEST_F(ParserValidationErrorTest, ExplicitlyMapEntryError) {
                 ExpectHasValidationErrors(
-                    "message Foo {\n"
-                    "  message ValueEntry {\n"
+                    "struct Foo {\n"
+                    "  struct ValueEntry {\n"
                     "    option map_entry = true;\n"
                     "    optional int32 key = 1;\n"
                     "    optional int32 value = 2;\n"
@@ -1588,7 +1588,7 @@ namespace shark {
 
             TEST_F(ParserValidationErrorTest, MethodNameError) {
                 ExpectHasValidationErrors(
-                    "message Baz {}\n"
+                    "struct Baz {}\n"
                     "service Foo {\n"
                     "  rpc Bar(Baz) returns(Baz);\n"
                     "  rpc Bar(Baz) returns(Baz);\n"
@@ -1598,7 +1598,7 @@ namespace shark {
 
             TEST_F(ParserValidationErrorTest, MethodInputTypeError) {
                 ExpectHasValidationErrors(
-                    "message Baz {}\n"
+                    "struct Baz {}\n"
                     "service Foo {\n"
                     "  rpc Bar(Qux) returns(Baz);\n"
                     "}\n",
@@ -1607,7 +1607,7 @@ namespace shark {
 
             TEST_F(ParserValidationErrorTest, MethodOutputTypeError) {
                 ExpectHasValidationErrors(
-                    "message Baz {}\n"
+                    "struct Baz {}\n"
                     "service Foo {\n"
                     "  rpc Bar(Baz) returns(Qux);\n"
                     "}\n",
@@ -1627,7 +1627,7 @@ namespace shark {
                 ExpectHasValidationErrors(
                     "package foo.base;\n"
                     "import \"base.shark\";\n"
-                    "message qux {\n"
+                    "struct qux {\n"
                     "  optional base.bar baz = 1;\n"
                     "  optional .base.bar quz = 2;\n"
                     "}\n",
@@ -1876,7 +1876,7 @@ namespace shark {
                     "// Message comment.\n"
                     "//\n"
                     "// More detail in message comment.\n"
-                    "message TestMessage1 {\n"
+                    "struct TestMessage1 {\n"
                     "\n"
                     "  // Detached comment before foo.\n"
                     "\n"
@@ -1886,7 +1886,7 @@ namespace shark {
                     "  // Detached comment before NestedMessage.\n"
                     "\n"
                     "  // Nested-message comment.\n"
-                    "  message NestedMessage {\n"
+                    "  struct NestedMessage {\n"
                     "    optional int32 bar = 1;\n"
                     "  }\n"
                     "}\n"
@@ -1976,8 +1976,8 @@ namespace shark {
             TEST_F(ParseDescriptorDebugTest, TestMaps) {
                 SetupParser(
                     "syntax = \"proto2\"; "
-                    "message Foo { "
-                    "  message Bar { } "
+                    "struct Foo { "
+                    "  struct Bar { } "
                     "  map<int32, Bar> enum_message_map = 1; "
                     "  map<string, float> primitive_map = 2; "
                     "} ");
@@ -2035,8 +2035,8 @@ namespace shark {
 
             TEST_F(SourceInfoTest, Messages) {
                 EXPECT_TRUE(
-                    Parse("$a$message $b$Foo$c$ {}$d$\n"
-                          "$e$message $f$Bar$g$ {}$h$\n"));
+                    Parse("$a$struct $b$Foo$c$ {}$d$\n"
+                          "$e$struct $f$Bar$g$ {}$h$\n"));
 
                 EXPECT_TRUE(HasSpan('a', 'd', file_.message_type(0)));
                 EXPECT_TRUE(HasSpan('b', 'c', file_.message_type(0), "name"));
@@ -2049,7 +2049,7 @@ namespace shark {
 
             TEST_F(SourceInfoTest, Fields) {
                 EXPECT_TRUE(
-                    Parse("message Foo {\n"
+                    Parse("struct Foo {\n"
                           "  $a$optional$b$ $c$int32$d$ $e$bar$f$ = $g$1$h$;$i$\n"
                           "  $j$list$k$<$l$X.Y$m$> $n$baz$o$ = $p$2$q$;$r$\n"
                           "}\n"));
@@ -2078,7 +2078,7 @@ namespace shark {
             TEST_F(SourceInfoTest, Proto3Fields) {
                 EXPECT_FALSE(
                     Parse("syntax = \"proto3\";\n"
-                          "message Foo {\n"
+                          "struct Foo {\n"
                           "  $a$int32$b$ $c$bar$d$ = $e$1$f$;$g$\n"
                           "  $h$list$i$<$j$X.Y$k$> $l$baz$m$ = $n$2$o$;$p$\n"
                           "}\n"));
@@ -2128,7 +2128,7 @@ namespace shark {
 
             TEST_F(SourceInfoTest, NestedExtensions) {
                 EXPECT_TRUE(
-                    Parse("message Message {\n"
+                    Parse("struct Message {\n"
                           "  $a$extend $b$Foo$c$ {\n"
                           "    $d$optional$e$ int32 bar = 1;$f$\n"
                           "    $g$list$h$<X.Y> baz = 2;$i$\n"
@@ -2174,7 +2174,7 @@ namespace shark {
 
             TEST_F(SourceInfoTest, ExtensionRanges) {
                 EXPECT_TRUE(
-                    Parse("message Message {\n"
+                    Parse("struct Message {\n"
                           "  $a$extensions $b$1$c$ to $d$4$e$, $f$6$g$;$h$\n"
                           "  $i$extensions $j$8$k$ to $l$max$m$;$n$\n"
                           "}\n"));
@@ -2206,7 +2206,7 @@ namespace shark {
 
             TEST_F(SourceInfoTest, ReservedRanges) {
                 EXPECT_TRUE(
-                    Parse("message Message {\n"
+                    Parse("struct Message {\n"
                           "  $a$reserved $b$1$c$ to $d$4$e$, $f$6$g$;$h$\n"
                           "}\n"));
 
@@ -2231,7 +2231,7 @@ namespace shark {
 
             TEST_F(SourceInfoTest, Oneofs) {
                 EXPECT_TRUE(
-                    Parse("message Foo {\n"
+                    Parse("struct Foo {\n"
                           "  $a$oneof $c$foo$d$ {\n"
                           "    $e$int32$f$ $g$a$h$ = $i$1$j$;$k$\n"
                           "  }$r$\n"
@@ -2256,11 +2256,11 @@ namespace shark {
 
             TEST_F(SourceInfoTest, NestedMessages) {
                 EXPECT_TRUE(
-                    Parse("message Foo {\n"
-                          "  $a$message $b$Bar$c$ {\n"
-                          "    $d$message $e$Baz$f$ {}$g$\n"
+                    Parse("struct Foo {\n"
+                          "  $a$struct $b$Bar$c$ {\n"
+                          "    $d$struct $e$Baz$f$ {}$g$\n"
                           "  }$h$\n"
-                          "  $i$message $j$Qux$k$ {}$l$\n"
+                          "  $i$struct $j$Qux$k$ {}$l$\n"
                           "}\n"));
 
                 const DescriptorProto& bar = file_.message_type(0).nested_type(0);
@@ -2387,7 +2387,7 @@ namespace shark {
 
             TEST_F(SourceInfoTest, ScopedOptions) {
                 EXPECT_TRUE(
-                    Parse("message Foo {\n"
+                    Parse("struct Foo {\n"
                           "  $a$option mopt = 1;$b$\n"
                           "}\n"
                           "enum Bar {\n"
@@ -2490,7 +2490,7 @@ namespace shark {
                 // top-level options so we won't re-test that -- just make sure that the
                 // syntax used for field options is understood.
                 EXPECT_TRUE(
-                    Parse("message Foo {"
+                    Parse("struct Foo {"
                           "  optional int32 bar = 1 "
                           "$a$[default=$b$123$c$,$d$opt1=123$e$,"
                           "$f$opt2='hi'$g$]$h$;"
@@ -2528,7 +2528,7 @@ namespace shark {
                 EXPECT_TRUE(
                     Parse("// Foo leading\n"
                           "// line 2\n"
-                          "$a$message Foo {\n"
+                          "$a$struct Foo {\n"
                           "  // Foo trailing\n"
                           "  // line 2\n"
                           "\n"
@@ -2563,7 +2563,7 @@ namespace shark {
                           "\n"
                           "// Foo leading\n"
                           "// line 2\n"
-                          "$a$message Foo {\n"
+                          "$a$struct Foo {\n"
                           "  /* Foo trailing\n"
                           "   * line 2 */\n"
                           "  // detached\n"
@@ -2609,7 +2609,7 @@ namespace shark {
 
             TEST_F(SourceInfoTest, DocComments3) {
                 EXPECT_TRUE(
-                    Parse("$a$message Foo {\n"
+                    Parse("$a$struct Foo {\n"
                           "  // bar leading\n"
                           "  $b$optional int32 bar = 1 [(baz.qux) = {}];$c$\n"
                           "  // bar trailing\n"
@@ -2681,7 +2681,7 @@ namespace shark {
             TEST_F(SourceInfoTest, DocCommentsOneof) {
                 EXPECT_TRUE(
                     Parse("// Foo leading\n"
-                          "$a$message Foo {\n"
+                          "$a$struct Foo {\n"
                           "  /* Foo trailing\n"
                           "   */\n"
                           "  // detached before oneof\n"

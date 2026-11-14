@@ -37,6 +37,6 @@ package sharkbuf_unittest_import;
 option optimize_for = LITE_RUNTIME;
 
 
-message PublicImportMessageLite {
+struct PublicImportMessageLite {
   optional int32 e = 1;
 }

@@ -541,7 +541,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --test_out=$tmpdir "
                     "--proto_path=$tmpdir foo.shark");
@@ -571,7 +571,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --plug_out=$tmpdir "
                     "--proto_path=$tmpdir foo.shark");
@@ -602,7 +602,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --test_out=$tmpdir --plug_out=$tmpdir "
                     "--proto_path=$tmpdir foo.shark");
@@ -635,10 +635,10 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
-                    "message Bar {}\n");
+                    "struct Bar {}\n");
 
                 Run("protocol_compiler --test_out=$tmpdir --plug_out=$tmpdir "
                     "--proto_path=$tmpdir foo.shark bar.shark");
@@ -757,16 +757,16 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
                     "import \"baz.shark\";\n"
-                    "message Bar {\n"
+                    "struct Bar {\n"
                     "  optional Baz a = 1;\n"
                     "}\n");
                 CreateTempFile("baz.shark",
                     "syntax = \"proto2\";\n"
-                    "message Baz {}\n");
+                    "struct Baz {}\n");
 
                 Run("protocol_compiler --test_out=$tmpdir --plug_out=$tmpdir "
                     "--proto_path=$tmpdir foo.shark bar.shark");
@@ -973,7 +973,7 @@ namespace shark {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
                     "import \"bar.shark\";\n"
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional Bar bar = 1;\n"
                     "}\n");
 
@@ -991,15 +991,15 @@ namespace shark {
                 OnlyReportsUnusedImportsForFilesBeingGenerated) {
                 CreateTempFile("unused.shark",
                     "syntax = \"proto2\";\n"
-                    "message Unused {}\n");
+                    "struct Unused {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
                     "import \"unused.shark\";\n"
-                    "message Bar {}\n");
+                    "struct Bar {}\n");
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
                     "import \"bar.shark\";\n"
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional Bar bar = 1;\n"
                     "}\n");
 
@@ -1011,15 +1011,15 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, ReportsTransitiveMisingImports_LeafFirst) {
                 CreateTempFile("unused.shark",
                     "syntax = \"proto2\";\n"
-                    "message Unused {}\n");
+                    "struct Unused {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
                     "import \"unused.shark\";\n"
-                    "message Bar {}\n");
+                    "struct Bar {}\n");
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
                     "import \"bar.shark\";\n"
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional Bar bar = 1;\n"
                     "}\n");
 
@@ -1032,15 +1032,15 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, ReportsTransitiveMisingImports_LeafLast) {
                 CreateTempFile("unused.shark",
                     "syntax = \"proto2\";\n"
-                    "message Unused {}\n");
+                    "struct Unused {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
                     "import \"unused.shark\";\n"
-                    "message Bar {}\n");
+                    "struct Bar {}\n");
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
                     "import \"bar.shark\";\n"
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional Bar bar = 1;\n"
                     "}\n");
 
@@ -1054,7 +1054,7 @@ namespace shark {
 
                 CreateTempFile("bar/baz/foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempDir("out");
                 CreateTempDir("plugout");
 
@@ -1071,7 +1071,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --test_out=TestParameter:$tmpdir "
                     "--plug_out=TestPluginParameter:$tmpdir "
@@ -1088,7 +1088,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 // Create the "a" and "b" sub-directories.
                 CreateTempDir("a");
                 CreateTempDir("b");
@@ -1114,7 +1114,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 // Create the "a" and "b" sub-directories.
                 CreateTempDir("a");
                 CreateTempDir("b");
@@ -1135,7 +1135,7 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, UnrecognizedExtraParameters) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --plug_out=TestParameter:$tmpdir "
                     "--unknown_plug_a_opt=Foo "
@@ -1159,7 +1159,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --plug_out=TestParameter:$tmpdir "
                     "--xyz_opt=foo=bar --xyz_out=$tmpdir "
@@ -1175,7 +1175,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler "
                     "--test_out=TestParameter:$tmpdir "
@@ -1198,7 +1198,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message MockCodeGenerator_Annotate {}\n");
+                    "struct MockCodeGenerator_Annotate {}\n");
 
                 Run("protocol_compiler "
                     "--test_out=TestParameter:$tmpdir "
@@ -1244,7 +1244,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --test_out=$tmpdir\\ "
                     "--proto_path=$tmpdir\\ foo.shark");
@@ -1265,11 +1265,11 @@ namespace shark {
 
                 CreateTempFile("b/bar.shark",
                     "syntax = \"proto2\";\n"
-                    "message Bar {}\n");
+                    "struct Bar {}\n");
                 CreateTempFile("a/foo.shark",
                     "syntax = \"proto2\";\n"
                     "import \"bar.shark\";\n"
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional Bar a = 1;\n"
                     "}\n");
                 CreateTempFile("b/foo.shark", "this should not be parsed\n");
@@ -1286,11 +1286,11 @@ namespace shark {
 
                 CreateTempFile("b/bar.shark",
                     "syntax = \"proto2\";\n"
-                    "message Bar {}\n");
+                    "struct Bar {}\n");
                 CreateTempFile("a/foo.shark",
                     "syntax = \"proto2\";\n"
                     "import \"bar.shark\";\n"
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional Bar a = 1;\n"
                     "}\n");
                 CreateTempFile("b/foo.shark", "this should not be parsed\n");
@@ -1308,7 +1308,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --test_out=$tmpdir "
                     "--proto_path=bar=$tmpdir bar/foo.shark");
@@ -1323,7 +1323,7 @@ namespace shark {
                 CreateTempDir("with=sign");
                 CreateTempFile("with=sign/foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --test_out=$tmpdir "
                     "--proto_path=$tmpdir/with=sign foo.shark");
@@ -1338,7 +1338,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 // Create the "a" and "b" sub-directories.
                 CreateTempDir("a");
                 CreateTempDir("b");
@@ -1359,7 +1359,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --disallow_services --test_out=$tmpdir "
                     "--proto_path=$tmpdir foo.shark");
@@ -1373,7 +1373,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n"
+                    "struct Foo {}\n"
                     "service Bar {}\n");
 
                 Run("protocol_compiler --disallow_services --test_out=$tmpdir "
@@ -1387,7 +1387,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n"
+                    "struct Foo {}\n"
                     "service Bar {}\n");
 
                 Run("protocol_compiler --test_out=$tmpdir "
@@ -1401,10 +1401,10 @@ namespace shark {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
                     "import \"bar.shark\";\n"
-                    "message Foo { optional Bar bar = 1; }");
+                    "struct Foo { optional Bar bar = 1; }");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
-                    "message Bar { optional string text = 1; }");
+                    "struct Bar { optional string text = 1; }");
 
                 Run("protocol_compiler --test_out=$tmpdir --proto_path=$tmpdir "
                     "--direct_dependencies= foo.shark");
@@ -1419,13 +1419,13 @@ namespace shark {
                     "syntax = \"proto2\";\n"
                     "import \"bar.shark\";\n"
                     "import \"bla.shark\";\n"
-                    "message Foo { optional Bar bar = 1; optional Bla bla = 2; }");
+                    "struct Foo { optional Bar bar = 1; optional Bla bla = 2; }");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
-                    "message Bar { optional string text = 1; }");
+                    "struct Bar { optional string text = 1; }");
                 CreateTempFile("bla.shark",
                     "syntax = \"proto2\";\n"
-                    "message Bla { optional int64 number = 1; }");
+                    "struct Bla { optional int64 number = 1; }");
 
                 Run("protocol_compiler --test_out=$tmpdir --proto_path=$tmpdir "
                     "--direct_dependencies=bla.shark foo.shark");
@@ -1439,10 +1439,10 @@ namespace shark {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
                     "import \"bar.shark\";\n"
-                    "message Foo { optional Bar bar = 1; }");
+                    "struct Foo { optional Bar bar = 1; }");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
-                    "message Bar { optional string text = 1; }");
+                    "struct Bar { optional string text = 1; }");
 
                 Run("protocol_compiler --test_out=$tmpdir --proto_path=$tmpdir "
                     "--direct_dependencies=bar.shark foo.shark");
@@ -1455,13 +1455,13 @@ namespace shark {
                     "syntax = \"proto2\";\n"
                     "import \"bar.shark\";\n"
                     "import \"bla.shark\";\n"
-                    "message Foo { optional Bar bar = 1; optional Bla bla = 2; }");
+                    "struct Foo { optional Bar bar = 1; optional Bla bla = 2; }");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
-                    "message Bar { optional string text = 1; }");
+                    "struct Bar { optional string text = 1; }");
                 CreateTempFile("bla.shark",
                     "syntax = \"proto2\";\n"
-                    "message Bla { optional int64 number = 1; }");
+                    "struct Bla { optional int64 number = 1; }");
 
                 Run("protocol_compiler --test_out=$tmpdir --proto_path=$tmpdir "
                     "--direct_dependencies=bar.shark:bla.shark foo.shark");
@@ -1486,10 +1486,10 @@ namespace shark {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
                     "import \"bar.shark\";\n"
-                    "message Foo { optional Bar bar = 1; }");
+                    "struct Foo { optional Bar bar = 1; }");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
-                    "message Bar { optional string text = 1; }");
+                    "struct Bar { optional string text = 1; }");
 
                 std::vector<std::string> commands;
                 commands.push_back("protocol_compiler");
@@ -1508,7 +1508,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --test_out=$tmpdir "
                     "--proto_path=$tmpdir $tmpdir/foo.shark");
@@ -1520,11 +1520,11 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, WriteDescriptorSet) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
                     "import \"foo.shark\";\n"
-                    "message Bar {\n"
+                    "struct Bar {\n"
                     "  optional Foo foo = 1;\n"
                     "}\n");
 
@@ -1550,17 +1550,17 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, WriteDescriptorSetWithDuplicates) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
                     "import \"foo.shark\";\n"
-                    "message Bar {\n"
+                    "struct Bar {\n"
                     "  optional Foo foo = 1;\n"
                     "}\n");
                 CreateTempFile("baz.shark",
                     "syntax = \"proto2\";\n"
                     "import \"foo.shark\";\n"
-                    "message Baz {\n"
+                    "struct Baz {\n"
                     "  optional Foo foo = 1;\n"
                     "}\n");
 
@@ -1590,11 +1590,11 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, WriteDescriptorSetWithSourceInfo) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
                     "import \"foo.shark\";\n"
-                    "message Bar {\n"
+                    "struct Bar {\n"
                     "  optional Foo foo = 1;\n"
                     "}\n");
 
@@ -1616,11 +1616,11 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, WriteTransitiveDescriptorSet) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
                     "import \"foo.shark\";\n"
-                    "message Bar {\n"
+                    "struct Bar {\n"
                     "  optional Foo foo = 1;\n"
                     "}\n");
 
@@ -1647,11 +1647,11 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, WriteTransitiveDescriptorSetWithSourceInfo) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
                     "import \"foo.shark\";\n"
-                    "message Bar {\n"
+                    "struct Bar {\n"
                     "  optional Foo foo = 1;\n"
                     "}\n");
 
@@ -1681,11 +1681,11 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, WriteDependencyManifestFileGivenTwoInputs) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
                     "import \"foo.shark\";\n"
-                    "message Bar {\n"
+                    "struct Bar {\n"
                     "  optional Foo foo = 1;\n"
                     "}\n");
 
@@ -1700,11 +1700,11 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, WriteDependencyManifestFile) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
                     "import \"foo.shark\";\n"
-                    "message Bar {\n"
+                    "struct Bar {\n"
                     "  optional Foo foo = 1;\n"
                     "}\n");
 
@@ -1730,11 +1730,11 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, WriteDependencyManifestFileForAbsolutePath) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
                     "import \"foo.shark\";\n"
-                    "message Bar {\n"
+                    "struct Bar {\n"
                     "  optional Foo foo = 1;\n"
                     "}\n");
 
@@ -1752,11 +1752,11 @@ namespace shark {
                 WriteDependencyManifestFileWithDescriptorSetOut) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
                     "import \"foo.shark\";\n"
-                    "message Bar {\n"
+                    "struct Bar {\n"
                     "  optional Foo foo = 1;\n"
                     "}\n");
 
@@ -1776,10 +1776,10 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
-                    "message Bar {}\n");
+                    "struct Bar {}\n");
                 CreateTempFile("arguments.txt",
                     "--test_out=$tmpdir\n"
                     "--plug_out=$tmpdir\n"
@@ -1814,7 +1814,7 @@ namespace shark {
                     "--proto_path=$tmpdir foo.shark");
 
                 ExpectErrorText(
-                    "foo.shark:2:1: Expected top-level statement (e.g. \"message\").\n");
+                    "foo.shark:2:1: Expected top-level statement (e.g. \"struct\").\n");
             }
 
             TEST_F(CommandLineInterfaceTest, ParseErrors_DescriptorSetIn) {
@@ -1848,7 +1848,7 @@ namespace shark {
                     "--proto_path=$tmpdir foo.shark");
 
                 ExpectErrorText(
-                    "bar.shark:2:1: Expected top-level statement (e.g. \"message\").\n"
+                    "bar.shark:2:1: Expected top-level statement (e.g. \"struct\").\n"
                     "baz.shark:2:1: Import \"bar.shark\" was not found or had errors.\n"
                     "foo.shark:2:1: Import \"bar.shark\" was not found or had errors.\n"
                     "foo.shark:3:1: Import \"baz.shark\" was not found or had errors.\n");
@@ -1906,7 +1906,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 // Create a directory called "bar" so that we can point --proto_path at it.
                 CreateTempFile("bar/dummy", "");
@@ -1945,10 +1945,10 @@ namespace shark {
 
                 CreateTempFile("foo/foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
                 CreateTempFile("bar/foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Bar {}\n");
+                    "struct Bar {}\n");
 
                 Run("protocol_compiler --test_out=$tmpdir "
                     "--proto_path=$tmpdir/foo --proto_path=$tmpdir/bar "
@@ -1999,7 +1999,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message FooBar { required string foo_message = 1; }\n");
+                    "struct FooBar { required string foo_message = 1; }\n");
 
                 Run("protocol_compiler --descriptor_set_out=$tmpdir/descriptor_set "
                     "--descriptor_set_in=$tmpdir/foo.bin "
@@ -2047,7 +2047,7 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, MissingOutputError) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --proto_path=$tmpdir foo.shark");
 
@@ -2057,7 +2057,7 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, OutputWriteError) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 std::string output_file = MockCodeGenerator::GetOutputFileName("test_generator", "foo.shark");
 
@@ -2085,7 +2085,7 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, PluginOutputWriteError) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 std::string output_file = MockCodeGenerator::GetOutputFileName("test_plugin", "foo.shark");
 
@@ -2108,7 +2108,7 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, OutputDirectoryNotFoundError) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --test_out=$tmpdir/nosuchdir "
                     "--proto_path=$tmpdir foo.shark");
@@ -2119,7 +2119,7 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, PluginOutputDirectoryNotFoundError) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --plug_out=$tmpdir/nosuchdir "
                     "--proto_path=$tmpdir foo.shark");
@@ -2130,7 +2130,7 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, OutputDirectoryIsFileError) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --test_out=$tmpdir/foo.shark "
                     "--proto_path=$tmpdir foo.shark");
@@ -2148,7 +2148,7 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, GeneratorError) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message MockCodeGenerator_Error {}\n");
+                    "struct MockCodeGenerator_Error {}\n");
 
                 Run("protocol_compiler --test_out=$tmpdir "
                     "--proto_path=$tmpdir foo.shark");
@@ -2162,7 +2162,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message MockCodeGenerator_Error {}\n");
+                    "struct MockCodeGenerator_Error {}\n");
 
                 Run("protocol_compiler --plug_out=TestParameter:$tmpdir "
                     "--proto_path=$tmpdir foo.shark");
@@ -2176,7 +2176,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message MockCodeGenerator_Exit {}\n");
+                    "struct MockCodeGenerator_Exit {}\n");
 
                 Run("protocol_compiler --plug_out=TestParameter:$tmpdir "
                     "--proto_path=$tmpdir foo.shark");
@@ -2191,7 +2191,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message MockCodeGenerator_Abort {}\n");
+                    "struct MockCodeGenerator_Abort {}\n");
 
                 Run("protocol_compiler --plug_out=TestParameter:$tmpdir "
                     "--proto_path=$tmpdir foo.shark");
@@ -2212,7 +2212,7 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, PluginReceivesSourceCodeInfo) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message MockCodeGenerator_HasSourceCodeInfo {}\n");
+                    "struct MockCodeGenerator_HasSourceCodeInfo {}\n");
 
                 Run("protocol_compiler --plug_out=$tmpdir --proto_path=$tmpdir foo.shark");
 
@@ -2223,7 +2223,7 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, PluginReceivesJsonName) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message MockCodeGenerator_HasJsonName {\n"
+                    "struct MockCodeGenerator_HasJsonName {\n"
                     "  optional int32 value = 1;\n"
                     "}\n");
 
@@ -2235,7 +2235,7 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, PluginReceivesCompilerVersion) {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message MockCodeGenerator_ShowVersionNumber {\n"
+                    "struct MockCodeGenerator_ShowVersionNumber {\n"
                     "  optional int32 value = 1;\n"
                     "}\n");
 
@@ -2251,7 +2251,7 @@ namespace shark {
 
                 CreateTempFile("error.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --badplug_out=TestParameter:$tmpdir "
                     "--plugin=prefix-gen-badplug=no_such_file "
@@ -2278,7 +2278,7 @@ namespace shark {
 
                 CreateTempFile("error.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 DisallowPlugins();
                 Run("protocol_compiler --plug_out=TestParameter:$tmpdir "
@@ -2309,7 +2309,7 @@ namespace shark {
                     "--proto_path=$tmpdir --error_format=gcc foo.shark");
 
                 ExpectErrorText(
-                    "foo.shark:2:1: Expected top-level statement (e.g. \"message\").\n");
+                    "foo.shark:2:1: Expected top-level statement (e.g. \"struct\").\n");
             }
 
             TEST_F(CommandLineInterfaceTest, MsvsFormatErrors) {
@@ -2324,7 +2324,7 @@ namespace shark {
 
                 ExpectErrorText(
                     "$tmpdir/foo.shark(2) : error in column=1: Expected top-level statement "
-                    "(e.g. \"message\").\n");
+                    "(e.g. \"struct\").\n");
             }
 
             TEST_F(CommandLineInterfaceTest, InvalidErrorFormat) {
@@ -2366,7 +2366,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler -t$tmpdir "
                     "--proto_path=$tmpdir foo.shark");
@@ -2380,7 +2380,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler --test_out $tmpdir "
                     "--proto_path=$tmpdir foo.shark");
@@ -2395,7 +2395,7 @@ namespace shark {
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
-                    "message Foo {}\n");
+                    "struct Foo {}\n");
 
                 Run("protocol_compiler -t $tmpdir "
                     "--proto_path=$tmpdir foo.shark");
@@ -2424,7 +2424,7 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, Proto3OptionalDisallowedNoCodegenSupport) {
                 CreateTempFile("google/foo.shark",
                     "syntax = \"proto3\";\n"
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional int32 i = 1;\n"
                     "}\n");
 
@@ -2441,7 +2441,7 @@ namespace shark {
             TEST_F(CommandLineInterfaceTest, Proto3OptionalAllowWithFlag) {
                 CreateTempFile("google/foo.shark",
                     "syntax = \"proto3\";\n"
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional int32 i = 1;\n"
                     "}\n");
 
@@ -2454,7 +2454,7 @@ namespace shark {
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
                     "package foo;\n"
-                    "message Foo {\n"
+                    "struct Foo {\n"
                     "  optional int32 a = 2;\n"
                     "  optional string b = 4;\n"
                     "  optional string c = 5;\n"
@@ -2463,7 +2463,7 @@ namespace shark {
                     "}\n");
                 CreateTempFile("bar.shark",
                     "syntax = \"proto2\";\n"
-                    "message Bar {\n"
+                    "struct Bar {\n"
                     "  optional int32 a = 2;\n"
                     "  extensions 4 to 5;\n"
                     "  optional int64 d = 8;\n"
@@ -2471,7 +2471,7 @@ namespace shark {
                     "}\n");
                 CreateTempFile("baz.shark",
                     "syntax = \"proto2\";\n"
-                    "message Baz {\n"
+                    "struct Baz {\n"
                     "  optional int32 a = 2;\n"
                     "  optional int64 d = 8;\n"
                     "  extensions 15 to max;\n" // unordered.
@@ -2483,18 +2483,18 @@ namespace shark {
                 CreateTempFile(
                     "quz.shark",
                     "syntax = \"proto2\";\n"
-                    "message Quz {\n"
-                    "  message Foo {}\n" // nested message
+                    "struct Quz {\n"
+                    "  struct Foo {}\n" // nested message
                     "  optional int32 a = 2;\n"
-                    "  message C {\n"
+                    "  struct C {\n"
                     "    optional int32 d = 5;\n"
                     "  }\n"
                     "  optional C c = 4;\n"
                     "  extensions 8 to 10;\n"
-                    "  message E {\n"
+                    "  struct E {\n"
                     "    optional int32 f = 9;\n" // explicitly reuse extension range 8-10
-                    "    message G {\n"
-                    "      message Foo {}\n"
+                    "    struct G {\n"
+                    "      struct Foo {}\n"
                     "    }\n"
                     "    optional G g = 15;\n"
                     "  }\n"

@@ -40,7 +40,7 @@ import "tests/sk/unittest.shark";
 package sharkbuf_unittest;
 
 // Tests maps.
-message TestMap {
+struct TestMap {
   map<int32, int32> map_int32_int32 = 1;
   map<int64, int64> map_int64_int64 = 2;
   map<uint32, uint32> map_uint32_uint32 = 3;
@@ -62,16 +62,16 @@ message TestMap {
   map<int32, TestAllTypes> map_int32_all_types = 19;
 }
 
-message TestMapSubmessage {
+struct TestMapSubmessage {
   optional TestMap test_map = 1;
 }
 
-message TestMessageMap {
+struct TestMessageMap {
   map<int32, TestAllTypes> map_int32_message = 1;
 }
 
 // Two map fields share the same entry default instance.
-message TestSameTypeMap {
+struct TestSameTypeMap {
   map<int32, int32> map1 = 1;
   map<int32, int32> map2 = 2;
 }
@@ -84,11 +84,11 @@ enum MapEnum {
 }
 
 // Test embedded message with required fields
-message TestRequiredMessageMap {
+struct TestRequiredMessageMap {
   map<int32, TestRequired> map_field = 1;
 }
 
-message TestArenaMap {
+struct TestArenaMap {
   map<int32, int32> map_int32_int32 = 1;
   map<int64, int64> map_int64_int64 = 2;
   map<uint32, uint32> map_uint32_uint32 = 3;
@@ -110,16 +110,16 @@ message TestArenaMap {
 
 // Previously, message containing enum called Type cannot be used as value of
 // map field.
-message MessageContainingEnumCalledType {
+struct MessageContainingEnumCalledType {
   enum Type { TYPE_FOO = 0; }
   map<string, MessageContainingEnumCalledType> type = 1;
 }
 
 // Previously, message cannot contain map field called "entry".
-message MessageContainingMapCalledEntry {
+struct MessageContainingMapCalledEntry {
   map<int32, int32> entry = 1;
 }
 
-message TestRecursiveMapMessage {
+struct TestRecursiveMapMessage {
   map<string, TestRecursiveMapMessage> a = 1;
 }

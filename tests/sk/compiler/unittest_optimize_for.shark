@@ -41,7 +41,7 @@ package sharkbuf_unittest;
 
 option optimize_for = CODE_SIZE;
 
-message TestOptimizedForSize {
+struct TestOptimizedForSize {
   optional int32 i = 1;
   optional ForeignMessage msg = 19;
 
@@ -58,10 +58,10 @@ message TestOptimizedForSize {
   }
 }
 
-message TestRequiredOptimizedForSize {
+struct TestRequiredOptimizedForSize {
   required int32 x = 1;
 }
 
-message TestOptionalOptimizedForSize {
+struct TestOptionalOptimizedForSize {
   optional TestRequiredOptimizedForSize o = 1;
 }

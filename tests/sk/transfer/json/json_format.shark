@@ -38,22 +38,22 @@ syntax = "proto2";
 
 package sharkbuf_unittest;
 
-message TestFlagsAndStrings {
+struct TestFlagsAndStrings {
   required int32 A = 1;
 }
 
-message TestBase64ByteArrays {
+struct TestBase64ByteArrays {
   required bytes a = 1;
 }
 
-message TestJavaScriptJSON {
+struct TestJavaScriptJSON {
   optional int32 a = 1;
   optional float final = 2;
   optional string in = 3;
   optional string Var = 4;
 }
 
-message TestJavaScriptOrderJSON1 {
+struct TestJavaScriptOrderJSON1 {
   optional int32 d = 1;
   optional int32 c = 2;
   optional bool x = 3;
@@ -61,7 +61,7 @@ message TestJavaScriptOrderJSON1 {
   optional int32 a = 5;
 }
 
-message TestJavaScriptOrderJSON2 {
+struct TestJavaScriptOrderJSON2 {
   optional int32 d = 1;
   optional int32 c = 2;
   optional bool x = 3;
@@ -70,12 +70,12 @@ message TestJavaScriptOrderJSON2 {
   list<TestJavaScriptOrderJSON1> z = 6;
 }
 
-message TestLargeInt {
+struct TestLargeInt {
   required int64 a = 1;
   required uint64 b = 2;
 }
 
-message TestNumbers {
+struct TestNumbers {
   enum MyType {
     OK = 0;
     WARNING = 1;
@@ -90,36 +90,36 @@ message TestNumbers {
 }
 
 
-message TestCamelCase {
+struct TestCamelCase {
   optional string normal_field = 1;
   optional int32 CAPITAL_FIELD = 2;
   optional int32 CamelCaseField = 3;
 }
 
-message TestBoolMap {
+struct TestBoolMap {
   map<bool, int32> bool_map = 1;
 }
 
-message TestRecursion {
+struct TestRecursion {
   optional int32 value = 1;
   optional TestRecursion child = 2;
 }
 
-message TestStringMap {
+struct TestStringMap {
   map<string, string> string_map = 1;
 }
 
-message TestStringSerializer {
+struct TestStringSerializer {
   optional string scalar_string = 1;
   list<string> repeated_string = 2;
   map<string, string> string_map = 3;
 }
 
-message TestMessageWithExtension {
+struct TestMessageWithExtension {
   extensions 100 to max;
 }
 
-message TestExtension {
+struct TestExtension {
   extend TestMessageWithExtension {
     optional TestExtension ext = 100;
   }
@@ -132,6 +132,6 @@ enum EnumValue {
   DEFAULT = 2;
 }
 
-message TestDefaultEnumValue {
+struct TestDefaultEnumValue {
   optional EnumValue enum_value = 1 [default = DEFAULT];
 }

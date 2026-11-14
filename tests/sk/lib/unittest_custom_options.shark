@@ -95,7 +95,7 @@ extend shark.MethodOptions {
 
 // A test message with custom options at all possible locations (and also some
 // regular options, to make sure they interact nicely).
-message TestMessageWithCustomOptions {
+struct TestMessageWithCustomOptions {
   option message_set_wire_format = false;
   option (message_opt1) = -56;
 
@@ -119,13 +119,13 @@ message TestMessageWithCustomOptions {
 
 // A test RPC service with custom options at all possible locations (and also
 // some regular options, to make sure they interact nicely).
-message CustomOptionFooRequest {}
+struct CustomOptionFooRequest {}
 
-message CustomOptionFooResponse {}
+struct CustomOptionFooResponse {}
 
-message CustomOptionFooClientMessage {}
+struct CustomOptionFooClientMessage {}
 
-message CustomOptionFooServerMessage {}
+struct CustomOptionFooServerMessage {}
 
 service TestServiceWithCustomOptions {
   option (service_opt1) = -9876543210;
@@ -137,14 +137,14 @@ service TestServiceWithCustomOptions {
 
 // Options of every possible field type, so we can test them all exhaustively.
 
-message DummyMessageContainingEnum {
+struct DummyMessageContainingEnum {
   enum TestEnumType {
     TEST_OPTION_ENUM_TYPE1 = 22;
     TEST_OPTION_ENUM_TYPE2 = -23;
   }
 }
 
-message DummyMessageInvalidAsOptionType {}
+struct DummyMessageInvalidAsOptionType {}
 
 extend shark.MessageOptions {
   optional bool bool_opt = 7706090;
@@ -166,7 +166,7 @@ extend shark.MessageOptions {
   optional DummyMessageInvalidAsOptionType message_type_opt = 7665967;
 }
 
-message CustomOptionMinIntegerValues {
+struct CustomOptionMinIntegerValues {
   option (bool_opt) = false;
   option (int32_opt) = -0x80000000;
   option (int64_opt) = -0x8000000000000000;
@@ -180,7 +180,7 @@ message CustomOptionMinIntegerValues {
   option (sfixed64_opt) = -0x8000000000000000;
 }
 
-message CustomOptionMaxIntegerValues {
+struct CustomOptionMaxIntegerValues {
   option (bool_opt) = true;
   option (int32_opt) = 0x7FFFFFFF;
   option (int64_opt) = 0x7FFFFFFFFFFFFFFF;
@@ -194,7 +194,7 @@ message CustomOptionMaxIntegerValues {
   option (sfixed64_opt) = 0x7FFFFFFFFFFFFFFF;
 }
 
-message CustomOptionOtherValues {
+struct CustomOptionOtherValues {
   option (int32_opt) = -100;  // To test sign-extension.
   option (float_opt) = 12.3456789;
   option (double_opt) = 1.234567890123456789;
@@ -203,12 +203,12 @@ message CustomOptionOtherValues {
   option (enum_opt) = TEST_OPTION_ENUM_TYPE2;
 }
 
-message SettingRealsFromPositiveInts {
+struct SettingRealsFromPositiveInts {
   option (float_opt) = 12;
   option (double_opt) = 154;
 }
 
-message SettingRealsFromNegativeInts {
+struct SettingRealsFromNegativeInts {
   option (float_opt) = -12;
   option (double_opt) = -154;
 }
@@ -216,7 +216,7 @@ message SettingRealsFromNegativeInts {
 // Options of complex message types, themselves combined and extended in
 // various ways.
 
-message ComplexOptionType1 {
+struct ComplexOptionType1 {
   optional int32 foo = 1;
   optional int32 foo2 = 2;
   optional int32 foo3 = 3;
@@ -225,11 +225,11 @@ message ComplexOptionType1 {
   extensions 100 to max;
 }
 
-message ComplexOptionType2 {
+struct ComplexOptionType2 {
   optional ComplexOptionType1 bar = 1;
   optional int32 baz = 2;
 
-  message ComplexOptionType4 {
+  struct ComplexOptionType4 {
     optional int32 waldo = 1;
 
     extend shark.MessageOptions {
@@ -243,7 +243,7 @@ message ComplexOptionType2 {
   extensions 100 to max;
 }
 
-message ComplexOptionType3 {
+struct ComplexOptionType3 {
   optional int32 moo = 1;
 
 }
@@ -265,7 +265,7 @@ extend shark.MessageOptions {
 }
 
 // Note that we try various different ways of naming the same extension.
-message VariousComplexOptions {
+struct VariousComplexOptions {
   option (.sharkbuf_unittest.complex_opt1).foo = 42;
   option (sharkbuf_unittest.complex_opt1).(.sharkbuf_unittest.mooo) = 324;
   option (.sharkbuf_unittest.complex_opt1).(sharkbuf_unittest.corge).moo = 876;
@@ -294,13 +294,13 @@ message VariousComplexOptions {
 // Definitions for testing aggregate option parsing.
 // See descriptor_unittest.cc.
 
-message AggregateMessageSet {
+struct AggregateMessageSet {
   option message_set_wire_format = true;
 
   extensions 4 to max;
 }
 
-message AggregateMessageSetElement {
+struct AggregateMessageSetElement {
   extend AggregateMessageSet {
     optional AggregateMessageSetElement message_set_extension = 15447542;
   }
@@ -308,7 +308,7 @@ message AggregateMessageSetElement {
 }
 
 // A helper type used to test aggregate option parsing
-message Aggregate {
+struct Aggregate {
   optional int32 i = 1;
   optional string s = 2;
 
@@ -381,7 +381,7 @@ option (fileopt) = {
   }
 };
 
-message AggregateMessage {
+struct AggregateMessage {
   option (msgopt) = {
     i: 101
     s: 'MessageAnnotation'
@@ -411,8 +411,8 @@ enum AggregateEnum {
 }
 
 // Test custom options for nested type.
-message NestedOptionType {
-  message NestedMessage {
+struct NestedOptionType {
+  struct NestedMessage {
     option (message_opt1) = 1001;
 
     optional int32 nested_field = 1 [(field_opt1) = 1002];
@@ -429,7 +429,7 @@ message NestedOptionType {
 
 // Custom message option that has a required enum field.
 // WARNING: this is strongly discouraged!
-message OldOptionType {
+struct OldOptionType {
   enum TestEnum {
     OLD_VALUE = 0;
   }
@@ -437,7 +437,7 @@ message OldOptionType {
 }
 
 // Updated version of the custom option above.
-message NewOptionType {
+struct NewOptionType {
   enum TestEnum {
     OLD_VALUE = 0;
     NEW_VALUE = 1;
@@ -450,7 +450,7 @@ extend shark.MessageOptions {
 }
 
 // Test message using the "required_enum_opt" option defined above.
-message TestMessageWithRequiredEnumOption {
+struct TestMessageWithRequiredEnumOption {
   option (required_enum_opt) = {
     value: OLD_VALUE
   };

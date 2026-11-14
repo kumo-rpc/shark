@@ -36,7 +36,7 @@ option go_package = "google.golang.org/protobuf/types/known/sourcecontextpb";
 
 // `SourceContext` represents information about the source of a
 // protobuf element, like the file in which it is defined.
-message SourceContext {
+struct SourceContext {
   // The path-qualified name of the .shark file that contained the associated
   // protobuf element.  For example: `"shark/types/source_context.shark"`.
   optional string file_name = 1;

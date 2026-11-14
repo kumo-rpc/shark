@@ -42,13 +42,13 @@ option cc_enable_arenas = true;
 option optimize_for = LITE_RUNTIME;
 
 // Same as TestAllTypes but with the lite runtime.
-message TestAllTypesLite {
-  message NestedMessage {
+struct TestAllTypesLite {
+  struct NestedMessage {
     optional int32 bb = 1;
     optional int64 cc = 2;
   }
 
-  message NestedMessage2 {
+  struct NestedMessage2 {
     optional int32 dd = 1;
   }
 
@@ -169,7 +169,7 @@ message TestAllTypesLite {
   optional int32 deceptively_named_list = 116;
 }
 
-message ForeignMessageLite {
+struct ForeignMessageLite {
   optional int32 c = 1;
 }
 
@@ -179,7 +179,7 @@ enum ForeignEnumLite {
   FOREIGN_LITE_BAR = 5;
 }
 
-message TestPackedTypesLite {
+struct TestPackedTypesLite {
   list<int32> packed_int32 = 90 [packed = true];
   list<int64> packed_int64 = 91 [packed = true];
   list<uint32> packed_uint32 = 92 [packed = true];
@@ -196,7 +196,7 @@ message TestPackedTypesLite {
   list<ForeignEnumLite> packed_enum = 103 [packed = true];
 }
 
-message TestAllExtensionsLite {
+struct TestAllExtensionsLite {
   extensions 1 to max;
 }
 
@@ -316,7 +316,7 @@ extend TestAllExtensionsLite {
   optional bytes oneof_bytes_extension_lite = 114;
 }
 
-message TestPackedExtensionsLite {
+struct TestPackedExtensionsLite {
   extensions 1 to max;
 }
 
@@ -337,7 +337,7 @@ extend TestPackedExtensionsLite {
   list<ForeignEnumLite> packed_enum_extension_lite = 103 [packed = true];
 }
 
-message TestNestedExtensionLite {
+struct TestNestedExtensionLite {
   extend TestAllExtensionsLite {
     optional int32 nested_extension = 12345;
   }
@@ -345,7 +345,7 @@ message TestNestedExtensionLite {
 
 // Test that deprecated fields work.  We only verify that they compile (at one
 // point this failed).
-message TestDeprecatedLite {
+struct TestDeprecatedLite {
   optional int32 deprecated_field = 1 [deprecated = true];
   required int32 deprecated_field2 = 2 [deprecated = true];
   optional string deprecated_field3 = 3 [deprecated = true];
@@ -353,8 +353,8 @@ message TestDeprecatedLite {
 }
 
 // See the comments of the same type in unittest.shark.
-message TestParsingMergeLite {
-  message RepeatedFieldsGenerator {
+struct TestParsingMergeLite {
+  struct RepeatedFieldsGenerator {
     list<TestAllTypesLite> field1 = 1;
     list<TestAllTypesLite> field2 = 2;
     list<TestAllTypesLite> field3 = 3;
@@ -373,16 +373,16 @@ message TestParsingMergeLite {
 
 // Test that the correct exception is thrown by parseFrom in a corner case
 // involving merging, extensions, and required fields.
-message TestMergeExceptionLite {
+struct TestMergeExceptionLite {
   optional TestAllExtensionsLite all_extensions = 1;
 }
 
 // TestEmptyMessageLite is used to test unknown fields support in lite mode.
-message TestEmptyMessageLite {}
+struct TestEmptyMessageLite {}
 
 // Like above, but declare all field numbers as potential extensions.  No
 // actual extensions should ever be defined for this type.
-message TestEmptyMessageWithExtensionsLite {
+struct TestEmptyMessageWithExtensionsLite {
   extensions 1 to max;
 }
 
@@ -395,17 +395,17 @@ enum V2EnumLite {
   V2_SECOND = 2;
 }
 
-message V1MessageLite {
+struct V1MessageLite {
   required int32 int_field = 1;
   optional V1EnumLite enum_field = 2 [default = V1_FIRST];
 }
 
-message V2MessageLite {
+struct V2MessageLite {
   required int32 int_field = 1;
   optional V2EnumLite enum_field = 2 [default = V2_FIRST];
 }
 
-message TestHugeFieldNumbersLite {
+struct TestHugeFieldNumbersLite {
   optional int32 optional_int32 = 536870000;
   optional int32 fixed_32 = 536870001;
   list<int32> repeated_int32 = 536870002 [packed = false];
@@ -433,7 +433,7 @@ extend TestHugeFieldNumbersLite {
   optional TestAllTypesLite test_all_types_lite = 536860000;
 }
 
-message TestOneofParsingLite {
+struct TestOneofParsingLite {
   oneof oneof_field {
     int32 oneof_int32 = 1;
     TestAllTypesLite oneof_submessage = 2;
@@ -448,7 +448,7 @@ message TestOneofParsingLite {
   }
 }
 
-message TestMessageSetLite {
+struct TestMessageSetLite {
   option message_set_wire_format = true;
 
   extensions 100 to max;
@@ -457,24 +457,24 @@ message TestMessageSetLite {
 // The following four messages are set up to test for wire compatibility between
 // packed and non-packed list<fields>. We use the field number 2048, because
 // that is large enough to require a 3-byte varint for the tag.
-message PackedInt32 {
+struct PackedInt32 {
   list<int32> repeated_int32 = 2048 [packed = true];
 }
 
-message NonPackedInt32 {
+struct NonPackedInt32 {
   list<int32> repeated_int32 = 2048;
 }
 
-message PackedFixed32 {
+struct PackedFixed32 {
   list<fixed32> repeated_fixed32 = 2048 [packed = true];
 }
 
-message NonPackedFixed32 {
+struct NonPackedFixed32 {
   list<fixed32> repeated_fixed32 = 2048;
 }
 
 // Test an enum that has multiple values with the same number.
-message DupEnum {
+struct DupEnum {
   enum TestEnumWithDupValueLite {
     option allow_alias = true;
 
@@ -486,7 +486,7 @@ message DupEnum {
   }
 }
 
-message RecursiveMessage {
+struct RecursiveMessage {
   optional RecursiveMessage recurse = 1;
   optional bytes payload = 2;
 }

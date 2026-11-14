@@ -50,12 +50,12 @@ option optimize_for = SPEED;
 
 // The protocol compiler can output a FileDescriptorSet containing the .shark
 // files it parses.
-message FileDescriptorSet {
+struct FileDescriptorSet {
   list<FileDescriptorProto> file = 1;
 }
 
 // Describes a complete .shark file.
-message FileDescriptorProto {
+struct FileDescriptorProto {
   optional string name = 1;     // file name, relative to root of source tree
   optional string package = 2;  // e.g. "foo", "foo.bar", etc.
 
@@ -87,7 +87,7 @@ message FileDescriptorProto {
 }
 
 // Describes a message type.
-message DescriptorProto {
+struct DescriptorProto {
   optional string name = 1;
 
   list<FieldDescriptorProto> field = 2;
@@ -96,7 +96,7 @@ message DescriptorProto {
   list<DescriptorProto> nested_type = 3;
   list<EnumDescriptorProto> enum_type = 4;
 
-  message ExtensionRange {
+  struct ExtensionRange {
     optional int32 start = 1;  // Inclusive.
     optional int32 end = 2;    // Exclusive.
 
@@ -111,7 +111,7 @@ message DescriptorProto {
   // Range of reserved tag numbers. Reserved tag numbers may not be used by
   // fields or extension ranges in the same message. Reserved ranges may
   // not overlap.
-  message ReservedRange {
+  struct ReservedRange {
     optional int32 start = 1;  // Inclusive.
     optional int32 end = 2;    // Exclusive.
   }
@@ -121,7 +121,7 @@ message DescriptorProto {
   list<string> reserved_name = 10;
 }
 
-message ExtensionRangeOptions {
+struct ExtensionRangeOptions {
   // The parser stores options it doesn't recognize here. See above.
   list<UninterpretedOption> uninterpreted_option = 999;
 
@@ -131,7 +131,7 @@ message ExtensionRangeOptions {
 }
 
 // Describes a field within a message.
-message FieldDescriptorProto {
+struct FieldDescriptorProto {
   enum Type {
     // 0 is reserved for errors.
     TYPE_BOOL = 1;
@@ -209,13 +209,13 @@ message FieldDescriptorProto {
 }
 
 // Describes a oneof.
-message OneofDescriptorProto {
+struct OneofDescriptorProto {
   optional string name = 1;
   optional OneofOptions options = 2;
 }
 
 // Describes an enum type.
-message EnumDescriptorProto {
+struct EnumDescriptorProto {
   optional string name = 1;
 
   list<EnumValueDescriptorProto> value = 2;
@@ -228,7 +228,7 @@ message EnumDescriptorProto {
   // Note that this is distinct from DescriptorProto.ReservedRange in that it
   // is inclusive such that it can appropriately represent the entire int32
   // domain.
-  message EnumReservedRange {
+  struct EnumReservedRange {
     optional int32 start = 1;  // Inclusive.
     optional int32 end = 2;    // Inclusive.
   }
@@ -244,7 +244,7 @@ message EnumDescriptorProto {
 }
 
 // Describes a value within an enum.
-message EnumValueDescriptorProto {
+struct EnumValueDescriptorProto {
   optional string name = 1;
   optional int32 number = 2;
 
@@ -252,7 +252,7 @@ message EnumValueDescriptorProto {
 }
 
 // Describes a service.
-message ServiceDescriptorProto {
+struct ServiceDescriptorProto {
   optional string name = 1;
   list<MethodDescriptorProto> method = 2;
 
@@ -260,7 +260,7 @@ message ServiceDescriptorProto {
 }
 
 // Describes a method of a service.
-message MethodDescriptorProto {
+struct MethodDescriptorProto {
   optional string name = 1;
 
   // Input and output type names.  These are resolved in the same way as
@@ -309,7 +309,7 @@ message MethodDescriptorProto {
 //   If this turns out to be popular, a web service will be set up
 //   to automatically assign option numbers.
 
-message FileOptions {
+struct FileOptions {
 
   // Generated classes can be optimized for speed or code size.
   enum OptimizeMode {
@@ -365,14 +365,14 @@ message FileOptions {
   reserved 1, 8, 10, 17, 20, 27, 36, 37, 38, 39, 40, 41, 42, 44, 45;
 }
 
-message MessageOptions {
+struct MessageOptions {
   // Set true to use the old proto1 MessageSet wire format for extensions.
   // This is provided for backwards-compatibility with the MessageSet wire
   // format.  You should not use this for any other reason:  It's less
   // efficient, has fewer features, and is more complicated.
   //
   // The message must be defined exactly as follows:
-  //   message Foo {
+  //   struct Foo {
   //     option message_set_wire_format = true;
   //     extensions 4 to max;
   //   }
@@ -405,7 +405,7 @@ message MessageOptions {
   // For maps fields:
   //     map<KeyType, ValueType> map_field = 1;
   // The parsed descriptor looks like:
-  //     message MapFieldEntry {
+  //     struct MapFieldEntry {
   //         option map_entry = true;
   //         optional KeyType key = 1;
   //         optional ValueType value = 2;
@@ -433,7 +433,7 @@ message MessageOptions {
   extensions 1000 to max;
 }
 
-message FieldOptions {
+struct FieldOptions {
   // The ctype option instructs the C++ code generator to use a different
   // representation of the field than it normally would.  See the specific
   // options below.  This option is not yet implemented in the open source
@@ -537,7 +537,7 @@ message FieldOptions {
   reserved 4;  // removed jtype
 }
 
-message OneofOptions {
+struct OneofOptions {
   // The parser stores options it doesn't recognize here. See above.
   list<UninterpretedOption> uninterpreted_option = 999;
 
@@ -556,7 +556,7 @@ enum EnumUnderlyingType {
   ENUM_UNDERLYING_TYPE_UINT32 = 6;
 }
 
-message EnumOptions {
+struct EnumOptions {
 
   // Set this option to true to allow mapping different tag names to the same
   // value.
@@ -583,7 +583,7 @@ message EnumOptions {
   extensions 1000 to max;
 }
 
-message EnumValueOptions {
+struct EnumValueOptions {
   // Is this enum value deprecated?
   // Depending on the target platform, this can emit Deprecated annotations
   // for the enum value, or it will be completely ignored; in the very least,
@@ -597,7 +597,7 @@ message EnumValueOptions {
   extensions 1000 to max;
 }
 
-message ServiceOptions {
+struct ServiceOptions {
 
   // Note:  Field numbers 1 through 32 are reserved for Google's internal RPC
   //   framework.  We apologize for hoarding these numbers to ourselves, but
@@ -617,7 +617,7 @@ message ServiceOptions {
   extensions 1000 to max;
 }
 
-message MethodOptions {
+struct MethodOptions {
 
   // Note:  Field numbers 1 through 32 are reserved for Google's internal RPC
   //   framework.  We apologize for hoarding these numbers to ourselves, but
@@ -655,13 +655,13 @@ message MethodOptions {
 // options protos in descriptor objects (e.g. returned by Descriptor::options(),
 // or produced by Descriptor::CopyTo()) will never have UninterpretedOptions
 // in them.
-message UninterpretedOption {
+struct UninterpretedOption {
   // The name of the uninterpreted option.  Each string represents a segment in
   // a dot-separated name.  is_extension is true iff a segment represents an
   // extension (denoted with parentheses in options specs in .shark files).
   // E.g.,{ ["foo", false], ["bar.baz", true], ["moo", false] } represents
   // "foo.(bar.baz).moo".
-  message NamePart {
+  struct NamePart {
     required string name_part = 1;
     required bool is_extension = 2;
   }
@@ -682,14 +682,14 @@ message UninterpretedOption {
 
 // Encapsulates information about the original source file from which a
 // FileDescriptorProto was generated.
-message SourceCodeInfo {
+struct SourceCodeInfo {
   // A Location identifies a piece of source code in a .shark file which
   // corresponds to a particular definition.  This information is intended
   // to be useful to IDEs, code indexers, documentation generators, and similar
   // tools.
   //
   // For example, say we have a file like:
-  //   message Foo {
+  //   struct Foo {
   //     optional string foo = 1;
   //   }
   // Let's look at just the field definition:
@@ -727,7 +727,7 @@ message SourceCodeInfo {
   //   ignore those that it doesn't understand, as more types of locations could
   //   be recorded in the future.
   list<Location> location = 1;
-  message Location {
+  struct Location {
     // Identifies which part of the FileDescriptorProto was defined at this
     // location.
     //
@@ -816,11 +816,11 @@ message SourceCodeInfo {
 // Describes the relationship between generated code and its original source
 // file. A GeneratedCodeInfo message is associated with only one generated
 // source file, but may contain references to different source .shark files.
-message GeneratedCodeInfo {
+struct GeneratedCodeInfo {
   // An Annotation connects some span of text in generated code to an element
   // of its generating .shark file.
   list<Annotation> annotation = 1;
-  message Annotation {
+  struct Annotation {
     // Identifies the element in the original source .shark file. This field
     // is formatted the same as SourceCodeInfo.Location.path.
     list<int32> path = 1 [packed = true];

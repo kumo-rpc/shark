@@ -59,8 +59,8 @@ option optimize_for = SPEED;
 
 // This proto includes every type of field in both singular and repeated
 // forms.
-message TestAllTypes {
-  message NestedMessage {
+struct TestAllTypes {
+  struct NestedMessage {
     // The field name "b" fails to compile in proto1 because it conflicts with
     // a local variable named "b" in one of the generated methods.  Doh.
     // This file needs to compile in proto1 to test backwards-compatibility.
@@ -176,7 +176,7 @@ message TestAllTypes {
 }
 
 // This proto includes a recursively nested message.
-message NestedTestAllTypes {
+struct NestedTestAllTypes {
   optional NestedTestAllTypes child = 1;
   optional TestAllTypes payload = 2;
   list<NestedTestAllTypes> repeated_child = 3;
@@ -184,20 +184,20 @@ message NestedTestAllTypes {
   optional TestAllTypes eager_child = 5 [lazy=false];
 }
 
-message TestDeprecatedFields {
+struct TestDeprecatedFields {
   optional int32 deprecated_int32 = 1 [deprecated=true];
   oneof oneof_fields {
     int32 deprecated_int32_in_oneof = 2 [deprecated=true];
   }
 }
 
-message TestDeprecatedMessage {
+struct TestDeprecatedMessage {
   option deprecated = true;
 }
 
 // Define these after TestAllTypes to make sure the compiler can handle
 // that.
-message ForeignMessage {
+struct ForeignMessage {
   optional int32 c = 1;
   optional int32 d = 2;
 }
@@ -208,12 +208,12 @@ enum ForeignEnum {
   FOREIGN_BAZ = 6;
 }
 
-message TestReservedFields {
+struct TestReservedFields {
   reserved 2, 15, 9 to 11;
   reserved "bar", "baz";
 }
 
-message TestAllExtensions {
+struct TestAllExtensions {
   extensions 1 to max;
 }
 
@@ -326,15 +326,15 @@ extend TestAllExtensions {
   optional bytes oneof_bytes_extension = 114;
 }
 
-message TestGroup {
+struct TestGroup {
   optional ForeignEnum optional_foreign_enum = 22;
 }
 
-message TestGroupExtension {
+struct TestGroupExtension {
   extensions 1 to max;
 }
 
-message TestNestedExtension {
+struct TestNestedExtension {
   extend TestAllExtensions {
     // Check for bug where string extensions declared in tested scope did not
     // compile.
@@ -349,7 +349,7 @@ message TestNestedExtension {
   }
 }
 
-message TestChildExtension {
+struct TestChildExtension {
   optional string a = 1;
   optional string b = 2;
   optional TestAllExtensions optional_extension = 3;
@@ -357,9 +357,9 @@ message TestChildExtension {
 
 // Emulates wireformat data of TestChildExtension with dynamic extension
 // (DynamicExtension).
-message TestChildExtensionData {
-  message NestedTestAllExtensionsData {
-    message NestedDynamicExtensions {
+struct TestChildExtensionData {
+  struct NestedTestAllExtensionsData {
+    struct NestedDynamicExtensions {
       optional int32 a = 1;
       optional int32 b = 2;
     }
@@ -370,14 +370,14 @@ message TestChildExtensionData {
   optional NestedTestAllExtensionsData optional_extension = 3;
 }
 
-message TestNestedChildExtension {
+struct TestNestedChildExtension {
   optional int32 a = 1;
   optional TestChildExtension child = 2;
 }
 
 // Emulates wireformat data of TestNestedChildExtension with dynamic extension
 // (DynamicExtension).
-message TestNestedChildExtensionData {
+struct TestNestedChildExtensionData {
   optional int32 a = 1;
   optional TestChildExtensionData child = 2;
 }
@@ -387,7 +387,7 @@ message TestNestedChildExtensionData {
 // do anything with it.  Note that we don't need to test every type of
 // required filed because the code output is basically identical to
 // optional fields for all types.
-message TestRequired {
+struct TestRequired {
   required int32 a = 1;
   optional int32 dummy2 = 2;
   required int32 b = 3;
@@ -435,83 +435,83 @@ message TestRequired {
   optional ForeignMessage optional_foreign = 34;
 }
 
-message TestRequiredForeign {
+struct TestRequiredForeign {
   optional TestRequired optional_message = 1;
   list<TestRequired> repeated_message = 2;
   optional int32 dummy = 3;
 }
 
-message TestRequiredMessage {
+struct TestRequiredMessage {
   optional TestRequired optional_message = 1;
   list<TestRequired> repeated_message = 2;
   required TestRequired required_message = 3;
 }
 
-message TestNestedRequiredForeign {
+struct TestNestedRequiredForeign {
   optional TestNestedRequiredForeign child = 1;
   optional TestRequiredForeign payload = 2;
   optional int32 dummy = 3;
 }
 
 // Test that we can use NestedMessage from outside TestAllTypes.
-message TestForeignNested {
+struct TestForeignNested {
   optional TestAllTypes.NestedMessage foreign_nested = 1;
 }
 
 // TestEmptyMessage is used to test unknown field support.
-message TestEmptyMessage {
+struct TestEmptyMessage {
 }
 
 // Like above, but declare all field numbers as potential extensions.  No
 // actual extensions should ever be defined for this type.
-message TestEmptyMessageWithExtensions {
+struct TestEmptyMessageWithExtensions {
   extensions 1 to max;
 }
 
 // Needed for a Python test.
-message TestPickleNestedMessage {
-  message NestedMessage {
+struct TestPickleNestedMessage {
+  struct NestedMessage {
     optional int32 bb = 1;
-    message NestedNestedMessage {
+    struct NestedNestedMessage {
       optional int32 cc = 1;
     }
   }
 }
 
-message TestMultipleExtensionRanges {
+struct TestMultipleExtensionRanges {
   extensions 42;
   extensions 4143 to 4243;
   extensions 65536 to max;
 }
 
 // Test that really large tag numbers don't break anything.
-message TestReallyLargeTagNumber {
+struct TestReallyLargeTagNumber {
   // The largest possible tag number is 2^28 - 1, since the wire format uses
   // three bits to communicate wire type.
   optional int32 a = 1;
   optional int32 bb = 268435455;
 }
 
-message TestRecursiveMessage {
+struct TestRecursiveMessage {
   optional TestRecursiveMessage a = 1;
   optional int32 i = 2;
 }
 
 // Test that mutual recursion works.
-message TestMutualRecursionA {
-  message SubMessage {
+struct TestMutualRecursionA {
+  struct SubMessage {
     optional TestMutualRecursionB b = 1;
   }
   optional TestMutualRecursionB bb = 1;
 }
 
-message TestMutualRecursionB {
+struct TestMutualRecursionB {
   optional TestMutualRecursionA a = 1;
   optional int32 optional_int32 = 2;
 }
 
-message TestIsInitialized {
-  message SubMessage {
+struct TestIsInitialized {
+  struct SubMessage {
   }
   optional SubMessage sub_message = 1;
 }
@@ -520,21 +520,21 @@ message TestIsInitialized {
 // parents.  This is NOT possible in proto1; only shark.  When attempting
 // to compile with proto1, this will emit an error; so we only include it
 // in sharkbuf_unittest_proto.
-message TestDupFieldNumber {                        // NO_PROTO1
+struct TestDupFieldNumber {                        // NO_PROTO1
   optional int32 a = 1;                             // NO_PROTO1
   // NO_PROTO1
   // NO_PROTO1
 }                                                   // NO_PROTO1
 
 // Additional messages for testing lazy fields.
-message TestEagerMessage {
+struct TestEagerMessage {
   optional TestAllTypes sub_message = 1 [lazy=false];
 }
-message TestLazyMessage {
+struct TestLazyMessage {
   optional TestAllTypes sub_message = 1 [lazy=true];
 }
-message TestEagerMaybeLazy {
-  message NestedMessage {
+struct TestEagerMaybeLazy {
+  struct NestedMessage {
     optional TestPackedTypes packed = 1;
   }
   optional TestAllTypes message_foo = 1;
@@ -542,8 +542,8 @@ message TestEagerMaybeLazy {
   optional NestedMessage message_baz = 3;
 }
 // Needed for a Python test.
-message TestNestedMessageHasBits {
-  message NestedMessage {
+struct TestNestedMessageHasBits {
+  struct NestedMessage {
     list<int32> nestedmessage_repeated_int32 = 1;
     list<ForeignMessage> nestedmessage_repeated_foreignmessage = 2;
   }
@@ -575,7 +575,7 @@ enum TestSparseEnum {
 
 // Test message with CamelCase field names.  This violates Protocol Buffer
 // standard style.
-message TestCamelCaseFieldNames {
+struct TestCamelCaseFieldNames {
   optional int32 PrimitiveField = 1;
   optional string StringField = 2;
   optional ForeignEnum EnumField = 3;
@@ -594,13 +594,13 @@ message TestCamelCaseFieldNames {
 
 // We list fields out of order, to ensure that we're using field number and not
 // field index to determine serialization order.
-message TestFieldOrderings {
+struct TestFieldOrderings {
   optional string my_string = 11;
   extensions 2 to 10;
   optional int64 my_int = 1;
   extensions 12 to 100;
   optional float my_float = 101;
-  message NestedMessage {
+  struct NestedMessage {
     optional int64 oo = 2;
     // The field name "b" fails to compile in proto1 because it conflicts with
     // a local variable named "b" in one of the generated methods.  Doh.
@@ -616,18 +616,18 @@ extend TestFieldOrderings {
   optional int32 my_extension_int = 5;
 }
 
-message TestExtensionOrderings1 {
+struct TestExtensionOrderings1 {
   extend TestFieldOrderings {
     optional TestExtensionOrderings1 test_ext_orderings1 = 13;
   }
   optional string my_string = 1;
 }
 
-message TestExtensionOrderings2 {
+struct TestExtensionOrderings2 {
   extend TestFieldOrderings {
     optional TestExtensionOrderings2 test_ext_orderings2 = 12;
   }
-  message TestExtensionOrderings3 {
+  struct TestExtensionOrderings3 {
     extend TestFieldOrderings {
       optional TestExtensionOrderings3 test_ext_orderings3 = 14;
     }
@@ -636,7 +636,7 @@ message TestExtensionOrderings2 {
   optional string my_string = 1;
 }
 
-message TestExtremeDefaultValues {
+struct TestExtremeDefaultValues {
   optional bytes escaped_bytes = 1 [default = "\0\001\a\b\f\n\r\t\v\\\'\"\xfe"];
   optional uint32 large_uint32 = 2 [default = 0xFFFFFFFF];
   optional uint64 large_uint64 = 3 [default = 0xFFFFFFFFFFFFFFFF];
@@ -685,28 +685,28 @@ message TestExtremeDefaultValues {
   optional string replacement_string     = 27 [default="${unknown}"];
 }
 
-message SparseEnumMessage {
+struct SparseEnumMessage {
   optional TestSparseEnum sparse_enum = 1;
 }
 
 // Test String and Bytes: string is for valid UTF-8 strings
-message OneString {
+struct OneString {
   optional string data = 1;
 }
 
-message MoreString {
+struct MoreString {
   list<string> data = 1;
 }
 
-message OneBytes {
+struct OneBytes {
   optional bytes data = 1;
 }
 
-message MoreBytes {
+struct MoreBytes {
   list<bytes> data = 1;
 }
 
-message ManyOptionalString {
+struct ManyOptionalString {
   optional string str1 = 1;
   optional string str2 = 2;
   optional string str3 = 3;
@@ -742,28 +742,28 @@ message ManyOptionalString {
 }
 
 // Test int32, uint32, int64, uint64, and bool are all compatible
-message Int32Message {
+struct Int32Message {
   optional int32 data = 1;
 }
 
-message Uint32Message {
+struct Uint32Message {
   optional uint32 data = 1;
 }
 
-message Int64Message {
+struct Int64Message {
   optional int64 data = 1;
 }
 
-message Uint64Message {
+struct Uint64Message {
   optional uint64 data = 1;
 }
 
-message BoolMessage {
+struct BoolMessage {
   optional bool data = 1;
 }
 
 // Test oneofs.
-message TestOneof {
+struct TestOneof {
   oneof foo {
     int32 foo_int = 1;
     string foo_string = 2;
@@ -771,13 +771,13 @@ message TestOneof {
   }
 }
 
-message TestOneofBackwardsCompatible {
+struct TestOneofBackwardsCompatible {
   optional int32 foo_int = 1;
   optional string foo_string = 2;
   optional TestAllTypes foo_message = 3;
 }
 
-message TestOneof2 {
+struct TestOneof2 {
   oneof foo {
     int32 foo_int = 1;
     string foo_string = 2;
@@ -805,7 +805,7 @@ message TestOneof2 {
   optional int32 baz_int = 18;
   optional string baz_string = 19 [default = "BAZ"];
 
-  message NestedMessage {
+  struct NestedMessage {
     optional int64 moo_int = 1;
     list<int32> corge_int = 2;
   }
@@ -817,13 +817,13 @@ message TestOneof2 {
   }
 }
 
-message TestRequiredOneof {
+struct TestRequiredOneof {
   oneof foo {
     int32 foo_int = 1;
     string foo_string = 2;
     NestedMessage foo_message = 3;
   }
-  message NestedMessage {
+  struct NestedMessage {
     required double required_double = 1;
   }
 }
@@ -831,7 +831,7 @@ message TestRequiredOneof {
 
 // Test messages for packed fields
 
-message TestPackedTypes {
+struct TestPackedTypes {
   list<int32> packed_int32    =  90 [packed = true];
   list<int64> packed_int64    =  91 [packed = true];
   list<uint32> packed_uint32   =  92 [packed = true];
@@ -850,7 +850,7 @@ message TestPackedTypes {
 
 // A message with the same fields as TestPackedTypes, but without packing. Used
 // to test packed <-> unpacked wire compatibility.
-message TestUnpackedTypes {
+struct TestUnpackedTypes {
   list<int32> unpacked_int32    =  90 [packed = false];
   list<int64> unpacked_int64    =  91 [packed = false];
   list<uint32> unpacked_uint32   =  92 [packed = false];
@@ -867,7 +867,7 @@ message TestUnpackedTypes {
   list<ForeignEnum> unpacked_enum  = 103 [packed = false];
 }
 
-message TestPackedExtensions {
+struct TestPackedExtensions {
   extensions 1 to max;
 }
 
@@ -888,7 +888,7 @@ extend TestPackedExtensions {
   list<ForeignEnum> packed_enum_extension  = 103 [packed = true];
 }
 
-message TestUnpackedExtensions {
+struct TestUnpackedExtensions {
   extensions 1 to max;
 }
 
@@ -912,13 +912,13 @@ extend TestUnpackedExtensions {
 // Used by ExtensionSetTest/DynamicExtensions.  The test actually builds
 // a set of extensions to TestAllExtensions dynamically, based on the fields
 // of this message type.
-message TestDynamicExtensions {
+struct TestDynamicExtensions {
   enum DynamicEnumType {
     DYNAMIC_FOO = 2200;
     DYNAMIC_BAR = 2201;
     DYNAMIC_BAZ = 2202;
   }
-  message DynamicMessageType {
+  struct DynamicMessageType {
     optional int32 dynamic_field = 2100;
   }
 
@@ -933,7 +933,7 @@ message TestDynamicExtensions {
   list<sint32> packed_extension = 2006 [packed = true];
 }
 
-message TestRepeatedScalarDifferentTagSizes {
+struct TestRepeatedScalarDifferentTagSizes {
   // Parsing list<fixed> size values used to fail. This message needs to be
   // used in order to get a tag of the right size; all of the list<fields>
   // in TestAllTypes didn't trigger the check.
@@ -952,13 +952,13 @@ message TestRepeatedScalarDifferentTagSizes {
 
 // Test that if an optional or required message/group field appears multiple
 // times in the input, they need to be merged.
-message TestParsingMerge {
+struct TestParsingMerge {
   // RepeatedFieldsGenerator defines matching field types as TestParsingMerge,
   // except that all fields are repeated. In the tests, we will serialize the
   // RepeatedFieldsGenerator to bytes, and parse the bytes to TestParsingMerge.
   // Repeated fields in RepeatedFieldsGenerator are expected to be merged into
   // the corresponding required/optional fields in TestParsingMerge.
-  message RepeatedFieldsGenerator {
+  struct RepeatedFieldsGenerator {
     list<TestAllTypes> field1 = 1;
     list<TestAllTypes> field2 = 2;
     list<TestAllTypes> field3 = 3;
@@ -977,18 +977,18 @@ message TestParsingMerge {
 
 // Test that the correct exception is thrown by parseFrom in a corner case
 // involving merging, extensions, and required fields.
-message TestMergeException {
+struct TestMergeException {
   optional TestAllExtensions all_extensions = 1;
 }
 
-message TestCommentInjectionMessage {
+struct TestCommentInjectionMessage {
   // */ <- This should not close the generated doc comment
   optional string a = 1 [default="*/ <- Neither should this."];
 }
 
 // Used to check that the c++ code generator re-orders messages to reduce
 // padding.
-message TestMessageSize {
+struct TestMessageSize {
   optional bool m1 = 1;
   optional int64 m2 = 2;
   optional bool m3 = 3;
@@ -999,11 +999,11 @@ message TestMessageSize {
 
 
 // Test that RPC services work.
-message FooRequest  {}
-message FooResponse {}
+struct FooRequest  {}
+struct FooResponse {}
 
-message FooClientMessage {}
-message FooServerMessage{}
+struct FooClientMessage {}
+struct FooServerMessage{}
 
 service TestService {
   rpc Foo(FooRequest) returns (FooResponse);
@@ -1011,10 +1011,10 @@ service TestService {
 }
 
 
-message BarRequest  {}
-message BarResponse {}
+struct BarRequest  {}
+struct BarResponse {}
 
-message TestJsonName {
+struct TestJsonName {
   optional int32 field_name1 = 1;
   optional int32 fieldName2 = 2;
   optional int32 FieldName3 = 3;
@@ -1024,7 +1024,7 @@ message TestJsonName {
   optional int32 fieldname7 = 7;
 }
 
-message TestHugeFieldNumbers {
+struct TestHugeFieldNumbers {
   optional int32 optional_int32 = 536870000;
   optional int32 fixed_32 = 536870001;
   list<int32> repeated_int32 = 536870002 [packed = false];
@@ -1052,7 +1052,7 @@ extend TestHugeFieldNumbers {
   optional TestAllTypes test_all_types = 536860000;
 }
 
-message TestExtensionInsideTable {
+struct TestExtensionInsideTable {
   optional int32 field1 = 1;
   optional int32 field2 = 2;
   optional int32 field3 = 3;
@@ -1173,7 +1173,7 @@ enum VeryLargeEnum {
   ENUM_LABEL_100 = 100;
 };
 
-message TestExtensionRangeSerialize {
+struct TestExtensionRangeSerialize {
   optional int32 foo_one = 1;
 
   extensions 2 to 2;
@@ -1201,14 +1201,14 @@ message TestExtensionRangeSerialize {
   }
 }
 
-message TestVerifyInt32Simple {
+struct TestVerifyInt32Simple {
     optional int32 optional_int32_1 = 1;
     optional int32 optional_int32_2 = 2;
     optional int32 optional_int32_63 = 63;
     optional int32 optional_int32_64 = 64;
 }
 
-message TestVerifyInt32 {
+struct TestVerifyInt32 {
     optional int32 optional_int32_1 = 1;
     optional int32 optional_int32_2 = 2;
     optional int32 optional_int32_63 = 63;
@@ -1218,7 +1218,7 @@ message TestVerifyInt32 {
     list<TestAllTypes> repeated_all_types = 10;
 }
 
-message TestVerifyMostlyInt32 {
+struct TestVerifyMostlyInt32 {
     optional int64 optional_int64_30 = 30;
 
     optional int32 optional_int32_1 = 1;
@@ -1232,7 +1232,7 @@ message TestVerifyMostlyInt32 {
     list<TestAllTypes> repeated_all_types = 10;
 }
 
-message TestVerifyMostlyInt32BigFieldNumber {
+struct TestVerifyMostlyInt32BigFieldNumber {
     optional int64 optional_int64_30 = 30;
     optional int32 optional_int32_300 = 300;
 
@@ -1247,14 +1247,14 @@ message TestVerifyMostlyInt32BigFieldNumber {
     list<TestAllTypes> repeated_all_types = 10;
 }
 
-message TestVerifyUint32Simple {
+struct TestVerifyUint32Simple {
     optional uint32 optional_uint32_1 = 1;
     optional uint32 optional_uint32_2 = 2;
     optional uint32 optional_uint32_63 = 63;
     optional uint32 optional_uint32_64 = 64;
 }
 
-message TestVerifyUint32 {
+struct TestVerifyUint32 {
     optional uint32 optional_uint32_1 = 1;
     optional uint32 optional_uint32_2 = 2;
     optional uint32 optional_uint32_63 = 63;
@@ -1264,7 +1264,7 @@ message TestVerifyUint32 {
     list<TestAllTypes> repeated_all_types = 10;
 }
 
-message TestVerifyOneUint32 {
+struct TestVerifyOneUint32 {
     optional uint32 optional_uint32_1 = 1;
     optional int32 optional_int32_2 = 2;
     optional int32 optional_int32_63 = 63;
@@ -1274,7 +1274,7 @@ message TestVerifyOneUint32 {
     list<TestAllTypes> repeated_all_types = 10;
 }
 
-message TestVerifyOneInt32BigFieldNumber {
+struct TestVerifyOneInt32BigFieldNumber {
     optional int32 optional_int32_65 = 65;
 
     optional int64 optional_int64_1 = 1;
@@ -1286,7 +1286,7 @@ message TestVerifyOneInt32BigFieldNumber {
     list<TestAllTypes> repeated_all_types = 10;
 }
 
-message TestVerifyInt32BigFieldNumber {
+struct TestVerifyInt32BigFieldNumber {
     optional int32 optional_int32_1000 = 1000;
     optional int32 optional_int32_65 = 65;
 
@@ -1299,7 +1299,7 @@ message TestVerifyInt32BigFieldNumber {
     list<TestAllTypes> repeated_all_types = 10;
 }
 
-message TestVerifyUint32BigFieldNumber {
+struct TestVerifyUint32BigFieldNumber {
     optional uint32 optional_uint32_1000 = 1000;
     optional uint32 optional_uint32_65 = 65;
 
@@ -1312,8 +1312,8 @@ message TestVerifyUint32BigFieldNumber {
     list<TestAllTypes> repeated_all_types = 10;
 }
 
-message TestVerifyBigFieldNumberUint32 {
-  message Nested {
+struct TestVerifyBigFieldNumberUint32 {
+  struct Nested {
     optional uint32 optional_uint32_5000 = 5000;
     optional uint32 optional_uint32_1000 = 1000;
     optional uint32 optional_uint32_66 = 66;

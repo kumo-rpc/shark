@@ -34,10 +34,10 @@ package proto2_arena_unittest;
 
 option cc_enable_arenas = true;
 
-message NestedMessage {
+struct NestedMessage {
   optional int32 d = 1;
 }
 
-message ArenaMessage {
+struct ArenaMessage {
   list<NestedMessage> repeated_nested_message = 1;
 }

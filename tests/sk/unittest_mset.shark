@@ -44,16 +44,16 @@ package sharkbuf_unittest;
 option cc_enable_arenas = true;
 option optimize_for = SPEED;
 
-message TestMessageSetContainer {
+struct TestMessageSetContainer {
   optional proto2_wireformat_unittest.TestMessageSet message_set = 1;
 }
 
-message NestedTestMessageSetContainer {
+struct NestedTestMessageSetContainer {
   optional TestMessageSetContainer container = 1;
   optional NestedTestMessageSetContainer child = 2;
 }
 
-message TestMessageSetExtension1 {
+struct TestMessageSetExtension1 {
   extend proto2_wireformat_unittest.TestMessageSet {
     optional TestMessageSetExtension1 message_set_extension = 1545008;
   }
@@ -62,19 +62,19 @@ message TestMessageSetExtension1 {
   optional string test_aliasing = 17 [ctype = STRING_PIECE];
 }
 
-message TestMessageSetExtension2 {
+struct TestMessageSetExtension2 {
   extend proto2_wireformat_unittest.TestMessageSet {
     optional TestMessageSetExtension2 message_set_extension = 1547769;
   }
   optional string str = 25;
 }
 
-message NestedTestInt {
+struct NestedTestInt {
   optional fixed32 a = 1;
   optional NestedTestInt child = 2;
 }
 
-message TestMessageSetExtension3 {
+struct TestMessageSetExtension3 {
   extend proto2_wireformat_unittest.TestMessageSet {
     optional TestMessageSetExtension3 message_set_extension = 195273129;
   }
@@ -85,7 +85,7 @@ message TestMessageSetExtension3 {
 // //net/proto2/python/internal/testdata/message_set_message, but is commented
 // out since it must not actually exist in code, to simulate an "unknown"
 // extension.
-// message TestMessageSetUnknownExtension {
+// struct TestMessageSetUnknownExtension {
 //   extend TestMessageSet {
 //     optional TestMessageSetUnknownExtension message_set_extension = 56141421;
 //   }
@@ -93,5 +93,5 @@ message TestMessageSetExtension3 {
 // }
 
 // MessageSet wire format is equivalent to this.
-message RawMessageSet {
+struct RawMessageSet {
 }

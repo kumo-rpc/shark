@@ -35,7 +35,7 @@ syntax = "proto2";
 
 package sharkbuf_unittest;
 
-message TestLargeEnumValue {
+struct TestLargeEnumValue {
   enum EnumWithLargeValue {
     VALUE_1 = 1;
     VALUE_MAX = 0x7fffffff;

@@ -43,4 +43,4 @@ option cc_enable_arenas = true;
 //       rpc Bar(google.sharkbuf.Empty) returns (google.sharkbuf.Empty);
 //     }
 //
-message Empty {}
+struct Empty {}

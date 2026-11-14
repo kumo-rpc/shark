@@ -46,7 +46,7 @@ suite('Proto3Definition', () => {
     });
 
     test('does not match message definitions', () => {
-      const line = 'message MyMessage {';
+      const line = 'struct MyMessage {';
       assert.ok(!messageRegExp.test(line), 'Should not match message definition');
     });
   });

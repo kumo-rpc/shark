@@ -43,7 +43,7 @@ package sharkbuf_unittest;
 // for code size.
 option optimize_for = SPEED;
 
-message TestEmbedOptimizedForSize {
+struct TestEmbedOptimizedForSize {
   // Test that embedding a message which has optimize_for = CODE_SIZE into
   // one optimized for speed works.
   optional TestOptimizedForSize optional_message = 1;

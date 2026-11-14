@@ -43,7 +43,7 @@ package proto_util_converter.testing;
 import "tests/sk/transfer/json/anys.shark";
 
 // A book
-message Book {
+struct Book {
   optional string title = 1;
   optional Author author = 2;
   optional uint32 length = 3;
@@ -51,7 +51,7 @@ message Book {
   optional bytes content = 5;
 
 
-  message Label {
+  struct Label {
     optional string key = 1;
     optional string value = 2;
   }
@@ -82,12 +82,12 @@ message Book {
 }
 
 // A publisher of a book, tests required fields.
-message Publisher {
+struct Publisher {
   required string name = 1;
 }
 
 // An author of a book
-message Author {
+struct Author {
   optional uint64 id = 1 [json_name = "@id"];
   optional string name = 2;
   list<string> pseudonym = 3;
@@ -97,7 +97,7 @@ message Author {
 
 // For testing resiliency of our protostream parser.
 // Field numbers of Author are reused for something else.
-message BadAuthor {
+struct BadAuthor {
   optional string id = 1;         // non-length-delimited to length-delimited.
   list<uint64> name = 2;       // string to repeated (both length-delimited).
   optional string pseudonym = 3;  // Repeated to optional.
@@ -105,7 +105,7 @@ message BadAuthor {
 }
 
 // All primitive types
-message Primitive {
+struct Primitive {
   // 32 bit numbers:
   optional fixed32 fix32 = 1;
   optional uint32 u32 = 2;
@@ -151,7 +151,7 @@ message Primitive {
 
 // Test packed versions of all list<primitives>.
 // The field numbers should match their non-packed version in Primitive message.
-message PackedPrimitive {
+struct PackedPrimitive {
   // repeated 32 bit numbers:
   list<fixed32> rep_fix32 = 16 [packed = true];
   list<uint32> rep_u32 = 17 [packed = true];
@@ -178,7 +178,7 @@ extend Book {
 }
 
 // Test nested extensions.
-message NestedBook {
+struct NestedBook {
   extend Book {
     optional NestedBook another_book = 301;
   }
@@ -188,12 +188,12 @@ message NestedBook {
 
 // For testing resiliency of our protostream parser.
 // Field number of NestedBook is reused for something else.
-message BadNestedBook {
+struct BadNestedBook {
   list<uint32> book = 1 [packed = true];  // Packed to optional message.
 }
 
 // A recursively defined message.
-message Cyclic {
+struct Cyclic {
   optional int32 m_int = 1;
   optional string m_str = 2;
   optional Book m_book = 3;
@@ -203,14 +203,14 @@ message Cyclic {
 
 // Test that two messages can have different fields mapped to the same JSON
 // name. See: https://github.com/protocolbuffers/protobuf/issues/1415
-message TestJsonName1 {
+struct TestJsonName1 {
   optional int32 one_value = 1 [json_name = "value"];
 }
-message TestJsonName2 {
+struct TestJsonName2 {
   optional int32 another_value = 1 [json_name = "value"];
 }
 
-message TestPrimitiveFieldsWithSameJsonName {
+struct TestPrimitiveFieldsWithSameJsonName {
   optional string val_str1 = 1;
   optional string val_str_1 = 2;
 
@@ -236,12 +236,12 @@ message TestPrimitiveFieldsWithSameJsonName {
   optional float val_float_1 = 16;
 }
 
-message TestRepeatedFieldsWithSameJsonName {
+struct TestRepeatedFieldsWithSameJsonName {
   list<string> rep_str1 = 1;
   list<string> rep_str_1 = 2;
 }
 
-message TestMessageFieldsWithSameJsonName {
+struct TestMessageFieldsWithSameJsonName {
   optional Primitive prim1 = 1;
   optional Primitive prim_1 = 2;
 }

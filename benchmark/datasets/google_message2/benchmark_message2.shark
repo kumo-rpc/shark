@@ -41,7 +41,7 @@ option optimize_for = SPEED;
 
 option cc_enable_arenas = true;
 
-message GoogleMessage2 {
+struct GoogleMessage2 {
   optional string field1 = 1;
   optional int64 field3 = 3;
   optional int64 field4 = 4;
@@ -74,7 +74,7 @@ message GoogleMessage2 {
   optional bool field206 = 206 [default = false];
 }
 
-message GoogleMessage2GroupedMessage {
+struct GoogleMessage2GroupedMessage {
   optional float field1 = 1;
   optional float field2 = 2;
   optional float field3 = 3 [default = 0.0];

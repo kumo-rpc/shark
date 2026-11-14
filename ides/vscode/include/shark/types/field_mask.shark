@@ -180,11 +180,11 @@ option cc_enable_arenas = true;
 //
 // As an example, consider the following message declarations:
 //
-//     message Profile {
+//     struct Profile {
 //       User user = 1;
 //       Photo photo = 2;
 //     }
-//     message User {
+//     struct User {
 //       string display_name = 1;
 //       string address = 2;
 //     }
@@ -207,7 +207,7 @@ option cc_enable_arenas = true;
 // Field masks treat fields in oneofs just as regular fields. Consider the
 // following message:
 //
-//     message SampleMessage {
+//     struct SampleMessage {
 //       oneof test_oneof {
 //         string name = 4;
 //         SubMessage sub_message = 9;
@@ -234,7 +234,7 @@ option cc_enable_arenas = true;
 // The implementation of any API method which has a FieldMask type field in the
 // request should verify the included field paths, and return an
 // `INVALID_ARGUMENT` error if any path is unmappable.
-message FieldMask {
+struct FieldMask {
   // The set of field mask paths.
   list<string> paths = 1;
 }

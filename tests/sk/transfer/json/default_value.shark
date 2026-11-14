@@ -36,7 +36,7 @@ import "shark/types/any.shark";
 import "shark/types/struct.shark";
 import "shark/types/wrappers.shark";
 
-message DefaultValueTestCases {
+struct DefaultValueTestCases {
   optional DoubleMessage empty_double = 1;
   optional DoubleMessage double_with_default_value = 2;
   optional DoubleMessage double_with_nondefault_value = 3;
@@ -83,7 +83,7 @@ message DefaultValueTestCases {
   optional DoubleValueMessage double_value_default = 502;
 }
 
-message DoubleMessage {
+struct DoubleMessage {
   optional double double_value = 1;
   list<double> repeated_double = 2;
   optional DoubleMessage nested_message = 3;
@@ -95,18 +95,18 @@ message DoubleMessage {
   }
 }
 
-message StructMessage {
+struct StructMessage {
   optional shark.Struct struct = 1;
 }
 
-message ValueMessage {
+struct ValueMessage {
   optional shark.Value value = 1;
 }
 
-message ListValueMessage {
+struct ListValueMessage {
   optional shark.ListValue shopping_list = 1;
 }
-message RequestMessage {
+struct RequestMessage {
   optional string content = 1;
 }
 
@@ -116,12 +116,12 @@ service DefaultValueTestService {
   rpc Call(RequestMessage) returns (DefaultValueTestCases);
 }
 
-message AnyMessage {
+struct AnyMessage {
   optional shark.Any any = 1;
   optional AnyData data = 2;
 }
 
-message AnyData {
+struct AnyData {
   optional int32 attr = 1;
   optional string str = 2;
   list<string> msgs = 3;
@@ -131,21 +131,21 @@ message AnyData {
   list<AnyData> repeated_data = 9;
 }
 
-message StringtoIntMap {
+struct StringtoIntMap {
   map<string, int32> map = 1;
 }
 
-message IntToStringMap {
+struct IntToStringMap {
   map<int32, string> map = 1;
 }
 
-message MixedMap {
+struct MixedMap {
   optional string msg = 1;
   map<string, float> map = 2;
   optional int32 int_value = 3;
 }
 
-message MixedMap2 {
+struct MixedMap2 {
   enum E {
     E0 = 0;
     E1 = 1;
@@ -157,14 +157,14 @@ message MixedMap2 {
   optional string msg = 4;
 }
 
-message MessageMap {
-  message M {
+struct MessageMap {
+  struct M {
     optional int32 inner_int = 1;
     optional string inner_text = 2;
   }
   map<string, M> map = 1;
 }
 
-message DoubleValueMessage {
+struct DoubleValueMessage {
   optional shark.DoubleValue double = 1;
 }

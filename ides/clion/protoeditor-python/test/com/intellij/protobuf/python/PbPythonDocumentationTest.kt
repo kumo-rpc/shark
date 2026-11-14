@@ -20,7 +20,7 @@ class PbPythonDocumentationTest : PbPythonTestBase() {
   fun testMessageCall() = runWithGeneratedPb("all.proto") { context ->
     val html = documentationAt(context, "SomeMessage(<caret>)")
 
-    assertContainsAll(html, "message", "SomeMessage", "This text is an example of a multi-line comment.", "all.proto")
+    assertContainsAll(html, "struct", "SomeMessage", "This text is an example of a multi-line comment.", "all.proto")
   }
 
   fun testKeywordArgument() = runWithGeneratedPb("all.proto") { context ->

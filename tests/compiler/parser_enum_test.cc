@@ -537,7 +537,7 @@ TEST_F(SourceInfoTest, EnumReservedName) {
 
 TEST_F(SourceInfoTest, NestedEnums) {
   EXPECT_TRUE(
-      Parse("message Foo {\n"
+      Parse("struct Foo {\n"
             "  $a$enum $b$Bar$c$ {}$d$\n"
             "  $e$enum $f$Baz$g$ {}$h$\n"
             "}\n"));

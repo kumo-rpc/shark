@@ -17,7 +17,7 @@ import "shark/types/wrappers.shark";
 // Test that we can include all well-known types.
 // Each wrapper type is included separately, as languages
 // map handle different wrappers in different ways.
-message TestWellKnownTypes {
+struct TestWellKnownTypes {
   optional shark.Any any_field = 1;
   optional shark.Api api_field = 2;
   optional shark.Duration duration_field = 3;
@@ -41,7 +41,7 @@ message TestWellKnownTypes {
 }
 
 // A list<field> for each well-known type.
-message RepeatedWellKnownTypes {
+struct RepeatedWellKnownTypes {
   list<shark.Any> any_field = 1;
   list<shark.Api> api_field = 2;
   list<shark.Duration> duration_field = 3;
@@ -63,7 +63,7 @@ message RepeatedWellKnownTypes {
   list<shark.BytesValue> bytes_field = 18;
 }
 
-message OneofWellKnownTypes {
+struct OneofWellKnownTypes {
   oneof oneof_field {
     shark.Any any_field = 1;
     shark.Api api_field = 2;
@@ -89,7 +89,7 @@ message OneofWellKnownTypes {
 // A map field for each well-known type. We only
 // need to worry about the value part of the map being the
 // well-known types, as messages can't be map keys.
-message MapWellKnownTypes {
+struct MapWellKnownTypes {
   map<int32,shark.Any> any_field = 1;
   map<int32,shark.Api> api_field = 2;
   map<int32,shark.Duration> duration_field = 3;

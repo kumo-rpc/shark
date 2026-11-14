@@ -51,26 +51,26 @@ enum Proto2MapEnumPlusExtra {
   E_PROTO2_MAP_ENUM_EXTRA = 3;
 }
 
-message TestEnumMap {
+struct TestEnumMap {
   map<int32, Proto2MapEnum> known_map_field = 101;
   map<int32, Proto2MapEnum> unknown_map_field = 102;
 }
 
-message TestEnumMapPlusExtra {
+struct TestEnumMapPlusExtra {
   map<int32, Proto2MapEnumPlusExtra> known_map_field = 101;
   map<int32, Proto2MapEnumPlusExtra> unknown_map_field = 102;
 }
 
-message TestImportEnumMap {
+struct TestImportEnumMap {
   map<int32, sharkbuf_unittest_import.ImportEnumForMap> import_enum_amp = 1;
 }
 
-message TestIntIntMap {
+struct TestIntIntMap {
   map<int32, int32> m = 1;
 }
 
 // Test all key types: string, plus the non-floating-point scalars.
-message TestMaps {
+struct TestMaps {
   map<int32, TestIntIntMap> m_int32 = 1;
   map<int64, TestIntIntMap> m_int64 = 2;
   map<uint32, TestIntIntMap> m_uint32 = 3;
@@ -86,6 +86,6 @@ message TestMaps {
 }
 
 // Test maps in submessages.
-message TestSubmessageMaps {
+struct TestSubmessageMaps {
   optional TestMaps m = 1;
 }

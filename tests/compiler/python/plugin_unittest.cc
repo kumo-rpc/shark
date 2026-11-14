@@ -79,14 +79,14 @@ TEST(PythonPluginTest, ImportTest) {
                              "syntax = \"proto2\";\n"
                              "package foo;\n"
                              "import \"test2.shark\";"
-                             "message Message1 {\n"
+                             "struct Message1 {\n"
                              "  optional Message2 message_2 = 1;\n"
                              "}\n",
                              true));
   GOOGLE_CHECK_OK(File::SetContents(TestTempDir() + "/test2.shark",
                              "syntax = \"proto2\";\n"
                              "package foo;\n"
-                             "message Message2 {}\n",
+                             "struct Message2 {}\n",
                              true));
 
   compiler::CommandLineInterface cli;

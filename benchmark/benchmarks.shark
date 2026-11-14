@@ -31,7 +31,7 @@
 syntax = "proto2";
 package benchmarks;
 
-message BenchmarkDataset {
+struct BenchmarkDataset {
   // Name of the benchmark dataset.  This should be unique across all datasets.
   // Should only contain word characters: [a-zA-Z0-9_]
   optional string name = 1;

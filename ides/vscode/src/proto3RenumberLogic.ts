@@ -25,7 +25,7 @@ export function findEnclosingBlock(text: string, offset: number): ProtoBlock | u
 
 export function findAllBlocks(text: string): ProtoBlock[] {
   const blocks: ProtoBlock[] = [];
-  const pattern = /\b(message|enum)\s+[A-Za-z_][\w]*\s*{/g;
+  const pattern = /\b(struct|enum)\s+[A-Za-z_][\w]*\s*{/g;
   let match: RegExpExecArray | null;
 
   while ((match = pattern.exec(text)) !== null) {
@@ -38,7 +38,7 @@ export function findAllBlocks(text: string): ProtoBlock[] {
       continue;
     }
     blocks.push({
-      type: match[1] as BlockType,
+      type: match[1] === 'enum' ? 'enum' : 'message',
       keywordStart: match.index,
       openBrace,
       closeBrace,
@@ -121,7 +121,8 @@ export function computeEnumEdits(text: string, block: ProtoBlock): NumericEdit[]
 }
 
 function locateBlock(text: string, offset: number, keyword: BlockType): ProtoBlock | undefined {
-  const pattern = new RegExp(`\\b${keyword}\\s+[A-Za-z_][\\w]*\\s*{`, 'g');
+  const word = keyword === 'message' ? 'struct' : keyword;
+  const pattern = new RegExp(`\\b${word}\\s+[A-Za-z_][\\w]*\\s*{`, 'g');
   let match: RegExpExecArray | null;
   let candidate: ProtoBlock | undefined;
 
@@ -157,7 +158,7 @@ function collectNestedTypeRanges(
 ): Array<{ start: number; end: number }> {
   const ranges: Array<{ start: number; end: number }> = [];
   const slice = text.slice(start, end);
-  const pattern = /\b(message|enum)\s+[A-Za-z_][\w]*\s*{/g;
+  const pattern = /\b(struct|enum)\s+[A-Za-z_][\w]*\s*{/g;
   let match: RegExpExecArray | null;
 
   while ((match = pattern.exec(slice)) !== null) {

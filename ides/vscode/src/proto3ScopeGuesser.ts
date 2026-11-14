@@ -2,7 +2,7 @@
 
 import vscode = require('vscode');
 
-const MSG_BEGIN = /\s*message\s+(\w*)\s*\{.*/;
+const MSG_BEGIN = /\s*struct\s+(\w*)\s*\{.*/;
 const ENUM_BEGIN = /\s*enum\s+(?:class\s+)?(\w*)(?:\s*:\s*\w+)?\s*\{.*/;
 const SERVICE_BEGIN = /\s*service\s+(\w*)\s*\{.*/;
 const SCOPE_END = /\s*\}.*/;

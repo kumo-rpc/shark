@@ -32,7 +32,7 @@ syntax = "proto2";
 
 package proto_util_converter.testing;
 
-message DefaultValueTest {
+struct DefaultValueTest {
   optional double double_value = 1;
   list<double> repeated_double = 2;
   optional float float_value = 3;

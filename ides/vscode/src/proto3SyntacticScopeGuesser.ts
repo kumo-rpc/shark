@@ -129,7 +129,7 @@ export function SyntacticGuessScope(
   const tkn = new tokenizer(document);
   for (let tok = tkn.next(); tok !== null; tok = tkn.next()) {
     switch (tok.tok) {
-      case 'message': {
+      case 'struct': {
         // take next token until reach left brace
         let t = tkn.next();
         for (; t !== null && t.tok !== '{'; t = tkn.next()) {

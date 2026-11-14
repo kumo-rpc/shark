@@ -48,7 +48,7 @@ option cc_enable_arenas = true;
 // Test public import
 import public "tests/sk/unittest_import_public.shark";
 
-message ImportMessage {
+struct ImportMessage {
   optional int32 d = 1;
 }
 

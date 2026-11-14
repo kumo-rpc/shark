@@ -34,20 +34,20 @@ package proto_util_converter.testing;
 
 import "shark/types/field_mask.shark";
 
-message NestedFieldMask {
+struct NestedFieldMask {
   optional string data = 1;
   optional shark.FieldMask single_mask = 2;
   list<shark.FieldMask> repeated_mask = 3;
 }
 
-message FieldMaskTest {
+struct FieldMaskTest {
   optional string id = 1;
   optional shark.FieldMask single_mask = 2;
   list<shark.FieldMask> repeated_mask = 3;
   list<NestedFieldMask> nested_mask = 4;
 }
 
-message FieldMaskTestCases {
+struct FieldMaskTestCases {
   optional FieldMaskWrapper single_mask = 1;
   optional FieldMaskWrapper multiple_mask = 2;
   optional FieldMaskWrapper snake_camel = 3;
@@ -62,7 +62,7 @@ message FieldMaskTestCases {
   optional FieldMaskWrapper map_key5 = 12;
 }
 
-message FieldMaskWrapper {
+struct FieldMaskWrapper {
   optional shark.FieldMask mask = 1;
 }
 

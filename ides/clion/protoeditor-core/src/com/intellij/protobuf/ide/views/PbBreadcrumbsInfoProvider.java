@@ -63,7 +63,7 @@ public class PbBreadcrumbsInfoProvider implements BreadcrumbsProvider {
 
   private static String getTooltipPrefix(@NotNull PsiElement element) {
     if (element instanceof PbMessageDefinition) {
-      return "message";
+      return "struct";
     }
     if (element instanceof PbEnumDefinition) {
       return "enum";

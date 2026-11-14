@@ -56,7 +56,7 @@ package sharkbuf_unittest.lazy_imports;
 option optimize_for = SPEED;
 
 
-message LazyMessage {
+struct LazyMessage {
   optional int32 a = 1;
 }
 

@@ -37,7 +37,7 @@ import "shark/types/wrappers.shark";
 // Top-level test cases proto used by MarshallingTest. See description
 // at the top of the class MarshallingTest for details on how to write
 // test cases.
-message WrappersTestCases {
+struct WrappersTestCases {
   optional DoubleWrapper double_wrapper = 1;
   optional FloatWrapper float_wrapper = 2;
   optional Int64Wrapper int64_wrapper = 3;
@@ -59,39 +59,39 @@ message WrappersTestCases {
   optional BytesWrapper bytes_wrapper_default = 18;
 }
 
-message DoubleWrapper {
+struct DoubleWrapper {
   optional shark.DoubleValue double = 1;
 }
 
-message FloatWrapper {
+struct FloatWrapper {
   optional shark.FloatValue float = 1;
 }
 
-message Int64Wrapper {
+struct Int64Wrapper {
   optional shark.Int64Value int64 = 1;
 }
 
-message UInt64Wrapper {
+struct UInt64Wrapper {
   optional shark.UInt64Value uint64 = 1;
 }
 
-message Int32Wrapper {
+struct Int32Wrapper {
   optional shark.Int32Value int32 = 1;
 }
 
-message UInt32Wrapper {
+struct UInt32Wrapper {
   optional shark.UInt32Value uint32 = 1;
 }
 
-message BoolWrapper {
+struct BoolWrapper {
   optional shark.BoolValue bool = 1;
 }
 
-message StringWrapper {
+struct StringWrapper {
   optional shark.StringValue string = 1;
 }
 
-message BytesWrapper {
+struct BytesWrapper {
   optional shark.BytesValue bytes = 1;
 }
 

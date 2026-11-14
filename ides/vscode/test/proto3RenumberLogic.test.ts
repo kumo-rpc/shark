@@ -7,11 +7,11 @@ import {
 } from '../src/proto3RenumberLogic';
 
 suite('Proto3RenumberLogic', () => {
-  test('renumbers message fields while skipping nested messages', () => {
-    const text = `message Outer {\n  string keep = 5;\n  message Inner {\n    string nested = 1;\n  }\n  oneof choice {\n    int32 picked = 8;\n    string named = 11;\n  }\n}`;
+  test('renumbers struct fields while skipping nested messages', () => {
+    const text = `struct Outer {\n  string keep = 5;\n  struct Inner {\n    string nested = 1;\n  }\n  oneof choice {\n    int32 picked = 8;\n    string named = 11;\n  }\n}`;
     const offset = text.indexOf('keep');
     const block = findEnclosingBlock(text, offset);
-    assert.ok(block, 'expected outer message block');
+    assert.ok(block, 'expected outer struct block');
     assert.strictEqual(block.type, 'message');
 
     const edits = computeMessageEdits(text, block);
@@ -26,11 +26,11 @@ suite('Proto3RenumberLogic', () => {
     );
   });
 
-  test('finds nested message block', () => {
-    const text = `message Wrapper {\n  message Embedded {\n    string note = 7;\n  }\n}`;
+  test('finds nested struct block', () => {
+    const text = `struct Wrapper {\n  struct Embedded {\n    string note = 7;\n  }\n}`;
     const offset = text.indexOf('note');
     const block = findEnclosingBlock(text, offset);
-    assert.ok(block, 'expected nested message block');
+    assert.ok(block, 'expected nested struct block');
     assert.strictEqual(block.type, 'message');
     const edits = computeMessageEdits(text, block);
     assert.strictEqual(edits.length, 1);
@@ -53,7 +53,7 @@ suite('Proto3RenumberLogic', () => {
   });
 
   test('renumbers entire document across messages and enums', () => {
-    const text = `message Foo {\n  string keep = 3;\n  enum State {\n    UNKNOWN = 2;\n    STARTED = 5;\n  }\n  message Inner {\n    int64 value = 4;\n  }\n}`;
+    const text = `struct Foo {\n  string keep = 3;\n  enum State {\n    UNKNOWN = 2;\n    STARTED = 5;\n  }\n  struct Inner {\n    int64 value = 4;\n  }\n}`;
     const edits = computeDocumentRenumberEdits(text);
     assert.strictEqual(edits.length, 4);
     assert.deepStrictEqual(

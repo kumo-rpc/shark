@@ -4204,7 +4204,7 @@ namespace shark {
 
             ASSERT_EQ(
                 "syntax = \"proto2\";\n\n"
-                "message Foo {\n"
+                "struct Foo {\n"
                 "  reserved 5, 10 to 19;\n"
                 "  reserved \"foo\", \"bar\";\n"
                 "}\n\n",
@@ -4231,7 +4231,7 @@ namespace shark {
                 "  BAR = 1;\n"
                 "  reserved 5 to max;\n"
                 "}\n\n"
-                "message Foo {\n"
+                "struct Foo {\n"
                 "  reserved 5 to max;\n"
                 "}\n\n",
                 file->DebugString());
@@ -5021,7 +5021,7 @@ namespace shark {
             //   message Bar { message Baz {} }
             //   message Foo {
             //     message Bar {
-            //       // Placing "message Baz{}" here, or removing Foo.Bar altogether,
+            //       // Placing "struct Baz{}" here, or removing Foo.Bar altogether,
             //       // would fix the error.
             //     }
             //     optional Bar.Baz baz = 1;
@@ -7356,10 +7356,10 @@ namespace shark {
         const char* const kSourceLocationTestInput = "syntax = \"proto2\";\n"
                                                      "option go_package = \"com.foo.bar\";\n"
                                                      "option (test_file_opt) = \"foobar\";\n"
-                                                     "message A {\n"
+                                                     "struct A {\n"
                                                      "  option (test_msg_opt) = \"foobar\";\n"
                                                      "  optional int32 a = 1 [deprecated = true];\n"
-                                                     "  message B {\n"
+                                                     "  struct B {\n"
                                                      "    required double b = 1 [(test_field_opt) = \"foobar\"];\n"
                                                      "  }\n"
                                                      "  oneof c {\n"
@@ -7389,13 +7389,13 @@ namespace shark {
                                                      "    option (test_method_opt) = \"foobar\";\n"
                                                      "  }\n"
                                                      "}\n"
-                                                     "message MessageWithExtensions {\n"
+                                                     "struct MessageWithExtensions {\n"
                                                      "  extensions 1000 to 2000, 2001 to max [(test_ext_opt) = \"foobar\"];\n"
                                                      "}\n"
                                                      "extend MessageWithExtensions {\n"
                                                      "  list<int32> int32_extension = 1001 [packed=true];\n"
                                                      "}\n"
-                                                     "message C {\n"
+                                                     "struct C {\n"
                                                      "  extend MessageWithExtensions {\n"
                                                      "    optional C message_extension = 1002;\n"
                                                      "  }\n"
@@ -7935,7 +7935,7 @@ namespace shark {
         // ===================================================================
 
         const char* const kCopySourceCodeInfoToTestInput = "syntax = \"proto2\";\n"
-                                                           "message Foo {}\n";
+                                                           "struct Foo {}\n";
 
         // Required since source code information is not preserved by
         // FileDescriptorTest.
@@ -7980,7 +7980,7 @@ namespace shark {
             ASSERT_EQ(3, foo_location.span_size()); // Foo spans one line
             EXPECT_EQ(1, foo_location.span(0)); // Foo is declared on line 1
             EXPECT_EQ(0, foo_location.span(1)); // Foo starts at column 0
-            EXPECT_EQ(14, foo_location.span(2)); // Foo ends on column 14
+            EXPECT_EQ(13, foo_location.span(2)); // Foo ends on column 13
         }
 
         // ===================================================================

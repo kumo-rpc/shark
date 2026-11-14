@@ -72,8 +72,8 @@
     },
     "message": {
       "prefix": "msg",
-      "description": "message",
-      "body": "message ${1:MessageName} {\n\t$0\n}"
+      "description": "struct",
+      "body": "struct ${1:MessageName} {\n\t$0\n}"
     },
     "bool field": {
       "prefix": "fbo",

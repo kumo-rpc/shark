@@ -35,7 +35,7 @@ package proto_util_converter.testing;
 import "shark/types/duration.shark";
 import "shark/types/timestamp.shark";
 
-message TimestampDurationTestCases {
+struct TimestampDurationTestCases {
   // Timestamp tests
   optional TimeStampType epoch = 1;
   optional TimeStampType epoch2 = 2;
@@ -61,11 +61,11 @@ message TimestampDurationTestCases {
   optional shark.Duration duration5 = 108;
 }
 
-message TimeStampType {
+struct TimeStampType {
   optional shark.Timestamp timestamp = 1;
 }
 
-message DurationType {
+struct DurationType {
   optional shark.Duration duration = 1;
 }
 
@@ -73,7 +73,7 @@ service TimestampDurationTestService {
   rpc Call(TimestampDurationTestCases) returns (TimestampDurationTestCases);
 }
 
-message TimestampDuration {
+struct TimestampDuration {
   optional shark.Timestamp ts = 1;
   optional shark.Duration dur = 2;
   list<shark.Timestamp> rep_ts = 3;

@@ -39,7 +39,7 @@ import "tests/sk/unittest.shark";
 
 option optimize_for = LITE_RUNTIME;
 
-message TestLiteImportsNonlite {
+struct TestLiteImportsNonlite {
   optional TestAllTypes message = 1;
 
   // Verifies that transitive required fields generates valid code.

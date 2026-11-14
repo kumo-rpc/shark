@@ -43,7 +43,7 @@ import "shark/types/any.shark";
 
 option optimize_for = SPEED;
 
-message TestField {
+struct TestField {
   optional int32 a = 3;
   optional int32 b = 4;
   optional int32 c = 1;
@@ -55,7 +55,7 @@ message TestField {
   }
 }
 
-message TestDiffMessage {
+struct TestDiffMessage {
 
   optional int32 v = 13 [deprecated = true];
   optional string w = 14;

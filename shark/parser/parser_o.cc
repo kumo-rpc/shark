@@ -657,7 +657,7 @@ namespace shark {
             if (TryConsumeEndOfDeclaration(";", nullptr)) {
                 // empty statement; ignore
                 return true;
-            } else if (LookingAt("message")) {
+            } else if (LookingAt("struct")) {
                 LocationRecorder location(root_location,
                     FileDescriptorProto::kMessageTypeFieldNumber,
                     file->message_type_size());
@@ -690,7 +690,7 @@ namespace shark {
                 return ParseOption(file->mutable_options(), location, file,
                     OPTION_STATEMENT);
             } else {
-                AddError("Expected top-level statement (e.g. \"message\").");
+                AddError("Expected top-level statement (e.g. \"struct\").");
                 return false;
             }
         }
@@ -701,7 +701,7 @@ namespace shark {
         bool Parser::ParseMessageDefinition(
             DescriptorProto* message, const LocationRecorder& message_location,
             const FileDescriptorProto* containing_file) {
-            DO(Consume("message"));
+            DO(Consume("struct"));
             {
                 LocationRecorder location(message_location,
                     DescriptorProto::kNameFieldNumber);
@@ -797,7 +797,7 @@ namespace shark {
             if (TryConsumeEndOfDeclaration(";", nullptr)) {
                 // empty statement; ignore
                 return true;
-            } else if (LookingAt("message")) {
+            } else if (LookingAt("struct")) {
                 LocationRecorder location(message_location,
                     DescriptorProto::kNestedTypeFieldNumber,
                     message->nested_type_size());

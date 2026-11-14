@@ -43,7 +43,7 @@ option go_package = "google.golang.org/protobuf/types/known/structpb";
 // with the proto support for the language.
 //
 // The JSON representation for `Struct` is JSON object.
-message Struct {
+struct Struct {
   // Unordered map of dynamically typed values.
   map<string, Value> fields = 1;
 }
@@ -54,7 +54,7 @@ message Struct {
 // variants. Absence of any variant indicates an error.
 //
 // The JSON representation for `Value` is JSON value.
-message Value {
+struct Value {
   // The kind of value.
   oneof kind {
     // Represents a null value.
@@ -84,7 +84,7 @@ enum NullValue {
 // `ListValue` is a wrapper around a list<field> of values.
 //
 // The JSON representation for `ListValue` is JSON array.
-message ListValue {
+struct ListValue {
   // Repeated field of dynamically typed values.
   list<Value> values = 1;
 }

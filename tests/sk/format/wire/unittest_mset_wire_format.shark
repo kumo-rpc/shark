@@ -41,11 +41,11 @@ option cc_enable_arenas = true;
 option optimize_for = SPEED;
 
 // A message with message_set_wire_format.
-message TestMessageSet {
+struct TestMessageSet {
   option message_set_wire_format = true;
   extensions 4 to max;
 }
 
-message TestMessageSetWireFormatContainer {
+struct TestMessageSetWireFormatContainer {
   optional TestMessageSet message_set = 1;
 }

@@ -42,14 +42,14 @@ import "benchmark/datasets/google_message3/benchmark_message3_8.shark";
 
 option cc_enable_arenas = true;
 
-message Message34390 {
+struct Message34390 {
   list<.benchmarks.google_message3.Message34387> field34452 = 1;
   extend .benchmarks.google_message3.Message0 {
     optional .benchmarks.google_message3.Message34390 field34453 = 92144610;
   }
 }
 
-message Message34624 {
+struct Message34624 {
   optional .benchmarks.google_message3.Message34621 field34683 = 1;
   optional .benchmarks.google_message3.Message34621 field34684 = 2;
   extend .benchmarks.google_message3.Message0 {
@@ -57,7 +57,7 @@ message Message34624 {
   }
 }
 
-message Message34791 {
+struct Message34791 {
   optional fixed64 field34793 = 1;
   optional int32 field34795 = 5;
   optional int32 field34796 = 6;
@@ -76,7 +76,7 @@ message Message34791 {
   }
 }
 
-message Message35483 {
+struct Message35483 {
   optional int32 field35499 = 1;
   optional string field35500 = 2;
   optional string field35501 = 3;
@@ -88,7 +88,7 @@ message Message35483 {
   }
 }
 
-message Message35807 {
+struct Message35807 {
   optional int32 field35810 = 1;
   optional int32 field35811 = 2;
   optional int32 field35812 = 3;
@@ -102,12 +102,12 @@ message Message35807 {
   }
 }
 
-message Message37487 {
+struct Message37487 {
   optional bytes field37501 = 2;
   optional bool field37502 = 3;
 }
 
-message Message13062 {
+struct Message13062 {
   optional int64 field13075 = 1;
   optional string field13076 = 2;
   optional int32 field13077 = 3;
@@ -115,11 +115,11 @@ message Message13062 {
   optional int32 field13079 = 5;
 }
 
-message Message952 {
+struct Message952 {
   list<.benchmarks.google_message3.Message949> field963 = 1;
 }
 
-message Message36876 {
+struct Message36876 {
   optional .benchmarks.google_message3.Message2356 field36980 = 1;
   list<.benchmarks.google_message3.UnusedEmptyMessage> field36984 = 78;
   optional uint64 field36986 = 59;
@@ -169,11 +169,11 @@ message Message36876 {
   optional .benchmarks.google_message3.UnusedEmptyMessage field37042 = 155;
 }
 
-message Message1328 {}
+struct Message1328 {}
 
-message Message6850 {}
+struct Message6850 {}
 
-message Message6863 {
+struct Message6863 {
   optional .benchmarks.google_message3.Enum6858 field6931 = 1;
   optional .benchmarks.google_message3.Enum6858 field6932 = 2;
   optional .benchmarks.google_message3.UnusedEnum field6933 = 36;
@@ -209,14 +209,14 @@ message Message6863 {
   optional bool field6963 = 34;
 }
 
-message Message6871 {}
+struct Message6871 {}
 
-message Message7547 {
+struct Message7547 {
   required bytes field7549 = 1;
   required int32 field7550 = 2;
 }
 
-message Message7648 {
+struct Message7648 {
   optional string field7669 = 1;
   optional int32 field7670 = 2;
   optional int32 field7671 = 3;
@@ -231,32 +231,32 @@ message Message7648 {
   optional bool field7680 = 12;
 }
 
-message Message7865 {}
+struct Message7865 {}
 
-message Message7928 {
+struct Message7928 {
   optional string field7940 = 1;
   optional int64 field7941 = 2;
 }
 
-message Message7919 {
+struct Message7919 {
   optional fixed64 field7931 = 1;
   optional int64 field7932 = 2;
   optional bytes field7933 = 3;
 }
 
-message Message7920 {
+struct Message7920 {
   optional int64 field7934 = 1;
   optional int64 field7935 = 2;
 }
 
-message Message7921 {
+struct Message7921 {
   optional int32 field7936 = 1;
   optional int64 field7937 = 2;
   optional float field7938 = 3;
   optional .benchmarks.google_message3.UnusedEnum field7939 = 4;
 }
 
-message Message8511 {
+struct Message8511 {
   optional .benchmarks.google_message3.Message8224 field8539 = 1;
   optional string field8540 = 2;
   optional bool field8541 = 3;
@@ -264,7 +264,7 @@ message Message8511 {
   optional string field8543 = 5;
 }
 
-message Message8512 {
+struct Message8512 {
   optional .benchmarks.google_message3.Message8301 field8544 = 1;
   optional .benchmarks.google_message3.Message8302 field8545 = 2;
   optional string field8546 = 3;
@@ -273,14 +273,14 @@ message Message8512 {
   optional string field8549 = 6;
 }
 
-message Message8513 {
+struct Message8513 {
   list<.benchmarks.google_message3.Message8392> field8550 = 1;
   optional string field8551 = 2;
   optional bool field8552 = 3;
   optional string field8553 = 4;
 }
 
-message Message8514 {
+struct Message8514 {
   optional string field8554 = 1;
   optional int64 field8555 = 2;
   optional bool field8556 = 3;
@@ -288,13 +288,13 @@ message Message8514 {
   optional string field8558 = 5;
 }
 
-message Message8515 {
+struct Message8515 {
   optional .benchmarks.google_message3.Message8479 field8559 = 1;
   optional .benchmarks.google_message3.Message8478 field8560 = 2;
   optional string field8561 = 3;
 }
 
-message Message10320 {
+struct Message10320 {
   optional .benchmarks.google_message3.Enum10335 field10347 = 1;
   list<.benchmarks.google_message3.Message10319> field10348 = 2;
   optional int32 field10349 = 3;
@@ -304,33 +304,33 @@ message Message10320 {
   optional .benchmarks.google_message3.Enum10337 field10353 = 7;
 }
 
-message Message10321 {
+struct Message10321 {
   optional int32 field10354 = 1;
   optional int32 field10355 = 2;
   optional uint64 field10356 = 3;
 }
 
-message Message10322 {
+struct Message10322 {
   optional .benchmarks.google_message3.Message4016 field10357 = 1;
   optional bool field10358 = 2;
   optional bool field10359 = 3;
 }
 
-message Message11988 {
+struct Message11988 {
   optional string field12021 = 1;
   optional string field12022 = 2;
   optional .benchmarks.google_message3.UnusedEmptyMessage field12023 = 3;
   optional .benchmarks.google_message3.Message10155 field12024 = 4;
 }
 
-message Message12668 {
+struct Message12668 {
   list<.benchmarks.google_message3.Message12669> field12677 = 1;
   optional int32 field12678 = 2;
   optional int32 field12679 = 3;
   optional int32 field12680 = 4;
 }
 
-message Message12825 {
+struct Message12825 {
   list<.benchmarks.google_message3.Message12818> field12862 = 1;
   optional int32 field12863 = 2;
   optional .benchmarks.google_message3.Message12819 field12864 = 3;
@@ -340,25 +340,25 @@ message Message12825 {
   list<.benchmarks.google_message3.UnusedEmptyMessage> field12868 = 7;
 }
 
-message Message16478 {
+struct Message16478 {
   list<.benchmarks.google_message3.Message16479> field16481 = 1;
   optional bool field16482 = 3;
   optional int32 field16483 = 2;
 }
 
-message Message16552 {
+struct Message16552 {
   optional fixed64 field16565 = 1;
   optional int32 field16566 = 2;
   optional .benchmarks.google_message3.Enum16553 field16567 = 3;
 }
 
-message Message16660 {
+struct Message16660 {
   optional string field16668 = 1;
   optional string field16669 = 2;
   optional int32 field16670 = 3;
 }
 
-message Message16727 {
+struct Message16727 {
   required .benchmarks.google_message3.Enum16728 field16782 = 1;
   required string field16783 = 2;
   optional string field16784 = 3;
@@ -386,12 +386,12 @@ message Message16727 {
   extensions 1000 to 536870911;
 }
 
-message Message16725 {
+struct Message16725 {
   optional .benchmarks.google_message3.Enum16728 field16774 = 1;
   list<string> field16775 = 2;
 }
 
-message Message17726 {
+struct Message17726 {
   optional string field17801 = 1;
   list<string> field17802 = 2;
   optional string field17803 = 3;
@@ -416,19 +416,19 @@ message Message17726 {
   list<.benchmarks.google_message3.UnusedEmptyMessage> field17822 = 30;
 }
 
-message Message17782 {
+struct Message17782 {
   optional string field18153 = 1;
   optional string field18154 = 2;
 }
 
-message Message17783 {
+struct Message17783 {
   optional string field18155 = 1;
   optional string field18156 = 2;
   optional string field18157 = 3;
   list<string> field18160 = 16;
 }
 
-message Message16945 {
+struct Message16945 {
   optional string field16946 = 1;
   optional string field16947 = 2;
   optional string field16948 = 3;

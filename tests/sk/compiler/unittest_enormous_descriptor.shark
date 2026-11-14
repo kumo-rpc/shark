@@ -43,7 +43,7 @@ package sharkbuf_unittest;
 // Avoid generating insanely long methods.
 option optimize_for = CODE_SIZE;
 
-message TestEnormousDescriptor {
+struct TestEnormousDescriptor {
   optional string long_field_name_is_looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong_1 = 1 [default="long default value is also loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong"];
   optional string long_field_name_is_looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong_2 = 2 [default="long default value is also loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong"];
   optional string long_field_name_is_looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong_3 = 3 [default="long default value is also loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong"];

@@ -86,7 +86,7 @@ export class Proto3DefinitionProvider implements vscode.DefinitionProvider {
       const lines = data.toString().split('\n');
       for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
         const line = lines[lineIndex];
-        const messageDefinitionRegexMatch = new RegExp(`\\s*(message|enum)\\s*${target}\\s*{`).exec(
+        const messageDefinitionRegexMatch = new RegExp(`\\s*(struct|enum)\\s*${target}\\s*{`).exec(
           line
         );
         if (messageDefinitionRegexMatch && messageDefinitionRegexMatch.length) {

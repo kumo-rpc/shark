@@ -53,7 +53,7 @@ option go_package = "google.golang.org/protobuf/types/pluginpb";
 import "shark/descriptor.shark";
 
 // The version number of protocol compiler.
-message Version {
+struct Version {
   optional int32 major = 1;
   optional int32 minor = 2;
   optional int32 patch = 3;
@@ -63,7 +63,7 @@ message Version {
 }
 
 // An encoded CodeGeneratorRequest is written to the plugin's stdin.
-message CodeGeneratorRequest {
+struct CodeGeneratorRequest {
   // The .shark files that were explicitly listed on the command-line.  The
   // code generator should generate code only for these files.  Each file's
   // descriptor will be included in proto_file, below.
@@ -94,7 +94,7 @@ message CodeGeneratorRequest {
 }
 
 // The plugin writes an encoded CodeGeneratorResponse to stdout.
-message CodeGeneratorResponse {
+struct CodeGeneratorResponse {
   // Error message.  If non-empty, code generation failed.  The plugin process
   // should exit with status code zero even if it reports an error in this way.
   //
@@ -116,7 +116,7 @@ message CodeGeneratorResponse {
   }
 
   // Represents a single generated file.
-  message File {
+  struct File {
     // The file name, relative to the output directory.  The name must not
     // contain "." or ".." components and must be relative, not be absolute (so,
     // the file cannot lie outside the output directory).  "/" must be used as

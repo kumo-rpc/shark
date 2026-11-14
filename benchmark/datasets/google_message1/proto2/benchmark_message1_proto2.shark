@@ -39,7 +39,7 @@ option optimize_for = SPEED;
 
 option cc_enable_arenas = true;
 
-message GoogleMessage1 {
+struct GoogleMessage1 {
   required string field1 = 1;
   optional string field9 = 9;
   optional string field18 = 18;
@@ -83,7 +83,7 @@ message GoogleMessage1 {
   optional int32 field131 = 131 [default = 0];
 }
 
-message GoogleMessage1SubMessage {
+struct GoogleMessage1SubMessage {
   optional int32 field1 = 1 [default = 0];
   optional int32 field2 = 2 [default = 0];
   optional int32 field3 = 3 [default = 0];

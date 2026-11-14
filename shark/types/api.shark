@@ -47,7 +47,7 @@ option go_package = "google.golang.org/protobuf/types/known/apipb";
 // sometimes simply referred to as "APIs" in other contexts, such as the name of
 // this message itself. See https://cloud.google.com/apis/design/glossary for
 // detailed terminology.
-message Api {
+struct Api {
   // The fully qualified name of this interface, including package name
   // followed by the interface's simple name.
   optional string name = 1;
@@ -93,7 +93,7 @@ message Api {
 }
 
 // Method represents a method of an API interface.
-message Method {
+struct Method {
   // The simple name of this method.
   optional string name = 1;
 
@@ -194,7 +194,7 @@ message Method {
 //       }
 //       ...
 //     }
-message Mixin {
+struct Mixin {
   // The fully qualified name of the interface which is included.
   optional string name = 1;
 
