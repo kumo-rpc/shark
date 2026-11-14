@@ -92,6 +92,7 @@ kmcmake_cc_library(
         unknown_field_set.cc
         extension_set_heavy.cc
         parser/importer.cc
+        parser/parser_o.cc
         parser/parser.cc
         format/wired/wire_format.cc
         format/text/text_format.cc

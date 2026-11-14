@@ -46,7 +46,7 @@
 #include <memory>
 
 #include <shark/parser/importer.h>
-#include <shark/parser/parser.h>
+#include <shark/parser/parser_o.h>
 #include <shark/io/io_win32.h>
 #include <shark/io/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
