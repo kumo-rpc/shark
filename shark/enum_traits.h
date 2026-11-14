@@ -55,6 +55,7 @@
 #include <string_view>
 #include <limits>
 #include <shark/port.h>
+#include <shark/stubs/port.h>
 
 namespace shark {
 

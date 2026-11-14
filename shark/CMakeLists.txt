@@ -161,7 +161,21 @@ kmcmake_cc_library(
         compiler/cpp/service.cc
         compiler/cpp/string_field.cc
         #################################################
-
+        compiler/cc/enum.cc
+        compiler/cc/enum_field.cc
+        compiler/cc/extension.cc
+        compiler/cc/field.cc
+        compiler/cc/file.cc
+        compiler/cc/generator.cc
+        compiler/cc/helpers.cc
+        compiler/cc/map_field.cc
+        compiler/cc/message.cc
+        compiler/cc/message_field.cc
+        compiler/cc/padding_optimizer.cc
+        compiler/cc/parse_function_generator.cc
+        compiler/cc/primitive_field.cc
+        compiler/cc/service.cc
+        compiler/cc/string_field.cc
         ######################################
         compiler/plugin.cc
         compiler/plugin.skp.cc

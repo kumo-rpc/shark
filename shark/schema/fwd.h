@@ -15,7 +15,6 @@
 
 #pragma once
 
-
 #include <atomic>
 #include <map>
 #include <memory>
@@ -23,14 +22,14 @@
 #include <string>
 #include <vector>
 
-#include <shark/port.h>
+#include <cstdint>
+#include <shark/enum_traits.h>
 #include <shark/meta.h>
+#include <shark/port.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/mutex.h>
 #include <shark/stubs/once.h>
-#include <shark/enum_traits.h>
-#include <cstdint>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -88,9 +87,6 @@ namespace shark {
         /// Does not impose any character encoding requirements.
         STRING = 15,
 
-        /// Non-owning view referencing an external byte sequence.
-        STRING_VIEW = 16,
-
         /// Variable-length sequence of values of a specified logical type.
         LIST = 17,
 
@@ -121,149 +117,105 @@ namespace shark {
     };
 
     enum class LogicalTypeId : uint8_t {
-
         /// Void type, representing the absence of a value.
         VOID = 0,
 
-        /// SQL NULL type, representing an unknown or missing value.
-        /// Physical type: VOID.
-        NULLPTR = 1,
-
         /// Boolean value.
         /// Physical type: BOOL.
-        BOOL = 2,
+        BOOL = 1,
 
         /// Unsigned 8-bit integer.
         /// Physical type: UINT8.
-        UINT8 = 3,
+        UINT8 = 2,
 
         /// Signed 8-bit integer.
         /// Physical type: INT8.
-        INT8 = 4,
+        INT8 = 3,
 
         /// Unsigned 16-bit integer.
         /// Physical type: UINT16.
-        UINT16 = 5,
+        UINT16 = 4,
 
         /// Signed 16-bit integer.
         /// Physical type: INT16.
-        INT16 = 6,
+        INT16 = 5,
 
         /// Unsigned 32-bit integer.
         /// Physical type: UINT32.
-        UINT32 = 7,
+        UINT32 = 6,
 
         /// Signed 32-bit integer.
         /// Physical type: INT32.
-        INT32 = 8,
+        INT32 = 7,
 
         /// Unsigned 64-bit integer.
         /// Physical type: UINT64.
-        UINT64 = 9,
+        UINT64 = 8,
 
         /// Signed 64-bit integer.
         /// Physical type: INT64.
-        INT64 = 10,
+        INT64 = 9,
 
         /// Unsigned 128-bit integer.
         /// Physical type: UINT128.
-        UINT128 = 11,
+        UINT128 = 10,
 
         /// Signed 128-bit integer.
         /// Physical type: INT128.
-        INT128 = 12,
+        INT128 = 11,
 
         /// 16-bit floating-point number.
         /// Physical type: FLOAT16.
-        FLOAT16 = 13,
+        FLOAT16 = 12,
 
         /// 32-bit floating-point number.
         /// Physical type: FLOAT32.
-        FLOAT32 = 14,
+        FLOAT32 = 13,
 
         /// 64-bit floating-point number.
         /// Physical type: FLOAT64.
-        FLOAT64 = 15,
+        FLOAT64 = 14,
 
         /// Enumeration type, representing a named set of integer constants.
         /// Physical type: UINT8, UINT16, or UINT32.
-        ENUM = 16,
-
-        /// 64-bit fixed-point decimal number.
-        /// Physical type: INT64.
-        DECIMAL64 = 17,
-
-        /// 128-bit fixed-point decimal number.
-        /// Physical type: INT128.
-        DECIMAL128 = 18,
-
-        /// Timestamp type with microsecond (us) precision.
-        /// Represents the number of microseconds since the Unix epoch.
-        /// Physical type: INT64.
-        TIMESTAMP = 19,
+        ENUM = 15,
 
         /// UTF-8 encoded string.
-        /// Physical type: STRING or STRING_VIEW.
-        STRING = 20,
+        /// Physical type: STRING.
+        STRING = 16,
 
         /// Binary data, representing a sequence of bytes without character encoding.
-        /// Physical type: STRING or STRING_VIEW.
-        BINARY = 21,
-
-        /// Bit string, representing a sequence of bits.
-        /// Physical type: STRING or STRING_VIEW.
-        BIT = 22,
+        /// Physical type: STRING.
+        BINARY = 17,
 
         /// Variable-length sequence of values of a specified logical type.
         /// Physical type: LIST.
-        LIST = 23,
-
-        /// Fixed-length sequence of values of a specified logical type.
-        /// Physical type: ARRAY.
-        ARRAY = 24,
-
-        /// Universally unique identifier (UUID).
-        /// Physical type: UINT128.
-        UUID = 25,
+        LIST = 18,
 
         /// Composite value containing named fields.
         /// Physical type: STRUCT.
-        STRUCT = 26,
+        STRUCT = 19,
 
         /// Value representing one of several alternative logical types.
         /// Physical type: UNION.
-        UNION = 27,
+        UNION = 20,
 
         /// Generic type representing any logical type.
         /// A type-system abstraction used for generic function parameters,
         /// return types, and type constraints.
         /// Does not represent a concrete runtime value or prescribe a physical layout.
-        ANY = 28,
-
-        /// Unnamed composite value containing positional fields.
-        /// Physical type: STRUCT.
-        TUPLE = 29,
+        ANY = 21,
 
         /// Collection of key-value pairs with specified key and value types.
         /// Physical type: MAP.
-        MAP = 30,
+        MAP = 22,
 
         /// Collection of unique values of a specified logical type.
         /// Physical type: SET.
-        SET = 31,
-
-        /// Function or operation identifier.
-        /// Represented by a symbol name, such as kumo.shark.add.
-        /// Physical type: STRING or STRING_VIEW.
-        SYMBOL = 32,
-
-        /// Dynamically typed value that can hold a value of any logical type.
-        /// A concrete runtime data type implemented using a built-in UNION
-        /// with runtime type information.
-        VARIANT = 33,
+        SET = 23,
 
         /// Maximum logical type value.
-        MAX = VARIANT,
+        MAX = SET,
 
         /// Invalid logical type.
         INVALID = 255,
@@ -308,7 +260,6 @@ namespace shark {
     // Defined in message.h
     class Message;
     class Reflection;
-
 
     // Defined in descriptor.cc
     class DescriptorBuilder;
@@ -446,6 +397,5 @@ namespace shark {
     } // namespace internal
 
 } // namespace shark
-
 
 #include <shark/port_undef.inc>
