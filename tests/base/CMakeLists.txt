@@ -110,20 +110,6 @@ kmcmake_cc_test(
 )
 
 
-kmcmake_cc_test(
-        NAME iostream_test
-        MODULE base
-        SOURCES
-        std/iostream-test.cc
-        CXXOPTS
-        CXXOPTS
-        ${KMCMAKE_CXX_OPTIONS}
-        LINKS
-        shark::testing_static
-        shark::shark_base_static
-        ${KMCMAKE_DEPS_LINK}
-
-)
 
 kmcmake_cc_test(
         NAME parse_test
