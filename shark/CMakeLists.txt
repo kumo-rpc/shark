@@ -48,6 +48,15 @@ kmcmake_cc_library(
         io/zero_copy_stream.cc
         io/zero_copy_stream_impl.cc
         io/zero_copy_stream_impl_lite.cc
+        schema/internal/field_descriptor.cc
+        schema/internal/file_descriptor.cc
+        schema/internal/file_descriptor_tables.cc
+        schema/internal/descriptor_pool_tables.cc
+        schema/internal/descriptor_pool.cc
+        schema/internal/descriptor.cc
+        schema/internal/enum_descriptor.cc
+        schema/internal/service_descriptor.cc
+        schema/internal/oneof_descriptor.cc
         stubs/bytestream.cc
         stubs/common.cc
         stubs/int128.cc
