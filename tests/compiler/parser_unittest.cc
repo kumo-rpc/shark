@@ -466,7 +466,7 @@ namespace shark {
             TEST_F(ParseMessageTest, Oneof) {
                 ExpectParsesTo(
                     "struct TestMessage {\n"
-                    "  oneof foo {\n"
+                    "  union foo {\n"
                     "    int32 a = 1;\n"
                     "    string b = 2;\n"
                     "    TestMessage c = 3;\n"
@@ -490,11 +490,11 @@ namespace shark {
             TEST_F(ParseMessageTest, MultipleOneofs) {
                 ExpectParsesTo(
                     "struct TestMessage {\n"
-                    "  oneof foo {\n"
+                    "  union foo {\n"
                     "    int32 a = 1;\n"
                     "    string b = 2;\n"
                     "  }\n"
-                    "  oneof bar {\n"
+                    "  union bar {\n"
                     "    int32 c = 3;\n"
                     "    string d = 4;\n"
                     "  }\n"
@@ -1161,32 +1161,32 @@ namespace shark {
             TEST_F(ParseErrorTest, MissingOneofName) {
                 ExpectHasErrors(
                     "struct TestMessage {\n"
-                    "  oneof {\n"
+                    "  union {\n"
                     "    int32 bar = 1;\n"
                     "  }\n"
                     "}\n",
-                    "1:8: Expected oneof name.\n");
+                    "1:8: Expected union name.\n");
             }
 
             TEST_F(ParseErrorTest, LabelInOneof) {
                 ExpectHasErrors(
                     "struct TestMessage {\n"
-                    "  oneof foo {\n"
+                    "  union foo {\n"
                     "    optional int32 bar = 1;\n"
                     "  }\n"
                     "}\n",
-                    "2:4: Fields in oneofs must not have labels (required / optional).\n");
+                    "2:4: Fields in unions must not have labels (required / optional).\n");
             }
 
             TEST_F(ParseErrorTest, MapInOneof) {
                 ExpectHasErrors(
                     "struct TestMessage {\n"
-                    "  oneof foo {\n"
+                    "  union foo {\n"
                     "    map<int32, int32> foo_map = 1;\n"
                     "    map message_field = 2;\n" // a normal message field is OK
                     "  }\n"
                     "}\n",
-                    "2:7: Map fields are not allowed in oneofs.\n");
+                    "2:7: Map fields are not allowed in unions.\n");
             }
 
             TEST_F(ParseErrorTest, LabelForMap) {
@@ -2232,7 +2232,7 @@ namespace shark {
             TEST_F(SourceInfoTest, Oneofs) {
                 EXPECT_TRUE(
                     Parse("struct Foo {\n"
-                          "  $a$oneof $c$foo$d$ {\n"
+                          "  $a$union $c$foo$d$ {\n"
                           "    $e$int32$f$ $g$a$h$ = $i$1$j$;$k$\n"
                           "  }$r$\n"
                           "}\n"));
@@ -2687,7 +2687,7 @@ namespace shark {
                           "  // detached before oneof\n"
                           "  /* bar leading\n"
                           "   * line 2 */\n"
-                          "  $b$oneof bar {\n"
+                          "  $b$union bar {\n"
                           "  /* bar trailing\n"
                           "   * line 2 */\n"
                           "  // detached before bar_int\n"

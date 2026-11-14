@@ -78,7 +78,7 @@ public class PbBreadcrumbsInfoProvider implements BreadcrumbsProvider {
       return "field";
     }
     if (element instanceof PbOneofDefinition) {
-      return "oneof";
+      return "union";
     }
     if (element instanceof PbServiceDefinition) {
       return "service";

@@ -169,7 +169,7 @@ public class PbCompletionContributor extends CompletionContributor {
   private static class NonTopLevelKeywords extends CompletionProvider<CompletionParameters> {
 
     private static List<LookupElement> createMessageEntryStart() {
-      return Stream.of("struct", "enum", "extensions", "reserved", "extend", "option", "oneof")
+      return Stream.of("struct", "enum", "extensions", "reserved", "extend", "option", "union")
         .map(PbCompletionContributor::lookupElementWithSpace)
         .collect(Collectors.toList());
     }

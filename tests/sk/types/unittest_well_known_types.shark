@@ -64,7 +64,7 @@ struct RepeatedWellKnownTypes {
 }
 
 struct OneofWellKnownTypes {
-  oneof oneof_field {
+  union oneof_field {
     shark.Any any_field = 1;
     shark.Api api_field = 2;
     shark.Duration duration_field = 3;

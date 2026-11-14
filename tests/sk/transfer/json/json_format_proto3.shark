@@ -83,7 +83,7 @@ struct TestOneof {
   //      printed if it's set no matter whether it's the default value.
   //   2. Multiple oneof fields in the same oneof cannot appear at the
   //      same time in the input.
-  oneof oneof_value {
+  union oneof_value {
     int32 oneof_int32_value = 1;
     string oneof_string_value = 2;
     bytes oneof_bytes_value = 3;

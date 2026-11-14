@@ -51,7 +51,7 @@ namespace shark {
         SourceLocationCommentPrinter comment_printer(this, prefix,
             debug_string_options);
         comment_printer.AddPreComment(contents);
-        strings::SubstituteAndAppend(contents, "$0oneof $1 {", prefix, name());
+        strings::SubstituteAndAppend(contents, "$0union $1 {", prefix, name());
 
         FormatLineOptions(depth, options(), containing_type()->file()->pool(),
             contents);

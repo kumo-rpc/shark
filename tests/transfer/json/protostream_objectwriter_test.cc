@@ -2828,7 +2828,7 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
       InvalidValue(
           _, StringPiece("oneof"),
           StringPiece(
-              "oneof field 'data' is already set. Cannot set 'intData'")));
+              "union field 'data' is already set. Cannot set 'intData'")));
 
   ow_->StartObject("");
   ow_->RenderString("strData", "blah");
@@ -2841,7 +2841,7 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
   // Test for setting primitive oneof field first and then message field.
   EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
                                       StringPiece(
-                                          "oneof field 'data' is already set. "
+                                          "union field 'data' is already set. "
                                           "Cannot set 'messageData'")));
 
   // JSON: { "strData": "blah", "messageData": { "dataValue": 123 } }
@@ -2858,7 +2858,7 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
   // Test for setting message oneof field first and then primitive field.
   EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
                                       StringPiece(
-                                          "oneof field 'data' is already set. "
+                                          "union field 'data' is already set. "
                                           "Cannot set 'strData'")));
 
   // JSON: { "messageData": { "dataValue": 123 }, "strData": "blah" }
@@ -2874,7 +2874,7 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForStructTypesPrimitiveFirstTest) {
   EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
                                       StringPiece(
-                                          "oneof field 'data' is already set. "
+                                          "union field 'data' is already set. "
                                           "Cannot set 'structData'")));
 
   // JSON: { "strData": "blah", "structData": { "a": "b" } }
@@ -2890,7 +2890,7 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForStructTypesStructFirstTest) {
   EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
                                       StringPiece(
-                                          "oneof field 'data' is already set. "
+                                          "union field 'data' is already set. "
                                           "Cannot set 'strData'")));
 
   // JSON: { "structData": { "a": "b" }, "strData": "blah" }
@@ -2906,7 +2906,7 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForStructValueTypesTest) {
   EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
                                       StringPiece(
-                                          "oneof field 'data' is already set. "
+                                          "union field 'data' is already set. "
                                           "Cannot set 'valueData'")));
 
   // JSON: { "messageData": { "dataValue": 123 }, "valueData": { "a": "b" } }
@@ -2924,7 +2924,7 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForWellKnownTypesPrimitiveFirstTest) {
   EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
                                       StringPiece(
-                                          "oneof field 'data' is already set. "
+                                          "union field 'data' is already set. "
                                           "Cannot set 'tsData'")));
 
   // JSON: { "intData": 123, "tsData": "1970-01-02T01:00:00.000Z" }
@@ -2938,7 +2938,7 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForWellKnownTypesWktFirstTest) {
   EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
                                       StringPiece(
-                                          "oneof field 'data' is already set. "
+                                          "union field 'data' is already set. "
                                           "Cannot set 'intData'")));
 
   // JSON: { "tsData": "1970-01-02T01:00:00.000Z", "intData": 123 }
@@ -2952,7 +2952,7 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForWellKnownTypesAndMessageTest) {
   EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
                                       StringPiece(
-                                          "oneof field 'data' is already set. "
+                                          "union field 'data' is already set. "
                                           "Cannot set 'messageData'")));
 
   // JSON: { "tsData": "1970-01-02T01:00:00.000Z",
@@ -2969,7 +2969,7 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForOneofWithinAnyTest) {
   EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
                                       StringPiece(
-                                          "oneof field 'data' is already set. "
+                                          "union field 'data' is already set. "
                                           "Cannot set 'intData'")));
 
   // JSON:

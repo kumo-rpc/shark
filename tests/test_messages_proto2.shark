@@ -172,7 +172,7 @@ struct TestAllTypesProto2 {
   map<string, NestedEnum> map_string_nested_enum = 73;
   map<string, ForeignEnumProto2> map_string_foreign_enum = 74;
 
-  oneof oneof_field {
+  union oneof_field {
     uint32 oneof_uint32 = 111;
     NestedMessage oneof_nested_message = 112;
     string oneof_string = 113;

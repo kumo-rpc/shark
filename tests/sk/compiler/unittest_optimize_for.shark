@@ -52,7 +52,7 @@ struct TestOptimizedForSize {
     optional TestRequiredOptimizedForSize test_extension2 = 1235;
   }
 
-  oneof foo {
+  union foo {
     int32 integer_field = 2;
     string string_field = 3;
   }

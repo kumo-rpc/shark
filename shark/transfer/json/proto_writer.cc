@@ -591,7 +591,7 @@ bool ProtoWriter::ValidOneof(const shark::Field& field,
       InvalidValue(
           "oneof",
           StrCat(
-              "oneof field '", element_->type().oneofs(field.oneof_index() - 1),
+              "union field '", element_->type().oneofs(field.oneof_index() - 1),
               "' is already set. Cannot set '", unnormalized_name, "'"));
       return false;
     }

@@ -144,7 +144,7 @@ String = {SingleQuotedString} | {DoubleQuotedString}
   "map"                     { return keyword(ProtoTokenTypes.MAP); }
   "max"                     { return keyword(ProtoTokenTypes.MAX); }
   "struct"                  { return keyword(ProtoTokenTypes.MESSAGE); }
-  "oneof"                   { return keyword(ProtoTokenTypes.ONEOF); }
+  "union"                   { return keyword(ProtoTokenTypes.ONEOF); }
   "option"                  { return keyword(ProtoTokenTypes.OPTION); }
   "optional"                { return keyword(ProtoTokenTypes.OPTIONAL); }
   "package"                 { return keyword(ProtoTokenTypes.PACKAGE); }

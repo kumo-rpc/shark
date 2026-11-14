@@ -376,7 +376,7 @@ private MessageEntry ::=
   | ';' { recoverWhile = MessageRecovery }
 
 private MessageRecovery ::=
-  !(export | local | struct | enum | extensions | reserved | extend | option | oneof
+  !(export | local | struct | enum | extensions | reserved | extend | option | union
   | FieldLabel | map | TypeName | '}' | ';')
 
 /*
@@ -469,7 +469,7 @@ ListField ::= FieldLabel? list '<' TypeName '>' Identifier '=' IntegerValue Opti
 /*
  * OneOf definition.
  */
-OneofDefinition ::= oneof Identifier OneofBody {
+OneofDefinition ::= union Identifier OneofBody {
   pin = 1
   implements = [
     'com.intellij.protobuf.lang.psi.PbDefinition'

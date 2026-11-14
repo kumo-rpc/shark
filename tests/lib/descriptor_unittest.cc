@@ -4570,9 +4570,9 @@ namespace shark {
                 "  oneof_decl { name:\"foos\" }"
                 "}",
 
-                "foo.shark: Foo.bar: TYPE: Fields in the same oneof must be defined "
+                "foo.shark: Foo.bar: TYPE: Fields in the same union must be defined "
                 "consecutively. \"bar\" cannot be defined before the completion of the "
-                "\"foos\" oneof definition.\n");
+                "\"foos\" union definition.\n");
 
             // Prevent interleaved fields, which belong to different oneofs.
             BuildFileWithErrors(
@@ -4590,12 +4590,12 @@ namespace shark {
                 "  oneof_decl { name:\"foos\" }"
                 "  oneof_decl { name:\"bars\" }"
                 "}",
-                "foo2.shark: Foo2.bar1: TYPE: Fields in the same oneof must be defined "
+                "foo2.shark: Foo2.bar1: TYPE: Fields in the same union must be defined "
                 "consecutively. \"bar1\" cannot be defined before the completion of the "
-                "\"foos\" oneof definition.\n"
-                "foo2.shark: Foo2.foo2: TYPE: Fields in the same oneof must be defined "
+                "\"foos\" union definition.\n"
+                "foo2.shark: Foo2.foo2: TYPE: Fields in the same union must be defined "
                 "consecutively. \"foo2\" cannot be defined before the completion of the "
-                "\"bars\" oneof definition.\n");
+                "\"bars\" union definition.\n");
 
             // Another case for normal fields and different oneof fields interleave.
             BuildFileWithErrors(
@@ -4612,9 +4612,9 @@ namespace shark {
                 "  oneof_decl { name:\"foos\" }"
                 "  oneof_decl { name:\"bars\" }"
                 "}",
-                "foo3.shark: Foo3.baz: TYPE: Fields in the same oneof must be defined "
+                "foo3.shark: Foo3.baz: TYPE: Fields in the same union must be defined "
                 "consecutively. \"baz\" cannot be defined before the completion of the "
-                "\"foos\" oneof definition.\n");
+                "\"foos\" union definition.\n");
         }
 
         TEST_F(ValidationErrorTest, FieldNumberConflict) {
@@ -7362,7 +7362,7 @@ namespace shark {
                                                      "  struct B {\n"
                                                      "    required double b = 1 [(test_field_opt) = \"foobar\"];\n"
                                                      "  }\n"
-                                                     "  oneof c {\n"
+                                                     "  union c {\n"
                                                      "    option (test_oneof_opt) = \"foobar\";\n"
                                                      "    string d = 2;\n"
                                                      "    string e = 3;\n"

@@ -101,7 +101,7 @@ struct TestMessageWithCustomOptions {
 
   optional string field1 = 1 [ctype = CORD, (field_opt1) = 8765432109];
 
-  oneof AnOneof {
+  union AnOneof {
     option (oneof_opt1) = -99;
 
     int32 oneof_field = 2;

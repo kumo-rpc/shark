@@ -89,7 +89,7 @@ struct DoubleMessage {
   optional DoubleMessage nested_message = 3;
   list<DoubleMessage> repeated_nested_message = 4;
   optional shark.DoubleValue double_wrapper = 100;
-  oneof value {
+  union value {
     string str_value = 112;
     int64 num_value = 113;
   }

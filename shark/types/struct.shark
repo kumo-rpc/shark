@@ -56,7 +56,7 @@ struct Struct {
 // The JSON representation for `Value` is JSON value.
 struct Value {
   // The kind of value.
-  oneof kind {
+  union kind {
     // Represents a null value.
     NullValue null_value = 1;
     // Represents a double value.

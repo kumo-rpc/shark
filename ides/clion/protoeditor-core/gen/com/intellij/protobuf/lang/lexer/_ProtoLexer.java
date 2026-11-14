@@ -474,6 +474,14 @@ public class _ProtoLexer implements FlexLexer {
     return returnKeywords ? type : ProtoTokenTypes.IDENTIFIER_LITERAL;
   }
 
+  private IElementType keywordOrIdentifier() {
+    if (returnKeywords) {
+      if ("struct".contentEquals(yytext())) return ProtoTokenTypes.MESSAGE;
+      if ("union".contentEquals(yytext())) return ProtoTokenTypes.ONEOF;
+    }
+    return ProtoTokenTypes.IDENTIFIER_LITERAL;
+  }
+
 
   /**
    * Creates a new scanner
@@ -809,7 +817,7 @@ public class _ProtoLexer implements FlexLexer {
           // fall through
           case 76: break;
           case 18:
-            { return returnKeywords && "struct".contentEquals(yytext()) ? ProtoTokenTypes.MESSAGE : ProtoTokenTypes.IDENTIFIER_LITERAL;
+            { return keywordOrIdentifier();
             }
           // fall through
           case 77: break;
@@ -928,7 +936,7 @@ public class _ProtoLexer implements FlexLexer {
           // fall through
           case 96: break;
           case 38:
-            { return returnKeywords && "struct".contentEquals(yytext()) ? ProtoTokenTypes.MESSAGE : ProtoTokenTypes.IDENTIFIER_LITERAL;
+            { return keywordOrIdentifier();
             }
           // fall through
           case 97: break;
@@ -938,7 +946,7 @@ public class _ProtoLexer implements FlexLexer {
           // fall through
           case 98: break;
           case 40:
-            { return keyword(ProtoTokenTypes.ONEOF);
+            { return ProtoTokenTypes.IDENTIFIER_LITERAL;
             }
           // fall through
           case 99: break;
@@ -1013,7 +1021,7 @@ public class _ProtoLexer implements FlexLexer {
           // fall through
           case 113: break;
           case 55:
-            { return returnKeywords && "struct".contentEquals(yytext()) ? ProtoTokenTypes.MESSAGE : ProtoTokenTypes.IDENTIFIER_LITERAL;
+            { return keywordOrIdentifier();
             }
           // fall through
           case 114: break;

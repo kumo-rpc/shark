@@ -39,7 +39,7 @@ import "shark/types/timestamp.shark";
 
 struct OneOfsRequest {
   optional string value = 1;
-  oneof data {
+  union data {
     string str_data = 2;
     int32 int_data = 3;
     // Simple message
@@ -56,7 +56,7 @@ struct OneOfsRequest {
 
 struct RequestWithSimpleOneof {
   optional string value = 1;
-  oneof data {
+  union data {
     string str_data = 2;
     int32 int_data = 3;
     Data message_data = 4;

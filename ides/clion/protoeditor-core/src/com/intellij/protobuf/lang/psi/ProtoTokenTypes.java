@@ -84,7 +84,7 @@ public final class ProtoTokenTypes {
   public static final IElementType MAP = put("map", new ProtoKeywordTokenType("map"));
   public static final IElementType MAX = put("max", new ProtoKeywordTokenType("max"));
   public static final IElementType MESSAGE = put("struct", new ProtoKeywordTokenType("struct"));
-  public static final IElementType ONEOF = put("oneof", new ProtoKeywordTokenType("oneof"));
+  public static final IElementType ONEOF = put("union", new ProtoKeywordTokenType("union"));
   public static final IElementType OPTION = put("option", new ProtoKeywordTokenType("option"));
   public static final IElementType OPTIONAL =
       put("optional", new ProtoKeywordTokenType("optional"));

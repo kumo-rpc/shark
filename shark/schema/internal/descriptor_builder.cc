@@ -2560,9 +2560,9 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                     AddError(message->full_name() + "." + message->field(i - 1)->name(),
                         proto.field(i - 1), DescriptorPool::ErrorCollector::TYPE,
                         strings::Substitute(
-                            "Fields in the same oneof must be defined consecutively. "
+                            "Fields in the same union must be defined consecutively. "
                             "\"$0\" cannot be defined before the completion of the "
-                            "\"$1\" oneof definition.",
+                            "\"$1\" union definition.",
                             message->field(i - 1)->name(), oneof_decl->name()));
                 }
                 // Must go through oneof_decls_ array to get a non-const version of the

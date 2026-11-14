@@ -98,7 +98,7 @@ export class Proto3DocumentSymbolProvider implements DocumentSymbolProvider {
             if (nestedEnum) children.push(nestedEnum);
             break;
 
-          case 'oneof':
+          case 'union':
             const oneofSymbol = this.parseOneof(doc, tokenizer);
             if (oneofSymbol) children.push(oneofSymbol);
             break;

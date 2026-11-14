@@ -827,7 +827,7 @@ namespace shark {
                     DescriptorProto::kOptionsFieldNumber);
                 return ParseOption(message->mutable_options(), location, containing_file,
                     OPTION_STATEMENT);
-            } else if (LookingAt("oneof")) {
+            } else if (LookingAt("union")) {
                 int oneof_index = message->oneof_decl_size();
                 LocationRecorder oneof_location(
                     message_location, DescriptorProto::kOneofDeclFieldNumber, oneof_index);
@@ -884,7 +884,7 @@ namespace shark {
                 if (TryConsume("list")) {
                     if (LookingAt("<")) {
                         if (field->has_oneof_index()) {
-                            AddError("List fields are not allowed in oneofs.");
+                            AddError("List fields are not allowed in unions.");
                             return false;
                         }
                         io::Tokenizer::Token list_token = input_->previous();
@@ -999,7 +999,7 @@ namespace shark {
         bool Parser::ParseMapType(MapField* map_field, FieldDescriptorProto* field,
             LocationRecorder& type_name_location) {
             if (field->has_oneof_index()) {
-                AddError("Map fields are not allowed in oneofs.");
+                AddError("Map fields are not allowed in unions.");
                 return false;
             }
             if (field->has_label()) {
@@ -1810,19 +1810,19 @@ namespace shark {
             const LocationRecorder& oneof_location,
             const LocationRecorder& containing_type_location,
             const FileDescriptorProto* containing_file) {
-            DO(Consume("oneof"));
+            DO(Consume("union"));
 
             {
                 LocationRecorder name_location(oneof_location,
                     OneofDescriptorProto::kNameFieldNumber);
-                DO(ConsumeIdentifier(oneof_decl->mutable_name(), "Expected oneof name."));
+                DO(ConsumeIdentifier(oneof_decl->mutable_name(), "Expected union name."));
             }
 
             DO(ConsumeEndOfDeclaration("{", &oneof_location));
 
             do {
                 if (AtEnd()) {
-                    AddError("Reached end of input in oneof definition (missing '}').");
+                    AddError("Reached end of input in union definition (missing '}').");
                     return false;
                 }
 
@@ -1840,7 +1840,7 @@ namespace shark {
                 // on an individual member of a oneof.
                 if (LookingAt("required") || LookingAt("optional")) {
                     AddError(
-                        "Fields in oneofs must not have labels (required / optional).");
+                        "Fields in unions must not have labels (required / optional).");
                     // We can continue parsing here because we understand what the user
                     // meant.  The error report will still make parsing fail overall.
                     input_->Next();
