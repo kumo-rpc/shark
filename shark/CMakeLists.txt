@@ -57,6 +57,7 @@ kmcmake_cc_library(
         schema/internal/enum_descriptor.cc
         schema/internal/service_descriptor.cc
         schema/internal/oneof_descriptor.cc
+        schema/internal/descriptor_builder.cc
         stubs/bytestream.cc
         stubs/common.cc
         stubs/int128.cc
