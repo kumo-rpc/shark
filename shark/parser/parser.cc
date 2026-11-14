@@ -44,13 +44,13 @@
 #include <shark/descriptor.skp.h>
 #include <shark/format/wired/wire_format.h>
 #include <shark/io/tokenizer.h>
+#include <shark/stubs/ascii.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/hash.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/string_util.h>
 #include <unordered_map>
 
 namespace shark {

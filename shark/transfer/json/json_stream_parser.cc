@@ -68,7 +68,7 @@ inline bool IsAlphanumeric(char c) {
 
 // Indicates a character may not be part of an unquoted key.
 inline bool IsKeySeparator(char c) {
-  return (ascii_isspace(c) || c == '"' || c == '\'' || c == '{' ||
+  return (ascii_is_space(c) || c == '"' || c == '\'' || c == '{' ||
           c == '}' || c == '[' || c == ']' || c == ':' || c == ',');
 }
 
@@ -898,10 +898,10 @@ util::Status JsonStreamParser::IncrementRecursionDepth(
 }
 
 void JsonStreamParser::SkipWhitespace() {
-  while (!p_.empty() && ascii_isspace(*p_.data())) {
+  while (!p_.empty() && ascii_is_space(*p_.data())) {
     Advance();
   }
-  if (!p_.empty() && !ascii_isspace(*p_.data())) {
+  if (!p_.empty() && !ascii_is_space(*p_.data())) {
     seen_non_whitespace_ = true;
   }
 }

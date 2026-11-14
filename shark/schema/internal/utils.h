@@ -32,18 +32,18 @@
 #include <unordered_set>
 #include <vector>
 
-#include <shark/types/any.h>
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor_database.h>
 #include <shark/dynamic_message.h>
+#include <shark/format/text/text_format.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/strtod.h>
 #include <shark/io/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/port.h>
+#include <shark/stubs/ascii.h>
 #include <shark/stubs/casts.h>
-#include <shark/stubs/string_util.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/hash.h>
 #include <shark/stubs/logging.h>
@@ -53,7 +53,7 @@
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/substitute.h>
-#include <shark/format/text/text_format.h>
+#include <shark/types/any.h>
 #include <shark/unknown_field_set.h>
 
 #undef PACKAGE // autoheader #defines this.  :(
@@ -158,9 +158,9 @@ namespace shark {
                     next_upper = true;
                 } else {
                     if (next_upper) {
-                        result.push_back(ToUpper(character));
+                        result.push_back(ascii_to_upper(character));
                     } else {
-                        result.push_back(ToLower(character));
+                        result.push_back(ascii_to_lower(character));
                     }
                     next_upper = false;
                 }
@@ -176,7 +176,7 @@ namespace shark {
                 // Strip underscores and lower-case the prefix.
                 for (char character : prefix) {
                     if (character != '_') {
-                        prefix_ += ascii_tolower(character);
+                        prefix_ += ascii_to_lower(character);
                     }
                 }
             }
@@ -202,7 +202,7 @@ namespace shark {
                         continue;
                     }
 
-                    if (ascii_tolower(str[i]) != prefix_[j++]) {
+                    if (ascii_to_lower(str[i]) != prefix_[j++]) {
                         return std::string(str);
                     }
                 }

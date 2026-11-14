@@ -34,9 +34,9 @@
 //
 // Recursive descent FTW.
 
-#include <shark/parser/parser_o.h>
-#include <shark/stubs/string_util.h>
 #include <float.h>
+#include <shark/parser/parser_o.h>
+#include <shark/stubs/ascii.h>
 
 #include <cstdint>
 #include <limits>
