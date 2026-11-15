@@ -36,6 +36,7 @@ kmcmake_cc_library(
         test_util_lite.cc
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
         LINKS
+        ${PROJECT_NAME}::test_sk_static
         ${PROJECT_NAME}::shark-lite_static
         GTest::gmock
 )

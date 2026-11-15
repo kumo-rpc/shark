@@ -102,6 +102,8 @@ function(kmcmake_cpp_test_sk)
                 COMMAND sharkc ${PROTOC_FLAGS} ${INCLUDE_FLAGS} --cpp_out=${KMCMAKE_CC_PROTO_OUTDIR} ${PROTO_ABS}
                 DEPENDS sharkc ${PROTO_ABS} ${KMCMAKE_CC_PROTO_DEPS}
         )
+        message(STATUS "generating ${HDR}")
+        message(STATUS "generating ${SRC}")
     endforeach ()
     set(${KMCMAKE_CC_PROTO_NAME}_HDRS ${HDRS} PARENT_SCOPE)
     set(${KMCMAKE_CC_PROTO_NAME}_SRCS ${SRCS} PARENT_SCOPE)
