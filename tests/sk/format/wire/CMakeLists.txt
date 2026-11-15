@@ -15,10 +15,12 @@
 
 
 
-kmcmake_cpp_test_sk(
-        NAME sk_format_wire_obj
+shark_schema_generate(
+        sk_format_wire_obj_SRCS
+        sk_format_wire_obj_HDRS
         OUTDIR ${PROJECT_SOURCE_DIR}
-        PROTOS
+        PREFIX ${PROJECT_SOURCE_DIR}
+        SCHEMAS
         unittest_mset_wire_format.shark
 )
 

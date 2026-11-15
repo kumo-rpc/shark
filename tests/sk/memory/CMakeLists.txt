@@ -17,10 +17,12 @@
 set(UNIT_MEM
         unittest_arena.shark
 )
-kmcmake_cpp_test_sk(
-        NAME test_mem_sk
+shark_schema_generate(
+        test_mem_sk_SRCS
+        test_mem_sk_HDRS
         OUTDIR ${PROJECT_SOURCE_DIR}
-        PROTOS ${UNIT_MEM}
+        PREFIX ${PROJECT_SOURCE_DIR}
+        SCHEMAS ${UNIT_MEM}
 )
 
 kmcmake_cc_library(

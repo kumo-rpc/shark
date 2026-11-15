@@ -13,10 +13,12 @@
 # limitations under the License.
 #
 
-kmcmake_cpp_test_sk(
-        NAME sk_types_obj
+shark_schema_generate(
+        sk_types_obj_SRCS
+        sk_types_obj_HDRS
         OUTDIR ${PROJECT_SOURCE_DIR}
-        PROTOS
+        PREFIX ${PROJECT_SOURCE_DIR}
+        SCHEMAS
         map_lite_unittest.shark
         any_test.shark
         map_proto2_unittest.shark

@@ -32,6 +32,12 @@ set(@PROJECT_NAME@_INCLUDE_DIR ${PACKAGE_PREFIX_DIR}/include)
 # Consumers should get include paths from imported target properties
 # (INTERFACE_INCLUDE_DIRECTORIES) via @PROJECT_NAME@Targets.cmake.
 
+find_package(ZLIB REQUIRED)
+find_package(Threads REQUIRED)
+
+include ("${CMAKE_CURRENT_LIST_DIR}/shark_cc_generate.cmake)
+
+
 set(@PROJECT_NAME@_ARCH_FLAGS @KMCMAKE_ARCH_OPTION@)
 
 check_required_components("@PROJECT_NAME@")

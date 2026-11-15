@@ -22,10 +22,12 @@ set(UNIT_SHARK
         unittest_no_generic_services.shark
         unittest_enormous_descriptor.shark
 )
-kmcmake_cpp_test_sk(
-        NAME sk_compiler_obj
+shark_schema_generate(
+        sk_compiler_obj_SRCS
+        sk_compiler_obj_HDRS
         OUTDIR ${PROJECT_SOURCE_DIR}
-        PROTOS ${UNIT_SHARK}
+        PREFIX ${PROJECT_SOURCE_DIR}
+        SCHEMAS ${UNIT_SHARK}
 )
 
 kmcmake_cc_library(

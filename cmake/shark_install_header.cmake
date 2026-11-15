@@ -5,4 +5,10 @@ install(DIRECTORY ${PROJECT_NAME}
         PATTERN "*.inc"
         PATTERN "*.h"
         PATTERN "*.hpp"
+        PATTERN "*.shark"
 )
+
+install(FILES shark_cc_generate.cmake
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
+

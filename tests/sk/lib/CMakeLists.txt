@@ -19,10 +19,12 @@ set(UNIT_SHARK
         unittest_lazy_dependencies_custom_option.shark
         unittest_lazy_dependencies_enum.shark
 )
-kmcmake_cpp_test_sk(
-        NAME sk_lib_lazy_obj
+shark_schema_generate(
+        sk_lib_lazy_obj_SRCS
+        sk_lib_lazy_obj_HDRS
         OUTDIR ${PROJECT_SOURCE_DIR}
-        PROTOS ${UNIT_SHARK}
+        PREFIX ${PROJECT_SOURCE_DIR}
+        SCHEMAS ${UNIT_SHARK}
 )
 
 kmcmake_cc_library(
@@ -40,10 +42,12 @@ kmcmake_cc_library(
 set(UNIT_SHARK_LIB
         unittest_custom_options.shark
 )
-kmcmake_cpp_test_sk(
-        NAME sk_lib_obj
+shark_schema_generate(
+        sk_lib_obj_SRCS
+        sk_lib_obj_HDRS
         OUTDIR ${PROJECT_SOURCE_DIR}
-        PROTOS ${UNIT_SHARK_LIB}
+        PREFIX ${PROJECT_SOURCE_DIR}
+        SCHEMAS ${UNIT_SHARK_LIB}
 )
 
 kmcmake_cc_library(
@@ -58,10 +62,12 @@ kmcmake_cc_library(
 )
 
 #############################################
-kmcmake_cpp_test_sk(
-        NAME drop_unknown_fields_sk
+shark_schema_generate(
+        drop_unknown_fields_sk_SRCS
+        drop_unknown_fields_sk_HDRS
         OUTDIR ${PROJECT_SOURCE_DIR}
-        PROTOS unittest_drop_unknown_fields.shark
+        PREFIX ${PROJECT_SOURCE_DIR}
+        SCHEMAS unittest_drop_unknown_fields.shark
 )
 
 kmcmake_cc_library(

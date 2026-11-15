@@ -13,10 +13,12 @@
 # limitations under the License.
 #
 
-kmcmake_cpp_test_sk(
-        NAME sk_transfer_json_obj
+shark_schema_generate(
+        sk_transfer_json_obj_SRCS
+        sk_transfer_json_obj_HDRS
         OUTDIR ${PROJECT_SOURCE_DIR}
-        PROTOS
+        PREFIX ${PROJECT_SOURCE_DIR}
+        SCHEMAS
         anys.shark
         books.shark
         default_value.shark
