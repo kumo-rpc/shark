@@ -70,6 +70,44 @@ namespace shark {
     // Can't use an anonymous namespace here due to brokenness of Tru64 compiler.
     namespace descriptor_unittest {
 
+        bool copy_generated_file(const char* name, FileDescriptorProto* proto) {
+            const FileDescriptor* fd = DescriptorPool::generated_pool()->FindFileByName(name);
+            if (fd == nullptr) {
+                return false;
+            }
+            fd->CopyTo(proto);
+            return true;
+        }
+
+        bool build_meta_file(DescriptorPool* pool) {
+            FileDescriptorProto any_proto;
+            if (!copy_generated_file("shark/types/any.shark", &any_proto)) {
+                return false;
+            }
+            if (pool->BuildFile(any_proto) == nullptr) {
+                return false;
+            }
+            FileDescriptorProto meta_proto;
+            if (!copy_generated_file("shark/meta.shark", &meta_proto)) {
+                return false;
+            }
+            return pool->BuildFile(meta_proto) != nullptr;
+        }
+
+        bool add_meta_file(SimpleDescriptorDatabase* db, FileDescriptorProto* meta_proto) {
+            FileDescriptorProto any_proto;
+            if (!copy_generated_file("shark/types/any.shark", &any_proto)) {
+                return false;
+            }
+            if (!db->Add(any_proto)) {
+                return false;
+            }
+            if (!copy_generated_file("shark/meta.shark", meta_proto)) {
+                return false;
+            }
+            return db->Add(*meta_proto);
+        }
+
         // Some helpers to make assembling descriptors faster.
         DescriptorProto* AddMessage(FileDescriptorProto* file,
             const std::string& name) {
@@ -2097,11 +2135,7 @@ namespace shark {
 
         TEST_F(ExtensionDescriptorTest, DuplicateFieldNumber) {
             DescriptorPool pool;
-            const FileDescriptor* meta_fd = DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
-            ASSERT_NE(meta_fd, nullptr);
-            FileDescriptorProto meta_proto;
-            meta_fd->CopyTo(&meta_proto);
-            ASSERT_NE(pool.BuildFile(meta_proto), nullptr);
+            ASSERT_TRUE(build_meta_file(&pool));
 
             FileDescriptorProto file_proto;
             // Add "shark/descriptor.shark".
@@ -3278,11 +3312,7 @@ namespace shark {
             // defining the option; we do not also have to import descriptor.shark.
             DescriptorPool pool;
 
-            const FileDescriptor* meta_fd = DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
-            ASSERT_NE(meta_fd, nullptr);
-            FileDescriptorProto meta_proto;
-            meta_fd->CopyTo(&meta_proto);
-            ASSERT_NE(pool.BuildFile(meta_proto), nullptr);
+            ASSERT_TRUE(build_meta_file(&pool));
 
             FileDescriptorProto file_proto;
             FileDescriptorProto::descriptor()->file()->CopyTo(&file_proto);
@@ -3347,11 +3377,7 @@ namespace shark {
             // you want to know more.
             DescriptorPool pool;
 
-            const FileDescriptor* meta_fd = DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
-            ASSERT_NE(meta_fd, nullptr);
-            FileDescriptorProto meta_proto;
-            meta_fd->CopyTo(&meta_proto);
-            ASSERT_NE(pool.BuildFile(meta_proto), nullptr);
+            ASSERT_TRUE(build_meta_file(&pool));
 
             FileDescriptorProto file_proto;
             FileDescriptorProto::descriptor()->file()->CopyTo(&file_proto);
@@ -3434,11 +3460,7 @@ namespace shark {
             // when they are merged into the final option value.
             DescriptorPool pool;
 
-            const FileDescriptor* meta_fd = DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
-            ASSERT_NE(meta_fd, nullptr);
-            FileDescriptorProto meta_proto;
-            meta_fd->CopyTo(&meta_proto);
-            ASSERT_NE(pool.BuildFile(meta_proto), nullptr);
+            ASSERT_TRUE(build_meta_file(&pool));
 
             FileDescriptorProto file_proto;
             FileDescriptorProto::descriptor()->file()->CopyTo(&file_proto);
@@ -3524,11 +3546,7 @@ namespace shark {
             // when they are merged into the final option value.
             DescriptorPool pool;
 
-            const FileDescriptor* meta_fd = DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
-            ASSERT_NE(meta_fd, nullptr);
-            FileDescriptorProto meta_proto;
-            meta_fd->CopyTo(&meta_proto);
-            ASSERT_NE(pool.BuildFile(meta_proto), nullptr);
+            ASSERT_TRUE(build_meta_file(&pool));
 
             FileDescriptorProto file_proto;
             FileDescriptorProto::descriptor()->file()->CopyTo(&file_proto);
@@ -3658,11 +3676,7 @@ namespace shark {
         TEST(CustomOptions, UnusedImportError) {
             DescriptorPool pool;
 
-            const FileDescriptor* meta_fd = DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
-            ASSERT_NE(meta_fd, nullptr);
-            FileDescriptorProto meta_proto;
-            meta_fd->CopyTo(&meta_proto);
-            ASSERT_NE(pool.BuildFile(meta_proto), nullptr);
+            ASSERT_TRUE(build_meta_file(&pool));
 
             FileDescriptorProto file_proto;
             FileDescriptorProto::descriptor()->file()->CopyTo(&file_proto);
@@ -3697,11 +3711,7 @@ namespace shark {
         // compiled in the binary. See http://b/19276250.
         TEST(CustomOptions, OptionsWithIncompatibleDescriptors) {
             DescriptorPool pool;
-            const FileDescriptor* meta_fd = DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
-            ASSERT_NE(meta_fd, nullptr);
-            FileDescriptorProto meta_proto;
-            meta_fd->CopyTo(&meta_proto);
-            ASSERT_NE(pool.BuildFile(meta_proto), nullptr);
+            ASSERT_TRUE(build_meta_file(&pool));
             FileDescriptorProto file_proto;
             MessageOptions::descriptor()->file()->CopyTo(&file_proto);
             ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
@@ -3751,11 +3761,7 @@ namespace shark {
         TEST(CustomOptions, DebugString) {
             DescriptorPool pool;
 
-            const FileDescriptor* meta_fd = DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
-            ASSERT_NE(meta_fd, nullptr);
-            FileDescriptorProto meta_proto;
-            meta_fd->CopyTo(&meta_proto);
-            ASSERT_NE(pool.BuildFile(meta_proto), nullptr);
+            ASSERT_TRUE(build_meta_file(&pool));
             FileDescriptorProto file_proto;
             MessageOptions::descriptor()->file()->CopyTo(&file_proto);
             ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
@@ -3871,11 +3877,7 @@ namespace shark {
 
             // Builds some already-parsed file in our test pool.
             void BuildFileInTestPool(const FileDescriptor* file) {
-                const FileDescriptor* meta_fd = DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
-                ASSERT_NE(meta_fd, nullptr);
-                FileDescriptorProto meta_proto;
-                meta_fd->CopyTo(&meta_proto);
-                ASSERT_NE(pool_.BuildFile(meta_proto), nullptr);
+                ASSERT_TRUE(build_meta_file(&pool_));
                 FileDescriptorProto file_proto;
                 file->CopyTo(&file_proto);
                 ASSERT_TRUE(pool_.BuildFile(file_proto) != nullptr);
@@ -6657,11 +6659,7 @@ namespace shark {
         TEST_F(ValidationErrorTest, ValidateProto3Extension) {
             // Valid for options.
             DescriptorPool pool;
-            const FileDescriptor* meta_fd = DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
-            ASSERT_NE(meta_fd, nullptr);
-            FileDescriptorProto meta_proto;
-            meta_fd->CopyTo(&meta_proto);
-            ASSERT_NE(pool.BuildFile(meta_proto), nullptr);
+            ASSERT_TRUE(build_meta_file(&pool));
             FileDescriptorProto file_proto;
             // Add "shark/descriptor.shark".
             FileDescriptorProto::descriptor()->file()->CopyTo(&file_proto);
@@ -7438,9 +7436,7 @@ namespace shark {
                 , merged_db_(&simple_db_, &source_tree_db_)
                 , pool_(&merged_db_, &collector_) {
 
-                const FileDescriptor* meta_fd = DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
-                meta_fd->CopyTo(&meta_proto_);
-                simple_db_.Add(meta_proto_);
+                EXPECT_TRUE(add_meta_file(&simple_db_, &meta_proto_));
 
                 // we need descriptor.shark to be accessible by the pool
                 // since our test file imports it

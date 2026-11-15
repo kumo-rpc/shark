@@ -21,39 +21,77 @@ namespace _pb = ::SHARK_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
 namespace shark {
+constexpr Option::Option(
+    ::_pbi::ConstantInitialized): _impl_{
+      /*decltype(_impl_._has_bits_)*/{}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    , /*decltype(_impl_.value_)*/nullptr} {}
+struct OptionDefaultTypeInternal {
+  constexpr OptionDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~OptionDefaultTypeInternal() {}
+  union {
+    Option _instance;
+  };
+};
+SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 OptionDefaultTypeInternal _Option_default_instance_;
 }  // namespace shark
+static ::_pb::Metadata file_level_metadata_shark_2fmeta_2eshark[1];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_shark_2fmeta_2eshark[4];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2fmeta_2eshark = nullptr;
-const uint32_t TableStruct_shark_2fmeta_2eshark::offsets[1] = {};
-static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
-static constexpr ::_pb::Message* const* file_default_instances = nullptr;
+
+const uint32_t TableStruct_shark_2fmeta_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
+    SHARK_FIELD_OFFSET(::shark::Option, _impl_._has_bits_),
+    SHARK_FIELD_OFFSET(::shark::Option, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    SHARK_FIELD_OFFSET(::shark::Option, _impl_.name_),
+    SHARK_FIELD_OFFSET(::shark::Option, _impl_.value_),
+    0,
+    1,
+};
+static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
+    { 0, 8, -1, sizeof(::shark::Option)},
+};
+
+static const ::_pb::Message* const file_default_instances[] = {
+    &::shark::_Option_default_instance_._instance,
+};
 
 const char descriptor_table_protodef_shark_2fmeta_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
-    "\n\020shark/meta.shark\022\005shark*\254\002\n\tSharkType\022"
-    "\013\n\007UNKNOWN\020\000\022\010\n\004BOOL\020\001\022\010\n\004INT8\020\002\022\t\n\005UINT"
-    "8\020\003\022\t\n\005INT16\020\004\022\n\n\006UINT16\020\005\022\t\n\005INT32\020\006\022\n\n"
-    "\006UINT32\020\007\022\t\n\005INT64\020\010\022\n\n\006UINT64\020\t\022\t\n\005FLOA"
-    "T\020\n\022\013\n\007FLOAT16\020\013\022\n\n\006FLOAT8\020\014\022\n\n\006DOUBLE\020\r"
-    "\022\010\n\004ENUM\020\016\022\013\n\007MESSAGE\020\017\022\n\n\006STRING\020\020\022\t\n\005B"
-    "YTES\020\021\022\013\n\007FIXED32\020\022\022\013\n\007FIXED64\020\023\022\014\n\010SFIX"
-    "ED32\020\024\022\014\n\010SFIXED64\020\025\022\n\n\006SINT32\020\026\022\n\n\006SINT"
-    "64\020\027\032\0028\002*\311\001\n\014SharkCppType\022\010\n\004BOOL\020\001\022\010\n\004I"
-    "NT8\020\002\022\t\n\005UINT8\020\003\022\t\n\005INT16\020\004\022\n\n\006UINT16\020\005\022"
-    "\t\n\005INT32\020\006\022\n\n\006UINT32\020\007\022\t\n\005INT64\020\010\022\n\n\006UIN"
-    "T64\020\t\022\t\n\005FLOAT\020\n\022\013\n\007FLOAT16\020\013\022\n\n\006FLOAT8\020"
-    "\014\022\n\n\006DOUBLE\020\r\022\010\n\004ENUM\020\016\022\013\n\007MESSAGE\020\017\022\n\n\006"
-    "STRING\020\020\032\0028\002*M\n\020FieldCardinality\022\013\n\007UNKN"
-    "OWN\020\000\022\014\n\010OPTIONAL\020\001\022\014\n\010REQUIRED\020\002\022\014\n\010REP"
-    "EATED\020\003\032\0028\005*2\n\006Syntax\022\021\n\rSYNTAX_PROTO2\020\000"
-    "\022\021\n\rSYNTAX_PROTO3\020\001\032\0028\005"
+    "\n\020shark/meta.shark\022\005shark\032\025shark/types/a"
+    "ny.shark\"1\n\006Option\022\014\n\004name\030\001 \001(\020\022\031\n\005valu"
+    "e\030\002 \001(\0172\n.shark.Any*\254\002\n\tSharkType\022\013\n\007UNK"
+    "NOWN\020\000\022\010\n\004BOOL\020\001\022\010\n\004INT8\020\002\022\t\n\005UINT8\020\003\022\t\n"
+    "\005INT16\020\004\022\n\n\006UINT16\020\005\022\t\n\005INT32\020\006\022\n\n\006UINT3"
+    "2\020\007\022\t\n\005INT64\020\010\022\n\n\006UINT64\020\t\022\t\n\005FLOAT\020\n\022\013\n"
+    "\007FLOAT16\020\013\022\n\n\006FLOAT8\020\014\022\n\n\006DOUBLE\020\r\022\010\n\004EN"
+    "UM\020\016\022\013\n\007MESSAGE\020\017\022\n\n\006STRING\020\020\022\t\n\005BYTES\020\021"
+    "\022\013\n\007FIXED32\020\022\022\013\n\007FIXED64\020\023\022\014\n\010SFIXED32\020\024"
+    "\022\014\n\010SFIXED64\020\025\022\n\n\006SINT32\020\026\022\n\n\006SINT64\020\027\032\002"
+    "8\002*\311\001\n\014SharkCppType\022\010\n\004BOOL\020\001\022\010\n\004INT8\020\002\022"
+    "\t\n\005UINT8\020\003\022\t\n\005INT16\020\004\022\n\n\006UINT16\020\005\022\t\n\005INT"
+    "32\020\006\022\n\n\006UINT32\020\007\022\t\n\005INT64\020\010\022\n\n\006UINT64\020\t\022"
+    "\t\n\005FLOAT\020\n\022\013\n\007FLOAT16\020\013\022\n\n\006FLOAT8\020\014\022\n\n\006D"
+    "OUBLE\020\r\022\010\n\004ENUM\020\016\022\013\n\007MESSAGE\020\017\022\n\n\006STRING"
+    "\020\020\032\0028\002*M\n\020FieldCardinality\022\013\n\007UNKNOWN\020\000\022"
+    "\014\n\010OPTIONAL\020\001\022\014\n\010REQUIRED\020\002\022\014\n\010REPEATED\020"
+    "\003\032\0028\005*2\n\006Syntax\022\021\n\rSYNTAX_PROTO2\020\000\022\021\n\rSY"
+    "NTAX_PROTO3\020\001\032\0028\005"
     ;
+static const ::_pbi::DescriptorTable* const descriptor_table_shark_2fmeta_2eshark_deps[1] = {
+  &::descriptor_table_shark_2ftypes_2fany_2eshark,
+};
 static ::_pbi::once_flag descriptor_table_shark_2fmeta_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fmeta_2eshark = {
-    false, false, 663, descriptor_table_protodef_shark_2fmeta_2eshark,
+    false, false, 737, descriptor_table_protodef_shark_2fmeta_2eshark,
     "shark/meta.shark",
-    &descriptor_table_shark_2fmeta_2eshark_once, nullptr, 0, 0,
+    &descriptor_table_shark_2fmeta_2eshark_once, descriptor_table_shark_2fmeta_2eshark_deps, 1, 1,
     schemas, file_default_instances, TableStruct_shark_2fmeta_2eshark::offsets,
-    nullptr, file_level_enum_descriptors_shark_2fmeta_2eshark,
+    file_level_metadata_shark_2fmeta_2eshark, file_level_enum_descriptors_shark_2fmeta_2eshark,
     file_level_service_descriptors_shark_2fmeta_2eshark,
 };
 SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fmeta_2eshark_getter() {
@@ -202,10 +240,290 @@ bool ::shark::SyntaxTrait::enum_parse(
     descriptor(), name, value);
 }
 
+// ===================================================================
+
+class Option::_Internal {
+ public:
+    using HasBits = decltype(std::declval<Option>()._impl_._has_bits_);
+    static void set_has_name(HasBits* has_bits) {
+      (*has_bits)[0] |= 1u;
+    }
+    static const ::shark::Any& value(const Option* msg);
+    static void set_has_value(HasBits* has_bits) {
+      (*has_bits)[0] |= 2u;
+    }
+};
+
+const ::shark::Any&
+Option::_Internal::value(const Option* msg) {
+  return *msg->_impl_.value_;
+}
+void Option::clear_value() {
+    if (_impl_.value_ != nullptr) _impl_.value_->Clear();
+    _impl_._has_bits_[0] &= ~0x00000002u;
+}
+Option::Option(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:shark.Option)
+}
+Option::Option(const Option& from)
+  : ::SHARK_NAMESPACE_ID::Message() {
+    Option* const _this = this; (void)_this;
+    new (&_impl_) Impl_{
+          decltype(_impl_._has_bits_){from._impl_._has_bits_}
+        , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.name_){}
+        , decltype(_impl_.value_){nullptr}};
+
+    _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+    _impl_.name_.InitDefault();
+    #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+      _impl_.name_.Set("", GetArenaForAllocation());
+    #endif // SHARK_FORCE_COPY_DEFAULT_STRING
+    if (from._internal_has_name()) {
+        _this->_impl_.name_.Set(from._internal_name(), 
+          _this->GetArenaForAllocation());
+    }
+    if (from._internal_has_value()) {
+      _this->_impl_.value_ = new ::shark::Any(*from._impl_.value_);
+    }
+  // @@protoc_insertion_point(copy_constructor:shark.Option)
+}
+
+inline void Option::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+    new (&_impl_) Impl_{
+          decltype(_impl_._has_bits_){}
+        , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.name_){}
+        , decltype(_impl_.value_){nullptr}
+    };
+    _impl_.name_.InitDefault();
+    #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+      _impl_.name_.Set("", GetArenaForAllocation());
+    #endif // SHARK_FORCE_COPY_DEFAULT_STRING
+}
+
+Option::~Option() {
+  // @@protoc_insertion_point(destructor:shark.Option)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void Option::SharedDtor() {
+    GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+    _impl_.name_.Destroy();
+    if (this != internal_default_instance()) delete _impl_.value_;
+}
+
+void Option::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void Option::Clear() {
+// @@protoc_insertion_point(message_clear_start:shark.Option)
+    uint32_t cached_has_bits = 0;
+    // Prevent compiler warnings about cached_has_bits being unused
+    (void) cached_has_bits;
+
+    cached_has_bits = _impl_._has_bits_[0];
+    if (cached_has_bits & 0x00000003u) {
+        if (cached_has_bits & 0x00000001u) {
+            _impl_.name_.ClearNonDefaultToEmpty();
+        }
+        if (cached_has_bits & 0x00000002u) {
+            GOOGLE_DCHECK(_impl_.value_ != nullptr);
+            _impl_.value_->Clear();
+        }
+    }
+    _impl_._has_bits_.Clear();
+    _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* Option::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
+    _Internal::HasBits has_bits{};
+    while (!ctx->Done(&ptr)) {
+        uint32_t tag;
+        ptr = ::_pbi::ReadTag(ptr, &tag);
+        switch (::_pbi::field_number(tag)) {
+            // optional string name = 1;
+            case 1:
+                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+                    auto str = _internal_mutable_name();
+                    ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+                    CHK_(ptr);
+                    #ifndef NDEBUG
+                    ::_pbi::VerifyUTF8(str, "shark.Option.name");
+                    #endif  // !NDEBUG
+                } else
+                  goto handle_unusual;
+                continue;
+            // optional .shark.Any value = 2;
+            case 2:
+                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+                    ptr = ctx->ParseMessage(_internal_mutable_value(), ptr);
+                    CHK_(ptr);
+                } else
+                  goto handle_unusual;
+                continue;
+            default:
+              goto handle_unusual;
+        }  // switch
+    handle_unusual:
+        if (tag == 0) {
+          CHK_(ptr);
+          ctx->SetLastTag(tag);
+          goto message_done;
+        }
+        ptr = UnknownFieldParse(
+            tag,
+            _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+    }  // while
+message_done:
+  _impl_._has_bits_.Or(has_bits);
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* Option::_InternalSerialize(
+    uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+    // @@protoc_insertion_point(serialize_to_array_start:shark.Option)
+    uint32_t cached_has_bits = 0;
+    (void) cached_has_bits;
+
+    cached_has_bits = _impl_._has_bits_[0];
+    // optional string name = 1;
+    if (cached_has_bits & 0x00000001u) {
+        ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+            ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+            "shark.Option.name");
+        target = stream->WriteStringMaybeAliased(
+            1, this->_internal_name(), target);
+    }
+
+    // optional .shark.Any value = 2;
+    if (cached_has_bits & 0x00000002u) {
+        target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
+          InternalWriteMessage(2, _Internal::value(this),
+            _Internal::value(this).GetCachedSize(), target, stream);
+    }
+
+    if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+        target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+    }
+    // @@protoc_insertion_point(serialize_to_array_end:shark.Option)
+  return target;
+}
+
+size_t Option::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:shark.Option)
+    size_t total_size = 0;
+
+    uint32_t cached_has_bits = 0;
+    // Prevent compiler warnings about cached_has_bits being unused
+    (void) cached_has_bits;
+
+    cached_has_bits = _impl_._has_bits_[0];
+    if (cached_has_bits & 0x00000003u) {
+        // optional string name = 1;
+        if (cached_has_bits & 0x00000001u) {
+            total_size += 1 +
+              ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+                this->_internal_name());
+        }
+
+        // optional .shark.Any value = 2;
+        if (cached_has_bits & 0x00000002u) {
+            total_size += 1 +
+              ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+                *_impl_.value_);
+        }
+
+    }
+    return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::SHARK_NAMESPACE_ID::Message::ClassData Option::_class_data_ = {
+    ::SHARK_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    Option::MergeImpl
+};
+const ::SHARK_NAMESPACE_ID::Message::ClassData*Option::GetClassData() const { return &_class_data_; }
+
+
+void Option::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<Option*>(&to_msg);
+  auto& from = static_cast<const Option&>(from_msg);
+    // @@protoc_insertion_point(class_specific_merge_from_start:shark.Option)
+    GOOGLE_DCHECK_NE(&from, _this);
+    uint32_t cached_has_bits = 0;
+    (void) cached_has_bits;
+
+    cached_has_bits = from._impl_._has_bits_[0];
+    if (cached_has_bits & 0x00000003u) {
+        if (cached_has_bits & 0x00000001u) {
+            _this->_internal_set_name(from._internal_name());
+        }
+        if (cached_has_bits & 0x00000002u) {
+            _this->_internal_mutable_value()->::shark::Any::MergeFrom(
+                from._internal_value());
+        }
+    }
+    _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void Option::CopyFrom(const Option& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.Option)
+    if (&from == this) return;
+    Clear();
+    MergeFrom(from);
+}
+
+bool Option::IsInitialized() const {
+  return true;
+}
+
+void Option::InternalSwap(Option* other) {
+    using std::swap;
+    auto* lhs_arena = GetArenaForAllocation();
+    auto* rhs_arena = other->GetArenaForAllocation();
+    _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+    swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+        &_impl_.name_, lhs_arena,
+        &other->_impl_.name_, rhs_arena
+    );
+    swap(_impl_.value_, other->_impl_.value_);
+}
+
+::SHARK_NAMESPACE_ID::Metadata Option::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_shark_2fmeta_2eshark_getter, &descriptor_table_shark_2fmeta_2eshark_once,
+      file_level_metadata_shark_2fmeta_2eshark[0]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
 
+template<> SHARK_NOINLINE ::shark::Option*
+Arena::CreateMaybeMessage< ::shark::Option >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::Option >(arena);
+}
 SHARK_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)

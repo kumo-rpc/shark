@@ -1762,7 +1762,26 @@ class SHARK_EXPORT ExtensionRangeOptions final :
 
     // accessors -------------------------------------------------------
 
+    static constexpr int  kAttributesFieldNumber = 60;
     static constexpr int  kUninterpretedOptionFieldNumber = 999;
+
+    // list<.shark.Option> attributes = 60;
+    int attributes_size() const;
+    private:
+    int _internal_attributes_size() const;
+    public:
+    void clear_attributes();
+    ::shark::Option* mutable_attributes(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_attributes();
+    private:
+    const ::shark::Option& _internal_attributes(int index) const;
+    ::shark::Option* _internal_add_attributes();
+    public:
+    const ::shark::Option& attributes(int index) const;
+    ::shark::Option* add_attributes();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        attributes() const;
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
@@ -1982,6 +2001,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
     struct Impl_ {
         ::SHARK_NAMESPACE_ID::internal::ExtensionSet _extensions_;
 
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > attributes_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
         mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     };
@@ -3726,6 +3746,7 @@ class SHARK_EXPORT FileOptions final :
 
     // accessors -------------------------------------------------------
 
+    static constexpr int  kAttributesFieldNumber = 60;
     static constexpr int  kUninterpretedOptionFieldNumber = 999;
     static constexpr int  kGoPackageFieldNumber = 11;
     static constexpr int  kCcGenericServicesFieldNumber = 16;
@@ -3733,6 +3754,24 @@ class SHARK_EXPORT FileOptions final :
     static constexpr int  kDeprecatedFieldNumber = 23;
     static constexpr int  kOptimizeForFieldNumber = 9;
     static constexpr int  kCcEnableArenasFieldNumber = 31;
+
+    // list<.shark.Option> attributes = 60;
+    int attributes_size() const;
+    private:
+    int _internal_attributes_size() const;
+    public:
+    void clear_attributes();
+    ::shark::Option* mutable_attributes(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_attributes();
+    private:
+    const ::shark::Option& _internal_attributes(int index) const;
+    ::shark::Option* _internal_add_attributes();
+    public:
+    const ::shark::Option& attributes(int index) const;
+    ::shark::Option* add_attributes();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        attributes() const;
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
@@ -4037,6 +4076,7 @@ class SHARK_EXPORT FileOptions final :
 
         ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
         mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > attributes_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
         ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr go_package_;
         bool cc_generic_services_;
@@ -4177,11 +4217,30 @@ class SHARK_EXPORT MessageOptions final :
 
     // accessors -------------------------------------------------------
 
+    static constexpr int  kAttributesFieldNumber = 60;
     static constexpr int  kUninterpretedOptionFieldNumber = 999;
     static constexpr int  kMessageSetWireFormatFieldNumber = 1;
     static constexpr int  kNoStandardDescriptorAccessorFieldNumber = 2;
     static constexpr int  kDeprecatedFieldNumber = 3;
     static constexpr int  kMapEntryFieldNumber = 7;
+
+    // list<.shark.Option> attributes = 60;
+    int attributes_size() const;
+    private:
+    int _internal_attributes_size() const;
+    public:
+    void clear_attributes();
+    ::shark::Option* mutable_attributes(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_attributes();
+    private:
+    const ::shark::Option& _internal_attributes(int index) const;
+    ::shark::Option* _internal_add_attributes();
+    public:
+    const ::shark::Option& attributes(int index) const;
+    ::shark::Option* add_attributes();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        attributes() const;
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
@@ -4455,6 +4514,7 @@ class SHARK_EXPORT MessageOptions final :
 
         ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
         mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > attributes_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
         bool message_set_wire_format_;
         bool no_standard_descriptor_accessor_;
@@ -4599,6 +4659,7 @@ class SHARK_EXPORT FieldOptions final :
 
     // accessors -------------------------------------------------------
 
+    static constexpr int  kAttributesFieldNumber = 20;
     static constexpr int  kUninterpretedOptionFieldNumber = 999;
     static constexpr int  kCtypeFieldNumber = 1;
     static constexpr int  kJstypeFieldNumber = 6;
@@ -4607,6 +4668,24 @@ class SHARK_EXPORT FieldOptions final :
     static constexpr int  kUnverifiedLazyFieldNumber = 15;
     static constexpr int  kDeprecatedFieldNumber = 3;
     static constexpr int  kWeakFieldNumber = 10;
+
+    // list<.shark.Option> attributes = 20;
+    int attributes_size() const;
+    private:
+    int _internal_attributes_size() const;
+    public:
+    void clear_attributes();
+    ::shark::Option* mutable_attributes(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_attributes();
+    private:
+    const ::shark::Option& _internal_attributes(int index) const;
+    ::shark::Option* _internal_add_attributes();
+    public:
+    const ::shark::Option& attributes(int index) const;
+    ::shark::Option* add_attributes();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        attributes() const;
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
@@ -4919,6 +4998,7 @@ class SHARK_EXPORT FieldOptions final :
 
         ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
         mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > attributes_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
         int ctype_;
         int jstype_;
@@ -5060,7 +5140,26 @@ class SHARK_EXPORT OneofOptions final :
 
     // accessors -------------------------------------------------------
 
+    static constexpr int  kAttributesFieldNumber = 60;
     static constexpr int  kUninterpretedOptionFieldNumber = 999;
+
+    // list<.shark.Option> attributes = 60;
+    int attributes_size() const;
+    private:
+    int _internal_attributes_size() const;
+    public:
+    void clear_attributes();
+    ::shark::Option* mutable_attributes(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_attributes();
+    private:
+    const ::shark::Option& _internal_attributes(int index) const;
+    ::shark::Option* _internal_add_attributes();
+    public:
+    const ::shark::Option& attributes(int index) const;
+    ::shark::Option* add_attributes();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        attributes() const;
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
@@ -5280,6 +5379,7 @@ class SHARK_EXPORT OneofOptions final :
     struct Impl_ {
         ::SHARK_NAMESPACE_ID::internal::ExtensionSet _extensions_;
 
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > attributes_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
         mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     };
@@ -5415,11 +5515,30 @@ class SHARK_EXPORT EnumOptions final :
 
     // accessors -------------------------------------------------------
 
+    static constexpr int  kAttributesFieldNumber = 60;
     static constexpr int  kUninterpretedOptionFieldNumber = 999;
     static constexpr int  kAllowAliasFieldNumber = 2;
     static constexpr int  kDeprecatedFieldNumber = 3;
     static constexpr int  kEnableOperatorFieldNumber = 6;
     static constexpr int  kUnderlyingTypeFieldNumber = 7;
+
+    // list<.shark.Option> attributes = 60;
+    int attributes_size() const;
+    private:
+    int _internal_attributes_size() const;
+    public:
+    void clear_attributes();
+    ::shark::Option* mutable_attributes(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_attributes();
+    private:
+    const ::shark::Option& _internal_attributes(int index) const;
+    ::shark::Option* _internal_add_attributes();
+    public:
+    const ::shark::Option& attributes(int index) const;
+    ::shark::Option* add_attributes();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        attributes() const;
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
@@ -5693,6 +5812,7 @@ class SHARK_EXPORT EnumOptions final :
 
         ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
         mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > attributes_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
         bool allow_alias_;
         bool deprecated_;
@@ -5831,8 +5951,27 @@ class SHARK_EXPORT EnumValueOptions final :
 
     // accessors -------------------------------------------------------
 
+    static constexpr int  kAttributesFieldNumber = 60;
     static constexpr int  kUninterpretedOptionFieldNumber = 999;
     static constexpr int  kDeprecatedFieldNumber = 1;
+
+    // list<.shark.Option> attributes = 60;
+    int attributes_size() const;
+    private:
+    int _internal_attributes_size() const;
+    public:
+    void clear_attributes();
+    ::shark::Option* mutable_attributes(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_attributes();
+    private:
+    const ::shark::Option& _internal_attributes(int index) const;
+    ::shark::Option* _internal_add_attributes();
+    public:
+    const ::shark::Option& attributes(int index) const;
+    ::shark::Option* add_attributes();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        attributes() const;
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
@@ -6067,6 +6206,7 @@ class SHARK_EXPORT EnumValueOptions final :
 
         ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
         mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > attributes_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
         bool deprecated_;
     };
@@ -6202,8 +6342,27 @@ class SHARK_EXPORT ServiceOptions final :
 
     // accessors -------------------------------------------------------
 
+    static constexpr int  kAttributesFieldNumber = 60;
     static constexpr int  kUninterpretedOptionFieldNumber = 999;
     static constexpr int  kDeprecatedFieldNumber = 33;
+
+    // list<.shark.Option> attributes = 60;
+    int attributes_size() const;
+    private:
+    int _internal_attributes_size() const;
+    public:
+    void clear_attributes();
+    ::shark::Option* mutable_attributes(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_attributes();
+    private:
+    const ::shark::Option& _internal_attributes(int index) const;
+    ::shark::Option* _internal_add_attributes();
+    public:
+    const ::shark::Option& attributes(int index) const;
+    ::shark::Option* add_attributes();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        attributes() const;
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
@@ -6438,6 +6597,7 @@ class SHARK_EXPORT ServiceOptions final :
 
         ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
         mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > attributes_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
         bool deprecated_;
     };
@@ -6576,9 +6736,28 @@ class SHARK_EXPORT MethodOptions final :
 
     // accessors -------------------------------------------------------
 
+    static constexpr int  kAttributesFieldNumber = 60;
     static constexpr int  kUninterpretedOptionFieldNumber = 999;
     static constexpr int  kDeprecatedFieldNumber = 33;
     static constexpr int  kIdempotencyLevelFieldNumber = 34;
+
+    // list<.shark.Option> attributes = 60;
+    int attributes_size() const;
+    private:
+    int _internal_attributes_size() const;
+    public:
+    void clear_attributes();
+    ::shark::Option* mutable_attributes(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_attributes();
+    private:
+    const ::shark::Option& _internal_attributes(int index) const;
+    ::shark::Option* _internal_add_attributes();
+    public:
+    const ::shark::Option& attributes(int index) const;
+    ::shark::Option* add_attributes();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        attributes() const;
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
@@ -6826,6 +7005,7 @@ class SHARK_EXPORT MethodOptions final :
 
         ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
         mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > attributes_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
         bool deprecated_;
         int idempotency_level_;
@@ -9634,6 +9814,43 @@ ExtensionRangeOptions::uninterpreted_option() const {
   return _impl_.uninterpreted_option_;
 }
 
+// list<.shark.Option> attributes = 60;
+inline int ExtensionRangeOptions::_internal_attributes_size() const {
+  return _impl_.attributes_.size();
+}
+inline int ExtensionRangeOptions::attributes_size() const {
+  return _internal_attributes_size();
+}
+inline ::shark::Option* ExtensionRangeOptions::mutable_attributes(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.ExtensionRangeOptions.attributes)
+  return _impl_.attributes_.Mutable(index);
+}
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+ExtensionRangeOptions::mutable_attributes() {
+  // @@protoc_insertion_point(field_mutable_list:shark.ExtensionRangeOptions.attributes)
+  return &_impl_.attributes_;
+}
+inline const ::shark::Option& ExtensionRangeOptions::_internal_attributes(int index) const {
+  return _impl_.attributes_.Get(index);
+}
+inline const ::shark::Option& ExtensionRangeOptions::attributes(int index) const {
+  // @@protoc_insertion_point(field_get:shark.ExtensionRangeOptions.attributes)
+  return _internal_attributes(index);
+}
+inline ::shark::Option* ExtensionRangeOptions::_internal_add_attributes() {
+  return _impl_.attributes_.Add();
+}
+inline ::shark::Option* ExtensionRangeOptions::add_attributes() {
+  ::shark::Option* _add = _internal_add_attributes();
+  // @@protoc_insertion_point(field_add:shark.ExtensionRangeOptions.attributes)
+  return _add;
+}
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+ExtensionRangeOptions::attributes() const {
+  // @@protoc_insertion_point(field_list:shark.ExtensionRangeOptions.attributes)
+  return _impl_.attributes_;
+}
+
 // -------------------------------------------------------------------
 
 // FieldDescriptorProto
@@ -11705,6 +11922,43 @@ inline void FileOptions::set_cc_enable_arenas(bool value) {
   // @@protoc_insertion_point(field_set:shark.FileOptions.cc_enable_arenas)
 }
 
+// list<.shark.Option> attributes = 60;
+inline int FileOptions::_internal_attributes_size() const {
+  return _impl_.attributes_.size();
+}
+inline int FileOptions::attributes_size() const {
+  return _internal_attributes_size();
+}
+inline ::shark::Option* FileOptions::mutable_attributes(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.FileOptions.attributes)
+  return _impl_.attributes_.Mutable(index);
+}
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+FileOptions::mutable_attributes() {
+  // @@protoc_insertion_point(field_mutable_list:shark.FileOptions.attributes)
+  return &_impl_.attributes_;
+}
+inline const ::shark::Option& FileOptions::_internal_attributes(int index) const {
+  return _impl_.attributes_.Get(index);
+}
+inline const ::shark::Option& FileOptions::attributes(int index) const {
+  // @@protoc_insertion_point(field_get:shark.FileOptions.attributes)
+  return _internal_attributes(index);
+}
+inline ::shark::Option* FileOptions::_internal_add_attributes() {
+  return _impl_.attributes_.Add();
+}
+inline ::shark::Option* FileOptions::add_attributes() {
+  ::shark::Option* _add = _internal_add_attributes();
+  // @@protoc_insertion_point(field_add:shark.FileOptions.attributes)
+  return _add;
+}
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+FileOptions::attributes() const {
+  // @@protoc_insertion_point(field_list:shark.FileOptions.attributes)
+  return _impl_.attributes_;
+}
+
 // list<.shark.UninterpretedOption> uninterpreted_option = 999;
 inline int FileOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
@@ -11859,6 +12113,43 @@ inline void MessageOptions::_internal_set_map_entry(bool value) {
 inline void MessageOptions::set_map_entry(bool value) {
   _internal_set_map_entry(value);
   // @@protoc_insertion_point(field_set:shark.MessageOptions.map_entry)
+}
+
+// list<.shark.Option> attributes = 60;
+inline int MessageOptions::_internal_attributes_size() const {
+  return _impl_.attributes_.size();
+}
+inline int MessageOptions::attributes_size() const {
+  return _internal_attributes_size();
+}
+inline ::shark::Option* MessageOptions::mutable_attributes(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.MessageOptions.attributes)
+  return _impl_.attributes_.Mutable(index);
+}
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+MessageOptions::mutable_attributes() {
+  // @@protoc_insertion_point(field_mutable_list:shark.MessageOptions.attributes)
+  return &_impl_.attributes_;
+}
+inline const ::shark::Option& MessageOptions::_internal_attributes(int index) const {
+  return _impl_.attributes_.Get(index);
+}
+inline const ::shark::Option& MessageOptions::attributes(int index) const {
+  // @@protoc_insertion_point(field_get:shark.MessageOptions.attributes)
+  return _internal_attributes(index);
+}
+inline ::shark::Option* MessageOptions::_internal_add_attributes() {
+  return _impl_.attributes_.Add();
+}
+inline ::shark::Option* MessageOptions::add_attributes() {
+  ::shark::Option* _add = _internal_add_attributes();
+  // @@protoc_insertion_point(field_add:shark.MessageOptions.attributes)
+  return _add;
+}
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+MessageOptions::attributes() const {
+  // @@protoc_insertion_point(field_list:shark.MessageOptions.attributes)
+  return _impl_.attributes_;
 }
 
 // list<.shark.UninterpretedOption> uninterpreted_option = 999;
@@ -12101,6 +12392,43 @@ inline void FieldOptions::set_weak(bool value) {
   // @@protoc_insertion_point(field_set:shark.FieldOptions.weak)
 }
 
+// list<.shark.Option> attributes = 20;
+inline int FieldOptions::_internal_attributes_size() const {
+  return _impl_.attributes_.size();
+}
+inline int FieldOptions::attributes_size() const {
+  return _internal_attributes_size();
+}
+inline ::shark::Option* FieldOptions::mutable_attributes(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.FieldOptions.attributes)
+  return _impl_.attributes_.Mutable(index);
+}
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+FieldOptions::mutable_attributes() {
+  // @@protoc_insertion_point(field_mutable_list:shark.FieldOptions.attributes)
+  return &_impl_.attributes_;
+}
+inline const ::shark::Option& FieldOptions::_internal_attributes(int index) const {
+  return _impl_.attributes_.Get(index);
+}
+inline const ::shark::Option& FieldOptions::attributes(int index) const {
+  // @@protoc_insertion_point(field_get:shark.FieldOptions.attributes)
+  return _internal_attributes(index);
+}
+inline ::shark::Option* FieldOptions::_internal_add_attributes() {
+  return _impl_.attributes_.Add();
+}
+inline ::shark::Option* FieldOptions::add_attributes() {
+  ::shark::Option* _add = _internal_add_attributes();
+  // @@protoc_insertion_point(field_add:shark.FieldOptions.attributes)
+  return _add;
+}
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+FieldOptions::attributes() const {
+  // @@protoc_insertion_point(field_list:shark.FieldOptions.attributes)
+  return _impl_.attributes_;
+}
+
 // list<.shark.UninterpretedOption> uninterpreted_option = 999;
 inline int FieldOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
@@ -12183,6 +12511,43 @@ inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOptio
 OneofOptions::uninterpreted_option() const {
   // @@protoc_insertion_point(field_list:shark.OneofOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_;
+}
+
+// list<.shark.Option> attributes = 60;
+inline int OneofOptions::_internal_attributes_size() const {
+  return _impl_.attributes_.size();
+}
+inline int OneofOptions::attributes_size() const {
+  return _internal_attributes_size();
+}
+inline ::shark::Option* OneofOptions::mutable_attributes(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.OneofOptions.attributes)
+  return _impl_.attributes_.Mutable(index);
+}
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+OneofOptions::mutable_attributes() {
+  // @@protoc_insertion_point(field_mutable_list:shark.OneofOptions.attributes)
+  return &_impl_.attributes_;
+}
+inline const ::shark::Option& OneofOptions::_internal_attributes(int index) const {
+  return _impl_.attributes_.Get(index);
+}
+inline const ::shark::Option& OneofOptions::attributes(int index) const {
+  // @@protoc_insertion_point(field_get:shark.OneofOptions.attributes)
+  return _internal_attributes(index);
+}
+inline ::shark::Option* OneofOptions::_internal_add_attributes() {
+  return _impl_.attributes_.Add();
+}
+inline ::shark::Option* OneofOptions::add_attributes() {
+  ::shark::Option* _add = _internal_add_attributes();
+  // @@protoc_insertion_point(field_add:shark.OneofOptions.attributes)
+  return _add;
+}
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+OneofOptions::attributes() const {
+  // @@protoc_insertion_point(field_list:shark.OneofOptions.attributes)
+  return _impl_.attributes_;
 }
 
 // -------------------------------------------------------------------
@@ -12301,6 +12666,43 @@ inline void EnumOptions::set_underlying_type(::shark::EnumUnderlyingType value) 
   // @@protoc_insertion_point(field_set:shark.EnumOptions.underlying_type)
 }
 
+// list<.shark.Option> attributes = 60;
+inline int EnumOptions::_internal_attributes_size() const {
+  return _impl_.attributes_.size();
+}
+inline int EnumOptions::attributes_size() const {
+  return _internal_attributes_size();
+}
+inline ::shark::Option* EnumOptions::mutable_attributes(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.EnumOptions.attributes)
+  return _impl_.attributes_.Mutable(index);
+}
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+EnumOptions::mutable_attributes() {
+  // @@protoc_insertion_point(field_mutable_list:shark.EnumOptions.attributes)
+  return &_impl_.attributes_;
+}
+inline const ::shark::Option& EnumOptions::_internal_attributes(int index) const {
+  return _impl_.attributes_.Get(index);
+}
+inline const ::shark::Option& EnumOptions::attributes(int index) const {
+  // @@protoc_insertion_point(field_get:shark.EnumOptions.attributes)
+  return _internal_attributes(index);
+}
+inline ::shark::Option* EnumOptions::_internal_add_attributes() {
+  return _impl_.attributes_.Add();
+}
+inline ::shark::Option* EnumOptions::add_attributes() {
+  ::shark::Option* _add = _internal_add_attributes();
+  // @@protoc_insertion_point(field_add:shark.EnumOptions.attributes)
+  return _add;
+}
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+EnumOptions::attributes() const {
+  // @@protoc_insertion_point(field_list:shark.EnumOptions.attributes)
+  return _impl_.attributes_;
+}
+
 // list<.shark.UninterpretedOption> uninterpreted_option = 999;
 inline int EnumOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
@@ -12373,6 +12775,43 @@ inline void EnumValueOptions::set_deprecated(bool value) {
   // @@protoc_insertion_point(field_set:shark.EnumValueOptions.deprecated)
 }
 
+// list<.shark.Option> attributes = 60;
+inline int EnumValueOptions::_internal_attributes_size() const {
+  return _impl_.attributes_.size();
+}
+inline int EnumValueOptions::attributes_size() const {
+  return _internal_attributes_size();
+}
+inline ::shark::Option* EnumValueOptions::mutable_attributes(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.EnumValueOptions.attributes)
+  return _impl_.attributes_.Mutable(index);
+}
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+EnumValueOptions::mutable_attributes() {
+  // @@protoc_insertion_point(field_mutable_list:shark.EnumValueOptions.attributes)
+  return &_impl_.attributes_;
+}
+inline const ::shark::Option& EnumValueOptions::_internal_attributes(int index) const {
+  return _impl_.attributes_.Get(index);
+}
+inline const ::shark::Option& EnumValueOptions::attributes(int index) const {
+  // @@protoc_insertion_point(field_get:shark.EnumValueOptions.attributes)
+  return _internal_attributes(index);
+}
+inline ::shark::Option* EnumValueOptions::_internal_add_attributes() {
+  return _impl_.attributes_.Add();
+}
+inline ::shark::Option* EnumValueOptions::add_attributes() {
+  ::shark::Option* _add = _internal_add_attributes();
+  // @@protoc_insertion_point(field_add:shark.EnumValueOptions.attributes)
+  return _add;
+}
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+EnumValueOptions::attributes() const {
+  // @@protoc_insertion_point(field_list:shark.EnumValueOptions.attributes)
+  return _impl_.attributes_;
+}
+
 // list<.shark.UninterpretedOption> uninterpreted_option = 999;
 inline int EnumValueOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
@@ -12416,6 +12855,43 @@ EnumValueOptions::uninterpreted_option() const {
 // -------------------------------------------------------------------
 
 // ServiceOptions
+
+// list<.shark.Option> attributes = 60;
+inline int ServiceOptions::_internal_attributes_size() const {
+  return _impl_.attributes_.size();
+}
+inline int ServiceOptions::attributes_size() const {
+  return _internal_attributes_size();
+}
+inline ::shark::Option* ServiceOptions::mutable_attributes(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.ServiceOptions.attributes)
+  return _impl_.attributes_.Mutable(index);
+}
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+ServiceOptions::mutable_attributes() {
+  // @@protoc_insertion_point(field_mutable_list:shark.ServiceOptions.attributes)
+  return &_impl_.attributes_;
+}
+inline const ::shark::Option& ServiceOptions::_internal_attributes(int index) const {
+  return _impl_.attributes_.Get(index);
+}
+inline const ::shark::Option& ServiceOptions::attributes(int index) const {
+  // @@protoc_insertion_point(field_get:shark.ServiceOptions.attributes)
+  return _internal_attributes(index);
+}
+inline ::shark::Option* ServiceOptions::_internal_add_attributes() {
+  return _impl_.attributes_.Add();
+}
+inline ::shark::Option* ServiceOptions::add_attributes() {
+  ::shark::Option* _add = _internal_add_attributes();
+  // @@protoc_insertion_point(field_add:shark.ServiceOptions.attributes)
+  return _add;
+}
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+ServiceOptions::attributes() const {
+  // @@protoc_insertion_point(field_list:shark.ServiceOptions.attributes)
+  return _impl_.attributes_;
+}
 
 // optional bool deprecated = 33 [default = false];
 inline bool ServiceOptions::_internal_has_deprecated() const {
@@ -12515,6 +12991,43 @@ inline void MethodOptions::_internal_set_deprecated(bool value) {
 inline void MethodOptions::set_deprecated(bool value) {
   _internal_set_deprecated(value);
   // @@protoc_insertion_point(field_set:shark.MethodOptions.deprecated)
+}
+
+// list<.shark.Option> attributes = 60;
+inline int MethodOptions::_internal_attributes_size() const {
+  return _impl_.attributes_.size();
+}
+inline int MethodOptions::attributes_size() const {
+  return _internal_attributes_size();
+}
+inline ::shark::Option* MethodOptions::mutable_attributes(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.MethodOptions.attributes)
+  return _impl_.attributes_.Mutable(index);
+}
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+MethodOptions::mutable_attributes() {
+  // @@protoc_insertion_point(field_mutable_list:shark.MethodOptions.attributes)
+  return &_impl_.attributes_;
+}
+inline const ::shark::Option& MethodOptions::_internal_attributes(int index) const {
+  return _impl_.attributes_.Get(index);
+}
+inline const ::shark::Option& MethodOptions::attributes(int index) const {
+  // @@protoc_insertion_point(field_get:shark.MethodOptions.attributes)
+  return _internal_attributes(index);
+}
+inline ::shark::Option* MethodOptions::_internal_add_attributes() {
+  return _impl_.attributes_.Add();
+}
+inline ::shark::Option* MethodOptions::add_attributes() {
+  ::shark::Option* _add = _internal_add_attributes();
+  // @@protoc_insertion_point(field_add:shark.MethodOptions.attributes)
+  return _add;
+}
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+MethodOptions::attributes() const {
+  // @@protoc_insertion_point(field_list:shark.MethodOptions.attributes)
+  return _impl_.attributes_;
 }
 
 // optional .shark.MethodOptions.IdempotencyLevel idempotency_level = 34 [default = IDEMPOTENCY_UNKNOWN];

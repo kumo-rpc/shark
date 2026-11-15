@@ -51,6 +51,27 @@ namespace shark {
 
         namespace {
 
+            bool build_meta_file(DescriptorPool* pool) {
+                const FileDescriptor* any_fd =
+                    DescriptorPool::generated_pool()->FindFileByName("shark/types/any.shark");
+                if (any_fd == nullptr) {
+                    return false;
+                }
+                FileDescriptorProto any_proto;
+                any_fd->CopyTo(&any_proto);
+                if (pool->BuildFile(any_proto) == nullptr) {
+                    return false;
+                }
+                const FileDescriptor* meta_fd =
+                    DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
+                if (meta_fd == nullptr) {
+                    return false;
+                }
+                FileDescriptorProto meta_proto;
+                meta_fd->CopyTo(&meta_proto);
+                return pool->BuildFile(meta_proto) != nullptr;
+            }
+
             TEST_F(ParserTest, StopAfterSyntaxIdentifier) {
                 SetupParser(
                     "// blah\n"
@@ -1639,11 +1660,7 @@ namespace shark {
 
             TEST_F(ParserValidationErrorTest, ResovledUndefinedOptionError) {
                 // Build descriptor message in test pool
-                const FileDescriptor* meta_fd = DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
-                ASSERT_NE(meta_fd, nullptr);
-                FileDescriptorProto meta_proto;
-                meta_fd->CopyTo(&meta_proto);
-                ASSERT_NE(pool_.BuildFile(meta_proto), nullptr);
+                ASSERT_TRUE(build_meta_file(&pool_));
 
                 FileDescriptorProto descriptor_proto;
                 DescriptorProto::descriptor()->file()->CopyTo(&descriptor_proto);
@@ -1827,11 +1844,7 @@ namespace shark {
 
                 // unittest_custom_options.shark depends on descriptor.shark.
 
-                const FileDescriptor* meta_fd = DescriptorPool::generated_pool()->FindFileByName("shark/meta.shark");
-                ASSERT_NE(meta_fd, nullptr);
-                FileDescriptorProto meta_proto;
-                meta_fd->CopyTo(&meta_proto);
-                ASSERT_NE(pool_.BuildFile(meta_proto), nullptr);
+                ASSERT_TRUE(build_meta_file(&pool_));
 
                 const FileDescriptor* import = FileDescriptorProto::descriptor()->file();
                 FileDescriptorProto import_proto;

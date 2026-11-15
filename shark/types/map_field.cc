@@ -268,7 +268,7 @@ namespace shark::internal {
         // default value.
         switch (val_des->cpp_type()) {
 #define HANDLE_TYPE(CPPTYPE, TYPE)                               \
-    case SharkFieldCppType::CPPTYPE_##CPPTYPE: {                                \
+    case SharkFieldCppType::CPPTYPE_##CPPTYPE: {                 \
         TYPE* value = Arena::Create<TYPE>(MapFieldBase::arena_); \
         map_val->SetValue(value);                                \
         break;                                                   \
@@ -600,7 +600,7 @@ namespace shark::internal {
             map_val.SetType(val_des->cpp_type());
             switch (val_des->cpp_type()) {
 #define HANDLE_TYPE(CPPTYPE, TYPE, METHOD)                       \
-    case SharkFieldCppType::CPPTYPE_##CPPTYPE: {                                \
+    case SharkFieldCppType::CPPTYPE_##CPPTYPE: {                 \
         TYPE* value = Arena::Create<TYPE>(MapFieldBase::arena_); \
         *value = reflection->Get##METHOD(*it, val_des);          \
         map_val.SetValue(value);                                 \
@@ -648,10 +648,10 @@ namespace shark::internal {
             }
             // Add the allocated space in MapValueRef.
             switch (it->second.type()) {
-#define HANDLE_TYPE(CPPTYPE, TYPE)       \
-    case SharkFieldCppType::CPPTYPE_##CPPTYPE: {        \
-        size += sizeof(TYPE) * map_size; \
-        break;                           \
+#define HANDLE_TYPE(CPPTYPE, TYPE)               \
+    case SharkFieldCppType::CPPTYPE_##CPPTYPE: { \
+        size += sizeof(TYPE) * map_size;         \
+        break;                                   \
     }
                 HANDLE_TYPE(INT32, int32_t);
                 HANDLE_TYPE(INT8, int8_t);

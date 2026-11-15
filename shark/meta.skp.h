@@ -26,9 +26,12 @@
 #include <shark/generated/generated_message_util.h>
 #include <shark/generated/metadata_lite.h>
 #include <shark/generated/generated_message_reflection.h>
+#include <shark/message.h>
 #include <shark/types/repeated_field.h>  // IWYU pragma: export
 #include <shark/extension_set.h>  // IWYU pragma: export
 #include <shark/generated/generated_enum_reflection.h>
+#include <shark/unknown_field_set.h>
+#include <shark/types/any.skp.h>
 // @@protoc_insertion_point(includes)
 #include <shark/port_def.inc>
 #define SHARK_INTERNAL_EXPORT_shark_2fmeta_2eshark SHARK_EXPORT
@@ -43,7 +46,13 @@ struct SHARK_EXPORT TableStruct_shark_2fmeta_2eshark {
   static const uint32_t offsets[];
 };
 SHARK_EXPORT extern const ::SHARK_NAMESPACE_ID::internal::DescriptorTable descriptor_table_shark_2fmeta_2eshark;
+namespace shark {
+class Option;
+struct OptionDefaultTypeInternal;
+SHARK_EXPORT extern OptionDefaultTypeInternal _Option_default_instance_;
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
+template<> SHARK_EXPORT ::shark::Option* Arena::CreateMaybeMessage<::shark::Option>(Arena*);
 SHARK_NAMESPACE_CLOSE
 namespace shark {
 
@@ -234,7 +243,188 @@ SHARK_NAMESPACE_CLOSE
 // ===================================================================
 namespace shark {
 
+class SHARK_EXPORT Option final :
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Option) */ {
+ public:
+    inline Option() : Option(nullptr) {}
+    ~Option() override;
+    explicit constexpr Option(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
+    Option(const Option& from);
+    Option(Option&& from) noexcept
+      : Option() {
+      *this = ::std::move(from);
+    }
+
+    inline Option& operator=(const Option& from) {
+      CopyFrom(from);
+      return *this;
+    }
+    inline Option& operator=(Option&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
+
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
+
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const Option& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const Option* internal_default_instance() {
+      return reinterpret_cast<const Option*>(
+                 &_Option_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      0;
+
+    friend void swap(Option& a, Option& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(Option* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(Option* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+      InternalSwap(other);
+    }
+
+    // implements Message ----------------------------------------------
+
+    Option* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<Option>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const Option& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const Option& from) {
+      Option::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
+
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(Option* other);
+
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.Option";
+    }
+    protected:
+    explicit Option(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
+
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+    // nested types ----------------------------------------------------
+
+    // accessors -------------------------------------------------------
+
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kValueFieldNumber = 2;
+
+    // optional string name = 1;
+    bool has_name() const;
+    private:
+    bool _internal_has_name() const;
+    public:
+    void clear_name();
+    const std::string& name() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_name(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_name();
+    [[nodiscard]] std::string* release_name();
+    void set_allocated_name(std::string* name);
+    private:
+    const std::string& _internal_name() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+    std::string* _internal_mutable_name();
+    public:
+
+    // optional .shark.Any value = 2;
+    bool has_value() const;
+    private:
+    bool _internal_has_value() const;
+    public:
+    void clear_value();
+    const ::shark::Any& value() const;
+    [[nodiscard]] ::shark::Any* release_value();
+    ::shark::Any* mutable_value();
+    void set_allocated_value(::shark::Any* value);
+    private:
+    const ::shark::Any& _internal_value() const;
+    ::shark::Any* _internal_mutable_value();
+    public:
+    void unsafe_arena_set_allocated_value(
+        ::shark::Any* value);
+    ::shark::Any* unsafe_arena_release_value();
+
+    // @@protoc_insertion_point(class_scope:shark.Option)
+ private:
+    class _Internal;
+
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
+        ::shark::Any* value_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2fmeta_2eshark;
+};
 // ===================================================================
 
 
@@ -244,6 +434,163 @@ namespace shark {
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// Option
+
+// optional string name = 1;
+inline bool Option::_internal_has_name() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool Option::has_name() const {
+  return _internal_has_name();
+}
+inline void Option::clear_name() {
+    _impl_.name_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const std::string& Option::name() const {
+  // @@protoc_insertion_point(field_get:shark.Option.name)
+  return _internal_name();
+}
+template <typename ArgT0, typename... ArgT>
+inline SHARK_ALWAYS_INLINE
+void Option::set_name(ArgT0&& arg0, ArgT... args) {
+ _impl_._has_bits_[0] |= 0x00000001u;
+ _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:shark.Option.name)
+}
+inline std::string* Option::mutable_name() {
+  std::string* _s = _internal_mutable_name();
+  // @@protoc_insertion_point(field_mutable:shark.Option.name)
+  return _s;
+}
+inline const std::string& Option::_internal_name() const {
+  return _impl_.name_.Get();
+}
+inline void Option::_internal_set_name(const std::string& value) {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.name_.Set(value, GetArenaForAllocation());
+}
+inline std::string* Option::_internal_mutable_name() {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  return _impl_.name_.Mutable(GetArenaForAllocation());
+}
+inline std::string* Option::release_name() {
+  // @@protoc_insertion_point(field_release:shark.Option.name)
+  if (!_internal_has_name()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.name_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
+}
+inline void Option::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.name_.SetAllocated(name, GetArenaForAllocation());
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:shark.Option.name)
+}
+
+// optional .shark.Any value = 2;
+inline bool Option::_internal_has_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  SHARK_ASSUME(!value || _impl_.value_ != nullptr);
+  return value;
+}
+inline bool Option::has_value() const {
+  return _internal_has_value();
+}
+inline const ::shark::Any& Option::_internal_value() const {
+  const ::shark::Any* p = _impl_.value_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::Any&>(
+      ::shark::_Any_default_instance_);
+}
+inline const ::shark::Any& Option::value() const {
+  // @@protoc_insertion_point(field_get:shark.Option.value)
+  return _internal_value();
+}
+inline void Option::unsafe_arena_set_allocated_value(
+    ::shark::Any* value) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.value_);
+  }
+  _impl_.value_ = value;
+  if (value) {
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.Option.value)
+}
+inline ::shark::Any* Option::release_value() {
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::shark::Any* temp = _impl_.value_;
+  _impl_.value_ = nullptr;
+#ifdef SHARK_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::SHARK_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // SHARK_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::SHARK_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !SHARK_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::shark::Any* Option::unsafe_arena_release_value() {
+  // @@protoc_insertion_point(field_release:shark.Option.value)
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::shark::Any* temp = _impl_.value_;
+  _impl_.value_ = nullptr;
+  return temp;
+}
+inline ::shark::Any* Option::_internal_mutable_value() {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  if (_impl_.value_ == nullptr) {
+    auto* p = CreateMaybeMessage<::shark::Any>(GetArenaForAllocation());
+    _impl_.value_ = p;
+  }
+  return _impl_.value_;
+}
+inline ::shark::Any* Option::mutable_value() {
+  ::shark::Any* _msg = _internal_mutable_value();
+  // @@protoc_insertion_point(field_mutable:shark.Option.value)
+  return _msg;
+}
+inline void Option::set_allocated_value(::shark::Any* value) {
+  ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.value_);
+  }
+  if (value) {
+    ::SHARK_NAMESPACE_ID::Arena* submessage_arena =
+        ::SHARK_NAMESPACE_ID::Arena::InternalGetOwningArena(
+                reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(value));
+    if (message_arena != submessage_arena) {
+      value = ::SHARK_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+  _impl_.value_ = value;
+  // @@protoc_insertion_point(field_set_allocated:shark.Option.value)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__

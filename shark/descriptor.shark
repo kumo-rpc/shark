@@ -127,10 +127,11 @@ struct ExtensionRangeOptions {
   // The parser stores options it doesn't recognize here. See above.
   list<UninterpretedOption> uninterpreted_option = 999;
 
-
+  optional list<Option> attributes = 60;
   // Clients can define custom options in extensions of this message. See above.
   extensions 1000 to max;
 }
+
 
 // Describes a field within a message.
 struct FieldDescriptorProto {
@@ -174,6 +175,7 @@ struct FieldDescriptorProto {
 
   // Field number 17 is reserved. A descriptor that sets this flag is rejected.
   optional bool proto3_optional = 17;
+
 }
 
 // Describes a oneof.
@@ -189,6 +191,7 @@ struct EnumDescriptorProto {
   list<EnumValueDescriptorProto> value = 2;
 
   optional EnumOptions options = 3;
+
 
   // Range of reserved numeric values. Reserved values may not be used by
   // entries in the same enum. Reserved ranges may not overlap.
@@ -282,7 +285,7 @@ struct FileOptions {
   // Generated classes can be optimized for speed or code size.
   enum OptimizeMode {
     SPEED = 1;         // Generate complete code for parsing, serialization,
-                       // etc.
+    // etc.
     CODE_SIZE = 2;     // Use ReflectionOps to implement these methods.
     LITE_RUNTIME = 3;  // Generate code using MessageLite and the lite runtime.
   }
@@ -321,6 +324,7 @@ struct FileOptions {
   // only to generated classes for C++.
   optional bool cc_enable_arenas = 31 [default = true];
 
+  optional list<Option> attributes = 60;
 
   // The parser stores options it doesn't recognize here.
   // See the documentation for the "Options" section above.
@@ -393,6 +397,8 @@ struct MessageOptions {
   reserved 8;  // javalite_serializable
   reserved 9;  // javanano_as_lite
 
+
+  optional list<Option> attributes = 60;
 
   // The parser stores options it doesn't recognize here. See above.
   list<UninterpretedOption> uninterpreted_option = 999;
@@ -496,6 +502,8 @@ struct FieldOptions {
   optional bool weak = 10 [default = false];
 
 
+  optional list<Option> attributes = 20;
+
   // The parser stores options it doesn't recognize here. See above.
   list<UninterpretedOption> uninterpreted_option = 999;
 
@@ -508,6 +516,8 @@ struct FieldOptions {
 struct OneofOptions {
   // The parser stores options it doesn't recognize here. See above.
   list<UninterpretedOption> uninterpreted_option = 999;
+
+  optional list<Option> attributes = 60;
 
   // Clients can define custom options in extensions of this message. See above.
   extensions 1000 to max;
@@ -544,6 +554,8 @@ struct EnumOptions {
   // Set for enum class. Legacy enums leave this unset.
   optional EnumUnderlyingType underlying_type = 7;
 
+  optional list<Option> attributes = 60;
+
   // The parser stores options it doesn't recognize here. See above.
   list<UninterpretedOption> uninterpreted_option = 999;
 
@@ -558,6 +570,8 @@ struct EnumValueOptions {
   // this is a formalization for deprecating enum values.
   optional bool deprecated = 1 [default = false];
 
+  optional list<Option> attributes = 60;
+
   // The parser stores options it doesn't recognize here. See above.
   list<UninterpretedOption> uninterpreted_option = 999;
 
@@ -566,7 +580,7 @@ struct EnumValueOptions {
 }
 
 struct ServiceOptions {
-
+  optional list<Option> attributes = 60;
   // Note:  Field numbers 1 through 32 are reserved for Google's internal RPC
   //   framework.  We apologize for hoarding these numbers to ourselves, but
   //   we were already using them long before we decided to release Protocol
@@ -598,6 +612,8 @@ struct MethodOptions {
   // this is a formalization for deprecating methods.
   optional bool deprecated = 33 [default = false];
 
+  optional list<Option> attributes = 60;
+
   // Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
   // or neither? HTTP based RPC implementation may choose GET verb for safe
   // methods, and PUT verb for idempotent methods instead of the default POST.
@@ -607,7 +623,7 @@ struct MethodOptions {
     IDEMPOTENT = 2;       // idempotent, but may have side effects
   }
   optional IdempotencyLevel idempotency_level = 34
-      [default = IDEMPOTENCY_UNKNOWN];
+  [default = IDEMPOTENCY_UNKNOWN];
 
   // The parser stores options it doesn't recognize here. See above.
   list<UninterpretedOption> uninterpreted_option = 999;

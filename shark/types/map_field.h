@@ -39,11 +39,11 @@
 #include <shark/generated/generated_message_util.h>
 #include <shark/message.h>
 #include <shark/port.h>
-#include <shark/types/repeated_field.h>
 #include <shark/stubs/mutex.h>
 #include <shark/types/map_entry.h>
 #include <shark/types/map_field_lite.h>
 #include <shark/types/map_type_handler.h>
+#include <shark/types/repeated_field.h>
 #include <shark/unknown_field_set.h>
 
 // Must be included last.
@@ -943,10 +943,10 @@ namespace shark {
         // Only used in DynamicMapField
         void DeleteData() {
             switch (type_) {
-#define HANDLE_TYPE(CPPTYPE, TYPE)             \
-    case SharkFieldCppType::CPPTYPE_##CPPTYPE: {              \
-        delete reinterpret_cast<TYPE*>(data_); \
-        break;                                 \
+#define HANDLE_TYPE(CPPTYPE, TYPE)               \
+    case SharkFieldCppType::CPPTYPE_##CPPTYPE: { \
+        delete reinterpret_cast<TYPE*>(data_);   \
+        break;                                   \
     }
                 HANDLE_TYPE(INT32, int32_t);
                 HANDLE_TYPE(INT8, int8_t);

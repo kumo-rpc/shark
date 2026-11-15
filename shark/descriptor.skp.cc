@@ -116,6 +116,7 @@ SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 Descri
 constexpr ExtensionRangeOptions::ExtensionRangeOptions(
     ::_pbi::ConstantInitialized): _impl_{
       /*decltype(_impl_._extensions_)*/{}
+    , /*decltype(_impl_.attributes_)*/{}
     , /*decltype(_impl_.uninterpreted_option_)*/{}
     , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ExtensionRangeOptionsDefaultTypeInternal {
@@ -255,6 +256,7 @@ constexpr FileOptions::FileOptions(
       /*decltype(_impl_._extensions_)*/{}
     , /*decltype(_impl_._has_bits_)*/{}
     , /*decltype(_impl_._cached_size_)*/{}
+    , /*decltype(_impl_.attributes_)*/{}
     , /*decltype(_impl_.uninterpreted_option_)*/{}
     , /*decltype(_impl_.go_package_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
     , /*decltype(_impl_.cc_generic_services_)*/false
@@ -276,6 +278,7 @@ constexpr MessageOptions::MessageOptions(
       /*decltype(_impl_._extensions_)*/{}
     , /*decltype(_impl_._has_bits_)*/{}
     , /*decltype(_impl_._cached_size_)*/{}
+    , /*decltype(_impl_.attributes_)*/{}
     , /*decltype(_impl_.uninterpreted_option_)*/{}
     , /*decltype(_impl_.message_set_wire_format_)*/false
     , /*decltype(_impl_.no_standard_descriptor_accessor_)*/false
@@ -295,6 +298,7 @@ constexpr FieldOptions::FieldOptions(
       /*decltype(_impl_._extensions_)*/{}
     , /*decltype(_impl_._has_bits_)*/{}
     , /*decltype(_impl_._cached_size_)*/{}
+    , /*decltype(_impl_.attributes_)*/{}
     , /*decltype(_impl_.uninterpreted_option_)*/{}
     , /*decltype(_impl_.ctype_)*/0
     , /*decltype(_impl_.jstype_)*/0
@@ -315,6 +319,7 @@ SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 FieldO
 constexpr OneofOptions::OneofOptions(
     ::_pbi::ConstantInitialized): _impl_{
       /*decltype(_impl_._extensions_)*/{}
+    , /*decltype(_impl_.attributes_)*/{}
     , /*decltype(_impl_.uninterpreted_option_)*/{}
     , /*decltype(_impl_._cached_size_)*/{}} {}
 struct OneofOptionsDefaultTypeInternal {
@@ -331,6 +336,7 @@ constexpr EnumOptions::EnumOptions(
       /*decltype(_impl_._extensions_)*/{}
     , /*decltype(_impl_._has_bits_)*/{}
     , /*decltype(_impl_._cached_size_)*/{}
+    , /*decltype(_impl_.attributes_)*/{}
     , /*decltype(_impl_.uninterpreted_option_)*/{}
     , /*decltype(_impl_.allow_alias_)*/false
     , /*decltype(_impl_.deprecated_)*/false
@@ -350,6 +356,7 @@ constexpr EnumValueOptions::EnumValueOptions(
       /*decltype(_impl_._extensions_)*/{}
     , /*decltype(_impl_._has_bits_)*/{}
     , /*decltype(_impl_._cached_size_)*/{}
+    , /*decltype(_impl_.attributes_)*/{}
     , /*decltype(_impl_.uninterpreted_option_)*/{}
     , /*decltype(_impl_.deprecated_)*/false} {}
 struct EnumValueOptionsDefaultTypeInternal {
@@ -366,6 +373,7 @@ constexpr ServiceOptions::ServiceOptions(
       /*decltype(_impl_._extensions_)*/{}
     , /*decltype(_impl_._has_bits_)*/{}
     , /*decltype(_impl_._cached_size_)*/{}
+    , /*decltype(_impl_.attributes_)*/{}
     , /*decltype(_impl_.uninterpreted_option_)*/{}
     , /*decltype(_impl_.deprecated_)*/false} {}
 struct ServiceOptionsDefaultTypeInternal {
@@ -382,6 +390,7 @@ constexpr MethodOptions::MethodOptions(
       /*decltype(_impl_._extensions_)*/{}
     , /*decltype(_impl_._has_bits_)*/{}
     , /*decltype(_impl_._cached_size_)*/{}
+    , /*decltype(_impl_.attributes_)*/{}
     , /*decltype(_impl_.uninterpreted_option_)*/{}
     , /*decltype(_impl_.deprecated_)*/false
     , /*decltype(_impl_.idempotency_level_)*/0} {}
@@ -591,6 +600,7 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     ~0u,  // no _weak_field_map_
     ~0u,  // no _inlined_string_donated_
     SHARK_FIELD_OFFSET(::shark::ExtensionRangeOptions, _impl_.uninterpreted_option_),
+    SHARK_FIELD_OFFSET(::shark::ExtensionRangeOptions, _impl_.attributes_),
     SHARK_FIELD_OFFSET(::shark::FieldDescriptorProto, _impl_._has_bits_),
     SHARK_FIELD_OFFSET(::shark::FieldDescriptorProto, _internal_metadata_),
     ~0u,  // no _extensions_
@@ -709,6 +719,7 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.py_generic_services_),
     SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.deprecated_),
     SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.cc_enable_arenas_),
+    SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.attributes_),
     SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.uninterpreted_option_),
     4,
     0,
@@ -716,6 +727,7 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     2,
     3,
     5,
+    ~0u,
     ~0u,
     SHARK_FIELD_OFFSET(::shark::MessageOptions, _impl_._has_bits_),
     SHARK_FIELD_OFFSET(::shark::MessageOptions, _internal_metadata_),
@@ -727,11 +739,13 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     SHARK_FIELD_OFFSET(::shark::MessageOptions, _impl_.no_standard_descriptor_accessor_),
     SHARK_FIELD_OFFSET(::shark::MessageOptions, _impl_.deprecated_),
     SHARK_FIELD_OFFSET(::shark::MessageOptions, _impl_.map_entry_),
+    SHARK_FIELD_OFFSET(::shark::MessageOptions, _impl_.attributes_),
     SHARK_FIELD_OFFSET(::shark::MessageOptions, _impl_.uninterpreted_option_),
     0,
     1,
     2,
     3,
+    ~0u,
     ~0u,
     SHARK_FIELD_OFFSET(::shark::FieldOptions, _impl_._has_bits_),
     SHARK_FIELD_OFFSET(::shark::FieldOptions, _internal_metadata_),
@@ -746,6 +760,7 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     SHARK_FIELD_OFFSET(::shark::FieldOptions, _impl_.unverified_lazy_),
     SHARK_FIELD_OFFSET(::shark::FieldOptions, _impl_.deprecated_),
     SHARK_FIELD_OFFSET(::shark::FieldOptions, _impl_.weak_),
+    SHARK_FIELD_OFFSET(::shark::FieldOptions, _impl_.attributes_),
     SHARK_FIELD_OFFSET(::shark::FieldOptions, _impl_.uninterpreted_option_),
     0,
     2,
@@ -755,6 +770,7 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     5,
     6,
     ~0u,
+    ~0u,
     ~0u,  // no _has_bits_
     SHARK_FIELD_OFFSET(::shark::OneofOptions, _internal_metadata_),
     SHARK_FIELD_OFFSET(::shark::OneofOptions, _impl_._extensions_),
@@ -762,6 +778,7 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     ~0u,  // no _weak_field_map_
     ~0u,  // no _inlined_string_donated_
     SHARK_FIELD_OFFSET(::shark::OneofOptions, _impl_.uninterpreted_option_),
+    SHARK_FIELD_OFFSET(::shark::OneofOptions, _impl_.attributes_),
     SHARK_FIELD_OFFSET(::shark::EnumOptions, _impl_._has_bits_),
     SHARK_FIELD_OFFSET(::shark::EnumOptions, _internal_metadata_),
     SHARK_FIELD_OFFSET(::shark::EnumOptions, _impl_._extensions_),
@@ -772,11 +789,13 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     SHARK_FIELD_OFFSET(::shark::EnumOptions, _impl_.deprecated_),
     SHARK_FIELD_OFFSET(::shark::EnumOptions, _impl_.enable_operator_),
     SHARK_FIELD_OFFSET(::shark::EnumOptions, _impl_.underlying_type_),
+    SHARK_FIELD_OFFSET(::shark::EnumOptions, _impl_.attributes_),
     SHARK_FIELD_OFFSET(::shark::EnumOptions, _impl_.uninterpreted_option_),
     0,
     1,
     2,
     3,
+    ~0u,
     ~0u,
     SHARK_FIELD_OFFSET(::shark::EnumValueOptions, _impl_._has_bits_),
     SHARK_FIELD_OFFSET(::shark::EnumValueOptions, _internal_metadata_),
@@ -785,8 +804,10 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     ~0u,  // no _weak_field_map_
     ~0u,  // no _inlined_string_donated_
     SHARK_FIELD_OFFSET(::shark::EnumValueOptions, _impl_.deprecated_),
+    SHARK_FIELD_OFFSET(::shark::EnumValueOptions, _impl_.attributes_),
     SHARK_FIELD_OFFSET(::shark::EnumValueOptions, _impl_.uninterpreted_option_),
     0,
+    ~0u,
     ~0u,
     SHARK_FIELD_OFFSET(::shark::ServiceOptions, _impl_._has_bits_),
     SHARK_FIELD_OFFSET(::shark::ServiceOptions, _internal_metadata_),
@@ -794,8 +815,10 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     ~0u,  // no _oneof_case_
     ~0u,  // no _weak_field_map_
     ~0u,  // no _inlined_string_donated_
+    SHARK_FIELD_OFFSET(::shark::ServiceOptions, _impl_.attributes_),
     SHARK_FIELD_OFFSET(::shark::ServiceOptions, _impl_.deprecated_),
     SHARK_FIELD_OFFSET(::shark::ServiceOptions, _impl_.uninterpreted_option_),
+    ~0u,
     0,
     ~0u,
     SHARK_FIELD_OFFSET(::shark::MethodOptions, _impl_._has_bits_),
@@ -805,9 +828,11 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     ~0u,  // no _weak_field_map_
     ~0u,  // no _inlined_string_donated_
     SHARK_FIELD_OFFSET(::shark::MethodOptions, _impl_.deprecated_),
+    SHARK_FIELD_OFFSET(::shark::MethodOptions, _impl_.attributes_),
     SHARK_FIELD_OFFSET(::shark::MethodOptions, _impl_.idempotency_level_),
     SHARK_FIELD_OFFSET(::shark::MethodOptions, _impl_.uninterpreted_option_),
     0,
+    ~0u,
     1,
     ~0u,
     SHARK_FIELD_OFFSET(::shark::UninterpretedOption_NamePart, _impl_._has_bits_),
@@ -892,27 +917,27 @@ static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_
     { 49, 57, -1, sizeof(::shark::DescriptorProto_ReservedRange)},
     { 59, 75, -1, sizeof(::shark::DescriptorProto)},
     { 85, -1, -1, sizeof(::shark::ExtensionRangeOptions)},
-    { 92, 109, -1, sizeof(::shark::FieldDescriptorProto)},
-    { 120, 128, -1, sizeof(::shark::OneofDescriptorProto)},
-    { 130, 138, -1, sizeof(::shark::EnumDescriptorProto_EnumReservedRange)},
-    { 140, 151, -1, sizeof(::shark::EnumDescriptorProto)},
-    { 156, 165, -1, sizeof(::shark::EnumValueDescriptorProto)},
-    { 168, 177, -1, sizeof(::shark::ServiceDescriptorProto)},
-    { 180, 192, -1, sizeof(::shark::MethodDescriptorProto)},
-    { 198, 211, -1, sizeof(::shark::FileOptions)},
-    { 218, 229, -1, sizeof(::shark::MessageOptions)},
-    { 234, 248, -1, sizeof(::shark::FieldOptions)},
-    { 256, -1, -1, sizeof(::shark::OneofOptions)},
-    { 263, 274, -1, sizeof(::shark::EnumOptions)},
-    { 279, 287, -1, sizeof(::shark::EnumValueOptions)},
-    { 289, 297, -1, sizeof(::shark::ServiceOptions)},
-    { 299, 308, -1, sizeof(::shark::MethodOptions)},
-    { 311, 319, -1, sizeof(::shark::UninterpretedOption_NamePart)},
-    { 321, 334, -1, sizeof(::shark::UninterpretedOption)},
-    { 341, 352, -1, sizeof(::shark::SourceCodeInfo_Location)},
-    { 357, -1, -1, sizeof(::shark::SourceCodeInfo)},
-    { 364, 374, -1, sizeof(::shark::GeneratedCodeInfo_Annotation)},
-    { 378, -1, -1, sizeof(::shark::GeneratedCodeInfo)},
+    { 93, 110, -1, sizeof(::shark::FieldDescriptorProto)},
+    { 121, 129, -1, sizeof(::shark::OneofDescriptorProto)},
+    { 131, 139, -1, sizeof(::shark::EnumDescriptorProto_EnumReservedRange)},
+    { 141, 152, -1, sizeof(::shark::EnumDescriptorProto)},
+    { 157, 166, -1, sizeof(::shark::EnumValueDescriptorProto)},
+    { 169, 178, -1, sizeof(::shark::ServiceDescriptorProto)},
+    { 181, 193, -1, sizeof(::shark::MethodDescriptorProto)},
+    { 199, 213, -1, sizeof(::shark::FileOptions)},
+    { 221, 233, -1, sizeof(::shark::MessageOptions)},
+    { 239, 254, -1, sizeof(::shark::FieldOptions)},
+    { 263, -1, -1, sizeof(::shark::OneofOptions)},
+    { 271, 283, -1, sizeof(::shark::EnumOptions)},
+    { 289, 298, -1, sizeof(::shark::EnumValueOptions)},
+    { 301, 310, -1, sizeof(::shark::ServiceOptions)},
+    { 313, 323, -1, sizeof(::shark::MethodOptions)},
+    { 327, 335, -1, sizeof(::shark::UninterpretedOption_NamePart)},
+    { 337, 350, -1, sizeof(::shark::UninterpretedOption)},
+    { 357, 368, -1, sizeof(::shark::SourceCodeInfo_Location)},
+    { 373, -1, -1, sizeof(::shark::SourceCodeInfo)},
+    { 380, 390, -1, sizeof(::shark::GeneratedCodeInfo_Annotation)},
+    { 394, -1, -1, sizeof(::shark::GeneratedCodeInfo)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -974,115 +999,123 @@ const char descriptor_table_protodef_shark_2fdescriptor_2eshark[] SHARK_SECTION_
     "ange\022\r\n\005start\030\001 \001(\006\022\013\n\003end\030\002 \001(\006\022-\n\007opti"
     "ons\030\003 \001(\0172\034.shark.ExtensionRangeOptions\032"
     "+\n\rReservedRange\022\r\n\005start\030\001 \001(\006\022\013\n\003end\030\002"
-    " \001(\006\"]\n\025ExtensionRangeOptions\0229\n\024uninter"
-    "preted_option\030\347\007 \003(\0172\032.shark.Uninterpret"
-    "edOption*\t\010\350\007\020\200\200\200\200\002\"\237\002\n\024FieldDescriptorP"
-    "roto\022\014\n\004name\030\001 \001(\020\022\016\n\006number\030\003 \001(\006\022&\n\005la"
-    "bel\030\004 \001(\0162\027.shark.FieldCardinality\022\036\n\004ty"
-    "pe\030\005 \001(\0162\020.shark.SharkType\022\021\n\ttype_name\030"
-    "\006 \001(\020\022\020\n\010extendee\030\002 \001(\020\022\025\n\rdefault_value"
-    "\030\007 \001(\020\022\023\n\013oneof_index\030\t \001(\006\022\021\n\tjson_name"
-    "\030\n \001(\020\022$\n\007options\030\010 \001(\0172\023.shark.FieldOpt"
-    "ions\022\027\n\017proto3_optional\030\021 \001(\001\"J\n\024OneofDe"
-    "scriptorProto\022\014\n\004name\030\001 \001(\020\022$\n\007options\030\002"
-    " \001(\0172\023.shark.OneofOptions\"\206\002\n\023EnumDescri"
-    "ptorProto\022\014\n\004name\030\001 \001(\020\022.\n\005value\030\002 \003(\0172\037"
-    ".shark.EnumValueDescriptorProto\022#\n\007optio"
-    "ns\030\003 \001(\0172\022.shark.EnumOptions\022D\n\016reserved"
-    "_range\030\004 \003(\0172,.shark.EnumDescriptorProto"
-    ".EnumReservedRange\022\025\n\rreserved_name\030\005 \003("
-    "\020\032/\n\021EnumReservedRange\022\r\n\005start\030\001 \001(\006\022\013\n"
-    "\003end\030\002 \001(\006\"b\n\030EnumValueDescriptorProto\022\014"
-    "\n\004name\030\001 \001(\020\022\016\n\006number\030\002 \001(\006\022(\n\007options\030"
-    "\003 \001(\0172\027.shark.EnumValueOptions\"|\n\026Servic"
-    "eDescriptorProto\022\014\n\004name\030\001 \001(\020\022,\n\006method"
-    "\030\002 \003(\0172\034.shark.MethodDescriptorProto\022&\n\007"
-    "options\030\003 \001(\0172\025.shark.ServiceOptions\"\267\001\n"
-    "\025MethodDescriptorProto\022\014\n\004name\030\001 \001(\020\022\022\n\n"
-    "input_type\030\002 \001(\020\022\023\n\013output_type\030\003 \001(\020\022%\n"
-    "\007options\030\004 \001(\0172\024.shark.MethodOptions\022\037\n\020"
-    "client_streaming\030\005 \001(\001:\005false\022\037\n\020server_"
-    "streaming\030\006 \001(\001:\005false\"\302\003\n\013FileOptions\022<"
-    "\n\014optimize_for\030\t \001(\0162\037.shark.FileOptions"
-    ".OptimizeMode:\005SPEED\022\022\n\ngo_package\030\013 \001(\020"
-    "\022\"\n\023cc_generic_services\030\020 \001(\001:\005false\022\"\n\023"
-    "py_generic_services\030\022 \001(\001:\005false\022\031\n\ndepr"
-    "ecated\030\027 \001(\001:\005false\022\036\n\020cc_enable_arenas\030"
-    "\037 \001(\001:\004true\0229\n\024uninterpreted_option\030\347\007 \003"
-    "(\0172\032.shark.UninterpretedOption\">\n\014Optimi"
-    "zeMode\022\t\n\005SPEED\020\001\022\r\n\tCODE_SIZE\020\002\022\020\n\014LITE"
-    "_RUNTIME\020\003\032\0028\005*\t\010\350\007\020\200\200\200\200\002J\004\010\001\020\002J\004\010\010\020\tJ\004\010"
-    "\n\020\013J\004\010\021\020\022J\004\010\024\020\025J\004\010\033\020\034J\004\010$\020%J\004\010%\020&J\004\010&\020\'J"
-    "\004\010\'\020(J\004\010(\020)J\004\010)\020*J\004\010*\020+J\004\010,\020-J\004\010-\020.\"\372\001\n\016"
-    "MessageOptions\022&\n\027message_set_wire_forma"
-    "t\030\001 \001(\001:\005false\022.\n\037no_standard_descriptor"
-    "_accessor\030\002 \001(\001:\005false\022\031\n\ndeprecated\030\003 \001"
-    "(\001:\005false\022\021\n\tmap_entry\030\007 \001(\001\0229\n\024uninterp"
+    " \001(\006\"\200\001\n\025ExtensionRangeOptions\0229\n\024uninte"
+    "rpreted_option\030\347\007 \003(\0172\032.shark.Uninterpre"
+    "tedOption\022!\n\nattributes\030< \003(\0172\r.shark.Op"
+    "tion*\t\010\350\007\020\200\200\200\200\002\"\237\002\n\024FieldDescriptorProto"
+    "\022\014\n\004name\030\001 \001(\020\022\016\n\006number\030\003 \001(\006\022&\n\005label\030"
+    "\004 \001(\0162\027.shark.FieldCardinality\022\036\n\004type\030\005"
+    " \001(\0162\020.shark.SharkType\022\021\n\ttype_name\030\006 \001("
+    "\020\022\020\n\010extendee\030\002 \001(\020\022\025\n\rdefault_value\030\007 \001"
+    "(\020\022\023\n\013oneof_index\030\t \001(\006\022\021\n\tjson_name\030\n \001"
+    "(\020\022$\n\007options\030\010 \001(\0172\023.shark.FieldOptions"
+    "\022\027\n\017proto3_optional\030\021 \001(\001\"J\n\024OneofDescri"
+    "ptorProto\022\014\n\004name\030\001 \001(\020\022$\n\007options\030\002 \001(\017"
+    "2\023.shark.OneofOptions\"\206\002\n\023EnumDescriptor"
+    "Proto\022\014\n\004name\030\001 \001(\020\022.\n\005value\030\002 \003(\0172\037.sha"
+    "rk.EnumValueDescriptorProto\022#\n\007options\030\003"
+    " \001(\0172\022.shark.EnumOptions\022D\n\016reserved_ran"
+    "ge\030\004 \003(\0172,.shark.EnumDescriptorProto.Enu"
+    "mReservedRange\022\025\n\rreserved_name\030\005 \003(\020\032/\n"
+    "\021EnumReservedRange\022\r\n\005start\030\001 \001(\006\022\013\n\003end"
+    "\030\002 \001(\006\"b\n\030EnumValueDescriptorProto\022\014\n\004na"
+    "me\030\001 \001(\020\022\016\n\006number\030\002 \001(\006\022(\n\007options\030\003 \001("
+    "\0172\027.shark.EnumValueOptions\"|\n\026ServiceDes"
+    "criptorProto\022\014\n\004name\030\001 \001(\020\022,\n\006method\030\002 \003"
+    "(\0172\034.shark.MethodDescriptorProto\022&\n\007opti"
+    "ons\030\003 \001(\0172\025.shark.ServiceOptions\"\267\001\n\025Met"
+    "hodDescriptorProto\022\014\n\004name\030\001 \001(\020\022\022\n\ninpu"
+    "t_type\030\002 \001(\020\022\023\n\013output_type\030\003 \001(\020\022%\n\007opt"
+    "ions\030\004 \001(\0172\024.shark.MethodOptions\022\037\n\020clie"
+    "nt_streaming\030\005 \001(\001:\005false\022\037\n\020server_stre"
+    "aming\030\006 \001(\001:\005false\"\345\003\n\013FileOptions\022<\n\014op"
+    "timize_for\030\t \001(\0162\037.shark.FileOptions.Opt"
+    "imizeMode:\005SPEED\022\022\n\ngo_package\030\013 \001(\020\022\"\n\023"
+    "cc_generic_services\030\020 \001(\001:\005false\022\"\n\023py_g"
+    "eneric_services\030\022 \001(\001:\005false\022\031\n\ndeprecat"
+    "ed\030\027 \001(\001:\005false\022\036\n\020cc_enable_arenas\030\037 \001("
+    "\001:\004true\022!\n\nattributes\030< \003(\0172\r.shark.Opti"
+    "on\0229\n\024uninterpreted_option\030\347\007 \003(\0172\032.shar"
+    "k.UninterpretedOption\">\n\014OptimizeMode\022\t\n"
+    "\005SPEED\020\001\022\r\n\tCODE_SIZE\020\002\022\020\n\014LITE_RUNTIME\020"
+    "\003\032\0028\005*\t\010\350\007\020\200\200\200\200\002J\004\010\001\020\002J\004\010\010\020\tJ\004\010\n\020\013J\004\010\021\020\022"
+    "J\004\010\024\020\025J\004\010\033\020\034J\004\010$\020%J\004\010%\020&J\004\010&\020\'J\004\010\'\020(J\004\010("
+    "\020)J\004\010)\020*J\004\010*\020+J\004\010,\020-J\004\010-\020.\"\235\002\n\016MessageOp"
+    "tions\022&\n\027message_set_wire_format\030\001 \001(\001:\005"
+    "false\022.\n\037no_standard_descriptor_accessor"
+    "\030\002 \001(\001:\005false\022\031\n\ndeprecated\030\003 \001(\001:\005false"
+    "\022\021\n\tmap_entry\030\007 \001(\001\022!\n\nattributes\030< \003(\0172"
+    "\r.shark.Option\0229\n\024uninterpreted_option\030\347"
+    "\007 \003(\0172\032.shark.UninterpretedOption*\t\010\350\007\020\200"
+    "\200\200\200\002J\004\010\004\020\005J\004\010\005\020\006J\004\010\006\020\007J\004\010\010\020\tJ\004\010\t\020\n\"\313\003\n\014F"
+    "ieldOptions\0220\n\005ctype\030\001 \001(\0162\031.shark.Field"
+    "Options.CType:\006STRING\022\016\n\006packed\030\002 \001(\001\0225\n"
+    "\006jstype\030\006 \001(\0162\032.shark.FieldOptions.JSTyp"
+    "e:\tJS_NORMAL\022\023\n\004lazy\030\005 \001(\001:\005false\022\036\n\017unv"
+    "erified_lazy\030\017 \001(\001:\005false\022\031\n\ndeprecated\030"
+    "\003 \001(\001:\005false\022\023\n\004weak\030\n \001(\001:\005false\022!\n\natt"
+    "ributes\030\024 \003(\0172\r.shark.Option\0229\n\024uninterp"
     "reted_option\030\347\007 \003(\0172\032.shark.Uninterprete"
-    "dOption*\t\010\350\007\020\200\200\200\200\002J\004\010\004\020\005J\004\010\005\020\006J\004\010\006\020\007J\004\010\010"
-    "\020\tJ\004\010\t\020\n\"\250\003\n\014FieldOptions\0220\n\005ctype\030\001 \001(\016"
-    "2\031.shark.FieldOptions.CType:\006STRING\022\016\n\006p"
-    "acked\030\002 \001(\001\0225\n\006jstype\030\006 \001(\0162\032.shark.Fiel"
-    "dOptions.JSType:\tJS_NORMAL\022\023\n\004lazy\030\005 \001(\001"
-    ":\005false\022\036\n\017unverified_lazy\030\017 \001(\001:\005false\022"
-    "\031\n\ndeprecated\030\003 \001(\001:\005false\022\023\n\004weak\030\n \001(\001"
-    ":\005false\0229\n\024uninterpreted_option\030\347\007 \003(\0172\032"
-    ".shark.UninterpretedOption\"3\n\005CType\022\n\n\006S"
-    "TRING\020\000\022\010\n\004CORD\020\001\022\020\n\014STRING_PIECE\020\002\032\0028\005\""
-    "9\n\006JSType\022\r\n\tJS_NORMAL\020\000\022\r\n\tJS_STRING\020\001\022"
-    "\r\n\tJS_NUMBER\020\002\032\0028\005*\t\010\350\007\020\200\200\200\200\002J\004\010\004\020\005\"T\n\014O"
-    "neofOptions\0229\n\024uninterpreted_option\030\347\007 \003"
-    "(\0172\032.shark.UninterpretedOption*\t\010\350\007\020\200\200\200\200"
-    "\002\"\335\001\n\013EnumOptions\022\023\n\013allow_alias\030\002 \001(\001\022\031"
-    "\n\ndeprecated\030\003 \001(\001:\005false\022\036\n\017enable_oper"
-    "ator\030\006 \001(\001:\005false\0222\n\017underlying_type\030\007 \001"
-    "(\0162\031.shark.EnumUnderlyingType\0229\n\024uninter"
-    "preted_option\030\347\007 \003(\0172\032.shark.Uninterpret"
-    "edOption*\t\010\350\007\020\200\200\200\200\002J\004\010\005\020\006\"s\n\020EnumValueOp"
-    "tions\022\031\n\ndeprecated\030\001 \001(\001:\005false\0229\n\024unin"
+    "dOption\"3\n\005CType\022\n\n\006STRING\020\000\022\010\n\004CORD\020\001\022\020"
+    "\n\014STRING_PIECE\020\002\032\0028\005\"9\n\006JSType\022\r\n\tJS_NOR"
+    "MAL\020\000\022\r\n\tJS_STRING\020\001\022\r\n\tJS_NUMBER\020\002\032\0028\005*"
+    "\t\010\350\007\020\200\200\200\200\002J\004\010\004\020\005\"w\n\014OneofOptions\0229\n\024unin"
     "terpreted_option\030\347\007 \003(\0172\032.shark.Uninterp"
-    "retedOption*\t\010\350\007\020\200\200\200\200\002\"q\n\016ServiceOptions"
-    "\022\031\n\ndeprecated\030! \001(\001:\005false\0229\n\024uninterpr"
+    "retedOption\022!\n\nattributes\030< \003(\0172\r.shark."
+    "Option*\t\010\350\007\020\200\200\200\200\002\"\200\002\n\013EnumOptions\022\023\n\013all"
+    "ow_alias\030\002 \001(\001\022\031\n\ndeprecated\030\003 \001(\001:\005fals"
+    "e\022\036\n\017enable_operator\030\006 \001(\001:\005false\0222\n\017und"
+    "erlying_type\030\007 \001(\0162\031.shark.EnumUnderlyin"
+    "gType\022!\n\nattributes\030< \003(\0172\r.shark.Option"
+    "\0229\n\024uninterpreted_option\030\347\007 \003(\0172\032.shark."
+    "UninterpretedOption*\t\010\350\007\020\200\200\200\200\002J\004\010\005\020\006\"\226\001\n"
+    "\020EnumValueOptions\022\031\n\ndeprecated\030\001 \001(\001:\005f"
+    "alse\022!\n\nattributes\030< \003(\0172\r.shark.Option\022"
+    "9\n\024uninterpreted_option\030\347\007 \003(\0172\032.shark.U"
+    "ninterpretedOption*\t\010\350\007\020\200\200\200\200\002\"\224\001\n\016Servic"
+    "eOptions\022!\n\nattributes\030< \003(\0172\r.shark.Opt"
+    "ion\022\031\n\ndeprecated\030! \001(\001:\005false\0229\n\024uninte"
+    "rpreted_option\030\347\007 \003(\0172\032.shark.Uninterpre"
+    "tedOption*\t\010\350\007\020\200\200\200\200\002\"\300\002\n\rMethodOptions\022\031"
+    "\n\ndeprecated\030! \001(\001:\005false\022!\n\nattributes\030"
+    "< \003(\0172\r.shark.Option\022U\n\021idempotency_leve"
+    "l\030\" \001(\0162%.shark.MethodOptions.Idempotenc"
+    "yLevel:\023IDEMPOTENCY_UNKNOWN\0229\n\024uninterpr"
     "eted_option\030\347\007 \003(\0172\032.shark.Uninterpreted"
-    "Option*\t\010\350\007\020\200\200\200\200\002\"\235\002\n\rMethodOptions\022\031\n\nd"
-    "eprecated\030! \001(\001:\005false\022U\n\021idempotency_le"
-    "vel\030\" \001(\0162%.shark.MethodOptions.Idempote"
-    "ncyLevel:\023IDEMPOTENCY_UNKNOWN\0229\n\024uninter"
-    "preted_option\030\347\007 \003(\0172\032.shark.Uninterpret"
-    "edOption\"T\n\020IdempotencyLevel\022\027\n\023IDEMPOTE"
-    "NCY_UNKNOWN\020\000\022\023\n\017NO_SIDE_EFFECTS\020\001\022\016\n\nID"
-    "EMPOTENT\020\002\032\0028\005*\t\010\350\007\020\200\200\200\200\002\"\224\002\n\023Uninterpre"
-    "tedOption\0221\n\004name\030\002 \003(\0172#.shark.Uninterp"
-    "retedOption.NamePart\022\030\n\020identifier_value"
-    "\030\003 \001(\020\022\032\n\022positive_int_value\030\004 \001(\t\022\032\n\022ne"
-    "gative_int_value\030\005 \001(\010\022\024\n\014double_value\030\006"
-    " \001(\r\022\024\n\014string_value\030\007 \001(\021\022\027\n\017aggregate_"
-    "value\030\010 \001(\020\0323\n\010NamePart\022\021\n\tname_part\030\001 \002"
-    "(\020\022\024\n\014is_extension\030\002 \002(\001\"\313\001\n\016SourceCodeI"
-    "nfo\0220\n\010location\030\001 \003(\0172\036.shark.SourceCode"
-    "Info.Location\032\206\001\n\010Location\022\020\n\004path\030\001 \003(\006"
-    "B\002\020\001\022\020\n\004span\030\002 \003(\006B\002\020\001\022\030\n\020leading_commen"
-    "ts\030\003 \001(\020\022\031\n\021trailing_comments\030\004 \001(\020\022!\n\031l"
-    "eading_detached_comments\030\006 \003(\020\"\235\001\n\021Gener"
-    "atedCodeInfo\0227\n\nannotation\030\001 \003(\0172#.shark"
-    ".GeneratedCodeInfo.Annotation\032O\n\nAnnotat"
-    "ion\022\020\n\004path\030\001 \003(\006B\002\020\001\022\023\n\013source_file\030\002 \001"
-    "(\020\022\r\n\005begin\030\003 \001(\006\022\013\n\003end\030\004 \001(\006*\377\001\n\022EnumU"
-    "nderlyingType\022$\n ENUM_UNDERLYING_TYPE_UN"
-    "SPECIFIED\020\000\022\035\n\031ENUM_UNDERLYING_TYPE_INT8"
-    "\020\001\022\036\n\032ENUM_UNDERLYING_TYPE_UINT8\020\002\022\036\n\032EN"
-    "UM_UNDERLYING_TYPE_INT16\020\003\022\037\n\033ENUM_UNDER"
-    "LYING_TYPE_UINT16\020\004\022\036\n\032ENUM_UNDERLYING_T"
-    "YPE_INT32\020\005\022\037\n\033ENUM_UNDERLYING_TYPE_UINT"
-    "32\020\006\032\0028\005B4H\001Z-google.golang.org/protobuf"
-    "/types/descriptorpb\370\001\001"
+    "Option\"T\n\020IdempotencyLevel\022\027\n\023IDEMPOTENC"
+    "Y_UNKNOWN\020\000\022\023\n\017NO_SIDE_EFFECTS\020\001\022\016\n\nIDEM"
+    "POTENT\020\002\032\0028\005*\t\010\350\007\020\200\200\200\200\002\"\224\002\n\023Uninterprete"
+    "dOption\0221\n\004name\030\002 \003(\0172#.shark.Uninterpre"
+    "tedOption.NamePart\022\030\n\020identifier_value\030\003"
+    " \001(\020\022\032\n\022positive_int_value\030\004 \001(\t\022\032\n\022nega"
+    "tive_int_value\030\005 \001(\010\022\024\n\014double_value\030\006 \001"
+    "(\r\022\024\n\014string_value\030\007 \001(\021\022\027\n\017aggregate_va"
+    "lue\030\010 \001(\020\0323\n\010NamePart\022\021\n\tname_part\030\001 \002(\020"
+    "\022\024\n\014is_extension\030\002 \002(\001\"\313\001\n\016SourceCodeInf"
+    "o\0220\n\010location\030\001 \003(\0172\036.shark.SourceCodeIn"
+    "fo.Location\032\206\001\n\010Location\022\020\n\004path\030\001 \003(\006B\002"
+    "\020\001\022\020\n\004span\030\002 \003(\006B\002\020\001\022\030\n\020leading_comments"
+    "\030\003 \001(\020\022\031\n\021trailing_comments\030\004 \001(\020\022!\n\031lea"
+    "ding_detached_comments\030\006 \003(\020\"\235\001\n\021Generat"
+    "edCodeInfo\0227\n\nannotation\030\001 \003(\0172#.shark.G"
+    "eneratedCodeInfo.Annotation\032O\n\nAnnotatio"
+    "n\022\020\n\004path\030\001 \003(\006B\002\020\001\022\023\n\013source_file\030\002 \001(\020"
+    "\022\r\n\005begin\030\003 \001(\006\022\013\n\003end\030\004 \001(\006*\377\001\n\022EnumUnd"
+    "erlyingType\022$\n ENUM_UNDERLYING_TYPE_UNSP"
+    "ECIFIED\020\000\022\035\n\031ENUM_UNDERLYING_TYPE_INT8\020\001"
+    "\022\036\n\032ENUM_UNDERLYING_TYPE_UINT8\020\002\022\036\n\032ENUM"
+    "_UNDERLYING_TYPE_INT16\020\003\022\037\n\033ENUM_UNDERLY"
+    "ING_TYPE_UINT16\020\004\022\036\n\032ENUM_UNDERLYING_TYP"
+    "E_INT32\020\005\022\037\n\033ENUM_UNDERLYING_TYPE_UINT32"
+    "\020\006\032\0028\005B4H\001Z-google.golang.org/protobuf/t"
+    "ypes/descriptorpb\370\001\001"
     ;
 static const ::_pbi::DescriptorTable* const descriptor_table_shark_2fdescriptor_2eshark_deps[1] = {
   &::descriptor_table_shark_2fmeta_2eshark,
 };
 static ::_pbi::once_flag descriptor_table_shark_2fdescriptor_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fdescriptor_2eshark = {
-    false, false, 5182, descriptor_table_protodef_shark_2fdescriptor_2eshark,
+    false, false, 5500, descriptor_table_protodef_shark_2fdescriptor_2eshark,
     "shark/descriptor.shark",
     &descriptor_table_shark_2fdescriptor_2eshark_once, descriptor_table_shark_2fdescriptor_2eshark_deps, 1, 27,
     schemas, file_default_instances, TableStruct_shark_2fdescriptor_2eshark::offsets,
@@ -3208,6 +3241,9 @@ class ExtensionRangeOptions::_Internal {
  public:
 };
 
+void ExtensionRangeOptions::clear_attributes() {
+    _impl_.attributes_.Clear();
+}
 ExtensionRangeOptions::ExtensionRangeOptions(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -3219,6 +3255,7 @@ ExtensionRangeOptions::ExtensionRangeOptions(const ExtensionRangeOptions& from)
     ExtensionRangeOptions* const _this = this; (void)_this;
     new (&_impl_) Impl_{
           /*decltype(_impl_._extensions_)*/{}
+        , decltype(_impl_.attributes_){from._impl_.attributes_}
         , decltype(_impl_.uninterpreted_option_){from._impl_.uninterpreted_option_}
         , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -3233,6 +3270,7 @@ inline void ExtensionRangeOptions::SharedCtor(
   (void)is_message_owned;
     new (&_impl_) Impl_{
           /*decltype(_impl_._extensions_)*/{::_pbi::ArenaInitialized(), arena}
+        , decltype(_impl_.attributes_){arena}
         , decltype(_impl_.uninterpreted_option_){arena}
         , /*decltype(_impl_._cached_size_)*/{}
     };
@@ -3250,6 +3288,7 @@ ExtensionRangeOptions::~ExtensionRangeOptions() {
 inline void ExtensionRangeOptions::SharedDtor() {
     GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
     _impl_._extensions_.~ExtensionSet();
+    _impl_.attributes_.~RepeatedPtrField();
     _impl_.uninterpreted_option_.~RepeatedPtrField();
 }
 
@@ -3264,6 +3303,7 @@ void ExtensionRangeOptions::Clear() {
     (void) cached_has_bits;
 
     _impl_._extensions_.Clear();
+    _impl_.attributes_.Clear();
     _impl_.uninterpreted_option_.Clear();
     _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -3274,6 +3314,19 @@ const char* ExtensionRangeOptions::_InternalParse(const char* ptr, ::_pbi::Parse
         uint32_t tag;
         ptr = ::_pbi::ReadTag(ptr, &tag);
         switch (::_pbi::field_number(tag)) {
+            // list<.shark.Option> attributes = 60;
+            case 60:
+                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 226)) {
+                    ptr -= 2;
+                    do {
+                      ptr += 2;
+                        ptr = ctx->ParseMessage(_internal_add_attributes(), ptr);
+                        CHK_(ptr);
+                      if (!ctx->DataAvailable(ptr)) break;
+                    } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<482>(ptr));
+                } else
+                  goto handle_unusual;
+                continue;
             // list<.shark.UninterpretedOption> uninterpreted_option = 999;
             case 999:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
@@ -3321,6 +3374,14 @@ uint8_t* ExtensionRangeOptions::_InternalSerialize(
     uint32_t cached_has_bits = 0;
     (void) cached_has_bits;
 
+    // list<.shark.Option> attributes = 60;
+    for (unsigned i = 0,
+        n = static_cast<unsigned>(this->_internal_attributes_size()); i < n; i++) {
+      const auto& repfield = this->_internal_attributes(i);
+      target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
+          InternalWriteMessage(60, repfield, repfield.GetCachedSize(), target, stream);
+    }
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     for (unsigned i = 0,
         n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
@@ -3351,6 +3412,13 @@ size_t ExtensionRangeOptions::ByteSizeLong() const {
     // Prevent compiler warnings about cached_has_bits being unused
     (void) cached_has_bits;
 
+    // list<.shark.Option> attributes = 60;
+    total_size += 2UL * this->_internal_attributes_size();
+    for (const auto& msg : this->_impl_.attributes_) {
+      total_size +=
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+    }
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     total_size += 2UL * this->_internal_uninterpreted_option_size();
     for (const auto& msg : this->_impl_.uninterpreted_option_) {
@@ -3376,6 +3444,7 @@ void ExtensionRangeOptions::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, con
     uint32_t cached_has_bits = 0;
     (void) cached_has_bits;
 
+    _this->_impl_.attributes_.MergeFrom(from._impl_.attributes_);
     _this->_impl_.uninterpreted_option_.MergeFrom(from._impl_.uninterpreted_option_);
     _this->_impl_._extensions_.MergeFrom(internal_default_instance(), from._impl_._extensions_);
     _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -3402,6 +3471,7 @@ void ExtensionRangeOptions::InternalSwap(ExtensionRangeOptions* other) {
     using std::swap;
     _impl_._extensions_.InternalSwap(&other->_impl_._extensions_);
     _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+    _impl_.attributes_.InternalSwap(&other->_impl_.attributes_);
     _impl_.uninterpreted_option_.InternalSwap(&other->_impl_.uninterpreted_option_);
 }
 
@@ -6092,6 +6162,9 @@ class FileOptions::_Internal {
     }
 };
 
+void FileOptions::clear_attributes() {
+    _impl_.attributes_.Clear();
+}
 FileOptions::FileOptions(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -6105,6 +6178,7 @@ FileOptions::FileOptions(const FileOptions& from)
           /*decltype(_impl_._extensions_)*/{}
         , decltype(_impl_._has_bits_){from._impl_._has_bits_}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){from._impl_.attributes_}
         , decltype(_impl_.uninterpreted_option_){from._impl_.uninterpreted_option_}
         , decltype(_impl_.go_package_){}
         , decltype(_impl_.cc_generic_services_){}
@@ -6137,6 +6211,7 @@ inline void FileOptions::SharedCtor(
           /*decltype(_impl_._extensions_)*/{::_pbi::ArenaInitialized(), arena}
         , decltype(_impl_._has_bits_){}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){arena}
         , decltype(_impl_.uninterpreted_option_){arena}
         , decltype(_impl_.go_package_){}
         , decltype(_impl_.cc_generic_services_){false}
@@ -6163,6 +6238,7 @@ FileOptions::~FileOptions() {
 inline void FileOptions::SharedDtor() {
     GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
     _impl_._extensions_.~ExtensionSet();
+    _impl_.attributes_.~RepeatedPtrField();
     _impl_.uninterpreted_option_.~RepeatedPtrField();
     _impl_.go_package_.Destroy();
 }
@@ -6178,6 +6254,7 @@ void FileOptions::Clear() {
     (void) cached_has_bits;
 
     _impl_._extensions_.Clear();
+    _impl_.attributes_.Clear();
     _impl_.uninterpreted_option_.Clear();
     cached_has_bits = _impl_._has_bits_[0];
     if (cached_has_bits & 0x00000001u) {
@@ -6259,6 +6336,19 @@ const char* FileOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
                     _Internal::set_has_cc_enable_arenas(&has_bits);
                     _impl_.cc_enable_arenas_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
+                } else
+                  goto handle_unusual;
+                continue;
+            // list<.shark.Option> attributes = 60;
+            case 60:
+                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 226)) {
+                    ptr -= 2;
+                    do {
+                      ptr += 2;
+                        ptr = ctx->ParseMessage(_internal_add_attributes(), ptr);
+                        CHK_(ptr);
+                      if (!ctx->DataAvailable(ptr)) break;
+                    } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<482>(ptr));
                 } else
                   goto handle_unusual;
                 continue;
@@ -6352,6 +6442,14 @@ uint8_t* FileOptions::_InternalSerialize(
         target = ::_pbi::WireFormatLite::WriteBoolToArray(31, this->_internal_cc_enable_arenas(), target);
     }
 
+    // list<.shark.Option> attributes = 60;
+    for (unsigned i = 0,
+        n = static_cast<unsigned>(this->_internal_attributes_size()); i < n; i++) {
+      const auto& repfield = this->_internal_attributes(i);
+      target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
+          InternalWriteMessage(60, repfield, repfield.GetCachedSize(), target, stream);
+    }
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     for (unsigned i = 0,
         n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
@@ -6381,6 +6479,13 @@ size_t FileOptions::ByteSizeLong() const {
     uint32_t cached_has_bits = 0;
     // Prevent compiler warnings about cached_has_bits being unused
     (void) cached_has_bits;
+
+    // list<.shark.Option> attributes = 60;
+    total_size += 2UL * this->_internal_attributes_size();
+    for (const auto& msg : this->_impl_.attributes_) {
+      total_size +=
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+    }
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     total_size += 2UL * this->_internal_uninterpreted_option_size();
@@ -6443,6 +6548,7 @@ void FileOptions::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK
     uint32_t cached_has_bits = 0;
     (void) cached_has_bits;
 
+    _this->_impl_.attributes_.MergeFrom(from._impl_.attributes_);
     _this->_impl_.uninterpreted_option_.MergeFrom(from._impl_.uninterpreted_option_);
     cached_has_bits = from._impl_._has_bits_[0];
     if (cached_has_bits & 0x0000003fu) {
@@ -6494,6 +6600,7 @@ void FileOptions::InternalSwap(FileOptions* other) {
     auto* rhs_arena = other->GetArenaForAllocation();
     _internal_metadata_.InternalSwap(&other->_internal_metadata_);
     swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+    _impl_.attributes_.InternalSwap(&other->_impl_.attributes_);
     _impl_.uninterpreted_option_.InternalSwap(&other->_impl_.uninterpreted_option_);
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
         &_impl_.go_package_, lhs_arena,
@@ -6534,6 +6641,9 @@ class MessageOptions::_Internal {
     }
 };
 
+void MessageOptions::clear_attributes() {
+    _impl_.attributes_.Clear();
+}
 MessageOptions::MessageOptions(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -6547,6 +6657,7 @@ MessageOptions::MessageOptions(const MessageOptions& from)
           /*decltype(_impl_._extensions_)*/{}
         , decltype(_impl_._has_bits_){from._impl_._has_bits_}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){from._impl_.attributes_}
         , decltype(_impl_.uninterpreted_option_){from._impl_.uninterpreted_option_}
         , decltype(_impl_.message_set_wire_format_){}
         , decltype(_impl_.no_standard_descriptor_accessor_){}
@@ -6569,6 +6680,7 @@ inline void MessageOptions::SharedCtor(
           /*decltype(_impl_._extensions_)*/{::_pbi::ArenaInitialized(), arena}
         , decltype(_impl_._has_bits_){}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){arena}
         , decltype(_impl_.uninterpreted_option_){arena}
         , decltype(_impl_.message_set_wire_format_){false}
         , decltype(_impl_.no_standard_descriptor_accessor_){false}
@@ -6589,6 +6701,7 @@ MessageOptions::~MessageOptions() {
 inline void MessageOptions::SharedDtor() {
     GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
     _impl_._extensions_.~ExtensionSet();
+    _impl_.attributes_.~RepeatedPtrField();
     _impl_.uninterpreted_option_.~RepeatedPtrField();
 }
 
@@ -6603,6 +6716,7 @@ void MessageOptions::Clear() {
     (void) cached_has_bits;
 
     _impl_._extensions_.Clear();
+    _impl_.attributes_.Clear();
     _impl_.uninterpreted_option_.Clear();
     ::memset(&_impl_.message_set_wire_format_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&_impl_.map_entry_) -
@@ -6651,6 +6765,19 @@ const char* MessageOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext
                     _Internal::set_has_map_entry(&has_bits);
                     _impl_.map_entry_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
+                } else
+                  goto handle_unusual;
+                continue;
+            // list<.shark.Option> attributes = 60;
+            case 60:
+                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 226)) {
+                    ptr -= 2;
+                    do {
+                      ptr += 2;
+                        ptr = ctx->ParseMessage(_internal_add_attributes(), ptr);
+                        CHK_(ptr);
+                      if (!ctx->DataAvailable(ptr)) break;
+                    } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<482>(ptr));
                 } else
                   goto handle_unusual;
                 continue;
@@ -6727,6 +6854,14 @@ uint8_t* MessageOptions::_InternalSerialize(
         target = ::_pbi::WireFormatLite::WriteBoolToArray(7, this->_internal_map_entry(), target);
     }
 
+    // list<.shark.Option> attributes = 60;
+    for (unsigned i = 0,
+        n = static_cast<unsigned>(this->_internal_attributes_size()); i < n; i++) {
+      const auto& repfield = this->_internal_attributes(i);
+      target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
+          InternalWriteMessage(60, repfield, repfield.GetCachedSize(), target, stream);
+    }
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     for (unsigned i = 0,
         n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
@@ -6756,6 +6891,13 @@ size_t MessageOptions::ByteSizeLong() const {
     uint32_t cached_has_bits = 0;
     // Prevent compiler warnings about cached_has_bits being unused
     (void) cached_has_bits;
+
+    // list<.shark.Option> attributes = 60;
+    total_size += 2UL * this->_internal_attributes_size();
+    for (const auto& msg : this->_impl_.attributes_) {
+      total_size +=
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+    }
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     total_size += 2UL * this->_internal_uninterpreted_option_size();
@@ -6805,6 +6947,7 @@ void MessageOptions::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SH
     uint32_t cached_has_bits = 0;
     (void) cached_has_bits;
 
+    _this->_impl_.attributes_.MergeFrom(from._impl_.attributes_);
     _this->_impl_.uninterpreted_option_.MergeFrom(from._impl_.uninterpreted_option_);
     cached_has_bits = from._impl_._has_bits_[0];
     if (cached_has_bits & 0x0000000fu) {
@@ -6848,6 +6991,7 @@ void MessageOptions::InternalSwap(MessageOptions* other) {
     _impl_._extensions_.InternalSwap(&other->_impl_._extensions_);
     _internal_metadata_.InternalSwap(&other->_internal_metadata_);
     swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+    _impl_.attributes_.InternalSwap(&other->_impl_.attributes_);
     _impl_.uninterpreted_option_.InternalSwap(&other->_impl_.uninterpreted_option_);
     ::SHARK_NAMESPACE_ID::internal::memswap<
         SHARK_FIELD_OFFSET(MessageOptions, _impl_.map_entry_)
@@ -6891,6 +7035,9 @@ class FieldOptions::_Internal {
     }
 };
 
+void FieldOptions::clear_attributes() {
+    _impl_.attributes_.Clear();
+}
 FieldOptions::FieldOptions(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -6904,6 +7051,7 @@ FieldOptions::FieldOptions(const FieldOptions& from)
           /*decltype(_impl_._extensions_)*/{}
         , decltype(_impl_._has_bits_){from._impl_._has_bits_}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){from._impl_.attributes_}
         , decltype(_impl_.uninterpreted_option_){from._impl_.uninterpreted_option_}
         , decltype(_impl_.ctype_){}
         , decltype(_impl_.jstype_){}
@@ -6929,6 +7077,7 @@ inline void FieldOptions::SharedCtor(
           /*decltype(_impl_._extensions_)*/{::_pbi::ArenaInitialized(), arena}
         , decltype(_impl_._has_bits_){}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){arena}
         , decltype(_impl_.uninterpreted_option_){arena}
         , decltype(_impl_.ctype_){0}
         , decltype(_impl_.jstype_){0}
@@ -6952,6 +7101,7 @@ FieldOptions::~FieldOptions() {
 inline void FieldOptions::SharedDtor() {
     GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
     _impl_._extensions_.~ExtensionSet();
+    _impl_.attributes_.~RepeatedPtrField();
     _impl_.uninterpreted_option_.~RepeatedPtrField();
 }
 
@@ -6966,6 +7116,7 @@ void FieldOptions::Clear() {
     (void) cached_has_bits;
 
     _impl_._extensions_.Clear();
+    _impl_.attributes_.Clear();
     _impl_.uninterpreted_option_.Clear();
     cached_has_bits = _impl_._has_bits_[0];
     if (cached_has_bits & 0x0000007fu) {
@@ -7052,6 +7203,19 @@ const char* FieldOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
                     _Internal::set_has_unverified_lazy(&has_bits);
                     _impl_.unverified_lazy_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
+                } else
+                  goto handle_unusual;
+                continue;
+            // list<.shark.Option> attributes = 20;
+            case 20:
+                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 162)) {
+                    ptr -= 2;
+                    do {
+                      ptr += 2;
+                        ptr = ctx->ParseMessage(_internal_add_attributes(), ptr);
+                        CHK_(ptr);
+                      if (!ctx->DataAvailable(ptr)) break;
+                    } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<162>(ptr));
                 } else
                   goto handle_unusual;
                 continue;
@@ -7148,6 +7312,14 @@ uint8_t* FieldOptions::_InternalSerialize(
         target = ::_pbi::WireFormatLite::WriteBoolToArray(15, this->_internal_unverified_lazy(), target);
     }
 
+    // list<.shark.Option> attributes = 20;
+    for (unsigned i = 0,
+        n = static_cast<unsigned>(this->_internal_attributes_size()); i < n; i++) {
+      const auto& repfield = this->_internal_attributes(i);
+      target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
+          InternalWriteMessage(20, repfield, repfield.GetCachedSize(), target, stream);
+    }
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     for (unsigned i = 0,
         n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
@@ -7177,6 +7349,13 @@ size_t FieldOptions::ByteSizeLong() const {
     uint32_t cached_has_bits = 0;
     // Prevent compiler warnings about cached_has_bits being unused
     (void) cached_has_bits;
+
+    // list<.shark.Option> attributes = 20;
+    total_size += 2UL * this->_internal_attributes_size();
+    for (const auto& msg : this->_impl_.attributes_) {
+      total_size +=
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+    }
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     total_size += 2UL * this->_internal_uninterpreted_option_size();
@@ -7243,6 +7422,7 @@ void FieldOptions::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHAR
     uint32_t cached_has_bits = 0;
     (void) cached_has_bits;
 
+    _this->_impl_.attributes_.MergeFrom(from._impl_.attributes_);
     _this->_impl_.uninterpreted_option_.MergeFrom(from._impl_.uninterpreted_option_);
     cached_has_bits = from._impl_._has_bits_[0];
     if (cached_has_bits & 0x0000007fu) {
@@ -7295,6 +7475,7 @@ void FieldOptions::InternalSwap(FieldOptions* other) {
     _impl_._extensions_.InternalSwap(&other->_impl_._extensions_);
     _internal_metadata_.InternalSwap(&other->_internal_metadata_);
     swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+    _impl_.attributes_.InternalSwap(&other->_impl_.attributes_);
     _impl_.uninterpreted_option_.InternalSwap(&other->_impl_.uninterpreted_option_);
     ::SHARK_NAMESPACE_ID::internal::memswap<
         SHARK_FIELD_OFFSET(FieldOptions, _impl_.weak_)
@@ -7316,6 +7497,9 @@ class OneofOptions::_Internal {
  public:
 };
 
+void OneofOptions::clear_attributes() {
+    _impl_.attributes_.Clear();
+}
 OneofOptions::OneofOptions(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -7327,6 +7511,7 @@ OneofOptions::OneofOptions(const OneofOptions& from)
     OneofOptions* const _this = this; (void)_this;
     new (&_impl_) Impl_{
           /*decltype(_impl_._extensions_)*/{}
+        , decltype(_impl_.attributes_){from._impl_.attributes_}
         , decltype(_impl_.uninterpreted_option_){from._impl_.uninterpreted_option_}
         , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -7341,6 +7526,7 @@ inline void OneofOptions::SharedCtor(
   (void)is_message_owned;
     new (&_impl_) Impl_{
           /*decltype(_impl_._extensions_)*/{::_pbi::ArenaInitialized(), arena}
+        , decltype(_impl_.attributes_){arena}
         , decltype(_impl_.uninterpreted_option_){arena}
         , /*decltype(_impl_._cached_size_)*/{}
     };
@@ -7358,6 +7544,7 @@ OneofOptions::~OneofOptions() {
 inline void OneofOptions::SharedDtor() {
     GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
     _impl_._extensions_.~ExtensionSet();
+    _impl_.attributes_.~RepeatedPtrField();
     _impl_.uninterpreted_option_.~RepeatedPtrField();
 }
 
@@ -7372,6 +7559,7 @@ void OneofOptions::Clear() {
     (void) cached_has_bits;
 
     _impl_._extensions_.Clear();
+    _impl_.attributes_.Clear();
     _impl_.uninterpreted_option_.Clear();
     _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -7382,6 +7570,19 @@ const char* OneofOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
         uint32_t tag;
         ptr = ::_pbi::ReadTag(ptr, &tag);
         switch (::_pbi::field_number(tag)) {
+            // list<.shark.Option> attributes = 60;
+            case 60:
+                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 226)) {
+                    ptr -= 2;
+                    do {
+                      ptr += 2;
+                        ptr = ctx->ParseMessage(_internal_add_attributes(), ptr);
+                        CHK_(ptr);
+                      if (!ctx->DataAvailable(ptr)) break;
+                    } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<482>(ptr));
+                } else
+                  goto handle_unusual;
+                continue;
             // list<.shark.UninterpretedOption> uninterpreted_option = 999;
             case 999:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
@@ -7429,6 +7630,14 @@ uint8_t* OneofOptions::_InternalSerialize(
     uint32_t cached_has_bits = 0;
     (void) cached_has_bits;
 
+    // list<.shark.Option> attributes = 60;
+    for (unsigned i = 0,
+        n = static_cast<unsigned>(this->_internal_attributes_size()); i < n; i++) {
+      const auto& repfield = this->_internal_attributes(i);
+      target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
+          InternalWriteMessage(60, repfield, repfield.GetCachedSize(), target, stream);
+    }
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     for (unsigned i = 0,
         n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
@@ -7459,6 +7668,13 @@ size_t OneofOptions::ByteSizeLong() const {
     // Prevent compiler warnings about cached_has_bits being unused
     (void) cached_has_bits;
 
+    // list<.shark.Option> attributes = 60;
+    total_size += 2UL * this->_internal_attributes_size();
+    for (const auto& msg : this->_impl_.attributes_) {
+      total_size +=
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+    }
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     total_size += 2UL * this->_internal_uninterpreted_option_size();
     for (const auto& msg : this->_impl_.uninterpreted_option_) {
@@ -7484,6 +7700,7 @@ void OneofOptions::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHAR
     uint32_t cached_has_bits = 0;
     (void) cached_has_bits;
 
+    _this->_impl_.attributes_.MergeFrom(from._impl_.attributes_);
     _this->_impl_.uninterpreted_option_.MergeFrom(from._impl_.uninterpreted_option_);
     _this->_impl_._extensions_.MergeFrom(internal_default_instance(), from._impl_._extensions_);
     _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -7510,6 +7727,7 @@ void OneofOptions::InternalSwap(OneofOptions* other) {
     using std::swap;
     _impl_._extensions_.InternalSwap(&other->_impl_._extensions_);
     _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+    _impl_.attributes_.InternalSwap(&other->_impl_.attributes_);
     _impl_.uninterpreted_option_.InternalSwap(&other->_impl_.uninterpreted_option_);
 }
 
@@ -7538,6 +7756,9 @@ class EnumOptions::_Internal {
     }
 };
 
+void EnumOptions::clear_attributes() {
+    _impl_.attributes_.Clear();
+}
 EnumOptions::EnumOptions(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -7551,6 +7772,7 @@ EnumOptions::EnumOptions(const EnumOptions& from)
           /*decltype(_impl_._extensions_)*/{}
         , decltype(_impl_._has_bits_){from._impl_._has_bits_}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){from._impl_.attributes_}
         , decltype(_impl_.uninterpreted_option_){from._impl_.uninterpreted_option_}
         , decltype(_impl_.allow_alias_){}
         , decltype(_impl_.deprecated_){}
@@ -7573,6 +7795,7 @@ inline void EnumOptions::SharedCtor(
           /*decltype(_impl_._extensions_)*/{::_pbi::ArenaInitialized(), arena}
         , decltype(_impl_._has_bits_){}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){arena}
         , decltype(_impl_.uninterpreted_option_){arena}
         , decltype(_impl_.allow_alias_){false}
         , decltype(_impl_.deprecated_){false}
@@ -7593,6 +7816,7 @@ EnumOptions::~EnumOptions() {
 inline void EnumOptions::SharedDtor() {
     GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
     _impl_._extensions_.~ExtensionSet();
+    _impl_.attributes_.~RepeatedPtrField();
     _impl_.uninterpreted_option_.~RepeatedPtrField();
 }
 
@@ -7607,6 +7831,7 @@ void EnumOptions::Clear() {
     (void) cached_has_bits;
 
     _impl_._extensions_.Clear();
+    _impl_.attributes_.Clear();
     _impl_.uninterpreted_option_.Clear();
     cached_has_bits = _impl_._has_bits_[0];
     if (cached_has_bits & 0x0000000fu) {
@@ -7662,6 +7887,19 @@ const char* EnumOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(7, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
                     }
+                } else
+                  goto handle_unusual;
+                continue;
+            // list<.shark.Option> attributes = 60;
+            case 60:
+                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 226)) {
+                    ptr -= 2;
+                    do {
+                      ptr += 2;
+                        ptr = ctx->ParseMessage(_internal_add_attributes(), ptr);
+                        CHK_(ptr);
+                      if (!ctx->DataAvailable(ptr)) break;
+                    } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<482>(ptr));
                 } else
                   goto handle_unusual;
                 continue;
@@ -7739,6 +7977,14 @@ uint8_t* EnumOptions::_InternalSerialize(
           7, this->_impl_.underlying_type_, target);
     }
 
+    // list<.shark.Option> attributes = 60;
+    for (unsigned i = 0,
+        n = static_cast<unsigned>(this->_internal_attributes_size()); i < n; i++) {
+      const auto& repfield = this->_internal_attributes(i);
+      target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
+          InternalWriteMessage(60, repfield, repfield.GetCachedSize(), target, stream);
+    }
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     for (unsigned i = 0,
         n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
@@ -7768,6 +8014,13 @@ size_t EnumOptions::ByteSizeLong() const {
     uint32_t cached_has_bits = 0;
     // Prevent compiler warnings about cached_has_bits being unused
     (void) cached_has_bits;
+
+    // list<.shark.Option> attributes = 60;
+    total_size += 2UL * this->_internal_attributes_size();
+    for (const auto& msg : this->_impl_.attributes_) {
+      total_size +=
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+    }
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     total_size += 2UL * this->_internal_uninterpreted_option_size();
@@ -7818,6 +8071,7 @@ void EnumOptions::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK
     uint32_t cached_has_bits = 0;
     (void) cached_has_bits;
 
+    _this->_impl_.attributes_.MergeFrom(from._impl_.attributes_);
     _this->_impl_.uninterpreted_option_.MergeFrom(from._impl_.uninterpreted_option_);
     cached_has_bits = from._impl_._has_bits_[0];
     if (cached_has_bits & 0x0000000fu) {
@@ -7861,6 +8115,7 @@ void EnumOptions::InternalSwap(EnumOptions* other) {
     _impl_._extensions_.InternalSwap(&other->_impl_._extensions_);
     _internal_metadata_.InternalSwap(&other->_internal_metadata_);
     swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+    _impl_.attributes_.InternalSwap(&other->_impl_.attributes_);
     _impl_.uninterpreted_option_.InternalSwap(&other->_impl_.uninterpreted_option_);
     ::SHARK_NAMESPACE_ID::internal::memswap<
         SHARK_FIELD_OFFSET(EnumOptions, _impl_.underlying_type_)
@@ -7886,6 +8141,9 @@ class EnumValueOptions::_Internal {
     }
 };
 
+void EnumValueOptions::clear_attributes() {
+    _impl_.attributes_.Clear();
+}
 EnumValueOptions::EnumValueOptions(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -7899,6 +8157,7 @@ EnumValueOptions::EnumValueOptions(const EnumValueOptions& from)
           /*decltype(_impl_._extensions_)*/{}
         , decltype(_impl_._has_bits_){from._impl_._has_bits_}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){from._impl_.attributes_}
         , decltype(_impl_.uninterpreted_option_){from._impl_.uninterpreted_option_}
         , decltype(_impl_.deprecated_){}};
 
@@ -7916,6 +8175,7 @@ inline void EnumValueOptions::SharedCtor(
           /*decltype(_impl_._extensions_)*/{::_pbi::ArenaInitialized(), arena}
         , decltype(_impl_._has_bits_){}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){arena}
         , decltype(_impl_.uninterpreted_option_){arena}
         , decltype(_impl_.deprecated_){false}
     };
@@ -7933,6 +8193,7 @@ EnumValueOptions::~EnumValueOptions() {
 inline void EnumValueOptions::SharedDtor() {
     GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
     _impl_._extensions_.~ExtensionSet();
+    _impl_.attributes_.~RepeatedPtrField();
     _impl_.uninterpreted_option_.~RepeatedPtrField();
 }
 
@@ -7947,6 +8208,7 @@ void EnumValueOptions::Clear() {
     (void) cached_has_bits;
 
     _impl_._extensions_.Clear();
+    _impl_.attributes_.Clear();
     _impl_.uninterpreted_option_.Clear();
     _impl_.deprecated_ = false;
     _impl_._has_bits_.Clear();
@@ -7966,6 +8228,19 @@ const char* EnumValueOptions::_InternalParse(const char* ptr, ::_pbi::ParseConte
                     _Internal::set_has_deprecated(&has_bits);
                     _impl_.deprecated_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
+                } else
+                  goto handle_unusual;
+                continue;
+            // list<.shark.Option> attributes = 60;
+            case 60:
+                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 226)) {
+                    ptr -= 2;
+                    do {
+                      ptr += 2;
+                        ptr = ctx->ParseMessage(_internal_add_attributes(), ptr);
+                        CHK_(ptr);
+                      if (!ctx->DataAvailable(ptr)) break;
+                    } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<482>(ptr));
                 } else
                   goto handle_unusual;
                 continue;
@@ -8024,6 +8299,14 @@ uint8_t* EnumValueOptions::_InternalSerialize(
         target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_deprecated(), target);
     }
 
+    // list<.shark.Option> attributes = 60;
+    for (unsigned i = 0,
+        n = static_cast<unsigned>(this->_internal_attributes_size()); i < n; i++) {
+      const auto& repfield = this->_internal_attributes(i);
+      target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
+          InternalWriteMessage(60, repfield, repfield.GetCachedSize(), target, stream);
+    }
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     for (unsigned i = 0,
         n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
@@ -8053,6 +8336,13 @@ size_t EnumValueOptions::ByteSizeLong() const {
     uint32_t cached_has_bits = 0;
     // Prevent compiler warnings about cached_has_bits being unused
     (void) cached_has_bits;
+
+    // list<.shark.Option> attributes = 60;
+    total_size += 2UL * this->_internal_attributes_size();
+    for (const auto& msg : this->_impl_.attributes_) {
+      total_size +=
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+    }
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     total_size += 2UL * this->_internal_uninterpreted_option_size();
@@ -8085,6 +8375,7 @@ void EnumValueOptions::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::
     uint32_t cached_has_bits = 0;
     (void) cached_has_bits;
 
+    _this->_impl_.attributes_.MergeFrom(from._impl_.attributes_);
     _this->_impl_.uninterpreted_option_.MergeFrom(from._impl_.uninterpreted_option_);
     if (from._internal_has_deprecated()) {
         _this->_internal_set_deprecated(from._internal_deprecated());
@@ -8115,6 +8406,7 @@ void EnumValueOptions::InternalSwap(EnumValueOptions* other) {
     _impl_._extensions_.InternalSwap(&other->_impl_._extensions_);
     _internal_metadata_.InternalSwap(&other->_internal_metadata_);
     swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+    _impl_.attributes_.InternalSwap(&other->_impl_.attributes_);
     _impl_.uninterpreted_option_.InternalSwap(&other->_impl_.uninterpreted_option_);
     swap(_impl_.deprecated_, other->_impl_.deprecated_);
 }
@@ -8135,6 +8427,9 @@ class ServiceOptions::_Internal {
     }
 };
 
+void ServiceOptions::clear_attributes() {
+    _impl_.attributes_.Clear();
+}
 ServiceOptions::ServiceOptions(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -8148,6 +8443,7 @@ ServiceOptions::ServiceOptions(const ServiceOptions& from)
           /*decltype(_impl_._extensions_)*/{}
         , decltype(_impl_._has_bits_){from._impl_._has_bits_}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){from._impl_.attributes_}
         , decltype(_impl_.uninterpreted_option_){from._impl_.uninterpreted_option_}
         , decltype(_impl_.deprecated_){}};
 
@@ -8165,6 +8461,7 @@ inline void ServiceOptions::SharedCtor(
           /*decltype(_impl_._extensions_)*/{::_pbi::ArenaInitialized(), arena}
         , decltype(_impl_._has_bits_){}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){arena}
         , decltype(_impl_.uninterpreted_option_){arena}
         , decltype(_impl_.deprecated_){false}
     };
@@ -8182,6 +8479,7 @@ ServiceOptions::~ServiceOptions() {
 inline void ServiceOptions::SharedDtor() {
     GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
     _impl_._extensions_.~ExtensionSet();
+    _impl_.attributes_.~RepeatedPtrField();
     _impl_.uninterpreted_option_.~RepeatedPtrField();
 }
 
@@ -8196,6 +8494,7 @@ void ServiceOptions::Clear() {
     (void) cached_has_bits;
 
     _impl_._extensions_.Clear();
+    _impl_.attributes_.Clear();
     _impl_.uninterpreted_option_.Clear();
     _impl_.deprecated_ = false;
     _impl_._has_bits_.Clear();
@@ -8215,6 +8514,19 @@ const char* ServiceOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext
                     _Internal::set_has_deprecated(&has_bits);
                     _impl_.deprecated_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
+                } else
+                  goto handle_unusual;
+                continue;
+            // list<.shark.Option> attributes = 60;
+            case 60:
+                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 226)) {
+                    ptr -= 2;
+                    do {
+                      ptr += 2;
+                        ptr = ctx->ParseMessage(_internal_add_attributes(), ptr);
+                        CHK_(ptr);
+                      if (!ctx->DataAvailable(ptr)) break;
+                    } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<482>(ptr));
                 } else
                   goto handle_unusual;
                 continue;
@@ -8273,6 +8585,14 @@ uint8_t* ServiceOptions::_InternalSerialize(
         target = ::_pbi::WireFormatLite::WriteBoolToArray(33, this->_internal_deprecated(), target);
     }
 
+    // list<.shark.Option> attributes = 60;
+    for (unsigned i = 0,
+        n = static_cast<unsigned>(this->_internal_attributes_size()); i < n; i++) {
+      const auto& repfield = this->_internal_attributes(i);
+      target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
+          InternalWriteMessage(60, repfield, repfield.GetCachedSize(), target, stream);
+    }
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     for (unsigned i = 0,
         n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
@@ -8302,6 +8622,13 @@ size_t ServiceOptions::ByteSizeLong() const {
     uint32_t cached_has_bits = 0;
     // Prevent compiler warnings about cached_has_bits being unused
     (void) cached_has_bits;
+
+    // list<.shark.Option> attributes = 60;
+    total_size += 2UL * this->_internal_attributes_size();
+    for (const auto& msg : this->_impl_.attributes_) {
+      total_size +=
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+    }
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     total_size += 2UL * this->_internal_uninterpreted_option_size();
@@ -8334,6 +8661,7 @@ void ServiceOptions::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SH
     uint32_t cached_has_bits = 0;
     (void) cached_has_bits;
 
+    _this->_impl_.attributes_.MergeFrom(from._impl_.attributes_);
     _this->_impl_.uninterpreted_option_.MergeFrom(from._impl_.uninterpreted_option_);
     if (from._internal_has_deprecated()) {
         _this->_internal_set_deprecated(from._internal_deprecated());
@@ -8364,6 +8692,7 @@ void ServiceOptions::InternalSwap(ServiceOptions* other) {
     _impl_._extensions_.InternalSwap(&other->_impl_._extensions_);
     _internal_metadata_.InternalSwap(&other->_internal_metadata_);
     swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+    _impl_.attributes_.InternalSwap(&other->_impl_.attributes_);
     _impl_.uninterpreted_option_.InternalSwap(&other->_impl_.uninterpreted_option_);
     swap(_impl_.deprecated_, other->_impl_.deprecated_);
 }
@@ -8387,6 +8716,9 @@ class MethodOptions::_Internal {
     }
 };
 
+void MethodOptions::clear_attributes() {
+    _impl_.attributes_.Clear();
+}
 MethodOptions::MethodOptions(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -8400,6 +8732,7 @@ MethodOptions::MethodOptions(const MethodOptions& from)
           /*decltype(_impl_._extensions_)*/{}
         , decltype(_impl_._has_bits_){from._impl_._has_bits_}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){from._impl_.attributes_}
         , decltype(_impl_.uninterpreted_option_){from._impl_.uninterpreted_option_}
         , decltype(_impl_.deprecated_){}
         , decltype(_impl_.idempotency_level_){}};
@@ -8420,6 +8753,7 @@ inline void MethodOptions::SharedCtor(
           /*decltype(_impl_._extensions_)*/{::_pbi::ArenaInitialized(), arena}
         , decltype(_impl_._has_bits_){}
         , /*decltype(_impl_._cached_size_)*/{}
+        , decltype(_impl_.attributes_){arena}
         , decltype(_impl_.uninterpreted_option_){arena}
         , decltype(_impl_.deprecated_){false}
         , decltype(_impl_.idempotency_level_){0}
@@ -8438,6 +8772,7 @@ MethodOptions::~MethodOptions() {
 inline void MethodOptions::SharedDtor() {
     GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
     _impl_._extensions_.~ExtensionSet();
+    _impl_.attributes_.~RepeatedPtrField();
     _impl_.uninterpreted_option_.~RepeatedPtrField();
 }
 
@@ -8452,6 +8787,7 @@ void MethodOptions::Clear() {
     (void) cached_has_bits;
 
     _impl_._extensions_.Clear();
+    _impl_.attributes_.Clear();
     _impl_.uninterpreted_option_.Clear();
     cached_has_bits = _impl_._has_bits_[0];
     if (cached_has_bits & 0x00000003u) {
@@ -8489,6 +8825,19 @@ const char* MethodOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext*
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(34, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
                     }
+                } else
+                  goto handle_unusual;
+                continue;
+            // list<.shark.Option> attributes = 60;
+            case 60:
+                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 226)) {
+                    ptr -= 2;
+                    do {
+                      ptr += 2;
+                        ptr = ctx->ParseMessage(_internal_add_attributes(), ptr);
+                        CHK_(ptr);
+                      if (!ctx->DataAvailable(ptr)) break;
+                    } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<482>(ptr));
                 } else
                   goto handle_unusual;
                 continue;
@@ -8554,6 +8903,14 @@ uint8_t* MethodOptions::_InternalSerialize(
           34, this->_impl_.idempotency_level_, target);
     }
 
+    // list<.shark.Option> attributes = 60;
+    for (unsigned i = 0,
+        n = static_cast<unsigned>(this->_internal_attributes_size()); i < n; i++) {
+      const auto& repfield = this->_internal_attributes(i);
+      target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
+          InternalWriteMessage(60, repfield, repfield.GetCachedSize(), target, stream);
+    }
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     for (unsigned i = 0,
         n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
@@ -8583,6 +8940,13 @@ size_t MethodOptions::ByteSizeLong() const {
     uint32_t cached_has_bits = 0;
     // Prevent compiler warnings about cached_has_bits being unused
     (void) cached_has_bits;
+
+    // list<.shark.Option> attributes = 60;
+    total_size += 2UL * this->_internal_attributes_size();
+    for (const auto& msg : this->_impl_.attributes_) {
+      total_size +=
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+    }
 
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     total_size += 2UL * this->_internal_uninterpreted_option_size();
@@ -8623,6 +8987,7 @@ void MethodOptions::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHA
     uint32_t cached_has_bits = 0;
     (void) cached_has_bits;
 
+    _this->_impl_.attributes_.MergeFrom(from._impl_.attributes_);
     _this->_impl_.uninterpreted_option_.MergeFrom(from._impl_.uninterpreted_option_);
     cached_has_bits = from._impl_._has_bits_[0];
     if (cached_has_bits & 0x00000003u) {
@@ -8660,6 +9025,7 @@ void MethodOptions::InternalSwap(MethodOptions* other) {
     _impl_._extensions_.InternalSwap(&other->_impl_._extensions_);
     _internal_metadata_.InternalSwap(&other->_internal_metadata_);
     swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+    _impl_.attributes_.InternalSwap(&other->_impl_.attributes_);
     _impl_.uninterpreted_option_.InternalSwap(&other->_impl_.uninterpreted_option_);
     ::SHARK_NAMESPACE_ID::internal::memswap<
         SHARK_FIELD_OFFSET(MethodOptions, _impl_.idempotency_level_)
