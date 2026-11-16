@@ -42,7 +42,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>
@@ -161,7 +161,7 @@ class TestErrorCollector : public ErrorCollector {
 
   // implements ErrorCollector ---------------------------------------
   void AddError(int line, int column, const std::string& message) {
-    strings::SubstituteAndAppend(&text_, "$0:$1: $2\n", line, column, message);
+    turbo::substitute_and_append(&text_, "$0:$1: $2\n", line, column, message);
   }
 };
 

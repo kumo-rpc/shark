@@ -54,7 +54,7 @@ namespace shark {
         std::vector<std::string> all_options;
         if (RetrieveOptions(depth, options, pool, &all_options)) {
             for (const std::string& option : all_options) {
-                strings::SubstituteAndAppend(output, "$0option $1;\n", prefix, option);
+                turbo::substitute_and_append(output, "$0option $1;\n", prefix, option);
             }
         }
         return !all_options.empty();

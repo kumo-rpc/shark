@@ -95,7 +95,7 @@ namespace shark {
             // Note:  We want to avoid depending on strutil in the lite library, otherwise
             //   we'd use:
             //
-            // return strings::Substitute(
+            // return turbo::substitute(
             //   "Can't $0 message of type \"$1\" because it is missing required "
             //   "fields: $2",
             //   action, message.GetTypeName(),

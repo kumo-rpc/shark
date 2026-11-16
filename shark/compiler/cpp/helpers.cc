@@ -57,7 +57,7 @@
 #include <shark/stubs/hash.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <turbo/strings/ascii.h>
 
 // Must be last.
@@ -826,7 +826,7 @@ namespace shark::compiler::cpp {
         case SharkFieldCppType::CPPTYPE_ENUM:
             // Lazy:  Generate a static_cast because we don't have a helper function
             //   that constructs the full name of an enum value.
-            return strings::Substitute(
+            return turbo::substitute(
                 "static_cast< $0 >($1)", ClassName(field->enum_type(), true),
                 Int32ToString(field->default_value_enum()->number()));
         case SharkFieldCppType::CPPTYPE_STRING:

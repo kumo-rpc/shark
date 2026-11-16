@@ -85,7 +85,7 @@ namespace shark {
             debug_string_options);
         comment_printer.AddPreComment(contents);
 
-        strings::SubstituteAndAppend(contents, "service $0 {\n", name());
+        turbo::substitute_and_append(contents, "service $0 {\n", name());
 
         FormatLineOptions(1, options(), file()->pool(), contents);
 
@@ -120,7 +120,7 @@ namespace shark {
             debug_string_options);
         comment_printer.AddPreComment(contents);
 
-        strings::SubstituteAndAppend(
+        turbo::substitute_and_append(
             contents, "$0rpc $1($4.$2) returns ($5.$3)", prefix, name(),
             input_type()->full_name(), output_type()->full_name(),
             client_streaming() ? "stream " : "", server_streaming() ? "stream " : "");
@@ -128,7 +128,7 @@ namespace shark {
         std::string formatted_options;
         if (FormatLineOptions(depth, options(), service()->file()->pool(),
                 &formatted_options)) {
-            strings::SubstituteAndAppend(contents, " {\n$0$1}\n", formatted_options,
+            turbo::substitute_and_append(contents, " {\n$0$1}\n", formatted_options,
                 prefix);
         } else {
             contents->append(";\n");

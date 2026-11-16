@@ -46,7 +46,7 @@
 #include <shark/descriptor.h>
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/strutil.h>
 
@@ -72,13 +72,13 @@ class MockErrorCollector : public MultiFileErrorCollector {
   // implements ErrorCollector ---------------------------------------
   void AddError(const std::string& filename, int line, int column,
                 const std::string& message) override {
-    strings::SubstituteAndAppend(&text_, "$0:$1:$2: $3\n", filename, line, column,
+    turbo::substitute_and_append(&text_, "$0:$1:$2: $3\n", filename, line, column,
                               message);
   }
 
   void AddWarning(const std::string& filename, int line, int column,
                   const std::string& message) override {
-    strings::SubstituteAndAppend(&warning_text_, "$0:$1:$2: $3\n", filename, line,
+    turbo::substitute_and_append(&warning_text_, "$0:$1:$2: $3\n", filename, line,
                               column, message);
   }
 };

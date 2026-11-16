@@ -36,7 +36,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <turbo/strings/ascii.h>
 
 #include <tests/common/googletest.h>
@@ -82,7 +82,7 @@ std::vector<std::string> captured_messages_;
 void CaptureLog(LogLevel level, const char* filename, int line,
                 const std::string& message) {
   captured_messages_.push_back(
-    strings::Substitute("$0 $1:$2: $3",
+    turbo::substitute("$0 $1:$2: $3",
       implicit_cast<int>(level), filename, line, message));
 }
 

@@ -48,7 +48,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <shark/types/any.skp.h>
 #include <tests/sk/format/wire/unittest_mset_wire_format.skp.h>
 #include <tests/common/test_util.h>
@@ -580,7 +580,7 @@ namespace shark {
                 TextFormat::BaseTextGenerator* generator) const override {
                 if (message.ByteSizeLong() > 0) {
                     generator->PrintString(
-                        strings::Substitute("# REDACTED, $0 bytes\n", message.ByteSizeLong()));
+                        turbo::substitute("# REDACTED, $0 bytes\n", message.ByteSizeLong()));
                 }
                 return true;
             }
@@ -806,7 +806,7 @@ namespace shark {
 
         TEST_F(TextFormatTest, ParseEnumFieldFromNumber) {
             // Create a parse string with a numerical value for an enum field.
-            std::string parse_string = strings::Substitute("optional_nested_enum: $0",
+            std::string parse_string = turbo::substitute("optional_nested_enum: $0",
                 static_cast<int>(unittest::TestAllTypes_NestedEnum::BAZ));
             EXPECT_TRUE(TextFormat::ParseFromString(parse_string, &proto_));
             EXPECT_TRUE(proto_.has_optional_nested_enum());
@@ -815,7 +815,7 @@ namespace shark {
 
         TEST_F(TextFormatTest, ParseEnumFieldFromNegativeNumber) {
             ASSERT_LT(unittest::TestSparseEnum::SPARSE_E, 0);
-            std::string parse_string = strings::Substitute("sparse_enum: $0",
+            std::string parse_string = turbo::substitute("sparse_enum: $0",
                 static_cast<int>(unittest::TestSparseEnum::SPARSE_E));
             unittest::SparseEnumMessage proto;
             EXPECT_TRUE(TextFormat::ParseFromString(parse_string, &proto));
@@ -1377,7 +1377,7 @@ namespace shark {
 
                 // implements ErrorCollector -------------------------------------
                 void AddError(int line, int column, const std::string& message) override {
-                    strings::SubstituteAndAppend(&text_, "$0:$1: $2\n", line + 1, column + 1,
+                    turbo::substitute_and_append(&text_, "$0:$1: $2\n", line + 1, column + 1,
                         message);
                 }
 
@@ -1824,12 +1824,12 @@ namespace shark {
             const char* format = "child: { $0 }";
             std::string input;
             for (int i = 0; i < 100; ++i)
-                input = strings::Substitute(format, input);
+                input = turbo::substitute(format, input);
 
             unittest::NestedTestAllTypes message;
             ExpectSuccessAndTree(input, &message, nullptr);
 
-            input = strings::Substitute(format, input);
+            input = turbo::substitute(format, input);
             parser_.SetRecursionLimit(100);
             ExpectMessage(input,
                 "Message is too deep, the parser exceeded the configured "
@@ -1844,7 +1844,7 @@ namespace shark {
             const char* format = "[$0]";
             std::string input = "\"test_value\"";
             for (int i = 0; i < 99; ++i)
-                input = strings::Substitute(format, input);
+                input = turbo::substitute(format, input);
             std::string not_deep_input = StrCat("unknown_nested_array: ", input);
 
             parser_.AllowUnknownField(true);
@@ -1853,7 +1853,7 @@ namespace shark {
             unittest::NestedTestAllTypes message;
             ExpectSuccessAndTree(not_deep_input, &message, nullptr);
 
-            input = strings::Substitute(format, input);
+            input = turbo::substitute(format, input);
             std::string deep_input = StrCat("unknown_nested_array: ", input);
             ExpectMessage(
                 deep_input,
@@ -1870,7 +1870,7 @@ namespace shark {
             const char* format = "unknown_child: { $0 }";
             std::string input;
             for (int i = 0; i < 100; ++i)
-                input = strings::Substitute(format, input);
+                input = turbo::substitute(format, input);
 
             parser_.AllowUnknownField(true);
             parser_.SetRecursionLimit(100);
@@ -1878,7 +1878,7 @@ namespace shark {
             unittest::NestedTestAllTypes message;
             ExpectSuccessAndTree(input, &message, nullptr);
 
-            input = strings::Substitute(format, input);
+            input = turbo::substitute(format, input);
             ExpectMessage(
                 input,
                 "WARNING:Message type \"sharkbuf_unittest.NestedTestAllTypes\" has no "

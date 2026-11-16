@@ -238,7 +238,7 @@ namespace shark {
         comment_printer.AddPreComment(contents);
 
         if (include_opening_clause) {
-            strings::SubstituteAndAppend(contents, "$0struct $1", prefix, name());
+            turbo::substitute_and_append(contents, "$0struct $1", prefix, name());
         }
         contents->append(" {\n");
 
@@ -262,7 +262,7 @@ namespace shark {
         }
 
         for (int i = 0; i < extension_range_count(); i++) {
-            strings::SubstituteAndAppend(contents, "$0  extensions $1 to $2;\n", prefix,
+            turbo::substitute_and_append(contents, "$0  extensions $1 to $2;\n", prefix,
                 extension_range(i)->start,
                 extension_range(i)->end - 1);
         }
@@ -272,26 +272,26 @@ namespace shark {
         for (int i = 0; i < extension_count(); i++) {
             if (extension(i)->containing_type() != containing_type) {
                 if (i > 0)
-                    strings::SubstituteAndAppend(contents, "$0  }\n", prefix);
+                    turbo::substitute_and_append(contents, "$0  }\n", prefix);
                 containing_type = extension(i)->containing_type();
-                strings::SubstituteAndAppend(contents, "$0  extend .$1 {\n", prefix,
+                turbo::substitute_and_append(contents, "$0  extend .$1 {\n", prefix,
                     containing_type->full_name());
             }
             extension(i)->DebugString(depth + 1, contents, debug_string_options);
         }
         if (extension_count() > 0)
-            strings::SubstituteAndAppend(contents, "$0  }\n", prefix);
+            turbo::substitute_and_append(contents, "$0  }\n", prefix);
 
         if (reserved_range_count() > 0) {
-            strings::SubstituteAndAppend(contents, "$0  reserved ", prefix);
+            turbo::substitute_and_append(contents, "$0  reserved ", prefix);
             for (int i = 0; i < reserved_range_count(); i++) {
                 const Descriptor::ReservedRange* range = reserved_range(i);
                 if (range->end == range->start + 1) {
-                    strings::SubstituteAndAppend(contents, "$0, ", range->start);
+                    turbo::substitute_and_append(contents, "$0, ", range->start);
                 } else if (range->end > FieldDescriptor::kMaxNumber) {
-                    strings::SubstituteAndAppend(contents, "$0 to max, ", range->start);
+                    turbo::substitute_and_append(contents, "$0 to max, ", range->start);
                 } else {
-                    strings::SubstituteAndAppend(contents, "$0 to $1, ", range->start,
+                    turbo::substitute_and_append(contents, "$0 to $1, ", range->start,
                         range->end - 1);
                 }
             }
@@ -299,15 +299,15 @@ namespace shark {
         }
 
         if (reserved_name_count() > 0) {
-            strings::SubstituteAndAppend(contents, "$0  reserved ", prefix);
+            turbo::substitute_and_append(contents, "$0  reserved ", prefix);
             for (int i = 0; i < reserved_name_count(); i++) {
-                strings::SubstituteAndAppend(contents, "\"$0\", ",
+                turbo::substitute_and_append(contents, "\"$0\", ",
                     CEscape(reserved_name(i)));
             }
             contents->replace(contents->size() - 2, 2, ";\n");
         }
 
-        strings::SubstituteAndAppend(contents, "$0}\n", prefix);
+        turbo::substitute_and_append(contents, "$0}\n", prefix);
         comment_printer.AddPostComment(contents);
     }
 

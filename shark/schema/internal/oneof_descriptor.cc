@@ -51,7 +51,7 @@ namespace shark {
         SourceLocationCommentPrinter comment_printer(this, prefix,
             debug_string_options);
         comment_printer.AddPreComment(contents);
-        strings::SubstituteAndAppend(contents, "$0union $1 {", prefix, name());
+        turbo::substitute_and_append(contents, "$0union $1 {", prefix, name());
 
         FormatLineOptions(depth, options(), containing_type()->file()->pool(),
             contents);
@@ -63,7 +63,7 @@ namespace shark {
             for (int i = 0; i < field_count(); i++) {
                 field(i)->DebugString(depth, contents, debug_string_options);
             }
-            strings::SubstituteAndAppend(contents, "$0}\n", prefix);
+            turbo::substitute_and_append(contents, "$0}\n", prefix);
         }
         comment_printer.AddPostComment(contents);
     }

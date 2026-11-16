@@ -59,7 +59,7 @@
 #include <shark/stubs/hash.h>
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <shark/types/map_entry_lite.h>
 
 // Must be included last.
@@ -513,7 +513,7 @@ namespace shark {
                     if (options.field_listener_options.forbidden_field_listener_events.count(
                             std::string(annotation_name)))
                         return;
-                    (*variables)[StrCat("annotate_", annotation_name)] = strings::Substitute(
+                    (*variables)[StrCat("annotate_", annotation_name)] = turbo::substitute(
                         StrCat(injector_template_prefix, injector_template_suffix),
                         (*variables)["classtype"]);
                 }

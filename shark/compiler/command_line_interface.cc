@@ -82,7 +82,7 @@
 #include <shark/stubs/stl_util.h>
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <shark/format/text/text_format.h>
 
 // Must be included last.
@@ -806,7 +806,7 @@ namespace shark {
                 std::string* target = &it->second;
 
                 // Find the insertion point.
-                std::string magic_string = strings::Substitute("@@protoc_insertion_point($0)", insertion_point_);
+                std::string magic_string = turbo::substitute("@@protoc_insertion_point($0)", insertion_point_);
                 std::string::size_type pos = target->find(magic_string);
 
                 if (pos == std::string::npos) {
@@ -2252,7 +2252,7 @@ Parse PROTO_FILES and generate output based on the options given:
 
             std::string communicate_error;
             if (!subprocess.Communicate(request, &response, &communicate_error)) {
-                *error = strings::Substitute("$0: $1", plugin_name, communicate_error);
+                *error = turbo::substitute("$0: $1", plugin_name, communicate_error);
                 return false;
             }
 
@@ -2279,7 +2279,7 @@ Parse PROTO_FILES and generate output based on the options given:
                     current_output.reset();
                     current_output.reset(generator_context->Open(output_file.name()));
                 } else if (current_output == nullptr) {
-                    *error = strings::Substitute(
+                    *error = turbo::substitute(
                         "$0: First file chunk returned by plugin did not specify a file "
                         "name.",
                         plugin_name);

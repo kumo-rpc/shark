@@ -45,7 +45,7 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <shark/message.h>
 #include <shark/io/io_win32.h>
 
@@ -271,7 +271,7 @@ bool Subprocess::Communicate(const Message& input, Message* output,
   child_handle_ = nullptr;
 
   if (exit_code != 0) {
-    *error = strings::Substitute("Plugin failed with status code $0.", exit_code);
+    *error = turbo::substitute("Plugin failed with status code $0.", exit_code);
     return false;
   }
 
@@ -469,12 +469,12 @@ bool Subprocess::Communicate(const Message& input, Message* output,
     if (WEXITSTATUS(status) != 0) {
       int error_code = WEXITSTATUS(status);
       *error =
-          strings::Substitute("Plugin failed with status code $0.", error_code);
+          turbo::substitute("Plugin failed with status code $0.", error_code);
       return false;
     }
   } else if (WIFSIGNALED(status)) {
     int signal = WTERMSIG(status);
-    *error = strings::Substitute("Plugin killed by signal $0.", signal);
+    *error = turbo::substitute("Plugin killed by signal $0.", signal);
     return false;
   } else {
     *error = "Neither WEXITSTATUS nor WTERMSIG is true?";

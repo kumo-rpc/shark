@@ -90,7 +90,7 @@ namespace shark {
             debug_string_options);
         comment_printer.AddPreComment(contents);
 
-        strings::SubstituteAndAppend(contents, "$0enum $1 {\n", prefix, name());
+        turbo::substitute_and_append(contents, "$0enum $1 {\n", prefix, name());
 
         FormatLineOptions(depth, options(), file()->pool(), contents);
 
@@ -99,15 +99,15 @@ namespace shark {
         }
 
         if (reserved_range_count() > 0) {
-            strings::SubstituteAndAppend(contents, "$0  reserved ", prefix);
+            turbo::substitute_and_append(contents, "$0  reserved ", prefix);
             for (int i = 0; i < reserved_range_count(); i++) {
                 const EnumDescriptor::ReservedRange* range = reserved_range(i);
                 if (range->end == range->start) {
-                    strings::SubstituteAndAppend(contents, "$0, ", range->start);
+                    turbo::substitute_and_append(contents, "$0, ", range->start);
                 } else if (range->end == INT_MAX) {
-                    strings::SubstituteAndAppend(contents, "$0 to max, ", range->start);
+                    turbo::substitute_and_append(contents, "$0 to max, ", range->start);
                 } else {
-                    strings::SubstituteAndAppend(contents, "$0 to $1, ", range->start,
+                    turbo::substitute_and_append(contents, "$0 to $1, ", range->start,
                         range->end);
                 }
             }
@@ -115,15 +115,15 @@ namespace shark {
         }
 
         if (reserved_name_count() > 0) {
-            strings::SubstituteAndAppend(contents, "$0  reserved ", prefix);
+            turbo::substitute_and_append(contents, "$0  reserved ", prefix);
             for (int i = 0; i < reserved_name_count(); i++) {
-                strings::SubstituteAndAppend(contents, "\"$0\", ",
+                turbo::substitute_and_append(contents, "\"$0\", ",
                     CEscape(reserved_name(i)));
             }
             contents->replace(contents->size() - 2, 2, ";\n");
         }
 
-        strings::SubstituteAndAppend(contents, "$0}\n", prefix);
+        turbo::substitute_and_append(contents, "$0}\n", prefix);
 
         comment_printer.AddPostComment(contents);
     }
@@ -149,12 +149,12 @@ namespace shark {
             debug_string_options);
         comment_printer.AddPreComment(contents);
 
-        strings::SubstituteAndAppend(contents, "$0$1 = $2", prefix, name(), number());
+        turbo::substitute_and_append(contents, "$0$1 = $2", prefix, name(), number());
 
         std::string formatted_options;
         if (FormatBracketedOptions(depth, options(), type()->file()->pool(),
                 &formatted_options)) {
-            strings::SubstituteAndAppend(contents, " [$0]", formatted_options);
+            turbo::substitute_and_append(contents, " [$0]", formatted_options);
         }
         contents->append(";\n");
 

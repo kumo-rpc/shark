@@ -52,7 +52,7 @@
 #include <shark/stubs/stl_util.h>
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <shark/types/any.h>
 #include <shark/unknown_field_set.h>
 
@@ -562,7 +562,7 @@ namespace shark {
                 std::vector<std::string> lines = Split(stripped_comment, "\n");
                 std::string output;
                 for (const std::string& line : lines) {
-                    strings::SubstituteAndAppend(&output, "$0// $1\n", prefix_, line);
+                    turbo::substitute_and_append(&output, "$0// $1\n", prefix_, line);
                 }
                 return output;
             }

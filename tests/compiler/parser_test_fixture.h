@@ -55,7 +55,7 @@
 #include <shark/types/repeated_field.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <shark/format/text/text_format.h>
 
 namespace shark {
@@ -73,12 +73,12 @@ class MockErrorCollector : public io::ErrorCollector {
 
   // implements ErrorCollector ---------------------------------------
   void AddWarning(int line, int column, const std::string& message) override {
-    strings::SubstituteAndAppend(&warning_, "$0:$1: $2\n", line - line_offset,
+    turbo::substitute_and_append(&warning_, "$0:$1: $2\n", line - line_offset,
                                  column, message);
   }
 
   void AddError(int line, int column, const std::string& message) override {
-    strings::SubstituteAndAppend(&text_, "$0:$1: $2\n", line - line_offset,
+    turbo::substitute_and_append(&text_, "$0:$1: $2\n", line - line_offset,
                                  column, message);
   }
 };

@@ -49,7 +49,7 @@
 #include <shark/io/zero_copy_stream.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <shark/format/text/text_format.h>
 #include <tests/common/file.h>
 
@@ -363,7 +363,7 @@ namespace shark {
             const std::string& generator_name, const std::string& parameter,
             const std::string& file, const std::string& parsed_file_list,
             const std::string& first_message_name) {
-            return strings::Substitute("$0: $1, $2, $3, $4\n", generator_name, parameter,
+            return turbo::substitute("$0: $1, $2, $3, $4\n", generator_name, parameter,
                 file, first_message_name, parsed_file_list);
         }
 

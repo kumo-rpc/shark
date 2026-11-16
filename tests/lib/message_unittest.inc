@@ -56,7 +56,7 @@
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/logging.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <shark/arena.h>
 #include <shark/descriptor.h>
 #include <shark/io/io_win32.h>
@@ -254,7 +254,7 @@ TEST(MESSAGE_TEST_NAME, ParseFailsIfExtensionNotInitialized) {
   }
 
   EXPECT_THAT(errors,
-              testing::ElementsAre(strings::Substitute(
+              testing::ElementsAre(turbo::substitute(
                   "Can't parse message of type \"$0.TestChildExtension\" "
                   "because it is missing required fields: "
                   "optional_extension.($0.TestRequired.single).a, "

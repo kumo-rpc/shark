@@ -17,6 +17,7 @@
 
 #include <shark/schema/internal/descriptor_builder.h>
 #include <shark/schema/internal/file_descriptor_tables_inl.h>
+#include <turbo/strings/substitute.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -1773,7 +1774,7 @@ namespace shark {
                 if (range1.end() > range2.start() && range2.end() > range1.start()) {
                     AddError(result->full_name(), proto.reserved_range(i),
                         DescriptorPool::ErrorCollector::NUMBER,
-                        strings::Substitute("Reserved range $0 to $1 overlaps with "
+                        turbo::substitute("Reserved range $0 to $1 overlaps with "
                                             "already-defined range $2 to $3.",
                             range2.start(), range2.end() - 1,
                             range1.start(), range1.end() - 1));
@@ -1788,7 +1789,7 @@ namespace shark {
                 reserved_name_set.insert(name);
             } else {
                 AddError(name, proto, DescriptorPool::ErrorCollector::NAME,
-                    strings::Substitute("Field name \"$0\" is reserved multiple times.",
+                    turbo::substitute("Field name \"$0\" is reserved multiple times.",
                         name));
             }
         }
@@ -1803,7 +1804,7 @@ namespace shark {
                     AddError(
                         field->full_name(), proto.extension_range(j),
                         DescriptorPool::ErrorCollector::NUMBER,
-                        strings::Substitute(
+                        turbo::substitute(
                             "Extension range $0 to $1 includes field \"$2\" ($3).",
                             range->start, range->end - 1, field->name(), field->number()));
                 }
@@ -1815,7 +1816,7 @@ namespace shark {
                         proto.reserved_range(j), DescriptorPool::ErrorCollector::NUMBER);
                     AddError(field->full_name(), proto.reserved_range(j),
                         DescriptorPool::ErrorCollector::NUMBER,
-                        strings::Substitute("Field \"$0\" uses reserved number $1.",
+                        turbo::substitute("Field \"$0\" uses reserved number $1.",
                             field->name(), field->number()));
                 }
             }
@@ -1823,7 +1824,7 @@ namespace shark {
                 AddError(
                     field->full_name(), proto.field(i),
                     DescriptorPool::ErrorCollector::NAME,
-                    strings::Substitute("Field name \"$0\" is reserved.", field->name()));
+                    turbo::substitute("Field name \"$0\" is reserved.", field->name()));
             }
         }
 
@@ -1836,7 +1837,7 @@ namespace shark {
                 if (range1->end > range2->start && range2->end > range1->start) {
                     AddError(result->full_name(), proto.extension_range(i),
                         DescriptorPool::ErrorCollector::NUMBER,
-                        strings::Substitute("Extension range $0 to $1 overlaps with "
+                        turbo::substitute("Extension range $0 to $1 overlaps with "
                                             "reserved range $2 to $3.",
                             range1->start, range1->end - 1, range2->start,
                             range2->end - 1));
@@ -1847,7 +1848,7 @@ namespace shark {
                 if (range1->end > range2->start && range2->end > range1->start) {
                     AddError(result->full_name(), proto.extension_range(i),
                         DescriptorPool::ErrorCollector::NUMBER,
-                        strings::Substitute("Extension range $0 to $1 overlaps with "
+                        turbo::substitute("Extension range $0 to $1 overlaps with "
                                             "already-defined range $2 to $3.",
                             range2->start, range2->end - 1, range1->start,
                             range1->end - 1));
@@ -2068,13 +2069,13 @@ namespace shark {
             message_hints_[parent].RequestHintOnFieldNumbers(
                 proto, DescriptorPool::ErrorCollector::NUMBER);
             AddError(result->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
-                strings::Substitute("Field numbers cannot be greater than $0.",
+                turbo::substitute("Field numbers cannot be greater than $0.",
                     FieldDescriptor::kMaxNumber));
         } else if (result->number() >= FieldDescriptor::kFirstReservedNumber && result->number() <= FieldDescriptor::kLastReservedNumber) {
             message_hints_[parent].RequestHintOnFieldNumbers(
                 proto, DescriptorPool::ErrorCollector::NUMBER);
             AddError(result->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
-                strings::Substitute(
+                turbo::substitute(
                     "Field numbers $0 through $1 are reserved for the protocol "
                     "buffer library implementation.",
                     FieldDescriptor::kFirstReservedNumber,
@@ -2108,7 +2109,7 @@ namespace shark {
                 if (proto.oneof_index() < 0 || proto.oneof_index() >= parent->oneof_decl_count()) {
                     AddError(result->full_name(), proto,
                         DescriptorPool::ErrorCollector::TYPE,
-                        strings::Substitute("FieldDescriptorProto.oneof_index $0 is "
+                        turbo::substitute("FieldDescriptorProto.oneof_index $0 is "
                                             "out of range for type \"$1\".",
                             proto.oneof_index(), parent->name()));
                 } else {
@@ -2345,7 +2346,7 @@ namespace shark {
                 if (range1.end() >= range2.start() && range2.end() >= range1.start()) {
                     AddError(result->full_name(), proto.reserved_range(i),
                         DescriptorPool::ErrorCollector::NUMBER,
-                        strings::Substitute("Reserved range $0 to $1 overlaps with "
+                        turbo::substitute("Reserved range $0 to $1 overlaps with "
                                             "already-defined range $2 to $3.",
                             range2.start(), range2.end(), range1.start(),
                             range1.end()));
@@ -2360,7 +2361,7 @@ namespace shark {
                 reserved_name_set.insert(name);
             } else {
                 AddError(name, proto, DescriptorPool::ErrorCollector::NAME,
-                    strings::Substitute("Enum value \"$0\" is reserved multiple times.",
+                    turbo::substitute("Enum value \"$0\" is reserved multiple times.",
                         name));
             }
         }
@@ -2372,7 +2373,7 @@ namespace shark {
                 if (range->start <= value->number() && value->number() <= range->end) {
                     AddError(value->full_name(), proto.reserved_range(j),
                         DescriptorPool::ErrorCollector::NUMBER,
-                        strings::Substitute("Enum value \"$0\" uses reserved number $1.",
+                        turbo::substitute("Enum value \"$0\" uses reserved number $1.",
                             value->name(), value->number()));
                 }
             }
@@ -2380,7 +2381,7 @@ namespace shark {
                 AddError(
                     value->full_name(), proto.value(i),
                     DescriptorPool::ErrorCollector::NAME,
-                    strings::Substitute("Enum value \"$0\" is reserved.", value->name()));
+                    turbo::substitute("Enum value \"$0\" is reserved.", value->name()));
             }
         }
     }
@@ -2559,7 +2560,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 if (oneof_decl->field_count() > 0 && message->field(i - 1)->containing_oneof() != oneof_decl) {
                     AddError(message->full_name() + "." + message->field(i - 1)->name(),
                         proto.field(i - 1), DescriptorPool::ErrorCollector::TYPE,
-                        strings::Substitute(
+                        turbo::substitute(
                             "Fields in the same union must be defined consecutively. "
                             "\"$0\" cannot be defined before the completion of the "
                             "\"$1\" union definition.",
@@ -2675,7 +2676,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 if (!skip_check) {
                     AddError(field->full_name(), proto,
                         DescriptorPool::ErrorCollector::NUMBER,
-                        strings::Substitute("\"$0\" does not declare $1 as an "
+                        turbo::substitute("\"$0\" does not declare $1 as an "
                                             "extension number.",
                             field->containing_type()->full_name(),
                             field->number()));
@@ -2860,14 +2861,14 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             if (field->is_extension()) {
                 AddError(field->full_name(), proto,
                     DescriptorPool::ErrorCollector::NUMBER,
-                    strings::Substitute("Extension number $0 has already been used "
+                    turbo::substitute("Extension number $0 has already been used "
                                         "in \"$1\" by extension \"$2\".",
                         field->number(), containing_type_name,
                         conflicting_field->full_name()));
             } else {
                 AddError(field->full_name(), proto,
                     DescriptorPool::ErrorCollector::NUMBER,
-                    strings::Substitute("Field number $0 has already been used in "
+                    turbo::substitute("Field number $0 has already been used in "
                                         "\"$1\" by field \"$2\".",
                         field->number(), containing_type_name,
                         conflicting_field->name()));
@@ -2879,7 +2880,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                     std::string containing_type_name = field->containing_type() == nullptr
                         ? "unknown"
                         : field->containing_type()->full_name();
-                    std::string error_msg = strings::Substitute(
+                    std::string error_msg = turbo::substitute(
                         "Extension number $0 has already been used in \"$1\" by extension "
                         "\"$2\" defined in $3.",
                         field->number(), containing_type_name,
@@ -3236,7 +3237,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             if (message->extension_range(i)->end > max_extension_range + 1) {
                 AddError(message->full_name(), proto.extension_range(i),
                     DescriptorPool::ErrorCollector::NUMBER,
-                    strings::Substitute("Extension numbers cannot be greater than $0.",
+                    turbo::substitute("Extension numbers cannot be greater than $0.",
                         max_extension_range));
             }
 

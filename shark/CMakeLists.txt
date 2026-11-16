@@ -109,7 +109,6 @@ kmcmake_cc_library(
         types/field_mask.skp.cc
         types/source_context.skp.cc
         types/struct.skp.cc
-        stubs/substitute.cc
         types/timestamp.skp.cc
         types/type.skp.cc
         types/wrappers.skp.cc

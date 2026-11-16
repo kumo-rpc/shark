@@ -176,7 +176,7 @@ namespace shark {
         std::string contents;
         int depth = 0;
         if (is_extension()) {
-            strings::SubstituteAndAppend(&contents, "extend .$0 {\n",
+            turbo::substitute_and_append(&contents, "extend .$0 {\n",
                 containing_type()->full_name());
             depth = 1;
         }
@@ -207,7 +207,7 @@ namespace shark {
 
         // Special case map fields.
         if (is_map()) {
-            strings::SubstituteAndAppend(
+            turbo::substitute_and_append(
                 &field_type, "map<$0, $1>",
                 message_type()->field(0)->FieldTypeNameDebugString(),
                 message_type()->field(1)->FieldTypeNameDebugString());
@@ -229,14 +229,14 @@ namespace shark {
             debug_string_options);
         comment_printer.AddPreComment(contents);
 
-        strings::SubstituteAndAppend(
+        turbo::substitute_and_append(
             contents, "$0$1$2 $3 = $4", prefix, label, field_type, name(),
             number());
 
         bool bracketed = false;
         if (has_default_value()) {
             bracketed = true;
-            strings::SubstituteAndAppend(contents, " [default = $0",
+            turbo::substitute_and_append(contents, " [default = $0",
                 DefaultValueAsString(true));
         }
         if (has_json_name_) {

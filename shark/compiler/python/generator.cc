@@ -62,7 +62,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 
 namespace shark::compiler::python {
 
@@ -876,7 +876,7 @@ namespace shark::compiler::python {
         if (!containing_type) {
             return ResolveKeyword(field.name());
         }
-        return strings::Substitute("$0.$1['$2']",
+        return turbo::substitute("$0.$1['$2']",
             ModuleLevelDescriptorName(*containing_type),
             python_dict_name, field.name());
     }
@@ -1233,7 +1233,7 @@ namespace shark::compiler::python {
     void Generator::FixOptionsForOneof(const OneofDescriptor& oneof) const {
         std::string oneof_options = OptionsValue(oneof.options().SerializeAsString());
         if (oneof_options != "None") {
-            std::string oneof_name = strings::Substitute(
+            std::string oneof_name = turbo::substitute(
                 "$0.$1['$2']", ModuleLevelDescriptorName(*oneof.containing_type()),
                 "oneofs_by_name", oneof.name());
             PrintDescriptorOptionsFixingCode(oneof_name, oneof_options, printer_);

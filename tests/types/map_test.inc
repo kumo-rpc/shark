@@ -54,7 +54,7 @@
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/casts.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <tests/common/arena_test_util.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor_database.h>

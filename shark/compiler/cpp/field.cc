@@ -50,7 +50,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 
 namespace shark::compiler::cpp {
 
@@ -67,7 +67,7 @@ namespace shark::compiler::cpp {
             if (options.field_listener_options.forbidden_field_listener_events.count(
                     std::string(annotation_name)))
                 return;
-            (*variables)[StrCat("annotate_", annotation_name)] = strings::Substitute(
+            (*variables)[StrCat("annotate_", annotation_name)] = turbo::substitute(
                 StrCat(substitute_template_prefix, prepared_template, ");\n"),
                 field_index, access_type);
         }
@@ -81,13 +81,13 @@ namespace shark::compiler::cpp {
                 : "$0";
 
             if (descriptor->default_value_string().empty()) {
-                return strings::Substitute(StrCat("_internal_has_", field_name, "() ? ",
+                return turbo::substitute(StrCat("_internal_has_", field_name, "() ? ",
                                                field_pointer, ": nullptr"),
                     field_member);
             }
 
             if (descriptor->options().ctype() == shark::FieldOptions_CType::STRING_PIECE) {
-                return strings::Substitute(StrCat("_internal_has_", field_name, "() ? ",
+                return turbo::substitute(StrCat("_internal_has_", field_name, "() ? ",
                                                field_pointer, ": nullptr"),
                     field_member);
             }
@@ -95,7 +95,7 @@ namespace shark::compiler::cpp {
             std::string default_value_pointer = descriptor->options().ctype() == shark::FieldOptions_CType::STRING
                 ? "&$1.get()"
                 : "&$1";
-            return strings::Substitute(
+            return turbo::substitute(
                 StrCat("_internal_has_", field_name, "() ? ", field_pointer, " : ",
                     default_value_pointer),
                 field_member, MakeDefaultFieldName(descriptor));
@@ -108,7 +108,7 @@ namespace shark::compiler::cpp {
             }
 
             if (descriptor->options().ctype() == shark::FieldOptions_CType::STRING) {
-                return strings::Substitute(
+                return turbo::substitute(
                     "$0.IsDefault() ? &$1.get() : $0.UnsafeGetPointer()", field_member,
                     MakeDefaultFieldName(descriptor));
             }
@@ -164,8 +164,8 @@ namespace shark::compiler::cpp {
         // TODO(b/190614678): Support fields with type Message or Map.
         if (descriptor->is_repeated() && !descriptor->is_map()) {
             if (descriptor->type() != SharkFieldType::MESSAGE) {
-                prepared_template = strings::Substitute("&$0.Get(index)", field_member);
-                prepared_add_template = strings::Substitute("&$0.Get($0.size() - 1)", field_member);
+                prepared_template = turbo::substitute("&$0.Get(index)", field_member);
+                prepared_add_template = turbo::substitute("&$0.Get($0.size() - 1)", field_member);
             } else {
                 prepared_template = "nullptr";
                 prepared_add_template = "nullptr";

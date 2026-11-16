@@ -52,7 +52,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <shark/format/text/text_format.h>
 #include <shark/types/any.skp.h>
 #include <tests/common/googletest.h>
@@ -281,7 +281,7 @@ namespace shark {
                     break;
                 }
 
-                strings::SubstituteAndAppend(&text_, "$0: $1: $2: $3\n", filename,
+                turbo::substitute_and_append(&text_, "$0: $1: $2: $3\n", filename,
                     element_name, location_name, message);
             }
 
@@ -326,7 +326,7 @@ namespace shark {
                     break;
                 }
 
-                strings::SubstituteAndAppend(&warning_text_, "$0: $1: $2: $3\n", filename,
+                turbo::substitute_and_append(&warning_text_, "$0: $1: $2: $3\n", filename,
                     element_name, location_name, message);
             }
         };
@@ -4214,7 +4214,7 @@ namespace shark {
         }
 
         TEST_F(ValidationErrorTest, DebugStringReservedRangeMax) {
-            const FileDescriptor* file = BuildFile(strings::Substitute(
+            const FileDescriptor* file = BuildFile(turbo::substitute(
                 "name: \"foo.shark\" "
                 "enum_type { "
                 "  name: \"Bar\""
@@ -5805,7 +5805,7 @@ namespace shark {
         // errors.  The "value" argument is embedded inside the
         // "uninterpreted_option" portion of the result.
         static std::string EmbedAggregateValue(const char* value) {
-            return strings::Substitute(
+            return turbo::substitute(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
                 "message_type { name: \"Foo\" } "
@@ -7257,19 +7257,19 @@ namespace shark {
             bool PopulateFile(int file_num, FileDescriptorProto* output) {
                 GOOGLE_CHECK_GE(file_num, 0);
                 output->Clear();
-                output->set_name(strings::Substitute("file$0.shark", file_num));
+                output->set_name(turbo::substitute("file$0.shark", file_num));
                 // file0.shark doesn't define Message0
                 if (file_num > 0) {
                     DescriptorProto* message = output->add_message_type();
-                    message->set_name(strings::Substitute("Message$0", file_num));
+                    message->set_name(turbo::substitute("Message$0", file_num));
                     for (int i = 0; i < file_num; ++i) {
-                        output->add_dependency(strings::Substitute("file$0.shark", i));
+                        output->add_dependency(turbo::substitute("file$0.shark", i));
                         FieldDescriptorProto* field = message->add_field();
-                        field->set_name(strings::Substitute("field$0", i));
+                        field->set_name(turbo::substitute("field$0", i));
                         field->set_number(i);
                         field->set_label(FieldCardinality::OPTIONAL);
                         field->set_type(SharkType::MESSAGE);
-                        field->set_type_name(strings::Substitute("Message$0", i));
+                        field->set_type_name(turbo::substitute("Message$0", i));
                     }
                 }
                 return true;
@@ -7445,7 +7445,7 @@ namespace shark {
             }
 
             static std::string PrintSourceLocation(const SourceLocation& loc) {
-                return strings::Substitute("$0:$1-$2:$3", 1 + loc.start_line,
+                return turbo::substitute("$0:$1-$2:$3", 1 + loc.start_line,
                     1 + loc.start_column, 1 + loc.end_line,
                     1 + loc.end_column);
             }

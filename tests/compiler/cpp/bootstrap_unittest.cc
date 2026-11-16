@@ -54,7 +54,7 @@
 #include <shark/stubs/strutil.h>
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <shark/compiler/cpp/helpers.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
@@ -73,7 +73,7 @@ class MockErrorCollector : public MultiFileErrorCollector {
   // implements ErrorCollector ---------------------------------------
   void AddError(const std::string& filename, int line, int column,
                 const std::string& message) override {
-    strings::SubstituteAndAppend(&text_, "$0:$1:$2: $3\n", filename, line, column,
+    turbo::substitute_and_append(&text_, "$0:$1:$2: $3\n", filename, line, column,
                               message);
   }
 };

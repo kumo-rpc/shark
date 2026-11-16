@@ -202,7 +202,7 @@ namespace shark {
             SourceLocationCommentPrinter syntax_comment(this, path, "",
                 debug_string_options);
             syntax_comment.AddPreComment(&contents);
-            strings::SubstituteAndAppend(&contents, "syntax = \"$0\";\n\n",
+            turbo::substitute_and_append(&contents, "syntax = \"$0\";\n\n",
                 SyntaxName(syntax()));
             syntax_comment.AddPostComment(&contents);
         }
@@ -219,13 +219,13 @@ namespace shark {
 
         for (int i = 0; i < dependency_count(); i++) {
             if (public_dependencies.count(i) > 0) {
-                strings::SubstituteAndAppend(&contents, "import public \"$0\";\n",
+                turbo::substitute_and_append(&contents, "import public \"$0\";\n",
                     dependency(i)->name());
             } else if (weak_dependencies.count(i) > 0) {
-                strings::SubstituteAndAppend(&contents, "import weak \"$0\";\n",
+                turbo::substitute_and_append(&contents, "import weak \"$0\";\n",
                     dependency(i)->name());
             } else {
-                strings::SubstituteAndAppend(&contents, "import \"$0\";\n",
+                turbo::substitute_and_append(&contents, "import \"$0\";\n",
                     dependency(i)->name());
             }
         }
@@ -236,7 +236,7 @@ namespace shark {
             SourceLocationCommentPrinter package_comment(this, path, "",
                 debug_string_options);
             package_comment.AddPreComment(&contents);
-            strings::SubstituteAndAppend(&contents, "package $0;\n\n", package());
+            turbo::substitute_and_append(&contents, "package $0;\n\n", package());
             package_comment.AddPostComment(&contents);
         }
 
@@ -266,7 +266,7 @@ namespace shark {
                 if (i > 0)
                     contents.append("}\n\n");
                 containing_type = extension(i)->containing_type();
-                strings::SubstituteAndAppend(&contents, "extend .$0 {\n",
+                turbo::substitute_and_append(&contents, "extend .$0 {\n",
                     containing_type->full_name());
             }
             extension(i)->DebugString(1, &contents, debug_string_options);

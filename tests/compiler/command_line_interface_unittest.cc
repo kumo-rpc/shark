@@ -57,7 +57,7 @@
 #include <shark/io/zero_copy_stream.h>
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/substitute.h>
+#include <turbo/strings/substitute.h>
 #include <shark/types/any.skp.h>
 #include <tests/common/test_util2.h>
 #include <tests/common/file.h>
@@ -818,7 +818,7 @@ namespace shark {
                 field->set_number(1);
 
                 WriteDescriptorSet("baz_and_bat.bin", &file_descriptor_set);
-                Run(strings::Substitute(
+                Run(turbo::substitute(
                     "protocol_compiler --test_out=$$tmpdir --plug_out=$$tmpdir "
                     "--descriptor_set_in=$0 foo.shark bar.shark",
                     std::string("$tmpdir/foo_and_bar.bin") + CommandLineInterface::kPathSeparator + "$tmpdir/baz_and_bat.bin"));
@@ -833,7 +833,7 @@ namespace shark {
                 ExpectGeneratedWithMultipleInputs("test_plugin", "foo.shark,bar.shark",
                     "bar.shark", "Bar");
 
-                Run(strings::Substitute(
+                Run(turbo::substitute(
                     "protocol_compiler --test_out=$$tmpdir --plug_out=$$tmpdir "
                     "--descriptor_set_in=$0 baz.shark bat.shark",
                     std::string("$tmpdir/foo_and_bar.bin") + CommandLineInterface::kPathSeparator + "$tmpdir/baz_and_bat.bin"));
@@ -890,7 +890,7 @@ namespace shark {
                 field->set_number(1);
                 WriteDescriptorSet("foo_and_baz.bin", &file_descriptor_set);
 
-                Run(strings::Substitute(
+                Run(turbo::substitute(
                     "protocol_compiler --test_out=$$tmpdir --plug_out=$$tmpdir "
                     "--descriptor_set_in=$0 bar.shark",
                     std::string("$tmpdir/foo_and_bar.bin") + CommandLineInterface::kPathSeparator + "$tmpdir/foo_and_baz.bin"));
@@ -1295,7 +1295,7 @@ namespace shark {
                     "}\n");
                 CreateTempFile("b/foo.shark", "this should not be parsed\n");
 
-                Run(strings::Substitute(
+                Run(turbo::substitute(
                     "protocol_compiler --test_out=$$tmpdir --proto_path=$0 foo.shark",
                     std::string("$tmpdir/a") + CommandLineInterface::kPathSeparator + "$tmpdir/b"));
 
