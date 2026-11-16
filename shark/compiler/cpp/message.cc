@@ -57,7 +57,6 @@
 #include <shark/io/printer.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/hash.h>
-#include <shark/stubs/stringprintf.h>
 #include <shark/stubs/strutil.h>
 #include <turbo/strings/substitute.h>
 #include <shark/types/map_entry_lite.h>

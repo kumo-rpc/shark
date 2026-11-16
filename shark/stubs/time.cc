@@ -2,7 +2,7 @@
 
 #include <ctime>
 
-#include <shark/stubs/stringprintf.h>
+#include <turbo/format/str_format.h>
 #include <shark/stubs/strutil.h>
 #include <turbo/strings/ascii.h>
 
@@ -131,11 +131,11 @@ namespace shark::internal {
         // precision to represent the exact value.
         std::string FormatNanos(int32_t nanos) {
             if (nanos % kNanosPerMillisecond == 0) {
-                return StringPrintf("%03d", nanos / kNanosPerMillisecond);
+                return turbo::str_sprintf("%03d", nanos / kNanosPerMillisecond);
             } else if (nanos % kNanosPerMicrosecond == 0) {
-                return StringPrintf("%06d", nanos / kNanosPerMicrosecond);
+                return turbo::str_sprintf("%06d", nanos / kNanosPerMicrosecond);
             } else {
-                return StringPrintf("%09d", nanos);
+                return turbo::str_sprintf("%09d", nanos);
             }
         }
 
@@ -272,7 +272,7 @@ namespace shark::internal {
         if (nanos < 0 || nanos > 999999999 || !SecondsToDateTime(seconds, &time)) {
             return "InvalidTime";
         }
-        std::string result = StringPrintf("%04d-%02d-%02dT%02d:%02d:%02d", time.year, time.month,
+        std::string result = turbo::str_sprintf("%04d-%02d-%02dT%02d:%02d:%02d", time.year, time.month,
             time.day, time.hour, time.minute, time.second);
         if (nanos != 0) {
             result += "." + FormatNanos(nanos);

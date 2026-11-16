@@ -80,7 +80,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
-#include <shark/stubs/stringprintf.h>
+#include <turbo/format/str_format.h>
 #include <shark/stubs/strutil.h>
 #include <turbo/strings/substitute.h>
 #include <shark/format/text/text_format.h>
@@ -2524,7 +2524,7 @@ Parse PROTO_FILES and generate output based on the options given:
             void FormatFreeFieldNumbers(const std::string& name,
                 const std::set<FieldRange>& ranges) {
                 std::string output;
-                StringAppendF(&output, "%-35s free:", name.c_str());
+                turbo::str_append_sprintf(&output, "%-35s free:", name.c_str());
                 int next_free_number = 1;
                 for (std::set<FieldRange>::const_iterator i = ranges.begin();
                     i != ranges.end(); ++i) {
@@ -2536,17 +2536,17 @@ Parse PROTO_FILES and generate output based on the options given:
                     if (next_free_number < i->first) {
                         if (next_free_number + 1 == i->first) {
                             // Singleton
-                            StringAppendF(&output, " %d", next_free_number);
+                            turbo::str_append_sprintf(&output, " %d", next_free_number);
                         } else {
                             // Range
-                            StringAppendF(&output, " %d-%d", next_free_number,
+                            turbo::str_append_sprintf(&output, " %d-%d", next_free_number,
                                 i->first - 1);
                         }
                     }
                     next_free_number = i->second;
                 }
                 if (next_free_number <= FieldDescriptor::kMaxNumber) {
-                    StringAppendF(&output, " %d-INF", next_free_number);
+                    turbo::str_append_sprintf(&output, " %d-INF", next_free_number);
                 }
                 std::cout << output << std::endl;
             }

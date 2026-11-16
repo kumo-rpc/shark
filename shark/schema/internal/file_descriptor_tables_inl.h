@@ -19,6 +19,7 @@
 #include <shark/schema/internal/file_descriptor_tables.h>
 #include <shark/schema/internal/descriptor_pool_tables.h>
 #include <shark/schema/internal/flat_allocator.h>
+#include <turbo/format/str_format.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -131,7 +132,7 @@ namespace shark {
             // EnumDescriptor (it's not a part of the enum as originally defined), but
             // we do insert it into the table so that we can return the same pointer
             // later.
-            std::string enum_value_name = StringPrintf(
+            std::string enum_value_name = turbo::str_sprintf(
                 "UNKNOWN_ENUM_VALUE_%s_%d", parent->name().c_str(), number);
             auto* pool = DescriptorPool::generated_pool();
             auto* tables = const_cast<DescriptorPool::Tables*>(pool->tables_.get());

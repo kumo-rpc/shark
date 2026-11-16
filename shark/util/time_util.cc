@@ -36,7 +36,7 @@
 #include <shark/types/duration.skp.h>
 #include <shark/types/timestamp.skp.h>
 #include <turbo/numeric/int128.h>
-#include <shark/stubs/stringprintf.h>
+#include <turbo/format/str_format.h>
 #include <shark/stubs/time.h>
 
 // Must go after other includes.
@@ -106,11 +106,11 @@ Duration CreateNormalized(int64_t seconds, int64_t nanos) {
 // precision to represent the exact value.
 std::string FormatNanos(int32_t nanos) {
   if (nanos % kNanosPerMillisecond == 0) {
-    return StringPrintf("%03d", nanos / kNanosPerMillisecond);
+    return turbo::str_sprintf("%03d", nanos / kNanosPerMillisecond);
   } else if (nanos % kNanosPerMicrosecond == 0) {
-    return StringPrintf("%06d", nanos / kNanosPerMicrosecond);
+    return turbo::str_sprintf("%06d", nanos / kNanosPerMicrosecond);
   } else {
-    return StringPrintf("%09d", nanos);
+    return turbo::str_sprintf("%09d", nanos);
   }
 }
 

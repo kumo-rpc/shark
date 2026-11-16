@@ -55,7 +55,7 @@
 #include <shark/message.h>
 #include <shark/format/text/text_format.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/stringprintf.h>
+#include <turbo/format/str_format.h>
 #include <shark/util/field_comparator.h>
 
 // Always include as last one, otherwise it can break compilation
@@ -2073,7 +2073,7 @@ void MessageDifferencer::StreamReporter::PrintUnknownFieldValue(
           "0x", strings::Hex(unknown_field->fixed64(), strings::ZERO_PAD_16));
       break;
     case UnknownField::TYPE_LENGTH_DELIMITED:
-      output = StringPrintf(
+      output = turbo::str_sprintf(
           "\"%s\"", CEscape(unknown_field->length_delimited()).c_str());
       break;
   }

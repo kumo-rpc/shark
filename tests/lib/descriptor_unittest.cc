@@ -50,7 +50,7 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
-#include <shark/stubs/stringprintf.h>
+#include <turbo/format/str_format.h>
 #include <shark/stubs/strutil.h>
 #include <turbo/strings/substitute.h>
 #include <shark/format/text/text_format.h>
@@ -596,7 +596,7 @@ namespace shark {
         public:
             // implements ErrorCollector ---------------------------------------
             void AddError(int line, int column, const std::string& message) override {
-                last_error_ = StringPrintf("%d:%d:", line, column) + message;
+                last_error_ = turbo::str_sprintf("%d:%d:", line, column) + message;
             }
 
             const std::string& last_error() { return last_error_; }

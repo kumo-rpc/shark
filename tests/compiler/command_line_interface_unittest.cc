@@ -55,7 +55,7 @@
 #include <shark/io/io_win32.h>
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
-#include <shark/stubs/stringprintf.h>
+#include <turbo/format/str_format.h>
 #include <shark/stubs/strutil.h>
 #include <turbo/strings/substitute.h>
 #include <shark/types/any.skp.h>
@@ -2241,7 +2241,7 @@ namespace shark {
 
                 Run("protocol_compiler --plug_out=$tmpdir --proto_path=$tmpdir foo.shark");
 
-                ExpectErrorSubstring(StringPrintf("Saw compiler_version: %d %s",
+                ExpectErrorSubstring(turbo::str_sprintf("Saw compiler_version: %d %s",
                     SHARK_VERSION,
                     SHARK_VERSION_SUFFIX));
             }

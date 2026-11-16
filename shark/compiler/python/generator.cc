@@ -60,7 +60,7 @@
 #include <shark/io/zero_copy_stream.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
-#include <shark/stubs/stringprintf.h>
+#include <turbo/format/str_format.h>
 #include <shark/stubs/strutil.h>
 #include <turbo/strings/substitute.h>
 
@@ -1253,7 +1253,7 @@ namespace shark::compiler::python {
             std::string value_options = OptionsValue(value_descriptor.options().SerializeAsString());
             if (value_options != "None") {
                 PrintDescriptorOptionsFixingCode(
-                    StringPrintf("%s.values_by_name[\"%s\"]", descriptor_name.c_str(),
+                    turbo::str_sprintf("%s.values_by_name[\"%s\"]", descriptor_name.c_str(),
                         value_descriptor.name().c_str()),
                     value_options, printer_);
             }

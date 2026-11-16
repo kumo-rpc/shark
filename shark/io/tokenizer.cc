@@ -95,7 +95,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/stl_util.h>
-#include <shark/stubs/stringprintf.h>
+#include <turbo/format/str_format.h>
 #include <shark/stubs/strutil.h>
 
 // Must be included last.
@@ -942,7 +942,7 @@ namespace shark {
                         if (current_char_ & 0x80) {
                             error_collector_->AddError(
                                 line_, column_,
-                                StringPrintf("Interpreting non ascii codepoint %d.",
+                                turbo::str_sprintf("Interpreting non ascii codepoint %d.",
                                     static_cast<unsigned char>(current_char_)));
                         }
                         NextChar();
@@ -1287,7 +1287,7 @@ namespace shark {
                 // Unicode code points end at 0x10FFFF, so this is out-of-range.
                 // ConsumeString permits hex values up to 0x1FFFFF, and FetchUnicodePoint
                 // doesn't perform a range check.
-                StringAppendF(output, "\\U%08x", code_point);
+                turbo::str_append_sprintf(output, "\\U%08x", code_point);
                 return;
             }
             tmp = ghtonl(tmp);

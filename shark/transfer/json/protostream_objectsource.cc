@@ -46,7 +46,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/status.h>
-#include <shark/stubs/stringprintf.h>
+#include <turbo/format/str_format.h>
 #include <shark/stubs/time.h>
 #include <shark/transfer/json/constants.h>
 #include <shark/transfer/json/field_mask_utility.h>
@@ -366,7 +366,7 @@ util::Status ProtoStreamObjectSource::RenderDuration(
     sign = "-";
     nanos = -nanos;
   }
-  std::string formatted_duration = StringPrintf(
+  std::string formatted_duration = turbo::str_sprintf(
       "%s%lld%ss", sign.c_str(), static_cast<long long>(seconds),  // NOLINT
       FormatNanos(
           nanos,
@@ -1110,7 +1110,7 @@ const std::string FormatNanos(uint32_t nanos, bool with_trailing_zeros) {
   const int precision = (nanos % 1000 != 0)      ? 9
                         : (nanos % 1000000 != 0) ? 6
                                                  : 3;
-  std::string formatted = StringPrintf(
+  std::string formatted = turbo::str_sprintf(
       "%.*f", precision, static_cast<double>(nanos) / kNanosPerSecond);
   // remove the leading 0 before decimal.
   return formatted.substr(1);
