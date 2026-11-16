@@ -124,7 +124,7 @@ namespace shark {
             // =================================================================
             // Error recovery helpers
 
-            // Consume the rest of the current statement.  This consumes tokens
+            // consume the rest of the current statement.  This consumes tokens
             // until it sees one of:
             //   ';'  Consumes the token and returns.
             //   '{'  Consumes the brace then calls SkipRestOfBlock().
@@ -135,7 +135,7 @@ namespace shark {
             // it to report more than just one error in the file.
             void SkipStatement();
 
-            // Consume the rest of the current block, including nested blocks,
+            // consume the rest of the current block, including nested blocks,
             // ending after the closing '}' is encountered and consumed, or at EOF.
             void SkipRestOfBlock();
 
@@ -145,43 +145,43 @@ namespace shark {
             // These make parsing code more readable.
 
             // True if the current token is TYPE_END.
-            inline bool AtEnd();
+            inline bool at_end();
 
             // True if the next token matches the given text.
-            inline bool LookingAt(const char* text);
+            inline bool looking_at(const char* text);
             // True if the next token is of the given type.
-            inline bool LookingAtType(io::Tokenizer::TokenType token_type);
+            inline bool looking_at_type(io::Tokenizer::TokenType token_type);
 
             // If the next token exactly matches the text given, consume it and return
             // true.  Otherwise, return false without logging an error.
-            bool TryConsume(const char* text);
+            bool try_consume(const char* text);
 
             // These attempt to read some kind of token from the input.  If successful,
             // they return true.  Otherwise they return false and add the given error
             // to the error list.
 
-            // Consume a token with the exact text given.
-            bool Consume(const char* text, const char* error);
+            // consume a token with the exact text given.
+            bool consume(const char* text, const char* error);
             // Same as above, but automatically generates the error "Expected \"text\".",
             // where "text" is the expected token text.
-            bool Consume(const char* text);
-            // Consume a token of type IDENTIFIER and store its text in "output".
-            bool ConsumeIdentifier(std::string* output, const char* error);
-            // Consume an integer and store its value in "output".
-            bool ConsumeInteger(int* output, const char* error);
-            // Consume a signed integer and store its value in "output".
-            bool ConsumeSignedInteger(int* output, const char* error);
-            // Consume a 64-bit integer and store its value in "output".  If the value
+            bool consume(const char* text);
+            // consume a token of type IDENTIFIER and store its text in "output".
+            bool consume_identifier(std::string* output, const char* error);
+            // consume an integer and store its value in "output".
+            bool consume_integer(int* output, const char* error);
+            // consume a signed integer and store its value in "output".
+            bool consume_signed_integer(int* output, const char* error);
+            // consume a 64-bit integer and store its value in "output".  If the value
             // is greater than max_value, an error will be reported.
-            bool ConsumeInteger64(uint64_t max_value, uint64_t* output,
+            bool consume_integer64(uint64_t max_value, uint64_t* output,
                 const char* error);
-            // Consume a number and store its value in "output".  This will accept
+            // consume a number and store its value in "output".  This will accept
             // tokens of either INTEGER or FLOAT type.
-            bool ConsumeNumber(double* output, const char* error);
-            // Consume a string literal and store its (unescaped) value in "output".
-            bool ConsumeString(std::string* output, const char* error);
+            bool consume_number(double* output, const char* error);
+            // consume a string literal and store its (unescaped) value in "output".
+            bool consume_string(std::string* output, const char* error);
 
-            // Consume a token representing the end of the statement.  Comments between
+            // consume a token representing the end of the statement.  Comments between
             // this token and the next will be harvested for documentation.  The given
             // LocationRecorder should refer to the declaration that was just parsed;
             // it will be populated with these comments.
@@ -190,27 +190,27 @@ namespace shark {
             //   have been passed around by const reference, for no particularly good
             //   reason.  We should probably go through and change them all to mutable
             //   pointer to make this more intuitive.
-            bool TryConsumeEndOfDeclaration(const char* text,
+            bool try_consume_end_of_declaration(const char* text,
                 const LocationRecorder* location);
             bool TryConsumeEndOfDeclarationFinishScope(const char* text,
                 const LocationRecorder* location);
 
-            bool ConsumeEndOfDeclaration(const char* text,
+            bool consume_end_of_declaration(const char* text,
                 const LocationRecorder* location);
 
             // -----------------------------------------------------------------
             // Error logging helpers
 
-            // Invokes error_collector_->AddError(), if error_collector_ is not NULL.
-            void AddError(int line, int column, const std::string& error);
+            // Invokes error_collector_->add_error(), if error_collector_ is not NULL.
+            void add_error(int line, int column, const std::string& error);
 
-            // Invokes error_collector_->AddError() with the line and column number
+            // Invokes error_collector_->add_error() with the line and column number
             // of the current token.
-            void AddError(const std::string& error);
+            void add_error(const std::string& error);
 
-            // Invokes error_collector_->AddWarning() with the line and column number
+            // Invokes error_collector_->add_warning() with the line and column number
             // of the current token.
-            void AddWarning(const std::string& warning);
+            void add_warning(const std::string& warning);
 
             // Records a location in the SourceCodeInfo.location table (see
             // descriptor.shark).  We use RAII to ensure that the start and end locations
@@ -273,7 +273,7 @@ namespace shark {
                 // will be swapped into place, so after this is called *leading and
                 // *trailing will be empty.
                 //
-                // TODO(kenton):  See comment on TryConsumeEndOfDeclaration(), above, for
+                // TODO(kenton):  See comment on try_consume_end_of_declaration(), above, for
                 //   why this is const.
                 void AttachComments(std::string* leading, std::string* trailing,
                     std::vector<std::string>* detached_comments) const;
@@ -301,7 +301,7 @@ namespace shark {
             // were no errors; only that there were no *syntax* errors.  For instance,
             // if a service method is defined using proper syntax but uses a primitive
             // type as its input or output, ParseMethodField() still returns true
-            // and only reports the error by calling AddError().  In practice, this
+            // and only reports the error by calling add_error().  In practice, this
             // makes logic much simpler for the caller.
 
             // Parse a top-level message, enum, service, etc.
@@ -402,7 +402,7 @@ namespace shark {
 
             // Parse an "extend" declaration.  (See also comments for
             // ParseMessageField().)
-            bool ParseExtend(RepeatedPtrField<FieldDescriptorProto>* extensions,
+            bool parse_extend(RepeatedPtrField<FieldDescriptorProto>* extensions,
                 RepeatedPtrField<DescriptorProto>* messages,
                 const LocationRecorder& parent_location,
                 int location_field_number_for_nested_type,
@@ -412,18 +412,18 @@ namespace shark {
             // Parse a "oneof" declaration.  The caller is responsible for setting
             // oneof_decl->label() since it will have had to parse the label before it
             // knew it was parsing a oneof.
-            bool ParseOneof(OneofDescriptorProto* oneof_decl,
+            bool parse_oneof(OneofDescriptorProto* oneof_decl,
                 DescriptorProto* containing_type, int oneof_index,
                 const LocationRecorder& oneof_location,
                 const LocationRecorder& containing_type_location,
                 const FileDescriptorProto* containing_file);
 
             // Parse a single enum value within an enum block.
-            bool ParseEnumConstant(EnumValueDescriptorProto* enum_value,
+            bool parse_enum_constant(EnumValueDescriptorProto* enum_value,
                 const LocationRecorder& enum_value_location,
                 const FileDescriptorProto* containing_file,
                 EnumUnderlyingType underlying_type);
-            bool ConsumeEnumNumber(EnumUnderlyingType underlying_type, int32_t* output,
+            bool consume_enum_number(EnumUnderlyingType underlying_type, int32_t* output,
                 const char* error);
 
             // Parse enum constant options, i.e. the list in square brackets at the end
@@ -433,7 +433,7 @@ namespace shark {
                 const FileDescriptorProto* containing_file);
 
             // Parse a single method within a service definition.
-            bool ParseServiceMethod(MethodDescriptorProto* method,
+            bool parse_service_method(MethodDescriptorProto* method,
                 const LocationRecorder& method_location,
                 const FileDescriptorProto* containing_file);
 
@@ -445,29 +445,29 @@ namespace shark {
 
             // Parse "required", "optional", or "repeated" and fill in "label"
             // with the value. Returns true if such a label is consumed.
-            bool ParseLabel(FieldCardinality* label,
+            bool parse_label(FieldCardinality* label,
                 const LocationRecorder& field_location);
 
             // Parse a type name and fill in "type" (if it is a primitive) or
             // "type_name" (if it is not) with the type parsed.
-            bool ParseType(SharkType* type, std::string* type_name);
+            bool parse_type(SharkType* type, std::string* type_name);
             // Parse a user-defined type and fill in "type_name" with the name.
             // If a primitive type is named, it is treated as an error.
-            bool ParseUserDefinedType(std::string* type_name);
+            bool parse_user_defined_type(std::string* type_name);
 
             // Parses field options, i.e. the stuff in square brackets at the end
             // of a field definition.  Also parses default value.
-            bool ParseFieldOptions(FieldDescriptorProto* field,
+            bool parse_field_options(FieldDescriptorProto* field,
                 const LocationRecorder& field_location,
                 const FileDescriptorProto* containing_file);
 
             // Parse the "default" option.  This needs special handling because its
             // type is the field's type.
-            bool ParseDefaultAssignment(FieldDescriptorProto* field,
+            bool parse_default_assignment(FieldDescriptorProto* field,
                 const LocationRecorder& field_location,
                 const FileDescriptorProto* containing_file);
 
-            bool ParseJsonName(FieldDescriptorProto* field,
+            bool parse_json_name(FieldDescriptorProto* field,
                 const LocationRecorder& field_location,
                 const FileDescriptorProto* containing_file);
 
@@ -479,7 +479,7 @@ namespace shark {
             // Parse a single option name/value pair, e.g. "ctype = CORD".  The name
             // identifies a field of the given Message, and the value of that field
             // is set to the parsed value.
-            bool ParseOption(Message* options, const LocationRecorder& options_location,
+            bool prse_option(Message* options, const LocationRecorder& options_location,
                 const FileDescriptorProto* containing_file,
                 OptionStyle style);
 
@@ -487,7 +487,7 @@ namespace shark {
             // of names separated by dots. Each name is either an identifier or a series
             // of identifiers separated by dots and enclosed in parentheses. E.g.,
             // "foo.(bar.baz).moo".
-            bool ParseOptionNamePart(UninterpretedOption* uninterpreted_option,
+            bool parse_option_name_part(UninterpretedOption* uninterpreted_option,
                 const LocationRecorder& part_location,
                 const FileDescriptorProto* containing_file);
 
@@ -498,10 +498,10 @@ namespace shark {
             //     { foo { bar: box } }        *value gets 'foo { bar: box }'
             //     {}                          *value gets ''
             //
-            // REQUIRES: LookingAt("{")
+            // REQUIRES: looking_at("{")
             // When finished successfully, we are looking at the first token past
             // the ending brace.
-            bool ParseUninterpretedBlock(std::string* value);
+            bool parse_uninterpreted_block(std::string* value);
 
             struct MapField {
                 // Whether the field is a map field.
@@ -517,13 +517,13 @@ namespace shark {
                     : is_map_field(false) { }
             };
             // Desugar the map syntax to generate a nested map entry message.
-            void GenerateMapEntry(const MapField& map_field, FieldDescriptorProto* field,
+            void generate_map_entry(const MapField& map_field, FieldDescriptorProto* field,
                 RepeatedPtrField<DescriptorProto>* messages);
 
             // Whether fields without label default to optional fields.
-            bool DefaultToOptionalFields() const { return false; }
+            bool default_to_optional_fields() const { return false; }
 
-            bool ValidateEnum(const EnumDescriptorProto* proto);
+            bool validate_enum(const EnumDescriptorProto* proto);
 
             // =================================================================
 
@@ -537,14 +537,14 @@ namespace shark {
             std::string syntax_identifier_;
 
             // Leading doc comments for the next declaration.  These are not complete
-            // yet; use ConsumeEndOfDeclaration() to get the complete comments.
+            // yet; use consume_end_of_declaration() to get the complete comments.
             std::string upcoming_doc_comments_;
 
             // Detached comments are not connected to any syntax entities. Elements in
             // this vector are paragraphs of comments separated by empty lines. The
             // detached comments will be put into the leading_detached_comments field for
             // the next element (See SourceCodeInfo.Location in descriptor.shark), when
-            // ConsumeEndOfDeclaration() is called.
+            // consume_end_of_declaration() is called.
             std::vector<std::string> upcoming_detached_comments_;
 
             KUMO_DISALLOW_COPY_AND_ASSIGN(Parser);

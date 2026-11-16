@@ -179,7 +179,7 @@ namespace shark {
                 TestUtil::ExpectPackedExtensionsSet(dest);
             }
 
-            TEST(WireFormatTest, ParseOneof) {
+            TEST(WireFormatTest, parse_oneof) {
                 UNITTEST::TestOneof2 source, dest;
                 std::string data;
 

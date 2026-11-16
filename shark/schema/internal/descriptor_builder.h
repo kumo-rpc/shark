@@ -124,10 +124,10 @@ namespace shark {
         // Maximum recursion depth corresponds to 32 nested message declarations.
         int recursion_depth_ = 32;
 
-        void AddError(const std::string& element_name, const Message& descriptor,
+        void add_error(const std::string& element_name, const Message& descriptor,
             DescriptorPool::ErrorCollector::ErrorLocation location,
             const std::string& error);
-        void AddError(const std::string& element_name, const Message& descriptor,
+        void add_error(const std::string& element_name, const Message& descriptor,
             DescriptorPool::ErrorCollector::ErrorLocation location,
             const char* error);
         void AddRecursiveImportError(const FileDescriptorProto& proto, int from_here);
@@ -141,7 +141,7 @@ namespace shark {
             DescriptorPool::ErrorCollector::ErrorLocation location,
             const std::string& undefined_symbol);
 
-        void AddWarning(const std::string& element_name, const Message& descriptor,
+        void add_warning(const std::string& element_name, const Message& descriptor,
             DescriptorPool::ErrorCollector::ErrorLocation location,
             const std::string& error);
 
@@ -328,7 +328,7 @@ namespace shark {
             ~OptionInterpreter();
 
             // Interprets the uninterpreted options in the specified Options message.
-            // On error, calls AddError() on the underlying builder and returns false.
+            // On error, calls add_error() on the underlying builder and returns false.
             // Otherwise returns true.
             bool InterpretOptions(OptionsToInterpret* options_to_interpret);
 
@@ -392,7 +392,7 @@ namespace shark {
             // option we're currently interpreting, and returns false.
             bool AddOptionError(DescriptorPool::ErrorCollector::ErrorLocation location,
                 const std::string& msg) {
-                builder_->AddError(options_to_interpret_->element_name,
+                builder_->add_error(options_to_interpret_->element_name,
                     *uninterpreted_option_, location, msg);
                 return false;
             }
@@ -474,7 +474,7 @@ namespace shark {
         // NOTE: Validation code must only reference the options in the mutable
         // descriptors, which are the ones that have been interpreted. The const
         // proto references are passed in only so they can be provided to calls to
-        // AddError(). Do not look at their options, which have not been interpreted.
+        // add_error(). Do not look at their options, which have not been interpreted.
         void ValidateFileOptions(FileDescriptor* file,
             const FileDescriptorProto& proto);
         void ValidateMessageOptions(Descriptor* message,
@@ -522,7 +522,7 @@ namespace shark {
         auto* options = alloc.AllocateArray<typename DescriptorT::OptionsType>(1);
 
         if (!orig_options.IsInitialized()) {
-            AddError(name_scope + "." + element_name, orig_options,
+            add_error(name_scope + "." + element_name, orig_options,
                 DescriptorPool::ErrorCollector::OPTION_NAME,
                 "Uninterpreted option is missing name or value.");
             return;

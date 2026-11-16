@@ -333,7 +333,7 @@ turbo::Status JsonStreamParser::ParseValue(TokenType type) {
     case BEGIN_ARRAY:
       return HandleBeginArray();
     case BEGIN_STRING:
-      return ParseString();
+      return parse_string();
     case BEGIN_NUMBER:
       return ParseNumber();
     case BEGIN_TRUE:
@@ -362,7 +362,7 @@ turbo::Status JsonStreamParser::ParseValue(TokenType type) {
   }
 }
 
-turbo::Status JsonStreamParser::ParseString() {
+turbo::Status JsonStreamParser::parse_string() {
   turbo::Status result = ParseStringHelper();
   if (result.ok()) {
     ow_->RenderString(key_, parsed_);

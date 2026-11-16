@@ -62,7 +62,7 @@
 //                       "\\\\[abfnrtv?\"'\\\\0-7]|"
 //                       "\\\\x[0-9a-fA-F])*\')");
 //   Verifying the correctness of this line noise is actually harder than
-//   verifying the correctness of ConsumeString(), defined below.  I'm not
+//   verifying the correctness of consume_string(), defined below.  I'm not
 //   even confident that the above is correct, after staring at it for some
 //   time.
 // - PCRE is fast, but there's still more overhead involved than the code
@@ -115,7 +115,7 @@ namespace shark {
             // this is a bad idea or if there is some way around this.
             //
             // These "character classes" are designed to be used in template methods.
-            // For instance, Tokenizer::ConsumeZeroOrMore<Whitespace>() will eat
+            // For instance, Tokenizer::consume_zero_or_more<Whitespace>() will eat
             // whitespace.
 
             // Note:  No class is allowed to contain '\0', since this is used to mark end-
@@ -473,7 +473,7 @@ namespace shark {
             current_.end_column = 0;
             current_.type = TYPE_START;
 
-            Refresh();
+            refresh();
         }
 
         Tokenizer::~Tokenizer() {
@@ -506,7 +506,7 @@ namespace shark {
         // -------------------------------------------------------------------
         // Internal helpers.
 
-        void Tokenizer::NextChar() {
+        void Tokenizer::next_char() {
             // Update our line and column counters based on the character being
             // consumed.
             if (current_char_ == '\n') {
@@ -523,11 +523,11 @@ namespace shark {
             if (buffer_pos_ < buffer_size_) {
                 current_char_ = buffer_[buffer_pos_];
             } else {
-                Refresh();
+                refresh();
             }
         }
 
-        void Tokenizer::Refresh() {
+        void Tokenizer::refresh() {
             if (read_error_) {
                 current_char_ = '\0';
                 return;
@@ -558,12 +558,12 @@ namespace shark {
             current_char_ = buffer_[0];
         }
 
-        inline void Tokenizer::RecordTo(std::string* target) {
+        inline void Tokenizer::record_to(std::string* target) {
             record_target_ = target;
             record_start_ = buffer_pos_;
         }
 
-        inline void Tokenizer::StopRecording() {
+        inline void Tokenizer::stop_recording() {
             // Note:  The if() is necessary because some STL implementations crash when
             //   you call string::append(NULL, 0), presumably because they are trying to
             //   be helpful by detecting the NULL pointer, even though there's nothing
@@ -576,16 +576,16 @@ namespace shark {
             record_start_ = -1;
         }
 
-        inline void Tokenizer::StartToken() {
+        inline void Tokenizer::start_token() {
             current_.type = TYPE_START; // Just for the sake of initializing it.
             current_.text.clear();
             current_.line = line_;
             current_.column = column_;
-            RecordTo(&current_.text);
+            record_to(&current_.text);
         }
 
-        inline void Tokenizer::EndToken() {
-            StopRecording();
+        inline void Tokenizer::end_token() {
+            stop_recording();
             current_.end_column = column_;
         }
 
@@ -593,23 +593,23 @@ namespace shark {
         // Helper methods that consume characters.
 
         template <typename CharacterClass>
-        inline bool Tokenizer::LookingAt() {
+        inline bool Tokenizer::looking_at() {
             return CharacterClass::InClass(current_char_);
         }
 
         template <typename CharacterClass>
-        inline bool Tokenizer::TryConsumeOne() {
+        inline bool Tokenizer::try_consume_one() {
             if (CharacterClass::InClass(current_char_)) {
-                NextChar();
+                next_char();
                 return true;
             } else {
                 return false;
             }
         }
 
-        inline bool Tokenizer::TryConsume(char c) {
+        inline bool Tokenizer::try_consume(char c) {
             if (current_char_ == c) {
-                NextChar();
+                next_char();
                 return true;
             } else {
                 return false;
@@ -617,19 +617,19 @@ namespace shark {
         }
 
         template <typename CharacterClass>
-        inline void Tokenizer::ConsumeZeroOrMore() {
+        inline void Tokenizer::consume_zero_or_more() {
             while (CharacterClass::InClass(current_char_)) {
-                NextChar();
+                next_char();
             }
         }
 
         template <typename CharacterClass>
-        inline void Tokenizer::ConsumeOneOrMore(const char* error) {
+        inline void Tokenizer::consume_one_or_more(const char* error) {
             if (!CharacterClass::InClass(current_char_)) {
-                AddError(error);
+                add_error(error);
             } else {
                 do {
-                    NextChar();
+                    next_char();
                 } while (CharacterClass::InClass(current_char_));
             }
         }
@@ -638,115 +638,115 @@ namespace shark {
         // Methods that read whole patterns matching certain kinds of tokens
         // or comments.
 
-        void Tokenizer::ConsumeString(char delimiter) {
+        void Tokenizer::consume_string(char delimiter) {
             while (true) {
                 switch (current_char_) {
                 case '\0':
-                    AddError("Unexpected end of string.");
+                    add_error("Unexpected end of string.");
                     return;
 
                 case '\n': {
                     if (!allow_multiline_strings_) {
-                        AddError("String literals cannot cross line boundaries.");
+                        add_error("String literals cannot cross line boundaries.");
                         return;
                     }
-                    NextChar();
+                    next_char();
                     break;
                 }
 
                 case '\\': {
                     // An escape sequence.
-                    NextChar();
-                    if (TryConsumeOne<Escape>()) {
+                    next_char();
+                    if (try_consume_one<Escape>()) {
                         // Valid escape sequence.
-                    } else if (TryConsumeOne<OctalDigit>()) {
+                    } else if (try_consume_one<OctalDigit>()) {
                         // Possibly followed by two more octal digits, but these will
                         // just be consumed by the main loop anyway so we don't need
                         // to do so explicitly here.
-                    } else if (TryConsume('x')) {
-                        if (!TryConsumeOne<HexDigit>()) {
-                            AddError("Expected hex digits for escape sequence.");
+                    } else if (try_consume('x')) {
+                        if (!try_consume_one<HexDigit>()) {
+                            add_error("Expected hex digits for escape sequence.");
                         }
                         // Possibly followed by another hex digit, but again we don't care.
-                    } else if (TryConsume('u')) {
-                        if (!TryConsumeOne<HexDigit>() || !TryConsumeOne<HexDigit>() || !TryConsumeOne<HexDigit>() || !TryConsumeOne<HexDigit>()) {
-                            AddError("Expected four hex digits for \\u escape sequence.");
+                    } else if (try_consume('u')) {
+                        if (!try_consume_one<HexDigit>() || !try_consume_one<HexDigit>() || !try_consume_one<HexDigit>() || !try_consume_one<HexDigit>()) {
+                            add_error("Expected four hex digits for \\u escape sequence.");
                         }
-                    } else if (TryConsume('U')) {
+                    } else if (try_consume('U')) {
                         // We expect 8 hex digits; but only the range up to 0x10ffff is
                         // legal.
-                        if (!TryConsume('0') || !TryConsume('0') || !(TryConsume('0') || TryConsume('1')) || !TryConsumeOne<HexDigit>() || !TryConsumeOne<HexDigit>() || !TryConsumeOne<HexDigit>() || !TryConsumeOne<HexDigit>() || !TryConsumeOne<HexDigit>()) {
-                            AddError(
+                        if (!try_consume('0') || !try_consume('0') || !(try_consume('0') || try_consume('1')) || !try_consume_one<HexDigit>() || !try_consume_one<HexDigit>() || !try_consume_one<HexDigit>() || !try_consume_one<HexDigit>() || !try_consume_one<HexDigit>()) {
+                            add_error(
                                 "Expected eight hex digits up to 10ffff for \\U escape "
                                 "sequence");
                         }
                     } else {
-                        AddError("Invalid escape sequence in string literal.");
+                        add_error("Invalid escape sequence in string literal.");
                     }
                     break;
                 }
 
                 default: {
                     if (current_char_ == delimiter) {
-                        NextChar();
+                        next_char();
                         return;
                     }
-                    NextChar();
+                    next_char();
                     break;
                 }
                 }
             }
         }
 
-        Tokenizer::TokenType Tokenizer::ConsumeNumber(bool started_with_zero,
+        Tokenizer::TokenType Tokenizer::consume_number(bool started_with_zero,
             bool started_with_dot) {
             bool is_float = false;
 
-            if (started_with_zero && (TryConsume('x') || TryConsume('X'))) {
+            if (started_with_zero && (try_consume('x') || try_consume('X'))) {
                 // A hex number (started with "0x").
-                ConsumeOneOrMore<HexDigit>("\"0x\" must be followed by hex digits.");
+                consume_one_or_more<HexDigit>("\"0x\" must be followed by hex digits.");
 
-            } else if (started_with_zero && LookingAt<Digit>()) {
+            } else if (started_with_zero && looking_at<Digit>()) {
                 // An octal number (had a leading zero).
-                ConsumeZeroOrMore<OctalDigit>();
-                if (LookingAt<Digit>()) {
-                    AddError("Numbers starting with leading zero must be in octal.");
-                    ConsumeZeroOrMore<Digit>();
+                consume_zero_or_more<OctalDigit>();
+                if (looking_at<Digit>()) {
+                    add_error("Numbers starting with leading zero must be in octal.");
+                    consume_zero_or_more<Digit>();
                 }
 
             } else {
                 // A decimal number.
                 if (started_with_dot) {
                     is_float = true;
-                    ConsumeZeroOrMore<Digit>();
+                    consume_zero_or_more<Digit>();
                 } else {
-                    ConsumeZeroOrMore<Digit>();
+                    consume_zero_or_more<Digit>();
 
-                    if (TryConsume('.')) {
+                    if (try_consume('.')) {
                         is_float = true;
-                        ConsumeZeroOrMore<Digit>();
+                        consume_zero_or_more<Digit>();
                     }
                 }
 
-                if (TryConsume('e') || TryConsume('E')) {
+                if (try_consume('e') || try_consume('E')) {
                     is_float = true;
-                    TryConsume('-') || TryConsume('+');
-                    ConsumeOneOrMore<Digit>("\"e\" must be followed by exponent.");
+                    try_consume('-') || try_consume('+');
+                    consume_one_or_more<Digit>("\"e\" must be followed by exponent.");
                 }
 
-                if (allow_f_after_float_ && (TryConsume('f') || TryConsume('F'))) {
+                if (allow_f_after_float_ && (try_consume('f') || try_consume('F'))) {
                     is_float = true;
                 }
             }
 
-            if (LookingAt<Letter>() && require_space_after_number_) {
-                AddError("Need space between number and identifier.");
+            if (looking_at<Letter>() && require_space_after_number_) {
+                add_error("Need space between number and identifier.");
             } else if (current_char_ == '.') {
                 if (is_float) {
-                    AddError(
+                    add_error(
                         "Already saw decimal point or exponent; can't have another one.");
                 } else {
-                    AddError("Hex and octal numbers must be integers.");
+                    add_error("Hex and octal numbers must be integers.");
                 }
             }
 
@@ -755,15 +755,15 @@ namespace shark {
 
         void Tokenizer::ConsumeLineComment(std::string* content) {
             if (content != NULL)
-                RecordTo(content);
+                record_to(content);
 
             while (current_char_ != '\0' && current_char_ != '\n') {
-                NextChar();
+                next_char();
             }
-            TryConsume('\n');
+            try_consume('\n');
 
             if (content != NULL)
-                StopRecording();
+                stop_recording();
         }
 
         void Tokenizer::ConsumeBlockComment(std::string* content) {
@@ -771,57 +771,57 @@ namespace shark {
             int start_column = column_ - 2;
 
             if (content != NULL)
-                RecordTo(content);
+                record_to(content);
 
             while (true) {
                 while (current_char_ != '\0' && current_char_ != '*' && current_char_ != '/' && current_char_ != '\n') {
-                    NextChar();
+                    next_char();
                 }
 
-                if (TryConsume('\n')) {
+                if (try_consume('\n')) {
                     if (content != NULL)
-                        StopRecording();
+                        stop_recording();
 
-                    // Consume leading whitespace and asterisk;
-                    ConsumeZeroOrMore<WhitespaceNoNewline>();
-                    if (TryConsume('*')) {
-                        if (TryConsume('/')) {
+                    // consume leading whitespace and asterisk;
+                    consume_zero_or_more<WhitespaceNoNewline>();
+                    if (try_consume('*')) {
+                        if (try_consume('/')) {
                             // End of comment.
                             break;
                         }
                     }
 
                     if (content != NULL)
-                        RecordTo(content);
-                } else if (TryConsume('*') && TryConsume('/')) {
+                        record_to(content);
+                } else if (try_consume('*') && try_consume('/')) {
                     // End of comment.
                     if (content != NULL) {
-                        StopRecording();
+                        stop_recording();
                         // Strip trailing "*/".
                         content->erase(content->size() - 2);
                     }
                     break;
-                } else if (TryConsume('/') && current_char_ == '*') {
+                } else if (try_consume('/') && current_char_ == '*') {
                     // Note:  We didn't consume the '*' because if there is a '/' after it
                     //   we want to interpret that as the end of the comment.
-                    AddError(
+                    add_error(
                         "\"/*\" inside block comment.  Block comments cannot be nested.");
                 } else if (current_char_ == '\0') {
-                    AddError("End-of-file inside block comment.");
-                    error_collector_->AddError(start_line, start_column,
+                    add_error("End-of-file inside block comment.");
+                    error_collector_->add_error(start_line, start_column,
                         "  Comment started here.");
                     if (content != NULL)
-                        StopRecording();
+                        stop_recording();
                     break;
                 }
             }
         }
 
         Tokenizer::NextCommentStatus Tokenizer::TryConsumeCommentStart() {
-            if (comment_style_ == CPP_COMMENT_STYLE && TryConsume('/')) {
-                if (TryConsume('/')) {
+            if (comment_style_ == CPP_COMMENT_STYLE && try_consume('/')) {
+                if (try_consume('/')) {
                     return LINE_COMMENT;
-                } else if (TryConsume('*')) {
+                } else if (try_consume('*')) {
                     return BLOCK_COMMENT;
                 } else {
                     // Oops, it was just a slash.  Return it.
@@ -832,35 +832,35 @@ namespace shark {
                     current_.end_column = column_;
                     return SLASH_NOT_COMMENT;
                 }
-            } else if (comment_style_ == SH_COMMENT_STYLE && TryConsume('#')) {
+            } else if (comment_style_ == SH_COMMENT_STYLE && try_consume('#')) {
                 return LINE_COMMENT;
             } else {
                 return NO_COMMENT;
             }
         }
 
-        bool Tokenizer::TryConsumeWhitespace() {
+        bool Tokenizer::try_consume_whitespace() {
             if (report_newlines_) {
-                if (TryConsumeOne<WhitespaceNoNewline>()) {
-                    ConsumeZeroOrMore<WhitespaceNoNewline>();
+                if (try_consume_one<WhitespaceNoNewline>()) {
+                    consume_zero_or_more<WhitespaceNoNewline>();
                     current_.type = TYPE_WHITESPACE;
                     return true;
                 }
                 return false;
             }
-            if (TryConsumeOne<Whitespace>()) {
-                ConsumeZeroOrMore<Whitespace>();
+            if (try_consume_one<Whitespace>()) {
+                consume_zero_or_more<Whitespace>();
                 current_.type = TYPE_WHITESPACE;
                 return report_whitespace_;
             }
             return false;
         }
 
-        bool Tokenizer::TryConsumeNewline() {
+        bool Tokenizer::try_consume_newline() {
             if (!report_whitespace_ || !report_newlines_) {
                 return false;
             }
-            if (TryConsume('\n')) {
+            if (try_consume('\n')) {
                 current_.type = TYPE_NEWLINE;
                 return true;
             }
@@ -873,9 +873,9 @@ namespace shark {
             previous_ = current_;
 
             while (!read_error_) {
-                StartToken();
-                bool report_token = TryConsumeWhitespace() || TryConsumeNewline();
-                EndToken();
+                start_token();
+                bool report_token = try_consume_whitespace() || try_consume_newline();
+                end_token();
                 if (report_token) {
                     return true;
                 }
@@ -897,64 +897,64 @@ namespace shark {
                 if (read_error_)
                     break;
 
-                if (LookingAt<Unprintable>() || current_char_ == '\0') {
-                    AddError("Invalid control characters encountered in text.");
-                    NextChar();
+                if (looking_at<Unprintable>() || current_char_ == '\0') {
+                    add_error("Invalid control characters encountered in text.");
+                    next_char();
                     // Skip more unprintable characters, too.  But, remember that '\0' is
                     // also what current_char_ is set to after EOF / read error.  We have
                     // to be careful not to go into an infinite loop of trying to consume
                     // it, so make sure to check read_error_ explicitly before consuming
                     // '\0'.
-                    while (TryConsumeOne<Unprintable>() || (!read_error_ && TryConsume('\0'))) {
+                    while (try_consume_one<Unprintable>() || (!read_error_ && try_consume('\0'))) {
                         // Ignore.
                     }
 
                 } else {
                     // Reading some sort of token.
-                    StartToken();
+                    start_token();
 
-                    if (TryConsumeOne<Letter>()) {
-                        ConsumeZeroOrMore<Alphanumeric>();
+                    if (try_consume_one<Letter>()) {
+                        consume_zero_or_more<Alphanumeric>();
                         current_.type = TYPE_IDENTIFIER;
-                    } else if (TryConsume('0')) {
-                        current_.type = ConsumeNumber(true, false);
-                    } else if (TryConsume('.')) {
+                    } else if (try_consume('0')) {
+                        current_.type = consume_number(true, false);
+                    } else if (try_consume('.')) {
                         // This could be the beginning of a floating-point number, or it could
                         // just be a '.' symbol.
 
-                        if (TryConsumeOne<Digit>()) {
+                        if (try_consume_one<Digit>()) {
                             // It's a floating-point number.
                             if (previous_.type == TYPE_IDENTIFIER && current_.line == previous_.line && current_.column == previous_.end_column) {
                                 // We don't accept syntax like "blah.123".
-                                error_collector_->AddError(
+                                error_collector_->add_error(
                                     line_, column_ - 2,
                                     "Need space between identifier and decimal point.");
                             }
-                            current_.type = ConsumeNumber(false, true);
+                            current_.type = consume_number(false, true);
                         } else {
                             current_.type = TYPE_SYMBOL;
                         }
-                    } else if (TryConsumeOne<Digit>()) {
-                        current_.type = ConsumeNumber(false, false);
-                    } else if (TryConsume('\"')) {
-                        ConsumeString('\"');
+                    } else if (try_consume_one<Digit>()) {
+                        current_.type = consume_number(false, false);
+                    } else if (try_consume('\"')) {
+                        consume_string('\"');
                         current_.type = TYPE_STRING;
-                    } else if (TryConsume('\'')) {
-                        ConsumeString('\'');
+                    } else if (try_consume('\'')) {
+                        consume_string('\'');
                         current_.type = TYPE_STRING;
                     } else {
                         // Check if the high order bit is set.
                         if (current_char_ & 0x80) {
-                            error_collector_->AddError(
+                            error_collector_->add_error(
                                 line_, column_,
                                 turbo::str_sprintf("Interpreting non ascii codepoint %d.",
                                     static_cast<unsigned char>(current_char_)));
                         }
-                        NextChar();
+                        next_char();
                         current_.type = TYPE_SYMBOL;
                     }
 
-                    EndToken();
+                    end_token();
                     return true;
                 }
             }
@@ -1072,7 +1072,7 @@ namespace shark {
 
         } // namespace
 
-        bool Tokenizer::NextWithComments(std::string* prev_trailing_comments,
+        bool Tokenizer::next_with_comments(std::string* prev_trailing_comments,
             std::vector<std::string>* detached_comments,
             std::string* next_leading_comments) {
             CommentCollector collector(prev_trailing_comments, detached_comments,
@@ -1081,9 +1081,9 @@ namespace shark {
             if (current_.type == TYPE_START) {
                 // Ignore unicode byte order mark(BOM) if it appears at the file
                 // beginning. Only UTF-8 BOM (0xEF 0xBB 0xBF) is accepted.
-                if (TryConsume(static_cast<char>(0xEF))) {
-                    if (!TryConsume(static_cast<char>(0xBB)) || !TryConsume(static_cast<char>(0xBF))) {
-                        AddError(
+                if (try_consume(static_cast<char>(0xEF))) {
+                    if (!try_consume(static_cast<char>(0xBB)) || !try_consume(static_cast<char>(0xBF))) {
+                        add_error(
                             "Proto file starts with 0xEF but not UTF-8 BOM. "
                             "Only UTF-8 is accepted for proto file.");
                         return false;
@@ -1093,7 +1093,7 @@ namespace shark {
             } else {
                 // A comment appearing on the same line must be attached to the previous
                 // declaration.
-                ConsumeZeroOrMore<WhitespaceNoNewline>();
+                consume_zero_or_more<WhitespaceNoNewline>();
                 switch (TryConsumeCommentStart()) {
                 case LINE_COMMENT:
                     ConsumeLineComment(collector.GetBufferForLineComment());
@@ -1105,8 +1105,8 @@ namespace shark {
                 case BLOCK_COMMENT:
                     ConsumeBlockComment(collector.GetBufferForBlockComment());
 
-                    ConsumeZeroOrMore<WhitespaceNoNewline>();
-                    if (!TryConsume('\n')) {
+                    consume_zero_or_more<WhitespaceNoNewline>();
+                    if (!try_consume('\n')) {
                         // Oops, the next token is on the same line.  If we recorded a comment
                         // we really have no idea which token it should be attached to.
                         collector.ClearBuffer();
@@ -1120,7 +1120,7 @@ namespace shark {
                 case SLASH_NOT_COMMENT:
                     return true;
                 case NO_COMMENT:
-                    if (!TryConsume('\n')) {
+                    if (!try_consume('\n')) {
                         // The next token is on the same line.  There are no comments.
                         return Next();
                     }
@@ -1130,7 +1130,7 @@ namespace shark {
 
             // OK, we are now on the line *after* the previous token.
             while (true) {
-                ConsumeZeroOrMore<WhitespaceNoNewline>();
+                consume_zero_or_more<WhitespaceNoNewline>();
 
                 switch (TryConsumeCommentStart()) {
                 case LINE_COMMENT:
@@ -1139,15 +1139,15 @@ namespace shark {
                 case BLOCK_COMMENT:
                     ConsumeBlockComment(collector.GetBufferForBlockComment());
 
-                    // Consume the rest of the line so that we don't interpret it as a
+                    // consume the rest of the line so that we don't interpret it as a
                     // blank line the next time around the loop.
-                    ConsumeZeroOrMore<WhitespaceNoNewline>();
-                    TryConsume('\n');
+                    consume_zero_or_more<WhitespaceNoNewline>();
+                    try_consume('\n');
                     break;
                 case SLASH_NOT_COMMENT:
                     return true;
                 case NO_COMMENT:
-                    if (TryConsume('\n')) {
+                    if (try_consume('\n')) {
                         // Completely blank line.
                         collector.Flush();
                         collector.DetachFromPrev();
@@ -1172,7 +1172,7 @@ namespace shark {
         // are given is text that the tokenizer actually parsed as a token
         // of the given type.
 
-        bool Tokenizer::ParseInteger(const std::string& text, uint64_t max_value,
+        bool Tokenizer::parse_integer(const std::string& text, uint64_t max_value,
             uint64_t* output) {
             // We can't just use strtoull() because (a) it accepts negative numbers,
             // (b) We want additional range checks, (c) it reports overflows via errno.
@@ -1243,7 +1243,7 @@ namespace shark {
             return true;
         }
 
-        double Tokenizer::ParseFloat(const std::string& text) {
+        double Tokenizer::parse_float(const std::string& text) {
             const char* start = text.c_str();
             double result = 0;
             auto parsed = turbo::from_chars(start, start + text.size(), result);
@@ -1270,7 +1270,7 @@ namespace shark {
 
             GOOGLE_LOG_IF(DFATAL,
                 static_cast<size_t>(end - start) != text.size() || *start == '-')
-                << " Tokenizer::ParseFloat() passed text that could not have been"
+                << " Tokenizer::parse_float() passed text that could not have been"
                    " tokenized as a float: "
                 << turbo::c_escape(text);
             return result;
@@ -1295,7 +1295,7 @@ namespace shark {
                 len = 4;
             } else {
                 // Unicode code points end at 0x10FFFF, so this is out-of-range.
-                // ConsumeString permits hex values up to 0x1FFFFF, and FetchUnicodePoint
+                // consume_string permits hex values up to 0x1FFFFF, and FetchUnicodePoint
                 // doesn't perform a range check.
                 turbo::str_append_sprintf(output, "\\U%08x", code_point);
                 return;
@@ -1384,13 +1384,13 @@ namespace shark {
 
         // The text string must begin and end with single or double quote
         // characters.
-        void Tokenizer::ParseStringAppend(const std::string& text,
+        void Tokenizer::parse_string_append(const std::string& text,
             std::string* output) {
             // Reminder: text[0] is always a quote character.  (If text is
             // empty, it's invalid, so we'll just return).
             const size_t text_size = text.size();
             if (text_size == 0) {
-                GOOGLE_LOG(DFATAL) << " Tokenizer::ParseStringAppend() passed text that could not"
+                GOOGLE_LOG(DFATAL) << " Tokenizer::parse_string_append() passed text that could not"
                                       " have been tokenized as a string: "
                                    << turbo::c_escape(text);
                 return;
@@ -1472,7 +1472,7 @@ namespace shark {
             return true;
         }
 
-        bool Tokenizer::IsIdentifier(const std::string& text) {
+        bool Tokenizer::is_identifier(const std::string& text) {
             // Mirrors IDENTIFIER definition in Tokenizer::Next() above.
             if (text.size() == 0)
                 return false;

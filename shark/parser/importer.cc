@@ -97,9 +97,9 @@ namespace shark::compiler {
         bool had_errors() { return had_errors_; }
 
         // implements ErrorCollector ---------------------------------------
-        void AddError(int line, int column, const std::string& message) override {
+        void add_error(int line, int column, const std::string& message) override {
             if (multi_file_error_collector_ != nullptr) {
-                multi_file_error_collector_->AddError(filename_, line, column, message);
+                multi_file_error_collector_->add_error(filename_, line, column, message);
             }
             had_errors_ = true;
         }
@@ -138,7 +138,7 @@ namespace shark::compiler {
                 return true;
             }
             if (error_collector_ != nullptr) {
-                error_collector_->AddError(filename, -1, 0,
+                error_collector_->add_error(filename, -1, 0,
                     source_tree_->GetLastErrorMessage());
             }
             return false;
@@ -181,7 +181,7 @@ namespace shark::compiler {
     SourceTreeDescriptorDatabase::ValidationErrorCollector::
         ~ValidationErrorCollector() { }
 
-    void SourceTreeDescriptorDatabase::ValidationErrorCollector::AddError(
+    void SourceTreeDescriptorDatabase::ValidationErrorCollector::add_error(
         const std::string& filename, const std::string& element_name,
         const Message* descriptor, ErrorLocation location,
         const std::string& message) {
@@ -195,10 +195,10 @@ namespace shark::compiler {
         } else {
             owner_->source_locations_.Find(descriptor, location, &line, &column);
         }
-        owner_->error_collector_->AddError(filename, line, column, message);
+        owner_->error_collector_->add_error(filename, line, column, message);
     }
 
-    void SourceTreeDescriptorDatabase::ValidationErrorCollector::AddWarning(
+    void SourceTreeDescriptorDatabase::ValidationErrorCollector::add_warning(
         const std::string& filename, const std::string& element_name,
         const Message* descriptor, ErrorLocation location,
         const std::string& message) {
@@ -212,7 +212,7 @@ namespace shark::compiler {
         } else {
             owner_->source_locations_.Find(descriptor, location, &line, &column);
         }
-        owner_->error_collector_->AddWarning(filename, line, column, message);
+        owner_->error_collector_->add_warning(filename, line, column, message);
     }
 
     // ===================================================================

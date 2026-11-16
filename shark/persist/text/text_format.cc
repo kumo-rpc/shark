@@ -290,7 +290,7 @@ namespace shark {
                 tokenizer_.set_allow_multiline_strings(true);
             }
 
-            // Consume the starting token.
+            // consume the starting token.
             tokenizer_.Next();
         }
         ~ParserImpl() { }
@@ -300,9 +300,9 @@ namespace shark {
         // false if an error occurs (an error will also be logged to
         // GOOGLE_LOG(ERROR)).
         bool Parse(Message* output) {
-            // Consume fields until we cannot do so anymore.
+            // consume fields until we cannot do so anymore.
             while (true) {
-                if (LookingAtType(io::Tokenizer::TYPE_END)) {
+                if (looking_at_type(io::Tokenizer::TYPE_END)) {
                     // Ensures recursion limit properly unwinded, but only for success
                     // cases. This implicitly avoids the check when `Parse` returns false
                     // via `DO(...)`.
@@ -326,7 +326,7 @@ namespace shark {
             } else {
                 suc = ConsumeFieldValue(output, output->GetReflection(), field);
             }
-            return suc && LookingAtType(io::Tokenizer::TYPE_END);
+            return suc && looking_at_type(io::Tokenizer::TYPE_END);
         }
 
         void ReportError(int line, int col, const std::string& message) {
@@ -341,7 +341,7 @@ namespace shark {
                                       << root_message_type_->full_name() << ": " << message;
                 }
             } else {
-                error_collector_->AddError(line, col, message);
+                error_collector_->add_error(line, col, message);
             }
         }
 
@@ -356,7 +356,7 @@ namespace shark {
                                         << root_message_type_->full_name() << ": " << message;
                 }
             } else {
-                error_collector_->AddWarning(line, col, message);
+                error_collector_->add_warning(line, col, message);
             }
         }
 
@@ -387,21 +387,21 @@ namespace shark {
         // This method checks to see that the end delimiter at the conclusion of
         // the consumption matches the starting delimiter passed in here.
         bool ConsumeMessage(Message* message, const std::string delimiter) {
-            while (!LookingAt(">") && !LookingAt("}")) {
+            while (!looking_at(">") && !looking_at("}")) {
                 DO(ConsumeField(message));
             }
 
             // Confirm that we have a valid ending delimiter.
-            DO(Consume(delimiter));
+            DO(consume(delimiter));
             return true;
         }
 
-        // Consume either "<" or "{".
+        // consume either "<" or "{".
         bool ConsumeMessageDelimiter(std::string* delimiter) {
-            if (TryConsume("<")) {
+            if (try_consume("<")) {
                 *delimiter = ">";
             } else {
-                DO(Consume("{"));
+                DO(consume("{"));
                 *delimiter = "}";
             }
             return true;
@@ -423,15 +423,15 @@ namespace shark {
             const FieldDescriptor* any_value_field;
             if (internal::GetAnyFieldDescriptors(*message, &any_type_url_field,
                     &any_value_field)
-                && TryConsume("[")) {
+                && try_consume("[")) {
                 std::string full_type_name, prefix;
                 DO(ConsumeAnyTypeUrl(&full_type_name, &prefix));
                 std::string prefix_and_full_type_name = turbo::str_cat(prefix, full_type_name);
                 DO(ConsumeBeforeWhitespace("]"));
-                TryConsumeWhitespace();
+                try_consume_whitespace();
                 // ':' is optional between message labels and values.
                 if (TryConsumeBeforeWhitespace(":")) {
-                    TryConsumeWhitespace();
+                    try_consume_whitespace();
                 }
                 std::string serialized_value;
                 const Descriptor* value_descriptor = finder_ ? finder_->FindAnyType(*message, prefix, full_type_name)
@@ -454,11 +454,11 @@ namespace shark {
                     std::move(serialized_value));
                 return true;
             }
-            if (TryConsume("[")) {
+            if (try_consume("[")) {
                 // Extension.
                 DO(ConsumeFullTypeName(&field_name));
                 DO(ConsumeBeforeWhitespace("]"));
-                TryConsumeWhitespace();
+                try_consume_whitespace();
 
                 field = finder_ ? finder_->FindExtension(message, field_name)
                                 : DefaultFinderFindExtension(message, field_name);
@@ -475,7 +475,7 @@ namespace shark {
                 }
             } else {
                 DO(ConsumeIdentifierBeforeWhitespace(&field_name));
-                TryConsumeWhitespace();
+                try_consume_whitespace();
 
                 int32_t field_number;
                 if (allow_field_number_ && turbo::SimpleAtoi(field_name, &field_number)) {
@@ -524,8 +524,8 @@ namespace shark {
                 // If there is no ":" or there is a "{" or "<" after ":", this field has
                 // to be a message or the input is ill-formed.
                 if (TryConsumeBeforeWhitespace(":")) {
-                    TryConsumeWhitespace();
-                    if (!LookingAt("{") && !LookingAt("<")) {
+                    try_consume_whitespace();
+                    if (!looking_at("{") && !looking_at("<")) {
                         return SkipFieldValue();
                     }
                 }
@@ -557,12 +557,12 @@ namespace shark {
                 // ':' is optional here.
                 bool consumed_semicolon = TryConsumeBeforeWhitespace(":");
                 if (consumed_semicolon) {
-                    TryConsumeWhitespace();
+                    try_consume_whitespace();
                 }
-                if (consumed_semicolon && field->options().weak() && LookingAtType(io::Tokenizer::TYPE_STRING)) {
+                if (consumed_semicolon && field->options().weak() && looking_at_type(io::Tokenizer::TYPE_STRING)) {
                     // we are getting a bytes string for a weak field.
                     std::string tmp;
-                    DO(ConsumeString(&tmp));
+                    DO(consume_string(&tmp));
                     MessageFactory* factory = finder_ ? finder_->FindExtensionFactory(field) : nullptr;
                     reflection->MutableMessage(message, field, factory)
                         ->ParseFromString(tmp);
@@ -571,12 +571,12 @@ namespace shark {
             } else {
                 // ':' is required here.
                 DO(ConsumeBeforeWhitespace(":"));
-                TryConsumeWhitespace();
+                try_consume_whitespace();
             }
 
-            if (field->is_repeated() && TryConsume("[")) {
+            if (field->is_repeated() && try_consume("[")) {
                 // Short repeated format, e.g.  "foo: [1, 2, 3]".
-                if (!TryConsume("]")) {
+                if (!try_consume("]")) {
                     // "foo: []" is treated as empty.
                     while (true) {
                         if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
@@ -585,10 +585,10 @@ namespace shark {
                         } else {
                             DO(ConsumeFieldValue(message, reflection, field));
                         }
-                        if (TryConsume("]")) {
+                        if (try_consume("]")) {
                             break;
                         }
-                        DO(Consume(","));
+                        DO(consume(","));
                     }
                 }
             } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
@@ -599,7 +599,7 @@ namespace shark {
         label_skip_parsing:
             // For historical reasons, fields may optionally be separated by commas or
             // semicolons.
-            TryConsume(";") || TryConsume(",");
+            try_consume(";") || try_consume(",");
 
             if (field->options().deprecated()) {
                 ReportWarning("text format contains deprecated field \"" + field_name + "\"");
@@ -622,14 +622,14 @@ namespace shark {
         // Skips the next field including the field's name and value.
         bool SkipField() {
             std::string field_name;
-            if (TryConsume("[")) {
+            if (try_consume("[")) {
                 // Extension name or type URL.
                 DO(ConsumeTypeUrlOrFullTypeName(&field_name));
                 DO(ConsumeBeforeWhitespace("]"));
             } else {
                 DO(ConsumeIdentifierBeforeWhitespace(&field_name));
             }
-            TryConsumeWhitespace();
+            try_consume_whitespace();
 
             // Try to guess the type of this field.
             // If this field is not a message, there should be a ":" between the
@@ -638,8 +638,8 @@ namespace shark {
             // If there is no ":" or there is a "{" or "<" after ":", this field has
             // to be a message or the input is ill-formed.
             if (TryConsumeBeforeWhitespace(":")) {
-                TryConsumeWhitespace();
-                if (!LookingAt("{") && !LookingAt("<")) {
+                try_consume_whitespace();
+                if (!looking_at("{") && !looking_at("<")) {
                     DO(SkipFieldValue());
                 } else {
                     DO(SkipFieldMessage());
@@ -649,7 +649,7 @@ namespace shark {
             }
             // For historical reasons, fields may optionally be separated by commas or
             // semicolons.
-            TryConsume(";") || TryConsume(",");
+            try_consume(";") || try_consume(",");
             return true;
         }
 
@@ -700,10 +700,10 @@ namespace shark {
 
             std::string delimiter;
             DO(ConsumeMessageDelimiter(&delimiter));
-            while (!LookingAt(">") && !LookingAt("}")) {
+            while (!looking_at(">") && !looking_at("}")) {
                 DO(SkipField());
             }
-            DO(Consume(delimiter));
+            DO(consume(delimiter));
 
             ++recursion_limit_;
             return true;
@@ -724,21 +724,21 @@ namespace shark {
             switch (field->cpp_type()) {
             case SharkFieldCppType::CPPTYPE_INT8: {
                 int64_t value;
-                DO(ConsumeSignedInteger(&value, 127));
+                DO(consume_signed_integer(&value, 127));
                 SET_FIELD(Int32, static_cast<int32_t>(value));
                 break;
             }
 
             case SharkFieldCppType::CPPTYPE_INT16: {
                 int64_t value;
-                DO(ConsumeSignedInteger(&value, 32767));
+                DO(consume_signed_integer(&value, 32767));
                 SET_FIELD(Int32, static_cast<int32_t>(value));
                 break;
             }
 
             case SharkFieldCppType::CPPTYPE_INT32: {
                 int64_t value;
-                DO(ConsumeSignedInteger(&value, kint32max));
+                DO(consume_signed_integer(&value, kint32max));
                 SET_FIELD(Int32, static_cast<int32_t>(value));
                 break;
             }
@@ -766,7 +766,7 @@ namespace shark {
 
             case SharkFieldCppType::CPPTYPE_INT64: {
                 int64_t value;
-                DO(ConsumeSignedInteger(&value, kint64max));
+                DO(consume_signed_integer(&value, kint64max));
                 SET_FIELD(Int64, value);
                 break;
             }
@@ -794,19 +794,19 @@ namespace shark {
 
             case SharkFieldCppType::CPPTYPE_STRING: {
                 std::string value;
-                DO(ConsumeString(&value));
+                DO(consume_string(&value));
                 SET_FIELD(String, std::move(value));
                 break;
             }
 
             case SharkFieldCppType::CPPTYPE_BOOL: {
-                if (LookingAtType(io::Tokenizer::TYPE_INTEGER)) {
+                if (looking_at_type(io::Tokenizer::TYPE_INTEGER)) {
                     uint64_t value;
                     DO(ConsumeUnsignedInteger(&value, 1));
                     SET_FIELD(Bool, value);
                 } else {
                     std::string value;
-                    DO(ConsumeIdentifier(&value));
+                    DO(consume_identifier(&value));
                     if (value == "true" || value == "True" || value == "t") {
                         SET_FIELD(Bool, true);
                     } else if (value == "false" || value == "False" || value == "f") {
@@ -825,13 +825,13 @@ namespace shark {
                 const EnumDescriptor* enum_type = field->enum_type();
                 const EnumValueDescriptor* enum_value = nullptr;
 
-                if (LookingAtType(io::Tokenizer::TYPE_IDENTIFIER)) {
-                    DO(ConsumeIdentifier(&value));
+                if (looking_at_type(io::Tokenizer::TYPE_IDENTIFIER)) {
+                    DO(consume_identifier(&value));
                     // Find the enumeration value.
                     enum_value = enum_type->FindValueByName(value);
 
-                } else if (LookingAt("-") || LookingAtType(io::Tokenizer::TYPE_INTEGER)) {
-                    DO(ConsumeSignedInteger(&int_value, kint32max));
+                } else if (looking_at("-") || looking_at_type(io::Tokenizer::TYPE_INTEGER)) {
+                    DO(consume_signed_integer(&int_value, kint32max));
                     value = turbo::str_cat(int_value); // for error reporting
                     enum_value = enum_type->FindValueByNumber(int_value);
                 } else {
@@ -880,24 +880,24 @@ namespace shark {
                 return false;
             }
 
-            if (LookingAtType(io::Tokenizer::TYPE_STRING)) {
-                while (LookingAtType(io::Tokenizer::TYPE_STRING)) {
+            if (looking_at_type(io::Tokenizer::TYPE_STRING)) {
+                while (looking_at_type(io::Tokenizer::TYPE_STRING)) {
                     tokenizer_.Next();
                 }
                 ++recursion_limit_;
                 return true;
             }
-            if (TryConsume("[")) {
+            if (try_consume("[")) {
                 while (true) {
-                    if (!LookingAt("{") && !LookingAt("<")) {
+                    if (!looking_at("{") && !looking_at("<")) {
                         DO(SkipFieldValue());
                     } else {
                         DO(SkipFieldMessage());
                     }
-                    if (TryConsume("]")) {
+                    if (try_consume("]")) {
                         break;
                     }
-                    DO(Consume(","));
+                    DO(consume(","));
                 }
                 ++recursion_limit_;
                 return true;
@@ -923,8 +923,8 @@ namespace shark {
             //     -inf         => TYPE_SYMBOL + TYPE_IDENTIFIER
             // As we can see, the field value consists of an optional '-' and one of
             // TYPE_INTEGER, TYPE_FLOAT and TYPE_IDENTIFIER.
-            bool has_minus = TryConsume("-");
-            if (!LookingAtType(io::Tokenizer::TYPE_INTEGER) && !LookingAtType(io::Tokenizer::TYPE_FLOAT) && !LookingAtType(io::Tokenizer::TYPE_IDENTIFIER)) {
+            bool has_minus = try_consume("-");
+            if (!looking_at_type(io::Tokenizer::TYPE_INTEGER) && !looking_at_type(io::Tokenizer::TYPE_FLOAT) && !looking_at_type(io::Tokenizer::TYPE_IDENTIFIER)) {
                 std::string text = tokenizer_.current().text;
                 ReportError("Cannot skip field value, unexpected token: " + text);
                 ++recursion_limit_;
@@ -936,7 +936,7 @@ namespace shark {
             // TYPE_IDENTIFIER after a '-' should be one of the float values listed
             // below:
             //   inf, inff, infinity, nan
-            if (has_minus && LookingAtType(io::Tokenizer::TYPE_IDENTIFIER)) {
+            if (has_minus && looking_at_type(io::Tokenizer::TYPE_IDENTIFIER)) {
                 std::string text = tokenizer_.current().text;
                 turbo::str_to_lower(&text);
                 if (text != "inf" && text != "infinity" && text != "nan") {
@@ -951,19 +951,19 @@ namespace shark {
         }
 
         // Returns true if the current token's text is equal to that specified.
-        bool LookingAt(const std::string& text) {
+        bool looking_at(const std::string& text) {
             return tokenizer_.current().text == text;
         }
 
         // Returns true if the current token's type is equal to that specified.
-        bool LookingAtType(io::Tokenizer::TokenType token_type) {
+        bool looking_at_type(io::Tokenizer::TokenType token_type) {
             return tokenizer_.current().type == token_type;
         }
 
         // Consumes an identifier and saves its value in the identifier parameter.
         // Returns false if the token is not of type IDENTIFIER.
-        bool ConsumeIdentifier(std::string* identifier) {
-            if (LookingAtType(io::Tokenizer::TYPE_IDENTIFIER)) {
+        bool consume_identifier(std::string* identifier) {
+            if (looking_at_type(io::Tokenizer::TYPE_IDENTIFIER)) {
                 *identifier = tokenizer_.current().text;
                 tokenizer_.Next();
                 return true;
@@ -971,7 +971,7 @@ namespace shark {
 
             // If allow_field_numer_ or allow_unknown_field_ is true, we should able
             // to parse integer identifiers.
-            if ((allow_field_number_ || allow_unknown_field_ || allow_unknown_extension_) && LookingAtType(io::Tokenizer::TYPE_INTEGER)) {
+            if ((allow_field_number_ || allow_unknown_field_ || allow_unknown_extension_) && looking_at_type(io::Tokenizer::TYPE_INTEGER)) {
                 *identifier = tokenizer_.current().text;
                 tokenizer_.Next();
                 return true;
@@ -981,21 +981,21 @@ namespace shark {
             return false;
         }
 
-        // Similar to `ConsumeIdentifier`, but any following whitespace token may
+        // Similar to `consume_identifier`, but any following whitespace token may
         // be reported.
         bool ConsumeIdentifierBeforeWhitespace(std::string* identifier) {
             tokenizer_.set_report_whitespace(true);
-            bool result = ConsumeIdentifier(identifier);
+            bool result = consume_identifier(identifier);
             tokenizer_.set_report_whitespace(false);
             return result;
         }
 
-        // Consume a string of form "<id1>.<id2>....<idN>".
+        // consume a string of form "<id1>.<id2>....<idN>".
         bool ConsumeFullTypeName(std::string* name) {
-            DO(ConsumeIdentifier(name));
-            while (TryConsume(".")) {
+            DO(consume_identifier(name));
+            while (try_consume(".")) {
                 std::string part;
-                DO(ConsumeIdentifier(&part));
+                DO(consume_identifier(&part));
                 *name += ".";
                 *name += part;
             }
@@ -1003,18 +1003,18 @@ namespace shark {
         }
 
         bool ConsumeTypeUrlOrFullTypeName(std::string* name) {
-            DO(ConsumeIdentifier(name));
+            DO(consume_identifier(name));
             while (true) {
                 std::string connector;
-                if (TryConsume(".")) {
+                if (try_consume(".")) {
                     connector = ".";
-                } else if (TryConsume("/")) {
+                } else if (try_consume("/")) {
                     connector = "/";
                 } else {
                     break;
                 }
                 std::string part;
-                DO(ConsumeIdentifier(&part));
+                DO(consume_identifier(&part));
                 *name += connector;
                 *name += part;
             }
@@ -1023,15 +1023,15 @@ namespace shark {
 
         // Consumes a string and saves its value in the text parameter.
         // Returns false if the token is not of type STRING.
-        bool ConsumeString(std::string* text) {
-            if (!LookingAtType(io::Tokenizer::TYPE_STRING)) {
+        bool consume_string(std::string* text) {
+            if (!looking_at_type(io::Tokenizer::TYPE_STRING)) {
                 ReportError("Expected string, got: " + tokenizer_.current().text);
                 return false;
             }
 
             text->clear();
-            while (LookingAtType(io::Tokenizer::TYPE_STRING)) {
-                io::Tokenizer::ParseStringAppend(tokenizer_.current().text, text);
+            while (looking_at_type(io::Tokenizer::TYPE_STRING)) {
+                io::Tokenizer::parse_string_append(tokenizer_.current().text, text);
 
                 tokenizer_.Next();
             }
@@ -1042,12 +1042,12 @@ namespace shark {
         // Consumes a uint64_t and saves its value in the value parameter.
         // Returns false if the token is not of type INTEGER.
         bool ConsumeUnsignedInteger(uint64_t* value, uint64_t max_value) {
-            if (!LookingAtType(io::Tokenizer::TYPE_INTEGER)) {
+            if (!looking_at_type(io::Tokenizer::TYPE_INTEGER)) {
                 ReportError("Expected integer, got: " + tokenizer_.current().text);
                 return false;
             }
 
-            if (!io::Tokenizer::ParseInteger(tokenizer_.current().text, max_value,
+            if (!io::Tokenizer::parse_integer(tokenizer_.current().text, max_value,
                     value)) {
                 ReportError("Integer out of range (" + tokenizer_.current().text + ")");
                 return false;
@@ -1062,10 +1062,10 @@ namespace shark {
         // we actually may consume an additional token (for the minus sign) in this
         // method. Returns false if the token is not an integer
         // (signed or otherwise).
-        bool ConsumeSignedInteger(int64_t* value, uint64_t max_value) {
+        bool consume_signed_integer(int64_t* value, uint64_t max_value) {
             bool negative = false;
 
-            if (TryConsume("-")) {
+            if (try_consume("-")) {
                 negative = true;
                 // Two's complement always allows one more negative integer than
                 // positive.
@@ -1092,7 +1092,7 @@ namespace shark {
         // Consumes a double and saves its value in the value parameter.
         // Accepts decimal numbers only, rejects hex or oct numbers.
         bool ConsumeUnsignedDecimalAsDouble(double* value, uint64_t max_value) {
-            if (!LookingAtType(io::Tokenizer::TYPE_INTEGER)) {
+            if (!looking_at_type(io::Tokenizer::TYPE_INTEGER)) {
                 ReportError("Expected integer, got: " + tokenizer_.current().text);
                 return false;
             }
@@ -1104,11 +1104,11 @@ namespace shark {
             }
 
             uint64_t uint64_value;
-            if (io::Tokenizer::ParseInteger(text, max_value, &uint64_value)) {
+            if (io::Tokenizer::parse_integer(text, max_value, &uint64_value)) {
                 *value = static_cast<double>(uint64_value);
             } else {
                 // Uint64 overflow, attempt to parse as a double instead.
-                *value = io::Tokenizer::ParseFloat(text);
+                *value = io::Tokenizer::parse_float(text);
             }
 
             tokenizer_.Next();
@@ -1123,22 +1123,22 @@ namespace shark {
         bool ConsumeDouble(double* value) {
             bool negative = false;
 
-            if (TryConsume("-")) {
+            if (try_consume("-")) {
                 negative = true;
             }
 
             // A double can actually be an integer, according to the tokenizer.
             // Therefore, we must check both cases here.
-            if (LookingAtType(io::Tokenizer::TYPE_INTEGER)) {
+            if (looking_at_type(io::Tokenizer::TYPE_INTEGER)) {
                 // We have found an integer value for the double.
                 DO(ConsumeUnsignedDecimalAsDouble(value, kuint64max));
-            } else if (LookingAtType(io::Tokenizer::TYPE_FLOAT)) {
+            } else if (looking_at_type(io::Tokenizer::TYPE_FLOAT)) {
                 // We have found a float value for the double.
-                *value = io::Tokenizer::ParseFloat(tokenizer_.current().text);
+                *value = io::Tokenizer::parse_float(tokenizer_.current().text);
 
                 // Mark the current token as consumed.
                 tokenizer_.Next();
-            } else if (LookingAtType(io::Tokenizer::TYPE_IDENTIFIER)) {
+            } else if (looking_at_type(io::Tokenizer::TYPE_IDENTIFIER)) {
                 std::string text = tokenizer_.current().text;
                 turbo::str_to_lower(&text);
                 if (text == "inf" || text == "infinity") {
@@ -1166,15 +1166,15 @@ namespace shark {
         // Consumes Any::type_url value, of form "type.googleapis.com/full.type.Name"
         // or "type.googleprod.com/full.type.Name"
         bool ConsumeAnyTypeUrl(std::string* full_type_name, std::string* prefix) {
-            // TODO(saito) Extend Consume() to consume multiple tokens at once, so that
-            // this code can be written as just DO(Consume(kGoogleApisTypePrefix)).
-            DO(ConsumeIdentifier(prefix));
-            while (TryConsume(".")) {
+            // TODO(saito) Extend consume() to consume multiple tokens at once, so that
+            // this code can be written as just DO(consume(kGoogleApisTypePrefix)).
+            DO(consume_identifier(prefix));
+            while (try_consume(".")) {
                 std::string url;
-                DO(ConsumeIdentifier(&url));
+                DO(consume_identifier(&url));
                 *prefix += "." + url;
             }
-            DO(Consume("/"));
+            DO(consume("/"));
             *prefix += "/";
             DO(ConsumeFullTypeName(full_type_name));
 
@@ -1211,7 +1211,7 @@ namespace shark {
         // Consumes a token and confirms that it matches that specified in the
         // value parameter. Returns false if the token found does not match that
         // which was specified.
-        bool Consume(const std::string& value) {
+        bool consume(const std::string& value) {
             const std::string& current_value = tokenizer_.current().text;
 
             if (current_value != value) {
@@ -1224,19 +1224,19 @@ namespace shark {
             return true;
         }
 
-        // Similar to `Consume`, but the following token may be tokenized as
+        // Similar to `consume`, but the following token may be tokenized as
         // TYPE_WHITESPACE.
         bool ConsumeBeforeWhitespace(const std::string& value) {
             // Report whitespace after this token, but only once.
             tokenizer_.set_report_whitespace(true);
-            bool result = Consume(value);
+            bool result = consume(value);
             tokenizer_.set_report_whitespace(false);
             return result;
         }
 
         // Attempts to consume the supplied value. Returns false if a the
         // token found does not match the value specified.
-        bool TryConsume(const std::string& value) {
+        bool try_consume(const std::string& value) {
             if (tokenizer_.current().text == value) {
                 tokenizer_.Next();
                 return true;
@@ -1245,19 +1245,19 @@ namespace shark {
             }
         }
 
-        // Similar to `TryConsume`, but the following token may be tokenized as
+        // Similar to `try_consume`, but the following token may be tokenized as
         // TYPE_WHITESPACE.
         bool TryConsumeBeforeWhitespace(const std::string& value) {
             // Report whitespace after this token, but only once.
             tokenizer_.set_report_whitespace(true);
-            bool result = TryConsume(value);
+            bool result = try_consume(value);
             tokenizer_.set_report_whitespace(false);
             return result;
         }
 
-        bool TryConsumeWhitespace() {
+        bool try_consume_whitespace() {
             had_silent_marker_ = false;
-            if (LookingAtType(io::Tokenizer::TYPE_WHITESPACE)) {
+            if (looking_at_type(io::Tokenizer::TYPE_WHITESPACE)) {
                 if (tokenizer_.current().text == turbo::str_cat(" ", internal::kDebugStringSilentMarkerForDetection)) {
                     had_silent_marker_ = true;
                 }
@@ -1276,11 +1276,11 @@ namespace shark {
 
             ~ParserErrorCollector() override { }
 
-            void AddError(int line, int column, const std::string& message) override {
+            void add_error(int line, int column, const std::string& message) override {
                 parser_->ReportError(line, column, message);
             }
 
-            void AddWarning(int line, int column, const std::string& message) override {
+            void add_warning(int line, int column, const std::string& message) override {
                 parser_->ReportWarning(line, column, message);
             }
 
@@ -1585,7 +1585,7 @@ namespace shark {
         bool CheckParseInputSize(std::string_view input,
             io::ErrorCollector* error_collector) {
             if (input.size() > INT_MAX) {
-                error_collector->AddError(
+                error_collector->add_error(
                     -1, 0,
                     turbo::str_cat(
                         "Input size too large: ", static_cast<int64_t>(input.size()),
@@ -1704,7 +1704,7 @@ namespace shark {
 // Some compilers do not support ref-qualifiers even in C++11 mode.
 // Disable the optimization for now and revisit it later.
 #if 0 // LANG_CXX11
-  std::string Consume() && { return std::move(output_); }
+  std::string consume() && { return std::move(output_); }
 #else // !LANG_CXX11
             const std::string& Get() { return output_; }
 #endif // LANG_CXX11

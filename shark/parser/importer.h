@@ -125,11 +125,11 @@ namespace shark::io {
                 ~ValidationErrorCollector() override;
 
                 // implements ErrorCollector ---------------------------------------
-                void AddError(const std::string& filename, const std::string& element_name,
+                void add_error(const std::string& filename, const std::string& element_name,
                     const Message* descriptor, ErrorLocation location,
                     const std::string& message) override;
 
-                void AddWarning(const std::string& filename,
+                void add_warning(const std::string& filename,
                     const std::string& element_name, const Message* descriptor,
                     ErrorLocation location,
                     const std::string& message) override;
@@ -196,10 +196,10 @@ namespace shark::io {
 
             // Line and column numbers are zero-based.  A line number of -1 indicates
             // an error with the entire file (e.g. "not found").
-            virtual void AddError(const std::string& filename, int line, int column,
+            virtual void add_error(const std::string& filename, int line, int column,
                 const std::string& message) = 0;
 
-            virtual void AddWarning(const std::string& /* filename */, int /* line */,
+            virtual void add_warning(const std::string& /* filename */, int /* line */,
                 int /* column */, const std::string& /* message */) { }
 
         private:

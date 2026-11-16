@@ -72,12 +72,12 @@ class MockErrorCollector : public io::ErrorCollector {
   int line_offset = 0;
 
   // implements ErrorCollector ---------------------------------------
-  void AddWarning(int line, int column, const std::string& message) override {
+  void add_warning(int line, int column, const std::string& message) override {
     turbo::substitute_and_append(&warning_, "$0:$1: $2\n", line - line_offset,
                                  column, message);
   }
 
-  void AddError(int line, int column, const std::string& message) override {
+  void add_error(int line, int column, const std::string& message) override {
     turbo::substitute_and_append(&text_, "$0:$1: $2\n", line - line_offset,
                                  column, message);
   }
@@ -92,7 +92,7 @@ class MockValidationErrorCollector : public DescriptorPool::ErrorCollector {
   ~MockValidationErrorCollector() override {}
 
   // implements ErrorCollector ---------------------------------------
-  void AddError(const std::string& filename, const std::string& element_name,
+  void add_error(const std::string& filename, const std::string& element_name,
                 const Message* descriptor, ErrorLocation location,
                 const std::string& message) override {
     int line, column;
@@ -101,7 +101,7 @@ class MockValidationErrorCollector : public DescriptorPool::ErrorCollector {
     } else {
       source_locations_.Find(descriptor, location, &line, &column);
     }
-    wrapped_collector_->AddError(line, column, message);
+    wrapped_collector_->add_error(line, column, message);
   }
 
  private:

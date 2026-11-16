@@ -70,13 +70,13 @@ namespace shark::io {
         // Indicates that there was an error in the input at the given line and
         // column numbers.  The numbers are zero-based, so you may want to add
         // 1 to each before printing them.
-        virtual void AddError(int line, ColumnNumber column,
+        virtual void add_error(int line, ColumnNumber column,
             const std::string& message) = 0;
 
         // Indicates that there was a warning in the input at the given line and
         // column numbers.  The numbers are zero-based, so you may want to add
         // 1 to each before printing them.
-        virtual void AddWarning(int /* line */, ColumnNumber /* column */,
+        virtual void add_warning(int /* line */, ColumnNumber /* column */,
             const std::string& /* message */) { }
 
     private:
@@ -198,7 +198,7 @@ namespace shark::io {
         //   /* Block comment attached to
         //    * grault. */
         //   optional int32 grault = 6;
-        bool NextWithComments(std::string* prev_trailing_comments,
+        bool next_with_comments(std::string* prev_trailing_comments,
             std::vector<std::string>* detached_comments,
             std::string* next_leading_comments);
 
@@ -207,22 +207,22 @@ namespace shark::io {
         // Parses a TYPE_FLOAT token.  This never fails, so long as the text actually
         // comes from a TYPE_FLOAT token parsed by Tokenizer.  If it doesn't, the
         // result is undefined (possibly an assert failure).
-        static double ParseFloat(const std::string& text);
+        static double parse_float(const std::string& text);
 
         // Parses a TYPE_STRING token.  This never fails, so long as the text actually
         // comes from a TYPE_STRING token parsed by Tokenizer.  If it doesn't, the
         // result is undefined (possibly an assert failure).
-        static void ParseString(const std::string& text, std::string* output);
+        static void parse_string(const std::string& text, std::string* output);
 
-        // Identical to ParseString, but appends to output.
-        static void ParseStringAppend(const std::string& text, std::string* output);
+        // Identical to parse_string, but appends to output.
+        static void parse_string_append(const std::string& text, std::string* output);
 
         // Parses a TYPE_INTEGER token.  Returns false if the result would be
         // greater than max_value.  Otherwise, returns true and sets *output to the
         // result.  If the text is not from a Token of type TYPE_INTEGER originally
         // parsed by a Tokenizer, the result is undefined (possibly an assert
         // failure).
-        static bool ParseInteger(const std::string& text, uint64_t max_value,
+        static bool parse_integer(const std::string& text, uint64_t max_value,
             uint64_t* output);
 
         // Options ---------------------------------------------------------
@@ -268,7 +268,7 @@ namespace shark::io {
         void set_report_newlines(bool report);
 
         // External helper: validate an identifier.
-        static bool IsIdentifier(const std::string& text);
+        static bool is_identifier(const std::string& text);
 
         // -----------------------------------------------------------------
     private:
@@ -280,7 +280,7 @@ namespace shark::io {
         ZeroCopyInputStream* input_;
         ErrorCollector* error_collector_;
 
-        char current_char_; // == buffer_[buffer_pos_], updated by NextChar().
+        char current_char_; // == buffer_[buffer_pos_], updated by next_char().
         const char* buffer_; // Current buffer returned from input_.
         int buffer_size_; // Size of buffer_.
         int buffer_pos_; // Current position within the buffer.
@@ -291,8 +291,8 @@ namespace shark::io {
         ColumnNumber column_;
 
         // String to which text should be appended as we advance through it.
-        // Call RecordTo(&str) to start recording and StopRecording() to stop.
-        // E.g. StartToken() calls RecordTo(&current_.text).  record_start_ is the
+        // Call record_to(&str) to start recording and stop_recording() to stop.
+        // E.g. start_token() calls record_to(&current_.text).  record_start_ is the
         // position within the current buffer where recording started.
         std::string* record_target_;
         int record_start_;
@@ -313,26 +313,26 @@ namespace shark::io {
         // -----------------------------------------------------------------
         // Helper methods.
 
-        // Consume this character and advance to the next one.
-        void NextChar();
+        // consume this character and advance to the next one.
+        void next_char();
 
         // Read a new buffer from the input.
-        void Refresh();
+        void refresh();
 
-        inline void RecordTo(std::string* target);
-        inline void StopRecording();
+        inline void record_to(std::string* target);
+        inline void stop_recording();
 
         // Called when the current character is the first character of a new
         // token (not including whitespace or comments).
-        inline void StartToken();
+        inline void start_token();
         // Called when the current character is the first character after the
         // end of the last token.  After this returns, current_.text will
-        // contain all text consumed since StartToken() was called.
-        inline void EndToken();
+        // contain all text consumed since start_token() was called.
+        inline void end_token();
 
         // Convenience method to add an error at the current line and column.
-        void AddError(const std::string& message) {
-            error_collector_->AddError(line_, column_, message);
+        void add_error(const std::string& message) {
+            error_collector_->add_error(line_, column_, message);
         }
 
         // -----------------------------------------------------------------
@@ -343,7 +343,7 @@ namespace shark::io {
 
         // Read and consume a string, ending when the given delimiter is
         // consumed.
-        void ConsumeString(char delimiter);
+        void consume_string(char delimiter);
 
         // Read and consume a number, returning TYPE_FLOAT or TYPE_INTEGER
         // depending on what was read.  This needs to know if the first
@@ -351,11 +351,11 @@ namespace shark::io {
         // numbers.
         // It also needs to know if the first character was a . to parse floating
         // point correctly.
-        TokenType ConsumeNumber(bool started_with_zero, bool started_with_dot);
+        TokenType consume_number(bool started_with_zero, bool started_with_dot);
 
-        // Consume the rest of a line.
+        // consume the rest of a line.
         void ConsumeLineComment(std::string* content);
-        // Consume until "*/".
+        // consume until "*/".
         void ConsumeBlockComment(std::string* content);
 
         enum NextCommentStatus {
@@ -379,11 +379,11 @@ namespace shark::io {
 
         // If we're looking at a TYPE_WHITESPACE token and `report_whitespace_` is
         // true, consume it and return true.
-        bool TryConsumeWhitespace();
+        bool try_consume_whitespace();
 
         // If we're looking at a TYPE_NEWLINE token and `report_newlines_` is true,
         // consume it and return true.
-        bool TryConsumeNewline();
+        bool try_consume_newline();
 
         // -----------------------------------------------------------------
         // These helper methods make the parsing code more readable.  The
@@ -396,26 +396,26 @@ namespace shark::io {
         // Returns true if the current character is of the given character
         // class, but does not consume anything.
         template <typename CharacterClass>
-        inline bool LookingAt();
+        inline bool looking_at();
 
         // If the current character is in the given class, consume it and return
         // true.  Otherwise return false.
-        // e.g. TryConsumeOne<Letter>()
+        // e.g. try_consume_one<Letter>()
         template <typename CharacterClass>
-        inline bool TryConsumeOne();
+        inline bool try_consume_one();
 
         // Like above, but try to consume the specific character indicated.
-        inline bool TryConsume(char c);
+        inline bool try_consume(char c);
 
-        // Consume zero or more of the given character class.
+        // consume zero or more of the given character class.
         template <typename CharacterClass>
-        inline void ConsumeZeroOrMore();
+        inline void consume_zero_or_more();
 
-        // Consume one or more of the given character class or log the given
+        // consume one or more of the given character class or log the given
         // error message.
-        // e.g. ConsumeOneOrMore<Digit>("Expected digits.");
+        // e.g. consume_one_or_more<Digit>("Expected digits.");
         template <typename CharacterClass>
-        inline void ConsumeOneOrMore(const char* error);
+        inline void consume_one_or_more(const char* error);
     };
 
     // inline methods ====================================================
@@ -427,10 +427,10 @@ namespace shark::io {
         return previous_;
     }
 
-    inline void Tokenizer::ParseString(const std::string& text,
+    inline void Tokenizer::parse_string(const std::string& text,
         std::string* output) {
         output->clear();
-        ParseStringAppend(text, output);
+        parse_string_append(text, output);
     }
 
 } // namespace shark::io

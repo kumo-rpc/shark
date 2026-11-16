@@ -46,7 +46,7 @@ namespace shark {
 
 
 
-    void DescriptorBuilder::AddError(
+    void DescriptorBuilder::add_error(
         const std::string& element_name, const Message& descriptor,
         DescriptorPool::ErrorCollector::ErrorLocation location,
         const std::string& error) {
@@ -57,16 +57,16 @@ namespace shark {
             }
             GOOGLE_LOG(ERROR) << "  " << element_name << ": " << error;
         } else {
-            error_collector_->AddError(filename_, element_name, &descriptor, location,
+            error_collector_->add_error(filename_, element_name, &descriptor, location,
                 error);
         }
         had_errors_ = true;
     }
 
-    void DescriptorBuilder::AddError(
+    void DescriptorBuilder::add_error(
         const std::string& element_name, const Message& descriptor,
         DescriptorPool::ErrorCollector::ErrorLocation location, const char* error) {
-        AddError(element_name, descriptor, location, std::string(error));
+        add_error(element_name, descriptor, location, std::string(error));
     }
 
     void DescriptorBuilder::AddNotDefinedError(
@@ -74,18 +74,18 @@ namespace shark {
         DescriptorPool::ErrorCollector::ErrorLocation location,
         const std::string& undefined_symbol) {
         if (possible_undeclared_dependency_ == nullptr && undefine_resolved_name_.empty()) {
-            AddError(element_name, descriptor, location,
+            add_error(element_name, descriptor, location,
                 "\"" + undefined_symbol + "\" is not defined.");
         } else {
             if (possible_undeclared_dependency_ != nullptr) {
-                AddError(element_name, descriptor, location,
+                add_error(element_name, descriptor, location,
                     "\"" + possible_undeclared_dependency_name_ + "\" seems to be defined in \"" + possible_undeclared_dependency_->name() + "\", which is not "
                                                                                                                                              "imported by \""
                         + filename_ + "\".  To use it here, please "
                                       "add the necessary import.");
             }
             if (!undefine_resolved_name_.empty()) {
-                AddError(element_name, descriptor, location,
+                add_error(element_name, descriptor, location,
                     "\"" + undefined_symbol + "\" is resolved to \"" + undefine_resolved_name_ + "\", which is not defined. "
                                                                                                  "The innermost scope is searched first in name resolution. "
                                                                                                  "Consider using a leading '.'(i.e., \"."
@@ -95,14 +95,14 @@ namespace shark {
     }
 
 
-    void DescriptorBuilder::AddWarning(
+    void DescriptorBuilder::add_warning(
         const std::string& element_name, const Message& descriptor,
         DescriptorPool::ErrorCollector::ErrorLocation location,
         const std::string& error) {
         if (error_collector_ == nullptr) {
             GOOGLE_LOG(WARNING) << filename_ << " " << element_name << ": " << error;
         } else {
-            error_collector_->AddWarning(filename_, element_name, &descriptor, location,
+            error_collector_->add_warning(filename_, element_name, &descriptor, location,
                 error);
         }
     }
@@ -300,7 +300,7 @@ namespace shark {
             parent = file_;
 
         if (full_name.find('\0') != std::string::npos) {
-            AddError(full_name, proto, DescriptorPool::ErrorCollector::NAME,
+            add_error(full_name, proto, DescriptorPool::ErrorCollector::NAME,
                 "\"" + full_name + "\" contains null character.");
             return false;
         }
@@ -322,15 +322,15 @@ namespace shark {
             if (other_file == file_) {
                 std::string::size_type dot_pos = full_name.find_last_of('.');
                 if (dot_pos == std::string::npos) {
-                    AddError(full_name, proto, DescriptorPool::ErrorCollector::NAME,
+                    add_error(full_name, proto, DescriptorPool::ErrorCollector::NAME,
                         "\"" + full_name + "\" is already defined.");
                 } else {
-                    AddError(full_name, proto, DescriptorPool::ErrorCollector::NAME,
+                    add_error(full_name, proto, DescriptorPool::ErrorCollector::NAME,
                         "\"" + full_name.substr(dot_pos + 1) + "\" is already defined in \"" + full_name.substr(0, dot_pos) + "\".");
                 }
             } else {
                 // Symbol seems to have been defined in a different file.
-                AddError(full_name, proto, DescriptorPool::ErrorCollector::NAME,
+                add_error(full_name, proto, DescriptorPool::ErrorCollector::NAME,
                     "\"" + full_name + "\" is already defined in file \"" + (other_file == nullptr ? "null" : other_file->name()) + "\".");
             }
             return false;
@@ -341,7 +341,7 @@ namespace shark {
     void DescriptorBuilder::AddPackage(const std::string& name,
         const Message& proto, FileDescriptor* file) {
         if (name.find('\0') != std::string::npos) {
-            AddError(name, proto, DescriptorPool::ErrorCollector::NAME,
+            add_error(name, proto, DescriptorPool::ErrorCollector::NAME,
                 "\"" + name + "\" contains null character.");
             return;
         }
@@ -373,7 +373,7 @@ namespace shark {
         } else if (!existing_symbol.IsPackage()) {
             // Symbol seems to have been defined in a different file.
             const FileDescriptor* other_file = existing_symbol.GetFile();
-            AddError(name, proto, DescriptorPool::ErrorCollector::NAME,
+            add_error(name, proto, DescriptorPool::ErrorCollector::NAME,
                 "\"" + name + "\" is already defined (as something other than "
                               "a package) in file \""
                     + (other_file == nullptr ? "null" : other_file->name()) + "\".");
@@ -384,13 +384,13 @@ namespace shark {
         const std::string& full_name,
         const Message& proto) {
         if (name.empty()) {
-            AddError(full_name, proto, DescriptorPool::ErrorCollector::NAME,
+            add_error(full_name, proto, DescriptorPool::ErrorCollector::NAME,
                 "Missing name.");
         } else {
             for (char character : name) {
                 // I don't trust isalnum() due to locales.  :(
                 if ((character < 'a' || 'z' < character) && (character < 'A' || 'Z' < character) && (character < '0' || '9' < character) && (character != '_')) {
-                    AddError(full_name, proto, DescriptorPool::ErrorCollector::NAME,
+                    add_error(full_name, proto, DescriptorPool::ErrorCollector::NAME,
                         "\"" + name + "\" is not a valid identifier.");
                     return;
                 }
@@ -448,17 +448,17 @@ namespace shark {
         error_message.append(proto.name());
 
         if (static_cast<size_t>(from_here) < tables_->pending_files_.size() - 1) {
-            AddError(tables_->pending_files_[from_here + 1], proto,
+            add_error(tables_->pending_files_[from_here + 1], proto,
                 DescriptorPool::ErrorCollector::IMPORT, error_message);
         } else {
-            AddError(proto.name(), proto, DescriptorPool::ErrorCollector::IMPORT,
+            add_error(proto.name(), proto, DescriptorPool::ErrorCollector::IMPORT,
                 error_message);
         }
     }
 
     void DescriptorBuilder::AddTwiceListedError(const FileDescriptorProto& proto,
         int index) {
-        AddError(proto.dependency(index), proto,
+        add_error(proto.dependency(index), proto,
             DescriptorPool::ErrorCollector::IMPORT,
             "Import \"" + proto.dependency(index) + "\" was listed twice.");
     }
@@ -471,7 +471,7 @@ namespace shark {
         } else {
             message = "Import \"" + proto.dependency(index) + "\" was not found or had errors.";
         }
-        AddError(proto.dependency(index), proto,
+        add_error(proto.dependency(index), proto,
             DescriptorPool::ErrorCollector::IMPORT, message);
     }
 
@@ -662,7 +662,7 @@ namespace shark {
 
         static const int kMaximumPackageLength = 511;
         if (proto.package().size() > kMaximumPackageLength) {
-            AddError(proto.package(), proto, DescriptorPool::ErrorCollector::NAME,
+            add_error(proto.package(), proto, DescriptorPool::ErrorCollector::NAME,
                 "Package name is too long");
             return nullptr;
         }
@@ -723,7 +723,7 @@ namespace shark {
         file_->tables_ = file_tables_;
 
         if (!proto.has_name()) {
-            AddError("", proto, DescriptorPool::ErrorCollector::OTHER,
+            add_error("", proto, DescriptorPool::ErrorCollector::OTHER,
                 "Missing field: FileDescriptorProto.name.");
         }
 
@@ -733,11 +733,11 @@ namespace shark {
             file_->syntax_ = SyntaxEdition::SYNTAX_PROTO2;
         } else if (proto.syntax() == "proto3") {
             file_->syntax_ = SyntaxEdition::SYNTAX_UNKNOWN;
-            AddError(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
+            add_error(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
                 "syntax \"proto3\" is not supported.");
         } else {
             file_->syntax_ = SyntaxEdition::SYNTAX_UNKNOWN;
-            AddError(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
+            add_error(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
                 "Unrecognized syntax: " + proto.syntax());
         }
 
@@ -754,14 +754,14 @@ namespace shark {
         result->pool_ = pool_;
 
         if (result->name().find('\0') != std::string::npos) {
-            AddError(result->name(), proto, DescriptorPool::ErrorCollector::NAME,
+            add_error(result->name(), proto, DescriptorPool::ErrorCollector::NAME,
                 "\"" + result->name() + "\" contains null character.");
             return nullptr;
         }
 
         // Add to tables.
         if (!tables_->AddFile(result)) {
-            AddError(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
+            add_error(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
                 "A file with this name is already in the pool.");
             // Bail out early so that if this is actually the exact same file, we
             // don't end up reporting that every single symbol is already defined.
@@ -769,7 +769,7 @@ namespace shark {
         }
         if (!result->package().empty()) {
             if (std::count(result->package().begin(), result->package().end(), '.') > kPackageLimit) {
-                AddError(result->package(), proto, DescriptorPool::ErrorCollector::NAME,
+                add_error(result->package(), proto, DescriptorPool::ErrorCollector::NAME,
                     "Exceeds Maximum Package Depth");
                 return nullptr;
             }
@@ -871,7 +871,7 @@ namespace shark {
                     unused_dependency_.erase(result->dependency(index));
                 }
             } else {
-                AddError(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
+                add_error(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
                     "Invalid public dependency index.");
             }
         }
@@ -896,7 +896,7 @@ namespace shark {
             if (index >= 0 && index < proto.dependency_size()) {
                 result->weak_dependencies_[weak_dependency_count++] = index;
             } else {
-                AddError(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
+                add_error(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
                     "Invalid weak dependency index.");
             }
         }
@@ -1041,7 +1041,7 @@ namespace shark {
 
             std::string buf;
             if (!unparsed_options->AppendToString(&buf) || !options->ParseFromString(buf)) {
-                builder_->AddError(
+                builder_->add_error(
                     options_to_interpret->element_name, *original_options,
                     DescriptorPool::ErrorCollector::OTHER,
                     "Some options could not be correctly parsed using the proto "
@@ -1745,7 +1745,7 @@ namespace shark {
         --recursion_depth_;
         IncrementWhenDestroyed revert { recursion_depth_ };
         if (recursion_depth_ <= 0) {
-            AddError(result->full_name(), proto, DescriptorPool::ErrorCollector::OTHER,
+            add_error(result->full_name(), proto, DescriptorPool::ErrorCollector::OTHER,
                 "Reached maximum recursion limit for nested messages.");
             result->nested_types_ = nullptr;
             result->nested_type_count_ = 0;
@@ -1775,7 +1775,7 @@ namespace shark {
             for (int j = i + 1; j < proto.reserved_range_size(); j++) {
                 const DescriptorProto_ReservedRange& range2 = proto.reserved_range(j);
                 if (range1.end() > range2.start() && range2.end() > range1.start()) {
-                    AddError(result->full_name(), proto.reserved_range(i),
+                    add_error(result->full_name(), proto.reserved_range(i),
                         DescriptorPool::ErrorCollector::NUMBER,
                         turbo::substitute("Reserved range $0 to $1 overlaps with "
                                             "already-defined range $2 to $3.",
@@ -1791,7 +1791,7 @@ namespace shark {
             if (reserved_name_set.find(name) == reserved_name_set.end()) {
                 reserved_name_set.insert(name);
             } else {
-                AddError(name, proto, DescriptorPool::ErrorCollector::NAME,
+                add_error(name, proto, DescriptorPool::ErrorCollector::NAME,
                     turbo::substitute("Field name \"$0\" is reserved multiple times.",
                         name));
             }
@@ -1804,7 +1804,7 @@ namespace shark {
                 if (range->start <= field->number() && field->number() < range->end) {
                     message_hints_[result].RequestHintOnFieldNumbers(
                         proto.extension_range(j), DescriptorPool::ErrorCollector::NUMBER);
-                    AddError(
+                    add_error(
                         field->full_name(), proto.extension_range(j),
                         DescriptorPool::ErrorCollector::NUMBER,
                         turbo::substitute(
@@ -1817,14 +1817,14 @@ namespace shark {
                 if (range->start <= field->number() && field->number() < range->end) {
                     message_hints_[result].RequestHintOnFieldNumbers(
                         proto.reserved_range(j), DescriptorPool::ErrorCollector::NUMBER);
-                    AddError(field->full_name(), proto.reserved_range(j),
+                    add_error(field->full_name(), proto.reserved_range(j),
                         DescriptorPool::ErrorCollector::NUMBER,
                         turbo::substitute("Field \"$0\" uses reserved number $1.",
                             field->name(), field->number()));
                 }
             }
             if (reserved_name_set.find(field->name()) != reserved_name_set.end()) {
-                AddError(
+                add_error(
                     field->full_name(), proto.field(i),
                     DescriptorPool::ErrorCollector::NAME,
                     turbo::substitute("Field name \"$0\" is reserved.", field->name()));
@@ -1838,7 +1838,7 @@ namespace shark {
             for (int j = 0; j < result->reserved_range_count(); j++) {
                 const Descriptor::ReservedRange* range2 = result->reserved_range(j);
                 if (range1->end > range2->start && range2->end > range1->start) {
-                    AddError(result->full_name(), proto.extension_range(i),
+                    add_error(result->full_name(), proto.extension_range(i),
                         DescriptorPool::ErrorCollector::NUMBER,
                         turbo::substitute("Extension range $0 to $1 overlaps with "
                                             "reserved range $2 to $3.",
@@ -1849,7 +1849,7 @@ namespace shark {
             for (int j = i + 1; j < result->extension_range_count(); j++) {
                 const Descriptor::ExtensionRange* range2 = result->extension_range(j);
                 if (range1->end > range2->start && range2->end > range1->start) {
-                    AddError(result->full_name(), proto.extension_range(i),
+                    add_error(result->full_name(), proto.extension_range(i),
                         DescriptorPool::ErrorCollector::NUMBER,
                         turbo::substitute("Extension range $0 to $1 overlaps with "
                                             "already-defined range $2 to $3.",
@@ -1886,7 +1886,7 @@ namespace shark {
         result->is_oneof_ = false;
         result->proto3_optional_ = false;
         if (proto.proto3_optional()) {
-            AddError(result->full_name(), proto, DescriptorPool::ErrorCollector::OTHER,
+            add_error(result->full_name(), proto, DescriptorPool::ErrorCollector::OTHER,
                 "proto3_optional is not supported.");
         }
 
@@ -1901,7 +1901,7 @@ namespace shark {
         if (static_cast<FieldLabel>(result->label_) == FieldLabel::REQUIRED) {
             // An extension cannot have a required field (b/13365836).
             if (result->is_extension_) {
-                AddError(result->full_name(), proto,
+                add_error(result->full_name(), proto,
                     // Error location `TYPE`: we would really like to indicate
                     // `LABEL`, but the `ErrorLocation` enum has no entry for this,
                     // and we don't necessarily know about all implementations of the
@@ -1919,7 +1919,7 @@ namespace shark {
 
         result->has_default_value_ = proto.has_default_value();
         if (proto.has_default_value() && result->is_repeated()) {
-            AddError(result->full_name(), proto,
+            add_error(result->full_name(), proto,
                 DescriptorPool::ErrorCollector::DEFAULT_VALUE,
                 "Repeated fields can't have default values.");
         }
@@ -1982,7 +1982,7 @@ namespace shark {
                     } else if (proto.default_value() == "false") {
                         result->default_value_bool_ = false;
                     } else {
-                        AddError(result->full_name(), proto,
+                        add_error(result->full_name(), proto,
                             DescriptorPool::ErrorCollector::DEFAULT_VALUE,
                             "Boolean default must be true or false.");
                     }
@@ -2001,7 +2001,7 @@ namespace shark {
                     }
                     break;
                 case SharkFieldCppType::CPPTYPE_MESSAGE:
-                    AddError(result->full_name(), proto,
+                    add_error(result->full_name(), proto,
                         DescriptorPool::ErrorCollector::DEFAULT_VALUE,
                         "Messages can't have default values.");
                     result->has_default_value_ = false;
@@ -2014,7 +2014,7 @@ namespace shark {
                     // above. This checks that the default was non-empty and had no extra
                     // junk after the end of the number.
                     if (proto.default_value().empty() || *end_pos != '\0') {
-                        AddError(result->full_name(), proto,
+                        add_error(result->full_name(), proto,
                             DescriptorPool::ErrorCollector::DEFAULT_VALUE,
                             "Couldn't parse default value \"" + proto.default_value() + "\".");
                     }
@@ -2066,7 +2066,7 @@ namespace shark {
         if (result->number() <= 0) {
             message_hints_[parent].RequestHintOnFieldNumbers(
                 proto, DescriptorPool::ErrorCollector::NUMBER);
-            AddError(result->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
+            add_error(result->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
                 "Field numbers must be positive integers.");
         } else if (!is_extension && result->number() > FieldDescriptor::kMaxNumber) {
             // Only validate that the number is within the valid field range if it is
@@ -2079,13 +2079,13 @@ namespace shark {
             // on extension numbers.
             message_hints_[parent].RequestHintOnFieldNumbers(
                 proto, DescriptorPool::ErrorCollector::NUMBER);
-            AddError(result->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
+            add_error(result->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
                 turbo::substitute("Field numbers cannot be greater than $0.",
                     FieldDescriptor::kMaxNumber));
         } else if (result->number() >= FieldDescriptor::kFirstReservedNumber && result->number() <= FieldDescriptor::kLastReservedNumber) {
             message_hints_[parent].RequestHintOnFieldNumbers(
                 proto, DescriptorPool::ErrorCollector::NUMBER);
-            AddError(result->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
+            add_error(result->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
                 turbo::substitute(
                     "Field numbers $0 through $1 are reserved for the protocol "
                     "buffer library implementation.",
@@ -2095,7 +2095,7 @@ namespace shark {
 
         if (is_extension) {
             if (!proto.has_extendee()) {
-                AddError(result->full_name(), proto,
+                add_error(result->full_name(), proto,
                     DescriptorPool::ErrorCollector::EXTENDEE,
                     "FieldDescriptorProto.extendee not set for extension field.");
             }
@@ -2103,13 +2103,13 @@ namespace shark {
             result->scope_.extension_scope = parent;
 
             if (proto.has_oneof_index()) {
-                AddError(result->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
+                add_error(result->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                     "FieldDescriptorProto.oneof_index should not be set for "
                     "extensions.");
             }
         } else {
             if (proto.has_extendee()) {
-                AddError(result->full_name(), proto,
+                add_error(result->full_name(), proto,
                     DescriptorPool::ErrorCollector::EXTENDEE,
                     "FieldDescriptorProto.extendee set for non-extension field.");
             }
@@ -2118,7 +2118,7 @@ namespace shark {
 
             if (proto.has_oneof_index()) {
                 if (proto.oneof_index() < 0 || proto.oneof_index() >= parent->oneof_decl_count()) {
-                    AddError(result->full_name(), proto,
+                    add_error(result->full_name(), proto,
                         DescriptorPool::ErrorCollector::TYPE,
                         turbo::substitute("FieldDescriptorProto.oneof_index $0 is "
                                             "out of range for type \"$1\".",
@@ -2150,7 +2150,7 @@ namespace shark {
             message_hints_[parent].RequestHintOnFieldNumbers(
                 proto, DescriptorPool::ErrorCollector::NUMBER, result->start,
                 result->end);
-            AddError(parent->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
+            add_error(parent->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
                 "Extension numbers must be positive integers.");
         }
 
@@ -2160,7 +2160,7 @@ namespace shark {
         // numbers are actually used as int32s in the message_set_wire_format.
 
         if (result->start >= result->end) {
-            AddError(parent->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
+            add_error(parent->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
                 "Extension range end number must be greater than start number.");
         }
 
@@ -2190,7 +2190,7 @@ namespace shark {
             message_hints_[parent].RequestHintOnFieldNumbers(
                 proto, DescriptorPool::ErrorCollector::NUMBER, result->start,
                 result->end);
-            AddError(parent->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
+            add_error(parent->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
                 "Reserved numbers must be positive integers.");
         }
     }
@@ -2203,7 +2203,7 @@ namespace shark {
         result->end = proto.end();
 
         if (result->start > result->end) {
-            AddError(parent->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
+            add_error(parent->full_name(), proto, DescriptorPool::ErrorCollector::NUMBER,
                 "Reserved range end number must be greater than start number.");
         }
     }
@@ -2282,10 +2282,10 @@ namespace shark {
                 // There are proto2 enums out there with conflicting names, so to preserve
                 // compatibility we issue only a warning for proto2.
                 if (result->file()->syntax() == SyntaxEdition::SYNTAX_PROTO2) {
-                    AddWarning(value->full_name(), proto.value(i),
+                    add_warning(value->full_name(), proto.value(i),
                         DescriptorPool::ErrorCollector::NAME, error_message);
                 } else {
-                    AddError(value->full_name(), proto.value(i),
+                    add_error(value->full_name(), proto.value(i),
                         DescriptorPool::ErrorCollector::NAME, error_message);
                 }
             }
@@ -2309,7 +2309,7 @@ namespace shark {
         if (proto.value_size() == 0) {
             // We cannot allow enums with no values because this would mean there
             // would be no valid default value for fields of this type.
-            AddError(result->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
+            add_error(result->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
                 "Enums must contain at least one value.");
         }
 
@@ -2355,7 +2355,7 @@ namespace shark {
             for (int j = i + 1; j < proto.reserved_range_size(); j++) {
                 const EnumDescriptorProto_EnumReservedRange& range2 = proto.reserved_range(j);
                 if (range1.end() >= range2.start() && range2.end() >= range1.start()) {
-                    AddError(result->full_name(), proto.reserved_range(i),
+                    add_error(result->full_name(), proto.reserved_range(i),
                         DescriptorPool::ErrorCollector::NUMBER,
                         turbo::substitute("Reserved range $0 to $1 overlaps with "
                                             "already-defined range $2 to $3.",
@@ -2371,7 +2371,7 @@ namespace shark {
             if (reserved_name_set.find(name) == reserved_name_set.end()) {
                 reserved_name_set.insert(name);
             } else {
-                AddError(name, proto, DescriptorPool::ErrorCollector::NAME,
+                add_error(name, proto, DescriptorPool::ErrorCollector::NAME,
                     turbo::substitute("Enum value \"$0\" is reserved multiple times.",
                         name));
             }
@@ -2382,14 +2382,14 @@ namespace shark {
             for (int j = 0; j < result->reserved_range_count(); j++) {
                 const EnumDescriptor::ReservedRange* range = result->reserved_range(j);
                 if (range->start <= value->number() && value->number() <= range->end) {
-                    AddError(value->full_name(), proto.reserved_range(j),
+                    add_error(value->full_name(), proto.reserved_range(j),
                         DescriptorPool::ErrorCollector::NUMBER,
                         turbo::substitute("Enum value \"$0\" uses reserved number $1.",
                             value->name(), value->number()));
                 }
             }
             if (reserved_name_set.find(value->name()) != reserved_name_set.end()) {
-                AddError(
+                add_error(
                     value->full_name(), proto.value(i),
                     DescriptorPool::ErrorCollector::NAME,
                     turbo::substitute("Enum value \"$0\" is reserved.", value->name()));
@@ -2569,7 +2569,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 // seen so far. field_count() > 0 guarantees that i > 0, so field(i-1) is
                 // safe.
                 if (oneof_decl->field_count() > 0 && message->field(i - 1)->containing_oneof() != oneof_decl) {
-                    AddError(message->full_name() + "." + message->field(i - 1)->name(),
+                    add_error(message->full_name() + "." + message->field(i - 1)->name(),
                         proto.field(i - 1), DescriptorPool::ErrorCollector::TYPE,
                         turbo::substitute(
                             "Fields in the same union must be defined consecutively. "
@@ -2600,7 +2600,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             OneofDescriptor* oneof_decl = &message->oneof_decls_[i];
 
             if (oneof_decl->field_count() == 0) {
-                AddError(message->full_name() + "." + oneof_decl->name(),
+                add_error(message->full_name() + "." + oneof_decl->name(),
                     proto.oneof_decl(i), DescriptorPool::ErrorCollector::NAME,
                     "Oneof must have at least one field.");
             }
@@ -2614,7 +2614,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             const FieldDescriptor* field = message->field(i);
             if (field->proto3_optional_) {
                 if (!field->containing_oneof() || !field->containing_oneof()->is_synthetic()) {
-                    AddError(message->full_name(), proto.field(i),
+                    add_error(message->full_name(), proto.field(i),
                         DescriptorPool::ErrorCollector::OTHER,
                         "Fields with proto3_optional set must be "
                         "a member of a one-field oneof");
@@ -2632,7 +2632,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 }
             } else {
                 if (first_synthetic != -1) {
-                    AddError(message->full_name(), proto.oneof_decl(i),
+                    add_error(message->full_name(), proto.oneof_decl(i),
                         DescriptorPool::ErrorCollector::OTHER,
                         "Synthetic oneofs must be after all other oneofs");
                 }
@@ -2669,7 +2669,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                     proto.extendee());
                 return;
             } else if (extendee.type() != Symbol::MESSAGE) {
-                AddError(field->full_name(), proto,
+                add_error(field->full_name(), proto,
                     DescriptorPool::ErrorCollector::EXTENDEE,
                     "\"" + proto.extendee() + "\" is not a message type.");
                 return;
@@ -2685,7 +2685,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 // have that information, and wrongly deem the extension as invalid.
                 auto skip_check = get_allow_unknown(pool_) && proto.extendee() == "shark.bridge.MessageSet";
                 if (!skip_check) {
-                    AddError(field->full_name(), proto,
+                    add_error(field->full_name(), proto,
                         DescriptorPool::ErrorCollector::NUMBER,
                         turbo::substitute("\"$0\" does not declare $1 as an "
                                             "extension number.",
@@ -2700,7 +2700,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 // Note that this error will never happen when parsing .shark files.
                 // It can only happen if you manually construct a FileDescriptorProto
                 // that is incorrect.
-                AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
+                add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
                     "Fields of oneofs must themselves have label OPTIONAL.");
             }
         }
@@ -2774,7 +2774,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 } else if (type.type() == Symbol::ENUM) {
                     field->type_ = static_cast<uint8_t>(SharkFieldType::ENUM);
                 } else {
-                    AddError(field->full_name(), proto,
+                    add_error(field->full_name(), proto,
                         DescriptorPool::ErrorCollector::TYPE,
                         "\"" + proto.type_name() + "\" is not a type.");
                     return;
@@ -2784,21 +2784,21 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
                 field->type_descriptor_.message_type = type.descriptor();
                 if (field->type_descriptor_.message_type == nullptr) {
-                    AddError(field->full_name(), proto,
+                    add_error(field->full_name(), proto,
                         DescriptorPool::ErrorCollector::TYPE,
                         "\"" + proto.type_name() + "\" is not a message type.");
                     return;
                 }
 
                 if (field->has_default_value()) {
-                    AddError(field->full_name(), proto,
+                    add_error(field->full_name(), proto,
                         DescriptorPool::ErrorCollector::DEFAULT_VALUE,
                         "Messages can't have default values.");
                 }
             } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_ENUM) {
                 field->type_descriptor_.enum_type = type.enum_descriptor();
                 if (field->type_descriptor_.enum_type == nullptr) {
-                    AddError(field->full_name(), proto,
+                    add_error(field->full_name(), proto,
                         DescriptorPool::ErrorCollector::TYPE,
                         "\"" + proto.type_name() + "\" is not an enum type.");
                     return;
@@ -2816,8 +2816,8 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                     // N.B. that this check yields better error messages but is not
                     // necessary for correctness (an enum symbol must be a valid identifier
                     // anyway), only for better errors.
-                    if (!io::Tokenizer::IsIdentifier(proto.default_value())) {
-                        AddError(field->full_name(), proto,
+                    if (!io::Tokenizer::is_identifier(proto.default_value())) {
+                        add_error(field->full_name(), proto,
                             DescriptorPool::ErrorCollector::DEFAULT_VALUE,
                             "Default value for an enum field must be an identifier.");
                     } else {
@@ -2835,7 +2835,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                         if (default_value != nullptr && default_value->type() == field->enum_type()) {
                             field->default_value_enum_ = default_value;
                         } else {
-                            AddError(field->full_name(), proto,
+                            add_error(field->full_name(), proto,
                                 DescriptorPool::ErrorCollector::DEFAULT_VALUE,
                                 "Enum type \"" + field->enum_type()->full_name() + "\" has no value named \"" + proto.default_value() + "\".");
                         }
@@ -2847,12 +2847,12 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                     field->default_value_enum_ = field->enum_type()->value(0);
                 }
             } else {
-                AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
+                add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                     "Field with primitive type has type_name.");
             }
         } else {
             if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE || field->cpp_type() == SharkFieldCppType::CPPTYPE_ENUM) {
-                AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
+                add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                     "Field with message or enum type missing type_name.");
             }
         }
@@ -2870,14 +2870,14 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 ? "unknown"
                 : field->containing_type()->full_name();
             if (field->is_extension()) {
-                AddError(field->full_name(), proto,
+                add_error(field->full_name(), proto,
                     DescriptorPool::ErrorCollector::NUMBER,
                     turbo::substitute("Extension number $0 has already been used "
                                         "in \"$1\" by extension \"$2\".",
                         field->number(), containing_type_name,
                         conflicting_field->full_name()));
             } else {
-                AddError(field->full_name(), proto,
+                add_error(field->full_name(), proto,
                     DescriptorPool::ErrorCollector::NUMBER,
                     turbo::substitute("Field number $0 has already been used in "
                                         "\"$1\" by field \"$2\".",
@@ -2900,7 +2900,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                     // turning this into an error we need to fix all existing broken
                     // protos first.
                     // TODO(xiaofeng): Change this to an error.
-                    AddWarning(field->full_name(), proto,
+                    add_warning(field->full_name(), proto,
                         DescriptorPool::ErrorCollector::NUMBER, error_msg);
                 }
             }
@@ -2957,7 +2957,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 method->input_type_.SetLazy(proto.input_type(), file_);
             }
         } else if (input_type.type() != Symbol::MESSAGE) {
-            AddError(method->full_name(), proto,
+            add_error(method->full_name(), proto,
                 DescriptorPool::ErrorCollector::INPUT_TYPE,
                 "\"" + proto.input_type() + "\" is not a message type.");
         } else {
@@ -2976,7 +2976,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 method->output_type_.SetLazy(proto.output_type(), file_);
             }
         } else if (output_type.type() != Symbol::MESSAGE) {
-            AddError(method->full_name(), proto,
+            add_error(method->full_name(), proto,
                 DescriptorPool::ErrorCollector::OUTPUT_TYPE,
                 "\"" + proto.output_type() + "\" is not a message type.");
         } else {
@@ -3054,7 +3054,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 current_ordinal = std::max(current_ordinal, current_range.to);
             }
             if (hints->first_reason) {
-                AddError(message->full_name(), *hints->first_reason,
+                add_error(message->full_name(), *hints->first_reason,
                     hints->first_reason_location, id_list.str());
             }
         }
@@ -3086,7 +3086,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         if (!IsLite(file)) {
             for (int i = 0; i < file->dependency_count(); i++) {
                 if (IsLite(file->dependency(i))) {
-                    AddError(
+                    add_error(
                         file->dependency(i)->name(), proto,
                         DescriptorPool::ErrorCollector::IMPORT,
                         "Files that do not use optimize_for = LITE_RUNTIME cannot import "
@@ -3143,13 +3143,13 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             ValidateProto3Field(message->extensions_ + i, proto.extension(i));
         }
         if (message->extension_range_count() > 0) {
-            AddError(message->full_name(), proto.extension_range(0),
+            add_error(message->full_name(), proto.extension_range(0),
                 DescriptorPool::ErrorCollector::NUMBER,
                 "Extension ranges are not allowed in proto3.");
         }
         if (message->options().message_set_wire_format()) {
             // Using MessageSet doesn't make sense since we disallow extensions.
-            AddError(message->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
+            add_error(message->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
                 "MessageSet is not supported in proto3.");
         }
 
@@ -3160,7 +3160,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         for (int i = 0; i < message->field_count(); ++i) {
             std::string lowercase_name = ToLowercaseWithoutUnderscores(message->field(i)->name());
             if (name_to_field.find(lowercase_name) != name_to_field.end()) {
-                AddError(message->full_name(), proto.field(i),
+                add_error(message->full_name(), proto.field(i),
                     DescriptorPool::ErrorCollector::NAME,
                     "The JSON camel-case name of field \"" + message->field(i)->name() + "\" conflicts with field \"" + name_to_field[lowercase_name]->name() + "\". This is not " + "allowed in proto3.");
             } else {
@@ -3204,23 +3204,23 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
     void DescriptorBuilder::ValidateProto3Field(FieldDescriptor* field,
         const FieldDescriptorProto& proto) {
         if (field->is_extension() && !AllowedExtendeeInProto3(field->containing_type()->full_name())) {
-            AddError(field->full_name(), proto,
+            add_error(field->full_name(), proto,
                 DescriptorPool::ErrorCollector::EXTENDEE,
                 "Extensions in proto3 are only allowed for defining options.");
         }
         if (field->is_required()) {
-            AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
+            add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                 "Required fields are not allowed in proto3.");
         }
         if (field->has_default_value()) {
-            AddError(field->full_name(), proto,
+            add_error(field->full_name(), proto,
                 DescriptorPool::ErrorCollector::DEFAULT_VALUE,
                 "Explicit default values are not allowed in proto3.");
         }
         if (field->cpp_type() == SharkFieldCppType::CPPTYPE_ENUM && field->enum_type() && field->enum_type()->file()->syntax() != SyntaxEdition::SYNTAX_PROTO3 && field->enum_type()->file()->syntax() != SyntaxEdition::SYNTAX_UNKNOWN) {
             // Proto3 messages can only use Proto3 enum types; otherwise we can't
             // guarantee that the default value is zero.
-            AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
+            add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                 "Enum type \"" + field->enum_type()->full_name() + "\" is not a proto3 enum, but is used in \"" + field->containing_type()->full_name() + "\" which is a proto3 message type.");
         }
     }
@@ -3228,7 +3228,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
     void DescriptorBuilder::ValidateProto3Enum(EnumDescriptor* enm,
         const EnumDescriptorProto& proto) {
         if (enm->value_count() > 0 && enm->value(0)->number() != 0) {
-            AddError(enm->full_name(), proto.value(0),
+            add_error(enm->full_name(), proto.value(0),
                 DescriptorPool::ErrorCollector::NUMBER,
                 "The first enum value must be zero in proto3.");
         }
@@ -3246,7 +3246,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 : FieldDescriptor::kMaxNumber);
         for (int i = 0; i < message->extension_range_count(); ++i) {
             if (message->extension_range(i)->end > max_extension_range + 1) {
-                AddError(message->full_name(), proto.extension_range(i),
+                add_error(message->full_name(), proto.extension_range(i),
                     DescriptorPool::ErrorCollector::NUMBER,
                     turbo::substitute("Extension numbers cannot be greater than $0.",
                         max_extension_range));
@@ -3266,14 +3266,14 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         // Only message type fields may be lazy.
         if (field->options().lazy() || field->options().unverified_lazy()) {
             if (field->type() != SharkFieldType::MESSAGE) {
-                AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
+                add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                     "[lazy = true] can only be specified for submessage fields.");
             }
         }
 
         // Only repeated primitive fields may be packed.
         if (field->options().packed() && !field->is_packable()) {
-            AddError(
+            add_error(
                 field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                 "[packed = true] can only be specified for repeated primitive fields.");
         }
@@ -3283,19 +3283,19 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         if (field->containing_type_ != nullptr && &field->containing_type()->options() != &MessageOptions::default_instance() && field->containing_type()->options().message_set_wire_format()) {
             if (field->is_extension()) {
                 if (!field->is_optional() || field->type() != SharkFieldType::MESSAGE) {
-                    AddError(field->full_name(), proto,
+                    add_error(field->full_name(), proto,
                         DescriptorPool::ErrorCollector::TYPE,
                         "Extensions of MessageSets must be optional messages.");
                 }
             } else {
-                AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
+                add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
                     "MessageSets cannot have fields, only extensions.");
             }
         }
 
         // Lite extensions can only be of Lite types.
         if (IsLite(field->file()) && field->containing_type_ != nullptr && !IsLite(field->containing_type()->file())) {
-            AddError(field->full_name(), proto,
+            add_error(field->full_name(), proto,
                 DescriptorPool::ErrorCollector::EXTENDEE,
                 "Extensions to non-lite types can only be declared in non-lite "
                 "files.  Note that you cannot extend a non-lite type to contain "
@@ -3305,7 +3305,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         // Validate map types.
         if (field->is_map()) {
             if (!ValidateMapEntry(field, proto)) {
-                AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
+                add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                     "map_entry should not be set explicitly. Use map<KeyType, "
                     "ValueType> instead.");
             }
@@ -3323,7 +3323,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         // an user explicitly sets json_name to the default value, but should be
         // good enough to catch common misuses.
         if (field->is_extension() && (field->has_json_name() && field->json_name() != ToJsonName(field->name()))) {
-            AddError(field->full_name(), proto,
+            add_error(field->full_name(), proto,
                 DescriptorPool::ErrorCollector::OPTION_NAME,
                 "option json_name is not allowed on extension fields.");
         }
@@ -3341,7 +3341,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                                                                                                                                                    "'option allow_alias = true;' to the enum definition.";
                     if (!enm->options().allow_alias()) {
                         // Generate error if duplicated enum values are explicitly disallowed.
-                        AddError(enm->full_name(), proto.value(i),
+                        add_error(enm->full_name(), proto.value(i),
                             DescriptorPool::ErrorCollector::NUMBER, error);
                     }
                 } else {
@@ -3369,7 +3369,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
     void DescriptorBuilder::ValidateServiceOptions(
         ServiceDescriptor* service, const ServiceDescriptorProto& proto) {
         if (IsLite(service->file()) && service->file()->options().cc_generic_services()) {
-            AddError(service->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
+            add_error(service->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
                 "Files with optimize_for = LITE_RUNTIME cannot define services "
                 "unless you set cc_generic_services to false.");
         }
@@ -3409,14 +3409,14 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         // Check key types are legal.
         switch (key->type()) {
         case SharkFieldType::ENUM:
-            AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
+            add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                 "Key in map fields cannot be enum types.");
             break;
         case SharkFieldType::FLOAT:
         case SharkFieldType::DOUBLE:
         case SharkFieldType::MESSAGE:
         case SharkFieldType::BYTES:
-            AddError(
+            add_error(
                 field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                 "Key in map fields cannot be float/double, bytes or message types.");
             break;
@@ -3444,7 +3444,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
 
         if (value->type() == SharkFieldType::ENUM) {
             if (value->enum_type()->value(0)->number() != 0) {
-                AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
+                add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                     "Enum value in map must define 0 as the first value.");
             }
         }
@@ -3460,7 +3460,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             std::pair<std::map<std::string, const Descriptor*>::iterator, bool> result = seen_types.insert(std::make_pair(nested->name(), nested));
             if (!result.second) {
                 if (result.first->second->options().map_entry() || nested->options().map_entry()) {
-                    AddError(message->full_name(), proto,
+                    add_error(message->full_name(), proto,
                         DescriptorPool::ErrorCollector::NAME,
                         "Expanded map entry type " + nested->name() + " conflicts with an existing nested message type.");
                     break;
@@ -3474,7 +3474,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             const FieldDescriptor* field = message->field(i);
             std::map<std::string, const Descriptor*>::iterator iter = seen_types.find(field->name());
             if (iter != seen_types.end() && iter->second->options().map_entry()) {
-                AddError(message->full_name(), proto,
+                add_error(message->full_name(), proto,
                     DescriptorPool::ErrorCollector::NAME,
                     "Expanded map entry type " + iter->second->name() + " conflicts with an existing field.");
             }
@@ -3484,7 +3484,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             const EnumDescriptor* enum_desc = message->enum_type(i);
             std::map<std::string, const Descriptor*>::iterator iter = seen_types.find(enum_desc->name());
             if (iter != seen_types.end() && iter->second->options().map_entry()) {
-                AddError(message->full_name(), proto,
+                add_error(message->full_name(), proto,
                     DescriptorPool::ErrorCollector::NAME,
                     "Expanded map entry type " + iter->second->name() + " conflicts with an existing enum type.");
             }
@@ -3494,7 +3494,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             const OneofDescriptor* oneof_desc = message->oneof_decl(i);
             std::map<std::string, const Descriptor*>::iterator iter = seen_types.find(oneof_desc->name());
             if (iter != seen_types.end() && iter->second->options().map_entry()) {
-                AddError(message->full_name(), proto,
+                add_error(message->full_name(), proto,
                     DescriptorPool::ErrorCollector::NAME,
                     "Expanded map entry type " + iter->second->name() + " conflicts with an existing oneof type.");
             }
@@ -3520,7 +3520,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             if (jstype == FieldOptions::JSType::JS_STRING || jstype == FieldOptions::JSType::JS_NUMBER) {
                 return;
             }
-            AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
+            add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                 "Illegal jstype for int64, uint64, sint64, fixed64 "
                 "or sfixed64 field: "
                     + FieldOptions_JSTypeTrait::descriptor()
@@ -3530,7 +3530,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
 
         // No other types permit a jstype option.
         default:
-            AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
+            add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                 "jstype is only allowed on int64, uint64, sint64, fixed64 "
                 "or sfixed64 fields.");
             break;
@@ -3554,7 +3554,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         public:
             std::string error_;
 
-            void AddError(int /* line */, int /* column */,
+            void add_error(int /* line */, int /* column */,
                 const std::string& message) override {
                 if (!error_.empty()) {
                     error_ += "; ";
@@ -3562,7 +3562,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 error_ += message;
             }
 
-            void AddWarning(int /* line */, int /* column */,
+            void add_warning(int /* line */, int /* column */,
                 const std::string& /* message */) override {
                 // Ignore warnings
             }
@@ -3704,10 +3704,10 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 it != unused_dependency_.end(); ++it) {
                 std::string error_message = "Import " + (*it)->name() + " is unused.";
                 if (is_error) {
-                    AddError((*it)->name(), proto, DescriptorPool::ErrorCollector::IMPORT,
+                    add_error((*it)->name(), proto, DescriptorPool::ErrorCollector::IMPORT,
                         error_message);
                 } else {
-                    AddWarning((*it)->name(), proto, DescriptorPool::ErrorCollector::IMPORT,
+                    add_warning((*it)->name(), proto, DescriptorPool::ErrorCollector::IMPORT,
                         error_message);
                 }
             }

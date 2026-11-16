@@ -1379,13 +1379,13 @@ namespace shark {
                 std::string text_;
 
                 // implements ErrorCollector -------------------------------------
-                void AddError(int line, int column, const std::string& message) override {
+                void add_error(int line, int column, const std::string& message) override {
                     turbo::substitute_and_append(&text_, "$0:$1: $2\n", line + 1, column + 1,
                         message);
                 }
 
-                void AddWarning(int line, int column, const std::string& message) override {
-                    AddError(line, column, "WARNING:" + message);
+                void add_warning(int line, int column, const std::string& message) override {
+                    add_error(line, column, "WARNING:" + message);
                 }
             };
 

@@ -9,7 +9,7 @@ Helpers in the example are **`kmpkg_*`** (vckgctl). Vanilla vcpkg uses the same 
 
 No in-tree `vcpkg install` / `kmpkg install` when a toolchain preset already configures. Do not copy `vcpkg.cmake` into the repo. Do not use CPM inside a port build.
 
-## Consume a kmcmake project (already generated)
+## consume a kmcmake project (already generated)
 
 `--preset=vcpkg*` sets:
 

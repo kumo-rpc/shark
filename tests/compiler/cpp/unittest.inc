@@ -99,7 +99,7 @@ class MockErrorCollector : public MultiFileErrorCollector {
   std::string text_;
 
   // implements ErrorCollector ---------------------------------------
-  void AddError(const std::string& filename, int line, int column,
+  void add_error(const std::string& filename, int line, int column,
                 const std::string& message) override {
     turbo::substitute_and_append(&text_, "$0:$1:$2: $3\n", filename, line, column,
                               message);

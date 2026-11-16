@@ -241,7 +241,7 @@ namespace shark {
             std::string warning_text_;
 
             // implements ErrorCollector ---------------------------------------
-            void AddError(const std::string& filename, const std::string& element_name,
+            void add_error(const std::string& filename, const std::string& element_name,
                 const Message* descriptor, ErrorLocation location,
                 const std::string& message) override {
                 const char* location_name = nullptr;
@@ -286,7 +286,7 @@ namespace shark {
             }
 
             // implements ErrorCollector ---------------------------------------
-            void AddWarning(const std::string& filename, const std::string& element_name,
+            void add_warning(const std::string& filename, const std::string& element_name,
                 const Message* descriptor, ErrorLocation location,
                 const std::string& message) override {
                 const char* location_name = nullptr;
@@ -595,7 +595,7 @@ namespace shark {
         class SimpleErrorCollector : public io::ErrorCollector {
         public:
             // implements ErrorCollector ---------------------------------------
-            void AddError(int line, int column, const std::string& message) override {
+            void add_error(int line, int column, const std::string& message) override {
                 last_error_ = turbo::str_sprintf("%d:%d:", line, column) + message;
             }
 
@@ -7320,10 +7320,10 @@ namespace shark {
         public:
             AbortingErrorCollector() { }
 
-            void AddError(const std::string& filename, const std::string& element_name,
+            void add_error(const std::string& filename, const std::string& element_name,
                 const Message* message, ErrorLocation location,
                 const std::string& error_message) override {
-                GOOGLE_LOG(FATAL) << "AddError() called unexpectedly: " << filename << " ["
+                GOOGLE_LOG(FATAL) << "add_error() called unexpectedly: " << filename << " ["
                                   << element_name << "]: " << error_message;
             }
 

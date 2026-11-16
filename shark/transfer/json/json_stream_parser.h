@@ -171,7 +171,7 @@ class SHARK_EXPORT JsonStreamParser {
   turbo::Status ParseValue(TokenType type);
 
   // Parses a string and writes it out to the ow_.
-  turbo::Status ParseString();
+  turbo::Status parse_string();
 
   // Parses a string, storing the result in parsed_.
   turbo::Status ParseStringHelper();

@@ -160,7 +160,7 @@ class TestErrorCollector : public ErrorCollector {
   std::string text_;
 
   // implements ErrorCollector ---------------------------------------
-  void AddError(int line, int column, const std::string& message) {
+  void add_error(int line, int column, const std::string& message) {
     turbo::substitute_and_append(&text_, "$0:$1: $2\n", line, column, message);
   }
 };
@@ -176,9 +176,9 @@ const int kBlockSizes[] = {1, 2, 3, 5, 7, 13, 32, 1024};
 class TokenizerTest : public testing::Test {
  protected:
   // For easy testing.
-  uint64_t ParseInteger(const std::string& text) {
+  uint64_t parse_integer(const std::string& text) {
     uint64_t result;
-    EXPECT_TRUE(Tokenizer::ParseInteger(text, kuint64max, &result))
+    EXPECT_TRUE(Tokenizer::parse_integer(text, kuint64max, &result))
         << "'" << text << "'";
     return result;
   }
@@ -770,7 +770,7 @@ TEST_2D(TokenizerTest, DocComments, kDocCommentCases, kBlockSizes) {
   TestErrorCollector error_collector;
   Tokenizer tokenizer(&input, &error_collector);
 
-  // Set up a second tokenizer where we'll pass all NULLs to NextWithComments().
+  // Set up a second tokenizer where we'll pass all NULLs to next_with_comments().
   TestInputStream input2(kDocCommentCases_case.input.data(),
                          kDocCommentCases_case.input.size(), kBlockSizes_case);
   Tokenizer tokenizer2(&input2, &error_collector);
@@ -784,9 +784,9 @@ TEST_2D(TokenizerTest, DocComments, kDocCommentCases, kBlockSizes) {
   std::string prev_trailing_comments;
   std::vector<std::string> detached_comments;
   std::string next_leading_comments;
-  tokenizer.NextWithComments(&prev_trailing_comments, &detached_comments,
+  tokenizer.next_with_comments(&prev_trailing_comments, &detached_comments,
                              &next_leading_comments);
-  tokenizer2.NextWithComments(NULL, NULL, NULL);
+  tokenizer2.next_with_comments(NULL, NULL, NULL);
   EXPECT_EQ("next", tokenizer.current().text);
   EXPECT_EQ("next", tokenizer2.current().text);
 
@@ -810,35 +810,35 @@ TEST_2D(TokenizerTest, DocComments, kDocCommentCases, kBlockSizes) {
 
 // Test parse helpers.
 // TODO(b/225783758): Add a fuzz test for this.
-TEST_F(TokenizerTest, ParseInteger) {
-  EXPECT_EQ(0, ParseInteger("0"));
-  EXPECT_EQ(123, ParseInteger("123"));
-  EXPECT_EQ(0xabcdef12u, ParseInteger("0xabcdef12"));
-  EXPECT_EQ(0xabcdef12u, ParseInteger("0xABCDEF12"));
-  EXPECT_EQ(kuint64max, ParseInteger("0xFFFFFFFFFFFFFFFF"));
-  EXPECT_EQ(01234567, ParseInteger("01234567"));
-  EXPECT_EQ(0X123, ParseInteger("0X123"));
+TEST_F(TokenizerTest, parse_integer) {
+  EXPECT_EQ(0, parse_integer("0"));
+  EXPECT_EQ(123, parse_integer("123"));
+  EXPECT_EQ(0xabcdef12u, parse_integer("0xabcdef12"));
+  EXPECT_EQ(0xabcdef12u, parse_integer("0xABCDEF12"));
+  EXPECT_EQ(kuint64max, parse_integer("0xFFFFFFFFFFFFFFFF"));
+  EXPECT_EQ(01234567, parse_integer("01234567"));
+  EXPECT_EQ(0X123, parse_integer("0X123"));
 
   // Test invalid integers that may still be tokenized as integers.
-  EXPECT_EQ(0, ParseInteger("0x"));
+  EXPECT_EQ(0, parse_integer("0x"));
 
   uint64_t i;
 
   // Test invalid integers that will never be tokenized as integers.
-  EXPECT_FALSE(Tokenizer::ParseInteger("zxy", kuint64max, &i));
-  EXPECT_FALSE(Tokenizer::ParseInteger("1.2", kuint64max, &i));
-  EXPECT_FALSE(Tokenizer::ParseInteger("08", kuint64max, &i));
-  EXPECT_FALSE(Tokenizer::ParseInteger("0xg", kuint64max, &i));
-  EXPECT_FALSE(Tokenizer::ParseInteger("-1", kuint64max, &i));
+  EXPECT_FALSE(Tokenizer::parse_integer("zxy", kuint64max, &i));
+  EXPECT_FALSE(Tokenizer::parse_integer("1.2", kuint64max, &i));
+  EXPECT_FALSE(Tokenizer::parse_integer("08", kuint64max, &i));
+  EXPECT_FALSE(Tokenizer::parse_integer("0xg", kuint64max, &i));
+  EXPECT_FALSE(Tokenizer::parse_integer("-1", kuint64max, &i));
 
   // Test overflows.
-  EXPECT_TRUE(Tokenizer::ParseInteger("0", 0, &i));
-  EXPECT_FALSE(Tokenizer::ParseInteger("1", 0, &i));
-  EXPECT_TRUE(Tokenizer::ParseInteger("1", 1, &i));
-  EXPECT_TRUE(Tokenizer::ParseInteger("12345", 12345, &i));
-  EXPECT_FALSE(Tokenizer::ParseInteger("12346", 12345, &i));
-  EXPECT_TRUE(Tokenizer::ParseInteger("0xFFFFFFFFFFFFFFFF", kuint64max, &i));
-  EXPECT_FALSE(Tokenizer::ParseInteger("0x10000000000000000", kuint64max, &i));
+  EXPECT_TRUE(Tokenizer::parse_integer("0", 0, &i));
+  EXPECT_FALSE(Tokenizer::parse_integer("1", 0, &i));
+  EXPECT_TRUE(Tokenizer::parse_integer("1", 1, &i));
+  EXPECT_TRUE(Tokenizer::parse_integer("12345", 12345, &i));
+  EXPECT_FALSE(Tokenizer::parse_integer("12346", 12345, &i));
+  EXPECT_TRUE(Tokenizer::parse_integer("0xFFFFFFFFFFFFFFFF", kuint64max, &i));
+  EXPECT_FALSE(Tokenizer::parse_integer("0x10000000000000000", kuint64max, &i));
 
   // Test near the limits of signed parsing (values in kint64max +/- 1600)
   for (int64_t offset = -1600; offset <= 1600; ++offset) {
@@ -849,11 +849,11 @@ TEST_F(TokenizerTest, ParseInteger) {
     snprintf(decimal, 32, "%llu", static_cast<unsigned long long>(i));
     if (offset > 0) {
       uint64_t parsed = -1;
-      EXPECT_FALSE(Tokenizer::ParseInteger(decimal, kint64max, &parsed))
+      EXPECT_FALSE(Tokenizer::parse_integer(decimal, kint64max, &parsed))
           << decimal << "=>" << parsed;
     } else {
       uint64_t parsed = -1;
-      EXPECT_TRUE(Tokenizer::ParseInteger(decimal, kint64max, &parsed))
+      EXPECT_TRUE(Tokenizer::parse_integer(decimal, kint64max, &parsed))
           << decimal << "=>" << parsed;
       EXPECT_EQ(parsed, i);
     }
@@ -861,11 +861,11 @@ TEST_F(TokenizerTest, ParseInteger) {
     snprintf(octal, 32, "0%llo", static_cast<unsigned long long>(i));
     if (offset > 0) {
       uint64_t parsed = -1;
-      EXPECT_FALSE(Tokenizer::ParseInteger(octal, kint64max, &parsed))
+      EXPECT_FALSE(Tokenizer::parse_integer(octal, kint64max, &parsed))
           << octal << "=>" << parsed;
     } else {
       uint64_t parsed = -1;
-      EXPECT_TRUE(Tokenizer::ParseInteger(octal, kint64max, &parsed))
+      EXPECT_TRUE(Tokenizer::parse_integer(octal, kint64max, &parsed))
           << octal << "=>" << parsed;
       EXPECT_EQ(parsed, i);
     }
@@ -873,11 +873,11 @@ TEST_F(TokenizerTest, ParseInteger) {
     snprintf(hex, 32, "0x%llx", static_cast<unsigned long long>(i));
     if (offset > 0) {
       uint64_t parsed = -1;
-      EXPECT_FALSE(Tokenizer::ParseInteger(hex, kint64max, &parsed))
+      EXPECT_FALSE(Tokenizer::parse_integer(hex, kint64max, &parsed))
           << hex << "=>" << parsed;
     } else {
       uint64_t parsed = -1;
-      EXPECT_TRUE(Tokenizer::ParseInteger(hex, kint64max, &parsed)) << hex;
+      EXPECT_TRUE(Tokenizer::parse_integer(hex, kint64max, &parsed)) << hex;
       EXPECT_EQ(parsed, i);
     }
     // EXPECT_NE(offset, -237);
@@ -896,11 +896,11 @@ TEST_F(TokenizerTest, ParseInteger) {
                static_cast<unsigned long long>(1615 + offset));
       if (offset > 0) {
         uint64_t parsed = -1;
-        EXPECT_FALSE(Tokenizer::ParseInteger(decimal, kuint64max, &parsed))
+        EXPECT_FALSE(Tokenizer::parse_integer(decimal, kuint64max, &parsed))
             << decimal << "=>" << parsed;
       } else {
         uint64_t parsed = -1;
-        EXPECT_TRUE(Tokenizer::ParseInteger(decimal, kuint64max, &parsed))
+        EXPECT_TRUE(Tokenizer::parse_integer(decimal, kuint64max, &parsed))
             << decimal;
         EXPECT_EQ(parsed, i);
       }
@@ -912,13 +912,13 @@ TEST_F(TokenizerTest, ParseInteger) {
         snprintf(octal, 32, "0200000000000000000%04llo",
                  static_cast<unsigned long long>(offset - 1));
         uint64_t parsed = -1;
-        EXPECT_FALSE(Tokenizer::ParseInteger(octal, kuint64max, &parsed))
+        EXPECT_FALSE(Tokenizer::parse_integer(octal, kuint64max, &parsed))
             << octal << "=>" << parsed;
       } else {
         char octal[32];
         snprintf(octal, 32, "0%llo", static_cast<unsigned long long>(i));
         uint64_t parsed = -1;
-        EXPECT_TRUE(Tokenizer::ParseInteger(octal, kuint64max, &parsed))
+        EXPECT_TRUE(Tokenizer::parse_integer(octal, kuint64max, &parsed))
             << octal;
         EXPECT_EQ(parsed, i);
       }
@@ -930,115 +930,115 @@ TEST_F(TokenizerTest, ParseInteger) {
         snprintf(hex, 32, "0x1000000000000%04llx",
                  static_cast<unsigned long long>(offset - 1));
         uint64_t parsed = -1;
-        EXPECT_FALSE(Tokenizer::ParseInteger(hex, kuint64max, &parsed))
+        EXPECT_FALSE(Tokenizer::parse_integer(hex, kuint64max, &parsed))
             << hex << "=>" << parsed;
       } else {
         snprintf(hex, 32, "0x%llx", static_cast<unsigned long long>(ui));
         uint64_t parsed = -1;
-        EXPECT_TRUE(Tokenizer::ParseInteger(hex, kuint64max, &parsed)) << hex;
+        EXPECT_TRUE(Tokenizer::parse_integer(hex, kuint64max, &parsed)) << hex;
         EXPECT_EQ(parsed, ui);
       }
     }
   }
 }
 
-TEST_F(TokenizerTest, ParseFloat) {
-  EXPECT_DOUBLE_EQ(1, Tokenizer::ParseFloat("1."));
-  EXPECT_DOUBLE_EQ(1e3, Tokenizer::ParseFloat("1e3"));
-  EXPECT_DOUBLE_EQ(1e3, Tokenizer::ParseFloat("1E3"));
-  EXPECT_DOUBLE_EQ(1.5e3, Tokenizer::ParseFloat("1.5e3"));
-  EXPECT_DOUBLE_EQ(.1, Tokenizer::ParseFloat(".1"));
-  EXPECT_DOUBLE_EQ(.25, Tokenizer::ParseFloat(".25"));
-  EXPECT_DOUBLE_EQ(.1e3, Tokenizer::ParseFloat(".1e3"));
-  EXPECT_DOUBLE_EQ(.25e3, Tokenizer::ParseFloat(".25e3"));
-  EXPECT_DOUBLE_EQ(.1e+3, Tokenizer::ParseFloat(".1e+3"));
-  EXPECT_DOUBLE_EQ(.1e-3, Tokenizer::ParseFloat(".1e-3"));
-  EXPECT_DOUBLE_EQ(5, Tokenizer::ParseFloat("5"));
-  EXPECT_DOUBLE_EQ(6e-12, Tokenizer::ParseFloat("6e-12"));
-  EXPECT_DOUBLE_EQ(1.2, Tokenizer::ParseFloat("1.2"));
-  EXPECT_DOUBLE_EQ(1.e2, Tokenizer::ParseFloat("1.e2"));
+TEST_F(TokenizerTest, parse_float) {
+  EXPECT_DOUBLE_EQ(1, Tokenizer::parse_float("1."));
+  EXPECT_DOUBLE_EQ(1e3, Tokenizer::parse_float("1e3"));
+  EXPECT_DOUBLE_EQ(1e3, Tokenizer::parse_float("1E3"));
+  EXPECT_DOUBLE_EQ(1.5e3, Tokenizer::parse_float("1.5e3"));
+  EXPECT_DOUBLE_EQ(.1, Tokenizer::parse_float(".1"));
+  EXPECT_DOUBLE_EQ(.25, Tokenizer::parse_float(".25"));
+  EXPECT_DOUBLE_EQ(.1e3, Tokenizer::parse_float(".1e3"));
+  EXPECT_DOUBLE_EQ(.25e3, Tokenizer::parse_float(".25e3"));
+  EXPECT_DOUBLE_EQ(.1e+3, Tokenizer::parse_float(".1e+3"));
+  EXPECT_DOUBLE_EQ(.1e-3, Tokenizer::parse_float(".1e-3"));
+  EXPECT_DOUBLE_EQ(5, Tokenizer::parse_float("5"));
+  EXPECT_DOUBLE_EQ(6e-12, Tokenizer::parse_float("6e-12"));
+  EXPECT_DOUBLE_EQ(1.2, Tokenizer::parse_float("1.2"));
+  EXPECT_DOUBLE_EQ(1.e2, Tokenizer::parse_float("1.e2"));
 
   // Test invalid integers that may still be tokenized as integers.
-  EXPECT_DOUBLE_EQ(1, Tokenizer::ParseFloat("1e"));
-  EXPECT_DOUBLE_EQ(1, Tokenizer::ParseFloat("1e-"));
-  EXPECT_DOUBLE_EQ(1, Tokenizer::ParseFloat("1.e"));
+  EXPECT_DOUBLE_EQ(1, Tokenizer::parse_float("1e"));
+  EXPECT_DOUBLE_EQ(1, Tokenizer::parse_float("1e-"));
+  EXPECT_DOUBLE_EQ(1, Tokenizer::parse_float("1.e"));
 
   // Test 'f' suffix.
-  EXPECT_DOUBLE_EQ(1, Tokenizer::ParseFloat("1f"));
-  EXPECT_DOUBLE_EQ(1, Tokenizer::ParseFloat("1.0f"));
-  EXPECT_DOUBLE_EQ(1, Tokenizer::ParseFloat("1F"));
+  EXPECT_DOUBLE_EQ(1, Tokenizer::parse_float("1f"));
+  EXPECT_DOUBLE_EQ(1, Tokenizer::parse_float("1.0f"));
+  EXPECT_DOUBLE_EQ(1, Tokenizer::parse_float("1F"));
 
   // These should parse successfully even though they are out of range.
   // Overflows become infinity and underflows become zero.
-  EXPECT_EQ(0.0, Tokenizer::ParseFloat("1e-9999999999999999999999999999"));
-  EXPECT_EQ(HUGE_VAL, Tokenizer::ParseFloat("1e+9999999999999999999999999999"));
+  EXPECT_EQ(0.0, Tokenizer::parse_float("1e-9999999999999999999999999999"));
+  EXPECT_EQ(HUGE_VAL, Tokenizer::parse_float("1e+9999999999999999999999999999"));
 
 #ifdef SHARK_HAS_DEATH_TEST  // death tests do not work on Windows yet
   // Test invalid integers that will never be tokenized as integers.
   EXPECT_DEBUG_DEATH(
-      Tokenizer::ParseFloat("zxy"),
+      Tokenizer::parse_float("zxy"),
       "passed text that could not have been tokenized as a float");
   EXPECT_DEBUG_DEATH(
-      Tokenizer::ParseFloat("1-e0"),
+      Tokenizer::parse_float("1-e0"),
       "passed text that could not have been tokenized as a float");
   EXPECT_DEBUG_DEATH(
-      Tokenizer::ParseFloat("-1.0"),
+      Tokenizer::parse_float("-1.0"),
       "passed text that could not have been tokenized as a float");
 #endif  // SHARK_HAS_DEATH_TEST
 }
 
-TEST_F(TokenizerTest, ParseString) {
+TEST_F(TokenizerTest, parse_string) {
   std::string output;
-  Tokenizer::ParseString("'hello'", &output);
+  Tokenizer::parse_string("'hello'", &output);
   EXPECT_EQ("hello", output);
-  Tokenizer::ParseString("\"blah\\nblah2\"", &output);
+  Tokenizer::parse_string("\"blah\\nblah2\"", &output);
   EXPECT_EQ("blah\nblah2", output);
-  Tokenizer::ParseString("'\\1x\\1\\123\\739\\52\\334n\\3'", &output);
+  Tokenizer::parse_string("'\\1x\\1\\123\\739\\52\\334n\\3'", &output);
   EXPECT_EQ("\1x\1\123\739\52\334n\3", output);
-  Tokenizer::ParseString("'\\x20\\x4'", &output);
+  Tokenizer::parse_string("'\\x20\\x4'", &output);
   EXPECT_EQ("\x20\x4", output);
 
   // Test invalid strings that may still be tokenized as strings.
-  Tokenizer::ParseString("\"\\a\\l\\v\\t", &output);  // \l is invalid
+  Tokenizer::parse_string("\"\\a\\l\\v\\t", &output);  // \l is invalid
   EXPECT_EQ("\a?\v\t", output);
-  Tokenizer::ParseString("'", &output);
+  Tokenizer::parse_string("'", &output);
   EXPECT_EQ("", output);
-  Tokenizer::ParseString("'\\", &output);
+  Tokenizer::parse_string("'\\", &output);
   EXPECT_EQ("\\", output);
 
   // Experiment with Unicode escapes. Here are one-, two- and three-byte Unicode
   // characters.
-  Tokenizer::ParseString("'\\u0024\\u00a2\\u20ac\\U00024b62XX'", &output);
+  Tokenizer::parse_string("'\\u0024\\u00a2\\u20ac\\U00024b62XX'", &output);
   EXPECT_EQ("$¢€𤭢XX", output);
   // Same thing encoded using UTF16.
-  Tokenizer::ParseString("'\\u0024\\u00a2\\u20ac\\ud852\\udf62XX'", &output);
+  Tokenizer::parse_string("'\\u0024\\u00a2\\u20ac\\ud852\\udf62XX'", &output);
   EXPECT_EQ("$¢€𤭢XX", output);
   // Here's some broken UTF16; there's a head surrogate with no tail surrogate.
   // We just output this as if it were UTF8; it's not a defined code point, but
   // it has a defined encoding.
-  Tokenizer::ParseString("'\\ud852XX'", &output);
+  Tokenizer::parse_string("'\\ud852XX'", &output);
   EXPECT_EQ("\xed\xa1\x92XX", output);
   // Malformed escape: Demons may fly out of the nose.
-  Tokenizer::ParseString("'\\u0'", &output);
+  Tokenizer::parse_string("'\\u0'", &output);
   EXPECT_EQ("u0", output);
   // Beyond the range of valid UTF-32 code units.
-  Tokenizer::ParseString("'\\U00110000\\U00200000\\UFFFFFFFF'", &output);
+  Tokenizer::parse_string("'\\U00110000\\U00200000\\UFFFFFFFF'", &output);
   EXPECT_EQ("\\U00110000\\U00200000\\Uffffffff", output);
 
   // Test invalid strings that will never be tokenized as strings.
 #ifdef SHARK_HAS_DEATH_TEST  // death tests do not work on Windows yet
   EXPECT_DEBUG_DEATH(
-      Tokenizer::ParseString("", &output),
+      Tokenizer::parse_string("", &output),
       "passed text that could not have been tokenized as a string");
 #endif  // SHARK_HAS_DEATH_TEST
 }
 
-TEST_F(TokenizerTest, ParseStringAppend) {
-  // Check that ParseString and ParseStringAppend differ.
+TEST_F(TokenizerTest, parse_string_append) {
+  // Check that parse_string and parse_string_append differ.
   std::string output("stuff+");
-  Tokenizer::ParseStringAppend("'hello'", &output);
+  Tokenizer::parse_string_append("'hello'", &output);
   EXPECT_EQ("stuff+hello", output);
-  Tokenizer::ParseString("'hello'", &output);
+  Tokenizer::parse_string("'hello'", &output);
   EXPECT_EQ("hello", output);
 }
 

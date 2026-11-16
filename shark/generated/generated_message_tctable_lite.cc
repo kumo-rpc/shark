@@ -452,7 +452,7 @@ SHARK_ALWAYS_INLINE const char* TcParser::SingularFixed(
   if (SHARK_PREDICT_FALSE(data.coded_tag<TagType>() != 0)) {
     SHARK_MUSTTAIL return MiniParse(SHARK_TC_PARAM_PASS);
   }
-  ptr += sizeof(TagType);  // Consume tag
+  ptr += sizeof(TagType);  // consume tag
   hasbits |= (uint64_t{1} << data.hasbit_idx());
   RefAt<LayoutType>(msg, data.offset()) = UnalignedLoad<LayoutType>(ptr);
   ptr += sizeof(LayoutType);
@@ -736,7 +736,7 @@ SHARK_ALWAYS_INLINE const char* TcParser::SingularVarint(
   if (SHARK_PREDICT_FALSE(data.coded_tag<TagType>() != 0)) {
     SHARK_MUSTTAIL return MiniParse(SHARK_TC_PARAM_PASS);
   }
-  ptr += sizeof(TagType);  // Consume tag
+  ptr += sizeof(TagType);  // consume tag
   hasbits |= (uint64_t{1} << data.hasbit_idx());
 
   // clang isn't smart enough to be able to only conditionally save
@@ -1023,7 +1023,7 @@ SHARK_ALWAYS_INLINE const char* TcParser::SingularEnum(
     SHARK_MUSTTAIL return MiniParse(SHARK_TC_PARAM_PASS);
   }
   const char* ptr2 = ptr;  // Save for unknown enum case
-  ptr += sizeof(TagType);  // Consume tag
+  ptr += sizeof(TagType);  // consume tag
   uint64_t tmp;
   ptr = ParseVarint(ptr, &tmp);
   if (ptr == nullptr) {

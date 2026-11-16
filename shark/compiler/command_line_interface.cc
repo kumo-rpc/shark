@@ -292,35 +292,35 @@ namespace shark {
             ~ErrorPrinter() override { }
 
             // implements MultiFileErrorCollector ------------------------------
-            void AddError(const std::string& filename, int line, int column,
+            void add_error(const std::string& filename, int line, int column,
                 const std::string& message) override {
                 found_errors_ = true;
                 AddErrorOrWarning(filename, line, column, message, "error", std::cerr);
             }
 
-            void AddWarning(const std::string& filename, int line, int column,
+            void add_warning(const std::string& filename, int line, int column,
                 const std::string& message) override {
                 found_warnings_ = true;
                 AddErrorOrWarning(filename, line, column, message, "warning", std::clog);
             }
 
             // implements io::ErrorCollector -----------------------------------
-            void AddError(int line, int column, const std::string& message) override {
-                AddError("input", line, column, message);
+            void add_error(int line, int column, const std::string& message) override {
+                add_error("input", line, column, message);
             }
 
-            void AddWarning(int line, int column, const std::string& message) override {
+            void add_warning(int line, int column, const std::string& message) override {
                 AddErrorOrWarning("input", line, column, message, "warning", std::clog);
             }
 
             // implements DescriptorPool::ErrorCollector-------------------------
-            void AddError(const std::string& filename, const std::string& element_name,
+            void add_error(const std::string& filename, const std::string& element_name,
                 const Message* descriptor, ErrorLocation location,
                 const std::string& message) override {
                 AddErrorOrWarning(filename, -1, -1, message, "error", std::cerr);
             }
 
-            void AddWarning(const std::string& filename, const std::string& element_name,
+            void add_warning(const std::string& filename, const std::string& element_name,
                 const Message* descriptor, ErrorLocation location,
                 const std::string& message) override {
                 AddErrorOrWarning(filename, -1, -1, message, "warning", std::clog);

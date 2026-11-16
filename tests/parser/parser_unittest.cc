@@ -990,10 +990,10 @@ namespace shark {
             //
             // There are a very large number of possible errors that the parser could
             // report, so it's infeasible to test every single one of them.  Instead,
-            // we test each unique call to AddError() in parser.h.  This does not mean
+            // we test each unique call to add_error() in parser.h.  This does not mean
             // we are testing every possible error that Parser can generate because
-            // each variant of the Consume() helper only counts as one unique call to
-            // AddError().
+            // each variant of the consume() helper only counts as one unique call to
+            // add_error().
 
             typedef ParserTest ParseErrorTest;
 

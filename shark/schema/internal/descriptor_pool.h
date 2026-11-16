@@ -161,7 +161,7 @@ namespace shark {
 
             // Reports an error in the FileDescriptorProto. Use this function if the
             // problem occurred should interrupt building the FileDescriptorProto.
-            virtual void AddError(
+            virtual void add_error(
                 const std::string& filename, // File name in which the error occurred.
                 const std::string& element_name, // Full name of the erroneous element.
                 const Message* descriptor, // Descriptor of the erroneous element.
@@ -171,7 +171,7 @@ namespace shark {
 
             // Reports a warning in the FileDescriptorProto. Use this function if the
             // problem occurred should NOT interrupt building the FileDescriptorProto.
-            virtual void AddWarning(
+            virtual void add_warning(
                 const std::string& /*filename*/, // File name in which the error
                                                  // occurred.
                 const std::string& /*element_name*/, // Full name of the erroneous
