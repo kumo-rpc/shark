@@ -64,7 +64,8 @@ list(APPEND KMCMAKE_SYSTEM_DYLINK Threads::Threads)
 
 find_package(ZLIB REQUIRED)
 kmcmake_private_find_package(ZLIB REQUIRED)
-list(APPEND KMCMAKE_SYSTEM_DYLINK ZLIB::ZLIB)
+find_package(turbo REQUIRED)
+find_package(fermat REQUIRED)
 
 ############################################################
 #
@@ -75,6 +76,9 @@ list(APPEND KMCMAKE_SYSTEM_DYLINK ZLIB::ZLIB)
 ##########################################################
 list(APPEND KMCMAKE_DEPS_LINK
         #${TURBO_LIB}
+        fermat::fermat_static
+        turbo::turbo_static
+        ZLIB::ZLIB
         ${KMCMAKE_SYSTEM_DYLINK}
         )
 list(REMOVE_DUPLICATES KMCMAKE_DEPS_LINK)

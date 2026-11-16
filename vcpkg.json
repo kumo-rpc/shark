@@ -1,7 +1,9 @@
 {
   "dependencies": [
+    "benchmark",
     "gtest",
+    "turbo",
     "zlib",
-    "benchmark"
+    "fermat"
   ]
 }
