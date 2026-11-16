@@ -279,7 +279,7 @@ std::string ToCamelCase(StringPiece input) {
     } else if (capitalize_next) {
       capitalize_next = false;
       if (turbo::ascii_islower(input[i])) {
-        result.push_back(turbo::ascii_isupper(input[i]));
+        result.push_back(turbo::ascii_toupper(input[i]));
         continue;
       } else {
         result.push_back(input[i]);
