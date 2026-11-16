@@ -36,14 +36,16 @@
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_split.h>
+#include <turbo/strings/str_replace.h>
 
 namespace shark::compiler::python {
 
     // Returns the Python module name expected for a given .shark filename.
     std::string ModuleName(const std::string& filename) {
         std::string basename = StripProto(filename);
-        ReplaceCharacters(&basename, "-", '_');
-        ReplaceCharacters(&basename, "/", '.');
+        turbo::StrReplaceAll({{"-", "_"}}, &basename);
+        turbo::StrReplaceAll({{"/", "."}}, &basename);
         return basename + "_pb2";
     }
 
@@ -93,7 +95,7 @@ namespace shark::compiler::python {
     const char* const* kKeywordsEnd = kKeywords + (sizeof(kKeywords) / sizeof(kKeywords[0]));
 
     bool ContainsPythonKeyword(const std::string& module_name) {
-        std::vector<std::string> tokens = Split(module_name, ".");
+        std::vector<std::string> tokens = turbo::str_split(module_name, turbo::ByAnyChar("."), turbo::SkipEmpty());
         for (int i = 0; i < static_cast<int>(tokens.size()); ++i) {
             if (std::find(kKeywords, kKeywordsEnd, tokens[i]) != kKeywordsEnd) {
                 return true;
@@ -117,7 +119,7 @@ namespace shark::compiler::python {
         const std::string& suffix) {
         std::string module_name = ModuleName(file_des->name());
         std::string filename = module_name;
-        ReplaceCharacters(&filename, ".", '/');
+        turbo::StrReplaceAll({{".", "/"}}, &filename);
         filename += suffix;
         return filename;
     }

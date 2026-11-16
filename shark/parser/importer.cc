@@ -51,6 +51,8 @@
 #include <shark/io/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_split.h>
+#include <turbo/strings/str_replace.h>
 
 #ifdef _WIN32
 #include <ctype.h>
@@ -280,15 +282,14 @@ namespace shark::compiler {
         // slashes.
         if (turbo::starts_with(path, "\\\\")) {
             // Avoid converting two leading backslashes.
-            path = "\\\\" + StringReplace(path.substr(2), "\\", "/", true);
+            path = "\\\\" + turbo::StrReplaceAll(path.substr(2), {{"\\", "/"}});
         } else {
-            path = StringReplace(path, "\\", "/", true);
+            path = turbo::StrReplaceAll(path, {{"\\", "/"}});
         }
 #endif
 
         std::vector<std::string> canonical_parts;
-        std::vector<std::string> parts = Split(
-            path, "/", true); // Note:  Removes empty parts.
+        std::vector<std::string> parts = turbo::str_split(path, turbo::ByAnyChar("/"), turbo::SkipEmpty()); // Note:  Removes empty parts.
         for (const std::string& part : parts) {
             if (part == ".") {
                 // Ignore.

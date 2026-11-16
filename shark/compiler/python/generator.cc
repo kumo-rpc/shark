@@ -62,6 +62,7 @@
 #include <shark/stubs/logging.h>
 #include <turbo/format/str_format.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/ascii.h>
 #include <turbo/strings/substitute.h>
 
 namespace shark::compiler::python {
@@ -1083,7 +1084,7 @@ namespace shark::compiler::python {
         // The C++ implementation doesn't guard against this either.  Leaving
         // it for now...
         std::string name = NamePrefixedWithNestedTypes(descriptor, "_");
-        ToUpper(&name);
+        turbo::str_to_upper(&name);
         // Module-private for now.  Easy to make public later; almost impossible
         // to make private later.
         name = "_" + name;
@@ -1113,7 +1114,7 @@ namespace shark::compiler::python {
     std::string Generator::ModuleLevelServiceDescriptorName(
         const ServiceDescriptor& descriptor) const {
         std::string name = descriptor.name();
-        ToUpper(&name);
+        turbo::str_to_upper(&name);
         name = "_" + name;
         if (descriptor.file() != file_) {
             name = ModuleAlias(descriptor.file()->name()) + "." + name;

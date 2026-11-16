@@ -49,6 +49,7 @@
 #include <shark/io/printer.h>
 #include <shark/port.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_split.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -856,7 +857,7 @@ namespace shark::compiler::cpp {
         ~NamespaceOpener() { ChangeTo(""); }
 
         void ChangeTo(const std::string& name) {
-            std::vector<std::string> new_stack_ = Split(name, "::", true);
+            std::vector<std::string> new_stack_ = turbo::str_split(name, turbo::ByAnyChar("::"), turbo::SkipEmpty());
             size_t len = std::min(name_stack_.size(), new_stack_.size());
             size_t common_idx = 0;
             while (common_idx < len) {

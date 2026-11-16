@@ -58,6 +58,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/hash.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/ascii.h>
 #include <turbo/strings/substitute.h>
 #include <shark/types/map_entry_lite.h>
 
@@ -286,8 +287,8 @@ namespace shark {
                     default:
                         vars["val_cpp"] = PrimitiveTypeName(options, val->cpp_type());
                     }
-                    vars["key_wire_type"] = ToUpper(DeclaredTypeMethodName(key->type()));
-                    vars["val_wire_type"] = ToUpper(DeclaredTypeMethodName(val->type()));
+                    vars["key_wire_type"] = turbo::str_to_upper(DeclaredTypeMethodName(key->type()));
+                    vars["val_wire_type"] = turbo::str_to_upper(DeclaredTypeMethodName(val->type()));
                 }
 
                 // Does the given field have a private (internal helper only) has_$name$()
@@ -1101,7 +1102,7 @@ $annotate_repeated_extension_list_mutable$
                 for (auto oneof : OneOfRange(descriptor_)) {
                     format.Set("oneof_name", oneof->name());
                     format.Set("oneof_index", oneof->index());
-                    format.Set("cap_oneof_name", ToUpper(oneof->name()));
+                    format.Set("cap_oneof_name", turbo::str_to_upper(oneof->name()));
                     format(
                         "inline bool $classname$::has_$oneof_name$() const {\n"
                         "  return $oneof_name$_case() != $cap_oneof_name$_NOT_SET;\n"
@@ -1464,7 +1465,7 @@ $annotate_repeated_extension_list_mutable$
                         format("$1$ = $2$,\n", OneofCaseConstantName(field), // 1
                             field->number()); // 2
                     }
-                    format("$1$_NOT_SET = 0,\n", ToUpper(oneof->name()));
+                    format("$1$_NOT_SET = 0,\n", turbo::str_to_upper(oneof->name()));
                     format.Outdent();
                     format(
                         "};\n"
@@ -2906,7 +2907,7 @@ $annotate_repeated_extension_list_mutable$
                             "case $1$_NOT_SET: {\n"
                             "  break;\n"
                             "}\n",
-                            ToUpper(oneof->name()));
+                            turbo::str_to_upper(oneof->name()));
                         format.Outdent();
                         format("}\n");
                     }
@@ -3192,12 +3193,12 @@ $annotate_repeated_extension_list_mutable$
                         "case $1$_NOT_SET: {\n"
                         "  break;\n"
                         "}\n",
-                        ToUpper(oneof->name()));
+                        turbo::str_to_upper(oneof->name()));
                     format.Outdent();
                     format(
                         "}\n"
                         "$oneof_case$[$1$] = $2$_NOT_SET;\n",
-                        i, ToUpper(oneof->name()));
+                        i, turbo::str_to_upper(oneof->name()));
                     format.Outdent();
                     format(
                         "}\n"
@@ -3518,7 +3519,7 @@ $annotate_repeated_extension_list_mutable$
                         "case $1$_NOT_SET: {\n"
                         "  break;\n"
                         "}\n",
-                        ToUpper(oneof->name()));
+                        turbo::str_to_upper(oneof->name()));
                     format.Outdent();
                     format("}\n");
                 }
@@ -4286,7 +4287,7 @@ $annotate_repeated_extension_list_mutable$
                         "case $1$_NOT_SET: {\n"
                         "  break;\n"
                         "}\n",
-                        ToUpper(oneof->name()));
+                        turbo::str_to_upper(oneof->name()));
                     format.Outdent();
                     format("}\n");
                 }
@@ -4384,7 +4385,7 @@ $annotate_repeated_extension_list_mutable$
                         "case $1$_NOT_SET: {\n"
                         "  break;\n"
                         "}\n",
-                        ToUpper(oneof->name()));
+                        turbo::str_to_upper(oneof->name()));
                     format.Outdent();
                     format("}\n");
                 }

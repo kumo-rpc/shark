@@ -34,6 +34,7 @@
 #include <shark/format/wired/wire_format.h>
 #include <shark/io/printer.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/ascii.h>
 
 namespace shark::compiler::cpp {
 
@@ -57,8 +58,8 @@ namespace shark::compiler::cpp {
         default:
             (*variables)["val_cpp"] = PrimitiveTypeName(options, val->cpp_type());
         }
-        (*variables)["key_wire_type"] = ToUpper(DeclaredTypeMethodName(key->type()));
-        (*variables)["val_wire_type"] = ToUpper(DeclaredTypeMethodName(val->type()));
+        (*variables)["key_wire_type"] = turbo::str_to_upper(DeclaredTypeMethodName(key->type()));
+        (*variables)["val_wire_type"] = turbo::str_to_upper(DeclaredTypeMethodName(val->type()));
         (*variables)["map_classname"] = ClassName(descriptor->message_type(), false);
         (*variables)["number"] = StrCat(descriptor->number());
         (*variables)["tag"] = StrCat(internal::WireFormat::MakeTag(descriptor));

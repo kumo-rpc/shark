@@ -40,7 +40,7 @@
 #include <shark/descriptor.skp.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
-
+#include <turbo/strings/match.h>
 
 namespace shark {
 

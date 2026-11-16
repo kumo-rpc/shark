@@ -34,6 +34,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/transfer/json/utility.h>
 #include <turbo/status/status_macros.h>
+#include <turbo/strings/match.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

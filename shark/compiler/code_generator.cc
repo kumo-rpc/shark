@@ -39,6 +39,8 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_split.h>
+#include <turbo/strings/strip.h>
 
 namespace shark::compiler {
 
@@ -104,7 +106,7 @@ namespace shark::compiler {
     void ParseGeneratorParameter(
         const std::string& text,
         std::vector<std::pair<std::string, std::string>>* output) {
-        std::vector<std::string> parts = Split(text, ",", true);
+        std::vector<std::string> parts = turbo::str_split(text, turbo::ByAnyChar(","), turbo::SkipEmpty());
 
         for (int i = 0; i < parts.size(); i++) {
             std::string::size_type equals_pos = parts[i].find_first_of('=');
@@ -123,9 +125,9 @@ namespace shark::compiler {
     // Strips ".shark" or ".protodevel" from the end of a filename.
     std::string StripProto(const std::string& filename) {
         if (turbo::ends_with(filename, ".protodevel")) {
-            return StripSuffixString(filename, ".protodevel");
+            return std::string(turbo::strip_suffix(filename, ".protodevel"));
         } else {
-            return StripSuffixString(filename, ".shark");
+            return std::string(turbo::strip_suffix(filename, ".shark"));
         }
     }
 

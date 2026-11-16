@@ -35,6 +35,7 @@
 #include <tests/common/file.h>
 #include <shark/io/io_win32.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_replace.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <errno.h>
@@ -147,7 +148,7 @@ std::string GetTemporaryDirectoryName() {
   // The Win32 API accepts forward slashes as a path delimiter as long as the
   // path doesn't use the "\\?\" prefix.
   // Let's avoid confusion and use only forward slashes.
-  result = StringReplace(result, "\\", "/", true);
+  result = turbo::StrReplaceAll(result, {{"\\", "/"}});
 #endif  // _WIN32
   return result;
 }

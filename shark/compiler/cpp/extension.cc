@@ -40,6 +40,7 @@
 #include <shark/descriptor.skp.h>
 #include <shark/io/printer.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_replace.h>
 
 namespace shark::compiler::cpp {
 
@@ -152,7 +153,7 @@ namespace shark::compiler::cpp {
             // We cannot declare it at class scope because that would require exposing
             // it in the header which would be annoying for other reasons.  So we
             // replace :: with _ in the name and declare it as a global.
-            default_str = StringReplace(variables_["scoped_name"], "::", "_", true) + "_default";
+            default_str = turbo::StrReplaceAll(variables_["scoped_name"], {{"::", "_"}}) + "_default";
             format("const std::string $1$($2$);\n", default_str,
                 DefaultValue(options_, descriptor_));
         } else if (descriptor_->message_type()) {

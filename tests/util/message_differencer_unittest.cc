@@ -42,6 +42,7 @@
 #include <shark/stubs/common.h>
 
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_split.h>
 
 #include <shark/stubs/logging.h>
 #include <tests/sk/types/any_test.skp.h>
@@ -67,7 +68,7 @@ namespace {
 const FieldDescriptor* GetFieldDescriptor(const Message& message,
                                           const std::string& field_name) {
   std::vector<std::string> field_path =
-      Split(field_name, ".", true);
+      turbo::str_split(field_name, turbo::ByAnyChar("."), turbo::SkipEmpty());
   const Descriptor* descriptor = message.GetDescriptor();
   const FieldDescriptor* field = nullptr;
   for (int i = 0; i < field_path.size(); i++) {

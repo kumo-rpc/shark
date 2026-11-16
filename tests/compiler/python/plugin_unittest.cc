@@ -40,6 +40,7 @@
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_split.h>
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 
@@ -104,7 +105,7 @@ TEST(PythonPluginTest, ImportTest) {
   std::string output;
   GOOGLE_CHECK_OK(File::GetContents(TestTempDir() + "/test1_pb2.py", &output,
                              true));
-  std::vector<std::string> lines = Split(output, "\n");
+  std::vector<std::string> lines = turbo::str_split(output, turbo::ByAnyChar("\n"), turbo::SkipEmpty());
   std::string expected_import = "import test2_pb2";
   bool found_expected_import = false;
   for (int i = 0; i < lines.size(); ++i) {

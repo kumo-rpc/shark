@@ -82,6 +82,8 @@
 #include <shark/stubs/stl_util.h>
 #include <turbo/format/str_format.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_split.h>
+#include <turbo/strings/str_replace.h>
 #include <turbo/strings/substitute.h>
 #include <shark/format/text/text_format.h>
 
@@ -170,7 +172,7 @@ namespace shark {
                 const std::string& filename) {
                 // Recursively create parent directories to the output file.
                 // On Windows, both '/' and '\' are valid path separators.
-                std::vector<std::string> parts = Split(filename, "/\\", true);
+                std::vector<std::string> parts = turbo::str_split(filename, turbo::ByAnyChar("/\\"), turbo::SkipEmpty());
                 std::string path_so_far = prefix;
                 for (int i = 0; i < parts.size() - 1; i++) {
                     path_so_far += parts[i];
@@ -1277,9 +1279,7 @@ namespace shark {
                         if (direct_dependencies_.find(parsed_file->dependency(i)->name()) == direct_dependencies_.end()) {
                             indirect_imports = true;
                             std::cerr << parsed_file->name() << ": "
-                                      << StringReplace(direct_dependencies_violation_msg_, "%s",
-                                             parsed_file->dependency(i)->name(),
-                                             true /* replace_all */)
+                                      << turbo::StrReplaceAll(direct_dependencies_violation_msg_, {{"%s", parsed_file->dependency(i)->name()}})
                                       << std::endl;
                         }
                     }
@@ -1669,9 +1669,7 @@ namespace shark {
                 // Java's -classpath (and some other languages) delimits path components
                 // with colons.  Let's accept that syntax too just to make things more
                 // intuitive.
-                std::vector<std::string> parts = Split(
-                    value, CommandLineInterface::kPathSeparator,
-                    true);
+                std::vector<std::string> parts = turbo::str_split(value, turbo::ByAnyChar(CommandLineInterface::kPathSeparator), turbo::SkipEmpty());
 
                 for (int i = 0; i < parts.size(); i++) {
                     std::string virtual_path;
@@ -1724,7 +1722,7 @@ namespace shark {
                 }
 
                 direct_dependencies_explicitly_set_ = true;
-                std::vector<std::string> direct = Split(value, ":", true);
+                std::vector<std::string> direct = turbo::str_split(value, turbo::ByAnyChar(":"), turbo::SkipEmpty());
                 GOOGLE_DCHECK(direct_dependencies_.empty());
                 direct_dependencies_.insert(direct.begin(), direct.end());
 
@@ -1750,9 +1748,7 @@ namespace shark {
                     return PARSE_ARGUMENT_FAIL;
                 }
 
-                descriptor_set_in_names_ = Split(
-                    value, CommandLineInterface::kPathSeparator,
-                    true);
+                descriptor_set_in_names_ = turbo::str_split(value, turbo::ByAnyChar(CommandLineInterface::kPathSeparator), turbo::SkipEmpty());
 
             } else if (name == "-o" || name == "--descriptor_set_out") {
                 if (!descriptor_set_out_name_.empty()) {

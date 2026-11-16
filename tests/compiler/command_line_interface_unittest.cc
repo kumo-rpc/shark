@@ -57,6 +57,8 @@
 #include <shark/io/zero_copy_stream.h>
 #include <turbo/format/str_format.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_split.h>
+#include <turbo/strings/str_replace.h>
 #include <turbo/strings/substitute.h>
 #include <shark/types/any.skp.h>
 #include <tests/common/test_util2.h>
@@ -313,7 +315,7 @@ namespace shark {
             }
 
             void CommandLineInterfaceTest::Run(const std::string& command) {
-                RunWithArgs(Split(command, " ", true));
+                RunWithArgs(turbo::str_split(command, turbo::ByAnyChar(" "), turbo::SkipEmpty()));
             }
 
             void CommandLineInterfaceTest::RunWithArgs(std::vector<std::string> args) {
@@ -362,7 +364,7 @@ namespace shark {
                 std::unique_ptr<const char*[]> argv(new const char*[args.size()]);
 
                 for (int i = 0; i < args.size(); i++) {
-                    args[i] = StringReplace(args[i], "$tmpdir", temp_directory_, true);
+                    args[i] = turbo::StrReplaceAll(args[i], {{"$tmpdir", temp_directory_}});
                     argv[i] = args[i].c_str();
                 }
 
@@ -399,7 +401,7 @@ namespace shark {
                 // Write file.
                 std::string full_name = temp_directory_ + "/" + name;
                 GOOGLE_CHECK_OK(File::SetContents(
-                    full_name, StringReplace(contents, "$tmpdir", temp_directory_, true),
+                    full_name, turbo::StrReplaceAll(contents, {{"$tmpdir", temp_directory_}}),
                     true));
             }
 
@@ -418,7 +420,7 @@ namespace shark {
             void CommandLineInterfaceTest::ExpectErrorText(
                 const std::string& expected_text) {
                 EXPECT_NE(0, return_code_);
-                EXPECT_EQ(StringReplace(expected_text, "$tmpdir", temp_directory_, true),
+                EXPECT_EQ(turbo::StrReplaceAll(expected_text, {{"$tmpdir", temp_directory_}}),
                     error_text_);
             }
 
@@ -530,7 +532,7 @@ namespace shark {
                 std::string file_contents;
                 GOOGLE_CHECK_OK(File::GetContents(path, &file_contents, true));
 
-                EXPECT_EQ(StringReplace(content, "$tmpdir", temp_directory_, true),
+                EXPECT_EQ(turbo::StrReplaceAll(content, {{"$tmpdir", temp_directory_}}),
                     file_contents);
             }
 
@@ -2582,7 +2584,7 @@ namespace shark {
                     std::vector<std::string> args;
                     args.push_back("protoc");
                     for (std::string_view split_piece :
-                        Split(command, " ", true)) {
+                        turbo::str_split(command, turbo::ByAnyChar(" "), turbo::SkipEmpty())) {
                         args.push_back(std::string(split_piece));
                     }
                     if (specify_proto_files) {

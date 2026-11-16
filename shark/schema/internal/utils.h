@@ -51,6 +51,8 @@
 #include <shark/stubs/once.h>
 #include <shark/stubs/stl_util.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_split.h>
+#include <turbo/strings/strip.h>
 #include <turbo/strings/substitute.h>
 #include <shark/types/any.h>
 #include <shark/unknown_field_set.h>
@@ -557,8 +559,8 @@ namespace shark {
             // the DebugString() output.
             std::string FormatComment(const std::string& comment_text) {
                 std::string stripped_comment = comment_text;
-                StripWhitespace(&stripped_comment);
-                std::vector<std::string> lines = Split(stripped_comment, "\n");
+                turbo::trim_all(&stripped_comment);
+                std::vector<std::string> lines = turbo::str_split(stripped_comment, turbo::ByAnyChar("\n"), turbo::SkipEmpty());
                 std::string output;
                 for (const std::string& line : lines) {
                     turbo::substitute_and_append(&output, "$0// $1\n", prefix_, line);

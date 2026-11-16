@@ -33,6 +33,7 @@
 #include <shark/types/any.h>
 #include <shark/arenastring.h>
 #include <shark/generated/generated_message_util.h>
+#include <turbo/strings/match.h>
 
 namespace shark::internal {
 

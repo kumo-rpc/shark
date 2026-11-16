@@ -48,6 +48,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_replace.h>
 #include <turbo/strings/substitute.h>
 #include <shark/types/any.skp.h>
 #include <tests/sk/format/wire/unittest_mset_wire_format.skp.h>
@@ -1008,8 +1009,8 @@ namespace shark {
         // Some platforms (e.g. Windows) insist on padding the exponent to three
         // digits when one or two would be just fine.
         static std::string RemoveRedundantZeros(std::string text) {
-            text = StringReplace(text, "e+0", "e+", true);
-            text = StringReplace(text, "e-0", "e-", true);
+            text = turbo::StrReplaceAll(text, {{"e+0", "e+"}});
+            text = turbo::StrReplaceAll(text, {{"e-0", "e-"}});
             return text;
         }
 

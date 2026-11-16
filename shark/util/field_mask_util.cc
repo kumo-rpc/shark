@@ -33,6 +33,7 @@
 #include <cstdint>
 
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_split.h>
 #include <shark/message.h>
 #include <shark/stubs/map_util.h>
 
@@ -49,7 +50,7 @@ std::string FieldMaskUtil::ToString(const FieldMask& mask) {
 
 void FieldMaskUtil::FromString(std::string_view str, FieldMask* out) {
   out->Clear();
-  std::vector<std::string> paths = Split(str, ",");
+  std::vector<std::string> paths = turbo::str_split(str, turbo::ByAnyChar(","), turbo::SkipEmpty());
   for (const std::string& path : paths) {
     if (path.empty()) continue;
     out->add_paths(path);
@@ -122,7 +123,7 @@ bool FieldMaskUtil::ToJsonString(const FieldMask& mask, std::string* out) {
 
 bool FieldMaskUtil::FromJsonString(std::string_view str, FieldMask* out) {
   out->Clear();
-  std::vector<std::string> paths = Split(str, ",");
+  std::vector<std::string> paths = turbo::str_split(str, turbo::ByAnyChar(","), turbo::SkipEmpty());
   for (const std::string& path : paths) {
     if (path.empty()) continue;
     std::string snakecase_path;
@@ -140,7 +141,7 @@ bool FieldMaskUtil::GetFieldDescriptors(
   if (field_descriptors != nullptr) {
     field_descriptors->clear();
   }
-  std::vector<std::string> parts = Split(path, ".");
+  std::vector<std::string> parts = turbo::str_split(path, turbo::ByAnyChar("."), turbo::SkipEmpty());
   for (const std::string& field_name : parts) {
     if (descriptor == nullptr) {
       return false;
@@ -323,7 +324,7 @@ void FieldMaskTree::MergeToFieldMask(const std::string& prefix,
 }
 
 void FieldMaskTree::AddPath(const std::string& path) {
-  std::vector<std::string> parts = Split(path, ".");
+  std::vector<std::string> parts = turbo::str_split(path, turbo::ByAnyChar("."), turbo::SkipEmpty());
   if (parts.empty()) {
     return;
   }
@@ -356,7 +357,7 @@ void FieldMaskTree::RemovePath(const std::string& path,
     // code below.
     return;
   }
-  std::vector<std::string> parts = Split(path, ".");
+  std::vector<std::string> parts = turbo::str_split(path, turbo::ByAnyChar("."), turbo::SkipEmpty());
   if (parts.empty()) {
     return;
   }
@@ -408,7 +409,7 @@ void FieldMaskTree::RemovePath(const std::string& path,
 }
 
 void FieldMaskTree::IntersectPath(const std::string& path, FieldMaskTree* out) {
-  std::vector<std::string> parts = Split(path, ".");
+  std::vector<std::string> parts = turbo::str_split(path, turbo::ByAnyChar("."), turbo::SkipEmpty());
   if (parts.empty()) {
     return;
   }

@@ -38,6 +38,8 @@
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_split.h>
+#include <turbo/strings/ascii.h>
 
 namespace shark::compiler::python {
 
@@ -71,7 +73,7 @@ namespace shark::compiler::python {
             std::string filename = descriptor.file()->name();
             if (import_map.find(filename) == import_map.end()) {
                 std::string module_name = ModuleName(descriptor.file()->name());
-                std::vector<std::string> tokens = Split(module_name, ".");
+                std::vector<std::string> tokens = turbo::str_split(module_name, turbo::ByAnyChar("."), turbo::SkipEmpty());
                 module_alias = "_" + tokens.back();
             } else {
                 module_alias = import_map.at(filename);
@@ -313,7 +315,7 @@ namespace shark::compiler::python {
         for (int i = 0; i < descriptor.extension_count(); ++i) {
             const FieldDescriptor* extension_field = descriptor.extension(i);
             std::string constant_name = extension_field->name() + "_FIELD_NUMBER";
-            ToUpper(&constant_name);
+            turbo::str_to_upper(&constant_name);
             (*item_map)[constant_name] = "_ClassVar[int]";
             (*item_map)[extension_field->name()] = "_descriptor.FieldDescriptor";
         }
@@ -446,7 +448,7 @@ namespace shark::compiler::python {
         // Adds field number and field descriptor to item_map
         for (int i = 0; i < message_descriptor.field_count(); ++i) {
             const FieldDescriptor& field_des = *message_descriptor.field(i);
-            item_map[ToUpper(field_des.name()) + "_FIELD_NUMBER"] = "_ClassVar[int]";
+            item_map[turbo::str_to_upper(field_des.name()) + "_FIELD_NUMBER"] = "_ClassVar[int]";
             if (IsPythonKeyword(field_des.name())) {
                 continue;
             }

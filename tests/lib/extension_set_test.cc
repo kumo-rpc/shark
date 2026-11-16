@@ -52,6 +52,7 @@
 #include <tests/common/test_util.h>
 #include <tests/common/test_util2.h>
 #include <shark/stubs/stl_util.h>
+#include <turbo/strings/match.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

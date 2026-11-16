@@ -40,6 +40,7 @@
 #include <vector>
 
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_split.h>
 
 #include <gtest/gtest.h>
 #include <shark/compiler/plugin.skp.h>
@@ -49,6 +50,7 @@
 #include <shark/io/zero_copy_stream.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
+#include <turbo/strings/strip.h>
 #include <turbo/strings/substitute.h>
 #include <shark/format/text/text_format.h>
 #include <tests/common/file.h>
@@ -104,7 +106,7 @@ namespace shark {
                 File::GetContents(output_directory + "/" + GetOutputFileName(name, file),
                     &content, true));
 
-            std::vector<std::string> lines = Split(content, "\n", true);
+            std::vector<std::string> lines = turbo::str_split(content, turbo::ByAnyChar("\n"), turbo::SkipEmpty());
 
             while (!lines.empty() && lines.back().empty()) {
                 lines.pop_back();
@@ -115,7 +117,7 @@ namespace shark {
 
             std::vector<std::string> insertion_list;
             if (!insertions.empty()) {
-                insertion_list = Split(insertions, ",", true);
+                insertion_list = turbo::str_split(insertions, turbo::ByAnyChar(","), turbo::SkipEmpty());
             }
 
             EXPECT_EQ(lines.size(), 3 + insertion_list.size() * 2);
@@ -200,8 +202,8 @@ namespace shark {
             bool annotate = false;
             for (int i = 0; i < file->message_type_count(); i++) {
                 if (turbo::starts_with(file->message_type(i)->name(), "MockCodeGenerator_")) {
-                    std::string command = StripPrefixString(
-                        file->message_type(i)->name(), "MockCodeGenerator_");
+                    std::string command = std::string(turbo::strip_prefix(
+                        file->message_type(i)->name(), "MockCodeGenerator_"));
                     if (command == "Error") {
                         *error = "Saw message type MockCodeGenerator_Error.";
                         return false;
@@ -241,10 +243,8 @@ namespace shark {
 
             bool insert_endlines = turbo::starts_with(parameter, "insert_endlines=");
             if (insert_endlines || turbo::starts_with(parameter, "insert=")) {
-                std::vector<std::string> insert_into = Split(
-                    StripPrefixString(
-                        parameter, insert_endlines ? "insert_endlines=" : "insert="),
-                    ",", true);
+                std::vector<std::string> insert_into = turbo::str_split(turbo::strip_prefix(
+                        parameter, insert_endlines ? "insert_endlines=" : "insert="), turbo::ByAnyChar(","), turbo::SkipEmpty());
 
                 for (size_t i = 0; i < insert_into.size(); i++) {
                     {

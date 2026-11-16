@@ -49,6 +49,7 @@
 #include <tests/common/types/map_lite_test_util.h>
 #include <tests/sk/types/map_lite_unittest.skp.h>
 #include <tests/sk/unittest_lite.skp.h>
+#include <turbo/strings/match.h>
 
 namespace shark {
 

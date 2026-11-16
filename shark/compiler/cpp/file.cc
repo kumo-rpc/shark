@@ -52,6 +52,7 @@
 #include <shark/descriptor.skp.h>
 #include <shark/io/printer.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_replace.h>
 
 // Must be last.
 #include <shark/port_def.inc>
@@ -340,9 +341,9 @@ namespace shark::compiler::cpp {
         if (options_.opensource_runtime) {
             std::string path = google3_name.substr(prefix.size());
 
-            path = StringReplace(path, "internal/", "", false);
-            path = StringReplace(path, "proto/", "", false);
-            path = StringReplace(path, "public/", "", false);
+            path = turbo::StrReplaceAll(path, {{"internal/", ""}});
+            path = turbo::StrReplaceAll(path, {{"proto/", ""}});
+            path = turbo::StrReplaceAll(path, {{"public/", ""}});
             if (path == "wire_format.h" || path == "wire_format_lite.h") {
                 path = "format/wired/" + path;
             }
@@ -363,8 +364,7 @@ namespace shark::compiler::cpp {
             // The bootstrapped proto generated code needs to use the
             // third_party/protobuf header paths to avoid circular dependencies.
             if (options_.bootstrap) {
-                path = StringReplace(google3_name, "net/proto2/public",
-                    "third_party/protobuf", false);
+                path = turbo::StrReplaceAll(google3_name, {{"net/proto2/public", "third_party/protobuf"}});
             }
             format("#include \"$1$\"", path);
         }

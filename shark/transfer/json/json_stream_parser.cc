@@ -43,6 +43,7 @@
 #include <turbo/status/status.h>
 #include <shark/transfer/json/object_writer.h>
 #include <shark/transfer/json/json_escaping.h>
+#include <turbo/strings/match.h>
 
 
 namespace shark::util::converter {

@@ -17,6 +17,7 @@
 
 #include <cstdint>
 #include <shark/schema/internal/file_descriptor_tables.h>
+#include <turbo/strings/ascii.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -97,7 +98,7 @@ namespace shark {
                 }
 
                 std::string lowercase_name = name;
-                LowerString(&lowercase_name);
+                turbo::str_to_lower(&lowercase_name);
 
                 std::string camelcase_name = ToCamelCase(name, /* lower_first = */ true);
                 std::string json_name = opt_json_name != nullptr ? *opt_json_name : ToJsonName(name);
@@ -160,7 +161,7 @@ namespace shark {
                 FieldNamesResult result { nullptr, 0, 0, 0 };
 
                 std::string lowercase_name = name;
-                LowerString(&lowercase_name);
+                turbo::str_to_lower(&lowercase_name);
                 result.lowercase_index = push_name(std::move(lowercase_name));
                 result.camelcase_index = push_name(ToCamelCase(name, /* lower_first = */ true));
                 result.json_index = push_name(opt_json_name != nullptr ? *opt_json_name : ToJsonName(name));

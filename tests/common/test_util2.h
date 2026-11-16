@@ -31,6 +31,7 @@
 #pragma once
 
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_replace.h>
 
 #include <tests/common/googletest.h>
 #include <shark/io/zero_copy_stream.h>
@@ -45,9 +46,9 @@ inline std::string TranslatePathToOpensource(const std::string& google3_path) {
   GOOGLE_CHECK(google3_path.find(prefix) == 0) << google3_path;
   std::string path = google3_path.substr(prefix.size());
 
-  path = StringReplace(path, "internal/", "", false);
-  path = StringReplace(path, "proto/", "", false);
-  path = StringReplace(path, "public/", "", false);
+  path = turbo::StrReplaceAll(path, {{"internal/", ""}});
+  path = turbo::StrReplaceAll(path, {{"proto/", ""}});
+  path = turbo::StrReplaceAll(path, {{"public/", ""}});
   return "tests/" + path;
 }
 

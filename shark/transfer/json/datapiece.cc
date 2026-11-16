@@ -41,6 +41,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/transfer/json/utility.h>
 #include <shark/stubs/mathutil.h>
+#include <turbo/strings/match.h>
 
 namespace shark::util::converter {
 

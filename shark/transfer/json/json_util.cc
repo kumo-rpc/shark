@@ -35,6 +35,7 @@
 #include <turbo/status/status.h>
 #include <shark/stubs/bytestream.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/strip.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/transfer/json/default_value_objectwriter.h>
@@ -161,7 +162,7 @@ class StatusErrorListener : public converter::ErrorListener {
 
   std::string GetLocString(const converter::LocationTrackerInterface& loc) {
     std::string loc_string = loc.ToString();
-    StripWhitespace(&loc_string);
+    turbo::trim_all(&loc_string);
     if (!loc_string.empty()) {
       loc_string = StrCat("(", loc_string, ")");
     }

@@ -58,6 +58,7 @@
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/ascii.h>
 #include <shark/types/any.h>
 #include <shark/types/map_field.h>
 #include <shark/types/repeated_field.h>
@@ -490,7 +491,7 @@ namespace shark {
 
                     if (field == nullptr && allow_case_insensitive_field_) {
                         std::string lower_field_name = field_name;
-                        LowerString(&lower_field_name);
+                        turbo::str_to_lower(&lower_field_name);
                         field = descriptor->FindFieldByLowercaseName(lower_field_name);
                     }
 
@@ -934,7 +935,7 @@ namespace shark {
             //   inf, inff, infinity, nan
             if (has_minus && LookingAtType(io::Tokenizer::TYPE_IDENTIFIER)) {
                 std::string text = tokenizer_.current().text;
-                LowerString(&text);
+                turbo::str_to_lower(&text);
                 if (text != "inf" && text != "infinity" && text != "nan") {
                     ReportError("Invalid float number: " + text);
                     ++recursion_limit_;
@@ -1136,7 +1137,7 @@ namespace shark {
                 tokenizer_.Next();
             } else if (LookingAtType(io::Tokenizer::TYPE_IDENTIFIER)) {
                 std::string text = tokenizer_.current().text;
-                LowerString(&text);
+                turbo::str_to_lower(&text);
                 if (text == "inf" || text == "infinity") {
                     *value = std::numeric_limits<double>::infinity();
                     tokenizer_.Next();

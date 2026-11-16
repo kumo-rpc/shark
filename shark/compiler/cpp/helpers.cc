@@ -57,6 +57,7 @@
 #include <shark/stubs/hash.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_replace.h>
 #include <turbo/strings/substitute.h>
 #include <turbo/strings/ascii.h>
 
@@ -71,7 +72,7 @@ namespace shark::compiler::cpp {
         static const char kAnyProtoFile[] = "shark/types/any.shark";
 
         std::string DotsToColons(const std::string& name) {
-            return StringReplace(name, ".", "::", true);
+            return turbo::StrReplaceAll(name, {{".", "::"}});
         }
 
         static const char* const kKeywordList[] = { //
@@ -415,10 +416,8 @@ namespace shark::compiler::cpp {
         if (IsWellKnownMessage(d) && options.opensource_runtime) {
             // Written with string concatenation to prevent rewriting of
             // shark.
-            ret = StringReplace(ret,
-                "::google::"
-                "protobuf",
-                "::SHARK_NAMESPACE_ID", false);
+            ret = turbo::StrReplaceAll(ret, {{"::google::"
+                "protobuf", "::SHARK_NAMESPACE_ID"}});
         }
         return ret;
     }
@@ -492,7 +491,7 @@ namespace shark::compiler::cpp {
 
     std::string FieldName(const FieldDescriptor* field) {
         std::string result = field->name();
-        LowerString(&result);
+        turbo::str_to_lower(&result);
         if (kKeywords.count(result) > 0) {
             result.append("_");
         }
@@ -874,7 +873,7 @@ namespace shark::compiler::cpp {
 
     // Escape C++ trigraphs by escaping question marks to \?
     std::string EscapeTrigraphs(const std::string& to_escape) {
-        return StringReplace(to_escape, "?", "\\?", true);
+        return turbo::StrReplaceAll(to_escape, {{"?", "\\?"}});
     }
 
     // Escaped function name to eliminate naming conflict.
@@ -883,7 +882,7 @@ namespace shark::compiler::cpp {
         const std::string& prefix) {
         // Do not use FieldName() since it will escape keywords.
         std::string name = field->name();
-        LowerString(&name);
+        turbo::str_to_lower(&name);
         std::string function_name = prefix + name;
         if (descriptor->FindFieldByName(function_name)) {
             // Single underscore will also make it conflicting with the private data
