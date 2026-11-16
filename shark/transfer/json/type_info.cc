@@ -57,13 +57,13 @@ class TypeInfoForTypeResolver : public TypeInfo {
   }
 
   util::StatusOr<const shark::Type*> ResolveTypeUrl(
-      StringPiece type_url) const override {
-    std::map<StringPiece, StatusOrType>::iterator it =
+      std::string_view type_url) const override {
+    std::map<std::string_view, StatusOrType>::iterator it =
         cached_types_.find(type_url);
     if (it != cached_types_.end()) {
       return it->second;
     }
-    // Stores the string value so it can be referenced using StringPiece in the
+    // Stores the string value so it can be referenced using std::string_view in the
     // cached_types_ map.
     const std::string& string_type_url =
         *string_storage_.insert(std::string(type_url)).first;
@@ -77,19 +77,19 @@ class TypeInfoForTypeResolver : public TypeInfo {
   }
 
   const shark::Type* GetTypeByTypeUrl(
-      StringPiece type_url) const override {
+      std::string_view type_url) const override {
     StatusOrType result = ResolveTypeUrl(type_url);
     return result.ok() ? result.value() : NULL;
   }
 
   const shark::Enum* GetEnumByTypeUrl(
-      StringPiece type_url) const override {
-    std::map<StringPiece, StatusOrEnum>::iterator it =
+      std::string_view type_url) const override {
+    std::map<std::string_view, StatusOrEnum>::iterator it =
         cached_enums_.find(type_url);
     if (it != cached_enums_.end()) {
       return it->second.ok() ? it->second.value() : NULL;
     }
-    // Stores the string value so it can be referenced using StringPiece in the
+    // Stores the string value so it can be referenced using std::string_view in the
     // cached_enums_ map.
     const std::string& string_type_url =
         *string_storage_.insert(std::string(type_url)).first;
@@ -105,15 +105,15 @@ class TypeInfoForTypeResolver : public TypeInfo {
 
   const shark::Field* FindField(
       const shark::Type* type,
-      StringPiece camel_case_name) const override {
+      std::string_view camel_case_name) const override {
     std::map<const shark::Type*, CamelCaseNameTable>::const_iterator
         it = indexed_types_.find(type);
     const CamelCaseNameTable& camel_case_name_table =
         (it == indexed_types_.end())
             ? PopulateNameLookupTable(type, &indexed_types_[type])
             : it->second;
-    StringPiece name = FindWithDefault(
-        camel_case_name_table, camel_case_name, StringPiece());
+    std::string_view name = FindWithDefault(
+        camel_case_name_table, camel_case_name, std::string_view());
     if (name.empty()) {
       // Didn't find a mapping. Use whatever provided.
       name = camel_case_name;
@@ -124,11 +124,11 @@ class TypeInfoForTypeResolver : public TypeInfo {
  private:
   typedef util::StatusOr<const shark::Type*> StatusOrType;
   typedef util::StatusOr<const shark::Enum*> StatusOrEnum;
-  typedef std::map<StringPiece, StringPiece> CamelCaseNameTable;
+  typedef std::map<std::string_view, std::string_view> CamelCaseNameTable;
 
   template <typename T>
-  static void DeleteCachedTypes(std::map<StringPiece, T>* cached_types) {
-    for (typename std::map<StringPiece, T>::iterator it =
+  static void DeleteCachedTypes(std::map<std::string_view, T>* cached_types) {
+    for (typename std::map<std::string_view, T>::iterator it =
              cached_types->begin();
          it != cached_types->end(); ++it) {
       if (it->second.ok()) {
@@ -142,9 +142,9 @@ class TypeInfoForTypeResolver : public TypeInfo {
       CamelCaseNameTable* camel_case_name_table) const {
     for (int i = 0; i < type->fields_size(); ++i) {
       const shark::Field& field = type->fields(i);
-      StringPiece name = field.name();
-      StringPiece camel_case_name = field.json_name();
-      const StringPiece* existing = InsertOrReturnExisting(
+      std::string_view name = field.name();
+      std::string_view camel_case_name = field.json_name();
+      const std::string_view* existing = InsertOrReturnExisting(
           camel_case_name_table, camel_case_name, name);
       if (existing && *existing != name) {
         GOOGLE_LOG(WARNING) << "Field '" << name << "' and '" << *existing
@@ -161,8 +161,8 @@ class TypeInfoForTypeResolver : public TypeInfo {
   // cached_types_, cached_enums_.
   mutable std::set<std::string> string_storage_;
 
-  mutable std::map<StringPiece, StatusOrType> cached_types_;
-  mutable std::map<StringPiece, StatusOrEnum> cached_enums_;
+  mutable std::map<std::string_view, StatusOrType> cached_types_;
+  mutable std::map<std::string_view, StatusOrEnum> cached_enums_;
 
   mutable std::map<const shark::Type*, CamelCaseNameTable>
       indexed_types_;

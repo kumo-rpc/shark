@@ -53,17 +53,17 @@ class SHARK_EXPORT ErrorListener {
 
   // Reports an invalid name at the given location.
   virtual void InvalidName(const LocationTrackerInterface& loc,
-                           StringPiece invalid_name,
-                           StringPiece message) = 0;
+                           std::string_view invalid_name,
+                           std::string_view message) = 0;
 
   // Reports an invalid value for a field.
   virtual void InvalidValue(const LocationTrackerInterface& loc,
-                            StringPiece type_name,
-                            StringPiece value) = 0;
+                            std::string_view type_name,
+                            std::string_view value) = 0;
 
   // Reports a missing required field.
   virtual void MissingField(const LocationTrackerInterface& loc,
-                            StringPiece missing_name) = 0;
+                            std::string_view missing_name) = 0;
 
  protected:
   ErrorListener() {}
@@ -80,15 +80,15 @@ class SHARK_EXPORT NoopErrorListener : public ErrorListener {
   ~NoopErrorListener() override {}
 
   void InvalidName(const LocationTrackerInterface& /*loc*/,
-                   StringPiece /* invalid_name */,
-                   StringPiece /* message */) override {}
+                   std::string_view /* invalid_name */,
+                   std::string_view /* message */) override {}
 
   void InvalidValue(const LocationTrackerInterface& /*loc*/,
-                    StringPiece /* type_name */,
-                    StringPiece /* value */) override {}
+                    std::string_view /* type_name */,
+                    std::string_view /* value */) override {}
 
   void MissingField(const LocationTrackerInterface& /* loc */,
-                    StringPiece /* missing_name */) override {}
+                    std::string_view /* missing_name */) override {}
 
  private:
   SHARK_DISALLOW_EVIL_CONSTRUCTORS(NoopErrorListener);

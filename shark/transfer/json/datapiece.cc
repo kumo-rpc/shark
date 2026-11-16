@@ -239,7 +239,7 @@ util::StatusOr<std::string> DataPiece::ToString() const {
 }
 
 std::string DataPiece::ValueAsStringOrDefault(
-    StringPiece default_string) const {
+    std::string_view default_string) const {
   switch (type_) {
     case TYPE_INT32:
       return StrCat(i32_);
@@ -256,7 +256,7 @@ std::string DataPiece::ValueAsStringOrDefault(
     case TYPE_BOOL:
       return SimpleBtoa(bool_);
     case TYPE_STRING:
-      return StrCat("\"", str_.ToString(), "\"");
+      return StrCat("\"", str_, "\"");
     case TYPE_BYTES: {
       std::string base64;
       WebSafeBase64Escape(str_, &base64);
@@ -270,7 +270,7 @@ std::string DataPiece::ValueAsStringOrDefault(
 }
 
 util::StatusOr<std::string> DataPiece::ToBytes() const {
-  if (type_ == TYPE_BYTES) return str_.ToString();
+  if (type_ == TYPE_BYTES) return std::string(str_);
   if (type_ == TYPE_STRING) {
     std::string decoded;
     if (!DecodeBase64(str_, &decoded)) {
@@ -366,7 +366,7 @@ util::StatusOr<To> DataPiece::GenericConvert() const {
 }
 
 template <typename To>
-util::StatusOr<To> DataPiece::StringToNumber(bool (*func)(StringPiece,
+util::StatusOr<To> DataPiece::StringToNumber(bool (*func)(std::string_view,
                                                           To*)) const {
   if (str_.size() > 0 && (str_[0] == ' ' || str_[str_.size() - 1] == ' ')) {
     return util::InvalidArgumentError(StrCat("\"", str_, "\""));
@@ -377,7 +377,7 @@ util::StatusOr<To> DataPiece::StringToNumber(bool (*func)(StringPiece,
       StrCat("\"", std::string(str_), "\""));
 }
 
-bool DataPiece::DecodeBase64(StringPiece src, std::string* dest) const {
+bool DataPiece::DecodeBase64(std::string_view src, std::string* dest) const {
   // Try web-safe decode first, if it fails, try the non-web-safe decode.
   if (WebSafeBase64Unescape(src, dest)) {
     if (use_strict_base64_decoding_) {
@@ -387,8 +387,8 @@ bool DataPiece::DecodeBase64(StringPiece src, std::string* dest) const {
       // WebSafeBase64Escape does no padding by default.
       WebSafeBase64Escape(*dest, &encoded);
       // Remove trailing padding '=' characters before comparison.
-      StringPiece src_no_padding = StringPiece(src).substr(
-          0, HasSuffixString(src, "=") ? src.find_last_not_of('=') + 1
+      std::string_view src_no_padding = std::string_view(src).substr(
+          0, turbo::ends_with(src, "=") ? src.find_last_not_of('=') + 1
                                       : src.length());
       return encoded == src_no_padding;
     }
@@ -400,8 +400,8 @@ bool DataPiece::DecodeBase64(StringPiece src, std::string* dest) const {
       std::string encoded;
       Base64Escape(reinterpret_cast<const unsigned char*>(dest->data()),
                          dest->length(), &encoded, false);
-      StringPiece src_no_padding = StringPiece(src).substr(
-          0, HasSuffixString(src, "=") ? src.find_last_not_of('=') + 1
+      std::string_view src_no_padding = std::string_view(src).substr(
+          0, turbo::ends_with(src, "=") ? src.find_last_not_of('=') + 1
                                       : src.length());
       return encoded == src_no_padding;
     }

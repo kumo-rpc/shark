@@ -60,7 +60,7 @@ class SHARK_EXPORT ObjectSource {
   // Writes to the ObjectWriter with a custom name for the message.
   // This is useful when you chain ObjectSource together by embedding one
   // within another.
-  virtual util::Status NamedWriteTo(StringPiece name,
+  virtual util::Status NamedWriteTo(std::string_view name,
                                     ObjectWriter* ow) const = 0;
 
  protected:

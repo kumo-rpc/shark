@@ -104,9 +104,9 @@ inline util::Status MessageToJsonString(const Message& message,
 // JsonStringToBinary(). It will use the DescriptorPool of the passed-in
 // message to resolve Any types.
 SHARK_EXPORT util::Status JsonStringToMessage(
-    StringPiece input, Message* message, const JsonParseOptions& options);
+    std::string_view input, Message* message, const JsonParseOptions& options);
 
-inline util::Status JsonStringToMessage(StringPiece input,
+inline util::Status JsonStringToMessage(std::string_view input,
                                         Message* message) {
   return JsonStringToMessage(input, message, JsonParseOptions());
 }
@@ -163,12 +163,12 @@ inline util::Status JsonToBinaryStream(
 
 SHARK_EXPORT util::Status JsonToBinaryString(
     TypeResolver* resolver, const std::string& type_url,
-    StringPiece json_input, std::string* binary_output,
+    std::string_view json_input, std::string* binary_output,
     const JsonParseOptions& options);
 
 inline util::Status JsonToBinaryString(TypeResolver* resolver,
                                        const std::string& type_url,
-                                       StringPiece json_input,
+                                       std::string_view json_input,
                                        std::string* binary_output) {
   return JsonToBinaryString(resolver, type_url, json_input, binary_output,
                             JsonParseOptions());

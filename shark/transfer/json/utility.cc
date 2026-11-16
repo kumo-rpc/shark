@@ -53,7 +53,7 @@ namespace shark::util::converter {
 
 bool GetBoolOptionOrDefault(
     const RepeatedPtrField<shark::Option>& options,
-    StringPiece option_name, bool default_value) {
+    std::string_view option_name, bool default_value) {
   const shark::Option* opt = FindOptionOrNull(options, option_name);
   if (opt == nullptr) {
     return default_value;
@@ -63,7 +63,7 @@ bool GetBoolOptionOrDefault(
 
 int64_t GetInt64OptionOrDefault(
     const RepeatedPtrField<shark::Option>& options,
-    StringPiece option_name, int64_t default_value) {
+    std::string_view option_name, int64_t default_value) {
   const shark::Option* opt = FindOptionOrNull(options, option_name);
   if (opt == nullptr) {
     return default_value;
@@ -73,7 +73,7 @@ int64_t GetInt64OptionOrDefault(
 
 double GetDoubleOptionOrDefault(
     const RepeatedPtrField<shark::Option>& options,
-    StringPiece option_name, double default_value) {
+    std::string_view option_name, double default_value) {
   const shark::Option* opt = FindOptionOrNull(options, option_name);
   if (opt == nullptr) {
     return default_value;
@@ -83,7 +83,7 @@ double GetDoubleOptionOrDefault(
 
 std::string GetStringOptionOrDefault(
     const RepeatedPtrField<shark::Option>& options,
-    StringPiece option_name, StringPiece default_value) {
+    std::string_view option_name, std::string_view default_value) {
   const shark::Option* opt = FindOptionOrNull(options, option_name);
   if (opt == nullptr) {
     return std::string(default_value);
@@ -122,7 +122,7 @@ std::string GetStringFromAny(const shark::Any& any) {
   return s.value();
 }
 
-const StringPiece GetTypeWithoutUrl(StringPiece type_url) {
+const std::string_view GetTypeWithoutUrl(std::string_view type_url) {
   if (type_url.size() > kTypeUrlSize && type_url[kTypeUrlSize] == '/') {
     return type_url.substr(kTypeUrlSize + 1);
   } else {
@@ -134,13 +134,13 @@ const StringPiece GetTypeWithoutUrl(StringPiece type_url) {
   }
 }
 
-const std::string GetFullTypeWithUrl(StringPiece simple_type) {
+const std::string GetFullTypeWithUrl(std::string_view simple_type) {
   return StrCat(kTypeServiceBaseUrl, "/", simple_type);
 }
 
 const shark::Option* FindOptionOrNull(
     const RepeatedPtrField<shark::Option>& options,
-    StringPiece option_name) {
+    std::string_view option_name) {
   for (int i = 0; i < options.size(); ++i) {
     const shark::Option& opt = options.Get(i);
     if (opt.name() == option_name) {
@@ -151,7 +151,7 @@ const shark::Option* FindOptionOrNull(
 }
 
 const shark::Field* FindFieldInTypeOrNull(
-    const shark::Type* type, StringPiece field_name) {
+    const shark::Type* type, std::string_view field_name) {
   if (type != nullptr) {
     for (int i = 0; i < type->fields_size(); ++i) {
       const shark::Field& field = type->fields(i);
@@ -164,7 +164,7 @@ const shark::Field* FindFieldInTypeOrNull(
 }
 
 const shark::Field* FindJsonFieldInTypeOrNull(
-    const shark::Type* type, StringPiece json_name) {
+    const shark::Type* type, std::string_view json_name) {
   if (type != nullptr) {
     for (int i = 0; i < type->fields_size(); ++i) {
       const shark::Field& field = type->fields(i);
@@ -190,7 +190,7 @@ const shark::Field* FindFieldInTypeByNumberOrNull(
 }
 
 const shark::EnumValue* FindEnumValueByNameOrNull(
-    const shark::Enum* enum_type, StringPiece enum_name) {
+    const shark::Enum* enum_type, std::string_view enum_name) {
   if (enum_type != nullptr) {
     for (int i = 0; i < enum_type->enumvalue_size(); ++i) {
       const shark::EnumValue& enum_value = enum_type->enumvalue(i);
@@ -216,7 +216,7 @@ const shark::EnumValue* FindEnumValueByNumberOrNull(
 }
 
 const shark::EnumValue* FindEnumValueByNameWithoutUnderscoreOrNull(
-    const shark::Enum* enum_type, StringPiece enum_name) {
+    const shark::Enum* enum_type, std::string_view enum_name) {
   if (enum_type != nullptr) {
     for (int i = 0; i < enum_type->enumvalue_size(); ++i) {
       const shark::EnumValue& enum_value = enum_type->enumvalue(i);
@@ -241,14 +241,14 @@ const shark::EnumValue* FindEnumValueByNameWithoutUnderscoreOrNull(
   return nullptr;
 }
 
-std::string EnumValueNameToLowerCamelCase(StringPiece input) {
+std::string EnumValueNameToLowerCamelCase(std::string_view input) {
   std::string input_string(input);
   std::transform(input_string.begin(), input_string.end(), input_string.begin(),
                  ::tolower);
   return ToCamelCase(input_string);
 }
 
-std::string ToCamelCase(StringPiece input) {
+std::string ToCamelCase(std::string_view input) {
   bool capitalize_next = false;
   bool was_cap = true;
   bool is_cap = false;
@@ -292,7 +292,7 @@ std::string ToCamelCase(StringPiece input) {
   return result;
 }
 
-std::string ToSnakeCase(StringPiece input) {
+std::string ToSnakeCase(std::string_view input) {
   bool was_not_underscore = false;  // Initialize to false for case 1 (below)
   bool was_not_cap = false;
   std::string result;
@@ -354,7 +354,7 @@ bool IsWellKnownType(const std::string& type_name) {
   return ContainsKey(*well_known_types_, type_name);
 }
 
-bool IsValidBoolString(StringPiece bool_string) {
+bool IsValidBoolString(std::string_view bool_string) {
   return bool_string == "true" || bool_string == "false" ||
          bool_string == "1" || bool_string == "0";
 }
@@ -389,7 +389,7 @@ std::string FloatAsString(float value) {
   return DoubleAsString(value);
 }
 
-bool SafeStrToFloat(StringPiece str, float* value) {
+bool SafeStrToFloat(std::string_view str, float* value) {
   double double_value;
   if (!safe_strtod(str, &double_value)) {
     return false;

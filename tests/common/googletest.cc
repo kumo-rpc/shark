@@ -141,7 +141,7 @@ std::string GetTemporaryDirectoryName() {
   }
   // On Win32, tmpnam() returns a file prefixed with '\', but which is supposed
   // to be used in the current working directory.  WTF?
-  if (HasPrefixString(result, "\\")) {
+  if (turbo::starts_with(result, "\\")) {
     result.erase(0, 1);
   }
   // The Win32 API accepts forward slashes as a path delimiter as long as the

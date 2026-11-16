@@ -57,25 +57,25 @@ static const int64_t kTypeUrlSize = 19;
 // When the option with the given name is not found, default_value is returned.
 SHARK_EXPORT bool GetBoolOptionOrDefault(
     const RepeatedPtrField<shark::Option>& options,
-    StringPiece option_name, bool default_value);
+    std::string_view option_name, bool default_value);
 
 // Returns int64 option value. If the option isn't found, returns the
 // default_value.
 SHARK_EXPORT int64_t GetInt64OptionOrDefault(
     const RepeatedPtrField<shark::Option>& options,
-    StringPiece option_name, int64_t default_value);
+    std::string_view option_name, int64_t default_value);
 
 // Returns double option value. If the option isn't found, returns the
 // default_value.
 SHARK_EXPORT double GetDoubleOptionOrDefault(
     const RepeatedPtrField<shark::Option>& options,
-    StringPiece option_name, double default_value);
+    std::string_view option_name, double default_value);
 
 // Returns string option value. If the option isn't found, returns the
 // default_value.
 SHARK_EXPORT std::string GetStringOptionOrDefault(
     const RepeatedPtrField<shark::Option>& options,
-    StringPiece option_name, StringPiece default_value);
+    std::string_view option_name, std::string_view default_value);
 
 // Returns a boolean value contained in Any type.
 // TODO(skarvaje): Make these utilities dealing with Any types more generic,
@@ -94,8 +94,8 @@ SHARK_EXPORT std::string GetStringFromAny(const shark::Any& any);
 
 // Returns the type string without the url prefix. e.g.: If the passed type is
 // 'type.googleapis.com/tech.type.Bool', the returned value is 'tech.type.Bool'.
-SHARK_EXPORT const StringPiece GetTypeWithoutUrl(
-    StringPiece type_url);
+SHARK_EXPORT const std::string_view GetTypeWithoutUrl(
+    std::string_view type_url);
 
 // Returns the simple_type with the base type url (kTypeServiceBaseUrl)
 // prefixed.
@@ -104,23 +104,23 @@ SHARK_EXPORT const StringPiece GetTypeWithoutUrl(
 // GetFullTypeWithUrl("shark.Timestamp") returns the string
 // "type.googleapis.com/shark.Timestamp".
 SHARK_EXPORT const std::string GetFullTypeWithUrl(
-    StringPiece simple_type);
+    std::string_view simple_type);
 
 // Finds and returns option identified by name and option_name within the
 // provided map. Returns nullptr if none found.
 const shark::Option* FindOptionOrNull(
     const RepeatedPtrField<shark::Option>& options,
-    StringPiece option_name);
+    std::string_view option_name);
 
 // Finds and returns the field identified by field_name in the passed tech Type
 // object. Returns nullptr if none found.
 const shark::Field* FindFieldInTypeOrNull(
-    const shark::Type* type, StringPiece field_name);
+    const shark::Type* type, std::string_view field_name);
 
 // Similar to FindFieldInTypeOrNull, but this looks up fields with given
 // json_name.
 const shark::Field* FindJsonFieldInTypeOrNull(
-    const shark::Type* type, StringPiece json_name);
+    const shark::Type* type, std::string_view json_name);
 
 // Similar to FindFieldInTypeOrNull, but this looks up fields by number.
 const shark::Field* FindFieldInTypeByNumberOrNull(
@@ -129,7 +129,7 @@ const shark::Field* FindFieldInTypeByNumberOrNull(
 // Finds and returns the EnumValue identified by enum_name in the passed tech
 // Enum object. Returns nullptr if none found.
 const shark::EnumValue* FindEnumValueByNameOrNull(
-    const shark::Enum* enum_type, StringPiece enum_name);
+    const shark::Enum* enum_type, std::string_view enum_name);
 
 // Finds and returns the EnumValue identified by value in the passed tech
 // Enum object. Returns nullptr if none found.
@@ -141,23 +141,23 @@ const shark::EnumValue* FindEnumValueByNumberOrNull(
 // For Ex. if enum_name is ACTIONANDADVENTURE it can get accepted if
 // EnumValue's name is action_and_adventure or ACTION_AND_ADVENTURE.
 const shark::EnumValue* FindEnumValueByNameWithoutUnderscoreOrNull(
-    const shark::Enum* enum_type, StringPiece enum_name);
+    const shark::Enum* enum_type, std::string_view enum_name);
 
 // Converts input to camel-case and returns it.
-SHARK_EXPORT std::string ToCamelCase(const StringPiece input);
+SHARK_EXPORT std::string ToCamelCase(const std::string_view input);
 
 // Converts enum name string to camel-case and returns it.
-std::string EnumValueNameToLowerCamelCase(const StringPiece input);
+std::string EnumValueNameToLowerCamelCase(const std::string_view input);
 
 // Converts input to snake_case and returns it.
-SHARK_EXPORT std::string ToSnakeCase(StringPiece input);
+SHARK_EXPORT std::string ToSnakeCase(std::string_view input);
 
 // Returns true if type_name represents a well-known type.
 SHARK_EXPORT bool IsWellKnownType(const std::string& type_name);
 
 // Returns true if 'bool_string' represents a valid boolean value. Only "true",
 // "false", "0" and "1" are allowed.
-SHARK_EXPORT bool IsValidBoolString(StringPiece bool_string);
+SHARK_EXPORT bool IsValidBoolString(std::string_view bool_string);
 
 // Returns true if "field" is a protobuf map field based on its type.
 SHARK_EXPORT bool IsMap(const shark::Field& field,
@@ -188,7 +188,7 @@ inline std::string ValueAsString(double value) {
 
 // Converts a string to float. Unlike safe_strtof, conversion will fail if the
 // value fits into double but not float (e.g., DBL_MAX).
-SHARK_EXPORT bool SafeStrToFloat(StringPiece str, float* value);
+SHARK_EXPORT bool SafeStrToFloat(std::string_view str, float* value);
 
 }  // namespace shark::util::converter
 

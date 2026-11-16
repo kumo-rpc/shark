@@ -105,7 +105,7 @@ namespace shark {
 
     bool DescriptorBuilder::IsInPackage(const FileDescriptor* file,
         const std::string& package_name) {
-        return HasPrefixString(file->package(), package_name) && (file->package().size() == package_name.size() || file->package()[package_name.size()] == '.');
+        return turbo::starts_with(file->package(), package_name) && (file->package().size() == package_name.size() || file->package()[package_name.size()] == '.');
     }
 
      void DescriptorBuilder::RecordPublicDependencies(const FileDescriptor* file) {

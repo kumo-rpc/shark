@@ -50,8 +50,8 @@ class ProtoWriter;
 // For primitive types (int32, int64, uint32, uint64, double, float, bool),
 // the data is stored by value.
 //
-// For string, a StringPiece is stored. For Cord, a pointer to Cord is stored.
-// Just like StringPiece, the DataPiece class does not own the storage for
+// For string, a std::string_view is stored. For Cord, a pointer to Cord is stored.
+// Just like std::string_view, the DataPiece class does not own the storage for
 // the actual string or Cord, so it is the user's responsibility to guarantee
 // that the underlying storage is still valid when the DataPiece is accessed.
 class SHARK_EXPORT DataPiece {
@@ -89,12 +89,12 @@ class SHARK_EXPORT DataPiece {
       : type_(TYPE_FLOAT), float_(value), use_strict_base64_decoding_(false) {}
   explicit DataPiece(const bool value)
       : type_(TYPE_BOOL), bool_(value), use_strict_base64_decoding_(false) {}
-  DataPiece(StringPiece value, bool use_strict_base64_decoding)
+  DataPiece(std::string_view value, bool use_strict_base64_decoding)
       : type_(TYPE_STRING),
         str_(value),
         use_strict_base64_decoding_(use_strict_base64_decoding) {}
   // Constructor for bytes. The second parameter is not used.
-  DataPiece(StringPiece value, bool /*dummy*/, bool use_strict_base64_decoding)
+  DataPiece(std::string_view value, bool /*dummy*/, bool use_strict_base64_decoding)
       : type_(TYPE_BYTES),
         str_(value),
         use_strict_base64_decoding_(use_strict_base64_decoding) {}
@@ -116,7 +116,7 @@ class SHARK_EXPORT DataPiece {
 
   bool use_strict_base64_decoding() { return use_strict_base64_decoding_; }
 
-  StringPiece str() const {
+  std::string_view str() const {
     GOOGLE_LOG_IF(DFATAL, type_ != TYPE_STRING) << "Not a string type.";
     return str_;
   }
@@ -148,7 +148,7 @@ class SHARK_EXPORT DataPiece {
 
   // Tries to convert the value contained in this datapiece to string. If the
   // conversion fails, it returns the default_string.
-  std::string ValueAsStringOrDefault(StringPiece default_string) const;
+  std::string ValueAsStringOrDefault(std::string_view default_string) const;
 
   util::StatusOr<std::string> ToBytes() const;
 
@@ -178,10 +178,10 @@ class SHARK_EXPORT DataPiece {
   // For conversion from string to
   //     int32, int64, uint32, uint64, double, float and bool
   template <typename To>
-  util::StatusOr<To> StringToNumber(bool (*func)(StringPiece, To*)) const;
+  util::StatusOr<To> StringToNumber(bool (*func)(std::string_view, To*)) const;
 
   // Decodes a base64 string. Returns true on success.
-  bool DecodeBase64(StringPiece src, std::string* dest) const;
+  bool DecodeBase64(std::string_view src, std::string* dest) const;
 
   // Helper function to initialize this DataPiece with 'other'.
   void InternalCopy(const DataPiece& other);
@@ -198,7 +198,7 @@ class SHARK_EXPORT DataPiece {
     double double_;
     float float_;
     bool bool_;
-    StringPiece str_;
+    std::string_view str_;
   };
 
   // Uses a stricter version of base64 decoding for byte fields.

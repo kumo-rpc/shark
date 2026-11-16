@@ -47,7 +47,7 @@ std::string FieldMaskUtil::ToString(const FieldMask& mask) {
   return Join(mask.paths(), ",");
 }
 
-void FieldMaskUtil::FromString(StringPiece str, FieldMask* out) {
+void FieldMaskUtil::FromString(std::string_view str, FieldMask* out) {
   out->Clear();
   std::vector<std::string> paths = Split(str, ",");
   for (const std::string& path : paths) {
@@ -56,7 +56,7 @@ void FieldMaskUtil::FromString(StringPiece str, FieldMask* out) {
   }
 }
 
-bool FieldMaskUtil::SnakeCaseToCamelCase(StringPiece input,
+bool FieldMaskUtil::SnakeCaseToCamelCase(std::string_view input,
                                          std::string* output) {
   output->clear();
   bool after_underscore = false;
@@ -86,7 +86,7 @@ bool FieldMaskUtil::SnakeCaseToCamelCase(StringPiece input,
   return true;
 }
 
-bool FieldMaskUtil::CamelCaseToSnakeCase(StringPiece input,
+bool FieldMaskUtil::CamelCaseToSnakeCase(std::string_view input,
                                          std::string* output) {
   output->clear();
   for (const char c : input) {
@@ -120,7 +120,7 @@ bool FieldMaskUtil::ToJsonString(const FieldMask& mask, std::string* out) {
   return true;
 }
 
-bool FieldMaskUtil::FromJsonString(StringPiece str, FieldMask* out) {
+bool FieldMaskUtil::FromJsonString(std::string_view str, FieldMask* out) {
   out->Clear();
   std::vector<std::string> paths = Split(str, ",");
   for (const std::string& path : paths) {
@@ -135,7 +135,7 @@ bool FieldMaskUtil::FromJsonString(StringPiece str, FieldMask* out) {
 }
 
 bool FieldMaskUtil::GetFieldDescriptors(
-    const Descriptor* descriptor, StringPiece path,
+    const Descriptor* descriptor, std::string_view path,
     std::vector<const FieldDescriptor*>* field_descriptors) {
   if (field_descriptors != nullptr) {
     field_descriptors->clear();
@@ -671,7 +671,7 @@ void FieldMaskUtil::Subtract(const Descriptor* descriptor,
   tree.MergeToFieldMask(out);
 }
 
-bool FieldMaskUtil::IsPathInFieldMask(StringPiece path,
+bool FieldMaskUtil::IsPathInFieldMask(std::string_view path,
                                       const FieldMask& mask) {
   for (int i = 0; i < mask.paths_size(); ++i) {
     const std::string& mask_path = mask.paths(i);

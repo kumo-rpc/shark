@@ -461,22 +461,22 @@ void ProtoWriter::ProtoElement::TakeOneofIndex(int32_t index) {
   oneof_indices_[index] = true;
 }
 
-void ProtoWriter::InvalidName(StringPiece unknown_name,
-                              StringPiece message) {
+void ProtoWriter::InvalidName(std::string_view unknown_name,
+                              std::string_view message) {
   listener_->InvalidName(location(), unknown_name, message);
 }
 
-void ProtoWriter::InvalidValue(StringPiece type_name,
-                               StringPiece value) {
+void ProtoWriter::InvalidValue(std::string_view type_name,
+                               std::string_view value) {
   listener_->InvalidValue(location(), type_name, value);
 }
 
-void ProtoWriter::MissingField(StringPiece missing_name) {
+void ProtoWriter::MissingField(std::string_view missing_name) {
   listener_->MissingField(location(), missing_name);
 }
 
 ProtoWriter* ProtoWriter::StartObject(
-    StringPiece name) {
+    std::string_view name) {
   // Starting the root message. Create the root ProtoElement and return.
   if (element_ == nullptr) {
     if (!name.empty()) {
@@ -529,7 +529,7 @@ ProtoWriter* ProtoWriter::EndObject() {
 }
 
 ProtoWriter* ProtoWriter::StartList(
-    StringPiece name) {
+    std::string_view name) {
 
   const shark::Field* field = BeginNamed(name, true);
 
@@ -562,7 +562,7 @@ ProtoWriter* ProtoWriter::EndList() {
 }
 
 ProtoWriter* ProtoWriter::RenderDataPiece(
-    StringPiece name, const DataPiece& data) {
+    std::string_view name, const DataPiece& data) {
   util::Status status;
   if (invalid_depth_ > 0) return this;
 
@@ -583,7 +583,7 @@ ProtoWriter* ProtoWriter::RenderDataPiece(
 }
 
 bool ProtoWriter::ValidOneof(const shark::Field& field,
-                             StringPiece unnormalized_name) {
+                             std::string_view unnormalized_name) {
   if (element_ == nullptr) return true;
 
   if (field.oneof_index() > 0) {
@@ -754,7 +754,7 @@ ProtoWriter* ProtoWriter::RenderPrimitiveField(
   return this;
 }
 
-const shark::Field* ProtoWriter::BeginNamed(StringPiece name,
+const shark::Field* ProtoWriter::BeginNamed(std::string_view name,
                                                        bool is_list) {
   if (invalid_depth_ > 0) {
     ++invalid_depth_;
@@ -775,7 +775,7 @@ const shark::Field* ProtoWriter::BeginNamed(StringPiece name,
 }
 
 const shark::Field* ProtoWriter::Lookup(
-    StringPiece unnormalized_name) {
+    std::string_view unnormalized_name) {
   ProtoElement* e = element();
   if (e == nullptr) {
     InvalidName(unnormalized_name, "Root element must be a message.");

@@ -43,8 +43,8 @@ namespace shark::util::converter {
 namespace {
 
 // Appends a FieldMask path segment to a prefix.
-std::string AppendPathSegmentToPrefix(StringPiece prefix,
-                                      StringPiece segment) {
+std::string AppendPathSegmentToPrefix(std::string_view prefix,
+                                      std::string_view segment) {
   if (prefix.empty()) {
     return std::string(segment);
   }
@@ -52,7 +52,7 @@ std::string AppendPathSegmentToPrefix(StringPiece prefix,
     return std::string(prefix);
   }
   // If the segment is a map key, appends it to the prefix without the ".".
-  if (HasPrefixString(segment, "[\"")) {
+  if (turbo::starts_with(segment, "[\"")) {
     return StrCat(prefix, segment);
   }
   return StrCat(prefix, ".", segment);
@@ -60,7 +60,7 @@ std::string AppendPathSegmentToPrefix(StringPiece prefix,
 
 }  // namespace
 
-std::string ConvertFieldMaskPath(const StringPiece path,
+std::string ConvertFieldMaskPath(const std::string_view path,
                                  ConverterCallback converter) {
   std::string result;
   result.reserve(path.size() << 1);
@@ -104,7 +104,7 @@ std::string ConvertFieldMaskPath(const StringPiece path,
   return result;
 }
 
-util::Status DecodeCompactFieldMaskPaths(StringPiece paths,
+util::Status DecodeCompactFieldMaskPaths(std::string_view paths,
                                          PathSinkCallback path_sink) {
   std::stack<std::string> prefix;
   int length = paths.length();
@@ -170,7 +170,7 @@ util::Status DecodeCompactFieldMaskPaths(StringPiece paths,
     }
     // Gets the current segment - sub-string between previous position (after
     // '(', ')', ',', or the beginning of the input) and the current position.
-    StringPiece segment =
+    std::string_view segment =
         paths.substr(previous_position, i - previous_position);
     std::string current_prefix = prefix.empty() ? "" : prefix.top();
 

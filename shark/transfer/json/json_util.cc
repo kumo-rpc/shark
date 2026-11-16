@@ -132,8 +132,8 @@ class StatusErrorListener : public converter::ErrorListener {
   util::Status GetStatus() { return status_; }
 
   void InvalidName(const converter::LocationTrackerInterface& loc,
-                   StringPiece unknown_name,
-                   StringPiece message) override {
+                   std::string_view unknown_name,
+                   std::string_view message) override {
     std::string loc_string = GetLocString(loc);
     if (!loc_string.empty()) {
       loc_string.append(" ");
@@ -143,15 +143,15 @@ class StatusErrorListener : public converter::ErrorListener {
   }
 
   void InvalidValue(const converter::LocationTrackerInterface& loc,
-                    StringPiece type_name,
-                    StringPiece value) override {
+                    std::string_view type_name,
+                    std::string_view value) override {
     status_ = util::InvalidArgumentError(
         StrCat(GetLocString(loc), ": invalid value ", std::string(value),
                      " for type ", std::string(type_name)));
   }
 
   void MissingField(const converter::LocationTrackerInterface& loc,
-                    StringPiece missing_name) override {
+                    std::string_view missing_name) override {
     status_ = util::InvalidArgumentError(StrCat(
         GetLocString(loc), ": missing field ", std::string(missing_name)));
   }
@@ -196,7 +196,7 @@ util::Status JsonToBinaryStream(TypeResolver* resolver,
   while (json_input->Next(&buffer, &length)) {
     if (length == 0) continue;
     RETURN_IF_ERROR(parser.Parse(
-        StringPiece(static_cast<const char*>(buffer), length)));
+        std::string_view(static_cast<const char*>(buffer), length)));
   }
   RETURN_IF_ERROR(parser.FinishParse());
 
@@ -205,7 +205,7 @@ util::Status JsonToBinaryStream(TypeResolver* resolver,
 
 util::Status JsonToBinaryString(TypeResolver* resolver,
                                 const std::string& type_url,
-                                StringPiece json_input,
+                                std::string_view json_input,
                                 std::string* binary_output,
                                 const JsonParseOptions& options) {
   io::ArrayInputStream input_stream(json_input.data(), json_input.size());
@@ -257,7 +257,7 @@ util::Status MessageToJsonString(const Message& message, std::string* output,
   return result;
 }
 
-util::Status JsonStringToMessage(StringPiece input, Message* message,
+util::Status JsonStringToMessage(std::string_view input, Message* message,
                                  const JsonParseOptions& options) {
   const DescriptorPool* pool = message->GetDescriptor()->file()->pool();
   TypeResolver* resolver =

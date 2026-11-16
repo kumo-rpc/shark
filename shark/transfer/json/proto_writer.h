@@ -73,50 +73,50 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
   ~ProtoWriter() override;
 
   // ObjectWriter methods.
-  ProtoWriter* StartObject(StringPiece name) override;
+  ProtoWriter* StartObject(std::string_view name) override;
   ProtoWriter* EndObject() override;
-  ProtoWriter* StartList(StringPiece name) override;
+  ProtoWriter* StartList(std::string_view name) override;
   ProtoWriter* EndList() override;
-  ProtoWriter* RenderBool(StringPiece name, bool value) override {
+  ProtoWriter* RenderBool(std::string_view name, bool value) override {
     return RenderDataPiece(name, DataPiece(value));
   }
-  ProtoWriter* RenderInt32(StringPiece name, int32_t value) override {
+  ProtoWriter* RenderInt32(std::string_view name, int32_t value) override {
     return RenderDataPiece(name, DataPiece(value));
   }
-  ProtoWriter* RenderUint32(StringPiece name, uint32_t value) override {
+  ProtoWriter* RenderUint32(std::string_view name, uint32_t value) override {
     return RenderDataPiece(name, DataPiece(value));
   }
-  ProtoWriter* RenderInt64(StringPiece name, int64_t value) override {
+  ProtoWriter* RenderInt64(std::string_view name, int64_t value) override {
     return RenderDataPiece(name, DataPiece(value));
   }
-  ProtoWriter* RenderUint64(StringPiece name, uint64_t value) override {
+  ProtoWriter* RenderUint64(std::string_view name, uint64_t value) override {
     return RenderDataPiece(name, DataPiece(value));
   }
-  ProtoWriter* RenderDouble(StringPiece name, double value) override {
+  ProtoWriter* RenderDouble(std::string_view name, double value) override {
     return RenderDataPiece(name, DataPiece(value));
   }
-  ProtoWriter* RenderFloat(StringPiece name, float value) override {
+  ProtoWriter* RenderFloat(std::string_view name, float value) override {
     return RenderDataPiece(name, DataPiece(value));
   }
-  ProtoWriter* RenderString(StringPiece name,
-                            StringPiece value) override {
+  ProtoWriter* RenderString(std::string_view name,
+                            std::string_view value) override {
     return RenderDataPiece(name,
                            DataPiece(value, use_strict_base64_decoding()));
   }
 
-  ProtoWriter* RenderBytes(StringPiece name, StringPiece value) override {
+  ProtoWriter* RenderBytes(std::string_view name, std::string_view value) override {
     return RenderDataPiece(
         name, DataPiece(value, false, use_strict_base64_decoding()));
   }
 
-  ProtoWriter* RenderNull(StringPiece name) override {
+  ProtoWriter* RenderNull(std::string_view name) override {
     return RenderDataPiece(name, DataPiece::NullData());
   }
 
 
   // Renders a DataPiece 'value' into a field whose wire type is determined
   // from the given field 'name'.
-  virtual ProtoWriter* RenderDataPiece(StringPiece name,
+  virtual ProtoWriter* RenderDataPiece(std::string_view name,
                                        const DataPiece& data);
 
 
@@ -257,20 +257,20 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
   ProtoElement* element() override { return element_.get(); }
 
   // Helper methods for calling ErrorListener. See error_listener.h.
-  void InvalidName(StringPiece unknown_name, StringPiece message);
-  void InvalidValue(StringPiece type_name, StringPiece value);
-  void MissingField(StringPiece missing_name);
+  void InvalidName(std::string_view unknown_name, std::string_view message);
+  void InvalidValue(std::string_view type_name, std::string_view value);
+  void MissingField(std::string_view missing_name);
 
   // Common code for BeginObject() and BeginList() that does invalid_depth_
   // bookkeeping associated with name lookup.
-  const shark::Field* BeginNamed(StringPiece name,
+  const shark::Field* BeginNamed(std::string_view name,
                                             bool is_list);
 
   // Lookup the field in the current element. Looks in the base descriptor
   // and in any extension. This will report an error if the field cannot be
   // found when ignore_unknown_names_ is false or if multiple matching
   // extensions are found.
-  const shark::Field* Lookup(StringPiece name);
+  const shark::Field* Lookup(std::string_view name);
 
   // Lookup the field type in the type descriptor. Returns nullptr if the type
   // is not known.
@@ -292,7 +292,7 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
   // false. It also calls the appropriate error callback.
   // unnormalized_name is used for error string.
   bool ValidOneof(const shark::Field& field,
-                  StringPiece unnormalized_name);
+                  std::string_view unnormalized_name);
 
   // Returns true if the field is repeated.
   bool IsRepeated(const shark::Field& field);

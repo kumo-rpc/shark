@@ -39,6 +39,7 @@
 
 #include <cstring>
 #include <shark/port_def.inc>
+#include <turbo/strings/match.h>
 #include <vector>
 
 namespace shark {
@@ -52,21 +53,9 @@ namespace shark {
 #define strtoull strtoul
 #endif
 
-    // ----------------------------------------------------------------------
-    // HasPrefixString()
-    //    Check if a string begins with a given prefix.
-    // StripPrefixString()
-    //    Given a string and a putative prefix, returns the string minus the
-    //    prefix string if the prefix matches, otherwise the original
-    //    string.
-    // ----------------------------------------------------------------------
-    inline bool HasPrefixString(StringPiece str, StringPiece prefix) {
-        return str.size() >= prefix.size() && memcmp(str.data(), prefix.data(), prefix.size()) == 0;
-    }
-
     inline std::string StripPrefixString(const std::string& str,
         const std::string& prefix) {
-        if (HasPrefixString(str, prefix)) {
+        if (turbo::starts_with(str, prefix)) {
             return str.substr(prefix.size());
         } else {
             return str;
@@ -74,20 +63,17 @@ namespace shark {
     }
 
     // ----------------------------------------------------------------------
-    // HasSuffixString()
+    // turbo::ends_with()
     //    Return true if str ends in suffix.
     // StripSuffixString()
     //    Given a string and a putative suffix, returns the string minus the
     //    suffix string if the suffix matches, otherwise the original
     //    string.
     // ----------------------------------------------------------------------
-    inline bool HasSuffixString(StringPiece str, StringPiece suffix) {
-        return str.size() >= suffix.size() && memcmp(str.data() + str.size() - suffix.size(), suffix.data(), suffix.size()) == 0;
-    }
 
     inline std::string StripSuffixString(const std::string& str,
         const std::string& suffix) {
-        if (HasSuffixString(str, suffix)) {
+        if (turbo::ends_with(str, suffix)) {
             return str.substr(0, str.size() - suffix.size());
         } else {
             return str;
@@ -165,7 +151,7 @@ namespace shark {
     //    to 'result'.  If there are consecutive delimiters, this function skips
     //    over all of them.
     // ----------------------------------------------------------------------
-    SHARK_EXPORT void SplitStringUsing(StringPiece full, const char* delim,
+    SHARK_EXPORT void SplitStringUsing(std::string_view full, const char* delim,
         std::vector<std::string>* res);
 
     // Split a string using one or more byte delimiters, presented
@@ -176,14 +162,14 @@ namespace shark {
     //
     // If "full" is the empty string, yields an empty string as the only value.
     // ----------------------------------------------------------------------
-    SHARK_EXPORT void SplitStringAllowEmpty(StringPiece full, const char* delim,
+    SHARK_EXPORT void SplitStringAllowEmpty(std::string_view full, const char* delim,
         std::vector<std::string>* result);
 
     // ----------------------------------------------------------------------
     // Split()
     //    Split a string using a character delimiter.
     // ----------------------------------------------------------------------
-    inline std::vector<std::string> Split(StringPiece full, const char* delim,
+    inline std::vector<std::string> Split(std::string_view full, const char* delim,
         bool skip_empty = true) {
         std::vector<std::string> result;
         if (skip_empty) {
@@ -283,7 +269,7 @@ namespace shark {
     //    Escapes 'src' using C-style escape sequences, and appends the escaped
     //    string to 'dest'.
     // ----------------------------------------------------------------------
-    SHARK_EXPORT void CEscapeAndAppend(StringPiece src, std::string* dest);
+    SHARK_EXPORT void CEscapeAndAppend(std::string_view src, std::string* dest);
 
     namespace strings {
         // Like CEscape() but does not escape bytes with the upper bit set.
@@ -345,21 +331,21 @@ namespace shark {
     // safe_strtof()
     // safe_strtod()
     // ----------------------------------------------------------------------
-    SHARK_EXPORT bool safe_strtob(StringPiece str, bool* value);
+    SHARK_EXPORT bool safe_strtob(std::string_view str, bool* value);
 
     SHARK_EXPORT bool safe_strto32(const std::string& str, int32_t* value);
     SHARK_EXPORT bool safe_strtou32(const std::string& str, uint32_t* value);
     inline bool safe_strto32(const char* str, int32_t* value) {
         return safe_strto32(std::string(str), value);
     }
-    inline bool safe_strto32(StringPiece str, int32_t* value) {
-        return safe_strto32(str.ToString(), value);
+    inline bool safe_strto32(std::string_view str, int32_t* value) {
+        return safe_strto32(std::string(str), value);
     }
     inline bool safe_strtou32(const char* str, uint32_t* value) {
         return safe_strtou32(std::string(str), value);
     }
-    inline bool safe_strtou32(StringPiece str, uint32_t* value) {
-        return safe_strtou32(str.ToString(), value);
+    inline bool safe_strtou32(std::string_view str, uint32_t* value) {
+        return safe_strtou32(std::string(str), value);
     }
 
     SHARK_EXPORT bool safe_strto64(const std::string& str, int64_t* value);
@@ -367,14 +353,15 @@ namespace shark {
     inline bool safe_strto64(const char* str, int64_t* value) {
         return safe_strto64(std::string(str), value);
     }
-    inline bool safe_strto64(StringPiece str, int64_t* value) {
-        return safe_strto64(str.ToString(), value);
+
+    inline bool safe_strto64(std::string_view str, int64_t* value) {
+        return safe_strto64(std::string(str), value);
     }
     inline bool safe_strtou64(const char* str, uint64_t* value) {
         return safe_strtou64(std::string(str), value);
     }
-    inline bool safe_strtou64(StringPiece str, uint64_t* value) {
-        return safe_strtou64(str.ToString(), value);
+    inline bool safe_strtou64(std::string_view str, uint64_t* value) {
+        return safe_strtou64(std::string(str), value);
     }
 
     SHARK_EXPORT bool safe_strtof(const char* str, float* value);
@@ -385,11 +372,11 @@ namespace shark {
     inline bool safe_strtod(const std::string& str, double* value) {
         return safe_strtod(str.c_str(), value);
     }
-    inline bool safe_strtof(StringPiece str, float* value) {
-        return safe_strtof(str.ToString(), value);
+    inline bool safe_strtof(std::string_view str, float* value) {
+        return safe_strtof(std::string(str), value);
     }
-    inline bool safe_strtod(StringPiece str, double* value) {
-        return safe_strtod(str.ToString(), value);
+    inline bool safe_strtod(std::string_view str, double* value) {
+        return safe_strtod(std::string(str), value);
     }
 
     // ----------------------------------------------------------------------
@@ -604,8 +591,7 @@ namespace shark {
             AlphaNum(const char* c_str)
                 : piece_data_(c_str)
                 , piece_size_(strlen(c_str)) { }
-            // TODO: Add a string_ref constructor, eventually
-            // AlphaNum(const StringPiece &pc) : piece(pc) {}
+
 
             AlphaNum(const std::string& str)
                 : piece_data_(str.data())
@@ -614,6 +600,9 @@ namespace shark {
             AlphaNum(StringPiece str)
                 : piece_data_(str.data())
                 , piece_size_(str.size()) { }
+            AlphaNum(std::string_view str)
+            : piece_data_(str.data())
+            , piece_size_(str.size()) { }
 
             size_t size() const { return piece_size_; }
             const char* data() const { return piece_data_; }
@@ -759,7 +748,7 @@ namespace shark {
     //    writes it to "dest". If src contains invalid characters, dest is cleared
     //    and the function returns false. Returns true on success.
     // ----------------------------------------------------------------------
-    SHARK_EXPORT bool Base64Unescape(StringPiece src, std::string* dest);
+    SHARK_EXPORT bool Base64Unescape(std::string_view src, std::string* dest);
 
     // ----------------------------------------------------------------------
     // WebSafeBase64Unescape()
@@ -774,7 +763,7 @@ namespace shark {
     // ----------------------------------------------------------------------
     SHARK_EXPORT int WebSafeBase64Unescape(const char* src, int slen, char* dest,
         int szdest);
-    SHARK_EXPORT bool WebSafeBase64Unescape(StringPiece src, std::string* dest);
+    SHARK_EXPORT bool WebSafeBase64Unescape(std::string_view src, std::string* dest);
 
     // Return the length to use for the output buffer given to the base64 escape
     // routines. Make sure to use the same value for do_padding in both.
@@ -802,11 +791,11 @@ namespace shark {
         char* dest, int szdest,
         bool do_padding);
     // Encode src into dest with padding.
-    SHARK_EXPORT void Base64Escape(StringPiece src, std::string* dest);
+    SHARK_EXPORT void Base64Escape(std::string_view src, std::string* dest);
     // Encode src into dest web-safely without padding.
-    SHARK_EXPORT void WebSafeBase64Escape(StringPiece src, std::string* dest);
+    SHARK_EXPORT void WebSafeBase64Escape(std::string_view src, std::string* dest);
     // Encode src into dest web-safely with padding.
-    SHARK_EXPORT void WebSafeBase64EscapeWithPadding(StringPiece src,
+    SHARK_EXPORT void WebSafeBase64EscapeWithPadding(std::string_view src,
         std::string* dest);
 
     SHARK_EXPORT void Base64Escape(const unsigned char* src, int szsrc,
@@ -874,12 +863,6 @@ namespace shark {
     // Same as above, but transforms the argument in place.
     SHARK_EXPORT void CleanStringLineEndings(std::string* str,
         bool auto_end_last_line);
-
-    namespace strings {
-        inline bool EndsWith(StringPiece text, StringPiece suffix) {
-            return suffix.empty() || (text.size() >= suffix.size() && memcmp(text.data() + (text.size() - suffix.size()), suffix.data(), suffix.size()) == 0);
-        }
-    } // namespace strings
 
     namespace internal {
 

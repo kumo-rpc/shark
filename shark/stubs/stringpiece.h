@@ -28,115 +28,6 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// A StringPiece points to part or all of a string, Cord, double-quoted string
-// literal, or other string-like object.  A StringPiece does *not* own the
-// string to which it points.  A StringPiece is not null-terminated.
-//
-// You can use StringPiece as a function or method parameter.  A StringPiece
-// parameter can receive a double-quoted string literal argument, a "const
-// char*" argument, a string argument, or a StringPiece argument with no data
-// copying.  Systematic use of StringPiece for arguments reduces data
-// copies and strlen() calls.
-//
-// Prefer passing StringPieces by value:
-//   void MyFunction(StringPiece arg);
-// If circumstances require, you may also pass by const reference:
-//   void MyFunction(const StringPiece& arg);  // not preferred
-// Both of these have the same lifetime semantics.  Passing by value
-// generates slightly smaller code.  For more discussion, see the thread
-// go/stringpiecebyvalue on c-users.
-//
-// StringPiece is also suitable for local variables if you know that
-// the lifetime of the underlying object is longer than the lifetime
-// of your StringPiece variable.
-//
-// Beware of binding a StringPiece to a temporary:
-//   StringPiece sp = obj.MethodReturningString();  // BAD: lifetime problem
-//
-// This code is okay:
-//   string str = obj.MethodReturningString();  // str owns its contents
-//   StringPiece sp(str);  // GOOD, because str outlives sp
-//
-// StringPiece is sometimes a poor choice for a return value and usually a poor
-// choice for a data member.  If you do use a StringPiece this way, it is your
-// responsibility to ensure that the object pointed to by the StringPiece
-// outlives the StringPiece.
-//
-// A StringPiece may represent just part of a string; thus the name "Piece".
-// For example, when splitting a string, vector<StringPiece> is a natural data
-// type for the output.  For another example, a Cord is a non-contiguous,
-// potentially very long string-like object.  The Cord class has an interface
-// that iteratively provides StringPiece objects that point to the
-// successive pieces of a Cord object.
-//
-// A StringPiece is not null-terminated.  If you write code that scans a
-// StringPiece, you must check its length before reading any characters.
-// Common idioms that work on null-terminated strings do not work on
-// StringPiece objects.
-//
-// There are several ways to create a null StringPiece:
-//   StringPiece()
-//   StringPiece(nullptr)
-//   StringPiece(nullptr, 0)
-// For all of the above, sp.data() == nullptr, sp.length() == 0,
-// and sp.empty() == true.  Also, if you create a StringPiece with
-// a non-null pointer then sp.data() != nullptr.  Once created,
-// sp.data() will stay either nullptr or not-nullptr, except if you call
-// sp.clear() or sp.set().
-//
-// Thus, you can use StringPiece(nullptr) to signal an out-of-band value
-// that is different from other StringPiece values.  This is similar
-// to the way that const char* p1 = nullptr; is different from
-// const char* p2 = "";.
-//
-// There are many ways to create an empty StringPiece:
-//   StringPiece()
-//   StringPiece(nullptr)
-//   StringPiece(nullptr, 0)
-//   StringPiece("")
-//   StringPiece("", 0)
-//   StringPiece("abcdef", 0)
-//   StringPiece("abcdef"+6, 0)
-// For all of the above, sp.length() will be 0 and sp.empty() will be true.
-// For some empty StringPiece values, sp.data() will be nullptr.
-// For some empty StringPiece values, sp.data() will not be nullptr.
-//
-// Be careful not to confuse: null StringPiece and empty StringPiece.
-// The set of empty StringPieces properly includes the set of null StringPieces.
-// That is, every null StringPiece is an empty StringPiece,
-// but some non-null StringPieces are empty Stringpieces too.
-//
-// All empty StringPiece values compare equal to each other.
-// Even a null StringPieces compares equal to a non-null empty StringPiece:
-//  StringPiece() == StringPiece("", 0)
-//  StringPiece(nullptr) == StringPiece("abc", 0)
-//  StringPiece(nullptr, 0) == StringPiece("abcdef"+6, 0)
-//
-// Look carefully at this example:
-//   StringPiece("") == nullptr
-// True or false?  TRUE, because StringPiece::operator== converts
-// the right-hand side from nullptr to StringPiece(nullptr),
-// and then compares two zero-length spans of characters.
-// However, we are working to make this example produce a compile error.
-//
-// Suppose you want to write:
-//   bool TestWhat?(StringPiece sp) { return sp == nullptr; }  // BAD
-// Do not do that.  Write one of these instead:
-//   bool TestNull(StringPiece sp) { return sp.data() == nullptr; }
-//   bool TestEmpty(StringPiece sp) { return sp.empty(); }
-// The intent of TestWhat? is unclear.  Did you mean TestNull or TestEmpty?
-// Right now, TestWhat? behaves likes TestEmpty.
-// We are working to make TestWhat? produce a compile error.
-// TestNull is good to test for an out-of-band signal.
-// TestEmpty is good to test for an empty StringPiece.
-//
-// Caveats (again):
-// (1) The lifetime of the pointed-to string (or piece of a string)
-//     must be longer than the lifetime of the StringPiece.
-// (2) There may or may not be a '\0' character after the end of
-//     StringPiece data.
-// (3) A null StringPiece is empty.
-//     An empty StringPiece may or may not be a null StringPiece.
 
 #pragma once
 
@@ -242,6 +133,9 @@ class SHARK_EXPORT StringPiece {
     return ptr_[i];
   }
 
+    operator std::string_view() const {
+      return std::string_view{data(),size()};
+  }
   void remove_prefix(size_type n) {
     assert(length_ >= n);
     ptr_ += n;

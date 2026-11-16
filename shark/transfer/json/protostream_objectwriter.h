@@ -150,14 +150,14 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
   ~ProtoStreamObjectWriter() override;
 
   // ObjectWriter methods.
-  ProtoStreamObjectWriter* StartObject(StringPiece name) override;
+  ProtoStreamObjectWriter* StartObject(std::string_view name) override;
   ProtoStreamObjectWriter* EndObject() override;
-  ProtoStreamObjectWriter* StartList(StringPiece name) override;
+  ProtoStreamObjectWriter* StartList(std::string_view name) override;
   ProtoStreamObjectWriter* EndList() override;
 
   // Renders a DataPiece 'value' into a field whose wire type is determined
   // from the given field 'name'.
-  ProtoStreamObjectWriter* RenderDataPiece(StringPiece name,
+  ProtoStreamObjectWriter* RenderDataPiece(std::string_view name,
                                            const DataPiece& data) override;
 
  protected:
@@ -172,7 +172,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
     ~AnyWriter();
 
     // Passes a StartObject call through to the Any writer.
-    void StartObject(StringPiece name);
+    void StartObject(std::string_view name);
 
     // Passes an EndObject call through to the Any. Returns true if the any
     // handled the EndObject call, false if the Any is now all done and is no
@@ -180,13 +180,13 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
     bool EndObject();
 
     // Passes a StartList call through to the Any writer.
-    void StartList(StringPiece name);
+    void StartList(std::string_view name);
 
     // Passes an EndList call through to the Any writer.
     void EndList();
 
     // Renders a data piece on the any.
-    void RenderDataPiece(StringPiece name, const DataPiece& value);
+    void RenderDataPiece(std::string_view name, const DataPiece& value);
 
    private:
     // Before the "@type" field is encountered, we store all incoming data
@@ -205,11 +205,11 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
       explicit Event(Type type) : type_(type), value_(DataPiece::NullData()) {}
 
       // Constructor for START_OBJECT and START_LIST events.
-      explicit Event(Type type, StringPiece name)
+      explicit Event(Type type, std::string_view name)
           : type_(type), name_(name), value_(DataPiece::NullData()) {}
 
       // Constructor for RENDER_DATA_PIECE events.
-      explicit Event(StringPiece name, const DataPiece& value)
+      explicit Event(std::string_view name, const DataPiece& value)
           : type_(RENDER_DATA_PIECE), name_(name), value_(value) {
         DeepCopy();
       }
@@ -314,7 +314,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
     // The hash set (map_keys_) is ONLY used to keep track of map keys.
     // Return true if insert successfully; returns false if the map key was
     // already present.
-    bool InsertMapKeyIfNotPresent(StringPiece map_key);
+    bool InsertMapKeyIfNotPresent(std::string_view map_key);
 
     bool is_placeholder() const { return is_placeholder_; }
     bool is_list() const { return is_list_; }
@@ -401,7 +401,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
   // is of element type MAP or STRUCT_MAP.
   // It also calls the appropriate error callback and unnormalzied_name is used
   // for error string.
-  bool ValidMapKey(StringPiece unnormalized_name);
+  bool ValidMapKey(std::string_view unnormalized_name);
 
   // Pushes an item on to the stack. Also calls either StartObject or StartList
   // on the underlying ObjectWriter depending on whether is_list is false or
@@ -409,7 +409,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
   // is_placeholder conveys whether the item is a placeholder item or not.
   // Placeholder items are pushed when adding auxiliary types' StartObject or
   // StartList calls.
-  void Push(StringPiece name, Item::ItemType item_type,
+  void Push(std::string_view name, Item::ItemType item_type,
             bool is_placeholder, bool is_list);
 
 

@@ -44,7 +44,7 @@
 //      NullByteSink            Consumes a never-ending stream of bytes
 //
 //   ByteSource:
-//      ArrayByteSource         Reads from an array or string/StringPiece
+//      ArrayByteSource         Reads from an array or string/std::string_view
 //      LimitedByteSource       Limits the number of bytes read from an
 
 #pragma once
@@ -96,7 +96,7 @@ class SHARK_EXPORT ByteSink {
 //
 //   ByteSource* source = ...
 //   while (source->Available() > 0) {
-//     StringPiece data = source->Peek();
+//     std::string_view data = source->Peek();
 //     ... do something with "data" ...
 //     source->Skip(data.length());
 //   }
@@ -115,16 +115,16 @@ class SHARK_EXPORT ByteSource {
   //       indicative of the fixed-size nature of a ByteSource.
   virtual size_t Available() const = 0;
 
-  // Returns a StringPiece of the next contiguous region of the source. Does not
+  // Returns a std::string_view of the next contiguous region of the source. Does not
   // reposition the source. The returned region is empty iff Available() == 0.
   //
   // The returned region is valid until the next call to Skip() or until this
   // object is destroyed, whichever occurs first.
   //
-  // The length of the returned StringPiece will be <= Available().
+  // The length of the returned std::string_view will be <= Available().
   virtual StringPiece Peek() = 0;
 
-  // Skips the next n bytes. Invalidates any StringPiece returned by a previous
+  // Skips the next n bytes. Invalidates any std::string_view returned by a previous
   // call to Peek().
   //
   // REQUIRES: Available() >= n
@@ -281,7 +281,7 @@ class SHARK_EXPORT NullByteSink : public ByteSink {
 // Some commonly used implementations of ByteSource
 //
 
-// Implementation of ByteSource that reads from a StringPiece.
+// Implementation of ByteSource that reads from a std::string_view.
 //
 // Example:
 //
@@ -292,7 +292,7 @@ class SHARK_EXPORT NullByteSink : public ByteSink {
 //
 class SHARK_EXPORT ArrayByteSource : public ByteSource {
  public:
-  explicit ArrayByteSource(StringPiece s) : input_(s) {}
+  explicit ArrayByteSource(std::string_view s) : input_(s) {}
 
   virtual size_t Available() const override;
   virtual StringPiece Peek() override;

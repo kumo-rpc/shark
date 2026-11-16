@@ -73,11 +73,11 @@ class SHARK_EXPORT JsonStreamParser {
   explicit JsonStreamParser(ObjectWriter* ow);
   virtual ~JsonStreamParser();
 
-  // Parses a UTF-8 encoded JSON string from a StringPiece. If the returned
+  // Parses a UTF-8 encoded JSON string from a std::string_view. If the returned
   // status is non-ok, the status might contain a payload ParseErrorType with
   // type_url kParseErrorTypeUrl and a payload containing string snippet of the
   // error with type_url kParseErrorSnippetUrl.
-  util::Status Parse(StringPiece json);
+  util::Status Parse(std::string_view json);
 
 
   // Finish parsing the JSON string. If the returned status is non-ok, the
@@ -160,7 +160,7 @@ class SHARK_EXPORT JsonStreamParser {
   };
 
   // Parses a single chunk of JSON, returning an error if the JSON was invalid.
-  util::Status ParseChunk(StringPiece chunk);
+  util::Status ParseChunk(std::string_view chunk);
 
   // Runs the parser based on stack_ and p_, until the stack is empty or p_ runs
   // out of data. If we unexpectedly run out of p_ we push the latest back onto
@@ -231,19 +231,19 @@ class SHARK_EXPORT JsonStreamParser {
   bool IsInputAllWhiteSpaces(TokenType type);
 
   // Report a failure as a util::Status.
-  util::Status ReportFailure(StringPiece message,
+  util::Status ReportFailure(std::string_view message,
                              ParseErrorType parse_code);
 
   // Report a failure due to an UNKNOWN token type. We check if we hit the
   // end of the stream and if we're finishing or not to detect what type of
   // status to return in this case.
-  util::Status ReportUnknown(StringPiece message,
+  util::Status ReportUnknown(std::string_view message,
                              ParseErrorType parse_code);
 
   // Helper function to check recursion depth and increment it. It will return
   // OkStatus() if the current depth is allowed. Otherwise an error is returned.
   // key is used for error reporting.
-  util::Status IncrementRecursionDepth(StringPiece key) const;
+  util::Status IncrementRecursionDepth(std::string_view key) const;
 
   // Advance p_ past all whitespace or until the end of the string.
   void SkipWhitespace();
@@ -270,13 +270,13 @@ class SHARK_EXPORT JsonStreamParser {
 
   // The current chunk of JSON being parsed. Primarily used for providing
   // context during error reporting.
-  StringPiece json_;
+  std::string_view json_;
 
   // A pointer within the current JSON being parsed, used to track location.
-  StringPiece p_;
+  std::string_view p_;
 
   // Stores the last key read, as we separate parsing of keys and values.
-  StringPiece key_;
+  std::string_view key_;
 
   // Storage for key_ if we need to keep ownership, for example between chunks
   // or if the key was unescaped from a JSON string.
@@ -297,7 +297,7 @@ class SHARK_EXPORT JsonStreamParser {
   bool allow_no_root_element_;
 
   // String we parsed during a call to ParseStringHelper().
-  StringPiece parsed_;
+  std::string_view parsed_;
 
   // Storage for the string we parsed. This may be empty if the string was able
   // to be parsed directly from the input.

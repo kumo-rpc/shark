@@ -53,9 +53,9 @@ static const int kUnicodeEscapedLength = 6;
 static const int kDefaultMaxRecursionDepth = 100;
 
 // These cannot be constexpr for portability with VS2015.
-static const StringPiece kKeywordTrue = "true";
-static const StringPiece kKeywordFalse = "false";
-static const StringPiece kKeywordNull = "null";
+static const std::string_view kKeywordTrue = "true";
+static const std::string_view kKeywordFalse = "false";
+static const std::string_view kKeywordNull = "null";
 
 inline bool IsLetter(char c) {
   return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || (c == '_') ||
@@ -72,12 +72,12 @@ inline bool IsKeySeparator(char c) {
           c == '}' || c == '[' || c == ']' || c == ':' || c == ',');
 }
 
-inline void ReplaceInvalidCodePoints(StringPiece str,
+inline void ReplaceInvalidCodePoints(std::string_view str,
                                      const std::string& replacement,
                                      std::string* dst) {
   while (!str.empty()) {
     int n_valid_bytes = internal::UTF8SpnStructurallyValid(str);
-    StringPiece valid_part = str.substr(0, n_valid_bytes);
+    std::string_view valid_part = str.substr(0, n_valid_bytes);
     StrAppend(dst, valid_part);
 
     if (n_valid_bytes == str.size()) {
@@ -92,7 +92,7 @@ inline void ReplaceInvalidCodePoints(StringPiece str,
   }
 }
 
-static bool ConsumeKey(StringPiece* input, StringPiece* key) {
+static bool ConsumeKey(std::string_view* input, std::string_view* key) {
   if (input->empty() || !IsLetter((*input)[0])) return false;
   int len = 1;
   for (; len < input->size(); ++len) {
@@ -100,14 +100,14 @@ static bool ConsumeKey(StringPiece* input, StringPiece* key) {
       break;
     }
   }
-  *key = StringPiece(input->data(), len);
-  *input = StringPiece(input->data() + len, input->size() - len);
+  *key = std::string_view(input->data(), len);
+  *input = std::string_view(input->data() + len, input->size() - len);
   return true;
 }
 
 // Same as 'ConsumeKey', but allows a widened set of key characters.
-static bool ConsumeKeyPermissive(StringPiece* input,
-                                 StringPiece* key) {
+static bool ConsumeKeyPermissive(std::string_view* input,
+                                 std::string_view* key) {
   if (input->empty() || !IsLetter((*input)[0])) return false;
   int len = 1;
   for (; len < input->size(); ++len) {
@@ -115,12 +115,12 @@ static bool ConsumeKeyPermissive(StringPiece* input,
       break;
     }
   }
-  *key = StringPiece(input->data(), len);
-  *input = StringPiece(input->data() + len, input->size() - len);
+  *key = std::string_view(input->data(), len);
+  *input = std::string_view(input->data() + len, input->size() - len);
   return true;
 }
 
-static bool MatchKey(StringPiece input) {
+static bool MatchKey(std::string_view input) {
   return !input.empty() && IsLetter(input[0]);
 }
 
@@ -153,10 +153,10 @@ JsonStreamParser::JsonStreamParser(ObjectWriter* ow)
 JsonStreamParser::~JsonStreamParser() {}
 
 
-util::Status JsonStreamParser::Parse(StringPiece json) {
-  StringPiece chunk = json;
+util::Status JsonStreamParser::Parse(std::string_view json) {
+  std::string_view chunk = json;
   // If we have leftovers from a previous chunk, append the new chunk to it
-  // and create a new StringPiece pointing at the string's data. This could
+  // and create a new std::string_view pointing at the string's data. This could
   // be large but we rely on the chunks to be small, assuming they are
   // fragments of a Cord.
   if (!leftover_.empty()) {
@@ -164,7 +164,7 @@ util::Status JsonStreamParser::Parse(StringPiece json) {
     // ParseChunk(chunk).
     chunk_storage_.swap(leftover_);
     StrAppend(&chunk_storage_, json);
-    chunk = StringPiece(chunk_storage_);
+    chunk = std::string_view(chunk_storage_);
   }
 
   // Find the structurally valid UTF8 prefix and parse only that.
@@ -223,7 +223,7 @@ util::Status JsonStreamParser::FinishParse() {
   return result;
 }
 
-util::Status JsonStreamParser::ParseChunk(StringPiece chunk) {
+util::Status JsonStreamParser::ParseChunk(std::string_view chunk) {
   // Do not do any work if the chunk is empty.
   if (chunk.empty()) return util::Status();
 
@@ -310,7 +310,7 @@ util::Status JsonStreamParser::RunParser() {
         // contents in our own storage.
         if (!key_.empty() && key_storage_.empty()) {
           StrAppend(&key_storage_, key_);
-          key_ = StringPiece(key_storage_);
+          key_ = std::string_view(key_storage_);
         }
         result = util::Status();
       }
@@ -360,8 +360,8 @@ util::Status JsonStreamParser::ParseString() {
   util::Status result = ParseStringHelper();
   if (result.ok()) {
     ow_->RenderString(key_, parsed_);
-    key_ = StringPiece();
-    parsed_ = StringPiece();
+    key_ = {};
+    parsed_ = {};
     parsed_storage_.clear();
   }
   return result;
@@ -434,12 +434,12 @@ util::Status JsonStreamParser::ParseStringHelper() {
     if (*data == string_open_) {
       // If we didn't copy anything, reuse the input buffer.
       if (parsed_storage_.empty()) {
-        parsed_ = StringPiece(last, data - last);
+        parsed_ = std::string_view(last, data - last);
       } else {
         if (last < data) {
           parsed_storage_.append(last, data - last);
         }
-        parsed_ = StringPiece(parsed_storage_);
+        parsed_ = std::string_view(parsed_storage_);
       }
       // Clear the quote char so next time we try to parse a string we'll
       // start fresh.
@@ -545,17 +545,17 @@ util::Status JsonStreamParser::ParseNumber() {
     switch (number.type) {
       case NumberResult::DOUBLE:
         ow_->RenderDouble(key_, number.double_val);
-        key_ = StringPiece();
+        key_ = {};
         break;
 
       case NumberResult::INT:
         ow_->RenderInt64(key_, number.int_val);
-        key_ = StringPiece();
+        key_ = {};
         break;
 
       case NumberResult::UINT:
         ow_->RenderUint64(key_, number.uint_val);
-        key_ = StringPiece();
+        key_ = {};
         break;
 
       default:
@@ -673,7 +673,7 @@ util::Status JsonStreamParser::HandleBeginObject() {
   if (!status.ok()) {
     return status;
   }
-  key_ = StringPiece();
+  key_ = {};
   stack_.push(ENTRY);
   return util::Status();
 }
@@ -724,14 +724,14 @@ util::Status JsonStreamParser::ParseEntry(TokenType type) {
       key_storage_.clear();
       if (!parsed_storage_.empty()) {
         parsed_storage_.swap(key_storage_);
-        key_ = StringPiece(key_storage_);
+        key_ = std::string_view(key_storage_);
       } else {
         key_ = parsed_;
       }
-      parsed_ = StringPiece();
+      parsed_ = {};
     }
   } else if (type == BEGIN_KEY) {
-    // Key is a bare key (back compat), create a StringPiece pointing to it.
+    // Key is a bare key (back compat), create a std::string_view pointing to it.
     result = ParseKey();
   } else if (type == BEGIN_NULL || type == BEGIN_TRUE || type == BEGIN_FALSE) {
     // Key may be a bare key that begins with a reserved word.
@@ -772,7 +772,7 @@ util::Status JsonStreamParser::HandleBeginArray() {
   GOOGLE_DCHECK_EQ('[', *p_.data());
   Advance();
   ow_->StartList(key_);
-  key_ = StringPiece();
+  key_ = {};
   stack_.push(ARRAY_VALUE);
   return util::Status();
 }
@@ -827,28 +827,28 @@ util::Status JsonStreamParser::ParseArrayMid(TokenType type) {
 
 util::Status JsonStreamParser::ParseTrue() {
   ow_->RenderBool(key_, true);
-  key_ = StringPiece();
+  key_ = {};
   p_.remove_prefix(kKeywordTrue.length());
   return util::Status();
 }
 
 util::Status JsonStreamParser::ParseFalse() {
   ow_->RenderBool(key_, false);
-  key_ = StringPiece();
+  key_ = {};
   p_.remove_prefix(kKeywordFalse.length());
   return util::Status();
 }
 
 util::Status JsonStreamParser::ParseNull() {
   ow_->RenderNull(key_);
-  key_ = StringPiece();
+  key_ = {};
   p_.remove_prefix(kKeywordNull.length());
   return util::Status();
 }
 
 util::Status JsonStreamParser::ParseEmptyNull() {
   ow_->RenderNull(key_);
-  key_ = StringPiece();
+  key_ = {};
   return util::Status();
 }
 
@@ -858,7 +858,7 @@ bool JsonStreamParser::IsEmptyNullAllowed(TokenType type) {
          stack_.top() == OBJ_MID;
 }
 
-util::Status JsonStreamParser::ReportFailure(StringPiece message,
+util::Status JsonStreamParser::ReportFailure(std::string_view message,
                                              ParseErrorType parse_code) {
   (void)parse_code;  // Parameter is used in Google-internal code.
   static const int kContextLength = 20;
@@ -867,7 +867,7 @@ util::Status JsonStreamParser::ReportFailure(StringPiece message,
   const char* begin = std::max(p_start - kContextLength, json_start);
   const char* end =
       std::min(p_start + kContextLength, json_start + json_.size());
-  StringPiece segment(begin, end - begin);
+  std::string_view segment(begin, end - begin);
   std::string location(p_start - begin, ' ');
   location.push_back('^');
   auto status = util::InvalidArgumentError(
@@ -875,7 +875,7 @@ util::Status JsonStreamParser::ReportFailure(StringPiece message,
   return status;
 }
 
-util::Status JsonStreamParser::ReportUnknown(StringPiece message,
+util::Status JsonStreamParser::ReportUnknown(std::string_view message,
                                              ParseErrorType parse_code) {
   // If we aren't finishing the parse, cancel parsing and try later.
   if (!finishing_) {
@@ -889,7 +889,7 @@ util::Status JsonStreamParser::ReportUnknown(StringPiece message,
 }
 
 util::Status JsonStreamParser::IncrementRecursionDepth(
-    StringPiece key) const {
+    std::string_view key) const {
   if (++recursion_depth_ > max_recursion_depth_) {
     return util::InvalidArgumentError(StrCat(
         "Message too deep. Max recursion depth reached for key '", key, "'"));
@@ -908,13 +908,13 @@ void JsonStreamParser::SkipWhitespace() {
 
 void JsonStreamParser::Advance() {
   // Advance by moving one UTF8 character while making sure we don't go beyond
-  // the length of StringPiece.
+  // the length of std::string_view.
   p_.remove_prefix(std::min<int>(
       p_.length(), UTF8FirstLetterNumBytes(p_.data(), p_.length())));
 }
 
 util::Status JsonStreamParser::ParseKey() {
-  StringPiece original = p_;
+  std::string_view original = p_;
 
   if (allow_permissive_key_naming_) {
     if (!ConsumeKeyPermissive(&p_, &key_)) {
@@ -951,21 +951,21 @@ JsonStreamParser::TokenType JsonStreamParser::GetNextTokenType() {
   // TODO(sven): Split this method based on context since different contexts
   // support different tokens. Would slightly speed up processing?
   const char* data = p_.data();
-  StringPiece data_view = StringPiece(data, size);
+  std::string_view data_view = std::string_view(data, size);
   if (*data == '\"' || *data == '\'') return BEGIN_STRING;
   if (*data == '-' || ('0' <= *data && *data <= '9')) {
     return BEGIN_NUMBER;
   }
   if (size >= kKeywordTrue.length() &&
-      HasPrefixString(data_view, kKeywordTrue)) {
+      turbo::starts_with(data_view, kKeywordTrue)) {
     return BEGIN_TRUE;
   }
   if (size >= kKeywordFalse.length() &&
-      HasPrefixString(data_view, kKeywordFalse)) {
+      turbo::starts_with(data_view, kKeywordFalse)) {
     return BEGIN_FALSE;
   }
   if (size >= kKeywordNull.length() &&
-      HasPrefixString(data_view, kKeywordNull)) {
+      turbo::starts_with(data_view, kKeywordNull)) {
     return BEGIN_NULL;
   }
   if (*data == '{') return BEGIN_OBJECT;

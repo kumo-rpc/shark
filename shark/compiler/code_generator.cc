@@ -122,7 +122,7 @@ namespace shark::compiler {
 
     // Strips ".shark" or ".protodevel" from the end of a filename.
     std::string StripProto(const std::string& filename) {
-        if (HasSuffixString(filename, ".protodevel")) {
+        if (turbo::ends_with(filename, ".protodevel")) {
             return StripSuffixString(filename, ".protodevel");
         } else {
             return StripSuffixString(filename, ".shark");

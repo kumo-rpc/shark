@@ -143,7 +143,7 @@ ProtoStreamObjectSource::~ProtoStreamObjectSource() {
   }
 }
 
-util::Status ProtoStreamObjectSource::NamedWriteTo(StringPiece name,
+util::Status ProtoStreamObjectSource::NamedWriteTo(std::string_view name,
                                                    ObjectWriter* ow) const {
   return WriteMessage(type_, name, 0, true, ow);
 }
@@ -169,7 +169,7 @@ const shark::Field* ProtoStreamObjectSource::FindAndVerifyField(
 }
 
 util::Status ProtoStreamObjectSource::WriteMessage(
-    const shark::Type& type, StringPiece name,
+    const shark::Type& type, std::string_view name,
     const uint32_t end_tag, bool include_start_and_end,
     ObjectWriter* ow) const {
 
@@ -233,7 +233,7 @@ util::Status ProtoStreamObjectSource::WriteMessage(
 }
 
 util::StatusOr<uint32_t> ProtoStreamObjectSource::RenderList(
-    const shark::Field* field, StringPiece name,
+    const shark::Field* field, std::string_view name,
     uint32_t list_tag, ObjectWriter* ow) const {
   uint32_t tag_to_return = 0;
   ow->StartList(name);
@@ -255,7 +255,7 @@ util::StatusOr<uint32_t> ProtoStreamObjectSource::RenderList(
 }
 
 util::StatusOr<uint32_t> ProtoStreamObjectSource::RenderMap(
-    const shark::Field* field, StringPiece /* name */,
+    const shark::Field* field, std::string_view /* name */,
     uint32_t list_tag, ObjectWriter* ow) const {
   const shark::Type* field_type =
       typeinfo_->GetTypeByTypeUrl(field->type_url());
@@ -307,7 +307,7 @@ util::Status ProtoStreamObjectSource::RenderPacked(
   stream_->ReadVarint32(&length);
   int old_limit = stream_->PushLimit(length);
   while (stream_->BytesUntilLimit() > 0) {
-    RETURN_IF_ERROR(RenderField(field, StringPiece(), ow));
+    RETURN_IF_ERROR(RenderField(field, std::string_view(), ow));
   }
   stream_->PopLimit(old_limit);
   return util::Status();
@@ -315,7 +315,7 @@ util::Status ProtoStreamObjectSource::RenderPacked(
 
 util::Status ProtoStreamObjectSource::RenderTimestamp(
     const ProtoStreamObjectSource* os, const shark::Type& type,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   std::pair<int64_t, int32_t> p = os->ReadSecondsAndNanos(type);
   int64_t seconds = p.first;
   int32_t nanos = p.second;
@@ -337,7 +337,7 @@ util::Status ProtoStreamObjectSource::RenderTimestamp(
 
 util::Status ProtoStreamObjectSource::RenderDuration(
     const ProtoStreamObjectSource* os, const shark::Type& type,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   std::pair<int64_t, int32_t> p = os->ReadSecondsAndNanos(type);
   int64_t seconds = p.first;
   int32_t nanos = p.second;
@@ -379,7 +379,7 @@ util::Status ProtoStreamObjectSource::RenderDuration(
 
 util::Status ProtoStreamObjectSource::RenderDouble(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
   uint64_t buffer64 = 0;  // default value of Double wrapper value
   if (tag != 0) {
@@ -392,7 +392,7 @@ util::Status ProtoStreamObjectSource::RenderDouble(
 
 util::Status ProtoStreamObjectSource::RenderFloat(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
   uint32_t buffer32 = 0;  // default value of Float wrapper value
   if (tag != 0) {
@@ -405,7 +405,7 @@ util::Status ProtoStreamObjectSource::RenderFloat(
 
 util::Status ProtoStreamObjectSource::RenderInt64(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
   uint64_t buffer64 = 0;  // default value of Int64 wrapper value
   if (tag != 0) {
@@ -418,7 +418,7 @@ util::Status ProtoStreamObjectSource::RenderInt64(
 
 util::Status ProtoStreamObjectSource::RenderUInt64(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
   uint64_t buffer64 = 0;  // default value of UInt64 wrapper value
   if (tag != 0) {
@@ -431,7 +431,7 @@ util::Status ProtoStreamObjectSource::RenderUInt64(
 
 util::Status ProtoStreamObjectSource::RenderInt32(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
   uint32_t buffer32 = 0;  // default value of Int32 wrapper value
   if (tag != 0) {
@@ -444,7 +444,7 @@ util::Status ProtoStreamObjectSource::RenderInt32(
 
 util::Status ProtoStreamObjectSource::RenderUInt32(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
   uint32_t buffer32 = 0;  // default value of UInt32 wrapper value
   if (tag != 0) {
@@ -457,7 +457,7 @@ util::Status ProtoStreamObjectSource::RenderUInt32(
 
 util::Status ProtoStreamObjectSource::RenderBool(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
   uint64_t buffer64 = 0;  // results in 'false' value as default, which is the
                           // default value of Bool wrapper
@@ -471,7 +471,7 @@ util::Status ProtoStreamObjectSource::RenderBool(
 
 util::Status ProtoStreamObjectSource::RenderString(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
   uint32_t buffer32;
   std::string str;  // default value of empty for String wrapper
@@ -486,7 +486,7 @@ util::Status ProtoStreamObjectSource::RenderString(
 
 util::Status ProtoStreamObjectSource::RenderBytes(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
   uint32_t buffer32;
   std::string str;
@@ -501,7 +501,7 @@ util::Status ProtoStreamObjectSource::RenderBytes(
 
 util::Status ProtoStreamObjectSource::RenderStruct(
     const ProtoStreamObjectSource* os, const shark::Type& type,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   const shark::Field* field = nullptr;
   uint32_t tag = os->stream_->ReadTag();
   ow->StartObject(field_name);
@@ -524,7 +524,7 @@ util::Status ProtoStreamObjectSource::RenderStruct(
 
 util::Status ProtoStreamObjectSource::RenderStructValue(
     const ProtoStreamObjectSource* os, const shark::Type& type,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   const shark::Field* field = nullptr;
   for (uint32_t tag = os->stream_->ReadTag(); tag != 0;
        tag = os->stream_->ReadTag()) {
@@ -541,7 +541,7 @@ util::Status ProtoStreamObjectSource::RenderStructValue(
 // TODO(skarvaje): Avoid code duplication of for loops and SkipField logic.
 util::Status ProtoStreamObjectSource::RenderStructListValue(
     const ProtoStreamObjectSource* os, const shark::Type& type,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
 
   // Render empty list when we find empty ListValue message.
@@ -565,7 +565,7 @@ util::Status ProtoStreamObjectSource::RenderStructListValue(
 
 util::Status ProtoStreamObjectSource::RenderAny(
     const ProtoStreamObjectSource* os, const shark::Type& type,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   // An Any is of the form { string type_url = 1; bytes value = 2; }
   uint32_t tag;
   std::string type_url;
@@ -639,7 +639,7 @@ util::Status ProtoStreamObjectSource::RenderAny(
 
 util::Status ProtoStreamObjectSource::RenderFieldMask(
     const ProtoStreamObjectSource* os, const shark::Type& type,
-    StringPiece field_name, ObjectWriter* ow) {
+    std::string_view field_name, ObjectWriter* ow) {
   std::string combined;
   uint32_t buffer32;
   uint32_t paths_field_tag = 0;
@@ -724,7 +724,7 @@ ProtoStreamObjectSource::FindTypeRenderer(const std::string& type_url) {
 }
 
 util::Status ProtoStreamObjectSource::RenderField(
-    const shark::Field* field, StringPiece field_name,
+    const shark::Field* field, std::string_view field_name,
     ObjectWriter* ow) const {
   // Short-circuit message types as it tends to call WriteMessage recursively
   // and ends up using a lot of stack space. Keep the stack usage of this
@@ -766,7 +766,7 @@ util::Status ProtoStreamObjectSource::RenderField(
 }
 
 util::Status ProtoStreamObjectSource::RenderNonMessageField(
-    const shark::Field* field, StringPiece field_name,
+    const shark::Field* field, std::string_view field_name,
     ObjectWriter* ow) const {
   // Temporary buffers of different types.
   uint32_t buffer32 = 0;
@@ -1059,7 +1059,7 @@ std::pair<int64_t, int32_t> ProtoStreamObjectSource::ReadSecondsAndNanos(
 }
 
 util::Status ProtoStreamObjectSource::IncrementRecursionDepth(
-    StringPiece type_name, StringPiece field_name) const {
+    std::string_view type_name, std::string_view field_name) const {
   if (++recursion_depth_ > max_recursion_depth_) {
     return util::InvalidArgumentError(
         StrCat("Message too deep. Max recursion depth reached for type '",

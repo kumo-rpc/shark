@@ -44,15 +44,15 @@ class MockErrorListener : public ErrorListener {
 
   MOCK_METHOD(void, InvalidName,
               (const LocationTrackerInterface& loc,
-               StringPiece unknown_name, StringPiece message),
+               std::string_view unknown_name, std::string_view message),
               (override));
   MOCK_METHOD(void, InvalidValue,
-              (const LocationTrackerInterface& loc, StringPiece type_name,
-               StringPiece value),
+              (const LocationTrackerInterface& loc, std::string_view type_name,
+               std::string_view value),
               (override));
   MOCK_METHOD(void, MissingField,
               (const LocationTrackerInterface& loc,
-               StringPiece missing_name),
+               std::string_view missing_name),
               (override));
 };
 

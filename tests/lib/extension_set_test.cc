@@ -1199,7 +1199,7 @@ TEST(ExtensionSetTest, DynamicExtensions) {
     std::string prefix = "." + template_descriptor->full_name() + ".";
     if (extension->has_type_name()) {
       std::string* type_name = extension->mutable_type_name();
-      if (HasPrefixString(*type_name, prefix)) {
+      if (turbo::starts_with(*type_name, prefix)) {
         type_name->replace(0, prefix.size(), ".dynamic_extensions.");
       }
     }

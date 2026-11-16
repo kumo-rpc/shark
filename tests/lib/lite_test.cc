@@ -1104,8 +1104,8 @@ namespace shark {
 
     TEST(Lite, DebugString) {
         sharkbuf_unittest::TestAllTypesLite message1, message2;
-        EXPECT_TRUE(HasPrefixString(message1.DebugString(), "MessageLite at 0x"));
-        EXPECT_TRUE(HasPrefixString(message2.DebugString(), "MessageLite at 0x"));
+        EXPECT_TRUE(turbo::starts_with(message1.DebugString(), "MessageLite at 0x"));
+        EXPECT_TRUE(turbo::starts_with(message2.DebugString(), "MessageLite at 0x"));
 
         // DebugString() and ShortDebugString() are the same for now.
         EXPECT_EQ(message1.DebugString(), message1.ShortDebugString());

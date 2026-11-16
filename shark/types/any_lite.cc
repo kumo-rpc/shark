@@ -69,7 +69,7 @@ bool AnyMetadata::InternalIs(StringPiece type_name) const {
   StringPiece type_url = type_url_->Get();
   return type_url.size() >= type_name.size() + 1 &&
          type_url[type_url.size() - type_name.size() - 1] == '/' &&
-         HasSuffixString(type_url, type_name);
+         turbo::ends_with(type_url, type_name);
 }
 
 bool ParseAnyTypeUrl(StringPiece type_url, std::string* url_prefix,

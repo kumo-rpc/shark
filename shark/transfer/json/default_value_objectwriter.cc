@@ -44,7 +44,7 @@ namespace {
 // passed converter function on the DataPiece created from "value" argument.
 // If value is empty or if conversion fails, the default_value is returned.
 template <typename T>
-T ConvertTo(StringPiece value,
+T ConvertTo(std::string_view value,
             util::StatusOr<T> (DataPiece::*converter_fn)() const,
             T default_value) {
   if (value.empty()) return default_value;
@@ -73,7 +73,7 @@ DefaultValueObjectWriter::~DefaultValueObjectWriter() {
 }
 
 DefaultValueObjectWriter* DefaultValueObjectWriter::RenderBool(
-    StringPiece name, bool value) {
+    std::string_view name, bool value) {
   if (current_ == nullptr) {
     ow_->RenderBool(name, value);
   } else {
@@ -83,7 +83,7 @@ DefaultValueObjectWriter* DefaultValueObjectWriter::RenderBool(
 }
 
 DefaultValueObjectWriter* DefaultValueObjectWriter::RenderInt32(
-    StringPiece name, int32_t value) {
+    std::string_view name, int32_t value) {
   if (current_ == nullptr) {
     ow_->RenderInt32(name, value);
   } else {
@@ -93,7 +93,7 @@ DefaultValueObjectWriter* DefaultValueObjectWriter::RenderInt32(
 }
 
 DefaultValueObjectWriter* DefaultValueObjectWriter::RenderUint32(
-    StringPiece name, uint32_t value) {
+    std::string_view name, uint32_t value) {
   if (current_ == nullptr) {
     ow_->RenderUint32(name, value);
   } else {
@@ -103,7 +103,7 @@ DefaultValueObjectWriter* DefaultValueObjectWriter::RenderUint32(
 }
 
 DefaultValueObjectWriter* DefaultValueObjectWriter::RenderInt64(
-    StringPiece name, int64_t value) {
+    std::string_view name, int64_t value) {
   if (current_ == nullptr) {
     ow_->RenderInt64(name, value);
   } else {
@@ -113,7 +113,7 @@ DefaultValueObjectWriter* DefaultValueObjectWriter::RenderInt64(
 }
 
 DefaultValueObjectWriter* DefaultValueObjectWriter::RenderUint64(
-    StringPiece name, uint64_t value) {
+    std::string_view name, uint64_t value) {
   if (current_ == nullptr) {
     ow_->RenderUint64(name, value);
   } else {
@@ -123,7 +123,7 @@ DefaultValueObjectWriter* DefaultValueObjectWriter::RenderUint64(
 }
 
 DefaultValueObjectWriter* DefaultValueObjectWriter::RenderDouble(
-    StringPiece name, double value) {
+    std::string_view name, double value) {
   if (current_ == nullptr) {
     ow_->RenderDouble(name, value);
   } else {
@@ -133,7 +133,7 @@ DefaultValueObjectWriter* DefaultValueObjectWriter::RenderDouble(
 }
 
 DefaultValueObjectWriter* DefaultValueObjectWriter::RenderFloat(
-    StringPiece name, float value) {
+    std::string_view name, float value) {
   if (current_ == nullptr) {
     ow_->RenderBool(name, value);
   } else {
@@ -143,11 +143,11 @@ DefaultValueObjectWriter* DefaultValueObjectWriter::RenderFloat(
 }
 
 DefaultValueObjectWriter* DefaultValueObjectWriter::RenderString(
-    StringPiece name, StringPiece value) {
+    std::string_view name, std::string_view value) {
   if (current_ == nullptr) {
     ow_->RenderString(name, value);
   } else {
-    // Since StringPiece is essentially a pointer, takes a copy of "value" to
+    // Since std::string_view is essentially a pointer, takes a copy of "value" to
     // avoid ownership issues.
     string_values_.emplace_back(new std::string(value));
     RenderDataPiece(name, DataPiece(*string_values_.back(), true));
@@ -156,11 +156,11 @@ DefaultValueObjectWriter* DefaultValueObjectWriter::RenderString(
 }
 
 DefaultValueObjectWriter* DefaultValueObjectWriter::RenderBytes(
-    StringPiece name, StringPiece value) {
+    std::string_view name, std::string_view value) {
   if (current_ == nullptr) {
     ow_->RenderBytes(name, value);
   } else {
-    // Since StringPiece is essentially a pointer, takes a copy of "value" to
+    // Since std::string_view is essentially a pointer, takes a copy of "value" to
     // avoid ownership issues.
     string_values_.emplace_back(new std::string(value));
     RenderDataPiece(name, DataPiece(*string_values_.back(), false, true));
@@ -169,7 +169,7 @@ DefaultValueObjectWriter* DefaultValueObjectWriter::RenderBytes(
 }
 
 DefaultValueObjectWriter* DefaultValueObjectWriter::RenderNull(
-    StringPiece name) {
+    std::string_view name) {
   if (current_ == nullptr) {
     ow_->RenderNull(name);
   } else {
@@ -213,7 +213,7 @@ DefaultValueObjectWriter::Node::Node(
       field_scrub_callback_(std::move(field_scrub_callback)) {}
 
 DefaultValueObjectWriter::Node* DefaultValueObjectWriter::Node::FindChild(
-    StringPiece name) {
+    std::string_view name) {
   if (name.empty() || kind_ != OBJECT) {
     return nullptr;
   }
@@ -499,7 +499,7 @@ DataPiece DefaultValueObjectWriter::CreateDefaultDataPieceForField(
 }
 
 DefaultValueObjectWriter* DefaultValueObjectWriter::StartObject(
-    StringPiece name) {
+    std::string_view name) {
   if (current_ == nullptr) {
     std::vector<std::string> path;
     root_.reset(CreateNewNode(std::string(name), &type_, OBJECT,
@@ -550,7 +550,7 @@ DefaultValueObjectWriter* DefaultValueObjectWriter::EndObject() {
 }
 
 DefaultValueObjectWriter* DefaultValueObjectWriter::StartList(
-    StringPiece name) {
+    std::string_view name) {
   if (current_ == nullptr) {
     std::vector<std::string> path;
     root_.reset(CreateNewNode(std::string(name), &type_, LIST,
@@ -594,7 +594,7 @@ DefaultValueObjectWriter* DefaultValueObjectWriter::EndList() {
   return this;
 }
 
-void DefaultValueObjectWriter::RenderDataPiece(StringPiece name,
+void DefaultValueObjectWriter::RenderDataPiece(std::string_view name,
                                                const DataPiece& data) {
   MaybePopulateChildrenOfAny(current_);
   if (current_->type() != nullptr && current_->type()->name() == kAnyType &&

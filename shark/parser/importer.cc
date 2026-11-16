@@ -278,7 +278,7 @@ namespace shark::compiler {
         // The Win32 API accepts forward slashes as a path delimiter even though
         // backslashes are standard.  Let's avoid confusion and use only forward
         // slashes.
-        if (HasPrefixString(path, "\\\\")) {
+        if (turbo::starts_with(path, "\\\\")) {
             // Avoid converting two leading backslashes.
             path = "\\\\" + StringReplace(path.substr(2), "\\", "/", true);
         } else {
@@ -309,7 +309,7 @@ namespace shark::compiler {
     }
 
     static inline bool ContainsParentReference(const std::string& path) {
-        return path == ".." || HasPrefixString(path, "../") || HasSuffixString(path, "/..") || path.find("/../") != std::string::npos;
+        return path == ".." || turbo::starts_with(path, "../") || turbo::ends_with(path, "/..") || path.find("/../") != std::string::npos;
     }
 
     // Maps a file from an old location to a new one.  Typically, old_prefix is
@@ -338,7 +338,7 @@ namespace shark::compiler {
                 // We do not allow the file name to use "..".
                 return false;
             }
-            if (HasPrefixString(filename, "/") || IsWindowsAbsolutePath(filename)) {
+            if (turbo::starts_with(filename, "/") || IsWindowsAbsolutePath(filename)) {
                 // This is an absolute path, so it isn't matched by the empty string.
                 return false;
             }
@@ -347,7 +347,7 @@ namespace shark::compiler {
                 result->push_back('/');
             result->append(filename);
             return true;
-        } else if (HasPrefixString(filename, old_prefix)) {
+        } else if (turbo::starts_with(filename, old_prefix)) {
             // old_prefix is a prefix of the filename.  Is it the whole filename?
             if (filename.size() == old_prefix.size()) {
                 // Yep, it's an exact match.

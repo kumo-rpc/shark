@@ -50,7 +50,7 @@ JsonObjectWriter::~JsonObjectWriter() {
   }
 }
 
-JsonObjectWriter* JsonObjectWriter::StartObject(StringPiece name) {
+JsonObjectWriter* JsonObjectWriter::StartObject(std::string_view name) {
   WritePrefix(name);
   WriteChar('{');
   PushObject();
@@ -64,7 +64,7 @@ JsonObjectWriter* JsonObjectWriter::EndObject() {
   return this;
 }
 
-JsonObjectWriter* JsonObjectWriter::StartList(StringPiece name) {
+JsonObjectWriter* JsonObjectWriter::StartList(std::string_view name) {
   WritePrefix(name);
   WriteChar('[');
   PushArray();
@@ -78,22 +78,22 @@ JsonObjectWriter* JsonObjectWriter::EndList() {
   return this;
 }
 
-JsonObjectWriter* JsonObjectWriter::RenderBool(StringPiece name,
+JsonObjectWriter* JsonObjectWriter::RenderBool(std::string_view name,
                                                bool value) {
   return RenderSimple(name, value ? "true" : "false");
 }
 
-JsonObjectWriter* JsonObjectWriter::RenderInt32(StringPiece name,
+JsonObjectWriter* JsonObjectWriter::RenderInt32(std::string_view name,
                                                 int32_t value) {
   return RenderSimple(name, StrCat(value));
 }
 
-JsonObjectWriter* JsonObjectWriter::RenderUint32(StringPiece name,
+JsonObjectWriter* JsonObjectWriter::RenderUint32(std::string_view name,
                                                  uint32_t value) {
   return RenderSimple(name, StrCat(value));
 }
 
-JsonObjectWriter* JsonObjectWriter::RenderInt64(StringPiece name,
+JsonObjectWriter* JsonObjectWriter::RenderInt64(std::string_view name,
                                                 int64_t value) {
   WritePrefix(name);
   WriteChar('"');
@@ -102,7 +102,7 @@ JsonObjectWriter* JsonObjectWriter::RenderInt64(StringPiece name,
   return this;
 }
 
-JsonObjectWriter* JsonObjectWriter::RenderUint64(StringPiece name,
+JsonObjectWriter* JsonObjectWriter::RenderUint64(std::string_view name,
                                                  uint64_t value) {
   WritePrefix(name);
   WriteChar('"');
@@ -111,7 +111,7 @@ JsonObjectWriter* JsonObjectWriter::RenderUint64(StringPiece name,
   return this;
 }
 
-JsonObjectWriter* JsonObjectWriter::RenderDouble(StringPiece name,
+JsonObjectWriter* JsonObjectWriter::RenderDouble(std::string_view name,
                                                  double value) {
   if (std::isfinite(value)) {
     return RenderSimple(name, SimpleDtoa(value));
@@ -121,7 +121,7 @@ JsonObjectWriter* JsonObjectWriter::RenderDouble(StringPiece name,
   return RenderString(name, DoubleAsString(value));
 }
 
-JsonObjectWriter* JsonObjectWriter::RenderFloat(StringPiece name,
+JsonObjectWriter* JsonObjectWriter::RenderFloat(std::string_view name,
                                                 float value) {
   if (std::isfinite(value)) {
     return RenderSimple(name, SimpleFtoa(value));
@@ -131,8 +131,8 @@ JsonObjectWriter* JsonObjectWriter::RenderFloat(StringPiece name,
   return RenderString(name, FloatAsString(value));
 }
 
-JsonObjectWriter* JsonObjectWriter::RenderString(StringPiece name,
-                                                 StringPiece value) {
+JsonObjectWriter* JsonObjectWriter::RenderString(std::string_view name,
+                                                 std::string_view value) {
   WritePrefix(name);
   WriteChar('"');
   JsonEscaping::Escape(value, &sink_);
@@ -140,8 +140,8 @@ JsonObjectWriter* JsonObjectWriter::RenderString(StringPiece name,
   return this;
 }
 
-JsonObjectWriter* JsonObjectWriter::RenderBytes(StringPiece name,
-                                                StringPiece value) {
+JsonObjectWriter* JsonObjectWriter::RenderBytes(std::string_view name,
+                                                std::string_view value) {
   WritePrefix(name);
   std::string base64;
 
@@ -159,15 +159,15 @@ JsonObjectWriter* JsonObjectWriter::RenderBytes(StringPiece name,
   return this;
 }
 
-JsonObjectWriter* JsonObjectWriter::RenderNull(StringPiece name) {
+JsonObjectWriter* JsonObjectWriter::RenderNull(std::string_view name) {
   return RenderSimple(name, "null");
 }
 
-JsonObjectWriter* JsonObjectWriter::RenderNullAsEmpty(StringPiece name) {
+JsonObjectWriter* JsonObjectWriter::RenderNullAsEmpty(std::string_view name) {
   return RenderSimple(name, "");
 }
 
-void JsonObjectWriter::WritePrefix(StringPiece name) {
+void JsonObjectWriter::WritePrefix(std::string_view name) {
   bool not_first = !element()->is_first();
   if (not_first) WriteChar(',');
   if (not_first || !element()->is_root()) NewLine();

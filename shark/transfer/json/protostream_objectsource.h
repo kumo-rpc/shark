@@ -122,7 +122,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
 
   ~ProtoStreamObjectSource() override;
 
-  util::Status NamedWriteTo(StringPiece name,
+  util::Status NamedWriteTo(std::string_view name,
                             ObjectWriter* ow) const override;
 
   // Sets the max recursion depth of proto message to be deserialized. Proto
@@ -139,7 +139,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // The include_start_and_end parameter allows this method to be called when
   // already inside of an object, and skip calling StartObject and EndObject.
   virtual util::Status WriteMessage(const shark::Type& type,
-                                    StringPiece name,
+                                    std::string_view name,
                                     const uint32_t end_tag,
                                     bool include_start_and_end,
                                     ObjectWriter* ow) const;
@@ -148,7 +148,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // reading all sequential repeating elements. The caller should use this tag
   // before reading more tags from the stream.
   virtual util::StatusOr<uint32_t> RenderList(
-      const shark::Field* field, StringPiece name,
+      const shark::Field* field, std::string_view name,
       uint32_t list_tag, ObjectWriter* ow) const;
 
   // Looks up a field and verify its consistency with wire type in tag.
@@ -157,7 +157,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
 
   // Renders a field value to the ObjectWriter.
   virtual util::Status RenderField(const shark::Field* field,
-                                   StringPiece field_name,
+                                   std::string_view field_name,
                                    ObjectWriter* ow) const;
 
   // Reads field value according to Field spec in 'field' and returns the read
@@ -178,7 +178,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // Function that renders a well known type with a modified behavior.
   typedef util::Status (*TypeRenderer)(const ProtoStreamObjectSource*,
                                        const shark::Type&,
-                                       StringPiece, ObjectWriter*);
+                                       std::string_view, ObjectWriter*);
 
   // TODO(skarvaje): Mark these methods as non-const as they modify internal
   // state (stream_).
@@ -187,7 +187,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // Returns the next tag after reading all map entries. The caller should use
   // this tag before reading more tags from the stream.
   util::StatusOr<uint32_t> RenderMap(const shark::Field* field,
-                                     StringPiece name, uint32_t list_tag,
+                                     std::string_view name, uint32_t list_tag,
                                      ObjectWriter* ow) const;
 
   // Renders a packed repeating field. A packed field is stored as:
@@ -199,69 +199,69 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // Renders a shark.Timestamp value to ObjectWriter
   static util::Status RenderTimestamp(const ProtoStreamObjectSource* os,
                                       const shark::Type& type,
-                                      StringPiece name, ObjectWriter* ow);
+                                      std::string_view name, ObjectWriter* ow);
 
   // Renders a shark.Duration value to ObjectWriter
   static util::Status RenderDuration(const ProtoStreamObjectSource* os,
                                      const shark::Type& type,
-                                     StringPiece name, ObjectWriter* ow);
+                                     std::string_view name, ObjectWriter* ow);
 
   // Following RenderTYPE functions render well known types in
   // shark/types/wrappers.shark corresponding to TYPE.
   static util::Status RenderDouble(const ProtoStreamObjectSource* os,
                                    const shark::Type& type,
-                                   StringPiece name, ObjectWriter* ow);
+                                   std::string_view name, ObjectWriter* ow);
   static util::Status RenderFloat(const ProtoStreamObjectSource* os,
                                   const shark::Type& type,
-                                  StringPiece name, ObjectWriter* ow);
+                                  std::string_view name, ObjectWriter* ow);
   static util::Status RenderInt64(const ProtoStreamObjectSource* os,
                                   const shark::Type& type,
-                                  StringPiece name, ObjectWriter* ow);
+                                  std::string_view name, ObjectWriter* ow);
   static util::Status RenderUInt64(const ProtoStreamObjectSource* os,
                                    const shark::Type& type,
-                                   StringPiece name, ObjectWriter* ow);
+                                   std::string_view name, ObjectWriter* ow);
   static util::Status RenderInt32(const ProtoStreamObjectSource* os,
                                   const shark::Type& type,
-                                  StringPiece name, ObjectWriter* ow);
+                                  std::string_view name, ObjectWriter* ow);
   static util::Status RenderUInt32(const ProtoStreamObjectSource* os,
                                    const shark::Type& type,
-                                   StringPiece name, ObjectWriter* ow);
+                                   std::string_view name, ObjectWriter* ow);
   static util::Status RenderBool(const ProtoStreamObjectSource* os,
                                  const shark::Type& type,
-                                 StringPiece name, ObjectWriter* ow);
+                                 std::string_view name, ObjectWriter* ow);
   static util::Status RenderString(const ProtoStreamObjectSource* os,
                                    const shark::Type& type,
-                                   StringPiece name, ObjectWriter* ow);
+                                   std::string_view name, ObjectWriter* ow);
   static util::Status RenderBytes(const ProtoStreamObjectSource* os,
                                   const shark::Type& type,
-                                  StringPiece name, ObjectWriter* ow);
+                                  std::string_view name, ObjectWriter* ow);
 
   // Renders a shark.Struct to ObjectWriter.
   static util::Status RenderStruct(const ProtoStreamObjectSource* os,
                                    const shark::Type& type,
-                                   StringPiece name, ObjectWriter* ow);
+                                   std::string_view name, ObjectWriter* ow);
 
   // Helper to render shark.Struct's Value fields to ObjectWriter.
   static util::Status RenderStructValue(const ProtoStreamObjectSource* os,
                                         const shark::Type& type,
-                                        StringPiece name,
+                                        std::string_view name,
                                         ObjectWriter* ow);
 
   // Helper to render shark.Struct's ListValue fields to ObjectWriter.
   static util::Status RenderStructListValue(const ProtoStreamObjectSource* os,
                                             const shark::Type& type,
-                                            StringPiece name,
+                                            std::string_view name,
                                             ObjectWriter* ow);
 
   // Render the "Any" type.
   static util::Status RenderAny(const ProtoStreamObjectSource* os,
                                 const shark::Type& type,
-                                StringPiece name, ObjectWriter* ow);
+                                std::string_view name, ObjectWriter* ow);
 
   // Render the "FieldMask" type.
   static util::Status RenderFieldMask(const ProtoStreamObjectSource* os,
                                       const shark::Type& type,
-                                      StringPiece name, ObjectWriter* ow);
+                                      std::string_view name, ObjectWriter* ow);
 
   static std::unordered_map<std::string, TypeRenderer>* renderers_;
   static void InitRendererMap();
@@ -271,7 +271,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // Same as above but renders all non-message field types. Callers don't call
   // this function directly. They just use RenderField.
   util::Status RenderNonMessageField(const shark::Field* field,
-                                     StringPiece field_name,
+                                     std::string_view field_name,
                                      ObjectWriter* ow) const;
 
 
@@ -286,8 +286,8 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // Helper function to check recursion depth and increment it. It will return
   // OkStatus() if the current depth is allowed. Otherwise an error is returned.
   // type_name and field_name are used for error reporting.
-  util::Status IncrementRecursionDepth(StringPiece type_name,
-                                       StringPiece field_name) const;
+  util::Status IncrementRecursionDepth(std::string_view type_name,
+                                       std::string_view field_name) const;
 
   // Input stream to read from. Ownership rests with the caller.
   mutable io::CodedInputStream* stream_;

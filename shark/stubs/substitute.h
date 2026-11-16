@@ -94,6 +94,8 @@ class SubstituteArg {
       : text_(value.data()), size_(value.size()) {}
   inline SubstituteArg(const StringPiece value)
       : text_(value.data()), size_(value.size()) {}
+    inline SubstituteArg(std::string_view value)
+      : text_(value.data()), size_(value.size()) {}
 
   // Indicates that no argument was given.
   inline explicit SubstituteArg()

@@ -199,7 +199,7 @@ namespace shark {
             std::string* error) const {
             bool annotate = false;
             for (int i = 0; i < file->message_type_count(); i++) {
-                if (HasPrefixString(file->message_type(i)->name(), "MockCodeGenerator_")) {
+                if (turbo::starts_with(file->message_type(i)->name(), "MockCodeGenerator_")) {
                     std::string command = StripPrefixString(
                         file->message_type(i)->name(), "MockCodeGenerator_");
                     if (command == "Error") {
@@ -239,8 +239,8 @@ namespace shark {
                 }
             }
 
-            bool insert_endlines = HasPrefixString(parameter, "insert_endlines=");
-            if (insert_endlines || HasPrefixString(parameter, "insert=")) {
+            bool insert_endlines = turbo::starts_with(parameter, "insert_endlines=");
+            if (insert_endlines || turbo::starts_with(parameter, "insert=")) {
                 std::vector<std::string> insert_into = Split(
                     StripPrefixString(
                         parameter, insert_endlines ? "insert_endlines=" : "insert="),

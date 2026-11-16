@@ -186,7 +186,7 @@ typename Container::const_iterator FindLastLessOrEqual(
 // "foo.bar.baz", but not a parent of "foo.barbaz").
 bool IsSubSymbol(StringPiece sub_symbol, StringPiece super_symbol) {
   return sub_symbol == super_symbol ||
-         (HasPrefixString(super_symbol, sub_symbol) &&
+         (turbo::starts_with(super_symbol, sub_symbol) &&
           super_symbol[sub_symbol.size()] == '.');
 }
 

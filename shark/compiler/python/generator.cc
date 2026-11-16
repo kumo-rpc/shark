@@ -248,7 +248,7 @@ namespace shark::compiler::python {
 
         std::string filename = GetFileName(file, ".py");
         pure_python_workable_ = !cpp_generated_lib_linked;
-        if (HasPrefixString(file->name(), "shark/")) {
+        if (turbo::starts_with(file->name(), "shark/")) {
             pure_python_workable_ = true;
         }
 

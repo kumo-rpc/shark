@@ -1045,7 +1045,7 @@ namespace shark {
             if (mode_ == MODE_COMPILE) {
                 for (int i = 0; i < output_directives_.size(); i++) {
                     std::string output_location = output_directives_[i].output_location;
-                    if (!HasSuffixString(output_location, ".zip") && !HasSuffixString(output_location, ".jar") && !HasSuffixString(output_location, ".srcjar")) {
+                    if (!turbo::ends_with(output_location, ".zip") && !turbo::ends_with(output_location, ".jar") && !turbo::ends_with(output_location, ".srcjar")) {
                         AddTrailingSlash(&output_location);
                     }
 
@@ -1067,12 +1067,12 @@ namespace shark {
             for (const auto& pair : output_directories) {
                 const std::string& location = pair.first;
                 GeneratorContextImpl* directory = pair.second.get();
-                if (HasSuffixString(location, "/")) {
+                if (turbo::ends_with(location, "/")) {
                     if (!directory->WriteAllToDisk(location)) {
                         return 1;
                     }
                 } else {
-                    if (HasSuffixString(location, ".jar")) {
+                    if (turbo::ends_with(location, ".jar")) {
                         directory->AddJarManifest();
                     }
 
@@ -1911,7 +1911,7 @@ namespace shark {
             } else {
                 // Some other flag.  Look it up in the generators list.
                 const GeneratorInfo* generator_info = FindOrNull(generators_by_flag_name_, name);
-                if (generator_info == nullptr && (plugin_prefix_.empty() || !HasSuffixString(name, "_out"))) {
+                if (generator_info == nullptr && (plugin_prefix_.empty() || !turbo::ends_with(name, "_out"))) {
                     // Check if it's a generator option flag.
                     generator_info = FindOrNull(generators_by_option_name_, name);
                     if (generator_info != nullptr) {
@@ -1920,7 +1920,7 @@ namespace shark {
                             parameters->append(",");
                         }
                         parameters->append(value);
-                    } else if (HasPrefixString(name, "--") && HasSuffixString(name, "_opt")) {
+                    } else if (turbo::starts_with(name, "--") && turbo::ends_with(name, "_opt")) {
                         std::string* parameters = &plugin_parameters_[PluginName(plugin_prefix_, name)];
                         if (!parameters->empty()) {
                             parameters->append(",");
@@ -2099,7 +2099,7 @@ Parse PROTO_FILES and generate output based on the options given:
             std::string error;
             if (output_directive.generator == nullptr) {
                 // This is a plugin.
-                GOOGLE_CHECK(HasPrefixString(output_directive.name, "--") && HasSuffixString(output_directive.name, "_out"))
+                GOOGLE_CHECK(turbo::starts_with(output_directive.name, "--") && turbo::ends_with(output_directive.name, "_out"))
                     << "Bad name for plugin generator: " << output_directive.name;
 
                 std::string plugin_name = PluginName(plugin_prefix_, output_directive.name);

@@ -206,7 +206,7 @@ namespace shark {
         }
     }
 
-    void SplitStringUsing(StringPiece full, const char* delim,
+    void SplitStringUsing(std::string_view full, const char* delim,
         std::vector<std::string>* result) {
         std::back_insert_iterator<std::vector<std::string>> it(*result);
         SplitStringToIteratorUsing(full, delim, it);
@@ -242,7 +242,7 @@ namespace shark {
         *result++ = std::string(full.substr(begin_index));
     }
 
-    void SplitStringAllowEmpty(StringPiece full, const char* delim,
+    void SplitStringAllowEmpty(std::string_view full, const char* delim,
         std::vector<std::string>* result) {
         std::back_insert_iterator<std::vector<std::string>> it(*result);
         SplitStringToIteratorAllowEmpty(full, delim, 0, it);
@@ -839,7 +839,7 @@ namespace shark {
     // the required space using a lookup table, and also does not do any special
     // handling for Hex or UTF-8 characters.
     // ----------------------------------------------------------------------
-    void CEscapeAndAppend(StringPiece src, std::string* dest) {
+    void CEscapeAndAppend(std::string_view src, std::string* dest) {
         size_t escaped_len = CEscapedLength(src);
         if (escaped_len == src.size()) {
             dest->append(src.data(), src.size());
@@ -1587,13 +1587,13 @@ namespace shark {
         return 0;
     }
 
-    inline bool CaseEqual(StringPiece s1, StringPiece s2) {
+    inline bool CaseEqual(std::string_view s1, std::string_view s2) {
         if (s1.size() != s2.size())
             return false;
         return memcasecmp(s1.data(), s2.data(), s1.size()) == 0;
     }
 
-    bool safe_strtob(StringPiece str, bool* value) {
+    bool safe_strtob(std::string_view str, bool* value) {
         GOOGLE_CHECK(value != nullptr) << "nullptr output boolean given.";
         if (CaseEqual(str, "true") || CaseEqual(str, "t") || CaseEqual(str, "yes") || CaseEqual(str, "y") || CaseEqual(str, "1")) {
             *value = true;
@@ -2354,11 +2354,11 @@ namespace shark {
         return true;
     }
 
-    bool Base64Unescape(StringPiece src, std::string* dest) {
+    bool Base64Unescape(std::string_view src, std::string* dest) {
         return Base64UnescapeInternal(src.data(), src.size(), dest, kUnBase64);
     }
 
-    bool WebSafeBase64Unescape(StringPiece src, std::string* dest) {
+    bool WebSafeBase64Unescape(std::string_view src, std::string* dest) {
         return Base64UnescapeInternal(src.data(), src.size(), dest, kUnWebSafeBase64);
     }
 
@@ -2506,17 +2506,17 @@ namespace shark {
         Base64EscapeInternal(src, szsrc, dest, do_padding, kWebSafeBase64Chars);
     }
 
-    void Base64Escape(StringPiece src, std::string* dest) {
+    void Base64Escape(std::string_view src, std::string* dest) {
         Base64Escape(reinterpret_cast<const unsigned char*>(src.data()),
             src.size(), dest, true);
     }
 
-    void WebSafeBase64Escape(StringPiece src, std::string* dest) {
+    void WebSafeBase64Escape(std::string_view src, std::string* dest) {
         WebSafeBase64Escape(reinterpret_cast<const unsigned char*>(src.data()),
             src.size(), dest, false);
     }
 
-    void WebSafeBase64EscapeWithPadding(StringPiece src, std::string* dest) {
+    void WebSafeBase64EscapeWithPadding(std::string_view src, std::string* dest) {
         WebSafeBase64Escape(reinterpret_cast<const unsigned char*>(src.data()),
             src.size(), dest, true);
     }

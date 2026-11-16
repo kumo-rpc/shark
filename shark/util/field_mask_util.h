@@ -51,7 +51,7 @@ class SHARK_EXPORT FieldMaskUtil {
   // Converts FieldMask to/from string, formatted by separating each path
   // with a comma (e.g., "foo_bar,baz.quz").
   static std::string ToString(const FieldMask& mask);
-  static void FromString(StringPiece str, FieldMask* out);
+  static void FromString(std::string_view str, FieldMask* out);
 
   // Populates the FieldMask with the paths corresponding to the fields with the
   // given numbers, after checking that all field numbers are valid.
@@ -73,19 +73,19 @@ class SHARK_EXPORT FieldMaskUtil {
   // style conforming (i.e., not snake_case when converted to string, or not
   // camelCase when converted from string), the conversion will fail.
   static bool ToJsonString(const FieldMask& mask, std::string* out);
-  static bool FromJsonString(StringPiece str, FieldMask* out);
+  static bool FromJsonString(std::string_view str, FieldMask* out);
 
   // Get the descriptors of the fields which the given path from the message
   // descriptor traverses, if field_descriptors is not null.
   // Return false if the path is not valid, and the content of field_descriptors
   // is unspecified.
   static bool GetFieldDescriptors(
-      const Descriptor* descriptor, StringPiece path,
+      const Descriptor* descriptor, std::string_view path,
       std::vector<const FieldDescriptor*>* field_descriptors);
 
   // Checks whether the given path is valid for type T.
   template <typename T>
-  static bool IsValidPath(StringPiece path) {
+  static bool IsValidPath(std::string_view path) {
     return GetFieldDescriptors(T::descriptor(), path, nullptr);
   }
 
@@ -103,7 +103,7 @@ class SHARK_EXPORT FieldMaskUtil {
   // Adds a path to FieldMask after checking whether the given path is valid.
   // This method check-fails if the path is not a valid path for type T.
   template <typename T>
-  static void AddPathToFieldMask(StringPiece path, FieldMask* mask) {
+  static void AddPathToFieldMask(std::string_view path, FieldMask* mask) {
     GOOGLE_CHECK(IsValidPath<T>(path)) << path;
     mask->add_paths(std::string(path));
   }
@@ -151,7 +151,7 @@ class SHARK_EXPORT FieldMaskUtil {
   // "foo.bar" covers all paths like "foo.bar.baz", "foo.bar.quz.x", etc.
   // Also note that parent paths are not covered by explicit child path, i.e.
   // "foo.bar" does NOT cover "foo", even if "bar" is the only child.
-  static bool IsPathInFieldMask(StringPiece path, const FieldMask& mask);
+  static bool IsPathInFieldMask(std::string_view path, const FieldMask& mask);
 
   class MergeOptions;
   // Merges fields specified in a FieldMask into another message.
@@ -186,7 +186,7 @@ class SHARK_EXPORT FieldMaskUtil {
   // Note that the input can contain characters not allowed in C identifiers.
   // For example, "foo_bar,baz_quz" will be converted to "fooBar,bazQuz"
   // successfully.
-  static bool SnakeCaseToCamelCase(StringPiece input,
+  static bool SnakeCaseToCamelCase(std::string_view input,
                                    std::string* output);
   // Converts a field name from camelCase to snake_case:
   //   1. Every uppercase letter is converted to lowercase with an additional
@@ -200,7 +200,7 @@ class SHARK_EXPORT FieldMaskUtil {
   // Note that the input can contain characters not allowed in C identifiers.
   // For example, "fooBar,bazQuz" will be converted to "foo_bar,baz_quz"
   // successfully.
-  static bool CamelCaseToSnakeCase(StringPiece input,
+  static bool CamelCaseToSnakeCase(std::string_view input,
                                    std::string* output);
 };
 

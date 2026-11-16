@@ -47,7 +47,7 @@
 #include <shark/transfer/json/object_location_tracker.h>
 #include <shark/transfer/json/utility.h>
 #include <shark/stubs/map_util.h>
-
+#include <turbo/strings/strip.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -112,19 +112,19 @@ ProtoStreamObjectWriter::~ProtoStreamObjectWriter() {
 namespace {
 // Utility method to split a string representation of Timestamp or Duration and
 // return the parts.
-void SplitSecondsAndNanos(StringPiece input, StringPiece* seconds,
-                          StringPiece* nanos) {
+void SplitSecondsAndNanos(std::string_view input, std::string_view* seconds,
+                          std::string_view* nanos) {
   size_t idx = input.rfind('.');
   if (idx != std::string::npos) {
     *seconds = input.substr(0, idx);
     *nanos = input.substr(idx + 1);
   } else {
     *seconds = input;
-    *nanos = StringPiece();
+    *nanos = std::string_view();
   }
 }
 
-Status GetNanosFromStringPiece(StringPiece s_nanos,
+Status GetNanosFromStringPiece(std::string_view s_nanos,
                                const char* parse_failure_message,
                                const char* exceeded_limit_message,
                                int32_t* nanos) {
@@ -132,9 +132,9 @@ Status GetNanosFromStringPiece(StringPiece s_nanos,
 
   // Count the number of leading 0s and consume them.
   int num_leading_zeros = 0;
-  while (s_nanos.Consume("0")) {
-    num_leading_zeros++;
-  }
+    while (turbo::consume_prefix(&s_nanos, "0")) {
+        num_leading_zeros++;
+    }
   int32_t i_nanos = 0;
   // 's_nanos' contains fractional seconds -- i.e. 'nanos' is equal to
   // "0." + s_nanos.ToString() seconds. An int32_t is used for the
@@ -147,7 +147,7 @@ Status GetNanosFromStringPiece(StringPiece s_nanos,
     return util::InvalidArgumentError(exceeded_limit_message);
   }
   // s_nanos should only have digits. No whitespace.
-  if (s_nanos.find_first_not_of("0123456789") != StringPiece::npos) {
+  if (s_nanos.find_first_not_of("0123456789") != std::string_view::npos) {
     return util::InvalidArgumentError(parse_failure_message);
   }
 
@@ -210,7 +210,7 @@ ProtoStreamObjectWriter::AnyWriter::AnyWriter(ProtoStreamObjectWriter* parent)
 
 ProtoStreamObjectWriter::AnyWriter::~AnyWriter() {}
 
-void ProtoStreamObjectWriter::AnyWriter::StartObject(StringPiece name) {
+void ProtoStreamObjectWriter::AnyWriter::StartObject(std::string_view name) {
   ++depth_;
   // If an object writer is absent, that means we have not called StartAny()
   // before reaching here, which happens when we have data before the "@type"
@@ -257,7 +257,7 @@ bool ProtoStreamObjectWriter::AnyWriter::EndObject() {
   return true;
 }
 
-void ProtoStreamObjectWriter::AnyWriter::StartList(StringPiece name) {
+void ProtoStreamObjectWriter::AnyWriter::StartList(std::string_view name) {
   ++depth_;
   if (ow_ == nullptr) {
     // Save data before the "@type" field for later replay.
@@ -289,7 +289,7 @@ void ProtoStreamObjectWriter::AnyWriter::EndList() {
 }
 
 void ProtoStreamObjectWriter::AnyWriter::RenderDataPiece(
-    StringPiece name, const DataPiece& value) {
+    std::string_view name, const DataPiece& value) {
   // Start an Any only at depth_ 0. Other RenderDataPiece calls with "@type"
   // should go to the contained ow_ as they indicate nested Anys.
   if (depth_ == 0 && ow_ == nullptr && name == "@type") {
@@ -475,13 +475,13 @@ ProtoStreamObjectWriter::Item::Item(ProtoStreamObjectWriter::Item* parent,
 }
 
 bool ProtoStreamObjectWriter::Item::InsertMapKeyIfNotPresent(
-    StringPiece map_key) {
+    std::string_view map_key) {
   return InsertIfNotPresent(map_keys_.get(), std::string(map_key));
 }
 
 
 ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartObject(
-    StringPiece name) {
+    std::string_view name) {
   if (invalid_depth() > 0) {
     IncrementInvalidDepth();
     return this;
@@ -676,7 +676,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::EndObject() {
 
 
 ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartList(
-    StringPiece name) {
+    std::string_view name) {
   if (invalid_depth() > 0) {
     IncrementInvalidDepth();
     return this;
@@ -1026,11 +1026,11 @@ Status ProtoStreamObjectWriter::RenderTimestamp(ProtoStreamObjectWriter* ow,
                      data.ValueAsStringOrDefault("")));
   }
 
-  StringPiece value(data.str());
+  std::string_view value(data.str());
 
   int64_t seconds;
   int32_t nanos;
-  if (!::shark::internal::ParseTime(value.ToString(), &seconds,
+  if (!::shark::internal::ParseTime(std::string(value), &seconds,
                                                &nanos)) {
     return util::InvalidArgumentError(StrCat("Invalid time format: ", value));
   }
@@ -1042,7 +1042,7 @@ Status ProtoStreamObjectWriter::RenderTimestamp(ProtoStreamObjectWriter* ow,
 }
 
 static inline util::Status RenderOneFieldPath(ProtoStreamObjectWriter* ow,
-                                              StringPiece path) {
+                                              std::string_view path) {
   ow->ProtoWriter::RenderDataPiece(
       "paths", DataPiece(ConvertFieldMaskPath(path, &ToSnakeCase), true));
   return Status();
@@ -1073,20 +1073,20 @@ Status ProtoStreamObjectWriter::RenderDuration(ProtoStreamObjectWriter* ow,
                      data.ValueAsStringOrDefault("")));
   }
 
-  StringPiece value(data.str());
+  std::string_view value(data.str());
 
-  if (!HasSuffixString(value, "s")) {
+  if (!turbo::ends_with(value, "s")) {
     return util::InvalidArgumentError(
         "Illegal duration format; duration must end with 's'");
   }
   value = value.substr(0, value.size() - 1);
   int sign = 1;
-  if (HasPrefixString(value, "-")) {
+  if (turbo::starts_with(value, "-")) {
     sign = -1;
     value = value.substr(1);
   }
 
-  StringPiece s_secs, s_nanos;
+  std::string_view s_secs, s_nanos;
   SplitSecondsAndNanos(value, &s_secs, &s_nanos);
   uint64_t unsigned_seconds;
   if (!safe_strtou64(s_secs, &unsigned_seconds)) {
@@ -1122,7 +1122,7 @@ Status ProtoStreamObjectWriter::RenderWrapperType(ProtoStreamObjectWriter* ow,
 }
 
 ProtoStreamObjectWriter* ProtoStreamObjectWriter::RenderDataPiece(
-    StringPiece name, const DataPiece& data) {
+    std::string_view name, const DataPiece& data) {
   Status status;
   if (invalid_depth() > 0) return this;
 
@@ -1320,7 +1320,7 @@ ProtoStreamObjectWriter::FindTypeRenderer(const std::string& type_url) {
   return FindOrNull(*renderers_, type_url);
 }
 
-bool ProtoStreamObjectWriter::ValidMapKey(StringPiece unnormalized_name) {
+bool ProtoStreamObjectWriter::ValidMapKey(std::string_view unnormalized_name) {
   if (current_ == nullptr) return true;
 
   if (!current_->InsertMapKeyIfNotPresent(unnormalized_name)) {
@@ -1335,7 +1335,7 @@ bool ProtoStreamObjectWriter::ValidMapKey(StringPiece unnormalized_name) {
 }
 
 void ProtoStreamObjectWriter::Push(
-    StringPiece name, Item::ItemType item_type, bool is_placeholder,
+    std::string_view name, Item::ItemType item_type, bool is_placeholder,
     bool is_list) {
   is_list ? ProtoWriter::StartList(name) : ProtoWriter::StartObject(name);
 

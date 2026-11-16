@@ -1254,7 +1254,7 @@ namespace shark {
 #ifdef SHARK_UTF8_VALIDATION_ENABLED
                 ASSERT_EQ(1, errors.size());
                 EXPECT_TRUE(
-                    HasPrefixString(errors[0],
+                    turbo::starts_with(errors[0],
                         "String field contains invalid UTF-8 data when "
                         "serializing a protocol buffer. Use the "
                         "'bytes' type if you intend to send raw bytes."));

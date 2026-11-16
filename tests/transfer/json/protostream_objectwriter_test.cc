@@ -538,17 +538,17 @@ TEST_P(ProtoStreamObjectWriterTest, InfinityInputTest) {
 
   ResetTypeInfo(Primitive::descriptor());
 
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("INT32"),
-                                      StringPiece("\"Infinity\"")))
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("INT32"),
+                                      std::string_view("\"Infinity\"")))
       .With(Args<0>(HasObjectLocation("i32")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("UINT32"),
-                                      StringPiece("\"Infinity\"")))
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("UINT32"),
+                                      std::string_view("\"Infinity\"")))
       .With(Args<0>(HasObjectLocation("u32")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("SFIXED64"),
-                                      StringPiece("\"-Infinity\"")))
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("SFIXED64"),
+                                      std::string_view("\"-Infinity\"")))
       .With(Args<0>(HasObjectLocation("sf64")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("BOOL"),
-                                      StringPiece("\"Infinity\"")))
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("BOOL"),
+                                      std::string_view("\"Infinity\"")))
       .With(Args<0>(HasObjectLocation("bool")));
 
   ow_->StartObject("")
@@ -571,17 +571,17 @@ TEST_P(ProtoStreamObjectWriterTest, NaNInputTest) {
 
   ResetTypeInfo(Primitive::descriptor());
 
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("INT32"),
-                                      StringPiece("\"NaN\"")))
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("INT32"),
+                                      std::string_view("\"NaN\"")))
       .With(Args<0>(HasObjectLocation("i32")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("UINT32"),
-                                      StringPiece("\"NaN\"")))
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("UINT32"),
+                                      std::string_view("\"NaN\"")))
       .With(Args<0>(HasObjectLocation("u32")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("SFIXED64"),
-                                      StringPiece("\"NaN\"")))
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("SFIXED64"),
+                                      std::string_view("\"NaN\"")))
       .With(Args<0>(HasObjectLocation("sf64")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("BOOL"),
-                                      StringPiece("\"NaN\"")))
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("BOOL"),
+                                      std::string_view("\"NaN\"")))
       .With(Args<0>(HasObjectLocation("bool")));
 
   ow_->StartObject("")
@@ -654,8 +654,8 @@ TEST_P(ProtoStreamObjectWriterTest, NonRepeatedExplicitPrimitiveList) {
 
   EXPECT_CALL(
       listener_,
-      InvalidName(_, StringPiece("name"),
-                  StringPiece(
+      InvalidName(_, std::string_view("name"),
+                  std::string_view(
                       "Proto field is not repeating, cannot start list.")))
       .With(Args<0>(HasObjectLocation("author")));
   ow_->StartObject("")
@@ -729,8 +729,8 @@ TEST_P(ProtoStreamObjectWriterTest,
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("friend"),
-          StringPiece(
+          _, std::string_view("friend"),
+          std::string_view(
               "Starting an object in a repeated field but the parent object "
               "is not a list")))
       .With(Args<0>(HasObjectLocation("author")))
@@ -805,8 +805,8 @@ TEST_P(ProtoStreamObjectWriterTest, NonRepeatedExplicitMessageList) {
 
   EXPECT_CALL(
       listener_,
-      InvalidName(_, StringPiece("publisher"),
-                  StringPiece(
+      InvalidName(_, std::string_view("publisher"),
+                  std::string_view(
                       "Proto field is not repeating, cannot start list.")))
       .With(Args<0>(HasObjectLocation("")));
   ow_->StartObject("")
@@ -828,8 +828,8 @@ TEST_P(ProtoStreamObjectWriterTest, NonRepeatedExplicitMessageList) {
 TEST_P(ProtoStreamObjectWriterTest, UnknownFieldAtRoot) {
   Book empty;
 
-  EXPECT_CALL(listener_, InvalidName(_, StringPiece("unknown"),
-                                     StringPiece("Cannot find field.")))
+  EXPECT_CALL(listener_, InvalidName(_, std::string_view("unknown"),
+                                     std::string_view("Cannot find field.")))
       .With(Args<0>(HasObjectLocation("")));
   ow_->StartObject("")->RenderString("unknown", "Nope!")->EndObject();
   CheckOutput(empty, 0);
@@ -846,8 +846,8 @@ TEST_P(ProtoStreamObjectWriterTest, UnknownFieldAtAuthorFriend) {
   Author* luke = paul->add_friend_();
   luke->set_name("Luke");
 
-  EXPECT_CALL(listener_, InvalidName(_, StringPiece("address"),
-                                     StringPiece("Cannot find field.")))
+  EXPECT_CALL(listener_, InvalidName(_, std::string_view("address"),
+                                     std::string_view("Cannot find field.")))
       .With(Args<0>(HasObjectLocation("author.friend[1]")));
   ow_->StartObject("")
       ->StartObject("author")
@@ -872,8 +872,8 @@ TEST_P(ProtoStreamObjectWriterTest, UnknownFieldAtAuthorFriend) {
 TEST_P(ProtoStreamObjectWriterTest, UnknownObjectAtRoot) {
   Book empty;
 
-  EXPECT_CALL(listener_, InvalidName(_, StringPiece("unknown"),
-                                     StringPiece("Cannot find field.")))
+  EXPECT_CALL(listener_, InvalidName(_, std::string_view("unknown"),
+                                     std::string_view("Cannot find field.")))
       .With(Args<0>(HasObjectLocation("")));
   ow_->StartObject("")->StartObject("unknown")->EndObject()->EndObject();
   CheckOutput(empty, 0);
@@ -885,8 +885,8 @@ TEST_P(ProtoStreamObjectWriterTest, UnknownObjectAtAuthor) {
   author->set_name("William");
   author->add_pseudonym("Bill");
 
-  EXPECT_CALL(listener_, InvalidName(_, StringPiece("wife"),
-                                     StringPiece("Cannot find field.")))
+  EXPECT_CALL(listener_, InvalidName(_, std::string_view("wife"),
+                                     std::string_view("Cannot find field.")))
       .With(Args<0>(HasObjectLocation("author")));
   ow_->StartObject("")
       ->StartObject("author")
@@ -903,8 +903,8 @@ TEST_P(ProtoStreamObjectWriterTest, UnknownObjectAtAuthor) {
 TEST_P(ProtoStreamObjectWriterTest, UnknownListAtRoot) {
   Book empty;
 
-  EXPECT_CALL(listener_, InvalidName(_, StringPiece("unknown"),
-                                     StringPiece("Cannot find field.")))
+  EXPECT_CALL(listener_, InvalidName(_, std::string_view("unknown"),
+                                     std::string_view("Cannot find field.")))
       .With(Args<0>(HasObjectLocation("")));
   ow_->StartObject("")->StartList("unknown")->EndList()->EndObject();
   CheckOutput(empty, 0);
@@ -916,8 +916,8 @@ TEST_P(ProtoStreamObjectWriterTest, UnknownListAtPublisher) {
   Publisher* publisher = expected.mutable_publisher();
   publisher->set_name("propaganda");
 
-  EXPECT_CALL(listener_, InvalidName(_, StringPiece("alliance"),
-                                     StringPiece("Cannot find field.")))
+  EXPECT_CALL(listener_, InvalidName(_, std::string_view("alliance"),
+                                     std::string_view("Cannot find field.")))
       .With(Args<0>(HasObjectLocation("publisher")));
   ow_->StartObject("")
       ->StartObject("publisher")
@@ -982,8 +982,8 @@ TEST_P(ProtoStreamObjectWriterTest, IgnoreUnknownObjectAtRoot) {
   options_.ignore_unknown_fields = true;
   ResetProtoWriter();
 
-  EXPECT_CALL(listener_, InvalidName(_, StringPiece("unknown"),
-                                     StringPiece("Cannot find field.")))
+  EXPECT_CALL(listener_, InvalidName(_, std::string_view("unknown"),
+                                     std::string_view("Cannot find field.")))
       .Times(0);
   ow_->StartObject("")->StartObject("unknown")->EndObject()->EndObject();
   CheckOutput(empty, 0);
@@ -1048,7 +1048,7 @@ TEST_P(ProtoStreamObjectWriterTest, MissingRequiredField) {
   expected.set_title("My Title");
   expected.set_allocated_publisher(new Publisher());
 
-  EXPECT_CALL(listener_, MissingField(_, StringPiece("name")))
+  EXPECT_CALL(listener_, MissingField(_, std::string_view("name")))
       .With(Args<0>(HasObjectLocation("publisher")));
   ow_->StartObject("")
       ->StartObject("publisher")
@@ -1061,8 +1061,8 @@ TEST_P(ProtoStreamObjectWriterTest, MissingRequiredField) {
 TEST_P(ProtoStreamObjectWriterTest, InvalidFieldValueAtRoot) {
   Book empty;
 
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("UINT32"),
-                                      StringPiece("\"garbage\"")))
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("UINT32"),
+                                      std::string_view("\"garbage\"")))
       .With(Args<0>(HasObjectLocation("length")));
   ow_->StartObject("")->RenderString("length", "garbage")->EndObject();
   CheckOutput(empty, 0);
@@ -1072,11 +1072,11 @@ TEST_P(ProtoStreamObjectWriterTest, MultipleInvalidFieldValues) {
   Book expected;
   expected.set_title("My Title");
 
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("UINT32"),
-                                      StringPiece("\"-400\"")))
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("UINT32"),
+                                      std::string_view("\"-400\"")))
       .With(Args<0>(HasObjectLocation("length")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("INT64"),
-                                      StringPiece("\"3.14\"")))
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("INT64"),
+                                      std::string_view("\"3.14\"")))
       .With(Args<0>(HasObjectLocation("published")));
   ow_->StartObject("")
       ->RenderString("length", "-400")
@@ -1090,8 +1090,8 @@ TEST_P(ProtoStreamObjectWriterTest, UnnamedFieldAtRoot) {
   Book empty;
 
   EXPECT_CALL(listener_,
-              InvalidName(_, StringPiece(""),
-                          StringPiece("Proto fields must have a name.")))
+              InvalidName(_, std::string_view(""),
+                          std::string_view("Proto fields must have a name.")))
       .With(Args<0>(HasObjectLocation("")));
   ow_->StartObject("")->RenderFloat("", 3.14)->EndObject();
   CheckOutput(empty, 0);
@@ -1103,8 +1103,8 @@ TEST_P(ProtoStreamObjectWriterTest, UnnamedFieldAtAuthor) {
   expected.set_allocated_author(new Author());
 
   EXPECT_CALL(listener_,
-              InvalidName(_, StringPiece(""),
-                          StringPiece("Proto fields must have a name.")))
+              InvalidName(_, std::string_view(""),
+                          std::string_view("Proto fields must have a name.")))
       .With(Args<0>(HasObjectLocation("author")));
   ow_->StartObject("")
       ->StartObject("author")
@@ -1120,8 +1120,8 @@ TEST_P(ProtoStreamObjectWriterTest, UnnamedListAtRoot) {
   expected.set_title("noname");
 
   EXPECT_CALL(listener_,
-              InvalidName(_, StringPiece(""),
-                          StringPiece("Proto fields must have a name.")))
+              InvalidName(_, std::string_view(""),
+                          std::string_view("Proto fields must have a name.")))
       .With(Args<0>(HasObjectLocation("")));
   ow_->StartObject("")
       ->StartList("")
@@ -1137,8 +1137,8 @@ TEST_P(ProtoStreamObjectWriterTest, RootNamedObject) {
 
   EXPECT_CALL(
       listener_,
-      InvalidName(_, StringPiece("oops"),
-                  StringPiece("Root element should not be named.")))
+      InvalidName(_, std::string_view("oops"),
+                  std::string_view("Root element should not be named.")))
       .With(Args<0>(HasObjectLocation("")));
   ow_->StartObject("oops")->RenderString("title", "Annie")->EndObject();
   CheckOutput(expected, 7);
@@ -1149,8 +1149,8 @@ TEST_P(ProtoStreamObjectWriterTest, RootNamedList) {
 
   EXPECT_CALL(
       listener_,
-      InvalidName(_, StringPiece("oops"),
-                  StringPiece("Root element should not be named.")))
+      InvalidName(_, std::string_view("oops"),
+                  std::string_view("Root element should not be named.")))
       .With(Args<0>(HasObjectLocation("")));
   ow_->StartList("oops")->RenderString("", "item")->EndList();
   CheckOutput(empty, 0);
@@ -1160,8 +1160,8 @@ TEST_P(ProtoStreamObjectWriterTest, RootUnnamedField) {
   Book empty;
 
   EXPECT_CALL(listener_,
-              InvalidName(_, StringPiece(""),
-                          StringPiece("Root element must be a message.")))
+              InvalidName(_, std::string_view(""),
+                          std::string_view("Root element must be a message.")))
       .With(Args<0>(HasObjectLocation("")));
   ow_->RenderBool("", true);
   CheckOutput(empty, 0);
@@ -1171,8 +1171,8 @@ TEST_P(ProtoStreamObjectWriterTest, RootNamedField) {
   Book empty;
 
   EXPECT_CALL(listener_,
-              InvalidName(_, StringPiece("oops"),
-                          StringPiece("Root element must be a message.")))
+              InvalidName(_, std::string_view("oops"),
+                          std::string_view("Root element must be a message.")))
       .With(Args<0>(HasObjectLocation("")));
   ow_->RenderBool("oops", true);
   CheckOutput(empty, 0);
@@ -1287,8 +1287,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest,
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Timestamp"),
-          StringPiece("Field 'ts', Invalid time format: "
+          _, std::string_view("type.googleapis.com/shark.Timestamp"),
+          std::string_view("Field 'ts', Invalid time format: "
                       "2016-03-07T15:14:23+")));
 
   ow_->StartObject("")->RenderString("ts", "2016-03-07T15:14:23+")->EndObject();
@@ -1302,8 +1302,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest,
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Timestamp"),
-          StringPiece("Field 'ts', Invalid time format: "
+          _, std::string_view("type.googleapis.com/shark.Timestamp"),
+          std::string_view("Field 'ts', Invalid time format: "
                       "2016-03-07T15:14:23+08-10")));
 
   ow_->StartObject("")
@@ -1319,8 +1319,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest,
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Timestamp"),
-          StringPiece("Field 'ts', Invalid time format: "
+          _, std::string_view("type.googleapis.com/shark.Timestamp"),
+          std::string_view("Field 'ts', Invalid time format: "
                       "2016-03-07T15:14:23+24:10")));
 
   ow_->StartObject("")
@@ -1336,8 +1336,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest,
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Timestamp"),
-          StringPiece("Field 'ts', Invalid time format: "
+          _, std::string_view("type.googleapis.com/shark.Timestamp"),
+          std::string_view("Field 'ts', Invalid time format: "
                       "2016-03-07T15:14:23+04:60")));
 
   ow_->StartObject("")
@@ -1352,8 +1352,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest, InvalidTimestampError1) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Timestamp"),
-          StringPiece("Field 'ts', Invalid time format: ")));
+          _, std::string_view("type.googleapis.com/shark.Timestamp"),
+          std::string_view("Field 'ts', Invalid time format: ")));
 
   ow_->StartObject("")->RenderString("ts", "")->EndObject();
   CheckOutput(timestamp);
@@ -1365,8 +1365,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest, InvalidTimestampError2) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Timestamp"),
-          StringPiece("Field 'ts', Invalid time format: Z")));
+          _, std::string_view("type.googleapis.com/shark.Timestamp"),
+          std::string_view("Field 'ts', Invalid time format: Z")));
 
   ow_->StartObject("")->RenderString("ts", "Z")->EndObject();
   CheckOutput(timestamp);
@@ -1378,8 +1378,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest, InvalidTimestampError3) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Timestamp"),
-          StringPiece("Field 'ts', Invalid time format: "
+          _, std::string_view("type.googleapis.com/shark.Timestamp"),
+          std::string_view("Field 'ts', Invalid time format: "
                       "1970-01-01T00:00:00.ABZ")));
 
   ow_->StartObject("")
@@ -1394,8 +1394,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest, InvalidTimestampError4) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Timestamp"),
-          StringPiece("Field 'ts', Invalid time format: "
+          _, std::string_view("type.googleapis.com/shark.Timestamp"),
+          std::string_view("Field 'ts', Invalid time format: "
                       "-8031-10-18T00:00:00.000Z")));
 
   ow_->StartObject("")
@@ -1410,8 +1410,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest, InvalidTimestampError5) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Timestamp"),
-          StringPiece("Field 'ts', Invalid time format: "
+          _, std::string_view("type.googleapis.com/shark.Timestamp"),
+          std::string_view("Field 'ts', Invalid time format: "
                       "2015-11-23T03:37:35.033155   Z")));
 
   ow_->StartObject("")
@@ -1427,8 +1427,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest, InvalidTimestampError6) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Timestamp"),
-          StringPiece("Field 'ts', Invalid time format: "
+          _, std::string_view("type.googleapis.com/shark.Timestamp"),
+          std::string_view("Field 'ts', Invalid time format: "
                       "2015-11-23T03:37:35.033155 1234Z")));
 
   ow_->StartObject("")
@@ -1444,8 +1444,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest, InvalidTimestampError7) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Timestamp"),
-          StringPiece("Field 'ts', Invalid time format: "
+          _, std::string_view("type.googleapis.com/shark.Timestamp"),
+          std::string_view("Field 'ts', Invalid time format: "
                       "2015-11-23T03:37:35.033abc155Z")));
 
   ow_->StartObject("")
@@ -1461,8 +1461,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest, InvalidTimestampError8) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Timestamp"),
-          StringPiece("Field 'ts', Invalid time format: "
+          _, std::string_view("type.googleapis.com/shark.Timestamp"),
+          std::string_view("Field 'ts', Invalid time format: "
                       "0-12-31T23:59:59.000Z")));
 
   ow_->StartObject("")
@@ -1487,8 +1487,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest, InvalidDurationError1) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Duration"),
-          StringPiece(
+          _, std::string_view("type.googleapis.com/shark.Duration"),
+          std::string_view(
               "Field 'dur', Illegal duration format; duration must "
               "end with 's'")));
 
@@ -1502,8 +1502,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest, InvalidDurationError2) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Duration"),
-          StringPiece(
+          _, std::string_view("type.googleapis.com/shark.Duration"),
+          std::string_view(
               "Field 'dur', Invalid duration format, failed to parse "
               "seconds")));
 
@@ -1517,8 +1517,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest, InvalidDurationError3) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Duration"),
-          StringPiece("Field 'dur', Invalid duration format, failed to "
+          _, std::string_view("type.googleapis.com/shark.Duration"),
+          std::string_view("Field 'dur', Invalid duration format, failed to "
                             "parse nano seconds")));
 
   ow_->StartObject("")->RenderString("dur", "123.DEFs")->EndObject();
@@ -1531,8 +1531,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest, InvalidDurationError4) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Duration"),
-          StringPiece("Field 'dur', Duration value exceeds limits")));
+          _, std::string_view("type.googleapis.com/shark.Duration"),
+          std::string_view("Field 'dur', Duration value exceeds limits")));
 
   ow_->StartObject("")->RenderString("dur", "315576000002s")->EndObject();
   CheckOutput(duration);
@@ -1544,8 +1544,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest, InvalidDurationError5) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Duration"),
-          StringPiece("Field 'dur', Duration value exceeds limits")));
+          _, std::string_view("type.googleapis.com/shark.Duration"),
+          std::string_view("Field 'dur', Duration value exceeds limits")));
 
   ow_->StartObject("")->RenderString("dur", "0.1000000001s")->EndObject();
   CheckOutput(duration);
@@ -1557,8 +1557,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest,
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Timestamp"),
-          StringPiece(
+          _, std::string_view("type.googleapis.com/shark.Timestamp"),
+          std::string_view(
               "Field 'ts', Invalid data type for timestamp, value is 1")))
       .With(Args<0>(HasObjectLocation("ts")));
   ow_->StartObject("")->RenderInt32("ts", 1)->EndObject();
@@ -1571,8 +1571,8 @@ TEST_P(ProtoStreamObjectWriterTimestampDurationTest,
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Duration"),
-          StringPiece(
+          _, std::string_view("type.googleapis.com/shark.Duration"),
+          std::string_view(
               "Field 'dur', Invalid data type for duration, value is 1")))
       .With(Args<0>(HasObjectLocation("dur")));
   ow_->StartObject("")->RenderInt32("dur", 1)->EndObject();
@@ -1631,8 +1631,8 @@ TEST_P(ProtoStreamObjectWriterStructTest, StructRenderSuccess) {
 TEST_P(ProtoStreamObjectWriterStructTest, StructNullInputSuccess) {
   StructType struct_type;
   EXPECT_CALL(listener_,
-              InvalidName(_, StringPiece(""),
-                          StringPiece("Proto fields must have a name.")))
+              InvalidName(_, std::string_view(""),
+                          std::string_view("Proto fields must have a name.")))
       .With(Args<0>(HasObjectLocation("")));
   ow_->StartObject("")->RenderNull("")->EndObject();
   CheckOutput(struct_type);
@@ -1643,8 +1643,8 @@ TEST_P(ProtoStreamObjectWriterStructTest, StructInvalidInputFailure) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.Struct"),
-          StringPiece("true")))
+          _, std::string_view("type.googleapis.com/shark.Struct"),
+          std::string_view("true")))
       .With(Args<0>(HasObjectLocation("object")));
 
   ow_->StartObject("")->RenderBool("object", true)->EndObject();
@@ -1675,8 +1675,8 @@ TEST_P(ProtoStreamObjectWriterStructTest, StructValuePreservesNull) {
 
 TEST_P(ProtoStreamObjectWriterStructTest, SimpleRepeatedStructMapKeyTest) {
   EXPECT_CALL(listener_,
-              InvalidName(_, StringPiece("gBike"),
-                          StringPiece(
+              InvalidName(_, std::string_view("gBike"),
+                          std::string_view(
                               "Repeated map key: 'gBike' is already set.")));
   ow_->StartObject("")
       ->StartObject("object")
@@ -1689,8 +1689,8 @@ TEST_P(ProtoStreamObjectWriterStructTest, SimpleRepeatedStructMapKeyTest) {
 TEST_P(ProtoStreamObjectWriterStructTest, RepeatedStructMapListKeyTest) {
   EXPECT_CALL(
       listener_,
-      InvalidName(_, StringPiece("k1"),
-                  StringPiece("Repeated map key: 'k1' is already set.")));
+      InvalidName(_, std::string_view("k1"),
+                  std::string_view("Repeated map key: 'k1' is already set.")));
   ow_->StartObject("")
       ->StartObject("object")
       ->RenderString("k1", "v1")
@@ -1704,8 +1704,8 @@ TEST_P(ProtoStreamObjectWriterStructTest, RepeatedStructMapListKeyTest) {
 TEST_P(ProtoStreamObjectWriterStructTest, RepeatedStructMapObjectKeyTest) {
   EXPECT_CALL(
       listener_,
-      InvalidName(_, StringPiece("k1"),
-                  StringPiece("Repeated map key: 'k1' is already set.")));
+      InvalidName(_, std::string_view("k1"),
+                  std::string_view("Repeated map key: 'k1' is already set.")));
   ow_->StartObject("")
       ->StartObject("object")
       ->StartObject("k1")
@@ -1807,8 +1807,8 @@ TEST_P(ProtoStreamObjectWriterMapTest, MapShouldNotAcceptList) {
   MapIn mm;
   EXPECT_CALL(
       listener_,
-      InvalidValue(_, StringPiece("Map"),
-                   StringPiece(
+      InvalidValue(_, std::string_view("Map"),
+                   std::string_view(
                        "Cannot bind a list to map for field 'map_input'.")));
   ow_->StartObject("")
       ->StartList("map_input")
@@ -1851,8 +1851,8 @@ TEST_P(ProtoStreamObjectWriterMapTest, MapShouldIgnoreNullValueEntry) {
 TEST_P(ProtoStreamObjectWriterMapTest, RepeatedMapKeyTest) {
   EXPECT_CALL(
       listener_,
-      InvalidName(_, StringPiece("k1"),
-                  StringPiece("Repeated map key: 'k1' is already set.")));
+      InvalidName(_, std::string_view("k1"),
+                  std::string_view("Repeated map key: 'k1' is already set.")));
   ow_->StartObject("")
       ->RenderString("other", "test")
       ->StartObject("map_input")
@@ -2016,7 +2016,7 @@ TEST_P(ProtoStreamObjectWriterAnyTest, TypeUrlAtEnd) {
 }
 
 // Same as TypeUrlAtEnd, but use temporary string values to make sure we don't
-// mistakenly store StringPiece objects pointing to invalid memory.
+// mistakenly store std::string_view objects pointing to invalid memory.
 TEST_P(ProtoStreamObjectWriterAnyTest, TypeUrlAtEndWithTemporaryStrings) {
   Book book;
   book.set_title("C++");
@@ -2085,8 +2085,8 @@ TEST_P(ProtoStreamObjectWriterAnyTest, AnyWithoutTypeUrlFails1) {
 
   EXPECT_CALL(
       listener_,
-      InvalidValue(_, StringPiece("Any"),
-                   StringPiece("Missing @type for any field in "
+      InvalidValue(_, std::string_view("Any"),
+                   std::string_view("Missing @type for any field in "
                                      "proto_util_converter.testing.AnyOut")));
 
   ow_->StartObject("")
@@ -2103,8 +2103,8 @@ TEST_P(ProtoStreamObjectWriterAnyTest, AnyWithoutTypeUrlFails2) {
 
   EXPECT_CALL(
       listener_,
-      InvalidValue(_, StringPiece("Any"),
-                   StringPiece("Missing @type for any field in "
+      InvalidValue(_, std::string_view("Any"),
+                   std::string_view("Missing @type for any field in "
                                      "proto_util_converter.testing.AnyOut")));
 
   ow_->StartObject("")
@@ -2121,8 +2121,8 @@ TEST_P(ProtoStreamObjectWriterAnyTest, AnyWithoutTypeUrlFails3) {
 
   EXPECT_CALL(
       listener_,
-      InvalidValue(_, StringPiece("Any"),
-                   StringPiece("Missing @type for any field in "
+      InvalidValue(_, std::string_view("Any"),
+                   std::string_view("Missing @type for any field in "
                                      "proto_util_converter.testing.AnyOut")));
 
   ow_->StartObject("")
@@ -2139,8 +2139,8 @@ TEST_P(ProtoStreamObjectWriterAnyTest, AnyWithInvalidTypeUrlFails) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("Any"),
-          StringPiece("Invalid type URL, type URLs must be of the form "
+          _, std::string_view("Any"),
+          std::string_view("Invalid type URL, type URLs must be of the form "
                             "'type.googleapis.com/<typename>', got: "
                             "type.other.com/some.Type")));
 
@@ -2157,8 +2157,8 @@ TEST_P(ProtoStreamObjectWriterAnyTest, AnyWithUnknownTypeFails) {
   AnyOut any;
 
   EXPECT_CALL(listener_,
-              InvalidValue(_, StringPiece("Any"),
-                           StringPiece(
+              InvalidValue(_, std::string_view("Any"),
+                           std::string_view(
                                "Invalid type URL, unknown type: some.Type")));
   ow_->StartObject("")
       ->StartObject("any")
@@ -2175,8 +2175,8 @@ TEST_P(ProtoStreamObjectWriterAnyTest, AnyIncorrectInputTypeFails) {
   EXPECT_CALL(
       listener_,
       InvalidValue(_,
-                   StringPiece("type.googleapis.com/shark.Any"),
-                   StringPiece("1")));
+                   std::string_view("type.googleapis.com/shark.Any"),
+                   std::string_view("1")));
   ow_->StartObject("")->RenderInt32("any", 1)->EndObject();
   CheckOutput(any);
 }
@@ -2190,8 +2190,8 @@ TEST_P(ProtoStreamObjectWriterAnyTest, AnyAcceptsNull) {
 }
 
 TEST_P(ProtoStreamObjectWriterAnyTest, AnyWellKnownTypeErrorTest) {
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("Any"),
-                                      StringPiece("Invalid time format: ")));
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("Any"),
+                                      std::string_view("Invalid time format: ")));
 
   AnyOut any;
   shark::Any* any_type = any.mutable_any();
@@ -2302,8 +2302,8 @@ TEST_P(ProtoStreamObjectWriterAnyTest,
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("Any"),
-          StringPiece("Expect a \"value\" field for well-known types.")));
+          _, std::string_view("Any"),
+          std::string_view("Expect a \"value\" field for well-known types.")));
   AnyOut any;
   shark::Any* any_type = any.mutable_any();
   any_type->set_type_url("type.googleapis.com/shark.Value");
@@ -2329,8 +2329,8 @@ TEST_P(ProtoStreamObjectWriterAnyTest, AnyWellKnownTypesNoValueFieldForObject) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("Any"),
-          StringPiece("Expect a \"value\" field for well-known types.")));
+          _, std::string_view("Any"),
+          std::string_view("Expect a \"value\" field for well-known types.")));
   AnyOut any;
   shark::Any* any_type = any.mutable_any();
   any_type->set_type_url("type.googleapis.com/shark.Value");
@@ -2357,8 +2357,8 @@ TEST_P(ProtoStreamObjectWriterAnyTest, AnyWellKnownTypesNoValueFieldForArray) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("Any"),
-          StringPiece("Expect a \"value\" field for well-known types.")));
+          _, std::string_view("Any"),
+          std::string_view("Expect a \"value\" field for well-known types.")));
   AnyOut any;
   shark::Any* any_type = any.mutable_any();
   any_type->set_type_url("type.googleapis.com/shark.Value");
@@ -2384,8 +2384,8 @@ TEST_P(ProtoStreamObjectWriterAnyTest, AnyWellKnownTypesNoValueFieldForArray) {
 // }
 TEST_P(ProtoStreamObjectWriterAnyTest, AnyWellKnownTypesExpectObjectForStruct) {
   EXPECT_CALL(listener_,
-              InvalidValue(_, StringPiece("Any"),
-                           StringPiece("Expect a JSON object.")));
+              InvalidValue(_, std::string_view("Any"),
+                           std::string_view("Expect a JSON object.")));
   AnyOut any;
   shark::Any* any_type = any.mutable_any();
   any_type->set_type_url("type.googleapis.com/shark.Struct");
@@ -2409,8 +2409,8 @@ TEST_P(ProtoStreamObjectWriterAnyTest, AnyWellKnownTypesExpectObjectForStruct) {
 // }
 TEST_P(ProtoStreamObjectWriterAnyTest, AnyWellKnownTypesExpectObjectForAny) {
   EXPECT_CALL(listener_,
-              InvalidValue(_, StringPiece("Any"),
-                           StringPiece("Expect a JSON object.")));
+              InvalidValue(_, std::string_view("Any"),
+                           std::string_view("Expect a JSON object.")));
   AnyOut any;
   shark::Any* any_type = any.mutable_any();
   any_type->set_type_url("type.googleapis.com/shark.Any");
@@ -2669,8 +2669,8 @@ TEST_P(ProtoStreamObjectWriterFieldMaskTest, MoreCloseThanOpenParentheses) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.FieldMask"),
-          StringPiece("Field 'single_mask', Invalid FieldMask 'a(b,c))'. "
+          _, std::string_view("type.googleapis.com/shark.FieldMask"),
+          std::string_view("Field 'single_mask', Invalid FieldMask 'a(b,c))'. "
                             "Cannot find matching '(' for all ')'.")));
 
   ow_->StartObject("");
@@ -2683,8 +2683,8 @@ TEST_P(ProtoStreamObjectWriterFieldMaskTest, MoreOpenThanCloseParentheses) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.FieldMask"),
-          StringPiece(
+          _, std::string_view("type.googleapis.com/shark.FieldMask"),
+          std::string_view(
               "Field 'single_mask', Invalid FieldMask 'a(((b,c)'. Cannot "
               "find matching ')' for all '('.")));
 
@@ -2715,8 +2715,8 @@ TEST_P(ProtoStreamObjectWriterFieldMaskTest,
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.FieldMask"),
-          StringPiece(
+          _, std::string_view("type.googleapis.com/shark.FieldMask"),
+          std::string_view(
               "Field 'single_mask', Invalid FieldMask "
               "'path.to.map[\"key1\"]a,path.to.map[\"key2\"]'. "
               "Map keys should be at the end of a path segment.")));
@@ -2731,8 +2731,8 @@ TEST_P(ProtoStreamObjectWriterFieldMaskTest, MapKeyMustEnd) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.FieldMask"),
-          StringPiece("Field 'single_mask', Invalid FieldMask "
+          _, std::string_view("type.googleapis.com/shark.FieldMask"),
+          std::string_view("Field 'single_mask', Invalid FieldMask "
                             "'path.to.map[\"key1\"'. Map keys should be "
                             "represented as [\"some_key\"].")));
 
@@ -2745,8 +2745,8 @@ TEST_P(ProtoStreamObjectWriterFieldMaskTest, MapKeyMustBeEscapedCorrectly) {
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("type.googleapis.com/shark.FieldMask"),
-          StringPiece("Field 'single_mask', Invalid FieldMask "
+          _, std::string_view("type.googleapis.com/shark.FieldMask"),
+          std::string_view("Field 'single_mask', Invalid FieldMask "
                             "'path.to.map[\"ke\"y1\"]'. Map keys should be "
                             "represented as [\"some_key\"].")));
 
@@ -2826,8 +2826,8 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
   EXPECT_CALL(
       listener_,
       InvalidValue(
-          _, StringPiece("oneof"),
-          StringPiece(
+          _, std::string_view("oneof"),
+          std::string_view(
               "union field 'data' is already set. Cannot set 'intData'")));
 
   ow_->StartObject("");
@@ -2839,8 +2839,8 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
 TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForMessageTypesPrimitiveFirstTest) {
   // Test for setting primitive oneof field first and then message field.
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
-                                      StringPiece(
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("oneof"),
+                                      std::string_view(
                                           "union field 'data' is already set. "
                                           "Cannot set 'messageData'")));
 
@@ -2856,8 +2856,8 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
 TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForMessageTypesMessageFirstTest) {
   // Test for setting message oneof field first and then primitive field.
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
-                                      StringPiece(
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("oneof"),
+                                      std::string_view(
                                           "union field 'data' is already set. "
                                           "Cannot set 'strData'")));
 
@@ -2872,8 +2872,8 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
 
 TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForStructTypesPrimitiveFirstTest) {
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
-                                      StringPiece(
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("oneof"),
+                                      std::string_view(
                                           "union field 'data' is already set. "
                                           "Cannot set 'structData'")));
 
@@ -2888,8 +2888,8 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
 
 TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForStructTypesStructFirstTest) {
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
-                                      StringPiece(
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("oneof"),
+                                      std::string_view(
                                           "union field 'data' is already set. "
                                           "Cannot set 'strData'")));
 
@@ -2904,8 +2904,8 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
 
 TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForStructValueTypesTest) {
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
-                                      StringPiece(
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("oneof"),
+                                      std::string_view(
                                           "union field 'data' is already set. "
                                           "Cannot set 'valueData'")));
 
@@ -2922,8 +2922,8 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
 
 TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForWellKnownTypesPrimitiveFirstTest) {
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
-                                      StringPiece(
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("oneof"),
+                                      std::string_view(
                                           "union field 'data' is already set. "
                                           "Cannot set 'tsData'")));
 
@@ -2936,8 +2936,8 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
 
 TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForWellKnownTypesWktFirstTest) {
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
-                                      StringPiece(
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("oneof"),
+                                      std::string_view(
                                           "union field 'data' is already set. "
                                           "Cannot set 'intData'")));
 
@@ -2950,8 +2950,8 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
 
 TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForWellKnownTypesAndMessageTest) {
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
-                                      StringPiece(
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("oneof"),
+                                      std::string_view(
                                           "union field 'data' is already set. "
                                           "Cannot set 'messageData'")));
 
@@ -2967,8 +2967,8 @@ TEST_P(ProtoStreamObjectWriterOneOfsTest,
 
 TEST_P(ProtoStreamObjectWriterOneOfsTest,
        MultipleOneofsFailForOneofWithinAnyTest) {
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("oneof"),
-                                      StringPiece(
+  EXPECT_CALL(listener_, InvalidValue(_, std::string_view("oneof"),
+                                      std::string_view(
                                           "union field 'data' is already set. "
                                           "Cannot set 'intData'")));
 

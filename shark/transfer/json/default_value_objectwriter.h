@@ -80,41 +80,41 @@ class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
   ~DefaultValueObjectWriter() override;
 
   // ObjectWriter methods.
-  DefaultValueObjectWriter* StartObject(StringPiece name) override;
+  DefaultValueObjectWriter* StartObject(std::string_view name) override;
 
   DefaultValueObjectWriter* EndObject() override;
 
-  DefaultValueObjectWriter* StartList(StringPiece name) override;
+  DefaultValueObjectWriter* StartList(std::string_view name) override;
 
   DefaultValueObjectWriter* EndList() override;
 
-  DefaultValueObjectWriter* RenderBool(StringPiece name,
+  DefaultValueObjectWriter* RenderBool(std::string_view name,
                                        bool value) override;
 
-  DefaultValueObjectWriter* RenderInt32(StringPiece name,
+  DefaultValueObjectWriter* RenderInt32(std::string_view name,
                                         int32_t value) override;
 
-  DefaultValueObjectWriter* RenderUint32(StringPiece name,
+  DefaultValueObjectWriter* RenderUint32(std::string_view name,
                                          uint32_t value) override;
 
-  DefaultValueObjectWriter* RenderInt64(StringPiece name,
+  DefaultValueObjectWriter* RenderInt64(std::string_view name,
                                         int64_t value) override;
 
-  DefaultValueObjectWriter* RenderUint64(StringPiece name,
+  DefaultValueObjectWriter* RenderUint64(std::string_view name,
                                          uint64_t value) override;
 
-  DefaultValueObjectWriter* RenderDouble(StringPiece name,
+  DefaultValueObjectWriter* RenderDouble(std::string_view name,
                                          double value) override;
 
-  DefaultValueObjectWriter* RenderFloat(StringPiece name,
+  DefaultValueObjectWriter* RenderFloat(std::string_view name,
                                         float value) override;
 
-  DefaultValueObjectWriter* RenderString(StringPiece name,
-                                         StringPiece value) override;
-  DefaultValueObjectWriter* RenderBytes(StringPiece name,
-                                        StringPiece value) override;
+  DefaultValueObjectWriter* RenderString(std::string_view name,
+                                         std::string_view value) override;
+  DefaultValueObjectWriter* RenderBytes(std::string_view name,
+                                        std::string_view value) override;
 
-  DefaultValueObjectWriter* RenderNull(StringPiece name) override;
+  DefaultValueObjectWriter* RenderNull(std::string_view name) override;
 
   // Register the callback for scrubbing of fields.
   void RegisterFieldScrubCallBack(FieldScrubCallBack field_scrub_callback);
@@ -159,7 +159,7 @@ class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
     void AddChild(Node* child) { children_.push_back(child); }
 
     // Finds the child given its name.
-    Node* FindChild(StringPiece name);
+    Node* FindChild(std::string_view name);
 
     // Populates children of this Node based on its type. If there are already
     // children created, they will be merged to the result. Caller should pass
@@ -275,7 +275,7 @@ class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
   void WriteRoot();
 
   // Adds or replaces the data_ of a primitive child node.
-  void RenderDataPiece(StringPiece name, const DataPiece& data);
+  void RenderDataPiece(std::string_view name, const DataPiece& data);
 
   // Returns the default enum value as a DataPiece, or the first enum value if
   // there is no default. For proto3, where we cannot specify an explicit

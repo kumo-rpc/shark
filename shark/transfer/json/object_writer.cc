@@ -36,7 +36,7 @@ namespace shark::util::converter {
 
 // static
 void ObjectWriter::RenderDataPieceTo(const DataPiece& data,
-                                     StringPiece name, ObjectWriter* ow) {
+                                     std::string_view name, ObjectWriter* ow) {
   switch (data.type()) {
     case DataPiece::TYPE_INT32: {
       ow->RenderInt32(name, data.ToInt32().value());

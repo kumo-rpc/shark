@@ -43,14 +43,14 @@
 
 namespace shark::util::converter {
 
-typedef std::function<std::string(StringPiece)> ConverterCallback;
-typedef std::function<util::Status(StringPiece)> PathSinkCallback;
+typedef std::function<std::string(std::string_view)> ConverterCallback;
+typedef std::function<util::Status(std::string_view)> PathSinkCallback;
 
 // Applies a 'converter' to each segment of a FieldMask path and returns the
 // result. Quoted strings in the 'path' are copied to the output as-is without
 // converting their content. Escaping is supported within quoted strings.
 // For example, "ab\"_c" will be returned as "ab\"_c" without any changes.
-std::string ConvertFieldMaskPath(const StringPiece path,
+std::string ConvertFieldMaskPath(const std::string_view path,
                                  ConverterCallback converter);
 
 // Decodes a compact list of FieldMasks. For example, "a.b,a.c.d,a.c.e" will be
@@ -59,7 +59,7 @@ std::string ConvertFieldMaskPath(const StringPiece path,
 // resulting path.
 // Note that we also support Apiary style FieldMask form. The above example in
 // the Apiary style will look like "a.b,a.c(d,e)".
-util::Status DecodeCompactFieldMaskPaths(StringPiece paths,
+util::Status DecodeCompactFieldMaskPaths(std::string_view paths,
                                          PathSinkCallback path_sink);
 
 }  // namespace shark::util::converter
