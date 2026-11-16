@@ -327,7 +327,7 @@ namespace shark {
         friend class FileDescriptor;
         friend class Descriptor;
         friend class OneofDescriptor;
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(FieldDescriptor);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(FieldDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(FieldDescriptor, 72);

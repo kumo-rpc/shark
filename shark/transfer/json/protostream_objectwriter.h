@@ -342,7 +342,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
     // StartList or EndList calls to underlying ObjectWriter.
     bool is_list_;
 
-    GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(Item);
+    KUMO_DISALLOW_IMPLICIT_CONSTRUCTORS(Item);
   };
 
   ProtoStreamObjectWriter(const TypeInfo* typeinfo,
@@ -436,7 +436,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
   // Reference to the options that control this class's behavior.
   const ProtoStreamObjectWriter::Options options_;
 
-  GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(ProtoStreamObjectWriter);
+  KUMO_DISALLOW_IMPLICIT_CONSTRUCTORS(ProtoStreamObjectWriter);
 };
 
 }  // namespace shark::util::converter

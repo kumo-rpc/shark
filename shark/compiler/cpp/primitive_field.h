@@ -65,7 +65,7 @@ namespace shark::compiler::cpp {
         void GenerateCopyAggregateInitializer(io::Printer* printer) const override;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(PrimitiveFieldGenerator);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(PrimitiveFieldGenerator);
     };
 
     class PrimitiveOneofFieldGenerator : public PrimitiveFieldGenerator {
@@ -81,7 +81,7 @@ namespace shark::compiler::cpp {
         void GenerateConstructorCode(io::Printer* printer) const override;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(PrimitiveOneofFieldGenerator);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(PrimitiveOneofFieldGenerator);
     };
 
     class RepeatedPrimitiveFieldGenerator : public FieldGenerator {
@@ -111,7 +111,7 @@ namespace shark::compiler::cpp {
         void GenerateCopyAggregateInitializer(io::Printer* printer) const override;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(RepeatedPrimitiveFieldGenerator);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(RepeatedPrimitiveFieldGenerator);
     };
 
 } // namespace shark::compiler::cpp

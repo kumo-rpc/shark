@@ -79,7 +79,7 @@ class SHARK_EXPORT TypeInfo {
   static TypeInfo* NewTypeInfo(TypeResolver* type_resolver);
 
  private:
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(TypeInfo);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(TypeInfo);
 };
 
 }  // namespace shark::util::converter

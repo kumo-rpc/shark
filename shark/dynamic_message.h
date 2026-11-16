@@ -136,7 +136,7 @@ class SHARK_EXPORT DynamicMessageFactory : public MessageFactory {
   friend class DynamicMessage;
   const Message* GetPrototypeNoLock(const Descriptor* type);
 
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(DynamicMessageFactory);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(DynamicMessageFactory);
 };
 
 // Helper for computing a sorted list of map entries via reflection.

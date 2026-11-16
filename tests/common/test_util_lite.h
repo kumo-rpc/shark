@@ -90,7 +90,7 @@ class TestUtilLite {
       const unittest::TestPackedExtensionsLite& message);
 
  private:
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(TestUtilLite);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(TestUtilLite);
 };
 
 }  // namespace shark

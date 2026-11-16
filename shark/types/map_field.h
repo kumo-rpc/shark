@@ -547,7 +547,7 @@ namespace shark {
             // Swaps state_ with another MapFieldBase
             void SwapState(MapFieldBase* other);
 
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(MapFieldBase);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(MapFieldBase);
         };
 
         // This class provides common Map Reflection implementations for generated
@@ -592,7 +592,7 @@ namespace shark {
             void IncreaseIterator(MapIterator* map_iter) const override;
 
             virtual void SetMapIteratorValue(MapIterator* map_iter) const = 0;
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(TypeDefinedMapFieldBase);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(TypeDefinedMapFieldBase);
         };
 
         // This class provides access to map field using generated api. It is used for
@@ -702,7 +702,7 @@ namespace shark {
 
             friend class ::SHARK_NAMESPACE_ID::Arena;
             friend class MapFieldStateTest; // For testing, it needs raw access to impl_
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(MapField);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(MapField);
         };
 
         template <typename Derived, typename Key, typename T,
@@ -762,7 +762,7 @@ namespace shark {
             void SyncMapWithRepeatedFieldNoLock() const override;
             size_t SpaceUsedExcludingSelfNoLock() const override;
             void SetMapIteratorValue(MapIterator* map_iter) const override;
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(DynamicMapField);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(DynamicMapField);
         };
 
     } // namespace internal

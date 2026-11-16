@@ -90,7 +90,7 @@ namespace shark::compiler::cpp {
     private:
         bool opensource_runtime_ = true;
         std::string runtime_include_base_;
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(CppGenerator);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(CppGenerator);
     };
 
 } // namespace shark::compiler::cpp

@@ -86,7 +86,7 @@ class SHARK_EXPORT ByteSink {
   virtual void Flush();
 
  private:
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ByteSink);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(ByteSink);
 };
 
 // An abstract interface for an object that produces a fixed-size sequence of
@@ -139,7 +139,7 @@ class SHARK_EXPORT ByteSource {
   virtual void CopyTo(ByteSink* sink, size_t n);
 
  private:
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ByteSource);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(ByteSource);
 };
 
 //
@@ -170,7 +170,7 @@ class SHARK_EXPORT UncheckedArrayByteSink : public ByteSink {
 
  private:
   char* dest_;
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(UncheckedArrayByteSink);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(UncheckedArrayByteSink);
 };
 
 // Implementation of ByteSink that writes to a sized byte array. This sink will
@@ -202,7 +202,7 @@ class SHARK_EXPORT CheckedArrayByteSink : public ByteSink {
   const size_t capacity_;
   size_t size_;
   bool overflowed_;
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(CheckedArrayByteSink);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(CheckedArrayByteSink);
 };
 
 // Implementation of ByteSink that allocates an internal buffer (a char array)
@@ -238,7 +238,7 @@ class SHARK_EXPORT GrowingArrayByteSink : public strings::ByteSink {
   size_t capacity_;
   char* buf_;
   size_t size_;
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(GrowingArrayByteSink);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(GrowingArrayByteSink);
 };
 
 // Implementation of ByteSink that appends to the given string.
@@ -258,7 +258,7 @@ class SHARK_EXPORT StringByteSink : public ByteSink {
 
  private:
   std::string* dest_;
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(StringByteSink);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(StringByteSink);
 };
 
 // Implementation of ByteSink that discards all data.
@@ -274,7 +274,7 @@ class SHARK_EXPORT NullByteSink : public ByteSink {
   void Append(const char* /*data*/, size_t /*n*/) override {}
 
  private:
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(NullByteSink);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(NullByteSink);
 };
 
 //
@@ -300,7 +300,7 @@ class SHARK_EXPORT ArrayByteSource : public ByteSource {
 
  private:
   std::string_view   input_;
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ArrayByteSource);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(ArrayByteSource);
 };
 
 // Implementation of ByteSource that wraps another ByteSource, limiting the

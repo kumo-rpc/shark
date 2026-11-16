@@ -77,7 +77,7 @@ class SHARK_EXPORT ReflectionOps {
 
  private:
   // All methods are static.  No need to construct.
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ReflectionOps);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(ReflectionOps);
 };
 
 }  // namespace shark::internal

@@ -236,7 +236,7 @@ class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
     FieldScrubCallBack field_scrub_callback_;
 
    private:
-    SHARK_DISALLOW_EVIL_CONSTRUCTORS(Node);
+    KUMO_DISALLOW_COPY_AND_ASSIGN(Node);
   };
 
   // Creates a new Node and returns it. Caller owns memory of returned object.
@@ -314,7 +314,7 @@ class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
 
   ObjectWriter* ow_;
 
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(DefaultValueObjectWriter);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(DefaultValueObjectWriter);
 };
 
 }  // namespace shark::util::converter

@@ -182,7 +182,7 @@ namespace shark {
             ) { }
 
         private:
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(ErrorCollector);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(ErrorCollector);
         };
 
         // Convert the FileDescriptorProto to real descriptors and place them in
@@ -387,7 +387,7 @@ namespace shark {
         // unused imports are treated as errors (and as warnings when false).
         std::map<std::string, bool> unused_import_track_files_;
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(DescriptorPool);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(DescriptorPool);
     };
 
 } // namespace shark

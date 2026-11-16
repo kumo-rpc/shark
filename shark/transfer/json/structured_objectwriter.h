@@ -94,7 +94,7 @@ class SHARK_EXPORT StructuredObjectWriter : public ObjectWriter {
     // The root Element has nullptr parent_ and a level_ of 0.
     const int level_;
 
-    GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(BaseElement);
+    KUMO_DISALLOW_IMPLICIT_CONSTRUCTORS(BaseElement);
   };
 
   StructuredObjectWriter() {}
@@ -104,7 +104,7 @@ class SHARK_EXPORT StructuredObjectWriter : public ObjectWriter {
 
  private:
   // Do not add any data members to this class.
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(StructuredObjectWriter);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(StructuredObjectWriter);
 };
 
 }  // namespace shark::util::converter

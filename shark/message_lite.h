@@ -484,7 +484,7 @@ namespace shark {
 
         bool MergeFromImpl(io::CodedInputStream* input, ParseFlags parse_flags);
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(MessageLite);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(MessageLite);
     };
 
     namespace internal {

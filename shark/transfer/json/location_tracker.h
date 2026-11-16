@@ -53,7 +53,7 @@ class SHARK_EXPORT LocationTrackerInterface {
 
  private:
   // Please do not add any data members to this class.
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(LocationTrackerInterface);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(LocationTrackerInterface);
 };
 
 }  // namespace shark::util::converter

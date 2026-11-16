@@ -88,7 +88,7 @@ namespace shark::io {
         int last_returned_size_; // How many bytes we returned last time Next()
                                  // was called (used for error checking only).
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ArrayInputStream);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(ArrayInputStream);
     };
 
     // ===================================================================
@@ -121,7 +121,7 @@ namespace shark::io {
         int last_returned_size_; // How many bytes we returned last time Next()
                                  // was called (used for error checking only).
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ArrayOutputStream);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(ArrayOutputStream);
     };
 
     // ===================================================================
@@ -152,7 +152,7 @@ namespace shark::io {
 
         std::string* target_;
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(StringOutputStream);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(StringOutputStream);
     };
 
     // Note:  There is no StringInputStream.  Instead, just create an
@@ -250,7 +250,7 @@ namespace shark::io {
         // 0 <= backup_bytes_ <= buffer_used_
         int backup_bytes_;
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(CopyingInputStreamAdaptor);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(CopyingInputStreamAdaptor);
     };
 
     // ===================================================================
@@ -337,7 +337,7 @@ namespace shark::io {
         // 0 <= buffer_used_ <= buffer_size_.
         int buffer_used_;
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(CopyingOutputStreamAdaptor);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(CopyingOutputStreamAdaptor);
     };
 
     // ===================================================================
@@ -361,7 +361,7 @@ namespace shark::io {
         int64_t limit_; // Decreases as we go, becomes negative if we overshoot.
         int64_t prior_bytes_read_; // Bytes read on underlying stream at construction
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(LimitingInputStream);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(LimitingInputStream);
     };
 
     // ===================================================================

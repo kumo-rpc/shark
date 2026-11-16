@@ -23,15 +23,6 @@
 namespace shark {
 
 
-    inline int hex_digit_to_int(char c) {
-        /* Assume ASCII. */
-        int x = static_cast<unsigned char>(c);
-        if (x > '9') {
-            x += 9;
-        }
-        return x & 0xf;
-    }
-
 
     std::string ToCamelCase(const std::string& input, bool lower_first);
 

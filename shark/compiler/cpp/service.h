@@ -110,7 +110,7 @@ namespace shark {
                 int index_in_metadata_;
 
                 friend class FileGenerator;
-                SHARK_DISALLOW_EVIL_CONSTRUCTORS(ServiceGenerator);
+                KUMO_DISALLOW_COPY_AND_ASSIGN(ServiceGenerator);
             };
 
         } // namespace cpp

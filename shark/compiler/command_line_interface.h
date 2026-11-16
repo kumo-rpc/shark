@@ -448,7 +448,7 @@ namespace shark {
             // When using --encode, this will be passed to SetSerializationDeterministic.
             bool deterministic_output_ = false;
 
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(CommandLineInterface);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(CommandLineInterface);
         };
 
     } // namespace compiler

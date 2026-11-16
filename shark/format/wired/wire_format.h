@@ -296,7 +296,7 @@ namespace shark::internal {
             const Reflection* reflection,
             const FieldDescriptor* field);
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(WireFormat);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(WireFormat);
     };
 
     // Subclass of FieldSkipper which saves skipped fields to an UnknownFieldSet.

@@ -719,7 +719,7 @@ namespace shark::internal {
         static void WriteSubMessageMaybeToArray(int size, const MessageLite& value,
             io::CodedOutputStream* output);
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(WireFormatLite);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(WireFormatLite);
     };
 
     // A class which deals with unknown values.  The default implementation just

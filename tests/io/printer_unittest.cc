@@ -52,7 +52,7 @@ namespace shark::io {
 TEST(Printer, EmptyPrinter) {
   char buffer[8192];
   const int block_size = 100;
-  ArrayOutputStream output(buffer, GOOGLE_ARRAYSIZE(buffer), block_size);
+  ArrayOutputStream output(buffer, KUMO_ARRAYSIZE(buffer), block_size);
   Printer printer(&output, '\0');
   EXPECT_TRUE(!printer.failed());
 }

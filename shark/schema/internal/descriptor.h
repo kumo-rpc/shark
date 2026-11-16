@@ -381,7 +381,7 @@ namespace shark {
         friend class OneofDescriptor;
         friend class MethodDescriptor;
         friend class FileDescriptor;
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(Descriptor);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(Descriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(Descriptor, 136);

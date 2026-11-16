@@ -300,7 +300,7 @@ class SHARK_EXPORT MessageDifferencer {
         const std::vector<SpecificField>& /* field_path */) {}
 
    private:
-    SHARK_DISALLOW_EVIL_CONSTRUCTORS(Reporter);
+    KUMO_DISALLOW_COPY_AND_ASSIGN(Reporter);
   };
 
   // MapKeyComparator is used to determine if two elements have the same key
@@ -318,7 +318,7 @@ class SHARK_EXPORT MessageDifferencer {
     }
 
    private:
-    SHARK_DISALLOW_EVIL_CONSTRUCTORS(MapKeyComparator);
+    KUMO_DISALLOW_COPY_AND_ASSIGN(MapKeyComparator);
   };
 
   // Abstract base class from which all IgnoreCriteria derive.
@@ -713,7 +713,7 @@ class SHARK_EXPORT MessageDifferencer {
     const Message* message1_;
     const Message* message2_;
     MessageDifferencer::UnpackAnyField unpack_any_field_;
-    SHARK_DISALLOW_EVIL_CONSTRUCTORS(StreamReporter);
+    KUMO_DISALLOW_COPY_AND_ASSIGN(StreamReporter);
   };
 
  private:
@@ -950,7 +950,7 @@ class SHARK_EXPORT MessageDifferencer {
       match_indices_for_smart_list_callback_;
 
   MessageDifferencer::UnpackAnyField unpack_any_field_;
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(MessageDifferencer);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(MessageDifferencer);
 };
 
 // This class provides extra information to the FieldComparator::Compare

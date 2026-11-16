@@ -83,7 +83,7 @@ class JsonEscaping {
   static void Escape(std::string_view input, strings::ByteSink* output);
 
  private:
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(JsonEscaping);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(JsonEscaping);
 };
 
 }  // namespace shark::util::converter

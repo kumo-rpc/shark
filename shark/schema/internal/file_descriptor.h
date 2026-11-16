@@ -216,7 +216,7 @@ namespace shark {
         friend class EnumValueDescriptor;
         friend class MethodDescriptor;
         friend class ServiceDescriptor;
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(FileDescriptor);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(FileDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(FileDescriptor, 144);

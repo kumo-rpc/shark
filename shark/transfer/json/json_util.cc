@@ -169,7 +169,7 @@ class StatusErrorListener : public converter::ErrorListener {
     return loc_string;
   }
 
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(StatusErrorListener);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(StatusErrorListener);
 };
 }  // namespace
 

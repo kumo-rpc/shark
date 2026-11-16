@@ -345,7 +345,7 @@ void DeleteWellKnownTypes() { delete well_known_types_; }
 
 void InitWellKnownTypes() {
   well_known_types_ = new std::set<std::string>;
-  for (int i = 0; i < GOOGLE_ARRAYSIZE(well_known_types_name_array_); ++i) {
+  for (int i = 0; i < KUMO_ARRAYSIZE(well_known_types_name_array_); ++i) {
     well_known_types_->insert(well_known_types_name_array_[i]);
   }
   shark::internal::OnShutdown(&DeleteWellKnownTypes);

@@ -102,7 +102,7 @@ namespace shark {
         friend class DescriptorBuilder;
         friend class FileDescriptor;
         friend class MethodDescriptor;
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ServiceDescriptor);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(ServiceDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(ServiceDescriptor, 48);
@@ -191,7 +191,7 @@ namespace shark {
         MethodDescriptor() { }
         friend class DescriptorBuilder;
         friend class ServiceDescriptor;
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(MethodDescriptor);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(MethodDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(MethodDescriptor, 64);

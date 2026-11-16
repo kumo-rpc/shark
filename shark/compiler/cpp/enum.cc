@@ -45,9 +45,9 @@
 namespace shark::compiler::cpp {
 
     namespace {
-        // The GOOGLE_ARRAYSIZE constant is the max enum value plus 1. If the max enum value
-        // is kint32max, GOOGLE_ARRAYSIZE will overflow. In such cases we should omit the
-        // generation of the GOOGLE_ARRAYSIZE constant.
+        // The generated array-size constant is the max enum value plus 1. If the max
+        // enum value is kint32max, that constant will overflow. In such cases we
+        // should omit generating it.
         bool ShouldGenerateArraySize(const EnumDescriptor* descriptor) {
             int32_t max_value = descriptor->value(0)->number();
             for (int i = 0; i < descriptor->value_count(); i++) {

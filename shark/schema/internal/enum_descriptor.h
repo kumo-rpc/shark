@@ -190,7 +190,7 @@ namespace shark {
         friend class FileDescriptor;
         friend class DescriptorPool;
         friend class Reflection;
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(EnumDescriptor);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(EnumDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(EnumDescriptor, 72);
@@ -276,7 +276,7 @@ namespace shark {
         friend class DescriptorPool;
         friend class FileDescriptorTables;
         friend class Reflection;
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(EnumValueDescriptor);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(EnumValueDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(EnumValueDescriptor, 32);

@@ -441,7 +441,7 @@ namespace shark {
             // any aggregate option values we encounter.
             DynamicMessageFactory dynamic_factory_;
 
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(OptionInterpreter);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(OptionInterpreter);
         };
 
         // Work-around for broken compilers:  According to the C++ standard,

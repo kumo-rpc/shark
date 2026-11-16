@@ -30,7 +30,7 @@
 
 #pragma once
 
-#include <shark/stubs/macros.h>
+#include <turbo/macros/utility/basic.h>
 #include <shark/stubs/port.h>
 #include <turbo/status/status.h>
 #include <string_view>

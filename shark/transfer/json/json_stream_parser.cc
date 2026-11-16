@@ -46,7 +46,7 @@
 #include <shark/transfer/json/json_escaping.h>
 #include <turbo/strings/match.h>
 #include <turbo/strings/ascii.h>
-#include <shark/stubs/ascii.h>
+#include <turbo/unicode/api/ascii.h>
 #include <turbo/unicode/api/utf8.h>
 #include <turbo/unicode/api/utf8_for_code_point.h>
 
@@ -493,7 +493,7 @@ turbo::Status JsonStreamParser::ParseUnicodeEscape() {
       return ReportFailure("Invalid escape sequence.",
                            ParseErrorType::INVALID_ESCAPE_SEQUENCE);
     }
-    code = (code << 4) + hex_digit_to_int(p_.data()[i]);
+    code = (code << 4) + turbo::hex_digit_to_int(p_.data()[i]);
   }
   if (code >= JsonEscaping::kMinHighSurrogate &&
       code <= JsonEscaping::kMaxHighSurrogate) {
@@ -514,7 +514,7 @@ turbo::Status JsonStreamParser::ParseUnicodeEscape() {
           return ReportFailure("Invalid escape sequence.",
                                ParseErrorType::INVALID_ESCAPE_SEQUENCE);
         }
-        low_code = (low_code << 4) + hex_digit_to_int(p_.data()[i]);
+        low_code = (low_code << 4) + turbo::hex_digit_to_int(p_.data()[i]);
       }
       if (low_code >= JsonEscaping::kMinLowSurrogate &&
           low_code <= JsonEscaping::kMaxLowSurrogate) {

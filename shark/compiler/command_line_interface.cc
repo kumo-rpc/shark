@@ -34,8 +34,6 @@
 
 #include <shark/compiler/command_line_interface.h>
 
-#include <shark/stubs/platform_macros.h>
-
 #include <stdio.h>
 #include <sys/types.h>
 #ifdef major

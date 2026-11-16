@@ -69,7 +69,7 @@ class SHARK_EXPORT ErrorListener {
 
  private:
   // Do not add any data members to this class.
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ErrorListener);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(ErrorListener);
 };
 
 // An error listener that ignores all errors.
@@ -90,7 +90,7 @@ class SHARK_EXPORT NoopErrorListener : public ErrorListener {
                     std::string_view /* missing_name */) override {}
 
  private:
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(NoopErrorListener);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(NoopErrorListener);
 };
 
 

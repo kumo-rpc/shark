@@ -201,7 +201,7 @@ class MessageDifferencer::MultipleFieldsMapKeyComparator
   }
   MessageDifferencer* message_differencer_;
   std::vector<std::vector<const FieldDescriptor*> > key_field_paths_;
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(MultipleFieldsMapKeyComparator);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(MultipleFieldsMapKeyComparator);
 };
 
 // Preserve the order when treating repeated field as SMART_LIST. The current
@@ -1699,7 +1699,7 @@ class MaximumMatcher {
   std::map<std::pair<int, int>, bool> cached_match_results_;
   std::vector<int>* match_list1_;
   std::vector<int>* match_list2_;
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(MaximumMatcher);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(MaximumMatcher);
 };
 
 MaximumMatcher::MaximumMatcher(int count1, int count2,

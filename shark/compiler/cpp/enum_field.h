@@ -64,7 +64,7 @@ namespace shark::compiler::cpp {
         void GenerateCopyAggregateInitializer(io::Printer* printer) const override;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(EnumFieldGenerator);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(EnumFieldGenerator);
     };
 
     class EnumOneofFieldGenerator : public EnumFieldGenerator {
@@ -80,7 +80,7 @@ namespace shark::compiler::cpp {
         void GenerateConstructorCode(io::Printer* printer) const override;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(EnumOneofFieldGenerator);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(EnumOneofFieldGenerator);
     };
 
     class RepeatedEnumFieldGenerator : public FieldGenerator {
@@ -110,7 +110,7 @@ namespace shark::compiler::cpp {
         void GenerateCopyAggregateInitializer(io::Printer* printer) const override;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(RepeatedEnumFieldGenerator);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(RepeatedEnumFieldGenerator);
     };
 
 } // namespace shark::compiler::cpp

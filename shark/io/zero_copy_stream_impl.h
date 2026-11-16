@@ -120,13 +120,13 @@ namespace shark::io {
             // doesn't support seeking and won't try again.
             bool previous_seek_failed_;
 
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(CopyingFileInputStream);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(CopyingFileInputStream);
         };
 
         CopyingFileInputStream copying_input_;
         CopyingInputStreamAdaptor impl_;
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(FileInputStream);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(FileInputStream);
     };
 
     // ===================================================================
@@ -190,12 +190,12 @@ namespace shark::io {
             // The errno of the I/O error, if one has occurred.  Otherwise, zero.
             int errno_;
 
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(CopyingFileOutputStream);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(CopyingFileOutputStream);
         };
 
         CopyingFileOutputStream copying_output_;
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(FileOutputStream);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(FileOutputStream);
     };
 
     // ===================================================================
@@ -234,13 +234,13 @@ namespace shark::io {
             // The stream.
             std::istream* input_;
 
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(CopyingIstreamInputStream);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(CopyingIstreamInputStream);
         };
 
         CopyingIstreamInputStream copying_input_;
         CopyingInputStreamAdaptor impl_;
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(IstreamInputStream);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(IstreamInputStream);
     };
 
     // ===================================================================
@@ -278,13 +278,13 @@ namespace shark::io {
             // The stream.
             std::ostream* output_;
 
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(CopyingOstreamOutputStream);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(CopyingOstreamOutputStream);
         };
 
         CopyingOstreamOutputStream copying_output_;
         CopyingOutputStreamAdaptor impl_;
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(OstreamOutputStream);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(OstreamOutputStream);
     };
 
     // ===================================================================
@@ -317,7 +317,7 @@ namespace shark::io {
         int stream_count_;
         int64_t bytes_retired_; // Bytes read from previous streams.
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ConcatenatingInputStream);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(ConcatenatingInputStream);
     };
 
     // ===================================================================

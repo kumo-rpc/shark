@@ -136,11 +136,11 @@ namespace shark::compiler::cpp {
             "annotate_clear",
             "annotate_add_mutable",
         };
-        for (size_t i = 0; i < GOOGLE_ARRAYSIZE(kAccessorsAnnotations); ++i) {
+        for (size_t i = 0; i < KUMO_ARRAYSIZE(kAccessorsAnnotations); ++i) {
             (*variables)[kAccessorsAnnotations[i]] = "";
         }
         if (options.annotate_accessor) {
-            for (size_t i = 0; i < GOOGLE_ARRAYSIZE(kAccessorsAnnotations); ++i) {
+            for (size_t i = 0; i < KUMO_ARRAYSIZE(kAccessorsAnnotations); ++i) {
                 (*variables)[kAccessorsAnnotations[i]] = turbo::str_cat(
                     "  ", FieldName(descriptor), "_AccessedNoStrip = true;\n");
             }

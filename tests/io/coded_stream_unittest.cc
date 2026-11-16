@@ -67,7 +67,7 @@ namespace {
 // run multiple times, once for each item in some input array.  TEST_1D
 // tests all cases in a single input array.  TEST_2D tests all
 // combinations of cases from two arrays.  The arrays must be statically
-// defined such that the GOOGLE_ARRAYSIZE() macro works on them.  Example:
+// defined such that the KUMO_ARRAYSIZE() macro works on them.  Example:
 //
 // int kCases[] = {1, 2, 3, 4}
 // TEST_1D(MyFixture, MyTest, kCases) {
@@ -90,7 +90,7 @@ namespace {
   };                                                              \
                                                                   \
   TEST_F(FIXTURE##_##NAME##_DD, NAME) {                           \
-    for (size_t i = 0; i < GOOGLE_ARRAYSIZE(CASES); i++) {               \
+    for (size_t i = 0; i < KUMO_ARRAYSIZE(CASES); i++) {               \
       SCOPED_TRACE(testing::Message()                             \
                    << #CASES " case #" << i << ": " << CASES[i]); \
       DoSingleCase(CASES[i]);                                     \
@@ -109,8 +109,8 @@ namespace {
   };                                                                        \
                                                                             \
   TEST_F(FIXTURE##_##NAME##_DD, NAME) {                                     \
-    for (size_t i = 0; i < GOOGLE_ARRAYSIZE(CASES1); i++) {                        \
-      for (size_t j = 0; j < GOOGLE_ARRAYSIZE(CASES2); j++) {                      \
+    for (size_t i = 0; i < KUMO_ARRAYSIZE(CASES1); i++) {                        \
+      for (size_t j = 0; j < KUMO_ARRAYSIZE(CASES2); j++) {                      \
         SCOPED_TRACE(testing::Message()                                     \
                      << #CASES1 " case #" << i << ": " << CASES1[i] << ", " \
                      << #CASES2 " case #" << j << ": " << CASES2[j]);       \

@@ -80,7 +80,7 @@ namespace shark::io {
             const std::string& /* message */) { }
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ErrorCollector);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(ErrorCollector);
     };
 
     // This class converts a stream of raw text into a stream of tokens for
@@ -272,7 +272,7 @@ namespace shark::io {
 
         // -----------------------------------------------------------------
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(Tokenizer);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(Tokenizer);
 
         Token current_; // Returned by current().
         Token previous_; // Returned by previous().

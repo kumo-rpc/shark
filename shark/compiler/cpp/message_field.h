@@ -79,7 +79,7 @@ namespace shark::compiler::cpp {
         const bool has_required_fields_;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(MessageFieldGenerator);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(MessageFieldGenerator);
     };
 
     class MessageOneofFieldGenerator : public MessageFieldGenerator {
@@ -104,7 +104,7 @@ namespace shark::compiler::cpp {
         void GenerateIsInitialized(io::Printer* printer) const override;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(MessageOneofFieldGenerator);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(MessageOneofFieldGenerator);
     };
 
     class RepeatedMessageFieldGenerator : public FieldGenerator {
@@ -133,7 +133,7 @@ namespace shark::compiler::cpp {
         const bool implicit_weak_field_;
         const bool has_required_fields_;
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(RepeatedMessageFieldGenerator);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(RepeatedMessageFieldGenerator);
     };
 
 } // namespace shark::compiler::cpp

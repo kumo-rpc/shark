@@ -242,7 +242,7 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
     // incoming messages so no more than one oneof is set.
     std::vector<bool> oneof_indices_;
 
-    GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(ProtoElement);
+    KUMO_DISALLOW_IMPLICIT_CONSTRUCTORS(ProtoElement);
   };
 
   // Container for inserting 'size' information at the 'pos' position.
@@ -372,7 +372,7 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
   int invalid_depth_;
   std::unique_ptr<LocationTrackerInterface> tracker_;
 
-  GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(ProtoWriter);
+  KUMO_DISALLOW_IMPLICIT_CONSTRUCTORS(ProtoWriter);
 };
 
 }  // namespace shark::util::converter

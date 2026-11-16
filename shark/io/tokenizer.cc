@@ -99,6 +99,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/stl_util.h>
 #include <turbo/format/str_format.h>
+#include <turbo/bits/endian.h>
 #include <turbo/strings/charconv.h>
 #include <turbo/strings/escaping.h>
 
@@ -1299,7 +1300,7 @@ namespace shark {
                 turbo::str_append_sprintf(output, "\\U%08x", code_point);
                 return;
             }
-            tmp = ghtonl(tmp);
+            tmp = turbo::ghtonl(tmp);
             output->append(reinterpret_cast<const char*>(&tmp) + sizeof(tmp) - len, len);
         }
 

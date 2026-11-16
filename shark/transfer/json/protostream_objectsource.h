@@ -311,7 +311,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // Maximum allowed recursion depth.
   int max_recursion_depth_;
 
-  GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(ProtoStreamObjectSource);
+  KUMO_DISALLOW_IMPLICIT_CONSTRUCTORS(ProtoStreamObjectSource);
 };
 
 }  // namespace shark::util::converter

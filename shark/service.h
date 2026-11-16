@@ -190,7 +190,7 @@ namespace shark {
             const MethodDescriptor* method) const = 0;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(Service);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(Service);
     };
 
     // An RpcController mediates a single method call.  The primary purpose of
@@ -256,7 +256,7 @@ namespace shark {
         virtual void NotifyOnCancel(Closure* callback) = 0;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(RpcController);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(RpcController);
     };
 
     // Abstract interface for an RPC channel.  An RpcChannel represents a
@@ -282,7 +282,7 @@ namespace shark {
             Message* response, Closure* done) = 0;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(RpcChannel);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(RpcChannel);
     };
 
 } // namespace shark

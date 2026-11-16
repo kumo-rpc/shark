@@ -548,7 +548,7 @@ namespace shark {
             // ConsumeEndOfDeclaration() is called.
             std::vector<std::string> upcoming_detached_comments_;
 
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(NParser);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(NParser);
         };
 
         // A table mapping (descriptor, ErrorLocation) pairs -- as reported by

@@ -120,7 +120,7 @@ namespace shark {
             virtual bool HasGenerateAll() const { return true; }
 
         private:
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(CodeGenerator);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(CodeGenerator);
         };
 
         // CodeGenerators generate one or more files in a given directory.  This
@@ -176,7 +176,7 @@ namespace shark {
             virtual void GetCompilerVersion(Version* version) const;
 
         private:
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(GeneratorContext);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(GeneratorContext);
         };
 
         // The type GeneratorContext was once called OutputDirectory. This typedef

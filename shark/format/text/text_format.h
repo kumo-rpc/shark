@@ -166,7 +166,7 @@ namespace shark {
                 BaseTextGenerator* generator) const;
 
         private:
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(FastFieldValuePrinter);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(FastFieldValuePrinter);
         };
 
         class SHARK_EXPORT MessagePrinter {
@@ -177,7 +177,7 @@ namespace shark {
                 BaseTextGenerator* generator) const = 0;
 
         private:
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(MessagePrinter);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(MessagePrinter);
         };
 
         // Interface that Printers or Parsers can use to find extensions, or types
@@ -634,7 +634,7 @@ namespace shark {
         static inline ParseInfoTree* CreateNested(ParseInfoTree* info_tree,
             const FieldDescriptor* field);
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(TextFormat);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(TextFormat);
     };
 
     inline void TextFormat::RecordLocation(ParseInfoTree* info_tree,

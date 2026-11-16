@@ -136,7 +136,7 @@ class SHARK_EXPORT DescriptorDatabase {
   bool FindAllMessageNames(std::vector<std::string>* output);
 
  private:
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(DescriptorDatabase);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(DescriptorDatabase);
 };
 
 // A DescriptorDatabase into which you can insert files manually.
@@ -273,7 +273,7 @@ class SHARK_EXPORT SimpleDescriptorDatabase : public DescriptorDatabase {
   // return false.
   bool MaybeCopy(const FileDescriptorProto* file, FileDescriptorProto* output);
 
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(SimpleDescriptorDatabase);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(SimpleDescriptorDatabase);
 };
 
 // Very similar to SimpleDescriptorDatabase, but stores all the descriptors
@@ -326,7 +326,7 @@ class SHARK_EXPORT EncodedDescriptorDatabase : public DescriptorDatabase {
   bool MaybeParse(std::pair<const void*, int> encoded_file,
                   FileDescriptorProto* output);
 
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(EncodedDescriptorDatabase);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(EncodedDescriptorDatabase);
 };
 
 // A DescriptorDatabase that fetches files from a given pool.
@@ -348,7 +348,7 @@ class SHARK_EXPORT DescriptorPoolDatabase : public DescriptorDatabase {
 
  private:
   const DescriptorPool& pool_;
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(DescriptorPoolDatabase);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(DescriptorPoolDatabase);
 };
 
 // A DescriptorDatabase that wraps two or more others.  It first searches the
@@ -385,7 +385,7 @@ class SHARK_EXPORT MergedDescriptorDatabase : public DescriptorDatabase {
 
  private:
   std::vector<DescriptorDatabase*> sources_;
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(MergedDescriptorDatabase);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(MergedDescriptorDatabase);
 };
 
 }  // namespace shark

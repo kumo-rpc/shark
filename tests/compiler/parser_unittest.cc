@@ -1970,7 +1970,7 @@ namespace shark {
                 {
                     const std::string debug_string = descriptor->DebugStringWithOptions(debug_string_options);
 
-                    for (int i = 0; i < GOOGLE_ARRAYSIZE(expected_comments); ++i) {
+                    for (int i = 0; i < KUMO_ARRAYSIZE(expected_comments); ++i) {
                         std::string::size_type found_pos = debug_string.find(expected_comments[i]);
                         EXPECT_TRUE(found_pos != std::string::npos)
                             << "\"" << expected_comments[i] << "\" not found.";

@@ -2,7 +2,7 @@
 
 #include <type_traits>
 
-#include <shark/stubs/macros.h>
+#include <turbo/macros/utility/basic.h>
 
 #include <shark/port_def.inc>
 
@@ -76,7 +76,7 @@ namespace shark {
         virtual void Run() = 0;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(Closure);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(Closure);
     };
 
     template <typename R>
@@ -88,7 +88,7 @@ namespace shark {
         virtual R Run() = 0;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ResultCallback);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(ResultCallback);
     };
 
     template <typename R, typename A1>
@@ -100,7 +100,7 @@ namespace shark {
         virtual R Run(A1) = 0;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ResultCallback1);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(ResultCallback1);
     };
 
     template <typename R, typename A1, typename A2>
@@ -112,7 +112,7 @@ namespace shark {
         virtual R Run(A1, A2) = 0;
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ResultCallback2);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(ResultCallback2);
     };
 
     namespace internal {

@@ -221,7 +221,7 @@ namespace shark {
                 std::map<std::string, std::string> variables_;
 
             private:
-                SHARK_DISALLOW_EVIL_CONSTRUCTORS(FieldGenerator);
+                KUMO_DISALLOW_COPY_AND_ASSIGN(FieldGenerator);
             };
 
             // Convenience class which constructs FieldGenerators for a Descriptor.
@@ -256,7 +256,7 @@ namespace shark {
                     const Options& options,
                     MessageSCCAnalyzer* scc_analyzer);
 
-                SHARK_DISALLOW_EVIL_CONSTRUCTORS(FieldGeneratorMap);
+                KUMO_DISALLOW_COPY_AND_ASSIGN(FieldGeneratorMap);
             };
 
         } // namespace cpp

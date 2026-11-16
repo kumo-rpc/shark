@@ -133,7 +133,7 @@ class SHARK_EXPORT ObjectWriter {
   bool use_strict_base64_decoding_;
 
   // Do not add any data members to this class.
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ObjectWriter);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(ObjectWriter);
 };
 
 }  // namespace shark::util::converter

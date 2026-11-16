@@ -136,7 +136,7 @@ namespace shark {
                 }
             }
 
-#if !defined(SHARK_OS_APPLE) && !defined(SHARK_OS_NACL) && !defined(SHARK_OS_EMSCRIPTEN)
+#if !KUMO_OS_APPLE && !KUMO_OS_NACL && !KUMO_OS_WEB
             template <class NodeType, class... Args>
             void construct(NodeType* p, Args&&... args) {
                 // Clang 3.6 doesn't compile static casting to void* directly. (Issue
@@ -1196,7 +1196,7 @@ namespace shark {
             size_type index_of_first_non_null_;
             void** table_; // an array with num_buckets_ entries
             Allocator alloc_;
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(InnerMap);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(InnerMap);
         }; // end of class InnerMap
 
         template <typename LookupKey>

@@ -96,7 +96,7 @@ class File {
   }
 
  private:
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(File);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(File);
 };
 
 }  // namespace shark

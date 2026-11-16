@@ -100,7 +100,7 @@ namespace shark {
         OneofDescriptor() { }
         friend class DescriptorBuilder;
         friend class Descriptor;
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(OneofDescriptor);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(OneofDescriptor);
     };
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(OneofDescriptor, 40);

@@ -615,16 +615,6 @@ namespace shark::internal {
 #pragma warning(disable : 4324)
 #endif
         struct alignas(kCacheAlignment) ThreadCache {
-#if defined(SHARK_NO_THREADLOCAL)
-            // If we are using the ThreadLocalStorage class to store the ThreadCache,
-            // then the ThreadCache's default constructor has to be responsible for
-            // initializing it.
-            ThreadCache()
-                : next_lifecycle_id(0)
-                , last_lifecycle_id_seen(-1)
-                , last_serial_arena(nullptr) { }
-#endif
-
             // Number of per-thread lifecycle IDs to reserve. Must be power of two.
             // To reduce contention on a global atomic, each thread reserves a batch of
             // IDs.  The following number is calculated based on a stress test with
@@ -649,11 +639,7 @@ namespace shark::internal {
             std::atomic<LifecycleIdAtomic> id;
         };
         static CacheAlignedLifecycleIdGenerator lifecycle_id_generator_;
-#if defined(SHARK_NO_THREADLOCAL)
-        // iOS does not support __thread keyword so we use a custom thread local
-        // storage class we implemented.
-        static ThreadCache& thread_cache();
-#elif defined(SHARK_USE_DLLS)
+#if defined(SHARK_USE_DLLS)
         // Thread local variables cannot be exposed through DLL interface but we can
         // wrap them in static functions.
         static ThreadCache& thread_cache();
@@ -664,7 +650,7 @@ namespace shark::internal {
 
         ThreadSafeArenaStatsHandle arena_stats_;
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(ThreadSafeArena);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(ThreadSafeArena);
         // All protos have pointers back to the arena hence Arena must have
         // pointer stability.
         ThreadSafeArena(ThreadSafeArena&&) = delete;

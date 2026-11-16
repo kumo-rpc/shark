@@ -159,7 +159,7 @@ class SHARK_EXPORT JsonObjectWriter : public StructuredObjectWriter {
     bool is_first_;
     bool is_json_object_;
 
-    GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(Element);
+    KUMO_DISALLOW_IMPLICIT_CONSTRUCTORS(Element);
   };
 
   Element* element() override { return element_.get(); }
@@ -178,7 +178,7 @@ class SHARK_EXPORT JsonObjectWriter : public StructuredObjectWriter {
    private:
     io::CodedOutputStream* stream_;
 
-    SHARK_DISALLOW_EVIL_CONSTRUCTORS(ByteSinkWrapper);
+    KUMO_DISALLOW_COPY_AND_ASSIGN(ByteSinkWrapper);
   };
 
   // Renders a simple value as a string. By default all non-string Render
@@ -261,7 +261,7 @@ class SHARK_EXPORT JsonObjectWriter : public StructuredObjectWriter {
   // to regular base64 encoding.
   bool use_websafe_base64_for_bytes_;
 
-  GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(JsonObjectWriter);
+  KUMO_DISALLOW_IMPLICIT_CONSTRUCTORS(JsonObjectWriter);
 };
 
 }  // namespace shark::util::converter

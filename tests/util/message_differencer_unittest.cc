@@ -1429,7 +1429,7 @@ class TestIgnorer : public util::MessageDifferencer::IgnoreCriteria {
       name += parent_fields[i].field->name() + ".";
     }
     name += field->name();
-    for (int i = 0; i < GOOGLE_ARRAYSIZE(kIgnoredFields); ++i) {
+    for (int i = 0; i < KUMO_ARRAYSIZE(kIgnoredFields); ++i) {
       if (name.compare(kIgnoredFields[i]) == 0) {
         return true;
       }
@@ -2552,7 +2552,7 @@ class MatchingTest : public testing::Test {
   }
 
  private:
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(MatchingTest);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(MatchingTest);
 };
 
 TEST_F(MatchingTest, StreamReporterMatching) {

@@ -32,60 +32,11 @@
 
 #include <assert.h>
 #include <cstdint>
-#include <stdlib.h>
-#include <cstddef>
 #include <string>
-#include <string.h>
 
-#include <shark/stubs/platform_macros.h>
+#include <turbo/macros/platform/platform.h>
 
 #include <shark/port_def.inc>
-
-#undef SHARK_LITTLE_ENDIAN
-#ifdef _WIN32
-  // Assuming windows is always little-endian.
-  // TODO(xiaofeng): The SHARK_LITTLE_ENDIAN is not only used for
-  // optimization but also for correctness. We should define an
-  // different macro to test the big-endian code path in coded_stream.
-  #if !defined(SHARK_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
-    #define SHARK_LITTLE_ENDIAN 1
-  #endif
-#if defined(_MSC_VER) && _MSC_VER >= 1300 && !defined(__INTEL_COMPILER)
-// If MSVC has "/RTCc" set, it will complain about truncating casts at
-// runtime.  This file contains some intentional truncating casts.
-#pragma runtime_checks("c", off)
-#endif
-#else
-#ifdef __APPLE__
-#include <machine/endian.h>  // __BYTE_ORDER
-#elif defined(__FreeBSD__)
-#include <sys/endian.h>  // __BYTE_ORDER
-#elif (defined(sun) || defined(__sun)) && (defined(__SVR4) || defined(__svr4__))
-#include <sys/isa_defs.h>  // __BYTE_ORDER
-#elif defined(_AIX) || defined(__TOS_AIX__)
-#include <sys/machine.h>  // BYTE_ORDER
-#else
-#if !defined(__QNX__)
-#include <endian.h>  // __BYTE_ORDER
-#endif
-#endif
-#if ((defined(__LITTLE_ENDIAN__) && !defined(__BIG_ENDIAN__)) ||   \
-     (defined(__BYTE_ORDER) && __BYTE_ORDER == __LITTLE_ENDIAN) || \
-     (defined(BYTE_ORDER) && BYTE_ORDER == LITTLE_ENDIAN)) &&      \
-    !defined(SHARK_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
-#define SHARK_LITTLE_ENDIAN 1
-#endif
-#endif
-
-// These #includes are for the byte swap functions declared later on.
-#ifdef _MSC_VER
-#include <stdlib.h>  // NOLINT(build/include)
-#include <intrin.h>
-#elif defined(__APPLE__)
-#include <libkern/OSByteOrder.h>
-#elif defined(__linux__) || defined(__ANDROID__) || defined(__CYGWIN__)
-#include <byteswap.h>  // IWYU pragma: export
-#endif
 
 // Legacy: some users reference these (internal-only) macros even though we
 // don't need them any more.
@@ -145,139 +96,11 @@ static const int64 kint64min = -kint64max - 1;
 static const uint32 kuint32max = 0xFFFFFFFFu;
 static const uint64 kuint64max = uint64_t{0xFFFFFFFFFFFFFFFFu};
 
-#if defined(ADDRESS_SANITIZER) || defined(THREAD_SANITIZER) ||\
-    defined(MEMORY_SANITIZER)
-
-#ifdef __cplusplus
-extern "C" {
-#endif  // __cplusplus
-uint16_t __sanitizer_unaligned_load16(const void *p);
-uint32_t __sanitizer_unaligned_load32(const void *p);
-uint64_t __sanitizer_unaligned_load64(const void *p);
-void __sanitizer_unaligned_store16(void *p, uint16_t v);
-void __sanitizer_unaligned_store32(void *p, uint32_t v);
-void __sanitizer_unaligned_store64(void *p, uint64_t v);
-#ifdef __cplusplus
-}  // extern "C"
-#endif  // __cplusplus
-
-inline uint16_t GOOGLE_UNALIGNED_LOAD16(const void *p) {
-  return __sanitizer_unaligned_load16(p);
-}
-
-inline uint32_t GOOGLE_UNALIGNED_LOAD32(const void *p) {
-  return __sanitizer_unaligned_load32(p);
-}
-
-inline uint64_t GOOGLE_UNALIGNED_LOAD64(const void *p) {
-  return __sanitizer_unaligned_load64(p);
-}
-
-inline void GOOGLE_UNALIGNED_STORE16(void *p, uint16_t v) {
-  __sanitizer_unaligned_store16(p, v);
-}
-
-inline void GOOGLE_UNALIGNED_STORE32(void *p, uint32_t v) {
-  __sanitizer_unaligned_store32(p, v);
-}
-
-inline void GOOGLE_UNALIGNED_STORE64(void *p, uint64_t v) {
-  __sanitizer_unaligned_store64(p, v);
-}
-
-#elif defined(SHARK_USE_UNALIGNED) && SHARK_USE_UNALIGNED
-
-#define GOOGLE_UNALIGNED_LOAD16(_p) (*reinterpret_cast<const uint16_t *>(_p))
-#define GOOGLE_UNALIGNED_LOAD32(_p) (*reinterpret_cast<const uint32_t *>(_p))
-#define GOOGLE_UNALIGNED_LOAD64(_p) (*reinterpret_cast<const uint64_t *>(_p))
-
-#define GOOGLE_UNALIGNED_STORE16(_p, _val) (*reinterpret_cast<uint16_t *>(_p) = (_val))
-#define GOOGLE_UNALIGNED_STORE32(_p, _val) (*reinterpret_cast<uint32_t *>(_p) = (_val))
-#define GOOGLE_UNALIGNED_STORE64(_p, _val) (*reinterpret_cast<uint64_t *>(_p) = (_val))
-
-#else
-inline uint16_t GOOGLE_UNALIGNED_LOAD16(const void *p) {
-  uint16_t t;
-  memcpy(&t, p, sizeof t);
-  return t;
-}
-
-inline uint32_t GOOGLE_UNALIGNED_LOAD32(const void *p) {
-  uint32_t t;
-  memcpy(&t, p, sizeof t);
-  return t;
-}
-
-inline uint64_t GOOGLE_UNALIGNED_LOAD64(const void *p) {
-  uint64_t t;
-  memcpy(&t, p, sizeof t);
-  return t;
-}
-
-inline void GOOGLE_UNALIGNED_STORE16(void *p, uint16_t v) {
-  memcpy(p, &v, sizeof v);
-}
-
-inline void GOOGLE_UNALIGNED_STORE32(void *p, uint32_t v) {
-  memcpy(p, &v, sizeof v);
-}
-
-inline void GOOGLE_UNALIGNED_STORE64(void *p, uint64_t v) {
-  memcpy(p, &v, sizeof v);
-}
-#endif
-
-#if defined(SHARK_OS_NACL) \
+#if KUMO_OS_NACL \
     || (defined(__ANDROID__) && defined(__clang__) \
         && (__clang_major__ == 3 && __clang_minor__ == 8) \
         && (__clang_patchlevel__ < 275480))
 # define SHARK_USE_PORTABLE_LOG2
-#endif
-
-// The following guarantees declaration of the byte swap functions.
-#ifdef _MSC_VER
-#define bswap_16(x) _byteswap_ushort(x)
-#define bswap_32(x) _byteswap_ulong(x)
-#define bswap_64(x) _byteswap_uint64(x)
-
-#elif defined(__APPLE__)
-// Mac OS X / Darwin features
-#define bswap_16(x) OSSwapInt16(x)
-#define bswap_32(x) OSSwapInt32(x)
-#define bswap_64(x) OSSwapInt64(x)
-
-#elif !defined(__linux__) && !defined(__ANDROID__) && !defined(__CYGWIN__)
-
-#ifndef bswap_16
-static inline uint16_t bswap_16(uint16_t x) {
-  return static_cast<uint16_t>(((x & 0xFF) << 8) | ((x & 0xFF00) >> 8));
-}
-#define bswap_16(x) bswap_16(x)
-#endif
-
-#ifndef bswap_32
-static inline uint32_t bswap_32(uint32_t x) {
-  return (((x & 0xFF) << 24) |
-          ((x & 0xFF00) << 8) |
-          ((x & 0xFF0000) >> 8) |
-          ((x & 0xFF000000) >> 24));
-}
-#define bswap_32(x) bswap_32(x)
-#endif
-
-#ifndef bswap_64
-static inline uint64_t bswap_64(uint64_t x) {
-  return (((x & uint64_t{0xFFu}) << 56) | ((x & uint64_t{0xFF00u}) << 40) |
-          ((x & uint64_t{0xFF0000u}) << 24) |
-          ((x & uint64_t{0xFF000000u}) << 8) |
-          ((x & uint64_t{0xFF00000000u}) >> 8) |
-          ((x & uint64_t{0xFF0000000000u}) >> 24) |
-          ((x & uint64_t{0xFF000000000000u}) >> 40) |
-          ((x & uint64_t{0xFF00000000000000u}) >> 56));
-}
-#define bswap_64(x) bswap_64(x)
-#endif
-
 #endif
 
 // ===================================================================
@@ -340,66 +163,6 @@ class Bits {
     } else {
       return 32 + static_cast<int>(Log2FloorNonZero(topbits));
     }
-  }
-};
-
-// ===================================================================
-// from google3/util/endian/endian.h
-SHARK_EXPORT uint32_t ghtonl(uint32_t x);
-
-class BigEndian {
- public:
-#ifdef SHARK_LITTLE_ENDIAN
-
-  static uint16_t FromHost16(uint16_t x) { return bswap_16(x); }
-  static uint16_t ToHost16(uint16_t x) { return bswap_16(x); }
-
-  static uint32_t FromHost32(uint32_t x) { return bswap_32(x); }
-  static uint32_t ToHost32(uint32_t x) { return bswap_32(x); }
-
-  static uint64_t FromHost64(uint64_t x) { return bswap_64(x); }
-  static uint64_t ToHost64(uint64_t x) { return bswap_64(x); }
-
-  static bool IsLittleEndian() { return true; }
-
-#else
-
-  static uint16_t FromHost16(uint16_t x) { return x; }
-  static uint16_t ToHost16(uint16_t x) { return x; }
-
-  static uint32_t FromHost32(uint32_t x) { return x; }
-  static uint32_t ToHost32(uint32_t x) { return x; }
-
-  static uint64_t FromHost64(uint64_t x) { return x; }
-  static uint64_t ToHost64(uint64_t x) { return x; }
-
-  static bool IsLittleEndian() { return false; }
-
-#endif /* ENDIAN */
-
-  // Functions to do unaligned loads and stores in big-endian order.
-  static uint16_t Load16(const void *p) {
-    return ToHost16(GOOGLE_UNALIGNED_LOAD16(p));
-  }
-
-  static void Store16(void *p, uint16_t v) {
-    GOOGLE_UNALIGNED_STORE16(p, FromHost16(v));
-  }
-
-  static uint32_t Load32(const void *p) {
-    return ToHost32(GOOGLE_UNALIGNED_LOAD32(p));
-  }
-
-  static void Store32(void *p, uint32_t v) {
-    GOOGLE_UNALIGNED_STORE32(p, FromHost32(v));
-  }
-
-  static uint64_t Load64(const void *p) {
-    return ToHost64(GOOGLE_UNALIGNED_LOAD64(p));
-  }
-
-  static void Store64(void *p, uint64_t v) {
-    GOOGLE_UNALIGNED_STORE64(p, FromHost64(v));
   }
 };
 

@@ -120,7 +120,7 @@ class SHARK_EXPORT AnyMetadata {
   UrlType* type_url_;
   ValueType* value_;
 
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(AnyMetadata);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(AnyMetadata);
 };
 
 // Get the proto type name from Any::type_url value. For example, passing

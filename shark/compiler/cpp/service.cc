@@ -113,7 +113,7 @@ namespace shark::compiler::cpp {
         format(
             "\n"
             " private:\n"
-            "  SHARK_DISALLOW_EVIL_CONSTRUCTORS($classname$);\n"
+            "  KUMO_DISALLOW_COPY_AND_ASSIGN($classname$);\n"
             "};\n"
             "\n");
     }
@@ -144,7 +144,7 @@ namespace shark::compiler::cpp {
             " private:\n"
             "  ::$proto_ns$::RpcChannel* channel_;\n"
             "  bool owns_channel_;\n"
-            "  SHARK_DISALLOW_EVIL_CONSTRUCTORS($classname$_Stub);\n"
+            "  KUMO_DISALLOW_COPY_AND_ASSIGN($classname$_Stub);\n"
             "};\n"
             "\n");
     }

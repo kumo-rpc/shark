@@ -207,12 +207,7 @@ namespace shark {
 
         ThreadSafeArena::CacheAlignedLifecycleIdGenerator
             ThreadSafeArena::lifecycle_id_generator_;
-#if defined(SHARK_NO_THREADLOCAL)
-        ThreadSafeArena::ThreadCache& ThreadSafeArena::thread_cache() {
-            static internal::ThreadLocalStorage<ThreadCache>* thread_cache_ = new internal::ThreadLocalStorage<ThreadCache>();
-            return *thread_cache_->Get();
-        }
-#elif defined(SHARK_USE_DLLS)
+#if defined(SHARK_USE_DLLS)
         ThreadSafeArena::ThreadCache& ThreadSafeArena::thread_cache() {
             static thread_local ThreadCache thread_cache_ = {
                 0, static_cast<LifecycleIdAtomic>(-1), nullptr

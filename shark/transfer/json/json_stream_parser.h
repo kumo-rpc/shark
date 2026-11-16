@@ -332,7 +332,7 @@ class SHARK_EXPORT JsonStreamParser {
   // Maximum allowed recursion depth.
   int max_recursion_depth_;
 
-  GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(JsonStreamParser);
+  KUMO_DISALLOW_IMPLICIT_CONSTRUCTORS(JsonStreamParser);
 };
 
 }  // namespace shark::util::converter

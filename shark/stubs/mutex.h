@@ -42,7 +42,7 @@
 
 #endif
 
-#include <shark/stubs/macros.h>
+#include <turbo/macros/utility/basic.h>
 
 // Define thread-safety annotations for use below, if we are building with
 // Clang.
@@ -85,7 +85,7 @@ class SHARK_EXPORT CriticalSectionLock {
  private:
   CRITICAL_SECTION critical_section_;
 
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(CriticalSectionLock);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(CriticalSectionLock);
 };
 
 #endif
@@ -149,7 +149,7 @@ class SHARK_SCOPED_CAPABILITY SHARK_EXPORT MutexLock {
 
  private:
   Mutex *const mu_;
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(MutexLock);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(MutexLock);
 };
 
 // TODO(kenton):  Implement these?  Hard to implement portably.
@@ -164,36 +164,8 @@ class SHARK_EXPORT MutexLockMaybe {
   ~MutexLockMaybe() { if (this->mu_ != nullptr) { this->mu_->Unlock(); } }
  private:
   Mutex *const mu_;
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(MutexLockMaybe);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(MutexLockMaybe);
 };
-
-#if defined(SHARK_NO_THREADLOCAL)
-template<typename T>
-class ThreadLocalStorage {
- public:
-  ThreadLocalStorage() {
-    pthread_key_create(&key_, &ThreadLocalStorage::Delete);
-  }
-  ~ThreadLocalStorage() {
-    pthread_key_delete(key_);
-  }
-  T* Get() {
-    T* result = static_cast<T*>(pthread_getspecific(key_));
-    if (result == nullptr) {
-      result = new T();
-      pthread_setspecific(key_, result);
-    }
-    return result;
-  }
- private:
-  static void Delete(void* value) {
-    delete static_cast<T*>(value);
-  }
-  pthread_key_t key_;
-
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ThreadLocalStorage);
-};
-#endif
 
 }  // namespace internal
 

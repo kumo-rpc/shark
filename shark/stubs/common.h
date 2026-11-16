@@ -42,8 +42,7 @@
 #include <string>
 #include <vector>
 
-#include <shark/stubs/macros.h>
-#include <shark/stubs/platform_macros.h>
+#include <turbo/macros/utility/basic.h>
 #include <shark/stubs/port.h>
 #include <string_view>
 
@@ -60,11 +59,7 @@
 #if SHARK_USE_EXCEPTIONS
 #include <exception>
 #endif
-#if defined(__APPLE__)
-#include <TargetConditionals.h>  // for TARGET_OS_IPHONE
-#endif
-
-#if defined(__ANDROID__) || defined(SHARK_OS_ANDROID) || (defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE) || defined(SHARK_OS_IPHONE)
+#if KUMO_OS_ANDROID || KUMO_OS_IOS || KUMO_OS_TVOS || KUMO_OS_WATCHOS || KUMO_OS_VISIONOS
 #include <pthread.h>
 #endif
 

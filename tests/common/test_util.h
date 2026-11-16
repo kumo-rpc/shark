@@ -117,7 +117,7 @@ class ReflectionTester {
   void ExpectAllFieldsSetViaReflection2(const Message& message);
   void ExpectAllFieldsSetViaReflection3(const Message& message);
 
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(ReflectionTester);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(ReflectionTester);
 };
 
 inline TestUtil::ReflectionTester::ReflectionTester(
@@ -1180,7 +1180,7 @@ inline void TestUtil::ReflectionTester::ExpectMessagesReleasedViaReflection(
       "optional_foreign_message",
       "optional_import_message",
   };
-  for (int i = 0; i < GOOGLE_ARRAYSIZE(fields); i++) {
+  for (int i = 0; i < KUMO_ARRAYSIZE(fields); i++) {
     Message* released = reflection->ReleaseMessage(message, F(fields[i]));
     switch (expected_release_state) {
       case IS_NULL:

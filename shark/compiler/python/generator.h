@@ -170,7 +170,7 @@ namespace shark {
                 mutable io::Printer* printer_; // Set in Generate().  Under mutex_.
                 mutable bool pure_python_workable_;
 
-                SHARK_DISALLOW_EVIL_CONSTRUCTORS(Generator);
+                KUMO_DISALLOW_COPY_AND_ASSIGN(Generator);
             };
 
         } // namespace python

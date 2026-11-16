@@ -234,7 +234,7 @@ class ExpectingObjectWriter : public ObjectWriter {
  private:
   MockObjectWriter* mock_;
 
-  GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(ExpectingObjectWriter);
+  KUMO_DISALLOW_IMPLICIT_CONSTRUCTORS(ExpectingObjectWriter);
 };
 
 }  // namespace shark::util::converter

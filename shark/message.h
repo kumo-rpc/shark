@@ -391,7 +391,7 @@ namespace shark {
         static uint64_t GetInvariantPerBuild(uint64_t salt);
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(Message);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(Message);
     };
 
     namespace internal {
@@ -1183,7 +1183,7 @@ namespace shark {
             const char* ptr,
             internal::ParseContext* ctx);
 
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(Reflection);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(Reflection);
     };
 
     // Abstract interface for a factory for message objects.
@@ -1246,7 +1246,7 @@ namespace shark {
             const Message* prototype);
 
     private:
-        SHARK_DISALLOW_EVIL_CONSTRUCTORS(MessageFactory);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(MessageFactory);
     };
 
 #define DECLARE_GET_REPEATED_FIELD(TYPE)                             \

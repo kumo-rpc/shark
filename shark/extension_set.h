@@ -584,7 +584,7 @@ namespace shark {
             private:
                 virtual void UnusedKeyMethod(); // Dummy key method to avoid weak vtable.
 
-                SHARK_DISALLOW_EVIL_CONSTRUCTORS(LazyMessageExtension);
+                KUMO_DISALLOW_COPY_AND_ASSIGN(LazyMessageExtension);
             };
             // Give access to function defined below to see LazyMessageExtension.
             friend LazyMessageExtension* MaybeCreateLazyExtension(Arena* arena);
@@ -923,7 +923,7 @@ namespace shark {
 
             static void DeleteFlatMap(const KeyValue* flat, uint16_t flat_capacity);
 
-            SHARK_DISALLOW_EVIL_CONSTRUCTORS(ExtensionSet);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(ExtensionSet);
         };
 
         constexpr ExtensionSet::ExtensionSet()

@@ -167,7 +167,7 @@ namespace shark::compiler::cpp {
         for (int i = 0; i < fields.size(); i++) {
             const std::string& name = fields[i]->name();
             static const char* kMacroNames[] = { "major", "minor" };
-            for (int j = 0; j < GOOGLE_ARRAYSIZE(kMacroNames); ++j) {
+            for (int j = 0; j < KUMO_ARRAYSIZE(kMacroNames); ++j) {
                 if (name == kMacroNames[j]) {
                     names_to_undef.push_back(name);
                     break;

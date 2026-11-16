@@ -345,7 +345,7 @@ namespace shark {
                         "test_plugin.exe", // Other Win32 (MSVC)
                         "test_plugin", // Unix
                     };
-                    for (int i = 0; i < GOOGLE_ARRAYSIZE(possible_paths); i++) {
+                    for (int i = 0; i < KUMO_ARRAYSIZE(possible_paths); i++) {
                         if (access(possible_paths[i], F_OK) == 0) {
                             plugin_path = possible_paths[i];
                             break;

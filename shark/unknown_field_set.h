@@ -206,7 +206,7 @@ class SHARK_EXPORT UnknownFieldSet {
   }
 
   std::vector<UnknownField> fields_;
-  SHARK_DISALLOW_EVIL_CONSTRUCTORS(UnknownFieldSet);
+  KUMO_DISALLOW_COPY_AND_ASSIGN(UnknownFieldSet);
 };
 
 namespace internal {
