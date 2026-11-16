@@ -51,7 +51,7 @@
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/strtod.h>
-#include <shark/io/tokenizer.h>
+#include <shark/parser/tokenizer.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/message.h>

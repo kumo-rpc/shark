@@ -43,7 +43,7 @@
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/format/wired/wire_format.h>
-#include <shark/io/tokenizer.h>
+#include <shark/parser/tokenizer.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/hash.h>

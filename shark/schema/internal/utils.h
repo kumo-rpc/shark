@@ -39,7 +39,7 @@
 #include <shark/generated/generated_message_util.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/strtod.h>
-#include <shark/io/tokenizer.h>
+#include <shark/parser/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/port.h>
 #include <shark/stubs/ascii.h>

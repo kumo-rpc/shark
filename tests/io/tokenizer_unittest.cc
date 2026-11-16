@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <shark/io/tokenizer.h>
+#include <shark/parser/tokenizer.h>
 
 #include <limits.h>
 #include <math.h>

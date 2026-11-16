@@ -43,7 +43,7 @@
 
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
-#include <shark/io/tokenizer.h>
+#include <shark/parser/tokenizer.h>
 #include <shark/types/repeated_field.h>
 
 // Must be included last.

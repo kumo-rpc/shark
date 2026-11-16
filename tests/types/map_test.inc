@@ -62,7 +62,7 @@
 #include <shark/descriptor_database.h>
 #include <shark/dynamic_message.h>
 #include <shark/io/coded_stream.h>
-#include <shark/io/tokenizer.h>
+#include <shark/parser/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/types/map.h>
 #include <shark/types/map_field_inl.h>

@@ -43,7 +43,7 @@
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include <shark/io/tokenizer.h>
+#include <shark/parser/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>

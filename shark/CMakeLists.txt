@@ -87,6 +87,7 @@ kmcmake_cc_library(
         parser/importer.cc
         parser/parser_o.cc
         parser/parser.cc
+        parser/tokenizer.cc
         format/wired/wire_format.cc
         format/text/text_format.cc
         generated/generated_message_bases.cc
@@ -94,7 +95,6 @@ kmcmake_cc_library(
         generated/generated_message_tctable_full.cc
         io/gzip_stream.cc
         io/printer.cc
-        io/tokenizer.cc
         types/any.cc
         types/any.skp.cc
         types/api.skp.cc

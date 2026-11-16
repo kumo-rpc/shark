@@ -46,7 +46,7 @@
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor_database.h>
 #include <shark/dynamic_message.h>
-#include <shark/io/tokenizer.h>
+#include <shark/parser/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>

@@ -88,7 +88,7 @@
 // I'd love to hear about other alternatives, though, as this code isn't
 // exactly pretty.
 
-#include <shark/io/tokenizer.h>
+#include <shark/parser/tokenizer.h>
 
 #include <cmath>
 #include <limits>

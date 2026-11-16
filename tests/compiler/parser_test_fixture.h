@@ -50,7 +50,7 @@
 #include <shark/parser/parser_o.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
-#include <shark/io/tokenizer.h>
+#include <shark/parser/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/types/repeated_field.h>
 #include <shark/stubs/map_util.h>
