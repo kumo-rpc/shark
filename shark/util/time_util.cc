@@ -38,7 +38,8 @@
 #include <shark/types/timestamp.skp.h>
 #include <turbo/numeric/int128.h>
 #include <turbo/format/str_format.h>
-#include <shark/stubs/time.h>
+#include <turbo/time/clock.h>
+#include <turbo/time/time.h>
 
 // Must go after other includes.
 #include <shark/port_def.inc>
@@ -116,15 +117,34 @@ std::string FormatNanos(int32_t nanos) {
 }
 
 std::string FormatTime(int64_t seconds, int32_t nanos) {
-  return ::shark::internal::FormatTime(seconds, nanos);
+  const turbo::Time time =
+      turbo::FromUnixSeconds(seconds) + turbo::Nanoseconds(nanos);
+  // %E4Y keeps the year at four digits. RFC3339_full uses %Y, which prints
+  // year 1 as "1".
+  constexpr char kRfc3339Full[] = "%E4Y-%m-%d%ET%H:%M:%E*S%Ez";
+  return turbo::format_time(kRfc3339Full, time, turbo::UTCTimeZone());
 }
 
 bool ParseTime(const std::string& value, int64_t* seconds, int32_t* nanos) {
-  return ::shark::internal::ParseTime(value, seconds, nanos);
+  turbo::Time time;
+  std::string error;
+  if (!turbo::parse_time(turbo::RFC3339_full, value, &time, &error)) {
+    return false;
+  }
+  const timespec ts = turbo::ToTimespec(time);
+  if (ts.tv_sec < TimeUtil::kTimestampMinSeconds ||
+      ts.tv_sec > TimeUtil::kTimestampMaxSeconds) {
+    return false;
+  }
+  *seconds = ts.tv_sec;
+  *nanos = static_cast<int32_t>(ts.tv_nsec);
+  return true;
 }
 
 void CurrentTime(int64_t* seconds, int32_t* nanos) {
-  return ::shark::internal::GetCurrentTime(seconds, nanos);
+  const timespec ts = turbo::ToTimespec(turbo::Now());
+  *seconds = ts.tv_sec;
+  *nanos = static_cast<int32_t>(ts.tv_nsec);
 }
 
 // Truncates the remainder part after division.

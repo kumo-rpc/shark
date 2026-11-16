@@ -42,7 +42,7 @@
 #include <turbo/strings/numbers.h>
 #include <turbo/status/status.h>
 #include <turbo/status/result.h>
-#include <shark/stubs/time.h>
+#include <shark/util/time_util.h>
 #include <shark/transfer/json/constants.h>
 #include <shark/transfer/json/field_mask_utility.h>
 #include <shark/transfer/json/object_location_tracker.h>
@@ -1029,16 +1029,13 @@ turbo::Status ProtoStreamObjectWriter::RenderTimestamp(ProtoStreamObjectWriter* 
 
   std::string_view value(data.str());
 
-  int64_t seconds;
-  int32_t nanos;
-  if (!::shark::internal::ParseTime(std::string(value), &seconds,
-                                               &nanos)) {
+  shark::Timestamp timestamp;
+  if (!shark::util::TimeUtil::FromString(std::string(value), &timestamp)) {
     return turbo::invalid_argument_error(turbo::str_cat("Invalid time format: ", value));
   }
 
-
-  ow->ProtoWriter::RenderDataPiece("seconds", DataPiece(seconds));
-  ow->ProtoWriter::RenderDataPiece("nanos", DataPiece(nanos));
+  ow->ProtoWriter::RenderDataPiece("seconds", DataPiece(timestamp.seconds()));
+  ow->ProtoWriter::RenderDataPiece("nanos", DataPiece(timestamp.nanos()));
   return turbo::ok_status();
 }
 

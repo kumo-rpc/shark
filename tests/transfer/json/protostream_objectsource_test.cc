@@ -1122,7 +1122,7 @@ TEST_P(ProtostreamObjectSourceTimestampTest, TimestampDurationDefaultValue) {
   out.mutable_dur()->set_seconds(0);
 
   ow_.StartObject("")
-      ->RenderString("ts", "1970-01-01T00:00:00Z")
+      ->RenderString("ts", "1970-01-01T00:00:00+00:00")
       ->RenderString("dur", "0s")
       ->EndObject();
 

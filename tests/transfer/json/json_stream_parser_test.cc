@@ -37,7 +37,6 @@
 #include <shark/stubs/common.h>
 #include <tests/common/json/expecting_objectwriter.h>
 #include <gtest/gtest.h>
-#include <shark/stubs/time.h>
 #include <shark/transfer/json/object_writer.h>
 #include <turbo/status/status.h>
 

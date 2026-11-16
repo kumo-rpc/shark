@@ -72,18 +72,18 @@ class SHARK_EXPORT TimeUtil {
   static const int64_t kDurationMinSeconds = -315576000000LL;
   static const int64_t kDurationMaxSeconds = 315576000000LL;
 
-  // Converts Timestamp to/from RFC 3339 date string format.
-  // Generated output will always be Z-normalized and uses 3, 6 or 9
-  // fractional digits as required to represent the exact time. When
-  // parsing, any fractional digits (or none) and any offset are
-  // accepted as long as they fit into nano-seconds precision.
-  // Note that Timestamp can only represent time from
-  // 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. Converting
-  // a Timestamp outside of this range is undefined behavior.
+  // Converts Timestamp to/from an RFC 3339 date string.
+  // Generated output uses the RFC 3339 full form with a four-digit year,
+  // a numeric UTC offset ("+00:00"), and fractional seconds with trailing
+  // zeros trimmed.
+  // Parsing accepts "Z" or a numeric offset, and any fractional digits
+  // that fit into nanosecond precision. Values outside
+  // 0001-01-01T00:00:00Z .. 9999-12-31T23:59:59.999999999Z are rejected
+  // by FromString. ToString outside that range is undefined.
   // See https://www.ietf.org/rfc/rfc3339.txt
   //
   // Example of generated format:
-  //   "1972-01-01T10:00:20.021Z"
+  //   "1972-01-01T10:00:20.021+00:00"
   //
   // Example of accepted format:
   //   "1972-01-01T10:00:20.021-05:00"

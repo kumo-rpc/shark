@@ -40,7 +40,6 @@
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/escaping.h>
 #include <turbo/status/result.h>
-#include <shark/stubs/time.h>
 #include <shark/transfer/json/constants.h>
 #include <shark/transfer/json/field_mask_utility.h>
 #include <shark/transfer/json/object_location_tracker.h>

@@ -55,7 +55,6 @@
 #include <gmock/gmock.h>
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>
-#include <shark/stubs/time.h>
 #include <tests/common/test_util.h>
 #include <shark/stubs/stl_util.h>
 #include <tests/common/gtest_enum.h>

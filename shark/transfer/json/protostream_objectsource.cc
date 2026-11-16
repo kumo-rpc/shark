@@ -47,7 +47,7 @@
 #include <shark/stubs/casts.h>
 #include <turbo/status/status.h>
 #include <turbo/format/str_format.h>
-#include <shark/stubs/time.h>
+#include <shark/util/time_util.h>
 #include <shark/transfer/json/constants.h>
 #include <shark/transfer/json/field_mask_utility.h>
 #include <shark/transfer/json/utility.h>
@@ -329,8 +329,10 @@ turbo::Status ProtoStreamObjectSource::RenderTimestamp(
         turbo::str_cat("Timestamp nanos exceeds limit for field: ", field_name));
   }
 
-  ow->RenderString(field_name,
-                   ::shark::internal::FormatTime(seconds, nanos));
+  shark::Timestamp timestamp;
+  timestamp.set_seconds(seconds);
+  timestamp.set_nanos(nanos);
+  ow->RenderString(field_name, shark::util::TimeUtil::ToString(timestamp));
 
   return turbo::ok_status();
 }

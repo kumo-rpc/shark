@@ -53,24 +53,24 @@ TEST(TimeUtilTest, TimestampStringFormat) {
   EXPECT_TRUE(TimeUtil::FromString("9999-12-31T23:59:59.999999999Z", &end));
   EXPECT_EQ(TimeUtil::kTimestampMaxSeconds, end.seconds());
   EXPECT_EQ(999999999, end.nanos());
-  EXPECT_EQ("0001-01-01T00:00:00Z", TimeUtil::ToString(begin));
-  EXPECT_EQ("9999-12-31T23:59:59.999999999Z", TimeUtil::ToString(end));
+  EXPECT_EQ("0001-01-01T00:00:00+00:00", TimeUtil::ToString(begin));
+  EXPECT_EQ("9999-12-31T23:59:59.999999999+00:00", TimeUtil::ToString(end));
 
   // Test negative timestamps.
   Timestamp time = TimeUtil::NanosecondsToTimestamp(-1);
   EXPECT_EQ(-1, time.seconds());
   // Timestamp's nano part is always non-negative.
   EXPECT_EQ(999999999, time.nanos());
-  EXPECT_EQ("1969-12-31T23:59:59.999999999Z", TimeUtil::ToString(time));
+  EXPECT_EQ("1969-12-31T23:59:59.999999999+00:00", TimeUtil::ToString(time));
 
-  // Generated output should contain 3, 6, or 9 fractional digits.
-  EXPECT_EQ("1970-01-01T00:00:00Z",
+  // RFC 3339 full form: numeric UTC offset, trailing zeros trimmed.
+  EXPECT_EQ("1970-01-01T00:00:00+00:00",
             TimeUtil::ToString(TimeUtil::NanosecondsToTimestamp(0)));
-  EXPECT_EQ("1970-01-01T00:00:00.010Z",
+  EXPECT_EQ("1970-01-01T00:00:00.01+00:00",
             TimeUtil::ToString(TimeUtil::NanosecondsToTimestamp(10000000)));
-  EXPECT_EQ("1970-01-01T00:00:00.000010Z",
+  EXPECT_EQ("1970-01-01T00:00:00.00001+00:00",
             TimeUtil::ToString(TimeUtil::NanosecondsToTimestamp(10000)));
-  EXPECT_EQ("1970-01-01T00:00:00.000000010Z",
+  EXPECT_EQ("1970-01-01T00:00:00.00000001+00:00",
             TimeUtil::ToString(TimeUtil::NanosecondsToTimestamp(10)));
 
   // Parsing accepts an fractional digits as long as they fit into nano
@@ -176,21 +176,21 @@ TEST(TimeUtilTest, DurationIntegerConversion) {
 }
 
 TEST(TestUtilTest, TimestampIntegerConversion) {
-  EXPECT_EQ("1970-01-01T00:00:00.000000001Z",
+  EXPECT_EQ("1970-01-01T00:00:00.000000001+00:00",
             TimeUtil::ToString(TimeUtil::NanosecondsToTimestamp(1)));
-  EXPECT_EQ("1969-12-31T23:59:59.999999999Z",
+  EXPECT_EQ("1969-12-31T23:59:59.999999999+00:00",
             TimeUtil::ToString(TimeUtil::NanosecondsToTimestamp(-1)));
-  EXPECT_EQ("1970-01-01T00:00:00.000001Z",
+  EXPECT_EQ("1970-01-01T00:00:00.000001+00:00",
             TimeUtil::ToString(TimeUtil::MicrosecondsToTimestamp(1)));
-  EXPECT_EQ("1969-12-31T23:59:59.999999Z",
+  EXPECT_EQ("1969-12-31T23:59:59.999999+00:00",
             TimeUtil::ToString(TimeUtil::MicrosecondsToTimestamp(-1)));
-  EXPECT_EQ("1970-01-01T00:00:00.001Z",
+  EXPECT_EQ("1970-01-01T00:00:00.001+00:00",
             TimeUtil::ToString(TimeUtil::MillisecondsToTimestamp(1)));
-  EXPECT_EQ("1969-12-31T23:59:59.999Z",
+  EXPECT_EQ("1969-12-31T23:59:59.999+00:00",
             TimeUtil::ToString(TimeUtil::MillisecondsToTimestamp(-1)));
-  EXPECT_EQ("1970-01-01T00:00:01Z",
+  EXPECT_EQ("1970-01-01T00:00:01+00:00",
             TimeUtil::ToString(TimeUtil::SecondsToTimestamp(1)));
-  EXPECT_EQ("1969-12-31T23:59:59Z",
+  EXPECT_EQ("1969-12-31T23:59:59+00:00",
             TimeUtil::ToString(TimeUtil::SecondsToTimestamp(-1)));
 
   EXPECT_EQ(
