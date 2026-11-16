@@ -35,7 +35,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/types/duration.skp.h>
 #include <shark/types/timestamp.skp.h>
-#include <shark/stubs/int128.h>
+#include <turbo/numeric/int128.h>
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/time.h>
 
@@ -376,7 +376,7 @@ using ::SHARK_NAMESPACE_ID::util::CreateNormalized;
 using ::SHARK_NAMESPACE_ID::util::kNanosPerSecond;
 
 // Convert a Duration to uint128.
-void ToUint128(const Duration& value, uint128* result, bool* negative) {
+void ToUint128(const Duration& value, turbo::uint128* result, bool* negative) {
   if (value.seconds() < 0 || value.nanos() < 0) {
     *negative = true;
     *result = static_cast<uint64_t>(-value.seconds());
@@ -388,7 +388,7 @@ void ToUint128(const Duration& value, uint128* result, bool* negative) {
   }
 }
 
-void ToDuration(const uint128& value, bool negative, Duration* duration) {
+void ToDuration(const turbo::uint128& value, bool negative, Duration* duration) {
   int64_t seconds =
       static_cast<int64_t>(Uint128Low64(value / kNanosPerSecond));
   int32_t nanos =
@@ -416,7 +416,7 @@ Duration& operator-=(Duration& d1, const Duration& d2) {  // NOLINT
 
 Duration& operator*=(Duration& d, int64_t r) {  // NOLINT
   bool negative;
-  uint128 value;
+  turbo::uint128 value;
   ToUint128(d, &value, &negative);
   if (r > 0) {
     value *= static_cast<uint64_t>(r);
@@ -445,7 +445,7 @@ Duration& operator*=(Duration& d, double r) {  // NOLINT
 
 Duration& operator/=(Duration& d, int64_t r) {  // NOLINT
   bool negative;
-  uint128 value;
+  turbo::uint128 value;
   ToUint128(d, &value, &negative);
   if (r > 0) {
     value /= static_cast<uint64_t>(r);
@@ -463,10 +463,10 @@ Duration& operator/=(Duration& d, double r) {  // NOLINT
 
 Duration& operator%=(Duration& d1, const Duration& d2) {  // NOLINT
   bool negative1, negative2;
-  uint128 value1, value2;
+  turbo::uint128 value1, value2;
   ToUint128(d1, &value1, &negative1);
   ToUint128(d2, &value2, &negative2);
-  uint128 result = value1 % value2;
+  turbo::uint128 result = value1 % value2;
   // When negative values are involved in division, we round the division
   // result towards zero. With this semantics, sign of the remainder is the
   // same as the dividend. For example:
@@ -479,7 +479,7 @@ Duration& operator%=(Duration& d1, const Duration& d2) {  // NOLINT
 
 int64_t operator/(const Duration& d1, const Duration& d2) {
   bool negative1, negative2;
-  uint128 value1, value2;
+  turbo::uint128 value1, value2;
   ToUint128(d1, &value1, &negative1);
   ToUint128(d2, &value2, &negative2);
   int64_t result = Uint128Low64(value1 / value2);

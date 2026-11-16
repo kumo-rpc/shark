@@ -60,7 +60,6 @@ kmcmake_cc_library(
         schema/internal/descriptor_builder.cc
         stubs/bytestream.cc
         stubs/common.cc
-        stubs/int128.cc
         stubs/status.cc
         stubs/statusor.cc
         stubs/stringpiece.cc

@@ -34,7 +34,7 @@
 #include <shark/stubs/port.h>
 #include <shark/stubs/status.h>
 #include <shark/stubs/stringpiece.h>
-
+#include <turbo/numeric/int128.h>
 #include <shark/port_def.inc>
 
 // ===================================================================
@@ -86,7 +86,7 @@ class SHARK_EXPORT LogMessage {
   LogMessage& operator<<(void* value);
   LogMessage& operator<<(const StringPiece& value);
   LogMessage& operator<<(const util::Status& status);
-  LogMessage& operator<<(const uint128& value);
+  LogMessage& operator<<(const turbo::uint128& value);
 
  private:
   friend class LogFinisher;

@@ -55,7 +55,8 @@
 #include <shark/stubs/status.h>
 #include <shark/stubs/stringpiece.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/int128.h>
+#include <turbo/numeric/int128.h>
+
 
 #include <shark/port_def.inc>
 
@@ -199,7 +200,7 @@ LogMessage& LogMessage::operator<<(const util::Status& status) {
   return *this;
 }
 
-LogMessage& LogMessage::operator<<(const uint128& value) {
+LogMessage& LogMessage::operator<<(const turbo::uint128& value) {
   std::ostringstream str;
   str << value;
   message_ += str.str();

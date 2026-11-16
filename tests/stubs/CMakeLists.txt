@@ -41,18 +41,6 @@ kmcmake_cc_test(
         GTest::gmock_main
 )
 
-kmcmake_cc_test(
-        NAME int128_test
-        MODULE stubs
-        SOURCES
-        int128_unittest.cc
-        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
-        LINKS
-        ${PROJECT_NAME}::test_sk_static
-        ${PROJECT_NAME}::test_common_static
-        ${PROJECT_NAME}::shark_static
-        GTest::gmock_main
-)
 
 kmcmake_cc_test(
         NAME status_test
