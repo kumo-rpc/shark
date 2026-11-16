@@ -516,8 +516,8 @@ class SHARK_EXPORT TcParser final {
   // Mini field lookup:
   static const TcParseTableBase::FieldEntry* FindFieldEntry(
       const TcParseTableBase* table, uint32_t field_num);
-  static StringPiece MessageName(const TcParseTableBase* table);
-  static StringPiece FieldName(const TcParseTableBase* table,
+  static std::string_view MessageName(const TcParseTableBase* table);
+  static std::string_view FieldName(const TcParseTableBase* table,
                                      const TcParseTableBase::FieldEntry*);
   static bool ChangeOneof(const TcParseTableBase* table,
                           const TcParseTableBase::FieldEntry& entry,
@@ -527,7 +527,7 @@ class SHARK_EXPORT TcParser final {
   // UTF-8 validation:
   static void ReportFastUtf8Error(uint32_t decoded_tag,
                                   const TcParseTableBase* table);
-  static bool MpVerifyUtf8(StringPiece wire_bytes,
+  static bool MpVerifyUtf8(std::string_view wire_bytes,
                            const TcParseTableBase* table,
                            const TcParseTableBase::FieldEntry& entry,
                            uint16_t xform_val);

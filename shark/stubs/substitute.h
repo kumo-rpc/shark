@@ -32,7 +32,7 @@
 // from google3/strings/substitute.h
 
 #include <shark/stubs/common.h>
-#include <shark/stubs/stringpiece.h>
+#include <string_view>
 #include <shark/stubs/strutil.h>
 
 #include <string>
@@ -91,8 +91,6 @@ class SubstituteArg {
   inline SubstituteArg(const char* value)
     : text_(value), size_(strlen(text_)) {}
   inline SubstituteArg(const std::string& value)
-      : text_(value.data()), size_(value.size()) {}
-  inline SubstituteArg(const StringPiece value)
       : text_(value.data()), size_(value.size()) {}
     inline SubstituteArg(std::string_view value)
       : text_(value.data()), size_(value.size()) {}

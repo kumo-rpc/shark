@@ -200,7 +200,7 @@ class DoubleValue final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.DoubleValue";
     }
     protected:
@@ -359,7 +359,7 @@ class FloatValue final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.FloatValue";
     }
     protected:
@@ -518,7 +518,7 @@ class Int64Value final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.Int64Value";
     }
     protected:
@@ -677,7 +677,7 @@ class UInt64Value final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.UInt64Value";
     }
     protected:
@@ -836,7 +836,7 @@ class Int32Value final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.Int32Value";
     }
     protected:
@@ -995,7 +995,7 @@ class UInt32Value final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.UInt32Value";
     }
     protected:
@@ -1154,7 +1154,7 @@ class BoolValue final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.BoolValue";
     }
     protected:
@@ -1313,7 +1313,7 @@ class StringValue final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.StringValue";
     }
     protected:
@@ -1477,7 +1477,7 @@ class BytesValue final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.BytesValue";
     }
     protected:

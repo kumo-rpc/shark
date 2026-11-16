@@ -165,7 +165,7 @@ class SHARK_EXPORT InlinedStringField {
                 ::shark::Arena* arena, bool donated, uint32_t* donating_states,
                 uint32_t mask, MessageLite* msg);
 
-  SHARK_NDEBUG_INLINE void SetNoArena(StringPiece value);
+  SHARK_NDEBUG_INLINE void SetNoArena(std::string_view value);
   SHARK_NDEBUG_INLINE void SetNoArena(std::string&& value);
 
   // Basic accessors.
@@ -295,7 +295,7 @@ class SHARK_EXPORT InlinedStringField {
              msg);
   }
 
-  void SetNoArena(const std::string*, StringPiece value) {
+  void SetNoArena(const std::string*, std::string_view value) {
     SetNoArena(value);
   }
   void SetNoArena(const std::string*, std::string&& value) {
@@ -411,7 +411,7 @@ inline void InlinedStringField::DestroyNoArena(const std::string*) {
   this->~InlinedStringField();
 }
 
-inline void InlinedStringField::SetNoArena(StringPiece value) {
+inline void InlinedStringField::SetNoArena(std::string_view value) {
   get_mutable()->assign(value.data(), value.length());
 }
 

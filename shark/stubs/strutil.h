@@ -35,7 +35,7 @@
 #include <cstdlib>
 #include <shark/stubs/common.h>
 #include <shark/stubs/ascii.h>
-#include <shark/stubs/stringpiece.h>
+#include <string_view>
 
 #include <cstring>
 #include <shark/port_def.inc>
@@ -597,12 +597,9 @@ namespace shark {
                 : piece_data_(str.data())
                 , piece_size_(str.size()) { }
 
-            AlphaNum(StringPiece str)
+            AlphaNum(std::string_view str)
                 : piece_data_(str.data())
                 , piece_size_(str.size()) { }
-            AlphaNum(std::string_view str)
-            : piece_data_(str.data())
-            , piece_size_(str.size()) { }
 
             size_t size() const { return piece_size_; }
             const char* data() const { return piece_data_; }

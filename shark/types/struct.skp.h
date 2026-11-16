@@ -255,7 +255,7 @@ class Struct final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.Struct";
     }
     protected:
@@ -434,7 +434,7 @@ class Value final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.Value";
     }
     protected:
@@ -699,7 +699,7 @@ class ListValue final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.ListValue";
     }
     protected:

@@ -53,7 +53,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/once.h>
 #include <shark/stubs/status.h>
-#include <shark/stubs/stringpiece.h>
+#include <string_view>
 #include <shark/stubs/strutil.h>
 #include <turbo/numeric/int128.h>
 
@@ -190,8 +190,8 @@ LogMessage& LogMessage::operator<<(const char* value) {
   return *this;
 }
 
-LogMessage& LogMessage::operator<<(const StringPiece& value) {
-  message_ += value.ToString();
+LogMessage& LogMessage::operator<<(const std::string_view& value) {
+  message_ += value;
   return *this;
 }
 
@@ -208,7 +208,7 @@ LogMessage& LogMessage::operator<<(const turbo::uint128& value) {
 }
 
 LogMessage& LogMessage::operator<<(char value) {
-  return *this << StringPiece(&value, 1);
+  return *this << std::string_view(&value, 1);
 }
 
 LogMessage& LogMessage::operator<<(void* value) {

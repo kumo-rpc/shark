@@ -96,7 +96,7 @@ namespace shark {
 
 
     Symbol DescriptorPool::Tables::FindByNameHelper(const DescriptorPool* pool,
-        StringPiece name) {
+        std::string_view name) {
         if (pool->mutex_ != nullptr) {
             // Fast path: the Symbol is already cached.  This is just a hash lookup.
             ReaderMutexLock lock(pool->mutex_);

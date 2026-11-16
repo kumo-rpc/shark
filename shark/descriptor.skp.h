@@ -463,7 +463,7 @@ class SHARK_EXPORT FileDescriptorSet final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.FileDescriptorSet";
     }
     protected:
@@ -626,7 +626,7 @@ class SHARK_EXPORT FileDescriptorProto final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.FileDescriptorProto";
     }
     protected:
@@ -1024,7 +1024,7 @@ class SHARK_EXPORT DescriptorProto_ExtensionRange final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.DescriptorProto.ExtensionRange";
     }
     protected:
@@ -1218,7 +1218,7 @@ class SHARK_EXPORT DescriptorProto_ReservedRange final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.DescriptorProto.ReservedRange";
     }
     protected:
@@ -1392,7 +1392,7 @@ class SHARK_EXPORT DescriptorProto final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.DescriptorProto";
     }
     protected:
@@ -1745,7 +1745,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.ExtensionRangeOptions";
     }
     protected:
@@ -2120,7 +2120,7 @@ class SHARK_EXPORT FieldDescriptorProto final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.FieldDescriptorProto";
     }
     protected:
@@ -2459,7 +2459,7 @@ class SHARK_EXPORT OneofDescriptorProto final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.OneofDescriptorProto";
     }
     protected:
@@ -2643,7 +2643,7 @@ class SHARK_EXPORT EnumDescriptorProto_EnumReservedRange final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.EnumDescriptorProto.EnumReservedRange";
     }
     protected:
@@ -2817,7 +2817,7 @@ class SHARK_EXPORT EnumDescriptorProto final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.EnumDescriptorProto";
     }
     protected:
@@ -3069,7 +3069,7 @@ class SHARK_EXPORT EnumValueDescriptorProto final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.EnumValueDescriptorProto";
     }
     protected:
@@ -3268,7 +3268,7 @@ class SHARK_EXPORT ServiceDescriptorProto final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.ServiceDescriptorProto";
     }
     protected:
@@ -3472,7 +3472,7 @@ class SHARK_EXPORT MethodDescriptorProto final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.MethodDescriptorProto";
     }
     protected:
@@ -3726,7 +3726,7 @@ class SHARK_EXPORT FileOptions final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.FileOptions";
     }
     protected:
@@ -4200,7 +4200,7 @@ class SHARK_EXPORT MessageOptions final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.MessageOptions";
     }
     protected:
@@ -4636,7 +4636,7 @@ class SHARK_EXPORT FieldOptions final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.FieldOptions";
     }
     protected:
@@ -5123,7 +5123,7 @@ class SHARK_EXPORT OneofOptions final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.OneofOptions";
     }
     protected:
@@ -5498,7 +5498,7 @@ class SHARK_EXPORT EnumOptions final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.EnumOptions";
     }
     protected:
@@ -5934,7 +5934,7 @@ class SHARK_EXPORT EnumValueOptions final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.EnumValueOptions";
     }
     protected:
@@ -6325,7 +6325,7 @@ class SHARK_EXPORT ServiceOptions final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.ServiceOptions";
     }
     protected:
@@ -6716,7 +6716,7 @@ class SHARK_EXPORT MethodOptions final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.MethodOptions";
     }
     protected:
@@ -7125,7 +7125,7 @@ class SHARK_EXPORT UninterpretedOption_NamePart final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.UninterpretedOption.NamePart";
     }
     protected:
@@ -7307,7 +7307,7 @@ class SHARK_EXPORT UninterpretedOption final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.UninterpretedOption";
     }
     protected:
@@ -7578,7 +7578,7 @@ class SHARK_EXPORT SourceCodeInfo_Location final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.SourceCodeInfo.Location";
     }
     protected:
@@ -7838,7 +7838,7 @@ class SHARK_EXPORT SourceCodeInfo final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.SourceCodeInfo";
     }
     protected:
@@ -8003,7 +8003,7 @@ class SHARK_EXPORT GeneratedCodeInfo_Annotation final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.GeneratedCodeInfo.Annotation";
     }
     protected:
@@ -8222,7 +8222,7 @@ class SHARK_EXPORT GeneratedCodeInfo final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.GeneratedCodeInfo";
     }
     protected:

@@ -80,7 +80,7 @@ namespace shark::compiler::cpp {
             if (options.opensource_runtime) {
                 (*variables)["string_piece"] = "::std::string";
             } else {
-                (*variables)["string_piece"] = "::StringPiece";
+                (*variables)["string_piece"] = "::std::string_view";
             }
         }
 
@@ -130,9 +130,9 @@ namespace shark::compiler::cpp {
         // because that ctype isn't actually implemented.  In particular, this is
         // true of ctype=CORD and ctype=STRING_PIECE in the open source release.
         // We aren't releasing Cord because it has too many Google-specific
-        // dependencies and we aren't releasing StringPiece because it's hardly
+        // dependencies and we aren't releasing std::string_view because it's hardly
         // useful outside of Google and because it would get confusing to have
-        // multiple instances of the StringPiece class in different libraries (PCRE
+        // multiple instances of the std::string_view class in different libraries (PCRE
         // already includes it for their C++ bindings, which came from Google).
         //
         // In any case, we make all the accessors private while still actually
@@ -724,7 +724,7 @@ namespace shark::compiler::cpp {
         if (!options_.opensource_runtime) {
             format(
                 "$deprecated_attr$void ${1$set_$name$$}$(int index, "
-                "StringPiece value);\n",
+                "std::string_view value);\n",
                 descriptor_);
         }
         format(
@@ -737,7 +737,7 @@ namespace shark::compiler::cpp {
             descriptor_);
         if (!options_.opensource_runtime) {
             format(
-                "$deprecated_attr$void ${1$add_$name$$}$(StringPiece value);\n",
+                "$deprecated_attr$void ${1$add_$name$$}$(std::string_view value);\n",
                 descriptor_);
         }
         format(
@@ -819,7 +819,7 @@ namespace shark::compiler::cpp {
         if (!options_.opensource_runtime) {
             format(
                 "inline void "
-                "$classname$::set_$name$(int index, StringPiece value) {\n"
+                "$classname$::set_$name$(int index, std::string_view value) {\n"
                 "  $field$.Mutable(index)->assign(value.data(), value.size());\n"
                 "$annotate_set$"
                 "  // @@protoc_insertion_point(field_set_string_piece:$full_name$)\n"
@@ -855,7 +855,7 @@ namespace shark::compiler::cpp {
             "}\n");
         if (!options_.opensource_runtime) {
             format(
-                "inline void $classname$::add_$name$(StringPiece value) {\n"
+                "inline void $classname$::add_$name$(std::string_view value) {\n"
                 "  $field$.Add()->assign(value.data(), value.size());\n"
                 "$annotate_add$"
                 "  // @@protoc_insertion_point(field_add_string_piece:$full_name$)\n"

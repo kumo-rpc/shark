@@ -147,7 +147,7 @@ inline void TestUtil::SetOptionalFields(UNITTEST::TestAllTypes* message) {
   message->set_optional_foreign_enum(UNITTEST::ForeignEnum::FOREIGN_BAZ);
   message->set_optional_import_enum(UNITTEST_IMPORT::ImportEnum::IMPORT_BAZ);
 
-  // StringPiece and Cord fields are only accessible via reflection in the
+  // std::string_view and Cord fields are only accessible via reflection in the
   // open source release; see comments in compiler/cpp/string_field.cc.
 #ifndef SHARK_TEST_NO_DESCRIPTORS
   message->GetReflection()->SetString(

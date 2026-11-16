@@ -221,7 +221,7 @@ namespace shark {
     namespace {
 
 #define HASH_MAP std::unordered_map
-#define STR_HASH_FXN hash<::shark::StringPiece>
+#define STR_HASH_FXN hash<::std::string_view>
 
         class GeneratedMessageFactory final : public MessageFactory {
         public:
@@ -235,7 +235,7 @@ namespace shark {
 
         private:
             // Only written at static init time, so does not require locking.
-            HASH_MAP<StringPiece, const shark::internal::DescriptorTable*,
+            HASH_MAP<std::string_view, const shark::internal::DescriptorTable*,
                 STR_HASH_FXN>
                 file_map_;
 

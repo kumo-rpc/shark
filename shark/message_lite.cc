@@ -111,8 +111,8 @@ namespace shark {
             return result;
         }
 
-        inline StringPiece as_string_view(const void* data, int size) {
-            return StringPiece(static_cast<const char*>(data), size);
+        inline std::string_view as_string_view(const void* data, int size) {
+            return std::string_view(static_cast<const char*>(data), size);
         }
 
         // Returns true of all required fields are present / have values.
@@ -135,7 +135,7 @@ namespace shark {
     namespace internal {
 
         template <bool aliasing>
-        bool MergeFromImpl(StringPiece input, MessageLite* msg,
+        bool MergeFromImpl(std::string_view input, MessageLite* msg,
             MessageLite::ParseFlags parse_flags) {
             const char* ptr;
             internal::ParseContext ctx(io::CodedInputStream::GetDefaultRecursionLimit(),
@@ -178,9 +178,9 @@ namespace shark {
             return false;
         }
 
-        template bool MergeFromImpl<false>(StringPiece input, MessageLite* msg,
+        template bool MergeFromImpl<false>(std::string_view input, MessageLite* msg,
             MessageLite::ParseFlags parse_flags);
-        template bool MergeFromImpl<true>(StringPiece input, MessageLite* msg,
+        template bool MergeFromImpl<true>(std::string_view input, MessageLite* msg,
             MessageLite::ParseFlags parse_flags);
         template bool MergeFromImpl<false>(io::ZeroCopyInputStream* input,
             MessageLite* msg,

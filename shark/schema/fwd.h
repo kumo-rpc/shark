@@ -363,7 +363,7 @@ namespace shark {
             // build time if the symbol wasn't found and building of the file containing
             // that type is delayed because lazily_build_dependencies_ is set on the pool.
             // Should not be called after Set() has been called.
-            void SetLazy(StringPiece name, const FileDescriptor* file);
+            void SetLazy(std::string_view name, const FileDescriptor* file);
 
             // Returns the current value of the descriptor, thread-safe. If SetLazy(...)
             // has been called, will do a one-time cross link of the type specified,

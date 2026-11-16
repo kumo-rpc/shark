@@ -62,7 +62,6 @@ kmcmake_cc_library(
         stubs/common.cc
         stubs/status.cc
         stubs/statusor.cc
-        stubs/stringpiece.cc
         stubs/ascii.cc
         stubs/stringprintf.cc
         stubs/structurally_valid.cc

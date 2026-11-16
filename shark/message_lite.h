@@ -491,12 +491,12 @@ namespace shark {
     namespace internal {
 
         template <bool alias>
-        bool MergeFromImpl(StringPiece input, MessageLite* msg,
+        bool MergeFromImpl(std::string_view input, MessageLite* msg,
             MessageLite::ParseFlags parse_flags);
-        extern template bool MergeFromImpl<false>(StringPiece input,
+        extern template bool MergeFromImpl<false>(std::string_view input,
             MessageLite* msg,
             MessageLite::ParseFlags parse_flags);
-        extern template bool MergeFromImpl<true>(StringPiece input,
+        extern template bool MergeFromImpl<true>(std::string_view input,
             MessageLite* msg,
             MessageLite::ParseFlags parse_flags);
 

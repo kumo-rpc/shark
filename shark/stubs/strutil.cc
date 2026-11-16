@@ -173,7 +173,7 @@ namespace shark {
     // the characters in the string, not the entire string as a single delimiter.
     // ----------------------------------------------------------------------
     template <typename ITR>
-    static inline void SplitStringToIteratorUsing(StringPiece full,
+    static inline void SplitStringToIteratorUsing(std::string_view full,
         const char* delim, ITR& result) {
         // Optimize the common case where delim is a single character.
         if (delim[0] != '\0' && delim[1] == '\0') {
@@ -224,7 +224,7 @@ namespace shark {
     // If "pieces" is negative for some reason, it returns the whole string
     // ----------------------------------------------------------------------
     template <typename ITR>
-    static inline void SplitStringToIteratorAllowEmpty(StringPiece full,
+    static inline void SplitStringToIteratorAllowEmpty(std::string_view full,
         const char* delim,
         int pieces, ITR& result) {
         std::string::size_type begin_index, end_index;
@@ -565,7 +565,7 @@ namespace shark {
     // Calculates the length of the C-style escaped version of 'src'.
     // Assumes that non-printable characters are escaped using octal sequences, and
     // that UTF-8 bytes are not handled specially.
-    static inline size_t CEscapedLength(StringPiece src) {
+    static inline size_t CEscapedLength(std::string_view src) {
         static char c_escaped_len[256] = {
             4,
             4,
@@ -826,7 +826,7 @@ namespace shark {
         };
 
         size_t escaped_len = 0;
-        for (StringPiece::size_type i = 0; i < src.size(); ++i) {
+        for (std::string_view::size_type i = 0; i < src.size(); ++i) {
             unsigned char c = static_cast<unsigned char>(src[i]);
             escaped_len += c_escaped_len[c];
         }
@@ -850,7 +850,7 @@ namespace shark {
         dest->resize(cur_dest_len + escaped_len);
         char* append_ptr = &(*dest)[cur_dest_len];
 
-        for (StringPiece::size_type i = 0; i < src.size(); ++i) {
+        for (std::string_view::size_type i = 0; i < src.size(); ++i) {
             unsigned char c = static_cast<unsigned char>(src[i]);
             switch (c) {
             case '\n':
@@ -1902,7 +1902,7 @@ namespace shark {
         std::string tmp;
         int num_replacements = 0;
         int pos = 0;
-        for (StringPiece::size_type match_pos = s->find(substring.data(), pos, substring.length());
+        for (std::string_view::size_type match_pos = s->find(substring.data(), pos, substring.length());
             match_pos != std::string::npos; pos = match_pos + substring.length(),
                                     match_pos = s->find(substring.data(), pos,
                                         substring.length())) {

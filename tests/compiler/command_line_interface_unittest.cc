@@ -2581,7 +2581,7 @@ namespace shark {
                 bool Run(const std::string& command, bool specify_proto_files = true) {
                     std::vector<std::string> args;
                     args.push_back("protoc");
-                    for (StringPiece split_piece :
+                    for (std::string_view split_piece :
                         Split(command, " ", true)) {
                         args.push_back(std::string(split_piece));
                     }

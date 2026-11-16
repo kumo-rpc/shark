@@ -84,10 +84,10 @@ inline std::string StatusCodeToString(StatusCode code) {
 
 Status::Status() : error_code_(StatusCode::kOk) {}
 
-Status::Status(StatusCode error_code, StringPiece error_message)
+Status::Status(StatusCode error_code, std::string_view error_message)
     : error_code_(error_code) {
   if (error_code != StatusCode::kOk) {
-    error_message_ = error_message.ToString();
+    error_message_ = error_message;
   }
 }
 
@@ -189,67 +189,67 @@ bool IsUnknown(const Status& status) {
   return status.code() == StatusCode::kUnknown;
 }
 
-Status AbortedError(StringPiece message) {
+Status AbortedError(std::string_view message) {
   return Status(StatusCode::kAborted, message);
 }
 
-Status AlreadyExistsError(StringPiece message) {
+Status AlreadyExistsError(std::string_view message) {
   return Status(StatusCode::kAlreadyExists, message);
 }
 
-Status CancelledError(StringPiece message) {
+Status CancelledError(std::string_view message) {
   return Status(StatusCode::kCancelled, message);
 }
 
-Status DataLossError(StringPiece message) {
+Status DataLossError(std::string_view message) {
   return Status(StatusCode::kDataLoss, message);
 }
 
-Status DeadlineExceededError(StringPiece message) {
+Status DeadlineExceededError(std::string_view message) {
   return Status(StatusCode::kDeadlineExceeded, message);
 }
 
-Status FailedPreconditionError(StringPiece message) {
+Status FailedPreconditionError(std::string_view message) {
   return Status(StatusCode::kFailedPrecondition, message);
 }
 
-Status InternalError(StringPiece message) {
+Status InternalError(std::string_view message) {
   return Status(StatusCode::kInternal, message);
 }
 
-Status InvalidArgumentError(StringPiece message) {
+Status InvalidArgumentError(std::string_view message) {
   return Status(StatusCode::kInvalidArgument, message);
 }
 
-Status NotFoundError(StringPiece message) {
+Status NotFoundError(std::string_view message) {
   return Status(StatusCode::kNotFound, message);
 }
 
-Status OutOfRangeError(StringPiece message) {
+Status OutOfRangeError(std::string_view message) {
   return Status(StatusCode::kOutOfRange, message);
 }
 
-Status PermissionDeniedError(StringPiece message) {
+Status PermissionDeniedError(std::string_view message) {
   return Status(StatusCode::kPermissionDenied, message);
 }
 
-Status ResourceExhaustedError(StringPiece message) {
+Status ResourceExhaustedError(std::string_view message) {
   return Status(StatusCode::kResourceExhausted, message);
 }
 
-Status UnauthenticatedError(StringPiece message) {
+Status UnauthenticatedError(std::string_view message) {
   return Status(StatusCode::kUnauthenticated, message);
 }
 
-Status UnavailableError(StringPiece message) {
+Status UnavailableError(std::string_view message) {
   return Status(StatusCode::kUnavailable, message);
 }
 
-Status UnimplementedError(StringPiece message) {
+Status UnimplementedError(std::string_view message) {
   return Status(StatusCode::kUnimplemented, message);
 }
 
-Status UnknownError(StringPiece message) {
+Status UnknownError(std::string_view message) {
   return Status(StatusCode::kUnknown, message);
 }
 

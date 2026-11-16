@@ -53,7 +53,7 @@
 #include <string>
 
 #include <shark/stubs/common.h>
-#include <shark/stubs/stringpiece.h>
+#include <string_view>
 
 #include <shark/port_def.inc>
 
@@ -122,7 +122,7 @@ class SHARK_EXPORT ByteSource {
   // object is destroyed, whichever occurs first.
   //
   // The length of the returned std::string_view will be <= Available().
-  virtual StringPiece Peek() = 0;
+  virtual std::string_view Peek() = 0;
 
   // Skips the next n bytes. Invalidates any std::string_view returned by a previous
   // call to Peek().
@@ -295,11 +295,11 @@ class SHARK_EXPORT ArrayByteSource : public ByteSource {
   explicit ArrayByteSource(std::string_view s) : input_(s) {}
 
   virtual size_t Available() const override;
-  virtual StringPiece Peek() override;
+  virtual std::string_view Peek() override;
   virtual void Skip(size_t n) override;
 
  private:
-  StringPiece   input_;
+  std::string_view   input_;
   SHARK_DISALLOW_EVIL_CONSTRUCTORS(ArrayByteSource);
 };
 
@@ -327,7 +327,7 @@ class SHARK_EXPORT LimitByteSource : public ByteSource {
   LimitByteSource(ByteSource* source, size_t limit);
 
   virtual size_t Available() const override;
-  virtual StringPiece Peek() override;
+  virtual std::string_view Peek() override;
   virtual void Skip(size_t n) override;
 
   // We override CopyTo so that we can forward to the underlying source, in

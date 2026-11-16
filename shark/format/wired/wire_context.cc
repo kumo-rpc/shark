@@ -308,7 +308,7 @@ namespace shark::internal {
         WriteVarint(val, s);
     }
 
-    void WriteLengthDelimited(uint32_t num, StringPiece val, std::string* s) {
+    void WriteLengthDelimited(uint32_t num, std::string_view val, std::string* s) {
         WriteVarint((num << 3) + 2, s);
         WriteVarint(val.size(), s);
         s->append(val.data(), val.size());
@@ -375,11 +375,11 @@ namespace shark::internal {
     }
 
     // Defined in wire_format_lite.cc
-    void PrintUTF8ErrorLog(StringPiece message_name,
-        StringPiece field_name, const char* operation_str,
+    void PrintUTF8ErrorLog(std::string_view message_name,
+        std::string_view field_name, const char* operation_str,
         bool emit_stacktrace);
 
-    bool VerifyUTF8(StringPiece str, const char* field_name) {
+    bool VerifyUTF8(std::string_view str, const char* field_name) {
         if (!IsStructurallyValidUTF8(str)) {
             PrintUTF8ErrorLog("", field_name, "parsing", false);
             return false;

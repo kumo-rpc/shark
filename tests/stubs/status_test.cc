@@ -212,15 +212,15 @@ TEST(Status, CheckOK) {
 TEST(Status, ErrorMessage) {
   util::Status status = util::InvalidArgumentError("");
   EXPECT_FALSE(status.ok());
-  EXPECT_EQ("", status.message().ToString());
+  EXPECT_EQ("", status.message());
   EXPECT_EQ("INVALID_ARGUMENT", status.ToString());
   status = util::InvalidArgumentError("msg");
   EXPECT_FALSE(status.ok());
-  EXPECT_EQ("msg", status.message().ToString());
+  EXPECT_EQ("msg", status.message());
   EXPECT_EQ("INVALID_ARGUMENT:msg", status.ToString());
   status = util::Status(util::StatusCode::kOk, "msg");
   EXPECT_TRUE(status.ok());
-  EXPECT_EQ("", status.message().ToString());
+  EXPECT_EQ("", status.message());
   EXPECT_EQ("OK", status.ToString());
 }
 

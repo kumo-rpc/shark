@@ -45,7 +45,7 @@
 #include <shark/stubs/macros.h>
 #include <shark/stubs/platform_macros.h>
 #include <shark/stubs/port.h>
-#include <shark/stubs/stringpiece.h>
+#include <string_view>
 
 #ifndef SHARK_USE_EXCEPTIONS
 #if defined(_MSC_VER) && defined(_CPPUNWIND)
@@ -111,12 +111,12 @@ namespace internal {
 // structurally_valid.cc.
 SHARK_EXPORT bool IsStructurallyValidUTF8(const char* buf, int len);
 
-inline bool IsStructurallyValidUTF8(StringPiece str) {
+inline bool IsStructurallyValidUTF8(std::string_view str) {
   return IsStructurallyValidUTF8(str.data(), static_cast<int>(str.length()));
 }
 
 // Returns initial number of bytes of structurally valid UTF-8.
-SHARK_EXPORT int UTF8SpnStructurallyValid(StringPiece str);
+SHARK_EXPORT int UTF8SpnStructurallyValid(std::string_view str);
 
 // Coerce UTF-8 byte string in src_str to be
 // a structurally-valid equal-length string by selectively
@@ -130,7 +130,7 @@ SHARK_EXPORT int UTF8SpnStructurallyValid(StringPiece str);
 //
 // Optimized for: all structurally valid and no byte copying is done.
 //
-SHARK_EXPORT char* UTF8CoerceToStructurallyValid(StringPiece str, char* dst,
+SHARK_EXPORT char* UTF8CoerceToStructurallyValid(std::string_view str, char* dst,
                                                     char replace_char);
 
 }  // namespace internal

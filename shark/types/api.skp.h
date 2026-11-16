@@ -179,7 +179,7 @@ class Api final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.Api";
     }
     protected:
@@ -458,7 +458,7 @@ class Method final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.Method";
     }
     protected:
@@ -727,7 +727,7 @@ class Mixin final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.Mixin";
     }
     protected:

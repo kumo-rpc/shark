@@ -32,7 +32,7 @@
 
 #include <shark/stubs/common.h>
 
-#include <shark/stubs/stringpiece.h>
+#include <string_view>
 
 namespace shark::internal {
 
@@ -561,7 +561,7 @@ bool IsStructurallyValidUTF8(const char* buf, int len) {
   return (bytes_consumed == len);
 }
 
-int UTF8SpnStructurallyValid(StringPiece str) {
+int UTF8SpnStructurallyValid(std::string_view str) {
   if (!module_initialized_) return str.size();
 
   int bytes_consumed = 0;
@@ -582,7 +582,7 @@ int UTF8SpnStructurallyValid(StringPiece str) {
 //
 // Fast case: all is structurally valid and no byte copying is done.
 //
-char* UTF8CoerceToStructurallyValid(StringPiece src_str, char* idst,
+char* UTF8CoerceToStructurallyValid(std::string_view src_str, char* idst,
                                     const char replace_char) {
   const char* isrc = src_str.data();
   const int len = src_str.length();
@@ -600,7 +600,7 @@ char* UTF8CoerceToStructurallyValid(StringPiece src_str, char* idst,
       dst[0] = replace_char;                    // replace one bad byte
       src++;
       dst++;
-      StringPiece str2(src, srclimit - src);
+      std::string_view str2(src, srclimit - src);
       n = UTF8SpnStructurallyValid(str2);       // scan the remainder
       memmove(dst, src, n);                     // copy next good chunk
       src += n;

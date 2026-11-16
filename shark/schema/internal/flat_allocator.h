@@ -102,7 +102,7 @@ namespace shark {
                 std::string camelcase_name = ToCamelCase(name, /* lower_first = */ true);
                 std::string json_name = opt_json_name != nullptr ? *opt_json_name : ToJsonName(name);
 
-                StringPiece all_names[] = { name, lowercase_name, camelcase_name,
+                std::string_view all_names[] = { name, lowercase_name, camelcase_name,
                     json_name };
                 std::sort(all_names, all_names + 4);
                 int unique = static_cast<int>(std::unique(all_names, all_names + 4) - all_names);

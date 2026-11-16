@@ -46,15 +46,15 @@ namespace shark {
 
         // Returns a null Symbol (symbol.IsNull() is true) if not found.
         inline Symbol FindNestedSymbol(const void* parent,
-            StringPiece name) const;
+            std::string_view name) const;
 
         // These return nullptr if not found.
         inline const FieldDescriptor* FindFieldByNumber(const Descriptor* parent,
             int number) const;
         inline const FieldDescriptor* FindFieldByLowercaseName(
-            const void* parent, StringPiece lowercase_name) const;
+            const void* parent, std::string_view lowercase_name) const;
         inline const FieldDescriptor* FindFieldByCamelcaseName(
-            const void* parent, StringPiece camelcase_name) const;
+            const void* parent, std::string_view camelcase_name) const;
         inline const EnumValueDescriptor* FindEnumValueByNumber(
             const EnumDescriptor* parent, int number) const;
         // This creates a new EnumValueDescriptor if not found, in a thread-safe way.

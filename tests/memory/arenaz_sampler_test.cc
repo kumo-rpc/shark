@@ -330,7 +330,7 @@ class ThreadSafeArenazSamplerTestThread : public Thread {
 
  public:
   ThreadSafeArenazSamplerTestThread(const thread::Options& options,
-                                    StringPiece name,
+                                    std::string_view name,
                                     shark::Arena* arena,
                                     absl::Barrier* barrier)
       : Thread(options, name), arena_(arena), barrier_(barrier) {}

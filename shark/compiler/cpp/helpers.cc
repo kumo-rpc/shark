@@ -500,8 +500,8 @@ namespace shark::compiler::cpp {
     }
 
     std::string FieldMemberName(const FieldDescriptor* field, bool split) {
-        StringPiece prefix = IsMapEntryMessage(field->containing_type()) ? "" : "_impl_.";
-        StringPiece split_prefix = split ? "_split_->" : "";
+        std::string_view prefix = IsMapEntryMessage(field->containing_type()) ? "" : "_impl_.";
+        std::string_view split_prefix = split ? "_split_->" : "";
         if (field->real_containing_oneof() == nullptr) {
             return StrCat(prefix, split_prefix, FieldName(field), "_");
         }

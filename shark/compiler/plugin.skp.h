@@ -233,7 +233,7 @@ class PROTOC_EXPORT Version final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.compiler.Version";
     }
     protected:
@@ -442,7 +442,7 @@ class PROTOC_EXPORT CodeGeneratorRequest final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.compiler.CodeGeneratorRequest";
     }
     protected:
@@ -672,7 +672,7 @@ class PROTOC_EXPORT CodeGeneratorResponse_File final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.compiler.CodeGeneratorResponse.File";
     }
     protected:
@@ -896,7 +896,7 @@ class PROTOC_EXPORT CodeGeneratorResponse final :
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+    static ::std::string_view FullMessageName() {
       return "shark.compiler.CodeGeneratorResponse";
     }
     protected:

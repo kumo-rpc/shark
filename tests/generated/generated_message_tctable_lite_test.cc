@@ -106,7 +106,7 @@ class FindFieldEntryTest : public ::testing::Test {
   // Calls the private `FieldName` function.
   template <size_t kFastTableSizeLog2, size_t kNumEntries, size_t kNumFieldAux,
             size_t kNameTableSize, size_t kFieldLookupTableSize>
-  static StringPiece FieldName(
+  static std::string_view FieldName(
       const TcParseTable<kFastTableSizeLog2, kNumEntries, kNumFieldAux,
                          kNameTableSize, kFieldLookupTableSize>& table,
       const TcParseTableBase::FieldEntry* entry) {
@@ -116,7 +116,7 @@ class FindFieldEntryTest : public ::testing::Test {
   // Calls the private `MessageName` function.
   template <size_t kFastTableSizeLog2, size_t kNumEntries, size_t kNumFieldAux,
             size_t kNameTableSize, size_t kFieldLookupTableSize>
-  static StringPiece MessageName(
+  static std::string_view MessageName(
       const TcParseTable<kFastTableSizeLog2, kNumEntries, kNumFieldAux,
                          kNameTableSize, kFieldLookupTableSize>& table) {
     return TcParser::MessageName(&table.header);
@@ -298,7 +298,7 @@ TEST_F(FindFieldEntryTest, OutOfRange) {
     EXPECT_THAT(entry,
                 IsEntryForFieldNum(&table, field_num, table_field_numbers));
 
-    StringPiece name = FieldName(table, entry);
+    std::string_view name = FieldName(table, entry);
     EXPECT_EQ(name.length(), field_num);
     while (name[0] == '0') name.remove_prefix(1);  // strip leading zeores
     EXPECT_EQ(name, StrCat(field_num));
@@ -555,7 +555,7 @@ TEST_F(FindFieldEntryTest, BigMessage) {
   for (int field_num :
        {1, 12, 31, 42, 57, 68, 79, 90, 101, 119, 249, 402, 412}) {
     auto* entry = FindFieldEntry(test_all_types_table, field_num);
-    StringPiece name = FieldName(test_all_types_table, entry);
+    std::string_view name = FieldName(test_all_types_table, entry);
     switch (field_num) {
       case 1:
         EXPECT_THAT(name, Eq("optional_int32"));

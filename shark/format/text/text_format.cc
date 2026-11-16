@@ -1391,15 +1391,15 @@ namespace shark {
         // error.)
         bool failed() const { return failed_; }
 
-        void PrintMaybeWithMarker(StringPiece text) {
+        void PrintMaybeWithMarker(std::string_view text) {
             Print(text.data(), text.size());
             if (ConsumeInsertSilentMarker()) {
                 PrintLiteral(internal::kDebugStringSilentMarker);
             }
         }
 
-        void PrintMaybeWithMarker(StringPiece text_head,
-            StringPiece text_tail) {
+        void PrintMaybeWithMarker(std::string_view text_head,
+            std::string_view text_tail) {
             Print(text_head.data(), text_head.size());
             if (ConsumeInsertSilentMarker()) {
                 PrintLiteral(internal::kDebugStringSilentMarker);
@@ -1578,7 +1578,7 @@ namespace shark {
 
     namespace {
 
-        bool CheckParseInputSize(StringPiece input,
+        bool CheckParseInputSize(std::string_view input,
             io::ErrorCollector* error_collector) {
             if (input.size() > INT_MAX) {
                 error_collector->AddError(

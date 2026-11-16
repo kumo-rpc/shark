@@ -366,7 +366,7 @@ namespace shark {
     }
 
     bool DescriptorPool::TryFindFileInFallbackDatabase(
-        StringPiece name) const {
+        std::string_view name) const {
         if (fallback_database_ == nullptr)
             return false;
 
@@ -382,7 +382,7 @@ namespace shark {
         return true;
     }
 
-    bool DescriptorPool::IsSubSymbolOfBuiltType(StringPiece name) const {
+    bool DescriptorPool::IsSubSymbolOfBuiltType(std::string_view name) const {
         auto prefix = std::string(name);
         for (;;) {
             std::string::size_type dot_pos = prefix.find_last_of('.');
@@ -405,7 +405,7 @@ namespace shark {
     }
 
     bool DescriptorPool::TryFindSymbolInFallbackDatabase(
-        StringPiece name) const {
+        std::string_view name) const {
         if (fallback_database_ == nullptr)
             return false;
 
@@ -525,7 +525,7 @@ namespace shark {
         return result;
     }
 
-    Symbol DescriptorPool::CrossLinkOnDemandHelper(StringPiece name,
+    Symbol DescriptorPool::CrossLinkOnDemandHelper(std::string_view name,
         bool expecting_enum) const {
         (void)expecting_enum; // Parameter is used by Google-internal code.
         auto lookup_name = std::string(name);
@@ -537,7 +537,7 @@ namespace shark {
     }
 
 
-    static bool ValidateQualifiedName(StringPiece name) {
+    static bool ValidateQualifiedName(std::string_view name) {
         bool last_was_period = false;
 
         for (char character : name) {
@@ -556,20 +556,20 @@ namespace shark {
         return !name.empty() && !last_was_period;
     }
 
-    Symbol DescriptorPool::NewPlaceholder(StringPiece name,
+    Symbol DescriptorPool::NewPlaceholder(std::string_view name,
         PlaceholderType placeholder_type) const {
         MutexLockMaybe lock(mutex_);
         return NewPlaceholderWithMutexHeld(name, placeholder_type);
     }
 
     Symbol DescriptorPool::NewPlaceholderWithMutexHeld(
-        StringPiece name, PlaceholderType placeholder_type) const {
+        std::string_view name, PlaceholderType placeholder_type) const {
         if (mutex_) {
             mutex_->AssertHeld();
         }
         // Compute names.
-        StringPiece placeholder_full_name;
-        StringPiece placeholder_name;
+        std::string_view placeholder_full_name;
+        std::string_view placeholder_name;
         const std::string* placeholder_package;
 
         if (!ValidateQualifiedName(name))
@@ -672,7 +672,7 @@ namespace shark {
     }
 
     FileDescriptor* DescriptorPool::NewPlaceholderFile(
-        StringPiece name) const {
+        std::string_view name) const {
         MutexLockMaybe lock(mutex_);
         internal::FlatAllocator alloc;
         alloc.PlanArray<FileDescriptor>(1);
@@ -683,7 +683,7 @@ namespace shark {
     }
 
     FileDescriptor* DescriptorPool::NewPlaceholderFileWithMutexHeld(
-        StringPiece name, internal::FlatAllocator& alloc) const {
+        std::string_view name, internal::FlatAllocator& alloc) const {
         if (mutex_) {
             mutex_->AssertHeld();
         }

@@ -52,13 +52,13 @@ namespace internal {
 // protos. This struct and the following related functions should only be used
 // by protobuf generated code.
 struct EnumEntry {
-  StringPiece name;
+  std::string_view name;
   int value;
 };
 
 // Looks up a numeric enum value given the string name.
 SHARK_EXPORT bool LookUpEnumValue(const EnumEntry* enums, size_t size,
-                                     StringPiece name, int* value);
+                                     std::string_view name, int* value);
 
 // Looks up an enum name given the numeric value.
 SHARK_EXPORT int LookUpEnumName(const EnumEntry* enums,

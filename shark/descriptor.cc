@@ -156,7 +156,7 @@ namespace shark {
             descriptor_ = descriptor;
         }
 
-        void LazyDescriptor::SetLazy(StringPiece name,
+        void LazyDescriptor::SetLazy(std::string_view name,
             const FileDescriptor* file) {
             // verify Init() has been called and Set hasn't been called yet.
             GOOGLE_CHECK(!descriptor_);

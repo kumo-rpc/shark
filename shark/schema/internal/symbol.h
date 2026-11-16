@@ -107,16 +107,16 @@ namespace shark {
         // TODO(b/215557658): If we templetize QueryKey on the expected object type we
         // can skip the switches for the eq function altogether.
         struct QueryKey : internal::SymbolBase {
-            StringPiece name;
+            std::string_view name;
             const void* parent;
             int field_number;
 
             // Adaptor functions to look like a Symbol to the comparators.
-            StringPiece full_name() const { return name; }
+            std::string_view full_name() const { return name; }
             std::pair<const void*, int> parent_number_key() const {
                 return { parent, field_number };
             }
-            std::pair<const void*, StringPiece> parent_name_key() const {
+            std::pair<const void*, std::string_view> parent_name_key() const {
                 return { parent, name };
             }
         };
@@ -175,7 +175,7 @@ namespace shark {
             }
         }
 
-        StringPiece full_name() const {
+        std::string_view full_name() const {
             switch (type()) {
             case MESSAGE:
                 return descriptor()->full_name();
@@ -195,7 +195,7 @@ namespace shark {
             case FULL_PACKAGE:
                 return file_descriptor()->package();
             case SUB_PACKAGE:
-                return StringPiece(sub_package_file_descriptor()->file->package())
+                return std::string_view(sub_package_file_descriptor()->file->package())
                     .substr(0, sub_package_file_descriptor()->name_size);
             case QUERY_KEY:
                 return query_key()->full_name();
@@ -205,7 +205,7 @@ namespace shark {
             return "";
         }
 
-        std::pair<const void*, StringPiece> parent_name_key() const {
+        std::pair<const void*, std::string_view> parent_name_key() const {
             const auto or_file = [&](const void* p) { return p ? p : GetFile(); };
             switch (type()) {
             case MESSAGE:
@@ -229,7 +229,7 @@ namespace shark {
                 // The outer-scope alias key is "EnumName.ValueName" — i.e. the
                 // value's full_name with the package (and any containing-message)
                 // prefix stripped. Both full_name and the enum/value names are
-                // already persistent, so the StringPiece is valid for the table's
+                // already persistent, so the std::string_view is valid for the table's
                 // hash/compare lifetime.
                 const EnumValueDescriptor* v = enum_value_descriptor();
                 const EnumDescriptor* e = v->type();
@@ -237,7 +237,7 @@ namespace shark {
                 int len = static_cast<int>(e->name().size() + 1 + v->name().size());
                 int offset = static_cast<int>(full.size()) - len;
                 return { or_file(e->containing_type()),
-                    StringPiece(full.data() + offset, static_cast<size_t>(len)) };
+                    std::string_view(full.data() + offset, static_cast<size_t>(len)) };
             }
             case SERVICE:
                 return { GetFile(), service_descriptor()->name() };

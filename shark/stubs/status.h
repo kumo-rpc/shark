@@ -32,7 +32,7 @@
 
 #include <string>
 
-#include <shark/stubs/stringpiece.h>
+#include <string_view>
 
 #include <shark/port_def.inc>
 
@@ -69,7 +69,7 @@ class SHARK_EXPORT Status {
   // code, and error message.  If "code == 0", error_message is
   // ignored and a Status object identical to Status::kOk is
   // constructed.
-  Status(StatusCode error_code, StringPiece error_message);
+  Status(StatusCode error_code, std::string_view error_message);
   Status(const Status&);
   Status& operator=(const Status& x);
   ~Status() {}
@@ -77,7 +77,7 @@ class SHARK_EXPORT Status {
   // Accessor
   bool ok() const { return error_code_ == StatusCode::kOk; }
   StatusCode code() const { return error_code_; }
-  StringPiece message() const {
+  std::string_view message() const {
     return error_message_;
   }
 
@@ -127,22 +127,22 @@ SHARK_EXPORT bool IsUnknown(const Status& status);
 // These functions are intentionally named `*Error` rather than `*Status` to
 // match the names from Abseil:
 // https://github.com/abseil/abseil-cpp/blob/2e9532cc6c701a8323d0cffb468999ab804095ab/absl/status/status.h#L716
-SHARK_EXPORT Status AbortedError(StringPiece message);
-SHARK_EXPORT Status AlreadyExistsError(StringPiece message);
-SHARK_EXPORT Status CancelledError(StringPiece message);
-SHARK_EXPORT Status DataLossError(StringPiece message);
-SHARK_EXPORT Status DeadlineExceededError(StringPiece message);
-SHARK_EXPORT Status FailedPreconditionError(StringPiece message);
-SHARK_EXPORT Status InternalError(StringPiece message);
-SHARK_EXPORT Status InvalidArgumentError(StringPiece message);
-SHARK_EXPORT Status NotFoundError(StringPiece message);
-SHARK_EXPORT Status OutOfRangeError(StringPiece message);
-SHARK_EXPORT Status PermissionDeniedError(StringPiece message);
-SHARK_EXPORT Status ResourceExhaustedError(StringPiece message);
-SHARK_EXPORT Status UnauthenticatedError(StringPiece message);
-SHARK_EXPORT Status UnavailableError(StringPiece message);
-SHARK_EXPORT Status UnimplementedError(StringPiece message);
-SHARK_EXPORT Status UnknownError(StringPiece message);
+SHARK_EXPORT Status AbortedError(std::string_view message);
+SHARK_EXPORT Status AlreadyExistsError(std::string_view message);
+SHARK_EXPORT Status CancelledError(std::string_view message);
+SHARK_EXPORT Status DataLossError(std::string_view message);
+SHARK_EXPORT Status DeadlineExceededError(std::string_view message);
+SHARK_EXPORT Status FailedPreconditionError(std::string_view message);
+SHARK_EXPORT Status InternalError(std::string_view message);
+SHARK_EXPORT Status InvalidArgumentError(std::string_view message);
+SHARK_EXPORT Status NotFoundError(std::string_view message);
+SHARK_EXPORT Status OutOfRangeError(std::string_view message);
+SHARK_EXPORT Status PermissionDeniedError(std::string_view message);
+SHARK_EXPORT Status ResourceExhaustedError(std::string_view message);
+SHARK_EXPORT Status UnauthenticatedError(std::string_view message);
+SHARK_EXPORT Status UnavailableError(std::string_view message);
+SHARK_EXPORT Status UnimplementedError(std::string_view message);
+SHARK_EXPORT Status UnknownError(std::string_view message);
 
 }  // namespace status_internal
 

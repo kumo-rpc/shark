@@ -59,10 +59,10 @@ namespace shark::compiler::cpp {
     namespace {
 
         void MaySetAnnotationVariable(const Options& options,
-            StringPiece annotation_name,
-            StringPiece substitute_template_prefix,
-            StringPiece prepared_template,
-            int field_index, StringPiece access_type,
+            std::string_view annotation_name,
+            std::string_view substitute_template_prefix,
+            std::string_view prepared_template,
+            int field_index, std::string_view access_type,
             std::map<std::string, std::string>* variables) {
             if (options.field_listener_options.forbidden_field_listener_events.count(
                     std::string(annotation_name)))
@@ -73,8 +73,8 @@ namespace shark::compiler::cpp {
         }
 
         std::string GenerateTemplateForOneofString(const FieldDescriptor* descriptor,
-            StringPiece proto_ns,
-            StringPiece field_member) {
+            std::string_view proto_ns,
+            std::string_view field_member) {
             std::string field_name = shark::compiler::cpp::FieldName(descriptor);
             std::string field_pointer = descriptor->options().ctype() == shark::FieldOptions_CType::STRING
                 ? "$0.UnsafeGetPointer()"
@@ -102,7 +102,7 @@ namespace shark::compiler::cpp {
         }
 
         std::string GenerateTemplateForSingleString(const FieldDescriptor* descriptor,
-            StringPiece field_member) {
+            std::string_view field_member) {
             if (descriptor->default_value_string().empty()) {
                 return StrCat("&", field_member);
             }

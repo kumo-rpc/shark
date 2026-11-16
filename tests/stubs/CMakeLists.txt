@@ -68,18 +68,6 @@ kmcmake_cc_test(
 
 
 kmcmake_cc_test(
-        NAME stringpiece_unittest
-        MODULE stubs
-        SOURCES
-        stringpiece_unittest.cc
-        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
-        LINKS
-        ${PROJECT_NAME}::test_common_static
-        ${PROJECT_NAME}::shark_static
-        GTest::gmock_main
-)
-
-kmcmake_cc_test(
         NAME stringprintf_unittest
         MODULE stubs
         SOURCES

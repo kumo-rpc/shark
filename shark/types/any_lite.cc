@@ -36,8 +36,8 @@
 
 namespace shark::internal {
 
-std::string GetTypeUrl(StringPiece message_name,
-                       StringPiece type_url_prefix) {
+std::string GetTypeUrl(std::string_view message_name,
+                       std::string_view type_url_prefix) {
   if (!type_url_prefix.empty() &&
       type_url_prefix[type_url_prefix.size() - 1] == '/') {
     return StrCat(type_url_prefix, message_name);
@@ -51,13 +51,13 @@ const char kTypeGoogleApisComPrefix[] = "type.googleapis.com/";
 const char kTypeGoogleProdComPrefix[] = "type.googleprod.com/";
 
 bool AnyMetadata::InternalPackFrom(Arena* arena, const MessageLite& message,
-                                   StringPiece type_url_prefix,
-                                   StringPiece type_name) {
+                                   std::string_view type_url_prefix,
+                                   std::string_view type_name) {
   type_url_->Set(GetTypeUrl(type_name, type_url_prefix), arena);
   return message.SerializeToString(value_->Mutable(arena));
 }
 
-bool AnyMetadata::InternalUnpackTo(StringPiece type_name,
+bool AnyMetadata::InternalUnpackTo(std::string_view type_name,
                                    MessageLite* message) const {
   if (!InternalIs(type_name)) {
     return false;
@@ -65,14 +65,14 @@ bool AnyMetadata::InternalUnpackTo(StringPiece type_name,
   return message->ParseFromString(value_->Get());
 }
 
-bool AnyMetadata::InternalIs(StringPiece type_name) const {
-  StringPiece type_url = type_url_->Get();
+bool AnyMetadata::InternalIs(std::string_view type_name) const {
+  std::string_view type_url = type_url_->Get();
   return type_url.size() >= type_name.size() + 1 &&
          type_url[type_url.size() - type_name.size() - 1] == '/' &&
          turbo::ends_with(type_url, type_name);
 }
 
-bool ParseAnyTypeUrl(StringPiece type_url, std::string* url_prefix,
+bool ParseAnyTypeUrl(std::string_view type_url, std::string* url_prefix,
                      std::string* full_type_name) {
   size_t pos = type_url.find_last_of('/');
   if (pos == std::string::npos || pos + 1 == type_url.size()) {
@@ -85,7 +85,7 @@ bool ParseAnyTypeUrl(StringPiece type_url, std::string* url_prefix,
   return true;
 }
 
-bool ParseAnyTypeUrl(StringPiece type_url, std::string* full_type_name) {
+bool ParseAnyTypeUrl(std::string_view type_url, std::string* full_type_name) {
   return ParseAnyTypeUrl(type_url, nullptr, full_type_name);
 }
 

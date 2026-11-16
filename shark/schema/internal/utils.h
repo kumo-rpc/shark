@@ -172,7 +172,7 @@ namespace shark {
         // Class to remove an enum prefix from enum values.
         class PrefixRemover {
         public:
-            PrefixRemover(StringPiece prefix) {
+            PrefixRemover(std::string_view prefix) {
                 // Strip underscores and lower-case the prefix.
                 for (char character : prefix) {
                     if (character != '_') {
@@ -183,7 +183,7 @@ namespace shark {
 
             // Tries to remove the enum prefix from this enum value.
             // If this is not possible, returns the input verbatim.
-            std::string MaybeRemove(StringPiece str) {
+            std::string MaybeRemove(std::string_view str) {
                 // We can't just lowercase and strip str and look for a prefix.
                 // We need to properly recognize the difference between:
                 //
@@ -241,7 +241,7 @@ namespace shark {
         //
         // The keys to these hash-maps are (parent, name) or (parent, number) pairs.
 
-        typedef std::pair<const void*, StringPiece> PointerStringPair;
+        typedef std::pair<const void*, std::string_view> PointerStringPair;
 
         typedef std::pair<const Descriptor*, int> DescriptorIntPair;
 
@@ -270,7 +270,7 @@ namespace shark {
         struct PointerStringPairHash {
             size_t operator()(const PointerStringPair& p) const {
                 static const size_t prime = 16777619;
-                hash<StringPiece> string_hash;
+                hash<std::string_view> string_hash;
                 return reinterpret_cast<size_t>(p.first) * prime ^ static_cast<size_t>(string_hash(p.second));
             }
 
@@ -290,7 +290,7 @@ namespace shark {
 
             template <typename T>
             size_t operator()(const T& s) const {
-                return HASH_FXN<StringPiece> { }(s.full_name());
+                return HASH_FXN<std::string_view> { }(s.full_name());
             }
         };
         struct SymbolByFullNameEq {
@@ -321,8 +321,8 @@ namespace shark {
         };
         using SymbolsByParentSet = HASH_SET<Symbol, SymbolByParentHash, SymbolByParentEq>;
 
-        typedef HASH_MAP<StringPiece, const FileDescriptor*,
-            HASH_FXN<StringPiece>>
+        typedef HASH_MAP<std::string_view, const FileDescriptor*,
+            HASH_FXN<std::string_view>>
             FilesByNameMap;
 
         typedef HASH_MAP<PointerStringPair, const FieldDescriptor*,

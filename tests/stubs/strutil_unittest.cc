@@ -450,7 +450,7 @@ TEST(Base64, EscapeAndUnescape) {
     const unsigned char* unsigned_plaintext =
       reinterpret_cast<const unsigned char*>(base64_tests[i].plaintext);
 
-    StringPiece plaintext(base64_tests[i].plaintext,
+    std::string_view plaintext(base64_tests[i].plaintext,
                           base64_tests[i].plain_length);
 
     cipher_length = strlen(base64_tests[i].ciphertext);
@@ -484,7 +484,7 @@ TEST(Base64, EscapeAndUnescape) {
     // If we decode it back:
     decode_str.clear();
     EXPECT_TRUE(
-        Base64Unescape(StringPiece(encode_buffer, cipher_length), &decode_str));
+        Base64Unescape(std::string_view(encode_buffer, cipher_length), &decode_str));
 
     //    Is it of the expected length?
     EXPECT_EQ(base64_tests[i].plain_length, decode_str.length());
@@ -501,7 +501,7 @@ TEST(Base64, EscapeAndUnescape) {
 
     std::string decoded("this junk should be ignored");
     EXPECT_TRUE(
-        Base64Unescape(StringPiece(encode_buffer, cipher_length), &decoded));
+        Base64Unescape(std::string_view(encode_buffer, cipher_length), &decoded));
     EXPECT_EQ(decoded.size(), base64_tests[i].plain_length);
     EXPECT_EQ_ARRAY(decoded.size(), decoded, base64_tests[i].plaintext, i);
 
@@ -519,7 +519,7 @@ TEST(Base64, EscapeAndUnescape) {
       std::string decoded2("this junk should also be ignored");
       *first_equals = '\0';
       EXPECT_TRUE(Base64Unescape(
-          StringPiece(encode_buffer, first_equals - encode_buffer), &decoded2));
+          std::string_view(encode_buffer, first_equals - encode_buffer), &decoded2));
       EXPECT_EQ(decoded.size(), base64_tests[i].plain_length);
       EXPECT_EQ_ARRAY(decoded.size(), decoded, base64_tests[i].plaintext, i);
 
@@ -529,7 +529,7 @@ TEST(Base64, EscapeAndUnescape) {
       *first_equals = ' ';
       *(first_equals+1) = '\0';
       EXPECT_TRUE(Base64Unescape(
-          StringPiece(encode_buffer, first_equals - encode_buffer + 1),
+          std::string_view(encode_buffer, first_equals - encode_buffer + 1),
           &decoded2));
       EXPECT_EQ(decoded.size(), base64_tests[i].plain_length);
       EXPECT_EQ_ARRAY(decoded.size(), decoded, base64_tests[i].plaintext, i);
@@ -541,7 +541,7 @@ TEST(Base64, EscapeAndUnescape) {
       *(first_equals+1) = '\0';
       EXPECT_TRUE(
           !Base64Unescape(
-              StringPiece(encode_buffer, first_equals - encode_buffer + 1),
+              std::string_view(encode_buffer, first_equals - encode_buffer + 1),
               &decoded2));
 
       int len;
@@ -557,7 +557,7 @@ TEST(Base64, EscapeAndUnescape) {
       }
       decoded2.assign("this junk should be ignored");
       EXPECT_TRUE(
-          Base64Unescape(StringPiece(encode_buffer, len), &decoded2));
+          Base64Unescape(std::string_view(encode_buffer, len), &decoded2));
       EXPECT_EQ(decoded.size(), base64_tests[i].plain_length);
       EXPECT_EQ_ARRAY(decoded.size(), decoded, base64_tests[i].plaintext, i);
 
@@ -572,7 +572,7 @@ TEST(Base64, EscapeAndUnescape) {
         len = first_equals - encode_buffer + 3;
       }
       EXPECT_TRUE(
-          !Base64Unescape(StringPiece(encode_buffer, len), &decoded2));
+          !Base64Unescape(std::string_view(encode_buffer, len), &decoded2));
     }
 
     // Cool! the basic Base64 encoder/decoder works.
@@ -676,7 +676,7 @@ TEST(Base64, EscapeAndUnescape) {
 
     // Let's try the string version of the decoder
     decoded = "this junk should be ignored";
-    EXPECT_TRUE(WebSafeBase64Unescape(StringPiece(encode_buffer, cipher_length),
+    EXPECT_TRUE(WebSafeBase64Unescape(std::string_view(encode_buffer, cipher_length),
                                       &decoded));
     EXPECT_EQ(decoded.size(), base64_tests[i].plain_length);
     EXPECT_EQ_ARRAY(decoded.size(), decoded, base64_tests[i].plaintext, i);
@@ -753,7 +753,7 @@ TEST(Base64, EscapeAndUnescape) {
 
     // Let's try the string version of the decoder
     decoded = "this junk should be ignored";
-    EXPECT_TRUE(WebSafeBase64Unescape(StringPiece(encode_buffer, cipher_length),
+    EXPECT_TRUE(WebSafeBase64Unescape(std::string_view(encode_buffer, cipher_length),
                                       &decoded));
     EXPECT_EQ(decoded.size(), base64_tests[i].plain_length);
     EXPECT_EQ_ARRAY(decoded.size(), decoded, base64_tests[i].plaintext, i);
@@ -785,7 +785,7 @@ TEST(Base64, EscapeAndUnescape) {
   {
     const char* bad_data = "ab-/";
     std::string buf;
-    EXPECT_FALSE(Base64Unescape(StringPiece(bad_data), &buf));
+    EXPECT_FALSE(Base64Unescape(std::string_view(bad_data), &buf));
     EXPECT_TRUE(!WebSafeBase64Unescape(bad_data, &buf));
     EXPECT_TRUE(buf.empty());
   }

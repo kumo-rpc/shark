@@ -39,7 +39,7 @@ namespace shark::strings {
 
 void ByteSource::CopyTo(ByteSink* sink, size_t n) {
   while (n > 0) {
-    StringPiece fragment = Peek();
+    std::string_view fragment = Peek();
     if (fragment.empty()) {
       GOOGLE_LOG(DFATAL) << "ByteSource::CopyTo() overran input.";
       break;
@@ -147,7 +147,7 @@ size_t ArrayByteSource::Available() const {
   return input_.size();
 }
 
-StringPiece ArrayByteSource::Peek() {
+std::string_view ArrayByteSource::Peek() {
   return input_;
 }
 
@@ -170,9 +170,9 @@ size_t LimitByteSource::Available() const {
   return available;
 }
 
-StringPiece LimitByteSource::Peek() {
-  StringPiece piece = source_->Peek();
-  return StringPiece(piece.data(), std::min(piece.size(), limit_));
+std::string_view LimitByteSource::Peek() {
+  std::string_view piece = source_->Peek();
+  return std::string_view(piece.data(), std::min(piece.size(), limit_));
 }
 
 void LimitByteSource::Skip(size_t n) {

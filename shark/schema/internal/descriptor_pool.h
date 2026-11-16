@@ -316,14 +316,14 @@ namespace shark {
         // Return true if the given name is a sub-symbol of any non-package
         // descriptor that already exists in the descriptor pool.  (The full
         // definition of such types is already known.)
-        bool IsSubSymbolOfBuiltType(StringPiece name) const;
+        bool IsSubSymbolOfBuiltType(std::string_view name) const;
 
         // Tries to find something in the fallback database and link in the
         // corresponding proto file.  Returns true if successful, in which case
         // the caller should search for the thing again.  These are declared
         // const because they are called by (semantically) const methods.
-        bool TryFindFileInFallbackDatabase(StringPiece name) const;
-        bool TryFindSymbolInFallbackDatabase(StringPiece name) const;
+        bool TryFindFileInFallbackDatabase(std::string_view name) const;
+        bool TryFindSymbolInFallbackDatabase(std::string_view name) const;
         bool TryFindExtensionInFallbackDatabase(const Descriptor* containing_type,
             int field_number) const;
 
@@ -344,13 +344,13 @@ namespace shark {
         // symbol is defined if necessary. Will create a placeholder if the type
         // doesn't exist in the fallback database, or the file doesn't build
         // successfully.
-        Symbol CrossLinkOnDemandHelper(StringPiece name,
+        Symbol CrossLinkOnDemandHelper(std::string_view name,
             bool expecting_enum) const;
 
         // Create a placeholder FileDescriptor of the specified name
-        FileDescriptor* NewPlaceholderFile(StringPiece name) const;
+        FileDescriptor* NewPlaceholderFile(std::string_view name) const;
         FileDescriptor* NewPlaceholderFileWithMutexHeld(
-            StringPiece name, internal::FlatAllocator& alloc) const;
+            std::string_view name, internal::FlatAllocator& alloc) const;
 
         enum PlaceholderType {
             PLACEHOLDER_MESSAGE,
@@ -358,9 +358,9 @@ namespace shark {
             PLACEHOLDER_EXTENDABLE_MESSAGE
         };
         // Create a placeholder Descriptor of the specified name
-        Symbol NewPlaceholder(StringPiece name,
+        Symbol NewPlaceholder(std::string_view name,
             PlaceholderType placeholder_type) const;
-        Symbol NewPlaceholderWithMutexHeld(StringPiece name,
+        Symbol NewPlaceholderWithMutexHeld(std::string_view name,
             PlaceholderType placeholder_type) const;
 
         // If fallback_database_ is nullptr, this is nullptr.  Otherwise, this is a

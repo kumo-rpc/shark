@@ -103,16 +103,16 @@ namespace shark {
 
         // Find symbols.  This returns a null Symbol (symbol.IsNull() is true)
         // if not found.
-        inline Symbol FindSymbol(StringPiece key) const;
+        inline Symbol FindSymbol(std::string_view key) const;
 
         // This implements the body of DescriptorPool::Find*ByName().  It should
         // really be a private method of DescriptorPool, but that would require
         // declaring Symbol in descriptor.h, which would drag all kinds of other
         // stuff into the header.  Yay C++.
-        Symbol FindByNameHelper(const DescriptorPool* pool, StringPiece name);
+        Symbol FindByNameHelper(const DescriptorPool* pool, std::string_view name);
 
         // These return nullptr if not found.
-        inline const FileDescriptor* FindFile(StringPiece key) const;
+        inline const FileDescriptor* FindFile(std::string_view key) const;
         inline const FieldDescriptor* FindExtension(const Descriptor* extendee,
             int number) const;
         inline void FindAllExtensions(const Descriptor* extendee,
@@ -197,7 +197,7 @@ namespace shark {
         std::vector<DescriptorIntPair> extensions_after_checkpoint_;
     };
 
-    inline Symbol DescriptorPool::Tables::FindSymbol(StringPiece key) const {
+    inline Symbol DescriptorPool::Tables::FindSymbol(std::string_view key) const {
         Symbol::QueryKey name;
         name.name = key;
         auto it = symbols_by_name_.find(name);
@@ -205,7 +205,7 @@ namespace shark {
     }
 
     inline const FileDescriptor* DescriptorPool::Tables::FindFile(
-    StringPiece key) const {
+    std::string_view key) const {
         return FindPtrOrNull(files_by_name_, key);
     }
 

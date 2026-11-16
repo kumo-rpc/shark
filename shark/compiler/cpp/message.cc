@@ -82,7 +82,7 @@ namespace shark {
                 // masks must be non-zero.
                 std::string ConditionalToCheckBitmasks(
                     const std::vector<uint32_t>& masks, bool return_success = true,
-                    StringPiece has_bits_var = "_impl_._has_bits_") {
+                    std::string_view has_bits_var = "_impl_._has_bits_") {
                     std::vector<std::string> parts;
                     for (int i = 0; i < masks.size(); i++) {
                         if (masks[i] == 0)
@@ -506,9 +506,9 @@ namespace shark {
                 }
 
                 void MaySetAnnotationVariable(const Options& options,
-                    StringPiece annotation_name,
-                    StringPiece injector_template_prefix,
-                    StringPiece injector_template_suffix,
+                    std::string_view annotation_name,
+                    std::string_view injector_template_prefix,
+                    std::string_view injector_template_suffix,
                     std::map<std::string, std::string>* variables) {
                     if (options.field_listener_options.forbidden_field_listener_events.count(
                             std::string(annotation_name)))
@@ -543,8 +543,8 @@ namespace shark {
                     if (!HasTracker(descriptor, options)) {
                         return;
                     }
-                    StringPiece tracker = (*variables)["tracker"];
-                    StringPiece extensions = (*variables)["extensions"];
+                    std::string_view tracker = (*variables)["tracker"];
+                    std::string_view extensions = (*variables)["extensions"];
                     for (const auto& annotation : accessor_annotations_to_hooks) {
                         const std::string& annotation_name = annotation.first;
                         const std::string& listener_call = annotation.second;
@@ -1681,9 +1681,7 @@ $annotate_repeated_extension_list_mutable$
                     "friend class ::$proto_ns$::internal::AnyMetadata;\n"
                     "static $1$ FullMessageName() {\n"
                     "  return \"$full_name$\";\n"
-                    "}\n",
-                    options_.opensource_runtime ? "::SHARK_NAMESPACE_ID::StringPiece"
-                                                : "::StringPiece");
+                    "}\n", "::std::string_view");
 
                 format(
                     // TODO(gerbens) Make this private! Currently people are deriving from

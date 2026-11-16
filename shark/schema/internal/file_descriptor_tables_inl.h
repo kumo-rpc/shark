@@ -31,7 +31,7 @@ namespace shark {
     }
 
     inline Symbol FileDescriptorTables::FindNestedSymbol(
-    const void* parent, StringPiece name) const {
+    const void* parent, std::string_view name) const {
         Symbol::QueryKey query;
         query.name = name;
         query.parent = parent;
@@ -58,7 +58,7 @@ namespace shark {
     }
 
     inline const FieldDescriptor* FileDescriptorTables::FindFieldByLowercaseName(
-    const void* parent, StringPiece lowercase_name) const {
+    const void* parent, std::string_view lowercase_name) const {
         internal::call_once(
             fields_by_lowercase_name_once_,
             &FileDescriptorTables::FieldsByLowercaseNamesLazyInitStatic, this);
@@ -68,7 +68,7 @@ namespace shark {
     }
 
     inline const FieldDescriptor* FileDescriptorTables::FindFieldByCamelcaseName(
-        const void* parent, StringPiece camelcase_name) const {
+        const void* parent, std::string_view camelcase_name) const {
         internal::call_once(
             fields_by_camelcase_name_once_,
             FileDescriptorTables::FieldsByCamelcaseNamesLazyInitStatic, this);

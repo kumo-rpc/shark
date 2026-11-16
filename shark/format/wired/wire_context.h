@@ -63,11 +63,11 @@ namespace shark {
 
         // Template code below needs to know about the existence of these functions.
         SHARK_EXPORT void WriteVarint(uint32_t num, uint64_t val, std::string* s);
-        SHARK_EXPORT void WriteLengthDelimited(uint32_t num, StringPiece val,
+        SHARK_EXPORT void WriteLengthDelimited(uint32_t num, std::string_view val,
             std::string* s);
         // Inline because it is just forwarding to s->WriteVarint
         inline void WriteVarint(uint32_t num, uint64_t val, UnknownFieldSet* s);
-        inline void WriteLengthDelimited(uint32_t num, StringPiece val,
+        inline void WriteLengthDelimited(uint32_t num, std::string_view val,
             UnknownFieldSet* s);
 
         // The basic abstraction the parser is designed for is a slight modification
@@ -230,7 +230,7 @@ namespace shark {
                 return res.second;
             }
 
-            const char* InitFrom(StringPiece flat) {
+            const char* InitFrom(std::string_view flat) {
                 overall_limit_ = 0;
                 if (flat.size() > kSlopBytes) {
                     limit_ = kSlopBytes;
@@ -864,7 +864,7 @@ namespace shark {
 
         // Helper for verification of utf8
         SHARK_EXPORT
-        bool VerifyUTF8(StringPiece s, const char* field_name);
+        bool VerifyUTF8(std::string_view s, const char* field_name);
 
         inline bool VerifyUTF8(const std::string* s, const char* field_name) {
             return VerifyUTF8(*s, field_name);

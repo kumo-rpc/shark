@@ -535,8 +535,8 @@ namespace shark {
             return ReadBytesToString(input, *p);
         }
 
-        void PrintUTF8ErrorLog(StringPiece message_name,
-            StringPiece field_name, const char* operation_str,
+        void PrintUTF8ErrorLog(std::string_view message_name,
+            std::string_view field_name, const char* operation_str,
             bool emit_stacktrace) {
             std::string stacktrace;
             (void)emit_stacktrace; // Parameter is used by Google-internal code.
