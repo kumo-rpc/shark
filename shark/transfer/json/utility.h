@@ -41,8 +41,8 @@
 #include <shark/types/type.skp.h>
 #include <shark/types/repeated_field.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/statusor.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/result.h>
+#include <turbo/status/status.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

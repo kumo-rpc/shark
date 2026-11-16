@@ -32,7 +32,7 @@
 
 #include <shark/stubs/macros.h>
 #include <shark/stubs/port.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <string_view>
 #include <turbo/numeric/int128.h>
 #include <shark/port_def.inc>
@@ -85,7 +85,7 @@ class SHARK_EXPORT LogMessage {
   LogMessage& operator<<(double value);
   LogMessage& operator<<(void* value);
   LogMessage& operator<<(const std::string_view& value);
-  LogMessage& operator<<(const util::Status& status);
+  LogMessage& operator<<(const turbo::Status& status);
   LogMessage& operator<<(const turbo::uint128& value);
 
  private:

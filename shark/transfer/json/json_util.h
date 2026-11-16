@@ -33,7 +33,7 @@
 #pragma once
 
 #include <shark/stubs/bytestream.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <shark/stubs/strutil.h>
 #include <shark/message.h>
 #include <shark/transfer/json/type_resolver.h>
@@ -91,11 +91,11 @@ typedef JsonPrintOptions JsonOptions;
 // Converts from protobuf message to JSON and appends it to |output|. This is a
 // simple wrapper of BinaryToJsonString(). It will use the DescriptorPool of the
 // passed-in message to resolve Any types.
-SHARK_EXPORT util::Status MessageToJsonString(const Message& message,
+SHARK_EXPORT turbo::Status MessageToJsonString(const Message& message,
                                                  std::string* output,
                                                  const JsonOptions& options);
 
-inline util::Status MessageToJsonString(const Message& message,
+inline turbo::Status MessageToJsonString(const Message& message,
                                         std::string* output) {
   return MessageToJsonString(message, output, JsonOptions());
 }
@@ -103,10 +103,10 @@ inline util::Status MessageToJsonString(const Message& message,
 // Converts from JSON to protobuf message. This is a simple wrapper of
 // JsonStringToBinary(). It will use the DescriptorPool of the passed-in
 // message to resolve Any types.
-SHARK_EXPORT util::Status JsonStringToMessage(
+SHARK_EXPORT turbo::Status JsonStringToMessage(
     std::string_view input, Message* message, const JsonParseOptions& options);
 
-inline util::Status JsonStringToMessage(std::string_view input,
+inline turbo::Status JsonStringToMessage(std::string_view input,
                                         Message* message) {
   return JsonStringToMessage(input, message, JsonParseOptions());
 }
@@ -117,12 +117,12 @@ inline util::Status JsonStringToMessage(std::string_view input,
 //   2. input is not valid protobuf wire format, or conflicts with the type
 //      information returned by TypeResolver.
 // Note that unknown fields will be discarded silently.
-SHARK_EXPORT util::Status BinaryToJsonStream(
+SHARK_EXPORT turbo::Status BinaryToJsonStream(
     TypeResolver* resolver, const std::string& type_url,
     io::ZeroCopyInputStream* binary_input,
     io::ZeroCopyOutputStream* json_output, const JsonPrintOptions& options);
 
-inline util::Status BinaryToJsonStream(TypeResolver* resolver,
+inline turbo::Status BinaryToJsonStream(TypeResolver* resolver,
                                        const std::string& type_url,
                                        io::ZeroCopyInputStream* binary_input,
                                        io::ZeroCopyOutputStream* json_output) {
@@ -130,12 +130,12 @@ inline util::Status BinaryToJsonStream(TypeResolver* resolver,
                             JsonPrintOptions());
 }
 
-SHARK_EXPORT util::Status BinaryToJsonString(
+SHARK_EXPORT turbo::Status BinaryToJsonString(
     TypeResolver* resolver, const std::string& type_url,
     const std::string& binary_input, std::string* json_output,
     const JsonPrintOptions& options);
 
-inline util::Status BinaryToJsonString(TypeResolver* resolver,
+inline turbo::Status BinaryToJsonString(TypeResolver* resolver,
                                        const std::string& type_url,
                                        const std::string& binary_input,
                                        std::string* json_output) {
@@ -148,12 +148,12 @@ inline util::Status BinaryToJsonString(TypeResolver* resolver,
 //   1. TypeResolver fails to resolve a type.
 //   2. input is not valid JSON format, or conflicts with the type
 //      information returned by TypeResolver.
-SHARK_EXPORT util::Status JsonToBinaryStream(
+SHARK_EXPORT turbo::Status JsonToBinaryStream(
     TypeResolver* resolver, const std::string& type_url,
     io::ZeroCopyInputStream* json_input,
     io::ZeroCopyOutputStream* binary_output, const JsonParseOptions& options);
 
-inline util::Status JsonToBinaryStream(
+inline turbo::Status JsonToBinaryStream(
     TypeResolver* resolver, const std::string& type_url,
     io::ZeroCopyInputStream* json_input,
     io::ZeroCopyOutputStream* binary_output) {
@@ -161,12 +161,12 @@ inline util::Status JsonToBinaryStream(
                             JsonParseOptions());
 }
 
-SHARK_EXPORT util::Status JsonToBinaryString(
+SHARK_EXPORT turbo::Status JsonToBinaryString(
     TypeResolver* resolver, const std::string& type_url,
     std::string_view json_input, std::string* binary_output,
     const JsonParseOptions& options);
 
-inline util::Status JsonToBinaryString(TypeResolver* resolver,
+inline turbo::Status JsonToBinaryString(TypeResolver* resolver,
                                        const std::string& type_url,
                                        std::string_view json_input,
                                        std::string* binary_output) {

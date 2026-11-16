@@ -35,9 +35,9 @@
 #include <string>
 
 #include <shark/stubs/common.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -60,7 +60,7 @@ class ObjectWriter;
 //
 // Here is an example usage:
 // JsonStreamParser parser(ow_.get());
-// util::Status result = parser.Parse(chunk1);
+// turbo::Status result = parser.Parse(chunk1);
 // result.Update(parser.Parse(chunk2));
 // result.Update(parser.FinishParse());
 // GOOGLE_DCHECK(result.ok()) << "Failed to parse JSON";
@@ -77,14 +77,14 @@ class SHARK_EXPORT JsonStreamParser {
   // status is non-ok, the status might contain a payload ParseErrorType with
   // type_url kParseErrorTypeUrl and a payload containing string snippet of the
   // error with type_url kParseErrorSnippetUrl.
-  util::Status Parse(std::string_view json);
+  turbo::Status Parse(std::string_view json);
 
 
   // Finish parsing the JSON string. If the returned status is non-ok, the
   // status might contain a payload ParseErrorType with type_url
   // kParseErrorTypeUrl and a payload containing string snippet of the error
   // with type_url kParseErrorSnippetUrl.
-  util::Status FinishParse();
+  turbo::Status FinishParse();
 
 
   // Sets the max recursion depth of JSON message to be deserialized. JSON
@@ -160,69 +160,69 @@ class SHARK_EXPORT JsonStreamParser {
   };
 
   // Parses a single chunk of JSON, returning an error if the JSON was invalid.
-  util::Status ParseChunk(std::string_view chunk);
+  turbo::Status ParseChunk(std::string_view chunk);
 
   // Runs the parser based on stack_ and p_, until the stack is empty or p_ runs
   // out of data. If we unexpectedly run out of p_ we push the latest back onto
   // the stack and return.
-  util::Status RunParser();
+  turbo::Status RunParser();
 
   // Parses a value from p_ and writes it to ow_.
   // A value may be an object, array, true, false, null, string or number.
-  util::Status ParseValue(TokenType type);
+  turbo::Status ParseValue(TokenType type);
 
   // Parses a string and writes it out to the ow_.
-  util::Status ParseString();
+  turbo::Status ParseString();
 
   // Parses a string, storing the result in parsed_.
-  util::Status ParseStringHelper();
+  turbo::Status ParseStringHelper();
 
   // This function parses unicode escape sequences in strings. It returns an
   // error when there's a parsing error, either the size is not the expected
   // size or a character is not a hex digit.  When it returns str will contain
   // what has been successfully parsed so far.
-  util::Status ParseUnicodeEscape();
+  turbo::Status ParseUnicodeEscape();
 
   // Expects p_ to point to a JSON number, writes the number to the writer using
   // the appropriate Render method based on the type of number.
-  util::Status ParseNumber();
+  turbo::Status ParseNumber();
 
   // Parse a number into a NumberResult, reporting an error if no number could
   // be parsed. This method will try to parse into a uint64, int64, or double
   // based on whether the number was positive or negative or had a decimal
   // component.
-  util::Status ParseNumberHelper(NumberResult* result);
+  turbo::Status ParseNumberHelper(NumberResult* result);
 
   // Parse a number as double into a NumberResult.
-  util::Status ParseDoubleHelper(const std::string& number,
+  turbo::Status ParseDoubleHelper(const std::string& number,
                                  NumberResult* result);
 
   // Handles a { during parsing of a value.
-  util::Status HandleBeginObject();
+  turbo::Status HandleBeginObject();
 
   // Parses from the ENTRY state.
-  util::Status ParseEntry(TokenType type);
+  turbo::Status ParseEntry(TokenType type);
 
   // Parses from the ENTRY_MID state.
-  util::Status ParseEntryMid(TokenType type);
+  turbo::Status ParseEntryMid(TokenType type);
 
   // Parses from the OBJ_MID state.
-  util::Status ParseObjectMid(TokenType type);
+  turbo::Status ParseObjectMid(TokenType type);
 
   // Handles a [ during parsing of a value.
-  util::Status HandleBeginArray();
+  turbo::Status HandleBeginArray();
 
   // Parses from the ARRAY_VALUE state.
-  util::Status ParseArrayValue(TokenType type);
+  turbo::Status ParseArrayValue(TokenType type);
 
   // Parses from the ARRAY_MID state.
-  util::Status ParseArrayMid(TokenType type);
+  turbo::Status ParseArrayMid(TokenType type);
 
   // Expects p_ to point to an unquoted literal
-  util::Status ParseTrue();
-  util::Status ParseFalse();
-  util::Status ParseNull();
-  util::Status ParseEmptyNull();
+  turbo::Status ParseTrue();
+  turbo::Status ParseFalse();
+  turbo::Status ParseNull();
+  turbo::Status ParseEmptyNull();
 
   // Whether an empty-null is allowed in the current state.
   bool IsEmptyNullAllowed(TokenType type);
@@ -230,20 +230,20 @@ class SHARK_EXPORT JsonStreamParser {
   // Whether the whole input is all whitespaces.
   bool IsInputAllWhiteSpaces(TokenType type);
 
-  // Report a failure as a util::Status.
-  util::Status ReportFailure(std::string_view message,
+  // Report a failure as a turbo::Status.
+  turbo::Status ReportFailure(std::string_view message,
                              ParseErrorType parse_code);
 
   // Report a failure due to an UNKNOWN token type. We check if we hit the
   // end of the stream and if we're finishing or not to detect what type of
   // status to return in this case.
-  util::Status ReportUnknown(std::string_view message,
+  turbo::Status ReportUnknown(std::string_view message,
                              ParseErrorType parse_code);
 
   // Helper function to check recursion depth and increment it. It will return
-  // OkStatus() if the current depth is allowed. Otherwise an error is returned.
+  // turbo::ok_status() if the current depth is allowed. Otherwise an error is returned.
   // key is used for error reporting.
-  util::Status IncrementRecursionDepth(std::string_view key) const;
+  turbo::Status IncrementRecursionDepth(std::string_view key) const;
 
   // Advance p_ past all whitespace or until the end of the string.
   void SkipWhitespace();
@@ -252,7 +252,7 @@ class SHARK_EXPORT JsonStreamParser {
   void Advance();
 
   // Expects p_ to point to the beginning of a key.
-  util::Status ParseKey();
+  turbo::Status ParseKey();
 
   // Return the type of the next token at p_.
   TokenType GetNextTokenType();

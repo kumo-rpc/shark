@@ -41,7 +41,7 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.h>
 #include <shark/stubs/bytestream.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <shark/transfer/json/datapiece.h>
 #include <shark/transfer/json/error_listener.h>
 #include <shark/transfer/json/proto_writer.h>
@@ -162,7 +162,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
 
  protected:
   // Function that renders a well known type with modified behavior.
-  typedef util::Status (*TypeRenderer)(ProtoStreamObjectWriter*,
+  typedef turbo::Status (*TypeRenderer)(ProtoStreamObjectWriter*,
                                        const DataPiece&);
 
   // Handles writing Anys out using nested object writers and the like.
@@ -371,24 +371,24 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
 
   // Renders shark.Value in struct.shark. It picks the right oneof
   // type based on value's type.
-  static util::Status RenderStructValue(ProtoStreamObjectWriter* ow,
+  static turbo::Status RenderStructValue(ProtoStreamObjectWriter* ow,
                                         const DataPiece& data);
 
   // Renders shark.Timestamp value.
-  static util::Status RenderTimestamp(ProtoStreamObjectWriter* ow,
+  static turbo::Status RenderTimestamp(ProtoStreamObjectWriter* ow,
                                       const DataPiece& data);
 
   // Renders shark.FieldMask value.
-  static util::Status RenderFieldMask(ProtoStreamObjectWriter* ow,
+  static turbo::Status RenderFieldMask(ProtoStreamObjectWriter* ow,
                                       const DataPiece& data);
 
   // Renders shark.Duration value.
-  static util::Status RenderDuration(ProtoStreamObjectWriter* ow,
+  static turbo::Status RenderDuration(ProtoStreamObjectWriter* ow,
                                      const DataPiece& data);
 
   // Renders wrapper message types for primitive types in
   // shark/types/wrappers.shark.
-  static util::Status RenderWrapperType(ProtoStreamObjectWriter* ow,
+  static turbo::Status RenderWrapperType(ProtoStreamObjectWriter* ow,
                                         const DataPiece& data);
 
   static void InitRendererMap();

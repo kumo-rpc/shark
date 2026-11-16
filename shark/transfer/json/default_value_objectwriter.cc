@@ -45,10 +45,10 @@ namespace {
 // If value is empty or if conversion fails, the default_value is returned.
 template <typename T>
 T ConvertTo(std::string_view value,
-            util::StatusOr<T> (DataPiece::*converter_fn)() const,
+            turbo::Result<T> (DataPiece::*converter_fn)() const,
             T default_value) {
   if (value.empty()) return default_value;
-  util::StatusOr<T> result = (DataPiece(value, true).*converter_fn)();
+  turbo::Result<T> result = (DataPiece(value, true).*converter_fn)();
   return result.ok() ? result.value() : default_value;
 }
 }  // namespace
@@ -280,7 +280,7 @@ const shark::Type* DefaultValueObjectWriter::Node::GetMapValueType(
       // get the field_type in this case.
       break;
     }
-    util::StatusOr<const shark::Type*> sub_type =
+    turbo::Result<const shark::Type*> sub_type =
         typeinfo->ResolveTypeUrl(sub_field.type_url());
     if (!sub_type.ok()) {
       GOOGLE_LOG(WARNING) << "Cannot resolve type '" << sub_field.type_url() << "'.";
@@ -343,7 +343,7 @@ void DefaultValueObjectWriter::Node::PopulateChildren(
 
     if (field.kind() == shark::SharkType::MESSAGE) {
       kind = OBJECT;
-      util::StatusOr<const shark::Type*> found_result =
+      turbo::Result<const shark::Type*> found_result =
           typeinfo->ResolveTypeUrl(field.type_url());
       if (!found_result.ok()) {
         // "field" is of an unknown type.
@@ -599,13 +599,13 @@ void DefaultValueObjectWriter::RenderDataPiece(std::string_view name,
   MaybePopulateChildrenOfAny(current_);
   if (current_->type() != nullptr && current_->type()->name() == kAnyType &&
       name == "@type") {
-    util::StatusOr<std::string> data_string = data.ToString();
+    turbo::Result<std::string> data_string = data.ToString();
     if (data_string.ok()) {
       const std::string& string_value = data_string.value();
       // If the type of current_ is "Any" and its "@type" field is being set
       // here, sets the type of current_ to be the type specified by the
       // "@type".
-      util::StatusOr<const shark::Type*> found_type =
+      turbo::Result<const shark::Type*> found_type =
           typeinfo_->ResolveTypeUrl(string_value);
       if (!found_type.ok()) {
         GOOGLE_LOG(WARNING) << "Failed to resolve type '" << string_value << "'.";

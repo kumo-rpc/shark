@@ -39,8 +39,8 @@
 #include <shark/stubs/once.h>
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/status.h>
-#include <shark/stubs/statusor.h>
+#include <turbo/status/status.h>
+#include <turbo/status/result.h>
 #include <shark/stubs/time.h>
 #include <shark/transfer/json/constants.h>
 #include <shark/transfer/json/field_mask_utility.h>
@@ -54,7 +54,7 @@
 
 namespace shark::util::converter {
 
-using util::Status;
+using turbo::Status;
 using ::SHARK_NAMESPACE_ID::internal::WireFormatLite;
 using std::placeholders::_1;
 
@@ -124,7 +124,7 @@ void SplitSecondsAndNanos(std::string_view input, std::string_view* seconds,
   }
 }
 
-Status GetNanosFromStringPiece(std::string_view s_nanos,
+turbo::Status GetNanosFromStringPiece(std::string_view s_nanos,
                                const char* parse_failure_message,
                                const char* exceeded_limit_message,
                                int32_t* nanos) {
@@ -141,14 +141,14 @@ Status GetNanosFromStringPiece(std::string_view s_nanos,
   // conversion to 'nanos', rather than a double, so that there is no
   // loss of precision.
   if (!s_nanos.empty() && !safe_strto32(s_nanos, &i_nanos)) {
-    return util::InvalidArgumentError(parse_failure_message);
+    return turbo::invalid_argument_error(parse_failure_message);
   }
   if (i_nanos > kNanosPerSecond || i_nanos < 0) {
-    return util::InvalidArgumentError(exceeded_limit_message);
+    return turbo::invalid_argument_error(exceeded_limit_message);
   }
   // s_nanos should only have digits. No whitespace.
   if (s_nanos.find_first_not_of("0123456789") != std::string_view::npos) {
-    return util::InvalidArgumentError(parse_failure_message);
+    return turbo::invalid_argument_error(parse_failure_message);
   }
 
   if (i_nanos > 0) {
@@ -188,12 +188,12 @@ Status GetNanosFromStringPiece(std::string_view s_nanos,
         conversion = 1;
         break;
       default:
-        return util::InvalidArgumentError(exceeded_limit_message);
+        return turbo::invalid_argument_error(exceeded_limit_message);
     }
     *nanos = i_nanos * conversion;
   }
 
-  return Status();
+  return turbo::ok_status();
 }
 
 }  // namespace
@@ -312,7 +312,7 @@ void ProtoStreamObjectWriter::AnyWriter::RenderDataPiece(
       }
     } else {
       ow_->ProtoWriter::StartObject("");
-      Status status = (*well_known_type_render_)(ow_.get(), value);
+      turbo::Status status = (*well_known_type_render_)(ow_.get(), value);
       if (!status.ok()) ow_->InvalidValue("Any", status.message());
       ow_->ProtoWriter::EndObject();
     }
@@ -327,7 +327,7 @@ void ProtoStreamObjectWriter::AnyWriter::StartAny(const DataPiece& value) {
   if (value.type() == DataPiece::TYPE_STRING) {
     type_url_ = std::string(value.str());
   } else {
-    util::StatusOr<std::string> s = value.ToString();
+    turbo::Result<std::string> s = value.ToString();
     if (!s.ok()) {
       parent_->InvalidValue("String", s.status().message());
       invalid_ = true;
@@ -336,7 +336,7 @@ void ProtoStreamObjectWriter::AnyWriter::StartAny(const DataPiece& value) {
     type_url_ = s.value();
   }
   // Resolve the type url, and report an error if we failed to resolve it.
-  util::StatusOr<const shark::Type*> resolved_type =
+  turbo::Result<const shark::Type*> resolved_type =
       parent_->typeinfo()->ResolveTypeUrl(type_url_);
   if (!resolved_type.ok()) {
     parent_->InvalidValue("Any", resolved_type.status().message());
@@ -911,18 +911,18 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::EndList() {
   return this;
 }
 
-Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter* ow,
+turbo::Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter* ow,
                                                   const DataPiece& data) {
   std::string struct_field_name;
   switch (data.type()) {
     case DataPiece::TYPE_INT32: {
       if (ow->options_.struct_integers_as_strings) {
-        util::StatusOr<int32_t> int_value = data.ToInt32();
+        turbo::Result<int32_t> int_value = data.ToInt32();
         if (int_value.ok()) {
           ow->ProtoWriter::RenderDataPiece(
               "string_value",
               DataPiece(SimpleDtoa(int_value.value()), true));
-          return Status();
+          return turbo::ok_status();
         }
       }
       struct_field_name = "number_value";
@@ -930,12 +930,12 @@ Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter* ow,
     }
     case DataPiece::TYPE_UINT32: {
       if (ow->options_.struct_integers_as_strings) {
-        util::StatusOr<uint32_t> int_value = data.ToUint32();
+        turbo::Result<uint32_t> int_value = data.ToUint32();
         if (int_value.ok()) {
           ow->ProtoWriter::RenderDataPiece(
               "string_value",
               DataPiece(SimpleDtoa(int_value.value()), true));
-          return Status();
+          return turbo::ok_status();
         }
       }
       struct_field_name = "number_value";
@@ -945,11 +945,11 @@ Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter* ow,
       // If the option to treat integers as strings is set, then render them as
       // strings. Otherwise, fallback to rendering them as double.
       if (ow->options_.struct_integers_as_strings) {
-        util::StatusOr<int64_t> int_value = data.ToInt64();
+        turbo::Result<int64_t> int_value = data.ToInt64();
         if (int_value.ok()) {
           ow->ProtoWriter::RenderDataPiece(
               "string_value", DataPiece(StrCat(int_value.value()), true));
-          return Status();
+          return turbo::ok_status();
         }
       }
       struct_field_name = "number_value";
@@ -959,11 +959,11 @@ Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter* ow,
       // If the option to treat integers as strings is set, then render them as
       // strings. Otherwise, fallback to rendering them as double.
       if (ow->options_.struct_integers_as_strings) {
-        util::StatusOr<uint64_t> int_value = data.ToUint64();
+        turbo::Result<uint64_t> int_value = data.ToUint64();
         if (int_value.ok()) {
           ow->ProtoWriter::RenderDataPiece(
               "string_value", DataPiece(StrCat(int_value.value()), true));
-          return Status();
+          return turbo::ok_status();
         }
       }
       struct_field_name = "number_value";
@@ -971,12 +971,12 @@ Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter* ow,
     }
     case DataPiece::TYPE_FLOAT: {
       if (ow->options_.struct_integers_as_strings) {
-        util::StatusOr<float> float_value = data.ToFloat();
+        turbo::Result<float> float_value = data.ToFloat();
         if (float_value.ok()) {
           ow->ProtoWriter::RenderDataPiece(
               "string_value",
               DataPiece(SimpleDtoa(float_value.value()), true));
-          return Status();
+          return turbo::ok_status();
         }
       }
       struct_field_name = "number_value";
@@ -984,12 +984,12 @@ Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter* ow,
     }
     case DataPiece::TYPE_DOUBLE: {
       if (ow->options_.struct_integers_as_strings) {
-        util::StatusOr<double> double_value = data.ToDouble();
+        turbo::Result<double> double_value = data.ToDouble();
         if (double_value.ok()) {
           ow->ProtoWriter::RenderDataPiece(
               "string_value",
               DataPiece(SimpleDtoa(double_value.value()), true));
-          return Status();
+          return turbo::ok_status();
         }
       }
       struct_field_name = "number_value";
@@ -1008,20 +1008,20 @@ Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter* ow,
       break;
     }
     default: {
-      return util::InvalidArgumentError(
+      return turbo::invalid_argument_error(
           "Invalid struct data type. Only number, string, boolean or  null "
           "values are supported.");
     }
   }
   ow->ProtoWriter::RenderDataPiece(struct_field_name, data);
-  return Status();
+  return turbo::ok_status();
 }
 
-Status ProtoStreamObjectWriter::RenderTimestamp(ProtoStreamObjectWriter* ow,
+turbo::Status ProtoStreamObjectWriter::RenderTimestamp(ProtoStreamObjectWriter* ow,
                                                 const DataPiece& data) {
-  if (data.type() == DataPiece::TYPE_NULL) return Status();
+  if (data.type() == DataPiece::TYPE_NULL) return turbo::ok_status();
   if (data.type() != DataPiece::TYPE_STRING) {
-    return util::InvalidArgumentError(
+    return turbo::invalid_argument_error(
         StrCat("Invalid data type for timestamp, value is ",
                      data.ValueAsStringOrDefault("")));
   }
@@ -1032,27 +1032,27 @@ Status ProtoStreamObjectWriter::RenderTimestamp(ProtoStreamObjectWriter* ow,
   int32_t nanos;
   if (!::shark::internal::ParseTime(std::string(value), &seconds,
                                                &nanos)) {
-    return util::InvalidArgumentError(StrCat("Invalid time format: ", value));
+    return turbo::invalid_argument_error(StrCat("Invalid time format: ", value));
   }
 
 
   ow->ProtoWriter::RenderDataPiece("seconds", DataPiece(seconds));
   ow->ProtoWriter::RenderDataPiece("nanos", DataPiece(nanos));
-  return Status();
+  return turbo::ok_status();
 }
 
-static inline util::Status RenderOneFieldPath(ProtoStreamObjectWriter* ow,
+static inline turbo::Status RenderOneFieldPath(ProtoStreamObjectWriter* ow,
                                               std::string_view path) {
   ow->ProtoWriter::RenderDataPiece(
       "paths", DataPiece(ConvertFieldMaskPath(path, &ToSnakeCase), true));
-  return Status();
+  return turbo::ok_status();
 }
 
-Status ProtoStreamObjectWriter::RenderFieldMask(ProtoStreamObjectWriter* ow,
+turbo::Status ProtoStreamObjectWriter::RenderFieldMask(ProtoStreamObjectWriter* ow,
                                                 const DataPiece& data) {
-  if (data.type() == DataPiece::TYPE_NULL) return Status();
+  if (data.type() == DataPiece::TYPE_NULL) return turbo::ok_status();
   if (data.type() != DataPiece::TYPE_STRING) {
-    return util::InvalidArgumentError(
+    return turbo::invalid_argument_error(
         StrCat("Invalid data type for field mask, value is ",
                      data.ValueAsStringOrDefault("")));
   }
@@ -1064,11 +1064,11 @@ Status ProtoStreamObjectWriter::RenderFieldMask(ProtoStreamObjectWriter* ow,
                                      std::bind(&RenderOneFieldPath, ow, _1));
 }
 
-Status ProtoStreamObjectWriter::RenderDuration(ProtoStreamObjectWriter* ow,
+turbo::Status ProtoStreamObjectWriter::RenderDuration(ProtoStreamObjectWriter* ow,
                                                const DataPiece& data) {
-  if (data.type() == DataPiece::TYPE_NULL) return Status();
+  if (data.type() == DataPiece::TYPE_NULL) return turbo::ok_status();
   if (data.type() != DataPiece::TYPE_STRING) {
-    return util::InvalidArgumentError(
+    return turbo::invalid_argument_error(
         StrCat("Invalid data type for duration, value is ",
                      data.ValueAsStringOrDefault("")));
   }
@@ -1076,7 +1076,7 @@ Status ProtoStreamObjectWriter::RenderDuration(ProtoStreamObjectWriter* ow,
   std::string_view value(data.str());
 
   if (!turbo::ends_with(value, "s")) {
-    return util::InvalidArgumentError(
+    return turbo::invalid_argument_error(
         "Illegal duration format; duration must end with 's'");
   }
   value = value.substr(0, value.size() - 1);
@@ -1090,12 +1090,12 @@ Status ProtoStreamObjectWriter::RenderDuration(ProtoStreamObjectWriter* ow,
   SplitSecondsAndNanos(value, &s_secs, &s_nanos);
   uint64_t unsigned_seconds;
   if (!safe_strtou64(s_secs, &unsigned_seconds)) {
-    return util::InvalidArgumentError(
+    return turbo::invalid_argument_error(
         "Invalid duration format, failed to parse seconds");
   }
 
   int32_t nanos = 0;
-  Status nanos_status = GetNanosFromStringPiece(
+  turbo::Status nanos_status = GetNanosFromStringPiece(
       s_nanos, "Invalid duration format, failed to parse nano seconds",
       "Duration value exceeds limits", &nanos);
   if (!nanos_status.ok()) {
@@ -1106,24 +1106,24 @@ Status ProtoStreamObjectWriter::RenderDuration(ProtoStreamObjectWriter* ow,
   int64_t seconds = sign * unsigned_seconds;
   if (seconds > kDurationMaxSeconds || seconds < kDurationMinSeconds ||
       nanos <= -kNanosPerSecond || nanos >= kNanosPerSecond) {
-    return util::InvalidArgumentError("Duration value exceeds limits");
+    return turbo::invalid_argument_error("Duration value exceeds limits");
   }
 
   ow->ProtoWriter::RenderDataPiece("seconds", DataPiece(seconds));
   ow->ProtoWriter::RenderDataPiece("nanos", DataPiece(nanos));
-  return Status();
+  return turbo::ok_status();
 }
 
-Status ProtoStreamObjectWriter::RenderWrapperType(ProtoStreamObjectWriter* ow,
+turbo::Status ProtoStreamObjectWriter::RenderWrapperType(ProtoStreamObjectWriter* ow,
                                                   const DataPiece& data) {
-  if (data.type() == DataPiece::TYPE_NULL) return Status();
+  if (data.type() == DataPiece::TYPE_NULL) return turbo::ok_status();
   ow->ProtoWriter::RenderDataPiece("value", data);
-  return Status();
+  return turbo::ok_status();
 }
 
 ProtoStreamObjectWriter* ProtoStreamObjectWriter::RenderDataPiece(
     std::string_view name, const DataPiece& data) {
-  Status status;
+  turbo::Status status;
   if (invalid_depth() > 0) return this;
 
   if (current_ == nullptr) {

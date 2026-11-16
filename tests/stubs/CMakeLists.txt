@@ -43,31 +43,6 @@ kmcmake_cc_test(
 
 
 kmcmake_cc_test(
-        NAME status_test
-        MODULE stubs
-        SOURCES
-        status_test.cc
-        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
-        LINKS
-        ${PROJECT_NAME}::test_common_static
-        ${PROJECT_NAME}::shark_static
-        GTest::gmock_main
-)
-
-kmcmake_cc_test(
-        NAME statusor_test
-        MODULE stubs
-        SOURCES
-        statusor_test.cc
-        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
-        LINKS
-        ${PROJECT_NAME}::test_common_static
-        ${PROJECT_NAME}::shark_static
-        GTest::gmock_main
-)
-
-
-kmcmake_cc_test(
         NAME structurally_valid_unittest
         MODULE stubs
         SOURCES

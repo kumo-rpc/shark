@@ -35,10 +35,10 @@
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <shark/transfer/json/utility.h>
 #include <shark/transfer/json/type_resolver.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 
 // clang-format off
 #include <shark/port_def.inc>
@@ -68,38 +68,38 @@ class DescriptorPoolTypeResolver : public TypeResolver {
                              const DescriptorPool* pool)
       : url_prefix_(url_prefix), pool_(pool) {}
 
-  util::Status ResolveMessageType(const std::string& type_url,
+  turbo::Status ResolveMessageType(const std::string& type_url,
                                   Type* type) override {
     std::string type_name;
-    util::Status status = ParseTypeUrl(type_url, &type_name);
+    turbo::Status status = ParseTypeUrl(type_url, &type_name);
     if (!status.ok()) {
       return status;
     }
 
     const Descriptor* descriptor = pool_->FindMessageTypeByName(type_name);
     if (descriptor == NULL) {
-      return util::NotFoundError("Invalid type URL, unknown type: " +
+      return turbo::not_found_error("Invalid type URL, unknown type: " +
                                  type_name);
     }
     ConvertDescriptor(descriptor, type);
-    return util::Status();
+    return turbo::ok_status();
   }
 
-  util::Status ResolveEnumType(const std::string& type_url,
+  turbo::Status ResolveEnumType(const std::string& type_url,
                                Enum* enum_type) override {
     std::string type_name;
-    util::Status status = ParseTypeUrl(type_url, &type_name);
+    turbo::Status status = ParseTypeUrl(type_url, &type_name);
     if (!status.ok()) {
       return status;
     }
 
     const EnumDescriptor* descriptor = pool_->FindEnumTypeByName(type_name);
     if (descriptor == NULL) {
-      return util::InvalidArgumentError("Invalid type URL, unknown type: " +
+      return turbo::invalid_argument_error("Invalid type URL, unknown type: " +
                                         type_name);
     }
     ConvertEnumDescriptor(descriptor, enum_type);
-    return util::Status();
+    return turbo::ok_status();
   }
 
  private:
@@ -304,15 +304,15 @@ class DescriptorPoolTypeResolver : public TypeResolver {
     return url_prefix_ + "/" + descriptor->full_name();
   }
 
-  util::Status ParseTypeUrl(const std::string& type_url,
+  turbo::Status ParseTypeUrl(const std::string& type_url,
                             std::string* type_name) {
     if (type_url.substr(0, url_prefix_.size() + 1) != url_prefix_ + "/") {
-      return util::InvalidArgumentError(
+      return turbo::invalid_argument_error(
           StrCat("Invalid type URL, type URLs must be of the form '",
                        url_prefix_, "/<typename>', got: ", type_url));
     }
     *type_name = type_url.substr(url_prefix_.size() + 1);
-    return util::Status();
+    return turbo::ok_status();
   }
 
   std::string DefaultValueAsString(const FieldDescriptor* descriptor) {

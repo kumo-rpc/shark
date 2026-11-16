@@ -40,7 +40,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <shark/transfer/json/object_writer.h>
 #include <shark/transfer/json/json_escaping.h>
 
@@ -153,7 +153,7 @@ JsonStreamParser::JsonStreamParser(ObjectWriter* ow)
 JsonStreamParser::~JsonStreamParser() {}
 
 
-util::Status JsonStreamParser::Parse(std::string_view json) {
+turbo::Status JsonStreamParser::Parse(std::string_view json) {
   std::string_view chunk = json;
   // If we have leftovers from a previous chunk, append the new chunk to it
   // and create a new std::string_view pointing at the string's data. This could
@@ -170,7 +170,7 @@ util::Status JsonStreamParser::Parse(std::string_view json) {
   // Find the structurally valid UTF8 prefix and parse only that.
   int n = internal::UTF8SpnStructurallyValid(chunk);
   if (n > 0) {
-    util::Status status = ParseChunk(chunk.substr(0, n));
+    turbo::Status status = ParseChunk(chunk.substr(0, n));
 
     // Any leftover characters are stashed in leftover_ for later parsing when
     // there is more data available.
@@ -178,15 +178,15 @@ util::Status JsonStreamParser::Parse(std::string_view json) {
     return status;
   } else {
     leftover_.assign(chunk.data(), chunk.size());
-    return util::Status();
+    return turbo::ok_status();
   }
 }
 
-util::Status JsonStreamParser::FinishParse() {
+turbo::Status JsonStreamParser::FinishParse() {
   // If we do not expect anything and there is nothing left to parse we're all
   // done.
   if (stack_.empty() && leftover_.empty()) {
-    return util::Status();
+    return turbo::ok_status();
   }
 
   // Lifetime needs to last until RunParser returns, so keep this variable
@@ -211,7 +211,7 @@ util::Status JsonStreamParser::FinishParse() {
   // Parse the remainder in finishing mode, which reports errors for things like
   // unterminated strings or unknown tokens that would normally be retried.
   finishing_ = true;
-  util::Status result = RunParser();
+  turbo::Status result = RunParser();
   if (result.ok()) {
     SkipWhitespace();
     if (!p_.empty()) {
@@ -223,14 +223,14 @@ util::Status JsonStreamParser::FinishParse() {
   return result;
 }
 
-util::Status JsonStreamParser::ParseChunk(std::string_view chunk) {
+turbo::Status JsonStreamParser::ParseChunk(std::string_view chunk) {
   // Do not do any work if the chunk is empty.
-  if (chunk.empty()) return util::Status();
+  if (chunk.empty()) return turbo::ok_status();
 
   p_ = json_ = chunk;
 
   finishing_ = false;
-  util::Status result = RunParser();
+  turbo::Status result = RunParser();
   if (!result.ok()) return result;
 
   SkipWhitespace();
@@ -249,7 +249,7 @@ util::Status JsonStreamParser::ParseChunk(std::string_view chunk) {
     // unparsed data left, we save it for later parse.
     leftover_ = std::string(p_);
   }
-  return util::Status();
+  return turbo::ok_status();
 }
 
 bool JsonStreamParser::IsInputAllWhiteSpaces(TokenType type) {
@@ -263,16 +263,16 @@ bool JsonStreamParser::IsInputAllWhiteSpaces(TokenType type) {
   return false;
 }
 
-util::Status JsonStreamParser::RunParser() {
+turbo::Status JsonStreamParser::RunParser() {
   while (!stack_.empty()) {
     ParseType type = stack_.top();
     TokenType t = (string_open_ == 0) ? GetNextTokenType() : BEGIN_STRING;
     stack_.pop();
-    util::Status result;
+    turbo::Status result;
     switch (type) {
       case VALUE:
         if (allow_no_root_element_ && IsInputAllWhiteSpaces(t)) {
-          return util::Status();
+          return turbo::ok_status();
         }
         result = ParseValue(t);
         break;
@@ -299,12 +299,12 @@ util::Status JsonStreamParser::RunParser() {
 
       default:
         result =
-            util::InternalError(StrCat("Unknown parse type: ", type));
+            turbo::internal_error(StrCat("Unknown parse type: ", type));
         break;
     }
     if (!result.ok()) {
       // If we were cancelled, save our state and try again later.
-      if (!finishing_ && util::IsCancelled(result)) {
+      if (!finishing_ && turbo::is_cancelled(result)) {
         stack_.push(type);
         // If we have a key we still need to render, make sure to save off the
         // contents in our own storage.
@@ -312,15 +312,15 @@ util::Status JsonStreamParser::RunParser() {
           StrAppend(&key_storage_, key_);
           key_ = std::string_view(key_storage_);
         }
-        result = util::Status();
+        result = turbo::Status();
       }
       return result;
     }
   }
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status JsonStreamParser::ParseValue(TokenType type) {
+turbo::Status JsonStreamParser::ParseValue(TokenType type) {
   switch (type) {
     case BEGIN_OBJECT:
       return HandleBeginObject();
@@ -344,7 +344,7 @@ util::Status JsonStreamParser::ParseValue(TokenType type) {
       // don't know if the next char would be e, completing it, or something
       // else, making it invalid.
       if (!finishing_ && p_.length() < kKeywordFalse.length()) {
-        return util::CancelledError("");
+        return turbo::cancelled_error("");
       }
 
       if (allow_empty_null_ && IsEmptyNullAllowed(type)) {
@@ -356,8 +356,8 @@ util::Status JsonStreamParser::ParseValue(TokenType type) {
   }
 }
 
-util::Status JsonStreamParser::ParseString() {
-  util::Status result = ParseStringHelper();
+turbo::Status JsonStreamParser::ParseString() {
+  turbo::Status result = ParseStringHelper();
   if (result.ok()) {
     ow_->RenderString(key_, parsed_);
     key_ = {};
@@ -367,7 +367,7 @@ util::Status JsonStreamParser::ParseString() {
   return result;
 }
 
-util::Status JsonStreamParser::ParseStringHelper() {
+turbo::Status JsonStreamParser::ParseStringHelper() {
   // If we haven't seen the start quote, grab it and remember it for later.
   if (string_open_ == 0) {
     string_open_ = *p_.data();
@@ -387,14 +387,14 @@ util::Status JsonStreamParser::ParseStringHelper() {
       // depending on if we expect more data later.
       if (p_.length() == 1) {
         if (!finishing_) {
-          return util::CancelledError("");
+          return turbo::cancelled_error("");
         }
         return ReportFailure("Closing quote expected in string.",
                              ParseErrorType::EXPECTED_CLOSING_QUOTE);
       }
       // Parse a unicode escape if we found \u in the string.
       if (data[1] == 'u') {
-        util::Status result = ParseUnicodeEscape();
+        turbo::Status result = ParseUnicodeEscape();
         if (!result.ok()) {
           return result;
         }
@@ -445,7 +445,7 @@ util::Status JsonStreamParser::ParseStringHelper() {
       // start fresh.
       string_open_ = 0;
       Advance();
-      return util::Status();
+      return turbo::ok_status();
     }
     // Normal character, just advance past it.
     Advance();
@@ -456,7 +456,7 @@ util::Status JsonStreamParser::ParseStringHelper() {
   }
   // If we didn't find the closing quote but we expect more data, cancel for now
   if (!finishing_) {
-    return util::CancelledError("");
+    return turbo::cancelled_error("");
   }
   // End of string reached without a closing quote, report an error.
   string_open_ = 0;
@@ -471,10 +471,10 @@ util::Status JsonStreamParser::ParseStringHelper() {
 // There are some security exploits with UTF-8 that we should be careful of:
 //   - http://www.unicode.org/reports/tr36/#UTF-8_Exploit
 //   - http://sites/intl-eng/design-guide/core-application
-util::Status JsonStreamParser::ParseUnicodeEscape() {
+turbo::Status JsonStreamParser::ParseUnicodeEscape() {
   if (p_.length() < kUnicodeEscapedLength) {
     if (!finishing_) {
-      return util::CancelledError("");
+      return turbo::cancelled_error("");
     }
     return ReportFailure("Illegal hex string.",
                          ParseErrorType::ILLEGAL_HEX_STRING);
@@ -493,7 +493,7 @@ util::Status JsonStreamParser::ParseUnicodeEscape() {
       code <= JsonEscaping::kMaxHighSurrogate) {
     if (p_.length() < 2 * kUnicodeEscapedLength) {
       if (!finishing_) {
-        return util::CancelledError("");
+        return turbo::cancelled_error("");
       }
       if (!coerce_to_utf8_) {
         return ReportFailure("Missing low surrogate.",
@@ -535,12 +535,12 @@ util::Status JsonStreamParser::ParseUnicodeEscape() {
   // Advance past the [final] code unit escape.
   p_.remove_prefix(kUnicodeEscapedLength);
   parsed_storage_.append(buf, len);
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status JsonStreamParser::ParseNumber() {
+turbo::Status JsonStreamParser::ParseNumber() {
   NumberResult number;
-  util::Status result = ParseNumberHelper(&number);
+  turbo::Status result = ParseNumberHelper(&number);
   if (result.ok()) {
     switch (number.type) {
       case NumberResult::DOUBLE:
@@ -566,7 +566,7 @@ util::Status JsonStreamParser::ParseNumber() {
   return result;
 }
 
-util::Status JsonStreamParser::ParseDoubleHelper(const std::string& number,
+turbo::Status JsonStreamParser::ParseDoubleHelper(const std::string& number,
                                                  NumberResult* result) {
   if (!safe_strtod(number, &result->double_val)) {
     return ReportFailure("Unable to parse number.",
@@ -577,10 +577,10 @@ util::Status JsonStreamParser::ParseDoubleHelper(const std::string& number,
                          ParseErrorType::NUMBER_EXCEEDS_RANGE_DOUBLE);
   }
   result->type = NumberResult::DOUBLE;
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status JsonStreamParser::ParseNumberHelper(NumberResult* result) {
+turbo::Status JsonStreamParser::ParseNumberHelper(NumberResult* result) {
   const char* data = p_.data();
   int length = p_.length();
 
@@ -607,7 +607,7 @@ util::Status JsonStreamParser::ParseNumberHelper(NumberResult* result) {
   // If the entire input is a valid number, and we may have more content in the
   // future, we abort for now and resume when we know more.
   if (index == length && !finishing_) {
-    return util::CancelledError("");
+    return turbo::cancelled_error("");
   }
 
   // Create a string containing just the number, so we can use safe_strtoX
@@ -615,7 +615,7 @@ util::Status JsonStreamParser::ParseNumberHelper(NumberResult* result) {
 
   // Floating point number, parse as a double.
   if (floating) {
-    util::Status status = ParseDoubleHelper(number, result);
+    turbo::Status status = ParseDoubleHelper(number, result);
     if (status.ok()) {
       p_.remove_prefix(index);
     }
@@ -633,10 +633,10 @@ util::Status JsonStreamParser::ParseNumberHelper(NumberResult* result) {
     if (safe_strtou64(number, &result->uint_val)) {
       result->type = NumberResult::UINT;
       p_.remove_prefix(index);
-      return util::Status();
+      return turbo::ok_status();
     } else {
       // If the value is too large, parse it as double.
-      util::Status status = ParseDoubleHelper(number, result);
+      turbo::Status status = ParseDoubleHelper(number, result);
       if (status.ok()) {
         p_.remove_prefix(index);
       }
@@ -654,10 +654,10 @@ util::Status JsonStreamParser::ParseNumberHelper(NumberResult* result) {
   if (safe_strto64(number, &result->int_val)) {
     result->type = NumberResult::INT;
     p_.remove_prefix(index);
-    return util::Status();
+    return turbo::ok_status();
   } else {
     // If the value is too large, parse it as double.
-    util::Status status = ParseDoubleHelper(number, result);
+    turbo::Status status = ParseDoubleHelper(number, result);
     if (status.ok()) {
       p_.remove_prefix(index);
     }
@@ -665,7 +665,7 @@ util::Status JsonStreamParser::ParseNumberHelper(NumberResult* result) {
   }
 }
 
-util::Status JsonStreamParser::HandleBeginObject() {
+turbo::Status JsonStreamParser::HandleBeginObject() {
   GOOGLE_DCHECK_EQ('{', *p_.data());
   Advance();
   ow_->StartObject(key_);
@@ -675,10 +675,10 @@ util::Status JsonStreamParser::HandleBeginObject() {
   }
   key_ = {};
   stack_.push(ENTRY);
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status JsonStreamParser::ParseObjectMid(TokenType type) {
+turbo::Status JsonStreamParser::ParseObjectMid(TokenType type) {
   if (type == UNKNOWN) {
     return ReportUnknown("Expected , or } after key:value pair.",
                          ParseErrorType::EXPECTED_COMMA_OR_BRACES);
@@ -689,20 +689,20 @@ util::Status JsonStreamParser::ParseObjectMid(TokenType type) {
     Advance();
     ow_->EndObject();
     --recursion_depth_;
-    return util::Status();
+    return turbo::ok_status();
   }
   // Found a comma, advance past it and get ready for an entry.
   if (type == VALUE_SEPARATOR) {
     Advance();
     stack_.push(ENTRY);
-    return util::Status();
+    return turbo::ok_status();
   }
   // Illegal token after key:value pair.
   return ReportFailure("Expected , or } after key:value pair.",
                        ParseErrorType::EXPECTED_COMMA_OR_BRACES);
 }
 
-util::Status JsonStreamParser::ParseEntry(TokenType type) {
+turbo::Status JsonStreamParser::ParseEntry(TokenType type) {
   if (type == UNKNOWN) {
     return ReportUnknown("Expected an object key or }.",
                          ParseErrorType::EXPECTED_OBJECT_KEY_OR_BRACES);
@@ -713,10 +713,10 @@ util::Status JsonStreamParser::ParseEntry(TokenType type) {
     ow_->EndObject();
     Advance();
     --recursion_depth_;
-    return util::Status();
+    return turbo::ok_status();
   }
 
-  util::Status result;
+  turbo::Status result;
   if (type == BEGIN_STRING) {
     // Key is a string (standard JSON), parse it and store the string.
     result = ParseStringHelper();
@@ -754,7 +754,7 @@ util::Status JsonStreamParser::ParseEntry(TokenType type) {
   return result;
 }
 
-util::Status JsonStreamParser::ParseEntryMid(TokenType type) {
+turbo::Status JsonStreamParser::ParseEntryMid(TokenType type) {
   if (type == UNKNOWN) {
     return ReportUnknown("Expected : between key:value pair.",
                          ParseErrorType::EXPECTED_COLON);
@@ -762,22 +762,22 @@ util::Status JsonStreamParser::ParseEntryMid(TokenType type) {
   if (type == ENTRY_SEPARATOR) {
     Advance();
     stack_.push(VALUE);
-    return util::Status();
+    return turbo::ok_status();
   }
   return ReportFailure("Expected : between key:value pair.",
                        ParseErrorType::EXPECTED_COLON);
 }
 
-util::Status JsonStreamParser::HandleBeginArray() {
+turbo::Status JsonStreamParser::HandleBeginArray() {
   GOOGLE_DCHECK_EQ('[', *p_.data());
   Advance();
   ow_->StartList(key_);
   key_ = {};
   stack_.push(ARRAY_VALUE);
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status JsonStreamParser::ParseArrayValue(TokenType type) {
+turbo::Status JsonStreamParser::ParseArrayValue(TokenType type) {
   if (type == UNKNOWN) {
     return ReportUnknown("Expected a value or ] within an array.",
                          ParseErrorType::EXPECTED_VALUE_OR_BRACKET);
@@ -786,15 +786,15 @@ util::Status JsonStreamParser::ParseArrayValue(TokenType type) {
   if (type == END_ARRAY) {
     ow_->EndList();
     Advance();
-    return util::Status();
+    return turbo::ok_status();
   }
 
   // The ParseValue call may push something onto the stack so we need to make
   // sure an ARRAY_MID is after it, so we push it on now. Also, the parsing of
   // empty-null array value is relying on this ARRAY_MID token.
   stack_.push(ARRAY_MID);
-  util::Status result = ParseValue(type);
-  if (util::IsCancelled(result)) {
+  turbo::Status result = ParseValue(type);
+  if (turbo::is_cancelled(result)) {
     // If we were cancelled, pop back off the ARRAY_MID so we don't try to
     // push it on again when we try over.
     stack_.pop();
@@ -802,7 +802,7 @@ util::Status JsonStreamParser::ParseArrayValue(TokenType type) {
   return result;
 }
 
-util::Status JsonStreamParser::ParseArrayMid(TokenType type) {
+turbo::Status JsonStreamParser::ParseArrayMid(TokenType type) {
   if (type == UNKNOWN) {
     return ReportUnknown("Expected , or ] after array value.",
                          ParseErrorType::EXPECTED_COMMA_OR_BRACKET);
@@ -811,45 +811,45 @@ util::Status JsonStreamParser::ParseArrayMid(TokenType type) {
   if (type == END_ARRAY) {
     ow_->EndList();
     Advance();
-    return util::Status();
+    return turbo::ok_status();
   }
 
   // Found a comma, advance past it and expect an array value next.
   if (type == VALUE_SEPARATOR) {
     Advance();
     stack_.push(ARRAY_VALUE);
-    return util::Status();
+    return turbo::ok_status();
   }
   // Illegal token after array value.
   return ReportFailure("Expected , or ] after array value.",
                        ParseErrorType::EXPECTED_COMMA_OR_BRACKET);
 }
 
-util::Status JsonStreamParser::ParseTrue() {
+turbo::Status JsonStreamParser::ParseTrue() {
   ow_->RenderBool(key_, true);
   key_ = {};
   p_.remove_prefix(kKeywordTrue.length());
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status JsonStreamParser::ParseFalse() {
+turbo::Status JsonStreamParser::ParseFalse() {
   ow_->RenderBool(key_, false);
   key_ = {};
   p_.remove_prefix(kKeywordFalse.length());
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status JsonStreamParser::ParseNull() {
+turbo::Status JsonStreamParser::ParseNull() {
   ow_->RenderNull(key_);
   key_ = {};
   p_.remove_prefix(kKeywordNull.length());
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status JsonStreamParser::ParseEmptyNull() {
+turbo::Status JsonStreamParser::ParseEmptyNull() {
   ow_->RenderNull(key_);
   key_ = {};
-  return util::Status();
+  return turbo::ok_status();
 }
 
 bool JsonStreamParser::IsEmptyNullAllowed(TokenType type) {
@@ -858,7 +858,7 @@ bool JsonStreamParser::IsEmptyNullAllowed(TokenType type) {
          stack_.top() == OBJ_MID;
 }
 
-util::Status JsonStreamParser::ReportFailure(std::string_view message,
+turbo::Status JsonStreamParser::ReportFailure(std::string_view message,
                                              ParseErrorType parse_code) {
   (void)parse_code;  // Parameter is used in Google-internal code.
   static const int kContextLength = 20;
@@ -870,16 +870,16 @@ util::Status JsonStreamParser::ReportFailure(std::string_view message,
   std::string_view segment(begin, end - begin);
   std::string location(p_start - begin, ' ');
   location.push_back('^');
-  auto status = util::InvalidArgumentError(
+  auto status = turbo::invalid_argument_error(
       StrCat(message, "\n", segment, "\n", location));
   return status;
 }
 
-util::Status JsonStreamParser::ReportUnknown(std::string_view message,
+turbo::Status JsonStreamParser::ReportUnknown(std::string_view message,
                                              ParseErrorType parse_code) {
   // If we aren't finishing the parse, cancel parsing and try later.
   if (!finishing_) {
-    return util::CancelledError("");
+    return turbo::cancelled_error("");
   }
   if (p_.empty()) {
     return ReportFailure(StrCat("Unexpected end of string. ", message),
@@ -888,13 +888,13 @@ util::Status JsonStreamParser::ReportUnknown(std::string_view message,
   return ReportFailure(message, parse_code);
 }
 
-util::Status JsonStreamParser::IncrementRecursionDepth(
+turbo::Status JsonStreamParser::IncrementRecursionDepth(
     std::string_view key) const {
   if (++recursion_depth_ > max_recursion_depth_) {
-    return util::InvalidArgumentError(StrCat(
+    return turbo::invalid_argument_error(StrCat(
         "Message too deep. Max recursion depth reached for key '", key, "'"));
   }
-  return util::Status();
+  return turbo::ok_status();
 }
 
 void JsonStreamParser::SkipWhitespace() {
@@ -913,7 +913,7 @@ void JsonStreamParser::Advance() {
       p_.length(), UTF8FirstLetterNumBytes(p_.data(), p_.length())));
 }
 
-util::Status JsonStreamParser::ParseKey() {
+turbo::Status JsonStreamParser::ParseKey() {
   std::string_view original = p_;
 
   if (allow_permissive_key_naming_) {
@@ -932,11 +932,11 @@ util::Status JsonStreamParser::ParseKey() {
   // we can't know if the key was complete or not.
   if (!finishing_ && p_.empty()) {
     p_ = original;
-    return util::CancelledError("");
+    return turbo::cancelled_error("");
   }
   // Since we aren't using the key storage, clear it out.
   key_storage_.clear();
-  return util::Status();
+  return turbo::ok_status();
 }
 
 JsonStreamParser::TokenType JsonStreamParser::GetNextTokenType() {

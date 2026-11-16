@@ -38,7 +38,7 @@
 #include <gtest/gtest.h>
 #include <shark/stubs/time.h>
 #include <shark/transfer/json/object_writer.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 
 
 namespace shark::util::converter {
@@ -84,7 +84,7 @@ class JsonStreamParserTest : public ::testing::Test {
   JsonStreamParserTest() : mock_(), ow_(&mock_) {}
   ~JsonStreamParserTest() override {}
 
-  util::Status RunTest(::std::string_view json, int split,
+  turbo::Status RunTest(::std::string_view json, int split,
                        std::function<void(JsonStreamParser*)> setup) {
     JsonStreamParser parser(&mock_);
     setup(&parser);
@@ -94,7 +94,7 @@ class JsonStreamParserTest : public ::testing::Test {
       GOOGLE_LOG(INFO) << "Testing split every char: " << json;
       for (int i = 0; i < json.length(); ++i) {
         ::std::string_view single = json.substr(i, 1);
-        util::Status result = parser.Parse(single);
+        turbo::Status result = parser.Parse(single);
         if (!result.ok()) {
           return result;
         }
@@ -106,7 +106,7 @@ class JsonStreamParserTest : public ::testing::Test {
     ::std::string_view first = json.substr(0, split);
     ::std::string_view rest = json.substr(split);
     GOOGLE_LOG(INFO) << "Testing split: " << first << "><" << rest;
-    util::Status result = parser.Parse(first);
+    turbo::Status result = parser.Parse(first);
     if (result.ok()) {
       result = parser.Parse(rest);
       if (result.ok()) {
@@ -123,7 +123,7 @@ class JsonStreamParserTest : public ::testing::Test {
       ::std::string_view json, int split,
       std::function<void(JsonStreamParser*)> setup = [](JsonStreamParser* p) {
       }) {
-    util::Status result = RunTest(json, split, setup);
+    turbo::Status result = RunTest(json, split, setup);
     if (!result.ok()) {
       GOOGLE_LOG(WARNING) << result;
     }
@@ -134,8 +134,8 @@ class JsonStreamParserTest : public ::testing::Test {
       ::std::string_view json, int split, ::std::string_view error_prefix,
       std::function<void(JsonStreamParser*)> setup = [](JsonStreamParser* p) {
       }) {
-    util::Status result = RunTest(json, split, setup);
-    EXPECT_TRUE(util::IsInvalidArgument(result));
+    turbo::Status result = RunTest(json, split, setup);
+    EXPECT_TRUE(turbo::is_invalid_argument(result));
     ::std::string_view error_message(result.message());
     EXPECT_EQ(error_prefix, error_message.substr(0, error_prefix.size()));
   }
@@ -145,8 +145,8 @@ class JsonStreamParserTest : public ::testing::Test {
       ParseErrorType expected_parse_error_type,
       std::function<void(JsonStreamParser*)> setup = [](JsonStreamParser* p) {
       }) {
-    util::Status result = RunTest(json, split, setup);
-    EXPECT_TRUE(util::IsInvalidArgument(result));
+    turbo::Status result = RunTest(json, split, setup);
+    EXPECT_TRUE(turbo::is_invalid_argument(result));
     ::std::string_view error_message(result.message());
     EXPECT_EQ(error_prefix, error_message.substr(0, error_prefix.size()));
   }

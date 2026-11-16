@@ -32,7 +32,7 @@
 
 #include <shark/stubs/common.h>
 #include <shark/stubs/once.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <shark/stubs/bytestream.h>
 #include <shark/stubs/strutil.h>
 #include <shark/io/coded_stream.h>
@@ -45,7 +45,7 @@
 #include <shark/transfer/json/protostream_objectwriter.h>
 #include <shark/transfer/json/type_resolver.h>
 #include <shark/transfer/json/type_resolver_util.h>
-#include <shark/stubs/status_macros.h>
+#include <turbo/status/status_macros.h>
 
 // clang-format off
 #include <shark/port_def.inc>
@@ -82,14 +82,14 @@ void ZeroCopyStreamByteSink::Append(const char* bytes, size_t len) {
 }
 }  // namespace internal
 
-util::Status BinaryToJsonStream(TypeResolver* resolver,
+turbo::Status BinaryToJsonStream(TypeResolver* resolver,
                                 const std::string& type_url,
                                 io::ZeroCopyInputStream* binary_input,
                                 io::ZeroCopyOutputStream* json_output,
                                 const JsonPrintOptions& options) {
   io::CodedInputStream in_stream(binary_input);
   shark::Type type;
-  RETURN_IF_ERROR(resolver->ResolveMessageType(type_url, &type));
+  TURBO_RETURN_IF_ERROR(resolver->ResolveMessageType(type_url, &type));
   converter::ProtoStreamObjectSource::RenderOptions render_options;
   render_options.use_ints_for_enums = options.always_print_enums_as_ints;
   render_options.preserve_proto_field_names =
@@ -112,7 +112,7 @@ util::Status BinaryToJsonStream(TypeResolver* resolver,
   }
 }
 
-util::Status BinaryToJsonString(TypeResolver* resolver,
+turbo::Status BinaryToJsonString(TypeResolver* resolver,
                                 const std::string& type_url,
                                 const std::string& binary_input,
                                 std::string* json_output,
@@ -129,7 +129,7 @@ class StatusErrorListener : public converter::ErrorListener {
   StatusErrorListener() {}
   ~StatusErrorListener() override {}
 
-  util::Status GetStatus() { return status_; }
+  turbo::Status GetStatus() { return status_; }
 
   void InvalidName(const converter::LocationTrackerInterface& loc,
                    std::string_view unknown_name,
@@ -138,26 +138,26 @@ class StatusErrorListener : public converter::ErrorListener {
     if (!loc_string.empty()) {
       loc_string.append(" ");
     }
-    status_ = util::InvalidArgumentError(
+    status_ = turbo::invalid_argument_error(
         StrCat(loc_string, unknown_name, ": ", message));
   }
 
   void InvalidValue(const converter::LocationTrackerInterface& loc,
                     std::string_view type_name,
                     std::string_view value) override {
-    status_ = util::InvalidArgumentError(
+    status_ = turbo::invalid_argument_error(
         StrCat(GetLocString(loc), ": invalid value ", std::string(value),
                      " for type ", std::string(type_name)));
   }
 
   void MissingField(const converter::LocationTrackerInterface& loc,
                     std::string_view missing_name) override {
-    status_ = util::InvalidArgumentError(StrCat(
+    status_ = turbo::invalid_argument_error(StrCat(
         GetLocString(loc), ": missing field ", std::string(missing_name)));
   }
 
  private:
-  util::Status status_;
+  turbo::Status status_;
 
   std::string GetLocString(const converter::LocationTrackerInterface& loc) {
     std::string loc_string = loc.ToString();
@@ -172,13 +172,13 @@ class StatusErrorListener : public converter::ErrorListener {
 };
 }  // namespace
 
-util::Status JsonToBinaryStream(TypeResolver* resolver,
+turbo::Status JsonToBinaryStream(TypeResolver* resolver,
                                 const std::string& type_url,
                                 io::ZeroCopyInputStream* json_input,
                                 io::ZeroCopyOutputStream* binary_output,
                                 const JsonParseOptions& options) {
   shark::Type type;
-  RETURN_IF_ERROR(resolver->ResolveMessageType(type_url, &type));
+  TURBO_RETURN_IF_ERROR(resolver->ResolveMessageType(type_url, &type));
   internal::ZeroCopyStreamByteSink sink(binary_output);
   StatusErrorListener listener;
   converter::ProtoStreamObjectWriter::Options proto_writer_options;
@@ -195,15 +195,15 @@ util::Status JsonToBinaryStream(TypeResolver* resolver,
   int length;
   while (json_input->Next(&buffer, &length)) {
     if (length == 0) continue;
-    RETURN_IF_ERROR(parser.Parse(
+    TURBO_RETURN_IF_ERROR(parser.Parse(
         std::string_view(static_cast<const char*>(buffer), length)));
   }
-  RETURN_IF_ERROR(parser.FinishParse());
+  TURBO_RETURN_IF_ERROR(parser.FinishParse());
 
   return listener.GetStatus();
 }
 
-util::Status JsonToBinaryString(TypeResolver* resolver,
+turbo::Status JsonToBinaryString(TypeResolver* resolver,
                                 const std::string& type_url,
                                 std::string_view json_input,
                                 std::string* binary_output,
@@ -241,14 +241,14 @@ TypeResolver* GetGeneratedTypeResolver() {
 }
 }  // namespace
 
-util::Status MessageToJsonString(const Message& message, std::string* output,
+turbo::Status MessageToJsonString(const Message& message, std::string* output,
                                  const JsonOptions& options) {
   const DescriptorPool* pool = message.GetDescriptor()->file()->pool();
   TypeResolver* resolver =
       pool == DescriptorPool::generated_pool()
           ? GetGeneratedTypeResolver()
           : NewTypeResolverForDescriptorPool(kTypeUrlPrefix, pool);
-  util::Status result =
+  turbo::Status result =
       BinaryToJsonString(resolver, GetTypeUrl(message),
                          message.SerializeAsString(), output, options);
   if (pool != DescriptorPool::generated_pool()) {
@@ -257,7 +257,7 @@ util::Status MessageToJsonString(const Message& message, std::string* output,
   return result;
 }
 
-util::Status JsonStringToMessage(std::string_view input, Message* message,
+turbo::Status JsonStringToMessage(std::string_view input, Message* message,
                                  const JsonParseOptions& options) {
   const DescriptorPool* pool = message->GetDescriptor()->file()->pool();
   TypeResolver* resolver =
@@ -265,10 +265,10 @@ util::Status JsonStringToMessage(std::string_view input, Message* message,
           ? GetGeneratedTypeResolver()
           : NewTypeResolverForDescriptorPool(kTypeUrlPrefix, pool);
   std::string binary;
-  util::Status result = JsonToBinaryString(resolver, GetTypeUrl(*message),
+  turbo::Status result = JsonToBinaryString(resolver, GetTypeUrl(*message),
                                            input, &binary, options);
   if (result.ok() && !message->ParseFromString(binary)) {
-    result = util::InvalidArgumentError(
+    result = turbo::invalid_argument_error(
         "JSON transcoder produced invalid protobuf output.");
   }
   if (pool != DescriptorPool::generated_pool()) {

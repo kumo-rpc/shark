@@ -32,10 +32,10 @@
 
 #include <shark/stubs/common.h>
 #include <shark/types/type.skp.h>
-#include <shark/stubs/statusor.h>
+#include <turbo/status/result.h>
 #include <shark/stubs/strutil.h>
 #include <shark/transfer/json/type_resolver.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -53,7 +53,7 @@ class SHARK_EXPORT TypeInfo {
   // corresponding type cannot be found, returns a NOT_FOUND error status.
   //
   // This TypeInfo class retains the ownership of the returned pointer.
-  virtual util::StatusOr<const shark::Type*> ResolveTypeUrl(
+  virtual turbo::Result<const shark::Type*> ResolveTypeUrl(
       std::string_view type_url) const = 0;
 
   // Resolves a type url into a Type. Like ResolveTypeUrl() but returns

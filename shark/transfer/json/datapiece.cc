@@ -37,24 +37,24 @@
 #include <shark/types/struct.skp.h>
 #include <shark/types/type.skp.h>
 #include <shark/descriptor.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <shark/stubs/strutil.h>
 #include <shark/transfer/json/utility.h>
 #include <shark/stubs/mathutil.h>
 
 namespace shark::util::converter {
 
-using util::Status;
+using turbo::Status;
 
 namespace {
 
 template <typename To, typename From>
-util::StatusOr<To> ValidateNumberConversion(To after, From before) {
+turbo::Result<To> ValidateNumberConversion(To after, From before) {
   if (after == before &&
       MathUtil::Sign<From>(before) == MathUtil::Sign<To>(after)) {
     return after;
   } else {
-    return util::InvalidArgumentError(
+    return turbo::invalid_argument_error(
         std::is_integral<From>::value       ? ValueAsString(before)
         : std::is_same<From, double>::value ? DoubleAsString(before)
                                             : FloatAsString(before));
@@ -65,7 +65,7 @@ util::StatusOr<To> ValidateNumberConversion(To after, From before) {
 //     int32, int64, uint32, uint64, double and float
 // except conversion between double and float.
 template <typename To, typename From>
-util::StatusOr<To> NumberConvertAndCheck(From before) {
+turbo::Result<To> NumberConvertAndCheck(From before) {
   if (std::is_same<From, To>::value) return before;
 
   To after = static_cast<To>(before);
@@ -75,7 +75,7 @@ util::StatusOr<To> NumberConvertAndCheck(From before) {
 // For conversion to integer types (int32, int64, uint32, uint64) from floating
 // point types (double, float) only.
 template <typename To, typename From>
-util::StatusOr<To> FloatingPointToIntConvertAndCheck(From before) {
+turbo::Result<To> FloatingPointToIntConvertAndCheck(From before) {
   if (std::is_same<From, To>::value) return before;
 
   To after = static_cast<To>(before);
@@ -83,13 +83,13 @@ util::StatusOr<To> FloatingPointToIntConvertAndCheck(From before) {
 }
 
 // For conversion between double and float only.
-util::StatusOr<double> FloatToDouble(float before) {
+turbo::Result<double> FloatToDouble(float before) {
   // Casting float to double should just work as double has more precision
   // than float.
   return static_cast<double>(before);
 }
 
-util::StatusOr<float> DoubleToFloat(double before) {
+turbo::Result<float> DoubleToFloat(double before) {
   if (std::isnan(before)) {
     return std::numeric_limits<float>::quiet_NaN();
   } else if (!std::isfinite(before)) {
@@ -116,7 +116,7 @@ util::StatusOr<float> DoubleToFloat(double before) {
       }
     }
     // Double value outside of the range of float.
-    return util::InvalidArgumentError(DoubleAsString(before));
+    return turbo::invalid_argument_error(DoubleAsString(before));
   } else {
     return static_cast<float>(before);
   }
@@ -124,7 +124,7 @@ util::StatusOr<float> DoubleToFloat(double before) {
 
 }  // namespace
 
-util::StatusOr<int32_t> DataPiece::ToInt32() const {
+turbo::Result<int32_t> DataPiece::ToInt32() const {
   if (type_ == TYPE_STRING)
     return StringToNumber<int32_t>(safe_strto32);
 
@@ -137,7 +137,7 @@ util::StatusOr<int32_t> DataPiece::ToInt32() const {
   return GenericConvert<int32_t>();
 }
 
-util::StatusOr<uint32_t> DataPiece::ToUint32() const {
+turbo::Result<uint32_t> DataPiece::ToUint32() const {
   if (type_ == TYPE_STRING)
     return StringToNumber<uint32_t>(safe_strtou32);
 
@@ -150,7 +150,7 @@ util::StatusOr<uint32_t> DataPiece::ToUint32() const {
   return GenericConvert<uint32_t>();
 }
 
-util::StatusOr<int64_t> DataPiece::ToInt64() const {
+turbo::Result<int64_t> DataPiece::ToInt64() const {
   if (type_ == TYPE_STRING)
     return StringToNumber<int64_t>(safe_strto64);
 
@@ -163,7 +163,7 @@ util::StatusOr<int64_t> DataPiece::ToInt64() const {
   return GenericConvert<int64_t>();
 }
 
-util::StatusOr<uint64_t> DataPiece::ToUint64() const {
+turbo::Result<uint64_t> DataPiece::ToUint64() const {
   if (type_ == TYPE_STRING)
     return StringToNumber<uint64_t>(safe_strtou64);
 
@@ -176,7 +176,7 @@ util::StatusOr<uint64_t> DataPiece::ToUint64() const {
   return GenericConvert<uint64_t>();
 }
 
-util::StatusOr<double> DataPiece::ToDouble() const {
+turbo::Result<double> DataPiece::ToDouble() const {
   if (type_ == TYPE_FLOAT) {
     return FloatToDouble(float_);
   }
@@ -184,11 +184,11 @@ util::StatusOr<double> DataPiece::ToDouble() const {
     if (str_ == "Infinity") return std::numeric_limits<double>::infinity();
     if (str_ == "-Infinity") return -std::numeric_limits<double>::infinity();
     if (str_ == "NaN") return std::numeric_limits<double>::quiet_NaN();
-    util::StatusOr<double> value = StringToNumber<double>(safe_strtod);
+    turbo::Result<double> value = StringToNumber<double>(safe_strtod);
     if (value.ok() && !std::isfinite(value.value())) {
       // safe_strtod converts out-of-range values to +inf/-inf, but we want
       // to report them as errors.
-      return util::InvalidArgumentError(StrCat("\"", str_, "\""));
+      return turbo::invalid_argument_error(StrCat("\"", str_, "\""));
     } else {
       return value;
     }
@@ -196,7 +196,7 @@ util::StatusOr<double> DataPiece::ToDouble() const {
   return GenericConvert<double>();
 }
 
-util::StatusOr<float> DataPiece::ToFloat() const {
+turbo::Result<float> DataPiece::ToFloat() const {
   if (type_ == TYPE_DOUBLE) {
     return DoubleToFloat(double_);
   }
@@ -211,19 +211,19 @@ util::StatusOr<float> DataPiece::ToFloat() const {
   return GenericConvert<float>();
 }
 
-util::StatusOr<bool> DataPiece::ToBool() const {
+turbo::Result<bool> DataPiece::ToBool() const {
   switch (type_) {
     case TYPE_BOOL:
       return bool_;
     case TYPE_STRING:
       return StringToNumber<bool>(safe_strtob);
     default:
-      return util::InvalidArgumentError(
+      return turbo::invalid_argument_error(
           ValueAsStringOrDefault("Wrong type. Cannot convert to Bool."));
   }
 }
 
-util::StatusOr<std::string> DataPiece::ToString() const {
+turbo::Result<std::string> DataPiece::ToString() const {
   switch (type_) {
     case TYPE_STRING:
       return std::string(str_);
@@ -233,7 +233,7 @@ util::StatusOr<std::string> DataPiece::ToString() const {
       return base64;
     }
     default:
-      return util::InvalidArgumentError(
+      return turbo::invalid_argument_error(
           ValueAsStringOrDefault("Cannot convert to string."));
   }
 }
@@ -269,22 +269,22 @@ std::string DataPiece::ValueAsStringOrDefault(
   }
 }
 
-util::StatusOr<std::string> DataPiece::ToBytes() const {
+turbo::Result<std::string> DataPiece::ToBytes() const {
   if (type_ == TYPE_BYTES) return std::string(str_);
   if (type_ == TYPE_STRING) {
     std::string decoded;
     if (!DecodeBase64(str_, &decoded)) {
-      return util::InvalidArgumentError(
+      return turbo::invalid_argument_error(
           ValueAsStringOrDefault("Invalid data in input."));
     }
     return decoded;
   } else {
-    return util::InvalidArgumentError(ValueAsStringOrDefault(
+    return turbo::invalid_argument_error(ValueAsStringOrDefault(
         "Wrong type. Only String or Bytes can be converted to Bytes."));
   }
 }
 
-util::StatusOr<int> DataPiece::ToEnum(const shark::Enum* enum_type,
+turbo::Result<int> DataPiece::ToEnum(const shark::Enum* enum_type,
                                       bool use_lower_camel_for_enums,
                                       bool case_insensitive_enum_parsing,
                                       bool ignore_unknown_enum_values,
@@ -299,7 +299,7 @@ util::StatusOr<int> DataPiece::ToEnum(const shark::Enum* enum_type,
     if (value != nullptr) return value->number();
 
     // Check if int version of enum is sent as string.
-    util::StatusOr<int32_t> int_value = ToInt32();
+    turbo::Result<int32_t> int_value = ToInt32();
     if (int_value.ok()) {
       if (const shark::EnumValue* enum_value =
               FindEnumValueByNumberOrNull(enum_type, int_value.value())) {
@@ -339,12 +339,12 @@ util::StatusOr<int> DataPiece::ToEnum(const shark::Enum* enum_type,
     // enum because we preserve unknown enum values as well.
     return ToInt32();
   }
-  return util::InvalidArgumentError(
+  return turbo::invalid_argument_error(
       ValueAsStringOrDefault("Cannot find enum with given value."));
 }
 
 template <typename To>
-util::StatusOr<To> DataPiece::GenericConvert() const {
+turbo::Result<To> DataPiece::GenericConvert() const {
   switch (type_) {
     case TYPE_INT32:
       return NumberConvertAndCheck<To, int32_t>(i32_);
@@ -359,21 +359,21 @@ util::StatusOr<To> DataPiece::GenericConvert() const {
     case TYPE_FLOAT:
       return NumberConvertAndCheck<To, float>(float_);
     default:  // TYPE_ENUM, TYPE_STRING, TYPE_CORD, TYPE_BOOL
-      return util::InvalidArgumentError(ValueAsStringOrDefault(
+      return turbo::invalid_argument_error(ValueAsStringOrDefault(
           "Wrong type. Bool, Enum, String and Cord not supported in "
           "GenericConvert."));
   }
 }
 
 template <typename To>
-util::StatusOr<To> DataPiece::StringToNumber(bool (*func)(std::string_view,
+turbo::Result<To> DataPiece::StringToNumber(bool (*func)(std::string_view,
                                                           To*)) const {
   if (str_.size() > 0 && (str_[0] == ' ' || str_[str_.size() - 1] == ' ')) {
-    return util::InvalidArgumentError(StrCat("\"", str_, "\""));
+    return turbo::invalid_argument_error(StrCat("\"", str_, "\""));
   }
   To result;
   if (func(str_, &result)) return result;
-  return util::InvalidArgumentError(
+  return turbo::invalid_argument_error(
       StrCat("\"", std::string(str_), "\""));
 }
 

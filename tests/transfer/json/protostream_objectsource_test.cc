@@ -47,7 +47,7 @@
 #include <tests/sk/transfer/json/timestamp_duration.skp.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/casts.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <shark/transfer/json/constants.h>
 #include <tests/common/json/type_info_test_helper.h>
 
@@ -101,11 +101,11 @@ class ProtostreamObjectSourceTest
   ~ProtostreamObjectSourceTest() override {}
 
   void DoTest(const Message& msg, const Descriptor* descriptor) {
-    util::Status status = ExecuteTest(msg, descriptor);
-    EXPECT_EQ(util::Status(), status);
+    turbo::Status status = ExecuteTest(msg, descriptor);
+    EXPECT_EQ(turbo::Status(), status);
   }
 
-  util::Status ExecuteTest(const Message& msg, const Descriptor* descriptor) {
+  turbo::Status ExecuteTest(const Message& msg, const Descriptor* descriptor) {
     std::ostringstream oss;
     msg.SerializePartialToOstream(&oss);
     std::string proto = oss.str();
@@ -567,8 +567,8 @@ TEST_P(ProtostreamObjectSourceTest, CyclicMessageDepthTest) {
     current = next;
   }
 
-  util::Status status = ExecuteTest(cyclic, Cyclic::descriptor());
-  EXPECT_TRUE(util::IsInvalidArgument(status));
+  turbo::Status status = ExecuteTest(cyclic, Cyclic::descriptor());
+  EXPECT_TRUE(turbo::is_invalid_argument(status));
 }
 
 class ProtostreamObjectSourceMapsTest : public ProtostreamObjectSourceTest {
@@ -913,8 +913,8 @@ TEST_P(ProtostreamObjectSourceAnysTest, MissingTypeUrlError) {
   // We start the "AnyOut" part and then fail when we hit the Any object.
   ow_.StartObject("");
 
-  util::Status status = ExecuteTest(out, AnyOut::descriptor());
-  EXPECT_TRUE(util::IsInternal(status));
+  turbo::Status status = ExecuteTest(out, AnyOut::descriptor());
+  EXPECT_TRUE(turbo::is_internal(status));
 }
 
 TEST_P(ProtostreamObjectSourceAnysTest, UnknownTypeServiceError) {
@@ -929,8 +929,8 @@ TEST_P(ProtostreamObjectSourceAnysTest, UnknownTypeServiceError) {
   // We start the "AnyOut" part and then fail when we hit the Any object.
   ow_.StartObject("");
 
-  util::Status status = ExecuteTest(out, AnyOut::descriptor());
-  EXPECT_TRUE(util::IsInternal(status));
+  turbo::Status status = ExecuteTest(out, AnyOut::descriptor());
+  EXPECT_TRUE(turbo::is_internal(status));
 }
 
 TEST_P(ProtostreamObjectSourceAnysTest, UnknownTypeError) {
@@ -945,8 +945,8 @@ TEST_P(ProtostreamObjectSourceAnysTest, UnknownTypeError) {
   // We start the "AnyOut" part and then fail when we hit the Any object.
   ow_.StartObject("");
 
-  util::Status status = ExecuteTest(out, AnyOut::descriptor());
-  EXPECT_TRUE(util::IsInternal(status));
+  turbo::Status status = ExecuteTest(out, AnyOut::descriptor());
+  EXPECT_TRUE(turbo::is_internal(status));
 }
 
 class ProtostreamObjectSourceStructTest : public ProtostreamObjectSourceTest {
@@ -1078,8 +1078,8 @@ TEST_P(ProtostreamObjectSourceTimestampTest, InvalidTimestampBelowMinTest) {
   ts->set_seconds(kTimestampMinSeconds - 1);
   ow_.StartObject("");
 
-  util::Status status = ExecuteTest(out, TimestampDuration::descriptor());
-  EXPECT_TRUE(util::IsInternal(status));
+  turbo::Status status = ExecuteTest(out, TimestampDuration::descriptor());
+  EXPECT_TRUE(turbo::is_internal(status));
 }
 
 TEST_P(ProtostreamObjectSourceTimestampTest, InvalidTimestampAboveMaxTest) {
@@ -1089,8 +1089,8 @@ TEST_P(ProtostreamObjectSourceTimestampTest, InvalidTimestampAboveMaxTest) {
   ts->set_seconds(kTimestampMaxSeconds + 1);
   ow_.StartObject("");
 
-  util::Status status = ExecuteTest(out, TimestampDuration::descriptor());
-  EXPECT_TRUE(util::IsInternal(status));
+  turbo::Status status = ExecuteTest(out, TimestampDuration::descriptor());
+  EXPECT_TRUE(turbo::is_internal(status));
 }
 
 TEST_P(ProtostreamObjectSourceTimestampTest, InvalidDurationBelowMinTest) {
@@ -1100,8 +1100,8 @@ TEST_P(ProtostreamObjectSourceTimestampTest, InvalidDurationBelowMinTest) {
   dur->set_seconds(kDurationMinSeconds - 1);
   ow_.StartObject("");
 
-  util::Status status = ExecuteTest(out, TimestampDuration::descriptor());
-  EXPECT_TRUE(util::IsInternal(status));
+  turbo::Status status = ExecuteTest(out, TimestampDuration::descriptor());
+  EXPECT_TRUE(turbo::is_internal(status));
 }
 
 TEST_P(ProtostreamObjectSourceTimestampTest, InvalidDurationAboveMaxTest) {
@@ -1111,8 +1111,8 @@ TEST_P(ProtostreamObjectSourceTimestampTest, InvalidDurationAboveMaxTest) {
   dur->set_seconds(kDurationMaxSeconds + 1);
   ow_.StartObject("");
 
-  util::Status status = ExecuteTest(out, TimestampDuration::descriptor());
-  EXPECT_TRUE(util::IsInternal(status));
+  turbo::Status status = ExecuteTest(out, TimestampDuration::descriptor());
+  EXPECT_TRUE(turbo::is_internal(status));
 }
 
 TEST_P(ProtostreamObjectSourceTimestampTest, TimestampDurationDefaultValue) {

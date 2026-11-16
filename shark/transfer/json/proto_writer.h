@@ -42,14 +42,14 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.h>
 #include <shark/stubs/bytestream.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <shark/transfer/json/datapiece.h>
 #include <shark/transfer/json/error_listener.h>
 #include <shark/transfer/json/structured_objectwriter.h>
 #include <shark/transfer/json/type_info.h>
 #include <shark/transfer/json/type_resolver.h>
 #include <shark/stubs/hash.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -312,7 +312,7 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
 
  private:
   // Writes an ENUM field, including tag, to the stream.
-  static util::Status WriteEnum(int field_number, const DataPiece& data,
+  static turbo::Status WriteEnum(int field_number, const DataPiece& data,
                                 const shark::Enum* enum_type,
                                 io::CodedOutputStream* stream,
                                 bool use_lower_camel_for_enums,

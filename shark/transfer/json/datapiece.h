@@ -36,7 +36,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/types/type.skp.h>
-#include <shark/stubs/statusor.h>
+#include <turbo/status/result.h>
 #include <shark/stubs/strutil.h>
 
 // Must be included last.
@@ -123,34 +123,34 @@ class SHARK_EXPORT DataPiece {
 
 
   // Parses, casts or converts the value stored in the DataPiece into an int32.
-  util::StatusOr<int32_t> ToInt32() const;
+  turbo::Result<int32_t> ToInt32() const;
 
   // Parses, casts or converts the value stored in the DataPiece into a uint32.
-  util::StatusOr<uint32_t> ToUint32() const;
+  turbo::Result<uint32_t> ToUint32() const;
 
   // Parses, casts or converts the value stored in the DataPiece into an int64.
-  util::StatusOr<int64_t> ToInt64() const;
+  turbo::Result<int64_t> ToInt64() const;
 
   // Parses, casts or converts the value stored in the DataPiece into a uint64.
-  util::StatusOr<uint64_t> ToUint64() const;
+  turbo::Result<uint64_t> ToUint64() const;
 
   // Parses, casts or converts the value stored in the DataPiece into a double.
-  util::StatusOr<double> ToDouble() const;
+  turbo::Result<double> ToDouble() const;
 
   // Parses, casts or converts the value stored in the DataPiece into a float.
-  util::StatusOr<float> ToFloat() const;
+  turbo::Result<float> ToFloat() const;
 
   // Parses, casts or converts the value stored in the DataPiece into a bool.
-  util::StatusOr<bool> ToBool() const;
+  turbo::Result<bool> ToBool() const;
 
   // Parses, casts or converts the value stored in the DataPiece into a string.
-  util::StatusOr<std::string> ToString() const;
+  turbo::Result<std::string> ToString() const;
 
   // Tries to convert the value contained in this datapiece to string. If the
   // conversion fails, it returns the default_string.
   std::string ValueAsStringOrDefault(std::string_view default_string) const;
 
-  util::StatusOr<std::string> ToBytes() const;
+  turbo::Result<std::string> ToBytes() const;
 
  private:
   friend class ProtoWriter;
@@ -164,7 +164,7 @@ class SHARK_EXPORT DataPiece {
 
   // Same as the ToEnum() method above but with additional flag to ignore
   // unknown enum values.
-  util::StatusOr<int> ToEnum(const shark::Enum* enum_type,
+  turbo::Result<int> ToEnum(const shark::Enum* enum_type,
                              bool use_lower_camel_for_enums,
                              bool case_insensitive_enum_parsing,
                              bool ignore_unknown_enum_values,
@@ -173,12 +173,12 @@ class SHARK_EXPORT DataPiece {
   // For numeric conversion between
   //     int32, int64, uint32, uint64, double, float and bool
   template <typename To>
-  util::StatusOr<To> GenericConvert() const;
+  turbo::Result<To> GenericConvert() const;
 
   // For conversion from string to
   //     int32, int64, uint32, uint64, double, float and bool
   template <typename To>
-  util::StatusOr<To> StringToNumber(bool (*func)(std::string_view, To*)) const;
+  turbo::Result<To> StringToNumber(bool (*func)(std::string_view, To*)) const;
 
   // Decodes a base64 string. Returns true on success.
   bool DecodeBase64(std::string_view src, std::string* dest) const;

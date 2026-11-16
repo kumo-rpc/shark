@@ -31,9 +31,9 @@
 #pragma once
 
 #include <shark/stubs/common.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -53,14 +53,14 @@ class SHARK_EXPORT ObjectSource {
   virtual ~ObjectSource() {}
 
   // Writes to the ObjectWriter
-  virtual util::Status WriteTo(ObjectWriter* ow) const {
+  virtual turbo::Status WriteTo(ObjectWriter* ow) const {
     return NamedWriteTo("", ow);
   }
 
   // Writes to the ObjectWriter with a custom name for the message.
   // This is useful when you chain ObjectSource together by embedding one
   // within another.
-  virtual util::Status NamedWriteTo(std::string_view name,
+  virtual turbo::Status NamedWriteTo(std::string_view name,
                                     ObjectWriter* ow) const = 0;
 
  protected:

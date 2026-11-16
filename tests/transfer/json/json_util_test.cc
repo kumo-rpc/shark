@@ -657,7 +657,7 @@ TEST_F(JsonUtilTest, TestWrongJsonInput) {
   delete resolver;
 
   EXPECT_FALSE(result_status.ok());
-  EXPECT_TRUE(util::IsInvalidArgument(result_status));
+  EXPECT_TRUE(turbo::is_invalid_argument(result_status));
 }
 
 TEST_F(JsonUtilTest, HtmlEscape) {

@@ -37,14 +37,14 @@
 
 #include <shark/stubs/callback.h>
 #include <shark/stubs/common.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 
 namespace shark::util::converter {
 
 typedef std::function<std::string(std::string_view)> ConverterCallback;
-typedef std::function<util::Status(std::string_view)> PathSinkCallback;
+typedef std::function<turbo::Status(std::string_view)> PathSinkCallback;
 
 // Applies a 'converter' to each segment of a FieldMask path and returns the
 // result. Quoted strings in the 'path' are copied to the output as-is without
@@ -59,7 +59,7 @@ std::string ConvertFieldMaskPath(const std::string_view path,
 // resulting path.
 // Note that we also support Apiary style FieldMask form. The above example in
 // the Apiary style will look like "a.b,a.c(d,e)".
-util::Status DecodeCompactFieldMaskPaths(std::string_view paths,
+turbo::Status DecodeCompactFieldMaskPaths(std::string_view paths,
                                          PathSinkCallback path_sink);
 
 }  // namespace shark::util::converter

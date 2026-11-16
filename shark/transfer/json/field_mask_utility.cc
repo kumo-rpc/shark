@@ -30,10 +30,10 @@
 
 #include <shark/transfer/json/field_mask_utility.h>
 
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <shark/stubs/strutil.h>
 #include <shark/transfer/json/utility.h>
-#include <shark/stubs/status_macros.h>
+#include <turbo/status/status_macros.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -104,7 +104,7 @@ std::string ConvertFieldMaskPath(const std::string_view path,
   return result;
 }
 
-util::Status DecodeCompactFieldMaskPaths(std::string_view paths,
+turbo::Status DecodeCompactFieldMaskPaths(std::string_view paths,
                                          PathSinkCallback path_sink) {
   std::stack<std::string> prefix;
   int length = paths.length();
@@ -131,7 +131,7 @@ util::Status DecodeCompactFieldMaskPaths(std::string_view paths,
         }
         // Un-escaped '"' must be followed with a ']'.
         if (i >= length - 1 || paths[i + 1] != ']') {
-          return util::InvalidArgumentError(StrCat(
+          return turbo::invalid_argument_error(StrCat(
               "Invalid FieldMask '", paths,
               "'. Map keys should be represented as [\"some_key\"]."));
         }
@@ -142,7 +142,7 @@ util::Status DecodeCompactFieldMaskPaths(std::string_view paths,
         // Checks whether the key ends at the end of a path segment.
         if (i < length - 1 && paths[i + 1] != '.' && paths[i + 1] != ',' &&
             paths[i + 1] != ')' && paths[i + 1] != '(') {
-          return util::InvalidArgumentError(StrCat(
+          return turbo::invalid_argument_error(StrCat(
               "Invalid FieldMask '", paths,
               "'. Map keys should be at the end of a path segment."));
         }
@@ -153,7 +153,7 @@ util::Status DecodeCompactFieldMaskPaths(std::string_view paths,
       // We are not in a map key, look for the start of one.
       if (paths[i] == '[') {
         if (i >= length - 1 || paths[i + 1] != '\"') {
-          return util::InvalidArgumentError(StrCat(
+          return turbo::invalid_argument_error(StrCat(
               "Invalid FieldMask '", paths,
               "'. Map keys should be represented as [\"some_key\"]."));
         }
@@ -181,14 +181,14 @@ util::Status DecodeCompactFieldMaskPaths(std::string_view paths,
       // When the current character is ')', ',' or the current position has
       // passed the end of the input, builds and outputs a new paths by
       // concatenating the last prefix with the current segment.
-      RETURN_IF_ERROR(
+      TURBO_RETURN_IF_ERROR(
           path_sink(AppendPathSegmentToPrefix(current_prefix, segment)));
     }
 
     // Removes the last prefix after seeing a ')'.
     if (i < length && paths[i] == ')') {
       if (prefix.empty()) {
-        return util::InvalidArgumentError(
+        return turbo::invalid_argument_error(
             StrCat("Invalid FieldMask '", paths,
                          "'. Cannot find matching '(' for all ')'."));
       }
@@ -197,16 +197,16 @@ util::Status DecodeCompactFieldMaskPaths(std::string_view paths,
     previous_position = i + 1;
   }
   if (in_map_key) {
-    return util::InvalidArgumentError(
+    return turbo::invalid_argument_error(
         StrCat("Invalid FieldMask '", paths,
                      "'. Cannot find matching ']' for all '['."));
   }
   if (!prefix.empty()) {
-    return util::InvalidArgumentError(
+    return turbo::invalid_argument_error(
         StrCat("Invalid FieldMask '", paths,
                      "'. Cannot find matching ')' for all '('."));
   }
-  return util::Status();
+  return turbo::ok_status();
 }
 
 }  // namespace shark::util::converter

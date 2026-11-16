@@ -38,7 +38,7 @@
 #include <shark/stubs/once.h>
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/strutil.h>
-#include <shark/stubs/statusor.h>
+#include <turbo/status/result.h>
 #include <shark/stubs/time.h>
 #include <shark/transfer/json/constants.h>
 #include <shark/transfer/json/field_mask_utility.h>
@@ -118,9 +118,9 @@ ProtoWriter::~ProtoWriter() {
 namespace {
 
 // Writes an INT32 field, including tag to the stream.
-inline util::Status WriteInt32(int field_number, const DataPiece& data,
+inline turbo::Status WriteInt32(int field_number, const DataPiece& data,
                                CodedOutputStream* stream) {
-  util::StatusOr<int32_t> i32 = data.ToInt32();
+  turbo::Result<int32_t> i32 = data.ToInt32();
   if (i32.ok()) {
     WireFormatLite::WriteInt32(field_number, i32.value(), stream);
   }
@@ -128,9 +128,9 @@ inline util::Status WriteInt32(int field_number, const DataPiece& data,
 }
 
 // writes an SFIXED32 field, including tag, to the stream.
-inline util::Status WriteSFixed32(int field_number, const DataPiece& data,
+inline turbo::Status WriteSFixed32(int field_number, const DataPiece& data,
                                   CodedOutputStream* stream) {
-  util::StatusOr<int32_t> i32 = data.ToInt32();
+  turbo::Result<int32_t> i32 = data.ToInt32();
   if (i32.ok()) {
     WireFormatLite::WriteSFixed32(field_number, i32.value(), stream);
   }
@@ -138,9 +138,9 @@ inline util::Status WriteSFixed32(int field_number, const DataPiece& data,
 }
 
 // Writes an SINT32 field, including tag, to the stream.
-inline util::Status WriteSInt32(int field_number, const DataPiece& data,
+inline turbo::Status WriteSInt32(int field_number, const DataPiece& data,
                                 CodedOutputStream* stream) {
-  util::StatusOr<int32_t> i32 = data.ToInt32();
+  turbo::Result<int32_t> i32 = data.ToInt32();
   if (i32.ok()) {
     WireFormatLite::WriteSInt32(field_number, i32.value(), stream);
   }
@@ -148,9 +148,9 @@ inline util::Status WriteSInt32(int field_number, const DataPiece& data,
 }
 
 // Writes a FIXED32 field, including tag, to the stream.
-inline util::Status WriteFixed32(int field_number, const DataPiece& data,
+inline turbo::Status WriteFixed32(int field_number, const DataPiece& data,
                                  CodedOutputStream* stream) {
-  util::StatusOr<uint32_t> u32 = data.ToUint32();
+  turbo::Result<uint32_t> u32 = data.ToUint32();
   if (u32.ok()) {
     WireFormatLite::WriteFixed32(field_number, u32.value(), stream);
   }
@@ -158,33 +158,33 @@ inline util::Status WriteFixed32(int field_number, const DataPiece& data,
 }
 
 // Writes a UINT32 field, including tag, to the stream.
-inline util::Status WriteRangedInt32(int field_number, const DataPiece& data,
+inline turbo::Status WriteRangedInt32(int field_number, const DataPiece& data,
                                       CodedOutputStream* stream, int32_t min,
                                       int32_t max) {
-  util::StatusOr<int32_t> i32 = data.ToInt32();
+  turbo::Result<int32_t> i32 = data.ToInt32();
   if (!i32.ok()) return i32.status();
   if (i32.value() < min || i32.value() > max) {
-    return util::InvalidArgumentError("Integer out of range.");
+    return turbo::invalid_argument_error("Integer out of range.");
   }
   WireFormatLite::WriteInt32(field_number, i32.value(), stream);
-  return util::Status();
+  return turbo::ok_status();
 }
 
-inline util::Status WriteRangedUInt32(int field_number, const DataPiece& data,
+inline turbo::Status WriteRangedUInt32(int field_number, const DataPiece& data,
                                        CodedOutputStream* stream,
                                        uint32_t max) {
-  util::StatusOr<uint32_t> u32 = data.ToUint32();
+  turbo::Result<uint32_t> u32 = data.ToUint32();
   if (!u32.ok()) return u32.status();
   if (u32.value() > max) {
-    return util::InvalidArgumentError("Integer out of range.");
+    return turbo::invalid_argument_error("Integer out of range.");
   }
   WireFormatLite::WriteUInt32(field_number, u32.value(), stream);
-  return util::Status();
+  return turbo::ok_status();
 }
 
-inline util::Status WriteUInt32(int field_number, const DataPiece& data,
+inline turbo::Status WriteUInt32(int field_number, const DataPiece& data,
                                 CodedOutputStream* stream) {
-  util::StatusOr<uint32_t> u32 = data.ToUint32();
+  turbo::Result<uint32_t> u32 = data.ToUint32();
   if (u32.ok()) {
     WireFormatLite::WriteUInt32(field_number, u32.value(), stream);
   }
@@ -192,9 +192,9 @@ inline util::Status WriteUInt32(int field_number, const DataPiece& data,
 }
 
 // Writes an INT64 field, including tag, to the stream.
-inline util::Status WriteInt64(int field_number, const DataPiece& data,
+inline turbo::Status WriteInt64(int field_number, const DataPiece& data,
                                CodedOutputStream* stream) {
-  util::StatusOr<int64_t> i64 = data.ToInt64();
+  turbo::Result<int64_t> i64 = data.ToInt64();
   if (i64.ok()) {
     WireFormatLite::WriteInt64(field_number, i64.value(), stream);
   }
@@ -202,9 +202,9 @@ inline util::Status WriteInt64(int field_number, const DataPiece& data,
 }
 
 // Writes an SFIXED64 field, including tag, to the stream.
-inline util::Status WriteSFixed64(int field_number, const DataPiece& data,
+inline turbo::Status WriteSFixed64(int field_number, const DataPiece& data,
                                   CodedOutputStream* stream) {
-  util::StatusOr<int64_t> i64 = data.ToInt64();
+  turbo::Result<int64_t> i64 = data.ToInt64();
   if (i64.ok()) {
     WireFormatLite::WriteSFixed64(field_number, i64.value(), stream);
   }
@@ -212,9 +212,9 @@ inline util::Status WriteSFixed64(int field_number, const DataPiece& data,
 }
 
 // Writes an SINT64 field, including tag, to the stream.
-inline util::Status WriteSInt64(int field_number, const DataPiece& data,
+inline turbo::Status WriteSInt64(int field_number, const DataPiece& data,
                                 CodedOutputStream* stream) {
-  util::StatusOr<int64_t> i64 = data.ToInt64();
+  turbo::Result<int64_t> i64 = data.ToInt64();
   if (i64.ok()) {
     WireFormatLite::WriteSInt64(field_number, i64.value(), stream);
   }
@@ -222,9 +222,9 @@ inline util::Status WriteSInt64(int field_number, const DataPiece& data,
 }
 
 // Writes a FIXED64 field, including tag, to the stream.
-inline util::Status WriteFixed64(int field_number, const DataPiece& data,
+inline turbo::Status WriteFixed64(int field_number, const DataPiece& data,
                                  CodedOutputStream* stream) {
-  util::StatusOr<uint64_t> u64 = data.ToUint64();
+  turbo::Result<uint64_t> u64 = data.ToUint64();
   if (u64.ok()) {
     WireFormatLite::WriteFixed64(field_number, u64.value(), stream);
   }
@@ -232,9 +232,9 @@ inline util::Status WriteFixed64(int field_number, const DataPiece& data,
 }
 
 // Writes a UINT64 field, including tag, to the stream.
-inline util::Status WriteUInt64(int field_number, const DataPiece& data,
+inline turbo::Status WriteUInt64(int field_number, const DataPiece& data,
                                 CodedOutputStream* stream) {
-  util::StatusOr<uint64_t> u64 = data.ToUint64();
+  turbo::Result<uint64_t> u64 = data.ToUint64();
   if (u64.ok()) {
     WireFormatLite::WriteUInt64(field_number, u64.value(), stream);
   }
@@ -242,9 +242,9 @@ inline util::Status WriteUInt64(int field_number, const DataPiece& data,
 }
 
 // Writes a DOUBLE field, including tag, to the stream.
-inline util::Status WriteDouble(int field_number, const DataPiece& data,
+inline turbo::Status WriteDouble(int field_number, const DataPiece& data,
                                 CodedOutputStream* stream) {
-  util::StatusOr<double> d = data.ToDouble();
+  turbo::Result<double> d = data.ToDouble();
   if (d.ok()) {
     WireFormatLite::WriteDouble(field_number, d.value(), stream);
   }
@@ -252,9 +252,9 @@ inline util::Status WriteDouble(int field_number, const DataPiece& data,
 }
 
 // Writes a FLOAT field, including tag, to the stream.
-inline util::Status WriteFloat(int field_number, const DataPiece& data,
+inline turbo::Status WriteFloat(int field_number, const DataPiece& data,
                                CodedOutputStream* stream) {
-  util::StatusOr<float> f = data.ToFloat();
+  turbo::Result<float> f = data.ToFloat();
   if (f.ok()) {
     WireFormatLite::WriteFloat(field_number, f.value(), stream);
   }
@@ -262,9 +262,9 @@ inline util::Status WriteFloat(int field_number, const DataPiece& data,
 }
 
 // Writes a BOOL field, including tag, to the stream.
-inline util::Status WriteBool(int field_number, const DataPiece& data,
+inline turbo::Status WriteBool(int field_number, const DataPiece& data,
                               CodedOutputStream* stream) {
-  util::StatusOr<bool> b = data.ToBool();
+  turbo::Result<bool> b = data.ToBool();
   if (b.ok()) {
     WireFormatLite::WriteBool(field_number, b.value(), stream);
   }
@@ -272,9 +272,9 @@ inline util::Status WriteBool(int field_number, const DataPiece& data,
 }
 
 // Writes a BYTES field, including tag, to the stream.
-inline util::Status WriteBytes(int field_number, const DataPiece& data,
+inline turbo::Status WriteBytes(int field_number, const DataPiece& data,
                                CodedOutputStream* stream) {
-  util::StatusOr<std::string> c = data.ToBytes();
+  turbo::Result<std::string> c = data.ToBytes();
   if (c.ok()) {
     WireFormatLite::WriteBytes(field_number, c.value(), stream);
   }
@@ -282,9 +282,9 @@ inline util::Status WriteBytes(int field_number, const DataPiece& data,
 }
 
 // Writes a STRING field, including tag, to the stream.
-inline util::Status WriteString(int field_number, const DataPiece& data,
+inline turbo::Status WriteString(int field_number, const DataPiece& data,
                                 CodedOutputStream* stream) {
-  util::StatusOr<std::string> s = data.ToString();
+  turbo::Result<std::string> s = data.ToString();
   if (s.ok()) {
     WireFormatLite::WriteString(field_number, s.value(), stream);
   }
@@ -563,7 +563,7 @@ ProtoWriter* ProtoWriter::EndList() {
 
 ProtoWriter* ProtoWriter::RenderDataPiece(
     std::string_view name, const DataPiece& data) {
-  util::Status status;
+  turbo::Status status;
   if (invalid_depth_ > 0) return this;
 
   const shark::Field* field = Lookup(name);
@@ -617,14 +617,14 @@ ProtoWriter* ProtoWriter::StartListField(const shark::Field& field,
   return this;
 }
 
-util::Status ProtoWriter::WriteEnum(int field_number, const DataPiece& data,
+turbo::Status ProtoWriter::WriteEnum(int field_number, const DataPiece& data,
                                     const shark::Enum* enum_type,
                                     CodedOutputStream* stream,
                                     bool use_lower_camel_for_enums,
                                     bool case_insensitive_enum_parsing,
                                     bool ignore_unknown_values) {
   bool is_unknown_enum_value = false;
-  util::StatusOr<int> e = data.ToEnum(
+  turbo::Result<int> e = data.ToEnum(
       enum_type, use_lower_camel_for_enums, case_insensitive_enum_parsing,
       ignore_unknown_values, &is_unknown_enum_value);
   if (e.ok() && !is_unknown_enum_value) {
@@ -636,7 +636,7 @@ util::Status ProtoWriter::WriteEnum(int field_number, const DataPiece& data,
 ProtoWriter* ProtoWriter::RenderPrimitiveField(
     const shark::Field& field, const shark::Type& type,
     const DataPiece& data) {
-  util::Status status;
+  turbo::Status status;
 
   // Pushing a ProtoElement and then pop it off at the end for 2 purposes:
   // error location reporting and required field accounting.
@@ -733,7 +733,7 @@ ProtoWriter* ProtoWriter::RenderPrimitiveField(
       break;
     }
     default:  // TYPE_GROUP, TYPE_MESSAGE, TYPE_UNKNOWN.
-      status = util::InvalidArgumentError(data.ValueAsStringOrDefault(""));
+      status = turbo::invalid_argument_error(data.ValueAsStringOrDefault(""));
   }
 
   if (!status.ok()) {

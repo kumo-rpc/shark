@@ -35,12 +35,12 @@
 
 #include <shark/stubs/common.h>
 #include <shark/types/type.skp.h>
-#include <shark/stubs/status.h>
-#include <shark/stubs/statusor.h>
+#include <turbo/status/status.h>
+#include <turbo/status/result.h>
 #include <shark/stubs/strutil.h>
 #include <shark/transfer/json/utility.h>
 #include <shark/stubs/map_util.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 
 namespace shark::util::converter {
 
@@ -56,7 +56,7 @@ class TypeInfoForTypeResolver : public TypeInfo {
     DeleteCachedTypes(&cached_enums_);
   }
 
-  util::StatusOr<const shark::Type*> ResolveTypeUrl(
+  turbo::Result<const shark::Type*> ResolveTypeUrl(
       std::string_view type_url) const override {
     std::map<std::string_view, StatusOrType>::iterator it =
         cached_types_.find(type_url);
@@ -68,7 +68,7 @@ class TypeInfoForTypeResolver : public TypeInfo {
     const std::string& string_type_url =
         *string_storage_.insert(std::string(type_url)).first;
     std::unique_ptr<shark::Type> type(new shark::Type());
-    util::Status status =
+    turbo::Status status =
         type_resolver_->ResolveMessageType(string_type_url, type.get());
     StatusOrType result =
         status.ok() ? StatusOrType(type.release()) : StatusOrType(status);
@@ -95,7 +95,7 @@ class TypeInfoForTypeResolver : public TypeInfo {
         *string_storage_.insert(std::string(type_url)).first;
     std::unique_ptr<shark::Enum> enum_type(
         new shark::Enum());
-    util::Status status =
+    turbo::Status status =
         type_resolver_->ResolveEnumType(string_type_url, enum_type.get());
     StatusOrEnum result =
         status.ok() ? StatusOrEnum(enum_type.release()) : StatusOrEnum(status);
@@ -122,8 +122,8 @@ class TypeInfoForTypeResolver : public TypeInfo {
   }
 
  private:
-  typedef util::StatusOr<const shark::Type*> StatusOrType;
-  typedef util::StatusOr<const shark::Enum*> StatusOrEnum;
+  typedef turbo::Result<const shark::Type*> StatusOrType;
+  typedef turbo::Result<const shark::Enum*> StatusOrEnum;
   typedef std::map<std::string_view, std::string_view> CamelCaseNameTable;
 
   template <typename T>

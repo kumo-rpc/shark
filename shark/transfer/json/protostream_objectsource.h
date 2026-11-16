@@ -35,18 +35,18 @@
 #include <string>
 #include <unordered_map>
 
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 
 #include <shark/stubs/common.h>
 #include <shark/types/type.skp.h>
-#include <shark/stubs/statusor.h>
+#include <turbo/status/result.h>
 #include <shark/stubs/strutil.h>
 #include <shark/transfer/json/object_source.h>
 #include <shark/transfer/json/object_writer.h>
 #include <shark/transfer/json/type_info.h>
 #include <shark/transfer/json/type_resolver.h>
 #include <shark/stubs/hash.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 
 
 // Must be included last.
@@ -68,7 +68,7 @@ class TypeInfo;
 //   ProtoStreamObjectSource os(&in_stream, /*ServiceTypeInfo*/ typeinfo,
 //                              <your message shark::Type>);
 //
-//   Status status = os.WriteTo(<some ObjectWriter>);
+//   turbo::Status status = os.WriteTo(<some ObjectWriter>);
 class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
  public:
 
@@ -122,7 +122,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
 
   ~ProtoStreamObjectSource() override;
 
-  util::Status NamedWriteTo(std::string_view name,
+  turbo::Status NamedWriteTo(std::string_view name,
                             ObjectWriter* ow) const override;
 
   // Sets the max recursion depth of proto message to be deserialized. Proto
@@ -138,7 +138,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // nested messages (end with 0) and nested groups (end with group end tag).
   // The include_start_and_end parameter allows this method to be called when
   // already inside of an object, and skip calling StartObject and EndObject.
-  virtual util::Status WriteMessage(const shark::Type& type,
+  virtual turbo::Status WriteMessage(const shark::Type& type,
                                     std::string_view name,
                                     const uint32_t end_tag,
                                     bool include_start_and_end,
@@ -147,7 +147,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // Renders a repeating field (packed or unpacked).  Returns the next tag after
   // reading all sequential repeating elements. The caller should use this tag
   // before reading more tags from the stream.
-  virtual util::StatusOr<uint32_t> RenderList(
+  virtual turbo::Result<uint32_t> RenderList(
       const shark::Field* field, std::string_view name,
       uint32_t list_tag, ObjectWriter* ow) const;
 
@@ -156,7 +156,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
       const shark::Type& type, uint32_t tag) const;
 
   // Renders a field value to the ObjectWriter.
-  virtual util::Status RenderField(const shark::Field* field,
+  virtual turbo::Status RenderField(const shark::Field* field,
                                    std::string_view field_name,
                                    ObjectWriter* ow) const;
 
@@ -176,7 +176,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
                           const shark::Type& type,
                           const RenderOptions& render_options);
   // Function that renders a well known type with a modified behavior.
-  typedef util::Status (*TypeRenderer)(const ProtoStreamObjectSource*,
+  typedef turbo::Status (*TypeRenderer)(const ProtoStreamObjectSource*,
                                        const shark::Type&,
                                        std::string_view, ObjectWriter*);
 
@@ -186,80 +186,80 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // Renders a NWP map.
   // Returns the next tag after reading all map entries. The caller should use
   // this tag before reading more tags from the stream.
-  util::StatusOr<uint32_t> RenderMap(const shark::Field* field,
+  turbo::Result<uint32_t> RenderMap(const shark::Field* field,
                                      std::string_view name, uint32_t list_tag,
                                      ObjectWriter* ow) const;
 
   // Renders a packed repeating field. A packed field is stored as:
   // {tag length item1 item2 item3} instead of the less efficient
   // {tag item1 tag item2 tag item3}.
-  util::Status RenderPacked(const shark::Field* field,
+  turbo::Status RenderPacked(const shark::Field* field,
                             ObjectWriter* ow) const;
 
   // Renders a shark.Timestamp value to ObjectWriter
-  static util::Status RenderTimestamp(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderTimestamp(const ProtoStreamObjectSource* os,
                                       const shark::Type& type,
                                       std::string_view name, ObjectWriter* ow);
 
   // Renders a shark.Duration value to ObjectWriter
-  static util::Status RenderDuration(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderDuration(const ProtoStreamObjectSource* os,
                                      const shark::Type& type,
                                      std::string_view name, ObjectWriter* ow);
 
   // Following RenderTYPE functions render well known types in
   // shark/types/wrappers.shark corresponding to TYPE.
-  static util::Status RenderDouble(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderDouble(const ProtoStreamObjectSource* os,
                                    const shark::Type& type,
                                    std::string_view name, ObjectWriter* ow);
-  static util::Status RenderFloat(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderFloat(const ProtoStreamObjectSource* os,
                                   const shark::Type& type,
                                   std::string_view name, ObjectWriter* ow);
-  static util::Status RenderInt64(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderInt64(const ProtoStreamObjectSource* os,
                                   const shark::Type& type,
                                   std::string_view name, ObjectWriter* ow);
-  static util::Status RenderUInt64(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderUInt64(const ProtoStreamObjectSource* os,
                                    const shark::Type& type,
                                    std::string_view name, ObjectWriter* ow);
-  static util::Status RenderInt32(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderInt32(const ProtoStreamObjectSource* os,
                                   const shark::Type& type,
                                   std::string_view name, ObjectWriter* ow);
-  static util::Status RenderUInt32(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderUInt32(const ProtoStreamObjectSource* os,
                                    const shark::Type& type,
                                    std::string_view name, ObjectWriter* ow);
-  static util::Status RenderBool(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderBool(const ProtoStreamObjectSource* os,
                                  const shark::Type& type,
                                  std::string_view name, ObjectWriter* ow);
-  static util::Status RenderString(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderString(const ProtoStreamObjectSource* os,
                                    const shark::Type& type,
                                    std::string_view name, ObjectWriter* ow);
-  static util::Status RenderBytes(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderBytes(const ProtoStreamObjectSource* os,
                                   const shark::Type& type,
                                   std::string_view name, ObjectWriter* ow);
 
   // Renders a shark.Struct to ObjectWriter.
-  static util::Status RenderStruct(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderStruct(const ProtoStreamObjectSource* os,
                                    const shark::Type& type,
                                    std::string_view name, ObjectWriter* ow);
 
   // Helper to render shark.Struct's Value fields to ObjectWriter.
-  static util::Status RenderStructValue(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderStructValue(const ProtoStreamObjectSource* os,
                                         const shark::Type& type,
                                         std::string_view name,
                                         ObjectWriter* ow);
 
   // Helper to render shark.Struct's ListValue fields to ObjectWriter.
-  static util::Status RenderStructListValue(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderStructListValue(const ProtoStreamObjectSource* os,
                                             const shark::Type& type,
                                             std::string_view name,
                                             ObjectWriter* ow);
 
   // Render the "Any" type.
-  static util::Status RenderAny(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderAny(const ProtoStreamObjectSource* os,
                                 const shark::Type& type,
                                 std::string_view name, ObjectWriter* ow);
 
   // Render the "FieldMask" type.
-  static util::Status RenderFieldMask(const ProtoStreamObjectSource* os,
+  static turbo::Status RenderFieldMask(const ProtoStreamObjectSource* os,
                                       const shark::Type& type,
                                       std::string_view name, ObjectWriter* ow);
 
@@ -270,7 +270,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
 
   // Same as above but renders all non-message field types. Callers don't call
   // this function directly. They just use RenderField.
-  util::Status RenderNonMessageField(const shark::Field* field,
+  turbo::Status RenderNonMessageField(const shark::Field* field,
                                      std::string_view field_name,
                                      ObjectWriter* ow) const;
 
@@ -284,9 +284,9 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
       const shark::Type& type) const;
 
   // Helper function to check recursion depth and increment it. It will return
-  // OkStatus() if the current depth is allowed. Otherwise an error is returned.
+  // turbo::ok_status() if the current depth is allowed. Otherwise an error is returned.
   // type_name and field_name are used for error reporting.
-  util::Status IncrementRecursionDepth(std::string_view type_name,
+  turbo::Status IncrementRecursionDepth(std::string_view type_name,
                                        std::string_view field_name) const;
 
   // Input stream to read from. Ownership rests with the caller.

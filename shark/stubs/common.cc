@@ -52,7 +52,7 @@
 #include <shark/stubs/callback.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/once.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <string_view>
 #include <shark/stubs/strutil.h>
 #include <turbo/numeric/int128.h>
@@ -195,7 +195,7 @@ LogMessage& LogMessage::operator<<(const std::string_view& value) {
   return *this;
 }
 
-LogMessage& LogMessage::operator<<(const util::Status& status) {
+LogMessage& LogMessage::operator<<(const turbo::Status& status) {
   message_ += status.ToString();
   return *this;
 }

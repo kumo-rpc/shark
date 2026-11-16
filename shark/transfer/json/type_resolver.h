@@ -36,8 +36,8 @@
 
 #include <shark/stubs/common.h>
 #include <shark/types/type.skp.h>
-#include <shark/stubs/status.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
+#include <turbo/status/status.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -55,11 +55,11 @@ class SHARK_EXPORT TypeResolver {
   virtual ~TypeResolver() {}
 
   // Resolves a type url for a message type.
-  virtual util::Status ResolveMessageType(
+  virtual turbo::Status ResolveMessageType(
       const std::string& type_url, shark::Type* message_type) = 0;
 
   // Resolves a type url for an enum type.
-  virtual util::Status ResolveEnumType(const std::string& type_url,
+  virtual turbo::Status ResolveEnumType(const std::string& type_url,
                                        shark::Enum* enum_type) = 0;
 
  private:

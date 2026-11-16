@@ -45,14 +45,14 @@
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/casts.h>
-#include <shark/stubs/status.h>
+#include <turbo/status/status.h>
 #include <turbo/format/str_format.h>
 #include <shark/stubs/time.h>
 #include <shark/transfer/json/constants.h>
 #include <shark/transfer/json/field_mask_utility.h>
 #include <shark/transfer/json/utility.h>
 #include <shark/stubs/map_util.h>
-#include <shark/stubs/status_macros.h>
+#include <turbo/status/status_macros.h>
 
 
 // Must be included last.
@@ -82,7 +82,7 @@ const shark::EnumValue* FindEnumValueByNumber(
 // Utility function to format nanos.
 const std::string FormatNanos(uint32_t nanos, bool with_trailing_zeros);
 
-util::StatusOr<std::string> MapKeyDefaultValueAsString(
+turbo::Result<std::string> MapKeyDefaultValueAsString(
     const shark::Field& field) {
   switch (field.kind()) {
     case shark::SharkType::BOOL:
@@ -105,7 +105,7 @@ util::StatusOr<std::string> MapKeyDefaultValueAsString(
     case shark::SharkType::STRING:
       return std::string();
     default:
-      return util::InternalError("Invalid map key type.");
+      return turbo::internal_error("Invalid map key type.");
   }
 }
 }  // namespace
@@ -143,7 +143,7 @@ ProtoStreamObjectSource::~ProtoStreamObjectSource() {
   }
 }
 
-util::Status ProtoStreamObjectSource::NamedWriteTo(std::string_view name,
+turbo::Status ProtoStreamObjectSource::NamedWriteTo(std::string_view name,
                                                    ObjectWriter* ow) const {
   return WriteMessage(type_, name, 0, true, ow);
 }
@@ -168,7 +168,7 @@ const shark::Field* ProtoStreamObjectSource::FindAndVerifyField(
   return field;
 }
 
-util::Status ProtoStreamObjectSource::WriteMessage(
+turbo::Status ProtoStreamObjectSource::WriteMessage(
     const shark::Type& type, std::string_view name,
     const uint32_t end_tag, bool include_start_and_end,
     ObjectWriter* ow) const {
@@ -213,14 +213,14 @@ util::Status ProtoStreamObjectSource::WriteMessage(
     if (field->cardinality() == shark::FieldCardinality::REPEATED) {
       if (IsMap(*field)) {
         ow->StartObject(field_name);
-        ASSIGN_OR_RETURN(tag, RenderMap(field, field_name, tag, ow));
+        TURBO_ASSIGN_OR_RETURN(tag, RenderMap(field, field_name, tag, ow));
         ow->EndObject();
       } else {
-        ASSIGN_OR_RETURN(tag, RenderList(field, field_name, tag, ow));
+        TURBO_ASSIGN_OR_RETURN(tag, RenderList(field, field_name, tag, ow));
       }
     } else {
       // Render the field.
-      RETURN_IF_ERROR(RenderField(field, field_name, ow));
+      TURBO_RETURN_IF_ERROR(RenderField(field, field_name, ow));
       tag = stream_->ReadTag();
     }
   }
@@ -229,10 +229,10 @@ util::Status ProtoStreamObjectSource::WriteMessage(
   if (include_start_and_end) {
     ow->EndObject();
   }
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::StatusOr<uint32_t> ProtoStreamObjectSource::RenderList(
+turbo::Result<uint32_t> ProtoStreamObjectSource::RenderList(
     const shark::Field* field, std::string_view name,
     uint32_t list_tag, ObjectWriter* ow) const {
   uint32_t tag_to_return = 0;
@@ -241,20 +241,20 @@ util::StatusOr<uint32_t> ProtoStreamObjectSource::RenderList(
       list_tag ==
           WireFormatLite::MakeTag(field->number(),
                                   WireFormatLite::WIRETYPE_LENGTH_DELIMITED)) {
-    RETURN_IF_ERROR(RenderPacked(field, ow));
+    TURBO_RETURN_IF_ERROR(RenderPacked(field, ow));
     // Since packed fields have a single tag, read another tag from stream to
     // return.
     tag_to_return = stream_->ReadTag();
   } else {
     do {
-      RETURN_IF_ERROR(RenderField(field, "", ow));
+      TURBO_RETURN_IF_ERROR(RenderField(field, "", ow));
     } while ((tag_to_return = stream_->ReadTag()) == list_tag);
   }
   ow->EndList();
   return tag_to_return;
 }
 
-util::StatusOr<uint32_t> ProtoStreamObjectSource::RenderMap(
+turbo::Result<uint32_t> ProtoStreamObjectSource::RenderMap(
     const shark::Field* field, std::string_view /* name */,
     uint32_t list_tag, ObjectWriter* ow) const {
   const shark::Type* field_type =
@@ -285,15 +285,15 @@ util::StatusOr<uint32_t> ProtoStreamObjectSource::RenderMap(
           if (key_field == nullptr) {
             // The Type info for this map entry is incorrect. It should always
             // have a field named "key" and with field number 1.
-            return util::InternalError("Invalid map entry.");
+            return turbo::internal_error("Invalid map entry.");
           }
-          ASSIGN_OR_RETURN(map_key, MapKeyDefaultValueAsString(*key_field));
+          TURBO_ASSIGN_OR_RETURN(map_key, MapKeyDefaultValueAsString(*key_field));
         }
-        RETURN_IF_ERROR(RenderField(map_entry_field, map_key, ow));
+        TURBO_RETURN_IF_ERROR(RenderField(map_entry_field, map_key, ow));
       } else {
         // The Type info for this map entry is incorrect. It should contain
         // exactly two fields with field number 1 and 2.
-        return util::InternalError("Invalid map entry.");
+        return turbo::internal_error("Invalid map entry.");
       }
     }
     stream_->PopLimit(old_limit);
@@ -301,60 +301,60 @@ util::StatusOr<uint32_t> ProtoStreamObjectSource::RenderMap(
   return tag_to_return;
 }
 
-util::Status ProtoStreamObjectSource::RenderPacked(
+turbo::Status ProtoStreamObjectSource::RenderPacked(
     const shark::Field* field, ObjectWriter* ow) const {
   uint32_t length;
   stream_->ReadVarint32(&length);
   int old_limit = stream_->PushLimit(length);
   while (stream_->BytesUntilLimit() > 0) {
-    RETURN_IF_ERROR(RenderField(field, std::string_view(), ow));
+    TURBO_RETURN_IF_ERROR(RenderField(field, std::string_view(), ow));
   }
   stream_->PopLimit(old_limit);
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderTimestamp(
+turbo::Status ProtoStreamObjectSource::RenderTimestamp(
     const ProtoStreamObjectSource* os, const shark::Type& type,
     std::string_view field_name, ObjectWriter* ow) {
   std::pair<int64_t, int32_t> p = os->ReadSecondsAndNanos(type);
   int64_t seconds = p.first;
   int32_t nanos = p.second;
   if (seconds > kTimestampMaxSeconds || seconds < kTimestampMinSeconds) {
-    return util::InternalError(StrCat(
+    return turbo::internal_error(StrCat(
         "Timestamp seconds exceeds limit for field: ", field_name));
   }
 
   if (nanos < 0 || nanos >= kNanosPerSecond) {
-    return util::InternalError(
+    return turbo::internal_error(
         StrCat("Timestamp nanos exceeds limit for field: ", field_name));
   }
 
   ow->RenderString(field_name,
                    ::shark::internal::FormatTime(seconds, nanos));
 
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderDuration(
+turbo::Status ProtoStreamObjectSource::RenderDuration(
     const ProtoStreamObjectSource* os, const shark::Type& type,
     std::string_view field_name, ObjectWriter* ow) {
   std::pair<int64_t, int32_t> p = os->ReadSecondsAndNanos(type);
   int64_t seconds = p.first;
   int32_t nanos = p.second;
   if (seconds > kDurationMaxSeconds || seconds < kDurationMinSeconds) {
-    return util::InternalError(
+    return turbo::internal_error(
         StrCat("Duration seconds exceeds limit for field: ", field_name));
   }
 
   if (nanos <= -kNanosPerSecond || nanos >= kNanosPerSecond) {
-    return util::InternalError(
+    return turbo::internal_error(
         StrCat("Duration nanos exceeds limit for field: ", field_name));
   }
 
   std::string sign = "";
   if (seconds < 0) {
     if (nanos > 0) {
-      return util::InternalError(
+      return turbo::internal_error(
           StrCat("Duration nanos is non-negative, but seconds is "
                        "negative for field: ",
                        field_name));
@@ -374,10 +374,10 @@ util::Status ProtoStreamObjectSource::RenderDuration(
           )
           .c_str());
   ow->RenderString(field_name, formatted_duration);
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderDouble(
+turbo::Status ProtoStreamObjectSource::RenderDouble(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
     std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
@@ -387,10 +387,10 @@ util::Status ProtoStreamObjectSource::RenderDouble(
     os->stream_->ReadTag();
   }
   ow->RenderDouble(field_name, bit_cast<double>(buffer64));
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderFloat(
+turbo::Status ProtoStreamObjectSource::RenderFloat(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
     std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
@@ -400,10 +400,10 @@ util::Status ProtoStreamObjectSource::RenderFloat(
     os->stream_->ReadTag();
   }
   ow->RenderFloat(field_name, bit_cast<float>(buffer32));
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderInt64(
+turbo::Status ProtoStreamObjectSource::RenderInt64(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
     std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
@@ -413,10 +413,10 @@ util::Status ProtoStreamObjectSource::RenderInt64(
     os->stream_->ReadTag();
   }
   ow->RenderInt64(field_name, bit_cast<int64_t>(buffer64));
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderUInt64(
+turbo::Status ProtoStreamObjectSource::RenderUInt64(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
     std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
@@ -426,10 +426,10 @@ util::Status ProtoStreamObjectSource::RenderUInt64(
     os->stream_->ReadTag();
   }
   ow->RenderUint64(field_name, bit_cast<uint64_t>(buffer64));
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderInt32(
+turbo::Status ProtoStreamObjectSource::RenderInt32(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
     std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
@@ -439,10 +439,10 @@ util::Status ProtoStreamObjectSource::RenderInt32(
     os->stream_->ReadTag();
   }
   ow->RenderInt32(field_name, bit_cast<int32_t>(buffer32));
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderUInt32(
+turbo::Status ProtoStreamObjectSource::RenderUInt32(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
     std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
@@ -452,10 +452,10 @@ util::Status ProtoStreamObjectSource::RenderUInt32(
     os->stream_->ReadTag();
   }
   ow->RenderUint32(field_name, bit_cast<uint32_t>(buffer32));
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderBool(
+turbo::Status ProtoStreamObjectSource::RenderBool(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
     std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
@@ -466,10 +466,10 @@ util::Status ProtoStreamObjectSource::RenderBool(
     os->stream_->ReadTag();
   }
   ow->RenderBool(field_name, buffer64 != 0);
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderString(
+turbo::Status ProtoStreamObjectSource::RenderString(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
     std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
@@ -481,10 +481,10 @@ util::Status ProtoStreamObjectSource::RenderString(
     os->stream_->ReadTag();
   }
   ow->RenderString(field_name, str);
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderBytes(
+turbo::Status ProtoStreamObjectSource::RenderBytes(
     const ProtoStreamObjectSource* os, const shark::Type& /*type*/,
     std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
@@ -496,10 +496,10 @@ util::Status ProtoStreamObjectSource::RenderBytes(
     os->stream_->ReadTag();
   }
   ow->RenderBytes(field_name, str);
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderStruct(
+turbo::Status ProtoStreamObjectSource::RenderStruct(
     const ProtoStreamObjectSource* os, const shark::Type& type,
     std::string_view field_name, ObjectWriter* ow) {
   const shark::Field* field = nullptr;
@@ -515,14 +515,14 @@ util::Status ProtoStreamObjectSource::RenderStruct(
     // shark.Struct has only one field that is a map. Hence we use
     // RenderMap to render that field.
     if (os->IsMap(*field)) {
-      ASSIGN_OR_RETURN(tag, os->RenderMap(field, field_name, tag, ow));
+      TURBO_ASSIGN_OR_RETURN(tag, os->RenderMap(field, field_name, tag, ow));
     }
   }
   ow->EndObject();
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderStructValue(
+turbo::Status ProtoStreamObjectSource::RenderStructValue(
     const ProtoStreamObjectSource* os, const shark::Type& type,
     std::string_view field_name, ObjectWriter* ow) {
   const shark::Field* field = nullptr;
@@ -533,13 +533,13 @@ util::Status ProtoStreamObjectSource::RenderStructValue(
       WireFormat::SkipField(os->stream_, tag, nullptr);
       continue;
     }
-    RETURN_IF_ERROR(os->RenderField(field, field_name, ow));
+    TURBO_RETURN_IF_ERROR(os->RenderField(field, field_name, ow));
   }
-  return util::Status();
+  return turbo::ok_status();
 }
 
 // TODO(skarvaje): Avoid code duplication of for loops and SkipField logic.
-util::Status ProtoStreamObjectSource::RenderStructListValue(
+turbo::Status ProtoStreamObjectSource::RenderStructListValue(
     const ProtoStreamObjectSource* os, const shark::Type& type,
     std::string_view field_name, ObjectWriter* ow) {
   uint32_t tag = os->stream_->ReadTag();
@@ -548,7 +548,7 @@ util::Status ProtoStreamObjectSource::RenderStructListValue(
   if (tag == 0) {
     ow->StartList(field_name);
     ow->EndList();
-    return util::Status();
+    return turbo::ok_status();
   }
 
   while (tag != 0) {
@@ -558,12 +558,12 @@ util::Status ProtoStreamObjectSource::RenderStructListValue(
       tag = os->stream_->ReadTag();
       continue;
     }
-    ASSIGN_OR_RETURN(tag, os->RenderList(field, field_name, tag, ow));
+    TURBO_ASSIGN_OR_RETURN(tag, os->RenderList(field, field_name, tag, ow));
   }
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderAny(
+turbo::Status ProtoStreamObjectSource::RenderAny(
     const ProtoStreamObjectSource* os, const shark::Type& type,
     std::string_view field_name, ObjectWriter* ow) {
   // An Any is of the form { string type_url = 1; bytes value = 2; }
@@ -601,22 +601,22 @@ util::Status ProtoStreamObjectSource::RenderAny(
       ow->RenderString("@type", type_url);
     }
     ow->EndObject();
-    return util::Status();
+    return turbo::ok_status();
   }
 
   // If there is a value but no type, we cannot render it, so report an error.
   if (type_url.empty()) {
     // TODO(sven): Add an external message once those are ready.
-    return util::InternalError("Invalid Any, the type_url is missing.");
+    return turbo::internal_error("Invalid Any, the type_url is missing.");
   }
 
-  util::StatusOr<const shark::Type*> resolved_type =
+  turbo::Result<const shark::Type*> resolved_type =
       os->typeinfo_->ResolveTypeUrl(type_url);
 
   if (!resolved_type.ok()) {
     // Convert into an internal error, since this means the backend gave us
     // an invalid response (missing or invalid type information).
-    return util::InternalError(resolved_type.status().message());
+    return turbo::internal_error(resolved_type.status().message());
   }
   // nested_type cannot be null at this time.
   const shark::Type* nested_type = resolved_type.value();
@@ -631,13 +631,13 @@ util::Status ProtoStreamObjectSource::RenderAny(
   // We manually call start and end object here so we can inject the @type.
   ow->StartObject(field_name);
   ow->RenderString("@type", type_url);
-  util::Status result =
+  turbo::Status result =
       nested_os.WriteMessage(nested_os.type_, "value", 0, false, ow);
   ow->EndObject();
   return result;
 }
 
-util::Status ProtoStreamObjectSource::RenderFieldMask(
+turbo::Status ProtoStreamObjectSource::RenderFieldMask(
     const ProtoStreamObjectSource* os, const shark::Type& type,
     std::string_view field_name, ObjectWriter* ow) {
   std::string combined;
@@ -653,7 +653,7 @@ util::Status ProtoStreamObjectSource::RenderFieldMask(
       }
     }
     if (paths_field_tag != tag) {
-      return util::InternalError("Invalid FieldMask, unexpected field.");
+      return turbo::internal_error("Invalid FieldMask, unexpected field.");
     }
     std::string str;
     os->stream_->ReadVarint32(&buffer32);  // string size.
@@ -664,7 +664,7 @@ util::Status ProtoStreamObjectSource::RenderFieldMask(
     combined.append(ConvertFieldMaskPath(str, &ToCamelCase));
   }
   ow->RenderString(field_name, combined);
-  return util::Status();
+  return turbo::ok_status();
 }
 
 
@@ -723,7 +723,7 @@ ProtoStreamObjectSource::FindTypeRenderer(const std::string& type_url) {
   return FindOrNull(*renderers_, type_url);
 }
 
-util::Status ProtoStreamObjectSource::RenderField(
+turbo::Status ProtoStreamObjectSource::RenderField(
     const shark::Field* field, std::string_view field_name,
     ObjectWriter* ow) const {
   // Short-circuit message types as it tends to call WriteMessage recursively
@@ -737,7 +737,7 @@ util::Status ProtoStreamObjectSource::RenderField(
     const shark::Type* type =
         typeinfo_->GetTypeByTypeUrl(field->type_url());
     if (type == nullptr) {
-      return util::InternalError(
+      return turbo::internal_error(
           StrCat("Invalid configuration. Could not find the type: ",
                        field->type_url()));
     }
@@ -745,16 +745,16 @@ util::Status ProtoStreamObjectSource::RenderField(
     // Short-circuit any special type rendering to save call-stack space.
     const TypeRenderer* type_renderer = FindTypeRenderer(type->name());
 
-    RETURN_IF_ERROR(IncrementRecursionDepth(type->name(), field_name));
+    TURBO_RETURN_IF_ERROR(IncrementRecursionDepth(type->name(), field_name));
     if (type_renderer != nullptr) {
-      RETURN_IF_ERROR((*type_renderer)(this, *type, field_name, ow));
+      TURBO_RETURN_IF_ERROR((*type_renderer)(this, *type, field_name, ow));
     } else {
-      RETURN_IF_ERROR(WriteMessage(*type, field_name, 0, true, ow));
+      TURBO_RETURN_IF_ERROR(WriteMessage(*type, field_name, 0, true, ow));
     }
     --recursion_depth_;
 
     if (!stream_->ConsumedEntireMessage()) {
-      return util::InvalidArgumentError(
+      return turbo::invalid_argument_error(
           "Nested protocol message not parsed in its entirety.");
     }
     stream_->PopLimit(old_limit);
@@ -762,10 +762,10 @@ util::Status ProtoStreamObjectSource::RenderField(
     // Render all other non-message types.
     return RenderNonMessageField(field, field_name, ow);
   }
-  return util::Status();
+  return turbo::ok_status();
 }
 
-util::Status ProtoStreamObjectSource::RenderNonMessageField(
+turbo::Status ProtoStreamObjectSource::RenderNonMessageField(
     const shark::Field* field, std::string_view field_name,
     ObjectWriter* ow) const {
   // Temporary buffers of different types.
@@ -893,7 +893,7 @@ util::Status ProtoStreamObjectSource::RenderNonMessageField(
     default:
       break;
   }
-  return util::Status();
+  return turbo::ok_status();
 }
 
 // TODO(skarvaje): Fix this to avoid code duplication.
@@ -1058,14 +1058,14 @@ std::pair<int64_t, int32_t> ProtoStreamObjectSource::ReadSecondsAndNanos(
   return std::pair<int64_t, int32_t>(signed_seconds, signed_nanos);
 }
 
-util::Status ProtoStreamObjectSource::IncrementRecursionDepth(
+turbo::Status ProtoStreamObjectSource::IncrementRecursionDepth(
     std::string_view type_name, std::string_view field_name) const {
   if (++recursion_depth_ > max_recursion_depth_) {
-    return util::InvalidArgumentError(
+    return turbo::invalid_argument_error(
         StrCat("Message too deep. Max recursion depth reached for type '",
                      type_name, "', field '", field_name, "'"));
   }
-  return util::Status();
+  return turbo::ok_status();
 }
 
 namespace {
