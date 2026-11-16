@@ -40,9 +40,9 @@
 
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
-#include <shark/format/wired/wire_context.h>
-#include <shark/format/wired/wire_format.h>
-#include <shark/format/wired/wire_format_lite.h>
+#include <shark/persist/wired/wire_context.h>
+#include <shark/persist/wired/wire_format.h>
+#include <shark/persist/wired/wire_format_lite.h>
 #include <shark/generated/generated_message_reflection.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/io/coded_stream.h>

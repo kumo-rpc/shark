@@ -41,20 +41,18 @@
 #include <utility>
 #include <vector>
 
-#include <shark/parser/parser_o.h>
+#include <shark/parser/parser.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor_database.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace shark {
+namespace shark::io {
+    class ZeroCopyInputStream;
+}
 
-    namespace io {
-        class ZeroCopyInputStream;
-    }
-
-    namespace compiler {
+    namespace shark::compiler {
 
         // Defined in this file.
         class Importer;
@@ -327,7 +325,6 @@ namespace shark {
             KUMO_DISALLOW_COPY_AND_ASSIGN(DiskSourceTree);
         };
 
-    } // namespace compiler
-} // namespace shark
+} // namespace shark::compiler
 
 #include <shark/port_undef.inc>

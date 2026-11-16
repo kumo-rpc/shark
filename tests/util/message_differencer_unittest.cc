@@ -51,8 +51,8 @@
 #include <tests/sk/unittest.skp.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
-#include <shark/format/text/text_format.h>
-#include <shark/format/wired/wire_format.h>
+#include <shark/persist/text/text_format.h>
+#include <shark/persist/wired/wire_format.h>
 #include <tests/sk/util/message_differencer_unittest.skp.h>
 #include <shark/util/field_comparator.h>
 #include <shark/util/message_differencer.h>

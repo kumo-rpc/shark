@@ -82,7 +82,7 @@
 #include <turbo/strings/str_split.h>
 #include <turbo/strings/str_replace.h>
 #include <turbo/strings/substitute.h>
-#include <shark/format/text/text_format.h>
+#include <shark/persist/text/text_format.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

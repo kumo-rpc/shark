@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <shark/format/text/text_format.h>
+#include <shark/persist/text/text_format.h>
 
 #include <math.h>
 #include <stdlib.h>

@@ -39,7 +39,7 @@
 #include <shark/arena.h>
 #include <shark/arenastring.h>
 #include <turbo/bits/endian.h>
-#include <shark/format/wired/wire_format_lite.h>
+#include <shark/persist/wired/wire_format_lite.h>
 #include <shark/generated/implicit_weak_message.h>
 #include <shark/generated/inlined_string_field.h>
 #include <shark/generated/metadata_lite.h>
@@ -47,7 +47,7 @@
 #include <shark/io/zero_copy_stream.h>
 #include <shark/port.h>
 #include <shark/types/repeated_field.h>
-#include <shark/format/wired/wire_tag.h>
+#include <shark/persist/wired/wire_tag.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

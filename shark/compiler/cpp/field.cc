@@ -45,7 +45,7 @@
 #include <shark/compiler/cpp/primitive_field.h>
 #include <shark/compiler/cpp/string_field.h>
 #include <shark/descriptor.skp.h>
-#include <shark/format/wired/wire_format.h>
+#include <shark/persist/wired/wire_format.h>
 #include <shark/io/printer.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>

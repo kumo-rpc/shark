@@ -39,8 +39,8 @@
 #pragma once
 
 #include <shark/descriptor.h>
-#include <shark/format/wired/wire_context.h>
-#include <shark/format/wired/wire_format_lite.h>
+#include <shark/persist/wired/wire_context.h>
+#include <shark/persist/wired/wire_format_lite.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/generated/metadata_lite.h>
 #include <shark/io/coded_stream.h>

@@ -51,7 +51,7 @@
 #include <shark/compiler/cpp/parse_function_generator.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
-#include <shark/format/wired/wire_format.h>
+#include <shark/persist/wired/wire_format.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/printer.h>

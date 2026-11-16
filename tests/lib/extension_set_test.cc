@@ -44,8 +44,8 @@
 #include <shark/descriptor.h>
 #include <shark/dynamic_message.h>
 #include <shark/extension_set.h>
-#include <shark/format/text/text_format.h>
-#include <shark/format/wired/wire_format.h>
+#include <shark/persist/text/text_format.h>
+#include <shark/persist/wired/wire_format.h>
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 #include <tests/common/test_util.h>

@@ -346,7 +346,7 @@ namespace shark::compiler::cpp {
             path = turbo::StrReplaceAll(path, {{"proto/", ""}});
             path = turbo::StrReplaceAll(path, {{"public/", ""}});
             if (path == "wire_format.h" || path == "wire_format_lite.h") {
-                path = "format/wired/" + path;
+                path = "persist/wired/" + path;
             }
             if (path == "any.h" || path == "map.h" || path == "map_entry.h" || path == "map_entry_lite.h" || path == "map_field.h" || path == "map_field_inl.h" || path == "map_field_lite.h" || path == "map_type_handler.h") {
                 path = "types/" + path;

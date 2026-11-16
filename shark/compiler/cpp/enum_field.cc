@@ -36,7 +36,7 @@
 
 #include <shark/compiler/cpp/field.h>
 #include <shark/compiler/cpp/helpers.h>
-#include <shark/format/wired/wire_format.h>
+#include <shark/persist/wired/wire_format.h>
 #include <shark/io/printer.h>
 
 namespace shark::compiler::cpp {

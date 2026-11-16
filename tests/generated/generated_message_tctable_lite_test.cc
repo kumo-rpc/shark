@@ -32,7 +32,7 @@
 #include <turbo/strings/str_cat.h>
 
 #include <shark/generated/generated_message_tctable_impl.h>
-#include <shark/format/wired/wire_format_lite.h>
+#include <shark/persist/wired/wire_format_lite.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 

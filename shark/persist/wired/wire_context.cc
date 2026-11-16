@@ -28,10 +28,10 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <shark/format/wired/wire_context.h>
+#include <shark/persist/wired/wire_context.h>
 
 #include <shark/arenastring.h>
-#include <shark/format/wired/wire_format_lite.h>
+#include <shark/persist/wired/wire_format_lite.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/message_lite.h>

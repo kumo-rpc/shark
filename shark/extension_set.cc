@@ -40,7 +40,7 @@
 
 #include <shark/arena.h>
 #include <shark/extension_set_inl.h>
-#include <shark/format/wired/wire_context.h>
+#include <shark/persist/wired/wire_context.h>
 #include <shark/generated/metadata_lite.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>

@@ -50,8 +50,8 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.h>
 #include <shark/stubs/mutex.h>
-#include <shark/format/text/text_format.h>
-#include <shark/format/wired/wire_format.h>
+#include <shark/persist/text/text_format.h>
+#include <shark/persist/wired/wire_format.h>
 #include <gmock/gmock.h>
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>

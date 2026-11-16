@@ -35,7 +35,7 @@
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor_database.h>
 #include <shark/dynamic_message.h>
-#include <shark/format/text/text_format.h>
+#include <shark/persist/text/text_format.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/strtod.h>

@@ -41,7 +41,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <shark/parser/importer.h>
-#include <shark/parser/parser_o.h>
+#include <shark/parser/parser.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor_database.h>
@@ -53,7 +53,7 @@
 #include <turbo/format/str_format.h>
 #include <turbo/strings/numbers.h>
 #include <turbo/strings/substitute.h>
-#include <shark/format/text/text_format.h>
+#include <shark/persist/text/text_format.h>
 #include <shark/types/any.skp.h>
 #include <tests/common/googletest.h>
 #include <tests/sk/unittest.skp.h>

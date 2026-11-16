@@ -34,9 +34,9 @@ kmcmake_cc_library(
         arenaz_sampler.cc
         extension_set.cc
         message_lite.cc
-        format/wired/wire_context.cc
-        format/wired/wire_format_lite.cc
-        format/wired/wire_tag.cc
+        persist/wired/wire_context.cc
+        persist/wired/wire_format_lite.cc
+        persist/wired/wire_tag.cc
         generated/generated_enum_util.cc
         generated/generated_message_tctable_lite.cc
         generated/generated_message_util.cc
@@ -85,11 +85,10 @@ kmcmake_cc_library(
         unknown_field_set.cc
         extension_set_heavy.cc
         parser/importer.cc
-        parser/parser_o.cc
         parser/parser.cc
         parser/tokenizer.cc
-        format/wired/wire_format.cc
-        format/text/text_format.cc
+        persist/wired/wire_format.cc
+        persist/text/text_format.cc
         generated/generated_message_bases.cc
         generated/generated_message_reflection.cc
         generated/generated_message_tctable_full.cc

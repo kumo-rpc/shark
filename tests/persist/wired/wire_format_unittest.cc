@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <shark/format/wired/wire_format.h>
+#include <shark/persist/wired/wire_format.h>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -48,7 +48,7 @@
 // Must include after defining UNITTEST, etc.
 // clang-format off
 #include <tests/common/test_util.inc>
-#include <tests/format/wired/wire_format_unittest.inc>
+#include <tests/persist/wired/wire_format_unittest.inc>
 // clang-format on
 
 // Must be included last.

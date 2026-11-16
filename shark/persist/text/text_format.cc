@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <shark/format/text/text_format.h>
+#include <shark/persist/text/text_format.h>
 
 #include <float.h>
 #include <stdio.h>
@@ -48,7 +48,7 @@
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/dynamic_message.h>
-#include <shark/format/wired/wire_format_lite.h>
+#include <shark/persist/wired/wire_format_lite.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/strtod.h>
 #include <shark/parser/tokenizer.h>

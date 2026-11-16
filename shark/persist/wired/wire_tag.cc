@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <shark/format/wired/wire_tag.h>
+#include <shark/persist/wired/wire_tag.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

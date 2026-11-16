@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <shark/parser/parser_o.h>
+#include <shark/parser/parser.h>
 
 #include <algorithm>
 #include <map>
@@ -40,7 +40,7 @@
 #include <vector>
 
 #include <shark/types/any.skp.h>
-#include <tests/compiler/parser_test_fixture.h>
+#include <tests/parser/parser_test_fixture.h>
 #include <tests/common/test_util2.h>
 #include <tests/common/googletest.h>
 #include <tests/sk/unittest.skp.h>

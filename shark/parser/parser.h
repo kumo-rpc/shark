@@ -50,26 +50,25 @@
 #include <shark/port_def.inc>
 
 namespace shark {
-
     class Message;
-
-    namespace compiler {
+}
+    namespace shark::compiler {
 
         // Defined in this file.
-        class NParser;
-        class NSourceLocationTable;
+        class Parser;
+        class SourceLocationTable;
 
         // Implements parsing of protocol definitions (such as .shark files).
         //
         // Note that most users will be more interested in the Importer class.
-        // NParser is a lower-level class which simply converts a single .shark file
+        // Parser is a lower-level class which simply converts a single .shark file
         // to a FileDescriptorProto.  It does not resolve import directives or perform
         // many other kinds of validation needed to construct a complete
         // FileDescriptor.
-        class SHARK_EXPORT NParser {
+        class SHARK_EXPORT Parser {
         public:
-            NParser() = default;
-            ~NParser() = default;
+            Parser();
+            ~Parser();
 
             // Parse the entire input and construct a FileDescriptorProto representing
             // it.  Returns true if no errors occurred, false otherwise.
@@ -81,10 +80,10 @@ namespace shark {
             //   FileDescriptorProto.
             //
             // Requests that locations of certain definitions be recorded to the given
-            // NSourceLocationTable while parsing.  This can be used to look up exact line
+            // SourceLocationTable while parsing.  This can be used to look up exact line
             // and column numbers for errors reported by DescriptorPool during validation.
             // Set to NULL (the default) to discard source location information.
-            void RecordSourceLocationsTo(NSourceLocationTable* location_table) {
+            void RecordSourceLocationsTo(SourceLocationTable* location_table) {
                 source_location_table_ = location_table;
             }
 
@@ -119,7 +118,7 @@ namespace shark {
             }
 
         private:
-            class NLocationRecorder;
+            class LocationRecorder;
             struct MapField;
 
             // =================================================================
@@ -131,7 +130,7 @@ namespace shark {
             //   '{'  Consumes the brace then calls SkipRestOfBlock().
             //   '}'  Returns without consuming.
             //   EOF  Returns (can't consume).
-            // The NParser often calls SkipStatement() after encountering a syntax
+            // The Parser often calls SkipStatement() after encountering a syntax
             // error.  This allows it to go on parsing the following lines, allowing
             // it to report more than just one error in the file.
             void SkipStatement();
@@ -184,20 +183,20 @@ namespace shark {
 
             // Consume a token representing the end of the statement.  Comments between
             // this token and the next will be harvested for documentation.  The given
-            // NLocationRecorder should refer to the declaration that was just parsed;
+            // LocationRecorder should refer to the declaration that was just parsed;
             // it will be populated with these comments.
             //
-            // TODO(kenton):  The NLocationRecorder is const because historically locations
+            // TODO(kenton):  The LocationRecorder is const because historically locations
             //   have been passed around by const reference, for no particularly good
             //   reason.  We should probably go through and change them all to mutable
             //   pointer to make this more intuitive.
             bool TryConsumeEndOfDeclaration(const char* text,
-                const NLocationRecorder* location);
+                const LocationRecorder* location);
             bool TryConsumeEndOfDeclarationFinishScope(const char* text,
-                const NLocationRecorder* location);
+                const LocationRecorder* location);
 
             bool ConsumeEndOfDeclaration(const char* text,
-                const NLocationRecorder* location);
+                const LocationRecorder* location);
 
             // -----------------------------------------------------------------
             // Error logging helpers
@@ -218,47 +217,47 @@ namespace shark {
             // are recorded -- the constructor records the start location and the
             // destructor records the end location.  Since the parser is
             // recursive-descent, this works out beautifully.
-            class SHARK_EXPORT NLocationRecorder {
+            class SHARK_EXPORT LocationRecorder {
             public:
                 // Construct the file's "root" location.
-                NLocationRecorder(NParser* parser);
+                LocationRecorder(Parser* parser);
 
                 // Construct a location that represents a declaration nested within the
                 // given parent.  E.g. a field's location is nested within the location
                 // for a message type.  The parent's path will be copied, so you should
                 // call AddPath() only to add the path components leading from the parent
                 // to the child (as opposed to leading from the root to the child).
-                NLocationRecorder(const NLocationRecorder& parent);
+                LocationRecorder(const LocationRecorder& parent);
 
                 // Convenience constructors that call AddPath() one or two times.
-                NLocationRecorder(const NLocationRecorder& parent, int path1);
-                NLocationRecorder(const NLocationRecorder& parent, int path1, int path2);
+                LocationRecorder(const LocationRecorder& parent, int path1);
+                LocationRecorder(const LocationRecorder& parent, int path1, int path2);
 
                 // Creates a recorder that generates locations into given source code info.
-                NLocationRecorder(const NLocationRecorder& parent, int path1,
+                LocationRecorder(const LocationRecorder& parent, int path1,
                     SourceCodeInfo* source_code_info);
 
-                ~NLocationRecorder();
+                ~LocationRecorder();
 
                 // Add a path component.  See SourceCodeInfo.Location.path in
                 // descriptor.shark.
                 void AddPath(int path_component);
 
                 // By default the location is considered to start at the current token at
-                // the time the NLocationRecorder is created.  StartAt() sets the start
+                // the time the LocationRecorder is created.  StartAt() sets the start
                 // location to the given token instead.
                 void StartAt(const io::Tokenizer::Token& token);
 
-                // Start at the same location as some other NLocationRecorder.
-                void StartAt(const NLocationRecorder& other);
+                // Start at the same location as some other LocationRecorder.
+                void StartAt(const LocationRecorder& other);
 
                 // By default the location is considered to end at the previous token at
-                // the time the NLocationRecorder is destroyed.  EndAt() sets the end
+                // the time the LocationRecorder is destroyed.  EndAt() sets the end
                 // location to the given token instead.
                 void EndAt(const io::Tokenizer::Token& token);
 
-                // Records the start point of this location to the NSourceLocationTable that
-                // was passed to RecordSourceLocationsTo(), if any.  NSourceLocationTable
+                // Records the start point of this location to the SourceLocationTable that
+                // was passed to RecordSourceLocationsTo(), if any.  SourceLocationTable
                 // is an older way of keeping track of source locations which is still
                 // used in some places.
                 void RecordLegacyLocation(
@@ -280,11 +279,11 @@ namespace shark {
                     std::vector<std::string>* detached_comments) const;
 
             private:
-                NParser* parser_;
+                Parser* parser_;
                 SourceCodeInfo* source_code_info_;
                 SourceCodeInfo::Location* location_;
 
-                void Init(const NLocationRecorder& parent, SourceCodeInfo* source_code_info);
+                void Init(const LocationRecorder& parent, SourceCodeInfo* source_code_info);
             };
 
             // =================================================================
@@ -293,7 +292,7 @@ namespace shark {
             // Parses the "syntax = \"proto2\";" line at the top of the file.  Returns
             // false if it failed to parse or if the syntax identifier was not
             // recognized.
-            bool ParseSyntaxIdentifier(const NLocationRecorder& parent);
+            bool ParseSyntaxIdentifier(const LocationRecorder& parent);
 
             // These methods parse various individual bits of code.  They return
             // false if they completely fail to parse the construct.  In this case,
@@ -307,52 +306,52 @@ namespace shark {
 
             // Parse a top-level message, enum, service, etc.
             bool ParseTopLevelStatement(FileDescriptorProto* file,
-                const NLocationRecorder& root_location);
+                const LocationRecorder& root_location);
 
             // Parse various language high-level language construrcts.
             bool ParseMessageDefinition(DescriptorProto* message,
-                const NLocationRecorder& message_location,
+                const LocationRecorder& message_location,
                 const FileDescriptorProto* containing_file);
             bool ParseEnumDefinition(EnumDescriptorProto* enum_type,
-                const NLocationRecorder& enum_location,
+                const LocationRecorder& enum_location,
                 const FileDescriptorProto* containing_file);
             bool ParseServiceDefinition(ServiceDescriptorProto* service,
-                const NLocationRecorder& service_location,
+                const LocationRecorder& service_location,
                 const FileDescriptorProto* containing_file);
             bool ParsePackage(FileDescriptorProto* file,
-                const NLocationRecorder& root_location,
+                const LocationRecorder& root_location,
                 const FileDescriptorProto* containing_file);
             bool ParseImport(RepeatedPtrField<std::string>* dependency,
                 RepeatedField<int32_t>* public_dependency,
                 RepeatedField<int32_t>* weak_dependency,
-                const NLocationRecorder& root_location,
+                const LocationRecorder& root_location,
                 const FileDescriptorProto* containing_file);
 
             // These methods parse the contents of a message, enum, or service type and
             // add them to the given object.  They consume the entire block including
             // the beginning and ending brace.
             bool ParseMessageBlock(DescriptorProto* message,
-                const NLocationRecorder& message_location,
+                const LocationRecorder& message_location,
                 const FileDescriptorProto* containing_file);
             bool ParseEnumBlock(EnumDescriptorProto* enum_type,
-                const NLocationRecorder& enum_location,
+                const LocationRecorder& enum_location,
                 const FileDescriptorProto* containing_file,
                 EnumUnderlyingType underlying_type);
             bool ParseServiceBlock(ServiceDescriptorProto* service,
-                const NLocationRecorder& service_location,
+                const LocationRecorder& service_location,
                 const FileDescriptorProto* containing_file);
 
             // Parse one statement within a message, enum, or service block, including
             // final semicolon.
             bool ParseMessageStatement(DescriptorProto* message,
-                const NLocationRecorder& message_location,
+                const LocationRecorder& message_location,
                 const FileDescriptorProto* containing_file);
             bool ParseEnumStatement(EnumDescriptorProto* message,
-                const NLocationRecorder& enum_location,
+                const LocationRecorder& enum_location,
                 const FileDescriptorProto* containing_file,
                 EnumUnderlyingType underlying_type);
             bool ParseServiceStatement(ServiceDescriptorProto* message,
-                const NLocationRecorder& service_location,
+                const LocationRecorder& service_location,
                 const FileDescriptorProto* containing_file);
 
             // Parse a field of a message.  If the field is a group, its type will be
@@ -365,49 +364,49 @@ namespace shark {
             // correct field number to use.
             bool ParseMessageField(FieldDescriptorProto* field,
                 RepeatedPtrField<DescriptorProto>* messages,
-                const NLocationRecorder& parent_location,
+                const LocationRecorder& parent_location,
                 int location_field_number_for_nested_type,
-                const NLocationRecorder& field_location,
+                const LocationRecorder& field_location,
                 const FileDescriptorProto* containing_file);
 
             // Like ParseMessageField() but expects the label has already been filled in
             // by the caller.
             bool ParseMessageFieldNoLabel(FieldDescriptorProto* field,
                 RepeatedPtrField<DescriptorProto>* messages,
-                const NLocationRecorder& parent_location,
+                const LocationRecorder& parent_location,
                 int location_field_number_for_nested_type,
-                const NLocationRecorder& field_location,
+                const LocationRecorder& field_location,
                 const FileDescriptorProto* containing_file);
 
             bool ParseMapType(MapField* map_field, FieldDescriptorProto* field,
-                NLocationRecorder& type_name_location);
+                LocationRecorder& type_name_location);
 
             // Parse an "extensions" declaration.
             bool ParseExtensions(DescriptorProto* message,
-                const NLocationRecorder& extensions_location,
+                const LocationRecorder& extensions_location,
                 const FileDescriptorProto* containing_file);
 
             // Parse a "reserved" declaration.
             bool ParseReserved(DescriptorProto* message,
-                const NLocationRecorder& message_location);
+                const LocationRecorder& message_location);
             bool ParseReservedNames(DescriptorProto* message,
-                const NLocationRecorder& parent_location);
+                const LocationRecorder& parent_location);
             bool ParseReservedNumbers(DescriptorProto* message,
-                const NLocationRecorder& parent_location);
+                const LocationRecorder& parent_location);
             bool ParseReserved(EnumDescriptorProto* message,
-                const NLocationRecorder& message_location);
+                const LocationRecorder& message_location);
             bool ParseReservedNames(EnumDescriptorProto* message,
-                const NLocationRecorder& parent_location);
+                const LocationRecorder& parent_location);
             bool ParseReservedNumbers(EnumDescriptorProto* message,
-                const NLocationRecorder& parent_location);
+                const LocationRecorder& parent_location);
 
             // Parse an "extend" declaration.  (See also comments for
             // ParseMessageField().)
             bool ParseExtend(RepeatedPtrField<FieldDescriptorProto>* extensions,
                 RepeatedPtrField<DescriptorProto>* messages,
-                const NLocationRecorder& parent_location,
+                const LocationRecorder& parent_location,
                 int location_field_number_for_nested_type,
-                const NLocationRecorder& extend_location,
+                const LocationRecorder& extend_location,
                 const FileDescriptorProto* containing_file);
 
             // Parse a "oneof" declaration.  The caller is responsible for setting
@@ -415,13 +414,13 @@ namespace shark {
             // knew it was parsing a oneof.
             bool ParseOneof(OneofDescriptorProto* oneof_decl,
                 DescriptorProto* containing_type, int oneof_index,
-                const NLocationRecorder& oneof_location,
-                const NLocationRecorder& containing_type_location,
+                const LocationRecorder& oneof_location,
+                const LocationRecorder& containing_type_location,
                 const FileDescriptorProto* containing_file);
 
             // Parse a single enum value within an enum block.
             bool ParseEnumConstant(EnumValueDescriptorProto* enum_value,
-                const NLocationRecorder& enum_value_location,
+                const LocationRecorder& enum_value_location,
                 const FileDescriptorProto* containing_file,
                 EnumUnderlyingType underlying_type);
             bool ConsumeEnumNumber(EnumUnderlyingType underlying_type, int32_t* output,
@@ -430,16 +429,16 @@ namespace shark {
             // Parse enum constant options, i.e. the list in square brackets at the end
             // of the enum constant value definition.
             bool ParseEnumConstantOptions(EnumValueDescriptorProto* value,
-                const NLocationRecorder& enum_value_location,
+                const LocationRecorder& enum_value_location,
                 const FileDescriptorProto* containing_file);
 
             // Parse a single method within a service definition.
             bool ParseServiceMethod(MethodDescriptorProto* method,
-                const NLocationRecorder& method_location,
+                const LocationRecorder& method_location,
                 const FileDescriptorProto* containing_file);
 
             // Parse options of a single method or stream.
-            bool ParseMethodOptions(const NLocationRecorder& parent_location,
+            bool ParseMethodOptions(const LocationRecorder& parent_location,
                 const FileDescriptorProto* containing_file,
                 const int optionsFieldNumber,
                 Message* mutable_options);
@@ -447,7 +446,7 @@ namespace shark {
             // Parse "required", "optional", or "repeated" and fill in "label"
             // with the value. Returns true if such a label is consumed.
             bool ParseLabel(FieldCardinality* label,
-                const NLocationRecorder& field_location);
+                const LocationRecorder& field_location);
 
             // Parse a type name and fill in "type" (if it is a primitive) or
             // "type_name" (if it is not) with the type parsed.
@@ -459,17 +458,17 @@ namespace shark {
             // Parses field options, i.e. the stuff in square brackets at the end
             // of a field definition.  Also parses default value.
             bool ParseFieldOptions(FieldDescriptorProto* field,
-                const NLocationRecorder& field_location,
+                const LocationRecorder& field_location,
                 const FileDescriptorProto* containing_file);
 
             // Parse the "default" option.  This needs special handling because its
             // type is the field's type.
             bool ParseDefaultAssignment(FieldDescriptorProto* field,
-                const NLocationRecorder& field_location,
+                const LocationRecorder& field_location,
                 const FileDescriptorProto* containing_file);
 
             bool ParseJsonName(FieldDescriptorProto* field,
-                const NLocationRecorder& field_location,
+                const LocationRecorder& field_location,
                 const FileDescriptorProto* containing_file);
 
             enum OptionStyle {
@@ -480,7 +479,7 @@ namespace shark {
             // Parse a single option name/value pair, e.g. "ctype = CORD".  The name
             // identifies a field of the given Message, and the value of that field
             // is set to the parsed value.
-            bool ParseOption(Message* options, const NLocationRecorder& options_location,
+            bool ParseOption(Message* options, const LocationRecorder& options_location,
                 const FileDescriptorProto* containing_file,
                 OptionStyle style);
 
@@ -489,7 +488,7 @@ namespace shark {
             // of identifiers separated by dots and enclosed in parentheses. E.g.,
             // "foo.(bar.baz).moo".
             bool ParseOptionNamePart(UninterpretedOption* uninterpreted_option,
-                const NLocationRecorder& part_location,
+                const LocationRecorder& part_location,
                 const FileDescriptorProto* containing_file);
 
             // Parses a string surrounded by balanced braces.  Strips off the outer
@@ -528,14 +527,14 @@ namespace shark {
 
             // =================================================================
 
-            io::Tokenizer* input_{nullptr};
-            io::ErrorCollector* error_collector_{nullptr};
-            SourceCodeInfo* source_code_info_{nullptr};
-            NSourceLocationTable* source_location_table_{nullptr};
-            bool had_errors_{false};
-            bool require_syntax_identifier_{false};
-            bool stop_after_syntax_identifier_{false};
-            std::string syntax_identifier_{false};
+            io::Tokenizer* input_;
+            io::ErrorCollector* error_collector_;
+            SourceCodeInfo* source_code_info_;
+            SourceLocationTable* source_location_table_; // legacy
+            bool had_errors_;
+            bool require_syntax_identifier_;
+            bool stop_after_syntax_identifier_;
+            std::string syntax_identifier_;
 
             // Leading doc comments for the next declaration.  These are not complete
             // yet; use ConsumeEndOfDeclaration() to get the complete comments.
@@ -548,7 +547,7 @@ namespace shark {
             // ConsumeEndOfDeclaration() is called.
             std::vector<std::string> upcoming_detached_comments_;
 
-            KUMO_DISALLOW_COPY_AND_ASSIGN(NParser);
+            KUMO_DISALLOW_COPY_AND_ASSIGN(Parser);
         };
 
         // A table mapping (descriptor, ErrorLocation) pairs -- as reported by
@@ -557,12 +556,12 @@ namespace shark {
         //
         // This is semi-obsolete:  FileDescriptorProto.source_code_info now contains
         // far more complete information about source locations.  However, as of this
-        // writing you still need to use NSourceLocationTable when integrating with
+        // writing you still need to use SourceLocationTable when integrating with
         // DescriptorPool.
-        class SHARK_EXPORT NSourceLocationTable {
+        class SHARK_EXPORT SourceLocationTable {
         public:
-            NSourceLocationTable();
-            ~NSourceLocationTable();
+            SourceLocationTable();
+            ~SourceLocationTable();
 
             // Finds the precise location of the given error and fills in *line and
             // *column with the line and column numbers.  If not found, sets *line to
@@ -595,7 +594,6 @@ namespace shark {
                 import_location_map_;
         };
 
-    } // namespace compiler
-} // namespace shark
+} // namespace shark::compiler
 
 #include <shark/port_undef.inc>

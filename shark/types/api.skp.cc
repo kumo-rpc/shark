@@ -7,11 +7,11 @@
 
 #include <shark/io/coded_stream.h>
 #include <shark/extension_set.h>
-#include <shark/format/wired/wire_format_lite.h>
+#include <shark/persist/wired/wire_format_lite.h>
 #include <shark/descriptor.h>
 #include <shark/generated/generated_message_reflection.h>
 #include <shark/reflection_ops.h>
-#include <shark/format/wired/wire_format.h>
+#include <shark/persist/wired/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <shark/port_def.inc>
 

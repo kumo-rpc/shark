@@ -53,7 +53,7 @@
 #include <shark/generated/generated_enum_reflection.h>
 #include <shark/types/map_field.h>
 #include <shark/message.h>
-#include <shark/format/text/text_format.h>
+#include <shark/persist/text/text_format.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/escaping.h>
 #include <turbo/format/str_format.h>

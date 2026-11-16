@@ -43,7 +43,7 @@
 #include <string>
 #include <vector>
 
-#include <shark/format/wired/wire_context.h>
+#include <shark/persist/wired/wire_context.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/message_lite.h>

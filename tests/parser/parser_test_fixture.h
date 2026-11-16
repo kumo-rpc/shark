@@ -47,7 +47,7 @@
 
 #include <gtest/gtest.h>
 
-#include <shark/parser/parser_o.h>
+#include <shark/parser/parser.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/parser/tokenizer.h>
@@ -56,7 +56,7 @@
 #include <shark/stubs/map_util.h>
 #include <turbo/strings/str_join.h>
 #include <turbo/strings/substitute.h>
-#include <shark/format/text/text_format.h>
+#include <shark/persist/text/text_format.h>
 
 namespace shark {
 namespace compiler {

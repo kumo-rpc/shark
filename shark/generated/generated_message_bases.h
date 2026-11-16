@@ -35,7 +35,7 @@
 #pragma once
 
 #include <shark/arena.h>
-#include <shark/format/wired/wire_context.h>
+#include <shark/persist/wired/wire_context.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/message.h>

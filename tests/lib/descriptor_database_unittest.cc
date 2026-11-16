@@ -43,7 +43,7 @@
 #include <shark/stubs/common.h>
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
-#include <shark/format/text/text_format.h>
+#include <shark/persist/text/text_format.h>
 #include <gmock/gmock.h>
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>

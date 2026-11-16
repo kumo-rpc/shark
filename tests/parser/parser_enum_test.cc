@@ -35,7 +35,7 @@
 // Enum-related tests split out of parser_unittest.cc. Fixtures live in
 // parser_test_fixture.h.
 
-#include <tests/compiler/parser_test_fixture.h>
+#include <tests/parser/parser_test_fixture.h>
 
 namespace shark {
 namespace compiler {

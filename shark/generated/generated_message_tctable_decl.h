@@ -39,7 +39,7 @@
 #include <cstdint>
 #include <type_traits>
 
-#include <shark/format/wired/wire_context.h>
+#include <shark/persist/wired/wire_context.h>
 #include <shark/message_lite.h>
 
 // Must come last:

@@ -30,7 +30,7 @@
 
 #pragma once
 
-#include <shark/format/wired/wire_format_lite.h>
+#include <shark/persist/wired/wire_format_lite.h>
 #include <shark/generated/generated_message_reflection.h>
 #include <shark/port.h>
 #include <shark/reflection_ops.h>

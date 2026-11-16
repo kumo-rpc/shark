@@ -37,7 +37,7 @@
 #include <shark/compiler/cpp/helpers.h>
 #include <shark/compiler/cpp/options.h>
 #include <shark/descriptor.h>
-#include <shark/format/wired/wire_format_lite.h>
+#include <shark/persist/wired/wire_format_lite.h>
 #include <shark/io/printer.h>
 
 namespace shark::compiler::cpp {

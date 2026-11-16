@@ -31,7 +31,7 @@
 #include <shark/arenastring.h>
 
 #include <cstddef>
-#include <shark/format/wired/wire_context.h>
+#include <shark/persist/wired/wire_context.h>
 #include <shark/io/coded_stream.h>
 #include <shark/message_lite.h>
 #include <shark/stubs/common.h>

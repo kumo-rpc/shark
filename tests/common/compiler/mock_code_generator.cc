@@ -53,7 +53,7 @@
 #include <shark/stubs/logging.h>
 #include <turbo/strings/strip.h>
 #include <turbo/strings/substitute.h>
-#include <shark/format/text/text_format.h>
+#include <shark/persist/text/text_format.h>
 #include <tests/common/file.h>
 
 #ifdef major

@@ -31,50 +31,6 @@ kmcmake_cc_test(
         GTest::gmock_main
 )
 
-kmcmake_cc_test(
-        NAME importer_unittest
-        MODULE compiler
-        SOURCES
-        importer_unittest.cc
-        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
-        LINKS
-        ${PROJECT_NAME}::test_sk_static
-        ${PROJECT_NAME}::test_common_static
-        ${PROJECT_NAME}::sharkc_static
-        ${PROJECT_NAME}::shark_static
-        GTest::gmock_main
-)
-
-kmcmake_cc_test(
-        NAME parser_enum_test
-        MODULE compiler
-        SOURCES
-        parser_enum_test.cc
-        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
-        LINKS
-        ${PROJECT_NAME}::sk_lib_static
-        ${PROJECT_NAME}::test_sk_static
-        ${PROJECT_NAME}::test_common_static
-        ${PROJECT_NAME}::sharkc_static
-        ${PROJECT_NAME}::shark_static
-        GTest::gmock_main
-)
-
-kmcmake_cc_test(
-        NAME parser_unittest
-        MODULE compiler
-        SOURCES
-        parser_unittest.cc
-        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
-        LINKS
-        ${PROJECT_NAME}::test_sk_static
-        ${PROJECT_NAME}::sk_lib_static
-        ${PROJECT_NAME}::test_common_static
-        ${PROJECT_NAME}::sharkc_static
-        ${PROJECT_NAME}::shark_static
-        GTest::gmock_main
-)
-
 kmcmake_cc_binary(
         NAME test_plugin
         SOURCES

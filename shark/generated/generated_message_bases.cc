@@ -30,9 +30,9 @@
 
 #include <shark/generated/generated_message_bases.h>
 
-#include <shark/format/wired/wire_context.h>
-#include <shark/format/wired/wire_format.h>
-#include <shark/format/wired/wire_format_lite.h>
+#include <shark/persist/wired/wire_context.h>
+#include <shark/persist/wired/wire_format.h>
+#include <shark/persist/wired/wire_format_lite.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/unknown_field_set.h>

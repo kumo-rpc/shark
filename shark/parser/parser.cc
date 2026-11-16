@@ -34,17 +34,16 @@
 //
 // Recursive descent FTW.
 
-#include <shark/parser/parser.h>
-
 #include <float.h>
+#include <shark/parser/parser.h>
+#include <shark/stubs/ascii.h>
 
 #include <cstdint>
 #include <limits>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
-#include <shark/format/wired/wire_format.h>
+#include <shark/persist/wired/wire_format.h>
 #include <shark/parser/tokenizer.h>
-#include <shark/stubs/ascii.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/hash.h>
@@ -63,7 +62,7 @@ namespace shark {
 
             typedef std::unordered_map<std::string, SharkType> TypeNameMap;
 
-            const TypeNameMap& NGetTypeNameTable() {
+            const TypeNameMap& GetTypeNameTable() {
                 static auto* table = new auto([]() {
                     TypeNameMap result;
 
@@ -94,7 +93,7 @@ namespace shark {
 
             // Camel-case the field name and append "Entry" for generated map entry name.
             // e.g. map<KeyType, ValueType> foo_map => FooMapEntry
-            std::string NMapEntryName(const std::string& field_name) {
+            std::string MapEntryName(const std::string& field_name) {
                 std::string result;
                 static const char kSuffix[] = "Entry";
                 result.reserve(field_name.size() + sizeof(kSuffix));
@@ -118,8 +117,6 @@ namespace shark {
                 return result;
             }
 
-
-
         } // anonymous namespace
 
 // Makes code slightly more readable.  The meaning of "DO(foo)" is
@@ -130,22 +127,34 @@ namespace shark {
     } else            \
         return false
 
+        // ===================================================================
+
+        Parser::Parser()
+            : input_(nullptr)
+            , error_collector_(nullptr)
+            , source_location_table_(nullptr)
+            , had_errors_(false)
+            , require_syntax_identifier_(false)
+            , stop_after_syntax_identifier_(false) {
+        }
+
+        Parser::~Parser() { }
 
         // ===================================================================
 
-        inline bool NParser::LookingAt(const char* text) {
+        inline bool Parser::LookingAt(const char* text) {
             return input_->current().text == text;
         }
 
-        inline bool NParser::LookingAtType(io::Tokenizer::TokenType token_type) {
+        inline bool Parser::LookingAtType(io::Tokenizer::TokenType token_type) {
             return input_->current().type == token_type;
         }
 
-        inline bool NParser::AtEnd() {
+        inline bool Parser::AtEnd() {
             return LookingAtType(io::Tokenizer::TYPE_END);
         }
 
-        bool NParser::TryConsume(const char* text) {
+        bool Parser::TryConsume(const char* text) {
             if (LookingAt(text)) {
                 input_->Next();
                 return true;
@@ -154,7 +163,7 @@ namespace shark {
             }
         }
 
-        bool NParser::Consume(const char* text, const char* error) {
+        bool Parser::Consume(const char* text, const char* error) {
             if (TryConsume(text)) {
                 return true;
             } else {
@@ -163,12 +172,12 @@ namespace shark {
             }
         }
 
-        bool NParser::Consume(const char* text) {
+        bool Parser::Consume(const char* text) {
             std::string error = "Expected \"" + std::string(text) + "\".";
             return Consume(text, error.c_str());
         }
 
-        bool NParser::ConsumeIdentifier(std::string* output, const char* error) {
+        bool Parser::ConsumeIdentifier(std::string* output, const char* error) {
             if (LookingAtType(io::Tokenizer::TYPE_IDENTIFIER)) {
                 *output = input_->current().text;
                 input_->Next();
@@ -179,7 +188,7 @@ namespace shark {
             }
         }
 
-        bool NParser::ConsumeInteger(int* output, const char* error) {
+        bool Parser::ConsumeInteger(int* output, const char* error) {
             if (LookingAtType(io::Tokenizer::TYPE_INTEGER)) {
                 uint64_t value = 0;
                 if (!io::Tokenizer::ParseInteger(input_->current().text,
@@ -197,7 +206,7 @@ namespace shark {
             }
         }
 
-        bool NParser::ConsumeSignedInteger(int* output, const char* error) {
+        bool Parser::ConsumeSignedInteger(int* output, const char* error) {
             bool is_negative = false;
             uint64_t max_value = std::numeric_limits<int32_t>::max();
             if (TryConsume("-")) {
@@ -212,7 +221,7 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ConsumeInteger64(uint64_t max_value, uint64_t* output,
+        bool Parser::ConsumeInteger64(uint64_t max_value, uint64_t* output,
             const char* error) {
             if (LookingAtType(io::Tokenizer::TYPE_INTEGER)) {
                 if (!io::Tokenizer::ParseInteger(input_->current().text, max_value,
@@ -229,7 +238,7 @@ namespace shark {
             }
         }
 
-        bool NParser::ConsumeNumber(double* output, const char* error) {
+        bool Parser::ConsumeNumber(double* output, const char* error) {
             if (LookingAtType(io::Tokenizer::TYPE_FLOAT)) {
                 *output = io::Tokenizer::ParseFloat(input_->current().text);
                 input_->Next();
@@ -260,7 +269,7 @@ namespace shark {
             }
         }
 
-        bool NParser::ConsumeString(std::string* output, const char* error) {
+        bool Parser::ConsumeString(std::string* output, const char* error) {
             if (LookingAtType(io::Tokenizer::TYPE_STRING)) {
                 io::Tokenizer::ParseString(input_->current().text, output);
                 input_->Next();
@@ -276,8 +285,8 @@ namespace shark {
             }
         }
 
-        bool NParser::TryConsumeEndOfDeclaration(const char* text,
-            const NLocationRecorder* location) {
+        bool Parser::TryConsumeEndOfDeclaration(const char* text,
+            const LocationRecorder* location) {
             if (LookingAt(text)) {
                 std::string leading, trailing;
                 std::vector<std::string> detached;
@@ -307,8 +316,8 @@ namespace shark {
             }
         }
 
-        bool NParser::ConsumeEndOfDeclaration(const char* text,
-            const NLocationRecorder* location) {
+        bool Parser::ConsumeEndOfDeclaration(const char* text,
+            const LocationRecorder* location) {
             if (TryConsumeEndOfDeclaration(text, location)) {
                 return true;
             } else {
@@ -319,18 +328,18 @@ namespace shark {
 
         // -------------------------------------------------------------------
 
-        void NParser::AddError(int line, int column, const std::string& error) {
+        void Parser::AddError(int line, int column, const std::string& error) {
             if (error_collector_ != nullptr) {
                 error_collector_->AddError(line, column, error);
             }
             had_errors_ = true;
         }
 
-        void NParser::AddError(const std::string& error) {
+        void Parser::AddError(const std::string& error) {
             AddError(input_->current().line, input_->current().column, error);
         }
 
-        void NParser::AddWarning(const std::string& warning) {
+        void Parser::AddWarning(const std::string& warning) {
             if (error_collector_ != nullptr) {
                 error_collector_->AddWarning(input_->current().line,
                     input_->current().column, warning);
@@ -339,7 +348,7 @@ namespace shark {
 
         // -------------------------------------------------------------------
 
-        NParser::NLocationRecorder::NLocationRecorder(NParser* parser)
+        Parser::LocationRecorder::LocationRecorder(Parser* parser)
             : parser_(parser)
             , source_code_info_(parser->source_code_info_)
             , location_(parser_->source_code_info_->add_location()) {
@@ -347,31 +356,31 @@ namespace shark {
             location_->add_span(parser_->input_->current().column);
         }
 
-        NParser::NLocationRecorder::NLocationRecorder(const NLocationRecorder& parent) {
+        Parser::LocationRecorder::LocationRecorder(const LocationRecorder& parent) {
             Init(parent, parent.source_code_info_);
         }
 
-        NParser::NLocationRecorder::NLocationRecorder(const NLocationRecorder& parent,
+        Parser::LocationRecorder::LocationRecorder(const LocationRecorder& parent,
             int path1,
             SourceCodeInfo* source_code_info) {
             Init(parent, source_code_info);
             AddPath(path1);
         }
 
-        NParser::NLocationRecorder::NLocationRecorder(const NLocationRecorder& parent,
+        Parser::LocationRecorder::LocationRecorder(const LocationRecorder& parent,
             int path1) {
             Init(parent, parent.source_code_info_);
             AddPath(path1);
         }
 
-        NParser::NLocationRecorder::NLocationRecorder(const NLocationRecorder& parent,
+        Parser::LocationRecorder::LocationRecorder(const LocationRecorder& parent,
             int path1, int path2) {
             Init(parent, parent.source_code_info_);
             AddPath(path1);
             AddPath(path2);
         }
 
-        void NParser::NLocationRecorder::Init(const NLocationRecorder& parent,
+        void Parser::LocationRecorder::Init(const LocationRecorder& parent,
             SourceCodeInfo* source_code_info) {
             parser_ = parent.parser_;
             source_code_info_ = source_code_info;
@@ -383,34 +392,34 @@ namespace shark {
             location_->add_span(parser_->input_->current().column);
         }
 
-        NParser::NLocationRecorder::~NLocationRecorder() {
+        Parser::LocationRecorder::~LocationRecorder() {
             if (location_->span_size() <= 2) {
                 EndAt(parser_->input_->previous());
             }
         }
 
-        void NParser::NLocationRecorder::AddPath(int path_component) {
+        void Parser::LocationRecorder::AddPath(int path_component) {
             location_->add_path(path_component);
         }
 
-        void NParser::NLocationRecorder::StartAt(const io::Tokenizer::Token& token) {
+        void Parser::LocationRecorder::StartAt(const io::Tokenizer::Token& token) {
             location_->set_span(0, token.line);
             location_->set_span(1, token.column);
         }
 
-        void NParser::NLocationRecorder::StartAt(const NLocationRecorder& other) {
+        void Parser::LocationRecorder::StartAt(const LocationRecorder& other) {
             location_->set_span(0, other.location_->span(0));
             location_->set_span(1, other.location_->span(1));
         }
 
-        void NParser::NLocationRecorder::EndAt(const io::Tokenizer::Token& token) {
+        void Parser::LocationRecorder::EndAt(const io::Tokenizer::Token& token) {
             if (token.line != location_->span(0)) {
                 location_->add_span(token.line);
             }
             location_->add_span(token.end_column);
         }
 
-        void NParser::NLocationRecorder::RecordLegacyLocation(
+        void Parser::LocationRecorder::RecordLegacyLocation(
             const Message* descriptor,
             DescriptorPool::ErrorCollector::ErrorLocation location) {
             if (parser_->source_location_table_ != nullptr) {
@@ -419,7 +428,7 @@ namespace shark {
             }
         }
 
-        void NParser::NLocationRecorder::RecordLegacyImportLocation(
+        void Parser::LocationRecorder::RecordLegacyImportLocation(
             const Message* descriptor, const std::string& name) {
             if (parser_->source_location_table_ != nullptr) {
                 parser_->source_location_table_->AddImport(
@@ -427,11 +436,11 @@ namespace shark {
             }
         }
 
-        int NParser::NLocationRecorder::CurrentPathSize() const {
+        int Parser::LocationRecorder::CurrentPathSize() const {
             return location_->path_size();
         }
 
-        void NParser::NLocationRecorder::AttachComments(
+        void Parser::LocationRecorder::AttachComments(
             std::string* leading, std::string* trailing,
             std::vector<std::string>* detached_comments) const {
             GOOGLE_CHECK(!location_->has_leading_comments());
@@ -451,7 +460,7 @@ namespace shark {
 
         // -------------------------------------------------------------------
 
-        void NParser::SkipStatement() {
+        void Parser::SkipStatement() {
             while (true) {
                 if (AtEnd()) {
                     return;
@@ -469,7 +478,7 @@ namespace shark {
             }
         }
 
-        void NParser::SkipRestOfBlock() {
+        void Parser::SkipRestOfBlock() {
             while (true) {
                 if (AtEnd()) {
                     return;
@@ -488,7 +497,7 @@ namespace shark {
 
         bool EnumValueFits(EnumUnderlyingType type, int32_t number);
 
-        bool NParser::ValidateEnum(const EnumDescriptorProto* proto) {
+        bool Parser::ValidateEnum(const EnumDescriptorProto* proto) {
             bool has_allow_alias = false;
             bool allow_alias = false;
 
@@ -557,7 +566,7 @@ namespace shark {
             return true;
         }
 
-        bool NParser::Parse(io::Tokenizer* input, FileDescriptorProto* file) {
+        bool Parser::Parse(io::Tokenizer* input, FileDescriptorProto* file) {
             input_ = input;
             had_errors_ = false;
             syntax_identifier_.clear();
@@ -576,7 +585,7 @@ namespace shark {
             }
 
             {
-                NLocationRecorder root_location(this);
+                LocationRecorder root_location(this);
                 root_location.RecordLegacyLocation(file,
                     DescriptorPool::ErrorCollector::OTHER);
 
@@ -620,8 +629,8 @@ namespace shark {
             return !had_errors_;
         }
 
-        bool NParser::ParseSyntaxIdentifier(const NLocationRecorder& parent) {
-            NLocationRecorder syntax_location(parent,
+        bool Parser::ParseSyntaxIdentifier(const LocationRecorder& parent) {
+            LocationRecorder syntax_location(parent,
                 FileDescriptorProto::kSyntaxFieldNumber);
             DO(Consume(
                 "syntax",
@@ -644,28 +653,28 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseTopLevelStatement(FileDescriptorProto* file,
-            const NLocationRecorder& root_location) {
+        bool Parser::ParseTopLevelStatement(FileDescriptorProto* file,
+            const LocationRecorder& root_location) {
             if (TryConsumeEndOfDeclaration(";", nullptr)) {
                 // empty statement; ignore
                 return true;
             } else if (LookingAt("struct")) {
-                NLocationRecorder location(root_location,
+                LocationRecorder location(root_location,
                     FileDescriptorProto::kMessageTypeFieldNumber,
                     file->message_type_size());
                 return ParseMessageDefinition(file->add_message_type(), location, file);
             } else if (LookingAt("enum")) {
-                NLocationRecorder location(root_location,
+                LocationRecorder location(root_location,
                     FileDescriptorProto::kEnumTypeFieldNumber,
                     file->enum_type_size());
                 return ParseEnumDefinition(file->add_enum_type(), location, file);
             } else if (LookingAt("service")) {
-                NLocationRecorder location(root_location,
+                LocationRecorder location(root_location,
                     FileDescriptorProto::kServiceFieldNumber,
                     file->service_size());
                 return ParseServiceDefinition(file->add_service(), location, file);
             } else if (LookingAt("extend")) {
-                NLocationRecorder location(root_location,
+                LocationRecorder location(root_location,
                     FileDescriptorProto::kExtensionFieldNumber);
                 return ParseExtend(
                     file->mutable_extension(), file->mutable_message_type(), root_location,
@@ -677,7 +686,7 @@ namespace shark {
             } else if (LookingAt("package")) {
                 return ParsePackage(file, root_location, file);
             } else if (LookingAt("option")) {
-                NLocationRecorder location(root_location,
+                LocationRecorder location(root_location,
                     FileDescriptorProto::kOptionsFieldNumber);
                 return ParseOption(file->mutable_options(), location, file,
                     OPTION_STATEMENT);
@@ -690,12 +699,12 @@ namespace shark {
         // -------------------------------------------------------------------
         // Messages
 
-        bool NParser::ParseMessageDefinition(
-            DescriptorProto* message, const NLocationRecorder& message_location,
+        bool Parser::ParseMessageDefinition(
+            DescriptorProto* message, const LocationRecorder& message_location,
             const FileDescriptorProto* containing_file) {
             DO(Consume("struct"));
             {
-                NLocationRecorder location(message_location,
+                LocationRecorder location(message_location,
                     DescriptorProto::kNameFieldNumber);
                 location.RecordLegacyLocation(message,
                     DescriptorPool::ErrorCollector::NAME);
@@ -756,8 +765,8 @@ namespace shark {
 
         } // namespace
 
-        bool NParser::ParseMessageBlock(DescriptorProto* message,
-            const NLocationRecorder& message_location,
+        bool Parser::ParseMessageBlock(DescriptorProto* message,
+            const LocationRecorder& message_location,
             const FileDescriptorProto* containing_file) {
             DO(ConsumeEndOfDeclaration("{", &message_location));
 
@@ -783,51 +792,51 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseMessageStatement(DescriptorProto* message,
-            const NLocationRecorder& message_location,
+        bool Parser::ParseMessageStatement(DescriptorProto* message,
+            const LocationRecorder& message_location,
             const FileDescriptorProto* containing_file) {
             if (TryConsumeEndOfDeclaration(";", nullptr)) {
                 // empty statement; ignore
                 return true;
             } else if (LookingAt("struct")) {
-                NLocationRecorder location(message_location,
+                LocationRecorder location(message_location,
                     DescriptorProto::kNestedTypeFieldNumber,
                     message->nested_type_size());
                 return ParseMessageDefinition(message->add_nested_type(), location,
                     containing_file);
             } else if (LookingAt("enum")) {
-                NLocationRecorder location(message_location,
+                LocationRecorder location(message_location,
                     DescriptorProto::kEnumTypeFieldNumber,
                     message->enum_type_size());
                 return ParseEnumDefinition(message->add_enum_type(), location,
                     containing_file);
             } else if (LookingAt("extensions")) {
-                NLocationRecorder location(message_location,
+                LocationRecorder location(message_location,
                     DescriptorProto::kExtensionRangeFieldNumber);
                 return ParseExtensions(message, location, containing_file);
             } else if (LookingAt("reserved")) {
                 return ParseReserved(message, message_location);
             } else if (LookingAt("extend")) {
-                NLocationRecorder location(message_location,
+                LocationRecorder location(message_location,
                     DescriptorProto::kExtensionFieldNumber);
                 return ParseExtend(message->mutable_extension(),
                     message->mutable_nested_type(), message_location,
                     DescriptorProto::kNestedTypeFieldNumber, location,
                     containing_file);
             } else if (LookingAt("option")) {
-                NLocationRecorder location(message_location,
+                LocationRecorder location(message_location,
                     DescriptorProto::kOptionsFieldNumber);
                 return ParseOption(message->mutable_options(), location, containing_file,
                     OPTION_STATEMENT);
             } else if (LookingAt("union")) {
                 int oneof_index = message->oneof_decl_size();
-                NLocationRecorder oneof_location(
+                LocationRecorder oneof_location(
                     message_location, DescriptorProto::kOneofDeclFieldNumber, oneof_index);
 
                 return ParseOneof(message->add_oneof_decl(), message, oneof_index,
                     oneof_location, message_location, containing_file);
             } else {
-                NLocationRecorder location(message_location,
+                LocationRecorder location(message_location,
                     DescriptorProto::kFieldFieldNumber,
                     message->field_size());
                 return ParseMessageField(
@@ -836,11 +845,11 @@ namespace shark {
             }
         }
 
-        bool NParser::ParseMessageField(FieldDescriptorProto* field,
+        bool Parser::ParseMessageField(FieldDescriptorProto* field,
             RepeatedPtrField<DescriptorProto>* messages,
-            const NLocationRecorder& parent_location,
+            const LocationRecorder& parent_location,
             int location_field_number_for_nested_type,
-            const NLocationRecorder& field_location,
+            const LocationRecorder& field_location,
             const FileDescriptorProto* containing_file) {
             {
                 FieldCardinality label;
@@ -854,16 +863,16 @@ namespace shark {
                 field_location, containing_file);
         }
 
-        bool NParser::ParseMessageFieldNoLabel(
+        bool Parser::ParseMessageFieldNoLabel(
             FieldDescriptorProto* field, RepeatedPtrField<DescriptorProto>* messages,
-            const NLocationRecorder& parent_location,
+            const LocationRecorder& parent_location,
             int location_field_number_for_nested_type,
-            const NLocationRecorder& field_location,
+            const LocationRecorder& field_location,
             const FileDescriptorProto* containing_file) {
             MapField map_field;
             // Parse type.
             {
-                NLocationRecorder location(field_location); // add path later
+                LocationRecorder location(field_location); // add path later
                 location.RecordLegacyLocation(field, DescriptorPool::ErrorCollector::TYPE);
 
                 bool type_parsed = false;
@@ -889,7 +898,7 @@ namespace shark {
                         location.EndAt(type_end);
                         field->set_label(FieldCardinality::REPEATED);
                         {
-                            NLocationRecorder label_location(
+                            LocationRecorder label_location(
                                 field_location, FieldDescriptorProto::kLabelFieldNumber);
                             label_location.StartAt(list_token);
                             label_location.EndAt(list_token);
@@ -944,7 +953,7 @@ namespace shark {
             // Parse name and '='.
             io::Tokenizer::Token name_token = input_->current();
             {
-                NLocationRecorder location(field_location,
+                LocationRecorder location(field_location,
                     FieldDescriptorProto::kNameFieldNumber);
                 location.RecordLegacyLocation(field, DescriptorPool::ErrorCollector::NAME);
                 DO(ConsumeIdentifier(field->mutable_name(), "Expected field name."));
@@ -962,7 +971,7 @@ namespace shark {
 
             // Parse field number.
             {
-                NLocationRecorder location(field_location,
+                LocationRecorder location(field_location,
                     FieldDescriptorProto::kNumberFieldNumber);
                 location.RecordLegacyLocation(field,
                     DescriptorPool::ErrorCollector::NUMBER);
@@ -988,8 +997,8 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseMapType(MapField* map_field, FieldDescriptorProto* field,
-            NLocationRecorder& type_name_location) {
+        bool Parser::ParseMapType(MapField* map_field, FieldDescriptorProto* field,
+            LocationRecorder& type_name_location) {
             if (field->has_oneof_index()) {
                 AddError("Map fields are not allowed in unions.");
                 return false;
@@ -1016,11 +1025,11 @@ namespace shark {
             return true;
         }
 
-        void NParser::GenerateMapEntry(const MapField& map_field,
+        void Parser::GenerateMapEntry(const MapField& map_field,
             FieldDescriptorProto* field,
             RepeatedPtrField<DescriptorProto>* messages) {
             DescriptorProto* entry = messages->Add();
-            std::string entry_name = NMapEntryName(field->name());
+            std::string entry_name = MapEntryName(field->name());
             field->set_type_name(entry_name);
             entry->set_name(entry_name);
             entry->mutable_options()->set_map_entry(true);
@@ -1077,13 +1086,13 @@ namespace shark {
             }
         }
 
-        bool NParser::ParseFieldOptions(FieldDescriptorProto* field,
-            const NLocationRecorder& field_location,
+        bool Parser::ParseFieldOptions(FieldDescriptorProto* field,
+            const LocationRecorder& field_location,
             const FileDescriptorProto* containing_file) {
             if (!LookingAt("["))
                 return true;
 
-            NLocationRecorder location(field_location,
+            LocationRecorder location(field_location,
                 FieldDescriptorProto::kOptionsFieldNumber);
 
             DO(Consume("["));
@@ -1107,8 +1116,8 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseDefaultAssignment(
-            FieldDescriptorProto* field, const NLocationRecorder& field_location,
+        bool Parser::ParseDefaultAssignment(
+            FieldDescriptorProto* field, const LocationRecorder& field_location,
             const FileDescriptorProto* containing_file) {
             if (field->has_default_value()) {
                 AddError("Already set option \"default\".");
@@ -1118,7 +1127,7 @@ namespace shark {
             DO(Consume("default"));
             DO(Consume("="));
 
-            NLocationRecorder location(field_location,
+            LocationRecorder location(field_location,
                 FieldDescriptorProto::kDefaultValueFieldNumber);
             location.RecordLegacyLocation(field,
                 DescriptorPool::ErrorCollector::DEFAULT_VALUE);
@@ -1253,15 +1262,15 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseJsonName(FieldDescriptorProto* field,
-            const NLocationRecorder& field_location,
+        bool Parser::ParseJsonName(FieldDescriptorProto* field,
+            const LocationRecorder& field_location,
             const FileDescriptorProto* containing_file) {
             if (field->has_json_name()) {
                 AddError("Already set option \"json_name\".");
                 field->clear_json_name();
             }
 
-            NLocationRecorder location(field_location,
+            LocationRecorder location(field_location,
                 FieldDescriptorProto::kJsonNameFieldNumber);
             location.RecordLegacyLocation(field,
                 DescriptorPool::ErrorCollector::OPTION_NAME);
@@ -1269,7 +1278,7 @@ namespace shark {
             DO(Consume("json_name"));
             DO(Consume("="));
 
-            NLocationRecorder value_location(location);
+            LocationRecorder value_location(location);
             value_location.RecordLegacyLocation(
                 field, DescriptorPool::ErrorCollector::OPTION_VALUE);
 
@@ -1278,8 +1287,8 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseOptionNamePart(UninterpretedOption* uninterpreted_option,
-            const NLocationRecorder& part_location,
+        bool Parser::ParseOptionNamePart(UninterpretedOption* uninterpreted_option,
+            const LocationRecorder& part_location,
             const FileDescriptorProto* containing_file) {
             UninterpretedOption::NamePart* name = uninterpreted_option->add_name();
             std::string identifier; // We parse identifiers into this string.
@@ -1287,7 +1296,7 @@ namespace shark {
                 DO(Consume("("));
 
                 {
-                    NLocationRecorder location(
+                    LocationRecorder location(
                         part_location, UninterpretedOption::NamePart::kNamePartFieldNumber);
                     // An extension name consists of dot-separated identifiers, and may begin
                     // with a dot.
@@ -1306,7 +1315,7 @@ namespace shark {
                 DO(Consume(")"));
                 name->set_is_extension(true);
             } else { // This is a regular field.
-                NLocationRecorder location(
+                LocationRecorder location(
                     part_location, UninterpretedOption::NamePart::kNamePartFieldNumber);
                 DO(ConsumeIdentifier(&identifier, "Expected identifier."));
                 name->mutable_name_part()->append(identifier);
@@ -1315,7 +1324,7 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseUninterpretedBlock(std::string* value) {
+        bool Parser::ParseUninterpretedBlock(std::string* value) {
             // Note that enclosing braces are not added to *value.
             // We do NOT use ConsumeEndOfStatement for this brace because it's delimiting
             // an expression, not a block of statements.
@@ -1343,8 +1352,8 @@ namespace shark {
 
         // We don't interpret the option here. Instead we store it in an
         // UninterpretedOption, to be interpreted later.
-        bool NParser::ParseOption(Message* options,
-            const NLocationRecorder& options_location,
+        bool Parser::ParseOption(Message* options,
+            const LocationRecorder& options_location,
             const FileDescriptorProto* containing_file,
             OptionStyle style) {
             // Create an entry in the uninterpreted_option field.
@@ -1354,7 +1363,7 @@ namespace shark {
 
             const Reflection* reflection = options->GetReflection();
 
-            NLocationRecorder location(
+            LocationRecorder location(
                 options_location, uninterpreted_option_field->number(),
                 reflection->FieldSize(*options, uninterpreted_option_field));
 
@@ -1367,13 +1376,13 @@ namespace shark {
 
             // Parse dot-separated name.
             {
-                NLocationRecorder name_location(location,
+                LocationRecorder name_location(location,
                     UninterpretedOption::kNameFieldNumber);
                 name_location.RecordLegacyLocation(
                     uninterpreted_option, DescriptorPool::ErrorCollector::OPTION_NAME);
 
                 {
-                    NLocationRecorder part_location(name_location,
+                    LocationRecorder part_location(name_location,
                         uninterpreted_option->name_size());
                     DO(ParseOptionNamePart(uninterpreted_option, part_location,
                         containing_file));
@@ -1381,7 +1390,7 @@ namespace shark {
 
                 while (LookingAt(".")) {
                     DO(Consume("."));
-                    NLocationRecorder part_location(name_location,
+                    LocationRecorder part_location(name_location,
                         uninterpreted_option->name_size());
                     DO(ParseOptionNamePart(uninterpreted_option, part_location,
                         containing_file));
@@ -1391,7 +1400,7 @@ namespace shark {
             DO(Consume("="));
 
             {
-                NLocationRecorder value_location(location);
+                LocationRecorder value_location(location);
                 value_location.RecordLegacyLocation(
                     uninterpreted_option, DescriptorPool::ErrorCollector::OPTION_VALUE);
 
@@ -1488,8 +1497,8 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseExtensions(DescriptorProto* message,
-            const NLocationRecorder& extensions_location,
+        bool Parser::ParseExtensions(DescriptorProto* message,
+            const LocationRecorder& extensions_location,
             const FileDescriptorProto* containing_file) {
             // Parse the declaration.
             DO(Consume("extensions"));
@@ -1498,7 +1507,7 @@ namespace shark {
 
             do {
                 // Note that kExtensionRangeFieldNumber was already pushed by the parent.
-                NLocationRecorder location(extensions_location,
+                LocationRecorder location(extensions_location,
                     message->extension_range_size());
 
                 DescriptorProto::ExtensionRange* range = message->add_extension_range();
@@ -1509,14 +1518,14 @@ namespace shark {
                 io::Tokenizer::Token start_token;
 
                 {
-                    NLocationRecorder start_location(
+                    LocationRecorder start_location(
                         location, DescriptorProto::ExtensionRange::kStartFieldNumber);
                     start_token = input_->current();
                     DO(ConsumeInteger(&start, "Expected field number range."));
                 }
 
                 if (TryConsume("to")) {
-                    NLocationRecorder end_location(
+                    LocationRecorder end_location(
                         location, DescriptorProto::ExtensionRange::kEndFieldNumber);
                     if (TryConsume("max")) {
                         // Set to the sentinel value - 1 since we increment the value below.
@@ -1527,7 +1536,7 @@ namespace shark {
                         DO(ConsumeInteger(&end, "Expected integer."));
                     }
                 } else {
-                    NLocationRecorder end_location(
+                    LocationRecorder end_location(
                         location, DescriptorProto::ExtensionRange::kEndFieldNumber);
                     end_location.StartAt(start_token);
                     end_location.EndAt(start_token);
@@ -1550,10 +1559,10 @@ namespace shark {
                 ExtensionRangeOptions* options = message->mutable_extension_range(old_range_size)->mutable_options();
 
                 {
-                    NLocationRecorder index_location(
+                    LocationRecorder index_location(
                         extensions_location, 0 /* we fill this in w/ actual index below */,
                         &info);
-                    NLocationRecorder location(
+                    LocationRecorder location(
                         index_location, DescriptorProto::ExtensionRange::kOptionsFieldNumber);
                     DO(Consume("["));
 
@@ -1591,52 +1600,52 @@ namespace shark {
 
         // This is similar to extension range parsing, except that it accepts field
         // name literals.
-        bool NParser::ParseReserved(DescriptorProto* message,
-            const NLocationRecorder& message_location) {
+        bool Parser::ParseReserved(DescriptorProto* message,
+            const LocationRecorder& message_location) {
             io::Tokenizer::Token start_token = input_->current();
             // Parse the declaration.
             DO(Consume("reserved"));
             if (LookingAtType(io::Tokenizer::TYPE_STRING)) {
-                NLocationRecorder location(message_location,
+                LocationRecorder location(message_location,
                     DescriptorProto::kReservedNameFieldNumber);
                 location.StartAt(start_token);
                 return ParseReservedNames(message, location);
             } else {
-                NLocationRecorder location(message_location,
+                LocationRecorder location(message_location,
                     DescriptorProto::kReservedRangeFieldNumber);
                 location.StartAt(start_token);
                 return ParseReservedNumbers(message, location);
             }
         }
 
-        bool NParser::ParseReservedNames(DescriptorProto* message,
-            const NLocationRecorder& parent_location) {
+        bool Parser::ParseReservedNames(DescriptorProto* message,
+            const LocationRecorder& parent_location) {
             do {
-                NLocationRecorder location(parent_location, message->reserved_name_size());
+                LocationRecorder location(parent_location, message->reserved_name_size());
                 DO(ConsumeString(message->add_reserved_name(), "Expected field name."));
             } while (TryConsume(","));
             DO(ConsumeEndOfDeclaration(";", &parent_location));
             return true;
         }
 
-        bool NParser::ParseReservedNumbers(DescriptorProto* message,
-            const NLocationRecorder& parent_location) {
+        bool Parser::ParseReservedNumbers(DescriptorProto* message,
+            const LocationRecorder& parent_location) {
             bool first = true;
             do {
-                NLocationRecorder location(parent_location, message->reserved_range_size());
+                LocationRecorder location(parent_location, message->reserved_range_size());
 
                 DescriptorProto::ReservedRange* range = message->add_reserved_range();
                 int start, end;
                 io::Tokenizer::Token start_token;
                 {
-                    NLocationRecorder start_location(
+                    LocationRecorder start_location(
                         location, DescriptorProto::ReservedRange::kStartFieldNumber);
                     start_token = input_->current();
                     DO(ConsumeInteger(&start, (first ? "Expected field name or number range." : "Expected field number range.")));
                 }
 
                 if (TryConsume("to")) {
-                    NLocationRecorder end_location(
+                    LocationRecorder end_location(
                         location, DescriptorProto::ReservedRange::kEndFieldNumber);
                     if (TryConsume("max")) {
                         // Set to the sentinel value - 1 since we increment the value below.
@@ -1647,7 +1656,7 @@ namespace shark {
                         DO(ConsumeInteger(&end, "Expected integer."));
                     }
                 } else {
-                    NLocationRecorder end_location(
+                    LocationRecorder end_location(
                         location, DescriptorProto::ReservedRange::kEndFieldNumber);
                     end_location.StartAt(start_token);
                     end_location.EndAt(start_token);
@@ -1667,45 +1676,45 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseReserved(EnumDescriptorProto* message,
-            const NLocationRecorder& message_location) {
+        bool Parser::ParseReserved(EnumDescriptorProto* message,
+            const LocationRecorder& message_location) {
             io::Tokenizer::Token start_token = input_->current();
             // Parse the declaration.
             DO(Consume("reserved"));
             if (LookingAtType(io::Tokenizer::TYPE_STRING)) {
-                NLocationRecorder location(message_location,
+                LocationRecorder location(message_location,
                     EnumDescriptorProto::kReservedNameFieldNumber);
                 location.StartAt(start_token);
                 return ParseReservedNames(message, location);
             } else {
-                NLocationRecorder location(message_location,
+                LocationRecorder location(message_location,
                     EnumDescriptorProto::kReservedRangeFieldNumber);
                 location.StartAt(start_token);
                 return ParseReservedNumbers(message, location);
             }
         }
 
-        bool NParser::ParseReservedNames(EnumDescriptorProto* message,
-            const NLocationRecorder& parent_location) {
+        bool Parser::ParseReservedNames(EnumDescriptorProto* message,
+            const LocationRecorder& parent_location) {
             do {
-                NLocationRecorder location(parent_location, message->reserved_name_size());
+                LocationRecorder location(parent_location, message->reserved_name_size());
                 DO(ConsumeString(message->add_reserved_name(), "Expected enum value."));
             } while (TryConsume(","));
             DO(ConsumeEndOfDeclaration(";", &parent_location));
             return true;
         }
 
-        bool NParser::ParseReservedNumbers(EnumDescriptorProto* message,
-            const NLocationRecorder& parent_location) {
+        bool Parser::ParseReservedNumbers(EnumDescriptorProto* message,
+            const LocationRecorder& parent_location) {
             bool first = true;
             do {
-                NLocationRecorder location(parent_location, message->reserved_range_size());
+                LocationRecorder location(parent_location, message->reserved_range_size());
 
                 EnumDescriptorProto::EnumReservedRange* range = message->add_reserved_range();
                 int start, end;
                 io::Tokenizer::Token start_token;
                 {
-                    NLocationRecorder start_location(
+                    LocationRecorder start_location(
                         location, EnumDescriptorProto::EnumReservedRange::kStartFieldNumber);
                     start_token = input_->current();
                     DO(ConsumeSignedInteger(&start,
@@ -1714,7 +1723,7 @@ namespace shark {
                 }
 
                 if (TryConsume("to")) {
-                    NLocationRecorder end_location(
+                    LocationRecorder end_location(
                         location, EnumDescriptorProto::EnumReservedRange::kEndFieldNumber);
                     if (TryConsume("max")) {
                         // This is in the enum descriptor path, which doesn't have the message
@@ -1724,7 +1733,7 @@ namespace shark {
                         DO(ConsumeSignedInteger(&end, "Expected integer."));
                     }
                 } else {
-                    NLocationRecorder end_location(
+                    LocationRecorder end_location(
                         location, EnumDescriptorProto::EnumReservedRange::kEndFieldNumber);
                     end_location.StartAt(start_token);
                     end_location.EndAt(start_token);
@@ -1740,11 +1749,11 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseExtend(RepeatedPtrField<FieldDescriptorProto>* extensions,
+        bool Parser::ParseExtend(RepeatedPtrField<FieldDescriptorProto>* extensions,
             RepeatedPtrField<DescriptorProto>* messages,
-            const NLocationRecorder& parent_location,
+            const LocationRecorder& parent_location,
             int location_field_number_for_nested_type,
-            const NLocationRecorder& extend_location,
+            const LocationRecorder& extend_location,
             const FileDescriptorProto* containing_file) {
             DO(Consume("extend"));
 
@@ -1766,12 +1775,12 @@ namespace shark {
                 }
 
                 // Note that kExtensionFieldNumber was already pushed by the parent.
-                NLocationRecorder location(extend_location, extensions->size());
+                LocationRecorder location(extend_location, extensions->size());
 
                 FieldDescriptorProto* field = extensions->Add();
 
                 {
-                    NLocationRecorder extendee_location(
+                    LocationRecorder extendee_location(
                         location, FieldDescriptorProto::kExtendeeFieldNumber);
                     extendee_location.StartAt(extendee_start);
                     extendee_location.EndAt(extendee_end);
@@ -1797,15 +1806,15 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseOneof(OneofDescriptorProto* oneof_decl,
+        bool Parser::ParseOneof(OneofDescriptorProto* oneof_decl,
             DescriptorProto* containing_type, int oneof_index,
-            const NLocationRecorder& oneof_location,
-            const NLocationRecorder& containing_type_location,
+            const LocationRecorder& oneof_location,
+            const LocationRecorder& containing_type_location,
             const FileDescriptorProto* containing_file) {
             DO(Consume("union"));
 
             {
-                NLocationRecorder name_location(oneof_location,
+                LocationRecorder name_location(oneof_location,
                     OneofDescriptorProto::kNameFieldNumber);
                 DO(ConsumeIdentifier(oneof_decl->mutable_name(), "Expected union name."));
             }
@@ -1819,7 +1828,7 @@ namespace shark {
                 }
 
                 if (LookingAt("option")) {
-                    NLocationRecorder option_location(
+                    LocationRecorder option_location(
                         oneof_location, OneofDescriptorProto::kOptionsFieldNumber);
                     if (!ParseOption(oneof_decl->mutable_options(), option_location,
                             containing_file, OPTION_STATEMENT)) {
@@ -1838,7 +1847,7 @@ namespace shark {
                     input_->Next();
                 }
 
-                NLocationRecorder field_location(containing_type_location,
+                LocationRecorder field_location(containing_type_location,
                     DescriptorProto::kFieldFieldNumber,
                     containing_type->field_size());
 
@@ -1899,8 +1908,8 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseEnumDefinition(EnumDescriptorProto* enum_type,
-            const NLocationRecorder& enum_location,
+        bool Parser::ParseEnumDefinition(EnumDescriptorProto* enum_type,
+            const LocationRecorder& enum_location,
             const FileDescriptorProto* containing_file) {
             DO(Consume("enum"));
             // "enum class" is sugar: plain enum and enum class are equivalent and
@@ -1908,7 +1917,7 @@ namespace shark {
             TryConsume("class");
 
             {
-                NLocationRecorder location(enum_location,
+                LocationRecorder location(enum_location,
                     EnumDescriptorProto::kNameFieldNumber);
                 location.RecordLegacyLocation(enum_type,
                     DescriptorPool::ErrorCollector::NAME);
@@ -1937,8 +1946,8 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseEnumBlock(EnumDescriptorProto* enum_type,
-            const NLocationRecorder& enum_location,
+        bool Parser::ParseEnumBlock(EnumDescriptorProto* enum_type,
+            const LocationRecorder& enum_location,
             const FileDescriptorProto* containing_file,
             EnumUnderlyingType underlying_type) {
             DO(ConsumeEndOfDeclaration("{", &enum_location));
@@ -1960,22 +1969,22 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseEnumStatement(EnumDescriptorProto* enum_type,
-            const NLocationRecorder& enum_location,
+        bool Parser::ParseEnumStatement(EnumDescriptorProto* enum_type,
+            const LocationRecorder& enum_location,
             const FileDescriptorProto* containing_file,
             EnumUnderlyingType underlying_type) {
             if (TryConsumeEndOfDeclaration(";", nullptr)) {
                 // empty statement; ignore
                 return true;
             } else if (LookingAt("option")) {
-                NLocationRecorder location(enum_location,
+                LocationRecorder location(enum_location,
                     EnumDescriptorProto::kOptionsFieldNumber);
                 return ParseOption(enum_type->mutable_options(), location, containing_file,
                     OPTION_STATEMENT);
             } else if (LookingAt("reserved")) {
                 return ParseReserved(enum_type, enum_location);
             } else {
-                NLocationRecorder location(enum_location,
+                LocationRecorder location(enum_location,
                     EnumDescriptorProto::kValueFieldNumber,
                     enum_type->value_size());
                 return ParseEnumConstant(enum_type->add_value(), location, containing_file,
@@ -1983,7 +1992,7 @@ namespace shark {
             }
         }
 
-        bool NParser::ConsumeEnumNumber(EnumUnderlyingType underlying_type,
+        bool Parser::ConsumeEnumNumber(EnumUnderlyingType underlying_type,
             int32_t* output, const char* error) {
             if (underlying_type == EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UNSPECIFIED || underlying_type == EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT32) {
                 return ConsumeSignedInteger(output, error);
@@ -2030,13 +2039,13 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseEnumConstant(EnumValueDescriptorProto* enum_value,
-            const NLocationRecorder& enum_value_location,
+        bool Parser::ParseEnumConstant(EnumValueDescriptorProto* enum_value,
+            const LocationRecorder& enum_value_location,
             const FileDescriptorProto* containing_file,
             EnumUnderlyingType underlying_type) {
             // Parse name.
             {
-                NLocationRecorder location(enum_value_location,
+                LocationRecorder location(enum_value_location,
                     EnumValueDescriptorProto::kNameFieldNumber);
                 location.RecordLegacyLocation(enum_value,
                     DescriptorPool::ErrorCollector::NAME);
@@ -2048,7 +2057,7 @@ namespace shark {
 
             // Parse value.
             {
-                NLocationRecorder location(enum_value_location,
+                LocationRecorder location(enum_value_location,
                     EnumValueDescriptorProto::kNumberFieldNumber);
                 location.RecordLegacyLocation(enum_value,
                     DescriptorPool::ErrorCollector::NUMBER);
@@ -2066,14 +2075,14 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseEnumConstantOptions(
+        bool Parser::ParseEnumConstantOptions(
             EnumValueDescriptorProto* value,
-            const NLocationRecorder& enum_value_location,
+            const LocationRecorder& enum_value_location,
             const FileDescriptorProto* containing_file) {
             if (!LookingAt("["))
                 return true;
 
-            NLocationRecorder location(enum_value_location,
+            LocationRecorder location(enum_value_location,
                 EnumValueDescriptorProto::kOptionsFieldNumber);
 
             DO(Consume("["));
@@ -2090,13 +2099,13 @@ namespace shark {
         // -------------------------------------------------------------------
         // Services
 
-        bool NParser::ParseServiceDefinition(
-            ServiceDescriptorProto* service, const NLocationRecorder& service_location,
+        bool Parser::ParseServiceDefinition(
+            ServiceDescriptorProto* service, const LocationRecorder& service_location,
             const FileDescriptorProto* containing_file) {
             DO(Consume("service"));
 
             {
-                NLocationRecorder location(service_location,
+                LocationRecorder location(service_location,
                     ServiceDescriptorProto::kNameFieldNumber);
                 location.RecordLegacyLocation(service,
                     DescriptorPool::ErrorCollector::NAME);
@@ -2107,8 +2116,8 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseServiceBlock(ServiceDescriptorProto* service,
-            const NLocationRecorder& service_location,
+        bool Parser::ParseServiceBlock(ServiceDescriptorProto* service,
+            const LocationRecorder& service_location,
             const FileDescriptorProto* containing_file) {
             DO(ConsumeEndOfDeclaration("{", &service_location));
 
@@ -2128,32 +2137,32 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseServiceStatement(ServiceDescriptorProto* service,
-            const NLocationRecorder& service_location,
+        bool Parser::ParseServiceStatement(ServiceDescriptorProto* service,
+            const LocationRecorder& service_location,
             const FileDescriptorProto* containing_file) {
             if (TryConsumeEndOfDeclaration(";", nullptr)) {
                 // empty statement; ignore
                 return true;
             } else if (LookingAt("option")) {
-                NLocationRecorder location(service_location,
+                LocationRecorder location(service_location,
                     ServiceDescriptorProto::kOptionsFieldNumber);
                 return ParseOption(service->mutable_options(), location, containing_file,
                     OPTION_STATEMENT);
             } else {
-                NLocationRecorder location(service_location,
+                LocationRecorder location(service_location,
                     ServiceDescriptorProto::kMethodFieldNumber,
                     service->method_size());
                 return ParseServiceMethod(service->add_method(), location, containing_file);
             }
         }
 
-        bool NParser::ParseServiceMethod(MethodDescriptorProto* method,
-            const NLocationRecorder& method_location,
+        bool Parser::ParseServiceMethod(MethodDescriptorProto* method,
+            const LocationRecorder& method_location,
             const FileDescriptorProto* containing_file) {
             DO(Consume("rpc"));
 
             {
-                NLocationRecorder location(method_location,
+                LocationRecorder location(method_location,
                     MethodDescriptorProto::kNameFieldNumber);
                 location.RecordLegacyLocation(method, DescriptorPool::ErrorCollector::NAME);
                 DO(ConsumeIdentifier(method->mutable_name(), "Expected method name."));
@@ -2163,14 +2172,14 @@ namespace shark {
             DO(Consume("("));
             {
                 if (LookingAt("stream")) {
-                    NLocationRecorder location(
+                    LocationRecorder location(
                         method_location, MethodDescriptorProto::kClientStreamingFieldNumber);
                     location.RecordLegacyLocation(method,
                         DescriptorPool::ErrorCollector::OTHER);
                     method->set_client_streaming(true);
                     DO(Consume("stream"));
                 }
-                NLocationRecorder location(method_location,
+                LocationRecorder location(method_location,
                     MethodDescriptorProto::kInputTypeFieldNumber);
                 location.RecordLegacyLocation(method,
                     DescriptorPool::ErrorCollector::INPUT_TYPE);
@@ -2183,14 +2192,14 @@ namespace shark {
             DO(Consume("("));
             {
                 if (LookingAt("stream")) {
-                    NLocationRecorder location(
+                    LocationRecorder location(
                         method_location, MethodDescriptorProto::kServerStreamingFieldNumber);
                     location.RecordLegacyLocation(method,
                         DescriptorPool::ErrorCollector::OTHER);
                     DO(Consume("stream"));
                     method->set_server_streaming(true);
                 }
-                NLocationRecorder location(method_location,
+                LocationRecorder location(method_location,
                     MethodDescriptorProto::kOutputTypeFieldNumber);
                 location.RecordLegacyLocation(method,
                     DescriptorPool::ErrorCollector::OUTPUT_TYPE);
@@ -2210,7 +2219,7 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseMethodOptions(const NLocationRecorder& parent_location,
+        bool Parser::ParseMethodOptions(const LocationRecorder& parent_location,
             const FileDescriptorProto* containing_file,
             const int optionsFieldNumber,
             Message* mutable_options) {
@@ -2225,7 +2234,7 @@ namespace shark {
                 if (TryConsumeEndOfDeclaration(";", nullptr)) {
                     // empty statement; ignore
                 } else {
-                    NLocationRecorder location(parent_location, optionsFieldNumber);
+                    LocationRecorder location(parent_location, optionsFieldNumber);
                     if (!ParseOption(mutable_options, location, containing_file,
                             OPTION_STATEMENT)) {
                         // This statement failed to parse.  Skip it, but keep looping to
@@ -2240,12 +2249,12 @@ namespace shark {
 
         // -------------------------------------------------------------------
 
-        bool NParser::ParseLabel(FieldCardinality* label,
-            const NLocationRecorder& field_location) {
+        bool Parser::ParseLabel(FieldCardinality* label,
+            const LocationRecorder& field_location) {
             if (!LookingAt("optional") && !LookingAt("required")) {
                 return false;
             }
-            NLocationRecorder location(field_location,
+            LocationRecorder location(field_location,
                 FieldDescriptorProto::kLabelFieldNumber);
             if (TryConsume("optional")) {
                 *label = FieldCardinality::OPTIONAL;
@@ -2256,14 +2265,14 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseType(SharkType* type,
+        bool Parser::ParseType(SharkType* type,
             std::string* type_name) {
             const std::string& text = input_->current().text;
             if (text == "float16" || text == "float8") {
                 AddError("\"" + text + "\" is not supported.");
                 return false;
             }
-            const auto& type_names_table = NGetTypeNameTable();
+            const auto& type_names_table = GetTypeNameTable();
             auto iter = type_names_table.find(text);
             if (iter != type_names_table.end()) {
                 *type = iter->second;
@@ -2274,10 +2283,10 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseUserDefinedType(std::string* type_name) {
+        bool Parser::ParseUserDefinedType(std::string* type_name) {
             type_name->clear();
 
-            const auto& type_names_table = NGetTypeNameTable();
+            const auto& type_names_table = GetTypeNameTable();
             auto iter = type_names_table.find(input_->current().text);
             if (iter != type_names_table.end()) {
                 // Note:  The only place enum types are allowed is for field types, but
@@ -2313,8 +2322,8 @@ namespace shark {
 
         // ===================================================================
 
-        bool NParser::ParsePackage(FileDescriptorProto* file,
-            const NLocationRecorder& root_location,
+        bool Parser::ParsePackage(FileDescriptorProto* file,
+            const LocationRecorder& root_location,
             const FileDescriptorProto* containing_file) {
             if (file->has_package()) {
                 AddError("Multiple package definitions.");
@@ -2323,7 +2332,7 @@ namespace shark {
                 file->clear_package();
             }
 
-            NLocationRecorder location(root_location,
+            LocationRecorder location(root_location,
                 FileDescriptorProto::kPackageFieldNumber);
             location.RecordLegacyLocation(file, DescriptorPool::ErrorCollector::NAME);
 
@@ -2343,25 +2352,25 @@ namespace shark {
             return true;
         }
 
-        bool NParser::ParseImport(RepeatedPtrField<std::string>* dependency,
+        bool Parser::ParseImport(RepeatedPtrField<std::string>* dependency,
             RepeatedField<int32_t>* public_dependency,
             RepeatedField<int32_t>* weak_dependency,
-            const NLocationRecorder& root_location,
+            const LocationRecorder& root_location,
             const FileDescriptorProto* containing_file) {
-            NLocationRecorder location(root_location,
+            LocationRecorder location(root_location,
                 FileDescriptorProto::kDependencyFieldNumber,
                 dependency->size());
 
             DO(Consume("import"));
 
             if (LookingAt("public")) {
-                NLocationRecorder public_location(
+                LocationRecorder public_location(
                     root_location, FileDescriptorProto::kPublicDependencyFieldNumber,
                     public_dependency->size());
                 DO(Consume("public"));
                 *public_dependency->Add() = dependency->size();
             } else if (LookingAt("weak")) {
-                NLocationRecorder weak_location(
+                LocationRecorder weak_location(
                     root_location, FileDescriptorProto::kWeakDependencyFieldNumber,
                     weak_dependency->size());
                 weak_location.RecordLegacyImportLocation(containing_file, "weak");
@@ -2382,10 +2391,10 @@ namespace shark {
 
         // ===================================================================
 
-        NSourceLocationTable::NSourceLocationTable() { }
-        NSourceLocationTable::~NSourceLocationTable() { }
+        SourceLocationTable::SourceLocationTable() { }
+        SourceLocationTable::~SourceLocationTable() { }
 
-        bool NSourceLocationTable::Find(
+        bool SourceLocationTable::Find(
             const Message* descriptor,
             DescriptorPool::ErrorCollector::ErrorLocation location, int* line,
             int* column) const {
@@ -2401,7 +2410,7 @@ namespace shark {
             }
         }
 
-        bool NSourceLocationTable::FindImport(const Message* descriptor,
+        bool SourceLocationTable::FindImport(const Message* descriptor,
             const std::string& name, int* line,
             int* column) const {
             const std::pair<int, int>* result = FindOrNull(import_location_map_, std::make_pair(descriptor, name));
@@ -2416,20 +2425,20 @@ namespace shark {
             }
         }
 
-        void NSourceLocationTable::Add(
+        void SourceLocationTable::Add(
             const Message* descriptor,
             DescriptorPool::ErrorCollector::ErrorLocation location, int line,
             int column) {
             location_map_[std::make_pair(descriptor, location)] = std::make_pair(line, column);
         }
 
-        void NSourceLocationTable::AddImport(const Message* descriptor,
+        void SourceLocationTable::AddImport(const Message* descriptor,
             const std::string& name, int line,
             int column) {
             import_location_map_[std::make_pair(descriptor, name)] = std::make_pair(line, column);
         }
 
-        void NSourceLocationTable::Clear() {
+        void SourceLocationTable::Clear() {
             location_map_.clear();
         }
 

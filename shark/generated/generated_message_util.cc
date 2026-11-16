@@ -45,7 +45,7 @@
 #include <shark/message_lite.h>
 #include <shark/generated/metadata_lite.h>
 #include <shark/types/repeated_field.h>
-#include <shark/format/wired/wire_format_lite.h>
+#include <shark/persist/wired/wire_format_lite.h>
 
 // Must be included last
 #include <shark/port_def.inc>
