@@ -38,7 +38,7 @@
 
 #include <shark/arena.h>
 #include <shark/arenastring.h>
-#include <shark/endian.h>
+#include <turbo/bits/endian.h>
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/generated/implicit_weak_message.h>
 #include <shark/generated/inlined_string_field.h>
@@ -497,27 +497,21 @@ namespace shark {
         template <>
         struct EndianHelper<2> {
             static uint16_t Load(const void* p) {
-                uint16_t tmp;
-                std::memcpy(&tmp, p, 2);
-                return little_endian::ToHost(tmp);
+                return turbo::little_endian::Load16(p);
             }
         };
 
         template <>
         struct EndianHelper<4> {
             static uint32_t Load(const void* p) {
-                uint32_t tmp;
-                std::memcpy(&tmp, p, 4);
-                return little_endian::ToHost(tmp);
+                return turbo::little_endian::Load32(p);
             }
         };
 
         template <>
         struct EndianHelper<8> {
             static uint64_t Load(const void* p) {
-                uint64_t tmp;
-                std::memcpy(&tmp, p, 8);
-                return little_endian::ToHost(tmp);
+                return turbo::little_endian::Load64(p);
             }
         };
 

@@ -118,27 +118,6 @@
 #define SHARK_has_builtin_DEFINED_
 #endif
 
-// Portable SHARK_BUILTIN_BSWAPxx definitions
-// Code must check for availability, e.g.: `defined(SHARK_BUILTIN_BSWAP32)`
-#ifdef SHARK_BUILTIN_BSWAP16
-#error SHARK_BUILTIN_BSWAP16 was previously defined
-#endif
-#ifdef SHARK_BUILTIN_BSWAP32
-#error SHARK_BUILTIN_BSWAP32 was previously defined
-#endif
-#ifdef SHARK_BUILTIN_BSWAP64
-#error SHARK_BUILTIN_BSWAP64 was previously defined
-#endif
-#if defined(__GNUC__) || __has_builtin(__builtin_bswap16)
-#define SHARK_BUILTIN_BSWAP16(x) __builtin_bswap16(x)
-#endif
-#if defined(__GNUC__) || __has_builtin(__builtin_bswap32)
-#define SHARK_BUILTIN_BSWAP32(x) __builtin_bswap32(x)
-#endif
-#if defined(__GNUC__) || __has_builtin(__builtin_bswap64)
-#define SHARK_BUILTIN_BSWAP64(x) __builtin_bswap64(x)
-#endif
-
 // Portable check for GCC minimum version:
 // https://gcc.gnu.org/onlinedocs/cpp/Common-Predefined-Macros.html
 #if defined(__GNUC__) && defined(__GNUC_MINOR__) \

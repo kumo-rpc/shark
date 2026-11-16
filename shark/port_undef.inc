@@ -35,9 +35,6 @@
 #error "port_undef.inc must be included after port_def.inc"
 #endif
 
-#undef SHARK_BUILTIN_BSWAP16
-#undef SHARK_BUILTIN_BSWAP32
-#undef SHARK_BUILTIN_BSWAP64
 #undef SHARK_GNUC_MIN
 #undef SHARK_MSC_VER_MIN
 #undef SHARK_CPLUSPLUS_MIN

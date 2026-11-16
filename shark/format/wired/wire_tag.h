@@ -21,8 +21,6 @@
 #include <string>
 #include <type_traits>
 #include <utility>
-#include <shark/endian.h>
-
 // Must be included last.
 #include <shark/port_def.inc>
 
