@@ -36,7 +36,6 @@
 #include <string>
 
 #include <shark/types/field_mask.skp.h>
-#include <shark/stubs/strutil.h>
 #include <shark/descriptor.h>
 
 // Must be included last.

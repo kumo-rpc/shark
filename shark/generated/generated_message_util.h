@@ -47,7 +47,6 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/once.h>  // Add direct dep on port for pb.cc
 #include <shark/port.h>
-#include <shark/stubs/strutil.h>
 #include <shark/types/any.h>
 #include <shark/has_bits.h>
 #include <shark/generated/implicit_weak_message.h>

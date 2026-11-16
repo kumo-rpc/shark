@@ -57,7 +57,6 @@
 #include <shark/message.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/numbers.h>
 #include <turbo/strings/escaping.h>

@@ -51,7 +51,6 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <turbo/format/str_format.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/numbers.h>
 #include <turbo/strings/substitute.h>
 #include <shark/format/text/text_format.h>

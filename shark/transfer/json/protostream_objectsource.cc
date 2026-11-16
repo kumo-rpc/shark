@@ -43,7 +43,6 @@
 #include <shark/unknown_field_set.h>
 #include <shark/format/wired/wire_format.h>
 #include <shark/format/wired/wire_format_lite.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <shark/stubs/casts.h>
 #include <turbo/status/status.h>

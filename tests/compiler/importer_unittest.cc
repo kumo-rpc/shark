@@ -48,7 +48,6 @@
 #include <gtest/gtest.h>
 #include <turbo/strings/substitute.h>
 #include <shark/stubs/map_util.h>
-#include <shark/stubs/strutil.h>
 
 namespace shark::compiler {
 

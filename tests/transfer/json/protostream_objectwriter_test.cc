@@ -49,7 +49,6 @@
 #include <tests/sk/transfer/json/timestamp_duration.skp.h>
 #include <tests/sk/transfer/json/wrappers.skp.h>
 #include <shark/stubs/bytestream.h>
-#include <shark/stubs/strutil.h>
 #include <gtest/gtest.h>
 #include <shark/descriptor.h>
 #include <shark/dynamic_message.h>

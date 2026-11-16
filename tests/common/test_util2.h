@@ -30,7 +30,6 @@
 
 #pragma once
 
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_replace.h>
 
 #include <tests/common/googletest.h>

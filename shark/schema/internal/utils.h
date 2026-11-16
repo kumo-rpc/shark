@@ -50,7 +50,6 @@
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/once.h>
 #include <shark/stubs/stl_util.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_split.h>
 #include <turbo/strings/strip.h>
 #include <turbo/strings/substitute.h>

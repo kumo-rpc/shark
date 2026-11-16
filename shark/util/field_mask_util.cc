@@ -32,7 +32,6 @@
 
 #include <cstdint>
 
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_join.h>
 #include <turbo/strings/str_split.h>
 #include <shark/message.h>

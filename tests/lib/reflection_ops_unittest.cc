@@ -42,7 +42,6 @@
 #include <gtest/gtest.h>
 #include <tests/common/test_util.h>
 
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_join.h>
 
 namespace shark::internal {

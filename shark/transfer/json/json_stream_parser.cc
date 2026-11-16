@@ -39,13 +39,14 @@
 
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/numbers.h>
 #include <turbo/status/status.h>
 #include <shark/transfer/json/object_writer.h>
 #include <shark/transfer/json/json_escaping.h>
 #include <turbo/strings/match.h>
+#include <turbo/strings/ascii.h>
+#include <shark/stubs/ascii.h>
 #include <turbo/unicode/api/utf8.h>
 #include <turbo/unicode/api/utf8_for_code_point.h>
 

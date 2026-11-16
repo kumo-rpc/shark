@@ -29,7 +29,6 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <shark/io/zero_copy_stream_impl_lite.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <shark/types/any.h>
 #include <shark/arenastring.h>

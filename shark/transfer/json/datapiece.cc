@@ -38,13 +38,14 @@
 #include <shark/types/type.skp.h>
 #include <shark/descriptor.h>
 #include <turbo/status/status.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/encoding/base64.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/numbers.h>
 #include <shark/transfer/json/utility.h>
 #include <shark/stubs/mathutil.h>
 #include <turbo/strings/match.h>
+#include <turbo/strings/ascii.h>
+#include <shark/stubs/ascii.h>
 
 namespace shark::util::converter {
 

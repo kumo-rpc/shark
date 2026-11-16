@@ -38,7 +38,6 @@
 
 #include <shark/stubs/once.h>
 #include <shark/format/wired/wire_format_lite.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/numbers.h>
 #include <turbo/status/status.h>

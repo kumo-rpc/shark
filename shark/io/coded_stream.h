@@ -129,7 +129,6 @@
 
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
-#include <shark/stubs/strutil.h>
 #include <shark/port.h>
 #include <shark/stubs/port.h>
 

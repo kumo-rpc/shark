@@ -37,7 +37,6 @@
 #include <shark/compiler/cpp/helpers.h>
 #include <shark/format/wired/wire_format.h>
 #include <shark/io/printer.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 
 namespace shark::compiler::cpp {

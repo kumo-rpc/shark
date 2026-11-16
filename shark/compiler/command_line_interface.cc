@@ -81,7 +81,6 @@
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
 #include <turbo/format/str_format.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_split.h>
 #include <turbo/strings/str_replace.h>
 #include <turbo/strings/substitute.h>

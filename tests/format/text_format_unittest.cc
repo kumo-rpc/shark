@@ -47,7 +47,6 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/str_replace.h>
 #include <turbo/strings/substitute.h>

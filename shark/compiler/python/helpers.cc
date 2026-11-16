@@ -35,7 +35,6 @@
 #include <shark/compiler/code_generator.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_split.h>
 #include <turbo/strings/str_replace.h>
 

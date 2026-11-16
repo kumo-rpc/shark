@@ -50,7 +50,6 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/mutex.h>
 #include <shark/stubs/stl_util.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <shark/types/repeated_field.h>
 

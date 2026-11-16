@@ -18,6 +18,7 @@
 
 #include <shark/schema/internal/descriptor_builder.h>
 #include <shark/schema/internal/file_descriptor_tables_inl.h>
+#include <turbo/strings/charconv.h>
 #include <turbo/strings/escaping.h>
 #include <turbo/strings/substitute.h>
 
@@ -1953,8 +1954,11 @@ namespace shark {
                     } else if (proto.default_value() == "nan") {
                         result->default_value_float_ = std::numeric_limits<float>::quiet_NaN();
                     } else {
-                        result->default_value_float_ = io::SafeDoubleToFloat(
-                            io::NoLocaleStrtod(proto.default_value().c_str(), &end_pos));
+                        const std::string& text = proto.default_value();
+                        double parsed = 0;
+                        auto r = turbo::from_chars(text.c_str(), text.c_str() + text.size(), parsed);
+                        end_pos = const_cast<char*>(r.ptr);
+                        result->default_value_float_ = io::SafeDoubleToFloat(parsed);
                     }
                     break;
                 case SharkFieldCppType::CPPTYPE_DOUBLE:
@@ -1965,7 +1969,11 @@ namespace shark {
                     } else if (proto.default_value() == "nan") {
                         result->default_value_double_ = std::numeric_limits<double>::quiet_NaN();
                     } else {
-                        result->default_value_double_ = io::NoLocaleStrtod(proto.default_value().c_str(), &end_pos);
+                        const std::string& text = proto.default_value();
+                        double parsed = 0;
+                        auto r = turbo::from_chars(text.c_str(), text.c_str() + text.size(), parsed);
+                        end_pos = const_cast<char*>(r.ptr);
+                        result->default_value_double_ = parsed;
                     }
                     break;
                 case SharkFieldCppType::CPPTYPE_BOOL:

@@ -41,7 +41,6 @@
 
 #include <shark/stubs/common.h>
 
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_split.h>
 
 #include <shark/stubs/logging.h>

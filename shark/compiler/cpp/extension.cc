@@ -39,7 +39,6 @@
 #include <shark/compiler/cpp/helpers.h>
 #include <shark/descriptor.skp.h>
 #include <shark/io/printer.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/str_replace.h>
 

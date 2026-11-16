@@ -36,7 +36,6 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
 #include <shark/port.h>
-#include <shark/stubs/strutil.h>
 #include <shark/arenastring.h>
 #include <shark/message_lite.h>
 

@@ -43,7 +43,7 @@
 #define WIN32_LEAN_AND_MEAN  // We only need minimal includes
 #endif
 #include <windows.h>
-#define snprintf _snprintf    // see comment in strutil.cc
+#define snprintf _snprintf
 #endif
 #if defined(__ANDROID__)
 #include <android/log.h>
@@ -54,7 +54,6 @@
 #include <shark/stubs/once.h>
 #include <turbo/status/status.h>
 #include <string_view>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/numeric/int128.h>
 

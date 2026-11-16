@@ -36,7 +36,6 @@
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 
 

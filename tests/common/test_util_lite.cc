@@ -37,7 +37,6 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
 #include <gtest/gtest.h>
-#include <shark/stubs/strutil.h>
 
 namespace shark {
 

@@ -45,7 +45,6 @@
 #include <tests/sk/memory/unittest_arena.skp.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include <shark/stubs/strutil.h>
 #include <tests/common/arena_test_util.h>
 #include <shark/descriptor.h>
 #include <shark/extension_set.h>

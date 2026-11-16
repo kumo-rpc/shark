@@ -34,7 +34,6 @@
 #include <tests/common/googletest.h>
 #include <tests/common/file.h>
 #include <shark/io/io_win32.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_replace.h>
 #include <sys/stat.h>
 #include <sys/types.h>

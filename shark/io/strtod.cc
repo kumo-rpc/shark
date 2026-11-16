@@ -30,15 +30,7 @@
 
 #include <shark/io/strtod.h>
 
-#include <cstdio>
-#include <cstring>
 #include <limits>
-#include <string>
-
-#include <shark/stubs/common.h>
-#include <shark/stubs/logging.h>
-
-#include <shark/stubs/strutil.h>
 
 namespace shark::io {
 
@@ -69,10 +61,6 @@ namespace shark::io {
         } else {
             return static_cast<float>(value);
         }
-    }
-
-    double NoLocaleStrtod(const char* str, char** endptr) {
-        return shark::internal::NoLocaleStrtod(str, endptr);
     }
 
 } // namespace shark::io

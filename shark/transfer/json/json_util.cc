@@ -34,7 +34,6 @@
 #include <shark/stubs/once.h>
 #include <turbo/status/status.h>
 #include <shark/stubs/bytestream.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/strip.h>
 #include <shark/io/coded_stream.h>

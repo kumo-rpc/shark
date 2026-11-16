@@ -37,7 +37,6 @@
 #include <vector>
 
 #include <shark/stubs/common.h>
-#include <shark/stubs/strutil.h>
 #include <shark/transfer/json/datapiece.h>
 #include <shark/transfer/json/object_writer.h>
 #include <shark/transfer/json/type_info.h>

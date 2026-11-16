@@ -44,7 +44,6 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/arenastring.h>
 #include <gtest/gtest.h>
-#include <shark/stubs/strutil.h>
 
 
 namespace shark {

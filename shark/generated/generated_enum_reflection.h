@@ -42,7 +42,6 @@
 
 #include <shark/generated/generated_enum_util.h>
 #include <shark/port.h>
-#include <shark/stubs/strutil.h>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"

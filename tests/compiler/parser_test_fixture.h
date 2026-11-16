@@ -54,7 +54,6 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/types/repeated_field.h>
 #include <shark/stubs/map_util.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_join.h>
 #include <turbo/strings/substitute.h>
 #include <shark/format/text/text_format.h>

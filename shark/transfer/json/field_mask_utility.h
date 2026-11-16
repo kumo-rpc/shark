@@ -38,7 +38,6 @@
 #include <shark/stubs/callback.h>
 #include <shark/stubs/common.h>
 #include <turbo/status/status.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/status/status.h>
 
 namespace shark::util::converter {

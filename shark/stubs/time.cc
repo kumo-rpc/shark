@@ -3,7 +3,6 @@
 #include <ctime>
 
 #include <turbo/format/str_format.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/ascii.h>
 
 namespace shark::internal {

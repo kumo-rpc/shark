@@ -57,7 +57,6 @@
 #include <shark/io/printer.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/hash.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/str_join.h>
 #include <turbo/strings/ascii.h>

@@ -36,7 +36,6 @@
 
 #include <shark/compiler/cpp/helpers.h>
 #include <shark/io/printer.h>
-#include <shark/stubs/strutil.h>
 
 namespace shark::compiler::cpp {
 

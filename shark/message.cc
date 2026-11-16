@@ -55,7 +55,6 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_join.h>
 #include <shark/types/map_field.h>
 #include <shark/types/map_field_inl.h>

@@ -33,7 +33,6 @@
 #include <cstdint>
 
 #include <shark/stubs/common.h>
-#include <shark/stubs/strutil.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

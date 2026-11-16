@@ -41,7 +41,6 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/mutex.h>
 #include <shark/stubs/casts.h>
-#include <shark/stubs/strutil.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/extension_set.h>

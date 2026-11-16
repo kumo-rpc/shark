@@ -33,7 +33,6 @@
 
 #include <type_traits>
 
-#include <shark/stubs/strutil.h>
 #include <shark/message_lite.h>
 
 // Must be included last.

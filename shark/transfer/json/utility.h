@@ -40,7 +40,6 @@
 #include <shark/types/any.skp.h>
 #include <shark/types/type.skp.h>
 #include <shark/types/repeated_field.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/status/result.h>
 #include <turbo/status/status.h>

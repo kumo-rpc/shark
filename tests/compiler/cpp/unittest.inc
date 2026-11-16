@@ -50,7 +50,6 @@
 #include <vector>
 
 #include <tests/compiler/cpp/unittest.h>
-#include <shark/stubs/strutil.h>
 #ifndef _MSC_VER
 // We exclude this large proto because it's too large for
 // visual studio to compile (report internal errors).

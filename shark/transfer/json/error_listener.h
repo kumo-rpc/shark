@@ -38,7 +38,6 @@
 #include <shark/stubs/callback.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
-#include <shark/stubs/strutil.h>
 #include <shark/transfer/json/location_tracker.h>
 
 // Must be included last.

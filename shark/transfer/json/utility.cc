@@ -41,11 +41,12 @@
 #include <shark/types/wrappers.skp.h>
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/numbers.h>
 #include <shark/transfer/json/constants.h>
 #include <shark/stubs/map_util.h>
+#include <turbo/strings/ascii.h>
+#include <shark/stubs/ascii.h>
 
 // clang-format off
 #include <shark/port_def.inc>

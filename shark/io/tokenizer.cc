@@ -90,13 +90,16 @@
 
 #include <shark/io/tokenizer.h>
 
+#include <cmath>
+#include <limits>
+
 #include <shark/io/strtod.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/stl_util.h>
 #include <turbo/format/str_format.h>
-#include <shark/stubs/strutil.h>
+#include <turbo/strings/charconv.h>
 #include <turbo/strings/escaping.h>
 
 // Must be included last.
@@ -1241,8 +1244,13 @@ namespace shark {
 
         double Tokenizer::ParseFloat(const std::string& text) {
             const char* start = text.c_str();
-            char* end;
-            double result = NoLocaleStrtod(start, &end);
+            double result = 0;
+            auto parsed = turbo::from_chars(start, start + text.size(), result);
+            if (parsed.ec == std::errc::result_out_of_range &&
+                std::fabs(result) == std::numeric_limits<double>::max()) {
+                result = std::copysign(std::numeric_limits<double>::infinity(), result);
+            }
+            const char* end = parsed.ptr;
 
             // "1e" is not a valid float, but if the tokenizer reads it, it will
             // report an error but still return it as a valid token.  We need to

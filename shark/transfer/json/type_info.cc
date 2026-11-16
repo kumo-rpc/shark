@@ -37,7 +37,6 @@
 #include <shark/types/type.skp.h>
 #include <turbo/status/status.h>
 #include <turbo/status/result.h>
-#include <shark/stubs/strutil.h>
 #include <shark/transfer/json/utility.h>
 #include <shark/stubs/map_util.h>
 #include <turbo/status/status.h>

@@ -34,7 +34,6 @@
 #include <shark/types/wrappers.skp.h>
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/escaping.h>
 #include <turbo/status/status.h>

@@ -37,7 +37,6 @@
 #include <shark/descriptor.skp.h>
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_split.h>
 #include <turbo/strings/ascii.h>
 

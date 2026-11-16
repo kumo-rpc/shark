@@ -38,7 +38,6 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/mutex.h>
 #include <shark/stubs/stl_util.h>
-#include <shark/stubs/strutil.h>
 
 // clang-format off
 #include <shark/port_def.inc>

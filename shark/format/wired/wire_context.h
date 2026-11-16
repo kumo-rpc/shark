@@ -47,7 +47,6 @@
 #include <shark/io/zero_copy_stream.h>
 #include <shark/port.h>
 #include <shark/types/repeated_field.h>
-#include <shark/stubs/strutil.h>
 #include <shark/format/wired/wire_tag.h>
 
 // Must be included last.

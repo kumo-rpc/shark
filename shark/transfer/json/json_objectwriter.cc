@@ -39,7 +39,6 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
 #include <shark/transfer/json/utility.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/encoding/base64.h>
 #include <turbo/strings/str_cat.h>
 #include <shark/transfer/json/json_escaping.h>

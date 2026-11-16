@@ -32,7 +32,6 @@
 
 #include <cstdint>
 
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/numbers.h>
 #include <shark/types/duration.skp.h>

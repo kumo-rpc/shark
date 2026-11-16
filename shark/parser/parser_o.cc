@@ -49,7 +49,6 @@
 #include <shark/stubs/hash.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/map_util.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/escaping.h>
 #include <unordered_map>

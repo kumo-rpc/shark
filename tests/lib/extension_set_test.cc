@@ -33,7 +33,6 @@
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
 #include <shark/stubs/casts.h>
-#include <shark/stubs/strutil.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
 #include <tests/sk/unittest.skp.h>

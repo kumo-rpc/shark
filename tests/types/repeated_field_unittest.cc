@@ -50,7 +50,6 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
 #include <tests/sk/unittest.skp.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <gmock/gmock.h>
 #include <tests/common/googletest.h>

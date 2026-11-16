@@ -45,7 +45,6 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/stl_util.h>
-#include <shark/stubs/strutil.h>
 #include <tests/common/googletest.h>
 #include <tests/common/test_util2.h>
 

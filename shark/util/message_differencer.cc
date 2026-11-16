@@ -54,7 +54,6 @@
 #include <shark/types/map_field.h>
 #include <shark/message.h>
 #include <shark/format/text/text_format.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <turbo/strings/escaping.h>
 #include <turbo/format/str_format.h>

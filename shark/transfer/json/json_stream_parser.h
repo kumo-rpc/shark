@@ -36,7 +36,6 @@
 
 #include <shark/stubs/common.h>
 #include <turbo/status/status.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/status/status.h>
 
 // Must be included last.

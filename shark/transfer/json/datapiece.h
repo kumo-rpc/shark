@@ -37,7 +37,6 @@
 #include <shark/stubs/logging.h>
 #include <shark/types/type.skp.h>
 #include <turbo/status/result.h>
-#include <shark/stubs/strutil.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

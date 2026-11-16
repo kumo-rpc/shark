@@ -39,7 +39,6 @@
 #include <memory>
 #include <vector>
 
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_replace.h>
 #include <turbo/strings/str_join.h>
 #include <turbo/strings/str_split.h>

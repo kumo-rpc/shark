@@ -50,7 +50,6 @@
 #include <shark/stubs/hash.h> // TODO(b/211442718): cleanup
 #include <shark/stubs/logging.h>
 #include <shark/stubs/once.h>
-#include <shark/stubs/strutil.h>
 
 // clang-format off
 #include <shark/port_def.inc>

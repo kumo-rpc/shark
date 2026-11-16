@@ -40,7 +40,6 @@
 #include <shark/stubs/common.h>
 #include <shark/types/type.skp.h>
 #include <turbo/status/result.h>
-#include <shark/stubs/strutil.h>
 #include <shark/transfer/json/object_source.h>
 #include <shark/transfer/json/object_writer.h>
 #include <shark/transfer/json/type_info.h>

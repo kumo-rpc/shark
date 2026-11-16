@@ -44,7 +44,6 @@
 #include <shark/generated/generated_message_util.h>
 #include <shark/message_lite.h>
 #include <gtest/gtest.h>
-#include <shark/stubs/strutil.h>
 
 
 // Must be included last.

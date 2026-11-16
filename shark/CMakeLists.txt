@@ -62,7 +62,6 @@ kmcmake_cc_library(
         stubs/common.cc
         stubs/ascii.cc
         stubs/structurally_valid.cc
-        stubs/strutil.cc
         stubs/time.cc
         types/any_lite.cc
         types/map.cc

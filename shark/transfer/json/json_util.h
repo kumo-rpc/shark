@@ -34,7 +34,6 @@
 
 #include <shark/stubs/bytestream.h>
 #include <turbo/status/status.h>
-#include <shark/stubs/strutil.h>
 #include <shark/message.h>
 #include <shark/transfer/json/type_resolver.h>
 

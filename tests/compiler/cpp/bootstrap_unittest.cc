@@ -51,7 +51,6 @@
 #include <tests/common/test_util2.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_replace.h>
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>

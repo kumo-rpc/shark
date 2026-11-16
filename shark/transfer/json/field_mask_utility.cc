@@ -31,7 +31,6 @@
 #include <shark/transfer/json/field_mask_utility.h>
 
 #include <turbo/status/status.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_cat.h>
 #include <shark/transfer/json/utility.h>
 #include <turbo/status/status_macros.h>

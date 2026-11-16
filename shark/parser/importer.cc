@@ -50,7 +50,6 @@
 #include <shark/io/io_win32.h>
 #include <shark/io/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
-#include <shark/stubs/strutil.h>
 #include <turbo/strings/str_join.h>
 #include <turbo/strings/str_split.h>
 #include <turbo/strings/str_replace.h>

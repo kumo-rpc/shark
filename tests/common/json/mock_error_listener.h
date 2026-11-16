@@ -31,7 +31,6 @@
 #pragma once
 
 #include <gmock/gmock.h>
-#include <shark/stubs/strutil.h>
 #include <shark/transfer/json/error_listener.h>
 #include <shark/transfer/json/location_tracker.h>
 

@@ -28,17 +28,9 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// A locale-independent version of strtod(), used to parse floating
-// point default values in .shark files, where the decimal separator
-// is always a dot.
-
 #pragma once
 
 namespace shark::io {
-
-    // A locale-independent version of the standard strtod(), which always
-    // uses a dot as the decimal separator.
-    double NoLocaleStrtod(const char* str, char** endptr);
 
     // Casts a double value to a float value. If the value is outside of the
     // representable range of float, it will be converted to positive or negative
