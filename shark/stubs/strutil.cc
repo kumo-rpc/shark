@@ -96,7 +96,7 @@ namespace shark {
 
         // Strip off leading whitespace.
         int first = 0;
-        while (first < str_length && ascii_is_space(str->at(first))) {
+        while (first < str_length && turbo::ascii_isspace(str->at(first))) {
             ++first;
         }
         // If entire string is white space.
@@ -111,7 +111,7 @@ namespace shark {
 
         // Strip off trailing whitespace.
         int last = str_length - 1;
-        while (last >= 0 && ascii_is_space(str->at(last))) {
+        while (last >= 0 && turbo::ascii_isspace(str->at(last))) {
             --last;
         }
         if (last != (str_length - 1) && last >= 0) {
@@ -1580,7 +1580,7 @@ namespace shark {
         const unsigned char* us2 = reinterpret_cast<const unsigned char*>(s2);
 
         for (size_t i = 0; i < len; i++) {
-            const int diff = static_cast<int>(static_cast<unsigned char>(ascii_to_lower(us1[i]))) - static_cast<int>(static_cast<unsigned char>(ascii_to_lower(us2[i])));
+            const int diff = static_cast<int>(static_cast<unsigned char>(turbo::ascii_tolower(us1[i]))) - static_cast<int>(static_cast<unsigned char>(turbo::ascii_tolower(us2[i])));
             if (diff != 0)
                 return diff;
         }
@@ -1621,7 +1621,7 @@ namespace shark {
         char* endptr;
         *value = internal::NoLocaleStrtod(str, &endptr);
         if (endptr != str) {
-            while (ascii_is_space(*endptr))
+            while (turbo::ascii_isspace(*endptr))
                 ++endptr;
         }
         // Ignore range errors from strtod.  The values it
@@ -2025,7 +2025,7 @@ namespace shark {
     ch = *src++;                                  \
     decode = unbase64[ch];                        \
     if (decode < 0) {                             \
-        if (ascii_is_space(ch) && szsrc >= remain) \
+        if (turbo::ascii_isspace(ch) && szsrc >= remain) \
             goto label;                           \
         state = 4 - remain;                       \
         break;                                    \
@@ -2110,7 +2110,7 @@ namespace shark {
 
         // if the loop terminated because we read a bad character, return
         // now.
-        if (decode < 0 && ch != '\0' && ch != kPad64Equals && ch != kPad64Dot && !ascii_is_space(ch))
+        if (decode < 0 && ch != '\0' && ch != kPad64Equals && ch != kPad64Dot && !turbo::ascii_isspace(ch))
             return -1;
 
         if (ch == kPad64Equals || ch == kPad64Dot) {
@@ -2129,7 +2129,7 @@ namespace shark {
                 ch = *src++;
                 decode = unbase64[ch];
                 if (decode < 0) {
-                    if (ascii_is_space(ch)) {
+                    if (turbo::ascii_isspace(ch)) {
                         continue;
                     } else if (ch == '\0') {
                         break;
@@ -2217,7 +2217,7 @@ namespace shark {
         while (szsrc > 0 && *src) {
             if (*src == kPad64Equals || *src == kPad64Dot)
                 ++equals;
-            else if (!ascii_is_space(*src))
+            else if (!turbo::ascii_isspace(*src))
                 return -1;
             --szsrc;
             ++src;

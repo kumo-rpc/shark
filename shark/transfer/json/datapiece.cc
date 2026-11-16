@@ -313,7 +313,7 @@ util::StatusOr<int> DataPiece::ToEnum(const shark::Enum* enum_type,
     if (should_normalize_enum) {
       for (std::string::iterator it = enum_name.begin(); it != enum_name.end();
            ++it) {
-        *it = *it == '-' ? '_' : ascii_to_upper(*it);
+        *it = *it == '-' ? '_' : turbo::ascii_toupper(*it);
       }
       value = FindEnumValueByNameOrNull(enum_type, enum_name);
       if (value != nullptr) return value->number();

@@ -158,9 +158,9 @@ namespace shark {
                     next_upper = true;
                 } else {
                     if (next_upper) {
-                        result.push_back(ascii_to_upper(character));
+                        result.push_back(turbo::ascii_toupper(character));
                     } else {
-                        result.push_back(ascii_to_lower(character));
+                        result.push_back(turbo::ascii_tolower(character));
                     }
                     next_upper = false;
                 }
@@ -176,7 +176,7 @@ namespace shark {
                 // Strip underscores and lower-case the prefix.
                 for (char character : prefix) {
                     if (character != '_') {
-                        prefix_ += ascii_to_lower(character);
+                        prefix_ += turbo::ascii_tolower(character);
                     }
                 }
             }
@@ -202,7 +202,7 @@ namespace shark {
                         continue;
                     }
 
-                    if (ascii_to_lower(str[i]) != prefix_[j++]) {
+                    if (turbo::ascii_tolower(str[i]) != prefix_[j++]) {
                         return std::string(str);
                     }
                 }

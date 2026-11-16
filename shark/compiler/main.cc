@@ -30,7 +30,6 @@
 
 #include <shark/compiler/command_line_interface.h>
 #include <shark/compiler/cpp/generator.h>
-#include <shark/compiler/cc/generator.h>
 #include <shark/compiler/python/generator.h>
 #include <shark/compiler/python/pyi_generator.h>
 
@@ -49,10 +48,6 @@ namespace shark::compiler {
         cli.RegisterGenerator("--cpp_out", "--cpp_opt", &cpp_generator,
             "Generate C++ header and source.");
 
-        // cpp
-        cc::CppGenerator cc_generator;
-        cli.RegisterGenerator("--cc_out", "--cc_opt", &cpp_generator,
-            "Generate stand C++ header and source.");
 
 #ifdef SHARK_RUNTIME_INCLUDE_BASE
         cpp_generator.set_opensource_runtime(true);

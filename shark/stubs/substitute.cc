@@ -76,7 +76,7 @@ void SubstituteAndAppend(std::string* output, const char* format,
   int size = 0;
   for (int i = 0; format[i] != '\0'; i++) {
     if (format[i] == '$') {
-      if (ascii_isdigit(format[i+1])) {
+      if (turbo::ascii_isdigit(format[i+1])) {
         int index = format[i+1] - '0';
         if (args_array[index]->size() == -1) {
           GOOGLE_LOG(DFATAL)
@@ -110,7 +110,7 @@ void SubstituteAndAppend(std::string* output, const char* format,
   char* target = string_as_array(output) + original_size;
   for (int i = 0; format[i] != '\0'; i++) {
     if (format[i] == '$') {
-      if (ascii_isdigit(format[i+1])) {
+      if (turbo::ascii_isdigit(format[i+1])) {
         unsigned int index = format[i+1] - '0';
         assert(index < 10);
         const SubstituteArg* src = args_array[index];

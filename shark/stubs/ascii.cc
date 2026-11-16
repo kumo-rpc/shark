@@ -27,7 +27,7 @@ namespace shark {
             if (character == '_') {
                 capitalize_next = true;
             } else if (capitalize_next) {
-                result.push_back(ascii_to_upper(character));
+                result.push_back(turbo::ascii_toupper(character));
                 capitalize_next = false;
             } else {
                 result.push_back(character);
@@ -36,7 +36,7 @@ namespace shark {
 
         // Lower-case the first letter.
         if (lower_first && !result.empty()) {
-            result[0] = ascii_to_lower(result[0]);
+            result[0] = turbo::ascii_tolower(result[0]);
         }
 
         return result;
@@ -51,7 +51,7 @@ namespace shark {
             if (character == '_') {
                 capitalize_next = true;
             } else if (capitalize_next) {
-                result.push_back(ascii_to_upper(character));
+                result.push_back(turbo::ascii_toupper(character));
                 capitalize_next = false;
             } else {
                 result.push_back(character);

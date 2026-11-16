@@ -4,6 +4,7 @@
 
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/ascii.h>
 
 namespace shark::internal {
 
@@ -144,12 +145,12 @@ namespace shark::internal {
         // integer value does not fall in the range of [min_value, max_value].
         const char* ParseInt(const char* data, int width, int min_value,
             int max_value, int* result) {
-            if (!ascii_isdigit(*data)) {
+            if (!turbo::ascii_isdigit(*data)) {
                 return nullptr;
             }
             int value = 0;
             for (int i = 0; i < width; ++i, ++data) {
-                if (ascii_isdigit(*data)) {
+                if (turbo::ascii_isdigit(*data)) {
                     value = value * 10 + (*data - '0');
                 } else {
                     break;
@@ -166,14 +167,14 @@ namespace shark::internal {
         // Consumes the fractional parts of a second into nanos. For example,
         // "010" will be parsed to 10000000 nanos.
         const char* ParseNanos(const char* data, int32_t* nanos) {
-            if (!ascii_isdigit(*data)) {
+            if (!turbo::ascii_isdigit(*data)) {
                 return nullptr;
             }
             int value = 0;
             int len = 0;
             // Consume as many digits as there are but only take the first 9 into
             // account.
-            while (ascii_isdigit(*data)) {
+            while (turbo::ascii_isdigit(*data)) {
                 if (len < 9) {
                     value = value * 10 + *data - '0';
                 }

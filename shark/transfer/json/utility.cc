@@ -230,7 +230,7 @@ const shark::EnumValue* FindEnumValueByNameWithoutUnderscoreOrNull(
       // Make the name uppercase.
       for (std::string::iterator it = enum_name_without_underscore.begin();
            it != enum_name_without_underscore.end(); ++it) {
-        *it = ascii_to_upper(*it);
+        *it = turbo::ascii_toupper(*it);
       }
 
       if (enum_name_without_underscore == enum_name) {
@@ -257,7 +257,7 @@ std::string ToCamelCase(StringPiece input) {
   result.reserve(input.size());
 
   for (size_t i = 0; i < input.size(); ++i, was_cap = is_cap) {
-    is_cap = ascii_is_upper(input[i]);
+    is_cap = turbo::ascii_isupper(input[i]);
     if (input[i] == '_') {
       capitalize_next = true;
       if (!result.empty()) first_word = false;
@@ -269,24 +269,24 @@ std::string ToCamelCase(StringPiece input) {
       // 2) followed by a lowercase: "...ABc..."
       if (!result.empty() && is_cap &&
           (!was_cap ||
-           (i + 1 < input.size() && ascii_is_lower(input[i + 1])))) {
+           (i + 1 < input.size() && turbo::ascii_islower(input[i + 1])))) {
         first_word = false;
         result.push_back(input[i]);
       } else {
-        result.push_back(ascii_to_lower(input[i]));
+        result.push_back(turbo::ascii_tolower(input[i]));
         continue;
       }
     } else if (capitalize_next) {
       capitalize_next = false;
-      if (ascii_is_lower(input[i])) {
-        result.push_back(ascii_to_upper(input[i]));
+      if (turbo::ascii_islower(input[i])) {
+        result.push_back(turbo::ascii_isupper(input[i]));
         continue;
       } else {
         result.push_back(input[i]);
         continue;
       }
     } else {
-      result.push_back(ascii_to_lower(input[i]));
+      result.push_back(turbo::ascii_tolower(input[i]));
     }
   }
   return result;
@@ -299,7 +299,7 @@ std::string ToSnakeCase(StringPiece input) {
   result.reserve(input.size() << 1);
 
   for (size_t i = 0; i < input.size(); ++i) {
-    if (ascii_is_upper(input[i])) {
+    if (turbo::ascii_isupper(input[i])) {
       // Consider when the current character B is capitalized:
       // 1) At beginning of input:   "B..." => "b..."
       //    (e.g. "Biscuit" => "biscuit")
@@ -312,11 +312,11 @@ std::string ToSnakeCase(StringPiece input) {
       if (was_not_underscore &&                     //            case 1 out
           (was_not_cap ||                           // case 2 in, case 3 out
            (i + 1 < input.size() &&                 //            case 3 out
-            ascii_is_lower(input[i + 1])))) {  // case 4 in
+            turbo::ascii_islower(input[i + 1])))) {  // case 4 in
         // We add an underscore for case 2 and case 4.
         result.push_back('_');
       }
-      result.push_back(ascii_to_lower(input[i]));
+      result.push_back(turbo::ascii_tolower(input[i]));
       was_not_underscore = true;
       was_not_cap = false;
     } else {

@@ -37,6 +37,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/substitute.h>
+#include <turbo/strings/ascii.h>
 
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>
@@ -55,7 +56,7 @@ TEST(VersionTest, VersionMatchesConfig) {
   std::string version = PACKAGE_VERSION;
   int pos = 0;
   while (pos < version.size() &&
-         (ascii_isdigit(version[pos]) || version[pos] == '.')) {
+         (turbo::ascii_isdigit(version[pos]) || version[pos] == '.')) {
     ++pos;
   }
   version.erase(pos);

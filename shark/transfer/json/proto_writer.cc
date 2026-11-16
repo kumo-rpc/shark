@@ -45,7 +45,7 @@
 #include <shark/transfer/json/object_location_tracker.h>
 #include <shark/transfer/json/utility.h>
 #include <shark/stubs/map_util.h>
-
+#include <turbo/strings/ascii.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -431,7 +431,7 @@ std::string ProtoWriter::ProtoElement::ToString() const {
       std::string name = now->parent_field_->name();
       int i = 0;
       while (i < name.size() &&
-             (ascii_isalnum(name[i]) || name[i] == '_'))
+             (turbo::ascii_isalnum(name[i]) || name[i] == '_'))
         ++i;
       if (i > 0 && i == name.size()) {  // safe field name
         if (loc.empty()) {

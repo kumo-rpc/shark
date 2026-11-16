@@ -58,6 +58,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/substitute.h>
+#include <turbo/strings/ascii.h>
 
 // Must be last.
 #include <shark/port_def.inc>
@@ -844,7 +845,7 @@ namespace shark::compiler::cpp {
     std::string FilenameIdentifier(const std::string& filename) {
         std::string result;
         for (int i = 0; i < filename.size(); i++) {
-            if (ascii_isalnum(filename[i])) {
+            if (turbo::ascii_isalnum(filename[i])) {
                 result.push_back(filename[i]);
             } else {
                 // Not alphanumeric.  To avoid any possibility of name conflicts we
