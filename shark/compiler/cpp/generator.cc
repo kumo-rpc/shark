@@ -45,6 +45,8 @@
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/numbers.h>
 
 namespace shark::compiler::cpp {
 
@@ -53,7 +55,7 @@ namespace shark::compiler::cpp {
 
     namespace {
         std::string NumberedCcFileName(const std::string& basename, int number) {
-            return StrCat(basename, ".out/", number, ".cc");
+            return turbo::str_cat(basename, ".out/", number, ".cc");
         }
     } // namespace
 
@@ -111,7 +113,11 @@ namespace shark::compiler::cpp {
                 file_options.enforce_mode = EnforceOptimizeMode::kLiteRuntime;
                 file_options.lite_implicit_weak_fields = true;
                 if (!options[i].second.empty()) {
-                    file_options.num_cc_files = strto32(options[i].second.c_str(), nullptr, 10);
+                    int32_t parsed = 0;
+                    if (!turbo::SimpleAtoi(options[i].second, &parsed)) {
+                        parsed = 0;
+                    }
+                    file_options.num_cc_files = parsed;
                 }
             } else if (options[i].first == "proto_h") {
                 file_options.proto_h = true;

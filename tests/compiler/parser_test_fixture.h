@@ -55,6 +55,7 @@
 #include <shark/types/repeated_field.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_join.h>
 #include <turbo/strings/substitute.h>
 #include <shark/format/text/text_format.h>
 
@@ -513,7 +514,7 @@ class SourceInfoTest : public ParserTest {
           } else {
             EXPECT_EQ(
                 expected_leading_detached_comments,
-                Join(iter->second->leading_detached_comments(), "\n"));
+                turbo::StrJoin(iter->second->leading_detached_comments(), "\n"));
           }
 
           spans_.erase(iter);

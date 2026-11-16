@@ -33,6 +33,7 @@
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
 #include <shark/format/wired/wire_format_lite.h>
+#include <turbo/strings/str_cat.h>
 
 #include <limits>
 #include <stack>
@@ -542,12 +543,12 @@ namespace shark {
             std::string quoted_field_name = "";
             if (!field_name.empty()) {
                 if (!message_name.empty()) {
-                    quoted_field_name = StrCat(" '", message_name, ".", field_name, "'");
+                    quoted_field_name = turbo::str_cat(" '", message_name, ".", field_name, "'");
                 } else {
-                    quoted_field_name = StrCat(" '", field_name, "'");
+                    quoted_field_name = turbo::str_cat(" '", field_name, "'");
                 }
             }
-            std::string error_message = StrCat("String field", quoted_field_name,
+            std::string error_message = turbo::str_cat("String field", quoted_field_name,
                 " contains invalid UTF-8 data "
                 "when ",
                 operation_str,

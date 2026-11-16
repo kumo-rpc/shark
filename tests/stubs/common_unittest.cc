@@ -36,6 +36,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 #include <turbo/strings/substitute.h>
 #include <turbo/strings/ascii.h>
 
@@ -95,9 +96,9 @@ TEST(LoggingTest, DefaultLogging) {
 
   std::string text = GetCapturedTestStderr();
   EXPECT_EQ(
-    "[shark INFO " __FILE__ ":" + SimpleItoa(line + 1) + "] A message.\n"
-    "[shark WARNING " __FILE__ ":" + SimpleItoa(line + 2) + "] A warning.\n"
-    "[shark ERROR " __FILE__ ":" + SimpleItoa(line + 3) + "] An error.\n",
+    "[shark INFO " __FILE__ ":" + turbo::str_cat(line + 1) + "] A message.\n"
+    "[shark WARNING " __FILE__ ":" + turbo::str_cat(line + 2) + "] A warning.\n"
+    "[shark ERROR " __FILE__ ":" + turbo::str_cat(line + 3) + "] An error.\n",
     text);
 }
 
@@ -128,10 +129,10 @@ TEST(LoggingTest, CaptureLogging) {
 
   ASSERT_EQ(2, captured_messages_.size());
   EXPECT_EQ(
-    "2 " __FILE__ ":" + SimpleItoa(start_line + 1) + ": An error.",
+    "2 " __FILE__ ":" + turbo::str_cat(start_line + 1) + ": An error.",
     captured_messages_[0]);
   EXPECT_EQ(
-    "1 " __FILE__ ":" + SimpleItoa(start_line + 2) + ": A warning.",
+    "1 " __FILE__ ":" + turbo::str_cat(start_line + 2) + ": A warning.",
     captured_messages_[1]);
 }
 
@@ -154,10 +155,10 @@ TEST(LoggingTest, SilenceLogging) {
 
   ASSERT_EQ(2, captured_messages_.size());
   EXPECT_EQ(
-    "0 " __FILE__ ":" + SimpleItoa(line1) + ": Visible1",
+    "0 " __FILE__ ":" + turbo::str_cat(line1) + ": Visible1",
     captured_messages_[0]);
   EXPECT_EQ(
-    "0 " __FILE__ ":" + SimpleItoa(line2) + ": Visible2",
+    "0 " __FILE__ ":" + turbo::str_cat(line2) + ": Visible2",
     captured_messages_[1]);
 }
 

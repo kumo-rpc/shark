@@ -55,6 +55,7 @@
 #include <turbo/status/status.h>
 #include <string_view>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 #include <turbo/numeric/int128.h>
 
 
@@ -212,14 +213,14 @@ LogMessage& LogMessage::operator<<(char value) {
 }
 
 LogMessage& LogMessage::operator<<(void* value) {
-  StrAppend(&message_, strings::Hex(reinterpret_cast<uintptr_t>(value)));
+  turbo::str_append(&message_, turbo::Hex(reinterpret_cast<uintptr_t>(value)));
   return *this;
 }
 
 #undef DECLARE_STREAM_OPERATOR
 #define DECLARE_STREAM_OPERATOR(TYPE)              \
   LogMessage& LogMessage::operator<<(TYPE value) { \
-    StrAppend(&message_, value);                   \
+    turbo::str_append(&message_, value);                   \
     return *this;                                  \
   }
 

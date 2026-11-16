@@ -52,6 +52,7 @@
 #include <shark/stubs/logging.h>
 #include <turbo/format/str_format.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/numbers.h>
 #include <turbo/strings/substitute.h>
 #include <shark/format/text/text_format.h>
 #include <shark/types/any.skp.h>
@@ -7250,7 +7251,7 @@ namespace shark {
                 if (name.substr(0, begin_size) != begin_with || name.substr(name.size() - end_size, end_size) != end_with) {
                     return;
                 }
-                safe_strto32(
+                turbo::SimpleAtoi(
                     name.substr(begin_size, name.size() - end_size - begin_size), file_num);
             }
 

@@ -16,6 +16,7 @@
 #include <cstdint>
 
 #include <shark/schema/internal/file_descriptor_tables.h>
+#include <turbo/strings/str_join.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -115,7 +116,7 @@ namespace shark {
         std::pair<const FileDescriptorTables*, const SourceCodeInfo*>* p) {
         for (int i = 0, len = p->second->location_size(); i < len; ++i) {
             const SourceCodeInfo_Location* loc = &p->second->location().Get(i);
-            p->first->locations_by_path_[Join(loc->path(), ",")] = loc;
+            p->first->locations_by_path_[turbo::StrJoin(loc->path(), ",")] = loc;
         }
     }
 
@@ -125,7 +126,7 @@ namespace shark {
             std::make_pair(this, info));
         internal::call_once(locations_by_path_once_,
             FileDescriptorTables::BuildLocationsByPath, &p);
-        return FindPtrOrNull(locations_by_path_, Join(path, ","));
+        return FindPtrOrNull(locations_by_path_, turbo::StrJoin(path, ","));
     }
 
 } // namespace shark

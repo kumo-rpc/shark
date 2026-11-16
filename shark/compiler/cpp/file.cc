@@ -52,6 +52,8 @@
 #include <shark/descriptor.skp.h>
 #include <shark/io/printer.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/escaping.h>
 #include <turbo/strings/str_replace.h>
 
 // Must be last.
@@ -512,7 +514,7 @@ namespace shark::compiler::cpp {
                 "  };\n"
                 "};\n",
                 DefaultInstanceType(generator->descriptor_, options_, /*split=*/true),
-                StrCat(generator->classname_, "::Impl_::Split"));
+                turbo::str_cat(generator->classname_, "::Impl_::Split"));
             // NO_DESTROY is not necessary for correctness. The empty destructor is
             // enough. However, the empty destructor fails to be elided in some
             // configurations (like non-opt or with certain sanitizers). NO_DESTROY is
@@ -914,7 +916,7 @@ namespace shark::compiler::cpp {
                 format("{ ");
                 for (int i = 0; i < file_data.size();) {
                     for (int j = 0; j < kBytesPerLine && i < file_data.size(); ++i, ++j) {
-                        format("'$1$', ", CEscape(file_data.substr(i, 1)));
+                        format("'$1$', ", turbo::c_escape(file_data.substr(i, 1)));
                     }
                     format("\n");
                 }
@@ -925,7 +927,7 @@ namespace shark::compiler::cpp {
                 for (int i = 0; i < file_data.size(); i += kBytesPerLine) {
                     format(
                         "\"$1$\"\n",
-                        EscapeTrigraphs(CEscape(file_data.substr(i, kBytesPerLine))));
+                        EscapeTrigraphs(turbo::c_escape(file_data.substr(i, kBytesPerLine))));
                 }
             }
             format(";\n");

@@ -14,9 +14,11 @@
 //
 
 #include <cstdint>
+#include <turbo/strings/str_cat.h>
 
 #include <shark/schema/internal/descriptor_builder.h>
 #include <shark/schema/internal/file_descriptor_tables_inl.h>
+#include <turbo/strings/escaping.h>
 #include <turbo/strings/substitute.h>
 
 // Must be included last.
@@ -970,7 +972,7 @@ namespace shark {
             return alloc.AllocateStrings(proto_name, proto_name);
         } else {
             return alloc.AllocateStrings(proto_name,
-                StrCat(scope, ".", proto_name));
+                turbo::str_cat(scope, ".", proto_name));
         }
     }
 
@@ -1935,13 +1937,13 @@ namespace shark {
                     result->default_value_uint32_t_ = strtoul(proto.default_value().c_str(), &end_pos, 0);
                     break;
                 case SharkFieldCppType::CPPTYPE_INT64:
-                    result->default_value_int64_t_ = strto64(proto.default_value().c_str(), &end_pos, 0);
+                    result->default_value_int64_t_ = strtoll(proto.default_value().c_str(), &end_pos, 0);
                     break;
                 case SharkFieldCppType::CPPTYPE_UINT32:
                     result->default_value_uint32_t_ = strtoul(proto.default_value().c_str(), &end_pos, 0);
                     break;
                 case SharkFieldCppType::CPPTYPE_UINT64:
-                    result->default_value_uint64_t_ = strtou64(proto.default_value().c_str(), &end_pos, 0);
+                    result->default_value_uint64_t_ = strtoull(proto.default_value().c_str(), &end_pos, 0);
                     break;
                 case SharkFieldCppType::CPPTYPE_FLOAT:
                     if (proto.default_value() == "inf") {
@@ -1983,8 +1985,9 @@ namespace shark {
                     break;
                 case SharkFieldCppType::CPPTYPE_STRING:
                     if (result->type() == SharkFieldType::BYTES) {
-                        result->default_value_string_ = alloc.AllocateStrings(
-                            UnescapeCEscapeString(proto.default_value()));
+                        std::string unescaped;
+                        turbo::c_unescape(proto.default_value(), &unescaped);
+                        result->default_value_string_ = alloc.AllocateStrings(unescaped);
                     } else {
                         result->default_value_string_ = alloc.AllocateStrings(proto.default_value());
                     }

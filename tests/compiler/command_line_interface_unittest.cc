@@ -57,6 +57,7 @@
 #include <shark/io/zero_copy_stream.h>
 #include <turbo/format/str_format.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 #include <turbo/strings/str_split.h>
 #include <turbo/strings/str_replace.h>
 #include <turbo/strings/substitute.h>
@@ -2593,7 +2594,7 @@ namespace shark {
                             args.push_back("--proto_path=" + TestUtil::TestSourceDir());
                             break;
                         case DESCRIPTOR_SET_IN:
-                            args.push_back(StrCat("--descriptor_set_in=",
+                            args.push_back(turbo::str_cat("--descriptor_set_in=",
                                 unittest_proto_descriptor_set_filename_));
                             break;
                         default:

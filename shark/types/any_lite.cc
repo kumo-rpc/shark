@@ -30,6 +30,7 @@
 
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 #include <shark/types/any.h>
 #include <shark/arenastring.h>
 #include <shark/generated/generated_message_util.h>
@@ -41,9 +42,9 @@ std::string GetTypeUrl(std::string_view message_name,
                        std::string_view type_url_prefix) {
   if (!type_url_prefix.empty() &&
       type_url_prefix[type_url_prefix.size() - 1] == '/') {
-    return StrCat(type_url_prefix, message_name);
+    return turbo::str_cat(type_url_prefix, message_name);
   } else {
-    return StrCat(type_url_prefix, "/", message_name);
+    return turbo::str_cat(type_url_prefix, "/", message_name);
   }
 }
 

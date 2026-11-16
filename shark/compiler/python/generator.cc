@@ -62,6 +62,9 @@
 #include <shark/stubs/logging.h>
 #include <turbo/format/str_format.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_replace.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/escaping.h>
 #include <turbo/strings/ascii.h>
 #include <turbo/strings/substitute.h>
 
@@ -77,8 +80,8 @@ namespace shark::compiler::python {
             // We can't have dots in the module name, so we replace each with _dot_.
             // But that could lead to a collision between a.b and a_dot_b, so we also
             // duplicate each underscore.
-            GlobalReplaceSubstring("_", "__", &module_name);
-            GlobalReplaceSubstring(".", "_dot_", &module_name);
+            turbo::StrReplaceAll({{"_", "__"}}, &module_name);
+            turbo::StrReplaceAll({{".", "_dot_"}}, &module_name);
             return module_name;
         }
 
@@ -128,13 +131,13 @@ namespace shark::compiler::python {
 
             switch (field.cpp_type()) {
             case SharkFieldCppType::CPPTYPE_INT32:
-                return StrCat(field.default_value_int32());
+                return turbo::str_cat(field.default_value_int32());
             case SharkFieldCppType::CPPTYPE_UINT32:
-                return StrCat(field.default_value_uint32());
+                return turbo::str_cat(field.default_value_uint32());
             case SharkFieldCppType::CPPTYPE_INT64:
-                return StrCat(field.default_value_int64());
+                return turbo::str_cat(field.default_value_int64());
             case SharkFieldCppType::CPPTYPE_UINT64:
-                return StrCat(field.default_value_uint64());
+                return turbo::str_cat(field.default_value_uint64());
             case SharkFieldCppType::CPPTYPE_DOUBLE: {
                 double value = field.default_value_double();
                 if (value == std::numeric_limits<double>::infinity()) {
@@ -148,7 +151,7 @@ namespace shark::compiler::python {
                     // infinity * 0 = nan
                     return "(1e10000 * 0)";
                 } else {
-                    return "float(" + SimpleDtoa(value) + ")";
+                    return "float(" + turbo::str_cat(turbo::HighPrecision(static_cast<double>(value))) + ")";
                 }
             }
             case SharkFieldCppType::CPPTYPE_FLOAT: {
@@ -164,23 +167,23 @@ namespace shark::compiler::python {
                     // infinity - infinity = nan
                     return "(1e10000 * 0)";
                 } else {
-                    return "float(" + SimpleFtoa(value) + ")";
+                    return "float(" + turbo::str_cat(turbo::HighPrecision(static_cast<float>(value))) + ")";
                 }
             }
             case SharkFieldCppType::CPPTYPE_BOOL:
                 return field.default_value_bool() ? "True" : "False";
             case SharkFieldCppType::CPPTYPE_ENUM:
-                return StrCat(field.default_value_enum()->number());
+                return turbo::str_cat(field.default_value_enum()->number());
             case SharkFieldCppType::CPPTYPE_STRING:
-                return "b\"" + CEscape(field.default_value_string()) + (field.type() != SharkFieldType::STRING ? "\"" : "\".decode('utf-8')");
+                return "b\"" + turbo::c_escape(field.default_value_string()) + (field.type() != SharkFieldType::STRING ? "\"" : "\".decode('utf-8')");
             case SharkFieldCppType::CPPTYPE_MESSAGE:
                 return "None";
             case SharkFieldCppType::CPPTYPE_INT8:
             case SharkFieldCppType::CPPTYPE_INT16:
-                return StrCat(field.default_value_int32());
+                return turbo::str_cat(field.default_value_int32());
             case SharkFieldCppType::CPPTYPE_UINT8:
             case SharkFieldCppType::CPPTYPE_UINT16:
-                return StrCat(field.default_value_uint32());
+                return turbo::str_cat(field.default_value_uint32());
             }
             // (We could add a default case above but then we wouldn't get the nice
             // compiler warning when a new type is added.)
@@ -372,7 +375,7 @@ namespace shark::compiler::python {
         m["package"] = file_->package();
         m["syntax"] = StringifySyntax(file_->syntax());
         m["options"] = OptionsValue(file_->options().SerializeAsString());
-        m["serialized_descriptor"] = strings::CHexEscape(file_descriptor_serialized_);
+        m["serialized_descriptor"] = turbo::c_hex_escape(file_descriptor_serialized_);
         if (GeneratingDescriptorProto()) {
             printer_->Print("if _descriptor._USE_C_DESCRIPTORS == False:\n");
             printer_->Indent();
@@ -389,7 +392,7 @@ namespace shark::compiler::python {
             printer_->Indent();
             if (pure_python_workable_) {
                 printer_->Print("serialized_pb=b'$value$'\n", "value",
-                    strings::CHexEscape(file_descriptor_serialized_));
+                    turbo::c_hex_escape(file_descriptor_serialized_));
                 if (file_->dependency_count() != 0) {
                     printer_->Print(",\ndependencies=[");
                     for (int i = 0; i < file_->dependency_count(); ++i) {
@@ -624,8 +627,8 @@ namespace shark::compiler::python {
         printer_->Print("extension_ranges=[");
         for (int i = 0; i < message_descriptor.extension_range_count(); ++i) {
             const Descriptor::ExtensionRange* range = message_descriptor.extension_range(i);
-            printer_->Print("($start$, $end$), ", "start", StrCat(range->start),
-                "end", StrCat(range->end));
+            printer_->Print("($start$, $end$), ", "start", turbo::str_cat(range->start),
+                "end", turbo::str_cat(range->end));
         }
         printer_->Print("],\n");
         printer_->Print("oneofs=[\n");
@@ -635,7 +638,7 @@ namespace shark::compiler::python {
             m.clear();
             m["name"] = desc->name();
             m["full_name"] = desc->full_name();
-            m["index"] = StrCat(desc->index());
+            m["index"] = turbo::str_cat(desc->index());
             options_string = OptionsValue(desc->options().SerializeAsString());
             if (options_string == "None") {
                 m["serialized_options"] = "";
@@ -972,8 +975,8 @@ namespace shark::compiler::python {
         descriptor.options().SerializeToString(&options_string);
         std::map<std::string, std::string> m;
         m["name"] = descriptor.name();
-        m["index"] = StrCat(descriptor.index());
-        m["number"] = StrCat(descriptor.number());
+        m["index"] = turbo::str_cat(descriptor.index());
+        m["number"] = turbo::str_cat(descriptor.number());
         m["options"] = OptionsValue(options_string);
         printer_->Print(m,
             "_descriptor.EnumValueDescriptor(\n"
@@ -989,7 +992,7 @@ namespace shark::compiler::python {
         if (serialized_options.length() == 0 || GeneratingDescriptorProto()) {
             return "None";
         } else {
-            return "b'" + CEscape(serialized_options) + "'";
+            return "b'" + turbo::c_escape(serialized_options) + "'";
         }
     }
 
@@ -1001,11 +1004,11 @@ namespace shark::compiler::python {
         std::map<std::string, std::string> m;
         m["name"] = field.name();
         m["full_name"] = field.full_name();
-        m["index"] = StrCat(field.index());
-        m["number"] = StrCat(field.number());
-        m["type"] = StrCat(static_cast<int>(field.type()));
-        m["cpp_type"] = StrCat(static_cast<int>(field.cpp_type()));
-        m["label"] = StrCat(static_cast<int>(field.label()));
+        m["index"] = turbo::str_cat(field.index());
+        m["number"] = turbo::str_cat(field.number());
+        m["type"] = turbo::str_cat(static_cast<int>(field.type()));
+        m["cpp_type"] = turbo::str_cat(static_cast<int>(field.cpp_type()));
+        m["label"] = turbo::str_cat(static_cast<int>(field.label()));
         m["has_default_value"] = field.has_default_value() ? "True" : "False";
         m["default_value"] = StringifyDefaultValue(field);
         m["is_extension"] = is_extension ? "True" : "False";
@@ -1143,8 +1146,8 @@ namespace shark::compiler::python {
         printer_->Print(
             "$name$._serialized_start=$serialized_start$\n"
             "$name$._serialized_end=$serialized_end$\n",
-            "name", name, "serialized_start", StrCat(offset), "serialized_end",
-            StrCat(offset + sp.size()));
+            "name", name, "serialized_start", turbo::str_cat(offset), "serialized_end",
+            turbo::str_cat(offset + sp.size()));
     }
 
     namespace {

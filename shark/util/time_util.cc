@@ -33,6 +33,8 @@
 #include <cstdint>
 
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/numbers.h>
 #include <shark/types/duration.skp.h>
 #include <shark/types/timestamp.skp.h>
 #include <turbo/numeric/int128.h>
@@ -184,7 +186,7 @@ std::string TimeUtil::ToString(const Duration& duration) {
     seconds = -seconds;
     nanos = -nanos;
   }
-  result += StrCat(seconds);
+  result += turbo::str_cat(seconds);
   if (nanos != 0) {
     result += "." + FormatNanos(nanos);
   }
@@ -217,13 +219,12 @@ bool TimeUtil::FromString(const std::string& value, Duration* duration) {
     seconds_part = value.substr(sign_length, pos - sign_length);
     nanos_part = value.substr(pos + 1, value.length() - pos - 2);
   }
-  char* end;
-  int64_t seconds = strto64(seconds_part.c_str(), &end, 10);
-  if (end != seconds_part.c_str() + seconds_part.length()) {
+  int64_t seconds = 0;
+  if (!turbo::SimpleAtoi(seconds_part, &seconds)) {
     return false;
   }
-  int64_t nanos = strto64(nanos_part.c_str(), &end, 10);
-  if (end != nanos_part.c_str() + nanos_part.length()) {
+  int64_t nanos = 0;
+  if (!turbo::SimpleAtoi(nanos_part, &nanos)) {
     return false;
   }
   nanos = nanos * Pow(10, static_cast<int>(9 - nanos_part.length()));

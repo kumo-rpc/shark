@@ -42,6 +42,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/escaping.h>
 #include <turbo/strings/substitute.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <tests/common/googletest.h>
@@ -199,7 +200,7 @@ struct SimpleTokenCase {
 
 inline std::ostream& operator<<(std::ostream& out,
                                 const SimpleTokenCase& test_case) {
-  return out << CEscape(test_case.input);
+  return out << turbo::c_escape(test_case.input);
 }
 
 SimpleTokenCase kSimpleTokenCases[] = {
@@ -368,7 +369,7 @@ struct MultiTokenCase {
 
 inline std::ostream& operator<<(std::ostream& out,
                                 const MultiTokenCase& test_case) {
-  return out << CEscape(test_case.input);
+  return out << turbo::c_escape(test_case.input);
 }
 
 MultiTokenCase kMultiTokenCases[] = {
@@ -639,7 +640,7 @@ struct DocCommentCase {
 
 inline std::ostream& operator<<(std::ostream& out,
                                 const DocCommentCase& test_case) {
-  return out << CEscape(test_case.input);
+  return out << turbo::c_escape(test_case.input);
 }
 
 DocCommentCase kDocCommentCases[] = {
@@ -1056,7 +1057,7 @@ struct ErrorCase {
 };
 
 inline std::ostream& operator<<(std::ostream& out, const ErrorCase& test_case) {
-  return out << CEscape(test_case.input);
+  return out << turbo::c_escape(test_case.input);
 }
 
 ErrorCase kErrorCases[] = {

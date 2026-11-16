@@ -97,6 +97,7 @@
 #include <shark/stubs/stl_util.h>
 #include <turbo/format/str_format.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/escaping.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -1262,7 +1263,7 @@ namespace shark {
                 static_cast<size_t>(end - start) != text.size() || *start == '-')
                 << " Tokenizer::ParseFloat() passed text that could not have been"
                    " tokenized as a float: "
-                << CEscape(text);
+                << turbo::c_escape(text);
             return result;
         }
 
@@ -1382,7 +1383,7 @@ namespace shark {
             if (text_size == 0) {
                 GOOGLE_LOG(DFATAL) << " Tokenizer::ParseStringAppend() passed text that could not"
                                       " have been tokenized as a string: "
-                                   << CEscape(text);
+                                   << turbo::c_escape(text);
                 return;
             }
 

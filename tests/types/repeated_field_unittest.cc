@@ -51,6 +51,7 @@
 #include <shark/stubs/common.h>
 #include <tests/sk/unittest.skp.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 #include <gmock/gmock.h>
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>
@@ -2265,11 +2266,11 @@ TEST_F(RepeatedFieldInsertionIteratorsTest,
   TestAllTypes goldenproto;
   for (int i = 0; i < 10; ++i) {
     std::string* new_data = new std::string;
-    *new_data = "name-" + StrCat(i);
+    *new_data = "name-" + turbo::str_cat(i);
     data.push_back(new_data);
 
     new_data = goldenproto.add_repeated_string();
-    *new_data = "name-" + StrCat(i);
+    *new_data = "name-" + turbo::str_cat(i);
   }
   TestAllTypes testproto;
   std::copy(data.begin(), data.end(),
@@ -2302,7 +2303,7 @@ TEST_F(RepeatedFieldInsertionIteratorsTest,
   auto* goldenproto = Arena::CreateMessage<TestAllTypes>(&arena);
   for (int i = 0; i < 10; ++i) {
     auto* new_data = goldenproto->add_repeated_string();
-    *new_data = "name-" + StrCat(i);
+    *new_data = "name-" + turbo::str_cat(i);
     data.push_back(new_data);
   }
   auto* testproto = Arena::CreateMessage<TestAllTypes>(&arena);

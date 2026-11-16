@@ -14,6 +14,7 @@
 //
 
 #include <cstdint>
+#include <turbo/strings/str_cat.h>
 
 #include <shark/schema/internal/descriptor_pool.h>
 #include <shark/schema/internal/descriptor_pool_tables.h>
@@ -609,7 +610,7 @@ namespace shark {
         }
 
         FileDescriptor* placeholder_file = NewPlaceholderFileWithMutexHeld(
-            StrCat(placeholder_full_name, ".placeholder.shark"), alloc);
+            turbo::str_cat(placeholder_full_name, ".placeholder.shark"), alloc);
         placeholder_file->package_ = placeholder_package;
 
         if (placeholder_type == PLACEHOLDER_ENUM) {

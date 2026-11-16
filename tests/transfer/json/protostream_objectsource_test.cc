@@ -29,6 +29,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <shark/transfer/json/protostream_objectsource.h>
+#include <turbo/strings/str_cat.h>
 
 #include <cstdint>
 #include <memory>
@@ -473,8 +474,8 @@ TEST_P(ProtostreamObjectSourceTest,
   int repeat = 10000;
   for (int i = 0; i < repeat; ++i) {
     Book_Label* label = book.add_labels();
-    label->set_key(StrCat("i", i));
-    label->set_value(StrCat("v", i));
+    label->set_key(turbo::str_cat("i", i));
+    label->set_value(turbo::str_cat("v", i));
   }
 
   // Make sure StartList and EndList are called exactly once (see b/18227499 for
@@ -555,7 +556,7 @@ TEST_P(ProtostreamObjectSourceTest, CyclicMessageDepthTest) {
   for (int i = 0; i < 63; ++i) {
     Author* next = current_author->add_friend_();
     next->set_id(i);
-    next->set_name(StrCat("author_name_", i));
+    next->set_name(turbo::str_cat("author_name_", i));
     next->set_alive(true);
     current_author = next;
   }
@@ -563,7 +564,7 @@ TEST_P(ProtostreamObjectSourceTest, CyclicMessageDepthTest) {
   // Recursive message with depth (65) > max (max is 64).
   for (int i = 0; i < 64; ++i) {
     Cyclic* next = current->mutable_m_cyclic();
-    next->set_m_str(StrCat("count_", i));
+    next->set_m_str(turbo::str_cat("count_", i));
     current = next;
   }
 

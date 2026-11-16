@@ -33,6 +33,7 @@
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
 #include <shark/descriptor_database.h>
+#include <turbo/strings/str_cat.h>
 
 #include <algorithm>
 #include <set>
@@ -51,7 +52,7 @@ void RecordMessageNames(const DescriptorProto& desc_proto,
   GOOGLE_CHECK(desc_proto.has_name());
   std::string full_name = prefix.empty()
                               ? desc_proto.name()
-                              : StrCat(prefix, ".", desc_proto.name());
+                              : turbo::str_cat(prefix, ".", desc_proto.name());
   output->insert(full_name);
 
   for (const auto& d : desc_proto.nested_type()) {
@@ -478,7 +479,7 @@ class EncodedDescriptorDatabase::DescriptorIndex {
 
     std::string AsString(const DescriptorIndex& index) const {
       auto p = package(index);
-      return StrCat(p, p.empty() ? "" : ".", symbol(index));
+      return turbo::str_cat(p, p.empty() ? "" : ".", symbol(index));
     }
   };
 

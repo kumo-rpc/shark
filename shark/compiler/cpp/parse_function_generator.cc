@@ -29,6 +29,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <shark/compiler/cpp/parse_function_generator.h>
+#include <turbo/strings/str_cat.h>
 
 #include <algorithm>
 #include <limits>
@@ -296,7 +297,7 @@ namespace shark::compiler::cpp {
             GOOGLE_LOG_IF(DFATAL, ordered_fields.empty())
                 << "Invalid message: " << descriptor->full_name() << " has "
                 << oneof_count << " oneof declarations, but no fields";
-            aux_entries.push_back(StrCat("_fl::Offset{offsetof(",
+            aux_entries.push_back(turbo::str_cat("_fl::Offset{offsetof(",
                 ClassName(descriptor),
                 ", _impl_._oneof_case_)}"));
         }
@@ -305,7 +306,7 @@ namespace shark::compiler::cpp {
         // offset in the second auxiliary entry.
         if (!inlined_string_indices.empty()) {
             aux_entries.resize(2); // pad if necessary
-            aux_entries[1] = StrCat("_fl::Offset{offsetof(", ClassName(descriptor),
+            aux_entries[1] = turbo::str_cat("_fl::Offset{offsetof(", ClassName(descriptor),
                 ", _impl_._inlined_string_donated_)}");
         }
 
@@ -329,7 +330,7 @@ namespace shark::compiler::cpp {
                 } else {
                     field_entries.back().aux_idx = aux_entries.size();
                     const Descriptor* field_type = field->message_type();
-                    aux_entries.push_back(StrCat(
+                    aux_entries.push_back(turbo::str_cat(
                         "reinterpret_cast<const ", QualifiedClassName(field_type, options),
                         "*>(&", QualifiedDefaultInstanceName(field_type, options), ")"));
                 }
@@ -350,7 +351,7 @@ namespace shark::compiler::cpp {
                 if (IsEnumClass(enum_type)) {
                     entry.is_enum_range = false;
                     aux_entries.push_back(
-                        StrCat(QualifiedClassName(enum_type, options), "Trait::fits_underlying"));
+                        turbo::str_cat(QualifiedClassName(enum_type, options), "Trait::fits_underlying"));
                     continue;
                 }
                 GOOGLE_CHECK_GT(enum_type->value_count(), 0) << enum_type->DebugString();
@@ -368,11 +369,11 @@ namespace shark::compiler::cpp {
                 if (enum_values.back() - enum_values[0] == enum_values.size() - 1 && enum_values[0] >= std::numeric_limits<int16_t>::min() && enum_values[0] <= std::numeric_limits<int16_t>::max() && enum_values.size() <= std::numeric_limits<uint16_t>::max()) {
                     entry.is_enum_range = true;
                     aux_entries.push_back(
-                        StrCat(enum_values[0], ", ", enum_values.size()));
+                        turbo::str_cat(enum_values[0], ", ", enum_values.size()));
                 } else {
                     entry.is_enum_range = false;
                     aux_entries.push_back(
-                        StrCat(QualifiedClassName(enum_type, options), "_IsValid"));
+                        turbo::str_cat(QualifiedClassName(enum_type, options), "_IsValid"));
                 }
             } else if ((field->type() == SharkFieldType::STRING || field->type() == SharkFieldType::BYTES) && IsStringInlined(field, options)) {
                 GOOGLE_CHECK(!field->is_repeated());
@@ -381,7 +382,7 @@ namespace shark::compiler::cpp {
                 // For mini parsing, the donation state index is stored as an `offset`
                 // auxiliary entry.
                 entry.aux_idx = aux_entries.size();
-                aux_entries.push_back(StrCat("_fl::Offset{", idx, "}"));
+                aux_entries.push_back(turbo::str_cat("_fl::Offset{", idx, "}"));
                 // For fast table parsing, the donation state index is stored instead of
                 // the aux_idx (this will limit the range to 8 bits).
                 entry.inlined_string_idx = idx;
@@ -1118,7 +1119,7 @@ namespace shark::compiler::cpp {
         std::string message_name = descriptor_->full_name();
         if (message_name.size() > kMaxNameLength) {
             static constexpr int kNameHalfLength = (kMaxNameLength - 3) / 2;
-            message_name = StrCat(
+            message_name = turbo::str_cat(
                 message_name.substr(0, kNameHalfLength), "...",
                 message_name.substr(message_name.size() - kNameHalfLength));
         }
@@ -1207,7 +1208,7 @@ namespace shark::compiler::cpp {
         std::string field_name;
         field_name = "nullptr";
         if (HasDescriptorMethods(field->file(), options_)) {
-            field_name = StrCat("\"", field->full_name(), "\"");
+            field_name = turbo::str_cat("\"", field->full_name(), "\"");
         }
         format("::_pbi::VerifyUTF8(str, $1$)", field_name);
         switch (level) {
@@ -1282,7 +1283,7 @@ namespace shark::compiler::cpp {
                         format(
                             "ctx->set_lazy_eager_verify_func($1$);\n",
                             eager_verify
-                                ? StrCat("&", ClassName(field->message_type(), true),
+                                ? turbo::str_cat("&", ClassName(field->message_type(), true),
                                       "::InternalVerify")
                                 : "nullptr");
                     }
@@ -1367,12 +1368,12 @@ namespace shark::compiler::cpp {
             { { "name", FieldName(field) },
                 { "primitive_type", PrimitiveTypeName(options_, field->cpp_type()) } });
         if (field->is_repeated()) {
-            format.AddMap({ { "put_field", StrCat("add_", FieldName(field)) },
-                { "mutable_field", StrCat("add_", FieldName(field)) } });
+            format.AddMap({ { "put_field", turbo::str_cat("add_", FieldName(field)) },
+                { "mutable_field", turbo::str_cat("add_", FieldName(field)) } });
         } else {
             format.AddMap(
-                { { "put_field", StrCat("set_", FieldName(field)) },
-                    { "mutable_field", StrCat("mutable_", FieldName(field)) } });
+                { { "put_field", turbo::str_cat("set_", FieldName(field)) },
+                    { "mutable_field", turbo::str_cat("mutable_", FieldName(field)) } });
         }
         uint32_t tag = WireFormatLite::MakeTag(field->number(), wiretype);
         switch (wiretype) {

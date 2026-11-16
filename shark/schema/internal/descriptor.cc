@@ -14,6 +14,7 @@
 //
 
 #include <cstdint>
+#include <turbo/strings/escaping.h>
 
 #include <shark/schema/internal/descriptor.h>
 #include <shark/schema/internal/file_descriptor.h>
@@ -302,7 +303,7 @@ namespace shark {
             turbo::substitute_and_append(contents, "$0  reserved ", prefix);
             for (int i = 0; i < reserved_name_count(); i++) {
                 turbo::substitute_and_append(contents, "\"$0\", ",
-                    CEscape(reserved_name(i)));
+                    turbo::c_escape(reserved_name(i)));
             }
             contents->replace(contents->size() - 2, 2, ";\n");
         }

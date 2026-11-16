@@ -16,6 +16,7 @@
 #pragma once
 
 #include <cstdint>
+#include <turbo/strings/str_cat.h>
 #include <shark/schema/internal/file_descriptor_tables.h>
 #include <turbo/strings/ascii.h>
 
@@ -122,7 +123,7 @@ namespace shark {
                 const std::string* opt_json_name) {
                 GOOGLE_CHECK(has_allocated());
 
-                std::string full_name = scope.empty() ? name : StrCat(scope, ".", name);
+                std::string full_name = scope.empty() ? name : turbo::str_cat(scope, ".", name);
 
                 // Fast path for snake_case names, which follow the style guide.
                 if (opt_json_name == nullptr) {

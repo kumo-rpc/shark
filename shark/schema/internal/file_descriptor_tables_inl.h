@@ -16,6 +16,7 @@
 #pragma once
 
 #include <cstdint>
+#include <turbo/strings/str_cat.h>
 #include <shark/schema/internal/file_descriptor_tables.h>
 #include <shark/schema/internal/descriptor_pool_tables.h>
 #include <shark/schema/internal/flat_allocator.h>
@@ -148,7 +149,7 @@ namespace shark {
             EnumValueDescriptor* result = alloc.AllocateArray<EnumValueDescriptor>(1);
             result->all_names_ = alloc.AllocateStrings(
                 enum_value_name,
-                StrCat(parent->full_name(), ".", enum_value_name));
+                turbo::str_cat(parent->full_name(), ".", enum_value_name));
             result->number_ = number;
             result->type_ = parent;
             result->options_ = &EnumValueOptions::default_instance();

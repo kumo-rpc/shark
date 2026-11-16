@@ -31,6 +31,7 @@
 // Author: kenton@google.com (Kenton Varda)
 
 #include <shark/compiler/subprocess.h>
+#include <turbo/strings/escaping.h>
 
 #include <algorithm>
 #include <cstring>
@@ -276,7 +277,7 @@ bool Subprocess::Communicate(const Message& input, Message* output,
   }
 
   if (!output->ParseFromString(output_data)) {
-    *error = "Plugin output is unparseable: " + CEscape(output_data);
+    *error = "Plugin output is unparseable: " + turbo::c_escape(output_data);
     return false;
   }
 
@@ -482,7 +483,7 @@ bool Subprocess::Communicate(const Message& input, Message* output,
   }
 
   if (!output->ParseFromString(output_data)) {
-    *error = "Plugin output is unparseable: " + CEscape(output_data);
+    *error = "Plugin output is unparseable: " + turbo::c_escape(output_data);
     return false;
   }
 

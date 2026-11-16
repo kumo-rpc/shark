@@ -29,6 +29,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <cstddef>
+#include <turbo/strings/str_cat.h>
 
 #include <shark/generated/generated_message_tctable_impl.h>
 #include <shark/format/wired/wire_format_lite.h>
@@ -43,7 +44,7 @@ using ::testing::Eq;
 using ::testing::Not;
 
 MATCHER_P3(IsEntryForFieldNum, table, field_num, field_numbers_table,
-           StrCat(negation ? "isn't " : "",
+           turbo::str_cat(negation ? "isn't " : "",
                         "the field entry for field number ", field_num)) {
   if (arg == nullptr) {
     *result_listener << "which is nullptr";
@@ -301,7 +302,7 @@ TEST_F(FindFieldEntryTest, OutOfRange) {
     std::string_view name = FieldName(table, entry);
     EXPECT_EQ(name.length(), field_num);
     while (name[0] == '0') name.remove_prefix(1);  // strip leading zeores
-    EXPECT_EQ(name, StrCat(field_num));
+    EXPECT_EQ(name, turbo::str_cat(field_num));
   }
   for (int field_num : {0, 4, 112, 500000000}) {
     EXPECT_THAT(FindFieldEntry(table, field_num), Eq(nullptr));

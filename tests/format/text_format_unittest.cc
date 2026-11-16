@@ -48,6 +48,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 #include <turbo/strings/str_replace.h>
 #include <turbo/strings/substitute.h>
 #include <shark/types/any.skp.h>
@@ -92,7 +93,8 @@ namespace shark {
                         "net/proto2/internal/"
                         "testdata/text_format_unittest_data_oneof_implemented.txt"),
                     &static_proto_text_format_, true));
-                CleanStringLineEndings(&static_proto_text_format_, false);
+                turbo::StrReplaceAll({{"\r\n", "\n"}, {"\r", "\n"}},
+                                    &static_proto_text_format_);
             }
 
             TextFormatTest()
@@ -115,7 +117,8 @@ namespace shark {
                     TestUtil::GetTestDataPath("net/proto2/internal/testdata/"
                                               "text_format_unittest_extensions_data.txt"),
                     &static_proto_text_format_, true));
-                CleanStringLineEndings(&static_proto_text_format_, false);
+                turbo::StrReplaceAll({{"\r\n", "\n"}, {"\r", "\n"}},
+                                    &static_proto_text_format_);
             }
 
             TextFormatExtensionsTest()
@@ -152,7 +155,7 @@ namespace shark {
             proto_.mutable_optional_foreign_message();
 
             EXPECT_EQ(proto_.ShortDebugString(),
-                StrCat("optional_int32: ", kDebugStringSilentMarker,
+                turbo::str_cat("optional_int32: ", kDebugStringSilentMarker,
                     "1 "
                     "optional_string: \"hello\" "
                     "optional_nested_message { bb: 2 } "
@@ -224,7 +227,7 @@ namespace shark {
             std::string utf8_debug_string = proto_.Utf8DebugString();
 
             // Hardcode a correct value to test against.
-            std::string correct_string = StrCat("optional_string: ", kDebugStringSilentMarker,
+            std::string correct_string = turbo::str_cat("optional_string: ", kDebugStringSilentMarker,
                 kEscapeTestStringEscaped, "\n");
 
             // Compare.
@@ -233,7 +236,7 @@ namespace shark {
             // the protocol buffer contains no UTF-8 text.
             EXPECT_EQ(correct_string, utf8_debug_string);
 
-            std::string expected_short_debug_string = StrCat(
+            std::string expected_short_debug_string = turbo::str_cat(
                 "optional_string: ", kDebugStringSilentMarker, kEscapeTestStringEscaped);
             EXPECT_EQ(expected_short_debug_string, proto_.ShortDebugString());
         }
@@ -248,10 +251,10 @@ namespace shark {
             std::string utf8_debug_string = proto_.Utf8DebugString();
 
             // Hardcode a correct value to test against.
-            std::string correct_utf8_string = StrCat("optional_string: ", kDebugStringSilentMarker,
+            std::string correct_utf8_string = turbo::str_cat("optional_string: ", kDebugStringSilentMarker,
                 "\"\350\260\267\346\255\214\"\n"
                 "optional_bytes: \"\\350\\260\\267\\346\\255\\214\"\n");
-            std::string correct_string = StrCat("optional_string: ", kDebugStringSilentMarker,
+            std::string correct_string = turbo::str_cat("optional_string: ", kDebugStringSilentMarker,
                 "\"\\350\\260\\267\\346\\255\\214\"\n"
                 "optional_bytes: \"\\350\\260\\267\\346\\255\\214\"\n");
 
@@ -275,7 +278,7 @@ namespace shark {
             unknown_fields->AddVarint(8, 2);
             unknown_fields->AddVarint(8, 3);
 
-            EXPECT_EQ(StrCat("5: ", kDebugStringSilentMarker,
+            EXPECT_EQ(turbo::str_cat("5: ", kDebugStringSilentMarker,
                           "1\n"
                           "5: 0x00000002\n"
                           "5: 0x0000000000000003\n"
@@ -525,7 +528,7 @@ namespace shark {
             void PrintInt32(int32_t v,
                             TextFormat::BaseTextGenerator* generator) const override {
                 FastFieldValuePrinter::PrintInt32(v, generator);
-                generator->PrintString(StrCat("  # x", strings::Hex(v)));
+                generator->PrintString(turbo::str_cat("  # x", turbo::Hex(v)));
             }
 
             void PrintMessageStart(const Message& message, int field_index,
@@ -535,7 +538,7 @@ namespace shark {
                     generator->PrintLiteral(" { ");
                     return;
                 }
-                generator->PrintString(StrCat(" {  # ", message.GetDescriptor()->name(),
+                generator->PrintString(turbo::str_cat(" {  # ", message.GetDescriptor()->name(),
                                               ": ", field_index, "\n"));
             }
         };
@@ -1035,14 +1038,14 @@ namespace shark {
             //   the value differed from strtod()'s parsing.  That is to say, the
             //   following assertion fails on MinGW:
             //     assert(1.23e22 == strtod("1.23e22", nullptr));
-            //   As a result, SimpleDtoa() would print the value as
+            //   As a result, a round-trip formatter would print the value as
             //   "1.2300000000000001e+22" to make sure strtod() produce the exact same
             //   result.  Our goal is to test runtime parsing, not compile-time parsing,
             //   so this wasn't our problem.  It was found that using 1.23e21 did not
             //   have this problem, so we switched to that instead.
 
             EXPECT_EQ(
-                StrCat("repeated_int64: ", kDebugStringSilentMarker,
+                turbo::str_cat("repeated_int64: ", kDebugStringSilentMarker,
                     "-9223372036854775808\n"
                     "repeated_uint64: 18446744073709551615\n"
                     "repeated_double: 123.456\n"
@@ -1102,7 +1105,7 @@ namespace shark {
             message.add_repeated_double(1.2345678987654e100);
             message.add_repeated_double(1.23456789876543e100);
 
-            EXPECT_EQ(StrCat("repeated_float: ", kDebugStringSilentMarker,
+            EXPECT_EQ(turbo::str_cat("repeated_float: ", kDebugStringSilentMarker,
                           "1\n"
                           "repeated_float: 1.2\n"
                           "repeated_float: 1.23\n"
@@ -1339,7 +1342,7 @@ namespace shark {
                 parser_.RecordErrorsTo(&error_collector);
                 EXPECT_EQ(expected_result, parser_.ParseFromString(input, proto))
                     << input << " -> " << proto->DebugString();
-                EXPECT_EQ(StrCat(line, ":", col, ": ", message, "\n"),
+                EXPECT_EQ(turbo::str_cat(line, ":", col, ": ", message, "\n"),
                     error_collector.text_);
                 parser_.RecordErrorsTo(nullptr);
             }
@@ -1568,7 +1571,7 @@ namespace shark {
             // enum
             EXPECT_FIELD(nested_enum, unittest::TestAllTypes_NestedEnum::BAR, "BAR");
             EXPECT_FIELD(nested_enum, unittest::TestAllTypes_NestedEnum::BAZ,
-                StrCat(static_cast<int>(unittest::TestAllTypes_NestedEnum::BAZ)));
+                turbo::str_cat(static_cast<int>(unittest::TestAllTypes_NestedEnum::BAZ)));
             EXPECT_INVALID(nested_enum, "FOOBAR");
 
             // message
@@ -1846,7 +1849,7 @@ namespace shark {
             std::string input = "\"test_value\"";
             for (int i = 0; i < 99; ++i)
                 input = turbo::substitute(format, input);
-            std::string not_deep_input = StrCat("unknown_nested_array: ", input);
+            std::string not_deep_input = turbo::str_cat("unknown_nested_array: ", input);
 
             parser_.AllowUnknownField(true);
             parser_.SetRecursionLimit(100);
@@ -1855,7 +1858,7 @@ namespace shark {
             ExpectSuccessAndTree(not_deep_input, &message, nullptr);
 
             input = turbo::substitute(format, input);
-            std::string deep_input = StrCat("unknown_nested_array: ", input);
+            std::string deep_input = turbo::str_cat("unknown_nested_array: ", input);
             ExpectMessage(
                 deep_input,
                 "WARNING:Message type \"sharkbuf_unittest.NestedTestAllTypes\" has no "

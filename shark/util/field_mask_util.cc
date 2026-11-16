@@ -33,6 +33,7 @@
 #include <cstdint>
 
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_join.h>
 #include <turbo/strings/str_split.h>
 #include <shark/message.h>
 #include <shark/stubs/map_util.h>
@@ -45,7 +46,7 @@ namespace shark::util {
 using shark::FieldMask;
 
 std::string FieldMaskUtil::ToString(const FieldMask& mask) {
-  return Join(mask.paths(), ",");
+  return turbo::StrJoin(mask.paths(), ",");
 }
 
 void FieldMaskUtil::FromString(std::string_view str, FieldMask* out) {

@@ -42,6 +42,8 @@
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/numbers.h>
 #include <shark/transfer/json/constants.h>
 #include <shark/stubs/map_util.h>
 
@@ -135,7 +137,7 @@ const std::string_view GetTypeWithoutUrl(std::string_view type_url) {
 }
 
 const std::string GetFullTypeWithUrl(std::string_view simple_type) {
-  return StrCat(kTypeServiceBaseUrl, "/", simple_type);
+  return turbo::str_cat(kTypeServiceBaseUrl, "/", simple_type);
 }
 
 const shark::Option* FindOptionOrNull(
@@ -381,17 +383,17 @@ std::string DoubleAsString(double value) {
   if (value == -std::numeric_limits<double>::infinity()) return "-Infinity";
   if (std::isnan(value)) return "NaN";
 
-  return SimpleDtoa(value);
+  return turbo::str_cat(turbo::HighPrecision(static_cast<double>(value)));
 }
 
 std::string FloatAsString(float value) {
-  if (std::isfinite(value)) return SimpleFtoa(value);
+  if (std::isfinite(value)) return turbo::str_cat(turbo::HighPrecision(static_cast<float>(value)));
   return DoubleAsString(value);
 }
 
 bool SafeStrToFloat(std::string_view str, float* value) {
   double double_value;
-  if (!safe_strtod(str, &double_value)) {
+  if (!turbo::SimpleAtod(str, &double_value)) {
     return false;
   }
 

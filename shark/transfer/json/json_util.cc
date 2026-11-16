@@ -35,6 +35,7 @@
 #include <turbo/status/status.h>
 #include <shark/stubs/bytestream.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 #include <turbo/strings/strip.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream.h>
@@ -140,20 +141,20 @@ class StatusErrorListener : public converter::ErrorListener {
       loc_string.append(" ");
     }
     status_ = turbo::invalid_argument_error(
-        StrCat(loc_string, unknown_name, ": ", message));
+        turbo::str_cat(loc_string, unknown_name, ": ", message));
   }
 
   void InvalidValue(const converter::LocationTrackerInterface& loc,
                     std::string_view type_name,
                     std::string_view value) override {
     status_ = turbo::invalid_argument_error(
-        StrCat(GetLocString(loc), ": invalid value ", std::string(value),
+        turbo::str_cat(GetLocString(loc), ": invalid value ", std::string(value),
                      " for type ", std::string(type_name)));
   }
 
   void MissingField(const converter::LocationTrackerInterface& loc,
                     std::string_view missing_name) override {
-    status_ = turbo::invalid_argument_error(StrCat(
+    status_ = turbo::invalid_argument_error(turbo::str_cat(
         GetLocString(loc), ": missing field ", std::string(missing_name)));
   }
 
@@ -164,7 +165,7 @@ class StatusErrorListener : public converter::ErrorListener {
     std::string loc_string = loc.ToString();
     turbo::trim_all(&loc_string);
     if (!loc_string.empty()) {
-      loc_string = StrCat("(", loc_string, ")");
+      loc_string = turbo::str_cat("(", loc_string, ")");
     }
     return loc_string;
   }

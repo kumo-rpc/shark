@@ -57,6 +57,8 @@
 #include <shark/stubs/hash.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/escaping.h>
 #include <turbo/strings/str_replace.h>
 #include <turbo/strings/substitute.h>
 #include <turbo/strings/ascii.h>
@@ -391,7 +393,7 @@ namespace shark::compiler::cpp {
 
     std::string ExtensionName(const FieldDescriptor* d) {
         if (const Descriptor* scope = d->extension_scope())
-            return StrCat(ClassName(scope), "::", ResolveKeyword(d->name()));
+            return turbo::str_cat(ClassName(scope), "::", ResolveKeyword(d->name()));
         return ResolveKeyword(d->name());
     }
 
@@ -502,11 +504,11 @@ namespace shark::compiler::cpp {
         std::string_view prefix = IsMapEntryMessage(field->containing_type()) ? "" : "_impl_.";
         std::string_view split_prefix = split ? "_split_->" : "";
         if (field->real_containing_oneof() == nullptr) {
-            return StrCat(prefix, split_prefix, FieldName(field), "_");
+            return turbo::str_cat(prefix, split_prefix, FieldName(field), "_");
         }
         // Oneof fields are never split.
         GOOGLE_CHECK(!split);
-        return StrCat(prefix, field->containing_oneof()->name(), "_.",
+        return turbo::str_cat(prefix, field->containing_oneof()->name(), "_.",
             FieldName(field), "_");
     }
 
@@ -519,7 +521,7 @@ namespace shark::compiler::cpp {
     std::string QualifiedOneofCaseConstantName(const FieldDescriptor* field) {
         GOOGLE_DCHECK(field->containing_oneof());
         const std::string qualification = QualifiedClassName(field->containing_type());
-        return StrCat(qualification, "::", OneofCaseConstantName(field));
+        return turbo::str_cat(qualification, "::", OneofCaseConstantName(field));
     }
 
     const char* EnumUnderlyingCppType(const EnumDescriptor* enum_descriptor) {
@@ -590,7 +592,7 @@ namespace shark::compiler::cpp {
             // This field's camelcase name is not unique.  As a hack, add the field
             // number to the constant name.  This makes the constant rather useless,
             // but what can we do?
-            result += "_" + StrCat(field->number());
+            result += "_" + turbo::str_cat(field->number());
         }
 
         return result;
@@ -748,9 +750,9 @@ namespace shark::compiler::cpp {
         if (number == std::numeric_limits<int32_t>::min()) {
             // This needs to be special-cased, see explanation here:
             // https://gcc.gnu.org/bugzilla/show_bug.cgi?id=52661
-            return StrCat(number + 1, " - 1");
+            return turbo::str_cat(number + 1, " - 1");
         } else {
-            return StrCat(number);
+            return turbo::str_cat(number);
         }
     }
 
@@ -758,13 +760,13 @@ namespace shark::compiler::cpp {
         if (number == std::numeric_limits<int64_t>::min()) {
             // This needs to be special-cased, see explanation here:
             // https://gcc.gnu.org/bugzilla/show_bug.cgi?id=52661
-            return StrCat("int64_t{", number + 1, "} - 1");
+            return turbo::str_cat("int64_t{", number + 1, "} - 1");
         }
-        return StrCat("int64_t{", number, "}");
+        return turbo::str_cat("int64_t{", number, "}");
     }
 
     static std::string UInt64ToString(uint64_t number) {
-        return StrCat("uint64_t{", number, "u}");
+        return turbo::str_cat("uint64_t{", number, "u}");
     }
 
     std::string DefaultValue(const FieldDescriptor* field) {
@@ -776,15 +778,15 @@ namespace shark::compiler::cpp {
         case SharkFieldCppType::CPPTYPE_INT32:
             return Int32ToString(field->default_value_int32());
         case SharkFieldCppType::CPPTYPE_INT8:
-            return StrCat("static_cast<int8_t>(", field->default_value_int32(), ")");
+            return turbo::str_cat("static_cast<int8_t>(", field->default_value_int32(), ")");
         case SharkFieldCppType::CPPTYPE_INT16:
-            return StrCat("static_cast<int16_t>(", field->default_value_int32(), ")");
+            return turbo::str_cat("static_cast<int16_t>(", field->default_value_int32(), ")");
         case SharkFieldCppType::CPPTYPE_UINT8:
-            return StrCat("static_cast<uint8_t>(", field->default_value_uint32(), "u)");
+            return turbo::str_cat("static_cast<uint8_t>(", field->default_value_uint32(), "u)");
         case SharkFieldCppType::CPPTYPE_UINT16:
-            return StrCat("static_cast<uint16_t>(", field->default_value_uint32(), "u)");
+            return turbo::str_cat("static_cast<uint16_t>(", field->default_value_uint32(), "u)");
         case SharkFieldCppType::CPPTYPE_UINT32:
-            return StrCat(field->default_value_uint32()) + "u";
+            return turbo::str_cat(field->default_value_uint32()) + "u";
         case SharkFieldCppType::CPPTYPE_INT64:
             return Int64ToString(field->default_value_int64());
         case SharkFieldCppType::CPPTYPE_UINT64:
@@ -798,7 +800,7 @@ namespace shark::compiler::cpp {
             } else if (value != value) {
                 return "std::numeric_limits<double>::quiet_NaN()";
             } else {
-                return SimpleDtoa(value);
+                return turbo::str_cat(turbo::HighPrecision(static_cast<double>(value)));
             }
         }
         case SharkFieldCppType::CPPTYPE_FLOAT: {
@@ -810,7 +812,7 @@ namespace shark::compiler::cpp {
             } else if (value != value) {
                 return "std::numeric_limits<float>::quiet_NaN()";
             } else {
-                std::string float_value = SimpleFtoa(value);
+                std::string float_value = turbo::str_cat(turbo::HighPrecision(static_cast<float>(value)));
                 // If floating point value contains a period (.) or an exponent
                 // (either E or e), then append suffix 'f' to make it a float
                 // literal.
@@ -829,7 +831,7 @@ namespace shark::compiler::cpp {
                 "static_cast< $0 >($1)", ClassName(field->enum_type(), true),
                 Int32ToString(field->default_value_enum()->number()));
         case SharkFieldCppType::CPPTYPE_STRING:
-            return "\"" + EscapeTrigraphs(CEscape(field->default_value_string())) + "\"";
+            return "\"" + EscapeTrigraphs(turbo::c_escape(field->default_value_string())) + "\"";
         case SharkFieldCppType::CPPTYPE_MESSAGE:
             return "*" + FieldMessageTypeName(field, options) + "::internal_default_instance()";
         }
@@ -849,8 +851,8 @@ namespace shark::compiler::cpp {
             } else {
                 // Not alphanumeric.  To avoid any possibility of name conflicts we
                 // use the hex code for the character.
-                StrAppend(&result, "_",
-                    strings::Hex(static_cast<uint8_t>(filename[i])));
+                turbo::str_append(&result, "_",
+                    turbo::Hex(static_cast<uint8_t>(filename[i])));
             }
         }
         return result;
@@ -866,9 +868,9 @@ namespace shark::compiler::cpp {
         const std::string& name,
         const Options& options) {
         if (file->package().empty()) {
-            return StrCat("::", name);
+            return turbo::str_cat("::", name);
         }
-        return StrCat(Namespace(file, options), "::", name);
+        return turbo::str_cat(Namespace(file, options), "::", name);
     }
 
     // Escape C++ trigraphs by escaping question marks to \?

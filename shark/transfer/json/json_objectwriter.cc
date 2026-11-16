@@ -31,6 +31,7 @@
 #include <shark/transfer/json/json_objectwriter.h>
 
 #include <cmath>
+#include <cstddef>
 #include <cstdint>
 #include <limits>
 
@@ -39,6 +40,8 @@
 #include <shark/stubs/common.h>
 #include <shark/transfer/json/utility.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/encoding/base64.h>
+#include <turbo/strings/str_cat.h>
 #include <shark/transfer/json/json_escaping.h>
 
 namespace shark::util::converter {
@@ -85,19 +88,19 @@ JsonObjectWriter* JsonObjectWriter::RenderBool(std::string_view name,
 
 JsonObjectWriter* JsonObjectWriter::RenderInt32(std::string_view name,
                                                 int32_t value) {
-  return RenderSimple(name, StrCat(value));
+  return RenderSimple(name, turbo::str_cat(value));
 }
 
 JsonObjectWriter* JsonObjectWriter::RenderUint32(std::string_view name,
                                                  uint32_t value) {
-  return RenderSimple(name, StrCat(value));
+  return RenderSimple(name, turbo::str_cat(value));
 }
 
 JsonObjectWriter* JsonObjectWriter::RenderInt64(std::string_view name,
                                                 int64_t value) {
   WritePrefix(name);
   WriteChar('"');
-  WriteRawString(StrCat(value));
+  WriteRawString(turbo::str_cat(value));
   WriteChar('"');
   return this;
 }
@@ -106,7 +109,7 @@ JsonObjectWriter* JsonObjectWriter::RenderUint64(std::string_view name,
                                                  uint64_t value) {
   WritePrefix(name);
   WriteChar('"');
-  WriteRawString(StrCat(value));
+  WriteRawString(turbo::str_cat(value));
   WriteChar('"');
   return this;
 }
@@ -114,7 +117,7 @@ JsonObjectWriter* JsonObjectWriter::RenderUint64(std::string_view name,
 JsonObjectWriter* JsonObjectWriter::RenderDouble(std::string_view name,
                                                  double value) {
   if (std::isfinite(value)) {
-    return RenderSimple(name, SimpleDtoa(value));
+    return RenderSimple(name, turbo::str_cat(turbo::HighPrecision(static_cast<double>(value))));
   }
 
   // Render quoted with NaN/Infinity-aware DoubleAsString.
@@ -124,7 +127,7 @@ JsonObjectWriter* JsonObjectWriter::RenderDouble(std::string_view name,
 JsonObjectWriter* JsonObjectWriter::RenderFloat(std::string_view name,
                                                 float value) {
   if (std::isfinite(value)) {
-    return RenderSimple(name, SimpleFtoa(value));
+    return RenderSimple(name, turbo::str_cat(turbo::HighPrecision(static_cast<float>(value))));
   }
 
   // Render quoted with NaN/Infinity-aware FloatAsString.
@@ -144,11 +147,12 @@ JsonObjectWriter* JsonObjectWriter::RenderBytes(std::string_view name,
                                                 std::string_view value) {
   WritePrefix(name);
   std::string base64;
-
-  if (use_websafe_base64_for_bytes_)
-    WebSafeBase64EscapeWithPadding(std::string(value), &base64);
-  else
-    Base64Escape(value, &base64);
+  if (use_websafe_base64_for_bytes_) {
+    base64 = turbo::web_safe_base64_encode(value);
+    base64.resize((base64.size() + 3) & ~std::size_t{3}, '=');
+  } else {
+    base64 = turbo::base64_encode(value);
+  }
 
   WriteChar('"');
   // TODO(wpoon): Consider a ByteSink solution that writes the base64 bytes

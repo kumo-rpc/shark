@@ -34,6 +34,7 @@
 // This test proto2 methods on a proto2 layout.
 
 #include <shark/stubs/casts.h>
+#include <turbo/strings/str_cat.h>
 #include <tests/sk/unittest.skp.h>
 #include <shark/dynamic_message.h>
 #include <shark/reflection.h>
@@ -51,7 +52,7 @@ namespace {
 
 static int Func(int i, int j) { return i * j; }
 
-static std::string StrFunc(int i, int j) { return StrCat(Func(i, 4)); }
+static std::string StrFunc(int i, int j) { return turbo::str_cat(Func(i, 4)); }
 
 TEST(RepeatedFieldReflectionTest, RegularFields) {
   TestAllTypes message;

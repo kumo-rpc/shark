@@ -41,6 +41,7 @@
 #include <shark/types/type.skp.h>
 #include <shark/types/repeated_field.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 #include <turbo/status/result.h>
 #include <turbo/status/status.h>
 
@@ -173,7 +174,7 @@ SHARK_EXPORT std::string FloatAsString(float value);
 // Convert from int32, int64, uint32, uint64, double or float to string.
 template <typename T>
 std::string ValueAsString(T value) {
-  return StrCat(value);
+  return turbo::str_cat(value);
 }
 
 template <>
@@ -186,7 +187,7 @@ inline std::string ValueAsString(double value) {
   return DoubleAsString(value);
 }
 
-// Converts a string to float. Unlike safe_strtof, conversion will fail if the
+// Converts a string to float. Unlike SimpleAtof, conversion will fail if the
 // value fits into double but not float (e.g., DBL_MAX).
 SHARK_EXPORT bool SafeStrToFloat(std::string_view str, float* value);
 

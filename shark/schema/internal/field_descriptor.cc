@@ -14,6 +14,8 @@
 //
 
 #include <cstdint>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/escaping.h>
 
 #include <shark/schema/internal/utils.h>
 #include <shark/schema/internal/file_descriptor_tables_inl.h>
@@ -217,7 +219,7 @@ namespace shark {
             field_type = FieldTypeNameDebugString();
         }
 
-        std::string label = StrCat(kLabelToName[static_cast<int>(this->label())], " ");
+        std::string label = turbo::str_cat(kLabelToName[static_cast<int>(this->label())], " ");
 
         // Label is omitted for maps, oneof, and plain proto3 fields.
         if (is_map() || is_repeated() || real_containing_oneof() ||
@@ -247,7 +249,7 @@ namespace shark {
                 contents->append(", ");
             }
             contents->append("json_name = \"");
-            contents->append(CEscape(json_name()));
+            contents->append(turbo::c_escape(json_name()));
             contents->append("\"");
         }
 

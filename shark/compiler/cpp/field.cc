@@ -50,6 +50,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 #include <turbo/strings/substitute.h>
 
 namespace shark::compiler::cpp {
@@ -67,8 +68,8 @@ namespace shark::compiler::cpp {
             if (options.field_listener_options.forbidden_field_listener_events.count(
                     std::string(annotation_name)))
                 return;
-            (*variables)[StrCat("annotate_", annotation_name)] = turbo::substitute(
-                StrCat(substitute_template_prefix, prepared_template, ");\n"),
+            (*variables)[turbo::str_cat("annotate_", annotation_name)] = turbo::substitute(
+                turbo::str_cat(substitute_template_prefix, prepared_template, ");\n"),
                 field_index, access_type);
         }
 
@@ -81,13 +82,13 @@ namespace shark::compiler::cpp {
                 : "$0";
 
             if (descriptor->default_value_string().empty()) {
-                return turbo::substitute(StrCat("_internal_has_", field_name, "() ? ",
+                return turbo::substitute(turbo::str_cat("_internal_has_", field_name, "() ? ",
                                                field_pointer, ": nullptr"),
                     field_member);
             }
 
             if (descriptor->options().ctype() == shark::FieldOptions_CType::STRING_PIECE) {
-                return turbo::substitute(StrCat("_internal_has_", field_name, "() ? ",
+                return turbo::substitute(turbo::str_cat("_internal_has_", field_name, "() ? ",
                                                field_pointer, ": nullptr"),
                     field_member);
             }
@@ -96,7 +97,7 @@ namespace shark::compiler::cpp {
                 ? "&$1.get()"
                 : "&$1";
             return turbo::substitute(
-                StrCat("_internal_has_", field_name, "() ? ", field_pointer, " : ",
+                turbo::str_cat("_internal_has_", field_name, "() ? ", field_pointer, " : ",
                     default_value_pointer),
                 field_member, MakeDefaultFieldName(descriptor));
         }
@@ -104,7 +105,7 @@ namespace shark::compiler::cpp {
         std::string GenerateTemplateForSingleString(const FieldDescriptor* descriptor,
             std::string_view field_member) {
             if (descriptor->default_value_string().empty()) {
-                return StrCat("&", field_member);
+                return turbo::str_cat("&", field_member);
             }
 
             if (descriptor->options().ctype() == shark::FieldOptions_CType::STRING) {
@@ -113,7 +114,7 @@ namespace shark::compiler::cpp {
                     MakeDefaultFieldName(descriptor));
             }
 
-            return StrCat("&", field_member);
+            return turbo::str_cat("&", field_member);
         }
 
     } // namespace
@@ -141,7 +142,7 @@ namespace shark::compiler::cpp {
         }
         if (options.annotate_accessor) {
             for (size_t i = 0; i < GOOGLE_ARRAYSIZE(kAccessorsAnnotations); ++i) {
-                (*variables)[kAccessorsAnnotations[i]] = StrCat(
+                (*variables)[kAccessorsAnnotations[i]] = turbo::str_cat(
                     "  ", FieldName(descriptor), "_AccessedNoStrip = true;\n");
             }
         }
@@ -154,7 +155,7 @@ namespace shark::compiler::cpp {
         std::string field_member = (*variables)["field"];
         const shark::OneofDescriptor* oneof_member = descriptor->real_containing_oneof();
         const std::string proto_ns = (*variables)["proto_ns"];
-        const std::string substitute_template_prefix = StrCat("  ", (*variables)["tracker"], ".$1<$0>(this, ");
+        const std::string substitute_template_prefix = turbo::str_cat("  ", (*variables)["tracker"], ".$1<$0>(this, ");
         std::string prepared_template;
 
         // Flat template is needed if the prepared one is introspecting the values
@@ -182,10 +183,10 @@ namespace shark::compiler::cpp {
                 prepared_template = GenerateTemplateForSingleString(descriptor, field_member);
             }
         } else {
-            prepared_template = StrCat("&", field_member);
+            prepared_template = turbo::str_cat("&", field_member);
         }
         if (descriptor->is_repeated() && !descriptor->is_map() && descriptor->type() != SharkFieldType::MESSAGE) {
-            prepared_flat_template = StrCat("&", field_member);
+            prepared_flat_template = turbo::str_cat("&", field_member);
         } else {
             prepared_flat_template = prepared_template;
         }
@@ -233,14 +234,14 @@ namespace shark::compiler::cpp {
 
         (*variables)["ns"] = Namespace(descriptor, options);
         (*variables)["name"] = FieldName(descriptor);
-        (*variables)["index"] = StrCat(descriptor->index());
-        (*variables)["number"] = StrCat(descriptor->number());
+        (*variables)["index"] = turbo::str_cat(descriptor->index());
+        (*variables)["number"] = turbo::str_cat(descriptor->number());
         (*variables)["classname"] = ClassName(FieldScope(descriptor), false);
         (*variables)["declared_type"] = DeclaredTypeMethodName(descriptor->type());
         bool split = ShouldSplit(descriptor, options);
         (*variables)["field"] = FieldMemberName(descriptor, split);
 
-        (*variables)["tag_size"] = StrCat(
+        (*variables)["tag_size"] = turbo::str_cat(
             WireFormat::TagSize(descriptor->number(), descriptor->type()));
         (*variables)["deprecated_attr"] = DeprecatedAttribute(options, descriptor);
 
@@ -263,12 +264,12 @@ namespace shark::compiler::cpp {
             GOOGLE_CHECK_EQ(has_bit_index, -1);
             return;
         }
-        variables_["set_hasbit"] = StrCat(
+        variables_["set_hasbit"] = turbo::str_cat(
             variables_["has_bits"], "[", has_bit_index / 32, "] |= 0x",
-            strings::Hex(1u << (has_bit_index % 32), strings::ZERO_PAD_8), "u;");
-        variables_["clear_hasbit"] = StrCat(
+            turbo::Hex(1u << (has_bit_index % 32), turbo::kZeroPad8), "u;");
+        variables_["clear_hasbit"] = turbo::str_cat(
             variables_["has_bits"], "[", has_bit_index / 32, "] &= ~0x",
-            strings::Hex(1u << (has_bit_index % 32), strings::ZERO_PAD_8), "u;");
+            turbo::Hex(1u << (has_bit_index % 32), turbo::kZeroPad8), "u;");
     }
 
     void FieldGenerator::SetInlinedStringIndex(int32_t inlined_string_index) {
@@ -279,15 +280,15 @@ namespace shark::compiler::cpp {
         // The first bit is the tracking bit for on demand registering ArenaDtor.
         GOOGLE_CHECK_GT(inlined_string_index, 0)
             << "_inlined_string_donated_'s bit 0 is reserved for arena dtor tracking";
-        variables_["inlined_string_donated"] = StrCat(
+        variables_["inlined_string_donated"] = turbo::str_cat(
             "(", variables_["inlined_string_donated_array"], "[",
             inlined_string_index / 32, "] & 0x",
-            strings::Hex(1u << (inlined_string_index % 32), strings::ZERO_PAD_8),
+            turbo::Hex(1u << (inlined_string_index % 32), turbo::kZeroPad8),
             "u) != 0;");
-        variables_["donating_states_word"] = StrCat(variables_["inlined_string_donated_array"], "[",
+        variables_["donating_states_word"] = turbo::str_cat(variables_["inlined_string_donated_array"], "[",
             inlined_string_index / 32, "]");
-        variables_["mask_for_undonate"] = StrCat(
-            "~0x", strings::Hex(1u << (inlined_string_index % 32), strings::ZERO_PAD_8),
+        variables_["mask_for_undonate"] = turbo::str_cat(
+            "~0x", turbo::Hex(1u << (inlined_string_index % 32), turbo::kZeroPad8),
             "u");
     }
 

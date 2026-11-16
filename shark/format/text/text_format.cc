@@ -58,6 +58,10 @@
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/numbers.h>
+#include <turbo/strings/escaping.h>
+#include <turbo/strings/str_join.h>
 #include <turbo/strings/ascii.h>
 #include <shark/types/any.h>
 #include <shark/types/map_field.h>
@@ -423,7 +427,7 @@ namespace shark {
                 && TryConsume("[")) {
                 std::string full_type_name, prefix;
                 DO(ConsumeAnyTypeUrl(&full_type_name, &prefix));
-                std::string prefix_and_full_type_name = StrCat(prefix, full_type_name);
+                std::string prefix_and_full_type_name = turbo::str_cat(prefix, full_type_name);
                 DO(ConsumeBeforeWhitespace("]"));
                 TryConsumeWhitespace();
                 // ':' is optional between message labels and values.
@@ -475,7 +479,7 @@ namespace shark {
                 TryConsumeWhitespace();
 
                 int32_t field_number;
-                if (allow_field_number_ && safe_strto32(field_name, &field_number)) {
+                if (allow_field_number_ && turbo::SimpleAtoi(field_name, &field_number)) {
                     if (descriptor->IsExtensionNumber(field_number)) {
                         field = finder_
                             ? finder_->FindExtensionByNumber(descriptor, field_number)
@@ -654,7 +658,7 @@ namespace shark {
             const FieldDescriptor* field) {
             if (--recursion_limit_ < 0) {
                 ReportError(
-                    StrCat("Message is too deep, the parser exceeded the "
+                    turbo::str_cat("Message is too deep, the parser exceeded the "
                            "configured recursion limit of ",
                         initial_recursion_limit_, "."));
                 return false;
@@ -689,7 +693,7 @@ namespace shark {
         bool SkipFieldMessage() {
             if (--recursion_limit_ < 0) {
                 ReportError(
-                    StrCat("Message is too deep, the parser exceeded the "
+                    turbo::str_cat("Message is too deep, the parser exceeded the "
                            "configured recursion limit of ",
                         initial_recursion_limit_, "."));
                 return false;
@@ -829,7 +833,7 @@ namespace shark {
 
                 } else if (LookingAt("-") || LookingAtType(io::Tokenizer::TYPE_INTEGER)) {
                     DO(ConsumeSignedInteger(&int_value, kint32max));
-                    value = StrCat(int_value); // for error reporting
+                    value = turbo::str_cat(int_value); // for error reporting
                     enum_value = enum_type->FindValueByNumber(int_value);
                 } else {
                     ReportError("Expected integer or identifier, got: " + tokenizer_.current().text);
@@ -871,7 +875,7 @@ namespace shark {
         bool SkipFieldValue() {
             if (--recursion_limit_ < 0) {
                 ReportError(
-                    StrCat("Message is too deep, the parser exceeded the "
+                    turbo::str_cat("Message is too deep, the parser exceeded the "
                            "configured recursion limit of ",
                         initial_recursion_limit_, "."));
                 return false;
@@ -1255,7 +1259,7 @@ namespace shark {
         bool TryConsumeWhitespace() {
             had_silent_marker_ = false;
             if (LookingAtType(io::Tokenizer::TYPE_WHITESPACE)) {
-                if (tokenizer_.current().text == StrCat(" ", internal::kDebugStringSilentMarkerForDetection)) {
+                if (tokenizer_.current().text == turbo::str_cat(" ", internal::kDebugStringSilentMarkerForDetection)) {
                     had_silent_marker_ = true;
                 }
                 tokenizer_.Next();
@@ -1525,7 +1529,7 @@ namespace shark {
         void PrintString(const std::string& val,
             TextFormat::BaseTextGenerator* generator) const override {
             generator->PrintLiteral("\"");
-            generator->PrintString(strings::Utf8SafeCEscape(val));
+            generator->PrintString(turbo::utf8_safe_c_escape(val));
             generator->PrintLiteral("\"");
         }
         void PrintBytes(const std::string& val,
@@ -1584,7 +1588,7 @@ namespace shark {
             if (input.size() > INT_MAX) {
                 error_collector->AddError(
                     -1, 0,
-                    StrCat(
+                    turbo::str_cat(
                         "Input size too large: ", static_cast<int64_t>(input.size()),
                         " bytes", " > ", INT_MAX, " bytes."));
                 return false;
@@ -1644,7 +1648,7 @@ namespace shark {
             std::vector<std::string> missing_fields;
             output->FindInitializationErrors(&missing_fields);
             parser_impl->ReportError(-1, 0,
-                "Message missing required fields: " + Join(missing_fields, ", "));
+                "Message missing required fields: " + turbo::StrJoin(missing_fields, ", "));
             return false;
         }
         return true;
@@ -1724,27 +1728,27 @@ namespace shark {
     }
     void TextFormat::FastFieldValuePrinter::PrintInt32(
         int32_t val, BaseTextGenerator* generator) const {
-        generator->PrintString(StrCat(val));
+        generator->PrintString(turbo::str_cat(val));
     }
     void TextFormat::FastFieldValuePrinter::PrintUInt32(
         uint32_t val, BaseTextGenerator* generator) const {
-        generator->PrintString(StrCat(val));
+        generator->PrintString(turbo::str_cat(val));
     }
     void TextFormat::FastFieldValuePrinter::PrintInt64(
         int64_t val, BaseTextGenerator* generator) const {
-        generator->PrintString(StrCat(val));
+        generator->PrintString(turbo::str_cat(val));
     }
     void TextFormat::FastFieldValuePrinter::PrintUInt64(
         uint64_t val, BaseTextGenerator* generator) const {
-        generator->PrintString(StrCat(val));
+        generator->PrintString(turbo::str_cat(val));
     }
     void TextFormat::FastFieldValuePrinter::PrintFloat(
         float val, BaseTextGenerator* generator) const {
-        generator->PrintString(!std::isnan(val) ? SimpleFtoa(val) : "nan");
+        generator->PrintString(!std::isnan(val) ? turbo::str_cat(turbo::HighPrecision(static_cast<float>(val))) : "nan");
     }
     void TextFormat::FastFieldValuePrinter::PrintDouble(
         double val, BaseTextGenerator* generator) const {
-        generator->PrintString(!std::isnan(val) ? SimpleDtoa(val) : "nan");
+        generator->PrintString(!std::isnan(val) ? turbo::str_cat(turbo::HighPrecision(static_cast<double>(val))) : "nan");
     }
     void TextFormat::FastFieldValuePrinter::PrintEnum(
         int32_t /*val*/, const std::string& name,
@@ -1755,7 +1759,7 @@ namespace shark {
     void TextFormat::FastFieldValuePrinter::PrintString(
         const std::string& val, BaseTextGenerator* generator) const {
         generator->PrintLiteral("\"");
-        generator->PrintString(CEscape(val));
+        generator->PrintString(turbo::c_escape(val));
         generator->PrintLiteral("\"");
     }
     void TextFormat::FastFieldValuePrinter::PrintBytes(
@@ -2305,7 +2309,7 @@ namespace shark {
         // if use_field_number_ is true, prints field number instead
         // of field name.
         if (use_field_number_) {
-            generator->PrintString(StrCat(field->number()));
+            generator->PrintString(turbo::str_cat(field->number()));
             return;
         }
 
@@ -2382,7 +2386,7 @@ namespace shark {
                 // it is possible for the user to force an unknown integer value.  So we
                 // simply use the integer value itself as the enum value name in this
                 // case.
-                printer->PrintEnum(enum_value, StrCat(enum_value), generator);
+                printer->PrintEnum(enum_value, turbo::str_cat(enum_value), generator);
             }
             break;
         }
@@ -2432,13 +2436,13 @@ namespace shark {
         int recursion_budget) const {
         for (int i = 0; i < unknown_fields.field_count(); i++) {
             const UnknownField& field = unknown_fields.field(i);
-            std::string field_number = StrCat(field.number());
+            std::string field_number = turbo::str_cat(field.number());
 
             switch (field.type()) {
             case UnknownField::TYPE_VARINT:
                 generator->PrintString(field_number);
                 generator->PrintMaybeWithMarker(": ");
-                generator->PrintString(StrCat(field.varint()));
+                generator->PrintString(turbo::str_cat(field.varint()));
                 if (single_line_mode_) {
                     generator->PrintLiteral(" ");
                 } else {
@@ -2449,7 +2453,7 @@ namespace shark {
                 generator->PrintString(field_number);
                 generator->PrintMaybeWithMarker(": ", "0x");
                 generator->PrintString(
-                    StrCat(strings::Hex(field.fixed32(), strings::ZERO_PAD_8)));
+                    turbo::str_cat(turbo::Hex(field.fixed32(), turbo::kZeroPad8)));
                 if (single_line_mode_) {
                     generator->PrintLiteral(" ");
                 } else {
@@ -2461,7 +2465,7 @@ namespace shark {
                 generator->PrintString(field_number);
                 generator->PrintMaybeWithMarker(": ", "0x");
                 generator->PrintString(
-                    StrCat(strings::Hex(field.fixed64(), strings::ZERO_PAD_16)));
+                    turbo::str_cat(turbo::Hex(field.fixed64(), turbo::kZeroPad16)));
                 if (single_line_mode_) {
                     generator->PrintLiteral(" ");
                 } else {
@@ -2500,7 +2504,7 @@ namespace shark {
                     // This field is not parseable as a Message (or we ran out of
                     // recursion budget). So it is probably just a plain string.
                     generator->PrintMaybeWithMarker(": ", "\"");
-                    generator->PrintString(CEscape(value));
+                    generator->PrintString(turbo::c_escape(value));
                     if (single_line_mode_) {
                         generator->PrintLiteral("\" ");
                     } else {

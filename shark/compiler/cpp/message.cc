@@ -58,6 +58,8 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/hash.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/str_join.h>
 #include <turbo/strings/ascii.h>
 #include <turbo/strings/substitute.h>
 #include <shark/types/map_entry_lite.h>
@@ -87,16 +89,16 @@ namespace shark {
                     for (int i = 0; i < masks.size(); i++) {
                         if (masks[i] == 0)
                             continue;
-                        std::string m = StrCat("0x", strings::Hex(masks[i], strings::ZERO_PAD_8));
+                        std::string m = turbo::str_cat("0x", turbo::Hex(masks[i], turbo::kZeroPad8));
                         // Each xor evaluates to 0 if the expected bits are present.
                         parts.push_back(
-                            StrCat("((", has_bits_var, "[", i, "] & ", m, ") ^ ", m, ")"));
+                            turbo::str_cat("((", has_bits_var, "[", i, "] & ", m, ") ^ ", m, ")"));
                     }
                     GOOGLE_CHECK(!parts.empty());
                     // If we have multiple parts, each expected to be 0, then bitwise-or them.
                     std::string result = parts.size() == 1
                         ? parts[0]
-                        : StrCat("(", Join(parts, "\n       | "), ")");
+                        : turbo::str_cat("(", turbo::StrJoin(parts, "\n       | "), ")");
                     return result + (return_success ? " == 0" : " != 0");
                 }
 
@@ -109,7 +111,7 @@ namespace shark {
                             *cached_has_word_index = (has_bit_index / 32);
                             format("cached_has_bits = $has_bits$[$1$];\n", *cached_has_word_index);
                         }
-                        const std::string mask = StrCat(strings::Hex(1u << (has_bit_index % 32), strings::ZERO_PAD_8));
+                        const std::string mask = turbo::str_cat(turbo::Hex(1u << (has_bit_index % 32), turbo::kZeroPad8));
                         format("if (cached_has_bits & 0x$1$u) {\n", mask);
                     } else {
                         format("if (has_$1$()) {\n", FieldName(field));
@@ -484,7 +486,7 @@ namespace shark {
                         if (this_word != first_word) {
                             format(" ||\n    ");
                         }
-                        format.Set("mask", strings::Hex(mask, strings::ZERO_PAD_8));
+                        format.Set("mask", turbo::Hex(mask, turbo::kZeroPad8));
                         if (this_word == cached_has_word_index) {
                             format("(cached_has_bits & 0x$mask$u) != 0");
                         } else {
@@ -513,8 +515,8 @@ namespace shark {
                     if (options.field_listener_options.forbidden_field_listener_events.count(
                             std::string(annotation_name)))
                         return;
-                    (*variables)[StrCat("annotate_", annotation_name)] = turbo::substitute(
-                        StrCat(injector_template_prefix, injector_template_suffix),
+                    (*variables)[turbo::str_cat("annotate_", annotation_name)] = turbo::substitute(
+                        turbo::str_cat(injector_template_prefix, injector_template_suffix),
                         (*variables)["classtype"]);
                 }
 
@@ -551,7 +553,7 @@ namespace shark {
                         if (!StrContains(annotation_name, "repeated") && !StrContains(annotation_name, "size") && !StrContains(annotation_name, "clear")) {
                             // Primitive fields accessors.
                             // "Has" is here as users calling "has" on a repeated field is a mistake.
-                            (*variables)[annotation_name] = StrCat(
+                            (*variables)[annotation_name] = turbo::str_cat(
                                 "  ", tracker, ".", listener_call,
                                 "(this, id.number(), _proto_TypeTraits::GetPtr(id.number(), ",
                                 extensions, ", id.default_value_ref()));");
@@ -559,15 +561,15 @@ namespace shark {
                             // Repeated index accessors.
                             std::string str_index = "index";
                             if (StrContains(annotation_name, "add")) {
-                                str_index = StrCat(extensions, ".ExtensionSize(id.number()) - 1");
+                                str_index = turbo::str_cat(extensions, ".ExtensionSize(id.number()) - 1");
                             }
-                            (*variables)[annotation_name] = StrCat("  ", tracker, ".", listener_call,
+                            (*variables)[annotation_name] = turbo::str_cat("  ", tracker, ".", listener_call,
                                 "(this, id.number(), "
                                 "_proto_TypeTraits::GetPtr(id.number(), ",
                                 extensions, ", ", str_index, "));");
                         } else if (StrContains(annotation_name, "list") || StrContains(annotation_name, "size")) {
                             // Repeated full accessors.
-                            (*variables)[annotation_name] = StrCat(
+                            (*variables)[annotation_name] = turbo::str_cat(
                                 "  ", tracker, ".", listener_call,
                                 "(this, id.number(), _proto_TypeTraits::GetRepeatedPtr(id.number(), ",
                                 extensions, "));");
@@ -616,7 +618,7 @@ namespace shark {
                 variables_["annotate_mergefrom"] = "";
 
                 if (HasTracker(descriptor_, options_)) {
-                    const std::string injector_template = StrCat("  ", variables_["tracker"], ".");
+                    const std::string injector_template = turbo::str_cat("  ", variables_["tracker"], ".");
 
                     MaySetAnnotationVariable(options, "serialize", injector_template,
                         "OnSerialize(this);\n", &variables_);
@@ -1055,7 +1057,7 @@ $annotate_repeated_extension_list_mutable$
 
                     format.Set("has_array_index", has_bit_index / 32);
                     format.Set("has_mask",
-                        strings::Hex(1u << (has_bit_index % 32), strings::ZERO_PAD_8));
+                        turbo::Hex(1u << (has_bit_index % 32), turbo::kZeroPad8));
                     format(
                         "inline bool $classname$::_internal_has_$name$() const {\n"
                         "  bool value = "
@@ -1191,7 +1193,7 @@ $annotate_repeated_extension_list_mutable$
                         int has_bit_index = HasBitIndex(field);
                         format.Set("has_array_index", has_bit_index / 32);
                         format.Set("has_mask",
-                            strings::Hex(1u << (has_bit_index % 32), strings::ZERO_PAD_8));
+                            turbo::Hex(1u << (has_bit_index % 32), turbo::kZeroPad8));
                         format("$has_bits$[$has_array_index$] &= ~0x$has_mask$u;\n");
                     }
                 }
@@ -1240,7 +1242,7 @@ $annotate_repeated_extension_list_mutable$
                         format.Set("field_name", UnderscoresToCamelCase(field->name(), true));
                         format.Set("oneof_name", field->containing_oneof()->name());
                         format.Set("oneof_index",
-                            StrCat(field->containing_oneof()->index()));
+                            turbo::str_cat(field->containing_oneof()->index()));
                         GenerateOneofMemberHasBits(field, format);
                     } else {
                         // Singular field.
@@ -1830,7 +1832,7 @@ $annotate_repeated_extension_list_mutable$
 
                 const size_t sizeof_has_bits = HasBitsSize();
                 const std::string has_bits_decl = sizeof_has_bits == 0 ? ""
-                                                                       : StrCat("::$proto_ns$::internal::HasBits<",
+                                                                       : turbo::str_cat("::$proto_ns$::internal::HasBits<",
                                                                              sizeof_has_bits, "> _has_bits_;\n");
 
                 format(
@@ -2306,7 +2308,7 @@ $annotate_repeated_extension_list_mutable$
                 } else if (!has_bit_indices_.empty()) {
                     entries += has_bit_indices_.size();
                     for (int i = 0; i < has_bit_indices_.size(); i++) {
-                        const std::string index = has_bit_indices_[i] >= 0 ? StrCat(has_bit_indices_[i]) : "~0u";
+                        const std::string index = has_bit_indices_[i] >= 0 ? turbo::str_cat(has_bit_indices_[i]) : "~0u";
                         format("$1$,\n", index);
                     }
                 }
@@ -2314,7 +2316,7 @@ $annotate_repeated_extension_list_mutable$
                     entries += inlined_string_indices_.size();
                     for (int inlined_string_index : inlined_string_indices_) {
                         const std::string index = inlined_string_index >= 0
-                            ? StrCat(inlined_string_index, ",  // inlined_string_index")
+                            ? turbo::str_cat(inlined_string_index, ",  // inlined_string_index")
                             : "~0u,";
                         format("$1$\n", index);
                     }
@@ -3061,7 +3063,7 @@ $annotate_repeated_extension_list_mutable$
                     if (have_outer_if) {
                         // Emit an if() that will let us skip the whole chunk if none are set.
                         uint32_t chunk_mask = GenChunkMask(chunk, has_bit_indices_);
-                        std::string chunk_mask_str = StrCat(strings::Hex(chunk_mask, strings::ZERO_PAD_8));
+                        std::string chunk_mask_str = turbo::str_cat(turbo::Hex(chunk_mask, turbo::kZeroPad8));
 
                         // Check (up to) 8 has_bits at a time if we have more than one field in
                         // this chunk.  Due to field layout ordering, we may check
@@ -3418,7 +3420,7 @@ $annotate_repeated_extension_list_mutable$
                     if (have_outer_if) {
                         // Emit an if() that will let us skip the whole chunk if none are set.
                         uint32_t chunk_mask = GenChunkMask(chunk, has_bit_indices_);
-                        std::string chunk_mask_str = StrCat(strings::Hex(chunk_mask, strings::ZERO_PAD_8));
+                        std::string chunk_mask_str = turbo::str_cat(turbo::Hex(chunk_mask, turbo::kZeroPad8));
 
                         // Check (up to) 8 has_bits at a time if we have more than one field in
                         // this chunk.  Due to field layout ordering, we may check
@@ -3464,8 +3466,8 @@ $annotate_repeated_extension_list_mutable$
                             // Check hasbit, using cached bits.
                             GOOGLE_CHECK(HasHasbit(field));
                             int has_bit_index = has_bit_indices_[field->index()];
-                            const std::string mask = StrCat(
-                                strings::Hex(1u << (has_bit_index % 32), strings::ZERO_PAD_8));
+                            const std::string mask = turbo::str_cat(
+                                turbo::Hex(1u << (has_bit_index % 32), turbo::kZeroPad8));
                             format("if (cached_has_bits & 0x$1$u) {\n", mask);
                             format.Indent();
 
@@ -3654,7 +3656,7 @@ $annotate_repeated_extension_list_mutable$
                     // Attempt to use the state of cached_has_bits, if possible.
                     int has_bit_index = HasBitIndex(field);
                     if (cached_has_bits_index == has_bit_index / 32) {
-                        const std::string mask = StrCat(strings::Hex(1u << (has_bit_index % 32), strings::ZERO_PAD_8));
+                        const std::string mask = turbo::str_cat(turbo::Hex(1u << (has_bit_index % 32), turbo::kZeroPad8));
 
                         format("if (cached_has_bits & 0x$1$u) {\n", mask);
                     } else {
@@ -3679,8 +3681,8 @@ $annotate_repeated_extension_list_mutable$
             void MessageGenerator::GenerateSerializeOneExtensionRange(
                 io::Printer* printer, const Descriptor::ExtensionRange* range) {
                 std::map<std::string, std::string> vars = variables_;
-                vars["start"] = StrCat(range->start);
-                vars["end"] = StrCat(range->end);
+                vars["start"] = turbo::str_cat(range->start);
+                vars["end"] = turbo::str_cat(range->end);
                 Formatter format(printer, vars);
                 format("// Extension range [$start$, $end$)\n");
                 format(
@@ -4205,7 +4207,7 @@ $annotate_repeated_extension_list_mutable$
                     if (have_outer_if) {
                         // Emit an if() that will let us skip the whole chunk if none are set.
                         uint32_t chunk_mask = GenChunkMask(chunk, has_bit_indices_);
-                        std::string chunk_mask_str = StrCat(strings::Hex(chunk_mask, strings::ZERO_PAD_8));
+                        std::string chunk_mask_str = turbo::str_cat(turbo::Hex(chunk_mask, turbo::kZeroPad8));
 
                         // Check (up to) 8 has_bits at a time if we have more than one field in
                         // this chunk.  Due to field layout ordering, we may check

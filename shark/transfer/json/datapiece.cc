@@ -39,6 +39,9 @@
 #include <shark/descriptor.h>
 #include <turbo/status/status.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/encoding/base64.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/numbers.h>
 #include <shark/transfer/json/utility.h>
 #include <shark/stubs/mathutil.h>
 #include <turbo/strings/match.h>
@@ -127,7 +130,7 @@ turbo::Result<float> DoubleToFloat(double before) {
 
 turbo::Result<int32_t> DataPiece::ToInt32() const {
   if (type_ == TYPE_STRING)
-    return StringToNumber<int32_t>(safe_strto32);
+    return StringToNumber<int32_t>(turbo::SimpleAtoi<int32_t>);
 
   if (type_ == TYPE_DOUBLE)
     return FloatingPointToIntConvertAndCheck<int32_t, double>(double_);
@@ -140,7 +143,7 @@ turbo::Result<int32_t> DataPiece::ToInt32() const {
 
 turbo::Result<uint32_t> DataPiece::ToUint32() const {
   if (type_ == TYPE_STRING)
-    return StringToNumber<uint32_t>(safe_strtou32);
+    return StringToNumber<uint32_t>(turbo::SimpleAtoi<uint32_t>);
 
   if (type_ == TYPE_DOUBLE)
     return FloatingPointToIntConvertAndCheck<uint32_t, double>(double_);
@@ -153,7 +156,7 @@ turbo::Result<uint32_t> DataPiece::ToUint32() const {
 
 turbo::Result<int64_t> DataPiece::ToInt64() const {
   if (type_ == TYPE_STRING)
-    return StringToNumber<int64_t>(safe_strto64);
+    return StringToNumber<int64_t>(turbo::SimpleAtoi<int64_t>);
 
   if (type_ == TYPE_DOUBLE)
     return FloatingPointToIntConvertAndCheck<int64_t, double>(double_);
@@ -166,7 +169,7 @@ turbo::Result<int64_t> DataPiece::ToInt64() const {
 
 turbo::Result<uint64_t> DataPiece::ToUint64() const {
   if (type_ == TYPE_STRING)
-    return StringToNumber<uint64_t>(safe_strtou64);
+    return StringToNumber<uint64_t>(turbo::SimpleAtoi<uint64_t>);
 
   if (type_ == TYPE_DOUBLE)
     return FloatingPointToIntConvertAndCheck<uint64_t, double>(double_);
@@ -185,11 +188,10 @@ turbo::Result<double> DataPiece::ToDouble() const {
     if (str_ == "Infinity") return std::numeric_limits<double>::infinity();
     if (str_ == "-Infinity") return -std::numeric_limits<double>::infinity();
     if (str_ == "NaN") return std::numeric_limits<double>::quiet_NaN();
-    turbo::Result<double> value = StringToNumber<double>(safe_strtod);
+    turbo::Result<double> value = StringToNumber<double>(turbo::SimpleAtod);
     if (value.ok() && !std::isfinite(value.value())) {
-      // safe_strtod converts out-of-range values to +inf/-inf, but we want
-      // to report them as errors.
-      return turbo::invalid_argument_error(StrCat("\"", str_, "\""));
+      // SimpleAtod rejects out-of-range values. Non-finite results still fail.
+      return turbo::invalid_argument_error(turbo::str_cat("\"", str_, "\""));
     } else {
       return value;
     }
@@ -205,8 +207,8 @@ turbo::Result<float> DataPiece::ToFloat() const {
     if (str_ == "Infinity") return std::numeric_limits<float>::infinity();
     if (str_ == "-Infinity") return -std::numeric_limits<float>::infinity();
     if (str_ == "NaN") return std::numeric_limits<float>::quiet_NaN();
-    // SafeStrToFloat() is used instead of safe_strtof() because the later
-    // does not fail on inputs like SimpleDtoa(DBL_MAX).
+    // SafeStrToFloat() is used instead of SimpleAtof() because the later
+    // does not fail on inputs like the decimal form of DBL_MAX.
     return StringToNumber<float>(SafeStrToFloat);
   }
   return GenericConvert<float>();
@@ -217,7 +219,7 @@ turbo::Result<bool> DataPiece::ToBool() const {
     case TYPE_BOOL:
       return bool_;
     case TYPE_STRING:
-      return StringToNumber<bool>(safe_strtob);
+      return StringToNumber<bool>(turbo::SimpleAtob);
     default:
       return turbo::invalid_argument_error(
           ValueAsStringOrDefault("Wrong type. Cannot convert to Bool."));
@@ -229,9 +231,7 @@ turbo::Result<std::string> DataPiece::ToString() const {
     case TYPE_STRING:
       return std::string(str_);
     case TYPE_BYTES: {
-      std::string base64;
-      Base64Escape(str_, &base64);
-      return base64;
+      return turbo::base64_encode(str_);
     }
     default:
       return turbo::invalid_argument_error(
@@ -243,25 +243,23 @@ std::string DataPiece::ValueAsStringOrDefault(
     std::string_view default_string) const {
   switch (type_) {
     case TYPE_INT32:
-      return StrCat(i32_);
+      return turbo::str_cat(i32_);
     case TYPE_INT64:
-      return StrCat(i64_);
+      return turbo::str_cat(i64_);
     case TYPE_UINT32:
-      return StrCat(u32_);
+      return turbo::str_cat(u32_);
     case TYPE_UINT64:
-      return StrCat(u64_);
+      return turbo::str_cat(u64_);
     case TYPE_DOUBLE:
       return DoubleAsString(double_);
     case TYPE_FLOAT:
       return FloatAsString(float_);
     case TYPE_BOOL:
-      return SimpleBtoa(bool_);
+      return bool_ ? "true" : "false";
     case TYPE_STRING:
-      return StrCat("\"", str_, "\"");
+      return turbo::str_cat("\"", str_, "\"");
     case TYPE_BYTES: {
-      std::string base64;
-      WebSafeBase64Escape(str_, &base64);
-      return StrCat("\"", base64, "\"");
+      return turbo::str_cat("\"", turbo::web_safe_base64_encode(str_), "\"");
     }
     case TYPE_NULL:
       return "null";
@@ -370,24 +368,19 @@ template <typename To>
 turbo::Result<To> DataPiece::StringToNumber(bool (*func)(std::string_view,
                                                           To*)) const {
   if (str_.size() > 0 && (str_[0] == ' ' || str_[str_.size() - 1] == ' ')) {
-    return turbo::invalid_argument_error(StrCat("\"", str_, "\""));
+    return turbo::invalid_argument_error(turbo::str_cat("\"", str_, "\""));
   }
   To result;
   if (func(str_, &result)) return result;
   return turbo::invalid_argument_error(
-      StrCat("\"", std::string(str_), "\""));
+      turbo::str_cat("\"", std::string(str_), "\""));
 }
 
 bool DataPiece::DecodeBase64(std::string_view src, std::string* dest) const {
   // Try web-safe decode first, if it fails, try the non-web-safe decode.
-  if (WebSafeBase64Unescape(src, dest)) {
+  if (turbo::web_safe_base64_decode(src, dest)) {
     if (use_strict_base64_decoding_) {
-      // In strict mode, check if the escaped version gives us the same value as
-      // unescaped.
-      std::string encoded;
-      // WebSafeBase64Escape does no padding by default.
-      WebSafeBase64Escape(*dest, &encoded);
-      // Remove trailing padding '=' characters before comparison.
+      std::string encoded = turbo::web_safe_base64_encode(*dest);
       std::string_view src_no_padding = std::string_view(src).substr(
           0, turbo::ends_with(src, "=") ? src.find_last_not_of('=') + 1
                                       : src.length());
@@ -396,11 +389,12 @@ bool DataPiece::DecodeBase64(std::string_view src, std::string* dest) const {
     return true;
   }
 
-  if (Base64Unescape(src, dest)) {
+  if (turbo::base64_decode(src, dest)) {
     if (use_strict_base64_decoding_) {
-      std::string encoded;
-      Base64Escape(reinterpret_cast<const unsigned char*>(dest->data()),
-                         dest->length(), &encoded, false);
+      std::string encoded = turbo::base64_encode(*dest);
+      while (!encoded.empty() && encoded.back() == '=') {
+        encoded.pop_back();
+      }
       std::string_view src_no_padding = std::string_view(src).substr(
           0, turbo::ends_with(src, "=") ? src.find_last_not_of('=') + 1
                                       : src.length());

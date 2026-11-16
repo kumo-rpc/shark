@@ -38,6 +38,7 @@
 #include <shark/descriptor.skp.h>
 #include <shark/io/printer.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 
 namespace shark::compiler::cpp {
 
@@ -52,7 +53,7 @@ namespace shark::compiler::cpp {
             const std::string kArenaStringPtr = kNS + "ArenaStringPtr";
 
             (*variables)["default"] = DefaultValue(options, descriptor);
-            (*variables)["default_length"] = StrCat(descriptor->default_value_string().length());
+            (*variables)["default_length"] = turbo::str_cat(descriptor->default_value_string().length());
             (*variables)["default_variable_name"] = MakeDefaultName(descriptor);
             (*variables)["default_variable_field"] = MakeDefaultFieldName(descriptor);
 
@@ -61,7 +62,7 @@ namespace shark::compiler::cpp {
                 (*variables)["default_value"] = "&" + (*variables)["default_string"];
                 (*variables)["lazy_variable_args"] = "";
             } else {
-                (*variables)["lazy_variable"] = StrCat(QualifiedClassName(descriptor->containing_type(), options),
+                (*variables)["lazy_variable"] = turbo::str_cat(QualifiedClassName(descriptor->containing_type(), options),
                     "::", MakeDefaultFieldName(descriptor));
 
                 (*variables)["default_string"] = (*variables)["lazy_variable"] + ".get()";
@@ -580,7 +581,7 @@ namespace shark::compiler::cpp {
         : StringFieldGenerator(descriptor, options) {
         SetCommonOneofFieldVariables(descriptor, &variables_);
         variables_["field_name"] = UnderscoresToCamelCase(descriptor->name(), true);
-        variables_["oneof_index"] = StrCat(descriptor->containing_oneof()->index());
+        variables_["oneof_index"] = turbo::str_cat(descriptor->containing_oneof()->index());
     }
 
     StringOneofFieldGenerator::~StringOneofFieldGenerator() { }

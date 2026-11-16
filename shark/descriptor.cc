@@ -33,6 +33,7 @@
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
 #include <shark/schema/internal/utils.h>
+#include <turbo/strings/str_join.h>
 #include <shark/schema/internal/symbol.h>
 #include <shark/schema/internal/file_descriptor_tables.h>
 #include <shark/schema/internal/file_descriptor_tables_inl.h>
@@ -145,7 +146,7 @@ namespace shark {
         const DescriptorPool* pool, std::string* output) {
         std::vector<std::string> all_options;
         if (RetrieveOptions(depth, options, pool, &all_options)) {
-            output->append(Join(all_options, ", "));
+            output->append(turbo::StrJoin(all_options, ", "));
         }
         return !all_options.empty();
     }

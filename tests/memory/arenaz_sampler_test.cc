@@ -37,6 +37,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 
 
 // Must be included last.
@@ -357,7 +358,7 @@ TEST(ThreadSafeArenazSamplerTest, MultiThread) {
     std::vector<std::unique_ptr<ThreadSafeArenazSamplerTestThread>> threads;
     for (int i = 0; i < kNumThreads; i++) {
       auto t = std::make_unique<ThreadSafeArenazSamplerTestThread>(
-          options, StrCat("thread", i), &arena, barrier);
+          options, turbo::str_cat("thread", i), &arena, barrier);
       t->Start();
       threads.push_back(std::move(t));
     }

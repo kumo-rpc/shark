@@ -35,6 +35,8 @@
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/escaping.h>
 #include <turbo/status/status.h>
 #include <shark/transfer/json/utility.h>
 #include <shark/transfer/json/type_resolver.h>
@@ -308,7 +310,7 @@ class DescriptorPoolTypeResolver : public TypeResolver {
                             std::string* type_name) {
     if (type_url.substr(0, url_prefix_.size() + 1) != url_prefix_ + "/") {
       return turbo::invalid_argument_error(
-          StrCat("Invalid type URL, type URLs must be of the form '",
+          turbo::str_cat("Invalid type URL, type URLs must be of the form '",
                        url_prefix_, "/<typename>', got: ", type_url));
     }
     *type_name = type_url.substr(url_prefix_.size() + 1);
@@ -320,31 +322,31 @@ class DescriptorPoolTypeResolver : public TypeResolver {
       case SharkFieldCppType::CPPTYPE_INT32:
       case SharkFieldCppType::CPPTYPE_INT8:
       case SharkFieldCppType::CPPTYPE_INT16:
-        return StrCat(descriptor->default_value_int32());
+        return turbo::str_cat(descriptor->default_value_int32());
         break;
       case SharkFieldCppType::CPPTYPE_INT64:
-        return StrCat(descriptor->default_value_int64());
+        return turbo::str_cat(descriptor->default_value_int64());
         break;
       case SharkFieldCppType::CPPTYPE_UINT32:
       case SharkFieldCppType::CPPTYPE_UINT8:
       case SharkFieldCppType::CPPTYPE_UINT16:
-        return StrCat(descriptor->default_value_uint32());
+        return turbo::str_cat(descriptor->default_value_uint32());
         break;
       case SharkFieldCppType::CPPTYPE_UINT64:
-        return StrCat(descriptor->default_value_uint64());
+        return turbo::str_cat(descriptor->default_value_uint64());
         break;
       case SharkFieldCppType::CPPTYPE_FLOAT:
-        return SimpleFtoa(descriptor->default_value_float());
+        return turbo::str_cat(turbo::HighPrecision(static_cast<float>(descriptor->default_value_float())));
         break;
       case SharkFieldCppType::CPPTYPE_DOUBLE:
-        return SimpleDtoa(descriptor->default_value_double());
+        return turbo::str_cat(turbo::HighPrecision(static_cast<double>(descriptor->default_value_double())));
         break;
       case SharkFieldCppType::CPPTYPE_BOOL:
         return descriptor->default_value_bool() ? "true" : "false";
         break;
       case SharkFieldCppType::CPPTYPE_STRING:
         if (descriptor->type() == SharkFieldType::BYTES) {
-          return CEscape(descriptor->default_value_string());
+          return turbo::c_escape(descriptor->default_value_string());
         } else {
           return descriptor->default_value_string();
         }

@@ -38,6 +38,7 @@
 #include <shark/format/wired/wire_format.h>
 #include <shark/io/printer.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 
 namespace shark::compiler::cpp {
 
@@ -106,10 +107,10 @@ namespace shark::compiler::cpp {
             (*variables)["cached_byte_size_name"] = MakeVarintCachedSizeName(descriptor);
             bool cold = ShouldSplit(descriptor, options);
             (*variables)["cached_byte_size_field"] = MakeVarintCachedSizeFieldName(descriptor, cold);
-            (*variables)["tag"] = StrCat(internal::WireFormat::MakeTag(descriptor));
+            (*variables)["tag"] = turbo::str_cat(internal::WireFormat::MakeTag(descriptor));
             int fixed_size = FixedSize(descriptor->type());
             if (fixed_size != -1) {
-                (*variables)["fixed_size"] = StrCat(fixed_size);
+                (*variables)["fixed_size"] = turbo::str_cat(fixed_size);
             }
             (*variables)["wire_format_field_type"] = SharkTypeTrait::enum_name(
                 static_cast<SharkType>(descriptor->type()));

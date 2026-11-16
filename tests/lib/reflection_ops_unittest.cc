@@ -43,6 +43,7 @@
 #include <tests/common/test_util.h>
 
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_join.h>
 
 namespace shark::internal {
 namespace {
@@ -454,7 +455,7 @@ TEST(ReflectionOpsTest, OneofIsInitialized) {
 static std::string FindInitializationErrors(const Message& message) {
   std::vector<std::string> errors;
   ReflectionOps::FindInitializationErrors(message, "", &errors);
-  return Join(errors, ",");
+  return turbo::StrJoin(errors, ",");
 }
 
 TEST(ReflectionOpsTest, FindInitializationErrors) {

@@ -32,6 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 #include <shark/reflection_ops.h>
+#include <turbo/strings/str_cat.h>
 
 #include <string>
 #include <vector>
@@ -380,7 +381,7 @@ static std::string SubMessagePrefix(const std::string& prefix,
   }
   if (index != -1) {
     result.append("[");
-    result.append(StrCat(index));
+    result.append(turbo::str_cat(index));
     result.append("]");
   }
   result.append(".");

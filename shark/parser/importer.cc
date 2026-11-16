@@ -51,6 +51,7 @@
 #include <shark/io/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_join.h>
 #include <turbo/strings/str_split.h>
 #include <turbo/strings/str_replace.h>
 
@@ -297,7 +298,7 @@ namespace shark::compiler {
                 canonical_parts.push_back(part);
             }
         }
-        std::string result = Join(canonical_parts, "/");
+        std::string result = turbo::StrJoin(canonical_parts, "/");
         if (!path.empty() && path[0] == '/') {
             // Restore leading slash.
             result = '/' + result;

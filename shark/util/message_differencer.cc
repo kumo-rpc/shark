@@ -55,6 +55,8 @@
 #include <shark/message.h>
 #include <shark/format/text/text_format.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/escaping.h>
 #include <turbo/format/str_format.h>
 #include <shark/util/field_comparator.h>
 
@@ -1990,14 +1992,14 @@ void MessageDifferencer::StreamReporter::PrintPath(
         continue;
       }
     } else {
-      printer_->PrintRaw(StrCat(specific_field.unknown_field_number));
+      printer_->PrintRaw(turbo::str_cat(specific_field.unknown_field_number));
     }
     if (left_side && specific_field.index >= 0) {
-      printer_->Print("[$name$]", "name", StrCat(specific_field.index));
+      printer_->Print("[$name$]", "name", turbo::str_cat(specific_field.index));
     }
     if (!left_side && specific_field.new_index >= 0) {
       printer_->Print("[$name$]", "name",
-                      StrCat(specific_field.new_index));
+                      turbo::str_cat(specific_field.new_index));
     }
   }
 }
@@ -2062,19 +2064,19 @@ void MessageDifferencer::StreamReporter::PrintUnknownFieldValue(
   std::string output;
   switch (unknown_field->type()) {
     case UnknownField::TYPE_VARINT:
-      output = StrCat(unknown_field->varint());
+      output = turbo::str_cat(unknown_field->varint());
       break;
     case UnknownField::TYPE_FIXED32:
-      output = StrCat(
-          "0x", strings::Hex(unknown_field->fixed32(), strings::ZERO_PAD_8));
+      output = turbo::str_cat(
+          "0x", turbo::Hex(unknown_field->fixed32(), turbo::kZeroPad8));
       break;
     case UnknownField::TYPE_FIXED64:
-      output = StrCat(
-          "0x", strings::Hex(unknown_field->fixed64(), strings::ZERO_PAD_16));
+      output = turbo::str_cat(
+          "0x", turbo::Hex(unknown_field->fixed64(), turbo::kZeroPad16));
       break;
     case UnknownField::TYPE_LENGTH_DELIMITED:
       output = turbo::str_sprintf(
-          "\"%s\"", CEscape(unknown_field->length_delimited()).c_str());
+          "\"%s\"", turbo::c_escape(unknown_field->length_delimited()).c_str());
       break;
   }
   printer_->PrintRaw(output);
@@ -2110,7 +2112,7 @@ void MessageDifferencer::StreamReporter::PrintMapKey(
     if (key_string.empty()) {
       key_string = "''";
     }
-    printer_->PrintRaw(StrCat("[", key_string, "]"));
+    printer_->PrintRaw(turbo::str_cat("[", key_string, "]"));
   }
 }
 

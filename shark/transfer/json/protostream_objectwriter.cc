@@ -39,6 +39,8 @@
 #include <shark/stubs/once.h>
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/numbers.h>
 #include <turbo/status/status.h>
 #include <turbo/status/result.h>
 #include <shark/stubs/time.h>
@@ -140,7 +142,7 @@ turbo::Status GetNanosFromStringPiece(std::string_view s_nanos,
   // "0." + s_nanos.ToString() seconds. An int32_t is used for the
   // conversion to 'nanos', rather than a double, so that there is no
   // loss of precision.
-  if (!s_nanos.empty() && !safe_strto32(s_nanos, &i_nanos)) {
+  if (!s_nanos.empty() && !turbo::SimpleAtoi(s_nanos, &i_nanos)) {
     return turbo::invalid_argument_error(parse_failure_message);
   }
   if (i_nanos > kNanosPerSecond || i_nanos < 0) {
@@ -390,7 +392,7 @@ void ProtoStreamObjectWriter::AnyWriter::WriteAny() {
       // There are uninterpreted data, but we never got a "@type" field.
       if (!invalid_) {
         parent_->InvalidValue("Any",
-                              StrCat("Missing @type for any field in ",
+                              turbo::str_cat("Missing @type for any field in ",
                                            parent_->master_type_.name()));
         invalid_ = true;
       }
@@ -431,7 +433,7 @@ void ProtoStreamObjectWriter::AnyWriter::Event::DeepCopy() {
   // string value stays valid, we make a copy of the string value and update
   // DataPiece to reference our own copy.
   if (value_.type() == DataPiece::TYPE_STRING) {
-    StrAppend(&value_storage_, value_.str());
+    turbo::str_append(&value_storage_, value_.str());
     value_ = DataPiece(value_storage_, value_.use_strict_base64_decoding());
   } else if (value_.type() == DataPiece::TYPE_BYTES) {
     value_storage_ = value_.ToBytes().value();
@@ -784,7 +786,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartList(
     }
 
     // Report an error.
-    InvalidValue("Map", StrCat("Cannot have repeated items ('", name,
+    InvalidValue("Map", turbo::str_cat("Cannot have repeated items ('", name,
                                      "') within a map."));
     return this;
   }
@@ -881,7 +883,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartList(
       Push(name, Item::MESSAGE, false, true);
       return this;
     }
-    InvalidValue("Map", StrCat("Cannot bind a list to map for field '",
+    InvalidValue("Map", turbo::str_cat("Cannot bind a list to map for field '",
                                      name, "'."));
     IncrementInvalidDepth();
     return this;
@@ -921,7 +923,7 @@ turbo::Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter
         if (int_value.ok()) {
           ow->ProtoWriter::RenderDataPiece(
               "string_value",
-              DataPiece(SimpleDtoa(int_value.value()), true));
+              DataPiece(turbo::str_cat(turbo::HighPrecision(static_cast<double>(int_value.value()))), true));
           return turbo::ok_status();
         }
       }
@@ -934,7 +936,7 @@ turbo::Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter
         if (int_value.ok()) {
           ow->ProtoWriter::RenderDataPiece(
               "string_value",
-              DataPiece(SimpleDtoa(int_value.value()), true));
+              DataPiece(turbo::str_cat(turbo::HighPrecision(static_cast<double>(int_value.value()))), true));
           return turbo::ok_status();
         }
       }
@@ -948,7 +950,7 @@ turbo::Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter
         turbo::Result<int64_t> int_value = data.ToInt64();
         if (int_value.ok()) {
           ow->ProtoWriter::RenderDataPiece(
-              "string_value", DataPiece(StrCat(int_value.value()), true));
+              "string_value", DataPiece(turbo::str_cat(int_value.value()), true));
           return turbo::ok_status();
         }
       }
@@ -962,7 +964,7 @@ turbo::Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter
         turbo::Result<uint64_t> int_value = data.ToUint64();
         if (int_value.ok()) {
           ow->ProtoWriter::RenderDataPiece(
-              "string_value", DataPiece(StrCat(int_value.value()), true));
+              "string_value", DataPiece(turbo::str_cat(int_value.value()), true));
           return turbo::ok_status();
         }
       }
@@ -975,7 +977,7 @@ turbo::Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter
         if (float_value.ok()) {
           ow->ProtoWriter::RenderDataPiece(
               "string_value",
-              DataPiece(SimpleDtoa(float_value.value()), true));
+              DataPiece(turbo::str_cat(turbo::HighPrecision(static_cast<double>(float_value.value()))), true));
           return turbo::ok_status();
         }
       }
@@ -988,7 +990,7 @@ turbo::Status ProtoStreamObjectWriter::RenderStructValue(ProtoStreamObjectWriter
         if (double_value.ok()) {
           ow->ProtoWriter::RenderDataPiece(
               "string_value",
-              DataPiece(SimpleDtoa(double_value.value()), true));
+              DataPiece(turbo::str_cat(turbo::HighPrecision(static_cast<double>(double_value.value()))), true));
           return turbo::ok_status();
         }
       }
@@ -1022,7 +1024,7 @@ turbo::Status ProtoStreamObjectWriter::RenderTimestamp(ProtoStreamObjectWriter* 
   if (data.type() == DataPiece::TYPE_NULL) return turbo::ok_status();
   if (data.type() != DataPiece::TYPE_STRING) {
     return turbo::invalid_argument_error(
-        StrCat("Invalid data type for timestamp, value is ",
+        turbo::str_cat("Invalid data type for timestamp, value is ",
                      data.ValueAsStringOrDefault("")));
   }
 
@@ -1032,7 +1034,7 @@ turbo::Status ProtoStreamObjectWriter::RenderTimestamp(ProtoStreamObjectWriter* 
   int32_t nanos;
   if (!::shark::internal::ParseTime(std::string(value), &seconds,
                                                &nanos)) {
-    return turbo::invalid_argument_error(StrCat("Invalid time format: ", value));
+    return turbo::invalid_argument_error(turbo::str_cat("Invalid time format: ", value));
   }
 
 
@@ -1053,7 +1055,7 @@ turbo::Status ProtoStreamObjectWriter::RenderFieldMask(ProtoStreamObjectWriter* 
   if (data.type() == DataPiece::TYPE_NULL) return turbo::ok_status();
   if (data.type() != DataPiece::TYPE_STRING) {
     return turbo::invalid_argument_error(
-        StrCat("Invalid data type for field mask, value is ",
+        turbo::str_cat("Invalid data type for field mask, value is ",
                      data.ValueAsStringOrDefault("")));
   }
 
@@ -1069,7 +1071,7 @@ turbo::Status ProtoStreamObjectWriter::RenderDuration(ProtoStreamObjectWriter* o
   if (data.type() == DataPiece::TYPE_NULL) return turbo::ok_status();
   if (data.type() != DataPiece::TYPE_STRING) {
     return turbo::invalid_argument_error(
-        StrCat("Invalid data type for duration, value is ",
+        turbo::str_cat("Invalid data type for duration, value is ",
                      data.ValueAsStringOrDefault("")));
   }
 
@@ -1089,7 +1091,7 @@ turbo::Status ProtoStreamObjectWriter::RenderDuration(ProtoStreamObjectWriter* o
   std::string_view s_secs, s_nanos;
   SplitSecondsAndNanos(value, &s_secs, &s_nanos);
   uint64_t unsigned_seconds;
-  if (!safe_strtou64(s_secs, &unsigned_seconds)) {
+  if (!turbo::SimpleAtoi(s_secs, &unsigned_seconds)) {
     return turbo::invalid_argument_error(
         "Invalid duration format, failed to parse seconds");
   }
@@ -1141,7 +1143,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::RenderDataPiece(
     status = (*type_renderer)(this, data);
     if (!status.ok()) {
       InvalidValue(master_type_.name(),
-                   StrCat("Field '", name, "', ", status.message()));
+                   turbo::str_cat("Field '", name, "', ", status.message()));
     }
     ProtoWriter::EndObject();
     return this;
@@ -1187,7 +1189,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::RenderDataPiece(
       status = (*type_renderer)(this, data);
       if (!status.ok()) {
         InvalidValue(field->type_url(),
-                     StrCat("Field '", name, "', ", status.message()));
+                     turbo::str_cat("Field '", name, "', ", status.message()));
       }
       Pop();
       return this;
@@ -1221,7 +1223,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::RenderDataPiece(
       status = (*type_renderer)(this, data);
       if (!status.ok()) {
         InvalidValue(field->type_url(),
-                     StrCat("Field '", name, "', ", status.message()));
+                     turbo::str_cat("Field '", name, "', ", status.message()));
       }
       Pop();
     }
@@ -1326,7 +1328,7 @@ bool ProtoStreamObjectWriter::ValidMapKey(std::string_view unnormalized_name) {
   if (!current_->InsertMapKeyIfNotPresent(unnormalized_name)) {
     listener()->InvalidName(
         location(), unnormalized_name,
-        StrCat("Repeated map key: '", unnormalized_name,
+        turbo::str_cat("Repeated map key: '", unnormalized_name,
                      "' is already set."));
     return false;
   }

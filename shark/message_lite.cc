@@ -51,6 +51,7 @@
 #include <shark/stubs/mutex.h>
 #include <shark/stubs/stl_util.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 #include <shark/types/repeated_field.h>
 
 // Must be included last.
@@ -64,7 +65,7 @@ namespace shark {
 
     std::string MessageLite::DebugString() const {
         std::uintptr_t address = reinterpret_cast<std::uintptr_t>(this);
-        return StrCat("MessageLite at 0x", strings::Hex(address));
+        return turbo::str_cat("MessageLite at 0x", turbo::Hex(address));
     }
 
     namespace {

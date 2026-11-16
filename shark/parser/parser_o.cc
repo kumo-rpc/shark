@@ -50,6 +50,8 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/escaping.h>
 #include <unordered_map>
 
 namespace shark {
@@ -1176,7 +1178,7 @@ namespace shark {
                 DO(ConsumeInteger64(max_value, &value,
                     "Expected integer for field default value."));
                 // And stringify it again.
-                default_value->append(StrCat(value));
+                default_value->append(turbo::str_cat(value));
                 break;
             }
 
@@ -1204,7 +1206,7 @@ namespace shark {
                 DO(ConsumeInteger64(max_value, &value,
                     "Expected integer for field default value."));
                 // And stringify it again.
-                default_value->append(StrCat(value));
+                default_value->append(turbo::str_cat(value));
                 break;
             }
 
@@ -1219,7 +1221,7 @@ namespace shark {
                 double value;
                 DO(ConsumeNumber(&value, "Expected number."));
                 // And stringify it again.
-                default_value->append(SimpleDtoa(value));
+                default_value->append(turbo::str_cat(turbo::HighPrecision(static_cast<double>(value))));
                 break;
 
             case SharkType::BOOL:
@@ -1244,7 +1246,7 @@ namespace shark {
 
             case SharkType::BYTES:
                 DO(ConsumeString(default_value, "Expected string."));
-                *default_value = CEscape(*default_value);
+                *default_value = turbo::c_escape(*default_value);
                 break;
 
             case SharkType::ENUM:

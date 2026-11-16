@@ -14,6 +14,8 @@
 //
 
 #include <cstdint>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/escaping.h>
 #include <shark/schema/internal/field_descriptor.h>
 #include <shark/schema/internal/file_descriptor_tables.h>
 #include <shark/schema/internal/file_descriptor_tables_inl.h>
@@ -93,28 +95,28 @@ namespace shark {
         case SharkFieldCppType::CPPTYPE_INT32:
         case SharkFieldCppType::CPPTYPE_INT8:
         case SharkFieldCppType::CPPTYPE_INT16:
-            return StrCat(default_value_int32_t());
+            return turbo::str_cat(default_value_int32_t());
         case SharkFieldCppType::CPPTYPE_UINT8:
         case SharkFieldCppType::CPPTYPE_UINT16:
-            return StrCat(default_value_uint32_t());
+            return turbo::str_cat(default_value_uint32_t());
         case SharkFieldCppType::CPPTYPE_INT64:
-            return StrCat(default_value_int64_t());
+            return turbo::str_cat(default_value_int64_t());
         case SharkFieldCppType::CPPTYPE_UINT32:
-            return StrCat(default_value_uint32_t());
+            return turbo::str_cat(default_value_uint32_t());
         case SharkFieldCppType::CPPTYPE_UINT64:
-            return StrCat(default_value_uint64_t());
+            return turbo::str_cat(default_value_uint64_t());
         case SharkFieldCppType::CPPTYPE_FLOAT:
-            return SimpleFtoa(default_value_float());
+            return turbo::str_cat(turbo::HighPrecision(static_cast<float>(default_value_float())));
         case SharkFieldCppType::CPPTYPE_DOUBLE:
-            return SimpleDtoa(default_value_double());
+            return turbo::str_cat(turbo::HighPrecision(static_cast<double>(default_value_double())));
         case SharkFieldCppType::CPPTYPE_BOOL:
             return default_value_bool() ? "true" : "false";
         case SharkFieldCppType::CPPTYPE_STRING:
             if (quote_string_type) {
-                return "\"" + CEscape(default_value_string()) + "\"";
+                return "\"" + turbo::c_escape(default_value_string()) + "\"";
             } else {
                 if (type() == SharkFieldType::BYTES) {
-                    return CEscape(default_value_string());
+                    return turbo::c_escape(default_value_string());
                 } else {
                     return default_value_string();
                 }

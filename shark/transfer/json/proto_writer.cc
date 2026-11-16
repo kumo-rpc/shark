@@ -38,6 +38,8 @@
 #include <shark/stubs/once.h>
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/escaping.h>
 #include <turbo/status/result.h>
 #include <shark/stubs/time.h>
 #include <shark/transfer/json/constants.h>
@@ -437,16 +439,16 @@ std::string ProtoWriter::ProtoElement::ToString() const {
         if (loc.empty()) {
           loc = name;
         } else {
-          StrAppend(&loc, ".", name);
+          turbo::str_append(&loc, ".", name);
         }
       } else {
-        StrAppend(&loc, "[\"", CEscape(name), "\"]");
+        turbo::str_append(&loc, "[\"", turbo::c_escape(name), "\"]");
       }
     }
 
     int array_index_now = now->array_index_;
     if (ow_->IsRepeated(*(now->parent_field_)) && array_index_now > 0) {
-      StrAppend(&loc, "[", array_index_now - 1, "]");
+      turbo::str_append(&loc, "[", array_index_now - 1, "]");
     }
   }
 
@@ -500,7 +502,7 @@ ProtoWriter* ProtoWriter::StartObject(
   const shark::Type* type = LookupType(field);
   if (type == nullptr) {
     ++invalid_depth_;
-    InvalidName(name, StrCat("Missing descriptor for field: ",
+    InvalidName(name, turbo::str_cat("Missing descriptor for field: ",
                                    field->type_url()));
     return this;
   }
@@ -543,7 +545,7 @@ ProtoWriter* ProtoWriter::StartList(
   const shark::Type* type = LookupType(field);
   if (type == nullptr) {
     ++invalid_depth_;
-    InvalidName(name, StrCat("Missing descriptor for field: ",
+    InvalidName(name, turbo::str_cat("Missing descriptor for field: ",
                                    field->type_url()));
     return this;
   }
@@ -574,7 +576,7 @@ ProtoWriter* ProtoWriter::RenderDataPiece(
 
   const shark::Type* type = LookupType(field);
   if (type == nullptr) {
-    InvalidName(name, StrCat("Missing descriptor for field: ",
+    InvalidName(name, turbo::str_cat("Missing descriptor for field: ",
                                    field->type_url()));
     return this;
   }
@@ -590,7 +592,7 @@ bool ProtoWriter::ValidOneof(const shark::Field& field,
     if (element_->IsOneofIndexTaken(field.oneof_index())) {
       InvalidValue(
           "oneof",
-          StrCat(
+          turbo::str_cat(
               "union field '", element_->type().oneofs(field.oneof_index() - 1),
               "' is already set. Cannot set '", unnormalized_name, "'"));
       return false;

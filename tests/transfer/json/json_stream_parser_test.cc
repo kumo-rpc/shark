@@ -29,6 +29,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <shark/transfer/json/json_stream_parser.h>
+#include <turbo/strings/str_cat.h>
 
 #include <cstdint>
 
@@ -931,11 +932,11 @@ TEST_F(JsonStreamParserTest, DeepNestJsonNotExceedLimit) {
   int count = 99;
   std::string str;
   for (int i = 0; i < count; ++i) {
-    StrAppend(&str, "{'a':");
+    turbo::str_append(&str, "{'a':");
   }
-  StrAppend(&str, "{'nest64':'v1', 'nest64': false, 'nest64': ['v2']}");
+  turbo::str_append(&str, "{'nest64':'v1', 'nest64': false, 'nest64': ['v2']}");
   for (int i = 0; i < count; ++i) {
-    StrAppend(&str, "}");
+    turbo::str_append(&str, "}");
   }
   ow_.StartObject("");
   for (int i = 0; i < count; ++i) {
@@ -957,14 +958,14 @@ TEST_F(JsonStreamParserTest, DeepNestJsonExceedLimit) {
   int count = 98;
   std::string str;
   for (int i = 0; i < count; ++i) {
-    StrAppend(&str, "{'a':");
+    turbo::str_append(&str, "{'a':");
   }
   // Supports trailing commas.
-  StrAppend(&str,
+  turbo::str_append(&str,
                   "{'nest11' : [{'nest12' : null,},],"
                   "'nest21' : {'nest22' : {'nest23' : false}}}");
   for (int i = 0; i < count; ++i) {
-    StrAppend(&str, "}");
+    turbo::str_append(&str, "}");
   }
   DoErrorTest(str, 0,
               "Message too deep. Max recursion depth reached for key 'nest22'");

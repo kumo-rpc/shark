@@ -44,6 +44,7 @@
 #include <shark/format/wired/wire_format.h>
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
 #include <shark/stubs/casts.h>
 #include <turbo/status/status.h>
 #include <turbo/format/str_format.h>
@@ -320,13 +321,13 @@ turbo::Status ProtoStreamObjectSource::RenderTimestamp(
   int64_t seconds = p.first;
   int32_t nanos = p.second;
   if (seconds > kTimestampMaxSeconds || seconds < kTimestampMinSeconds) {
-    return turbo::internal_error(StrCat(
+    return turbo::internal_error(turbo::str_cat(
         "Timestamp seconds exceeds limit for field: ", field_name));
   }
 
   if (nanos < 0 || nanos >= kNanosPerSecond) {
     return turbo::internal_error(
-        StrCat("Timestamp nanos exceeds limit for field: ", field_name));
+        turbo::str_cat("Timestamp nanos exceeds limit for field: ", field_name));
   }
 
   ow->RenderString(field_name,
@@ -343,19 +344,19 @@ turbo::Status ProtoStreamObjectSource::RenderDuration(
   int32_t nanos = p.second;
   if (seconds > kDurationMaxSeconds || seconds < kDurationMinSeconds) {
     return turbo::internal_error(
-        StrCat("Duration seconds exceeds limit for field: ", field_name));
+        turbo::str_cat("Duration seconds exceeds limit for field: ", field_name));
   }
 
   if (nanos <= -kNanosPerSecond || nanos >= kNanosPerSecond) {
     return turbo::internal_error(
-        StrCat("Duration nanos exceeds limit for field: ", field_name));
+        turbo::str_cat("Duration nanos exceeds limit for field: ", field_name));
   }
 
   std::string sign = "";
   if (seconds < 0) {
     if (nanos > 0) {
       return turbo::internal_error(
-          StrCat("Duration nanos is non-negative, but seconds is "
+          turbo::str_cat("Duration nanos is non-negative, but seconds is "
                        "negative for field: ",
                        field_name));
     }
@@ -738,7 +739,7 @@ turbo::Status ProtoStreamObjectSource::RenderField(
         typeinfo_->GetTypeByTypeUrl(field->type_url());
     if (type == nullptr) {
       return turbo::internal_error(
-          StrCat("Invalid configuration. Could not find the type: ",
+          turbo::str_cat("Invalid configuration. Could not find the type: ",
                        field->type_url()));
     }
 
@@ -912,13 +913,13 @@ const std::string ProtoStreamObjectSource::ReadFieldValueAsString(
     case shark::SharkType::INT16: {
       uint32_t buffer32;
       stream_->ReadVarint32(&buffer32);
-      result = StrCat(bit_cast<int32_t>(buffer32));
+      result = turbo::str_cat(bit_cast<int32_t>(buffer32));
       break;
     }
     case shark::SharkType::INT64: {
       uint64_t buffer64;
       stream_->ReadVarint64(&buffer64);
-      result = StrCat(bit_cast<int64_t>(buffer64));
+      result = turbo::str_cat(bit_cast<int64_t>(buffer64));
       break;
     }
     case shark::SharkType::UINT32:
@@ -926,61 +927,61 @@ const std::string ProtoStreamObjectSource::ReadFieldValueAsString(
     case shark::SharkType::UINT16: {
       uint32_t buffer32;
       stream_->ReadVarint32(&buffer32);
-      result = StrCat(bit_cast<uint32_t>(buffer32));
+      result = turbo::str_cat(bit_cast<uint32_t>(buffer32));
       break;
     }
     case shark::SharkType::UINT64: {
       uint64_t buffer64;
       stream_->ReadVarint64(&buffer64);
-      result = StrCat(bit_cast<uint64_t>(buffer64));
+      result = turbo::str_cat(bit_cast<uint64_t>(buffer64));
       break;
     }
     case shark::SharkType::SINT32: {
       uint32_t buffer32;
       stream_->ReadVarint32(&buffer32);
-      result = StrCat(WireFormatLite::ZigZagDecode32(buffer32));
+      result = turbo::str_cat(WireFormatLite::ZigZagDecode32(buffer32));
       break;
     }
     case shark::SharkType::SINT64: {
       uint64_t buffer64;
       stream_->ReadVarint64(&buffer64);
-      result = StrCat(WireFormatLite::ZigZagDecode64(buffer64));
+      result = turbo::str_cat(WireFormatLite::ZigZagDecode64(buffer64));
       break;
     }
     case shark::SharkType::SFIXED32: {
       uint32_t buffer32;
       stream_->ReadLittleEndian32(&buffer32);
-      result = StrCat(bit_cast<int32_t>(buffer32));
+      result = turbo::str_cat(bit_cast<int32_t>(buffer32));
       break;
     }
     case shark::SharkType::SFIXED64: {
       uint64_t buffer64;
       stream_->ReadLittleEndian64(&buffer64);
-      result = StrCat(bit_cast<int64_t>(buffer64));
+      result = turbo::str_cat(bit_cast<int64_t>(buffer64));
       break;
     }
     case shark::SharkType::FIXED32: {
       uint32_t buffer32;
       stream_->ReadLittleEndian32(&buffer32);
-      result = StrCat(bit_cast<uint32_t>(buffer32));
+      result = turbo::str_cat(bit_cast<uint32_t>(buffer32));
       break;
     }
     case shark::SharkType::FIXED64: {
       uint64_t buffer64;
       stream_->ReadLittleEndian64(&buffer64);
-      result = StrCat(bit_cast<uint64_t>(buffer64));
+      result = turbo::str_cat(bit_cast<uint64_t>(buffer64));
       break;
     }
     case shark::SharkType::FLOAT: {
       uint32_t buffer32;
       stream_->ReadLittleEndian32(&buffer32);
-      result = SimpleFtoa(bit_cast<float>(buffer32));
+      result = turbo::str_cat(turbo::HighPrecision(static_cast<float>(bit_cast<float>(buffer32))));
       break;
     }
     case shark::SharkType::DOUBLE: {
       uint64_t buffer64;
       stream_->ReadLittleEndian64(&buffer64);
-      result = SimpleDtoa(bit_cast<double>(buffer64));
+      result = turbo::str_cat(turbo::HighPrecision(static_cast<double>(bit_cast<double>(buffer64))));
       break;
     }
     case shark::SharkType::ENUM: {
@@ -1062,7 +1063,7 @@ turbo::Status ProtoStreamObjectSource::IncrementRecursionDepth(
     std::string_view type_name, std::string_view field_name) const {
   if (++recursion_depth_ > max_recursion_depth_) {
     return turbo::invalid_argument_error(
-        StrCat("Message too deep. Max recursion depth reached for type '",
+        turbo::str_cat("Message too deep. Max recursion depth reached for type '",
                      type_name, "', field '", field_name, "'"));
   }
   return turbo::ok_status();

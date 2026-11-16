@@ -56,6 +56,7 @@
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_join.h>
 #include <shark/types/map_field.h>
 #include <shark/types/map_field_inl.h>
 #include <shark/unknown_field_set.h>
@@ -152,7 +153,7 @@ namespace shark {
     std::string Message::InitializationErrorString() const {
         std::vector<std::string> errors;
         FindInitializationErrors(&errors);
-        return Join(errors, ", ");
+        return turbo::StrJoin(errors, ", ");
     }
 
     void Message::CheckInitialized() const {

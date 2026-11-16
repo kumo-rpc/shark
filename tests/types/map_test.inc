@@ -55,6 +55,8 @@
 #include <gtest/gtest.h>
 #include <shark/stubs/casts.h>
 #include <turbo/strings/substitute.h>
+#include <turbo/strings/str_replace.h>
+#include <turbo/strings/str_cat.h>
 #include <tests/common/arena_test_util.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor_database.h>
@@ -1390,7 +1392,7 @@ TEST_F(MapImplTest, ConstInit) {
 
 static int Func(int i, int j) { return i * j; }
 
-static std::string StrFunc(int i, int j) { return StrCat(Func(i, j)); }
+static std::string StrFunc(int i, int j) { return turbo::str_cat(Func(i, j)); }
 
 static int Int(const std::string& value) {
   int result = 0;
@@ -2929,7 +2931,7 @@ TEST(GeneratedMapFieldTest, MessagesMustMerge) {
   *p++ = 0;
   *p++ = WireFormatLite::MakeTag(2, WireFormatLite::WIRETYPE_LENGTH_DELIMITED);
   *p++ = payload_size;
-  StrAppend(&s, dummy4_s, dummy5_s);
+  turbo::str_append(&s, dummy4_s, dummy5_s);
 
   // Test key then value then value.
   int key = 0;
@@ -3680,7 +3682,7 @@ static std::string DeterministicSerialization(const T& t) {
 static std::string ConstructKey(uint64_t n) {
   std::string s(n % static_cast<uint64_t>(9), '\0');
   if (s.empty()) {
-    return StrCat(n);
+    return turbo::str_cat(n);
   } else {
     while (n != 0) {
       s[n % s.size()] = (n >> 10) & 0x7f;
@@ -3786,7 +3788,7 @@ TEST(TextFormatMapTest, DynamicMessage) {
                                                   "testdata/map_test_data.txt"),
                         &expected_text, true));
 
-  CleanStringLineEndings(&expected_text, false);
+  turbo::StrReplaceAll({{"\r\n", "\n"}, {"\r", "\n"}}, &expected_text);
   std::string actual_text;
   TextFormat::PrintToString(*message, &actual_text);
   EXPECT_EQ(actual_text, expected_text);
@@ -3803,7 +3805,7 @@ TEST(TextFormatMapTest, Sorted) {
                                                   "testdata/map_test_data.txt"),
                         &expected_text, true));
 
-  CleanStringLineEndings(&expected_text, false);
+  turbo::StrReplaceAll({{"\r\n", "\n"}, {"\r", "\n"}}, &expected_text);
   TextFormat::Printer printer;
   std::string actual_text;
   printer.PrintToString(message, &actual_text);

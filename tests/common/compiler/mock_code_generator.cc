@@ -40,6 +40,8 @@
 #include <vector>
 
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_replace.h>
+#include <turbo/strings/str_join.h>
 #include <turbo/strings/str_split.h>
 
 #include <gtest/gtest.h>
@@ -73,7 +75,7 @@ namespace shark {
             for (size_t i = 0; i < all_files.size(); i++) {
                 names.push_back(all_files[i]->name());
             }
-            return Join(names, ",");
+            return turbo::StrJoin(names, ",");
         }
 
         static const char* kFirstInsertionPointName = "first_mock_insertion_point";
@@ -251,7 +253,7 @@ namespace shark {
                         shark::GeneratedCodeInfo info;
                         std::string content = GetOutputFileContent(name_, "first_insert", file, context);
                         if (insert_endlines) {
-                            GlobalReplaceSubstring(",", ",\n", &content);
+                            turbo::StrReplaceAll({{",", ",\n"}}, &content);
                         }
                         if (annotate) {
                             auto* annotation = info.add_annotation();
@@ -275,7 +277,7 @@ namespace shark {
                         shark::GeneratedCodeInfo info;
                         std::string content = GetOutputFileContent(name_, "second_insert", file, context);
                         if (insert_endlines) {
-                            GlobalReplaceSubstring(",", ",\n", &content);
+                            turbo::StrReplaceAll({{",", ",\n"}}, &content);
                         }
                         if (annotate) {
                             auto* annotation = info.add_annotation();

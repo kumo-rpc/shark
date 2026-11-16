@@ -52,6 +52,7 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_replace.h>
 #include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 #include <turbo/strings/substitute.h>
@@ -92,7 +93,7 @@ class MockGeneratorContext : public GeneratorContext {
         File::GetContents(TestUtil::TestSourceDir() + "/" + physical_filename,
                           &actual_contents, true))
         << physical_filename;
-    CleanStringLineEndings(&actual_contents, false);
+    turbo::StrReplaceAll({{"\r\n", "\n"}, {"\r", "\n"}}, &actual_contents);
 
 #ifdef WRITE_FILES  // Define to debug mismatched files.
     GOOGLE_CHECK_OK(File::SetContents("/tmp/expected.cc", expected_contents,

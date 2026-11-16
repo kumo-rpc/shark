@@ -40,10 +40,14 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
+#include <turbo/strings/str_cat.h>
+#include <turbo/strings/numbers.h>
 #include <turbo/status/status.h>
 #include <shark/transfer/json/object_writer.h>
 #include <shark/transfer/json/json_escaping.h>
 #include <turbo/strings/match.h>
+#include <turbo/unicode/api/utf8.h>
+#include <turbo/unicode/api/utf8_for_code_point.h>
 
 
 namespace shark::util::converter {
@@ -79,14 +83,14 @@ inline void ReplaceInvalidCodePoints(std::string_view str,
   while (!str.empty()) {
     int n_valid_bytes = internal::UTF8SpnStructurallyValid(str);
     std::string_view valid_part = str.substr(0, n_valid_bytes);
-    StrAppend(dst, valid_part);
+    turbo::str_append(dst, valid_part);
 
     if (n_valid_bytes == str.size()) {
       break;
     }
 
     // Append replacement value.
-    StrAppend(dst, replacement);
+    turbo::str_append(dst, replacement);
 
     // Move past valid bytes + one invalid byte.
     str.remove_prefix(n_valid_bytes + 1);
@@ -164,7 +168,7 @@ turbo::Status JsonStreamParser::Parse(std::string_view json) {
     // Don't point chunk to leftover_ because leftover_ will be updated in
     // ParseChunk(chunk).
     chunk_storage_.swap(leftover_);
-    StrAppend(&chunk_storage_, json);
+    turbo::str_append(&chunk_storage_, json);
     chunk = std::string_view(chunk_storage_);
   }
 
@@ -175,7 +179,7 @@ turbo::Status JsonStreamParser::Parse(std::string_view json) {
 
     // Any leftover characters are stashed in leftover_ for later parsing when
     // there is more data available.
-    StrAppend(&leftover_, chunk.substr(n));
+    turbo::str_append(&leftover_, chunk.substr(n));
     return status;
   } else {
     leftover_.assign(chunk.data(), chunk.size());
@@ -300,7 +304,7 @@ turbo::Status JsonStreamParser::RunParser() {
 
       default:
         result =
-            turbo::internal_error(StrCat("Unknown parse type: ", type));
+            turbo::internal_error(turbo::str_cat("Unknown parse type: ", type));
         break;
     }
     if (!result.ok()) {
@@ -310,7 +314,7 @@ turbo::Status JsonStreamParser::RunParser() {
         // If we have a key we still need to render, make sure to save off the
         // contents in our own storage.
         if (!key_.empty() && key_storage_.empty()) {
-          StrAppend(&key_storage_, key_);
+          turbo::str_append(&key_storage_, key_);
           key_ = std::string_view(key_storage_);
         }
         result = turbo::Status();
@@ -527,15 +531,15 @@ turbo::Status JsonStreamParser::ParseUnicodeEscape() {
                            ParseErrorType::MISSING_LOW_SURROGATE);
     }
   }
-  if (!coerce_to_utf8_ && !IsValidCodePoint(code)) {
+  if (!coerce_to_utf8_ &&
+      !(code < 0xD800 || (code >= 0xE000 && code <= 0x10FFFF))) {
     return ReportFailure("Invalid unicode code point.",
                          ParseErrorType::INVALID_UNICODE);
   }
-  char buf[UTFmax];
-  int len = EncodeAsUTF8Char(code, buf);
+  turbo::Utf8ForCodePoint utf8(code);
   // Advance past the [final] code unit escape.
   p_.remove_prefix(kUnicodeEscapedLength);
-  parsed_storage_.append(buf, len);
+  parsed_storage_.append(utf8.bytes, utf8.length);
   return turbo::ok_status();
 }
 
@@ -569,7 +573,7 @@ turbo::Status JsonStreamParser::ParseNumber() {
 
 turbo::Status JsonStreamParser::ParseDoubleHelper(const std::string& number,
                                                  NumberResult* result) {
-  if (!safe_strtod(number, &result->double_val)) {
+  if (!turbo::SimpleAtod(number, &result->double_val)) {
     return ReportFailure("Unable to parse number.",
                          ParseErrorType::UNABLE_TO_PARSE_NUMBER);
   }
@@ -611,7 +615,7 @@ turbo::Status JsonStreamParser::ParseNumberHelper(NumberResult* result) {
     return turbo::cancelled_error("");
   }
 
-  // Create a string containing just the number, so we can use safe_strtoX
+  // Create a string containing just the number, so we can use SimpleAtoi.
   std::string number = std::string(p_.substr(0, index));
 
   // Floating point number, parse as a double.
@@ -631,7 +635,7 @@ turbo::Status JsonStreamParser::ParseNumberHelper(NumberResult* result) {
           "Octal/hex numbers are not valid JSON values.",
           ParseErrorType::OCTAL_OR_HEX_ARE_NOT_VALID_JSON_VALUES);
     }
-    if (safe_strtou64(number, &result->uint_val)) {
+    if (turbo::SimpleAtoi(number, &result->uint_val)) {
       result->type = NumberResult::UINT;
       p_.remove_prefix(index);
       return turbo::ok_status();
@@ -652,7 +656,7 @@ turbo::Status JsonStreamParser::ParseNumberHelper(NumberResult* result) {
         ParseErrorType::OCTAL_OR_HEX_ARE_NOT_VALID_JSON_VALUES);
   }
   // Negative non-floating point number, parse as an int64_t.
-  if (safe_strto64(number, &result->int_val)) {
+  if (turbo::SimpleAtoi(number, &result->int_val)) {
     result->type = NumberResult::INT;
     p_.remove_prefix(index);
     return turbo::ok_status();
@@ -872,7 +876,7 @@ turbo::Status JsonStreamParser::ReportFailure(std::string_view message,
   std::string location(p_start - begin, ' ');
   location.push_back('^');
   auto status = turbo::invalid_argument_error(
-      StrCat(message, "\n", segment, "\n", location));
+      turbo::str_cat(message, "\n", segment, "\n", location));
   return status;
 }
 
@@ -883,7 +887,7 @@ turbo::Status JsonStreamParser::ReportUnknown(std::string_view message,
     return turbo::cancelled_error("");
   }
   if (p_.empty()) {
-    return ReportFailure(StrCat("Unexpected end of string. ", message),
+    return ReportFailure(turbo::str_cat("Unexpected end of string. ", message),
                          parse_code);
   }
   return ReportFailure(message, parse_code);
@@ -892,7 +896,7 @@ turbo::Status JsonStreamParser::ReportUnknown(std::string_view message,
 turbo::Status JsonStreamParser::IncrementRecursionDepth(
     std::string_view key) const {
   if (++recursion_depth_ > max_recursion_depth_) {
-    return turbo::invalid_argument_error(StrCat(
+    return turbo::invalid_argument_error(turbo::str_cat(
         "Message too deep. Max recursion depth reached for key '", key, "'"));
   }
   return turbo::ok_status();
@@ -910,8 +914,10 @@ void JsonStreamParser::SkipWhitespace() {
 void JsonStreamParser::Advance() {
   // Advance by moving one UTF8 character while making sure we don't go beyond
   // the length of std::string_view.
-  p_.remove_prefix(std::min<int>(
-      p_.length(), UTF8FirstLetterNumBytes(p_.data(), p_.length())));
+  int n = p_.empty() ? 0
+                     : static_cast<int>(turbo::seq_length(
+                           static_cast<uint8_t>(*p_.data())));
+  p_.remove_prefix(std::min<int>(static_cast<int>(p_.length()), n));
 }
 
 turbo::Status JsonStreamParser::ParseKey() {
