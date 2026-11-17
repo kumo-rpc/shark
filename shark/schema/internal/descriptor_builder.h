@@ -105,7 +105,7 @@ namespace shark {
         // If LookupSymbol() finds a symbol that is in a file which is not a declared
         // dependency of this file, it will fail, but will set
         // possible_undeclared_dependency_ to point at that file.  This is only used
-        // by AddNotDefinedError() to report a more useful error message.
+        // by add_not_defined_error() to report a more useful error message.
         // possible_undeclared_dependency_name_ is the name of the symbol that was
         // actually found in possible_undeclared_dependency_, which may be a parent
         // of the symbol actually looked for.
@@ -113,7 +113,7 @@ namespace shark {
         std::string possible_undeclared_dependency_name_;
 
         // If LookupSymbol() could resolve a symbol which is not defined,
-        // record the resolved name.  This is only used by AddNotDefinedError()
+        // record the resolved name.  This is only used by add_not_defined_error()
         // to report a more useful error message.
         std::string undefine_resolved_name_;
 
@@ -136,7 +136,7 @@ namespace shark {
 
         // Adds an error indicating that undefined_symbol was not defined.  Must
         // only be called after LookupSymbol() fails.
-        void AddNotDefinedError(
+        void add_not_defined_error(
             const std::string& element_name, const Message& descriptor,
             DescriptorPool::ErrorCollector::ErrorLocation location,
             const std::string& undefined_symbol);
@@ -162,11 +162,11 @@ namespace shark {
 
         // Like FindSymbol() but does not require that the symbol is in one of the
         // file's declared dependencies.
-        Symbol FindSymbolNotEnforcingDeps(const std::string& name,
+        Symbol find_symbol_not_enforcing_deps(const std::string& name,
             bool build_it = true);
 
-        // This implements the body of FindSymbolNotEnforcingDeps().
-        Symbol FindSymbolNotEnforcingDepsHelper(const DescriptorPool* pool,
+        // This implements the body of find_symbol_not_enforcing_deps().
+        Symbol find_symbol_not_enforcing_deps_helper(const DescriptorPool* pool,
             const std::string& name,
             bool build_it = true);
 

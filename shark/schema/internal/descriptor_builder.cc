@@ -38,9 +38,9 @@ namespace shark {
        , error_collector_(error_collector)
        , had_errors_(false)
        , possible_undeclared_dependency_(nullptr)
-       , undefine_resolved_name_("") { }
+       , undefine_resolved_name_() { }
 
-    DescriptorBuilder::~DescriptorBuilder() { }
+    DescriptorBuilder::~DescriptorBuilder() = default;
 
 
 
@@ -69,7 +69,7 @@ namespace shark {
         add_error(element_name, descriptor, location, std::string(error));
     }
 
-    void DescriptorBuilder::AddNotDefinedError(
+    void DescriptorBuilder::add_not_defined_error(
         const std::string& element_name, const Message& descriptor,
         DescriptorPool::ErrorCollector::ErrorLocation location,
         const std::string& undefined_symbol) {
@@ -120,7 +120,7 @@ namespace shark {
         }
     }
 
-    Symbol DescriptorBuilder::FindSymbolNotEnforcingDepsHelper(
+    Symbol DescriptorBuilder::find_symbol_not_enforcing_deps_helper(
         const DescriptorPool* pool, const std::string& name, bool build_it) {
         // If we are looking at an underlay, we must lock its mutex_, since we are
         // accessing the underlay's tables_ directly.
@@ -129,7 +129,7 @@ namespace shark {
         Symbol result = pool->tables_->FindSymbol(name);
         if (result.IsNull() && pool->underlay_ != nullptr) {
             // Symbol not found; check the underlay.
-            result = FindSymbolNotEnforcingDepsHelper(pool->underlay_, name);
+            result = find_symbol_not_enforcing_deps_helper(pool->underlay_, name);
         }
 
         if (result.IsNull()) {
@@ -148,9 +148,9 @@ namespace shark {
         return result;
     }
 
-    Symbol DescriptorBuilder::FindSymbolNotEnforcingDeps(const std::string& name,
+    Symbol DescriptorBuilder::find_symbol_not_enforcing_deps(const std::string& name,
         bool build_it) {
-        Symbol result = FindSymbolNotEnforcingDepsHelper(pool_, name, build_it);
+        Symbol result = find_symbol_not_enforcing_deps_helper(pool_, name, build_it);
         // Only find symbols which were defined in this file or one of its
         // dependencies.
         const FileDescriptor* file = result.GetFile();
@@ -161,7 +161,7 @@ namespace shark {
     }
 
     Symbol DescriptorBuilder::FindSymbol(const std::string& name, bool build_it) {
-        Symbol result = FindSymbolNotEnforcingDeps(name, build_it);
+        Symbol result = find_symbol_not_enforcing_deps(name, build_it);
 
         if (result.IsNull())
             return result;
@@ -1085,12 +1085,12 @@ namespace shark {
         // we're currently building. The descriptor should be there as long as the
         // file we're building imported descriptor.shark.
 
-        // Note that we use DescriptorBuilder::FindSymbolNotEnforcingDeps(), not
+        // Note that we use DescriptorBuilder::find_symbol_not_enforcing_deps(), not
         // DescriptorPool::FindMessageTypeByName() because we're already holding the
         // pool's mutex, and the latter method locks it again.  We don't use
         // FindSymbol() because files that use custom options only need to depend on
         // the file that defines the option, not descriptor.shark itself.
-        Symbol symbol = builder_->FindSymbolNotEnforcingDeps(
+        Symbol symbol = builder_->find_symbol_not_enforcing_deps(
             options->GetDescriptor()->full_name());
         options_descriptor = symbol.descriptor();
         if (options_descriptor == nullptr) {
@@ -1602,10 +1602,10 @@ namespace shark {
                 fully_qualified_name += value_name;
 
                 // Search for the enum value's descriptor in the builder's pool. Note
-                // that we use DescriptorBuilder::FindSymbolNotEnforcingDeps(), not
+                // that we use DescriptorBuilder::find_symbol_not_enforcing_deps(), not
                 // DescriptorPool::FindEnumValueByName() because we're already holding
                 // the pool's mutex, and the latter method locks it again.
-                Symbol symbol = builder_->FindSymbolNotEnforcingDeps(fully_qualified_name);
+                Symbol symbol = builder_->find_symbol_not_enforcing_deps(fully_qualified_name);
                 if (auto* candicate_descriptor = symbol.enum_value_descriptor()) {
                     if (candicate_descriptor->type() != enum_type) {
                         return AddValueError(
@@ -2670,7 +2670,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             Symbol extendee = LookupSymbol(proto.extendee(), field->full_name(),
                 DescriptorPool::PLACEHOLDER_EXTENDABLE_MESSAGE);
             if (extendee.IsNull()) {
-                AddNotDefinedError(field->full_name(), proto,
+                add_not_defined_error(field->full_name(), proto,
                     DescriptorPool::ErrorCollector::EXTENDEE,
                     proto.extendee());
                 return;
@@ -2765,7 +2765,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                         type = FindSymbol(kNonLinkedWeakMessageReplacementName);
                     }
                     if (type.IsNull()) {
-                        AddNotDefinedError(field->full_name(), proto,
+                        add_not_defined_error(field->full_name(), proto,
                             DescriptorPool::ErrorCollector::TYPE,
                             proto.type_name());
                         return;
@@ -2956,7 +2956,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             !pool_->lazily_build_dependencies_);
         if (input_type.IsNull()) {
             if (!pool_->lazily_build_dependencies_) {
-                AddNotDefinedError(method->full_name(), proto,
+                add_not_defined_error(method->full_name(), proto,
                     DescriptorPool::ErrorCollector::INPUT_TYPE,
                     proto.input_type());
             } else {
@@ -2975,7 +2975,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             !pool_->lazily_build_dependencies_);
         if (output_type.IsNull()) {
             if (!pool_->lazily_build_dependencies_) {
-                AddNotDefinedError(method->full_name(), proto,
+                add_not_defined_error(method->full_name(), proto,
                     DescriptorPool::ErrorCollector::OUTPUT_TYPE,
                     proto.output_type());
             } else {

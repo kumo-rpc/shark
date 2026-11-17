@@ -270,7 +270,7 @@ namespace shark {
         // in descriptor.cc and update them to initialize the field.
 
         // Must be constructed using DescriptorPool.
-        EnumValueDescriptor() { }
+        EnumValueDescriptor() = default;
         friend class DescriptorBuilder;
         friend class EnumDescriptor;
         friend class DescriptorPool;
