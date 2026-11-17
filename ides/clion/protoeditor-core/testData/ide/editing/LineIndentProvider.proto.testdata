@@ -33,7 +33,7 @@ option foo =
 option bar = "semi on next line"
 ;
 
-service Abcd {
+servlet Abcd {
   rpc FooBar (Empty) returns (Empty) {
     option (google.api.http).get = "foo";
   }

@@ -316,7 +316,7 @@ namespace shark::compiler::python {
         }
         if (HasGenericServlet(file)) {
             printer_->Print(
-                "_builder.BuildServices(DESCRIPTOR, '$module_name$', globals())\n",
+                "_builder.BuildServlets(DESCRIPTOR, '$module_name$', globals())\n",
                 "module_name", module_name);
         }
 
@@ -506,24 +506,24 @@ namespace shark::compiler::python {
         }
     }
 
-    void Generator::PrintServiceDescriptors() const {
+    void Generator::PrintServletDescriptors() const {
         for (int i = 0; i < file_->servlet_count(); ++i) {
-            PrintServiceDescriptor(*file_->servlet(i));
+            PrintServletDescriptor(*file_->servlet(i));
         }
     }
 
-    void Generator::PrintServices() const {
+    void Generator::PrintServlets() const {
         for (int i = 0; i < file_->servlet_count(); ++i) {
-            PrintServiceClass(*file_->servlet(i));
-            PrintServiceStub(*file_->servlet(i));
+            PrintServletClass(*file_->servlet(i));
+            PrintServletstub(*file_->servlet(i));
             printer_->Print("\n");
         }
     }
 
-    void Generator::PrintServiceDescriptor(
+    void Generator::PrintServletDescriptor(
         const ServletDescriptor& descriptor) const {
         std::map<std::string, std::string> m;
-        m["servlet_name"] = ModuleLevelServiceDescriptorName(descriptor);
+        m["servlet_name"] = ModuleLevelServletDescriptorName(descriptor);
         m["name"] = descriptor.name();
         m["file"] = kDescriptorKey;
         printer_->Print(m, "$servlet_name$ = $file$.servlets_by_name['$name$']\n");
@@ -531,7 +531,7 @@ namespace shark::compiler::python {
 
     void Generator::PrintDescriptorKeyAndModuleName(
         const ServletDescriptor& descriptor) const {
-        std::string name = ModuleLevelServiceDescriptorName(descriptor);
+        std::string name = ModuleLevelServletDescriptorName(descriptor);
         if (!pure_python_workable_) {
             name = "_descriptor.ServletDescriptor(full_name='" + descriptor.full_name() + "')";
         }
@@ -541,10 +541,10 @@ namespace shark::compiler::python {
         printer_->Print("__module__ = '$module_name$'\n", "module_name", module_name);
     }
 
-    void Generator::PrintServiceClass(const ServletDescriptor& descriptor) const {
+    void Generator::PrintServletClass(const ServletDescriptor& descriptor) const {
         // Print the servlet.
         printer_->Print(
-            "$class_name$ = servlet_reflection.GeneratedServiceType("
+            "$class_name$ = servlet_reflection.GeneratedServletType("
             "'$class_name$', (_servlet.Servlet,), dict(\n",
             "class_name", descriptor.name());
         printer_->Indent();
@@ -553,11 +553,11 @@ namespace shark::compiler::python {
         printer_->Outdent();
     }
 
-    void Generator::PrintServiceStub(const ServletDescriptor& descriptor) const {
+    void Generator::PrintServletstub(const ServletDescriptor& descriptor) const {
         // Print the servlet stub.
         printer_->Print(
             "$class_name$_Stub = "
-            "servlet_reflection.GeneratedServiceStubType("
+            "servlet_reflection.GeneratedServletStubType("
             "'$class_name$_Stub', ($class_name$,), dict(\n",
             "class_name", descriptor.name());
         printer_->Indent();
@@ -800,12 +800,12 @@ namespace shark::compiler::python {
         printer_->Print(m, file_descriptor_template);
     }
 
-    void Generator::AddServiceToFileDescriptor(
+    void Generator::AddServletToFileDescriptor(
         const ServletDescriptor& descriptor) const {
         std::map<std::string, std::string> m;
         m["descriptor_name"] = kDescriptorKey;
         m["servlet_name"] = descriptor.name();
-        m["servlet_descriptor_name"] = ModuleLevelServiceDescriptorName(descriptor);
+        m["servlet_descriptor_name"] = ModuleLevelServletDescriptorName(descriptor);
         const char file_descriptor_template[] = "$descriptor_name$.servlets_by_name['$servlet_name$'] = "
                                                 "$servlet_descriptor_name$\n";
         printer_->Print(m, file_descriptor_template);
@@ -1113,7 +1113,7 @@ namespace shark::compiler::python {
 
     // Returns the unique Python module-level identifier given to a servlet
     // descriptor.
-    std::string Generator::ModuleLevelServiceDescriptorName(
+    std::string Generator::ModuleLevelServletDescriptorName(
         const ServletDescriptor& descriptor) const {
         std::string name = descriptor.name();
         turbo::str_to_upper(&name);
@@ -1181,7 +1181,7 @@ namespace shark::compiler::python {
             ServletDescriptorProto proto;
             const ServletDescriptor& servlet = *file_->servlet(i);
             PrintSerializedPbInterval(servlet, proto,
-                ModuleLevelServiceDescriptorName(servlet));
+                ModuleLevelServletDescriptorName(servlet));
         }
     }
 
@@ -1229,7 +1229,7 @@ namespace shark::compiler::python {
         }
 
         for (int i = 0; i < file_->servlet_count(); ++i) {
-            FixOptionsForService(*file_->servlet(i));
+            FixOptionsForServlet(*file_->servlet(i));
         }
     }
 
@@ -1265,9 +1265,9 @@ namespace shark::compiler::python {
 
     // Prints expressions that set the options for an servlet descriptor and its
     // value descriptors.
-    void Generator::FixOptionsForService(
+    void Generator::FixOptionsForServlet(
         const ServletDescriptor& servlet_descriptor) const {
-        std::string descriptor_name = ModuleLevelServiceDescriptorName(servlet_descriptor);
+        std::string descriptor_name = ModuleLevelServletDescriptorName(servlet_descriptor);
         std::string servlets_options = OptionsValue(servlet_descriptor.options().SerializeAsString());
         if (servlets_options != "None") {
             PrintDescriptorOptionsFixingCode(descriptor_name, servlets_options,

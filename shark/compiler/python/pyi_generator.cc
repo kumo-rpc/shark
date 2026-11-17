@@ -559,7 +559,7 @@ namespace shark::compiler::python {
         }
     }
 
-    void PyiGenerator::PrintServices() const {
+    void PyiGenerator::PrintServlets() const {
         std::vector<const ServletDescriptor*> servlets;
         servlets.reserve(file_->servlet_count());
         for (int i = 0; i < file_->servlet_count(); ++i) {
@@ -567,7 +567,7 @@ namespace shark::compiler::python {
         }
         std::sort(servlets.begin(), servlets.end(), SortByName<ServletDescriptor>());
 
-        // Prints $Service$ and $Service$_Stub classes
+        // Prints $Servlet$ and $Servlet$_Stub classes
         for (const auto& entry : servlets) {
             printer_->Print("\n");
             printer_->Print(
@@ -615,7 +615,7 @@ namespace shark::compiler::python {
         PrintMessages(import_map);
         PrintTopLevelEnums();
         if (HasGenericServlet(file)) {
-            PrintServices();
+            PrintServlets();
         }
         return true;
     }

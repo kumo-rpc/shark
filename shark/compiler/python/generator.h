@@ -112,7 +112,7 @@ namespace shark {
                 void AddMessageToFileDescriptor(const Descriptor& descriptor) const;
                 void AddEnumToFileDescriptor(const EnumDescriptor& descriptor) const;
                 void AddExtensionToFileDescriptor(const FieldDescriptor& descriptor) const;
-                void AddServiceToFileDescriptor(const ServletDescriptor& descriptor) const;
+                void AddServletToFileDescriptor(const ServletDescriptor& descriptor) const;
                 std::string FieldReferencingExpression(
                     const Descriptor* containing_type, const FieldDescriptor& field,
                     const std::string& python_dict_name) const;
@@ -126,11 +126,11 @@ namespace shark {
                     const FieldDescriptor& extension_field) const;
                 void FixForeignFieldsInNestedExtensions(const Descriptor& descriptor) const;
 
-                void PrintServices() const;
-                void PrintServiceDescriptors() const;
-                void PrintServiceDescriptor(const ServletDescriptor& descriptor) const;
-                void PrintServiceClass(const ServletDescriptor& descriptor) const;
-                void PrintServiceStub(const ServletDescriptor& descriptor) const;
+                void PrintServlets() const;
+                void PrintServletDescriptors() const;
+                void PrintServletDescriptor(const ServletDescriptor& descriptor) const;
+                void PrintServletClass(const ServletDescriptor& descriptor) const;
+                void PrintServletstub(const ServletDescriptor& descriptor) const;
                 void PrintDescriptorKeyAndModuleName(
                     const ServletDescriptor& descriptor) const;
 
@@ -141,7 +141,7 @@ namespace shark {
                 template <typename DescriptorT>
                 std::string ModuleLevelDescriptorName(const DescriptorT& descriptor) const;
                 std::string ModuleLevelMessageName(const Descriptor& descriptor) const;
-                std::string ModuleLevelServiceDescriptorName(
+                std::string ModuleLevelServletDescriptorName(
                     const ServletDescriptor& descriptor) const;
 
                 template <typename DescriptorT, typename DescriptorProtoT>
@@ -153,7 +153,7 @@ namespace shark {
                 void FixOptionsForField(const FieldDescriptor& field) const;
                 void FixOptionsForOneof(const OneofDescriptor& oneof) const;
                 void FixOptionsForEnum(const EnumDescriptor& descriptor) const;
-                void FixOptionsForService(const ServletDescriptor& descriptor) const;
+                void FixOptionsForServlet(const ServletDescriptor& descriptor) const;
                 void FixOptionsForMessage(const Descriptor& descriptor) const;
 
                 void SetSerializedPbInterval() const;

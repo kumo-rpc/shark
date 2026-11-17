@@ -90,7 +90,7 @@ namespace shark {
                     const std::map<std::string, std::string>& import_map) const;
                 void PrintMessage(const Descriptor& message_descriptor, bool is_nested,
                     const std::map<std::string, std::string>& import_map) const;
-                void PrintServices() const;
+                void PrintServlets() const;
                 void PrintItemMap(const std::map<std::string, std::string>& item_map) const;
                 std::string GetFieldType(
                     const FieldDescriptor& field_des, const Descriptor& containing_des,
