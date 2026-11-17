@@ -26,10 +26,10 @@
 //   }
 // will generate abstract interface "MyServlet" and class "MyServlet::Stub".
 // You could implement a MyServlet as follows:
-//   class MyServiceImpl : public MyServlet {
+//   class MyServletImpl : public MyServlet {
 //    public:
-//     MyServiceImpl() {}
-//     ~MyServiceImpl() {}
+//     MyServletImpl() {}
+//     ~MyServletImpl() {}
 //
 //     // implements MyServlet ---------------------------------------
 //
@@ -41,15 +41,15 @@
 //       done->Run();
 //     }
 //   };
-// You would then register an instance of MyServiceImpl with your RPC server
+// You would then register an instance of MyServletImpl with your RPC server
 // implementation.  (How to do that depends on the implementation.)
 //
-// To call a remote MyServiceImpl, first you need an RpcChannel connected to it.
+// To call a remote MyServletImpl, first you need an RpcChannel connected to it.
 // How to construct a channel depends, again, on your RPC implementation.
 // Here we use a hypothetical "MyRpcChannel" as an example:
 //   MyRpcChannel channel("rpc:hostname:1234/myservlet");
 //   MyRpcController controller;
-//   MyServiceImpl::Stub stub(&channel);
+//   MyServletImpl::Stub stub(&channel);
 //   FooRequest request;
 //   FooResponse response;
 //

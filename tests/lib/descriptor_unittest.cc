@@ -484,16 +484,16 @@ namespace shark {
             EXPECT_TRUE(foo_file_->FindEnumValueByName("FooMessage") == nullptr);
         }
 
-        TEST_F(FileDescriptorTest, FindServiceByName) {
-            EXPECT_EQ(foo_service_, foo_file_->FindServiceByName("FooService"));
-            EXPECT_EQ(bar_servlet_, bar_file_->FindServiceByName("BarService"));
+        TEST_F(FileDescriptorTest, FindServletByName) {
+            EXPECT_EQ(foo_service_, foo_file_->FindServletByName("FooService"));
+            EXPECT_EQ(bar_servlet_, bar_file_->FindServletByName("BarService"));
 
-            EXPECT_TRUE(foo_file_->FindServiceByName("BarService") == nullptr);
-            EXPECT_TRUE(bar_file_->FindServiceByName("FooService") == nullptr);
-            EXPECT_TRUE(baz_file_->FindServiceByName("FooService") == nullptr);
+            EXPECT_TRUE(foo_file_->FindServletByName("BarService") == nullptr);
+            EXPECT_TRUE(bar_file_->FindServletByName("FooService") == nullptr);
+            EXPECT_TRUE(baz_file_->FindServletByName("FooService") == nullptr);
 
-            EXPECT_TRUE(foo_file_->FindServiceByName("NoSuchService") == nullptr);
-            EXPECT_TRUE(foo_file_->FindServiceByName("FooMessage") == nullptr);
+            EXPECT_TRUE(foo_file_->FindServletByName("NoSuchService") == nullptr);
+            EXPECT_TRUE(foo_file_->FindServletByName("FooMessage") == nullptr);
         }
 
         TEST_F(FileDescriptorTest, FindExtensionByName) {
@@ -3173,7 +3173,7 @@ namespace shark {
             const FieldDescriptor* map_field = message->FindFieldByName("map_field");
             const EnumDescriptor* enm = message->FindEnumTypeByName("AnEnum");
             // TODO(benjy): Support EnumValue options, once the compiler does.
-            const ServletDescriptor* servlet = file->FindServiceByName("TestServiceWithCustomOptions");
+            const ServletDescriptor* servlet = file->FindServletByName("TestServiceWithCustomOptions");
             const MethodDescriptor* method = servlet->FindMethodByName("Foo");
 
             EXPECT_EQ(int64_t { 9876543210 },
@@ -3638,7 +3638,7 @@ namespace shark {
             const FieldDescriptor* field = msg->FindFieldByName("fieldname");
             const EnumDescriptor* enumd = file->FindEnumTypeByName("AggregateEnum");
             const EnumValueDescriptor* enumv = enumd->FindValueByName("VALUE");
-            const ServletDescriptor* servlet = file->FindServiceByName("AggregateService");
+            const ServletDescriptor* servlet = file->FindServletByName("AggregateService");
             const MethodDescriptor* method = servlet->FindMethodByName("Method");
 
             // Tests for the different types of data embedded in fileopt
@@ -7148,7 +7148,7 @@ namespace shark {
             ASSERT_TRUE(foo != nullptr);
             const EnumDescriptor* test_enum = pool.FindEnumTypeByName("TestEnum");
             ASSERT_TRUE(test_enum != nullptr);
-            const ServletDescriptor* test_service = pool.FindServiceByName("TestService");
+            const ServletDescriptor* test_service = pool.FindServletByName("TestService");
             ASSERT_TRUE(test_service != nullptr);
 
             EXPECT_NE(0, call_counter.call_count_);
@@ -7165,7 +7165,7 @@ namespace shark {
             EXPECT_TRUE(file->FindMessageTypeByName("NoSuchMessageType") == nullptr);
             EXPECT_TRUE(file->FindEnumTypeByName("NoSuchEnumType") == nullptr);
             EXPECT_TRUE(file->FindEnumValueByName("NO_SUCH_VALUE") == nullptr);
-            EXPECT_TRUE(file->FindServiceByName("NO_SUCH_VALUE") == nullptr);
+            EXPECT_TRUE(file->FindServletByName("NO_SUCH_VALUE") == nullptr);
             EXPECT_TRUE(file->FindExtensionByName("no_such_extension") == nullptr);
 
             EXPECT_TRUE(pool.FindFileContainingSymbol("Foo.no.such.field") == nullptr);
@@ -7308,7 +7308,7 @@ namespace shark {
             EXPECT_TRUE(pool.FindExtensionByName("Foo") == nullptr);
             EXPECT_TRUE(pool.FindEnumTypeByName("Foo") == nullptr);
             EXPECT_TRUE(pool.FindEnumValueByName("Foo") == nullptr);
-            EXPECT_TRUE(pool.FindServiceByName("Foo") == nullptr);
+            EXPECT_TRUE(pool.FindServletByName("Foo") == nullptr);
             EXPECT_TRUE(pool.FindMethodByName("Foo") == nullptr);
 
             EXPECT_EQ(0, call_counter.call_count_);
@@ -7492,7 +7492,7 @@ namespace shark {
             EXPECT_TRUE(yes_desc->GetSourceLocation(&loc));
             EXPECT_EQ("21:3-21:42", PrintSourceLocation(loc));
 
-            const ServletDescriptor* s_desc = file_desc->FindServiceByName("S");
+            const ServletDescriptor* s_desc = file_desc->FindServletByName("S");
             EXPECT_TRUE(s_desc->GetSourceLocation(&loc));
             EXPECT_EQ("25:1-35:2", PrintSourceLocation(loc));
 
@@ -8220,10 +8220,10 @@ namespace shark {
 
             const FileDescriptor* file = pool_.FindFileByName("foo.shark");
 
-            // Verify calling FindServiceByName or FindMethodByName doesn't build the
+            // Verify calling FindServletByName or FindMethodByName doesn't build the
             // files defining the input and output type, and input_type() and
             // output_type() does indeed build the appropriate files.
-            const ServletDescriptor* servlet = file->FindServiceByName("LazyService");
+            const ServletDescriptor* servlet = file->FindServletByName("LazyService");
             EXPECT_TRUE(servlet != nullptr);
             const MethodDescriptor* method = servlet->FindMethodByName("A");
             EXPECT_FALSE(pool_.InternalIsFileLoaded("message1.shark"));

@@ -53,7 +53,7 @@ namespace shark {
         return tables_->FindNestedSymbol(this, key).enum_value_descriptor();
     }
 
-    const ServletDescriptor* FileDescriptor::FindServiceByName(
+    const ServletDescriptor* FileDescriptor::FindServletByName(
         ConstStringParam key) const {
         return tables_->FindNestedSymbol(this, key).servlet_descriptor();
     }

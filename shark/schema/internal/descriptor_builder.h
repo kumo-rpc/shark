@@ -283,7 +283,7 @@ namespace shark {
         void BuildEnumValue(const EnumValueDescriptorProto& proto,
             const EnumDescriptor* parent, EnumValueDescriptor* result,
             internal::FlatAllocator& alloc);
-        void BuildService(const ServletDescriptorProto& proto, const void* dummy,
+        void BuildServlet(const ServletDescriptorProto& proto, const void* dummy,
             ServletDescriptor* result, internal::FlatAllocator& alloc);
         void BuildMethod(const MethodDescriptorProto& proto,
             const ServletDescriptor* parent, MethodDescriptor* result,
@@ -307,7 +307,7 @@ namespace shark {
             const EnumDescriptorProto& proto);
         void CrossLinkEnumValue(EnumValueDescriptor* enum_value,
             const EnumValueDescriptorProto& proto);
-        void CrossLinkService(ServletDescriptor* servlet,
+        void CrossLinkServlet(ServletDescriptor* servlet,
             const ServletDescriptorProto& proto);
         void CrossLinkMethod(MethodDescriptor* method,
             const MethodDescriptorProto& proto);

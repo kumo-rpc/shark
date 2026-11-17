@@ -909,7 +909,7 @@ namespace shark {
         result->servlets_count_ = proto.servlet_size();
         result->servlets_ = alloc.AllocateArray<typename std::remove_pointer<decltype(result->servlets_)>::type>(proto.servlet_size());
         for (int i = 0; i < proto.servlet_size(); i++) {
-            BuildService(proto.servlet(i), nullptr, result->servlets_ + i, alloc);
+            BuildServlet(proto.servlet(i), nullptr, result->servlets_ + i, alloc);
         };
 
         BUILD_ARRAY(proto, result, extension, BuildExtension, nullptr);
@@ -2458,7 +2458,7 @@ namespace shark {
         file_tables_->AddEnumValueByNumber(result);
     }
 
-    void DescriptorBuilder::BuildService(const ServletDescriptorProto& proto,
+    void DescriptorBuilder::BuildServlet(const ServletDescriptorProto& proto,
         const void* /* dummy */,
         ServletDescriptor* result,
         internal::FlatAllocator& alloc) {
@@ -2531,7 +2531,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         }
 
         for (int i = 0; i < file->servlet_count(); i++) {
-            CrossLinkService(&file->servlets_[i], proto.servlet(i));
+            CrossLinkServlet(&file->servlets_[i], proto.servlet(i));
         }
     }
 
@@ -2932,7 +2932,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         }
     }
 
-    void DescriptorBuilder::CrossLinkService(ServletDescriptor* servlet,
+    void DescriptorBuilder::CrossLinkServlet(ServletDescriptor* servlet,
         const ServletDescriptorProto& proto) {
         if (servlet->options_ == nullptr) {
             servlet->options_ = &ServletOptions::default_instance();

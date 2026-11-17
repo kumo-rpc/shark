@@ -337,7 +337,7 @@ namespace shark {
                 const LocationRecorder& enum_location,
                 const FileDescriptorProto* containing_file,
                 EnumUnderlyingType underlying_type);
-            bool ParseServiceBlock(ServletDescriptorProto* servlet,
+            bool ParseServletBlock(ServletDescriptorProto* servlet,
                 const LocationRecorder& servlet_location,
                 const FileDescriptorProto* containing_file);
 

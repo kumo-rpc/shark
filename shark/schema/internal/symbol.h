@@ -33,7 +33,7 @@ namespace shark {
             ENUM,
             ENUM_VALUE,
             ENUM_VALUE_OTHER_PARENT,
-            SERVICE,
+            SERVLET,
             METHOD,
             FULL_PACKAGE,
             SUB_PACKAGE,
@@ -64,7 +64,7 @@ namespace shark {
         DEFINE_MEMBERS(FieldDescriptor, FIELD, field_descriptor)
         DEFINE_MEMBERS(OneofDescriptor, ONEOF, oneof_descriptor)
         DEFINE_MEMBERS(EnumDescriptor, ENUM, enum_descriptor)
-        DEFINE_MEMBERS(ServletDescriptor, SERVICE, servlet_descriptor)
+        DEFINE_MEMBERS(ServletDescriptor, SERVLET, servlet_descriptor)
         DEFINE_MEMBERS(MethodDescriptor, METHOD, method_descriptor)
         DEFINE_MEMBERS(FileDescriptor, FULL_PACKAGE, file_descriptor)
 
@@ -143,7 +143,7 @@ namespace shark {
             return type() == MESSAGE || type() == ENUM;
         }
         bool IsAggregate() const {
-            return IsType() || IsPackage() || type() == SERVICE;
+            return IsType() || IsPackage() || type() == SERVLET;
         }
         bool IsPackage() const {
             return type() == FULL_PACKAGE || type() == SUB_PACKAGE;
@@ -162,7 +162,7 @@ namespace shark {
             case ENUM_VALUE:
             case ENUM_VALUE_OTHER_PARENT:
                 return enum_value_descriptor()->type()->file();
-            case SERVICE:
+            case SERVLET:
                 return servlet_descriptor()->file();
             case METHOD:
                 return method_descriptor()->servlet()->file();
@@ -188,7 +188,7 @@ namespace shark {
             case ENUM_VALUE:
             case ENUM_VALUE_OTHER_PARENT:
                 return enum_value_descriptor()->full_name();
-            case SERVICE:
+            case SERVLET:
                 return servlet_descriptor()->full_name();
             case METHOD:
                 return method_descriptor()->full_name();
@@ -239,7 +239,7 @@ namespace shark {
                 return { or_file(e->containing_type()),
                     std::string_view(full.data() + offset, static_cast<size_t>(len)) };
             }
-            case SERVICE:
+            case SERVLET:
                 return { GetFile(), servlet_descriptor()->name() };
             case METHOD:
                 return { method_descriptor()->servlet(), method_descriptor()->name() };

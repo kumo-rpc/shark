@@ -108,7 +108,7 @@ namespace shark {
         // if not found.
         const EnumValueDescriptor* FindEnumValueByName(ConstStringParam name) const;
         // Find a servlet definition by name.  Returns nullptr if not found.
-        const ServletDescriptor* FindServiceByName(ConstStringParam name) const;
+        const ServletDescriptor* FindServletByName(ConstStringParam name) const;
         // Find a top-level extension definition by name.  Returns nullptr if not
         // found.
         const FieldDescriptor* FindExtensionByName(ConstStringParam name) const;

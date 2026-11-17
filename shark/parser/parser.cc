@@ -2112,11 +2112,11 @@ namespace shark {
                 DO(consume_identifier(servlet->mutable_name(), "Expected servlet name."));
             }
 
-            DO(ParseServiceBlock(servlet, servlet_location, containing_file));
+            DO(ParseServletBlock(servlet, servlet_location, containing_file));
             return true;
         }
 
-        bool Parser::ParseServiceBlock(ServletDescriptorProto* servlet,
+        bool Parser::ParseServletBlock(ServletDescriptorProto* servlet,
             const LocationRecorder& servlet_location,
             const FileDescriptorProto* containing_file) {
             DO(consume_end_of_declaration("{", &servlet_location));
