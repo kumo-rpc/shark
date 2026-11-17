@@ -33,8 +33,8 @@
 //  Sanjay Ghemawat, Jeff Dean, and others.
 //
 // DEPRECATED:  This module declares the abstract interfaces underlying proto2
-// RPC services.  These are intended to be independent of any particular RPC
-// implementation, so that proto2 services can be used on top of a variety
+// RPC servlets.  These are intended to be independent of any particular RPC
+// implementation, so that proto2 servlets can be used on top of a variety
 // of implementations.  Starting with version 2.3.0, RPC implementations should
 // not try to build on these, but should instead provide code generator plugins
 // which generate code specific to the particular RPC implementation.  This way
@@ -42,14 +42,14 @@
 // and can avoid unnecessary layers of indirection.
 //
 //
-// When you use the protocol compiler to compile a service definition, it
-// generates two classes:  An abstract interface for the service (with
-// methods matching the service definition) and a "stub" implementation.
+// When you use the protocol compiler to compile a servlet definition, it
+// generates two classes:  An abstract interface for the servlet (with
+// methods matching the servlet definition) and a "stub" implementation.
 // A stub is just a type-safe wrapper around an RpcChannel which emulates a
-// local implementation of the service.
+// local implementation of the servlet.
 //
-// For example, the service definition:
-//   service MyService {
+// For example, the servlet definition:
+//   servlet MyService {
 //     rpc Foo(MyRequest) returns(MyResponse);
 //   }
 // will generate abstract interface "MyService" and class "MyService::Stub".
@@ -75,7 +75,7 @@
 // To call a remote MyServiceImpl, first you need an RpcChannel connected to it.
 // How to construct a channel depends, again, on your RPC implementation.
 // Here we use a hypothetical "MyRpcChannel" as an example:
-//   MyRpcChannel channel("rpc:hostname:1234/myservice");
+//   MyRpcChannel channel("rpc:hostname:1234/myservlet");
 //   MyRpcController controller;
 //   MyServiceImpl::Stub stub(&channel);
 //   FooRequest request;
@@ -123,7 +123,7 @@ namespace shark {
     class MethodDescriptor; // descriptor.h
     class Message; // message.h
 
-    // Abstract base interface for protocol-buffer-based RPC services.  Services
+    // Abstract base interface for protocol-buffer-based RPC servlets.  Services
     // themselves are abstract interfaces (implemented either by servers or as
     // stubs), but they subclass this base interface.  The methods of this
     // interface can be used to call the methods of the Service without knowing
@@ -139,15 +139,15 @@ namespace shark {
         enum ChannelOwnership { STUB_OWNS_CHANNEL,
             STUB_DOESNT_OWN_CHANNEL };
 
-        // Get the ServiceDescriptor describing this service and its methods.
+        // Get the ServiceDescriptor describing this servlet and its methods.
         virtual const ServiceDescriptor* GetDescriptor() = 0;
 
-        // Call a method of the service specified by MethodDescriptor.  This is
+        // Call a method of the servlet specified by MethodDescriptor.  This is
         // normally implemented as a simple switch() that calls the standard
-        // definitions of the service's methods.
+        // definitions of the servlet's methods.
         //
         // Preconditions:
-        // * method->service() == GetDescriptor()
+        // * method->servlet() == GetDescriptor()
         // * request and response are of the exact same classes as the objects
         //   returned by GetRequestPrototype(method) and
         //   GetResponsePrototype(method).
@@ -179,11 +179,11 @@ namespace shark {
         //
         // Example:
         //   const MethodDescriptor* method =
-        //     service->GetDescriptor()->FindMethodByName("Foo");
+        //     servlet->GetDescriptor()->FindMethodByName("Foo");
         //   Message* request  = stub->GetRequestPrototype (method)->New();
         //   Message* response = stub->GetResponsePrototype(method)->New();
         //   request->ParseFromString(input);
-        //   service->CallMethod(method, *request, response, callback);
+        //   servlet->CallMethod(method, *request, response, callback);
         virtual const Message& GetRequestPrototype(
             const MethodDescriptor* method) const = 0;
         virtual const Message& GetResponsePrototype(
@@ -265,14 +265,14 @@ namespace shark {
     // should not call an RpcChannel directly, but instead construct a stub Service
     // wrapping it.  Example:
     //   RpcChannel* channel = new MyRpcChannel("remotehost.example.com:1234");
-    //   MyService* service = new MyService::Stub(channel);
-    //   service->MyMethod(request, &response, callback);
+    //   MyService* servlet = new MyService::Stub(channel);
+    //   servlet->MyMethod(request, &response, callback);
     class SHARK_EXPORT RpcChannel {
     public:
         inline RpcChannel() { }
         virtual ~RpcChannel();
 
-        // Call the given method of the remote service.  The signature of this
+        // Call the given method of the remote servlet.  The signature of this
         // procedure looks the same as Service::CallMethod(), but the requirements
         // are less strict in one important way:  the request and response objects
         // need not be of any specific class as long as their descriptors are
