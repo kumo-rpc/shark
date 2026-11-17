@@ -95,6 +95,6 @@ struct BytesWrapper {
   optional shark.BytesValue bytes = 1;
 }
 
-service WrappersTestService {
+servlet WrappersTestService {
   rpc Call(WrappersTestCases) returns (WrappersTestCases);
 }

@@ -896,7 +896,7 @@ namespace shark {
 
             TEST_F(ParseServiceTest, SimpleService) {
                 ExpectParsesTo(
-                    "service TestService {\n"
+                    "servlet TestService {\n"
                     "  rpc Foo(In) returns (Out);\n"
                     "}\n",
 
@@ -908,7 +908,7 @@ namespace shark {
 
             TEST_F(ParseServiceTest, MethodsAndStreams) {
                 ExpectParsesTo(
-                    "service TestService {\n"
+                    "servlet TestService {\n"
                     "  rpc Foo(In1) returns (Out1);\n"
                     "  rpc Bar(In2) returns (Out2);\n"
                     "  rpc Baz(In3) returns (Out3);\n"
@@ -1326,13 +1326,13 @@ namespace shark {
 
             TEST_F(ParseErrorTest, EofInService) {
                 ExpectHasErrors(
-                    "service TestService {",
+                    "servlet TestService {",
                     "0:21: Reached end of input in servlet definition (missing '}').\n");
             }
 
             TEST_F(ParseErrorTest, ServiceMethodPrimitiveParams) {
                 ExpectHasErrors(
-                    "service TestService {\n"
+                    "servlet TestService {\n"
                     "  rpc Foo(int32) returns (string);\n"
                     "}\n",
                     "1:10: Expected message type.\n"
@@ -1341,7 +1341,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, EofInMethodOptions) {
                 ExpectHasErrors(
-                    "service TestService {\n"
+                    "servlet TestService {\n"
                     "  rpc Foo(Bar) returns(Bar) {",
                     "1:29: Reached end of input in method options (missing '}').\n"
                     "1:29: Reached end of input in servlet definition (missing '}').\n");
@@ -1349,7 +1349,7 @@ namespace shark {
 
             TEST_F(ParseErrorTest, PrimitiveMethodInput) {
                 ExpectHasErrors(
-                    "service TestService {\n"
+                    "servlet TestService {\n"
                     "  rpc Foo(int32) returns(Bar);\n"
                     "}\n",
                     "1:10: Expected message type.\n");
@@ -1359,7 +1359,7 @@ namespace shark {
                 // This used to cause an infinite loop.
                 ExpectHasErrors(
                     "struct Baz {}\n"
-                    "service Foo {\n"
+                    "servlet Foo {\n"
                     "  rpc Bar(Baz) returns(Baz) { option invalid syntax; }\n"
                     "}\n",
                     "2:45: Expected \"=\".\n");
@@ -1602,15 +1602,15 @@ namespace shark {
 
             TEST_F(ParserValidationErrorTest, ServiceNameError) {
                 ExpectHasValidationErrors(
-                    "service Foo {}\n"
-                    "service Foo {}\n",
+                    "servlet Foo {}\n"
+                    "servlet Foo {}\n",
                     "1:8: \"Foo\" is already defined.\n");
             }
 
             TEST_F(ParserValidationErrorTest, MethodNameError) {
                 ExpectHasValidationErrors(
                     "struct Baz {}\n"
-                    "service Foo {\n"
+                    "servlet Foo {\n"
                     "  rpc Bar(Baz) returns(Baz);\n"
                     "  rpc Bar(Baz) returns(Baz);\n"
                     "}\n",
@@ -1620,7 +1620,7 @@ namespace shark {
             TEST_F(ParserValidationErrorTest, MethodInputTypeError) {
                 ExpectHasValidationErrors(
                     "struct Baz {}\n"
-                    "service Foo {\n"
+                    "servlet Foo {\n"
                     "  rpc Bar(Qux) returns(Baz);\n"
                     "}\n",
                     "2:10: \"Qux\" is not defined.\n");
@@ -1629,7 +1629,7 @@ namespace shark {
             TEST_F(ParserValidationErrorTest, MethodOutputTypeError) {
                 ExpectHasValidationErrors(
                     "struct Baz {}\n"
-                    "service Foo {\n"
+                    "servlet Foo {\n"
                     "  rpc Bar(Baz) returns(Qux);\n"
                     "}\n",
                     "2:23: \"Qux\" is not defined.\n");
@@ -1918,7 +1918,7 @@ namespace shark {
                     "// Detached comment before MyServlet.\n"
                     "\n"
                     "// Servlet comment.\n"
-                    "service MyServlet {\n"
+                    "servlet MyServlet {\n"
                     "\n"
                     "  // Detached comment before MyRPCCall.\n"
                     "\n"
@@ -2295,8 +2295,8 @@ namespace shark {
 
             TEST_F(SourceInfoTest, Services) {
                 EXPECT_TRUE(
-                    Parse("$a$service $b$Foo$c$ {}$d$\n"
-                          "$e$service $f$Bar$g$ {}$h$\n"));
+                    Parse("$a$servlet $b$Foo$c$ {}$d$\n"
+                          "$e$servlet $f$Bar$g$ {}$h$\n"));
 
                 EXPECT_TRUE(HasSpan('a', 'd', file_.servlet(0)));
                 EXPECT_TRUE(HasSpan('b', 'c', file_.servlet(0), "name"));
@@ -2309,7 +2309,7 @@ namespace shark {
 
             TEST_F(SourceInfoTest, MethodsAndStreams) {
                 EXPECT_TRUE(
-                    Parse("service Foo {\n"
+                    Parse("servlet Foo {\n"
                           "  $a$rpc $b$Bar$c$($d$X$e$) returns($f$Y$g$);$h$"
                           "  $i$rpc $j$Baz$k$($l$Z$m$) returns($n$W$o$);$p$"
                           "}"));
@@ -2406,7 +2406,7 @@ namespace shark {
                           "enum Bar {\n"
                           "  $c$option eopt = 1;$d$\n"
                           "}\n"
-                          "service Baz {\n"
+                          "servlet Baz {\n"
                           "  $e$option sopt = 1;$f$\n"
                           "  rpc M(X) returns(Y) {\n"
                           "    $g$option mopt = 1;$h$\n"

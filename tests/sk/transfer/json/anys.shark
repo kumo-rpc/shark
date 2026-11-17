@@ -75,7 +75,7 @@ struct AnyWrapper {
 }
 
 // Hack to make sure the types we put into the any are included in the types.
-// Real solution is to add these types to the service config.
+// Real solution is to add these types to the servlet config.
 struct Imports {
   optional shark.DoubleValue dbl = 1;
   optional shark.Struct struct = 2;
@@ -99,7 +99,7 @@ struct Data {
   list<shark.Any> repeated_any = 10;
 }
 
-service AnyTestService {
+servlet AnyTestService {
   rpc Call(AnyTestCases) returns (AnyTestCases);
   rpc Call1(Imports) returns (Imports);
 }

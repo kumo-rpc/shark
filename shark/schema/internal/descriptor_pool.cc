@@ -247,7 +247,7 @@ namespace shark {
 
     const ServletDescriptor* DescriptorPool::FindServiceByName(
         ConstStringParam name) const {
-        return tables_->FindByNameHelper(this, name).service_descriptor();
+        return tables_->FindByNameHelper(this, name).servlet_descriptor();
     }
 
     const MethodDescriptor* DescriptorPool::FindMethodByName(

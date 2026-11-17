@@ -85,7 +85,7 @@ namespace shark {
             debug_string_options);
         comment_printer.AddPreComment(contents);
 
-        turbo::substitute_and_append(contents, "service $0 {\n", name());
+        turbo::substitute_and_append(contents, "servlet $0 {\n", name());
 
         FormatLineOptions(1, options(), file()->pool(), contents);
 

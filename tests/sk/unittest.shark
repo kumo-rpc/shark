@@ -998,14 +998,14 @@ struct TestMessageSize {
 }
 
 
-// Test that RPC services work.
+// Test that RPC servlets work.
 struct FooRequest  {}
 struct FooResponse {}
 
 struct FooClientMessage {}
 struct FooServerMessage{}
 
-service TestService {
+servlet TestService {
   rpc Foo(FooRequest) returns (FooResponse);
   rpc Bar(BarRequest) returns (BarResponse);
 }

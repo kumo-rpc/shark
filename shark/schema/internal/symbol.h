@@ -64,7 +64,7 @@ namespace shark {
         DEFINE_MEMBERS(FieldDescriptor, FIELD, field_descriptor)
         DEFINE_MEMBERS(OneofDescriptor, ONEOF, oneof_descriptor)
         DEFINE_MEMBERS(EnumDescriptor, ENUM, enum_descriptor)
-        DEFINE_MEMBERS(ServletDescriptor, SERVICE, service_descriptor)
+        DEFINE_MEMBERS(ServletDescriptor, SERVICE, servlet_descriptor)
         DEFINE_MEMBERS(MethodDescriptor, METHOD, method_descriptor)
         DEFINE_MEMBERS(FileDescriptor, FULL_PACKAGE, file_descriptor)
 
@@ -163,7 +163,7 @@ namespace shark {
             case ENUM_VALUE_OTHER_PARENT:
                 return enum_value_descriptor()->type()->file();
             case SERVICE:
-                return service_descriptor()->file();
+                return servlet_descriptor()->file();
             case METHOD:
                 return method_descriptor()->servlet()->file();
             case FULL_PACKAGE:
@@ -189,7 +189,7 @@ namespace shark {
             case ENUM_VALUE_OTHER_PARENT:
                 return enum_value_descriptor()->full_name();
             case SERVICE:
-                return service_descriptor()->full_name();
+                return servlet_descriptor()->full_name();
             case METHOD:
                 return method_descriptor()->full_name();
             case FULL_PACKAGE:
@@ -240,7 +240,7 @@ namespace shark {
                     std::string_view(full.data() + offset, static_cast<size_t>(len)) };
             }
             case SERVICE:
-                return { GetFile(), service_descriptor()->name() };
+                return { GetFile(), servlet_descriptor()->name() };
             case METHOD:
                 return { method_descriptor()->servlet(), method_descriptor()->name() };
             case QUERY_KEY:

@@ -3509,7 +3509,7 @@ void AssignDescriptorsImpl(const DescriptorTable* table, bool eager) {
   }
   if (file->options().cc_generic_servlets()) {
     for (int i = 0; i < file->servlet_count(); i++) {
-      table->file_level_service_descriptors[i] = file->servlet(i);
+      table->file_level_servlet_descriptors[i] = file->servlet(i);
     }
   }
   MetadataOwner::Instance()->AddArray(table->file_level_metadata,

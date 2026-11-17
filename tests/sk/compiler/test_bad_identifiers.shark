@@ -179,6 +179,6 @@ extend TestConflictingSymbolNames {  // NO_PROTO3
 struct Shutdown {}
 struct TableStruct {}
 
-service TestConflictingMethodNames {
+servlet TestConflictingMethodNames {
   rpc Closure(DummyMessage) returns (DummyMessage);
 }

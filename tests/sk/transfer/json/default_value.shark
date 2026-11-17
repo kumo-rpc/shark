@@ -110,8 +110,8 @@ struct RequestMessage {
   optional string content = 1;
 }
 
-// A test service.
-service DefaultValueTestService {
+// A test servlet.
+servlet DefaultValueTestService {
   // A test method.
   rpc Call(RequestMessage) returns (DefaultValueTestCases);
 }

@@ -334,7 +334,7 @@ namespace shark {
     }
 
     inline const ServletDescriptor* MethodDescriptor::servlet() const {
-        return service_;
+        return servlet_;
     }
 
     inline const MethodOptions& MethodDescriptor::options() const {
@@ -383,7 +383,7 @@ namespace shark {
     }
 
     inline int FileDescriptor::servlet_count() const {
-        return service_count_;
+        return servlets_count_;
     }
 
     inline int FileDescriptor::extension_count() const {
@@ -407,7 +407,7 @@ namespace shark {
     }
 
     inline const ServletDescriptor* FileDescriptor::servlet(int index) const {
-        return services_ + index;
+        return servlets_ + index;
     }
 
     inline const FieldDescriptor* FileDescriptor::extension(int index) const {
@@ -580,7 +580,7 @@ namespace shark {
     }
 
     inline int ServletDescriptor::index() const {
-        return static_cast<int>(this - file_->services_);
+        return static_cast<int>(this - file_->servlets_);
     }
 
     inline const FileDescriptor* MethodDescriptor::file() const {
@@ -588,7 +588,7 @@ namespace shark {
     }
 
     inline int MethodDescriptor::index() const {
-        return static_cast<int>(this - service_->methods_);
+        return static_cast<int>(this - servlet_->methods_);
     }
 
     inline const char* FieldDescriptor::type_name() const {

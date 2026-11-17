@@ -108,7 +108,7 @@ struct Dummy {
   optional string text = 1;
 }
 
-service StructTestService {
+servlet StructTestService {
   rpc Call(Dummy) returns (StructTestCases);
 }
 

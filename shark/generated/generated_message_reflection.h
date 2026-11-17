@@ -304,7 +304,7 @@ struct SHARK_EXPORT DescriptorTable {
   // update the following descriptor arrays.
   Metadata* file_level_metadata;
   const EnumDescriptor** file_level_enum_descriptors;
-  const ServletDescriptor** file_level_service_descriptors;
+  const ServletDescriptor** file_level_servlet_descriptors;
 };
 
 enum {

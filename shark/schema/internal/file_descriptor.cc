@@ -55,7 +55,7 @@ namespace shark {
 
     const ServletDescriptor* FileDescriptor::FindServiceByName(
         ConstStringParam key) const {
-        return tables_->FindNestedSymbol(this, key).service_descriptor();
+        return tables_->FindNestedSymbol(this, key).servlet_descriptor();
     }
 
     const FieldDescriptor* FileDescriptor::FindExtensionByName(

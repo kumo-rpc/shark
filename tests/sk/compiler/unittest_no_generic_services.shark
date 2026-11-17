@@ -48,6 +48,6 @@ extend TestMessage {
   optional int32 test_extension = 1000;
 }
 
-service TestService {
+servlet TestService {
   rpc Foo(TestMessage) returns (TestMessage);
 }

@@ -179,7 +179,7 @@ namespace shark {
         bool server_streaming_;
         // all_names_ = [name, full_name]
         const std::string* all_names_;
-        const ServletDescriptor* service_;
+        const ServletDescriptor* servlet_;
         mutable internal::LazyDescriptor input_type_;
         mutable internal::LazyDescriptor output_type_;
         const MethodOptions* options_;

@@ -127,7 +127,7 @@ struct CustomOptionFooClientMessage {}
 
 struct CustomOptionFooServerMessage {}
 
-service TestServiceWithCustomOptions {
+servlet TestServiceWithCustomOptions {
   option (service_opt1) = -9876543210;
 
   rpc Foo(CustomOptionFooRequest) returns (CustomOptionFooResponse) {
@@ -390,7 +390,7 @@ struct AggregateMessage {
   optional int32 fieldname = 1 [(fieldopt) = { s: 'FieldAnnotation' }];
 }
 
-service AggregateService {
+servlet AggregateService {
   option (serviceopt) = {
     s: 'ServiceAnnotation'
   };

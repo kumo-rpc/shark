@@ -526,7 +526,7 @@ namespace shark::compiler::python {
         m["servlet_name"] = ModuleLevelServiceDescriptorName(descriptor);
         m["name"] = descriptor.name();
         m["file"] = kDescriptorKey;
-        printer_->Print(m, "$servlet_name$ = $file$.services_by_name['$name$']\n");
+        printer_->Print(m, "$servlet_name$ = $file$.servlets_by_name['$name$']\n");
     }
 
     void Generator::PrintDescriptorKeyAndModuleName(
@@ -544,8 +544,8 @@ namespace shark::compiler::python {
     void Generator::PrintServiceClass(const ServletDescriptor& descriptor) const {
         // Print the servlet.
         printer_->Print(
-            "$class_name$ = service_reflection.GeneratedServiceType("
-            "'$class_name$', (_service.Servlet,), dict(\n",
+            "$class_name$ = servlet_reflection.GeneratedServiceType("
+            "'$class_name$', (_servlet.Servlet,), dict(\n",
             "class_name", descriptor.name());
         printer_->Indent();
         Generator::PrintDescriptorKeyAndModuleName(descriptor);
@@ -557,7 +557,7 @@ namespace shark::compiler::python {
         // Print the servlet stub.
         printer_->Print(
             "$class_name$_Stub = "
-            "service_reflection.GeneratedServiceStubType("
+            "servlet_reflection.GeneratedServiceStubType("
             "'$class_name$_Stub', ($class_name$,), dict(\n",
             "class_name", descriptor.name());
         printer_->Indent();
@@ -805,9 +805,9 @@ namespace shark::compiler::python {
         std::map<std::string, std::string> m;
         m["descriptor_name"] = kDescriptorKey;
         m["servlet_name"] = descriptor.name();
-        m["service_descriptor_name"] = ModuleLevelServiceDescriptorName(descriptor);
-        const char file_descriptor_template[] = "$descriptor_name$.services_by_name['$service_name$'] = "
-                                                "$service_descriptor_name$\n";
+        m["servlet_descriptor_name"] = ModuleLevelServiceDescriptorName(descriptor);
+        const char file_descriptor_template[] = "$descriptor_name$.servlets_by_name['$servlet_name$'] = "
+                                                "$servlet_descriptor_name$\n";
         printer_->Print(m, file_descriptor_template);
     }
 

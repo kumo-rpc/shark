@@ -187,14 +187,14 @@ namespace shark {
         int weak_dependency_count_;
         int message_type_count_;
         int enum_type_count_;
-        int service_count_;
+        int servlets_count_;
 
         mutable const FileDescriptor** dependencies_;
         int* public_dependencies_;
         int* weak_dependencies_;
         Descriptor* message_types_;
         EnumDescriptor* enum_types_;
-        ServletDescriptor* services_;
+        ServletDescriptor* servlets_;
         FieldDescriptor* extensions_;
         const FileOptions* options_;
 

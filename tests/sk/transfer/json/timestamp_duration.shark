@@ -69,7 +69,7 @@ struct DurationType {
   optional shark.Duration duration = 1;
 }
 
-service TimestampDurationTestService {
+servlet TimestampDurationTestService {
   rpc Call(TimestampDurationTestCases) returns (TimestampDurationTestCases);
 }
 

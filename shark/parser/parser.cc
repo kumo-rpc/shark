@@ -668,7 +668,7 @@ namespace shark {
                     FileDescriptorProto::kEnumTypeFieldNumber,
                     file->enum_type_size());
                 return ParseEnumDefinition(file->add_enum_type(), location, file);
-            } else if (looking_at("service")) {
+            } else if (looking_at("servlet")) {
                 LocationRecorder location(root_location,
                     FileDescriptorProto::kServletFieldNumber,
                     file->servlet_size());
@@ -2102,7 +2102,7 @@ namespace shark {
         bool Parser::parse_servlet_definition(
             ServletDescriptorProto* servlet, const LocationRecorder& servlet_location,
             const FileDescriptorProto* containing_file) {
-            DO(consume("service"));
+            DO(consume("servlet"));
 
             {
                 LocationRecorder location(servlet_location,

@@ -66,6 +66,6 @@ struct FieldMaskWrapper {
   optional shark.FieldMask mask = 1;
 }
 
-service FieldMaskTestService {
+servlet FieldMaskTestService {
   rpc Call(FieldMaskTestCases) returns (FieldMaskTestCases);
 }

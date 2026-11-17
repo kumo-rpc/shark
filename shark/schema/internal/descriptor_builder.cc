@@ -906,10 +906,10 @@ namespace shark {
         BUILD_ARRAY(proto, result, message_type, BuildMessage, nullptr);
         BUILD_ARRAY(proto, result, enum_type, BuildEnum, nullptr);
 
-        result->service_count_ = proto.servlet_size();
-        result->services_ = alloc.AllocateArray<typename std::remove_pointer<decltype(result->services_)>::type>(proto.servlet_size());
+        result->servlets_count_ = proto.servlet_size();
+        result->servlets_ = alloc.AllocateArray<typename std::remove_pointer<decltype(result->servlets_)>::type>(proto.servlet_size());
         for (int i = 0; i < proto.servlet_size(); i++) {
-            BuildService(proto.servlet(i), nullptr, result->services_ + i, alloc);
+            BuildService(proto.servlet(i), nullptr, result->servlets_ + i, alloc);
         };
 
         BUILD_ARRAY(proto, result, extension, BuildExtension, nullptr);
@@ -2484,7 +2484,7 @@ namespace shark {
         const ServletDescriptor* parent,
         MethodDescriptor* result,
         internal::FlatAllocator& alloc) {
-        result->service_ = parent;
+        result->servlet_ = parent;
         result->all_names_ = AllocateNameStrings(parent->full_name(), proto.name(), alloc);
 
         ValidateSymbolName(proto.name(), result->full_name(), proto);
@@ -2531,7 +2531,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         }
 
         for (int i = 0; i < file->servlet_count(); i++) {
-            CrossLinkService(&file->services_[i], proto.servlet(i));
+            CrossLinkService(&file->servlets_[i], proto.servlet(i));
         }
     }
 
@@ -3085,7 +3085,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         const FileDescriptorProto& proto) {
         VALIDATE_OPTIONS_FROM_ARRAY(file, message_type, Message);
         VALIDATE_OPTIONS_FROM_ARRAY(file, enum_type, Enum);
-         for (int i = 0; i < file->servlet_count(); ++i) { ValidateServletOptions(file->services_ + i, proto.servlet(i)); }
+         for (int i = 0; i < file->servlet_count(); ++i) { ValidateServletOptions(file->servlets_ + i, proto.servlet(i)); }
 
         VALIDATE_OPTIONS_FROM_ARRAY(file, extension, Field);
 

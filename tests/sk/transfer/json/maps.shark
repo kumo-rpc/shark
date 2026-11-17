@@ -96,7 +96,7 @@ struct MapOfObjects {
 
 struct DummyRequest {}
 
-service MapsTestService {
+servlet MapsTestService {
   rpc Call(DummyRequest) returns (MapsTestCases);
 }
 

@@ -215,11 +215,11 @@ namespace shark {
             return result;
         }
 
-        MethodDescriptorProto* AddMethod(ServletDescriptorProto* service,
+        MethodDescriptorProto* AddMethod(ServletDescriptorProto* servlet,
             const std::string& name,
             const std::string& input_type,
             const std::string& output_type) {
-            MethodDescriptorProto* result = service->add_method();
+            MethodDescriptorProto* result = servlet->add_method();
             result->set_name(name);
             result->set_input_type(input_type);
             result->set_output_type(output_type);
@@ -342,14 +342,14 @@ namespace shark {
                 //   // in "foo.shark"
                 //   message FooMessage { extensions 1; }
                 //   enum FooEnum {FOO_ENUM_VALUE = 1;}
-                //   service FooService {}
+                //   servlet FooService {}
                 //   extend FooMessage { optional int32 foo_extension = 1; }
                 //
                 //   // in "bar.shark"
                 //   package bar_package;
                 //   message BarMessage { extensions 1; }
                 //   enum BarEnum {BAR_ENUM_VALUE = 1;}
-                //   service BarService {}
+                //   servlet BarService {}
                 //   extend BarMessage { optional int32 bar_extension = 1; }
                 //
                 // Also, we have an empty file "baz.shark".  This file's purpose is to
@@ -407,7 +407,7 @@ namespace shark {
                 ASSERT_EQ(1, bar_enum_->value_count());
                 bar_enum_value_ = bar_enum_->value(0);
                 ASSERT_EQ(1, bar_file_->servlet_count());
-                bar_service_ = bar_file_->servlet(0);
+                bar_servlet_ = bar_file_->servlet(0);
                 ASSERT_EQ(1, bar_file_->extension_count());
                 bar_extension_ = bar_file_->extension(0);
             }
@@ -427,7 +427,7 @@ namespace shark {
             const Descriptor* bar_message_;
             const EnumDescriptor* bar_enum_;
             const EnumValueDescriptor* bar_enum_value_;
-            const ServletDescriptor* bar_service_;
+            const ServletDescriptor* bar_servlet_;
             const FieldDescriptor* bar_extension_;
         };
 
@@ -486,7 +486,7 @@ namespace shark {
 
         TEST_F(FileDescriptorTest, FindServiceByName) {
             EXPECT_EQ(foo_service_, foo_file_->FindServiceByName("FooService"));
-            EXPECT_EQ(bar_service_, bar_file_->FindServiceByName("BarService"));
+            EXPECT_EQ(bar_servlet_, bar_file_->FindServiceByName("BarService"));
 
             EXPECT_TRUE(foo_file_->FindServiceByName("BarService") == nullptr);
             EXPECT_TRUE(bar_file_->FindServiceByName("FooService") == nullptr);
@@ -1557,11 +1557,11 @@ namespace shark {
 
         // ===================================================================
 
-        // Test service descriptors.
+        // Test servlet descriptors.
         class ServiceDescriptorTest : public testing::Test {
         protected:
             void SetUp() override {
-                // Build descriptors for the following messages and service:
+                // Build descriptors for the following messages and servlet:
                 //    // in "foo.shark"
                 //    message FooRequest  {}
                 //    message FooResponse {}
@@ -1570,14 +1570,14 @@ namespace shark {
                 //    message BazRequest  {}
                 //    message BazResponse {}
                 //
-                //    service TestService {
+                //    servlet TestService {
                 //      rpc Foo(FooRequest) returns (FooResponse);
                 //      rpc Bar(BarRequest) returns (BarResponse);
                 //    }
                 //
                 //    // in "bar.shark"
                 //    package corge.grault
-                //    service TestService2 {
+                //    servlet TestService2 {
                 //      rpc Foo(FooRequest) returns (FooResponse);
                 //      rpc Baz(BazRequest) returns (BazResponse);
                 //    }
@@ -1592,9 +1592,9 @@ namespace shark {
                 AddMessage(&foo_file, "BazRequest");
                 AddMessage(&foo_file, "BazResponse");
 
-                ServletDescriptorProto* service = AddService(&foo_file, "TestService");
-                AddMethod(service, "Foo", "FooRequest", "FooResponse");
-                AddMethod(service, "Bar", "BarRequest", "BarResponse");
+                ServletDescriptorProto* servlet = AddService(&foo_file, "TestService");
+                AddMethod(servlet, "Foo", "FooRequest", "FooResponse");
+                AddMethod(servlet, "Bar", "BarRequest", "BarResponse");
 
                 FileDescriptorProto bar_file;
                 bar_file.set_name("bar.shark");
@@ -3173,8 +3173,8 @@ namespace shark {
             const FieldDescriptor* map_field = message->FindFieldByName("map_field");
             const EnumDescriptor* enm = message->FindEnumTypeByName("AnEnum");
             // TODO(benjy): Support EnumValue options, once the compiler does.
-            const ServletDescriptor* service = file->FindServiceByName("TestServiceWithCustomOptions");
-            const MethodDescriptor* method = service->FindMethodByName("Foo");
+            const ServletDescriptor* servlet = file->FindServiceByName("TestServiceWithCustomOptions");
+            const MethodDescriptor* method = servlet->FindMethodByName("Foo");
 
             EXPECT_EQ(int64_t { 9876543210 },
                 file->options().GetExtension(sharkbuf_unittest::file_opt1));
@@ -3190,7 +3190,7 @@ namespace shark {
             EXPECT_EQ(-789, enm->options().GetExtension(sharkbuf_unittest::enum_opt1));
             EXPECT_EQ(123, enm->value(1)->options().GetExtension(sharkbuf_unittest::enum_value_opt1));
             EXPECT_EQ(int64_t { -9876543210 },
-                service->options().GetExtension(sharkbuf_unittest::service_opt1));
+                servlet->options().GetExtension(sharkbuf_unittest::service_opt1));
             EXPECT_EQ(sharkbuf_unittest::MethodOpt1::METHODOPT1_VAL2,
                 method->options().GetExtension(sharkbuf_unittest::method_opt1));
 
@@ -3638,8 +3638,8 @@ namespace shark {
             const FieldDescriptor* field = msg->FindFieldByName("fieldname");
             const EnumDescriptor* enumd = file->FindEnumTypeByName("AggregateEnum");
             const EnumValueDescriptor* enumv = enumd->FindValueByName("VALUE");
-            const ServletDescriptor* service = file->FindServiceByName("AggregateService");
-            const MethodDescriptor* method = service->FindMethodByName("Method");
+            const ServletDescriptor* servlet = file->FindServiceByName("AggregateService");
+            const MethodDescriptor* method = servlet->FindMethodByName("Method");
 
             // Tests for the different types of data embedded in fileopt
             const sharkbuf_unittest::Aggregate& file_options = file->options().GetExtension(sharkbuf_unittest::fileopt);
@@ -3668,7 +3668,7 @@ namespace shark {
             EXPECT_EQ("EnumValueAnnotation",
                 enumv->options().GetExtension(sharkbuf_unittest::enumvalopt).s());
             EXPECT_EQ("ServiceAnnotation",
-                service->options().GetExtension(sharkbuf_unittest::serviceopt).s());
+                servlet->options().GetExtension(sharkbuf_unittest::serviceopt).s());
             EXPECT_EQ("MethodAnnotation",
                 method->options().GetExtension(sharkbuf_unittest::methodopt).s());
         }
@@ -7375,7 +7375,7 @@ namespace shark {
                                                      "  NO    = 2 [(test_enumval_opt) = {a:200}];\n"
                                                      "  MAYBE = 3;\n"
                                                      "}\n"
-                                                     "service S {\n"
+                                                     "servlet S {\n"
                                                      "  option (test_svc_opt) = {a:100};\n"
                                                      "  option (test_svc_opt) = {a:200};\n"
                                                      "  option (test_svc_opt) = {a:300};\n"
@@ -8223,9 +8223,9 @@ namespace shark {
             // Verify calling FindServiceByName or FindMethodByName doesn't build the
             // files defining the input and output type, and input_type() and
             // output_type() does indeed build the appropriate files.
-            const ServletDescriptor* service = file->FindServiceByName("LazyService");
-            EXPECT_TRUE(service != nullptr);
-            const MethodDescriptor* method = service->FindMethodByName("A");
+            const ServletDescriptor* servlet = file->FindServiceByName("LazyService");
+            EXPECT_TRUE(servlet != nullptr);
+            const MethodDescriptor* method = servlet->FindMethodByName("A");
             EXPECT_FALSE(pool_.InternalIsFileLoaded("message1.shark"));
             EXPECT_FALSE(pool_.InternalIsFileLoaded("message2.shark"));
             EXPECT_TRUE(method != nullptr);

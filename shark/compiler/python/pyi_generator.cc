@@ -571,7 +571,7 @@ namespace shark::compiler::python {
         for (const auto& entry : servlets) {
             printer_->Print("\n");
             printer_->Print(
-                "class $servlet_name$(_service.servlet): ...\n\n"
+                "class $servlet_name$(_servlet.servlet): ...\n\n"
                 "class $servlet_name$_Stub($servlet_name$): ...\n",
                 "servlet_name", entry->name());
         }
