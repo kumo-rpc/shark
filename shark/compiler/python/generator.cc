@@ -314,7 +314,7 @@ namespace shark::compiler::python {
 
             printer_->Outdent();
         }
-        if (HasGenericServices(file)) {
+        if (HasGenericServlet(file)) {
             printer_->Print(
                 "_builder.BuildServices(DESCRIPTOR, '$module_name$', globals())\n",
                 "module_name", module_name);
@@ -521,7 +521,7 @@ namespace shark::compiler::python {
     }
 
     void Generator::PrintServiceDescriptor(
-        const ServiceDescriptor& descriptor) const {
+        const ServletDescriptor& descriptor) const {
         std::map<std::string, std::string> m;
         m["service_name"] = ModuleLevelServiceDescriptorName(descriptor);
         m["name"] = descriptor.name();
@@ -530,10 +530,10 @@ namespace shark::compiler::python {
     }
 
     void Generator::PrintDescriptorKeyAndModuleName(
-        const ServiceDescriptor& descriptor) const {
+        const ServletDescriptor& descriptor) const {
         std::string name = ModuleLevelServiceDescriptorName(descriptor);
         if (!pure_python_workable_) {
-            name = "_descriptor.ServiceDescriptor(full_name='" + descriptor.full_name() + "')";
+            name = "_descriptor.ServletDescriptor(full_name='" + descriptor.full_name() + "')";
         }
         printer_->Print("$descriptor_key$ = $descriptor_name$,\n", "descriptor_key",
             kDescriptorKey, "descriptor_name", name);
@@ -541,11 +541,11 @@ namespace shark::compiler::python {
         printer_->Print("__module__ = '$module_name$'\n", "module_name", module_name);
     }
 
-    void Generator::PrintServiceClass(const ServiceDescriptor& descriptor) const {
+    void Generator::PrintServiceClass(const ServletDescriptor& descriptor) const {
         // Print the service.
         printer_->Print(
             "$class_name$ = service_reflection.GeneratedServiceType("
-            "'$class_name$', (_service.Service,), dict(\n",
+            "'$class_name$', (_service.Servlet,), dict(\n",
             "class_name", descriptor.name());
         printer_->Indent();
         Generator::PrintDescriptorKeyAndModuleName(descriptor);
@@ -553,7 +553,7 @@ namespace shark::compiler::python {
         printer_->Outdent();
     }
 
-    void Generator::PrintServiceStub(const ServiceDescriptor& descriptor) const {
+    void Generator::PrintServiceStub(const ServletDescriptor& descriptor) const {
         // Print the service stub.
         printer_->Print(
             "$class_name$_Stub = "
@@ -801,7 +801,7 @@ namespace shark::compiler::python {
     }
 
     void Generator::AddServiceToFileDescriptor(
-        const ServiceDescriptor& descriptor) const {
+        const ServletDescriptor& descriptor) const {
         std::map<std::string, std::string> m;
         m["descriptor_name"] = kDescriptorKey;
         m["service_name"] = descriptor.name();
@@ -1114,7 +1114,7 @@ namespace shark::compiler::python {
     // Returns the unique Python module-level identifier given to a service
     // descriptor.
     std::string Generator::ModuleLevelServiceDescriptorName(
-        const ServiceDescriptor& descriptor) const {
+        const ServletDescriptor& descriptor) const {
         std::string name = descriptor.name();
         turbo::str_to_upper(&name);
         name = "_" + name;
@@ -1178,8 +1178,8 @@ namespace shark::compiler::python {
 
         // Services.
         for (int i = 0; i < file_->service_count(); ++i) {
-            ServiceDescriptorProto proto;
-            const ServiceDescriptor& service = *file_->service(i);
+            ServletDescriptorProto proto;
+            const ServletDescriptor& service = *file_->service(i);
             PrintSerializedPbInterval(service, proto,
                 ModuleLevelServiceDescriptorName(service));
         }
@@ -1266,7 +1266,7 @@ namespace shark::compiler::python {
     // Prints expressions that set the options for an service descriptor and its
     // value descriptors.
     void Generator::FixOptionsForService(
-        const ServiceDescriptor& service_descriptor) const {
+        const ServletDescriptor& service_descriptor) const {
         std::string descriptor_name = ModuleLevelServiceDescriptorName(service_descriptor);
         std::string service_options = OptionsValue(service_descriptor.options().SerializeAsString());
         if (service_options != "None") {

@@ -283,10 +283,10 @@ namespace shark {
         void BuildEnumValue(const EnumValueDescriptorProto& proto,
             const EnumDescriptor* parent, EnumValueDescriptor* result,
             internal::FlatAllocator& alloc);
-        void BuildService(const ServiceDescriptorProto& proto, const void* dummy,
-            ServiceDescriptor* result, internal::FlatAllocator& alloc);
+        void BuildService(const ServletDescriptorProto& proto, const void* dummy,
+            ServletDescriptor* result, internal::FlatAllocator& alloc);
         void BuildMethod(const MethodDescriptorProto& proto,
-            const ServiceDescriptor* parent, MethodDescriptor* result,
+            const ServletDescriptor* parent, MethodDescriptor* result,
             internal::FlatAllocator& alloc);
 
         void LogUnusedDependency(const FileDescriptorProto& proto,
@@ -307,8 +307,8 @@ namespace shark {
             const EnumDescriptorProto& proto);
         void CrossLinkEnumValue(EnumValueDescriptor* enum_value,
             const EnumValueDescriptorProto& proto);
-        void CrossLinkService(ServiceDescriptor* service,
-            const ServiceDescriptorProto& proto);
+        void CrossLinkService(ServletDescriptor* service,
+            const ServletDescriptorProto& proto);
         void CrossLinkMethod(MethodDescriptor* method,
             const MethodDescriptorProto& proto);
         void SuggestFieldNumbers(FileDescriptor* file,
@@ -488,8 +488,8 @@ namespace shark {
         void ValidateExtensionRangeOptions(
             const std::string& full_name, Descriptor::ExtensionRange* extension_range,
             const DescriptorProto_ExtensionRange& proto);
-        void ValidateServiceOptions(ServiceDescriptor* service,
-            const ServiceDescriptorProto& proto);
+        void ValidateServletOptions(ServletDescriptor* service,
+            const ServletDescriptorProto& proto);
         void ValidateMethodOptions(MethodDescriptor* method,
             const MethodDescriptorProto& proto);
         void ValidateProto3(FileDescriptor* file, const FileDescriptorProto& proto);

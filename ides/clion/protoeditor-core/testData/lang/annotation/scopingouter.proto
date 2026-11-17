@@ -9,7 +9,7 @@ extend google.protobuf.FileOptions {
   optional int32 shadowed_file_option = 66667;
 }
 
-extend google.protobuf.ServiceOptions {
+extend google.protobuf.ServletOptions {
   optional int32 resolvable_service_option2 = 55556;
   optional int32 shadowed_service_option = 55557;
 }

@@ -1258,7 +1258,7 @@ class GENERATED_SERVICE_TEST_NAME : public testing::Test {
     ASSERT_TRUE(bar_ != nullptr);
   }
 
-  const ServiceDescriptor* descriptor_;
+  const ServletDescriptor* descriptor_;
   const MethodDescriptor* foo_;
   const MethodDescriptor* bar_;
 
@@ -1293,7 +1293,7 @@ TEST_F(GENERATED_SERVICE_TEST_NAME, OwnsChannel) {
 
   {
     UNITTEST::TestService::Stub owning_stub(channel,
-                                            Service::STUB_OWNS_CHANNEL);
+                                            Servlet::STUB_OWNS_CHANNEL);
     EXPECT_FALSE(destroyed);
   }
 
@@ -2155,7 +2155,7 @@ TEST_F(GENERATED_SERVICE_TEST_NAME, NoGenericServices) {
       ::sharkbuf_unittest::no_generic_services_test::TestEnum::FOO;
   EXPECT_EQ(e, 1);
 
-  // Verify that a ServiceDescriptor is generated for the service even if the
+  // Verify that a ServletDescriptor is generated for the service even if the
   // class itself is not.
   const FileDescriptor* file =
       ::shark::unittest::no_generic_services_test::TestMessage::descriptor()

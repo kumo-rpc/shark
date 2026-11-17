@@ -123,7 +123,7 @@ namespace shark::compiler::python {
         return filename;
     }
 
-    bool HasGenericServices(const FileDescriptor* file) {
+    bool HasGenericServlet(const FileDescriptor* file) {
         return file->service_count() > 0 && file->options().py_generic_services();
     }
 

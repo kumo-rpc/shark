@@ -172,7 +172,7 @@ namespace shark {
             lazy_name[name.size()] = 0;
         }
 
-        void LazyDescriptor::Once(const ServiceDescriptor* service) {
+        void LazyDescriptor::Once(const ServletDescriptor* service) {
             if (once_) {
                 internal::call_once(*once_, [&] {
                     auto* file = service->file();

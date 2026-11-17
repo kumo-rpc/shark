@@ -7,7 +7,7 @@ package issues;
 message MyRequest {}
 message MyResponse {}
 
-service MyService {
+service MyServlet {
 
   rpc m1 (MyRequest) returns (MyResponse) {
     option (my_option) = {

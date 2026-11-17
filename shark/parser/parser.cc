@@ -670,9 +670,9 @@ namespace shark {
                 return ParseEnumDefinition(file->add_enum_type(), location, file);
             } else if (looking_at("service")) {
                 LocationRecorder location(root_location,
-                    FileDescriptorProto::kServiceFieldNumber,
-                    file->service_size());
-                return ParseServiceDefinition(file->add_service(), location, file);
+                    FileDescriptorProto::kServletFieldNumber,
+                    file->servlet_size());
+                return ParseServiceDefinition(file->add_servlet(), location, file);
             } else if (looking_at("extend")) {
                 LocationRecorder location(root_location,
                     FileDescriptorProto::kExtensionFieldNumber);
@@ -2100,13 +2100,13 @@ namespace shark {
         // Services
 
         bool Parser::ParseServiceDefinition(
-            ServiceDescriptorProto* service, const LocationRecorder& service_location,
+            ServletDescriptorProto* service, const LocationRecorder& service_location,
             const FileDescriptorProto* containing_file) {
             DO(consume("service"));
 
             {
                 LocationRecorder location(service_location,
-                    ServiceDescriptorProto::kNameFieldNumber);
+                    ServletDescriptorProto::kNameFieldNumber);
                 location.RecordLegacyLocation(service,
                     DescriptorPool::ErrorCollector::NAME);
                 DO(consume_identifier(service->mutable_name(), "Expected service name."));
@@ -2116,7 +2116,7 @@ namespace shark {
             return true;
         }
 
-        bool Parser::ParseServiceBlock(ServiceDescriptorProto* service,
+        bool Parser::ParseServiceBlock(ServletDescriptorProto* service,
             const LocationRecorder& service_location,
             const FileDescriptorProto* containing_file) {
             DO(consume_end_of_declaration("{", &service_location));
@@ -2137,7 +2137,7 @@ namespace shark {
             return true;
         }
 
-        bool Parser::ParseServiceStatement(ServiceDescriptorProto* service,
+        bool Parser::ParseServiceStatement(ServletDescriptorProto* service,
             const LocationRecorder& service_location,
             const FileDescriptorProto* containing_file) {
             if (try_consume_end_of_declaration(";", nullptr)) {
@@ -2145,12 +2145,12 @@ namespace shark {
                 return true;
             } else if (looking_at("option")) {
                 LocationRecorder location(service_location,
-                    ServiceDescriptorProto::kOptionsFieldNumber);
+                    ServletDescriptorProto::kOptionsFieldNumber);
                 return prse_option(service->mutable_options(), location, containing_file,
                     OPTION_STATEMENT);
             } else {
                 LocationRecorder location(service_location,
-                    ServiceDescriptorProto::kMethodFieldNumber,
+                    ServletDescriptorProto::kMethodFieldNumber,
                     service->method_size());
                 return parse_service_method(service->add_method(), location, containing_file);
             }

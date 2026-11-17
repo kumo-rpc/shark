@@ -76,7 +76,7 @@ message EnumValueOptions {
   optional EnumValueOptionType enum_value_enum_option = 4;
 }
 
-message ServiceOptions {
+message ServletOptions {
   extensions 50 to max;
   enum ServiceOptionType {
     FOO = 1;

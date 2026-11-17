@@ -33,7 +33,7 @@ extend google.protobuf.EnumOptions {
 extend google.protobuf.EnumValueOptions {
   optional uint32 my_enum_value_option = 50004;
 }
-extend google.protobuf.ServiceOptions {
+extend google.protobuf.ServletOptions {
   optional MyEnum my_service_option = 50005;
 }
 extend google.protobuf.MethodOptions {
@@ -59,7 +59,7 @@ enum MyEnum {
 message RequestType {}
 message ResponseType {}
 
-service MyService {
+service MyServlet {
   option (my_service_option) = FOO;
 
   rpc MyMethod(RequestType) returns(ResponseType) {

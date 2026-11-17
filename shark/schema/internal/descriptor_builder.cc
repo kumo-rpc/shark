@@ -593,13 +593,13 @@ namespace shark {
     }
 
     static void PlanAllocationSize(
-        const RepeatedPtrField<ServiceDescriptorProto>& services,
+        const RepeatedPtrField<ServletDescriptorProto>& services,
         internal::FlatAllocator& alloc) {
-        alloc.PlanArray<ServiceDescriptor>(services.size());
+        alloc.PlanArray<ServletDescriptor>(services.size());
         alloc.PlanArray<std::string>(2 * services.size()); // name + full_name
         for (const auto& service : services) {
             if (service.has_options())
-                alloc.PlanArray<ServiceOptions>(1);
+                alloc.PlanArray<ServletOptions>(1);
             PlanAllocationSize(service.method(), alloc);
         }
     }
@@ -614,7 +614,7 @@ namespace shark {
         if (proto.has_source_code_info())
             alloc.PlanArray<SourceCodeInfo>(1);
 
-        PlanAllocationSize(proto.service(), alloc);
+        PlanAllocationSize(proto.servlet(), alloc);
         PlanAllocationSize(proto.message_type(), alloc);
         PlanAllocationSize(proto.enum_type(), alloc);
         PlanAllocationSize(proto.extension(), alloc);
@@ -905,7 +905,13 @@ namespace shark {
         // Convert children.
         BUILD_ARRAY(proto, result, message_type, BuildMessage, nullptr);
         BUILD_ARRAY(proto, result, enum_type, BuildEnum, nullptr);
-        BUILD_ARRAY(proto, result, service, BuildService, nullptr);
+
+        result->service_count_ = proto.servlet_size();
+        result->services_ = alloc.AllocateArray<typename std::remove_pointer<decltype(result->services_)>::type>(proto.servlet_size());
+        for (int i = 0; i < proto.servlet_size(); i++) {
+            BuildService(proto.servlet(i), nullptr, result->services_ + i, alloc);
+        };
+
         BUILD_ARRAY(proto, result, extension, BuildExtension, nullptr);
 
         // Copy options.
@@ -2452,9 +2458,9 @@ namespace shark {
         file_tables_->AddEnumValueByNumber(result);
     }
 
-    void DescriptorBuilder::BuildService(const ServiceDescriptorProto& proto,
+    void DescriptorBuilder::BuildService(const ServletDescriptorProto& proto,
         const void* /* dummy */,
-        ServiceDescriptor* result,
+        ServletDescriptor* result,
         internal::FlatAllocator& alloc) {
         result->all_names_ = AllocateNameStrings(file_->package(), proto.name(), alloc);
         result->file_ = file_;
@@ -2466,8 +2472,8 @@ namespace shark {
         result->options_ = nullptr; // Set to default_instance later if necessary.
         if (proto.has_options()) {
             AllocateOptions(proto.options(), result,
-                ServiceDescriptorProto::kOptionsFieldNumber,
-                "shark.ServiceOptions", alloc);
+                ServletDescriptorProto::kOptionsFieldNumber,
+                "shark.ServletOptions", alloc);
         }
 
         AddSymbol(result->full_name(), nullptr, result->name(), proto,
@@ -2475,7 +2481,7 @@ namespace shark {
     }
 
     void DescriptorBuilder::BuildMethod(const MethodDescriptorProto& proto,
-        const ServiceDescriptor* parent,
+        const ServletDescriptor* parent,
         MethodDescriptor* result,
         internal::FlatAllocator& alloc) {
         result->service_ = parent;
@@ -2525,7 +2531,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         }
 
         for (int i = 0; i < file->service_count(); i++) {
-            CrossLinkService(&file->services_[i], proto.service(i));
+            CrossLinkService(&file->services_[i], proto.servlet(i));
         }
     }
 
@@ -2926,10 +2932,10 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         }
     }
 
-    void DescriptorBuilder::CrossLinkService(ServiceDescriptor* service,
-        const ServiceDescriptorProto& proto) {
+    void DescriptorBuilder::CrossLinkService(ServletDescriptor* service,
+        const ServletDescriptorProto& proto) {
         if (service->options_ == nullptr) {
-            service->options_ = &ServiceOptions::default_instance();
+            service->options_ = &ServletOptions::default_instance();
         }
 
         for (int i = 0; i < service->method_count(); i++) {
@@ -3079,7 +3085,8 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         const FileDescriptorProto& proto) {
         VALIDATE_OPTIONS_FROM_ARRAY(file, message_type, Message);
         VALIDATE_OPTIONS_FROM_ARRAY(file, enum_type, Enum);
-        VALIDATE_OPTIONS_FROM_ARRAY(file, service, Service);
+         for (int i = 0; i < file->service_count(); ++i) { ValidateServletOptions(file->services_ + i, proto.servlet(i)); }
+
         VALIDATE_OPTIONS_FROM_ARRAY(file, extension, Field);
 
         // Lite files can only be imported by other Lite files.
@@ -3176,7 +3183,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
              auto allowed_proto3_extendees = new std::set<std::string>;
              const char* kOptionNames[] = {
                  "FileOptions", "MessageOptions", "FieldOptions",
-                 "EnumOptions", "EnumValueOptions", "ServiceOptions",
+                 "EnumOptions", "EnumValueOptions", "ServletOptions",
                  "MethodOptions", "OneofOptions", "ExtensionRangeOptions"
              };
              for (const char* option_name : kOptionNames) {
@@ -3366,8 +3373,8 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         (void)extension_range; // Parameter is used by Google-internal code.
     }
 
-    void DescriptorBuilder::ValidateServiceOptions(
-        ServiceDescriptor* service, const ServiceDescriptorProto& proto) {
+    void DescriptorBuilder::ValidateServletOptions(
+        ServletDescriptor* service, const ServletDescriptorProto& proto) {
         if (IsLite(service->file()) && service->file()->options().cc_generic_services()) {
             add_error(service->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
                 "Files with optimize_for = LITE_RUNTIME cannot define services "

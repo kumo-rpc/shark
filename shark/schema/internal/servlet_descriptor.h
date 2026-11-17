@@ -25,9 +25,9 @@ namespace shark {
 
         // Describes an RPC service. Use DescriptorPool to construct your own
     // descriptors.
-    class SHARK_EXPORT ServiceDescriptor : private internal::SymbolBase {
+    class SHARK_EXPORT ServletDescriptor : private internal::SymbolBase {
     public:
-        typedef ServiceDescriptorProto Proto;
+        typedef ServletDescriptorProto Proto;
 
         // The name of the service, not including its containing scope.
         const std::string& name() const;
@@ -41,9 +41,9 @@ namespace shark {
 
         // Get options for this service type.  These are specified in the .shark file
         // by placing lines like "option foo = 1234;" in the service definition.
-        // Allowed options are defined by ServiceOptions in descriptor.shark, and any
+        // Allowed options are defined by ServletOptions in descriptor.shark, and any
         // available extensions of that message.
-        const ServiceOptions& options() const;
+        const ServletOptions& options() const;
 
         // The number of methods this service defines.
         int method_count() const;
@@ -55,7 +55,7 @@ namespace shark {
         const MethodDescriptor* FindMethodByName(ConstStringParam name) const;
 
         // See Descriptor::CopyTo().
-        void CopyTo(ServiceDescriptorProto* proto) const;
+        void CopyTo(ServletDescriptorProto* proto) const;
 
         // See Descriptor::DebugString().
         std::string DebugString() const;
@@ -72,7 +72,7 @@ namespace shark {
 
     private:
         friend class Symbol;
-        typedef ServiceOptions OptionsType;
+        typedef ServletOptions OptionsType;
 
         // Allows access to GetLocationPath for annotations.
         friend class io::Printer;
@@ -90,26 +90,26 @@ namespace shark {
         // all_names_ = [name, full_name]
         const std::string* all_names_;
         const FileDescriptor* file_;
-        const ServiceOptions* options_;
+        const ServletOptions* options_;
         MethodDescriptor* methods_;
         int method_count_;
         // IMPORTANT:  If you add a new field, make sure to search for all instances
-        // of Allocate<ServiceDescriptor>() and AllocateArray<ServiceDescriptor>() in
+        // of Allocate<ServletDescriptor>() and AllocateArray<ServletDescriptor>() in
         // descriptor.cc and update them to initialize the field.
 
         // Must be constructed using DescriptorPool.
-        ServiceDescriptor() { }
+        ServletDescriptor() { }
         friend class DescriptorBuilder;
         friend class FileDescriptor;
         friend class MethodDescriptor;
-        KUMO_DISALLOW_COPY_AND_ASSIGN(ServiceDescriptor);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(ServletDescriptor);
     };
 
-    SHARK_INTERNAL_CHECK_CLASS_SIZE(ServiceDescriptor, 48);
+    SHARK_INTERNAL_CHECK_CLASS_SIZE(ServletDescriptor, 48);
 
         // Describes an individual service method.  To obtain a MethodDescriptor given
-    // a service, first get its ServiceDescriptor, then call
-    // ServiceDescriptor::FindMethodByName().  Use DescriptorPool to construct your
+    // a service, first get its ServletDescriptor, then call
+    // ServletDescriptor::FindMethodByName().  Use DescriptorPool to construct your
     // own descriptors.
     class SHARK_EXPORT MethodDescriptor : private internal::SymbolBase {
     public:
@@ -125,7 +125,7 @@ namespace shark {
         // The .shark file in which this method was defined.  Never nullptr.
         const FileDescriptor* file() const;
         // Gets the service to which this method belongs.  Never nullptr.
-        const ServiceDescriptor* service() const;
+        const ServletDescriptor* service() const;
 
         // Gets the type of protocol message which this method accepts as input.
         const Descriptor* input_type() const;
@@ -179,7 +179,7 @@ namespace shark {
         bool server_streaming_;
         // all_names_ = [name, full_name]
         const std::string* all_names_;
-        const ServiceDescriptor* service_;
+        const ServletDescriptor* service_;
         mutable internal::LazyDescriptor input_type_;
         mutable internal::LazyDescriptor output_type_;
         const MethodOptions* options_;
@@ -190,7 +190,7 @@ namespace shark {
         // Must be constructed using DescriptorPool.
         MethodDescriptor() { }
         friend class DescriptorBuilder;
-        friend class ServiceDescriptor;
+        friend class ServletDescriptor;
         KUMO_DISALLOW_COPY_AND_ASSIGN(MethodDescriptor);
     };
 

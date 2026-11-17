@@ -900,7 +900,7 @@ namespace shark {
                     "  rpc Foo(In) returns (Out);\n"
                     "}\n",
 
-                    "service {"
+                    "servlet {"
                     "  name: \"TestService\""
                     "  method { name:\"Foo\" input_type:\"In\" output_type:\"Out\" }"
                     "}");
@@ -914,7 +914,7 @@ namespace shark {
                     "  rpc Baz(In3) returns (Out3);\n"
                     "}\n",
 
-                    "service {"
+                    "servlet {"
                     "  name: \"TestService\""
                     "  method { name:\"Foo\" input_type:\"In1\" output_type:\"Out1\" }"
                     "  method { name:\"Bar\" input_type:\"In2\" output_type:\"Out2\" }"
@@ -1322,7 +1322,7 @@ namespace shark {
             }
 
             // -------------------------------------------------------------------
-            // Service errors
+            // Servlet errors
 
             TEST_F(ParseErrorTest, EofInService) {
                 ExpectHasErrors(
@@ -1915,10 +1915,10 @@ namespace shark {
                     "  ASDF = 1;\n"
                     "}\n"
                     "\n"
-                    "// Detached comment before MyService.\n"
+                    "// Detached comment before MyServlet.\n"
                     "\n"
-                    "// Service comment.\n"
-                    "service MyService {\n"
+                    "// Servlet comment.\n"
+                    "service MyServlet {\n"
                     "\n"
                     "  // Detached comment before MyRPCCall.\n"
                     "\n"
@@ -1958,8 +1958,8 @@ namespace shark {
                     "Enum comment",
                     "Detached comment before ASDF.",
                     "Enum-value comment",
-                    "Detached comment before MyService.",
-                    "Service comment",
+                    "Detached comment before MyServlet.",
+                    "Servlet comment",
                     "Detached comment before MyRPCCall.",
                     "RPC comment",
                 };
@@ -2298,10 +2298,10 @@ namespace shark {
                     Parse("$a$service $b$Foo$c$ {}$d$\n"
                           "$e$service $f$Bar$g$ {}$h$\n"));
 
-                EXPECT_TRUE(HasSpan('a', 'd', file_.service(0)));
-                EXPECT_TRUE(HasSpan('b', 'c', file_.service(0), "name"));
-                EXPECT_TRUE(HasSpan('e', 'h', file_.service(1)));
-                EXPECT_TRUE(HasSpan('f', 'g', file_.service(1), "name"));
+                EXPECT_TRUE(HasSpan('a', 'd', file_.servlet(0)));
+                EXPECT_TRUE(HasSpan('b', 'c', file_.servlet(0), "name"));
+                EXPECT_TRUE(HasSpan('e', 'h', file_.servlet(1)));
+                EXPECT_TRUE(HasSpan('f', 'g', file_.servlet(1), "name"));
 
                 // Ignore these.
                 EXPECT_TRUE(HasSpan(file_));
@@ -2314,8 +2314,8 @@ namespace shark {
                           "  $i$rpc $j$Baz$k$($l$Z$m$) returns($n$W$o$);$p$"
                           "}"));
 
-                const MethodDescriptorProto& bar = file_.service(0).method(0);
-                const MethodDescriptorProto& baz = file_.service(0).method(1);
+                const MethodDescriptorProto& bar = file_.servlet(0).method(0);
+                const MethodDescriptorProto& baz = file_.servlet(0).method(1);
 
                 EXPECT_TRUE(HasSpan('a', 'h', bar));
                 EXPECT_TRUE(HasSpan('b', 'c', bar, "name"));
@@ -2329,8 +2329,8 @@ namespace shark {
 
                 // Ignore these.
                 EXPECT_TRUE(HasSpan(file_));
-                EXPECT_TRUE(HasSpan(file_.service(0)));
-                EXPECT_TRUE(HasSpan(file_.service(0), "name"));
+                EXPECT_TRUE(HasSpan(file_.servlet(0)));
+                EXPECT_TRUE(HasSpan(file_.servlet(0), "name"));
             }
 
             TEST_F(SourceInfoTest, Options) {
@@ -2418,8 +2418,8 @@ namespace shark {
 
                 EXPECT_TRUE(HasSpan('a', 'b', file_.message_type(0).options()));
                 EXPECT_TRUE(HasSpan('c', 'd', file_.enum_type(0).options()));
-                EXPECT_TRUE(HasSpan('e', 'f', file_.service(0).options()));
-                EXPECT_TRUE(HasSpan('g', 'h', file_.service(0).method(0).options()));
+                EXPECT_TRUE(HasSpan('e', 'f', file_.servlet(0).options()));
+                EXPECT_TRUE(HasSpan('g', 'h', file_.servlet(0).method(0).options()));
 
                 // Ignore these.
                 EXPECT_TRUE(HasSpan(file_));
@@ -2447,55 +2447,55 @@ namespace shark {
                         "name_part"));
                 EXPECT_TRUE(HasSpan(file_.enum_type(0).options().uninterpreted_option(0),
                     "positive_int_value"));
-                EXPECT_TRUE(HasSpan(file_.service(0)));
-                EXPECT_TRUE(HasSpan(file_.service(0), "name"));
-                EXPECT_TRUE(HasSpan(file_.service(0).method(0)));
-                EXPECT_TRUE(HasSpan(file_.service(0).options().uninterpreted_option(0)));
+                EXPECT_TRUE(HasSpan(file_.servlet(0)));
+                EXPECT_TRUE(HasSpan(file_.servlet(0), "name"));
+                EXPECT_TRUE(HasSpan(file_.servlet(0).method(0)));
+                EXPECT_TRUE(HasSpan(file_.servlet(0).options().uninterpreted_option(0)));
                 EXPECT_TRUE(
-                    HasSpan(file_.service(0).options().uninterpreted_option(0), "name"));
+                    HasSpan(file_.servlet(0).options().uninterpreted_option(0), "name"));
                 EXPECT_TRUE(
-                    HasSpan(file_.service(0).options().uninterpreted_option(0).name(0)));
+                    HasSpan(file_.servlet(0).options().uninterpreted_option(0).name(0)));
                 EXPECT_TRUE(HasSpan(
-                    file_.service(0).options().uninterpreted_option(0).name(0), "name_part"));
-                EXPECT_TRUE(HasSpan(file_.service(0).options().uninterpreted_option(0),
+                    file_.servlet(0).options().uninterpreted_option(0).name(0), "name_part"));
+                EXPECT_TRUE(HasSpan(file_.servlet(0).options().uninterpreted_option(0),
                     "positive_int_value"));
-                EXPECT_TRUE(HasSpan(file_.service(0).method(0), "name"));
-                EXPECT_TRUE(HasSpan(file_.service(0).method(0), "input_type"));
-                EXPECT_TRUE(HasSpan(file_.service(0).method(0), "output_type"));
+                EXPECT_TRUE(HasSpan(file_.servlet(0).method(0), "name"));
+                EXPECT_TRUE(HasSpan(file_.servlet(0).method(0), "input_type"));
+                EXPECT_TRUE(HasSpan(file_.servlet(0).method(0), "output_type"));
                 EXPECT_TRUE(
-                    HasSpan(file_.service(0).method(0).options().uninterpreted_option(0)));
+                    HasSpan(file_.servlet(0).method(0).options().uninterpreted_option(0)));
                 EXPECT_TRUE(HasSpan(
-                    file_.service(0).method(0).options().uninterpreted_option(0), "name"));
+                    file_.servlet(0).method(0).options().uninterpreted_option(0), "name"));
                 EXPECT_TRUE(HasSpan(
-                    file_.service(0).method(0).options().uninterpreted_option(0).name(0)));
+                    file_.servlet(0).method(0).options().uninterpreted_option(0).name(0)));
                 EXPECT_TRUE(HasSpan(
-                    file_.service(0).method(0).options().uninterpreted_option(0).name(0),
+                    file_.servlet(0).method(0).options().uninterpreted_option(0).name(0),
                     "name_part"));
                 EXPECT_TRUE(
-                    HasSpan(file_.service(0).method(0).options().uninterpreted_option(0),
+                    HasSpan(file_.servlet(0).method(0).options().uninterpreted_option(0),
                         "positive_int_value"));
 
-                EXPECT_TRUE(HasSpan('k', 'l', file_.service(0).method(1).options()));
-                EXPECT_TRUE(HasSpan(file_.service(0).method(1)));
-                EXPECT_TRUE(HasSpan(file_.service(0).method(1), "name"));
-                EXPECT_TRUE(HasSpan(file_.service(0).method(1), "input_type"));
-                EXPECT_TRUE(HasSpan(file_.service(0).method(1), "output_type"));
+                EXPECT_TRUE(HasSpan('k', 'l', file_.servlet(0).method(1).options()));
+                EXPECT_TRUE(HasSpan(file_.servlet(0).method(1)));
+                EXPECT_TRUE(HasSpan(file_.servlet(0).method(1), "name"));
+                EXPECT_TRUE(HasSpan(file_.servlet(0).method(1), "input_type"));
+                EXPECT_TRUE(HasSpan(file_.servlet(0).method(1), "output_type"));
                 EXPECT_TRUE(
-                    HasSpan(file_.service(0).method(1).options().uninterpreted_option(0)));
+                    HasSpan(file_.servlet(0).method(1).options().uninterpreted_option(0)));
                 EXPECT_TRUE(HasSpan(
-                    file_.service(0).method(1).options().uninterpreted_option(0), "name"));
+                    file_.servlet(0).method(1).options().uninterpreted_option(0), "name"));
                 EXPECT_TRUE(HasSpan(
-                    file_.service(0).method(1).options().uninterpreted_option(0).name(0)));
+                    file_.servlet(0).method(1).options().uninterpreted_option(0).name(0)));
                 EXPECT_TRUE(HasSpan(
-                    file_.service(0).method(1).options().uninterpreted_option(0).name(0),
+                    file_.servlet(0).method(1).options().uninterpreted_option(0).name(0),
                     "name_part"));
                 EXPECT_TRUE(
-                    HasSpan(file_.service(0).method(1).options().uninterpreted_option(0),
+                    HasSpan(file_.servlet(0).method(1).options().uninterpreted_option(0),
                         "positive_int_value"));
                 EXPECT_TRUE(
-                    HasSpan('1', '2', file_.service(0).method(1), "client_streaming"));
+                    HasSpan('1', '2', file_.servlet(0).method(1), "client_streaming"));
                 EXPECT_TRUE(
-                    HasSpan('3', '4', file_.service(0).method(1), "server_streaming"));
+                    HasSpan('3', '4', file_.servlet(0).method(1), "server_streaming"));
             }
 
             TEST_F(SourceInfoTest, FieldOptions) {

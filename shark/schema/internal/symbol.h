@@ -64,7 +64,7 @@ namespace shark {
         DEFINE_MEMBERS(FieldDescriptor, FIELD, field_descriptor)
         DEFINE_MEMBERS(OneofDescriptor, ONEOF, oneof_descriptor)
         DEFINE_MEMBERS(EnumDescriptor, ENUM, enum_descriptor)
-        DEFINE_MEMBERS(ServiceDescriptor, SERVICE, service_descriptor)
+        DEFINE_MEMBERS(ServletDescriptor, SERVICE, service_descriptor)
         DEFINE_MEMBERS(MethodDescriptor, METHOD, method_descriptor)
         DEFINE_MEMBERS(FileDescriptor, FULL_PACKAGE, file_descriptor)
 

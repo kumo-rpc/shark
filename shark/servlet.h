@@ -21,17 +21,17 @@
 // local implementation of the servlet.
 //
 // For example, the servlet definition:
-//   servlet MyService {
+//   servlet MyServlet {
 //     rpc Foo(MyRequest) returns(MyResponse);
 //   }
-// will generate abstract interface "MyService" and class "MyService::Stub".
-// You could implement a MyService as follows:
-//   class MyServiceImpl : public MyService {
+// will generate abstract interface "MyServlet" and class "MyServlet::Stub".
+// You could implement a MyServlet as follows:
+//   class MyServiceImpl : public MyServlet {
 //    public:
 //     MyServiceImpl() {}
 //     ~MyServiceImpl() {}
 //
-//     // implements MyService ---------------------------------------
+//     // implements MyServlet ---------------------------------------
 //
 //     void Foo(shark::RpcController* controller,
 //              const MyRequest* request,
@@ -85,25 +85,25 @@
 namespace shark {
 
     // Defined in this file.
-    class Service;
+    class Servlet;
     class RpcController;
     class RpcChannel;
 
     // Defined in other files.
     class Descriptor; // descriptor.h
-    class ServiceDescriptor; // descriptor.h
+    class ServletDescriptor; // descriptor.h
     class MethodDescriptor; // descriptor.h
     class Message; // message.h
 
     // Abstract base interface for protocol-buffer-based RPC servlets.  Services
     // themselves are abstract interfaces (implemented either by servers or as
     // stubs), but they subclass this base interface.  The methods of this
-    // interface can be used to call the methods of the Service without knowing
+    // interface can be used to call the methods of the Servlet without knowing
     // its exact type at compile time (analogous to Reflection).
-    class SHARK_EXPORT Service {
+    class SHARK_EXPORT Servlet {
     public:
-        inline Service() { }
-        virtual ~Service();
+        inline Servlet() { }
+        virtual ~Servlet();
 
         // When constructing a stub, you may pass STUB_OWNS_CHANNEL as the second
         // parameter to the constructor to tell it to delete its RpcChannel when
@@ -111,8 +111,8 @@ namespace shark {
         enum ChannelOwnership { STUB_OWNS_CHANNEL,
             STUB_DOESNT_OWN_CHANNEL };
 
-        // Get the ServiceDescriptor describing this servlet and its methods.
-        virtual const ServiceDescriptor* GetDescriptor() = 0;
+        // Get the ServletDescriptor describing this servlet and its methods.
+        virtual const ServletDescriptor* GetDescriptor() = 0;
 
         // Call a method of the servlet specified by MethodDescriptor.  This is
         // normally implemented as a simple switch() that calls the standard
@@ -126,8 +126,8 @@ namespace shark {
         // * After the call has started, the request must not be modified and the
         //   response must not be accessed at all until "done" is called.
         // * "controller" is of the correct type for the RPC implementation being
-        //   used by this Service.  For stubs, the "correct type" depends on the
-        //   RpcChannel which the stub is using.  Server-side Service
+        //   used by this Servlet.  For stubs, the "correct type" depends on the
+        //   RpcChannel which the stub is using.  Server-side Servlet
         //   implementations are expected to accept whatever type of RpcController
         //   the server-side RPC implementation uses.
         //
@@ -162,7 +162,7 @@ namespace shark {
             const MethodDescriptor* method) const = 0;
 
     private:
-        KUMO_DISALLOW_COPY_AND_ASSIGN(Service);
+        KUMO_DISALLOW_COPY_AND_ASSIGN(Servlet);
     };
 
     // An RpcController mediates a single method call.  The primary purpose of
@@ -232,12 +232,12 @@ namespace shark {
     };
 
     // Abstract interface for an RPC channel.  An RpcChannel represents a
-    // communication line to a Service which can be used to call that Service's
-    // methods.  The Service may be running on another machine.  Normally, you
-    // should not call an RpcChannel directly, but instead construct a stub Service
+    // communication line to a Servlet which can be used to call that Servlet's
+    // methods.  The Servlet may be running on another machine.  Normally, you
+    // should not call an RpcChannel directly, but instead construct a stub Servlet
     // wrapping it.  Example:
     //   RpcChannel* channel = new MyRpcChannel("remotehost.example.com:1234");
-    //   MyService* servlet = new MyService::Stub(channel);
+    //   MyServlet* servlet = new MyServlet::Stub(channel);
     //   servlet->MyMethod(request, &response, callback);
     class SHARK_EXPORT RpcChannel {
     public:
@@ -245,7 +245,7 @@ namespace shark {
         virtual ~RpcChannel();
 
         // Call the given method of the remote servlet.  The signature of this
-        // procedure looks the same as Service::CallMethod(), but the requirements
+        // procedure looks the same as Servlet::CallMethod(), but the requirements
         // are less strict in one important way:  the request and response objects
         // need not be of any specific class as long as their descriptors are
         // method->input_type() and method->output_type().

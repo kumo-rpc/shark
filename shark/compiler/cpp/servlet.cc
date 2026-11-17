@@ -52,7 +52,7 @@ namespace shark::compiler::cpp {
     } // namespace
 
     ServletGenerator::ServletGenerator(
-        const ServiceDescriptor* descriptor,
+        const ServletDescriptor* descriptor,
         const std::map<std::string, std::string>& vars, const Options& options)
         : descriptor_(descriptor)
         , vars_(vars)
@@ -77,7 +77,7 @@ namespace shark::compiler::cpp {
     void ServletGenerator::GenerateInterface(io::Printer* printer) {
         Formatter format(printer, vars_);
         format(
-            "class $dllexport_decl $$classname$ : public ::$proto_ns$::Service {\n"
+            "class $dllexport_decl $$classname$ : public ::$proto_ns$::Servlet {\n"
             " protected:\n"
             "  // This class should be treated as an abstract interface.\n"
             "  inline $classname$() {};\n"
@@ -89,16 +89,16 @@ namespace shark::compiler::cpp {
             "\n"
             "typedef $classname$_Stub Stub;\n"
             "\n"
-            "static const ::$proto_ns$::ServiceDescriptor* descriptor();\n"
+            "static const ::$proto_ns$::ServletDescriptor* descriptor();\n"
             "\n");
 
         GenerateMethodSignatures(VIRTUAL, printer);
 
         format(
             "\n"
-            "// implements Service ----------------------------------------------\n"
+            "// implements Servlet ----------------------------------------------\n"
             "\n"
-            "const ::$proto_ns$::ServiceDescriptor* GetDescriptor();\n"
+            "const ::$proto_ns$::ServletDescriptor* GetDescriptor();\n"
             "void CallMethod(const ::$proto_ns$::MethodDescriptor* method,\n"
             "                ::$proto_ns$::RpcController* controller,\n"
             "                const ::$proto_ns$::Message* request,\n"
@@ -129,7 +129,7 @@ namespace shark::compiler::cpp {
         format(
             "$classname$_Stub(::$proto_ns$::RpcChannel* channel);\n"
             "$classname$_Stub(::$proto_ns$::RpcChannel* channel,\n"
-            "                 ::$proto_ns$::Service::ChannelOwnership ownership);\n"
+            "                 ::$proto_ns$::Servlet::ChannelOwnership ownership);\n"
             "~$classname$_Stub();\n"
             "\n"
             "inline ::$proto_ns$::RpcChannel* channel() { return channel_; }\n"
@@ -171,13 +171,13 @@ namespace shark::compiler::cpp {
         format(
             "$classname$::~$classname$() {}\n"
             "\n"
-            "const ::$proto_ns$::ServiceDescriptor* $classname$::descriptor() {\n"
+            "const ::$proto_ns$::ServletDescriptor* $classname$::descriptor() {\n"
             "  "
             "::$proto_ns$::internal::AssignDescriptors(&$desc_table$);\n"
             "  return $file_level_service_descriptors$[$1$];\n"
             "}\n"
             "\n"
-            "const ::$proto_ns$::ServiceDescriptor* $classname$::GetDescriptor() {\n"
+            "const ::$proto_ns$::ServletDescriptor* $classname$::GetDescriptor() {\n"
             "  return descriptor();\n"
             "}\n"
             "\n",
@@ -195,10 +195,10 @@ namespace shark::compiler::cpp {
             "  : channel_(channel), owns_channel_(false) {}\n"
             "$classname$_Stub::$classname$_Stub(\n"
             "    ::$proto_ns$::RpcChannel* channel,\n"
-            "    ::$proto_ns$::Service::ChannelOwnership ownership)\n"
+            "    ::$proto_ns$::Servlet::ChannelOwnership ownership)\n"
             "  : channel_(channel),\n"
             "    owns_channel_(ownership == "
-            "::$proto_ns$::Service::STUB_OWNS_CHANNEL) "
+            "::$proto_ns$::Servlet::STUB_OWNS_CHANNEL) "
             "{}\n"
             "$classname$_Stub::~$classname$_Stub() {\n"
             "  if (owns_channel_) delete channel_;\n"

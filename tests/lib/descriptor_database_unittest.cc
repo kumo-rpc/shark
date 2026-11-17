@@ -69,7 +69,7 @@ static void ExpectContainsType(const FileDescriptorProto& proto,
 }
 
 // ===================================================================
-
+#define GTEST_HAS_PARAM_TEST 1
 #if GTEST_HAS_PARAM_TEST
 
 // SimpleDescriptorDatabase, EncodedDescriptorDatabase, and
@@ -217,7 +217,7 @@ TEST_P(DescriptorDatabaseTest, FindFileContainingSymbol) {
       "  value { name:\"FRED\" } "
       "} "
       "extension { name: \"plugh\" } "
-      "service { "
+      "servlet { "
       "  name: \"Xyzzy\" "
       "  method { name: \"Thud\" } "
       "}");

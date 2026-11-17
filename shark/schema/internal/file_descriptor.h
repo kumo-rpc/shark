@@ -81,7 +81,7 @@ namespace shark {
         int service_count() const;
         // Gets a service, where 0 <= index < service_count().
         // These are returned in the order they were defined in the .shark file.
-        const ServiceDescriptor* service(int index) const;
+        const ServletDescriptor* service(int index) const;
 
         // Number of extensions defined at file scope.  (This does not include
         // extensions nested within message types.)
@@ -108,7 +108,7 @@ namespace shark {
         // if not found.
         const EnumValueDescriptor* FindEnumValueByName(ConstStringParam name) const;
         // Find a service definition by name.  Returns nullptr if not found.
-        const ServiceDescriptor* FindServiceByName(ConstStringParam name) const;
+        const ServletDescriptor* FindServiceByName(ConstStringParam name) const;
         // Find a top-level extension definition by name.  Returns nullptr if not
         // found.
         const FieldDescriptor* FindExtensionByName(ConstStringParam name) const;
@@ -194,7 +194,7 @@ namespace shark {
         int* weak_dependencies_;
         Descriptor* message_types_;
         EnumDescriptor* enum_types_;
-        ServiceDescriptor* services_;
+        ServletDescriptor* services_;
         FieldDescriptor* extensions_;
         const FileOptions* options_;
 
@@ -215,7 +215,7 @@ namespace shark {
         friend class EnumDescriptor;
         friend class EnumValueDescriptor;
         friend class MethodDescriptor;
-        friend class ServiceDescriptor;
+        friend class ServletDescriptor;
         KUMO_DISALLOW_COPY_AND_ASSIGN(FileDescriptor);
     };
 

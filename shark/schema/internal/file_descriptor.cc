@@ -53,7 +53,7 @@ namespace shark {
         return tables_->FindNestedSymbol(this, key).enum_value_descriptor();
     }
 
-    const ServiceDescriptor* FileDescriptor::FindServiceByName(
+    const ServletDescriptor* FileDescriptor::FindServiceByName(
         ConstStringParam key) const {
         return tables_->FindNestedSymbol(this, key).service_descriptor();
     }
@@ -160,7 +160,7 @@ namespace shark {
             enum_type(i)->CopyTo(proto->add_enum_type());
         }
         for (int i = 0; i < service_count(); i++) {
-            service(i)->CopyTo(proto->add_service());
+            service(i)->CopyTo(proto->add_servlet());
         }
         for (int i = 0; i < extension_count(); i++) {
             extension(i)->CopyTo(proto->add_extension());

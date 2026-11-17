@@ -150,8 +150,8 @@ namespace shark {
 
                 void GenerateEnumDefinitions(io::Printer* printer);
 
-                // Generates generic service definitions.
-                void GenerateServiceDefinitions(io::Printer* printer);
+                // Generates generic servlet definitions.
+                void GenerateServletDefinitions(io::Printer* printer);
 
                 // Generates extension identifiers.
                 void GenerateExtensionIdentifiers(io::Printer* printer);

@@ -25,7 +25,7 @@ public enum DescriptorOptionType {
   ONEOF_OPTIONS("OneofOptions"),
   ENUM_OPTIONS("EnumOptions"),
   ENUM_VALUE_OPTIONS("EnumValueOptions"),
-  SERVICE_OPTIONS("ServiceOptions"),
+  SERVICE_OPTIONS("ServletOptions"),
   METHOD_OPTIONS("MethodOptions"),
   STREAM_OPTIONS("StreamOptions"),
   EXTENSION_RANGE_OPTIONS("ExtensionRangeOptions");

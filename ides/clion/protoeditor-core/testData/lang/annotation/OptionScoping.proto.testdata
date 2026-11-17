@@ -128,7 +128,7 @@ message EnumValueMessage {
 /*
  * Service scope
  */
-extend google.protobuf.ServiceOptions {
+extend google.protobuf.ServletOptions {
   optional int32 resolvable_service_option1 = 55555;
 }
 extend google.protobuf.MessageOptions {
@@ -138,7 +138,7 @@ extend google.protobuf.MessageOptions {
 service TestService {
   option (resolvable_service_option1) = 10;
   option (resolvable_service_option2) = 10;  // in scopingouter.proto
-  option (<error descr="Field 'shadowed_service_option' does not extend type 'google.protobuf.ServiceOptions'">shadowed_service_option</error>) = 10;
+  option (<error descr="Field 'shadowed_service_option' does not extend type 'google.protobuf.ServletOptions'">shadowed_service_option</error>) = 10;
 }
 
 /*

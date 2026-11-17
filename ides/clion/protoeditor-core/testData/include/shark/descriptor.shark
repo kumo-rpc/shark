@@ -70,7 +70,7 @@ struct FileDescriptorProto {
   // All top-level definitions in this file.
   list<DescriptorProto> message_type = 4;
   list<EnumDescriptorProto> enum_type = 5;
-  list<ServiceDescriptorProto> service = 6;
+  list<ServletDescriptorProto> service = 6;
   list<FieldDescriptorProto> extension = 7;
 
   optional FileOptions options = 8;
@@ -252,11 +252,11 @@ struct EnumValueDescriptorProto {
 }
 
 // Describes a service.
-struct ServiceDescriptorProto {
+struct ServletDescriptorProto {
   optional string name = 1;
   list<MethodDescriptorProto> method = 2;
 
-  optional ServiceOptions options = 3;
+  optional ServletOptions options = 3;
 }
 
 // Describes a method of a service.
@@ -597,7 +597,7 @@ struct EnumValueOptions {
   extensions 1000 to max;
 }
 
-struct ServiceOptions {
+struct ServletOptions {
 
   // Note:  Field numbers 1 through 32 are reserved for Google's internal RPC
   //   framework.  We apologize for hoarding these numbers to ourselves, but

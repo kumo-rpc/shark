@@ -43,7 +43,7 @@ namespace shark::compiler::python {
     std::string ResolveKeyword(const std::string& name);
     std::string GetFileName(const FileDescriptor* file_des,
         const std::string& suffix);
-    bool HasGenericServices(const FileDescriptor* file);
+    bool HasGenericServlet(const FileDescriptor* file);
 
     template <typename DescriptorT>
     std::string NamePrefixedWithNestedTypes(const DescriptorT& descriptor,

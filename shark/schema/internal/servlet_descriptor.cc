@@ -23,20 +23,20 @@
 
 namespace shark {
 
-    const MethodDescriptor* ServiceDescriptor::FindMethodByName(
+    const MethodDescriptor* ServletDescriptor::FindMethodByName(
        ConstStringParam key) const {
         return file()->tables_->FindNestedSymbol(this, key).method_descriptor();
     }
 
 
-    void ServiceDescriptor::CopyTo(ServiceDescriptorProto* proto) const {
+    void ServletDescriptor::CopyTo(ServletDescriptorProto* proto) const {
         proto->set_name(name());
 
         for (int i = 0; i < method_count(); i++) {
             method(i)->CopyTo(proto->add_method());
         }
 
-        if (&options() != &ServiceOptions::default_instance()) {
+        if (&options() != &ServletOptions::default_instance()) {
             proto->mutable_options()->CopyFrom(options());
         }
     }
@@ -66,19 +66,19 @@ namespace shark {
         }
     }
 
-     std::string ServiceDescriptor::DebugString() const {
+     std::string ServletDescriptor::DebugString() const {
         DebugStringOptions options; // default values
         return DebugStringWithOptions(options);
     }
 
-    std::string ServiceDescriptor::DebugStringWithOptions(
+    std::string ServletDescriptor::DebugStringWithOptions(
         const DebugStringOptions& options) const {
         std::string contents;
         DebugString(&contents, options);
         return contents;
     }
 
-    void ServiceDescriptor::DebugString(
+    void ServletDescriptor::DebugString(
         std::string* contents,
         const DebugStringOptions& debug_string_options) const {
         SourceLocationCommentPrinter comment_printer(this, /* prefix */ "",
@@ -143,7 +143,7 @@ namespace shark {
         return service()->file()->GetSourceLocation(path, out_location);
     }
 
-    bool ServiceDescriptor::GetSourceLocation(SourceLocation* out_location) const {
+    bool ServletDescriptor::GetSourceLocation(SourceLocation* out_location) const {
         std::vector<int> path;
         GetLocationPath(&path);
         return file()->GetSourceLocation(path, out_location);
@@ -151,14 +151,14 @@ namespace shark {
 
 
 
-    void ServiceDescriptor::GetLocationPath(std::vector<int>* output) const {
-        output->push_back(FileDescriptorProto::kServiceFieldNumber);
+    void ServletDescriptor::GetLocationPath(std::vector<int>* output) const {
+        output->push_back(FileDescriptorProto::kServletFieldNumber);
         output->push_back(index());
     }
 
     void MethodDescriptor::GetLocationPath(std::vector<int>* output) const {
         service()->GetLocationPath(output);
-        output->push_back(ServiceDescriptorProto::kMethodFieldNumber);
+        output->push_back(ServletDescriptorProto::kMethodFieldNumber);
         output->push_back(index());
     }
 

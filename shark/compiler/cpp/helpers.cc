@@ -1374,10 +1374,10 @@ namespace shark::compiler::cpp {
         }
     }
 
-    void ListAllTypesForServices(const FileDescriptor* fd,
+    void ListAllTypesForServlet(const FileDescriptor* fd,
         std::vector<const Descriptor*>* types) {
         for (int i = 0; i < fd->service_count(); i++) {
-            const ServiceDescriptor* sd = fd->service(i);
+            const ServletDescriptor* sd = fd->service(i);
             for (int j = 0; j < sd->method_count(); j++) {
                 const MethodDescriptor* method = sd->method(j);
                 types->push_back(method->input_type());

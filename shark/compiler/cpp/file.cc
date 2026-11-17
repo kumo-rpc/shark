@@ -137,7 +137,7 @@ namespace shark::compiler::cpp {
             service_generators_.emplace_back(
                 new ServletGenerator(file->service(i), variables_, options));
         }
-        if (HasGenericServices(file_, options_)) {
+        if (HasGenericServlet(file_, options_)) {
             for (int i = 0; i < service_generators_.size(); i++) {
                 service_generators_[i]->index_in_metadata_ = i;
             }
@@ -227,7 +227,7 @@ namespace shark::compiler::cpp {
             format(kThickSeparator);
             format("\n");
 
-            GenerateServiceDefinitions(printer);
+            GenerateServletDefinitions(printer);
 
             GenerateExtensionIdentifiers(printer);
 
@@ -765,7 +765,7 @@ namespace shark::compiler::cpp {
                 message_generators_[i]->GenerateClassMethods(printer);
             }
 
-            if (HasGenericServices(file_, options_)) {
+            if (HasGenericServlet(file_, options_)) {
                 // Generate services.
                 for (int i = 0; i < service_generators_.size(); i++) {
                     if (i == 0)
@@ -828,16 +828,16 @@ namespace shark::compiler::cpp {
                 "constexpr ::_pb::EnumDescriptor const** "
                 "$file_level_enum_descriptors$ = nullptr;\n");
         }
-        if (HasGenericServices(file_, options_) && file_->service_count() > 0) {
+        if (HasGenericServlet(file_, options_) && file_->service_count() > 0) {
             format(
                 "static "
-                "const ::_pb::ServiceDescriptor* "
+                "const ::_pb::ServletDescriptor* "
                 "$file_level_service_descriptors$[$1$];\n",
                 file_->service_count());
         } else {
             format(
                 "static "
-                "constexpr ::_pb::ServiceDescriptor const** "
+                "constexpr ::_pb::ServletDescriptor const** "
                 "$file_level_service_descriptors$ = nullptr;\n");
         }
 
@@ -1080,7 +1080,7 @@ namespace shark::compiler::cpp {
                 classes.push_back(fields[i]->message_type());
                 enums.push_back(fields[i]->enum_type());
             }
-            ListAllTypesForServices(file_, &classes);
+            ListAllTypesForServlet(file_, &classes);
         }
 
         // Calculate the set of files whose definitions we get through include.
@@ -1246,7 +1246,7 @@ namespace shark::compiler::cpp {
             }
         }
 
-        if (HasGenericServices(file_, options_)) {
+        if (HasGenericServlet(file_, options_)) {
             IncludeFile("net/proto2/public/servlet.h", printer);
         }
 
@@ -1330,9 +1330,9 @@ namespace shark::compiler::cpp {
         }
     }
 
-    void FileGenerator::GenerateServiceDefinitions(io::Printer* printer) {
+    void FileGenerator::GenerateServletDefinitions(io::Printer* printer) {
         Formatter format(printer, variables_);
-        if (HasGenericServices(file_, options_)) {
+        if (HasGenericServlet(file_, options_)) {
             // Generate service definitions.
             for (int i = 0; i < service_generators_.size(); i++) {
                 if (i > 0) {

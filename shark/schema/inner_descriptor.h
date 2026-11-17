@@ -300,28 +300,28 @@ namespace shark {
         return *options_;
     }
 
-    inline const std::string& ServiceDescriptor::name() const {
+    inline const std::string& ServletDescriptor::name() const {
         return all_names_[0];
     }
 
-    inline const std::string& ServiceDescriptor::full_name() const {
+    inline const std::string& ServletDescriptor::full_name() const {
         return all_names_[1];
     }
 
-    inline const FileDescriptor* ServiceDescriptor::file() const {
+    inline const FileDescriptor* ServletDescriptor::file() const {
         return file_;
     }
 
-    inline int ServiceDescriptor::method_count() const {
+    inline int ServletDescriptor::method_count() const {
         return method_count_;
     }
 
 
-    inline const MethodDescriptor* ServiceDescriptor::method(int index) const {
+    inline const MethodDescriptor* ServletDescriptor::method(int index) const {
         return methods_ + index;
     }
 
-    inline const ServiceOptions& ServiceDescriptor::options() const {
+    inline const ServletOptions& ServletDescriptor::options() const {
         return *options_;
     }
 
@@ -333,7 +333,7 @@ namespace shark {
         return all_names_[1];
     }
 
-    inline const ServiceDescriptor* MethodDescriptor::service() const {
+    inline const ServletDescriptor* MethodDescriptor::service() const {
         return service_;
     }
 
@@ -406,7 +406,7 @@ namespace shark {
         return enum_types_ + index;
     }
 
-    inline const ServiceDescriptor* FileDescriptor::service(int index) const {
+    inline const ServletDescriptor* FileDescriptor::service(int index) const {
         return services_ + index;
     }
 
@@ -579,7 +579,7 @@ namespace shark {
         return static_cast<int>(this - type_->values_);
     }
 
-    inline int ServiceDescriptor::index() const {
+    inline int ServletDescriptor::index() const {
         return static_cast<int>(this - file_->services_);
     }
 

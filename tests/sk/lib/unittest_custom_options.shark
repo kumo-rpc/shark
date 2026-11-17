@@ -80,7 +80,7 @@ extend shark.EnumValueOptions {
   optional int32 enum_value_opt1 = 1560678;
 }
 
-extend shark.ServiceOptions {
+extend shark.ServletOptions {
   optional sint64 service_opt1 = 7887650;
 }
 
@@ -345,7 +345,7 @@ extend shark.EnumOptions {
 extend shark.EnumValueOptions {
   optional Aggregate enumvalopt = 15486921;
 }
-extend shark.ServiceOptions {
+extend shark.ServletOptions {
   optional Aggregate serviceopt = 15497145;
 }
 extend shark.MethodOptions {

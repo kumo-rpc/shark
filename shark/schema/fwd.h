@@ -229,7 +229,7 @@ namespace shark {
     class OneofDescriptor;
     class EnumDescriptor;
     class EnumValueDescriptor;
-    class ServiceDescriptor;
+    class ServletDescriptor;
     class MethodDescriptor;
     class FileDescriptor;
     class DescriptorDatabase;
@@ -242,7 +242,7 @@ namespace shark {
     class OneofDescriptorProto;
     class EnumDescriptorProto;
     class EnumValueDescriptorProto;
-    class ServiceDescriptorProto;
+    class ServletDescriptorProto;
     class MethodDescriptorProto;
     class FileDescriptorProto;
     class MessageOptions;
@@ -251,7 +251,7 @@ namespace shark {
     class EnumOptions;
     class EnumValueOptions;
     class ExtensionRangeOptions;
-    class ServiceOptions;
+    class ServletOptions;
     class MethodOptions;
     class FileOptions;
     class UninterpretedOption;
@@ -368,13 +368,13 @@ namespace shark {
             // Returns the current value of the descriptor, thread-safe. If SetLazy(...)
             // has been called, will do a one-time cross link of the type specified,
             // building the descriptor file that contains the type if necessary.
-            inline const Descriptor* Get(const ServiceDescriptor* service) {
+            inline const Descriptor* Get(const ServletDescriptor* service) {
                 Once(service);
                 return descriptor_;
             }
 
         private:
-            void Once(const ServiceDescriptor* service);
+            void Once(const ServletDescriptor* service);
 
             const Descriptor* descriptor_;
             // The once_ flag is followed by a NUL terminated string for the type name.

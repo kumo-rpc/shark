@@ -53,7 +53,7 @@ namespace shark {
             class ServletGenerator {
             public:
                 // See generator.cc for the meaning of dllexport_decl.
-                explicit ServletGenerator(const ServiceDescriptor* descriptor,
+                explicit ServletGenerator(const ServletDescriptor* descriptor,
                     const std::map<std::string, std::string>& vars,
                     const Options& options);
                 ~ServletGenerator();
@@ -103,7 +103,7 @@ namespace shark {
                 // Generate the stub's implementations of the service methods.
                 void GenerateStubMethods(io::Printer* printer);
 
-                const ServiceDescriptor* descriptor_;
+                const ServletDescriptor* descriptor_;
                 std::map<std::string, std::string> vars_;
                 const Options& options_;
 

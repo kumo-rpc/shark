@@ -17,7 +17,7 @@
 
 namespace shark {
 
-    Service::~Service() { }
+    Servlet::~Servlet() { }
     RpcChannel::~RpcChannel() { }
     RpcController::~RpcController() { }
 

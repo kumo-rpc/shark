@@ -110,12 +110,12 @@ SHARK_EXPORT extern OneofDescriptorProtoDefaultTypeInternal _OneofDescriptorProt
 class OneofOptions;
 struct OneofOptionsDefaultTypeInternal;
 SHARK_EXPORT extern OneofOptionsDefaultTypeInternal _OneofOptions_default_instance_;
-class ServiceDescriptorProto;
-struct ServiceDescriptorProtoDefaultTypeInternal;
-SHARK_EXPORT extern ServiceDescriptorProtoDefaultTypeInternal _ServiceDescriptorProto_default_instance_;
-class ServiceOptions;
-struct ServiceOptionsDefaultTypeInternal;
-SHARK_EXPORT extern ServiceOptionsDefaultTypeInternal _ServiceOptions_default_instance_;
+class ServletDescriptorProto;
+struct ServletDescriptorProtoDefaultTypeInternal;
+SHARK_EXPORT extern ServletDescriptorProtoDefaultTypeInternal _ServletDescriptorProto_default_instance_;
+class ServletOptions;
+struct ServletOptionsDefaultTypeInternal;
+SHARK_EXPORT extern ServletOptionsDefaultTypeInternal _ServletOptions_default_instance_;
 class SourceCodeInfo;
 struct SourceCodeInfoDefaultTypeInternal;
 SHARK_EXPORT extern SourceCodeInfoDefaultTypeInternal _SourceCodeInfo_default_instance_;
@@ -151,8 +151,8 @@ template<> SHARK_EXPORT ::shark::MethodDescriptorProto* Arena::CreateMaybeMessag
 template<> SHARK_EXPORT ::shark::MethodOptions* Arena::CreateMaybeMessage<::shark::MethodOptions>(Arena*);
 template<> SHARK_EXPORT ::shark::OneofDescriptorProto* Arena::CreateMaybeMessage<::shark::OneofDescriptorProto>(Arena*);
 template<> SHARK_EXPORT ::shark::OneofOptions* Arena::CreateMaybeMessage<::shark::OneofOptions>(Arena*);
-template<> SHARK_EXPORT ::shark::ServiceDescriptorProto* Arena::CreateMaybeMessage<::shark::ServiceDescriptorProto>(Arena*);
-template<> SHARK_EXPORT ::shark::ServiceOptions* Arena::CreateMaybeMessage<::shark::ServiceOptions>(Arena*);
+template<> SHARK_EXPORT ::shark::ServletDescriptorProto* Arena::CreateMaybeMessage<::shark::ServletDescriptorProto>(Arena*);
+template<> SHARK_EXPORT ::shark::ServletOptions* Arena::CreateMaybeMessage<::shark::ServletOptions>(Arena*);
 template<> SHARK_EXPORT ::shark::SourceCodeInfo* Arena::CreateMaybeMessage<::shark::SourceCodeInfo>(Arena*);
 template<> SHARK_EXPORT ::shark::SourceCodeInfo_Location* Arena::CreateMaybeMessage<::shark::SourceCodeInfo_Location>(Arena*);
 template<> SHARK_EXPORT ::shark::UninterpretedOption* Arena::CreateMaybeMessage<::shark::UninterpretedOption>(Arena*);
@@ -646,7 +646,7 @@ class SHARK_EXPORT FileDescriptorProto final :
     static constexpr int  kDependencyFieldNumber = 3;
     static constexpr int  kMessageTypeFieldNumber = 4;
     static constexpr int  kEnumTypeFieldNumber = 5;
-    static constexpr int  kServiceFieldNumber = 6;
+    static constexpr int  kServletFieldNumber = 6;
     static constexpr int  kExtensionFieldNumber = 7;
     static constexpr int  kPublicDependencyFieldNumber = 10;
     static constexpr int  kWeakDependencyFieldNumber = 11;
@@ -716,23 +716,23 @@ class SHARK_EXPORT FileDescriptorProto final :
     const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto >&
         enum_type() const;
 
-    // list<.shark.ServiceDescriptorProto> service = 6;
-    int service_size() const;
+    // list<.shark.ServletDescriptorProto> servlet = 6;
+    int servlet_size() const;
     private:
-    int _internal_service_size() const;
+    int _internal_servlet_size() const;
     public:
-    void clear_service();
-    ::shark::ServiceDescriptorProto* mutable_service(int index);
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServiceDescriptorProto >*
-        mutable_service();
+    void clear_servlet();
+    ::shark::ServletDescriptorProto* mutable_servlet(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServletDescriptorProto >*
+        mutable_servlet();
     private:
-    const ::shark::ServiceDescriptorProto& _internal_service(int index) const;
-    ::shark::ServiceDescriptorProto* _internal_add_service();
+    const ::shark::ServletDescriptorProto& _internal_servlet(int index) const;
+    ::shark::ServletDescriptorProto* _internal_add_servlet();
     public:
-    const ::shark::ServiceDescriptorProto& service(int index) const;
-    ::shark::ServiceDescriptorProto* add_service();
-    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServiceDescriptorProto >&
-        service() const;
+    const ::shark::ServletDescriptorProto& servlet(int index) const;
+    ::shark::ServletDescriptorProto* add_servlet();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServletDescriptorProto >&
+        servlet() const;
 
     // list<.shark.FieldDescriptorProto> extension = 7;
     int extension_size() const;
@@ -899,7 +899,7 @@ class SHARK_EXPORT FileDescriptorProto final :
         ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string> dependency_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto > message_type_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto > enum_type_;
-        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServiceDescriptorProto > service_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServletDescriptorProto > servlet_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto > extension_;
         ::SHARK_NAMESPACE_ID::RepeatedField< int32_t > public_dependency_;
         ::SHARK_NAMESPACE_ID::RepeatedField< int32_t > weak_dependency_;
@@ -3158,24 +3158,24 @@ class SHARK_EXPORT EnumValueDescriptorProto final :
 };
 // -------------------------------------------------------------------
 
-class SHARK_EXPORT ServiceDescriptorProto final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.ServiceDescriptorProto) */ {
+class SHARK_EXPORT ServletDescriptorProto final :
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.ServletDescriptorProto) */ {
  public:
-    inline ServiceDescriptorProto() : ServiceDescriptorProto(nullptr) {}
-    ~ServiceDescriptorProto() override;
-    explicit constexpr ServiceDescriptorProto(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline ServletDescriptorProto() : ServletDescriptorProto(nullptr) {}
+    ~ServletDescriptorProto() override;
+    explicit constexpr ServletDescriptorProto(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-    ServiceDescriptorProto(const ServiceDescriptorProto& from);
-    ServiceDescriptorProto(ServiceDescriptorProto&& from) noexcept
-      : ServiceDescriptorProto() {
+    ServletDescriptorProto(const ServletDescriptorProto& from);
+    ServletDescriptorProto(ServletDescriptorProto&& from) noexcept
+      : ServletDescriptorProto() {
       *this = ::std::move(from);
     }
 
-    inline ServiceDescriptorProto& operator=(const ServiceDescriptorProto& from) {
+    inline ServletDescriptorProto& operator=(const ServletDescriptorProto& from) {
       CopyFrom(from);
       return *this;
     }
-    inline ServiceDescriptorProto& operator=(ServiceDescriptorProto&& from) noexcept {
+    inline ServletDescriptorProto& operator=(ServletDescriptorProto&& from) noexcept {
       if (this == &from) return *this;
       if (GetOwningArena() == from.GetOwningArena()
     #ifdef SHARK_FORCE_COPY_IN_MOVE
@@ -3205,20 +3205,20 @@ class SHARK_EXPORT ServiceDescriptorProto final :
     static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
       return default_instance().GetMetadata().reflection;
     }
-    static const ServiceDescriptorProto& default_instance() {
+    static const ServletDescriptorProto& default_instance() {
       return *internal_default_instance();
     }
-    static inline const ServiceDescriptorProto* internal_default_instance() {
-      return reinterpret_cast<const ServiceDescriptorProto*>(
-                 &_ServiceDescriptorProto_default_instance_);
+    static inline const ServletDescriptorProto* internal_default_instance() {
+      return reinterpret_cast<const ServletDescriptorProto*>(
+                 &_ServletDescriptorProto_default_instance_);
     }
     static constexpr int kIndexInFileMessages =
       11;
 
-    friend void swap(ServiceDescriptorProto& a, ServiceDescriptorProto& b) {
+    friend void swap(ServletDescriptorProto& a, ServletDescriptorProto& b) {
       a.Swap(&b);
     }
-    inline void Swap(ServiceDescriptorProto* other) {
+    inline void Swap(ServletDescriptorProto* other) {
       if (other == this) return;
     #ifdef SHARK_FORCE_COPY_IN_SWAP
       if (GetOwningArena() != nullptr &&
@@ -3231,7 +3231,7 @@ class SHARK_EXPORT ServiceDescriptorProto final :
         ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
       }
     }
-    void UnsafeArenaSwap(ServiceDescriptorProto* other) {
+    void UnsafeArenaSwap(ServletDescriptorProto* other) {
       if (other == this) return;
       GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
@@ -3239,14 +3239,14 @@ class SHARK_EXPORT ServiceDescriptorProto final :
 
     // implements Message ----------------------------------------------
 
-    ServiceDescriptorProto* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-      return CreateMaybeMessage<ServiceDescriptorProto>(arena);
+    ServletDescriptorProto* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<ServletDescriptorProto>(arena);
     }
     using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-    void CopyFrom(const ServiceDescriptorProto& from);
+    void CopyFrom(const ServletDescriptorProto& from);
     using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-    void MergeFrom( const ServiceDescriptorProto& from) {
-      ServiceDescriptorProto::MergeImpl(*this, from);
+    void MergeFrom( const ServletDescriptorProto& from) {
+      ServletDescriptorProto::MergeImpl(*this, from);
     }
     private:
     static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
@@ -3264,15 +3264,15 @@ class SHARK_EXPORT ServiceDescriptorProto final :
     void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
     void SharedDtor();
     void SetCachedSize(int size) const final;
-    void InternalSwap(ServiceDescriptorProto* other);
+    void InternalSwap(ServletDescriptorProto* other);
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
     static ::std::string_view FullMessageName() {
-      return "shark.ServiceDescriptorProto";
+      return "shark.ServletDescriptorProto";
     }
     protected:
-    explicit ServiceDescriptorProto(::SHARK_NAMESPACE_ID::Arena* arena,
+    explicit ServletDescriptorProto(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned = false);
     public:
 
@@ -3325,25 +3325,25 @@ class SHARK_EXPORT ServiceDescriptorProto final :
     std::string* _internal_mutable_name();
     public:
 
-    // optional .shark.ServiceOptions options = 3;
+    // optional .shark.ServletOptions options = 3;
     bool has_options() const;
     private:
     bool _internal_has_options() const;
     public:
     void clear_options();
-    const ::shark::ServiceOptions& options() const;
-    [[nodiscard]] ::shark::ServiceOptions* release_options();
-    ::shark::ServiceOptions* mutable_options();
-    void set_allocated_options(::shark::ServiceOptions* options);
+    const ::shark::ServletOptions& options() const;
+    [[nodiscard]] ::shark::ServletOptions* release_options();
+    ::shark::ServletOptions* mutable_options();
+    void set_allocated_options(::shark::ServletOptions* options);
     private:
-    const ::shark::ServiceOptions& _internal_options() const;
-    ::shark::ServiceOptions* _internal_mutable_options();
+    const ::shark::ServletOptions& _internal_options() const;
+    ::shark::ServletOptions* _internal_mutable_options();
     public:
     void unsafe_arena_set_allocated_options(
-        ::shark::ServiceOptions* options);
-    ::shark::ServiceOptions* unsafe_arena_release_options();
+        ::shark::ServletOptions* options);
+    ::shark::ServletOptions* unsafe_arena_release_options();
 
-    // @@protoc_insertion_point(class_scope:shark.ServiceDescriptorProto)
+    // @@protoc_insertion_point(class_scope:shark.ServletDescriptorProto)
  private:
     class _Internal;
 
@@ -3355,7 +3355,7 @@ class SHARK_EXPORT ServiceDescriptorProto final :
         mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::MethodDescriptorProto > method_;
         ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-        ::shark::ServiceOptions* options_;
+        ::shark::ServletOptions* options_;
     };
     union { Impl_ _impl_; };
     friend struct ::TableStruct_shark_2fdescriptor_2eshark;
@@ -6215,24 +6215,24 @@ class SHARK_EXPORT EnumValueOptions final :
 };
 // -------------------------------------------------------------------
 
-class SHARK_EXPORT ServiceOptions final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.ServiceOptions) */ {
+class SHARK_EXPORT ServletOptions final :
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.ServletOptions) */ {
  public:
-    inline ServiceOptions() : ServiceOptions(nullptr) {}
-    ~ServiceOptions() override;
-    explicit constexpr ServiceOptions(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline ServletOptions() : ServletOptions(nullptr) {}
+    ~ServletOptions() override;
+    explicit constexpr ServletOptions(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-    ServiceOptions(const ServiceOptions& from);
-    ServiceOptions(ServiceOptions&& from) noexcept
-      : ServiceOptions() {
+    ServletOptions(const ServletOptions& from);
+    ServletOptions(ServletOptions&& from) noexcept
+      : ServletOptions() {
       *this = ::std::move(from);
     }
 
-    inline ServiceOptions& operator=(const ServiceOptions& from) {
+    inline ServletOptions& operator=(const ServletOptions& from) {
       CopyFrom(from);
       return *this;
     }
-    inline ServiceOptions& operator=(ServiceOptions&& from) noexcept {
+    inline ServletOptions& operator=(ServletOptions&& from) noexcept {
       if (this == &from) return *this;
       if (GetOwningArena() == from.GetOwningArena()
     #ifdef SHARK_FORCE_COPY_IN_MOVE
@@ -6262,20 +6262,20 @@ class SHARK_EXPORT ServiceOptions final :
     static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
       return default_instance().GetMetadata().reflection;
     }
-    static const ServiceOptions& default_instance() {
+    static const ServletOptions& default_instance() {
       return *internal_default_instance();
     }
-    static inline const ServiceOptions* internal_default_instance() {
-      return reinterpret_cast<const ServiceOptions*>(
-                 &_ServiceOptions_default_instance_);
+    static inline const ServletOptions* internal_default_instance() {
+      return reinterpret_cast<const ServletOptions*>(
+                 &_ServletOptions_default_instance_);
     }
     static constexpr int kIndexInFileMessages =
       19;
 
-    friend void swap(ServiceOptions& a, ServiceOptions& b) {
+    friend void swap(ServletOptions& a, ServletOptions& b) {
       a.Swap(&b);
     }
-    inline void Swap(ServiceOptions* other) {
+    inline void Swap(ServletOptions* other) {
       if (other == this) return;
     #ifdef SHARK_FORCE_COPY_IN_SWAP
       if (GetOwningArena() != nullptr &&
@@ -6288,7 +6288,7 @@ class SHARK_EXPORT ServiceOptions final :
         ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
       }
     }
-    void UnsafeArenaSwap(ServiceOptions* other) {
+    void UnsafeArenaSwap(ServletOptions* other) {
       if (other == this) return;
       GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
@@ -6296,14 +6296,14 @@ class SHARK_EXPORT ServiceOptions final :
 
     // implements Message ----------------------------------------------
 
-    ServiceOptions* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-      return CreateMaybeMessage<ServiceOptions>(arena);
+    ServletOptions* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<ServletOptions>(arena);
     }
     using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-    void CopyFrom(const ServiceOptions& from);
+    void CopyFrom(const ServletOptions& from);
     using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-    void MergeFrom( const ServiceOptions& from) {
-      ServiceOptions::MergeImpl(*this, from);
+    void MergeFrom( const ServletOptions& from) {
+      ServletOptions::MergeImpl(*this, from);
     }
     private:
     static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
@@ -6321,15 +6321,15 @@ class SHARK_EXPORT ServiceOptions final :
     void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
     void SharedDtor();
     void SetCachedSize(int size) const final;
-    void InternalSwap(ServiceOptions* other);
+    void InternalSwap(ServletOptions* other);
 
     private:
     friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
     static ::std::string_view FullMessageName() {
-      return "shark.ServiceOptions";
+      return "shark.ServletOptions";
     }
     protected:
-    explicit ServiceOptions(::SHARK_NAMESPACE_ID::Arena* arena,
+    explicit ServletOptions(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned = false);
     public:
 
@@ -6401,7 +6401,7 @@ class SHARK_EXPORT ServiceOptions final :
               bool _is_packed>
     inline bool HasExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id) const {
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id) const {
 
       return _impl_._extensions_.Has(id.number());
     }
@@ -6411,7 +6411,7 @@ class SHARK_EXPORT ServiceOptions final :
               bool _is_packed>
     inline void ClearExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id) {
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id) {
       _impl_._extensions_.ClearExtension(id.number());
 
     }
@@ -6421,7 +6421,7 @@ class SHARK_EXPORT ServiceOptions final :
               bool _is_packed>
     inline int ExtensionSize(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id) const {
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id) const {
 
       return _impl_._extensions_.ExtensionSize(id.number());
     }
@@ -6431,7 +6431,7 @@ class SHARK_EXPORT ServiceOptions final :
               bool _is_packed>
     inline typename _proto_TypeTraits::Singular::ConstType GetExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id) const {
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id) const {
 
       return _proto_TypeTraits::Get(id.number(), _impl_._extensions_,
                                     id.default_value());
@@ -6442,7 +6442,7 @@ class SHARK_EXPORT ServiceOptions final :
               bool _is_packed>
     inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id) {
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id) {
 
       return _proto_TypeTraits::Mutable(id.number(), _field_type,
                                         &_impl_._extensions_);
@@ -6453,7 +6453,7 @@ class SHARK_EXPORT ServiceOptions final :
               bool _is_packed>
     inline void SetExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
         typename _proto_TypeTraits::Singular::ConstType value) {
       _proto_TypeTraits::Set(id.number(), _field_type, value, &_impl_._extensions_);
 
@@ -6464,7 +6464,7 @@ class SHARK_EXPORT ServiceOptions final :
               bool _is_packed>
     inline void SetAllocatedExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
         typename _proto_TypeTraits::Singular::MutableType value) {
       _proto_TypeTraits::SetAllocated(id.number(), _field_type, value,
                                       &_impl_._extensions_);
@@ -6475,7 +6475,7 @@ class SHARK_EXPORT ServiceOptions final :
               bool _is_packed>
     inline void UnsafeArenaSetAllocatedExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
         typename _proto_TypeTraits::Singular::MutableType value) {
       _proto_TypeTraits::UnsafeArenaSetAllocated(id.number(), _field_type,
                                                  value, &_impl_._extensions_);
@@ -6488,7 +6488,7 @@ class SHARK_EXPORT ServiceOptions final :
         typename _proto_TypeTraits::Singular::MutableType
         ReleaseExtension(
             const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-                ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id) {
+                ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id) {
 
       return _proto_TypeTraits::Release(id.number(), _field_type,
                                         &_impl_._extensions_);
@@ -6499,7 +6499,7 @@ class SHARK_EXPORT ServiceOptions final :
     inline typename _proto_TypeTraits::Singular::MutableType
     UnsafeArenaReleaseExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id) {
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id) {
 
       return _proto_TypeTraits::UnsafeArenaRelease(id.number(), _field_type,
                                                    &_impl_._extensions_);
@@ -6510,7 +6510,7 @@ class SHARK_EXPORT ServiceOptions final :
               bool _is_packed>
     inline typename _proto_TypeTraits::Repeated::ConstType GetExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
         int index) const {
 
       return _proto_TypeTraits::Get(id.number(), _impl_._extensions_, index);
@@ -6521,7 +6521,7 @@ class SHARK_EXPORT ServiceOptions final :
               bool _is_packed>
     inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
         int index) {
 
       return _proto_TypeTraits::Mutable(id.number(), index, &_impl_._extensions_);
@@ -6532,7 +6532,7 @@ class SHARK_EXPORT ServiceOptions final :
               bool _is_packed>
     inline void SetExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
         int index, typename _proto_TypeTraits::Repeated::ConstType value) {
       _proto_TypeTraits::Set(id.number(), index, value, &_impl_._extensions_);
 
@@ -6543,7 +6543,7 @@ class SHARK_EXPORT ServiceOptions final :
               bool _is_packed>
     inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id) {
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id) {
       typename _proto_TypeTraits::Repeated::MutableType to_add =
           _proto_TypeTraits::Add(id.number(), _field_type, &_impl_._extensions_);
 
@@ -6555,7 +6555,7 @@ class SHARK_EXPORT ServiceOptions final :
               bool _is_packed>
     inline void AddExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id,
         typename _proto_TypeTraits::Repeated::ConstType value) {
       _proto_TypeTraits::Add(id.number(), _field_type, _is_packed, value,
                              &_impl_._extensions_);
@@ -6568,7 +6568,7 @@ class SHARK_EXPORT ServiceOptions final :
     inline const typename _proto_TypeTraits::Repeated::RepeatedFieldType&
     GetRepeatedExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id) const {
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id) const {
 
       return _proto_TypeTraits::GetRepeated(id.number(), _impl_._extensions_);
     }
@@ -6579,13 +6579,13 @@ class SHARK_EXPORT ServiceOptions final :
     inline typename _proto_TypeTraits::Repeated::RepeatedFieldType*
     MutableRepeatedExtension(
         const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
-            ServiceOptions, _proto_TypeTraits, _field_type, _is_packed>& id) {
+            ServletOptions, _proto_TypeTraits, _field_type, _is_packed>& id) {
 
       return _proto_TypeTraits::MutableRepeated(id.number(), _field_type,
                                                 _is_packed, &_impl_._extensions_);
     }
 
-    // @@protoc_insertion_point(class_scope:shark.ServiceOptions)
+    // @@protoc_insertion_point(class_scope:shark.ServletOptions)
  private:
     class _Internal;
 
@@ -8715,44 +8715,44 @@ FileDescriptorProto::enum_type() const {
   return _impl_.enum_type_;
 }
 
-// list<.shark.ServiceDescriptorProto> service = 6;
-inline int FileDescriptorProto::_internal_service_size() const {
-  return _impl_.service_.size();
+// list<.shark.ServletDescriptorProto> servlet = 6;
+inline int FileDescriptorProto::_internal_servlet_size() const {
+  return _impl_.servlet_.size();
 }
-inline int FileDescriptorProto::service_size() const {
-  return _internal_service_size();
+inline int FileDescriptorProto::servlet_size() const {
+  return _internal_servlet_size();
 }
-inline void FileDescriptorProto::clear_service() {
-    _impl_.service_.Clear();
+inline void FileDescriptorProto::clear_servlet() {
+    _impl_.servlet_.Clear();
 }
-inline ::shark::ServiceDescriptorProto* FileDescriptorProto::mutable_service(int index) {
-  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.service)
-  return _impl_.service_.Mutable(index);
+inline ::shark::ServletDescriptorProto* FileDescriptorProto::mutable_servlet(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.servlet)
+  return _impl_.servlet_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServiceDescriptorProto >*
-FileDescriptorProto::mutable_service() {
-  // @@protoc_insertion_point(field_mutable_list:shark.FileDescriptorProto.service)
-  return &_impl_.service_;
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServletDescriptorProto >*
+FileDescriptorProto::mutable_servlet() {
+  // @@protoc_insertion_point(field_mutable_list:shark.FileDescriptorProto.servlet)
+  return &_impl_.servlet_;
 }
-inline const ::shark::ServiceDescriptorProto& FileDescriptorProto::_internal_service(int index) const {
-  return _impl_.service_.Get(index);
+inline const ::shark::ServletDescriptorProto& FileDescriptorProto::_internal_servlet(int index) const {
+  return _impl_.servlet_.Get(index);
 }
-inline const ::shark::ServiceDescriptorProto& FileDescriptorProto::service(int index) const {
-  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.service)
-  return _internal_service(index);
+inline const ::shark::ServletDescriptorProto& FileDescriptorProto::servlet(int index) const {
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.servlet)
+  return _internal_servlet(index);
 }
-inline ::shark::ServiceDescriptorProto* FileDescriptorProto::_internal_add_service() {
-  return _impl_.service_.Add();
+inline ::shark::ServletDescriptorProto* FileDescriptorProto::_internal_add_servlet() {
+  return _impl_.servlet_.Add();
 }
-inline ::shark::ServiceDescriptorProto* FileDescriptorProto::add_service() {
-  ::shark::ServiceDescriptorProto* _add = _internal_add_service();
-  // @@protoc_insertion_point(field_add:shark.FileDescriptorProto.service)
+inline ::shark::ServletDescriptorProto* FileDescriptorProto::add_servlet() {
+  ::shark::ServletDescriptorProto* _add = _internal_add_servlet();
+  // @@protoc_insertion_point(field_add:shark.FileDescriptorProto.servlet)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServiceDescriptorProto >&
-FileDescriptorProto::service() const {
-  // @@protoc_insertion_point(field_list:shark.FileDescriptorProto.service)
-  return _impl_.service_;
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServletDescriptorProto >&
+FileDescriptorProto::servlet() const {
+  // @@protoc_insertion_point(field_list:shark.FileDescriptorProto.servlet)
+  return _impl_.servlet_;
 }
 
 // list<.shark.FieldDescriptorProto> extension = 7;
@@ -11156,49 +11156,49 @@ inline void EnumValueDescriptorProto::set_allocated_options(::shark::EnumValueOp
 
 // -------------------------------------------------------------------
 
-// ServiceDescriptorProto
+// ServletDescriptorProto
 
 // optional string name = 1;
-inline bool ServiceDescriptorProto::_internal_has_name() const {
+inline bool ServletDescriptorProto::_internal_has_name() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
-inline bool ServiceDescriptorProto::has_name() const {
+inline bool ServletDescriptorProto::has_name() const {
   return _internal_has_name();
 }
-inline void ServiceDescriptorProto::clear_name() {
+inline void ServletDescriptorProto::clear_name() {
     _impl_.name_.ClearToEmpty();
     _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline const std::string& ServiceDescriptorProto::name() const {
-  // @@protoc_insertion_point(field_get:shark.ServiceDescriptorProto.name)
+inline const std::string& ServletDescriptorProto::name() const {
+  // @@protoc_insertion_point(field_get:shark.ServletDescriptorProto.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
-void ServiceDescriptorProto::set_name(ArgT0&& arg0, ArgT... args) {
+void ServletDescriptorProto::set_name(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:shark.ServiceDescriptorProto.name)
+  // @@protoc_insertion_point(field_set:shark.ServletDescriptorProto.name)
 }
-inline std::string* ServiceDescriptorProto::mutable_name() {
+inline std::string* ServletDescriptorProto::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:shark.ServiceDescriptorProto.name)
+  // @@protoc_insertion_point(field_mutable:shark.ServletDescriptorProto.name)
   return _s;
 }
-inline const std::string& ServiceDescriptorProto::_internal_name() const {
+inline const std::string& ServletDescriptorProto::_internal_name() const {
   return _impl_.name_.Get();
 }
-inline void ServiceDescriptorProto::_internal_set_name(const std::string& value) {
+inline void ServletDescriptorProto::_internal_set_name(const std::string& value) {
   _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.name_.Set(value, GetArenaForAllocation());
 }
-inline std::string* ServiceDescriptorProto::_internal_mutable_name() {
+inline std::string* ServletDescriptorProto::_internal_mutable_name() {
   _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
-inline std::string* ServiceDescriptorProto::release_name() {
-  // @@protoc_insertion_point(field_release:shark.ServiceDescriptorProto.name)
+inline std::string* ServletDescriptorProto::release_name() {
+  // @@protoc_insertion_point(field_release:shark.ServletDescriptorProto.name)
   if (!_internal_has_name()) {
     return nullptr;
   }
@@ -11211,7 +11211,7 @@ inline std::string* ServiceDescriptorProto::release_name() {
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   return p;
 }
-inline void ServiceDescriptorProto::set_allocated_name(std::string* name) {
+inline void ServletDescriptorProto::set_allocated_name(std::string* name) {
   if (name != nullptr) {
     _impl_._has_bits_[0] |= 0x00000001u;
   } else {
@@ -11223,73 +11223,73 @@ inline void ServiceDescriptorProto::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:shark.ServiceDescriptorProto.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.ServletDescriptorProto.name)
 }
 
 // list<.shark.MethodDescriptorProto> method = 2;
-inline int ServiceDescriptorProto::_internal_method_size() const {
+inline int ServletDescriptorProto::_internal_method_size() const {
   return _impl_.method_.size();
 }
-inline int ServiceDescriptorProto::method_size() const {
+inline int ServletDescriptorProto::method_size() const {
   return _internal_method_size();
 }
-inline void ServiceDescriptorProto::clear_method() {
+inline void ServletDescriptorProto::clear_method() {
     _impl_.method_.Clear();
 }
-inline ::shark::MethodDescriptorProto* ServiceDescriptorProto::mutable_method(int index) {
-  // @@protoc_insertion_point(field_mutable:shark.ServiceDescriptorProto.method)
+inline ::shark::MethodDescriptorProto* ServletDescriptorProto::mutable_method(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.ServletDescriptorProto.method)
   return _impl_.method_.Mutable(index);
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::MethodDescriptorProto >*
-ServiceDescriptorProto::mutable_method() {
-  // @@protoc_insertion_point(field_mutable_list:shark.ServiceDescriptorProto.method)
+ServletDescriptorProto::mutable_method() {
+  // @@protoc_insertion_point(field_mutable_list:shark.ServletDescriptorProto.method)
   return &_impl_.method_;
 }
-inline const ::shark::MethodDescriptorProto& ServiceDescriptorProto::_internal_method(int index) const {
+inline const ::shark::MethodDescriptorProto& ServletDescriptorProto::_internal_method(int index) const {
   return _impl_.method_.Get(index);
 }
-inline const ::shark::MethodDescriptorProto& ServiceDescriptorProto::method(int index) const {
-  // @@protoc_insertion_point(field_get:shark.ServiceDescriptorProto.method)
+inline const ::shark::MethodDescriptorProto& ServletDescriptorProto::method(int index) const {
+  // @@protoc_insertion_point(field_get:shark.ServletDescriptorProto.method)
   return _internal_method(index);
 }
-inline ::shark::MethodDescriptorProto* ServiceDescriptorProto::_internal_add_method() {
+inline ::shark::MethodDescriptorProto* ServletDescriptorProto::_internal_add_method() {
   return _impl_.method_.Add();
 }
-inline ::shark::MethodDescriptorProto* ServiceDescriptorProto::add_method() {
+inline ::shark::MethodDescriptorProto* ServletDescriptorProto::add_method() {
   ::shark::MethodDescriptorProto* _add = _internal_add_method();
-  // @@protoc_insertion_point(field_add:shark.ServiceDescriptorProto.method)
+  // @@protoc_insertion_point(field_add:shark.ServletDescriptorProto.method)
   return _add;
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::MethodDescriptorProto >&
-ServiceDescriptorProto::method() const {
-  // @@protoc_insertion_point(field_list:shark.ServiceDescriptorProto.method)
+ServletDescriptorProto::method() const {
+  // @@protoc_insertion_point(field_list:shark.ServletDescriptorProto.method)
   return _impl_.method_;
 }
 
-// optional .shark.ServiceOptions options = 3;
-inline bool ServiceDescriptorProto::_internal_has_options() const {
+// optional .shark.ServletOptions options = 3;
+inline bool ServletDescriptorProto::_internal_has_options() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   SHARK_ASSUME(!value || _impl_.options_ != nullptr);
   return value;
 }
-inline bool ServiceDescriptorProto::has_options() const {
+inline bool ServletDescriptorProto::has_options() const {
   return _internal_has_options();
 }
-inline void ServiceDescriptorProto::clear_options() {
+inline void ServletDescriptorProto::clear_options() {
     if (_impl_.options_ != nullptr) _impl_.options_->Clear();
     _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline const ::shark::ServiceOptions& ServiceDescriptorProto::_internal_options() const {
-  const ::shark::ServiceOptions* p = _impl_.options_;
-  return p != nullptr ? *p : reinterpret_cast<const ::shark::ServiceOptions&>(
-      ::shark::_ServiceOptions_default_instance_);
+inline const ::shark::ServletOptions& ServletDescriptorProto::_internal_options() const {
+  const ::shark::ServletOptions* p = _impl_.options_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::ServletOptions&>(
+      ::shark::_ServletOptions_default_instance_);
 }
-inline const ::shark::ServiceOptions& ServiceDescriptorProto::options() const {
-  // @@protoc_insertion_point(field_get:shark.ServiceDescriptorProto.options)
+inline const ::shark::ServletOptions& ServletDescriptorProto::options() const {
+  // @@protoc_insertion_point(field_get:shark.ServletDescriptorProto.options)
   return _internal_options();
 }
-inline void ServiceDescriptorProto::unsafe_arena_set_allocated_options(
-    ::shark::ServiceOptions* options) {
+inline void ServletDescriptorProto::unsafe_arena_set_allocated_options(
+    ::shark::ServletOptions* options) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.options_);
   }
@@ -11299,11 +11299,11 @@ inline void ServiceDescriptorProto::unsafe_arena_set_allocated_options(
   } else {
     _impl_._has_bits_[0] &= ~0x00000002u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.ServiceDescriptorProto.options)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.ServletDescriptorProto.options)
 }
-inline ::shark::ServiceOptions* ServiceDescriptorProto::release_options() {
+inline ::shark::ServletOptions* ServletDescriptorProto::release_options() {
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::shark::ServiceOptions* temp = _impl_.options_;
+  ::shark::ServletOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -11316,27 +11316,27 @@ inline ::shark::ServiceOptions* ServiceDescriptorProto::release_options() {
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::shark::ServiceOptions* ServiceDescriptorProto::unsafe_arena_release_options() {
-  // @@protoc_insertion_point(field_release:shark.ServiceDescriptorProto.options)
+inline ::shark::ServletOptions* ServletDescriptorProto::unsafe_arena_release_options() {
+  // @@protoc_insertion_point(field_release:shark.ServletDescriptorProto.options)
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::shark::ServiceOptions* temp = _impl_.options_;
+  ::shark::ServletOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
   return temp;
 }
-inline ::shark::ServiceOptions* ServiceDescriptorProto::_internal_mutable_options() {
+inline ::shark::ServletOptions* ServletDescriptorProto::_internal_mutable_options() {
   _impl_._has_bits_[0] |= 0x00000002u;
   if (_impl_.options_ == nullptr) {
-    auto* p = CreateMaybeMessage<::shark::ServiceOptions>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::ServletOptions>(GetArenaForAllocation());
     _impl_.options_ = p;
   }
   return _impl_.options_;
 }
-inline ::shark::ServiceOptions* ServiceDescriptorProto::mutable_options() {
-  ::shark::ServiceOptions* _msg = _internal_mutable_options();
-  // @@protoc_insertion_point(field_mutable:shark.ServiceDescriptorProto.options)
+inline ::shark::ServletOptions* ServletDescriptorProto::mutable_options() {
+  ::shark::ServletOptions* _msg = _internal_mutable_options();
+  // @@protoc_insertion_point(field_mutable:shark.ServletDescriptorProto.options)
   return _msg;
 }
-inline void ServiceDescriptorProto::set_allocated_options(::shark::ServiceOptions* options) {
+inline void ServletDescriptorProto::set_allocated_options(::shark::ServletOptions* options) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.options_;
@@ -11353,7 +11353,7 @@ inline void ServiceDescriptorProto::set_allocated_options(::shark::ServiceOption
     _impl_._has_bits_[0] &= ~0x00000002u;
   }
   _impl_.options_ = options;
-  // @@protoc_insertion_point(field_set_allocated:shark.ServiceDescriptorProto.options)
+  // @@protoc_insertion_point(field_set_allocated:shark.ServletDescriptorProto.options)
 }
 
 // -------------------------------------------------------------------
@@ -12854,110 +12854,110 @@ EnumValueOptions::uninterpreted_option() const {
 
 // -------------------------------------------------------------------
 
-// ServiceOptions
+// ServletOptions
 
 // list<.shark.Option> attributes = 60;
-inline int ServiceOptions::_internal_attributes_size() const {
+inline int ServletOptions::_internal_attributes_size() const {
   return _impl_.attributes_.size();
 }
-inline int ServiceOptions::attributes_size() const {
+inline int ServletOptions::attributes_size() const {
   return _internal_attributes_size();
 }
-inline ::shark::Option* ServiceOptions::mutable_attributes(int index) {
-  // @@protoc_insertion_point(field_mutable:shark.ServiceOptions.attributes)
+inline ::shark::Option* ServletOptions::mutable_attributes(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.ServletOptions.attributes)
   return _impl_.attributes_.Mutable(index);
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
-ServiceOptions::mutable_attributes() {
-  // @@protoc_insertion_point(field_mutable_list:shark.ServiceOptions.attributes)
+ServletOptions::mutable_attributes() {
+  // @@protoc_insertion_point(field_mutable_list:shark.ServletOptions.attributes)
   return &_impl_.attributes_;
 }
-inline const ::shark::Option& ServiceOptions::_internal_attributes(int index) const {
+inline const ::shark::Option& ServletOptions::_internal_attributes(int index) const {
   return _impl_.attributes_.Get(index);
 }
-inline const ::shark::Option& ServiceOptions::attributes(int index) const {
-  // @@protoc_insertion_point(field_get:shark.ServiceOptions.attributes)
+inline const ::shark::Option& ServletOptions::attributes(int index) const {
+  // @@protoc_insertion_point(field_get:shark.ServletOptions.attributes)
   return _internal_attributes(index);
 }
-inline ::shark::Option* ServiceOptions::_internal_add_attributes() {
+inline ::shark::Option* ServletOptions::_internal_add_attributes() {
   return _impl_.attributes_.Add();
 }
-inline ::shark::Option* ServiceOptions::add_attributes() {
+inline ::shark::Option* ServletOptions::add_attributes() {
   ::shark::Option* _add = _internal_add_attributes();
-  // @@protoc_insertion_point(field_add:shark.ServiceOptions.attributes)
+  // @@protoc_insertion_point(field_add:shark.ServletOptions.attributes)
   return _add;
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
-ServiceOptions::attributes() const {
-  // @@protoc_insertion_point(field_list:shark.ServiceOptions.attributes)
+ServletOptions::attributes() const {
+  // @@protoc_insertion_point(field_list:shark.ServletOptions.attributes)
   return _impl_.attributes_;
 }
 
 // optional bool deprecated = 33 [default = false];
-inline bool ServiceOptions::_internal_has_deprecated() const {
+inline bool ServletOptions::_internal_has_deprecated() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
-inline bool ServiceOptions::has_deprecated() const {
+inline bool ServletOptions::has_deprecated() const {
   return _internal_has_deprecated();
 }
-inline void ServiceOptions::clear_deprecated() {
+inline void ServletOptions::clear_deprecated() {
     _impl_.deprecated_ = false;
     _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline bool ServiceOptions::_internal_deprecated() const {
+inline bool ServletOptions::_internal_deprecated() const {
   return _impl_.deprecated_;
 }
-inline bool ServiceOptions::deprecated() const {
-  // @@protoc_insertion_point(field_get:shark.ServiceOptions.deprecated)
+inline bool ServletOptions::deprecated() const {
+  // @@protoc_insertion_point(field_get:shark.ServletOptions.deprecated)
   return _internal_deprecated();
 }
-inline void ServiceOptions::_internal_set_deprecated(bool value) {
+inline void ServletOptions::_internal_set_deprecated(bool value) {
   _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.deprecated_ = value;
 }
-inline void ServiceOptions::set_deprecated(bool value) {
+inline void ServletOptions::set_deprecated(bool value) {
   _internal_set_deprecated(value);
-  // @@protoc_insertion_point(field_set:shark.ServiceOptions.deprecated)
+  // @@protoc_insertion_point(field_set:shark.ServletOptions.deprecated)
 }
 
 // list<.shark.UninterpretedOption> uninterpreted_option = 999;
-inline int ServiceOptions::_internal_uninterpreted_option_size() const {
+inline int ServletOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
-inline int ServiceOptions::uninterpreted_option_size() const {
+inline int ServletOptions::uninterpreted_option_size() const {
   return _internal_uninterpreted_option_size();
 }
-inline void ServiceOptions::clear_uninterpreted_option() {
+inline void ServletOptions::clear_uninterpreted_option() {
     _impl_.uninterpreted_option_.Clear();
 }
-inline ::shark::UninterpretedOption* ServiceOptions::mutable_uninterpreted_option(int index) {
-  // @@protoc_insertion_point(field_mutable:shark.ServiceOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* ServletOptions::mutable_uninterpreted_option(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.ServletOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_.Mutable(index);
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
-ServiceOptions::mutable_uninterpreted_option() {
-  // @@protoc_insertion_point(field_mutable_list:shark.ServiceOptions.uninterpreted_option)
+ServletOptions::mutable_uninterpreted_option() {
+  // @@protoc_insertion_point(field_mutable_list:shark.ServletOptions.uninterpreted_option)
   return &_impl_.uninterpreted_option_;
 }
-inline const ::shark::UninterpretedOption& ServiceOptions::_internal_uninterpreted_option(int index) const {
+inline const ::shark::UninterpretedOption& ServletOptions::_internal_uninterpreted_option(int index) const {
   return _impl_.uninterpreted_option_.Get(index);
 }
-inline const ::shark::UninterpretedOption& ServiceOptions::uninterpreted_option(int index) const {
-  // @@protoc_insertion_point(field_get:shark.ServiceOptions.uninterpreted_option)
+inline const ::shark::UninterpretedOption& ServletOptions::uninterpreted_option(int index) const {
+  // @@protoc_insertion_point(field_get:shark.ServletOptions.uninterpreted_option)
   return _internal_uninterpreted_option(index);
 }
-inline ::shark::UninterpretedOption* ServiceOptions::_internal_add_uninterpreted_option() {
+inline ::shark::UninterpretedOption* ServletOptions::_internal_add_uninterpreted_option() {
   return _impl_.uninterpreted_option_.Add();
 }
-inline ::shark::UninterpretedOption* ServiceOptions::add_uninterpreted_option() {
+inline ::shark::UninterpretedOption* ServletOptions::add_uninterpreted_option() {
   ::shark::UninterpretedOption* _add = _internal_add_uninterpreted_option();
-  // @@protoc_insertion_point(field_add:shark.ServiceOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_add:shark.ServletOptions.uninterpreted_option)
   return _add;
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
-ServiceOptions::uninterpreted_option() const {
-  // @@protoc_insertion_point(field_list:shark.ServiceOptions.uninterpreted_option)
+ServletOptions::uninterpreted_option() const {
+  // @@protoc_insertion_point(field_list:shark.ServletOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_;
 }
 

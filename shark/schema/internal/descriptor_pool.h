@@ -108,7 +108,7 @@ namespace shark {
         const OneofDescriptor* FindOneofByName(ConstStringParam name) const;
         const EnumDescriptor* FindEnumTypeByName(ConstStringParam name) const;
         const EnumValueDescriptor* FindEnumValueByName(ConstStringParam name) const;
-        const ServiceDescriptor* FindServiceByName(ConstStringParam name) const;
+        const ServletDescriptor* FindServiceByName(ConstStringParam name) const;
         const MethodDescriptor* FindMethodByName(ConstStringParam name) const;
 
         // Finds an extension of the given type by number.  The extendee must be
@@ -307,7 +307,7 @@ namespace shark {
         friend class internal::LazyDescriptor;
         friend class FieldDescriptor;
         friend class EnumDescriptor;
-        friend class ServiceDescriptor;
+        friend class ServletDescriptor;
         friend class MethodDescriptor;
         friend class FileDescriptor;
         friend class DescriptorBuilder;

@@ -121,7 +121,7 @@ public class PbOptionReferenceTest {
 
   @Test
   public void testServiceOption() {
-    assertIsField(resolve(), "google.protobuf.ServiceOptions.deprecated");
+    assertIsField(resolve(), "google.protobuf.ServletOptions.deprecated");
   }
 
   @Test

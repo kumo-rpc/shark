@@ -93,7 +93,7 @@ SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 CodeGe
 }  // namespace shark
 static ::_pb::Metadata file_level_metadata_shark_2fcompiler_2fplugin_2eshark[4];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_shark_2fcompiler_2fplugin_2eshark[1];
-static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2fcompiler_2fplugin_2eshark = nullptr;
+static constexpr ::_pb::ServletDescriptor const** file_level_service_descriptors_shark_2fcompiler_2fplugin_2eshark = nullptr;
 
 const uint32_t TableStruct_shark_2fcompiler_2fplugin_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
     SHARK_FIELD_OFFSET(::shark::compiler::Version, _impl_._has_bits_),

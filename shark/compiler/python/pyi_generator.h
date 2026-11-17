@@ -49,7 +49,7 @@ namespace shark {
     class EnumDescriptor;
     class FieldDescriptor;
     class MethodDescriptor;
-    class ServiceDescriptor;
+    class ServletDescriptor;
 
     namespace io {
         class Printer;

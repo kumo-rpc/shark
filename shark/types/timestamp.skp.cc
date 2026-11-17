@@ -39,7 +39,7 @@ SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 Timest
 }  // namespace shark
 static ::_pb::Metadata file_level_metadata_shark_2ftypes_2ftimestamp_2eshark[1];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark_2ftypes_2ftimestamp_2eshark = nullptr;
-static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2ftypes_2ftimestamp_2eshark = nullptr;
+static constexpr ::_pb::ServletDescriptor const** file_level_service_descriptors_shark_2ftypes_2ftimestamp_2eshark = nullptr;
 
 const uint32_t TableStruct_shark_2ftypes_2ftimestamp_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
     SHARK_FIELD_OFFSET(::shark::Timestamp, _impl_._has_bits_),

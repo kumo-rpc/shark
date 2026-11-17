@@ -245,7 +245,7 @@ namespace shark {
         return tables_->FindByNameHelper(this, name).enum_value_descriptor();
     }
 
-    const ServiceDescriptor* DescriptorPool::FindServiceByName(
+    const ServletDescriptor* DescriptorPool::FindServiceByName(
         ConstStringParam name) const {
         return tables_->FindByNameHelper(this, name).service_descriptor();
     }

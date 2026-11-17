@@ -137,9 +137,9 @@ namespace shark {
             return result;
         }
 
-        ServiceDescriptorProto* AddService(FileDescriptorProto* file,
+        ServletDescriptorProto* AddService(FileDescriptorProto* file,
             const std::string& name) {
-            ServiceDescriptorProto* result = file->add_service();
+            ServletDescriptorProto* result = file->add_servlet();
             result->set_name(name);
             return result;
         }
@@ -215,7 +215,7 @@ namespace shark {
             return result;
         }
 
-        MethodDescriptorProto* AddMethod(ServiceDescriptorProto* service,
+        MethodDescriptorProto* AddMethod(ServletDescriptorProto* service,
             const std::string& name,
             const std::string& input_type,
             const std::string& output_type) {
@@ -421,13 +421,13 @@ namespace shark {
             const Descriptor* foo_message_;
             const EnumDescriptor* foo_enum_;
             const EnumValueDescriptor* foo_enum_value_;
-            const ServiceDescriptor* foo_service_;
+            const ServletDescriptor* foo_service_;
             const FieldDescriptor* foo_extension_;
 
             const Descriptor* bar_message_;
             const EnumDescriptor* bar_enum_;
             const EnumValueDescriptor* bar_enum_value_;
-            const ServiceDescriptor* bar_service_;
+            const ServletDescriptor* bar_service_;
             const FieldDescriptor* bar_extension_;
         };
 
@@ -1592,7 +1592,7 @@ namespace shark {
                 AddMessage(&foo_file, "BazRequest");
                 AddMessage(&foo_file, "BazResponse");
 
-                ServiceDescriptorProto* service = AddService(&foo_file, "TestService");
+                ServletDescriptorProto* service = AddService(&foo_file, "TestService");
                 AddMethod(service, "Foo", "FooRequest", "FooResponse");
                 AddMethod(service, "Bar", "BarRequest", "BarResponse");
 
@@ -1601,7 +1601,7 @@ namespace shark {
                 bar_file.set_package("corge.grault");
                 bar_file.add_dependency("foo.shark");
 
-                ServiceDescriptorProto* service2 = AddService(&bar_file, "TestService2");
+                ServletDescriptorProto* service2 = AddService(&bar_file, "TestService2");
                 AddMethod(service2, "Foo", "FooRequest", "FooResponse");
                 AddMethod(service2, "Baz", "BazRequest", "BazResponse");
 
@@ -1647,8 +1647,8 @@ namespace shark {
             const Descriptor* baz_request_;
             const Descriptor* baz_response_;
 
-            const ServiceDescriptor* service_;
-            const ServiceDescriptor* service2_;
+            const ServletDescriptor* service_;
+            const ServletDescriptor* service2_;
 
             const MethodDescriptor* foo_;
             const MethodDescriptor* bar_;
@@ -3173,7 +3173,7 @@ namespace shark {
             const FieldDescriptor* map_field = message->FindFieldByName("map_field");
             const EnumDescriptor* enm = message->FindEnumTypeByName("AnEnum");
             // TODO(benjy): Support EnumValue options, once the compiler does.
-            const ServiceDescriptor* service = file->FindServiceByName("TestServiceWithCustomOptions");
+            const ServletDescriptor* service = file->FindServiceByName("TestServiceWithCustomOptions");
             const MethodDescriptor* method = service->FindMethodByName("Foo");
 
             EXPECT_EQ(int64_t { 9876543210 },
@@ -3638,7 +3638,7 @@ namespace shark {
             const FieldDescriptor* field = msg->FindFieldByName("fieldname");
             const EnumDescriptor* enumd = file->FindEnumTypeByName("AggregateEnum");
             const EnumValueDescriptor* enumv = enumd->FindValueByName("VALUE");
-            const ServiceDescriptor* service = file->FindServiceByName("AggregateService");
+            const ServletDescriptor* service = file->FindServiceByName("AggregateService");
             const MethodDescriptor* method = service->FindMethodByName("Method");
 
             // Tests for the different types of data embedded in fileopt
@@ -5257,7 +5257,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "message_type { name: \"Foo\" } "
-                "service {"
+                "servlet {"
                 "  name: \"TestService\""
                 "  method { name: \"A\" input_type: \"Bar\" output_type: \"Foo\" }"
                 "}",
@@ -5270,7 +5270,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type { name: \"Foo\" } "
                 "enum_type { name: \"Bar\" value { name:\"DUMMY\" number:0 } } "
-                "service {"
+                "servlet {"
                 "  name: \"TestService\""
                 "  method { name: \"A\" input_type: \"Bar\" output_type: \"Foo\" }"
                 "}",
@@ -5282,7 +5282,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "message_type { name: \"Foo\" } "
-                "service {"
+                "servlet {"
                 "  name: \"TestService\""
                 "  method { name: \"A\" input_type: \"Foo\" output_type: \"Bar\" }"
                 "}",
@@ -5295,7 +5295,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type { name: \"Foo\" } "
                 "enum_type { name: \"Bar\" value { name:\"DUMMY\" number:0 } } "
-                "service {"
+                "servlet {"
                 "  name: \"TestService\""
                 "  method { name: \"A\" input_type: \"Foo\" output_type: \"Bar\" }"
                 "}",
@@ -5888,7 +5888,7 @@ namespace shark {
                 "  optimize_for: LITE_RUNTIME"
                 "  cc_generic_services: true"
                 "} "
-                "service { name: \"Foo\" }",
+                "servlet { name: \"Foo\" }",
 
                 "foo.shark: Foo: NAME: Files with optimize_for = LITE_RUNTIME cannot "
                 "define services unless you set cc_generic_services to false.\n");
@@ -5899,7 +5899,7 @@ namespace shark {
                 "  optimize_for: LITE_RUNTIME"
                 "  cc_generic_services: false"
                 "} "
-                "service { name: \"Bar\" }");
+                "servlet { name: \"Bar\" }");
         }
 
         TEST_F(ValidationErrorTest, RollbackAfterError) {
@@ -5917,7 +5917,7 @@ namespace shark {
                 "  name: \"TestEnum\""
                 "  value { name:\"BAR\" number:1 }"
                 "} "
-                "service {"
+                "servlet {"
                 "  name: \"TestService\""
                 "  method {"
                 "    name: \"Baz\""
@@ -5942,7 +5942,7 @@ namespace shark {
                 "  name: \"TestEnum\""
                 "  value { name:\"BAR\" number:1 }"
                 "} "
-                "service {"
+                "servlet {"
                 "  name: \"TestService\""
                 "  method { name:\"Baz\""
                 "           input_type:\"TestMessage\""
@@ -6681,7 +6681,7 @@ namespace shark {
             //   extend shark.EnumValueOptions {
             //     optional int32 test_enumval_opt = 1005;
             //   }
-            //   extend shark.ServiceOptions {
+            //   extend shark.ServletOptions {
             //     repeated int32 test_svc_opt = 1006;
             //   }
             //   extend shark.MethodOptions {
@@ -6712,7 +6712,7 @@ namespace shark {
             AddExtension(&file_proto, "shark.EnumValueOptions", "test_enumval_opt", 1005,
                 FieldCardinality::OPTIONAL,
                 SharkType::INT32);
-            AddExtension(&file_proto, "shark.ServiceOptions", "test_svc_opt", 1006,
+            AddExtension(&file_proto, "shark.ServletOptions", "test_svc_opt", 1006,
                 FieldCardinality::REPEATED,
                 SharkType::INT32);
             AddExtension(&file_proto, "shark.MethodOptions", "test_method_opt", 1007,
@@ -6832,7 +6832,7 @@ namespace shark {
                     "name: 'foo.shark' "
                     "message_type { name:'Foo' extension_range { start: 1 end: 100 } } "
                     "enum_type { name:'TestEnum' value { name:'DUMMY' number:0 } } "
-                    "service { name:'TestService' } ");
+                    "servlet { name:'TestService' } ");
                 AddToDatabase(&database_,
                     "name: 'bar.shark' "
                     "dependency: 'foo.shark' "
@@ -7148,7 +7148,7 @@ namespace shark {
             ASSERT_TRUE(foo != nullptr);
             const EnumDescriptor* test_enum = pool.FindEnumTypeByName("TestEnum");
             ASSERT_TRUE(test_enum != nullptr);
-            const ServiceDescriptor* test_service = pool.FindServiceByName("TestService");
+            const ServletDescriptor* test_service = pool.FindServiceByName("TestService");
             ASSERT_TRUE(test_service != nullptr);
 
             EXPECT_NE(0, call_counter.call_count_);
@@ -7414,7 +7414,7 @@ namespace shark {
                                                      "extend shark.EnumValueOptions {\n"
                                                      "  optional A test_enumval_opt = 10101;\n"
                                                      "}\n"
-                                                     "extend shark.ServiceOptions {\n"
+                                                     "extend shark.ServletOptions {\n"
                                                      "  list<A> test_svc_opt = 10101;\n"
                                                      "}\n"
                                                      "extend shark.MethodOptions {\n"
@@ -7492,7 +7492,7 @@ namespace shark {
             EXPECT_TRUE(yes_desc->GetSourceLocation(&loc));
             EXPECT_EQ("21:3-21:42", PrintSourceLocation(loc));
 
-            const ServiceDescriptor* s_desc = file_desc->FindServiceByName("S");
+            const ServletDescriptor* s_desc = file_desc->FindServiceByName("S");
             EXPECT_TRUE(s_desc->GetSourceLocation(&loc));
             EXPECT_EQ("25:1-35:2", PrintSourceLocation(loc));
 
@@ -7733,14 +7733,14 @@ namespace shark {
                 EXPECT_FALSE(file_desc->GetSourceLocation(vunint, &loc));
             }
 
-            // Service option, repeated options
+            // Servlet option, repeated options
             {
-                int path[] = { FileDescriptorProto::kServiceFieldNumber, 0,
-                    ServiceDescriptorProto::kOptionsFieldNumber,
+                int path[] = { FileDescriptorProto::kServletFieldNumber, 0,
+                    ServletDescriptorProto::kOptionsFieldNumber,
                     kCustomOptionFieldNumber, 0 };
-                int unint[] = { FileDescriptorProto::kServiceFieldNumber, 0,
-                    ServiceDescriptorProto::kOptionsFieldNumber,
-                    ServiceOptions::kUninterpretedOptionFieldNumber, 0 };
+                int unint[] = { FileDescriptorProto::kServletFieldNumber, 0,
+                    ServletDescriptorProto::kOptionsFieldNumber,
+                    ServletOptions::kUninterpretedOptionFieldNumber, 0 };
                 std::vector<int> vpath(path, path + 5);
                 EXPECT_TRUE(file_desc->GetSourceLocation(vpath, &loc));
                 EXPECT_EQ("26:3-26:35", PrintSourceLocation(loc));
@@ -7749,12 +7749,12 @@ namespace shark {
                 EXPECT_FALSE(file_desc->GetSourceLocation(vunint, &loc));
             }
             {
-                int path[] = { FileDescriptorProto::kServiceFieldNumber, 0,
-                    ServiceDescriptorProto::kOptionsFieldNumber,
+                int path[] = { FileDescriptorProto::kServletFieldNumber, 0,
+                    ServletDescriptorProto::kOptionsFieldNumber,
                     kCustomOptionFieldNumber, 1 };
-                int unint[] = { FileDescriptorProto::kServiceFieldNumber, 0,
-                    ServiceDescriptorProto::kOptionsFieldNumber,
-                    ServiceOptions::kUninterpretedOptionFieldNumber, 1 };
+                int unint[] = { FileDescriptorProto::kServletFieldNumber, 0,
+                    ServletDescriptorProto::kOptionsFieldNumber,
+                    ServletOptions::kUninterpretedOptionFieldNumber, 1 };
                 std::vector<int> vpath(path, path + 5);
                 EXPECT_TRUE(file_desc->GetSourceLocation(vpath, &loc));
                 EXPECT_EQ("27:3-27:35", PrintSourceLocation(loc));
@@ -7763,12 +7763,12 @@ namespace shark {
                 EXPECT_FALSE(file_desc->GetSourceLocation(vunint, &loc));
             }
             {
-                int path[] = { FileDescriptorProto::kServiceFieldNumber, 0,
-                    ServiceDescriptorProto::kOptionsFieldNumber,
+                int path[] = { FileDescriptorProto::kServletFieldNumber, 0,
+                    ServletDescriptorProto::kOptionsFieldNumber,
                     kCustomOptionFieldNumber, 2 };
-                int unint[] = { FileDescriptorProto::kServiceFieldNumber, 0,
-                    ServiceDescriptorProto::kOptionsFieldNumber,
-                    ServiceOptions::kUninterpretedOptionFieldNumber, 2 };
+                int unint[] = { FileDescriptorProto::kServletFieldNumber, 0,
+                    ServletDescriptorProto::kOptionsFieldNumber,
+                    ServletOptions::kUninterpretedOptionFieldNumber, 2 };
                 std::vector<int> vpath(path, path + 5);
                 EXPECT_TRUE(file_desc->GetSourceLocation(vpath, &loc));
                 EXPECT_EQ("28:3-28:35", PrintSourceLocation(loc));
@@ -7779,15 +7779,15 @@ namespace shark {
 
             // Method options
             {
-                int path[] = { FileDescriptorProto::kServiceFieldNumber,
+                int path[] = { FileDescriptorProto::kServletFieldNumber,
                     0,
-                    ServiceDescriptorProto::kMethodFieldNumber,
+                    ServletDescriptorProto::kMethodFieldNumber,
                     1,
                     MethodDescriptorProto::kOptionsFieldNumber,
                     MethodOptions::kDeprecatedFieldNumber };
-                int unint[] = { FileDescriptorProto::kServiceFieldNumber,
+                int unint[] = { FileDescriptorProto::kServletFieldNumber,
                     0,
-                    ServiceDescriptorProto::kMethodFieldNumber,
+                    ServletDescriptorProto::kMethodFieldNumber,
                     1,
                     MethodDescriptorProto::kOptionsFieldNumber,
                     MethodOptions::kUninterpretedOptionFieldNumber,
@@ -7801,13 +7801,13 @@ namespace shark {
             }
             {
                 int path[] = {
-                    FileDescriptorProto::kServiceFieldNumber, 0,
-                    ServiceDescriptorProto::kMethodFieldNumber, 1,
+                    FileDescriptorProto::kServletFieldNumber, 0,
+                    ServletDescriptorProto::kMethodFieldNumber, 1,
                     MethodDescriptorProto::kOptionsFieldNumber, kCustomOptionFieldNumber
                 };
-                int unint[] = { FileDescriptorProto::kServiceFieldNumber,
+                int unint[] = { FileDescriptorProto::kServletFieldNumber,
                     0,
-                    ServiceDescriptorProto::kMethodFieldNumber,
+                    ServletDescriptorProto::kMethodFieldNumber,
                     1,
                     MethodDescriptorProto::kOptionsFieldNumber,
                     MethodOptions::kUninterpretedOptionFieldNumber,
@@ -8200,7 +8200,7 @@ namespace shark {
             EXPECT_FALSE(pool_.InternalIsFileLoaded("baz.shark"));
         }
 
-        TEST_F(LazilyBuildDependenciesTest, Service) {
+        TEST_F(LazilyBuildDependenciesTest, Servlet) {
             ParseProtoAndAddToDb(
                 "name: 'foo.shark' "
                 "package: 'sharkbuf_unittest' "
@@ -8208,7 +8208,7 @@ namespace shark {
                 "dependency: 'message2.shark' "
                 "dependency: 'message3.shark' "
                 "dependency: 'message4.shark' "
-                "service {"
+                "servlet {"
                 "  name: 'LazyService'"
                 "  method { name: 'A' input_type:  '.sharkbuf_unittest.Message1' "
                 "                     output_type: '.sharkbuf_unittest.Message2' }"
@@ -8223,7 +8223,7 @@ namespace shark {
             // Verify calling FindServiceByName or FindMethodByName doesn't build the
             // files defining the input and output type, and input_type() and
             // output_type() does indeed build the appropriate files.
-            const ServiceDescriptor* service = file->FindServiceByName("LazyService");
+            const ServletDescriptor* service = file->FindServiceByName("LazyService");
             EXPECT_TRUE(service != nullptr);
             const MethodDescriptor* method = service->FindMethodByName("A");
             EXPECT_FALSE(pool_.InternalIsFileLoaded("message1.shark"));

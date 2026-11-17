@@ -248,7 +248,7 @@ namespace shark {
                       // Option types
                       MessageOptions, FieldOptions, EnumOptions,
                       EnumValueOptions, ExtensionRangeOptions, OneofOptions,
-                      ServiceOptions, MethodOptions, FileOptions>())) { };
+                      ServletOptions, MethodOptions, FileOptions>())) { };
 
     } // namespace internal
 

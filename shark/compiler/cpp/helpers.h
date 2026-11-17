@@ -253,7 +253,7 @@ namespace shark::compiler::cpp {
         return UniqueName(name, d->file(), options);
     }
     inline std::string UniqueName(const std::string& name,
-        const ServiceDescriptor* d,
+        const ServletDescriptor* d,
         const Options& options) {
         return UniqueName(name, d->file(), options);
     }
@@ -281,7 +281,7 @@ namespace shark::compiler::cpp {
         return UniqueName(name, d->file(), InternalRuntimeOptions());
     }
     inline std::string UniqueName(const std::string& name,
-        const ServiceDescriptor* d) {
+        const ServletDescriptor* d) {
         return UniqueName(name, d->file(), InternalRuntimeOptions());
     }
 
@@ -418,7 +418,7 @@ namespace shark::compiler::cpp {
     }
 
     // Should we generate generic services for this file?
-    inline bool HasGenericServices(const FileDescriptor* file,
+    inline bool HasGenericServlet(const FileDescriptor* file,
         const Options& options) {
         return file->service_count() > 0 && GetOptimizeFor(file, options) != FileOptions_OptimizeMode::LITE_RUNTIME && file->options().cc_generic_services();
     }
@@ -646,7 +646,7 @@ namespace shark::compiler::cpp {
         }
     }
 
-    void ListAllTypesForServices(const FileDescriptor* fd,
+    void ListAllTypesForServlet(const FileDescriptor* fd,
         std::vector<const Descriptor*>* types);
 
     // Indicates whether we should use implicit weak fields for this file.

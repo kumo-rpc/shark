@@ -47,7 +47,7 @@ extend proto2.EnumValueOptions {
   optional int32 enum_value_opt1 = 1560678;
 }
 
-extend proto2.ServiceOptions {
+extend proto2.ServletOptions {
   optional sint64 service_opt1 = 7887650;
 }
 
@@ -325,7 +325,7 @@ extend proto2.MessageOptions   { optional Aggregate msgopt     = 15480088; }
 extend proto2.FieldOptions     { optional Aggregate fieldopt   = 15481374; }
 extend proto2.EnumOptions      { optional Aggregate enumopt    = 15483218; }
 extend proto2.EnumValueOptions { optional Aggregate enumvalopt = 15486921; }
-extend proto2.ServiceOptions   { optional Aggregate serviceopt = 15497145; }
+extend proto2.ServletOptions   { optional Aggregate serviceopt = 15497145; }
 extend proto2.MethodOptions    { optional Aggregate methodopt  = 15512713; }
 // BEGIN GOOGLE-INTERNAL
 extend proto2.StreamOptions    { optional Aggregate streamopt  = 15512714; }

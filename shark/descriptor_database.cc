@@ -140,8 +140,8 @@ bool SimpleDescriptorDatabase::DescriptorIndex<Value>::AddFile(
     if (!AddSymbol(path + file.extension(i).name(), value)) return false;
     if (!AddExtension(file.name(), file.extension(i), value)) return false;
   }
-  for (int i = 0; i < file.service_size(); i++) {
-    if (!AddSymbol(path + file.service(i).name(), value)) return false;
+  for (int i = 0; i < file.servlet_size(); i++) {
+    if (!AddSymbol(path + file.servlet(i).name(), value)) return false;
   }
 
   return true;
@@ -654,8 +654,8 @@ bool EncodedDescriptorDatabase::DescriptorIndex::AddFile(const FileProto& file,
     if (!AddSymbol(extension.name())) return false;
     if (!AddExtension(file.name(), extension)) return false;
   }
-  for (const auto& service : file.service()) {
-    if (!AddSymbol(service.name())) return false;
+  for (const auto& servlet : file.servlet()) {
+    if (!AddSymbol(servlet.name())) return false;
   }
 
   return true;

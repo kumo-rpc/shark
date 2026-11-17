@@ -1213,7 +1213,7 @@ namespace shark {
                 }
 
                 // Enforce --disallow_services.
-                if (disallow_services_ && file_descriptor.service_size() > 0) {
+                if (disallow_services_ && file_descriptor.servlet_size() > 0) {
                     std::cerr << file_descriptor.name()
                               << ": This file contains services, but "
                                  "--disallow_services was used."

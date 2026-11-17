@@ -12,7 +12,7 @@
 namespace shark {
 
     // Abstract interface for a callback.  When calling an RPC, you must provide
-    // a Closure to call when the procedure completes.  See the Service interface
+    // a Closure to call when the procedure completes.  See the Servlet interface
     // in service.h.
     //
     // To automatically construct a Closure which calls a particular function or

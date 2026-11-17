@@ -227,7 +227,7 @@ namespace shark::compiler::python {
             printer_->Print(
                 "from shark import message as _message\n");
         }
-        if (HasGenericServices(file_)) {
+        if (HasGenericServlet(file_)) {
             printer_->Print(
                 "from shark import service as"
                 " _service\n");
@@ -560,12 +560,12 @@ namespace shark::compiler::python {
     }
 
     void PyiGenerator::PrintServices() const {
-        std::vector<const ServiceDescriptor*> services;
+        std::vector<const ServletDescriptor*> services;
         services.reserve(file_->service_count());
         for (int i = 0; i < file_->service_count(); ++i) {
             services.push_back(file_->service(i));
         }
-        std::sort(services.begin(), services.end(), SortByName<ServiceDescriptor>());
+        std::sort(services.begin(), services.end(), SortByName<ServletDescriptor>());
 
         // Prints $Service$ and $Service$_Stub classes
         for (const auto& entry : services) {
@@ -614,7 +614,7 @@ namespace shark::compiler::python {
 
         PrintMessages(import_map);
         PrintTopLevelEnums();
-        if (HasGenericServices(file)) {
+        if (HasGenericServlet(file)) {
             PrintServices();
         }
         return true;
