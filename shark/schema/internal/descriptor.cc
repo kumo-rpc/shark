@@ -318,6 +318,17 @@ namespace shark {
         return file()->GetSourceLocation(path, out_location);
     }
 
+    void Descriptor::GetLocationPath(std::vector<int>* output) const {
+        if (containing_type()) {
+            containing_type()->GetLocationPath(output);
+            output->push_back(DescriptorProto::kNestedTypeFieldNumber);
+            output->push_back(index());
+        } else {
+            output->push_back(FileDescriptorProto::kMessageTypeFieldNumber);
+            output->push_back(index());
+        }
+    }
+
 } // namespace shark
 
 

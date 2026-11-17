@@ -251,16 +251,16 @@ namespace shark {
         // macro, below.
         void BuildMessage(const DescriptorProto& proto, const Descriptor* parent,
             Descriptor* result, internal::FlatAllocator& alloc);
-        void BuildFieldOrExtension(const FieldDescriptorProto& proto,
+        void build_field_or_extension(const FieldDescriptorProto& proto,
             Descriptor* parent, FieldDescriptor* result,
             bool is_extension, internal::FlatAllocator& alloc);
         void BuildField(const FieldDescriptorProto& proto, Descriptor* parent,
             FieldDescriptor* result, internal::FlatAllocator& alloc) {
-            BuildFieldOrExtension(proto, parent, result, false, alloc);
+            build_field_or_extension(proto, parent, result, false, alloc);
         }
         void BuildExtension(const FieldDescriptorProto& proto, Descriptor* parent,
             FieldDescriptor* result, internal::FlatAllocator& alloc) {
-            BuildFieldOrExtension(proto, parent, result, true, alloc);
+            build_field_or_extension(proto, parent, result, true, alloc);
         }
         void BuildExtensionRange(const DescriptorProto::ExtensionRange& proto,
             const Descriptor* parent,

@@ -475,16 +475,6 @@ namespace shark {
         return true;
     }
 
-    void Descriptor::GetLocationPath(std::vector<int>* output) const {
-        if (containing_type()) {
-            containing_type()->GetLocationPath(output);
-            output->push_back(DescriptorProto::kNestedTypeFieldNumber);
-            output->push_back(index());
-        } else {
-            output->push_back(FileDescriptorProto::kMessageTypeFieldNumber);
-            output->push_back(index());
-        }
-    }
 
     const FileDescriptor* DescriptorPool::BuildFile(
         const FileDescriptorProto& proto) {

@@ -1867,7 +1867,7 @@ namespace shark {
     }
 
 
-    void DescriptorBuilder::BuildFieldOrExtension(const FieldDescriptorProto& proto,
+    void DescriptorBuilder::build_field_or_extension(const FieldDescriptorProto& proto,
         Descriptor* parent,
         FieldDescriptor* result,
         bool is_extension,
