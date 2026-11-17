@@ -61,285 +61,287 @@ class CordByteSink;
 
 namespace shark::strings {
 
-// An abstract interface for an object that consumes a sequence of bytes. This
-// interface offers a way to append data as well as a Flush() function.
-//
-// Example:
-//
-//   string my_data;
-//   ...
-//   ByteSink* sink = ...
-//   sink->Append(my_data.data(), my_data.size());
-//   sink->Flush();
-//
-class SHARK_EXPORT ByteSink {
- public:
-  ByteSink() {}
-  virtual ~ByteSink() {}
+    // An abstract interface for an object that consumes a sequence of bytes. This
+    // interface offers a way to append data as well as a Flush() function.
+    //
+    // Example:
+    //
+    //   string my_data;
+    //   ...
+    //   ByteSink* sink = ...
+    //   sink->Append(my_data.data(), my_data.size());
+    //   sink->Flush();
+    //
+    class SHARK_EXPORT ByteSink {
+    public:
+        ByteSink() { }
+        virtual ~ByteSink() { }
 
-  // Appends the "n" bytes starting at "bytes".
-  virtual void Append(const char* bytes, size_t n) = 0;
+        // Appends the "n" bytes starting at "bytes".
+        virtual void Append(const char* bytes, size_t n) = 0;
 
-  // Flushes internal buffers. The default implementation does nothing. ByteSink
-  // subclasses may use internal buffers that require calling Flush() at the end
-  // of the stream.
-  virtual void Flush();
+        // Flushes internal buffers. The default implementation does nothing. ByteSink
+        // subclasses may use internal buffers that require calling Flush() at the end
+        // of the stream.
+        virtual void Flush();
 
- private:
-  KUMO_DISALLOW_COPY_AND_ASSIGN(ByteSink);
-};
+    private:
+        KUMO_DISALLOW_COPY_AND_ASSIGN(ByteSink);
+    };
 
-// An abstract interface for an object that produces a fixed-size sequence of
-// bytes.
-//
-// Example:
-//
-//   ByteSource* source = ...
-//   while (source->Available() > 0) {
-//     std::string_view data = source->Peek();
-//     ... do something with "data" ...
-//     source->Skip(data.length());
-//   }
-//
-class SHARK_EXPORT ByteSource {
- public:
-  ByteSource() {}
-  virtual ~ByteSource() {}
+    // An abstract interface for an object that produces a fixed-size sequence of
+    // bytes.
+    //
+    // Example:
+    //
+    //   ByteSource* source = ...
+    //   while (source->Available() > 0) {
+    //     std::string_view data = source->Peek();
+    //     ... do something with "data" ...
+    //     source->Skip(data.length());
+    //   }
+    //
+    class SHARK_EXPORT ByteSource {
+    public:
+        ByteSource() { }
+        virtual ~ByteSource() { }
 
-  // Returns the number of bytes left to read from the source. Available()
-  // should decrease by N each time Skip(N) is called. Available() may not
-  // increase. Available() returning 0 indicates that the ByteSource is
-  // exhausted.
-  //
-  // Note: Size() may have been a more appropriate name as it's more
-  //       indicative of the fixed-size nature of a ByteSource.
-  virtual size_t Available() const = 0;
+        // Returns the number of bytes left to read from the source. Available()
+        // should decrease by N each time Skip(N) is called. Available() may not
+        // increase. Available() returning 0 indicates that the ByteSource is
+        // exhausted.
+        //
+        // Note: Size() may have been a more appropriate name as it's more
+        //       indicative of the fixed-size nature of a ByteSource.
+        virtual size_t Available() const = 0;
 
-  // Returns a std::string_view of the next contiguous region of the source. Does not
-  // reposition the source. The returned region is empty iff Available() == 0.
-  //
-  // The returned region is valid until the next call to Skip() or until this
-  // object is destroyed, whichever occurs first.
-  //
-  // The length of the returned std::string_view will be <= Available().
-  virtual std::string_view Peek() = 0;
+        // Returns a std::string_view of the next contiguous region of the source. Does not
+        // reposition the source. The returned region is empty iff Available() == 0.
+        //
+        // The returned region is valid until the next call to Skip() or until this
+        // object is destroyed, whichever occurs first.
+        //
+        // The length of the returned std::string_view will be <= Available().
+        virtual std::string_view Peek() = 0;
 
-  // Skips the next n bytes. Invalidates any std::string_view returned by a previous
-  // call to Peek().
-  //
-  // REQUIRES: Available() >= n
-  virtual void Skip(size_t n) = 0;
+        // Skips the next n bytes. Invalidates any std::string_view returned by a previous
+        // call to Peek().
+        //
+        // REQUIRES: Available() >= n
+        virtual void Skip(size_t n) = 0;
 
-  // Writes the next n bytes in this ByteSource to the given ByteSink, and
-  // advances this ByteSource past the copied bytes. The default implementation
-  // of this method just copies the bytes normally, but subclasses might
-  // override CopyTo to optimize certain cases.
-  //
-  // REQUIRES: Available() >= n
-  virtual void CopyTo(ByteSink* sink, size_t n);
+        // Writes the next n bytes in this ByteSource to the given ByteSink, and
+        // advances this ByteSource past the copied bytes. The default implementation
+        // of this method just copies the bytes normally, but subclasses might
+        // override CopyTo to optimize certain cases.
+        //
+        // REQUIRES: Available() >= n
+        virtual void CopyTo(ByteSink* sink, size_t n);
 
- private:
-  KUMO_DISALLOW_COPY_AND_ASSIGN(ByteSource);
-};
+    private:
+        KUMO_DISALLOW_COPY_AND_ASSIGN(ByteSource);
+    };
 
-//
-// Some commonly used implementations of ByteSink
-//
+    //
+    // Some commonly used implementations of ByteSink
+    //
 
-// Implementation of ByteSink that writes to an unsized byte array. No
-// bounds-checking is performed--it is the caller's responsibility to ensure
-// that the destination array is large enough.
-//
-// Example:
-//
-//   char buf[10];
-//   UncheckedArrayByteSink sink(buf);
-//   sink.Append("hi", 2);    // OK
-//   sink.Append(data, 100);  // WOOPS! Overflows buf[10].
-//
-class SHARK_EXPORT UncheckedArrayByteSink : public ByteSink {
- public:
-  explicit UncheckedArrayByteSink(char* dest) : dest_(dest) {}
-  virtual void Append(const char* data, size_t n) override;
+    // Implementation of ByteSink that writes to an unsized byte array. No
+    // bounds-checking is performed--it is the caller's responsibility to ensure
+    // that the destination array is large enough.
+    //
+    // Example:
+    //
+    //   char buf[10];
+    //   UncheckedArrayByteSink sink(buf);
+    //   sink.Append("hi", 2);    // OK
+    //   sink.Append(data, 100);  // WOOPS! Overflows buf[10].
+    //
+    class SHARK_EXPORT UncheckedArrayByteSink : public ByteSink {
+    public:
+        explicit UncheckedArrayByteSink(char* dest)
+            : dest_(dest) { }
+        virtual void Append(const char* data, size_t n) override;
 
-  // Returns the current output pointer so that a caller can see how many bytes
-  // were produced.
-  //
-  // Note: this method is not part of the ByteSink interface.
-  char* CurrentDestination() const { return dest_; }
+        // Returns the current output pointer so that a caller can see how many bytes
+        // were produced.
+        //
+        // Note: this method is not part of the ByteSink interface.
+        char* CurrentDestination() const { return dest_; }
 
- private:
-  char* dest_;
-  KUMO_DISALLOW_COPY_AND_ASSIGN(UncheckedArrayByteSink);
-};
+    private:
+        char* dest_;
+        KUMO_DISALLOW_COPY_AND_ASSIGN(UncheckedArrayByteSink);
+    };
 
-// Implementation of ByteSink that writes to a sized byte array. This sink will
-// not write more than "capacity" bytes to outbuf. Once "capacity" bytes are
-// appended, subsequent bytes will be ignored and Overflowed() will return true.
-// Overflowed() does not cause a runtime error (i.e., it does not CHECK fail).
-//
-// Example:
-//
-//   char buf[10];
-//   CheckedArrayByteSink sink(buf, 10);
-//   sink.Append("hi", 2);    // OK
-//   sink.Append(data, 100);  // Will only write 8 more bytes
-//
-class SHARK_EXPORT CheckedArrayByteSink : public ByteSink {
- public:
-  CheckedArrayByteSink(char* outbuf, size_t capacity);
-  virtual void Append(const char* bytes, size_t n) override;
+    // Implementation of ByteSink that writes to a sized byte array. This sink will
+    // not write more than "capacity" bytes to outbuf. Once "capacity" bytes are
+    // appended, subsequent bytes will be ignored and Overflowed() will return true.
+    // Overflowed() does not cause a runtime error (i.e., it does not CHECK fail).
+    //
+    // Example:
+    //
+    //   char buf[10];
+    //   CheckedArrayByteSink sink(buf, 10);
+    //   sink.Append("hi", 2);    // OK
+    //   sink.Append(data, 100);  // Will only write 8 more bytes
+    //
+    class SHARK_EXPORT CheckedArrayByteSink : public ByteSink {
+    public:
+        CheckedArrayByteSink(char* outbuf, size_t capacity);
+        virtual void Append(const char* bytes, size_t n) override;
 
-  // Returns the number of bytes actually written to the sink.
-  size_t NumberOfBytesWritten() const { return size_; }
+        // Returns the number of bytes actually written to the sink.
+        size_t NumberOfBytesWritten() const { return size_; }
 
-  // Returns true if any bytes were discarded, i.e., if there was an
-  // attempt to write more than 'capacity' bytes.
-  bool Overflowed() const { return overflowed_; }
+        // Returns true if any bytes were discarded, i.e., if there was an
+        // attempt to write more than 'capacity' bytes.
+        bool Overflowed() const { return overflowed_; }
 
- private:
-  char* outbuf_;
-  const size_t capacity_;
-  size_t size_;
-  bool overflowed_;
-  KUMO_DISALLOW_COPY_AND_ASSIGN(CheckedArrayByteSink);
-};
+    private:
+        char* outbuf_;
+        const size_t capacity_;
+        size_t size_;
+        bool overflowed_;
+        KUMO_DISALLOW_COPY_AND_ASSIGN(CheckedArrayByteSink);
+    };
 
-// Implementation of ByteSink that allocates an internal buffer (a char array)
-// and expands it as needed to accommodate appended data (similar to a string),
-// and allows the caller to take ownership of the internal buffer via the
-// GetBuffer() method. The buffer returned from GetBuffer() must be deleted by
-// the caller with delete[]. GetBuffer() also sets the internal buffer to be
-// empty, and subsequent appends to the sink will create a new buffer. The
-// destructor will free the internal buffer if GetBuffer() was not called.
-//
-// Example:
-//
-//   GrowingArrayByteSink sink(10);
-//   sink.Append("hi", 2);
-//   sink.Append(data, n);
-//   const char* buf = sink.GetBuffer();  // Ownership transferred
-//   delete[] buf;
-//
-class SHARK_EXPORT GrowingArrayByteSink : public strings::ByteSink {
- public:
-  explicit GrowingArrayByteSink(size_t estimated_size);
-  virtual ~GrowingArrayByteSink();
-  virtual void Append(const char* bytes, size_t n) override;
+    // Implementation of ByteSink that allocates an internal buffer (a char array)
+    // and expands it as needed to accommodate appended data (similar to a string),
+    // and allows the caller to take ownership of the internal buffer via the
+    // GetBuffer() method. The buffer returned from GetBuffer() must be deleted by
+    // the caller with delete[]. GetBuffer() also sets the internal buffer to be
+    // empty, and subsequent appends to the sink will create a new buffer. The
+    // destructor will free the internal buffer if GetBuffer() was not called.
+    //
+    // Example:
+    //
+    //   GrowingArrayByteSink sink(10);
+    //   sink.Append("hi", 2);
+    //   sink.Append(data, n);
+    //   const char* buf = sink.GetBuffer();  // Ownership transferred
+    //   delete[] buf;
+    //
+    class SHARK_EXPORT GrowingArrayByteSink : public strings::ByteSink {
+    public:
+        explicit GrowingArrayByteSink(size_t estimated_size);
+        virtual ~GrowingArrayByteSink();
+        virtual void Append(const char* bytes, size_t n) override;
 
-  // Returns the allocated buffer, and sets nbytes to its size. The caller takes
-  // ownership of the buffer and must delete it with delete[].
-  char* GetBuffer(size_t* nbytes);
+        // Returns the allocated buffer, and sets nbytes to its size. The caller takes
+        // ownership of the buffer and must delete it with delete[].
+        char* GetBuffer(size_t* nbytes);
 
- private:
-  void Expand(size_t amount);
-  void ShrinkToFit();
+    private:
+        void Expand(size_t amount);
+        void ShrinkToFit();
 
-  size_t capacity_;
-  char* buf_;
-  size_t size_;
-  KUMO_DISALLOW_COPY_AND_ASSIGN(GrowingArrayByteSink);
-};
+        size_t capacity_;
+        char* buf_;
+        size_t size_;
+        KUMO_DISALLOW_COPY_AND_ASSIGN(GrowingArrayByteSink);
+    };
 
-// Implementation of ByteSink that appends to the given string.
-// Existing contents of "dest" are not modified; new data is appended.
-//
-// Example:
-//
-//   string dest = "Hello ";
-//   StringByteSink sink(&dest);
-//   sink.Append("World", 5);
-//   assert(dest == "Hello World");
-//
-class SHARK_EXPORT StringByteSink : public ByteSink {
- public:
-  explicit StringByteSink(std::string* dest) : dest_(dest) {}
-  virtual void Append(const char* data, size_t n) override;
+    // Implementation of ByteSink that appends to the given string.
+    // Existing contents of "dest" are not modified; new data is appended.
+    //
+    // Example:
+    //
+    //   string dest = "Hello ";
+    //   StringByteSink sink(&dest);
+    //   sink.Append("World", 5);
+    //   assert(dest == "Hello World");
+    //
+    class SHARK_EXPORT StringByteSink : public ByteSink {
+    public:
+        explicit StringByteSink(std::string* dest)
+            : dest_(dest) { }
+        virtual void Append(const char* data, size_t n) override;
 
- private:
-  std::string* dest_;
-  KUMO_DISALLOW_COPY_AND_ASSIGN(StringByteSink);
-};
+    private:
+        std::string* dest_;
+        KUMO_DISALLOW_COPY_AND_ASSIGN(StringByteSink);
+    };
 
-// Implementation of ByteSink that discards all data.
-//
-// Example:
-//
-//   NullByteSink sink;
-//   sink.Append(data, data.size());  // All data ignored.
-//
-class SHARK_EXPORT NullByteSink : public ByteSink {
- public:
-  NullByteSink() {}
-  void Append(const char* /*data*/, size_t /*n*/) override {}
+    // Implementation of ByteSink that discards all data.
+    //
+    // Example:
+    //
+    //   NullByteSink sink;
+    //   sink.Append(data, data.size());  // All data ignored.
+    //
+    class SHARK_EXPORT NullByteSink : public ByteSink {
+    public:
+        NullByteSink() { }
+        void Append(const char* /*data*/, size_t /*n*/) override { }
 
- private:
-  KUMO_DISALLOW_COPY_AND_ASSIGN(NullByteSink);
-};
+    private:
+        KUMO_DISALLOW_COPY_AND_ASSIGN(NullByteSink);
+    };
 
-//
-// Some commonly used implementations of ByteSource
-//
+    //
+    // Some commonly used implementations of ByteSource
+    //
 
-// Implementation of ByteSource that reads from a std::string_view.
-//
-// Example:
-//
-//   string data = "Hello";
-//   ArrayByteSource source(data);
-//   assert(source.Available() == 5);
-//   assert(source.Peek() == "Hello");
-//
-class SHARK_EXPORT ArrayByteSource : public ByteSource {
- public:
-  explicit ArrayByteSource(std::string_view s) : input_(s) {}
+    // Implementation of ByteSource that reads from a std::string_view.
+    //
+    // Example:
+    //
+    //   string data = "Hello";
+    //   ArrayByteSource source(data);
+    //   assert(source.Available() == 5);
+    //   assert(source.Peek() == "Hello");
+    //
+    class SHARK_EXPORT ArrayByteSource : public ByteSource {
+    public:
+        explicit ArrayByteSource(std::string_view s)
+            : input_(s) { }
 
-  virtual size_t Available() const override;
-  virtual std::string_view Peek() override;
-  virtual void Skip(size_t n) override;
+        virtual size_t Available() const override;
+        virtual std::string_view Peek() override;
+        virtual void Skip(size_t n) override;
 
- private:
-  std::string_view   input_;
-  KUMO_DISALLOW_COPY_AND_ASSIGN(ArrayByteSource);
-};
+    private:
+        std::string_view input_;
+        KUMO_DISALLOW_COPY_AND_ASSIGN(ArrayByteSource);
+    };
 
-// Implementation of ByteSource that wraps another ByteSource, limiting the
-// number of bytes returned.
-//
-// The caller maintains ownership of the underlying source, and may not use the
-// underlying source while using the LimitByteSource object.  The underlying
-// source's pointer is advanced by n bytes every time this LimitByteSource
-// object is advanced by n.
-//
-// Example:
-//
-//   string data = "Hello World";
-//   ArrayByteSource abs(data);
-//   assert(abs.Available() == data.size());
-//
-//   LimitByteSource limit(abs, 5);
-//   assert(limit.Available() == 5);
-//   assert(limit.Peek() == "Hello");
-//
-class SHARK_EXPORT LimitByteSource : public ByteSource {
- public:
-  // Returns at most "limit" bytes from "source".
-  LimitByteSource(ByteSource* source, size_t limit);
+    // Implementation of ByteSource that wraps another ByteSource, limiting the
+    // number of bytes returned.
+    //
+    // The caller maintains ownership of the underlying source, and may not use the
+    // underlying source while using the LimitByteSource object.  The underlying
+    // source's pointer is advanced by n bytes every time this LimitByteSource
+    // object is advanced by n.
+    //
+    // Example:
+    //
+    //   string data = "Hello World";
+    //   ArrayByteSource abs(data);
+    //   assert(abs.Available() == data.size());
+    //
+    //   LimitByteSource limit(abs, 5);
+    //   assert(limit.Available() == 5);
+    //   assert(limit.Peek() == "Hello");
+    //
+    class SHARK_EXPORT LimitByteSource : public ByteSource {
+    public:
+        // Returns at most "limit" bytes from "source".
+        LimitByteSource(ByteSource* source, size_t limit);
 
-  virtual size_t Available() const override;
-  virtual std::string_view Peek() override;
-  virtual void Skip(size_t n) override;
+        virtual size_t Available() const override;
+        virtual std::string_view Peek() override;
+        virtual void Skip(size_t n) override;
 
-  // We override CopyTo so that we can forward to the underlying source, in
-  // case it has an efficient implementation of CopyTo.
-  virtual void CopyTo(ByteSink* sink, size_t n) override;
+        // We override CopyTo so that we can forward to the underlying source, in
+        // case it has an efficient implementation of CopyTo.
+        virtual void CopyTo(ByteSink* sink, size_t n) override;
 
- private:
-  ByteSource* source_;
-  size_t limit_;
-};
+    private:
+        ByteSource* source_;
+        size_t limit_;
+    };
 
-}  // namespace shark::strings
+} // namespace shark::strings
 
 #include <shark/port_undef.inc>
-

@@ -337,7 +337,7 @@ namespace shark::compiler::cpp {
         bool do_export, io::Printer* printer) {
         Formatter format(printer, variables_);
         const std::string prefix = "net/proto2/";
-        GOOGLE_CHECK(google3_name.find(prefix) == 0) << google3_name;
+        SHARK_CHECK(google3_name.find(prefix) == 0) << google3_name;
 
         if (options_.opensource_runtime) {
             std::string path = google3_name.substr(prefix.size());
@@ -1147,11 +1147,11 @@ namespace shark::compiler::cpp {
             IncludeFile("net/proto2/public/implicit_weak_message.h", printer);
         }
         if (HasWeakFields(file_, options_)) {
-            GOOGLE_CHECK(!options_.opensource_runtime);
+            SHARK_CHECK(!options_.opensource_runtime);
             IncludeFile("net/proto2/public/weak_field_map.h", printer);
         }
         if (HasLazyFields(file_, options_, &scc_analyzer_)) {
-            GOOGLE_CHECK(!options_.opensource_runtime);
+            SHARK_CHECK(!options_.opensource_runtime);
             IncludeFile("net/proto2/public/lazy_field.h", printer);
         }
         if (ShouldVerify(file_, options_, &scc_analyzer_)) {

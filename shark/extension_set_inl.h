@@ -92,7 +92,7 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
       case SharkFieldType::STRING:
       case SharkFieldType::BYTES:
       case SharkFieldType::MESSAGE:
-        GOOGLE_LOG(FATAL) << "Non-primitive types can't be packed.";
+        SHARK_LOG(FATAL) << "Non-primitive types can't be packed.";
         break;
     }
   } else {

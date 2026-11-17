@@ -127,7 +127,7 @@ namespace shark {
 #ifdef _WIN32
                 if (setmode(fd, _O_TEXT) == -1) {
                     // This should never happen, I think.
-                    GOOGLE_LOG(WARNING) << "setmode(" << fd << ", _O_TEXT): " << strerror(errno);
+                    SHARK_LOG(WARNING) << "setmode(" << fd << ", _O_TEXT): " << strerror(errno);
                 }
 #endif
                 // (Text and binary are the same on non-Windows platforms.)
@@ -137,7 +137,7 @@ namespace shark {
 #ifdef _WIN32
                 if (setmode(fd, _O_BINARY) == -1) {
                     // This should never happen, I think.
-                    GOOGLE_LOG(WARNING) << "setmode(" << fd << ", _O_BINARY): " << strerror(errno);
+                    SHARK_LOG(WARNING) << "setmode(" << fd << ", _O_BINARY): " << strerror(errno);
                 }
 #endif
                 // (Text and binary are the same on non-Windows platforms.)
@@ -1102,7 +1102,7 @@ namespace shark {
                     FileDescriptorProto file;
                     file.set_name("empty_message.shark");
                     file.add_message_type()->set_name("EmptyMessage");
-                    GOOGLE_CHECK(pool.BuildFile(file) != nullptr);
+                    SHARK_CHECK(pool.BuildFile(file) != nullptr);
                     codec_type_ = "EmptyMessage";
                     if (!EncodeOrDecode(&pool)) {
                         return 1;
@@ -1129,7 +1129,7 @@ namespace shark {
                     }
                     break;
                 case PRINT_NONE:
-                    GOOGLE_LOG(ERROR) << "If the code reaches here, it usually means a bug of "
+                    SHARK_LOG(ERROR) << "If the code reaches here, it usually means a bug of "
                                          "flag parsing in the CommandLineInterface.";
                     return 1;
 
@@ -1523,7 +1523,7 @@ namespace shark {
                 missing_proto_definitions = input_files_.empty() && descriptor_set_in_names_.empty();
                 break;
             default:
-                GOOGLE_LOG(FATAL) << "Unexpected mode: " << mode_;
+                SHARK_LOG(FATAL) << "Unexpected mode: " << mode_;
             }
             if (missing_proto_definitions) {
                 std::cerr << "Missing input file." << std::endl;
@@ -2092,7 +2092,7 @@ Parse PROTO_FILES and generate output based on the options given:
             std::string error;
             if (output_directive.generator == nullptr) {
                 // This is a plugin.
-                GOOGLE_CHECK(turbo::starts_with(output_directive.name, "--") && turbo::ends_with(output_directive.name, "_out"))
+                SHARK_CHECK(turbo::starts_with(output_directive.name, "--") && turbo::ends_with(output_directive.name, "_out"))
                     << "Bad name for plugin generator: " << output_directive.name;
 
                 std::string plugin_name = PluginName(plugin_prefix_, output_directive.name);

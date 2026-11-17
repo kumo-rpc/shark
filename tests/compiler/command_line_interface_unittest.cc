@@ -504,7 +504,7 @@ namespace shark {
             void CommandLineInterfaceTest::WriteDescriptorSet(
                 const std::string& filename, const FileDescriptorSet* descriptor_set) {
                 std::string binary_proto;
-                GOOGLE_CHECK(descriptor_set->SerializeToString(&binary_proto));
+                SHARK_CHECK(descriptor_set->SerializeToString(&binary_proto));
                 CreateTempFile(filename, binary_proto);
             }
 
@@ -2550,7 +2550,7 @@ namespace shark {
                 void RedirectStdinFromText(const std::string& input) {
                     std::string filename = TestTempDir() + "/test_stdin";
                     GOOGLE_CHECK_OK(File::SetContents(filename, input, true));
-                    GOOGLE_CHECK(RedirectStdinFromFile(filename));
+                    SHARK_CHECK(RedirectStdinFromFile(filename));
                 }
 
                 bool RedirectStdinFromFile(const std::string& filename) {
@@ -2664,7 +2664,7 @@ namespace shark {
                     GOOGLE_DCHECK(file_descriptor_set.IsInitialized());
 
                     std::string binary_proto;
-                    GOOGLE_CHECK(file_descriptor_set.SerializeToString(&binary_proto));
+                    SHARK_CHECK(file_descriptor_set.SerializeToString(&binary_proto));
                     GOOGLE_CHECK_OK(File::SetContents(unittest_proto_descriptor_set_filename_,
                         binary_proto, true));
                 }

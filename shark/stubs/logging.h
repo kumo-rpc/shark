@@ -116,10 +116,10 @@ inline bool IsOk(bool status) { return status; }
 // which already defined them itself.  Presumably all Google libraries will
 // support the same syntax for these so it should not be a big deal if they
 // end up using our definitions instead.
-#undef GOOGLE_LOG
+#undef SHARK_LOG
 #undef GOOGLE_LOG_IF
 
-#undef GOOGLE_CHECK
+#undef SHARK_CHECK
 #undef GOOGLE_CHECK_OK
 #undef GOOGLE_CHECK_EQ
 #undef GOOGLE_CHECK_NE
@@ -139,29 +139,29 @@ inline bool IsOk(bool status) { return status; }
 #undef GOOGLE_DCHECK_GT
 #undef GOOGLE_DCHECK_GE
 
-#define GOOGLE_LOG(LEVEL)                          \
+#define SHARK_LOG(LEVEL)                          \
   ::shark::internal::LogFinisher() = \
       ::shark::internal::LogMessage( \
           ::shark::LOGLEVEL_##LEVEL, __FILE__, __LINE__)
 #define GOOGLE_LOG_IF(LEVEL, CONDITION) \
-  !(CONDITION) ? (void)0 : GOOGLE_LOG(LEVEL)
+  !(CONDITION) ? (void)0 : SHARK_LOG(LEVEL)
 
-#define GOOGLE_CHECK(EXPRESSION) \
+#define SHARK_CHECK(EXPRESSION) \
   GOOGLE_LOG_IF(FATAL, !(EXPRESSION)) << "CHECK failed: " #EXPRESSION ": "
-#define GOOGLE_CHECK_OK(A) GOOGLE_CHECK(::shark::internal::IsOk(A))
-#define GOOGLE_CHECK_EQ(A, B) GOOGLE_CHECK((A) == (B))
-#define GOOGLE_CHECK_NE(A, B) GOOGLE_CHECK((A) != (B))
-#define GOOGLE_CHECK_LT(A, B) GOOGLE_CHECK((A) <  (B))
-#define GOOGLE_CHECK_LE(A, B) GOOGLE_CHECK((A) <= (B))
-#define GOOGLE_CHECK_GT(A, B) GOOGLE_CHECK((A) >  (B))
-#define GOOGLE_CHECK_GE(A, B) GOOGLE_CHECK((A) >= (B))
+#define GOOGLE_CHECK_OK(A) SHARK_CHECK(::shark::internal::IsOk(A))
+#define GOOGLE_CHECK_EQ(A, B) SHARK_CHECK((A) == (B))
+#define GOOGLE_CHECK_NE(A, B) SHARK_CHECK((A) != (B))
+#define GOOGLE_CHECK_LT(A, B) SHARK_CHECK((A) <  (B))
+#define GOOGLE_CHECK_LE(A, B) SHARK_CHECK((A) <= (B))
+#define GOOGLE_CHECK_GT(A, B) SHARK_CHECK((A) >  (B))
+#define GOOGLE_CHECK_GE(A, B) SHARK_CHECK((A) >= (B))
 
 namespace internal {
 template<typename T>
 T* CheckNotNull(const char* /* file */, int /* line */,
                 const char* name, T* val) {
   if (val == nullptr) {
-    GOOGLE_LOG(FATAL) << name;
+    SHARK_LOG(FATAL) << name;
   }
   return val;
 }
@@ -174,7 +174,7 @@ T* CheckNotNull(const char* /* file */, int /* line */,
 
 #define GOOGLE_DLOG(LEVEL) GOOGLE_LOG_IF(LEVEL, false)
 
-#define GOOGLE_DCHECK(EXPRESSION) while(false) GOOGLE_CHECK(EXPRESSION)
+#define GOOGLE_DCHECK(EXPRESSION) while(false) SHARK_CHECK(EXPRESSION)
 #define GOOGLE_DCHECK_OK(E) GOOGLE_DCHECK(::shark::internal::IsOk(E))
 #define GOOGLE_DCHECK_EQ(A, B) GOOGLE_DCHECK((A) == (B))
 #define GOOGLE_DCHECK_NE(A, B) GOOGLE_DCHECK((A) != (B))
@@ -185,9 +185,9 @@ T* CheckNotNull(const char* /* file */, int /* line */,
 
 #else  // NDEBUG
 
-#define GOOGLE_DLOG GOOGLE_LOG
+#define GOOGLE_DLOG SHARK_LOG
 
-#define GOOGLE_DCHECK    GOOGLE_CHECK
+#define GOOGLE_DCHECK    SHARK_CHECK
 #define GOOGLE_DCHECK_OK GOOGLE_CHECK_OK
 #define GOOGLE_DCHECK_EQ GOOGLE_CHECK_EQ
 #define GOOGLE_DCHECK_NE GOOGLE_CHECK_NE

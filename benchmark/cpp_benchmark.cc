@@ -194,7 +194,7 @@ class SerializeFixture : public Fixture {
 
 std::string ReadFile(const std::string& name) {
   std::ifstream file(name.c_str());
-  GOOGLE_CHECK(file.is_open()) << "Couldn't find file '" << name <<
+  SHARK_CHECK(file.is_open()) << "Couldn't find file '" << name <<
                                   "', please make sure you are running "
                                   "this command from the benchmarks/ "
                                   "directory.\n";
@@ -216,7 +216,7 @@ void RegisterBenchmarksForType(const BenchmarkDataset& dataset) {
 
 void RegisterBenchmarks(const std::string& dataset_bytes) {
   BenchmarkDataset dataset;
-  GOOGLE_CHECK(dataset.ParseFromString(dataset_bytes));
+  SHARK_CHECK(dataset.ParseFromString(dataset_bytes));
 
   if (dataset.message_name() == "benchmarks.proto3.GoogleMessage1") {
     RegisterBenchmarksForType<benchmarks::proto3::GoogleMessage1>(dataset);

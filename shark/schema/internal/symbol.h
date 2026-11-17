@@ -200,7 +200,7 @@ namespace shark {
             case QUERY_KEY:
                 return query_key()->full_name();
             default:
-                GOOGLE_CHECK(false);
+                SHARK_CHECK(false);
             }
             return "";
         }
@@ -246,7 +246,7 @@ namespace shark {
             case QUERY_KEY:
                 return query_key()->parent_name_key();
             default:
-                GOOGLE_CHECK(false);
+                SHARK_CHECK(false);
             }
             return { };
         }
@@ -262,7 +262,7 @@ namespace shark {
             case QUERY_KEY:
                 return query_key()->parent_number_key();
             default:
-                GOOGLE_CHECK(false);
+                SHARK_CHECK(false);
             }
             return { };
         }

@@ -166,7 +166,7 @@ class TempDirDeleter {
   std::string GetTempDir() {
     if (name_.empty()) {
       name_ = GetTemporaryDirectoryName();
-      GOOGLE_CHECK(mkdir(name_.c_str(), 0777) == 0) << strerror(errno);
+      SHARK_CHECK(mkdir(name_.c_str(), 0777) == 0) << strerror(errno);
 
       // Stick a file in the directory that tells people what this is, in case
       // we abort and don't get a chance to delete it.
@@ -199,7 +199,7 @@ void CaptureTestStdout() {
 
   int fd = open(stdout_capture_filename_.c_str(),
                 O_WRONLY | O_CREAT | O_EXCL | O_BINARY, 0777);
-  GOOGLE_CHECK(fd >= 0) << "open: " << strerror(errno);
+  SHARK_CHECK(fd >= 0) << "open: " << strerror(errno);
 
   original_stdout_ = dup(1);
   close(1);
@@ -214,7 +214,7 @@ void CaptureTestStderr() {
 
   int fd = open(stderr_capture_filename_.c_str(),
                 O_WRONLY | O_CREAT | O_EXCL | O_BINARY, 0777);
-  GOOGLE_CHECK(fd >= 0) << "open: " << strerror(errno);
+  SHARK_CHECK(fd >= 0) << "open: " << strerror(errno);
 
   original_stderr_ = dup(2);
   close(2);
@@ -255,7 +255,7 @@ std::string GetCapturedTestStderr() {
 ScopedMemoryLog* ScopedMemoryLog::active_log_ = NULL;
 
 ScopedMemoryLog::ScopedMemoryLog() {
-  GOOGLE_CHECK(active_log_ == NULL);
+  SHARK_CHECK(active_log_ == NULL);
   active_log_ = this;
   old_handler_ = SetLogHandler(&HandleLog);
 }
@@ -266,14 +266,14 @@ ScopedMemoryLog::~ScopedMemoryLog() {
 }
 
 const std::vector<std::string>& ScopedMemoryLog::GetMessages(LogLevel level) {
-  GOOGLE_CHECK(level == ERROR ||
+  SHARK_CHECK(level == ERROR ||
                level == WARNING);
   return messages_[level];
 }
 
 void ScopedMemoryLog::HandleLog(LogLevel level, const char* filename, int line,
                                 const std::string& message) {
-  GOOGLE_CHECK(active_log_ != NULL);
+  SHARK_CHECK(active_log_ != NULL);
   if (level == ERROR || level == WARNING) {
     active_log_->messages_[level].push_back(message);
   }

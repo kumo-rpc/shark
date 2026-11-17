@@ -482,7 +482,7 @@ namespace shark::internal {
             case SharkFieldCppType::CPPTYPE_FLOAT:
             case SharkFieldCppType::CPPTYPE_ENUM:
             case SharkFieldCppType::CPPTYPE_MESSAGE:
-                GOOGLE_LOG(FATAL) << "Can't get here.";
+                SHARK_LOG(FATAL) << "Can't get here.";
                 break;
             }
             const MapValueRef& map_val = it->second;
@@ -584,7 +584,7 @@ namespace shark::internal {
             case SharkFieldCppType::CPPTYPE_FLOAT:
             case SharkFieldCppType::CPPTYPE_ENUM:
             case SharkFieldCppType::CPPTYPE_MESSAGE:
-                GOOGLE_LOG(FATAL) << "Can't get here.";
+                SHARK_LOG(FATAL) << "Can't get here.";
                 break;
             }
 

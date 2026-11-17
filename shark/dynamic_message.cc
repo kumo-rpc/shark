@@ -210,7 +210,7 @@ int FieldSpaceUsed(const FieldDescriptor* field) {
     }
   }
 
-  GOOGLE_LOG(DFATAL) << "Can't get here.";
+  SHARK_LOG(DFATAL) << "Can't get here.";
   return 0;
 }
 
@@ -636,7 +636,7 @@ DynamicMessage::~DynamicMessage() {
 
 void DynamicMessage::CrossLinkPrototypes() {
   // This should only be called on the prototype message.
-  GOOGLE_CHECK(is_prototype());
+  SHARK_CHECK(is_prototype());
 
   DynamicMessageFactory* factory = type_info_->factory;
   const Descriptor* descriptor = type_info_->type;

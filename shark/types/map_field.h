@@ -66,7 +66,7 @@ namespace shark {
 
 #define TYPE_CHECK(EXPECTEDTYPE, METHOD)                                              \
     if (type() != EXPECTEDTYPE) {                                                     \
-        GOOGLE_LOG(FATAL) << "Protocol Buffer map usage error:\n"                     \
+        SHARK_LOG(FATAL) << "Protocol Buffer map usage error:\n"                     \
                           << METHOD << " type does not match\n"                       \
                           << "  Expected : "                                          \
                           << FieldDescriptor::CppTypeName(EXPECTEDTYPE) << "\n"       \
@@ -95,7 +95,7 @@ namespace shark {
 
         SharkFieldCppType type() const {
             if (type_ == SharkFieldCppType()) {
-                GOOGLE_LOG(FATAL) << "Protocol Buffer map usage error:\n"
+                SHARK_LOG(FATAL) << "Protocol Buffer map usage error:\n"
                                   << "MapKey::type MapKey is not initialized. "
                                   << "Call set methods to initialize MapKey.";
             }
@@ -180,14 +180,14 @@ namespace shark {
             if (type_ != other.type_) {
                 // We could define a total order that handles this case, but
                 // there currently no need.  So, for now, fail.
-                GOOGLE_LOG(FATAL) << "Unsupported: type mismatch";
+                SHARK_LOG(FATAL) << "Unsupported: type mismatch";
             }
             switch (type()) {
             case SharkFieldCppType::CPPTYPE_DOUBLE:
             case SharkFieldCppType::CPPTYPE_FLOAT:
             case SharkFieldCppType::CPPTYPE_ENUM:
             case SharkFieldCppType::CPPTYPE_MESSAGE:
-                GOOGLE_LOG(FATAL) << "Unsupported";
+                SHARK_LOG(FATAL) << "Unsupported";
                 return false;
             case SharkFieldCppType::CPPTYPE_STRING:
                 return val_.string_value_.get() < other.val_.string_value_.get();
@@ -216,14 +216,14 @@ namespace shark {
         bool operator==(const MapKey& other) const {
             if (type_ != other.type_) {
                 // To be consistent with operator<, we don't allow this either.
-                GOOGLE_LOG(FATAL) << "Unsupported: type mismatch";
+                SHARK_LOG(FATAL) << "Unsupported: type mismatch";
             }
             switch (type()) {
             case SharkFieldCppType::CPPTYPE_DOUBLE:
             case SharkFieldCppType::CPPTYPE_FLOAT:
             case SharkFieldCppType::CPPTYPE_ENUM:
             case SharkFieldCppType::CPPTYPE_MESSAGE:
-                GOOGLE_LOG(FATAL) << "Unsupported";
+                SHARK_LOG(FATAL) << "Unsupported";
                 break;
             case SharkFieldCppType::CPPTYPE_STRING:
                 return val_.string_value_.get() == other.val_.string_value_.get();
@@ -246,7 +246,7 @@ namespace shark {
             case SharkFieldCppType::CPPTYPE_BOOL:
                 return val_.bool_value_ == other.val_.bool_value_;
             }
-            GOOGLE_LOG(FATAL) << "Can't get here.";
+            SHARK_LOG(FATAL) << "Can't get here.";
             return false;
         }
 
@@ -257,7 +257,7 @@ namespace shark {
             case SharkFieldCppType::CPPTYPE_FLOAT:
             case SharkFieldCppType::CPPTYPE_ENUM:
             case SharkFieldCppType::CPPTYPE_MESSAGE:
-                GOOGLE_LOG(FATAL) << "Unsupported";
+                SHARK_LOG(FATAL) << "Unsupported";
                 break;
             case SharkFieldCppType::CPPTYPE_STRING:
                 *val_.string_value_.get_mutable() = other.val_.string_value_.get();
@@ -339,7 +339,7 @@ namespace std {
             case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_FLOAT:
             case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_ENUM:
             case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_MESSAGE:
-                GOOGLE_LOG(FATAL) << "Unsupported";
+                SHARK_LOG(FATAL) << "Unsupported";
                 break;
             case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_STRING:
                 return hash<std::string>()(map_key.GetStringValue());
@@ -367,7 +367,7 @@ namespace std {
                 return hash<bool>()(map_key.GetBoolValue());
             }
             }
-            GOOGLE_LOG(FATAL) << "Can't get here.";
+            SHARK_LOG(FATAL) << "Can't get here.";
             return 0;
         }
         bool operator()(const ::SHARK_NAMESPACE_ID::MapKey& map_key1,
@@ -845,7 +845,7 @@ namespace shark {
 
         SharkFieldCppType type() const {
             if (type_ == SharkFieldCppType() || data_ == nullptr) {
-                GOOGLE_LOG(FATAL)
+                SHARK_LOG(FATAL)
                     << "Protocol Buffer map usage error:\n"
                     << "MapValueConstRef::type MapValueConstRef is not initialized.";
             }

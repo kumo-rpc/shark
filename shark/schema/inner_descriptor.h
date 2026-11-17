@@ -481,7 +481,7 @@ namespace shark {
     }
 
     inline const Descriptor* FieldDescriptor::extension_scope() const {
-        GOOGLE_CHECK(is_extension_);
+        SHARK_CHECK(is_extension_);
         return scope_.extension_scope;
     }
 

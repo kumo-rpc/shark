@@ -34,7 +34,7 @@ namespace shark {
         case SyntaxEdition::SYNTAX_UNKNOWN:
             return "unknown";
         }
-        GOOGLE_LOG(FATAL) << "can't reach here.";
+        SHARK_LOG(FATAL) << "can't reach here.";
         return nullptr;
     }
 
@@ -90,7 +90,7 @@ namespace shark {
 
     std::string FieldDescriptor::DefaultValueAsString(
         bool quote_string_type) const {
-        GOOGLE_CHECK(has_default_value()) << "No default value";
+        SHARK_CHECK(has_default_value()) << "No default value";
         switch (cpp_type()) {
         case SharkFieldCppType::CPPTYPE_INT32:
         case SharkFieldCppType::CPPTYPE_INT8:
@@ -124,10 +124,10 @@ namespace shark {
         case SharkFieldCppType::CPPTYPE_ENUM:
             return default_value_enum()->name();
         case SharkFieldCppType::CPPTYPE_MESSAGE:
-            GOOGLE_LOG(DFATAL) << "Messages can't have default values!";
+            SHARK_LOG(DFATAL) << "Messages can't have default values!";
             break;
         }
-        GOOGLE_LOG(FATAL) << "Can't get here: failed to get default value as string";
+        SHARK_LOG(FATAL) << "Can't get here: failed to get default value as string";
         return "";
     }
 
@@ -173,7 +173,7 @@ namespace shark {
 
     void FileDescriptor::CopyJsonNameTo(FileDescriptorProto* proto) const {
         if (message_type_count() != proto->message_type_size() || extension_count() != proto->extension_size()) {
-            GOOGLE_LOG(ERROR) << "Cannot copy json_name to a proto of a different size.";
+            SHARK_LOG(ERROR) << "Cannot copy json_name to a proto of a different size.";
             return;
         }
         for (int i = 0; i < message_type_count(); i++) {
@@ -283,7 +283,7 @@ namespace shark {
 
     bool FileDescriptor::GetSourceLocation(const std::vector<int>& path,
        SourceLocation* out_location) const {
-        GOOGLE_CHECK(out_location != nullptr);
+        SHARK_CHECK(out_location != nullptr);
         if (source_code_info_) {
             if (const SourceCodeInfo_Location* loc = tables_->GetSourceLocation(path, source_code_info_)) {
                 const RepeatedField<int32_t>& span = loc->span();
@@ -322,7 +322,7 @@ namespace shark {
     // be looked up when the accessor for the type was called. Set type_,
     // enum_type_, message_type_, and default_value_enum_ appropriately.
     void FieldDescriptor::InternalTypeOnceInit() const {
-        GOOGLE_CHECK(file()->finished_building_ == true);
+        SHARK_CHECK(file()->finished_building_ == true);
         const EnumDescriptor* enum_type = nullptr;
         const char* lazy_type_name = reinterpret_cast<const char*>(type_once_ + 1);
         const char* lazy_default_value_enum_name = lazy_type_name + strlen(lazy_type_name) + 1;
@@ -355,7 +355,7 @@ namespace shark {
             if (!default_value_enum_) {
                 // We use the first defined value as the default
                 // if a default is not explicitly defined.
-                GOOGLE_CHECK(enum_type->value_count());
+                SHARK_CHECK(enum_type->value_count());
                 default_value_enum_ = enum_type->value(0);
             }
         }
@@ -398,7 +398,7 @@ namespace shark {
     }
 
     void FileDescriptor::InternalDependenciesOnceInit() const {
-        GOOGLE_CHECK(finished_building_ == true);
+        SHARK_CHECK(finished_building_ == true);
         const char* names_ptr = reinterpret_cast<const char*>(dependencies_once_ + 1);
         for (int i = 0; i < dependency_count(); i++) {
             const char* name = names_ptr;

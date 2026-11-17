@@ -160,7 +160,7 @@ namespace shark {
                 // shared-for-the-whole-message-class method registered with
                 // OwnDestructor().
                 virtual void GenerateArenaDestructorCode(io::Printer* printer) const {
-                    GOOGLE_CHECK(NeedsArenaDestructor() == ArenaDtorNeeds::kNone)
+                    SHARK_CHECK(NeedsArenaDestructor() == ArenaDtorNeeds::kNone)
                         << descriptor_->cpp_type_name();
                 }
 

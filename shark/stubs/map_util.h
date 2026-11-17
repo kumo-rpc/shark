@@ -72,7 +72,7 @@ const typename Collection::value_type::second_type&
 FindOrDie(const Collection& collection,
           const typename Collection::value_type::first_type& key) {
   typename Collection::const_iterator it = collection.find(key);
-  GOOGLE_CHECK(it != collection.end()) << "Map key not found: " << key;
+  SHARK_CHECK(it != collection.end()) << "Map key not found: " << key;
   return it->second;
 }
 
@@ -82,7 +82,7 @@ typename Collection::value_type::second_type&
 FindOrDie(Collection& collection,  // NOLINT
           const typename Collection::value_type::first_type& key) {
   typename Collection::iterator it = collection.find(key);
-  GOOGLE_CHECK(it != collection.end()) << "Map key not found: " << key;
+  SHARK_CHECK(it != collection.end()) << "Map key not found: " << key;
   return it->second;
 }
 
@@ -92,7 +92,7 @@ const typename Collection::value_type::second_type&
 FindOrDieNoPrint(const Collection& collection,
                  const typename Collection::value_type::first_type& key) {
   typename Collection::const_iterator it = collection.find(key);
-  GOOGLE_CHECK(it != collection.end()) << "Map key not found";
+  SHARK_CHECK(it != collection.end()) << "Map key not found";
   return it->second;
 }
 
@@ -102,7 +102,7 @@ typename Collection::value_type::second_type&
 FindOrDieNoPrint(Collection& collection,  // NOLINT
                  const typename Collection::value_type::first_type& key) {
   typename Collection::iterator it = collection.find(key);
-  GOOGLE_CHECK(it != collection.end()) << "Map key not found";
+  SHARK_CHECK(it != collection.end()) << "Map key not found";
   return it->second;
 }
 
@@ -206,7 +206,7 @@ typename Collection::value_type::second_type::element_type&
 FindLinkedPtrOrDie(const Collection& collection,
                    const typename Collection::value_type::first_type& key) {
   typename Collection::const_iterator it = collection.find(key);
-  GOOGLE_CHECK(it != collection.end()) <<  "key not found: " << key;
+  SHARK_CHECK(it != collection.end()) <<  "key not found: " << key;
   // Since linked_ptr::operator*() is a const member returning a non const,
   // we do not need a version of this function taking a non const collection.
   return *it->second;
@@ -335,7 +335,7 @@ bool InsertIfNotPresent(
 template <class Collection>
 void InsertOrDie(Collection* const collection,
                  const typename Collection::value_type& value) {
-  GOOGLE_CHECK(InsertIfNotPresent(collection, value))
+  SHARK_CHECK(InsertIfNotPresent(collection, value))
       << "duplicate value: " << value;
 }
 
@@ -343,7 +343,7 @@ void InsertOrDie(Collection* const collection,
 template <class Collection>
 void InsertOrDieNoPrint(Collection* const collection,
                         const typename Collection::value_type& value) {
-  GOOGLE_CHECK(InsertIfNotPresent(collection, value)) << "duplicate value.";
+  SHARK_CHECK(InsertIfNotPresent(collection, value)) << "duplicate value.";
 }
 
 // Inserts the key-value pair into the collection. Dies if key was already
@@ -352,7 +352,7 @@ template <class Collection>
 void InsertOrDie(Collection* const collection,
                  const typename Collection::value_type::first_type& key,
                  const typename Collection::value_type::second_type& data) {
-  GOOGLE_CHECK(InsertIfNotPresent(collection, key, data))
+  SHARK_CHECK(InsertIfNotPresent(collection, key, data))
       << "duplicate key: " << key;
 }
 
@@ -362,7 +362,7 @@ void InsertOrDieNoPrint(
     Collection* const collection,
     const typename Collection::value_type::first_type& key,
     const typename Collection::value_type::second_type& data) {
-  GOOGLE_CHECK(InsertIfNotPresent(collection, key, data)) << "duplicate key.";
+  SHARK_CHECK(InsertIfNotPresent(collection, key, data)) << "duplicate key.";
 }
 
 // Inserts a new key and default-initialized value. Dies if the key was already
@@ -378,7 +378,7 @@ typename Collection::value_type::second_type& InsertKeyOrDie(
   typedef typename Collection::value_type value_type;
   std::pair<typename Collection::iterator, bool> res =
       collection->insert(value_type(key, typename value_type::second_type()));
-  GOOGLE_CHECK(res.second) << "duplicate key: " << key;
+  SHARK_CHECK(res.second) << "duplicate key: " << key;
   return res.first->second;
 }
 
@@ -675,7 +675,7 @@ typename Collection::value_type::second_type EraseKeyReturnValuePtr(
 template <class MapContainer, class KeyContainer>
 void InsertKeysFromMap(const MapContainer& map_container,
                        KeyContainer* key_container) {
-  GOOGLE_CHECK(key_container != nullptr);
+  SHARK_CHECK(key_container != nullptr);
   for (typename MapContainer::const_iterator it = map_container.begin();
        it != map_container.end(); ++it) {
     key_container->insert(it->first);
@@ -689,7 +689,7 @@ void InsertKeysFromMap(const MapContainer& map_container,
 template <class MapContainer, class KeyContainer>
 void AppendKeysFromMap(const MapContainer& map_container,
                        KeyContainer* key_container) {
-  GOOGLE_CHECK(key_container != nullptr);
+  SHARK_CHECK(key_container != nullptr);
   for (typename MapContainer::const_iterator it = map_container.begin();
        it != map_container.end(); ++it) {
     key_container->push_back(it->first);
@@ -706,7 +706,7 @@ void AppendKeysFromMap(const MapContainer& map_container,
 template <class MapContainer, class KeyType>
 void AppendKeysFromMap(const MapContainer& map_container,
                        std::vector<KeyType>* key_container) {
-  GOOGLE_CHECK(key_container != nullptr);
+  SHARK_CHECK(key_container != nullptr);
   // We now have the opportunity to call reserve(). Calling reserve() every
   // time is a bad idea for some use cases: libstdc++'s implementation of
   // vector<>::reserve() resizes the vector's backing store to exactly the
@@ -733,7 +733,7 @@ void AppendKeysFromMap(const MapContainer& map_container,
 template <class MapContainer, class ValueContainer>
 void AppendValuesFromMap(const MapContainer& map_container,
                          ValueContainer* value_container) {
-  GOOGLE_CHECK(value_container != nullptr);
+  SHARK_CHECK(value_container != nullptr);
   for (typename MapContainer::const_iterator it = map_container.begin();
        it != map_container.end(); ++it) {
     value_container->push_back(it->second);
@@ -750,7 +750,7 @@ void AppendValuesFromMap(const MapContainer& map_container,
 template <class MapContainer, class ValueType>
 void AppendValuesFromMap(const MapContainer& map_container,
                          std::vector<ValueType>* value_container) {
-  GOOGLE_CHECK(value_container != nullptr);
+  SHARK_CHECK(value_container != nullptr);
   // See AppendKeysFromMap for why this is done.
   if (value_container->empty()) {
     value_container->reserve(map_container.size());

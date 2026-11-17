@@ -140,7 +140,7 @@ namespace shark::io {
         : target_(target) { }
 
     bool StringOutputStream::Next(void** data, int* size) {
-        GOOGLE_CHECK(target_ != NULL);
+        SHARK_CHECK(target_ != NULL);
         size_t old_size = target_->size();
 
         // Grow the string.
@@ -168,13 +168,13 @@ namespace shark::io {
 
     void StringOutputStream::BackUp(int count) {
         GOOGLE_CHECK_GE(count, 0);
-        GOOGLE_CHECK(target_ != NULL);
+        SHARK_CHECK(target_ != NULL);
         GOOGLE_CHECK_LE(static_cast<size_t>(count), target_->size());
         target_->resize(target_->size() - count);
     }
 
     int64_t StringOutputStream::ByteCount() const {
-        GOOGLE_CHECK(target_ != NULL);
+        SHARK_CHECK(target_ != NULL);
         return target_->size();
     }
 
@@ -245,7 +245,7 @@ namespace shark::io {
     }
 
     void CopyingInputStreamAdaptor::BackUp(int count) {
-        GOOGLE_CHECK(backup_bytes_ == 0 && buffer_.get() != NULL)
+        SHARK_CHECK(backup_bytes_ == 0 && buffer_.get() != NULL)
             << " BackUp() can only be called after Next().";
         GOOGLE_CHECK_LE(count, buffer_used_)
             << " Can't back up over more bytes than were returned by the last call"

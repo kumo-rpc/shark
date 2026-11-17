@@ -87,7 +87,7 @@ bool File::ReadFileToString(const std::string& name, std::string* output,
 }
 
 void File::ReadFileToStringOrDie(const std::string& name, std::string* output) {
-  GOOGLE_CHECK(ReadFileToString(name, output)) << "Could not read: " << name;
+  SHARK_CHECK(ReadFileToString(name, output)) << "Could not read: " << name;
 }
 
 bool File::WriteStringToFile(const std::string& contents,
@@ -113,12 +113,12 @@ bool File::WriteStringToFile(const std::string& contents,
 void File::WriteStringToFileOrDie(const std::string& contents,
                                   const std::string& name) {
   FILE* file = fopen(name.c_str(), "wb");
-  GOOGLE_CHECK(file != NULL)
+  SHARK_CHECK(file != NULL)
       << "fopen(" << name << ", \"wb\"): " << strerror(errno);
   GOOGLE_CHECK_EQ(fwrite(contents.data(), 1, contents.size(), file),
                   contents.size())
       << "fwrite(" << name << "): " << strerror(errno);
-  GOOGLE_CHECK(fclose(file) == 0)
+  SHARK_CHECK(fclose(file) == 0)
       << "fclose(" << name << "): " << strerror(errno);
 }
 

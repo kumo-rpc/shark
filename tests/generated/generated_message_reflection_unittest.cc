@@ -94,7 +94,7 @@ namespace {
 const FieldDescriptor* F(const std::string& name) {
   const FieldDescriptor* result =
       unittest::TestAllTypes::descriptor()->FindFieldByName(name);
-  GOOGLE_CHECK(result != nullptr);
+  SHARK_CHECK(result != nullptr);
   return result;
 }
 

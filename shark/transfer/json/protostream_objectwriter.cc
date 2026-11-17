@@ -278,7 +278,7 @@ void ProtoStreamObjectWriter::AnyWriter::StartList(std::string_view name) {
 void ProtoStreamObjectWriter::AnyWriter::EndList() {
   --depth_;
   if (depth_ < 0) {
-    GOOGLE_LOG(DFATAL) << "Mismatched EndList found, should not be possible";
+    SHARK_LOG(DFATAL) << "Mismatched EndList found, should not be possible";
     depth_ = 0;
   }
   if (ow_ == nullptr) {
@@ -1156,7 +1156,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::RenderDataPiece(
 
     field = Lookup("value");
     if (field == nullptr) {
-      GOOGLE_LOG(DFATAL) << "Map does not have a value field.";
+      SHARK_LOG(DFATAL) << "Map does not have a value field.";
       return this;
     }
 

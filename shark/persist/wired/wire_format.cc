@@ -345,7 +345,7 @@ namespace shark::internal {
         } else if (field->is_repeated() || field->type() != ::shark::SharkFieldType::MESSAGE) {
             // This shouldn't happen as we only allow optional message extensions to
             // MessageSet.
-            GOOGLE_LOG(ERROR) << "Extensions of MessageSets must be optional messages.";
+            SHARK_LOG(ERROR) << "Extensions of MessageSets must be optional messages.";
             return false;
         } else {
             Message* sub_message = message_reflection->MutableMessage(
@@ -886,7 +886,7 @@ namespace shark::internal {
                 case ::shark::SharkFieldType::STRING:
                 case ::shark::SharkFieldType::MESSAGE:
                 case ::shark::SharkFieldType::BYTES:
-                    GOOGLE_LOG(FATAL) << "Can't reach";
+                    SHARK_LOG(FATAL) << "Can't reach";
                     return nullptr;
                 }
             } else {
@@ -1103,7 +1103,7 @@ namespace shark::internal {
         case ::shark::SharkFieldType::MESSAGE:
         case ::shark::SharkFieldType::BYTES:
         case ::shark::SharkFieldType::ENUM:
-            GOOGLE_LOG(FATAL) << "Unsupported";
+            SHARK_LOG(FATAL) << "Unsupported";
             break;
 #define CASE_TYPE(kType, CamelFieldType, CamelCppType)           \
     case ::shark::SharkFieldType::kType:                              \
@@ -1214,7 +1214,7 @@ namespace shark::internal {
 #undef CASE_TYPE
 
                 default:
-                    GOOGLE_LOG(DFATAL) << "Invalid key for map field.";
+                    SHARK_LOG(DFATAL) << "Invalid key for map field.";
                     return true;
                 }
             }
@@ -1350,7 +1350,7 @@ namespace shark::internal {
                 HANDLE_PRIMITIVE_TYPE(BOOL, bool, Bool, Bool)
 #undef HANDLE_PRIMITIVE_TYPE
             default:
-                GOOGLE_LOG(FATAL) << "Invalid descriptor";
+                SHARK_LOG(FATAL) << "Invalid descriptor";
             }
             return target;
         }
@@ -1555,7 +1555,7 @@ namespace shark::internal {
         case ::shark::SharkFieldType::MESSAGE:
         case ::shark::SharkFieldType::BYTES:
         case ::shark::SharkFieldType::ENUM:
-            GOOGLE_LOG(FATAL) << "Unsupported";
+            SHARK_LOG(FATAL) << "Unsupported";
             return 0;
 #define CASE_TYPE(kType, CamelFieldType, CamelCppType) \
     case ::shark::SharkFieldType::kType:                    \
@@ -1586,7 +1586,7 @@ namespace shark::internal {
 #undef CASE_TYPE
 #undef FIXED_CASE_TYPE
         }
-        GOOGLE_LOG(FATAL) << "Cannot get here";
+        SHARK_LOG(FATAL) << "Cannot get here";
         return 0;
     }
 
@@ -1627,7 +1627,7 @@ namespace shark::internal {
 #undef CASE_TYPE
 #undef FIXED_CASE_TYPE
         }
-        GOOGLE_LOG(FATAL) << "Cannot get here";
+        SHARK_LOG(FATAL) << "Cannot get here";
         return 0;
     }
 

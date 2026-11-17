@@ -476,10 +476,10 @@ namespace shark {
         struct PrimitiveTraits {
             static constexpr bool is_primitive = false;
         };
-#define DEFINE_PRIMITIVE(TYPE, type)                             \
-    template <>                                                  \
-    struct PrimitiveTraits<type> {                               \
-        static const bool is_primitive = true;                   \
+#define DEFINE_PRIMITIVE(TYPE, type)                                                 \
+    template <>                                                                      \
+    struct PrimitiveTraits<type> {                                                   \
+        static const bool is_primitive = true;                                       \
         static const SharkFieldCppType cpp_type = SharkFieldCppType::CPPTYPE_##TYPE; \
     };
         DEFINE_PRIMITIVE(INT32, int32_t)

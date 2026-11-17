@@ -49,7 +49,7 @@ namespace {
 void RecordMessageNames(const DescriptorProto& desc_proto,
                         const std::string& prefix,
                         std::set<std::string>* output) {
-  GOOGLE_CHECK(desc_proto.has_name());
+  SHARK_CHECK(desc_proto.has_name());
   std::string full_name = prefix.empty()
                               ? desc_proto.name()
                               : turbo::str_cat(prefix, ".", desc_proto.name());
@@ -79,7 +79,7 @@ bool ForAllFileProtos(DescriptorDatabase* db, Fn callback,
   for (const auto& f : file_names) {
     file_proto.Clear();
     if (!db->FindFileByName(f, &file_proto)) {
-      GOOGLE_LOG(ERROR) << "File not found in database (unexpected): " << f;
+      SHARK_LOG(ERROR) << "File not found in database (unexpected): " << f;
       return false;
     }
     callback(file_proto, &set);
@@ -118,7 +118,7 @@ template <typename Value>
 bool SimpleDescriptorDatabase::DescriptorIndex<Value>::AddFile(
     const FileDescriptorProto& file, Value value) {
   if (!InsertIfNotPresent(&by_name_, file.name(), value)) {
-    GOOGLE_LOG(ERROR) << "File already exists in database: " << file.name();
+    SHARK_LOG(ERROR) << "File already exists in database: " << file.name();
     return false;
   }
 
@@ -202,7 +202,7 @@ bool SimpleDescriptorDatabase::DescriptorIndex<Value>::AddSymbol(
   // relies on the fact that '.' sorts before all other characters that are
   // valid in symbol names).
   if (!ValidateSymbolName(name)) {
-    GOOGLE_LOG(ERROR) << "Invalid symbol name: " << name;
+    SHARK_LOG(ERROR) << "Invalid symbol name: " << name;
     return false;
   }
 
@@ -218,7 +218,7 @@ bool SimpleDescriptorDatabase::DescriptorIndex<Value>::AddSymbol(
   }
 
   if (IsSubSymbol(iter->first, name)) {
-    GOOGLE_LOG(ERROR) << "Symbol name \"" << name
+    SHARK_LOG(ERROR) << "Symbol name \"" << name
                << "\" conflicts with the existing "
                   "symbol \""
                << iter->first << "\".";
@@ -233,7 +233,7 @@ bool SimpleDescriptorDatabase::DescriptorIndex<Value>::AddSymbol(
   ++iter;
 
   if (iter != by_symbol_.end() && IsSubSymbol(name, iter->first)) {
-    GOOGLE_LOG(ERROR) << "Symbol name \"" << name
+    SHARK_LOG(ERROR) << "Symbol name \"" << name
                << "\" conflicts with the existing "
                   "symbol \""
                << iter->first << "\".";
@@ -275,7 +275,7 @@ bool SimpleDescriptorDatabase::DescriptorIndex<Value>::AddExtension(
             &by_extension_,
             std::make_pair(field.extendee().substr(1), field.number()),
             value)) {
-      GOOGLE_LOG(ERROR) << "Extension conflicts with extension already in database: "
+      SHARK_LOG(ERROR) << "Extension conflicts with extension already in database: "
                     "extend "
                  << field.extendee() << " { " << field.name() << " = "
                  << field.number() << " } from:" << filename;
@@ -557,7 +557,7 @@ bool EncodedDescriptorDatabase::Add(const void* encoded_file_descriptor,
   if (file.ParseFromArray(encoded_file_descriptor, size)) {
     return index_->AddFile(file, std::make_pair(encoded_file_descriptor, size));
   } else {
-    GOOGLE_LOG(ERROR) << "Invalid file descriptor data passed to "
+    SHARK_LOG(ERROR) << "Invalid file descriptor data passed to "
                   "EncodedDescriptorDatabase::Add().";
     return false;
   }
@@ -629,7 +629,7 @@ bool EncodedDescriptorDatabase::DescriptorIndex::AddFile(const FileProto& file,
   all_values_.push_back({value.first, value.second, {}});
 
   if (!ValidateSymbolName(file.package())) {
-    GOOGLE_LOG(ERROR) << "Invalid package name: " << file.package();
+    SHARK_LOG(ERROR) << "Invalid package name: " << file.package();
     return false;
   }
   all_values_.back().encoded_package = EncodeString(file.package());
@@ -639,7 +639,7 @@ bool EncodedDescriptorDatabase::DescriptorIndex::AddFile(const FileProto& file,
                                EncodeString(file.name())}) ||
       std::binary_search(by_name_flat_.begin(), by_name_flat_.end(),
                          file.name(), by_name_.key_comp())) {
-    GOOGLE_LOG(ERROR) << "File already exists in database: " << file.name();
+    SHARK_LOG(ERROR) << "File already exists in database: " << file.name();
     return false;
   }
 
@@ -666,7 +666,7 @@ static bool CheckForMutualSubsymbols(std::string_view symbol_name, Iter* iter,
                                      Iter2 end, const Index& index) {
   if (*iter != end) {
     if (IsSubSymbol((*iter)->AsString(index), symbol_name)) {
-      GOOGLE_LOG(ERROR) << "Symbol name \"" << symbol_name
+      SHARK_LOG(ERROR) << "Symbol name \"" << symbol_name
                  << "\" conflicts with the existing symbol \""
                  << (*iter)->AsString(index) << "\".";
       return false;
@@ -680,7 +680,7 @@ static bool CheckForMutualSubsymbols(std::string_view symbol_name, Iter* iter,
     ++*iter;
 
     if (*iter != end && IsSubSymbol(symbol_name, (*iter)->AsString(index))) {
-      GOOGLE_LOG(ERROR) << "Symbol name \"" << symbol_name
+      SHARK_LOG(ERROR) << "Symbol name \"" << symbol_name
                  << "\" conflicts with the existing symbol \""
                  << (*iter)->AsString(index) << "\".";
       return false;
@@ -701,7 +701,7 @@ bool EncodedDescriptorDatabase::DescriptorIndex::AddSymbol(
   // relies on the fact that '.' sorts before all other characters that are
   // valid in symbol names).
   if (!ValidateSymbolName(symbol)) {
-    GOOGLE_LOG(ERROR) << "Invalid symbol name: " << entry_as_string;
+    SHARK_LOG(ERROR) << "Invalid symbol name: " << entry_as_string;
     return false;
   }
 
@@ -754,7 +754,7 @@ bool EncodedDescriptorDatabase::DescriptorIndex::AddExtension(
             by_extension_flat_.begin(), by_extension_flat_.end(),
             std::make_pair(field.extendee().substr(1), field.number()),
             by_extension_.key_comp())) {
-      GOOGLE_LOG(ERROR) << "Extension conflicts with extension already in database: "
+      SHARK_LOG(ERROR) << "Extension conflicts with extension already in database: "
                     "extend "
                  << field.extendee() << " { " << field.name() << " = "
                  << field.number() << " } from:" << filename;

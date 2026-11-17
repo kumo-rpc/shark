@@ -443,8 +443,8 @@ namespace shark {
         void Parser::LocationRecorder::AttachComments(
             std::string* leading, std::string* trailing,
             std::vector<std::string>* detached_comments) const {
-            GOOGLE_CHECK(!location_->has_leading_comments());
-            GOOGLE_CHECK(!location_->has_trailing_comments());
+            SHARK_CHECK(!location_->has_leading_comments());
+            SHARK_CHECK(!location_->has_trailing_comments());
 
             if (!leading->empty()) {
                 location_->mutable_leading_comments()->swap(*leading);
@@ -546,7 +546,7 @@ namespace shark {
             // enum_alias.
             if (!allow_alias) {
                 for (const auto& enum_value : proto->value()) {
-                    if (!IsUpperUnderscore(enum_value.name())) {
+                    if (!is_upper_underscore(enum_value.name())) {
                         add_warning(
                             "Enum constant should be in UPPER_CASE. Found: " + enum_value.name() + ". See https://developers.google.com/protocol-buffers/docs/style");
                     }
@@ -709,7 +709,7 @@ namespace shark {
                 location.RecordLegacyLocation(message,
                     DescriptorPool::ErrorCollector::NAME);
                 DO(consume_identifier(message->mutable_name(), "Expected message name."));
-                if (!IsUpperCamelCase(message->name())) {
+                if (!is_upper_camel_case(message->name())) {
                     add_warning(
                         "Message name should be in UpperCamelCase. Found: " + message->name() + ". See https://developers.google.com/protocol-buffers/docs/style");
                 }
@@ -958,11 +958,11 @@ namespace shark {
                 location.RecordLegacyLocation(field, DescriptorPool::ErrorCollector::NAME);
                 DO(consume_identifier(field->mutable_name(), "Expected field name."));
 
-                if (!IsLowerUnderscore(field->name())) {
+                if (!is_lower_underscore(field->name())) {
                     add_warning(
                         "Field name should be lowercase. Found: " + field->name() + ". See: https://developers.google.com/protocol-buffers/docs/style");
                 }
-                if (IsNumberFollowUnderscore(field->name())) {
+                if (is_number_follow_underscore(field->name())) {
                     add_warning(
                         "Number should not come right after an underscore. Found: " + field->name() + ". See: https://developers.google.com/protocol-buffers/docs/style");
                 }
@@ -1358,7 +1358,7 @@ namespace shark {
             OptionStyle style) {
             // Create an entry in the uninterpreted_option field.
             const FieldDescriptor* uninterpreted_option_field = options->GetDescriptor()->FindFieldByName("uninterpreted_option");
-            GOOGLE_CHECK(uninterpreted_option_field != nullptr)
+            SHARK_CHECK(uninterpreted_option_field != nullptr)
                 << "No field named \"uninterpreted_option\" in the Options proto.";
 
             const Reflection* reflection = options->GetReflection();
@@ -1410,7 +1410,7 @@ namespace shark {
 
                 switch (input_->current().type) {
                 case io::Tokenizer::TYPE_START:
-                    GOOGLE_LOG(FATAL) << "Trying to read value before any tokens have been read.";
+                    SHARK_LOG(FATAL) << "Trying to read value before any tokens have been read.";
                     return false;
 
                 case io::Tokenizer::TYPE_END:
@@ -1419,9 +1419,9 @@ namespace shark {
 
                 case io::Tokenizer::TYPE_WHITESPACE:
                 case io::Tokenizer::TYPE_NEWLINE:
-                    GOOGLE_CHECK(!input_->report_whitespace() && !input_->report_newlines())
+                    SHARK_CHECK(!input_->report_whitespace() && !input_->report_newlines())
                         << "Whitespace tokens were not requested.";
-                    GOOGLE_LOG(FATAL) << "Tokenizer reported whitespace.";
+                    SHARK_LOG(FATAL) << "Tokenizer reported whitespace.";
                     return false;
 
                 case io::Tokenizer::TYPE_IDENTIFIER: {

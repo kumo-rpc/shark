@@ -90,7 +90,7 @@ namespace shark {
                     return RetrieveOptionsAssumingRightPool(depth, *dynamic_options,
                         option_entries);
                 } else {
-                    GOOGLE_LOG(ERROR) << "Found invalid proto option data for: "
+                    SHARK_LOG(ERROR) << "Found invalid proto option data for: "
                                       << options.GetDescriptor()->full_name();
                     return RetrieveOptionsAssumingRightPool(depth, options, option_entries);
                 }
@@ -153,18 +153,18 @@ namespace shark {
 
     namespace internal {
         void LazyDescriptor::Set(const Descriptor* descriptor) {
-            GOOGLE_CHECK(!once_);
+            SHARK_CHECK(!once_);
             descriptor_ = descriptor;
         }
 
         void LazyDescriptor::SetLazy(std::string_view name,
             const FileDescriptor* file) {
             // verify Init() has been called and Set hasn't been called yet.
-            GOOGLE_CHECK(!descriptor_);
-            GOOGLE_CHECK(!once_);
-            GOOGLE_CHECK(file && file->pool_);
-            GOOGLE_CHECK(file->pool_->lazily_build_dependencies_);
-            GOOGLE_CHECK(!file->finished_building_);
+            SHARK_CHECK(!descriptor_);
+            SHARK_CHECK(!once_);
+            SHARK_CHECK(file && file->pool_);
+            SHARK_CHECK(file->pool_->lazily_build_dependencies_);
+            SHARK_CHECK(!file->finished_building_);
             once_ = ::new (file->pool_->tables_->AllocateBytes(static_cast<int>(
                 sizeof(internal::once_flag) + name.size() + 1))) internal::once_flag { };
             char* lazy_name = reinterpret_cast<char*>(once_ + 1);
@@ -176,7 +176,7 @@ namespace shark {
             if (once_) {
                 internal::call_once(*once_, [&] {
                     auto* file = service->file();
-                    GOOGLE_CHECK(file->finished_building_);
+                    SHARK_CHECK(file->finished_building_);
                     const char* lazy_name = reinterpret_cast<const char*>(once_ + 1);
                     descriptor_ = file->pool_->CrossLinkOnDemandHelper(lazy_name, false).descriptor();
                 });

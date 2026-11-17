@@ -162,10 +162,10 @@ namespace shark {
         }
 
         if (field->is_repeated() && index == -1) {
-            GOOGLE_LOG(DFATAL) << "Index must be in range of repeated field values. "
+            SHARK_LOG(DFATAL) << "Index must be in range of repeated field values. "
                                << "Field: " << field->name();
         } else if (!field->is_repeated() && index != -1) {
-            GOOGLE_LOG(DFATAL) << "Index must be -1 for singular fields."
+            SHARK_LOG(DFATAL) << "Index must be -1 for singular fields."
                                << "Field: " << field->name();
         }
     }
@@ -298,7 +298,7 @@ namespace shark {
         // Parses the ASCII representation specified in input and saves the
         // information into the output pointer (a Message). Returns
         // false if an error occurs (an error will also be logged to
-        // GOOGLE_LOG(ERROR)).
+        // SHARK_LOG(ERROR)).
         bool Parse(Message* output) {
             // consume fields until we cannot do so anymore.
             while (true) {
@@ -333,11 +333,11 @@ namespace shark {
             had_errors_ = true;
             if (error_collector_ == nullptr) {
                 if (line >= 0) {
-                    GOOGLE_LOG(ERROR) << "Error parsing text-format "
+                    SHARK_LOG(ERROR) << "Error parsing text-format "
                                       << root_message_type_->full_name() << ": " << (line + 1)
                                       << ":" << (col + 1) << ": " << message;
                 } else {
-                    GOOGLE_LOG(ERROR) << "Error parsing text-format "
+                    SHARK_LOG(ERROR) << "Error parsing text-format "
                                       << root_message_type_->full_name() << ": " << message;
                 }
             } else {
@@ -348,11 +348,11 @@ namespace shark {
         void ReportWarning(int line, int col, const std::string& message) {
             if (error_collector_ == nullptr) {
                 if (line >= 0) {
-                    GOOGLE_LOG(WARNING) << "Warning parsing text-format "
+                    SHARK_LOG(WARNING) << "Warning parsing text-format "
                                         << root_message_type_->full_name() << ": " << (line + 1)
                                         << ":" << (col + 1) << ": " << message;
                 } else {
-                    GOOGLE_LOG(WARNING) << "Warning parsing text-format "
+                    SHARK_LOG(WARNING) << "Warning parsing text-format "
                                         << root_message_type_->full_name() << ": " << message;
                 }
             } else {
@@ -515,7 +515,7 @@ namespace shark {
 
             // Skips unknown or reserved fields.
             if (field == nullptr) {
-                GOOGLE_CHECK(allow_unknown_field_ || allow_unknown_extension_ || reserved_field);
+                SHARK_CHECK(allow_unknown_field_ || allow_unknown_extension_ || reserved_field);
 
                 // Try to guess the type of this field.
                 // If this field is not a message, there should be a ":" between the
@@ -863,7 +863,7 @@ namespace shark {
             case SharkFieldCppType::CPPTYPE_MESSAGE: {
                 // We should never get here. Put here instead of a default
                 // so that if new types are added, we get a nice compiler warning.
-                GOOGLE_LOG(FATAL) << "Reached an unintended state: CPPTYPE_MESSAGE";
+                SHARK_LOG(FATAL) << "Reached an unintended state: CPPTYPE_MESSAGE";
                 break;
             }
             }
@@ -1353,7 +1353,7 @@ namespace shark {
         // level is zero.
         void Outdent() override {
             if (indent_level_ == 0 || indent_level_ < initial_indent_level_) {
-                GOOGLE_LOG(DFATAL) << " Outdent() without matching Indent().";
+                SHARK_LOG(DFATAL) << " Outdent() without matching Indent().";
                 return;
             }
 
@@ -1947,7 +1947,7 @@ namespace shark {
         const Descriptor* value_descriptor = finder_ ? finder_->FindAnyType(message, url_prefix, full_type_name)
                                                      : DefaultFinderFindAnyType(message, url_prefix, full_type_name);
         if (value_descriptor == nullptr) {
-            GOOGLE_LOG(WARNING) << "Can't print proto content: proto type " << type_url
+            SHARK_LOG(WARNING) << "Can't print proto content: proto type " << type_url
                                 << " not found";
             return false;
         }
@@ -1956,7 +1956,7 @@ namespace shark {
             factory.GetPrototype(value_descriptor)->New());
         std::string serialized_value = reflection->GetString(message, value_field);
         if (!value_message->ParseFromString(serialized_value)) {
-            GOOGLE_LOG(WARNING) << type_url << ": failed to parse contents";
+            SHARK_LOG(WARNING) << type_url << ": failed to parse contents";
             return false;
         }
         generator->PrintLiteral("[");
@@ -2074,7 +2074,7 @@ namespace shark {
                 return first < second;
             }
             default:
-                GOOGLE_LOG(DFATAL) << "Invalid key for map field.";
+                SHARK_LOG(DFATAL) << "Invalid key for map field.";
                 return true;
             }
         }
@@ -2142,7 +2142,7 @@ namespace shark {
             case SharkFieldCppType::CPPTYPE_FLOAT:
             case SharkFieldCppType::CPPTYPE_ENUM:
             case SharkFieldCppType::CPPTYPE_MESSAGE:
-                GOOGLE_LOG(ERROR) << "Not supported.";
+                SHARK_LOG(ERROR) << "Not supported.";
                 break;
             case SharkFieldCppType::CPPTYPE_STRING:
                 reflection->SetString(message, field_desc, key.GetStringValue());

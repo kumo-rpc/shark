@@ -197,7 +197,7 @@ namespace shark::internal {
 #ifndef NDEBUG
     inline SHARK_NOINLINE void MapFieldLiteNotDestructed(void* map_field_lite) {
         bool proper_destruct = false;
-        GOOGLE_CHECK(proper_destruct) << map_field_lite;
+        SHARK_CHECK(proper_destruct) << map_field_lite;
     }
 #endif
 

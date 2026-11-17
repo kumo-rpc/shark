@@ -359,7 +359,7 @@ namespace shark::compiler::python {
             return name;
         }
         default:
-            GOOGLE_LOG(FATAL) << "Unsupported field type.";
+            SHARK_LOG(FATAL) << "Unsupported field type.";
         }
         return "";
     }
@@ -587,7 +587,7 @@ namespace shark::compiler::python {
         std::string filename = parameter.empty() ? GetFileName(file, ".pyi") : parameter;
 
         std::unique_ptr<io::ZeroCopyOutputStream> output(context->Open(filename));
-        GOOGLE_CHECK(output.get());
+        SHARK_CHECK(output.get());
         io::Printer printer(output.get(), '$');
         printer_ = &printer;
 

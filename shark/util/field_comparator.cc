@@ -123,7 +123,7 @@ FieldComparator::ComparisonResult SimpleFieldComparator::SimpleCompare(
       return RECURSE;
 
     default:
-      GOOGLE_LOG(FATAL) << "No comparison code for field " << field->full_name()
+      SHARK_LOG(FATAL) << "No comparison code for field " << field->full_name()
                  << " of CppType = " << static_cast<int>(field->cpp_type());
       return DIFFERENT;
   }
@@ -145,7 +145,7 @@ void SimpleFieldComparator::SetDefaultFractionAndMargin(double fraction,
 void SimpleFieldComparator::SetFractionAndMargin(const FieldDescriptor* field,
                                                  double fraction,
                                                  double margin) {
-  GOOGLE_CHECK(SharkFieldCppType::CPPTYPE_FLOAT == field->cpp_type() ||
+  SHARK_CHECK(SharkFieldCppType::CPPTYPE_FLOAT == field->cpp_type() ||
         SharkFieldCppType::CPPTYPE_DOUBLE == field->cpp_type())
       << "Field has to be float or double type. Field name is: "
       << field->full_name();

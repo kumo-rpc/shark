@@ -1339,7 +1339,7 @@ bool TcParser::ChangeOneof(const TcParseTableBase* table,
       case field_layout::kRepSString:
       case field_layout::kRepIString:
       default:
-        GOOGLE_LOG(DFATAL) << "string rep not handled: "
+        SHARK_LOG(DFATAL) << "string rep not handled: "
                     << (current_rep >> field_layout::kRepShift);
         return true;
     }
@@ -1355,7 +1355,7 @@ bool TcParser::ChangeOneof(const TcParseTableBase* table,
         break;
       }
       default:
-        GOOGLE_LOG(DFATAL) << "message rep not handled: "
+        SHARK_LOG(DFATAL) << "message rep not handled: "
                     << (current_rep >> field_layout::kRepShift);
         break;
     }
@@ -1766,7 +1766,7 @@ const char* TcParser::MpRepeatedString(SHARK_TC_PARAM_DECL) {
 
 #ifndef NDEBUG
     default:
-      GOOGLE_LOG(FATAL) << "Unsupported repeated string rep: " << rep;
+      SHARK_LOG(FATAL) << "Unsupported repeated string rep: " << rep;
       break;
 #endif
   }

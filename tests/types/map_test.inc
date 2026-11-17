@@ -3826,7 +3826,7 @@ TEST(TextFormatMapTest, ParseCorruptedString) {
                             "net/proto2/internal/testdata/golden_message_maps"),
                         &serialized_message, true));
   UNITTEST::TestMaps message;
-  GOOGLE_CHECK(message.ParseFromString(serialized_message));
+  SHARK_CHECK(message.ParseFromString(serialized_message));
   TestParseCorruptedString<UNITTEST::TestMaps, true>(message);
   TestParseCorruptedString<UNITTEST::TestMaps, false>(message);
 }

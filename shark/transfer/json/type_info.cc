@@ -146,7 +146,7 @@ class TypeInfoForTypeResolver : public TypeInfo {
       const std::string_view* existing = InsertOrReturnExisting(
           camel_case_name_table, camel_case_name, name);
       if (existing && *existing != name) {
-        GOOGLE_LOG(WARNING) << "Field '" << name << "' and '" << *existing
+        SHARK_LOG(WARNING) << "Field '" << name << "' and '" << *existing
                      << "' map to the same camel case name '" << camel_case_name
                      << "'.";
       }

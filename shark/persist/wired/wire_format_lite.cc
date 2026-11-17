@@ -555,7 +555,7 @@ namespace shark {
                 " a protocol buffer. Use the 'bytes' type if you intend to "
                 "send raw bytes. ",
                 stacktrace);
-            GOOGLE_LOG(ERROR) << error_message;
+            SHARK_LOG(ERROR) << error_message;
         }
 
         bool WireFormatLite::VerifyUtf8String(const char* data, int size, Operation op,

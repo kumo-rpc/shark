@@ -93,7 +93,7 @@ namespace shark::compiler::cpp {
                 // No default because we want the compiler to complain if any new
                 // types are added.
             }
-            GOOGLE_LOG(FATAL) << "Can't get here.";
+            SHARK_LOG(FATAL) << "Can't get here.";
             return -1;
         }
 

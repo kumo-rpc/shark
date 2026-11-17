@@ -69,7 +69,7 @@ void VerifyVersion(int headerVersion,
                    const char* filename) {
   if (SHARK_VERSION < minLibraryVersion) {
     // Library is too old for headers.
-    GOOGLE_LOG(FATAL)
+    SHARK_LOG(FATAL)
       << "This program requires version " << VersionString(minLibraryVersion)
       << " of the Protocol Buffer runtime library, but the installed version "
          "is " << VersionString(SHARK_VERSION) << ".  Please update "
@@ -80,7 +80,7 @@ void VerifyVersion(int headerVersion,
   }
   if (headerVersion < kMinHeaderVersionForLibrary) {
     // Headers are too old for library.
-    GOOGLE_LOG(FATAL)
+    SHARK_LOG(FATAL)
       << "This program was compiled against version "
       << VersionString(headerVersion) << " of the Protocol Buffer runtime "
          "library, which is not compatible with the installed version ("

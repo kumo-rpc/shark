@@ -259,7 +259,7 @@ namespace shark::compiler::cpp {
 
         format(
             "    default:\n"
-            "      GOOGLE_LOG(FATAL) << \"Bad method index; this should never happen.\";\n"
+            "      SHARK_LOG(FATAL) << \"Bad method index; this should never happen.\";\n"
             "      break;\n"
             "  }\n"
             "}\n"
@@ -292,7 +292,7 @@ namespace shark::compiler::cpp {
 
         format(
             "    default:\n"
-            "      GOOGLE_LOG(FATAL) << \"Bad method index; this should never happen.\";\n"
+            "      SHARK_LOG(FATAL) << \"Bad method index; this should never happen.\";\n"
             "      return *::$proto_ns$::MessageFactory::generated_factory()\n"
             "          ->GetPrototype(method->$1$_type());\n"
             "  }\n"

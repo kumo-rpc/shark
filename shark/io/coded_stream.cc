@@ -189,7 +189,7 @@ int CodedInputStream::BytesUntilTotalBytesLimit() const {
 }
 
 void CodedInputStream::PrintTotalBytesLimitError() {
-  GOOGLE_LOG(ERROR)
+  SHARK_LOG(ERROR)
       << "A protocol message was rejected because it was too "
          "big (more than "
       << total_bytes_limit_

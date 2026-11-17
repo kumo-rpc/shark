@@ -93,7 +93,7 @@ namespace shark::internal {
             static auto local_static_registry = OnShutdownDelete(new ExtensionRegistry);
             global_registry = local_static_registry;
             if (!InsertIfNotPresent(local_static_registry, info)) {
-                GOOGLE_LOG(FATAL) << "Multiple extension registrations for type \""
+                SHARK_LOG(FATAL) << "Multiple extension registrations for type \""
                                   << info.message->GetTypeName() << "\", field number "
                                   << info.number << ".";
             }
@@ -169,7 +169,7 @@ namespace shark::internal {
         bool is_repeated, bool is_packed,
         const MessageLite* prototype,
         LazyEagerVerifyFnType verify_func) {
-        GOOGLE_CHECK(type == static_cast<FieldTypeUint8>(SharkFieldType::MESSAGE));
+        SHARK_CHECK(type == static_cast<FieldTypeUint8>(SharkFieldType::MESSAGE));
         ExtensionInfo info(extendee, number, type, is_repeated, is_packed,
             verify_func);
         info.message_info = { prototype };
@@ -246,11 +246,11 @@ namespace shark::internal {
     FieldTypeUint8 ExtensionSet::ExtensionType(int number) const {
         const Extension* ext = FindOrNull(number);
         if (ext == nullptr) {
-            GOOGLE_LOG(DFATAL) << "Don't lookup extension types if they aren't present (1). ";
+            SHARK_LOG(DFATAL) << "Don't lookup extension types if they aren't present (1). ";
             return 0;
         }
         if (ext->is_cleared) {
-            GOOGLE_LOG(DFATAL) << "Don't lookup extension types if they aren't present (2). ";
+            SHARK_LOG(DFATAL) << "Don't lookup extension types if they aren't present (2). ";
         }
         return ext->type;
     }
@@ -322,7 +322,7 @@ namespace shark::internal {
     LOWERCASE ExtensionSet::GetRepeated##CAMELCASE(int number, int index)                                     \
         const {                                                                                               \
         const Extension* extension = FindOrNull(number);                                                      \
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";                        \
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";                        \
         GOOGLE_DCHECK_TYPE(*extension, REPEATED_FIELD, UPPERCASE);                                            \
         return extension->repeated_##LOWERCASE##_value->Get(index);                                           \
     }                                                                                                         \
@@ -330,7 +330,7 @@ namespace shark::internal {
     const LOWERCASE& ExtensionSet::GetRefRepeated##CAMELCASE(int number,                                      \
         int index) const {                                                                                    \
         const Extension* extension = FindOrNull(number);                                                      \
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";                        \
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";                        \
         GOOGLE_DCHECK_TYPE(*extension, REPEATED_FIELD, UPPERCASE);                                            \
         return extension->repeated_##LOWERCASE##_value->Get(index);                                           \
     }                                                                                                         \
@@ -338,7 +338,7 @@ namespace shark::internal {
     void ExtensionSet::SetRepeated##CAMELCASE(int number, int index,                                          \
         LOWERCASE value) {                                                                                    \
         Extension* extension = FindOrNull(number);                                                            \
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";                        \
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";                        \
         GOOGLE_DCHECK_TYPE(*extension, REPEATED_FIELD, UPPERCASE);                                            \
         extension->repeated_##LOWERCASE##_value->Set(index, value);                                           \
     }                                                                                                         \
@@ -451,10 +451,10 @@ namespace shark::internal {
     }
 
     // Compatible version using old call signature. Does not create extensions when
-    // the don't already exist; instead, just GOOGLE_CHECK-fails.
+    // the don't already exist; instead, just SHARK_CHECK-fails.
     void* ExtensionSet::MutableRawRepeatedField(int number) {
         Extension* extension = FindOrNull(number);
-        GOOGLE_CHECK(extension != nullptr) << "Extension not found.";
+        SHARK_CHECK(extension != nullptr) << "Extension not found.";
         // We assume that all the RepeatedField<>* pointers have the same
         // size and alignment within the anonymous union in Extension.
         return extension->repeated_int32_t_value;
@@ -502,21 +502,21 @@ namespace shark::internal {
 
     int ExtensionSet::GetRepeatedEnum(int number, int index) const {
         const Extension* extension = FindOrNull(number);
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
         GOOGLE_DCHECK_TYPE(*extension, REPEATED_FIELD, ENUM);
         return extension->repeated_enum_value->Get(index);
     }
 
     const int& ExtensionSet::GetRefRepeatedEnum(int number, int index) const {
         const Extension* extension = FindOrNull(number);
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
         GOOGLE_DCHECK_TYPE(*extension, REPEATED_FIELD, ENUM);
         return extension->repeated_enum_value->Get(index);
     }
 
     void ExtensionSet::SetRepeatedEnum(int number, int index, int value) {
         Extension* extension = FindOrNull(number);
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
         GOOGLE_DCHECK_TYPE(*extension, REPEATED_FIELD, ENUM);
         extension->repeated_enum_value->Set(index, value);
     }
@@ -570,14 +570,14 @@ namespace shark::internal {
     const std::string& ExtensionSet::GetRepeatedString(int number,
         int index) const {
         const Extension* extension = FindOrNull(number);
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
         GOOGLE_DCHECK_TYPE(*extension, REPEATED_FIELD, STRING);
         return extension->repeated_string_value->Get(index);
     }
 
     std::string* ExtensionSet::MutableRepeatedString(int number, int index) {
         Extension* extension = FindOrNull(number);
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
         GOOGLE_DCHECK_TYPE(*extension, REPEATED_FIELD, STRING);
         return extension->repeated_string_value->Mutable(index);
     }
@@ -783,14 +783,14 @@ namespace shark::internal {
     const MessageLite& ExtensionSet::GetRepeatedMessage(int number,
         int index) const {
         const Extension* extension = FindOrNull(number);
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
         GOOGLE_DCHECK_TYPE(*extension, REPEATED_FIELD, MESSAGE);
         return extension->repeated_message_value->Get(index);
     }
 
     MessageLite* ExtensionSet::MutableRepeatedMessage(int number, int index) {
         Extension* extension = FindOrNull(number);
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
         GOOGLE_DCHECK_TYPE(*extension, REPEATED_FIELD, MESSAGE);
         return extension->repeated_message_value->Mutable(index);
     }
@@ -829,7 +829,7 @@ namespace shark::internal {
 
     void ExtensionSet::RemoveLast(int number) {
         Extension* extension = FindOrNull(number);
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
         GOOGLE_DCHECK(extension->is_repeated);
 
         switch (cpp_type(extension->type)) {
@@ -880,7 +880,7 @@ namespace shark::internal {
 
     MessageLite* ExtensionSet::ReleaseLast(int number) {
         Extension* extension = FindOrNull(number);
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
         GOOGLE_DCHECK(extension->is_repeated);
         GOOGLE_DCHECK(cpp_type(extension->type) == SharkFieldCppType::CPPTYPE_MESSAGE);
         return extension->repeated_message_value->ReleaseLast();
@@ -888,7 +888,7 @@ namespace shark::internal {
 
     MessageLite* ExtensionSet::UnsafeArenaReleaseLast(int number) {
         Extension* extension = FindOrNull(number);
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
         GOOGLE_DCHECK(extension->is_repeated);
         GOOGLE_DCHECK(cpp_type(extension->type) == SharkFieldCppType::CPPTYPE_MESSAGE);
         return extension->repeated_message_value->UnsafeArenaReleaseLast();
@@ -896,7 +896,7 @@ namespace shark::internal {
 
     void ExtensionSet::SwapElements(int number, int index1, int index2) {
         Extension* extension = FindOrNull(number);
-        GOOGLE_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
+        SHARK_CHECK(extension != nullptr) << "Index out-of-bounds (field is empty).";
         GOOGLE_DCHECK(extension->is_repeated);
 
         switch (cpp_type(extension->type)) {
@@ -1432,7 +1432,7 @@ namespace shark::internal {
                 case SharkFieldType::STRING:
                 case SharkFieldType::BYTES:
                 case SharkFieldType::MESSAGE:
-                    GOOGLE_LOG(FATAL) << "Non-primitive types can't be packed.";
+                    SHARK_LOG(FATAL) << "Non-primitive types can't be packed.";
                     break;
                 }
 
@@ -1561,7 +1561,7 @@ namespace shark::internal {
 #undef HANDLE_TYPE
         }
 
-        GOOGLE_LOG(FATAL) << "Can't get here.";
+        SHARK_LOG(FATAL) << "Can't get here.";
         return 0;
     }
 
@@ -1807,7 +1807,7 @@ namespace shark::internal {
                 case SharkFieldType::STRING:
                 case SharkFieldType::BYTES:
                 case SharkFieldType::MESSAGE:
-                    GOOGLE_LOG(FATAL) << "Non-primitive types can't be packed.";
+                    SHARK_LOG(FATAL) << "Non-primitive types can't be packed.";
                     break;
                 }
             } else {
@@ -1930,7 +1930,7 @@ namespace shark::internal {
         uint8_t* target, io::EpsCopyOutputStream* stream) const {
         if (type != static_cast<FieldTypeUint8>(SharkFieldType::MESSAGE) || is_repeated) {
             // Not a valid MessageSet extension, but serialize it the normal way.
-            GOOGLE_LOG(WARNING) << "Invalid message set extension.";
+            SHARK_LOG(WARNING) << "Invalid message set extension.";
             return InternalSerializeFieldWithCachedSizesToArray(extendee, extension_set,
                 number, target, stream);
         }

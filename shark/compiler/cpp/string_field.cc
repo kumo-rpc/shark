@@ -436,8 +436,8 @@ namespace shark::compiler::cpp {
 
     void StringFieldGenerator::GenerateCreateSplitMessageCode(
         io::Printer* printer) const {
-        GOOGLE_CHECK(ShouldSplit(descriptor_, options_));
-        GOOGLE_CHECK(!inlined_);
+        SHARK_CHECK(ShouldSplit(descriptor_, options_));
+        SHARK_CHECK(!inlined_);
         Formatter format(printer, variables_);
         format("ptr->$name$_.InitDefault();\n");
         if (IsString(descriptor_, options_) && descriptor_->default_value_string().empty()) {
@@ -556,7 +556,7 @@ namespace shark::compiler::cpp {
         io::Printer* printer) const {
         Formatter format(printer, variables_);
         if (ShouldSplit(descriptor_, options_)) {
-            GOOGLE_CHECK(!inlined_);
+            SHARK_CHECK(!inlined_);
             format("decltype(Impl_::Split::$name$_){}");
             return;
         }

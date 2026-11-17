@@ -279,7 +279,7 @@ namespace shark {
             // We ensured enough space so this cannot fail.
             void* p;
             if (!sa || !sa->MaybeAllocateAligned(kAPSize, &p)) {
-                GOOGLE_LOG(FATAL) << "MaybeAllocateAligned cannot fail here.";
+                SHARK_LOG(FATAL) << "MaybeAllocateAligned cannot fail here.";
                 return;
             }
             new (p) AllocationPolicy { policy };

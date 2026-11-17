@@ -1004,7 +1004,7 @@ namespace shark {
                 std::string MakeInvalidEmbeddedMessage(const char* bytes, int size) {
                     const FieldDescriptor* field = UNITTEST::TestAllTypes::descriptor()->FindFieldByName(
                         "optional_nested_message");
-                    GOOGLE_CHECK(field != nullptr);
+                    SHARK_CHECK(field != nullptr);
 
                     std::string result;
 

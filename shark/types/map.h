@@ -1307,14 +1307,14 @@ namespace shark {
         template <typename K = key_type>
         const T& at(const key_arg<K>& key) const {
             const_iterator it = find(key);
-            GOOGLE_CHECK(it != end()) << "key not found: " << static_cast<Key>(key);
+            SHARK_CHECK(it != end()) << "key not found: " << static_cast<Key>(key);
             return it->second;
         }
 
         template <typename K = key_type>
         T& at(const key_arg<K>& key) {
             iterator it = find(key);
-            GOOGLE_CHECK(it != end()) << "key not found: " << static_cast<Key>(key);
+            SHARK_CHECK(it != end()) << "key not found: " << static_cast<Key>(key);
             return it->second;
         }
 

@@ -250,7 +250,7 @@ template <size_t align>
 [[noreturn]]
 #endif
 void AlignFail(uintptr_t address) {
-  GOOGLE_LOG(FATAL) << "Unaligned (" << align << ") access at " << address;
+  SHARK_LOG(FATAL) << "Unaligned (" << align << ") access at " << address;
 }
 
 extern template void AlignFail<4>(uintptr_t);

@@ -150,7 +150,7 @@ namespace shark {
         // Therefore, when we parse one, we have to be very careful to avoid using
         // any descriptor-based operations, since this might cause infinite recursion
         // or deadlock.
-        GOOGLE_CHECK(GeneratedDatabase()->Add(encoded_file_descriptor, size));
+        SHARK_CHECK(GeneratedDatabase()->Add(encoded_file_descriptor, size));
     }
 
     // Find*By* methods ==================================================
@@ -488,11 +488,11 @@ namespace shark {
 
     const FileDescriptor* DescriptorPool::BuildFile(
         const FileDescriptorProto& proto) {
-        GOOGLE_CHECK(fallback_database_ == nullptr)
+        SHARK_CHECK(fallback_database_ == nullptr)
             << "Cannot call BuildFile on a DescriptorPool that uses a "
                "DescriptorDatabase.  You must instead find a way to get your file "
                "into the underlying database.";
-        GOOGLE_CHECK(mutex_ == nullptr); // Implied by the above GOOGLE_CHECK.
+        SHARK_CHECK(mutex_ == nullptr); // Implied by the above SHARK_CHECK.
         tables_->known_bad_symbols_.clear();
         tables_->known_bad_files_.clear();
         return DescriptorBuilder(this, tables_.get(), nullptr).BuildFile(proto);
@@ -501,11 +501,11 @@ namespace shark {
 
     const FileDescriptor* DescriptorPool::BuildFileCollectingErrors(
     const FileDescriptorProto& proto, ErrorCollector* error_collector) {
-        GOOGLE_CHECK(fallback_database_ == nullptr)
+        SHARK_CHECK(fallback_database_ == nullptr)
             << "Cannot call BuildFile on a DescriptorPool that uses a "
                "DescriptorDatabase.  You must instead find a way to get your file "
                "into the underlying database.";
-        GOOGLE_CHECK(mutex_ == nullptr); // Implied by the above GOOGLE_CHECK.
+        SHARK_CHECK(mutex_ == nullptr); // Implied by the above SHARK_CHECK.
         tables_->known_bad_symbols_.clear();
         tables_->known_bad_files_.clear();
         return DescriptorBuilder(this, tables_.get(), error_collector)

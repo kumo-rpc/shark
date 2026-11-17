@@ -48,7 +48,7 @@ namespace shark::util::converter {
 
 JsonObjectWriter::~JsonObjectWriter() {
   if (element_ && !element_->is_root()) {
-    GOOGLE_LOG(WARNING) << "JsonObjectWriter was not fully closed.";
+    SHARK_LOG(WARNING) << "JsonObjectWriter was not fully closed.";
   }
 }
 

@@ -121,7 +121,7 @@ using internal::GetPointerAtOffset;
 void ReportReflectionUsageError(const Descriptor* descriptor,
                                 const FieldDescriptor* field,
                                 const char* method, const char* description) {
-  GOOGLE_LOG(FATAL) << "Protocol Buffer reflection usage error:\n"
+  SHARK_LOG(FATAL) << "Protocol Buffer reflection usage error:\n"
                 "  Method      : shark::Reflection::"
              << method
              << "\n"
@@ -145,7 +145,7 @@ const char* cpptype_names_[kMaxFieldCppType + 1] = {
 static void ReportReflectionUsageTypeError(
     const Descriptor* descriptor, const FieldDescriptor* field,
     const char* method, SharkFieldCppType expected_type) {
-  GOOGLE_LOG(FATAL)
+  SHARK_LOG(FATAL)
       << "Protocol Buffer reflection usage error:\n"
          "  Method      : shark::Reflection::"
       << method
@@ -167,7 +167,7 @@ static void ReportReflectionUsageTypeError(
 static void ReportReflectionUsageEnumTypeError(
     const Descriptor* descriptor, const FieldDescriptor* field,
     const char* method, const EnumValueDescriptor* value) {
-  GOOGLE_LOG(FATAL) << "Protocol Buffer reflection usage error:\n"
+  SHARK_LOG(FATAL) << "Protocol Buffer reflection usage error:\n"
                 "  Method      : shark::Reflection::"
              << method
              << "\n"
@@ -187,7 +187,7 @@ static void ReportReflectionUsageEnumTypeError(
 
 inline void CheckInvalidAccess(const internal::ReflectionSchema& schema,
                                const FieldDescriptor* field) {
-  GOOGLE_CHECK(!schema.IsFieldStripped(field))
+  SHARK_CHECK(!schema.IsFieldStripped(field))
       << "invalid access to a stripped field " << field->full_name();
 }
 
@@ -461,7 +461,7 @@ struct OneofFieldMover {
         }
         break;
       default:
-        GOOGLE_LOG(FATAL) << "unimplemented type: " << static_cast<int>(field->cpp_type());
+        SHARK_LOG(FATAL) << "unimplemented type: " << static_cast<int>(field->cpp_type());
     }
     if (unsafe_shallow_swap) {
       // Not clearing oneof case after move may cause unwanted "ClearOneof"
@@ -720,7 +720,7 @@ void SwapFieldHelper::SwapNonMessageNonStringField(
     SWAP_VALUES(ENUM, int);
 #undef SWAP_VALUES
     default:
-      GOOGLE_LOG(FATAL) << "Unimplemented type: " << static_cast<int>(field->cpp_type());
+      SHARK_LOG(FATAL) << "Unimplemented type: " << static_cast<int>(field->cpp_type());
   }
 }
 
@@ -760,7 +760,7 @@ void Reflection::SwapField(Message* message1, Message* message2,
         break;
 
       default:
-        GOOGLE_LOG(FATAL) << "Unimplemented type: " << static_cast<int>(field->cpp_type());
+        SHARK_LOG(FATAL) << "Unimplemented type: " << static_cast<int>(field->cpp_type());
     }
   } else {
     switch (field->cpp_type()) {
@@ -827,7 +827,7 @@ void Reflection::UnsafeShallowSwapField(Message* message1, Message* message2,
       break;
 
     default:
-      GOOGLE_LOG(FATAL) << "Unimplemented type: " << static_cast<int>(field->cpp_type());
+      SHARK_LOG(FATAL) << "Unimplemented type: " << static_cast<int>(field->cpp_type());
   }
 }
 
@@ -1243,7 +1243,7 @@ int Reflection::FieldSize(const Message& message,
         }
     }
 
-    GOOGLE_LOG(FATAL) << "Can't get here.";
+    SHARK_LOG(FATAL) << "Can't get here.";
     return 0;
   }
 }
@@ -3091,7 +3091,7 @@ bool Reflection::HasBit(const Message& message,
         // handled above; avoid warning
         break;
     }
-    GOOGLE_LOG(FATAL) << "Reached impossible case in HasBit().";
+    SHARK_LOG(FATAL) << "Reached impossible case in HasBit().";
     return false;
   }
 }
@@ -3315,8 +3315,8 @@ void* Reflection::RepeatedFieldData(Message* message,
                                     const FieldDescriptor* field,
                                     SharkFieldCppType cpp_type,
                                     const Descriptor* message_type) const {
-  GOOGLE_CHECK(field->is_repeated());
-  GOOGLE_CHECK(field->cpp_type() == cpp_type ||
+  SHARK_CHECK(field->is_repeated());
+  SHARK_CHECK(field->cpp_type() == cpp_type ||
         (field->cpp_type() == SharkFieldCppType::CPPTYPE_ENUM &&
          cpp_type == SharkFieldCppType::CPPTYPE_INT32))
       << "The type parameter T in RepeatedFieldRef<T> API doesn't match "
@@ -3492,7 +3492,7 @@ void AssignDescriptorsImpl(const DescriptorTable* table, bool eager) {
   const FileDescriptor* file =
       DescriptorPool::internal_generated_pool()->FindFileByName(
           table->filename);
-  GOOGLE_CHECK(file != nullptr);
+  SHARK_CHECK(file != nullptr);
 
   MessageFactory* factory = MessageFactory::generated_factory();
 

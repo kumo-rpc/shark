@@ -107,7 +107,7 @@ namespace shark::compiler::cpp {
                     return false;
                 }
                 if (IsStringInlined(field, options)) {
-                    GOOGLE_CHECK(!field->is_repeated());
+                    SHARK_CHECK(!field->is_repeated());
                     // For inlined strings, the donation state index is stored in the
                     // `aux_idx` field of the fast parsing info. We need to check the range
                     // of that value instead of the auxiliary index.
@@ -195,7 +195,7 @@ namespace shark::compiler::cpp {
                 }
 
                 // Fill in this field's entry:
-                GOOGLE_CHECK(info.func_name.empty()) << info.func_name;
+                SHARK_CHECK(info.func_name.empty()) << info.func_name;
                 info.func_name = FieldParseFunctionName(entry, options);
                 info.field = field;
                 info.coded_tag = tag;
@@ -203,7 +203,7 @@ namespace shark::compiler::cpp {
                 // bit (tailcall parsing uses a uint64_t for hasbits, but only stores 32).
                 info.hasbit_idx = HasHasbit(field) ? entry.hasbit_idx : 63;
                 if (IsStringInlined(field, options)) {
-                    GOOGLE_CHECK(!field->is_repeated());
+                    SHARK_CHECK(!field->is_repeated());
                     info.aux_idx = static_cast<uint8_t>(entry.inlined_string_idx);
                 } else {
                     info.aux_idx = static_cast<uint8_t>(entry.aux_idx);
@@ -376,7 +376,7 @@ namespace shark::compiler::cpp {
                         turbo::str_cat(QualifiedClassName(enum_type, options), "_IsValid"));
                 }
             } else if ((field->type() == SharkFieldType::STRING || field->type() == SharkFieldType::BYTES) && IsStringInlined(field, options)) {
-                GOOGLE_CHECK(!field->is_repeated());
+                SHARK_CHECK(!field->is_repeated());
                 // Inlined strings have an extra marker to represent their donation state.
                 int idx = inlined_string_indices[field->index()];
                 // For mini parsing, the donation state index is stored as an `offset`
@@ -526,7 +526,7 @@ namespace shark::compiler::cpp {
     }
 
     void ParseFunctionGenerator::GenerateTailcallParseFunction(Formatter& format) {
-        GOOGLE_CHECK(should_generate_tctable());
+        SHARK_CHECK(should_generate_tctable());
 
         // Generate an `_InternalParse` that starts the tail-calling loop.
         format(
@@ -542,7 +542,7 @@ namespace shark::compiler::cpp {
 
     void ParseFunctionGenerator::GenerateTailcallFallbackFunction(
         Formatter& format) {
-        GOOGLE_CHECK(should_generate_tctable());
+        SHARK_CHECK(should_generate_tctable());
         format(
             "const char* $classname$::Tct_ParseFallback(SHARK_TC_PARAM_DECL) {\n"
             "#define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) return nullptr\n");
@@ -748,7 +748,7 @@ namespace shark::compiler::cpp {
     }
 
     void ParseFunctionGenerator::GenerateTailCallTable(Formatter& format) {
-        GOOGLE_CHECK(should_generate_tctable());
+        SHARK_CHECK(should_generate_tctable());
         // All entries without a fast-path parsing function need a fallback.
         std::string fallback;
         if (tc_table_info_->use_generated_fallback) {
@@ -1019,7 +1019,7 @@ namespace shark::compiler::cpp {
                 format("Bytes");
                 break;
             default:
-                GOOGLE_LOG(FATAL) << "Invalid Utf8CheckMode (" << static_cast<int>(mode)
+                SHARK_LOG(FATAL) << "Invalid Utf8CheckMode (" << static_cast<int>(mode)
                                   << ") for " << field->DebugString();
             }
             break;
@@ -1263,7 +1263,7 @@ namespace shark::compiler::cpp {
             case SharkFieldType::MESSAGE: {
                 if (field->is_map()) {
                     const FieldDescriptor* val = field->message_type()->map_value();
-                    GOOGLE_CHECK(val);
+                    SHARK_CHECK(val);
                     if (val->type() == SharkFieldType::ENUM && (IsEnumClass(val->enum_type()) || !HasPreservingUnknownEnumSemantics(field))) {
                         format(
                             "auto object = "
@@ -1348,7 +1348,7 @@ namespace shark::compiler::cpp {
                 break;
             }
             default:
-                GOOGLE_LOG(FATAL) << "Illegal combination for length delimited wiretype "
+                SHARK_LOG(FATAL) << "Illegal combination for length delimited wiretype "
                                   << " filed type is " << static_cast<int>(field->type());
             }
         }
@@ -1495,7 +1495,7 @@ namespace shark::compiler::cpp {
         if (field->is_packable()) {
             auto expected_wiretype = WireFormat::WireTypeForFieldType(field->type());
             expected_tag = WireFormatLite::MakeTag(field->number(), expected_wiretype);
-            GOOGLE_CHECK(expected_wiretype != WireFormatLite::WIRETYPE_LENGTH_DELIMITED);
+            SHARK_CHECK(expected_wiretype != WireFormatLite::WIRETYPE_LENGTH_DELIMITED);
             auto fallback_wiretype = WireFormatLite::WIRETYPE_LENGTH_DELIMITED;
             uint32_t fallback_tag = WireFormatLite::MakeTag(field->number(), fallback_wiretype);
 
@@ -1697,7 +1697,7 @@ namespace shark::compiler::cpp {
                     break;
                 }
                 if (field->is_repeated() && field->is_packed()) {
-                    GOOGLE_LOG(DFATAL) << "Enum validation not handled: " << field->DebugString();
+                    SHARK_LOG(DFATAL) << "Enum validation not handled: " << field->DebugString();
                     return "";
                 }
                 name.append(entry.is_enum_range ? "Er" : "Ev");
@@ -1728,7 +1728,7 @@ namespace shark::compiler::cpp {
                     name.append("U");
                     break;
                 default:
-                    GOOGLE_LOG(DFATAL) << "Mode not handled: "
+                    SHARK_LOG(DFATAL) << "Mode not handled: "
                                        << static_cast<int>(GetUtf8CheckMode(field, options));
                     return "";
                 }
@@ -1742,7 +1742,7 @@ namespace shark::compiler::cpp {
                 break;
 
             default:
-                GOOGLE_LOG(DFATAL) << "Type not handled: " << field->DebugString();
+                SHARK_LOG(DFATAL) << "Type not handled: " << field->DebugString();
                 return "";
             }
 

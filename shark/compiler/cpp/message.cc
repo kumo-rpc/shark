@@ -93,7 +93,7 @@ namespace shark {
                         parts.push_back(
                             turbo::str_cat("((", has_bits_var, "[", i, "] & ", m, ") ^ ", m, ")"));
                     }
-                    GOOGLE_CHECK(!parts.empty());
+                    SHARK_CHECK(!parts.empty());
                     // If we have multiple parts, each expected to be 0, then bitwise-or them.
                     std::string result = parts.size() == 1
                         ? parts[0]
@@ -219,7 +219,7 @@ namespace shark {
                 bool EmitFieldNonDefaultCondition(io::Printer* printer,
                     const std::string& prefix,
                     const FieldDescriptor* field) {
-                    GOOGLE_CHECK(!HasHasbit(field));
+                    SHARK_CHECK(!HasHasbit(field));
                     Formatter format(printer);
                     format.Set("prefix", prefix);
                     format.Set("name", FieldName(field));
@@ -273,7 +273,7 @@ namespace shark {
                 // Collects map entry message type information.
                 void CollectMapInfo(const Options& options, const Descriptor* descriptor,
                     std::map<std::string, std::string>* variables) {
-                    GOOGLE_CHECK(IsMapEntryMessage(descriptor));
+                    SHARK_CHECK(IsMapEntryMessage(descriptor));
                     std::map<std::string, std::string>& vars = *variables;
                     const FieldDescriptor* key = descriptor->map_key();
                     const FieldDescriptor* val = descriptor->map_value();
@@ -370,7 +370,7 @@ namespace shark {
                 // masked to tell if any thing in "fields" is present.
                 uint32_t GenChunkMask(const std::vector<const FieldDescriptor*>& fields,
                     const std::vector<int>& has_bit_indices) {
-                    GOOGLE_CHECK(!fields.empty());
+                    SHARK_CHECK(!fields.empty());
                     int first_index_offset = has_bit_indices[fields.front()->index()] / 32;
                     uint32_t chunk_mask = 0;
                     for (auto field : fields) {
@@ -1305,7 +1305,7 @@ $annotate_repeated_extension_list_mutable$
                                 " }\n",
                                 descriptor_->field(0)->full_name());
                         } else {
-                            GOOGLE_CHECK(utf8_check == Utf8CheckMode::kVerify);
+                            SHARK_CHECK(utf8_check == Utf8CheckMode::kVerify);
                             format(
                                 "  static bool ValidateKey(std::string* s) {\n"
                                 "#ifndef NDEBUG\n"
@@ -1333,7 +1333,7 @@ $annotate_repeated_extension_list_mutable$
                                 " }\n",
                                 descriptor_->field(1)->full_name());
                         } else {
-                            GOOGLE_CHECK(utf8_check == Utf8CheckMode::kVerify);
+                            SHARK_CHECK(utf8_check == Utf8CheckMode::kVerify);
                             format(
                                 "  static bool ValidateValue(std::string* s) {\n"
                                 "#ifndef NDEBUG\n"
@@ -2576,7 +2576,7 @@ $annotate_repeated_extension_list_mutable$
             }
 
             void MessageGenerator::GenerateArenaDestructorCode(io::Printer* printer) {
-                GOOGLE_CHECK(NeedsArenaDestructor() > ArenaDtorNeeds::kNone);
+                SHARK_CHECK(NeedsArenaDestructor() > ArenaDtorNeeds::kNone);
 
                 Formatter format(printer, variables_);
 
@@ -3043,7 +3043,7 @@ $annotate_repeated_extension_list_mutable$
                     bool chunk_is_cold = !chunk.empty() && ShouldSplit(chunk.front(), options_);
                     for (const auto& field : chunk) {
                         if (CanInitializeByZeroing(field)) {
-                            GOOGLE_CHECK(!saw_non_zero_init);
+                            SHARK_CHECK(!saw_non_zero_init);
                             if (!memset_start)
                                 memset_start = field;
                             memset_end = field;
@@ -3363,7 +3363,7 @@ $annotate_repeated_extension_list_mutable$
             void MessageGenerator::GenerateClassSpecificMergeImpl(io::Printer* printer) {
                 if (HasSimpleBaseClass(descriptor_, options_))
                     return;
-                // Generate the class-specific MergeFrom, which avoids the GOOGLE_CHECK and cast.
+                // Generate the class-specific MergeFrom, which avoids the SHARK_CHECK and cast.
                 Formatter format(printer, variables_);
                 if (!HasDescriptorMethods(descriptor_->file(), options_)) {
                     // For messages that don't inherit from Message, just implement MergeFrom
@@ -3455,7 +3455,7 @@ $annotate_repeated_extension_list_mutable$
                             }
                         } else if (field->options().weak() || cached_has_word_index != HasWordIndex(field)) {
                             // Check hasbit, not using cached bits.
-                            GOOGLE_CHECK(HasHasbit(field));
+                            SHARK_CHECK(HasHasbit(field));
                             format("if (from._internal_has_$1$()) {\n", FieldName(field));
                             format.Indent();
                             generator.GenerateMergingCode(printer);
@@ -3463,7 +3463,7 @@ $annotate_repeated_extension_list_mutable$
                             format("}\n");
                         } else {
                             // Check hasbit, using cached bits.
-                            GOOGLE_CHECK(HasHasbit(field));
+                            SHARK_CHECK(HasHasbit(field));
                             int has_bit_index = has_bit_indices_[field->index()];
                             const std::string mask = turbo::str_cat(
                                 turbo::Hex(1u << (has_bit_index % 32), turbo::kZeroPad8));
@@ -3615,7 +3615,7 @@ $annotate_repeated_extension_list_mutable$
             void MessageGenerator::GenerateSerializeOneofFields(
                 io::Printer* printer, const std::vector<const FieldDescriptor*>& fields) {
                 Formatter format(printer, variables_);
-                GOOGLE_CHECK(!fields.empty());
+                SHARK_CHECK(!fields.empty());
                 if (fields.size() == 1) {
                     GenerateSerializeOneField(printer, fields[0], -1);
                     return;

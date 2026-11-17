@@ -129,7 +129,7 @@ namespace shark {
     void Message::FailIfCopyFromDescendant(Message& to, const Message& from) {
         auto* arena = to.GetArenaForAllocation();
         bool same_message_owned_arena = to.GetOwningArena() == nullptr && arena != nullptr && arena == from.GetOwningArena();
-        GOOGLE_CHECK(!same_message_owned_arena && !internal::IsDescendant(to, from))
+        SHARK_CHECK(!same_message_owned_arena && !internal::IsDescendant(to, from))
             << "Source of CopyFrom cannot be a descendant of the target.";
     }
 
@@ -156,7 +156,7 @@ namespace shark {
     }
 
     void Message::CheckInitialized() const {
-        GOOGLE_CHECK(IsInitialized()) << "Message of type \"" << GetDescriptor()->full_name()
+        SHARK_CHECK(IsInitialized()) << "Message of type \"" << GetDescriptor()->full_name()
                                       << "\" is missing required fields: "
                                       << InitializationErrorString();
     }
@@ -182,7 +182,7 @@ namespace shark {
     }
 
     void Message::SetCachedSize(int /* size */) const {
-        GOOGLE_LOG(FATAL) << "Message class \"" << GetDescriptor()->full_name()
+        SHARK_LOG(FATAL) << "Message class \"" << GetDescriptor()->full_name()
                           << "\" implements neither SetCachedSize() nor ByteSize().  "
                              "Must implement one or the other.";
     }
@@ -252,7 +252,7 @@ namespace shark {
         void GeneratedMessageFactory::RegisterFile(
             const shark::internal::DescriptorTable* table) {
             if (!InsertIfNotPresent(&file_map_, table->filename, table)) {
-                GOOGLE_LOG(FATAL) << "File is already registered: " << table->filename;
+                SHARK_LOG(FATAL) << "File is already registered: " << table->filename;
             }
         }
 
@@ -267,7 +267,7 @@ namespace shark {
             // the mutex.
             mutex_.AssertHeld();
             if (!InsertIfNotPresent(&type_map_, descriptor, prototype)) {
-                GOOGLE_LOG(DFATAL) << "Type is already registered: " << descriptor->full_name();
+                SHARK_LOG(DFATAL) << "Type is already registered: " << descriptor->full_name();
             }
         }
 
@@ -287,7 +287,7 @@ namespace shark {
             // Apparently the file hasn't been registered yet.  Let's do that now.
             const internal::DescriptorTable* registration_data = FindPtrOrNull(file_map_, type->file()->name().c_str());
             if (registration_data == nullptr) {
-                GOOGLE_LOG(DFATAL) << "File appears to be in generated pool but wasn't "
+                SHARK_LOG(DFATAL) << "File appears to be in generated pool but wasn't "
                                       "registered: "
                                    << type->file()->name();
                 return nullptr;
@@ -305,7 +305,7 @@ namespace shark {
             }
 
             if (result == nullptr) {
-                GOOGLE_LOG(DFATAL) << "Type appears to be in generated pool but wasn't "
+                SHARK_LOG(DFATAL) << "Type appears to be in generated pool but wasn't "
                                    << "registered: " << type->full_name();
             }
 
@@ -338,7 +338,7 @@ namespace shark {
 
     const internal::RepeatedFieldAccessor* Reflection::RepeatedFieldAccessor(
         const FieldDescriptor* field) const {
-        GOOGLE_CHECK(field->is_repeated());
+        SHARK_CHECK(field->is_repeated());
         switch (field->cpp_type()) {
 #define HANDLE_PRIMITIVE_TYPE(TYPE, type)   \
     case SharkFieldCppType::CPPTYPE_##TYPE: \
@@ -370,7 +370,7 @@ namespace shark {
                 return GetSingleton<internal::RepeatedPtrFieldMessageAccessor>();
             }
         }
-        GOOGLE_LOG(FATAL) << "Should not reach here.";
+        SHARK_LOG(FATAL) << "Should not reach here.";
         return nullptr;
     }
 

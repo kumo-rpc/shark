@@ -167,7 +167,7 @@ namespace shark::internal {
     void TypeDefinedMapFieldBase<Key, T>::InitializeIterator(
         MapIterator* map_iter) const {
         map_iter->iter_ = new typename Map<Key, T>::const_iterator;
-        GOOGLE_CHECK(map_iter->iter_ != nullptr);
+        SHARK_CHECK(map_iter->iter_ != nullptr);
     }
 
     template <typename Key, typename T>
@@ -369,7 +369,7 @@ namespace shark::internal {
         Map<Key, T>* map = const_cast<MapField*>(this)->impl_.MutableMap();
         RepeatedPtrField<EntryType>* repeated_field = reinterpret_cast<RepeatedPtrField<EntryType>*>(
             this->MapFieldBase::repeated_field_);
-        GOOGLE_CHECK(this->MapFieldBase::repeated_field_ != nullptr);
+        SHARK_CHECK(this->MapFieldBase::repeated_field_ != nullptr);
         map->clear();
         for (typename RepeatedPtrField<EntryType>::iterator it = repeated_field->begin();
             it != repeated_field->end(); ++it) {

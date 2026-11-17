@@ -243,7 +243,7 @@ MessageLite* ExtensionSet::AddMessage(const FieldDescriptor* descriptor,
     const MessageLite* prototype;
     if (extension->repeated_message_value->empty()) {
       prototype = factory->GetPrototype(descriptor->message_type());
-      GOOGLE_CHECK(prototype != nullptr);
+      SHARK_CHECK(prototype != nullptr);
     } else {
       prototype = &extension->repeated_message_value->Get(0);
     }
@@ -285,7 +285,7 @@ bool DescriptorPoolExtensionFinder::Find(int number, ExtensionInfo* output) {
     if (extension->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
       output->message_info.sharktype =
           factory_->GetPrototype(extension->message_type());
-      GOOGLE_CHECK(output->message_info.sharktype != nullptr)
+      SHARK_CHECK(output->message_info.sharktype != nullptr)
           << "Extension factory's GetPrototype() returned nullptr; extension: "
           << extension->full_name();
     } else if (extension->cpp_type() == SharkFieldCppType::CPPTYPE_ENUM) {

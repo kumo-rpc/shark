@@ -79,7 +79,7 @@ namespace shark::compiler {
 
     io::ZeroCopyOutputStream* GeneratorContext::OpenForInsert(
         const std::string& filename, const std::string& insertion_point) {
-        GOOGLE_LOG(FATAL) << "This GeneratorContext does not support insertion.";
+        SHARK_LOG(FATAL) << "This GeneratorContext does not support insertion.";
         return nullptr; // make compiler happy
     }
 
@@ -91,7 +91,7 @@ namespace shark::compiler {
 
     void GeneratorContext::ListParsedFiles(
         std::vector<const FileDescriptor*>* output) {
-        GOOGLE_LOG(FATAL) << "This GeneratorContext does not support ListParsedFiles";
+        SHARK_LOG(FATAL) << "This GeneratorContext does not support ListParsedFiles";
     }
 
     void GeneratorContext::GetCompilerVersion(Version* version) const {

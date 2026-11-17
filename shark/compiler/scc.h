@@ -97,7 +97,7 @@ class PROTOC_EXPORT SCCAnalyzer {
 
     // Recurse the fields / nodes in graph
     for (auto dep : DepsGenerator()(descriptor)) {
-      GOOGLE_CHECK(dep);
+      SHARK_CHECK(dep);
       if (cache_.count(dep) == 0) {
         // unexplored node
         NodeData child_data = DFS(dep);
@@ -139,7 +139,7 @@ class PROTOC_EXPORT SCCAnalyzer {
     std::set<const SCC*> seen;
     for (auto descriptor : scc->descriptors) {
       for (auto child_msg : DepsGenerator()(descriptor)) {
-        GOOGLE_CHECK(child_msg);
+        SHARK_CHECK(child_msg);
         const SCC* child = GetSCC(child_msg);
         if (child == scc) continue;
         if (seen.insert(child).second) {

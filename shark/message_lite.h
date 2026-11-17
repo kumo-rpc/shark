@@ -97,7 +97,7 @@ namespace shark {
         // computed size to a cached size.  Since we don't proceed with serialization
         // if the total size was > INT_MAX, it is not important what this function
         // returns for inputs > INT_MAX.  However this case should not error or
-        // GOOGLE_CHECK-fail, because the full size_t resolution is still returned from
+        // SHARK_CHECK-fail, because the full size_t resolution is still returned from
         // ByteSizeLong() and checked against INT_MAX; we can catch the overflow
         // there.
         inline int ToCachedSize(size_t size) {
@@ -316,7 +316,7 @@ namespace shark {
 
         // Write a protocol buffer of this message to the given output.  Returns
         // false on a write error.  If the message is missing required fields,
-        // this may GOOGLE_CHECK-fail.
+        // this may SHARK_CHECK-fail.
         bool SerializeToCodedStream(io::CodedOutputStream* output) const;
         // Like SerializeToCodedStream(), but allows missing required fields.
         bool SerializePartialToCodedStream(io::CodedOutputStream* output) const;

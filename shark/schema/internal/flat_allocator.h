@@ -36,7 +36,7 @@ namespace shark {
             template <typename U>
             void PlanArray(int array_size) {
                 // We can't call PlanArray after FinalizePlanning has been called.
-                GOOGLE_CHECK(!has_allocated());
+                SHARK_CHECK(!has_allocated());
                 if (std::is_trivially_destructible<U>::value) {
                     // Trivial types are aligned to 8 bytes.
                     static_assert(alignof(U) <= 8, "");
@@ -57,7 +57,7 @@ namespace shark {
                 using TypeToUse = typename std::conditional<trivial, char, U>::type;
 
                 // We can only allocate after FinalizePlanning has been called.
-                GOOGLE_CHECK(has_allocated());
+                SHARK_CHECK(has_allocated());
 
                 TypeToUse*& data = pointers_.template Get<TypeToUse>();
                 int& used = used_.template Get<TypeToUse>();
@@ -82,7 +82,7 @@ namespace shark {
             // and the other 3 indices are specified in the result.
             void PlanFieldNames(const std::string& name,
                 const std::string* opt_json_name) {
-                GOOGLE_CHECK(!has_allocated());
+                SHARK_CHECK(!has_allocated());
 
                 // Fast path for snake_case names, which follow the style guide.
                 if (opt_json_name == nullptr) {
@@ -121,7 +121,7 @@ namespace shark {
             FieldNamesResult AllocateFieldNames(const std::string& name,
                 const std::string& scope,
                 const std::string* opt_json_name) {
-                GOOGLE_CHECK(has_allocated());
+                SHARK_CHECK(has_allocated());
 
                 std::string full_name = scope.empty() ? name : turbo::str_cat(scope, ".", name);
 
@@ -176,11 +176,11 @@ namespace shark {
 
             template <typename Alloc>
             void FinalizePlanning(Alloc& alloc) {
-                GOOGLE_CHECK(!has_allocated());
+                SHARK_CHECK(!has_allocated());
 
                 pointers_ = alloc->CreateFlatAlloc(total_)->Pointers();
 
-                GOOGLE_CHECK(has_allocated());
+                SHARK_CHECK(has_allocated());
             }
 
             void ExpectConsumed() const {

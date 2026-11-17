@@ -167,7 +167,7 @@ namespace shark {
                 output_directory + "/" + GetOutputFileName(name, file) + ".pb.meta",
                 &meta_content, true));
             GeneratedCodeInfo annotations;
-            GOOGLE_CHECK(TextFormat::ParseFromString(meta_content, &annotations));
+            SHARK_CHECK(TextFormat::ParseFromString(meta_content, &annotations));
             ASSERT_EQ(7, annotations.annotation_size());
 
             CheckSingleAnnotation("first_annotation", "first", file_content,

@@ -283,7 +283,7 @@ const shark::Type* DefaultValueObjectWriter::Node::GetMapValueType(
     turbo::Result<const shark::Type*> sub_type =
         typeinfo->ResolveTypeUrl(sub_field.type_url());
     if (!sub_type.ok()) {
-      GOOGLE_LOG(WARNING) << "Cannot resolve type '" << sub_field.type_url() << "'.";
+      SHARK_LOG(WARNING) << "Cannot resolve type '" << sub_field.type_url() << "'.";
     } else {
       return sub_type.value();
     }
@@ -347,7 +347,7 @@ void DefaultValueObjectWriter::Node::PopulateChildren(
           typeinfo->ResolveTypeUrl(field.type_url());
       if (!found_result.ok()) {
         // "field" is of an unknown type.
-        GOOGLE_LOG(WARNING) << "Cannot resolve type '" << field.type_url() << "'.";
+        SHARK_LOG(WARNING) << "Cannot resolve type '" << field.type_url() << "'.";
       } else {
         const shark::Type* found_type = found_result.value();
         is_map = IsMap(field, *found_type);
@@ -411,7 +411,7 @@ DataPiece DefaultValueObjectWriter::FindEnumDefault(
   const shark::Enum* enum_type =
       typeinfo->GetEnumByTypeUrl(field.type_url());
   if (!enum_type) {
-    GOOGLE_LOG(WARNING) << "Could not find enum with type '" << field.type_url()
+    SHARK_LOG(WARNING) << "Could not find enum with type '" << field.type_url()
                  << "'";
     return DataPiece::NullData();
   }
@@ -426,7 +426,7 @@ DataPiece DefaultValueObjectWriter::FindEnumDefault(
         if (enum_value.name() == enum_default_value_name)
           return DataPiece(enum_value.number());
       }
-      GOOGLE_LOG(WARNING) << "Could not find enum value '" << enum_default_value_name
+      SHARK_LOG(WARNING) << "Could not find enum value '" << enum_default_value_name
                    << "' with type '" << field.type_url() << "'";
       return DataPiece::NullData();
     }
@@ -608,7 +608,7 @@ void DefaultValueObjectWriter::RenderDataPiece(std::string_view name,
       turbo::Result<const shark::Type*> found_type =
           typeinfo_->ResolveTypeUrl(string_value);
       if (!found_type.ok()) {
-        GOOGLE_LOG(WARNING) << "Failed to resolve type '" << string_value << "'.";
+        SHARK_LOG(WARNING) << "Failed to resolve type '" << string_value << "'.";
       } else {
         current_->set_type(found_type.value());
       }

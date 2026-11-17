@@ -258,7 +258,7 @@ namespace shark {
         // exact same class).
         virtual void MergeFrom(const Message& from);
 
-        // Verifies that IsInitialized() returns true.  GOOGLE_CHECK-fails otherwise, with
+        // Verifies that IsInitialized() returns true.  SHARK_CHECK-fails otherwise, with
         // a nice error message.
         void CheckInitialized() const;
 

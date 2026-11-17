@@ -172,7 +172,7 @@ namespace shark {
 
                 bool IsDepWeak(const FileDescriptor* dep) const {
                     if (weak_deps_.count(dep) != 0) {
-                        GOOGLE_CHECK(!options_.opensource_runtime);
+                        SHARK_CHECK(!options_.opensource_runtime);
                         return true;
                     }
                     return false;

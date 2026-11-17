@@ -168,7 +168,7 @@ class SHARK_EXPORT SimpleDescriptorDatabase : public DescriptorDatabase {
   // Adds the FileDescriptorProto to the database, making a copy.  The object
   // can be deleted after Add() returns.  Returns false if the file conflicted
   // with a file already in the database, in which case an error will have
-  // been written to GOOGLE_LOG(ERROR).
+  // been written to SHARK_LOG(ERROR).
   bool Add(const FileDescriptorProto& file);
 
   // Adds the FileDescriptorProto to the database and takes ownership of it.

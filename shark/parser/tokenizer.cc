@@ -1390,7 +1390,7 @@ namespace shark {
             // empty, it's invalid, so we'll just return).
             const size_t text_size = text.size();
             if (text_size == 0) {
-                GOOGLE_LOG(DFATAL) << " Tokenizer::parse_string_append() passed text that could not"
+                SHARK_LOG(DFATAL) << " Tokenizer::parse_string_append() passed text that could not"
                                       " have been tokenized as a string: "
                                    << turbo::c_escape(text);
                 return;

@@ -354,7 +354,7 @@ class DescriptorPoolTypeResolver : public TypeResolver {
         return descriptor->default_value_enum()->name();
         break;
       case SharkFieldCppType::CPPTYPE_MESSAGE:
-        GOOGLE_LOG(DFATAL) << "Messages can't have default values!";
+        SHARK_LOG(DFATAL) << "Messages can't have default values!";
         break;
     }
     return "";

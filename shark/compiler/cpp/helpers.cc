@@ -235,10 +235,10 @@ namespace shark::compiler::cpp {
         // Warning: there is some clever naming/splitting here to avoid extract script
         // rewrites.  The names of these variables must not be things that the extract
         // script will rewrite.  That's why we use "CHK" (for example) instead of
-        // "GOOGLE_CHECK".
+        // "SHARK_CHECK".
         if (options.opensource_runtime) {
             (*variables)["GOOGLE_PROTOBUF"] = "GOOGLE_PROTOBUF";
-            (*variables)["CHK"] = "GOOGLE_CHECK";
+            (*variables)["CHK"] = "SHARK_CHECK";
             (*variables)["DCHK"] = "GOOGLE_DCHECK";
         } else {
             // These values are things the extract script would rewrite if we did not
@@ -506,7 +506,7 @@ namespace shark::compiler::cpp {
             return turbo::str_cat(prefix, split_prefix, FieldName(field), "_");
         }
         // Oneof fields are never split.
-        GOOGLE_CHECK(!split);
+        SHARK_CHECK(!split);
         return turbo::str_cat(prefix, field->containing_oneof()->name(), "_.",
             FieldName(field), "_");
     }
@@ -579,7 +579,7 @@ namespace shark::compiler::cpp {
         case SharkFieldCppType::CPPTYPE_MESSAGE:
             return 8;
         }
-        GOOGLE_LOG(FATAL) << "Can't get here.";
+        SHARK_LOG(FATAL) << "Can't get here.";
         return -1; // Make compiler happy.
     }
 
@@ -647,7 +647,7 @@ namespace shark::compiler::cpp {
             // CppTypes are added.
         }
 
-        GOOGLE_LOG(FATAL) << "Can't get here.";
+        SHARK_LOG(FATAL) << "Can't get here.";
         return nullptr;
     }
 
@@ -687,7 +687,7 @@ namespace shark::compiler::cpp {
             // CppTypes are added.
         }
 
-        GOOGLE_LOG(FATAL) << "Can't get here.";
+        SHARK_LOG(FATAL) << "Can't get here.";
         return "";
     }
 
@@ -741,7 +741,7 @@ namespace shark::compiler::cpp {
             // No default because we want the compiler to complain if any new
             // types are added.
         }
-        GOOGLE_LOG(FATAL) << "Can't get here.";
+        SHARK_LOG(FATAL) << "Can't get here.";
         return "";
     }
 
@@ -837,7 +837,7 @@ namespace shark::compiler::cpp {
         // Can't actually get here; make compiler happy.  (We could add a default
         // case above but then we wouldn't get the nice compiler warning when a
         // new type is added.)
-        GOOGLE_LOG(FATAL) << "Can't get here.";
+        SHARK_LOG(FATAL) << "Can't get here.";
         return "";
     }
 
@@ -1130,7 +1130,7 @@ namespace shark::compiler::cpp {
             return true;
         }
 
-        GOOGLE_LOG(FATAL) << "Can't get here.";
+        SHARK_LOG(FATAL) << "Can't get here.";
         return false;
     }
 
@@ -1602,7 +1602,7 @@ namespace shark::compiler::cpp {
         case EnforceOptimizeMode::kNoEnforcement:
             if (file->options().optimize_for() == FileOptions_OptimizeMode::CODE_SIZE) {
                 if (HasBootstrapProblem(file, options, has_opt_codesize_extension)) {
-                    GOOGLE_LOG(WARNING) << "Proto states optimize_for = CODE_SIZE, but we "
+                    SHARK_LOG(WARNING) << "Proto states optimize_for = CODE_SIZE, but we "
                                            "cannot honor that because it contains custom option "
                                            "extensions defined in the same proto.";
                     return FileOptions_OptimizeMode::SPEED;
@@ -1611,7 +1611,7 @@ namespace shark::compiler::cpp {
             return file->options().optimize_for();
         }
 
-        GOOGLE_LOG(FATAL) << "Unknown optimization enforcement requested.";
+        SHARK_LOG(FATAL) << "Unknown optimization enforcement requested.";
         // The phony return below serves to silence a warning from GCC 8.
         return FileOptions_OptimizeMode::SPEED;
     }

@@ -198,7 +198,7 @@ namespace shark {
 
     void Descriptor::CopyJsonNameTo(DescriptorProto* proto) const {
         if (field_count() != proto->field_size() || nested_type_count() != proto->nested_type_size() || extension_count() != proto->extension_size()) {
-            GOOGLE_LOG(ERROR) << "Cannot copy json_name to a proto of a different size.";
+            SHARK_LOG(ERROR) << "Cannot copy json_name to a proto of a different size.";
             return;
         }
         for (int i = 0; i < field_count(); i++) {

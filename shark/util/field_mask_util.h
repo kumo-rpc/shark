@@ -60,7 +60,7 @@ class SHARK_EXPORT FieldMaskUtil {
     for (const auto field_number : field_numbers) {
       const FieldDescriptor* field_desc =
           T::descriptor()->FindFieldByNumber(field_number);
-      GOOGLE_CHECK(field_desc != nullptr)
+      SHARK_CHECK(field_desc != nullptr)
           << "Invalid field number for " << T::descriptor()->full_name() << ": "
           << field_number;
       AddPathToFieldMask<T>(field_desc->lowercase_name(), out);
@@ -103,7 +103,7 @@ class SHARK_EXPORT FieldMaskUtil {
   // This method check-fails if the path is not a valid path for type T.
   template <typename T>
   static void AddPathToFieldMask(std::string_view path, FieldMask* mask) {
-    GOOGLE_CHECK(IsValidPath<T>(path)) << path;
+    SHARK_CHECK(IsValidPath<T>(path)) << path;
     mask->add_paths(std::string(path));
   }
 

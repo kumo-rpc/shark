@@ -317,7 +317,7 @@ namespace shark::compiler::cpp {
 
     inline bool IsWeak(const FieldDescriptor* field, const Options& options) {
         if (field->options().weak()) {
-            GOOGLE_CHECK(!options.opensource_runtime);
+            SHARK_CHECK(!options.opensource_runtime);
             return true;
         }
         return false;

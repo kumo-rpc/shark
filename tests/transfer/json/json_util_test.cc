@@ -537,7 +537,7 @@ class SegmentedZeroCopyOutputStream : public io::ZeroCopyOutputStream {
   }
 
   void BackUp(int length) override {
-    GOOGLE_CHECK(length <= last_segment_.second);
+    SHARK_CHECK(length <= last_segment_.second);
     segments_.push_front(
         Segment(last_segment_.first + last_segment_.second - length, length));
     last_segment_ = Segment(last_segment_.first, last_segment_.second - length);

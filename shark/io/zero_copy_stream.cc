@@ -41,7 +41,7 @@ namespace shark::io {
 
     bool ZeroCopyOutputStream::WriteAliasedRaw(const void* /* data */,
         int /* size */) {
-        GOOGLE_LOG(FATAL) << "This ZeroCopyOutputStream doesn't support aliasing. "
+        SHARK_LOG(FATAL) << "This ZeroCopyOutputStream doesn't support aliasing. "
                              "Reaching here usually means a ZeroCopyOutputStream "
                              "implementation bug.";
         return false;

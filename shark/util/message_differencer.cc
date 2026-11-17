@@ -138,9 +138,9 @@ class MessageDifferencer::MultipleFieldsMapKeyComparator
       const std::vector<std::vector<const FieldDescriptor*> >& key_field_paths)
       : message_differencer_(message_differencer),
         key_field_paths_(key_field_paths) {
-    GOOGLE_CHECK(!key_field_paths_.empty());
+    SHARK_CHECK(!key_field_paths_.empty());
     for (const auto& path : key_field_paths_) {
-      GOOGLE_CHECK(!path.empty());
+      SHARK_CHECK(!path.empty());
     }
   }
   MultipleFieldsMapKeyComparator(MessageDifferencer* message_differencer,
@@ -330,7 +330,7 @@ MessageDifferencer::~MessageDifferencer() {
 }
 
 void MessageDifferencer::set_field_comparator(FieldComparator* comparator) {
-  GOOGLE_CHECK(comparator) << "Field comparator can't be NULL.";
+  SHARK_CHECK(comparator) << "Field comparator can't be NULL.";
   field_comparator_kind_ = kFCBase;
   field_comparator_.base = comparator;
 }
@@ -338,7 +338,7 @@ void MessageDifferencer::set_field_comparator(FieldComparator* comparator) {
 #ifdef SHARK_FUTURE_BREAKING_CHANGES
 void MessageDifferencer::set_field_comparator(
     DefaultFieldComparator* comparator) {
-  GOOGLE_CHECK(comparator) << "Field comparator can't be NULL.";
+  SHARK_CHECK(comparator) << "Field comparator can't be NULL.";
   field_comparator_kind_ = kFCDefault;
   field_comparator_.default_impl = comparator;
 }
@@ -377,10 +377,10 @@ MessageDifferencer::repeated_field_comparison() const {
 void MessageDifferencer::CheckRepeatedFieldComparisons(
     const FieldDescriptor* field,
     const RepeatedFieldComparison& new_comparison) {
-  GOOGLE_CHECK(field->is_repeated())
+  SHARK_CHECK(field->is_repeated())
       << "Field must be repeated: " << field->full_name();
   const MapKeyComparator* key_comparator = GetMapKeyComparator(field);
-  GOOGLE_CHECK(key_comparator == NULL)
+  SHARK_CHECK(key_comparator == NULL)
       << "Cannot treat this repeated field as both MAP and " << new_comparison
       << " for comparison.  Field name is: " << field->full_name();
 }
@@ -414,11 +414,11 @@ void MessageDifferencer::TreatAsMap(const FieldDescriptor* field,
                                     const FieldDescriptor* key) {
   GOOGLE_CHECK_EQ(SharkFieldCppType::CPPTYPE_MESSAGE, field->cpp_type())
       << "Field has to be message type.  Field name is: " << field->full_name();
-  GOOGLE_CHECK(key->containing_type() == field->message_type())
+  SHARK_CHECK(key->containing_type() == field->message_type())
       << key->full_name()
       << " must be a direct subfield within the repeated field "
       << field->full_name() << ", not " << key->containing_type()->full_name();
-  GOOGLE_CHECK(repeated_field_comparisons_.find(field) ==
+  SHARK_CHECK(repeated_field_comparisons_.find(field) ==
         repeated_field_comparisons_.end())
       << "Cannot treat the same field as both "
       << repeated_field_comparisons_[field]
@@ -444,7 +444,7 @@ void MessageDifferencer::TreatAsMapWithMultipleFieldsAsKey(
 void MessageDifferencer::TreatAsMapWithMultipleFieldPathsAsKey(
     const FieldDescriptor* field,
     const std::vector<std::vector<const FieldDescriptor*> >& key_field_paths) {
-  GOOGLE_CHECK(field->is_repeated())
+  SHARK_CHECK(field->is_repeated())
       << "Field must be repeated: " << field->full_name();
   GOOGLE_CHECK_EQ(SharkFieldCppType::CPPTYPE_MESSAGE, field->cpp_type())
       << "Field has to be message type.  Field name is: " << field->full_name();
@@ -453,19 +453,19 @@ void MessageDifferencer::TreatAsMapWithMultipleFieldPathsAsKey(
       const FieldDescriptor* parent_field =
           j == 0 ? field : key_field_path[j - 1];
       const FieldDescriptor* child_field = key_field_path[j];
-      GOOGLE_CHECK(child_field->containing_type() == parent_field->message_type())
+      SHARK_CHECK(child_field->containing_type() == parent_field->message_type())
           << child_field->full_name()
           << " must be a direct subfield within the field: "
           << parent_field->full_name();
       if (j != 0) {
         GOOGLE_CHECK_EQ(SharkFieldCppType::CPPTYPE_MESSAGE, parent_field->cpp_type())
             << parent_field->full_name() << " has to be of type message.";
-        GOOGLE_CHECK(!parent_field->is_repeated())
+        SHARK_CHECK(!parent_field->is_repeated())
             << parent_field->full_name() << " cannot be a repeated field.";
       }
     }
   }
-  GOOGLE_CHECK(repeated_field_comparisons_.find(field) ==
+  SHARK_CHECK(repeated_field_comparisons_.find(field) ==
         repeated_field_comparisons_.end())
       << "Cannot treat the same field as both "
       << repeated_field_comparisons_[field]
@@ -478,9 +478,9 @@ void MessageDifferencer::TreatAsMapWithMultipleFieldPathsAsKey(
 
 void MessageDifferencer::TreatAsMapUsingKeyComparator(
     const FieldDescriptor* field, const MapKeyComparator* key_comparator) {
-  GOOGLE_CHECK(field->is_repeated())
+  SHARK_CHECK(field->is_repeated())
       << "Field must be repeated: " << field->full_name();
-  GOOGLE_CHECK(repeated_field_comparisons_.find(field) ==
+  SHARK_CHECK(repeated_field_comparisons_.find(field) ==
         repeated_field_comparisons_.end())
       << "Cannot treat the same field as both "
       << repeated_field_comparisons_[field]
@@ -558,7 +558,7 @@ bool MessageDifferencer::CompareWithFields(
     const std::vector<const FieldDescriptor*>& message1_fields_arg,
     const std::vector<const FieldDescriptor*>& message2_fields_arg) {
   if (message1.GetDescriptor() != message2.GetDescriptor()) {
-    GOOGLE_LOG(DFATAL) << "Comparison between two messages with different "
+    SHARK_LOG(DFATAL) << "Comparison between two messages with different "
                 << "descriptors.";
     return false;
   }
@@ -604,7 +604,7 @@ bool MessageDifferencer::Compare(const Message& message1,
   const Descriptor* descriptor1 = message1.GetDescriptor();
   const Descriptor* descriptor2 = message2.GetDescriptor();
   if (descriptor1 != descriptor2) {
-    GOOGLE_LOG(DFATAL) << "Comparison between two messages with different "
+    SHARK_LOG(DFATAL) << "Comparison between two messages with different "
                 << "descriptors. " << descriptor1->full_name() << " vs "
                 << descriptor2->full_name();
     return false;
@@ -1443,7 +1443,7 @@ bool MessageDifferencer::UnpackAnyField::UnpackAny(
       any.GetDescriptor()->file()->pool()->FindMessageTypeByName(
           full_type_name);
   if (desc == NULL) {
-    GOOGLE_LOG(INFO) << "Proto type '" << full_type_name << "' not found";
+    SHARK_LOG(INFO) << "Proto type '" << full_type_name << "' not found";
     return false;
   }
 
@@ -2058,7 +2058,7 @@ void MessageDifferencer::StreamReporter::PrintValue(
 
 void MessageDifferencer::StreamReporter::PrintUnknownFieldValue(
     const UnknownField* unknown_field) {
-  GOOGLE_CHECK(unknown_field != NULL) << " Cannot print NULL unknown_field.";
+  SHARK_CHECK(unknown_field != NULL) << " Cannot print NULL unknown_field.";
 
   std::string output;
   switch (unknown_field->type()) {
@@ -2088,7 +2088,7 @@ void MessageDifferencer::StreamReporter::Print(const std::string& str) {
 void MessageDifferencer::StreamReporter::PrintMapKey(
     bool left_side, const SpecificField& specific_field) {
   if (message1_ == nullptr || message2_ == nullptr) {
-    GOOGLE_LOG(INFO) << "PrintPath cannot log map keys; "
+    SHARK_LOG(INFO) << "PrintPath cannot log map keys; "
                  "use SetMessages to provide the messages "
                  "being compared prior to any processing.";
     return;

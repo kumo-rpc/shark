@@ -325,7 +325,7 @@ namespace shark {
 
             // This is an overload of MutableRawRepeatedField to maintain compatibility
             // with old code using a previous API. This version of
-            // MutableRawRepeatedField() will GOOGLE_CHECK-fail on a missing extension.
+            // MutableRawRepeatedField() will SHARK_CHECK-fail on a missing extension.
             // (E.g.: borg/clients/internal/proto1/proto2_reflection.cc.)
             void* MutableRawRepeatedField(int number);
 

@@ -186,7 +186,7 @@ namespace shark::compiler::python {
             }
             // (We could add a default case above but then we wouldn't get the nice
             // compiler warning when a new type is added.)
-            GOOGLE_LOG(FATAL) << "Not reached.";
+            SHARK_LOG(FATAL) << "Not reached.";
             return "";
         }
 
@@ -198,7 +198,7 @@ namespace shark::compiler::python {
                 return "proto3";
             case SyntaxEdition::SYNTAX_UNKNOWN:
             default:
-                GOOGLE_LOG(FATAL) << "Unsupported syntax; this generator only supports proto2 "
+                SHARK_LOG(FATAL) << "Unsupported syntax; this generator only supports proto2 "
                                      "and proto3 syntax.";
                 return "";
             }
@@ -260,7 +260,7 @@ namespace shark::compiler::python {
         fdp.SerializeToString(&file_descriptor_serialized_);
 
         std::unique_ptr<io::ZeroCopyOutputStream> output(context->Open(filename));
-        GOOGLE_CHECK(output.get());
+        SHARK_CHECK(output.get());
         io::Printer printer(output.get(), '$');
         printer_ = &printer;
 
@@ -939,7 +939,7 @@ namespace shark::compiler::python {
 
     void Generator::FixForeignFieldsInExtension(
         const FieldDescriptor& extension_field) const {
-        GOOGLE_CHECK(extension_field.is_extension());
+        SHARK_CHECK(extension_field.is_extension());
 
         std::map<std::string, std::string> m;
         // Confusingly, for FieldDescriptors that happen to be extensions,

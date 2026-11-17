@@ -63,7 +63,7 @@ GzipInputStream::GzipInputStream(ZeroCopyInputStream* sub_stream, Format format,
     output_buffer_length_ = buffer_size;
   }
   output_buffer_ = operator new(output_buffer_length_);
-  GOOGLE_CHECK(output_buffer_ != NULL);
+  SHARK_CHECK(output_buffer_ != NULL);
   zcontext_.next_out = static_cast<Bytef*>(output_buffer_);
   zcontext_.avail_out = output_buffer_length_;
   output_position_ = output_buffer_;
@@ -218,7 +218,7 @@ void GzipOutputStream::Init(ZeroCopyOutputStream* sub_stream,
 
   input_buffer_length_ = options.buffer_size;
   input_buffer_ = operator new(input_buffer_length_);
-  GOOGLE_CHECK(input_buffer_ != NULL);
+  SHARK_CHECK(input_buffer_ != NULL);
 
   zcontext_.zalloc = Z_NULL;
   zcontext_.zfree = Z_NULL;
@@ -292,7 +292,7 @@ bool GzipOutputStream::Next(void** data, int* size) {
     *size = input_buffer_length_;
   } else {
     // The loop in Deflate should consume all avail_in
-    GOOGLE_LOG(DFATAL) << "Deflate left bytes unconsumed";
+    SHARK_LOG(DFATAL) << "Deflate left bytes unconsumed";
   }
   return true;
 }

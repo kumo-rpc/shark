@@ -1093,7 +1093,7 @@ inline void TestUtil::SetOneofFields(UNITTEST::TestAllExtensions* message) {
 
 inline void TestUtil::SetAllFieldsAndExtensions(
     UNITTEST::TestFieldOrderings* message) {
-  GOOGLE_CHECK(message);
+  SHARK_CHECK(message);
   message->set_my_int(1);
   message->set_my_string("foo");
   message->set_my_float(1.0);

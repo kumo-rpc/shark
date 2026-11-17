@@ -753,7 +753,7 @@ namespace shark {
 #define SHARK_ASSERT_RETURN(predicate, ret)           \
     if (!(predicate)) {                               \
         /*  ::raise(SIGINT);  */                      \
-        /*  GOOGLE_LOG(ERROR) << "Parse failure";  */ \
+        /*  SHARK_LOG(ERROR) << "Parse failure";  */ \
         return ret;                                   \
     }
 

@@ -77,11 +77,11 @@ namespace shark::io {
         std::pair<size_t, size_t>* range) {
         std::map<std::string, std::pair<size_t, size_t>>::const_iterator iter = substitutions_.find(varname);
         if (iter == substitutions_.end()) {
-            GOOGLE_LOG(DFATAL) << " Undefined variable in annotation: " << varname;
+            SHARK_LOG(DFATAL) << " Undefined variable in annotation: " << varname;
             return false;
         }
         if (iter->second.first > iter->second.second) {
-            GOOGLE_LOG(DFATAL) << " Variable used for annotation used multiple times: "
+            SHARK_LOG(DFATAL) << " Variable used for annotation used multiple times: "
                                << varname;
             return false;
         }
@@ -101,7 +101,7 @@ namespace shark::io {
             return;
         }
         if (begin.first > end.second) {
-            GOOGLE_LOG(DFATAL) << "  Annotation has negative length from " << begin_varname
+            SHARK_LOG(DFATAL) << "  Annotation has negative length from " << begin_varname
                                << " to " << end_varname;
         } else {
             annotation_collector_->AddAnnotation(begin.first, end.second, file_path,
@@ -138,7 +138,7 @@ namespace shark::io {
                 // Find closing delimiter.
                 const char* end = strchr(text + pos, variable_delimiter_);
                 if (end == NULL) {
-                    GOOGLE_LOG(DFATAL) << " Unclosed variable name.";
+                    SHARK_LOG(DFATAL) << " Unclosed variable name.";
                     end = text + pos;
                 }
                 int endpos = end - text;
@@ -151,7 +151,7 @@ namespace shark::io {
                     // Replace with the variable's value.
                     std::map<std::string, std::string>::const_iterator iter = variables.find(varname);
                     if (iter == variables.end()) {
-                        GOOGLE_LOG(DFATAL) << " Undefined variable: " << varname;
+                        SHARK_LOG(DFATAL) << " Undefined variable: " << varname;
                     } else {
                         if (at_start_of_line_ && iter->second.empty()) {
                             line_start_variables_.push_back(varname);
@@ -187,7 +187,7 @@ namespace shark::io {
 
     void Printer::Outdent() {
         if (indent_.empty()) {
-            GOOGLE_LOG(DFATAL) << " Outdent() without matching Indent().";
+            SHARK_LOG(DFATAL) << " Outdent() without matching Indent().";
             return;
         }
 
@@ -304,10 +304,10 @@ namespace shark::io {
             push_back(c);
         }
         if (arg_index != static_cast<int>(args.size())) {
-            GOOGLE_LOG(FATAL) << " Unused arguments. " << save;
+            SHARK_LOG(FATAL) << " Unused arguments. " << save;
         }
         if (!annotations.empty()) {
-            GOOGLE_LOG(FATAL) << " Annotation range is not-closed, expect $}$. " << save;
+            SHARK_LOG(FATAL) << " Annotation range is not-closed, expect $}$. " << save;
         }
     }
 
@@ -318,7 +318,7 @@ namespace shark::io {
         auto start = format;
         auto end = strchr(format, '$');
         if (!end) {
-            GOOGLE_LOG(FATAL) << " Unclosed variable name.";
+            SHARK_LOG(FATAL) << " Unclosed variable name.";
         }
         format = end + 1;
         if (end == start) {
@@ -328,14 +328,14 @@ namespace shark::io {
             return format;
         }
         if (*start == '{') {
-            GOOGLE_CHECK(std::isdigit(start[1]));
+            SHARK_CHECK(std::isdigit(start[1]));
             GOOGLE_CHECK_EQ(end - start, 2);
             int idx = start[1] - '1';
             if (idx < 0 || static_cast<size_t>(idx) >= args.size()) {
-                GOOGLE_LOG(FATAL) << "Annotation ${" << idx + 1 << "$ is out of bounds.";
+                SHARK_LOG(FATAL) << "Annotation ${" << idx + 1 << "$ is out of bounds.";
             }
             if (idx > *arg_index) {
-                GOOGLE_LOG(FATAL) << "Annotation arg must be in correct order as given. Expected"
+                SHARK_LOG(FATAL) << "Annotation arg must be in correct order as given. Expected"
                                   << " ${" << (*arg_index) + 1 << "$ got ${" << idx + 1 << "$.";
             } else if (idx == *arg_index) {
                 (*arg_index)++;
@@ -344,9 +344,9 @@ namespace shark::io {
             annotations->push_back({ { offset_, 0 }, args[idx] });
             return format;
         } else if (*start == '}') {
-            GOOGLE_CHECK(annotations);
+            SHARK_CHECK(annotations);
             if (annotations->empty()) {
-                GOOGLE_LOG(FATAL) << "Unexpected end of annotation found.";
+                SHARK_LOG(FATAL) << "Unexpected end of annotation found.";
             }
             auto& a = annotations->back();
             a.first.second = offset_;
@@ -359,7 +359,7 @@ namespace shark::io {
         while (start_var < end && *start_var == ' ')
             start_var++;
         if (start_var == end) {
-            GOOGLE_LOG(FATAL) << " Empty variable.";
+            SHARK_LOG(FATAL) << " Empty variable.";
         }
         auto end_var = end;
         while (start_var < end_var && *(end_var - 1) == ' ')
@@ -373,10 +373,10 @@ namespace shark::io {
             int idx = var_name[0] - '1'; // Start counting at 1
             GOOGLE_CHECK_GE(idx, 0);
             if (static_cast<size_t>(idx) >= args.size()) {
-                GOOGLE_LOG(FATAL) << "Argument $" << idx + 1 << "$ is out of bounds.";
+                SHARK_LOG(FATAL) << "Argument $" << idx + 1 << "$ is out of bounds.";
             }
             if (idx > *arg_index) {
-                GOOGLE_LOG(FATAL) << "Arguments must be used in same order as given. Expected $"
+                SHARK_LOG(FATAL) << "Arguments must be used in same order as given. Expected $"
                                   << (*arg_index) + 1 << "$ got $" << idx + 1 << "$.";
             } else if (idx == *arg_index) {
                 (*arg_index)++;
@@ -385,7 +385,7 @@ namespace shark::io {
         } else {
             auto it = vars.find(var_name);
             if (it == vars.end()) {
-                GOOGLE_LOG(FATAL) << " Unknown variable: " << var_name << ".";
+                SHARK_LOG(FATAL) << " Unknown variable: " << var_name << ".";
             }
             sub = it->second;
         }

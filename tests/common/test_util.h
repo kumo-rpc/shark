@@ -169,7 +169,7 @@ inline const FieldDescriptor* TestUtil::ReflectionTester::F(
   } else {
     result = base_descriptor_->FindFieldByName(name);
   }
-  GOOGLE_CHECK(result != nullptr);
+  SHARK_CHECK(result != nullptr);
   return result;
 }
 

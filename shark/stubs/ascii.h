@@ -29,7 +29,7 @@ namespace shark {
     std::string ToJsonName(const std::string& input);
 
 
-   inline  bool IsUpperCamelCase(const std::string& name) {
+   inline  bool is_upper_camel_case(const std::string& name) {
         if (name.empty()) {
             return true;
         }
@@ -46,7 +46,7 @@ namespace shark {
         return true;
     }
 
-    inline bool IsUpperUnderscore(const std::string& name) {
+    inline bool is_upper_underscore(const std::string& name) {
         for (const char c : name) {
             if (!turbo::ascii_isupper(c) && c != '_' && !turbo::ascii_isdigit(c)) {
                 return false;
@@ -55,7 +55,7 @@ namespace shark {
         return true;
     }
 
-    inline bool IsLowerUnderscore(const std::string& name) {
+    inline bool is_lower_underscore(const std::string& name) {
         for (const char c : name) {
             if (!turbo::ascii_islower(c) && c != '_' && !turbo::ascii_isdigit(c)) {
                 return false;
@@ -64,7 +64,7 @@ namespace shark {
         return true;
     }
 
-    inline bool IsNumberFollowUnderscore(const std::string& name) {
+    inline bool is_number_follow_underscore(const std::string& name) {
         for (int i = 1; i < name.length(); i++) {
             const char c = name[i];
             if (turbo::ascii_isdigit(c) && name[i - 1] == '_') {

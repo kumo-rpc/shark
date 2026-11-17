@@ -459,7 +459,7 @@ void FieldMaskTree::MergeMessage(const Node* node, const Message& source,
     const Node* child = it->second;
     const FieldDescriptor* field = descriptor->FindFieldByName(field_name);
     if (field == nullptr) {
-      GOOGLE_LOG(ERROR) << "Cannot find field \"" << field_name << "\" in message "
+      SHARK_LOG(ERROR) << "Cannot find field \"" << field_name << "\" in message "
                  << descriptor->full_name();
       continue;
     }
@@ -467,7 +467,7 @@ void FieldMaskTree::MergeMessage(const Node* node, const Message& source,
       // Sub-paths are only allowed for singular message fields.
       if (field->is_repeated() ||
           field->cpp_type() != SharkFieldCppType::CPPTYPE_MESSAGE) {
-        GOOGLE_LOG(ERROR) << "Field \"" << field_name << "\" in message "
+        SHARK_LOG(ERROR) << "Field \"" << field_name << "\" in message "
                    << descriptor->full_name()
                    << " is not a singular message field and cannot "
                    << "have sub-fields.";
@@ -692,7 +692,7 @@ bool FieldMaskUtil::IsPathInFieldMask(std::string_view path,
 void FieldMaskUtil::MergeMessageTo(const Message& source, const FieldMask& mask,
                                    const MergeOptions& options,
                                    Message* destination) {
-  GOOGLE_CHECK(source.GetDescriptor() == destination->GetDescriptor());
+  SHARK_CHECK(source.GetDescriptor() == destination->GetDescriptor());
   // Build a FieldMaskTree and walk through the tree to merge all specified
   // fields.
   FieldMaskTree tree;

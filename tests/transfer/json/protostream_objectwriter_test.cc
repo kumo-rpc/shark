@@ -116,7 +116,7 @@ class BaseProtoStreamObjectWriterTest
   }
 
   void ResetTypeInfo(std::vector<const Descriptor*> descriptors) {
-    GOOGLE_CHECK(!descriptors.empty()) << "Must have at least one descriptor!";
+    SHARK_CHECK(!descriptors.empty()) << "Must have at least one descriptor!";
     helper_.ResetTypeInfo(descriptors);
     ow_.reset(helper_.NewProtoWriter(GetTypeUrl(descriptors[0]), output_.get(),
                                      &listener_, options_));

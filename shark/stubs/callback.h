@@ -70,7 +70,7 @@ namespace shark {
     // However, correctly-typed pointers will work just fine.
     class SHARK_EXPORT Closure {
     public:
-        Closure() { }
+        Closure()  = default;
         virtual ~Closure();
 
         virtual void Run() = 0;
@@ -82,8 +82,8 @@ namespace shark {
     template <typename R>
     class ResultCallback {
     public:
-        ResultCallback() { }
-        virtual ~ResultCallback() { }
+        ResultCallback()  = default;
+        virtual ~ResultCallback() = default;
 
         virtual R Run() = 0;
 
@@ -94,8 +94,8 @@ namespace shark {
     template <typename R, typename A1>
     class SHARK_EXPORT ResultCallback1 {
     public:
-        ResultCallback1() { }
-        virtual ~ResultCallback1() { }
+        ResultCallback1()  = default;
+        virtual ~ResultCallback1() = default;
 
         virtual R Run(A1) = 0;
 
@@ -106,8 +106,8 @@ namespace shark {
     template <typename R, typename A1, typename A2>
     class SHARK_EXPORT ResultCallback2 {
     public:
-        ResultCallback2() { }
-        virtual ~ResultCallback2() { }
+        ResultCallback2() = default;
+        virtual ~ResultCallback2() = default;
 
         virtual R Run(A1, A2) = 0;
 
@@ -124,7 +124,7 @@ namespace shark {
             FunctionClosure0(FunctionType function, bool self_deleting)
                 : function_(function)
                 , self_deleting_(self_deleting) { }
-            ~FunctionClosure0();
+            ~FunctionClosure0() override;
 
             void Run() override {
                 bool needs_delete = self_deleting_; // read in case callback deletes
@@ -147,7 +147,7 @@ namespace shark {
                 : object_(object)
                 , method_(method)
                 , self_deleting_(self_deleting) { }
-            ~MethodClosure0() { }
+            ~MethodClosure0() override = default;
 
             void Run() override {
                 bool needs_delete = self_deleting_; // read in case callback deletes
@@ -171,8 +171,8 @@ namespace shark {
                 Arg1 arg1)
                 : function_(function)
                 , self_deleting_(self_deleting)
-                , arg1_(arg1) { }
-            ~FunctionClosure1() { }
+                , arg1_(arg1) {}
+            ~FunctionClosure1() override = default;
 
             void Run() override {
                 bool needs_delete = self_deleting_; // read in case callback deletes
@@ -198,7 +198,7 @@ namespace shark {
                 , method_(method)
                 , self_deleting_(self_deleting)
                 , arg1_(arg1) { }
-            ~MethodClosure1() { }
+            ~MethodClosure1() override = default;
 
             void Run() override {
                 bool needs_delete = self_deleting_; // read in case callback deletes
@@ -225,7 +225,7 @@ namespace shark {
                 , self_deleting_(self_deleting)
                 , arg1_(arg1)
                 , arg2_(arg2) { }
-            ~FunctionClosure2() { }
+            ~FunctionClosure2() override = default;
 
             void Run() override {
                 bool needs_delete = self_deleting_; // read in case callback deletes
@@ -253,7 +253,7 @@ namespace shark {
                 , self_deleting_(self_deleting)
                 , arg1_(arg1)
                 , arg2_(arg2) { }
-            ~MethodClosure2() { }
+            ~MethodClosure2() override = default;
 
             void Run() override {
                 bool needs_delete = self_deleting_; // read in case callback deletes
@@ -278,7 +278,7 @@ namespace shark {
             FunctionResultCallback_0_0(FunctionType function, bool self_deleting)
                 : function_(function)
                 , self_deleting_(self_deleting) { }
-            ~FunctionResultCallback_0_0() { }
+            ~FunctionResultCallback_0_0() override = default;
 
             R Run() override {
                 bool needs_delete = self_deleting_; // read in case callback deletes
@@ -303,7 +303,7 @@ namespace shark {
                 : function_(function)
                 , self_deleting_(self_deleting)
                 , p1_(p1) { }
-            ~FunctionResultCallback_1_0() { }
+            ~FunctionResultCallback_1_0() override = default;
 
             R Run() override {
                 bool needs_delete = self_deleting_; // read in case callback deletes
@@ -327,7 +327,7 @@ namespace shark {
             FunctionResultCallback_0_1(FunctionType function, bool self_deleting)
                 : function_(function)
                 , self_deleting_(self_deleting) { }
-            ~FunctionResultCallback_0_1() { }
+            ~FunctionResultCallback_0_1() override = default;
 
             R Run(Arg1 a1) override {
                 bool needs_delete = self_deleting_; // read in case callback deletes
@@ -352,7 +352,7 @@ namespace shark {
                 : function_(function)
                 , self_deleting_(self_deleting)
                 , p1_(p1) { }
-            ~FunctionResultCallback_1_1() { }
+            ~FunctionResultCallback_1_1() override = default;
 
             R Run(A1 a1) override {
                 bool needs_delete = self_deleting_; // read in case callback deletes
@@ -370,7 +370,7 @@ namespace shark {
 
         template <typename T>
         struct InternalConstRef {
-            typedef typename std::remove_reference<T>::type base_type;
+            using base_type = std::remove_reference_t<T> ;
             typedef const base_type& type;
         };
 
@@ -382,7 +382,7 @@ namespace shark {
                 : object_(object)
                 , method_(method)
                 , self_deleting_(self_deleting) { }
-            ~MethodResultCallback_0_0() { }
+            ~MethodResultCallback_0_0() override = default;
 
             R Run() {
                 bool needs_delete = self_deleting_;
@@ -414,7 +414,7 @@ namespace shark {
                 , p4_(p4)
                 , p5_(p5)
                 , p6_(p6) { }
-            ~MethodResultCallback_6_2() { }
+            ~MethodResultCallback_6_2() override = default;
 
             R Run(A1 a1, A2 a2) override {
                 bool needs_delete = self_deleting_;
@@ -428,12 +428,12 @@ namespace shark {
             T* object_;
             MethodType method_;
             bool self_deleting_;
-            typename std::remove_reference<P1>::type p1_;
-            typename std::remove_reference<P2>::type p2_;
-            typename std::remove_reference<P3>::type p3_;
-            typename std::remove_reference<P4>::type p4_;
-            typename std::remove_reference<P5>::type p5_;
-            typename std::remove_reference<P6>::type p6_;
+            std::remove_reference_t<P1> p1_;
+            std::remove_reference_t<P2> p2_;
+            std::remove_reference_t<P3> p3_;
+            std::remove_reference_t<P4> p4_;
+            std::remove_reference_t<P5> p5_;
+            std::remove_reference_t<P6> p6_;
         };
 
     } // namespace internal
@@ -450,47 +450,47 @@ namespace shark {
 
     // See Closure.
     template <typename Class>
-    inline Closure* NewCallback(Class* object, void (Class::*method)()) {
+    Closure* NewCallback(Class* object, void (Class::*method)()) {
         return new internal::MethodClosure0<Class>(object, method, true);
     }
 
     // See Closure.
     template <typename Class>
-    inline Closure* NewPermanentCallback(Class* object, void (Class::*method)()) {
+    Closure* NewPermanentCallback(Class* object, void (Class::*method)()) {
         return new internal::MethodClosure0<Class>(object, method, false);
     }
 
     // See Closure.
     template <typename Arg1>
-    inline Closure* NewCallback(void (*function)(Arg1),
+    Closure* NewCallback(void (*function)(Arg1),
         Arg1 arg1) {
         return new internal::FunctionClosure1<Arg1>(function, true, arg1);
     }
 
     // See Closure.
     template <typename Arg1>
-    inline Closure* NewPermanentCallback(void (*function)(Arg1),
+    Closure* NewPermanentCallback(void (*function)(Arg1),
         Arg1 arg1) {
         return new internal::FunctionClosure1<Arg1>(function, false, arg1);
     }
 
     // See Closure.
     template <typename Class, typename Arg1>
-    inline Closure* NewCallback(Class* object, void (Class::*method)(Arg1),
+    Closure* NewCallback(Class* object, void (Class::*method)(Arg1),
         Arg1 arg1) {
         return new internal::MethodClosure1<Class, Arg1>(object, method, true, arg1);
     }
 
     // See Closure.
     template <typename Class, typename Arg1>
-    inline Closure* NewPermanentCallback(Class* object, void (Class::*method)(Arg1),
+    Closure* NewPermanentCallback(Class* object, void (Class::*method)(Arg1),
         Arg1 arg1) {
         return new internal::MethodClosure1<Class, Arg1>(object, method, false, arg1);
     }
 
     // See Closure.
     template <typename Arg1, typename Arg2>
-    inline Closure* NewCallback(void (*function)(Arg1, Arg2),
+    Closure* NewCallback(void (*function)(Arg1, Arg2),
         Arg1 arg1, Arg2 arg2) {
         return new internal::FunctionClosure2<Arg1, Arg2>(
             function, true, arg1, arg2);
@@ -498,7 +498,7 @@ namespace shark {
 
     // See Closure.
     template <typename Arg1, typename Arg2>
-    inline Closure* NewPermanentCallback(void (*function)(Arg1, Arg2),
+    Closure* NewPermanentCallback(void (*function)(Arg1, Arg2),
         Arg1 arg1, Arg2 arg2) {
         return new internal::FunctionClosure2<Arg1, Arg2>(
             function, false, arg1, arg2);
@@ -506,7 +506,7 @@ namespace shark {
 
     // See Closure.
     template <typename Class, typename Arg1, typename Arg2>
-    inline Closure* NewCallback(Class* object, void (Class::*method)(Arg1, Arg2),
+    Closure* NewCallback(Class* object, void (Class::*method)(Arg1, Arg2),
         Arg1 arg1, Arg2 arg2) {
         return new internal::MethodClosure2<Class, Arg1, Arg2>(
             object, method, true, arg1, arg2);
@@ -514,7 +514,7 @@ namespace shark {
 
     // See Closure.
     template <typename Class, typename Arg1, typename Arg2>
-    inline Closure* NewPermanentCallback(
+    Closure* NewPermanentCallback(
         Class* object, void (Class::*method)(Arg1, Arg2),
         Arg1 arg1, Arg2 arg2) {
         return new internal::MethodClosure2<Class, Arg1, Arg2>(
@@ -523,26 +523,26 @@ namespace shark {
 
     // See ResultCallback
     template <typename R>
-    inline ResultCallback<R>* NewCallback(R (*function)()) {
+    ResultCallback<R>* NewCallback(R (*function)()) {
         return new internal::FunctionResultCallback_0_0<R>(function, true);
     }
 
     // See ResultCallback
     template <typename R>
-    inline ResultCallback<R>* NewPermanentCallback(R (*function)()) {
+    ResultCallback<R>* NewPermanentCallback(R (*function)()) {
         return new internal::FunctionResultCallback_0_0<R>(function, false);
     }
 
     // See ResultCallback
     template <typename R, typename P1>
-    inline ResultCallback<R>* NewCallback(R (*function)(P1), P1 p1) {
+    ResultCallback<R>* NewCallback(R (*function)(P1), P1 p1) {
         return new internal::FunctionResultCallback_1_0<R, P1>(
             function, true, p1);
     }
 
     // See ResultCallback
     template <typename R, typename P1>
-    inline ResultCallback<R>* NewPermanentCallback(
+    ResultCallback<R>* NewPermanentCallback(
         R (*function)(P1), P1 p1) {
         return new internal::FunctionResultCallback_1_0<R, P1>(
             function, false, p1);
@@ -550,26 +550,26 @@ namespace shark {
 
     // See ResultCallback1
     template <typename R, typename A1>
-    inline ResultCallback1<R, A1>* NewCallback(R (*function)(A1)) {
+    ResultCallback1<R, A1>* NewCallback(R (*function)(A1)) {
         return new internal::FunctionResultCallback_0_1<R, A1>(function, true);
     }
 
     // See ResultCallback1
     template <typename R, typename A1>
-    inline ResultCallback1<R, A1>* NewPermanentCallback(R (*function)(A1)) {
+    ResultCallback1<R, A1>* NewPermanentCallback(R (*function)(A1)) {
         return new internal::FunctionResultCallback_0_1<R, A1>(function, false);
     }
 
     // See ResultCallback1
     template <typename R, typename P1, typename A1>
-    inline ResultCallback1<R, A1>* NewCallback(R (*function)(P1, A1), P1 p1) {
+    ResultCallback1<R, A1>* NewCallback(R (*function)(P1, A1), P1 p1) {
         return new internal::FunctionResultCallback_1_1<R, P1, A1>(
             function, true, p1);
     }
 
     // See ResultCallback1
     template <typename R, typename P1, typename A1>
-    inline ResultCallback1<R, A1>* NewPermanentCallback(
+    ResultCallback1<R, A1>* NewPermanentCallback(
         R (*function)(P1, A1), P1 p1) {
         return new internal::FunctionResultCallback_1_1<R, P1, A1>(
             function, false, p1);
@@ -577,7 +577,7 @@ namespace shark {
 
     // See MethodResultCallback_0_0
     template <typename R, typename T1, typename T2>
-    inline ResultCallback<R>* NewPermanentCallback(
+    ResultCallback<R>* NewPermanentCallback(
         T1* object, R (T2::*function)()) {
         return new internal::MethodResultCallback_0_0<R, T1>(object, function, false);
     }
@@ -585,7 +585,7 @@ namespace shark {
     // See MethodResultCallback_6_2
     template <typename R, typename T, typename P1, typename P2, typename P3,
         typename P4, typename P5, typename P6, typename A1, typename A2>
-    inline ResultCallback2<R, A1, A2>* NewPermanentCallback(
+    ResultCallback2<R, A1, A2>* NewPermanentCallback(
         T* object, R (T::*function)(P1, P2, P3, P4, P5, P6, A1, A2),
         typename internal::InternalConstRef<P1>::type p1,
         typename internal::InternalConstRef<P2>::type p2,

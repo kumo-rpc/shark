@@ -87,7 +87,7 @@ namespace shark {
                    "may indicate a bug in protocol buffers or it may be caused by "
                    "concurrent modification of "
                 << message.GetTypeName() << ".";
-            GOOGLE_LOG(FATAL) << "This shouldn't be called if all the sizes are equal.";
+            SHARK_LOG(FATAL) << "This shouldn't be called if all the sizes are equal.";
         }
 
         std::string InitializationErrorMessage(const char* action,
@@ -129,7 +129,7 @@ namespace shark {
     } // namespace
 
     void MessageLite::LogInitializationErrorMessage() const {
-        GOOGLE_LOG(ERROR) << InitializationErrorMessage("parse", *this);
+        SHARK_LOG(ERROR) << InitializationErrorMessage("parse", *this);
     }
 
     namespace internal {
@@ -372,7 +372,7 @@ namespace shark {
         io::CodedOutputStream* output) const {
         const size_t size = ByteSizeLong(); // Force size to be cached.
         if (size > INT_MAX) {
-            GOOGLE_LOG(ERROR) << GetTypeName()
+            SHARK_LOG(ERROR) << GetTypeName()
                               << " exceeded maximum protobuf size of 2GB: " << size;
             return false;
         }
@@ -402,7 +402,7 @@ namespace shark {
         io::ZeroCopyOutputStream* output) const {
         const size_t size = ByteSizeLong(); // Force size to be cached.
         if (size > INT_MAX) {
-            GOOGLE_LOG(ERROR) << GetTypeName()
+            SHARK_LOG(ERROR) << GetTypeName()
                               << " exceeded maximum protobuf size of 2GB: " << size;
             return false;
         }
@@ -451,7 +451,7 @@ namespace shark {
         size_t old_size = output->size();
         size_t byte_size = ByteSizeLong();
         if (byte_size > INT_MAX) {
-            GOOGLE_LOG(ERROR) << GetTypeName()
+            SHARK_LOG(ERROR) << GetTypeName()
                               << " exceeded maximum protobuf size of 2GB: " << byte_size;
             return false;
         }
@@ -480,7 +480,7 @@ namespace shark {
     bool MessageLite::SerializePartialToArray(void* data, int size) const {
         const size_t byte_size = ByteSizeLong();
         if (byte_size > INT_MAX) {
-            GOOGLE_LOG(ERROR) << GetTypeName()
+            SHARK_LOG(ERROR) << GetTypeName()
                               << " exceeded maximum protobuf size of 2GB: " << byte_size;
             return false;
         }

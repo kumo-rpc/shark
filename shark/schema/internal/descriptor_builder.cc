@@ -52,10 +52,10 @@ namespace shark {
         const std::string& error) {
         if (error_collector_ == nullptr) {
             if (!had_errors_) {
-                GOOGLE_LOG(ERROR) << "Invalid proto descriptor for file \"" << filename_
+                SHARK_LOG(ERROR) << "Invalid proto descriptor for file \"" << filename_
                                   << "\":";
             }
-            GOOGLE_LOG(ERROR) << "  " << element_name << ": " << error;
+            SHARK_LOG(ERROR) << "  " << element_name << ": " << error;
         } else {
             error_collector_->add_error(filename_, element_name, &descriptor, location,
                 error);
@@ -100,7 +100,7 @@ namespace shark {
         DescriptorPool::ErrorCollector::ErrorLocation location,
         const std::string& error) {
         if (error_collector_ == nullptr) {
-            GOOGLE_LOG(WARNING) << filename_ << " " << element_name << ": " << error;
+            SHARK_LOG(WARNING) << filename_ << " " << element_name << ": " << error;
         } else {
             error_collector_->add_warning(filename_, element_name, &descriptor, location,
                 error);
@@ -309,7 +309,7 @@ namespace shark {
                 // This is only possible if there was already an error adding something of
                 // the same name.
                 if (!had_errors_) {
-                    GOOGLE_LOG(DFATAL) << "\"" << full_name
+                    SHARK_LOG(DFATAL) << "\"" << full_name
                                        << "\" not previously defined in "
                                           "symbols_by_name_, but was defined in "
                                           "symbols_by_parent_; this shouldn't be possible.";
@@ -496,7 +496,7 @@ namespace shark {
     // necessary memory allocations that BuildXXX functions below will do on the
     // Tables object.
     // They *must* be kept in sync. If we miss some PlanArray call we won't have
-    // enough memory and will GOOGLE_CHECK-fail.
+    // enough memory and will SHARK_CHECK-fail.
     static void PlanAllocationSize(
         const RepeatedPtrField<EnumValueDescriptorProto>& values,
         internal::FlatAllocator& alloc) {
@@ -993,7 +993,7 @@ namespace shark {
         // Find the uninterpreted_option field in the mutable copy of the options
         // and clear them, since we're about to interpret them.
         const FieldDescriptor* uninterpreted_options_field = options->GetDescriptor()->FindFieldByName("uninterpreted_option");
-        GOOGLE_CHECK(uninterpreted_options_field != nullptr)
+        SHARK_CHECK(uninterpreted_options_field != nullptr)
             << "No field named \"uninterpreted_option\" in the Options proto.";
         options->GetReflection()->ClearField(options, uninterpreted_options_field);
 
@@ -1003,7 +1003,7 @@ namespace shark {
         // Find the uninterpreted_option field in the original options.
         const FieldDescriptor* original_uninterpreted_options_field = original_options->GetDescriptor()->FindFieldByName(
             "uninterpreted_option");
-        GOOGLE_CHECK(original_uninterpreted_options_field != nullptr)
+        SHARK_CHECK(original_uninterpreted_options_field != nullptr)
             << "No field named \"uninterpreted_option\" in the Options proto.";
 
         const int num_uninterpreted_options = original_options->GetReflection()->FieldSize(
@@ -1093,7 +1093,7 @@ namespace shark {
             // generated pool's mutex, so we can search it the straightforward way.
             options_descriptor = options->GetDescriptor();
         }
-        GOOGLE_CHECK(options_descriptor);
+        SHARK_CHECK(options_descriptor);
 
         // We iterate over the name parts to drill into the submessages until we find
         // the leaf field for the option. As we drill down we remember the current
@@ -1212,14 +1212,14 @@ namespace shark {
             switch ((*iter)->type()) {
             case SharkFieldType::MESSAGE: {
                 std::string* outstr = parent_unknown_fields->AddLengthDelimited((*iter)->number());
-                GOOGLE_CHECK(unknown_fields->SerializeToString(outstr))
+                SHARK_CHECK(unknown_fields->SerializeToString(outstr))
                     << "Unexpected failure while serializing option submessage "
                     << debug_msg_name << "\".";
                 break;
             }
 
             default:
-                GOOGLE_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_MESSAGE: "
+                SHARK_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_MESSAGE: "
                                   << static_cast<int>((*iter)->type());
                 return false;
             }
@@ -1335,7 +1335,7 @@ namespace shark {
     void DescriptorBuilder::OptionInterpreter::AddWithoutInterpreting(
         const UninterpretedOption& uninterpreted_option, Message* options) {
         const FieldDescriptor* field = options->GetDescriptor()->FindFieldByName("uninterpreted_option");
-        GOOGLE_CHECK(field != nullptr);
+        SHARK_CHECK(field != nullptr);
 
         options->GetReflection()
             ->AddMessage(options, field)
@@ -1384,7 +1384,7 @@ namespace shark {
                     break;
 
                 default:
-                    GOOGLE_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_MESSAGE: " << static_cast<int>(type);
+                    SHARK_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_MESSAGE: " << static_cast<int>(type);
                     return false;
                 }
             }
@@ -3544,7 +3544,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
     DescriptorBuilder::OptionInterpreter::OptionInterpreter(
         DescriptorBuilder* builder)
         : builder_(builder) {
-        GOOGLE_CHECK(builder_);
+        SHARK_CHECK(builder_);
     }
 
 
@@ -3585,7 +3585,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
 
         const Descriptor* type = option_field->message_type();
         std::unique_ptr<Message> dynamic(dynamic_factory_.GetPrototype(type)->New());
-        GOOGLE_CHECK(dynamic.get() != nullptr)
+        SHARK_CHECK(dynamic.get() != nullptr)
             << "Could not create an instance of " << option_field->DebugString();
 
         AggregateErrorCollector collector;
@@ -3627,7 +3627,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             break;
 
         default:
-            GOOGLE_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_INT32: " << static_cast<int>(type);
+            SHARK_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_INT32: " << static_cast<int>(type);
             break;
         }
     }
@@ -3650,7 +3650,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             break;
 
         default:
-            GOOGLE_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_INT64: " << static_cast<int>(type);
+            SHARK_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_INT64: " << static_cast<int>(type);
             break;
         }
     }
@@ -3670,7 +3670,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             break;
 
         default:
-            GOOGLE_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_UINT32: " << static_cast<int>(type);
+            SHARK_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_UINT32: " << static_cast<int>(type);
             break;
         }
     }
@@ -3688,7 +3688,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             break;
 
         default:
-            GOOGLE_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_UINT64: " << static_cast<int>(type);
+            SHARK_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_UINT64: " << static_cast<int>(type);
             break;
         }
     }

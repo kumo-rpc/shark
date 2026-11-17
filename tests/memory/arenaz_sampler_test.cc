@@ -320,7 +320,7 @@ class ThreadSafeArenazSamplerTestThread : public Thread {
         protobuf_test_messages::proto2::TestAllTypesProto2>
         message = shark::MakeArenaSafeUnique<
             protobuf_test_messages::proto2::TestAllTypesProto2>(arena_);
-    GOOGLE_CHECK(message != nullptr);
+    SHARK_CHECK(message != nullptr);
     // Signal that a message on the arena has been created.  This should create
     // a SerialArena for this thread.
     if (barrier_->Block()) {

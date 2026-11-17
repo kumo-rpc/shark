@@ -164,7 +164,7 @@ namespace shark::compiler::cpp {
                 aligned_to_8[f].push_back(FieldGroup(j, field));
                 break;
             default:
-                GOOGLE_LOG(FATAL) << "Unknown alignment size " << EstimateAlignmentSize(field)
+                SHARK_LOG(FATAL) << "Unknown alignment size " << EstimateAlignmentSize(field)
                                   << "for a field " << field->full_name() << ".";
             }
         }

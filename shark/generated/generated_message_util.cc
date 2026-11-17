@@ -356,7 +356,7 @@ class AccessorHelper {
 };
 
 void SerializeNotImplemented(int field) {
-  GOOGLE_LOG(FATAL) << "Not implemented field number " << field;
+  SHARK_LOG(FATAL) << "Not implemented field number " << field;
 }
 
 // When switching to c++11 we should make these constexpr functions

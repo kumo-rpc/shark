@@ -99,7 +99,7 @@ namespace shark::compiler::cpp {
         void GenerateSwappingCode(io::Printer* printer) const override;
         void GenerateConstructorCode(io::Printer* printer) const override { }
         void GenerateCopyConstructorCode(io::Printer* /*printer*/) const override {
-            GOOGLE_CHECK(!ShouldSplit(descriptor_, options_));
+            SHARK_CHECK(!ShouldSplit(descriptor_, options_));
         }
         void GenerateDestructorCode(io::Printer* printer) const override;
         void GenerateSerializeWithCachedSizesToArray(

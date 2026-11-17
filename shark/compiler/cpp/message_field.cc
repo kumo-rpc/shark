@@ -362,7 +362,7 @@ namespace shark::compiler::cpp {
     }
 
     void MessageFieldGenerator::GenerateClearingCode(io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         if (!HasHasbit(descriptor_)) {
@@ -380,7 +380,7 @@ namespace shark::compiler::cpp {
 
     void MessageFieldGenerator::GenerateMessageClearingCode(
         io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         if (!HasHasbit(descriptor_)) {
@@ -399,7 +399,7 @@ namespace shark::compiler::cpp {
     }
 
     void MessageFieldGenerator::GenerateMergingCode(io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         if (implicit_weak_field_) {
@@ -414,14 +414,14 @@ namespace shark::compiler::cpp {
     }
 
     void MessageFieldGenerator::GenerateSwappingCode(io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         format("swap($field$, other->$field$);\n");
     }
 
     void MessageFieldGenerator::GenerateDestructorCode(io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         if (options_.opensource_runtime) {
@@ -441,7 +441,7 @@ namespace shark::compiler::cpp {
 
     void MessageFieldGenerator::GenerateCopyConstructorCode(
         io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         format(
@@ -452,7 +452,7 @@ namespace shark::compiler::cpp {
 
     void MessageFieldGenerator::GenerateSerializeWithCachedSizesToArray(
         io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         if (descriptor_->type() == SharkFieldType::MESSAGE) {
@@ -470,7 +470,7 @@ namespace shark::compiler::cpp {
     }
 
     void MessageFieldGenerator::GenerateByteSize(io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         format(
@@ -480,7 +480,7 @@ namespace shark::compiler::cpp {
     }
 
     void MessageFieldGenerator::GenerateIsInitialized(io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         if (!has_required_fields_)
             return;
@@ -656,7 +656,7 @@ namespace shark::compiler::cpp {
 
     void MessageOneofFieldGenerator::GenerateClearingCode(
         io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         format(
@@ -828,7 +828,7 @@ namespace shark::compiler::cpp {
 
     void RepeatedMessageFieldGenerator::GenerateClearingCode(
         io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         format("$field$.Clear();\n");
@@ -836,7 +836,7 @@ namespace shark::compiler::cpp {
 
     void RepeatedMessageFieldGenerator::GenerateMergingCode(
         io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         format("_this->$field$.MergeFrom(from.$field$);\n");
@@ -844,7 +844,7 @@ namespace shark::compiler::cpp {
 
     void RepeatedMessageFieldGenerator::GenerateSwappingCode(
         io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         format("$field$.InternalSwap(&other->$field$);\n");
@@ -857,7 +857,7 @@ namespace shark::compiler::cpp {
 
     void RepeatedMessageFieldGenerator::GenerateDestructorCode(
         io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         if (implicit_weak_field_) {
@@ -869,7 +869,7 @@ namespace shark::compiler::cpp {
 
     void RepeatedMessageFieldGenerator::GenerateSerializeWithCachedSizesToArray(
         io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         if (implicit_weak_field_) {
@@ -914,7 +914,7 @@ namespace shark::compiler::cpp {
 
     void RepeatedMessageFieldGenerator::GenerateByteSize(
         io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         Formatter format(printer, variables_);
         format(
@@ -927,7 +927,7 @@ namespace shark::compiler::cpp {
 
     void RepeatedMessageFieldGenerator::GenerateIsInitialized(
         io::Printer* printer) const {
-        GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
+        SHARK_CHECK(!IsFieldStripped(descriptor_, options_));
 
         if (!has_required_fields_)
             return;

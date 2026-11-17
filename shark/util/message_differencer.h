@@ -313,7 +313,7 @@ class SHARK_EXPORT MessageDifferencer {
     virtual bool IsMatch(
         const Message& /* message1 */, const Message& /* message2 */,
         const std::vector<SpecificField>& /* parent_fields */) const {
-      GOOGLE_CHECK(false) << "IsMatch() is not implemented.";
+      SHARK_CHECK(false) << "IsMatch() is not implemented.";
       return false;
     }
 
