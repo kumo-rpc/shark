@@ -1212,11 +1212,11 @@ namespace shark {
                     return false;
                 }
 
-                // Enforce --disallow_services.
-                if (disallow_services_ && file_descriptor.servlet_size() > 0) {
+                // Enforce --disallow_servlets.
+                if (disallow_servlets_ && file_descriptor.servlet_size() > 0) {
                     std::cerr << file_descriptor.name()
                               << ": This file contains servlets, but "
-                                 "--disallow_services was used."
+                                 "--disallow_servlets was used."
                               << std::endl;
                     return false;
                 }
@@ -1259,11 +1259,11 @@ namespace shark {
                 }
                 parsed_files->push_back(parsed_file);
 
-                // Enforce --disallow_services.
-                if (disallow_services_ && parsed_file->servlet_count() > 0) {
+                // Enforce --disallow_servlets.
+                if (disallow_servlets_ && parsed_file->servlet_count() > 0) {
                     std::cerr << parsed_file->name()
                               << ": This file contains services, but "
-                                 "--disallow_services was used."
+                                 "--disallow_servlets was used."
                               << std::endl;
                     result = false;
                     break;
@@ -1308,7 +1308,7 @@ namespace shark {
             print_mode_ = PRINT_NONE;
             imports_in_descriptor_set_ = false;
             source_info_in_descriptor_set_ = false;
-            disallow_services_ = false;
+            disallow_servlets_ = false;
             direct_dependencies_explicitly_set_ = false;
             deterministic_output_ = false;
         }
@@ -1607,7 +1607,7 @@ namespace shark {
                 return false;
             }
 
-            if (*name == "-h" || *name == "--help" || *name == "--disallow_services" || *name == "--include_imports" || *name == "--include_source_info" || *name == "--version" || *name == "--decode_raw" || *name == "--print_free_field_numbers" || *name == "--experimental_allow_proto3_optional" || *name == "--deterministic_output" || *name == "--fatal_warnings") {
+            if (*name == "-h" || *name == "--help" || *name == "--disallow_servlets" || *name == "--include_imports" || *name == "--include_source_info" || *name == "--version" || *name == "--decode_raw" || *name == "--print_free_field_numbers" || *name == "--experimental_allow_proto3_optional" || *name == "--deterministic_output" || *name == "--fatal_warnings") {
                 // HACK:  These are the only flags that don't take a value.
                 //   They probably should not be hard-coded like this but for now it's
                 //   not worth doing better.
@@ -1807,8 +1807,8 @@ namespace shark {
                           << SHARK_VERSION_SUFFIX << std::endl;
                 return PARSE_ARGUMENT_DONE_AND_EXIT; // Exit without running compiler.
 
-            } else if (name == "--disallow_services") {
-                disallow_services_ = true;
+            } else if (name == "--disallow_servlets") {
+                disallow_servlets_ = true;
 
             } else if (name == "--experimental_allow_proto3_optional") {
                 // Flag is no longer observed, but we allow it for backward compat.

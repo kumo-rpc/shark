@@ -1356,14 +1356,14 @@ namespace shark {
             }
 
             TEST_F(CommandLineInterfaceTest, DisallowServicesNoServices) {
-                // Test that --disallow_services doesn't cause a problem when there are no
+                // Test that --disallow_servlets doesn't cause a problem when there are no
                 // services.
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
                     "struct Foo {}\n");
 
-                Run("protocol_compiler --disallow_services --test_out=$tmpdir "
+                Run("protocol_compiler --disallow_servlets --test_out=$tmpdir "
                     "--proto_path=$tmpdir foo.shark");
 
                 ExpectNoErrors();
@@ -1371,21 +1371,21 @@ namespace shark {
             }
 
             TEST_F(CommandLineInterfaceTest, DisallowServicesHasService) {
-                // Test that --disallow_services produces an error when there are services.
+                // Test that --disallow_servlets produces an error when there are services.
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"
                     "struct Foo {}\n"
                     "service Bar {}\n");
 
-                Run("protocol_compiler --disallow_services --test_out=$tmpdir "
+                Run("protocol_compiler --disallow_servlets --test_out=$tmpdir "
                     "--proto_path=$tmpdir foo.shark");
 
                 ExpectErrorSubstring("foo.shark: This file contains services");
             }
 
             TEST_F(CommandLineInterfaceTest, AllowServicesHasService) {
-                // Test that services work fine as long as --disallow_services is not used.
+                // Test that services work fine as long as --disallow_servlets is not used.
 
                 CreateTempFile("foo.shark",
                     "syntax = \"proto2\";\n"

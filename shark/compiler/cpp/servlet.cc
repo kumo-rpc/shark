@@ -174,7 +174,7 @@ namespace shark::compiler::cpp {
             "const ::$proto_ns$::ServletDescriptor* $classname$::descriptor() {\n"
             "  "
             "::$proto_ns$::internal::AssignDescriptors(&$desc_table$);\n"
-            "  return $file_level_service_descriptors$[$1$];\n"
+            "  return $file_level_servlet_descriptors$[$1$];\n"
             "}\n"
             "\n"
             "const ::$proto_ns$::ServletDescriptor* $classname$::GetDescriptor() {\n"
@@ -234,7 +234,7 @@ namespace shark::compiler::cpp {
             "                             const ::$proto_ns$::Message* request,\n"
             "                             ::$proto_ns$::Message* response,\n"
             "                             ::shark::Closure* done) {\n"
-            "  GOOGLE_DCHECK_EQ(method->servlet(), $file_level_service_descriptors$[$1$]);\n"
+            "  GOOGLE_DCHECK_EQ(method->servlet(), $file_level_servlet_descriptors$[$1$]);\n"
             "  switch(method->index()) {\n",
             index_in_metadata_);
 

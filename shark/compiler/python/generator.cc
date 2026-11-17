@@ -1268,9 +1268,9 @@ namespace shark::compiler::python {
     void Generator::FixOptionsForService(
         const ServletDescriptor& service_descriptor) const {
         std::string descriptor_name = ModuleLevelServiceDescriptorName(service_descriptor);
-        std::string service_options = OptionsValue(service_descriptor.options().SerializeAsString());
-        if (service_options != "None") {
-            PrintDescriptorOptionsFixingCode(descriptor_name, service_options,
+        std::string servlets_options = OptionsValue(service_descriptor.options().SerializeAsString());
+        if (servlets_options != "None") {
+            PrintDescriptorOptionsFixingCode(descriptor_name, servlets_options,
                 printer_);
         }
 

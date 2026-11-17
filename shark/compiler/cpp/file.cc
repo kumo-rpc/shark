@@ -116,7 +116,7 @@ namespace shark::compiler::cpp {
         variables_["file_level_metadata"] = UniqueName("file_level_metadata", file_, options_);
         variables_["desc_table"] = DescriptorTableName(file_, options_);
         variables_["file_level_enum_descriptors"] = UniqueName("file_level_enum_descriptors", file_, options_);
-        variables_["file_level_service_descriptors"] = UniqueName("file_level_service_descriptors", file_, options_);
+        variables_["file_level_servlet_descriptors"] = UniqueName("file_level_servlet_descriptors", file_, options_);
         variables_["filename"] = file_->name();
         variables_["package_ns"] = Namespace(file_, options);
 
@@ -134,12 +134,12 @@ namespace shark::compiler::cpp {
         }
 
         for (int i = 0; i < file->servlet_count(); i++) {
-            service_generators_.emplace_back(
+            servlets_generators_.emplace_back(
                 new ServletGenerator(file->servlet(i), variables_, options));
         }
         if (HasGenericServlet(file_, options_)) {
-            for (int i = 0; i < service_generators_.size(); i++) {
-                service_generators_[i]->index_in_metadata_ = i;
+            for (int i = 0; i < servlets_generators_.size(); i++) {
+                servlets_generators_[i]->index_in_metadata_ = i;
             }
         }
         for (int i = 0; i < file->extension_count(); i++) {
@@ -767,12 +767,12 @@ namespace shark::compiler::cpp {
 
             if (HasGenericServlet(file_, options_)) {
                 // Generate services.
-                for (int i = 0; i < service_generators_.size(); i++) {
+                for (int i = 0; i < servlets_generators_.size(); i++) {
                     if (i == 0)
                         format("\n");
                     format(kThickSeparator);
                     format("\n");
-                    service_generators_[i]->GenerateImplementation(printer);
+                    servlets_generators_[i]->GenerateImplementation(printer);
                 }
             }
 
@@ -832,13 +832,13 @@ namespace shark::compiler::cpp {
             format(
                 "static "
                 "const ::_pb::ServletDescriptor* "
-                "$file_level_service_descriptors$[$1$];\n",
+                "$file_level_servlet_descriptors$[$1$];\n",
                 file_->servlet_count());
         } else {
             format(
                 "static "
                 "constexpr ::_pb::ServletDescriptor const** "
-                "$file_level_service_descriptors$ = nullptr;\n");
+                "$file_level_servlet_descriptors$ = nullptr;\n");
         }
 
         if (!message_generators_.empty()) {
@@ -967,7 +967,7 @@ namespace shark::compiler::cpp {
             "    &$desc_table$_once, $4$, $5$, $6$,\n"
             "    schemas, file_default_instances, $tablename$::offsets,\n"
             "    $7$, $file_level_enum_descriptors$,\n"
-            "    $file_level_service_descriptors$,\n"
+            "    $file_level_servlet_descriptors$,\n"
             "};\n"
             // This function exists to be marked as weak.
             // It can significantly speed up compilation by breaking up LLVM's SCC in
@@ -1334,13 +1334,13 @@ namespace shark::compiler::cpp {
         Formatter format(printer, variables_);
         if (HasGenericServlet(file_, options_)) {
             // Generate servlet definitions.
-            for (int i = 0; i < service_generators_.size(); i++) {
+            for (int i = 0; i < servlets_generators_.size(); i++) {
                 if (i > 0) {
                     format("\n");
                     format(kThinSeparator);
                     format("\n");
                 }
-                service_generators_[i]->GenerateDeclarations(printer);
+                servlets_generators_[i]->GenerateDeclarations(printer);
             }
 
             format("\n");

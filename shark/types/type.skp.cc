@@ -100,7 +100,7 @@ SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 EnumVa
 }  // namespace shark
 static ::_pb::Metadata file_level_metadata_shark_2ftypes_2ftype_2eshark[4];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark_2ftypes_2ftype_2eshark = nullptr;
-static constexpr ::_pb::ServletDescriptor const** file_level_service_descriptors_shark_2ftypes_2ftype_2eshark = nullptr;
+static constexpr ::_pb::ServletDescriptor const** file_level_servlet_descriptors_shark_2ftypes_2ftype_2eshark = nullptr;
 
 const uint32_t TableStruct_shark_2ftypes_2ftype_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
     SHARK_FIELD_OFFSET(::shark::Type, _impl_._has_bits_),
@@ -225,7 +225,7 @@ const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2ftype_2eshark = {
     &descriptor_table_shark_2ftypes_2ftype_2eshark_once, descriptor_table_shark_2ftypes_2ftype_2eshark_deps, 3, 4,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2ftype_2eshark::offsets,
     file_level_metadata_shark_2ftypes_2ftype_2eshark, file_level_enum_descriptors_shark_2ftypes_2ftype_2eshark,
-    file_level_service_descriptors_shark_2ftypes_2ftype_2eshark,
+    file_level_servlet_descriptors_shark_2ftypes_2ftype_2eshark,
 };
 SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2ftypes_2ftype_2eshark_getter() {
   return &descriptor_table_shark_2ftypes_2ftype_2eshark;

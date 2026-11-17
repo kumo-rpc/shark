@@ -37,7 +37,7 @@ SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 FieldM
 }  // namespace shark
 static ::_pb::Metadata file_level_metadata_shark_2ftypes_2ffield_5fmask_2eshark[1];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark_2ftypes_2ffield_5fmask_2eshark = nullptr;
-static constexpr ::_pb::ServletDescriptor const** file_level_service_descriptors_shark_2ftypes_2ffield_5fmask_2eshark = nullptr;
+static constexpr ::_pb::ServletDescriptor const** file_level_servlet_descriptors_shark_2ftypes_2ffield_5fmask_2eshark = nullptr;
 
 const uint32_t TableStruct_shark_2ftypes_2ffield_5fmask_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
     ~0u,  // no _has_bits_
@@ -69,7 +69,7 @@ const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2ffield_5fmask_2esh
     &descriptor_table_shark_2ftypes_2ffield_5fmask_2eshark_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2ffield_5fmask_2eshark::offsets,
     file_level_metadata_shark_2ftypes_2ffield_5fmask_2eshark, file_level_enum_descriptors_shark_2ftypes_2ffield_5fmask_2eshark,
-    file_level_service_descriptors_shark_2ftypes_2ffield_5fmask_2eshark,
+    file_level_servlet_descriptors_shark_2ftypes_2ffield_5fmask_2eshark,
 };
 SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2ftypes_2ffield_5fmask_2eshark_getter() {
   return &descriptor_table_shark_2ftypes_2ffield_5fmask_2eshark;

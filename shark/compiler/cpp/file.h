@@ -191,7 +191,7 @@ namespace shark {
                 // this file. If you need a pre-order walk just reverse iterate.
                 std::vector<std::unique_ptr<MessageGenerator>> message_generators_;
                 std::vector<std::unique_ptr<EnumGenerator>> enum_generators_;
-                std::vector<std::unique_ptr<ServletGenerator>> service_generators_;
+                std::vector<std::unique_ptr<ServletGenerator>> servlets_generators_;
                 std::vector<std::unique_ptr<ExtensionGenerator>> extension_generators_;
 
                 KUMO_DISALLOW_COPY_AND_ASSIGN(FileGenerator);

@@ -442,8 +442,8 @@ namespace shark {
             // SourceCodeInfo from the DescriptorSet.
             bool source_info_in_descriptor_set_ = false;
 
-            // Was the --disallow_services flag used?
-            bool disallow_services_ = false;
+            // Was the --disallow_servlets flag used?
+            bool disallow_servlets_ = false;
 
             // When using --encode, this will be passed to SetSerializationDeterministic.
             bool deterministic_output_ = false;
