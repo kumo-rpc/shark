@@ -79,7 +79,7 @@ namespace shark {
 
         // Number of services defined in this file.
         int service_count() const;
-        // Gets a service, where 0 <= index < service_count().
+        // Gets a servlet, where 0 <= index < service_count().
         // These are returned in the order they were defined in the .shark file.
         const ServletDescriptor* service(int index) const;
 
@@ -107,7 +107,7 @@ namespace shark {
         // Find an enum value defined in any top-level enum by name.  Returns nullptr
         // if not found.
         const EnumValueDescriptor* FindEnumValueByName(ConstStringParam name) const;
-        // Find a service definition by name.  Returns nullptr if not found.
+        // Find a servlet definition by name.  Returns nullptr if not found.
         const ServletDescriptor* FindServiceByName(ConstStringParam name) const;
         // Find a top-level extension definition by name.  Returns nullptr if not
         // found.

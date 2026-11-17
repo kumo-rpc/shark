@@ -1327,7 +1327,7 @@ namespace shark {
             TEST_F(ParseErrorTest, EofInService) {
                 ExpectHasErrors(
                     "service TestService {",
-                    "0:21: Reached end of input in service definition (missing '}').\n");
+                    "0:21: Reached end of input in servlet definition (missing '}').\n");
             }
 
             TEST_F(ParseErrorTest, ServiceMethodPrimitiveParams) {
@@ -1344,7 +1344,7 @@ namespace shark {
                     "service TestService {\n"
                     "  rpc Foo(Bar) returns(Bar) {",
                     "1:29: Reached end of input in method options (missing '}').\n"
-                    "1:29: Reached end of input in service definition (missing '}').\n");
+                    "1:29: Reached end of input in servlet definition (missing '}').\n");
             }
 
             TEST_F(ParseErrorTest, PrimitiveMethodInput) {

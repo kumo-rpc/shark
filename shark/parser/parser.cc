@@ -672,7 +672,7 @@ namespace shark {
                 LocationRecorder location(root_location,
                     FileDescriptorProto::kServletFieldNumber,
                     file->servlet_size());
-                return ParseServiceDefinition(file->add_servlet(), location, file);
+                return parse_servlet_definition(file->add_servlet(), location, file);
             } else if (looking_at("extend")) {
                 LocationRecorder location(root_location,
                     FileDescriptorProto::kExtensionFieldNumber);
@@ -2099,35 +2099,35 @@ namespace shark {
         // -------------------------------------------------------------------
         // Services
 
-        bool Parser::ParseServiceDefinition(
-            ServletDescriptorProto* service, const LocationRecorder& service_location,
+        bool Parser::parse_servlet_definition(
+            ServletDescriptorProto* servlet, const LocationRecorder& servlet_location,
             const FileDescriptorProto* containing_file) {
             DO(consume("service"));
 
             {
-                LocationRecorder location(service_location,
+                LocationRecorder location(servlet_location,
                     ServletDescriptorProto::kNameFieldNumber);
-                location.RecordLegacyLocation(service,
+                location.RecordLegacyLocation(servlet,
                     DescriptorPool::ErrorCollector::NAME);
-                DO(consume_identifier(service->mutable_name(), "Expected service name."));
+                DO(consume_identifier(servlet->mutable_name(), "Expected servlet name."));
             }
 
-            DO(ParseServiceBlock(service, service_location, containing_file));
+            DO(ParseServiceBlock(servlet, servlet_location, containing_file));
             return true;
         }
 
-        bool Parser::ParseServiceBlock(ServletDescriptorProto* service,
-            const LocationRecorder& service_location,
+        bool Parser::ParseServiceBlock(ServletDescriptorProto* servlet,
+            const LocationRecorder& servlet_location,
             const FileDescriptorProto* containing_file) {
-            DO(consume_end_of_declaration("{", &service_location));
+            DO(consume_end_of_declaration("{", &servlet_location));
 
             while (!try_consume_end_of_declaration("}", nullptr)) {
                 if (at_end()) {
-                    add_error("Reached end of input in service definition (missing '}').");
+                    add_error("Reached end of input in servlet definition (missing '}').");
                     return false;
                 }
 
-                if (!ParseServiceStatement(service, service_location, containing_file)) {
+                if (!ParseServletStatement(servlet, servlet_location, containing_file)) {
                     // This statement failed to parse.  Skip it, but keep looping to parse
                     // other statements.
                     SkipStatement();
@@ -2137,26 +2137,26 @@ namespace shark {
             return true;
         }
 
-        bool Parser::ParseServiceStatement(ServletDescriptorProto* service,
-            const LocationRecorder& service_location,
+        bool Parser::ParseServletStatement(ServletDescriptorProto* servlet,
+            const LocationRecorder& servlet_location,
             const FileDescriptorProto* containing_file) {
             if (try_consume_end_of_declaration(";", nullptr)) {
                 // empty statement; ignore
                 return true;
             } else if (looking_at("option")) {
-                LocationRecorder location(service_location,
+                LocationRecorder location(servlet_location,
                     ServletDescriptorProto::kOptionsFieldNumber);
-                return prse_option(service->mutable_options(), location, containing_file,
+                return prse_option(servlet->mutable_options(), location, containing_file,
                     OPTION_STATEMENT);
             } else {
-                LocationRecorder location(service_location,
+                LocationRecorder location(servlet_location,
                     ServletDescriptorProto::kMethodFieldNumber,
-                    service->method_size());
-                return parse_service_method(service->add_method(), location, containing_file);
+                    servlet->method_size());
+                return parse_servlet_method(servlet->add_method(), location, containing_file);
             }
         }
 
-        bool Parser::parse_service_method(MethodDescriptorProto* method,
+        bool Parser::parse_servlet_method(MethodDescriptorProto* method,
             const LocationRecorder& method_location,
             const FileDescriptorProto* containing_file) {
             DO(consume("rpc"));

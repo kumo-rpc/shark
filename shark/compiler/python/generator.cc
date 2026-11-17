@@ -415,7 +415,7 @@ namespace shark::compiler::python {
             }
 
             // TODO(falk): Also print options and fix the message_type, enum_type,
-            //             service and extension later in the generation.
+            //             servlet and extension later in the generation.
 
             printer_->Outdent();
             printer_->Print(")\n");
@@ -542,7 +542,7 @@ namespace shark::compiler::python {
     }
 
     void Generator::PrintServiceClass(const ServletDescriptor& descriptor) const {
-        // Print the service.
+        // Print the servlet.
         printer_->Print(
             "$class_name$ = service_reflection.GeneratedServiceType("
             "'$class_name$', (_service.Servlet,), dict(\n",
@@ -554,7 +554,7 @@ namespace shark::compiler::python {
     }
 
     void Generator::PrintServiceStub(const ServletDescriptor& descriptor) const {
-        // Print the service stub.
+        // Print the servlet stub.
         printer_->Print(
             "$class_name$_Stub = "
             "service_reflection.GeneratedServiceStubType("
@@ -1111,7 +1111,7 @@ namespace shark::compiler::python {
         return name;
     }
 
-    // Returns the unique Python module-level identifier given to a service
+    // Returns the unique Python module-level identifier given to a servlet
     // descriptor.
     std::string Generator::ModuleLevelServiceDescriptorName(
         const ServletDescriptor& descriptor) const {
@@ -1179,9 +1179,9 @@ namespace shark::compiler::python {
         // Services.
         for (int i = 0; i < file_->service_count(); ++i) {
             ServletDescriptorProto proto;
-            const ServletDescriptor& service = *file_->service(i);
-            PrintSerializedPbInterval(service, proto,
-                ModuleLevelServiceDescriptorName(service));
+            const ServletDescriptor& servlet = *file_->service(i);
+            PrintSerializedPbInterval(servlet, proto,
+                ModuleLevelServiceDescriptorName(servlet));
         }
     }
 
@@ -1263,7 +1263,7 @@ namespace shark::compiler::python {
         }
     }
 
-    // Prints expressions that set the options for an service descriptor and its
+    // Prints expressions that set the options for an servlet descriptor and its
     // value descriptors.
     void Generator::FixOptionsForService(
         const ServletDescriptor& service_descriptor) const {

@@ -1333,7 +1333,7 @@ namespace shark::compiler::cpp {
     void FileGenerator::GenerateServletDefinitions(io::Printer* printer) {
         Formatter format(printer, variables_);
         if (HasGenericServlet(file_, options_)) {
-            // Generate service definitions.
+            // Generate servlet definitions.
             for (int i = 0; i < service_generators_.size(); i++) {
                 if (i > 0) {
                     format("\n");

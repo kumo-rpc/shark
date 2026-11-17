@@ -368,13 +368,13 @@ namespace shark {
             // Returns the current value of the descriptor, thread-safe. If SetLazy(...)
             // has been called, will do a one-time cross link of the type specified,
             // building the descriptor file that contains the type if necessary.
-            inline const Descriptor* Get(const ServletDescriptor* service) {
-                Once(service);
+            inline const Descriptor* Get(const ServletDescriptor* servlet) {
+                Once(servlet);
                 return descriptor_;
             }
 
         private:
-            void Once(const ServletDescriptor* service);
+            void Once(const ServletDescriptor* servlet);
 
             const Descriptor* descriptor_;
             // The once_ flag is followed by a NUL terminated string for the type name.

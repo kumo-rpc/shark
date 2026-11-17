@@ -299,12 +299,12 @@ namespace shark {
             // it is probably necessary to skip the rest of the statement to recover.
             // However, if these methods return true, it does NOT mean that there
             // were no errors; only that there were no *syntax* errors.  For instance,
-            // if a service method is defined using proper syntax but uses a primitive
+            // if a servlet method is defined using proper syntax but uses a primitive
             // type as its input or output, ParseMethodField() still returns true
             // and only reports the error by calling add_error().  In practice, this
             // makes logic much simpler for the caller.
 
-            // Parse a top-level message, enum, service, etc.
+            // Parse a top-level message, enum, servlet, etc.
             bool ParseTopLevelStatement(FileDescriptorProto* file,
                 const LocationRecorder& root_location);
 
@@ -315,7 +315,7 @@ namespace shark {
             bool ParseEnumDefinition(EnumDescriptorProto* enum_type,
                 const LocationRecorder& enum_location,
                 const FileDescriptorProto* containing_file);
-            bool ParseServiceDefinition(ServletDescriptorProto* service,
+            bool parse_servlet_definition(ServletDescriptorProto* service,
                 const LocationRecorder& service_location,
                 const FileDescriptorProto* containing_file);
             bool ParsePackage(FileDescriptorProto* file,
@@ -327,7 +327,7 @@ namespace shark {
                 const LocationRecorder& root_location,
                 const FileDescriptorProto* containing_file);
 
-            // These methods parse the contents of a message, enum, or service type and
+            // These methods parse the contents of a message, enum, or servlet type and
             // add them to the given object.  They consume the entire block including
             // the beginning and ending brace.
             bool ParseMessageBlock(DescriptorProto* message,
@@ -341,7 +341,7 @@ namespace shark {
                 const LocationRecorder& service_location,
                 const FileDescriptorProto* containing_file);
 
-            // Parse one statement within a message, enum, or service block, including
+            // Parse one statement within a message, enum, or servlet block, including
             // final semicolon.
             bool ParseMessageStatement(DescriptorProto* message,
                 const LocationRecorder& message_location,
@@ -350,7 +350,7 @@ namespace shark {
                 const LocationRecorder& enum_location,
                 const FileDescriptorProto* containing_file,
                 EnumUnderlyingType underlying_type);
-            bool ParseServiceStatement(ServletDescriptorProto* message,
+            bool ParseServletStatement(ServletDescriptorProto* message,
                 const LocationRecorder& service_location,
                 const FileDescriptorProto* containing_file);
 
@@ -432,8 +432,8 @@ namespace shark {
                 const LocationRecorder& enum_value_location,
                 const FileDescriptorProto* containing_file);
 
-            // Parse a single method within a service definition.
-            bool parse_service_method(MethodDescriptorProto* method,
+            // Parse a single method within a servlet definition.
+            bool parse_servlet_method(MethodDescriptorProto* method,
                 const LocationRecorder& method_location,
                 const FileDescriptorProto* containing_file);
 

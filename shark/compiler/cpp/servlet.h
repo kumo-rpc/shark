@@ -60,7 +60,7 @@ namespace shark {
 
                 // Header stuff.
 
-                // Generate the class definitions for the service's interface and the
+                // Generate the class definitions for the servlet's interface and the
                 // stub implementation.
                 void GenerateDeclarations(io::Printer* printer);
 
@@ -78,7 +78,7 @@ namespace shark {
 
                 // Header stuff.
 
-                // Generate the service abstract interface.
+                // Generate the servlet abstract interface.
                 void GenerateInterface(io::Printer* printer);
 
                 // Generate the stub class definition.
@@ -90,17 +90,17 @@ namespace shark {
 
                 // Source file stuff.
 
-                // Generate the default implementations of the service methods, which
+                // Generate the default implementations of the servlet methods, which
                 // produce a "not implemented" error.
                 void GenerateNotImplementedMethods(io::Printer* printer);
 
-                // Generate the CallMethod() method of the service.
+                // Generate the CallMethod() method of the servlet.
                 void GenerateCallMethod(io::Printer* printer);
 
                 // Generate the Get{Request,Response}Prototype() methods.
                 void GenerateGetPrototype(RequestOrResponse which, io::Printer* printer);
 
-                // Generate the stub's implementations of the service methods.
+                // Generate the stub's implementations of the servlet methods.
                 void GenerateStubMethods(io::Printer* printer);
 
                 const ServletDescriptor* descriptor_;

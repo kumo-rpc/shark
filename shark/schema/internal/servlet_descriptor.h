@@ -23,29 +23,29 @@
 
 namespace shark {
 
-        // Describes an RPC service. Use DescriptorPool to construct your own
+        // Describes an RPC servlet. Use DescriptorPool to construct your own
     // descriptors.
     class SHARK_EXPORT ServletDescriptor : private internal::SymbolBase {
     public:
         typedef ServletDescriptorProto Proto;
 
-        // The name of the service, not including its containing scope.
+        // The name of the servlet, not including its containing scope.
         const std::string& name() const;
-        // The fully-qualified name of the service, scope delimited by periods.
+        // The fully-qualified name of the servlet, scope delimited by periods.
         const std::string& full_name() const;
-        // Index of this service within the file's services array.
+        // Index of this servlet within the file's servlets array.
         int index() const;
 
-        // The .shark file in which this service was defined.  Never nullptr.
+        // The .shark file in which this servlet was defined.  Never nullptr.
         const FileDescriptor* file() const;
 
-        // Get options for this service type.  These are specified in the .shark file
-        // by placing lines like "option foo = 1234;" in the service definition.
+        // Get options for this servlet type.  These are specified in the .shark file
+        // by placing lines like "option foo = 1234;" in the servlet definition.
         // Allowed options are defined by ServletOptions in descriptor.shark, and any
         // available extensions of that message.
         const ServletOptions& options() const;
 
-        // The number of methods this service defines.
+        // The number of methods this servlet defines.
         int method_count() const;
         // Gets a MethodDescriptor by index, where 0 <= index < method_count().
         // These are returned in the order they were defined in the .shark file.
@@ -66,7 +66,7 @@ namespace shark {
         // Source Location ---------------------------------------------------
 
         // Updates |*out_location| to the source location of the complete
-        // extent of this service declaration.  Returns false and leaves
+        // extent of this servlet declaration.  Returns false and leaves
         // |*out_location| unchanged iff location information was not available.
         bool GetSourceLocation(SourceLocation* out_location) const;
 
@@ -107,8 +107,8 @@ namespace shark {
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(ServletDescriptor, 48);
 
-        // Describes an individual service method.  To obtain a MethodDescriptor given
-    // a service, first get its ServletDescriptor, then call
+        // Describes an individual servlet method.  To obtain a MethodDescriptor given
+    // a servlet, first get its ServletDescriptor, then call
     // ServletDescriptor::FindMethodByName().  Use DescriptorPool to construct your
     // own descriptors.
     class SHARK_EXPORT MethodDescriptor : private internal::SymbolBase {
@@ -119,12 +119,12 @@ namespace shark {
         const std::string& name() const;
         // The fully-qualified name of the method, scope delimited by periods.
         const std::string& full_name() const;
-        // Index within the service's Descriptor.
+        // Index within the servlet's Descriptor.
         int index() const;
 
         // The .shark file in which this method was defined.  Never nullptr.
         const FileDescriptor* file() const;
-        // Gets the service to which this method belongs.  Never nullptr.
+        // Gets the servlet to which this method belongs.  Never nullptr.
         const ServletDescriptor* service() const;
 
         // Gets the type of protocol message which this method accepts as input.

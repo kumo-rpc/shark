@@ -172,10 +172,10 @@ namespace shark {
             lazy_name[name.size()] = 0;
         }
 
-        void LazyDescriptor::Once(const ServletDescriptor* service) {
+        void LazyDescriptor::Once(const ServletDescriptor* servlet) {
             if (once_) {
                 internal::call_once(*once_, [&] {
-                    auto* file = service->file();
+                    auto* file = servlet->file();
                     SHARK_CHECK(file->finished_building_);
                     const char* lazy_name = reinterpret_cast<const char*>(once_ + 1);
                     descriptor_ = file->pool_->CrossLinkOnDemandHelper(lazy_name, false).descriptor();

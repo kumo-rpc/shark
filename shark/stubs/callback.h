@@ -13,7 +13,7 @@ namespace shark {
 
     // Abstract interface for a callback.  When calling an RPC, you must provide
     // a Closure to call when the procedure completes.  See the Servlet interface
-    // in service.h.
+    // in servlet.h.
     //
     // To automatically construct a Closure which calls a particular function or
     // method with a particular set of parameters, use the NewCallback() function.
@@ -27,7 +27,7 @@ namespace shark {
     //     // When done, call FooDone() and pass it a pointer to the response.
     //     Closure* callback = NewCallback(&FooDone, response);
     //     // Make the call.
-    //     service->Foo(controller, request, response, callback);
+    //     servlet->Foo(controller, request, response, callback);
     //   }
     //
     // Example that calls a method:
@@ -44,7 +44,7 @@ namespace shark {
     //       // When done, call FooDone() and pass it a pointer to the response.
     //       Closure* callback = NewCallback(this, &Handler::FooDone, response);
     //       // Make the call.
-    //       service->Foo(controller, request, response, callback);
+    //       servlet->Foo(controller, request, response, callback);
     //     }
     //   };
     //
