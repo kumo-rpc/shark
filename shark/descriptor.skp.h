@@ -3749,8 +3749,8 @@ class SHARK_EXPORT FileOptions final :
     static constexpr int  kAttributesFieldNumber = 60;
     static constexpr int  kUninterpretedOptionFieldNumber = 999;
     static constexpr int  kGoPackageFieldNumber = 11;
-    static constexpr int  kCcGenericServicesFieldNumber = 16;
-    static constexpr int  kPyGenericServicesFieldNumber = 18;
+    static constexpr int  kCcGenericServletsFieldNumber = 16;
+    static constexpr int  kPyGenericServletsFieldNumber = 18;
     static constexpr int  kDeprecatedFieldNumber = 23;
     static constexpr int  kOptimizeForFieldNumber = 9;
     static constexpr int  kCcEnableArenasFieldNumber = 31;
@@ -3809,30 +3809,30 @@ class SHARK_EXPORT FileOptions final :
     std::string* _internal_mutable_go_package();
     public:
 
-    // optional bool cc_generic_services = 16 [default = false];
-    bool has_cc_generic_services() const;
+    // optional bool cc_generic_servlets = 16 [default = false];
+    bool has_cc_generic_servlets() const;
     private:
-    bool _internal_has_cc_generic_services() const;
+    bool _internal_has_cc_generic_servlets() const;
     public:
-    void clear_cc_generic_services();
-    bool cc_generic_services() const;
-    void set_cc_generic_services(bool value);
+    void clear_cc_generic_servlets();
+    bool cc_generic_servlets() const;
+    void set_cc_generic_servlets(bool value);
     private:
-    bool _internal_cc_generic_services() const;
-    void _internal_set_cc_generic_services(bool value);
+    bool _internal_cc_generic_servlets() const;
+    void _internal_set_cc_generic_servlets(bool value);
     public:
 
-    // optional bool py_generic_services = 18 [default = false];
-    bool has_py_generic_services() const;
+    // optional bool py_generic_servlets = 18 [default = false];
+    bool has_py_generic_servlets() const;
     private:
-    bool _internal_has_py_generic_services() const;
+    bool _internal_has_py_generic_servlets() const;
     public:
-    void clear_py_generic_services();
-    bool py_generic_services() const;
-    void set_py_generic_services(bool value);
+    void clear_py_generic_servlets();
+    bool py_generic_servlets() const;
+    void set_py_generic_servlets(bool value);
     private:
-    bool _internal_py_generic_services() const;
-    void _internal_set_py_generic_services(bool value);
+    bool _internal_py_generic_servlets() const;
+    void _internal_set_py_generic_servlets(bool value);
     public:
 
     // optional bool deprecated = 23 [default = false];
@@ -4079,8 +4079,8 @@ class SHARK_EXPORT FileOptions final :
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > attributes_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
         ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr go_package_;
-        bool cc_generic_services_;
-        bool py_generic_services_;
+        bool cc_generic_servlets_;
+        bool py_generic_servlets_;
         bool deprecated_;
         int optimize_for_;
         bool cc_enable_arenas_;
@@ -11810,60 +11810,60 @@ inline void FileOptions::set_allocated_go_package(std::string* go_package) {
   // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.go_package)
 }
 
-// optional bool cc_generic_services = 16 [default = false];
-inline bool FileOptions::_internal_has_cc_generic_services() const {
+// optional bool cc_generic_servlets = 16 [default = false];
+inline bool FileOptions::_internal_has_cc_generic_servlets() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
-inline bool FileOptions::has_cc_generic_services() const {
-  return _internal_has_cc_generic_services();
+inline bool FileOptions::has_cc_generic_servlets() const {
+  return _internal_has_cc_generic_servlets();
 }
-inline void FileOptions::clear_cc_generic_services() {
-    _impl_.cc_generic_services_ = false;
+inline void FileOptions::clear_cc_generic_servlets() {
+    _impl_.cc_generic_servlets_ = false;
     _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline bool FileOptions::_internal_cc_generic_services() const {
-  return _impl_.cc_generic_services_;
+inline bool FileOptions::_internal_cc_generic_servlets() const {
+  return _impl_.cc_generic_servlets_;
 }
-inline bool FileOptions::cc_generic_services() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.cc_generic_services)
-  return _internal_cc_generic_services();
+inline bool FileOptions::cc_generic_servlets() const {
+  // @@protoc_insertion_point(field_get:shark.FileOptions.cc_generic_servlets)
+  return _internal_cc_generic_servlets();
 }
-inline void FileOptions::_internal_set_cc_generic_services(bool value) {
+inline void FileOptions::_internal_set_cc_generic_servlets(bool value) {
   _impl_._has_bits_[0] |= 0x00000002u;
-  _impl_.cc_generic_services_ = value;
+  _impl_.cc_generic_servlets_ = value;
 }
-inline void FileOptions::set_cc_generic_services(bool value) {
-  _internal_set_cc_generic_services(value);
-  // @@protoc_insertion_point(field_set:shark.FileOptions.cc_generic_services)
+inline void FileOptions::set_cc_generic_servlets(bool value) {
+  _internal_set_cc_generic_servlets(value);
+  // @@protoc_insertion_point(field_set:shark.FileOptions.cc_generic_servlets)
 }
 
-// optional bool py_generic_services = 18 [default = false];
-inline bool FileOptions::_internal_has_py_generic_services() const {
+// optional bool py_generic_servlets = 18 [default = false];
+inline bool FileOptions::_internal_has_py_generic_servlets() const {
   bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
   return value;
 }
-inline bool FileOptions::has_py_generic_services() const {
-  return _internal_has_py_generic_services();
+inline bool FileOptions::has_py_generic_servlets() const {
+  return _internal_has_py_generic_servlets();
 }
-inline void FileOptions::clear_py_generic_services() {
-    _impl_.py_generic_services_ = false;
+inline void FileOptions::clear_py_generic_servlets() {
+    _impl_.py_generic_servlets_ = false;
     _impl_._has_bits_[0] &= ~0x00000004u;
 }
-inline bool FileOptions::_internal_py_generic_services() const {
-  return _impl_.py_generic_services_;
+inline bool FileOptions::_internal_py_generic_servlets() const {
+  return _impl_.py_generic_servlets_;
 }
-inline bool FileOptions::py_generic_services() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.py_generic_services)
-  return _internal_py_generic_services();
+inline bool FileOptions::py_generic_servlets() const {
+  // @@protoc_insertion_point(field_get:shark.FileOptions.py_generic_servlets)
+  return _internal_py_generic_servlets();
 }
-inline void FileOptions::_internal_set_py_generic_services(bool value) {
+inline void FileOptions::_internal_set_py_generic_servlets(bool value) {
   _impl_._has_bits_[0] |= 0x00000004u;
-  _impl_.py_generic_services_ = value;
+  _impl_.py_generic_servlets_ = value;
 }
-inline void FileOptions::set_py_generic_services(bool value) {
-  _internal_set_py_generic_services(value);
-  // @@protoc_insertion_point(field_set:shark.FileOptions.py_generic_services)
+inline void FileOptions::set_py_generic_servlets(bool value) {
+  _internal_set_py_generic_servlets(value);
+  // @@protoc_insertion_point(field_set:shark.FileOptions.py_generic_servlets)
 }
 
 // optional bool deprecated = 23 [default = false];

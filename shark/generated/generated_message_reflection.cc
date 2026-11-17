@@ -3507,7 +3507,7 @@ void AssignDescriptorsImpl(const DescriptorTable* table, bool eager) {
   for (int i = 0; i < file->enum_type_count(); i++) {
     helper.AssignEnumDescriptor(file->enum_type(i));
   }
-  if (file->options().cc_generic_services()) {
+  if (file->options().cc_generic_servlets()) {
     for (int i = 0; i < file->servlet_count(); i++) {
       table->file_level_service_descriptors[i] = file->servlet(i);
     }

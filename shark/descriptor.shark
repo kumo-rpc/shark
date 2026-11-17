@@ -307,12 +307,12 @@ struct FileOptions {
   // Generic servlets were the only kind of servlet generation supported by
   // early versions of google.sharkbuf.
   //
-  // Generic services are now considered deprecated in favor of using plugins
+  // Generic servlets are now considered deprecated in favor of using plugins
   // that generate code specific to your particular RPC system.  Therefore,
-  // these default to false.  Old code which depends on generic services should
+  // these default to false.  Old code which depends on generic servlets should
   // explicitly set them to true.
-  optional bool cc_generic_services = 16 [default = false];
-  optional bool py_generic_services = 18 [default = false];
+  optional bool cc_generic_servlets = 16 [default = false];
+  optional bool py_generic_servlets = 18 [default = false];
 
   // Is this file deprecated?
   // Depending on the target platform, this can emit Deprecated annotations

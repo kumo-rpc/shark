@@ -259,8 +259,8 @@ constexpr FileOptions::FileOptions(
     , /*decltype(_impl_.attributes_)*/{}
     , /*decltype(_impl_.uninterpreted_option_)*/{}
     , /*decltype(_impl_.go_package_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-    , /*decltype(_impl_.cc_generic_services_)*/false
-    , /*decltype(_impl_.py_generic_services_)*/false
+    , /*decltype(_impl_.cc_generic_servlets_)*/false
+    , /*decltype(_impl_.py_generic_servlets_)*/false
     , /*decltype(_impl_.deprecated_)*/false
     , /*decltype(_impl_.optimize_for_)*/1
     , /*decltype(_impl_.cc_enable_arenas_)*/true} {}
@@ -715,8 +715,8 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     ~0u,  // no _inlined_string_donated_
     SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.optimize_for_),
     SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.go_package_),
-    SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.cc_generic_services_),
-    SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.py_generic_services_),
+    SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.cc_generic_servlets_),
+    SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.py_generic_servlets_),
     SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.deprecated_),
     SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.cc_enable_arenas_),
     SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.attributes_),
@@ -1031,8 +1031,8 @@ const char descriptor_table_protodef_shark_2fdescriptor_2eshark[] SHARK_SECTION_
     "aming\030\006 \001(\001:\005false\"\345\003\n\013FileOptions\022<\n\014op"
     "timize_for\030\t \001(\0162\037.shark.FileOptions.Opt"
     "imizeMode:\005SPEED\022\022\n\ngo_package\030\013 \001(\020\022\"\n\023"
-    "cc_generic_services\030\020 \001(\001:\005false\022\"\n\023py_g"
-    "eneric_services\030\022 \001(\001:\005false\022\031\n\ndeprecat"
+    "cc_generic_servlets\030\020 \001(\001:\005false\022\"\n\023py_g"
+    "eneric_servlets\030\022 \001(\001:\005false\022\031\n\ndeprecat"
     "ed\030\027 \001(\001:\005false\022\036\n\020cc_enable_arenas\030\037 \001("
     "\001:\004true\022!\n\nattributes\030< \003(\0172\r.shark.Opti"
     "on\0229\n\024uninterpreted_option\030\347\007 \003(\0172\032.shar"
@@ -6148,10 +6148,10 @@ class FileOptions::_Internal {
     static void set_has_go_package(HasBits* has_bits) {
       (*has_bits)[0] |= 1u;
     }
-    static void set_has_cc_generic_services(HasBits* has_bits) {
+    static void set_has_cc_generic_servlets(HasBits* has_bits) {
       (*has_bits)[0] |= 2u;
     }
-    static void set_has_py_generic_services(HasBits* has_bits) {
+    static void set_has_py_generic_servlets(HasBits* has_bits) {
       (*has_bits)[0] |= 4u;
     }
     static void set_has_deprecated(HasBits* has_bits) {
@@ -6181,8 +6181,8 @@ FileOptions::FileOptions(const FileOptions& from)
         , decltype(_impl_.attributes_){from._impl_.attributes_}
         , decltype(_impl_.uninterpreted_option_){from._impl_.uninterpreted_option_}
         , decltype(_impl_.go_package_){}
-        , decltype(_impl_.cc_generic_services_){}
-        , decltype(_impl_.py_generic_services_){}
+        , decltype(_impl_.cc_generic_servlets_){}
+        , decltype(_impl_.py_generic_servlets_){}
         , decltype(_impl_.deprecated_){}
         , decltype(_impl_.optimize_for_){}
         , decltype(_impl_.cc_enable_arenas_){}};
@@ -6197,9 +6197,9 @@ FileOptions::FileOptions(const FileOptions& from)
         _this->_impl_.go_package_.Set(from._internal_go_package(), 
           _this->GetArenaForAllocation());
     }
-    ::memcpy(&_impl_.cc_generic_services_, &from._impl_.cc_generic_services_,
+    ::memcpy(&_impl_.cc_generic_servlets_, &from._impl_.cc_generic_servlets_,
       static_cast<size_t>(reinterpret_cast<char*>(&_impl_.cc_enable_arenas_) -
-      reinterpret_cast<char*>(&_impl_.cc_generic_services_)) + sizeof(_impl_.cc_enable_arenas_));
+      reinterpret_cast<char*>(&_impl_.cc_generic_servlets_)) + sizeof(_impl_.cc_enable_arenas_));
   // @@protoc_insertion_point(copy_constructor:shark.FileOptions)
 }
 
@@ -6214,8 +6214,8 @@ inline void FileOptions::SharedCtor(
         , decltype(_impl_.attributes_){arena}
         , decltype(_impl_.uninterpreted_option_){arena}
         , decltype(_impl_.go_package_){}
-        , decltype(_impl_.cc_generic_services_){false}
-        , decltype(_impl_.py_generic_services_){false}
+        , decltype(_impl_.cc_generic_servlets_){false}
+        , decltype(_impl_.py_generic_servlets_){false}
         , decltype(_impl_.deprecated_){false}
         , decltype(_impl_.optimize_for_){1}
         , decltype(_impl_.cc_enable_arenas_){true}
@@ -6260,9 +6260,9 @@ void FileOptions::Clear() {
     if (cached_has_bits & 0x00000001u) {
         _impl_.go_package_.ClearNonDefaultToEmpty();
     }
-    ::memset(&_impl_.cc_generic_services_, 0, static_cast<size_t>(
+    ::memset(&_impl_.cc_generic_servlets_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&_impl_.deprecated_) -
-        reinterpret_cast<char*>(&_impl_.cc_generic_services_)) + sizeof(_impl_.deprecated_));
+        reinterpret_cast<char*>(&_impl_.cc_generic_servlets_)) + sizeof(_impl_.deprecated_));
     if (cached_has_bits & 0x00000030u) {
         _impl_.optimize_for_ = 1;
         _impl_.cc_enable_arenas_ = true;
@@ -6303,20 +6303,20 @@ const char* FileOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
                 } else
                   goto handle_unusual;
                 continue;
-            // optional bool cc_generic_services = 16 [default = false];
+            // optional bool cc_generic_servlets = 16 [default = false];
             case 16:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 128)) {
-                    _Internal::set_has_cc_generic_services(&has_bits);
-                    _impl_.cc_generic_services_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+                    _Internal::set_has_cc_generic_servlets(&has_bits);
+                    _impl_.cc_generic_servlets_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
                 } else
                   goto handle_unusual;
                 continue;
-            // optional bool py_generic_services = 18 [default = false];
+            // optional bool py_generic_servlets = 18 [default = false];
             case 18:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 144)) {
-                    _Internal::set_has_py_generic_services(&has_bits);
-                    _impl_.py_generic_services_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+                    _Internal::set_has_py_generic_servlets(&has_bits);
+                    _impl_.py_generic_servlets_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
                 } else
                   goto handle_unusual;
@@ -6418,16 +6418,16 @@ uint8_t* FileOptions::_InternalSerialize(
             11, this->_internal_go_package(), target);
     }
 
-    // optional bool cc_generic_services = 16 [default = false];
+    // optional bool cc_generic_servlets = 16 [default = false];
     if (cached_has_bits & 0x00000002u) {
         target = stream->EnsureSpace(target);
-        target = ::_pbi::WireFormatLite::WriteBoolToArray(16, this->_internal_cc_generic_services(), target);
+        target = ::_pbi::WireFormatLite::WriteBoolToArray(16, this->_internal_cc_generic_servlets(), target);
     }
 
-    // optional bool py_generic_services = 18 [default = false];
+    // optional bool py_generic_servlets = 18 [default = false];
     if (cached_has_bits & 0x00000004u) {
         target = stream->EnsureSpace(target);
-        target = ::_pbi::WireFormatLite::WriteBoolToArray(18, this->_internal_py_generic_services(), target);
+        target = ::_pbi::WireFormatLite::WriteBoolToArray(18, this->_internal_py_generic_servlets(), target);
     }
 
     // optional bool deprecated = 23 [default = false];
@@ -6503,12 +6503,12 @@ size_t FileOptions::ByteSizeLong() const {
                 this->_internal_go_package());
         }
 
-        // optional bool cc_generic_services = 16 [default = false];
+        // optional bool cc_generic_servlets = 16 [default = false];
         if (cached_has_bits & 0x00000002u) {
             total_size += 2 + 1;
         }
 
-        // optional bool py_generic_services = 18 [default = false];
+        // optional bool py_generic_servlets = 18 [default = false];
         if (cached_has_bits & 0x00000004u) {
             total_size += 2 + 1;
         }
@@ -6556,10 +6556,10 @@ void FileOptions::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK
             _this->_internal_set_go_package(from._internal_go_package());
         }
         if (cached_has_bits & 0x00000002u) {
-            _this->_impl_.cc_generic_services_ = from._impl_.cc_generic_services_;
+            _this->_impl_.cc_generic_servlets_ = from._impl_.cc_generic_servlets_;
         }
         if (cached_has_bits & 0x00000004u) {
-            _this->_impl_.py_generic_services_ = from._impl_.py_generic_services_;
+            _this->_impl_.py_generic_servlets_ = from._impl_.py_generic_servlets_;
         }
         if (cached_has_bits & 0x00000008u) {
             _this->_impl_.deprecated_ = from._impl_.deprecated_;
@@ -6609,9 +6609,9 @@ void FileOptions::InternalSwap(FileOptions* other) {
     ::SHARK_NAMESPACE_ID::internal::memswap<
         SHARK_FIELD_OFFSET(FileOptions, _impl_.deprecated_)
         + sizeof(FileOptions::_impl_.deprecated_)
-        - SHARK_FIELD_OFFSET(FileOptions, _impl_.cc_generic_services_)>(
-            reinterpret_cast<char*>(&_impl_.cc_generic_services_),
-            reinterpret_cast<char*>(&other->_impl_.cc_generic_services_));
+        - SHARK_FIELD_OFFSET(FileOptions, _impl_.cc_generic_servlets_)>(
+            reinterpret_cast<char*>(&_impl_.cc_generic_servlets_),
+            reinterpret_cast<char*>(&other->_impl_.cc_generic_servlets_));
     swap(_impl_.optimize_for_, other->_impl_.optimize_for_);
     swap(_impl_.cc_enable_arenas_, other->_impl_.cc_enable_arenas_);
 }

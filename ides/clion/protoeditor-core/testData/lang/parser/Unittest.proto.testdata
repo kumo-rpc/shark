@@ -3,7 +3,7 @@
 syntax = "proto2";
 
 // Some generic_services option(s) added automatically.
-option cc_generic_services = true;     // auto-added
+option cc_generic_servlet = true;     // auto-added
 option java_generic_services = true;   // auto-added
 option py_generic_services = true;     // auto-added
 option cc_enable_arenas = true;

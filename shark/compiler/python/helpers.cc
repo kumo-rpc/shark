@@ -124,7 +124,7 @@ namespace shark::compiler::python {
     }
 
     bool HasGenericServlet(const FileDescriptor* file) {
-        return file->servlet_count() > 0 && file->options().py_generic_services();
+        return file->servlet_count() > 0 && file->options().py_generic_servlets();
     }
 
     template <typename DescriptorT>

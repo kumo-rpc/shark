@@ -3375,10 +3375,10 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
 
     void DescriptorBuilder::ValidateServletOptions(
         ServletDescriptor* servlet, const ServletDescriptorProto& proto) {
-        if (IsLite(servlet->file()) && servlet->file()->options().cc_generic_services()) {
+        if (IsLite(servlet->file()) && servlet->file()->options().cc_generic_servlets()) {
             add_error(servlet->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
-                "Files with optimize_for = LITE_RUNTIME cannot define services "
-                "unless you set cc_generic_services to false.");
+                "Files with optimize_for = LITE_RUNTIME cannot define servlets "
+                "unless you set cc_generic_servlets to false.");
         }
 
         VALIDATE_OPTIONS_FROM_ARRAY(servlet, method, Method);

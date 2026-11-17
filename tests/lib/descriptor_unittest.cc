@@ -5886,18 +5886,18 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "options {"
                 "  optimize_for: LITE_RUNTIME"
-                "  cc_generic_services: true"
+                "  cc_generic_servlets: true"
                 "} "
                 "servlet { name: \"Foo\" }",
 
                 "foo.shark: Foo: NAME: Files with optimize_for = LITE_RUNTIME cannot "
-                "define services unless you set cc_generic_services to false.\n");
+                "define servlets unless you set cc_generic_servlets to false.\n");
 
             BuildFile(
                 "name: \"bar.shark\" "
                 "options {"
                 "  optimize_for: LITE_RUNTIME"
-                "  cc_generic_services: false"
+                "  cc_generic_servlets: false"
                 "} "
                 "servlet { name: \"Bar\" }");
         }

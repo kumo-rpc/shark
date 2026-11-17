@@ -417,10 +417,11 @@ namespace shark::compiler::cpp {
         return GetOptimizeFor(file, options) != FileOptions_OptimizeMode::LITE_RUNTIME;
     }
 
-    // Should we generate generic services for this file?
+    // Should we generate generic servlets for this file?
     inline bool HasGenericServlet(const FileDescriptor* file,
         const Options& options) {
-        return file->servlet_count() > 0 && GetOptimizeFor(file, options) != FileOptions_OptimizeMode::LITE_RUNTIME && file->options().cc_generic_services();
+        return file->servlet_count() > 0 && GetOptimizeFor(file, options) != FileOptions_OptimizeMode::LITE_RUNTIME &&
+            file->options().cc_generic_servlets();
     }
 
     inline bool IsProto2MessageSet(const Descriptor* descriptor,
