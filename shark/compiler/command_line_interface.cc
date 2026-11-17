@@ -1262,7 +1262,7 @@ namespace shark {
                 // Enforce --disallow_servlets.
                 if (disallow_servlets_ && parsed_file->servlet_count() > 0) {
                     std::cerr << parsed_file->name()
-                              << ": This file contains services, but "
+                              << ": This file contains servlets, but "
                                  "--disallow_servlets was used."
                               << std::endl;
                     result = false;

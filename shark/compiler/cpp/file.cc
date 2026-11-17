@@ -766,7 +766,7 @@ namespace shark::compiler::cpp {
             }
 
             if (HasGenericServlet(file_, options_)) {
-                // Generate services.
+                // Generate servlets.
                 for (int i = 0; i < servlets_generators_.size(); i++) {
                     if (i == 0)
                         format("\n");

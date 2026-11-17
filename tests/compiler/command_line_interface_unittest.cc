@@ -1381,7 +1381,7 @@ namespace shark {
                 Run("protocol_compiler --disallow_servlets --test_out=$tmpdir "
                     "--proto_path=$tmpdir foo.shark");
 
-                ExpectErrorSubstring("foo.shark: This file contains services");
+                ExpectErrorSubstring("foo.shark: This file contains servlets");
             }
 
             TEST_F(CommandLineInterfaceTest, AllowServicesHasService) {

@@ -560,20 +560,20 @@ namespace shark::compiler::python {
     }
 
     void PyiGenerator::PrintServices() const {
-        std::vector<const ServletDescriptor*> services;
-        services.reserve(file_->servlet_count());
+        std::vector<const ServletDescriptor*> servlets;
+        servlets.reserve(file_->servlet_count());
         for (int i = 0; i < file_->servlet_count(); ++i) {
-            services.push_back(file_->servlet(i));
+            servlets.push_back(file_->servlet(i));
         }
-        std::sort(services.begin(), services.end(), SortByName<ServletDescriptor>());
+        std::sort(servlets.begin(), servlets.end(), SortByName<ServletDescriptor>());
 
         // Prints $Service$ and $Service$_Stub classes
-        for (const auto& entry : services) {
+        for (const auto& entry : servlets) {
             printer_->Print("\n");
             printer_->Print(
-                "class $service_name$(_service.servlet): ...\n\n"
-                "class $service_name$_Stub($service_name$): ...\n",
-                "service_name", entry->name());
+                "class $servlet_name$(_service.servlet): ...\n\n"
+                "class $servlet_name$_Stub($servlet_name$): ...\n",
+                "servlet_name", entry->name());
         }
     }
 

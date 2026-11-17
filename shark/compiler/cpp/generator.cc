@@ -222,7 +222,7 @@ namespace shark::compiler::cpp {
         if (UsingImplicitWeakFields(file, file_options)) {
             {
                 // This is the global .cc file, containing
-                // enum/services/tables/reflection
+                // enum/servlets/tables/reflection
                 std::unique_ptr<io::ZeroCopyOutputStream> output(
                     generator_context->Open(basename + ".skp.cc"));
                 io::Printer printer(output.get(), '$');

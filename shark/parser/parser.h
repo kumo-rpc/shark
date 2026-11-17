@@ -316,7 +316,7 @@ namespace shark {
                 const LocationRecorder& enum_location,
                 const FileDescriptorProto* containing_file);
             bool parse_servlet_definition(ServletDescriptorProto* servlet,
-                const LocationRecorder& service_location,
+                const LocationRecorder& servlet_location,
                 const FileDescriptorProto* containing_file);
             bool ParsePackage(FileDescriptorProto* file,
                 const LocationRecorder& root_location,
@@ -338,7 +338,7 @@ namespace shark {
                 const FileDescriptorProto* containing_file,
                 EnumUnderlyingType underlying_type);
             bool ParseServiceBlock(ServletDescriptorProto* servlet,
-                const LocationRecorder& service_location,
+                const LocationRecorder& servlet_location,
                 const FileDescriptorProto* containing_file);
 
             // Parse one statement within a message, enum, or servlet block, including
@@ -351,7 +351,7 @@ namespace shark {
                 const FileDescriptorProto* containing_file,
                 EnumUnderlyingType underlying_type);
             bool ParseServletStatement(ServletDescriptorProto* message,
-                const LocationRecorder& service_location,
+                const LocationRecorder& servlet_location,
                 const FileDescriptorProto* containing_file);
 
             // Parse a field of a message.  If the field is a group, its type will be

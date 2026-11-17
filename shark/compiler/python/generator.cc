@@ -306,7 +306,7 @@ namespace shark::compiler::python {
             // can only be successfully parsed after we register corresponding
             // extensions. Therefore we parse all options again here to recognize
             // custom options that may be unknown when we define the descriptors.
-            // This does not apply to services because they are not used by extensions.
+            // This does not apply to servlets because they are not used by extensions.
             FixAllDescriptorOptions();
 
             // Set serialized_start and serialized_end.
@@ -523,10 +523,10 @@ namespace shark::compiler::python {
     void Generator::PrintServiceDescriptor(
         const ServletDescriptor& descriptor) const {
         std::map<std::string, std::string> m;
-        m["service_name"] = ModuleLevelServiceDescriptorName(descriptor);
+        m["servlet_name"] = ModuleLevelServiceDescriptorName(descriptor);
         m["name"] = descriptor.name();
         m["file"] = kDescriptorKey;
-        printer_->Print(m, "$service_name$ = $file$.services_by_name['$name$']\n");
+        printer_->Print(m, "$servlet_name$ = $file$.services_by_name['$name$']\n");
     }
 
     void Generator::PrintDescriptorKeyAndModuleName(
@@ -804,7 +804,7 @@ namespace shark::compiler::python {
         const ServletDescriptor& descriptor) const {
         std::map<std::string, std::string> m;
         m["descriptor_name"] = kDescriptorKey;
-        m["service_name"] = descriptor.name();
+        m["servlet_name"] = descriptor.name();
         m["service_descriptor_name"] = ModuleLevelServiceDescriptorName(descriptor);
         const char file_descriptor_template[] = "$descriptor_name$.services_by_name['$service_name$'] = "
                                                 "$service_descriptor_name$\n";
@@ -1266,16 +1266,16 @@ namespace shark::compiler::python {
     // Prints expressions that set the options for an servlet descriptor and its
     // value descriptors.
     void Generator::FixOptionsForService(
-        const ServletDescriptor& service_descriptor) const {
-        std::string descriptor_name = ModuleLevelServiceDescriptorName(service_descriptor);
-        std::string servlets_options = OptionsValue(service_descriptor.options().SerializeAsString());
+        const ServletDescriptor& servlet_descriptor) const {
+        std::string descriptor_name = ModuleLevelServiceDescriptorName(servlet_descriptor);
+        std::string servlets_options = OptionsValue(servlet_descriptor.options().SerializeAsString());
         if (servlets_options != "None") {
             PrintDescriptorOptionsFixingCode(descriptor_name, servlets_options,
                 printer_);
         }
 
-        for (int i = 0; i < service_descriptor.method_count(); ++i) {
-            const MethodDescriptor* method = service_descriptor.method(i);
+        for (int i = 0; i < servlet_descriptor.method_count(); ++i) {
+            const MethodDescriptor* method = servlet_descriptor.method(i);
             std::string method_options = OptionsValue(method->options().SerializeAsString());
             if (method_options != "None") {
                 std::string method_name = descriptor_name + ".methods_by_name['" + method->name() + "']";
