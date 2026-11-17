@@ -45,18 +45,18 @@ namespace shark::io {
     Printer::Printer(ZeroCopyOutputStream* output, char variable_delimiter)
         : variable_delimiter_(variable_delimiter)
         , output_(output)
-        , buffer_(NULL)
+        , buffer_(nullptr)
         , buffer_size_(0)
         , offset_(0)
         , at_start_of_line_(true)
         , failed_(false)
-        , annotation_collector_(NULL) { }
+        , annotation_collector_(nullptr) { }
 
     Printer::Printer(ZeroCopyOutputStream* output, char variable_delimiter,
         AnnotationCollector* annotation_collector)
         : variable_delimiter_(variable_delimiter)
         , output_(output)
-        , buffer_(NULL)
+        , buffer_(nullptr)
         , buffer_size_(0)
         , offset_(0)
         , at_start_of_line_(true)
@@ -92,7 +92,7 @@ namespace shark::io {
     void Printer::Annotate(const char* begin_varname, const char* end_varname,
         const std::string& file_path,
         const std::vector<int>& path) {
-        if (annotation_collector_ == NULL) {
+        if (annotation_collector_ == nullptr) {
             // Can't generate signatures with this Printer.
             return;
         }
@@ -137,7 +137,7 @@ namespace shark::io {
 
                 // Find closing delimiter.
                 const char* end = strchr(text + pos, variable_delimiter_);
-                if (end == NULL) {
+                if (end == nullptr) {
                     SHARK_LOG(DFATAL) << " Unclosed variable name.";
                     end = text + pos;
                 }
@@ -149,7 +149,7 @@ namespace shark::io {
                     WriteRaw(&variable_delimiter_, 1);
                 } else {
                     // Replace with the variable's value.
-                    std::map<std::string, std::string>::const_iterator iter = variables.find(varname);
+                    auto iter = variables.find(varname);
                     if (iter == variables.end()) {
                         SHARK_LOG(DFATAL) << " Undefined variable: " << varname;
                     } else {
@@ -218,7 +218,7 @@ namespace shark::io {
                 return;
             // Fix up empty variables (e.g., "{") that should be annotated as
             // coming after the indent.
-            for (std::vector<std::string>::iterator i = line_start_variables_.begin();
+            for (auto i = line_start_variables_.begin();
                 i != line_start_variables_.end(); ++i) {
                 substitutions_[*i].first += indent_.size();
                 substitutions_[*i].second += indent_.size();
