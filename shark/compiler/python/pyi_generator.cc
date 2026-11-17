@@ -229,8 +229,8 @@ namespace shark::compiler::python {
         }
         if (HasGenericServlet(file_)) {
             printer_->Print(
-                "from shark import service as"
-                " _service\n");
+                "from shark import servlet as"
+                " _servlet\n");
         }
         printer_->Print("from typing import ");
         printer_->Print("ClassVar as _ClassVar");
@@ -561,9 +561,9 @@ namespace shark::compiler::python {
 
     void PyiGenerator::PrintServices() const {
         std::vector<const ServletDescriptor*> services;
-        services.reserve(file_->service_count());
-        for (int i = 0; i < file_->service_count(); ++i) {
-            services.push_back(file_->service(i));
+        services.reserve(file_->servlet_count());
+        for (int i = 0; i < file_->servlet_count(); ++i) {
+            services.push_back(file_->servlet(i));
         }
         std::sort(services.begin(), services.end(), SortByName<ServletDescriptor>());
 
@@ -571,7 +571,7 @@ namespace shark::compiler::python {
         for (const auto& entry : services) {
             printer_->Print("\n");
             printer_->Print(
-                "class $service_name$(_service.service): ...\n\n"
+                "class $service_name$(_service.servlet): ...\n\n"
                 "class $service_name$_Stub($service_name$): ...\n",
                 "service_name", entry->name());
         }

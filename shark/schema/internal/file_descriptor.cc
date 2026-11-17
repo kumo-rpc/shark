@@ -159,8 +159,8 @@ namespace shark {
         for (int i = 0; i < enum_type_count(); i++) {
             enum_type(i)->CopyTo(proto->add_enum_type());
         }
-        for (int i = 0; i < service_count(); i++) {
-            service(i)->CopyTo(proto->add_servlet());
+        for (int i = 0; i < servlet_count(); i++) {
+            servlet(i)->CopyTo(proto->add_servlet());
         }
         for (int i = 0; i < extension_count(); i++) {
             extension(i)->CopyTo(proto->add_extension());
@@ -257,8 +257,8 @@ namespace shark {
             contents.append("\n");
         }
 
-        for (int i = 0; i < service_count(); i++) {
-            service(i)->DebugString(&contents, debug_string_options);
+        for (int i = 0; i < servlet_count(); i++) {
+            servlet(i)->DebugString(&contents, debug_string_options);
             contents.append("\n");
         }
 

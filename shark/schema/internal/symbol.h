@@ -165,7 +165,7 @@ namespace shark {
             case SERVICE:
                 return service_descriptor()->file();
             case METHOD:
-                return method_descriptor()->service()->file();
+                return method_descriptor()->servlet()->file();
             case FULL_PACKAGE:
                 return file_descriptor();
             case SUB_PACKAGE:
@@ -242,7 +242,7 @@ namespace shark {
             case SERVICE:
                 return { GetFile(), service_descriptor()->name() };
             case METHOD:
-                return { method_descriptor()->service(), method_descriptor()->name() };
+                return { method_descriptor()->servlet(), method_descriptor()->name() };
             case QUERY_KEY:
                 return query_key()->parent_name_key();
             default:

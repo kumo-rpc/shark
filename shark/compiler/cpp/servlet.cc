@@ -234,7 +234,7 @@ namespace shark::compiler::cpp {
             "                             const ::$proto_ns$::Message* request,\n"
             "                             ::$proto_ns$::Message* response,\n"
             "                             ::shark::Closure* done) {\n"
-            "  GOOGLE_DCHECK_EQ(method->service(), $file_level_service_descriptors$[$1$]);\n"
+            "  GOOGLE_DCHECK_EQ(method->servlet(), $file_level_service_descriptors$[$1$]);\n"
             "  switch(method->index()) {\n",
             index_in_metadata_);
 
@@ -277,7 +277,7 @@ namespace shark::compiler::cpp {
 
         format(
             "    const ::$proto_ns$::MethodDescriptor* method) const {\n"
-            "  GOOGLE_DCHECK_EQ(method->service(), descriptor());\n"
+            "  GOOGLE_DCHECK_EQ(method->servlet(), descriptor());\n"
             "  switch(method->index()) {\n");
 
         for (int i = 0; i < descriptor_->method_count(); i++) {

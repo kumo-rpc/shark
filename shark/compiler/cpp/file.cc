@@ -133,9 +133,9 @@ namespace shark::compiler::cpp {
                 new EnumGenerator(file->enum_type(i), variables_, options));
         }
 
-        for (int i = 0; i < file->service_count(); i++) {
+        for (int i = 0; i < file->servlet_count(); i++) {
             service_generators_.emplace_back(
-                new ServletGenerator(file->service(i), variables_, options));
+                new ServletGenerator(file->servlet(i), variables_, options));
         }
         if (HasGenericServlet(file_, options_)) {
             for (int i = 0; i < service_generators_.size(); i++) {
@@ -828,12 +828,12 @@ namespace shark::compiler::cpp {
                 "constexpr ::_pb::EnumDescriptor const** "
                 "$file_level_enum_descriptors$ = nullptr;\n");
         }
-        if (HasGenericServlet(file_, options_) && file_->service_count() > 0) {
+        if (HasGenericServlet(file_, options_) && file_->servlet_count() > 0) {
             format(
                 "static "
                 "const ::_pb::ServletDescriptor* "
                 "$file_level_service_descriptors$[$1$];\n",
-                file_->service_count());
+                file_->servlet_count());
         } else {
             format(
                 "static "

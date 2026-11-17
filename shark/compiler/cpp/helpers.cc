@@ -1376,8 +1376,8 @@ namespace shark::compiler::cpp {
 
     void ListAllTypesForServlet(const FileDescriptor* fd,
         std::vector<const Descriptor*>* types) {
-        for (int i = 0; i < fd->service_count(); i++) {
-            const ServletDescriptor* sd = fd->service(i);
+        for (int i = 0; i < fd->servlet_count(); i++) {
+            const ServletDescriptor* sd = fd->servlet(i);
             for (int j = 0; j < sd->method_count(); j++) {
                 const MethodDescriptor* method = sd->method(j);
                 types->push_back(method->input_type());

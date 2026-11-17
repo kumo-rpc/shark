@@ -126,7 +126,7 @@ namespace shark {
             client_streaming() ? "stream " : "", server_streaming() ? "stream " : "");
 
         std::string formatted_options;
-        if (FormatLineOptions(depth, options(), service()->file()->pool(),
+        if (FormatLineOptions(depth, options(), servlet()->file()->pool(),
                 &formatted_options)) {
             turbo::substitute_and_append(contents, " {\n$0$1}\n", formatted_options,
                 prefix);
@@ -140,7 +140,7 @@ namespace shark {
     bool MethodDescriptor::GetSourceLocation(SourceLocation* out_location) const {
         std::vector<int> path;
         GetLocationPath(&path);
-        return service()->file()->GetSourceLocation(path, out_location);
+        return servlet()->file()->GetSourceLocation(path, out_location);
     }
 
     bool ServletDescriptor::GetSourceLocation(SourceLocation* out_location) const {
@@ -157,18 +157,18 @@ namespace shark {
     }
 
     void MethodDescriptor::GetLocationPath(std::vector<int>* output) const {
-        service()->GetLocationPath(output);
+        servlet()->GetLocationPath(output);
         output->push_back(ServletDescriptorProto::kMethodFieldNumber);
         output->push_back(index());
     }
 
 
     const Descriptor* MethodDescriptor::input_type() const {
-        return input_type_.Get(service());
+        return input_type_.Get(servlet());
     }
 
     const Descriptor* MethodDescriptor::output_type() const {
-        return output_type_.Get(service());
+        return output_type_.Get(servlet());
     }
 
 

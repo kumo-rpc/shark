@@ -3508,8 +3508,8 @@ void AssignDescriptorsImpl(const DescriptorTable* table, bool eager) {
     helper.AssignEnumDescriptor(file->enum_type(i));
   }
   if (file->options().cc_generic_services()) {
-    for (int i = 0; i < file->service_count(); i++) {
-      table->file_level_service_descriptors[i] = file->service(i);
+    for (int i = 0; i < file->servlet_count(); i++) {
+      table->file_level_service_descriptors[i] = file->servlet(i);
     }
   }
   MetadataOwner::Instance()->AddArray(table->file_level_metadata,

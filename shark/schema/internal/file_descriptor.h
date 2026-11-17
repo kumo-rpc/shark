@@ -77,11 +77,11 @@ namespace shark {
         // These are returned in the order they were defined in the .shark file.
         const EnumDescriptor* enum_type(int index) const;
 
-        // Number of services defined in this file.
-        int service_count() const;
-        // Gets a servlet, where 0 <= index < service_count().
+        // Number of servlets defined in this file.
+        int servlet_count() const;
+        // Gets a servlet, where 0 <= index < servlet_count().
         // These are returned in the order they were defined in the .shark file.
-        const ServletDescriptor* service(int index) const;
+        const ServletDescriptor* servlet(int index) const;
 
         // Number of extensions defined at file scope.  (This does not include
         // extensions nested within message types.)

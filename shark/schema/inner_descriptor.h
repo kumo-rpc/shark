@@ -333,7 +333,7 @@ namespace shark {
         return all_names_[1];
     }
 
-    inline const ServletDescriptor* MethodDescriptor::service() const {
+    inline const ServletDescriptor* MethodDescriptor::servlet() const {
         return service_;
     }
 
@@ -382,7 +382,7 @@ namespace shark {
         return enum_type_count_;
     }
 
-    inline int FileDescriptor::service_count() const {
+    inline int FileDescriptor::servlet_count() const {
         return service_count_;
     }
 
@@ -406,7 +406,7 @@ namespace shark {
         return enum_types_ + index;
     }
 
-    inline const ServletDescriptor* FileDescriptor::service(int index) const {
+    inline const ServletDescriptor* FileDescriptor::servlet(int index) const {
         return services_ + index;
     }
 
@@ -584,7 +584,7 @@ namespace shark {
     }
 
     inline const FileDescriptor* MethodDescriptor::file() const {
-        return service()->file();
+        return servlet()->file();
     }
 
     inline int MethodDescriptor::index() const {

@@ -507,15 +507,15 @@ namespace shark::compiler::python {
     }
 
     void Generator::PrintServiceDescriptors() const {
-        for (int i = 0; i < file_->service_count(); ++i) {
-            PrintServiceDescriptor(*file_->service(i));
+        for (int i = 0; i < file_->servlet_count(); ++i) {
+            PrintServiceDescriptor(*file_->servlet(i));
         }
     }
 
     void Generator::PrintServices() const {
-        for (int i = 0; i < file_->service_count(); ++i) {
-            PrintServiceClass(*file_->service(i));
-            PrintServiceStub(*file_->service(i));
+        for (int i = 0; i < file_->servlet_count(); ++i) {
+            PrintServiceClass(*file_->servlet(i));
+            PrintServiceStub(*file_->servlet(i));
             printer_->Print("\n");
         }
     }
@@ -1177,9 +1177,9 @@ namespace shark::compiler::python {
         }
 
         // Services.
-        for (int i = 0; i < file_->service_count(); ++i) {
+        for (int i = 0; i < file_->servlet_count(); ++i) {
             ServletDescriptorProto proto;
-            const ServletDescriptor& servlet = *file_->service(i);
+            const ServletDescriptor& servlet = *file_->servlet(i);
             PrintSerializedPbInterval(servlet, proto,
                 ModuleLevelServiceDescriptorName(servlet));
         }
@@ -1228,8 +1228,8 @@ namespace shark::compiler::python {
             FixOptionsForMessage(*file_->message_type(i));
         }
 
-        for (int i = 0; i < file_->service_count(); ++i) {
-            FixOptionsForService(*file_->service(i));
+        for (int i = 0; i < file_->servlet_count(); ++i) {
+            FixOptionsForService(*file_->servlet(i));
         }
     }
 

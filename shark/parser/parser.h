@@ -315,7 +315,7 @@ namespace shark {
             bool ParseEnumDefinition(EnumDescriptorProto* enum_type,
                 const LocationRecorder& enum_location,
                 const FileDescriptorProto* containing_file);
-            bool parse_servlet_definition(ServletDescriptorProto* service,
+            bool parse_servlet_definition(ServletDescriptorProto* servlet,
                 const LocationRecorder& service_location,
                 const FileDescriptorProto* containing_file);
             bool ParsePackage(FileDescriptorProto* file,
@@ -337,7 +337,7 @@ namespace shark {
                 const LocationRecorder& enum_location,
                 const FileDescriptorProto* containing_file,
                 EnumUnderlyingType underlying_type);
-            bool ParseServiceBlock(ServletDescriptorProto* service,
+            bool ParseServiceBlock(ServletDescriptorProto* servlet,
                 const LocationRecorder& service_location,
                 const FileDescriptorProto* containing_file);
 

@@ -395,8 +395,8 @@ namespace shark {
                 foo_enum_ = foo_file_->enum_type(0);
                 ASSERT_EQ(1, foo_enum_->value_count());
                 foo_enum_value_ = foo_enum_->value(0);
-                ASSERT_EQ(1, foo_file_->service_count());
-                foo_service_ = foo_file_->service(0);
+                ASSERT_EQ(1, foo_file_->servlet_count());
+                foo_service_ = foo_file_->servlet(0);
                 ASSERT_EQ(1, foo_file_->extension_count());
                 foo_extension_ = foo_file_->extension(0);
 
@@ -406,8 +406,8 @@ namespace shark {
                 bar_enum_ = bar_file_->enum_type(0);
                 ASSERT_EQ(1, bar_enum_->value_count());
                 bar_enum_value_ = bar_enum_->value(0);
-                ASSERT_EQ(1, bar_file_->service_count());
-                bar_service_ = bar_file_->service(0);
+                ASSERT_EQ(1, bar_file_->servlet_count());
+                bar_service_ = bar_file_->servlet(0);
                 ASSERT_EQ(1, bar_file_->extension_count());
                 bar_extension_ = bar_file_->extension(0);
             }
@@ -1620,15 +1620,15 @@ namespace shark {
                 baz_request_ = foo_file_->message_type(4);
                 baz_response_ = foo_file_->message_type(5);
 
-                ASSERT_EQ(1, foo_file_->service_count());
-                service_ = foo_file_->service(0);
+                ASSERT_EQ(1, foo_file_->servlet_count());
+                service_ = foo_file_->servlet(0);
 
                 ASSERT_EQ(2, service_->method_count());
                 foo_ = service_->method(0);
                 bar_ = service_->method(1);
 
-                ASSERT_EQ(1, bar_file_->service_count());
-                service2_ = bar_file_->service(0);
+                ASSERT_EQ(1, bar_file_->servlet_count());
+                service2_ = bar_file_->servlet(0);
 
                 ASSERT_EQ(2, service2_->method_count());
                 foo2_ = service2_->method(0);
@@ -1701,8 +1701,8 @@ namespace shark {
         }
 
         TEST_F(ServiceDescriptorTest, MethodParent) {
-            EXPECT_EQ(service_, foo_->service());
-            EXPECT_EQ(service_, bar_->service());
+            EXPECT_EQ(service_, foo_->servlet());
+            EXPECT_EQ(service_, bar_->servlet());
         }
 
         TEST_F(ServiceDescriptorTest, MethodInputType) {

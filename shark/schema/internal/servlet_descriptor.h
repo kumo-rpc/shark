@@ -125,7 +125,7 @@ namespace shark {
         // The .shark file in which this method was defined.  Never nullptr.
         const FileDescriptor* file() const;
         // Gets the servlet to which this method belongs.  Never nullptr.
-        const ServletDescriptor* service() const;
+        const ServletDescriptor* servlet() const;
 
         // Gets the type of protocol message which this method accepts as input.
         const Descriptor* input_type() const;

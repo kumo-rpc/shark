@@ -2161,10 +2161,10 @@ TEST_F(GENERATED_SERVICE_TEST_NAME, NoGenericServices) {
       ::shark::unittest::no_generic_services_test::TestMessage::descriptor()
           ->file();
 
-  ASSERT_EQ(1, file->service_count());
-  EXPECT_EQ("TestService", file->service(0)->name());
-  ASSERT_EQ(1, file->service(0)->method_count());
-  EXPECT_EQ("Foo", file->service(0)->method(0)->name());
+  ASSERT_EQ(1, file->servlet_count());
+  EXPECT_EQ("TestService", file->servlet(0)->name());
+  ASSERT_EQ(1, file->servlet(0)->method_count());
+  EXPECT_EQ("Foo", file->servlet(0)->method(0)->name());
 }
 
 #endif  // !SHARK_TEST_NO_DESCRIPTORS
