@@ -217,8 +217,8 @@ namespace shark {
     inline void DescriptorPool::Tables::FindAllExtensions(
         const Descriptor* extendee,
         std::vector<const FieldDescriptor*>* out) const {
-        ExtensionsGroupedByDescriptorMap::const_iterator it = extensions_.lower_bound(std::make_pair(extendee, 0));
-        for (; it != extensions_.end() && it->first.first == extendee; ++it) {
+        for (auto it = extensions_.lower_bound(std::make_pair(extendee, 0));
+            it != extensions_.end() && it->first.first == extendee; ++it) {
             out->push_back(it->second);
         }
     }
@@ -231,7 +231,7 @@ namespace shark {
     }
 
     template <typename... T>
-internal::FlatAllocator::Allocation* DescriptorPool::Tables::CreateFlatAlloc(
+    internal::FlatAllocator::Allocation* DescriptorPool::Tables::CreateFlatAlloc(
     const TypeMap<IntT, T...>& sizes) {
         auto ends = CalculateEnds(sizes);
         using FlatAlloc = internal::FlatAllocator::Allocation;
