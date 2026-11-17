@@ -106,21 +106,21 @@ kmcmake_cc_library(
         types/timestamp.skp.cc
         types/type.skp.cc
         types/wrappers.skp.cc
-        transfer/json/datapiece.cc
-        transfer/json/default_value_objectwriter.cc
-        transfer/json/error_listener.cc
-        transfer/json/field_mask_utility.cc
-        transfer/json/json_escaping.cc
-        transfer/json/json_objectwriter.cc
-        transfer/json/json_stream_parser.cc
-        transfer/json/object_writer.cc
-        transfer/json/proto_writer.cc
-        transfer/json/protostream_objectsource.cc
-        transfer/json/protostream_objectwriter.cc
-        transfer/json/type_info.cc
-        transfer/json/utility.cc
-        transfer/json/json_util.cc
-        transfer/json/type_resolver_util.cc
+        persist/json/datapiece.cc
+        persist/json/default_value_objectwriter.cc
+        persist/json/error_listener.cc
+        persist/json/field_mask_utility.cc
+        persist/json/json_escaping.cc
+        persist/json/json_objectwriter.cc
+        persist/json/json_stream_parser.cc
+        persist/json/object_writer.cc
+        persist/json/proto_writer.cc
+        persist/json/protostream_objectsource.cc
+        persist/json/protostream_objectwriter.cc
+        persist/json/type_info.cc
+        persist/json/utility.cc
+        persist/json/json_util.cc
+        persist/json/type_resolver_util.cc
         util/delimited_message_util.cc
         util/field_comparator.cc
         util/field_mask_util.cc

@@ -36,13 +36,13 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
 #include <shark/descriptor.h>
-#include <shark/transfer/json/constants.h>
-#include <shark/transfer/json/default_value_objectwriter.h>
-#include <shark/transfer/json/protostream_objectsource.h>
-#include <shark/transfer/json/protostream_objectwriter.h>
-#include <shark/transfer/json/type_info.h>
-#include <shark/transfer/json/type_resolver.h>
-#include <shark/transfer/json/type_resolver_util.h>
+#include <shark/persist/json/constants.h>
+#include <shark/persist/json/default_value_objectwriter.h>
+#include <shark/persist/json/protostream_objectsource.h>
+#include <shark/persist/json/protostream_objectwriter.h>
+#include <shark/persist/json/type_info.h>
+#include <shark/persist/json/type_resolver.h>
+#include <shark/persist/json/type_resolver_util.h>
 
 namespace shark::util::converter::testing {
 

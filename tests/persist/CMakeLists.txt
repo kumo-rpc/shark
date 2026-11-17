@@ -14,17 +14,5 @@
 #
 
 add_subdirectory(wired)
-
-kmcmake_cc_test(
-        NAME text_format_unittest
-        MODULE format
-        SOURCES
-        text_format_unittest.cc
-        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
-        LINKS
-        ${PROJECT_NAME}::sk_format_wire_sk_static
-        ${PROJECT_NAME}::test_sk_static
-        ${PROJECT_NAME}::test_common_static
-        ${PROJECT_NAME}::shark_static
-        GTest::gmock_main
-)
+add_subdirectory(json)
+add_subdirectory(text)

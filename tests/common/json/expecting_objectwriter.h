@@ -53,7 +53,7 @@
 
 #include <shark/stubs/common.h>
 #include <gmock/gmock.h>
-#include <shark/transfer/json/object_writer.h>
+#include <shark/persist/json/object_writer.h>
 
 namespace shark::util::converter {
 

@@ -31,8 +31,8 @@
 #pragma once
 
 #include <gmock/gmock.h>
-#include <shark/transfer/json/error_listener.h>
-#include <shark/transfer/json/location_tracker.h>
+#include <shark/persist/json/error_listener.h>
+#include <shark/persist/json/location_tracker.h>
 
 namespace shark::util::converter {
 
