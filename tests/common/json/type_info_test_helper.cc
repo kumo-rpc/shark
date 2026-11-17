@@ -62,7 +62,7 @@ void TypeInfoTestHelper::ResetTypeInfo(
       return;
     }
   }
-  GOOGLE_LOG(FATAL) << "Can not reach here.";
+  SHARK_LOG(FATAL) << "Can not reach here.";
 }
 
 void TypeInfoTestHelper::ResetTypeInfo(const Descriptor* descriptor) {
@@ -91,7 +91,7 @@ ProtoStreamObjectSource* TypeInfoTestHelper::NewProtoSource(
                                          *type, render_options);
     }
   }
-  GOOGLE_LOG(FATAL) << "Can not reach here.";
+  SHARK_LOG(FATAL) << "Can not reach here.";
   return nullptr;
 }
 
@@ -105,7 +105,7 @@ ProtoStreamObjectWriter* TypeInfoTestHelper::NewProtoWriter(
                                          listener, options);
     }
   }
-  GOOGLE_LOG(FATAL) << "Can not reach here.";
+  SHARK_LOG(FATAL) << "Can not reach here.";
   return nullptr;
 }
 
@@ -117,7 +117,7 @@ DefaultValueObjectWriter* TypeInfoTestHelper::NewDefaultValueWriter(
       return new DefaultValueObjectWriter(type_resolver_.get(), *type, writer);
     }
   }
-  GOOGLE_LOG(FATAL) << "Can not reach here.";
+  SHARK_LOG(FATAL) << "Can not reach here.";
   return nullptr;
 }
 

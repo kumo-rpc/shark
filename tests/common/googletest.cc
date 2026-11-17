@@ -89,7 +89,7 @@ std::string TestSourceDir() {
   // shark/descriptor.cc.
   while (!File::Exists(prefix + "/shark/descriptor.cc")) {
     if (!File::Exists(prefix)) {
-      GOOGLE_LOG(FATAL)
+      SHARK_LOG(FATAL)
         << "Could not find protobuf source code.  Please run tests from "
            "somewhere within the protobuf source package.";
     }

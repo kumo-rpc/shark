@@ -91,7 +91,7 @@ class JsonStreamParserTest : public ::testing::Test {
 
     // Special case for split == length, test parsing one character at a time.
     if (split == json.length()) {
-      GOOGLE_LOG(INFO) << "Testing split every char: " << json;
+      SHARK_LOG(INFO) << "Testing split every char: " << json;
       for (int i = 0; i < json.length(); ++i) {
         ::std::string_view single = json.substr(i, 1);
         turbo::Status result = parser.Parse(single);
@@ -105,7 +105,7 @@ class JsonStreamParserTest : public ::testing::Test {
     // Normal case, split at the split point and parse two substrings.
     ::std::string_view first = json.substr(0, split);
     ::std::string_view rest = json.substr(split);
-    GOOGLE_LOG(INFO) << "Testing split: " << first << "><" << rest;
+    SHARK_LOG(INFO) << "Testing split: " << first << "><" << rest;
     turbo::Status result = parser.Parse(first);
     if (result.ok()) {
       result = parser.Parse(rest);
@@ -125,7 +125,7 @@ class JsonStreamParserTest : public ::testing::Test {
       }) {
     turbo::Status result = RunTest(json, split, setup);
     if (!result.ok()) {
-      GOOGLE_LOG(WARNING) << result;
+      SHARK_LOG(WARNING) << result;
     }
     EXPECT_TRUE(result.ok());
   }

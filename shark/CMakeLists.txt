@@ -55,7 +55,7 @@ kmcmake_cc_library(
         schema/internal/descriptor_pool.cc
         schema/internal/descriptor.cc
         schema/internal/enum_descriptor.cc
-        schema/internal/service_descriptor.cc
+        schema/internal/servlet_descriptor.cc
         schema/internal/oneof_descriptor.cc
         schema/internal/descriptor_builder.cc
         stubs/bytestream.cc
@@ -81,7 +81,7 @@ kmcmake_cc_library(
         dynamic_message.cc
         message.cc
         reflection_ops.cc
-        service.cc
+        servlet.cc
         unknown_field_set.cc
         extension_set_heavy.cc
         parser/importer.cc
@@ -149,7 +149,7 @@ kmcmake_cc_library(
         compiler/cpp/padding_optimizer.cc
         compiler/cpp/parse_function_generator.cc
         compiler/cpp/primitive_field.cc
-        compiler/cpp/service.cc
+        compiler/cpp/servlet.cc
         compiler/cpp/string_field.cc
         #################################################
 

@@ -15,9 +15,9 @@
 
 #include <cstdint>
 
-#include <shark/schema/internal/service_descriptor.h>
 #include <shark/schema/internal/file_descriptor_tables.h>
 #include <shark/schema/internal/file_descriptor_tables_inl.h>
+#include <shark/schema/internal/servlet_descriptor.h>
 // Must be included last.
 #include <shark/port_def.inc>
 

@@ -2916,7 +2916,7 @@ namespace shark {
                     return pool_->FindFileByName(proto.name());
                 }
                 }
-                GOOGLE_LOG(FATAL) << "Can't get here.";
+                SHARK_LOG(FATAL) << "Can't get here.";
                 return nullptr;
             }
 
@@ -3140,7 +3140,7 @@ namespace shark {
 
             const FileDescriptor* file = BuildFile(test_proto);
             ASSERT_TRUE(file != nullptr);
-            GOOGLE_LOG(INFO) << file->DebugString();
+            SHARK_LOG(INFO) << file->DebugString();
 
             EXPECT_EQ(0, file->dependency_count());
             ASSERT_EQ(1, file->message_type_count());
@@ -5951,7 +5951,7 @@ namespace shark {
         }
 
         TEST_F(ValidationErrorTest, ErrorsReportedToLogError) {
-            // Test that errors are reported to GOOGLE_LOG(ERROR) if no error collector is
+            // Test that errors are reported to SHARK_LOG(ERROR) if no error collector is
             // provided.
 
             FileDescriptorProto file_proto;
@@ -7280,7 +7280,7 @@ namespace shark {
             ExponentialErrorDatabase error_database;
             DescriptorPool pool(&error_database);
 
-            GOOGLE_LOG(INFO) << "A timeout in this test probably indicates a real bug.";
+            SHARK_LOG(INFO) << "A timeout in this test probably indicates a real bug.";
 
             EXPECT_TRUE(pool.FindFileByName("file40.shark") == nullptr);
             EXPECT_TRUE(pool.FindMessageTypeByName("Message40") == nullptr);
@@ -7323,7 +7323,7 @@ namespace shark {
             void add_error(const std::string& filename, const std::string& element_name,
                 const Message* message, ErrorLocation location,
                 const std::string& error_message) override {
-                GOOGLE_LOG(FATAL) << "add_error() called unexpectedly: " << filename << " ["
+                SHARK_LOG(FATAL) << "add_error() called unexpectedly: " << filename << " ["
                                   << element_name << "]: " << error_message;
             }
 

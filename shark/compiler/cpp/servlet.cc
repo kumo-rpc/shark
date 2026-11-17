@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <shark/compiler/cpp/service.h>
+#include <shark/compiler/cpp/servlet.h>
 
 #include <shark/compiler/cpp/helpers.h>
 #include <shark/io/printer.h>
@@ -51,7 +51,7 @@ namespace shark::compiler::cpp {
 
     } // namespace
 
-    ServiceGenerator::ServiceGenerator(
+    ServletGenerator::ServletGenerator(
         const ServiceDescriptor* descriptor,
         const std::map<std::string, std::string>& vars, const Options& options)
         : descriptor_(descriptor)
@@ -61,9 +61,9 @@ namespace shark::compiler::cpp {
         vars_["full_name"] = descriptor_->full_name();
     }
 
-    ServiceGenerator::~ServiceGenerator() { }
+    ServletGenerator::~ServletGenerator() { }
 
-    void ServiceGenerator::GenerateDeclarations(io::Printer* printer) {
+    void ServletGenerator::GenerateDeclarations(io::Printer* printer) {
         Formatter format(printer, vars_);
         // Forward-declare the stub type.
         format(
@@ -74,7 +74,7 @@ namespace shark::compiler::cpp {
         GenerateStubDefinition(printer);
     }
 
-    void ServiceGenerator::GenerateInterface(io::Printer* printer) {
+    void ServletGenerator::GenerateInterface(io::Printer* printer) {
         Formatter format(printer, vars_);
         format(
             "class $dllexport_decl $$classname$ : public ::$proto_ns$::Service {\n"
@@ -118,7 +118,7 @@ namespace shark::compiler::cpp {
             "\n");
     }
 
-    void ServiceGenerator::GenerateStubDefinition(io::Printer* printer) {
+    void ServletGenerator::GenerateStubDefinition(io::Printer* printer) {
         Formatter format(printer, vars_);
         format(
             "class $dllexport_decl $$classname$_Stub : public $classname$ {\n"
@@ -149,7 +149,7 @@ namespace shark::compiler::cpp {
             "\n");
     }
 
-    void ServiceGenerator::GenerateMethodSignatures(VirtualOrNon virtual_or_non,
+    void ServletGenerator::GenerateMethodSignatures(VirtualOrNon virtual_or_non,
         io::Printer* printer) {
         for (int i = 0; i < descriptor_->method_count(); i++) {
             const MethodDescriptor* method = descriptor_->method(i);
@@ -166,7 +166,7 @@ namespace shark::compiler::cpp {
 
     // ===================================================================
 
-    void ServiceGenerator::GenerateImplementation(io::Printer* printer) {
+    void ServletGenerator::GenerateImplementation(io::Printer* printer) {
         Formatter format(printer, vars_);
         format(
             "$classname$::~$classname$() {}\n"
@@ -208,7 +208,7 @@ namespace shark::compiler::cpp {
         GenerateStubMethods(printer);
     }
 
-    void ServiceGenerator::GenerateNotImplementedMethods(io::Printer* printer) {
+    void ServletGenerator::GenerateNotImplementedMethods(io::Printer* printer) {
         for (int i = 0; i < descriptor_->method_count(); i++) {
             const MethodDescriptor* method = descriptor_->method(i);
             Formatter format(printer, vars_);
@@ -225,7 +225,7 @@ namespace shark::compiler::cpp {
         }
     }
 
-    void ServiceGenerator::GenerateCallMethod(io::Printer* printer) {
+    void ServletGenerator::GenerateCallMethod(io::Printer* printer) {
         Formatter format(printer, vars_);
         format(
             "void $classname$::CallMethod(const ::$proto_ns$::MethodDescriptor* "
@@ -266,7 +266,7 @@ namespace shark::compiler::cpp {
             "\n");
     }
 
-    void ServiceGenerator::GenerateGetPrototype(RequestOrResponse which,
+    void ServletGenerator::GenerateGetPrototype(RequestOrResponse which,
         io::Printer* printer) {
         Formatter format(printer, vars_);
         if (which == REQUEST) {
@@ -301,7 +301,7 @@ namespace shark::compiler::cpp {
             which == REQUEST ? "input" : "output");
     }
 
-    void ServiceGenerator::GenerateStubMethods(io::Printer* printer) {
+    void ServletGenerator::GenerateStubMethods(io::Printer* printer) {
         for (int i = 0; i < descriptor_->method_count(); i++) {
             const MethodDescriptor* method = descriptor_->method(i);
             Formatter format(printer, vars_);

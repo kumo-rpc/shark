@@ -50,13 +50,13 @@ namespace shark {
     namespace compiler {
         namespace cpp {
 
-            class ServiceGenerator {
+            class ServletGenerator {
             public:
                 // See generator.cc for the meaning of dllexport_decl.
-                explicit ServiceGenerator(const ServiceDescriptor* descriptor,
+                explicit ServletGenerator(const ServiceDescriptor* descriptor,
                     const std::map<std::string, std::string>& vars,
                     const Options& options);
-                ~ServiceGenerator();
+                ~ServletGenerator();
 
                 // Header stuff.
 
@@ -110,7 +110,7 @@ namespace shark {
                 int index_in_metadata_;
 
                 friend class FileGenerator;
-                KUMO_DISALLOW_COPY_AND_ASSIGN(ServiceGenerator);
+                KUMO_DISALLOW_COPY_AND_ASSIGN(ServletGenerator);
             };
 
         } // namespace cpp

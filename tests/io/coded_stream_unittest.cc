@@ -230,9 +230,9 @@ TEST_F(CodedStreamTest, EmptyInputBeforeEos) {
       *size = 0;
       return count_++ < 2;
     }
-    void BackUp(int count) override { GOOGLE_LOG(FATAL) << "Tests never call this."; }
+    void BackUp(int count) override { SHARK_LOG(FATAL) << "Tests never call this."; }
     bool Skip(int count) override {
-      GOOGLE_LOG(FATAL) << "Tests never call this.";
+      SHARK_LOG(FATAL) << "Tests never call this.";
       return false;
     }
     int64_t ByteCount() const override { return 0; }
@@ -1303,11 +1303,11 @@ class ReallyBigInputStream : public ZeroCopyInputStream {
   void BackUp(int count) override { backup_amount_ = count; }
 
   bool Skip(int count) override {
-    GOOGLE_LOG(FATAL) << "Not implemented.";
+    SHARK_LOG(FATAL) << "Not implemented.";
     return false;
   }
   int64_t ByteCount() const override {
-    GOOGLE_LOG(FATAL) << "Not implemented.";
+    SHARK_LOG(FATAL) << "Not implemented.";
     return 0;
   }
 

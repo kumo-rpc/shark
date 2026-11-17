@@ -418,12 +418,12 @@ TEST_F(MapImplTest, BeginIsFast) {
     }
   } while (!map.empty());
   if (times.size() < .99 * kTestSize / kChunkSize) {
-    GOOGLE_LOG(WARNING) << "Now() isn't helping us measure time";
+    SHARK_LOG(WARNING) << "Now() isn't helping us measure time";
     return;
   }
   int64_t x0 = median(times.begin(), times.begin() + 9);
   int64_t x1 = median(times.begin() + times.size() - 9, times.end());
-  GOOGLE_LOG(INFO) << "x0=" << x0 << ", x1=" << x1;
+  SHARK_LOG(INFO) << "x0=" << x0 << ", x1=" << x1;
   // x1 will greatly exceed x0 if the code we just executed took O(n^2) time.
   // And we'll probably time out and never get here.  So, this test is
   // intentionally loose: we check that x0 and x1 are within a factor of 8.
@@ -521,7 +521,7 @@ static void TestOldVersusNewIterator(int skip, Map<int, int>* m) {
   }
   if (it == m->end()) return;
   const IteratorType old = it;
-  GOOGLE_LOG(INFO) << "skip=" << skip << ", old->first=" << old->first;
+  SHARK_LOG(INFO) << "skip=" << skip << ", old->first=" << old->first;
   const int target_size =
       initial_size < 100 ? initial_size * 5 : initial_size * 5 / 4;
   for (int i = 0; m->size() <= target_size; i++) {
@@ -549,7 +549,7 @@ static void TestOldVersusNewIterator(int skip, Map<int, int>* m) {
 
 // Create and test an n-element Map, with emphasis on iterator correctness.
 static void StressTestIterators(int n) {
-  GOOGLE_LOG(INFO) << "StressTestIterators " << n;
+  SHARK_LOG(INFO) << "StressTestIterators " << n;
   GOOGLE_CHECK_GT(n, 0);
   // Create a random-looking map of size n.  Use non-negative integer keys.
   Map<int, int> m;
@@ -3887,7 +3887,7 @@ TEST(TextFormatMapTest, NoDisableReflectionIterator) {
   const Reflection* map_entry_reflection = iter->GetReflection();
   const FieldDescriptor* value_field_desc = iter->GetDescriptor()->map_value();
   map_entry_reflection->SetInt32(&(*iter), value_field_desc, 2);
-  GOOGLE_LOG(INFO) << iter->DebugString();
+  SHARK_LOG(INFO) << iter->DebugString();
 
   // In previous implementation, the new change won't be reflected in text
   // format, because the previous iterator has been invalidated.

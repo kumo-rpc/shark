@@ -354,7 +354,7 @@ namespace shark {
 #endif
 
                     if (plugin_path.empty()) {
-                        GOOGLE_LOG(ERROR)
+                        SHARK_LOG(ERROR)
                             << "Plugin executable not found.  Plugin tests are likely to fail.";
                     } else {
                         args.push_back("--plugin=prefix-gen-plug=" + plugin_path);

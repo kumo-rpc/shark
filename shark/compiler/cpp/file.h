@@ -59,7 +59,7 @@ namespace shark {
 
             class EnumGenerator; // enum.h
             class MessageGenerator; // message.h
-            class ServiceGenerator; // service.h
+            class ServletGenerator; // servlet.h
             class ExtensionGenerator; // extension.h
 
             class FileGenerator {
@@ -191,7 +191,7 @@ namespace shark {
                 // this file. If you need a pre-order walk just reverse iterate.
                 std::vector<std::unique_ptr<MessageGenerator>> message_generators_;
                 std::vector<std::unique_ptr<EnumGenerator>> enum_generators_;
-                std::vector<std::unique_ptr<ServiceGenerator>> service_generators_;
+                std::vector<std::unique_ptr<ServletGenerator>> service_generators_;
                 std::vector<std::unique_ptr<ExtensionGenerator>> extension_generators_;
 
                 KUMO_DISALLOW_COPY_AND_ASSIGN(FileGenerator);

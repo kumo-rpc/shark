@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <shark/service.h>
+#include <shark/servlet.h>
 
 namespace shark {
 

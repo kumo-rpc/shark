@@ -94,12 +94,12 @@ bool File::WriteStringToFile(const std::string& contents,
                              const std::string& name) {
   FILE* file = fopen(name.c_str(), "wb");
   if (file == NULL) {
-    GOOGLE_LOG(ERROR) << "fopen(" << name << ", \"wb\"): " << strerror(errno);
+    SHARK_LOG(ERROR) << "fopen(" << name << ", \"wb\"): " << strerror(errno);
     return false;
   }
 
   if (fwrite(contents.data(), 1, contents.size(), file) != contents.size()) {
-    GOOGLE_LOG(ERROR) << "fwrite(" << name << "): " << strerror(errno);
+    SHARK_LOG(ERROR) << "fwrite(" << name << "): " << strerror(errno);
     fclose(file);
     return false;
   }

@@ -89,9 +89,9 @@ void CaptureLog(LogLevel level, const char* filename, int line,
 TEST(LoggingTest, DefaultLogging) {
   CaptureTestStderr();
   int line = __LINE__;
-  GOOGLE_LOG(INFO   ) << "A message.";
-  GOOGLE_LOG(WARNING) << "A warning.";
-  GOOGLE_LOG(ERROR  ) << "An error.";
+  SHARK_LOG(INFO   ) << "A message.";
+  SHARK_LOG(WARNING) << "A warning.";
+  SHARK_LOG(ERROR  ) << "An error.";
 
   std::string text = GetCapturedTestStderr();
   EXPECT_EQ(
@@ -105,9 +105,9 @@ TEST(LoggingTest, NullLogging) {
   LogHandler* old_handler = SetLogHandler(nullptr);
 
   CaptureTestStderr();
-  GOOGLE_LOG(INFO   ) << "A message.";
-  GOOGLE_LOG(WARNING) << "A warning.";
-  GOOGLE_LOG(ERROR  ) << "An error.";
+  SHARK_LOG(INFO   ) << "A message.";
+  SHARK_LOG(WARNING) << "A warning.";
+  SHARK_LOG(ERROR  ) << "An error.";
 
   EXPECT_TRUE(SetLogHandler(old_handler) == nullptr);
 
@@ -121,8 +121,8 @@ TEST(LoggingTest, CaptureLogging) {
   LogHandler* old_handler = SetLogHandler(&CaptureLog);
 
   int start_line = __LINE__;
-  GOOGLE_LOG(ERROR) << "An error.";
-  GOOGLE_LOG(WARNING) << "A warning.";
+  SHARK_LOG(ERROR) << "An error.";
+  SHARK_LOG(WARNING) << "A warning.";
 
   EXPECT_TRUE(SetLogHandler(old_handler) == &CaptureLog);
 
@@ -140,15 +140,15 @@ TEST(LoggingTest, SilenceLogging) {
 
   LogHandler* old_handler = SetLogHandler(&CaptureLog);
 
-  int line1 = __LINE__; GOOGLE_LOG(INFO) << "Visible1";
+  int line1 = __LINE__; SHARK_LOG(INFO) << "Visible1";
   LogSilencer* silencer1 = new LogSilencer;
-  GOOGLE_LOG(INFO) << "Not visible.";
+  SHARK_LOG(INFO) << "Not visible.";
   LogSilencer* silencer2 = new LogSilencer;
-  GOOGLE_LOG(INFO) << "Not visible.";
+  SHARK_LOG(INFO) << "Not visible.";
   delete silencer1;
-  GOOGLE_LOG(INFO) << "Not visible.";
+  SHARK_LOG(INFO) << "Not visible.";
   delete silencer2;
-  int line2 = __LINE__; GOOGLE_LOG(INFO) << "Visible2";
+  int line2 = __LINE__; SHARK_LOG(INFO) << "Visible2";
 
   EXPECT_TRUE(SetLogHandler(old_handler) == &CaptureLog);
 

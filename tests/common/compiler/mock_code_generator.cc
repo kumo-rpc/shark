@@ -237,7 +237,7 @@ namespace shark {
                                   << " " << compiler_version.suffix() << std::endl;
                         abort();
                     } else {
-                        GOOGLE_LOG(FATAL) << "Unknown MockCodeGenerator command: " << command;
+                        SHARK_LOG(FATAL) << "Unknown MockCodeGenerator command: " << command;
                     }
                 }
             }

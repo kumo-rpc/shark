@@ -47,12 +47,12 @@
 #include <shark/compiler/cpp/field.h>
 #include <shark/compiler/cpp/helpers.h>
 #include <shark/compiler/cpp/message.h>
-#include <shark/compiler/cpp/service.h>
+#include <shark/compiler/cpp/servlet.h>
 #include <shark/compiler/scc.h>
 #include <shark/descriptor.skp.h>
 #include <shark/io/printer.h>
-#include <turbo/strings/str_cat.h>
 #include <turbo/strings/escaping.h>
+#include <turbo/strings/str_cat.h>
 #include <turbo/strings/str_replace.h>
 
 // Must be last.
@@ -135,7 +135,7 @@ namespace shark::compiler::cpp {
 
         for (int i = 0; i < file->service_count(); i++) {
             service_generators_.emplace_back(
-                new ServiceGenerator(file->service(i), variables_, options));
+                new ServletGenerator(file->service(i), variables_, options));
         }
         if (HasGenericServices(file_, options_)) {
             for (int i = 0; i < service_generators_.size(); i++) {
@@ -1247,7 +1247,7 @@ namespace shark::compiler::cpp {
         }
 
         if (HasGenericServices(file_, options_)) {
-            IncludeFile("net/proto2/public/service.h", printer);
+            IncludeFile("net/proto2/public/servlet.h", printer);
         }
 
         if (UseUnknownFieldSet(file_, options_) && !message_generators_.empty()) {

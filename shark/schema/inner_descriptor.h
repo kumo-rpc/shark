@@ -54,12 +54,12 @@
 #pragma once
 
 #include <shark/schema/internal/descriptor.h>
-#include <shark/schema/internal/field_descriptor.h>
-#include <shark/schema/internal/enum_descriptor.h>
-#include <shark/schema/internal/service_descriptor.h>
-#include <shark/schema/internal/oneof_descriptor.h>
-#include <shark/schema/internal/file_descriptor.h>
 #include <shark/schema/internal/descriptor_pool.h>
+#include <shark/schema/internal/enum_descriptor.h>
+#include <shark/schema/internal/field_descriptor.h>
+#include <shark/schema/internal/file_descriptor.h>
+#include <shark/schema/internal/oneof_descriptor.h>
+#include <shark/schema/internal/servlet_descriptor.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
