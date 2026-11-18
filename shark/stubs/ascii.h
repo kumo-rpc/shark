@@ -73,4 +73,18 @@ namespace shark {
         }
         return false;
     }
+
+    inline  std::string ToLowercaseWithoutUnderscores(const std::string& name) {
+       std::string result;
+       for (char character : name) {
+           if (character != '_') {
+               if (character >= 'A' && character <= 'Z') {
+                   result.push_back(character - 'A' + 'a');
+               } else {
+                   result.push_back(character);
+               }
+           }
+       }
+       return result;
+   }
 }  // namespace shark

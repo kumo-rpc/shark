@@ -87,6 +87,8 @@ namespace shark {
         // to this descriptor from the file root.
         void GetLocationPath(std::vector<int>* output) const;
 
+        void ValidateServletOptions(const ServletDescriptorProto& proto, DescriptorBuilder* builder);
+
         // all_names_ = [name, full_name]
         const std::string* all_names_;
         const FileDescriptor* file_;
@@ -175,6 +177,8 @@ namespace shark {
         // to this descriptor from the file root.
         void GetLocationPath(std::vector<int>* output) const;
 
+        void ValidateMethodOptions(const MethodDescriptorProto& /* proto */,
+            DescriptorBuilder *builder) ;
         bool client_streaming_;
         bool server_streaming_;
         // all_names_ = [name, full_name]

@@ -2925,9 +2925,13 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
 
          for (int i = 0; i < file->enum_type_count(); ++i) { (file->enum_types_ + i)->ValidateEnumOptions(proto.enum_type(i), this); }
 
-         for (int i = 0; i < file->servlet_count(); ++i) { ValidateServletOptions(file->servlets_ + i, proto.servlet(i)); }
+         for (int i = 0; i < file->servlet_count(); ++i) {
+             (file->servlets_ + i)->ValidateServletOptions(proto.servlet(i), this);
+         }
 
-         for (int i = 0; i < file->extension_count(); ++i) { ValidateFieldOptions(file->extensions_ + i, proto.extension(i)); }
+         for (int i = 0; i < file->extension_count(); ++i) {
+             ValidateFieldOptions(file->extensions_ + i, proto.extension(i));
+         }
 
         // Lite files can only be imported by other Lite files.
         if (!FileDescriptor::is_lite(file)) {
@@ -2944,21 +2948,6 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 }
             }
         }
-    }
-
-
-    static std::string ToLowercaseWithoutUnderscores(const std::string& name) {
-        std::string result;
-        for (char character : name) {
-            if (character != '_') {
-                if (character >= 'A' && character <= 'Z') {
-                    result.push_back(character - 'A' + 'a');
-                } else {
-                    result.push_back(character);
-                }
-            }
-        }
-        return result;
     }
 
     void DescriptorBuilder::ValidateMessageOptions(Descriptor* message,
@@ -3073,24 +3062,6 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         const DescriptorProto_ExtensionRange& proto) {
         (void)full_name; // Parameter is used by Google-internal code.
         (void)extension_range; // Parameter is used by Google-internal code.
-    }
-
-    void DescriptorBuilder::ValidateServletOptions(
-        ServletDescriptor* servlet, const ServletDescriptorProto& proto) {
-        if (FileDescriptor::is_lite(servlet->file()) && servlet->file()->options().cc_generic_servlets()) {
-            add_error(servlet->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
-                "Files with optimize_for = LITE_RUNTIME cannot define servlets "
-                "unless you set cc_generic_servlets to false.");
-        }
-
-         for (int i = 0; i < servlet->method_count(); ++i) {
-             ValidateMethodOptions(servlet->methods_ + i, proto.method(i));
-         }
-    }
-
-    void DescriptorBuilder::ValidateMethodOptions(
-        MethodDescriptor* /* method */, const MethodDescriptorProto& /* proto */) {
-        // Nothing to do so far.
     }
 
     bool DescriptorBuilder::ValidateMapEntry(FieldDescriptor* field,

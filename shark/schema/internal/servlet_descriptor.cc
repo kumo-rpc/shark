@@ -18,6 +18,8 @@
 #include <shark/schema/internal/file_descriptor_tables.h>
 #include <shark/schema/internal/file_descriptor_tables_inl.h>
 #include <shark/schema/internal/servlet_descriptor.h>
+#include <shark/schema/internal/descriptor_builder.h>
+
 // Must be included last.
 #include <shark/port_def.inc>
 
@@ -169,6 +171,23 @@ namespace shark {
 
     const Descriptor* MethodDescriptor::output_type() const {
         return output_type_.Get(servlet());
+    }
+
+
+    void MethodDescriptor::ValidateMethodOptions(const MethodDescriptorProto& /* proto */, DescriptorBuilder *builder) {
+        // Nothing to do so far.
+    }
+
+    void ServletDescriptor::ValidateServletOptions(const ServletDescriptorProto& proto, DescriptorBuilder * builder) {
+        if (FileDescriptor::is_lite(file()) && file()->options().cc_generic_servlets()) {
+            builder->add_error(full_name(), proto, DescriptorPool::ErrorCollector::NAME,
+                "Files with optimize_for = LITE_RUNTIME cannot define servlets "
+                "unless you set cc_generic_servlets to false.");
+        }
+
+        for (int i = 0; i < method_count(); ++i) {
+            (methods_ + i)->ValidateMethodOptions(proto.method(i), builder);
+        }
     }
 
 

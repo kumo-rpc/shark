@@ -447,6 +447,8 @@ namespace shark {
         friend class OptionInterpreter::AggregateOptionFinder;
 
         friend class EnumDescriptor;
+        friend class ServletDescriptor;
+        friend class MethodDescriptor;
 
         static inline bool get_allow_unknown(const DescriptorPool* pool) {
             return pool->allow_unknown_;
@@ -478,10 +480,6 @@ namespace shark {
         void ValidateExtensionRangeOptions(
             const std::string& full_name, Descriptor::ExtensionRange* extension_range,
             const DescriptorProto_ExtensionRange& proto);
-        void ValidateServletOptions(ServletDescriptor* servlet,
-            const ServletDescriptorProto& proto);
-        void ValidateMethodOptions(MethodDescriptor* method,
-            const MethodDescriptorProto& proto);
 
         // Returns true if the map entry message is compatible with the
         // auto-generated entry message from map fields syntax.
