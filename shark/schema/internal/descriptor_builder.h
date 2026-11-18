@@ -239,14 +239,6 @@ namespace shark {
             DescriptorT* descriptor, const std::vector<int>& options_path,
             const std::string& option_name, internal::FlatAllocator& alloc);
 
-        // Allocates an array of two strings, the first one is a copy of `proto_name`,
-        // and the second one is the full name.
-        // Full proto name is "scope.proto_name" if scope is non-empty and
-        // "proto_name" otherwise.
-        const std::string* AllocateNameStrings(const std::string& scope,
-            const std::string& proto_name,
-            internal::FlatAllocator& alloc);
-
         // These methods all have the same signature for the sake of the BUILD_ARRAY
         // macro, below.
         void BuildMessage(const DescriptorProto& proto, const Descriptor* parent,
@@ -390,7 +382,7 @@ namespace shark {
 
             // A helper function that adds an error at the specified location of the
             // option we're currently interpreting, and returns false.
-            bool AddOptionError(DescriptorPool::ErrorCollector::ErrorLocation location,
+            bool add_option_error(DescriptorPool::ErrorCollector::ErrorLocation location,
                 const std::string& msg) {
                 builder_->add_error(options_to_interpret_->element_name,
                     *uninterpreted_option_, location, msg);
@@ -403,14 +395,14 @@ namespace shark {
 #ifdef SHARK_INTERNAL_IGNORE_FIELD_NAME_ERRORS_
                 return true;
 #else // SHARK_INTERNAL_IGNORE_FIELD_NAME_ERRORS_
-                return AddOptionError(DescriptorPool::ErrorCollector::OPTION_NAME, msg);
+                return add_option_error(DescriptorPool::ErrorCollector::OPTION_NAME, msg);
 #endif // SHARK_INTERNAL_IGNORE_FIELD_NAME_ERRORS_
             }
 
             // A helper function that adds an error at the location of the option name
             // and returns false.
             bool AddValueError(const std::string& msg) {
-                return AddOptionError(DescriptorPool::ErrorCollector::OPTION_VALUE, msg);
+                return add_option_error(DescriptorPool::ErrorCollector::OPTION_VALUE, msg);
             }
 
             // We interpret against this builder's pool. Is never nullptr. We don't own

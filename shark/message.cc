@@ -40,13 +40,13 @@
 
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
-#include <shark/persist/wired/wire_context.h>
-#include <shark/persist/wired/wire_format.h>
-#include <shark/persist/wired/wire_format_lite.h>
 #include <shark/generated/generated_message_reflection.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
+#include <shark/persist/wired/wire_context.h>
+#include <shark/persist/wired/wire_format.h>
+#include <shark/persist/wired/wire_format_lite.h>
 #include <shark/reflection_internal.h>
 #include <shark/reflection_ops.h>
 #include <shark/stubs/casts.h>
@@ -55,10 +55,10 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
-#include <turbo/strings/str_join.h>
 #include <shark/types/map_field.h>
 #include <shark/types/map_field_inl.h>
 #include <shark/unknown_field_set.h>
+#include <turbo/strings/str_join.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -157,8 +157,8 @@ namespace shark {
 
     void Message::CheckInitialized() const {
         SHARK_CHECK(IsInitialized()) << "Message of type \"" << GetDescriptor()->full_name()
-                                      << "\" is missing required fields: "
-                                      << InitializationErrorString();
+                                     << "\" is missing required fields: "
+                                     << InitializationErrorString();
     }
 
     void Message::DiscardUnknownFields() {
@@ -183,8 +183,8 @@ namespace shark {
 
     void Message::SetCachedSize(int /* size */) const {
         SHARK_LOG(FATAL) << "Message class \"" << GetDescriptor()->full_name()
-                          << "\" implements neither SetCachedSize() nor ByteSize().  "
-                             "Must implement one or the other.";
+                         << "\" implements neither SetCachedSize() nor ByteSize().  "
+                            "Must implement one or the other.";
     }
 
     size_t Message::ComputeUnknownFieldsSize(
@@ -288,8 +288,8 @@ namespace shark {
             const internal::DescriptorTable* registration_data = FindPtrOrNull(file_map_, type->file()->name().c_str());
             if (registration_data == nullptr) {
                 SHARK_LOG(DFATAL) << "File appears to be in generated pool but wasn't "
-                                      "registered: "
-                                   << type->file()->name();
+                                     "registered: "
+                                  << type->file()->name();
                 return nullptr;
             }
 
@@ -306,7 +306,7 @@ namespace shark {
 
             if (result == nullptr) {
                 SHARK_LOG(DFATAL) << "Type appears to be in generated pool but wasn't "
-                                   << "registered: " << type->full_name();
+                                  << "registered: " << type->full_name();
             }
 
             return result;

@@ -37,7 +37,6 @@
 #include <shark/schema/internal/symbol.h>
 #include <shark/schema/internal/file_descriptor_tables.h>
 #include <shark/schema/internal/file_descriptor_tables_inl.h>
-#include <shark/schema/internal/flat_allocator.h>
 #include <shark/schema/internal/descriptor_pool_tables.h>
 
 // Must be included last.

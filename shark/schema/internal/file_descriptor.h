@@ -156,6 +156,9 @@ namespace shark {
         bool GetSourceLocation(const std::vector<int>& path,
             SourceLocation* out_location) const;
 
+        bool is_lite() const;
+
+        static bool is_lite(const FileDescriptor *file);
     private:
         friend class Symbol;
         typedef FileOptions OptionsType;

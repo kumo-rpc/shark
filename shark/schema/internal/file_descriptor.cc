@@ -423,6 +423,18 @@ namespace shark {
         return dependencies_[index];
     }
 
+    // Determine if the file uses optimize_for = LITE_RUNTIME, being careful to
+    // avoid problems that exist at init time.
+    bool FileDescriptor::is_lite() const {
+        // TODO(kenton):  I don't even remember how many of these conditions are
+        //   actually possible.  I'm just being super-safe.
+        return &options() != &FileOptions::default_instance() &&
+            options().optimize_for() == FileOptions_OptimizeMode::LITE_RUNTIME;
+    }
+
+    bool FileDescriptor::is_lite(const FileDescriptor *file) {
+        return file != nullptr && file->is_lite();
+    }
 } // namespace shark
 
 

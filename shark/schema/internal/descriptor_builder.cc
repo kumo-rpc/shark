@@ -21,6 +21,7 @@
 #include <turbo/strings/charconv.h>
 #include <turbo/strings/escaping.h>
 #include <turbo/strings/substitute.h>
+#include <shark/schema/internal/plan_alloc.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -491,139 +492,6 @@ namespace shark {
     }
 
 
-
-    // These PlanAllocationSize functions will gather into the FlatAllocator all the
-    // necessary memory allocations that BuildXXX functions below will do on the
-    // Tables object.
-    // They *must* be kept in sync. If we miss some PlanArray call we won't have
-    // enough memory and will SHARK_CHECK-fail.
-    static void PlanAllocationSize(
-        const RepeatedPtrField<EnumValueDescriptorProto>& values,
-        internal::FlatAllocator& alloc) {
-        alloc.PlanArray<EnumValueDescriptor>(values.size());
-        alloc.PlanArray<std::string>(2 * values.size()); // name + full_name
-        for (const auto& v : values) {
-            if (v.has_options())
-                alloc.PlanArray<EnumValueOptions>(1);
-        }
-    }
-
-    static void PlanAllocationSize(
-        const RepeatedPtrField<EnumDescriptorProto>& enums,
-        internal::FlatAllocator& alloc) {
-        alloc.PlanArray<EnumDescriptor>(enums.size());
-        alloc.PlanArray<std::string>(2 * enums.size()); // name + full_name
-        for (const auto& e : enums) {
-            if (e.has_options())
-                alloc.PlanArray<EnumOptions>(1);
-            PlanAllocationSize(e.value(), alloc);
-            alloc.PlanArray<EnumDescriptor::ReservedRange>(e.reserved_range_size());
-            alloc.PlanArray<const std::string*>(e.reserved_name_size());
-            alloc.PlanArray<std::string>(e.reserved_name_size());
-        }
-    }
-
-    static void PlanAllocationSize(
-        const RepeatedPtrField<OneofDescriptorProto>& oneofs,
-        internal::FlatAllocator& alloc) {
-        alloc.PlanArray<OneofDescriptor>(oneofs.size());
-        alloc.PlanArray<std::string>(2 * oneofs.size()); // name + full_name
-        for (const auto& oneof : oneofs) {
-            if (oneof.has_options())
-                alloc.PlanArray<OneofOptions>(1);
-        }
-    }
-
-    static void PlanAllocationSize(
-        const RepeatedPtrField<FieldDescriptorProto>& fields,
-        internal::FlatAllocator& alloc) {
-        alloc.PlanArray<FieldDescriptor>(fields.size());
-        for (const auto& field : fields) {
-            if (field.has_options())
-                alloc.PlanArray<FieldOptions>(1);
-            alloc.PlanFieldNames(field.name(),
-                field.has_json_name() ? &field.json_name() : nullptr);
-            if (field.has_default_value() && field.has_type() && (field.type() == SharkType::STRING || field.type() == SharkType::BYTES)) {
-                // For the default string value.
-                alloc.PlanArray<std::string>(1);
-            }
-        }
-    }
-
-    static void PlanAllocationSize(
-        const RepeatedPtrField<DescriptorProto::ExtensionRange>& ranges,
-        internal::FlatAllocator& alloc) {
-        alloc.PlanArray<Descriptor::ExtensionRange>(ranges.size());
-        for (const auto& r : ranges) {
-            if (r.has_options())
-                alloc.PlanArray<ExtensionRangeOptions>(1);
-        }
-    }
-
-    static void PlanAllocationSize(
-        const RepeatedPtrField<DescriptorProto>& messages,
-        internal::FlatAllocator& alloc) {
-        alloc.PlanArray<Descriptor>(messages.size());
-        alloc.PlanArray<std::string>(2 * messages.size()); // name + full_name
-
-        for (const auto& message : messages) {
-            if (message.has_options())
-                alloc.PlanArray<MessageOptions>(1);
-            PlanAllocationSize(message.nested_type(), alloc);
-            PlanAllocationSize(message.field(), alloc);
-            PlanAllocationSize(message.extension(), alloc);
-            PlanAllocationSize(message.extension_range(), alloc);
-            alloc.PlanArray<Descriptor::ReservedRange>(message.reserved_range_size());
-            alloc.PlanArray<const std::string*>(message.reserved_name_size());
-            alloc.PlanArray<std::string>(message.reserved_name_size());
-            PlanAllocationSize(message.enum_type(), alloc);
-            PlanAllocationSize(message.oneof_decl(), alloc);
-        }
-    }
-
-    static void PlanAllocationSize(
-        const RepeatedPtrField<MethodDescriptorProto>& methods,
-        internal::FlatAllocator& alloc) {
-        alloc.PlanArray<MethodDescriptor>(methods.size());
-        alloc.PlanArray<std::string>(2 * methods.size()); // name + full_name
-        for (const auto& m : methods) {
-            if (m.has_options())
-                alloc.PlanArray<MethodOptions>(1);
-        }
-    }
-
-    static void PlanAllocationSize(
-        const RepeatedPtrField<ServletDescriptorProto>& servlets,
-        internal::FlatAllocator& alloc) {
-        alloc.PlanArray<ServletDescriptor>(servlets.size());
-        alloc.PlanArray<std::string>(2 * servlets.size()); // name + full_name
-        for (const auto& servlet : servlets) {
-            if (servlet.has_options())
-                alloc.PlanArray<ServletOptions>(1);
-            PlanAllocationSize(servlet.method(), alloc);
-        }
-    }
-
-    static void PlanAllocationSize(const FileDescriptorProto& proto,
-        internal::FlatAllocator& alloc) {
-        alloc.PlanArray<FileDescriptor>(1);
-        alloc.PlanArray<FileDescriptorTables>(1);
-        alloc.PlanArray<std::string>(2); // name + package
-        if (proto.has_options())
-            alloc.PlanArray<FileOptions>(1);
-        if (proto.has_source_code_info())
-            alloc.PlanArray<SourceCodeInfo>(1);
-
-        PlanAllocationSize(proto.servlet(), alloc);
-        PlanAllocationSize(proto.message_type(), alloc);
-        PlanAllocationSize(proto.enum_type(), alloc);
-        PlanAllocationSize(proto.extension(), alloc);
-
-        alloc.PlanArray<int>(proto.weak_dependency_size());
-        alloc.PlanArray<int>(proto.public_dependency_size());
-        alloc.PlanArray<const FileDescriptor*>(proto.dependency_size());
-    }
-
     const FileDescriptor* DescriptorBuilder::BuildFile(
         const FileDescriptorProto& proto) {
         filename_ = proto.name();
@@ -687,7 +555,7 @@ namespace shark {
         tables_->AddCheckpoint();
 
         internal::FlatAllocator alloc;
-        PlanAllocationSize(proto, alloc);
+        plan_allocation_size(proto, alloc);
         alloc.FinalizePlanning(tables_);
         FileDescriptor* result = BuildFileImpl(proto, alloc);
 
@@ -972,19 +840,8 @@ namespace shark {
         }
     }
 
-    const std::string* DescriptorBuilder::AllocateNameStrings(
-        const std::string& scope, const std::string& proto_name,
-        internal::FlatAllocator& alloc) {
-        if (scope.empty()) {
-            return alloc.AllocateStrings(proto_name, proto_name);
-        } else {
-            return alloc.AllocateStrings(proto_name,
-                turbo::str_cat(scope, ".", proto_name));
-        }
-    }
 
-
-     DescriptorBuilder::OptionInterpreter::~OptionInterpreter() { }
+     DescriptorBuilder::OptionInterpreter::~OptionInterpreter() = default;
 
     bool DescriptorBuilder::OptionInterpreter::InterpretOptions(
         OptionsToInterpret* options_to_interpret) {
@@ -1110,7 +967,7 @@ namespace shark {
         const Descriptor* descriptor = options_descriptor;
         const FieldDescriptor* field = nullptr;
         std::vector<const FieldDescriptor*> intermediate_fields;
-        std::string debug_msg_name = "";
+        std::string debug_msg_name;
 
         std::vector<int> dest_path = options_path;
 
@@ -1712,7 +1569,7 @@ namespace shark {
         Descriptor* result,
         internal::FlatAllocator& alloc) {
         const std::string& scope = (parent == nullptr) ? file_->package() : parent->full_name();
-        result->all_names_ = AllocateNameStrings(scope, proto.name(), alloc);
+        result->all_names_ = allocate_name_strings(scope, proto.name(), alloc);
         ValidateSymbolName(proto.name(), result->full_name(), proto);
 
         result->file_ = file_;
@@ -2217,7 +2074,7 @@ namespace shark {
     void DescriptorBuilder::BuildOneof(const OneofDescriptorProto& proto,
         Descriptor* parent, OneofDescriptor* result,
         internal::FlatAllocator& alloc) {
-        result->all_names_ = AllocateNameStrings(parent->full_name(), proto.name(), alloc);
+        result->all_names_ = allocate_name_strings(parent->full_name(), proto.name(), alloc);
         ValidateSymbolName(proto.name(), result->full_name(), proto);
 
         result->containing_type_ = parent;
@@ -2305,7 +2162,7 @@ namespace shark {
         internal::FlatAllocator& alloc) {
         const std::string& scope = (parent == nullptr) ? file_->package() : parent->full_name();
 
-        result->all_names_ = AllocateNameStrings(scope, proto.name(), alloc);
+        result->all_names_ = allocate_name_strings(scope, proto.name(), alloc);
         ValidateSymbolName(proto.name(), result->full_name(), proto);
         result->file_ = file_;
         result->containing_type_ = parent;
@@ -2462,7 +2319,7 @@ namespace shark {
         const void* /* dummy */,
         ServletDescriptor* result,
         internal::FlatAllocator& alloc) {
-        result->all_names_ = AllocateNameStrings(file_->package(), proto.name(), alloc);
+        result->all_names_ = allocate_name_strings(file_->package(), proto.name(), alloc);
         result->file_ = file_;
         ValidateSymbolName(proto.name(), result->full_name(), proto);
 
@@ -2485,7 +2342,7 @@ namespace shark {
         MethodDescriptor* result,
         internal::FlatAllocator& alloc) {
         result->servlet_ = parent;
-        result->all_names_ = AllocateNameStrings(parent->full_name(), proto.name(), alloc);
+        result->all_names_ = allocate_name_strings(parent->full_name(), proto.name(), alloc);
 
         ValidateSymbolName(proto.name(), result->full_name(), proto);
 
@@ -3073,26 +2930,21 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             proto.array_name(i));                                 \
     }
 
-    // Determine if the file uses optimize_for = LITE_RUNTIME, being careful to
-    // avoid problems that exist at init time.
-    static bool IsLite(const FileDescriptor* file) {
-        // TODO(kenton):  I don't even remember how many of these conditions are
-        //   actually possible.  I'm just being super-safe.
-        return file != nullptr && &file->options() != &FileOptions::default_instance() && file->options().optimize_for() == FileOptions_OptimizeMode::LITE_RUNTIME;
-    }
 
     void DescriptorBuilder::ValidateFileOptions(FileDescriptor* file,
         const FileDescriptorProto& proto) {
-        VALIDATE_OPTIONS_FROM_ARRAY(file, message_type, Message);
-        VALIDATE_OPTIONS_FROM_ARRAY(file, enum_type, Enum);
+         for (int i = 0; i < file->message_type_count(); ++i) { ValidateMessageOptions(file->message_types_ + i, proto.message_type(i)); }
+
+         for (int i = 0; i < file->enum_type_count(); ++i) { ValidateEnumOptions(file->enum_types_ + i, proto.enum_type(i)); }
+
          for (int i = 0; i < file->servlet_count(); ++i) { ValidateServletOptions(file->servlets_ + i, proto.servlet(i)); }
 
-        VALIDATE_OPTIONS_FROM_ARRAY(file, extension, Field);
+         for (int i = 0; i < file->extension_count(); ++i) { ValidateFieldOptions(file->extensions_ + i, proto.extension(i)); }
 
         // Lite files can only be imported by other Lite files.
-        if (!IsLite(file)) {
+        if (!FileDescriptor::is_lite(file)) {
             for (int i = 0; i < file->dependency_count(); i++) {
-                if (IsLite(file->dependency(i))) {
+                if (FileDescriptor::is_lite(file->dependency(i))) {
                     add_error(
                         file->dependency(i)->name(), proto,
                         DescriptorPool::ErrorCollector::IMPORT,
@@ -3301,7 +3153,8 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         }
 
         // Lite extensions can only be of Lite types.
-        if (IsLite(field->file()) && field->containing_type_ != nullptr && !IsLite(field->containing_type()->file())) {
+        if (FileDescriptor::is_lite(field->file()) && field->containing_type_ != nullptr &&
+            !FileDescriptor::is_lite(field->containing_type()->file())) {
             add_error(field->full_name(), proto,
                 DescriptorPool::ErrorCollector::EXTENDEE,
                 "Extensions to non-lite types can only be declared in non-lite "
@@ -3375,7 +3228,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
 
     void DescriptorBuilder::ValidateServletOptions(
         ServletDescriptor* servlet, const ServletDescriptorProto& proto) {
-        if (IsLite(servlet->file()) && servlet->file()->options().cc_generic_servlets()) {
+        if (FileDescriptor::is_lite(servlet->file()) && servlet->file()->options().cc_generic_servlets()) {
             add_error(servlet->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
                 "Files with optimize_for = LITE_RUNTIME cannot define servlets "
                 "unless you set cc_generic_servlets to false.");
