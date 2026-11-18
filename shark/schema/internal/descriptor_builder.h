@@ -391,7 +391,7 @@ namespace shark {
 
             // A helper function that adds an error at the location of the option name
             // and returns false.
-            bool AddNameError(const std::string& msg) {
+            bool add_name_error(const std::string& msg) {
 #ifdef SHARK_INTERNAL_IGNORE_FIELD_NAME_ERRORS_
                 return true;
 #else // SHARK_INTERNAL_IGNORE_FIELD_NAME_ERRORS_
@@ -401,7 +401,7 @@ namespace shark {
 
             // A helper function that adds an error at the location of the option name
             // and returns false.
-            bool AddValueError(const std::string& msg) {
+            bool add_value_error(const std::string& msg) {
                 return add_option_error(DescriptorPool::ErrorCollector::OPTION_VALUE, msg);
             }
 
@@ -446,6 +446,8 @@ namespace shark {
         friend class OptionInterpreter;
         friend class OptionInterpreter::AggregateOptionFinder;
 
+        friend class EnumDescriptor;
+
         static inline bool get_allow_unknown(const DescriptorPool* pool) {
             return pool->allow_unknown_;
         }
@@ -473,10 +475,6 @@ namespace shark {
             const DescriptorProto& proto);
         void ValidateFieldOptions(FieldDescriptor* field,
             const FieldDescriptorProto& proto);
-        void ValidateEnumOptions(EnumDescriptor* enm,
-            const EnumDescriptorProto& proto);
-        void ValidateEnumValueOptions(EnumValueDescriptor* enum_value,
-            const EnumValueDescriptorProto& proto);
         void ValidateExtensionRangeOptions(
             const std::string& full_name, Descriptor::ExtensionRange* extension_range,
             const DescriptorProto_ExtensionRange& proto);
@@ -484,12 +482,6 @@ namespace shark {
             const ServletDescriptorProto& proto);
         void ValidateMethodOptions(MethodDescriptor* method,
             const MethodDescriptorProto& proto);
-        void ValidateProto3(FileDescriptor* file, const FileDescriptorProto& proto);
-        void ValidateProto3Message(Descriptor* message, const DescriptorProto& proto);
-        void ValidateProto3Field(FieldDescriptor* field,
-            const FieldDescriptorProto& proto);
-        void ValidateProto3Enum(EnumDescriptor* enm,
-            const EnumDescriptorProto& proto);
 
         // Returns true if the map entry message is compatible with the
         // auto-generated entry message from map fields syntax.

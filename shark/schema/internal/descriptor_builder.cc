@@ -599,10 +599,6 @@ namespace shark {
         // have added the syntax statement.
         if (proto.syntax().empty() || proto.syntax() == "proto2") {
             file_->syntax_ = SyntaxEdition::SYNTAX_PROTO2;
-        } else if (proto.syntax() == "proto3") {
-            file_->syntax_ = SyntaxEdition::SYNTAX_UNKNOWN;
-            add_error(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
-                "syntax \"proto3\" is not supported.");
         } else {
             file_->syntax_ = SyntaxEdition::SYNTAX_UNKNOWN;
             add_error(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
@@ -928,10 +924,10 @@ namespace shark {
         if (uninterpreted_option_->name_size() == 0) {
             // This should never happen unless the parser has gone seriously awry or
             // someone has manually created the uninterpreted option badly.
-            return AddNameError("Option must have a name.");
+            return add_name_error("Option must have a name.");
         }
         if (uninterpreted_option_->name(0).name_part() == "uninterpreted_option") {
-            return AddNameError(
+            return add_name_error(
                 "Option must not use reserved name "
                 "\"uninterpreted_option\".");
         }
@@ -1004,12 +1000,12 @@ namespace shark {
                     return true;
                 } else if (!(builder_->undefine_resolved_name_).empty()) {
                     // Option is resolved to a name which is not defined.
-                    return AddNameError(
+                    return add_name_error(
                         "Option \"" + debug_msg_name + "\" is resolved to \"(" + builder_->undefine_resolved_name_ + ")\", which is not defined. The innermost scope is searched first "
                                                                                                                      "in name resolution. Consider using a leading '.'(i.e., \"(."
                         + debug_msg_name.substr(1) + "\") to start from the outermost scope.");
                 } else {
-                    return AddNameError(
+                    return add_name_error(
                         "Option \"" + debug_msg_name + "\" unknown. Ensure that your proto" + " definition file imports the proto which defines the option.");
                 }
             } else if (field->containing_type() != descriptor) {
@@ -1025,7 +1021,7 @@ namespace shark {
                     // This can only happen if, due to some insane misconfiguration of the
                     // pools, we find the options message in one pool but the field in
                     // another. This would probably imply a hefty bug somewhere.
-                    return AddNameError("Option field \"" + debug_msg_name + "\" is not a field or extension of message \"" + descriptor->name() + "\".");
+                    return add_name_error("Option field \"" + debug_msg_name + "\" is not a field or extension of message \"" + descriptor->name() + "\".");
                 }
             } else {
                 // accumulate field numbers to form path to interpreted option
@@ -1033,9 +1029,9 @@ namespace shark {
 
                 if (i < uninterpreted_option_->name_size() - 1) {
                     if (field->cpp_type() != SharkFieldCppType::CPPTYPE_MESSAGE) {
-                        return AddNameError("Option \"" + debug_msg_name + "\" is an atomic type, not a message.");
+                        return add_name_error("Option \"" + debug_msg_name + "\" is an atomic type, not a message.");
                     } else if (field->is_repeated()) {
-                        return AddNameError("Option field \"" + debug_msg_name + "\" is a repeated message. Repeated message "
+                        return add_name_error("Option field \"" + debug_msg_name + "\" is a repeated message. Repeated message "
                                                                                  "options must be initialized using an "
                                                                                  "aggregate value.");
                     } else {
@@ -1220,7 +1216,7 @@ namespace shark {
             // We're at the innermost submessage.
             for (int i = 0; i < unknown_fields.field_count(); i++) {
                 if (unknown_fields.field(i).number() == innermost_field->number()) {
-                    return AddNameError("Option \"" + debug_msg_name + "\" was already set.");
+                    return add_name_error("Option \"" + debug_msg_name + "\" was already set.");
                 }
             }
             return true;
@@ -1262,7 +1258,7 @@ namespace shark {
         case SharkFieldCppType::CPPTYPE_INT32:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > static_cast<uint64_t>(std::numeric_limits<int32_t>::max())) {
-                    return AddValueError("Value out of range for int32 option \"" + option_field->full_name() + "\".");
+                    return add_value_error("Value out of range for int32 option \"" + option_field->full_name() + "\".");
                 } else {
                     SetInt32(option_field->number(),
                         uninterpreted_option_->positive_int_value(),
@@ -1270,53 +1266,53 @@ namespace shark {
                 }
             } else if (uninterpreted_option_->has_negative_int_value()) {
                 if (uninterpreted_option_->negative_int_value() < static_cast<int64_t>(std::numeric_limits<int32_t>::min())) {
-                    return AddValueError("Value out of range for int32 option \"" + option_field->full_name() + "\".");
+                    return add_value_error("Value out of range for int32 option \"" + option_field->full_name() + "\".");
                 } else {
                     SetInt32(option_field->number(),
                         uninterpreted_option_->negative_int_value(),
                         option_field->type(), unknown_fields);
                 }
             } else {
-                return AddValueError("Value must be integer for int32 option \"" + option_field->full_name() + "\".");
+                return add_value_error("Value must be integer for int32 option \"" + option_field->full_name() + "\".");
             }
             break;
 
         case SharkFieldCppType::CPPTYPE_INT8:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > 127) {
-                    return AddValueError("Value out of range for int8 option \"" + option_field->full_name() + "\".");
+                    return add_value_error("Value out of range for int8 option \"" + option_field->full_name() + "\".");
                 }
                 SetInt32(option_field->number(), static_cast<int32_t>(uninterpreted_option_->positive_int_value()), option_field->type(), unknown_fields);
             } else if (uninterpreted_option_->has_negative_int_value()) {
                 if (uninterpreted_option_->negative_int_value() < -128) {
-                    return AddValueError("Value out of range for int8 option \"" + option_field->full_name() + "\".");
+                    return add_value_error("Value out of range for int8 option \"" + option_field->full_name() + "\".");
                 }
                 SetInt32(option_field->number(), static_cast<int32_t>(uninterpreted_option_->negative_int_value()), option_field->type(), unknown_fields);
             } else {
-                return AddValueError("Value must be integer for int8 option \"" + option_field->full_name() + "\".");
+                return add_value_error("Value must be integer for int8 option \"" + option_field->full_name() + "\".");
             }
             break;
 
         case SharkFieldCppType::CPPTYPE_INT16:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > 32767) {
-                    return AddValueError("Value out of range for int16 option \"" + option_field->full_name() + "\".");
+                    return add_value_error("Value out of range for int16 option \"" + option_field->full_name() + "\".");
                 }
                 SetInt32(option_field->number(), static_cast<int32_t>(uninterpreted_option_->positive_int_value()), option_field->type(), unknown_fields);
             } else if (uninterpreted_option_->has_negative_int_value()) {
                 if (uninterpreted_option_->negative_int_value() < -32768) {
-                    return AddValueError("Value out of range for int16 option \"" + option_field->full_name() + "\".");
+                    return add_value_error("Value out of range for int16 option \"" + option_field->full_name() + "\".");
                 }
                 SetInt32(option_field->number(), static_cast<int32_t>(uninterpreted_option_->negative_int_value()), option_field->type(), unknown_fields);
             } else {
-                return AddValueError("Value must be integer for int16 option \"" + option_field->full_name() + "\".");
+                return add_value_error("Value must be integer for int16 option \"" + option_field->full_name() + "\".");
             }
             break;
 
         case SharkFieldCppType::CPPTYPE_INT64:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > static_cast<uint64_t>(std::numeric_limits<int64_t>::max())) {
-                    return AddValueError("Value out of range for int64 option \"" + option_field->full_name() + "\".");
+                    return add_value_error("Value out of range for int64 option \"" + option_field->full_name() + "\".");
                 } else {
                     SetInt64(option_field->number(),
                         uninterpreted_option_->positive_int_value(),
@@ -1327,21 +1323,21 @@ namespace shark {
                     uninterpreted_option_->negative_int_value(),
                     option_field->type(), unknown_fields);
             } else {
-                return AddValueError("Value must be integer for int64 option \"" + option_field->full_name() + "\".");
+                return add_value_error("Value must be integer for int64 option \"" + option_field->full_name() + "\".");
             }
             break;
 
         case SharkFieldCppType::CPPTYPE_UINT32:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > std::numeric_limits<uint32_t>::max()) {
-                    return AddValueError("Value out of range for uint32 option \"" + option_field->name() + "\".");
+                    return add_value_error("Value out of range for uint32 option \"" + option_field->name() + "\".");
                 } else {
                     SetUInt32(option_field->number(),
                         uninterpreted_option_->positive_int_value(),
                         option_field->type(), unknown_fields);
                 }
             } else {
-                return AddValueError(
+                return add_value_error(
                     "Value must be non-negative integer for uint32 "
                     "option \""
                     + option_field->full_name() + "\".");
@@ -1351,26 +1347,26 @@ namespace shark {
         case SharkFieldCppType::CPPTYPE_UINT8:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > 255) {
-                    return AddValueError("Value out of range for uint8 option \"" + option_field->full_name() + "\".");
+                    return add_value_error("Value out of range for uint8 option \"" + option_field->full_name() + "\".");
                 }
                 SetUInt32(option_field->number(),
                     static_cast<uint32_t>(uninterpreted_option_->positive_int_value()),
                     option_field->type(), unknown_fields);
             } else {
-                return AddValueError("Value must be non-negative integer for uint8 option \"" + option_field->full_name() + "\".");
+                return add_value_error("Value must be non-negative integer for uint8 option \"" + option_field->full_name() + "\".");
             }
             break;
 
         case SharkFieldCppType::CPPTYPE_UINT16:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > 65535) {
-                    return AddValueError("Value out of range for uint16 option \"" + option_field->full_name() + "\".");
+                    return add_value_error("Value out of range for uint16 option \"" + option_field->full_name() + "\".");
                 }
                 SetUInt32(option_field->number(),
                     static_cast<uint32_t>(uninterpreted_option_->positive_int_value()),
                     option_field->type(), unknown_fields);
             } else {
-                return AddValueError("Value must be non-negative integer for uint16 option \"" + option_field->full_name() + "\".");
+                return add_value_error("Value must be non-negative integer for uint16 option \"" + option_field->full_name() + "\".");
             }
             break;
 
@@ -1380,7 +1376,7 @@ namespace shark {
                     uninterpreted_option_->positive_int_value(),
                     option_field->type(), unknown_fields);
             } else {
-                return AddValueError(
+                return add_value_error(
                     "Value must be non-negative integer for uint64 "
                     "option \""
                     + option_field->full_name() + "\".");
@@ -1396,7 +1392,7 @@ namespace shark {
             } else if (uninterpreted_option_->has_negative_int_value()) {
                 value = uninterpreted_option_->negative_int_value();
             } else {
-                return AddValueError("Value must be number for float option \"" + option_field->full_name() + "\".");
+                return add_value_error("Value must be number for float option \"" + option_field->full_name() + "\".");
             }
             unknown_fields->AddFixed32(option_field->number(),
                 internal::WireFormatLite::EncodeFloat(value));
@@ -1412,7 +1408,7 @@ namespace shark {
             } else if (uninterpreted_option_->has_negative_int_value()) {
                 value = uninterpreted_option_->negative_int_value();
             } else {
-                return AddValueError("Value must be number for double option \"" + option_field->full_name() + "\".");
+                return add_value_error("Value must be number for double option \"" + option_field->full_name() + "\".");
             }
             unknown_fields->AddFixed64(option_field->number(),
                 internal::WireFormatLite::EncodeDouble(value));
@@ -1422,7 +1418,7 @@ namespace shark {
         case SharkFieldCppType::CPPTYPE_BOOL:
             uint64_t value;
             if (!uninterpreted_option_->has_identifier_value()) {
-                return AddValueError(
+                return add_value_error(
                     "Value must be identifier for boolean option "
                     "\""
                     + option_field->full_name() + "\".");
@@ -1432,7 +1428,7 @@ namespace shark {
             } else if (uninterpreted_option_->identifier_value() == "false") {
                 value = 0;
             } else {
-                return AddValueError(
+                return add_value_error(
                     "Value must be \"true\" or \"false\" for boolean "
                     "option \""
                     + option_field->full_name() + "\".");
@@ -1442,7 +1438,7 @@ namespace shark {
 
         case SharkFieldCppType::CPPTYPE_ENUM: {
             if (!uninterpreted_option_->has_identifier_value()) {
-                return AddValueError(
+                return add_value_error(
                     "Value must be identifier for enum-valued option "
                     "\""
                     + option_field->full_name() + "\".");
@@ -1465,7 +1461,7 @@ namespace shark {
                 Symbol symbol = builder_->find_symbol_not_enforcing_deps(fully_qualified_name);
                 if (auto* candicate_descriptor = symbol.enum_value_descriptor()) {
                     if (candicate_descriptor->type() != enum_type) {
-                        return AddValueError(
+                        return add_value_error(
                             "Enum type \"" + enum_type->full_name() + "\" has no value named \"" + value_name + "\" for option \"" + option_field->full_name() + "\". This appears to be a value from a sibling type.");
                     } else {
                         enum_value = candicate_descriptor;
@@ -1478,7 +1474,7 @@ namespace shark {
             }
 
             if (enum_value == nullptr) {
-                return AddValueError("Enum type \"" + option_field->enum_type()->full_name() + "\" has no value named \"" + value_name + "\" for "
+                return add_value_error("Enum type \"" + option_field->enum_type()->full_name() + "\" has no value named \"" + value_name + "\" for "
                                                                                                                                          "option \""
                     + option_field->full_name() + "\".");
             } else {
@@ -1493,7 +1489,7 @@ namespace shark {
 
         case SharkFieldCppType::CPPTYPE_STRING:
             if (!uninterpreted_option_->has_string_value()) {
-                return AddValueError(
+                return add_value_error(
                     "Value must be quoted string for string option "
                     "\""
                     + option_field->full_name() + "\".");
@@ -2923,19 +2919,11 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         }
     }
 
-
-#define VALIDATE_OPTIONS_FROM_ARRAY(descriptor, array_name, type) \
-    for (int i = 0; i < descriptor->array_name##_count(); ++i) {  \
-        Validate##type##Options(descriptor->array_name##s_ + i,   \
-            proto.array_name(i));                                 \
-    }
-
-
     void DescriptorBuilder::ValidateFileOptions(FileDescriptor* file,
         const FileDescriptorProto& proto) {
          for (int i = 0; i < file->message_type_count(); ++i) { ValidateMessageOptions(file->message_types_ + i, proto.message_type(i)); }
 
-         for (int i = 0; i < file->enum_type_count(); ++i) { ValidateEnumOptions(file->enum_types_ + i, proto.enum_type(i)); }
+         for (int i = 0; i < file->enum_type_count(); ++i) { (file->enum_types_ + i)->ValidateEnumOptions(proto.enum_type(i), this); }
 
          for (int i = 0; i < file->servlet_count(); ++i) { ValidateServletOptions(file->servlets_ + i, proto.servlet(i)); }
 
@@ -2958,20 +2946,6 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         }
     }
 
-    void DescriptorBuilder::ValidateProto3(FileDescriptor* file,
-        const FileDescriptorProto& proto) {
-        for (int i = 0; i < file->extension_count(); ++i) {
-            ValidateProto3Field(file->extensions_ + i, proto.extension(i));
-        }
-        for (int i = 0; i < file->message_type_count(); ++i) {
-            ValidateProto3Message(file->message_types_ + i, proto.message_type(i));
-        }
-        for (int i = 0; i < file->enum_type_count(); ++i) {
-            ValidateProto3Enum(file->enum_types_ + i, proto.enum_type(i));
-        }
-    }
-
-
 
     static std::string ToLowercaseWithoutUnderscores(const std::string& name) {
         std::string result;
@@ -2987,118 +2961,22 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         return result;
     }
 
-    void DescriptorBuilder::ValidateProto3Message(Descriptor* message,
-        const DescriptorProto& proto) {
-        for (int i = 0; i < message->nested_type_count(); ++i) {
-            ValidateProto3Message(message->nested_types_ + i, proto.nested_type(i));
-        }
-        for (int i = 0; i < message->enum_type_count(); ++i) {
-            ValidateProto3Enum(message->enum_types_ + i, proto.enum_type(i));
-        }
-        for (int i = 0; i < message->field_count(); ++i) {
-            ValidateProto3Field(message->fields_ + i, proto.field(i));
-        }
-        for (int i = 0; i < message->extension_count(); ++i) {
-            ValidateProto3Field(message->extensions_ + i, proto.extension(i));
-        }
-        if (message->extension_range_count() > 0) {
-            add_error(message->full_name(), proto.extension_range(0),
-                DescriptorPool::ErrorCollector::NUMBER,
-                "Extension ranges are not allowed in proto3.");
-        }
-        if (message->options().message_set_wire_format()) {
-            // Using MessageSet doesn't make sense since we disallow extensions.
-            add_error(message->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
-                "MessageSet is not supported in proto3.");
-        }
-
-        // In proto3, we reject field names if they conflict in camelCase.
-        // Note that we currently enforce a stricter rule: Field names must be
-        // unique after being converted to lowercase with underscores removed.
-        std::map<std::string, const FieldDescriptor*> name_to_field;
-        for (int i = 0; i < message->field_count(); ++i) {
-            std::string lowercase_name = ToLowercaseWithoutUnderscores(message->field(i)->name());
-            if (name_to_field.find(lowercase_name) != name_to_field.end()) {
-                add_error(message->full_name(), proto.field(i),
-                    DescriptorPool::ErrorCollector::NAME,
-                    "The JSON camel-case name of field \"" + message->field(i)->name() + "\" conflicts with field \"" + name_to_field[lowercase_name]->name() + "\". This is not " + "allowed in proto3.");
-            } else {
-                name_to_field[lowercase_name] = message->field(i);
-            }
-        }
-    }
-
-
-    namespace {
-
-         std::set<std::string>* NewAllowedProto3Extendee() {
-             auto allowed_proto3_extendees = new std::set<std::string>;
-             const char* kOptionNames[] = {
-                 "FileOptions", "MessageOptions", "FieldOptions",
-                 "EnumOptions", "EnumValueOptions", "ServletOptions",
-                 "MethodOptions", "OneofOptions", "ExtensionRangeOptions"
-             };
-             for (const char* option_name : kOptionNames) {
-                 // descriptor.shark has a different package name in opensource. We allow
-                 // both so the opensource protocol compiler can also compile internal
-                 // proto3 files with custom options. See: b/27567912
-                 allowed_proto3_extendees->insert(std::string("shark.") + option_name);
-                 // Split the word to trick the opensource processing scripts so they
-                 // will keep the original package name.
-                 allowed_proto3_extendees->insert(std::string("proto") + "2." + option_name);
-             }
-             return allowed_proto3_extendees;
-         }
-
-         // Checks whether the extendee type is allowed in proto3.
-         // Only extensions to descriptor options are allowed. We use name comparison
-         // instead of comparing the descriptor directly because the extensions may be
-         // defined in a different pool.
-         bool AllowedExtendeeInProto3(const std::string& name) {
-             static auto allowed_proto3_extendees = internal::OnShutdownDelete(NewAllowedProto3Extendee());
-             return allowed_proto3_extendees->find(name) != allowed_proto3_extendees->end();
-         }
-     } // anonymous namespace
-
-    void DescriptorBuilder::ValidateProto3Field(FieldDescriptor* field,
-        const FieldDescriptorProto& proto) {
-        if (field->is_extension() && !AllowedExtendeeInProto3(field->containing_type()->full_name())) {
-            add_error(field->full_name(), proto,
-                DescriptorPool::ErrorCollector::EXTENDEE,
-                "Extensions in proto3 are only allowed for defining options.");
-        }
-        if (field->is_required()) {
-            add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
-                "Required fields are not allowed in proto3.");
-        }
-        if (field->has_default_value()) {
-            add_error(field->full_name(), proto,
-                DescriptorPool::ErrorCollector::DEFAULT_VALUE,
-                "Explicit default values are not allowed in proto3.");
-        }
-        if (field->cpp_type() == SharkFieldCppType::CPPTYPE_ENUM && field->enum_type() && field->enum_type()->file()->syntax() != SyntaxEdition::SYNTAX_PROTO3 && field->enum_type()->file()->syntax() != SyntaxEdition::SYNTAX_UNKNOWN) {
-            // Proto3 messages can only use Proto3 enum types; otherwise we can't
-            // guarantee that the default value is zero.
-            add_error(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
-                "Enum type \"" + field->enum_type()->full_name() + "\" is not a proto3 enum, but is used in \"" + field->containing_type()->full_name() + "\" which is a proto3 message type.");
-        }
-    }
-
-    void DescriptorBuilder::ValidateProto3Enum(EnumDescriptor* enm,
-        const EnumDescriptorProto& proto) {
-        if (enm->value_count() > 0 && enm->value(0)->number() != 0) {
-            add_error(enm->full_name(), proto.value(0),
-                DescriptorPool::ErrorCollector::NUMBER,
-                "The first enum value must be zero in proto3.");
-        }
-    }
-
     void DescriptorBuilder::ValidateMessageOptions(Descriptor* message,
         const DescriptorProto& proto) {
-        VALIDATE_OPTIONS_FROM_ARRAY(message, field, Field);
-        VALIDATE_OPTIONS_FROM_ARRAY(message, nested_type, Message);
-        VALIDATE_OPTIONS_FROM_ARRAY(message, enum_type, Enum);
-        VALIDATE_OPTIONS_FROM_ARRAY(message, extension, Field);
+         for (int i = 0; i < message->field_count(); ++i) {
+             ValidateFieldOptions(message->fields_ + i, proto.field(i));
+         }
+
+         for (int i = 0; i < message->nested_type_count(); ++i) {
+             ValidateMessageOptions(message->nested_types_ + i, proto.nested_type(i));
+         }
+         for (int i = 0; i < message->enum_type_count(); ++i) {
+             (message->enum_types_ + i)->ValidateEnumOptions(proto.enum_type(i), this);
+         }
+
+         for (int i = 0; i < message->extension_count(); ++i) {
+             ValidateFieldOptions(message->extensions_ + i, proto.extension(i));
+         }
 
         const int64_t max_extension_range = static_cast<int64_t>(message->options().message_set_wire_format()
                 ? std::numeric_limits<int32_t>::max()
@@ -3189,35 +3067,6 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         }
     }
 
-    void DescriptorBuilder::ValidateEnumOptions(EnumDescriptor* enm,
-        const EnumDescriptorProto& proto) {
-        VALIDATE_OPTIONS_FROM_ARRAY(enm, value, EnumValue);
-        if (!enm->options().has_allow_alias() || !enm->options().allow_alias()) {
-            std::map<int, std::string> used_values;
-            for (int i = 0; i < enm->value_count(); ++i) {
-                const EnumValueDescriptor* enum_value = enm->value(i);
-                if (used_values.find(enum_value->number()) != used_values.end()) {
-                    std::string error = "\"" + enum_value->full_name() + "\" uses the same enum value as \"" + used_values[enum_value->number()] + "\". If this is intended, set "
-                                                                                                                                                   "'option allow_alias = true;' to the enum definition.";
-                    if (!enm->options().allow_alias()) {
-                        // Generate error if duplicated enum values are explicitly disallowed.
-                        add_error(enm->full_name(), proto.value(i),
-                            DescriptorPool::ErrorCollector::NUMBER, error);
-                    }
-                } else {
-                    used_values[enum_value->number()] = enum_value->full_name();
-                }
-            }
-        }
-    }
-
-
-
-    void DescriptorBuilder::ValidateEnumValueOptions(
-        EnumValueDescriptor* /* enum_value */,
-        const EnumValueDescriptorProto& /* proto */) {
-        // Nothing to do so far.
-    }
 
     void DescriptorBuilder::ValidateExtensionRangeOptions(
         const std::string& full_name, Descriptor::ExtensionRange* extension_range,
@@ -3234,7 +3083,9 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
                 "unless you set cc_generic_servlets to false.");
         }
 
-        VALIDATE_OPTIONS_FROM_ARRAY(servlet, method, Method);
+         for (int i = 0; i < servlet->method_count(); ++i) {
+             ValidateMethodOptions(servlet->methods_ + i, proto.method(i));
+         }
     }
 
     void DescriptorBuilder::ValidateMethodOptions(
@@ -3397,7 +3248,6 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         }
     }
 
-#undef VALIDATE_OPTIONS_FROM_ARRAY
 
     // -------------------------------------------------------------------
 
@@ -3435,7 +3285,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
     bool DescriptorBuilder::OptionInterpreter::SetAggregateOption(
         const FieldDescriptor* option_field, UnknownFieldSet* unknown_fields) {
         if (!uninterpreted_option_->has_aggregate_value()) {
-            return AddValueError("Option \"" + option_field->full_name() + "\" is a message. To set the entire message, use "
+            return add_value_error("Option \"" + option_field->full_name() + "\" is a message. To set the entire message, use "
                                                                            "syntax like \""
                 + option_field->name() + " = { <proto text format> }\". "
                                          "To set fields within it, use "
@@ -3456,7 +3306,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         parser.SetFinder(&finder);
         if (!parser.ParseFromString(uninterpreted_option_->aggregate_value(),
                 dynamic.get())) {
-            AddValueError("Error while parsing option value for \"" + option_field->name() + "\": " + collector.error_);
+            add_value_error("Error while parsing option value for \"" + option_field->name() + "\": " + collector.error_);
             return false;
         } else {
             std::string serial;

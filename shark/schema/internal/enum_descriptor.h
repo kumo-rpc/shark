@@ -148,6 +148,7 @@ namespace shark {
         // to this descriptor from the file root.
         void GetLocationPath(std::vector<int>* output) const;
 
+        void ValidateEnumOptions(const EnumDescriptorProto& proto,  DescriptorBuilder* builder) const;
         // True if this is a placeholder for an unknown type.
         bool is_placeholder_ : 1;
         // True if this is a placeholder and the type name wasn't fully-qualified.
@@ -255,6 +256,8 @@ namespace shark {
         // See Descriptor::DebugString().
         void DebugString(int depth, std::string* contents,
             const DebugStringOptions& options) const;
+
+        void ValidateEnumValueOptions(const EnumValueDescriptorProto&, DescriptorBuilder*);
 
         // Walks up the descriptor tree to generate the source location path
         // to this descriptor from the file root.

@@ -37,7 +37,7 @@ public final class Proto3Annotator implements Annotator, DumbAware {
     if (!(element instanceof PbSyntaxStatement)) {
       return;
     }
-    holder.newAnnotation(HighlightSeverity.ERROR, "syntax \"proto3\" is not supported")
+    holder.newAnnotation(HighlightSeverity.ERROR, "Unrecognized syntax: proto3\n")
         .range(element)
         .create();
   }

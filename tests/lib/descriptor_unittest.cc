@@ -6272,8 +6272,7 @@ namespace shark {
             file_proto.mutable_message_type()->RemoveLast();
             file_proto.set_syntax("proto3");
             BuildFileWithErrors(file_proto.DebugString(),
-                "foo.shark: foo.shark: OTHER: syntax \"proto3\" is not "
-                "supported.\n");
+                "foo.shark: foo.shark: OTHER: Unrecognized syntax: proto3\n");
         }
 
         TEST_F(ValidationErrorTest, MapEntryKeyTypeMessage) {
@@ -6344,7 +6343,7 @@ namespace shark {
                 "name: 'foo.shark' "
                 "syntax: 'proto3' "
                 "message_type { name: 'Foo' }",
-                "foo.shark: foo.shark: OTHER: syntax \"proto3\" is not supported.\n");
+                "foo.shark: foo.shark: OTHER: Unrecognized syntax: proto3\n");
         }
 
         TEST_F(ValidationErrorTest, Proto3OptionalRejected) {
@@ -6599,7 +6598,7 @@ namespace shark {
                 "}");
         }
 
-        TEST_F(ValidationErrorTest, ValidateProto3Enum) {
+        TEST_F(ValidationErrorTest, ValidateProto2Enum) {
             BuildFile(
                 "name: 'foo.shark' "
                 "package: 'p3en' "

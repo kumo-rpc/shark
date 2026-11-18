@@ -16,6 +16,7 @@
 #include <cstdint>
 #include <turbo/strings/escaping.h>
 #include <shark/schema/internal/enum_descriptor.h>
+#include <shark/schema/internal/descriptor_builder.h>
 #include <shark/schema/internal/field_descriptor.h>
 #include <shark/schema/internal/file_descriptor_tables.h>
 #include <shark/schema/internal/file_descriptor_tables_inl.h>
@@ -191,6 +192,34 @@ namespace shark {
         type()->GetLocationPath(output);
         output->push_back(EnumDescriptorProto::kValueFieldNumber);
         output->push_back(index());
+    }
+
+
+    void EnumValueDescriptor::ValidateEnumValueOptions(const EnumValueDescriptorProto&,  DescriptorBuilder*) {
+        // Nothing to do so far.
+    }
+
+    void EnumDescriptor::ValidateEnumOptions(const EnumDescriptorProto& proto,  DescriptorBuilder* builder) const {
+        for (int i = 0; i < value_count(); ++i) {
+            (values_ + i)->ValidateEnumValueOptions(proto.value(i), builder);
+        }
+        if (!options().has_allow_alias() || !options().allow_alias()) {
+            std::map<int, std::string> used_values;
+            for (int i = 0; i < value_count(); ++i) {
+                const EnumValueDescriptor* enum_value = value(i);
+                if (used_values.find(enum_value->number()) != used_values.end()) {
+                    std::string error = "\"" + enum_value->full_name() + "\" uses the same enum value as \"" + used_values[enum_value->number()] + "\". If this is intended, set "
+                                                                                                                                                   "'option allow_alias = true;' to the enum definition.";
+                    if (!options().allow_alias()) {
+                        // Generate error if duplicated enum values are explicitly disallowed.
+                        builder->add_error(full_name(), proto.value(i),
+                            DescriptorPool::ErrorCollector::NUMBER, error);
+                    }
+                } else {
+                    used_values[enum_value->number()] = enum_value->full_name();
+                }
+            }
+        }
     }
 
 } // namespace shark
