@@ -142,9 +142,9 @@ namespace shark::compiler::cpp {
                 servlets_generators_[i]->index_in_metadata_ = i;
             }
         }
-        for (int i = 0; i < file->anonymous_extension_count(); i++) {
+        for (int i = 0; i < file->extension_count(); i++) {
             extension_generators_.emplace_back(
-                new ExtensionGenerator(file->anonymous_extension(i), options, &scc_analyzer_));
+                new ExtensionGenerator(file->extension(i), options, &scc_analyzer_));
         }
         for (int i = 0; i < file->weak_dependency_count(); ++i) {
             weak_deps_.insert(file->weak_dependency(i));

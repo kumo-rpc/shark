@@ -911,8 +911,8 @@ namespace shark::compiler::cpp {
                 return true;
             }
         }
-        for (int idx = 0; idx < descriptor->anonymous_extension_count(); idx++) {
-            if (IsLazy(descriptor->anonymous_extension(idx), options, scc_analyzer)) {
+        for (int idx = 0; idx < descriptor->extension_count(); idx++) {
+            if (IsLazy(descriptor->extension(idx), options, scc_analyzer)) {
                 return true;
             }
         }
@@ -933,8 +933,8 @@ namespace shark::compiler::cpp {
                 return true;
             }
         }
-        for (int field_idx = 0; field_idx < file->anonymous_extension_count(); field_idx++) {
-            if (IsLazy(file->anonymous_extension(field_idx), options, scc_analyzer)) {
+        for (int field_idx = 0; field_idx < file->extension_count(); field_idx++) {
+            if (IsLazy(file->extension(field_idx), options, scc_analyzer)) {
                 return true;
             }
         }
@@ -1021,9 +1021,9 @@ namespace shark::compiler::cpp {
     }
 
     static bool HasExtensionsOrExtendableMessage(const Descriptor* descriptor) {
-        if (descriptor->anonymous_extension_range_count() > 0)
+        if (descriptor->extension_range_count() > 0)
             return true;
-        if (descriptor->anonymous_extension_count() > 0)
+        if (descriptor->extension_count() > 0)
             return true;
         for (int i = 0; i < descriptor->nested_type_count(); ++i) {
             if (HasExtensionsOrExtendableMessage(descriptor->nested_type(i))) {
@@ -1034,7 +1034,7 @@ namespace shark::compiler::cpp {
     }
 
     bool HasExtensionsOrExtendableMessage(const FileDescriptor* file) {
-        if (file->anonymous_extension_count() > 0)
+        if (file->extension_count() > 0)
             return true;
         for (int i = 0; i < file->message_type_count(); ++i) {
             if (HasExtensionsOrExtendableMessage(file->message_type(i)))
@@ -1296,7 +1296,7 @@ namespace shark::compiler::cpp {
         }
         for (int i = 0; i < scc->descriptors.size(); i++) {
             const Descriptor* descriptor = scc->descriptors[i];
-            if (descriptor->anonymous_extension_range_count() > 0) {
+            if (descriptor->extension_range_count() > 0) {
                 result.contains_extension = true;
             }
             for (int j = 0; j < descriptor->field_count(); j++) {
@@ -1353,8 +1353,8 @@ namespace shark::compiler::cpp {
             ListAllFields(d->nested_type(i), fields);
         }
         // Collect message level extensions.
-        for (int i = 0; i < d->anonymous_extension_count(); i++) {
-            fields->push_back(d->anonymous_extension(i));
+        for (int i = 0; i < d->extension_count(); i++) {
+            fields->push_back(d->extension(i));
         }
         // Add types of fields necessary
         for (int i = 0; i < d->field_count(); i++) {
@@ -1369,8 +1369,8 @@ namespace shark::compiler::cpp {
             ListAllFields(d->message_type(i), fields);
         }
         // Collect message level extensions.
-        for (int i = 0; i < d->anonymous_extension_count(); i++) {
-            fields->push_back(d->anonymous_extension(i));
+        for (int i = 0; i < d->extension_count(); i++) {
+            fields->push_back(d->extension(i));
         }
     }
 
@@ -1633,7 +1633,7 @@ namespace shark::compiler::cpp {
     }
 
     bool HasMessageFieldOrExtension(const Descriptor* desc) {
-        if (desc->anonymous_extension_range_count() > 0)
+        if (desc->extension_range_count() > 0)
             return true;
         for (const auto* f : FieldRange(desc)) {
             if (f->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE)

@@ -162,8 +162,8 @@ namespace shark {
         for (int i = 0; i < servlet_count(); i++) {
             servlet(i)->CopyTo(proto->add_servlet());
         }
-        for (int i = 0; i < anonymous_extension_count(); i++) {
-            anonymous_extension(i)->CopyTo(proto->add_anonymous_extension());
+        for (int i = 0; i < extension_count(); i++) {
+            extension(i)->CopyTo(proto->add_extension());
         }
 
         if (&options() != &FileOptions::default_instance()) {
@@ -173,15 +173,15 @@ namespace shark {
 
     void FileDescriptor::CopyJsonNameTo(FileDescriptorProto* proto) const {
         if (message_type_count() != proto->message_type_size() ||
-            anonymous_extension_count() != proto->anonymous_extension_size()) {
+            extension_count() != proto->extension_size()) {
             SHARK_LOG(ERROR) << "Cannot copy json_name to a proto of a different size.";
             return;
         }
         for (int i = 0; i < message_type_count(); i++) {
             message_type(i)->CopyJsonNameTo(proto->mutable_message_type(i));
         }
-        for (int i = 0; i < anonymous_extension_count(); i++) {
-            anonymous_extension(i)->CopyJsonNameTo(proto->mutable_anonymous_extension(i));
+        for (int i = 0; i < extension_count(); i++) {
+            extension(i)->CopyJsonNameTo(proto->mutable_extension(i));
         }
     }
 
@@ -264,17 +264,17 @@ namespace shark {
         }
 
         const Descriptor* containing_type = nullptr;
-        for (int i = 0; i < anonymous_extension_count(); i++) {
-            if (anonymous_extension(i)->containing_type() != containing_type) {
+        for (int i = 0; i < extension_count(); i++) {
+            if (extension(i)->containing_type() != containing_type) {
                 if (i > 0)
                     contents.append("}\n\n");
-                containing_type = anonymous_extension(i)->containing_type();
+                containing_type = extension(i)->containing_type();
                 turbo::substitute_and_append(&contents, "extend .$0 {\n",
                     containing_type->full_name());
             }
-            anonymous_extension(i)->DebugString(1, &contents, debug_string_options);
+            extension(i)->DebugString(1, &contents, debug_string_options);
         }
-        if (anonymous_extension_count() > 0)
+        if (extension_count() > 0)
             contents.append("}\n\n");
 
         comment_printer.AddPostComment(&contents);

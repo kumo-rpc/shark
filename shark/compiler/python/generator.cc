@@ -618,14 +618,14 @@ namespace shark::compiler::python {
             "is_extendable=$extendable$,\n"
             "syntax='$syntax$'",
             "options_value", OptionsValue(options_string), "extendable",
-            message_descriptor.anonymous_extension_range_count() > 0 ? "True" : "False",
+            message_descriptor.extension_range_count() > 0 ? "True" : "False",
             "syntax", StringifySyntax(message_descriptor.file()->syntax()));
         printer_->Print(",\n");
 
         // Extension ranges
         printer_->Print("extension_ranges=[");
-        for (int i = 0; i < message_descriptor.anonymous_extension_range_count(); ++i) {
-            const Descriptor::ExtensionRange* range = message_descriptor.anonymous_extension_range(i);
+        for (int i = 0; i < message_descriptor.extension_range_count(); ++i) {
+            const Descriptor::ExtensionRange* range = message_descriptor.extension_range(i);
             printer_->Print("($start$, $end$), ", "start", turbo::str_cat(range->start),
                 "end", turbo::str_cat(range->end));
         }
@@ -911,8 +911,8 @@ namespace shark::compiler::python {
         for (int i = 0; i < file_->enum_type_count(); ++i) {
             AddEnumToFileDescriptor(*file_->enum_type(i));
         }
-        for (int i = 0; i < file_->anonymous_extension_count(); ++i) {
-            AddExtensionToFileDescriptor(*file_->anonymous_extension(i));
+        for (int i = 0; i < file_->extension_count(); ++i) {
+            AddExtensionToFileDescriptor(*file_->extension(i));
         }
 
         // TODO(jieluo): Move this register to PrintFileDescriptor() when
@@ -927,8 +927,8 @@ namespace shark::compiler::python {
     // extending.
     void Generator::FixForeignFieldsInExtensions() const {
         // Top-level extensions.
-        for (int i = 0; i < file_->anonymous_extension_count(); ++i) {
-            FixForeignFieldsInExtension(*file_->anonymous_extension(i));
+        for (int i = 0; i < file_->extension_count(); ++i) {
+            FixForeignFieldsInExtension(*file_->extension(i));
         }
         // Nested extensions.
         for (int i = 0; i < file_->message_type_count(); ++i) {
@@ -959,8 +959,8 @@ namespace shark::compiler::python {
             FixForeignFieldsInNestedExtensions(*descriptor.nested_type(i));
         }
         // Fix up extensions directly contained within this type.
-        for (int i = 0; i < descriptor.anonymous_extension_count(); ++i) {
-            FixForeignFieldsInExtension(*descriptor.anonymous_extension(i));
+        for (int i = 0; i < descriptor.extension_count(); ++i) {
+            FixForeignFieldsInExtension(*descriptor.extension(i));
         }
     }
 
@@ -1059,8 +1059,8 @@ namespace shark::compiler::python {
         const Descriptor& message_descriptor) const {
         const bool is_extension = true;
         PrintFieldDescriptorsInDescriptor(message_descriptor, is_extension,
-            "extensions", &Descriptor::anonymous_extension_count,
-            &Descriptor::anonymous_extension);
+            "extensions", &Descriptor::extension_count,
+            &Descriptor::extension);
     }
 
     bool Generator::GeneratingDescriptorProto() const {
@@ -1218,8 +1218,8 @@ namespace shark::compiler::python {
             FixOptionsForEnum(enum_descriptor);
         }
         // Prints expressions that set the options for all top level extensions.
-        for (int i = 0; i < file_->anonymous_extension_count(); ++i) {
-            const FieldDescriptor& field = *file_->anonymous_extension(i);
+        for (int i = 0; i < file_->extension_count(); ++i) {
+            const FieldDescriptor& field = *file_->extension(i);
             FixOptionsForField(field);
         }
         // Prints expressions that set the options for all messages, nested enums,
@@ -1327,8 +1327,8 @@ namespace shark::compiler::python {
             FixOptionsForField(field);
         }
         // Extensions.
-        for (int i = 0; i < descriptor.anonymous_extension_count(); ++i) {
-            const FieldDescriptor& field = *descriptor.anonymous_extension(i);
+        for (int i = 0; i < descriptor.extension_count(); ++i) {
+            const FieldDescriptor& field = *descriptor.extension(i);
             FixOptionsForField(field);
         }
         // Message option for this message.

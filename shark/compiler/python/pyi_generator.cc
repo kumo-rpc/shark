@@ -105,7 +105,7 @@ namespace shark::compiler::python {
     // descriptor.
     void CheckImportModules(const Descriptor* descriptor,
         ImportModules* import_modules) {
-        if (descriptor->anonymous_extension_range_count() > 0) {
+        if (descriptor->extension_range_count() > 0) {
             import_modules->has_extendable = true;
         }
         if (descriptor->enum_type_count() > 0) {
@@ -311,8 +311,8 @@ namespace shark::compiler::python {
     void PyiGenerator::AddExtensions(
         const DescriptorT& descriptor,
         std::map<std::string, std::string>* item_map) const {
-        for (int i = 0; i < descriptor.anonymous_extension_count(); ++i) {
-            const FieldDescriptor* extension_field = descriptor.anonymous_extension(i);
+        for (int i = 0; i < descriptor.extension_count(); ++i) {
+            const FieldDescriptor* extension_field = descriptor.extension(i);
             std::string constant_name = extension_field->name() + "_FIELD_NUMBER";
             turbo::str_to_upper(&constant_name);
             (*item_map)[constant_name] = "_ClassVar[int]";
@@ -409,7 +409,7 @@ namespace shark::compiler::python {
 
         std::map<std::string, std::string> item_map;
         // Prints Extensions for extendable messages
-        if (message_descriptor.anonymous_extension_range_count() > 0) {
+        if (message_descriptor.extension_range_count() > 0) {
             item_map["Extensions"] = "_python_message._ExtensionDict";
         }
 

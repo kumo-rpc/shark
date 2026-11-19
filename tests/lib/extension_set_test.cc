@@ -1184,13 +1184,13 @@ TEST(ExtensionSetTest, DynamicExtensions) {
       template_descriptor_proto.nested_type());
   dynamic_proto.mutable_enum_type()->MergeFrom(
       template_descriptor_proto.enum_type());
-  dynamic_proto.mutable_anonymous_extension()->MergeFrom(
+  dynamic_proto.mutable_extension()->MergeFrom(
       template_descriptor_proto.field());
 
   // For each extension that we added...
-  for (int i = 0; i < dynamic_proto.anonymous_extension_size(); i++) {
+  for (int i = 0; i < dynamic_proto.extension_size(); i++) {
     // Set its extendee to TestAllExtensions.
-    FieldDescriptorProto* extension = dynamic_proto.mutable_anonymous_extension(i);
+    FieldDescriptorProto* extension = dynamic_proto.mutable_extension(i);
     extension->set_extendee(
         unittest::TestAllExtensions::descriptor()->full_name());
 

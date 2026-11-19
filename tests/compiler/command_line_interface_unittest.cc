@@ -703,7 +703,7 @@ namespace shark {
                 custom_file->CopyTo(file_descriptor_proto);
                 file_descriptor_proto->set_name("custom_options.shark");
                 // Add a custom message option.
-                FieldDescriptorProto* extension_option = file_descriptor_proto->add_anonymous_extension();
+                FieldDescriptorProto* extension_option = file_descriptor_proto->add_extension();
                 extension_option->set_name("unknown_option");
                 extension_option->set_extendee(".shark.MessageOptions");
                 extension_option->set_number(1111);

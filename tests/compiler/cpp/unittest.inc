@@ -970,7 +970,7 @@ TEST(GENERATED_MESSAGE_TEST_NAME, ExtensionConstantValues) {
 TEST(GENERATED_MESSAGE_TEST_NAME, ParseFromTruncated) {
   const std::string long_string = std::string(128, 'q');
   FileDescriptorProto p;
-  p.add_anonymous_extension()->set_name(long_string);
+  p.add_extension()->set_name(long_string);
   const std::string msg = p.SerializeAsString();
   int successful_count = 0;
   for (int i = 0; i <= msg.size(); i++) {

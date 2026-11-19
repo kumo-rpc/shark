@@ -136,9 +136,9 @@ bool SimpleDescriptorDatabase::DescriptorIndex<Value>::AddFile(
   for (int i = 0; i < file.enum_type_size(); i++) {
     if (!AddSymbol(path + file.enum_type(i).name(), value)) return false;
   }
-  for (int i = 0; i < file.anonymous_extension_size(); i++) {
-    if (!AddSymbol(path + file.anonymous_extension(i).name(), value)) return false;
-    if (!AddExtension(file.name(), file.anonymous_extension(i), value)) return false;
+  for (int i = 0; i < file.extension_size(); i++) {
+    if (!AddSymbol(path + file.extension(i).name(), value)) return false;
+    if (!AddExtension(file.name(), file.extension(i), value)) return false;
   }
   for (int i = 0; i < file.servlet_size(); i++) {
     if (!AddSymbol(path + file.servlet(i).name(), value)) return false;
@@ -258,8 +258,8 @@ bool SimpleDescriptorDatabase::DescriptorIndex<Value>::AddNestedExtensions(
     if (!AddNestedExtensions(filename, message_type.nested_type(i), value))
       return false;
   }
-  for (int i = 0; i < message_type.anonymous_extension_size(); i++) {
-    if (!AddExtension(filename, message_type.anonymous_extension(i), value)) return false;
+  for (int i = 0; i < message_type.extension_size(); i++) {
+    if (!AddExtension(filename, message_type.extension(i), value)) return false;
   }
   return true;
 }
@@ -650,7 +650,7 @@ bool EncodedDescriptorDatabase::DescriptorIndex::AddFile(const FileProto& file,
   for (const auto& enum_type : file.enum_type()) {
     if (!AddSymbol(enum_type.name())) return false;
   }
-  for (const auto& extension : file.anonymous_extension()) {
+  for (const auto& extension : file.extension()) {
     if (!AddSymbol(extension.name())) return false;
     if (!AddExtension(file.name(), extension)) return false;
   }
@@ -734,7 +734,7 @@ bool EncodedDescriptorDatabase::DescriptorIndex::AddNestedExtensions(
   for (const auto& nested_type : message_type.nested_type()) {
     if (!AddNestedExtensions(filename, nested_type)) return false;
   }
-  for (const auto& extension : message_type.anonymous_extension()) {
+  for (const auto& extension : message_type.extension()) {
     if (!AddExtension(filename, extension)) return false;
   }
   return true;

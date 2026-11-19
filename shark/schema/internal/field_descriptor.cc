@@ -279,11 +279,11 @@ namespace shark {
     void FieldDescriptor::GetLocationPath(std::vector<int>* output) const {
          if (is_extension()) {
              if (extension_scope() == nullptr) {
-                 output->push_back(FileDescriptorProto::kAnonymousExtensionFieldNumber);
+                 output->push_back(FileDescriptorProto::kExtensionFieldNumber);
                  output->push_back(index());
              } else {
                  extension_scope()->GetLocationPath(output);
-                 output->push_back(DescriptorProto::kAnonymousExtensionFieldNumber);
+                 output->push_back(DescriptorProto::kExtensionFieldNumber);
                  output->push_back(index());
              }
          } else {

@@ -160,7 +160,7 @@ namespace shark {
             const std::string& name, int number,
             FieldCardinality label,
             SharkType type) {
-            FieldDescriptorProto* result = file->add_anonymous_extension();
+            FieldDescriptorProto* result = file->add_extension();
             result->set_name(name);
             result->set_number(number);
             result->set_label(label);
@@ -174,7 +174,7 @@ namespace shark {
             const std::string& name, int number,
             FieldCardinality label,
             SharkType type) {
-            FieldDescriptorProto* result = parent->add_anonymous_extension();
+            FieldDescriptorProto* result = parent->add_extension();
             result->set_name(name);
             result->set_number(number);
             result->set_label(label);
@@ -397,8 +397,8 @@ namespace shark {
                 foo_enum_value_ = foo_enum_->value(0);
                 ASSERT_EQ(1, foo_file_->servlet_count());
                 foo_service_ = foo_file_->servlet(0);
-                ASSERT_EQ(1, foo_file_->anonymous_extension_count());
-                foo_extension_ = foo_file_->anonymous_extension(0);
+                ASSERT_EQ(1, foo_file_->extension_count());
+                foo_extension_ = foo_file_->extension(0);
 
                 ASSERT_EQ(1, bar_file_->message_type_count());
                 bar_message_ = bar_file_->message_type(0);
@@ -408,8 +408,8 @@ namespace shark {
                 bar_enum_value_ = bar_enum_->value(0);
                 ASSERT_EQ(1, bar_file_->servlet_count());
                 bar_servlet_ = bar_file_->servlet(0);
-                ASSERT_EQ(1, bar_file_->anonymous_extension_count());
-                bar_extension_ = bar_file_->anonymous_extension(0);
+                ASSERT_EQ(1, bar_file_->extension_count());
+                bar_extension_ = bar_file_->extension(0);
             }
 
             DescriptorPool pool_;
@@ -1294,8 +1294,8 @@ namespace shark {
                 message_ = file_->message_type(1);
                 ASSERT_EQ("TestMessage", message_->name());
                 ASSERT_EQ(5, message_->field_count());
-                ASSERT_EQ(5, message_->anonymous_extension_count());
-                ASSERT_EQ(5, file_->anonymous_extension_count());
+                ASSERT_EQ(5, message_->extension_count());
+                ASSERT_EQ(5, file_->extension_count());
             }
 
             DescriptorPool pool_;
@@ -1310,17 +1310,17 @@ namespace shark {
             EXPECT_EQ("foofoo", message_->field(3)->lowercase_name());
             EXPECT_EQ("foobar", message_->field(4)->lowercase_name());
 
-            EXPECT_EQ("bar_foo", message_->anonymous_extension(0)->lowercase_name());
-            EXPECT_EQ("barbar", message_->anonymous_extension(1)->lowercase_name());
-            EXPECT_EQ("barbaz", message_->anonymous_extension(2)->lowercase_name());
-            EXPECT_EQ("barfoo", message_->anonymous_extension(3)->lowercase_name());
-            EXPECT_EQ("barbar", message_->anonymous_extension(4)->lowercase_name());
+            EXPECT_EQ("bar_foo", message_->extension(0)->lowercase_name());
+            EXPECT_EQ("barbar", message_->extension(1)->lowercase_name());
+            EXPECT_EQ("barbaz", message_->extension(2)->lowercase_name());
+            EXPECT_EQ("barfoo", message_->extension(3)->lowercase_name());
+            EXPECT_EQ("barbar", message_->extension(4)->lowercase_name());
 
-            EXPECT_EQ("baz_foo", file_->anonymous_extension(0)->lowercase_name());
-            EXPECT_EQ("bazbar", file_->anonymous_extension(1)->lowercase_name());
-            EXPECT_EQ("bazbaz", file_->anonymous_extension(2)->lowercase_name());
-            EXPECT_EQ("bazfoo", file_->anonymous_extension(3)->lowercase_name());
-            EXPECT_EQ("bazbar", file_->anonymous_extension(4)->lowercase_name());
+            EXPECT_EQ("baz_foo", file_->extension(0)->lowercase_name());
+            EXPECT_EQ("bazbar", file_->extension(1)->lowercase_name());
+            EXPECT_EQ("bazbaz", file_->extension(2)->lowercase_name());
+            EXPECT_EQ("bazfoo", file_->extension(3)->lowercase_name());
+            EXPECT_EQ("bazbar", file_->extension(4)->lowercase_name());
         }
 
         TEST_F(StylizedFieldNamesTest, CamelcaseName) {
@@ -1330,17 +1330,17 @@ namespace shark {
             EXPECT_EQ("fooFoo", message_->field(3)->camelcase_name());
             EXPECT_EQ("foobar", message_->field(4)->camelcase_name());
 
-            EXPECT_EQ("barFoo", message_->anonymous_extension(0)->camelcase_name());
-            EXPECT_EQ("barBar", message_->anonymous_extension(1)->camelcase_name());
-            EXPECT_EQ("barBaz", message_->anonymous_extension(2)->camelcase_name());
-            EXPECT_EQ("barFoo", message_->anonymous_extension(3)->camelcase_name());
-            EXPECT_EQ("barbar", message_->anonymous_extension(4)->camelcase_name());
+            EXPECT_EQ("barFoo", message_->extension(0)->camelcase_name());
+            EXPECT_EQ("barBar", message_->extension(1)->camelcase_name());
+            EXPECT_EQ("barBaz", message_->extension(2)->camelcase_name());
+            EXPECT_EQ("barFoo", message_->extension(3)->camelcase_name());
+            EXPECT_EQ("barbar", message_->extension(4)->camelcase_name());
 
-            EXPECT_EQ("bazFoo", file_->anonymous_extension(0)->camelcase_name());
-            EXPECT_EQ("bazBar", file_->anonymous_extension(1)->camelcase_name());
-            EXPECT_EQ("bazBaz", file_->anonymous_extension(2)->camelcase_name());
-            EXPECT_EQ("bazFoo", file_->anonymous_extension(3)->camelcase_name());
-            EXPECT_EQ("bazbar", file_->anonymous_extension(4)->camelcase_name());
+            EXPECT_EQ("bazFoo", file_->extension(0)->camelcase_name());
+            EXPECT_EQ("bazBar", file_->extension(1)->camelcase_name());
+            EXPECT_EQ("bazBaz", file_->extension(2)->camelcase_name());
+            EXPECT_EQ("bazFoo", file_->extension(3)->camelcase_name());
+            EXPECT_EQ("bazbar", file_->extension(4)->camelcase_name());
         }
 
         TEST_F(StylizedFieldNamesTest, FindByLowercaseName) {
@@ -1353,22 +1353,22 @@ namespace shark {
             EXPECT_TRUE(message_->FindFieldByLowercaseName("bar_foo") == nullptr);
             EXPECT_TRUE(message_->FindFieldByLowercaseName("nosuchfield") == nullptr);
 
-            EXPECT_EQ(message_->anonymous_extension(0),
+            EXPECT_EQ(message_->extension(0),
                 message_->FindExtensionByLowercaseName("bar_foo"));
             EXPECT_THAT(message_->FindExtensionByLowercaseName("barbar"),
-                AnyOf(message_->anonymous_extension(1), message_->anonymous_extension(4)));
-            EXPECT_EQ(message_->anonymous_extension(2),
+                AnyOf(message_->extension(1), message_->extension(4)));
+            EXPECT_EQ(message_->extension(2),
                 message_->FindExtensionByLowercaseName("barbaz"));
             EXPECT_TRUE(message_->FindExtensionByLowercaseName("BarBar") == nullptr);
             EXPECT_TRUE(message_->FindExtensionByLowercaseName("barBaz") == nullptr);
             EXPECT_TRUE(message_->FindExtensionByLowercaseName("foo_foo") == nullptr);
             EXPECT_TRUE(message_->FindExtensionByLowercaseName("nosuchfield") == nullptr);
 
-            EXPECT_EQ(file_->anonymous_extension(0),
+            EXPECT_EQ(file_->extension(0),
                 file_->FindExtensionByLowercaseName("baz_foo"));
             EXPECT_THAT(file_->FindExtensionByLowercaseName("bazbar"),
-                AnyOf(file_->anonymous_extension(1), file_->anonymous_extension(4)));
-            EXPECT_EQ(file_->anonymous_extension(2), file_->FindExtensionByLowercaseName("bazbaz"));
+                AnyOf(file_->extension(1), file_->extension(4)));
+            EXPECT_EQ(file_->extension(2), file_->FindExtensionByLowercaseName("bazbaz"));
             EXPECT_TRUE(file_->FindExtensionByLowercaseName("BazBar") == nullptr);
             EXPECT_TRUE(file_->FindExtensionByLowercaseName("bazBaz") == nullptr);
             EXPECT_TRUE(file_->FindExtensionByLowercaseName("nosuchfield") == nullptr);
@@ -1385,10 +1385,10 @@ namespace shark {
             EXPECT_TRUE(message_->FindFieldByCamelcaseName("nosuchfield") == nullptr);
 
             EXPECT_THAT(message_->FindExtensionByCamelcaseName("barFoo"),
-                AnyOf(message_->anonymous_extension(0), message_->anonymous_extension(3)));
-            EXPECT_EQ(message_->anonymous_extension(1),
+                AnyOf(message_->extension(0), message_->extension(3)));
+            EXPECT_EQ(message_->extension(1),
                 message_->FindExtensionByCamelcaseName("barBar"));
-            EXPECT_EQ(message_->anonymous_extension(2),
+            EXPECT_EQ(message_->extension(2),
                 message_->FindExtensionByCamelcaseName("barBaz"));
             EXPECT_TRUE(message_->FindExtensionByCamelcaseName("bar_foo") == nullptr);
             EXPECT_TRUE(message_->FindExtensionByCamelcaseName("BarBar") == nullptr);
@@ -1396,9 +1396,9 @@ namespace shark {
             EXPECT_TRUE(message_->FindExtensionByCamelcaseName("nosuchfield") == nullptr);
 
             EXPECT_THAT(file_->FindExtensionByCamelcaseName("bazFoo"),
-                AnyOf(file_->anonymous_extension(0), file_->anonymous_extension(3)));
-            EXPECT_EQ(file_->anonymous_extension(1), file_->FindExtensionByCamelcaseName("bazBar"));
-            EXPECT_EQ(file_->anonymous_extension(2), file_->FindExtensionByCamelcaseName("bazBaz"));
+                AnyOf(file_->extension(0), file_->extension(3)));
+            EXPECT_EQ(file_->extension(1), file_->FindExtensionByCamelcaseName("bazBar"));
+            EXPECT_EQ(file_->extension(2), file_->FindExtensionByCamelcaseName("bazBaz"));
             EXPECT_TRUE(file_->FindExtensionByCamelcaseName("baz_foo") == nullptr);
             EXPECT_TRUE(file_->FindExtensionByCamelcaseName("BazBar") == nullptr);
             EXPECT_TRUE(file_->FindExtensionByCamelcaseName("nosuchfield") == nullptr);
@@ -2012,59 +2012,59 @@ namespace shark {
         };
 
         TEST_F(ExtensionDescriptorTest, ExtensionRanges) {
-            EXPECT_EQ(0, bar_->anonymous_extension_range_count());
-            ASSERT_EQ(2, foo_->anonymous_extension_range_count());
+            EXPECT_EQ(0, bar_->extension_range_count());
+            ASSERT_EQ(2, foo_->extension_range_count());
 
-            EXPECT_EQ(10, foo_->anonymous_extension_range(0)->start);
-            EXPECT_EQ(30, foo_->anonymous_extension_range(1)->start);
+            EXPECT_EQ(10, foo_->extension_range(0)->start);
+            EXPECT_EQ(30, foo_->extension_range(1)->start);
 
-            EXPECT_EQ(20, foo_->anonymous_extension_range(0)->end);
-            EXPECT_EQ(40, foo_->anonymous_extension_range(1)->end);
+            EXPECT_EQ(20, foo_->extension_range(0)->end);
+            EXPECT_EQ(40, foo_->extension_range(1)->end);
         }
 
         TEST_F(ExtensionDescriptorTest, Extensions) {
-            EXPECT_EQ(0, foo_->anonymous_extension_count());
-            ASSERT_EQ(2, foo_file_->anonymous_extension_count());
-            ASSERT_EQ(2, bar_->anonymous_extension_count());
+            EXPECT_EQ(0, foo_->extension_count());
+            ASSERT_EQ(2, foo_file_->extension_count());
+            ASSERT_EQ(2, bar_->extension_count());
 
-            EXPECT_TRUE(foo_file_->anonymous_extension(0)->is_extension());
-            EXPECT_TRUE(foo_file_->anonymous_extension(1)->is_extension());
-            EXPECT_TRUE(bar_->anonymous_extension(0)->is_extension());
-            EXPECT_TRUE(bar_->anonymous_extension(1)->is_extension());
+            EXPECT_TRUE(foo_file_->extension(0)->is_extension());
+            EXPECT_TRUE(foo_file_->extension(1)->is_extension());
+            EXPECT_TRUE(bar_->extension(0)->is_extension());
+            EXPECT_TRUE(bar_->extension(1)->is_extension());
 
-            EXPECT_EQ("foo_int32", foo_file_->anonymous_extension(0)->name());
-            EXPECT_EQ("foo_enum", foo_file_->anonymous_extension(1)->name());
-            EXPECT_EQ("foo_message", bar_->anonymous_extension(0)->name());
-            EXPECT_EQ("foo_group", bar_->anonymous_extension(1)->name());
+            EXPECT_EQ("foo_int32", foo_file_->extension(0)->name());
+            EXPECT_EQ("foo_enum", foo_file_->extension(1)->name());
+            EXPECT_EQ("foo_message", bar_->extension(0)->name());
+            EXPECT_EQ("foo_group", bar_->extension(1)->name());
 
-            EXPECT_EQ(10, foo_file_->anonymous_extension(0)->number());
-            EXPECT_EQ(19, foo_file_->anonymous_extension(1)->number());
-            EXPECT_EQ(30, bar_->anonymous_extension(0)->number());
-            EXPECT_EQ(39, bar_->anonymous_extension(1)->number());
+            EXPECT_EQ(10, foo_file_->extension(0)->number());
+            EXPECT_EQ(19, foo_file_->extension(1)->number());
+            EXPECT_EQ(30, bar_->extension(0)->number());
+            EXPECT_EQ(39, bar_->extension(1)->number());
 
-            EXPECT_EQ(SharkFieldType::INT32, foo_file_->anonymous_extension(0)->type());
-            EXPECT_EQ(SharkFieldType::ENUM, foo_file_->anonymous_extension(1)->type());
-            EXPECT_EQ(SharkFieldType::MESSAGE, bar_->anonymous_extension(0)->type());
-            EXPECT_EQ(SharkFieldType::MESSAGE, bar_->anonymous_extension(1)->type());
+            EXPECT_EQ(SharkFieldType::INT32, foo_file_->extension(0)->type());
+            EXPECT_EQ(SharkFieldType::ENUM, foo_file_->extension(1)->type());
+            EXPECT_EQ(SharkFieldType::MESSAGE, bar_->extension(0)->type());
+            EXPECT_EQ(SharkFieldType::MESSAGE, bar_->extension(1)->type());
 
-            EXPECT_EQ(baz_, foo_file_->anonymous_extension(1)->enum_type());
-            EXPECT_EQ(moo_, bar_->anonymous_extension(0)->message_type());
-            EXPECT_EQ(moo_, bar_->anonymous_extension(1)->message_type());
+            EXPECT_EQ(baz_, foo_file_->extension(1)->enum_type());
+            EXPECT_EQ(moo_, bar_->extension(0)->message_type());
+            EXPECT_EQ(moo_, bar_->extension(1)->message_type());
 
-            EXPECT_EQ(FieldLabel::OPTIONAL, foo_file_->anonymous_extension(0)->label());
-            EXPECT_EQ(FieldLabel::REPEATED, foo_file_->anonymous_extension(1)->label());
-            EXPECT_EQ(FieldLabel::OPTIONAL, bar_->anonymous_extension(0)->label());
-            EXPECT_EQ(FieldLabel::REPEATED, bar_->anonymous_extension(1)->label());
+            EXPECT_EQ(FieldLabel::OPTIONAL, foo_file_->extension(0)->label());
+            EXPECT_EQ(FieldLabel::REPEATED, foo_file_->extension(1)->label());
+            EXPECT_EQ(FieldLabel::OPTIONAL, bar_->extension(0)->label());
+            EXPECT_EQ(FieldLabel::REPEATED, bar_->extension(1)->label());
 
-            EXPECT_EQ(foo_, foo_file_->anonymous_extension(0)->containing_type());
-            EXPECT_EQ(foo_, foo_file_->anonymous_extension(1)->containing_type());
-            EXPECT_EQ(foo_, bar_->anonymous_extension(0)->containing_type());
-            EXPECT_EQ(foo_, bar_->anonymous_extension(1)->containing_type());
+            EXPECT_EQ(foo_, foo_file_->extension(0)->containing_type());
+            EXPECT_EQ(foo_, foo_file_->extension(1)->containing_type());
+            EXPECT_EQ(foo_, bar_->extension(0)->containing_type());
+            EXPECT_EQ(foo_, bar_->extension(1)->containing_type());
 
-            EXPECT_TRUE(foo_file_->anonymous_extension(0)->extension_scope() == nullptr);
-            EXPECT_TRUE(foo_file_->anonymous_extension(1)->extension_scope() == nullptr);
-            EXPECT_EQ(bar_, bar_->anonymous_extension(0)->extension_scope());
-            EXPECT_EQ(bar_, bar_->anonymous_extension(1)->extension_scope());
+            EXPECT_TRUE(foo_file_->extension(0)->extension_scope() == nullptr);
+            EXPECT_TRUE(foo_file_->extension(1)->extension_scope() == nullptr);
+            EXPECT_EQ(bar_, bar_->extension(0)->extension_scope());
+            EXPECT_EQ(bar_, bar_->extension(1)->extension_scope());
         }
 
         TEST_F(ExtensionDescriptorTest, IsExtensionNumber) {
@@ -2081,10 +2081,10 @@ namespace shark {
         TEST_F(ExtensionDescriptorTest, FindExtensionByName) {
             // Note that FileDescriptor::FindExtensionByName() is tested by
             // FileDescriptorTest.
-            ASSERT_EQ(2, bar_->anonymous_extension_count());
+            ASSERT_EQ(2, bar_->extension_count());
 
-            EXPECT_EQ(bar_->anonymous_extension(0), bar_->FindExtensionByName("foo_message"));
-            EXPECT_EQ(bar_->anonymous_extension(1), bar_->FindExtensionByName("foo_group"));
+            EXPECT_EQ(bar_->extension(0), bar_->FindExtensionByName("foo_message"));
+            EXPECT_EQ(bar_->extension(1), bar_->FindExtensionByName("foo_group"));
 
             EXPECT_TRUE(bar_->FindExtensionByName("no_such_extension") == nullptr);
             EXPECT_TRUE(foo_->FindExtensionByName("foo_int32") == nullptr);
@@ -2962,7 +2962,7 @@ namespace shark {
             const Descriptor* baz_type = baz_field_->message_type();
             EXPECT_EQ("Baz", baz_type->name());
             EXPECT_EQ("Baz", baz_type->full_name());
-            EXPECT_EQ(0, baz_type->anonymous_extension_range_count());
+            EXPECT_EQ(0, baz_type->extension_range_count());
             EXPECT_TRUE(baz_type->is_placeholder());
 
             ASSERT_EQ(SharkFieldType::ENUM, moo_field_->type());
@@ -3018,20 +3018,20 @@ namespace shark {
 
             ASSERT_TRUE(TextFormat::ParseFromString(
                 "name: 'extension.shark'"
-                "anonymous_extension { extendee: 'UnknownType' name:'some_extension' number:123"
+                "extension { extendee: 'UnknownType' name:'some_extension' number:123"
                 "            label:OPTIONAL type:INT32 }",
                 &extension_proto));
             const FileDescriptor* file = BuildFile(extension_proto);
 
             ASSERT_TRUE(file != nullptr);
 
-            ASSERT_EQ(1, file->anonymous_extension_count());
-            const Descriptor* extendee = file->anonymous_extension(0)->containing_type();
+            ASSERT_EQ(1, file->extension_count());
+            const Descriptor* extendee = file->extension(0)->containing_type();
             EXPECT_EQ("UnknownType", extendee->name());
             EXPECT_TRUE(extendee->is_placeholder());
-            ASSERT_EQ(1, extendee->anonymous_extension_range_count());
-            EXPECT_EQ(1, extendee->anonymous_extension_range(0)->start);
-            EXPECT_EQ(FieldDescriptor::kMaxNumber + 1, extendee->anonymous_extension_range(0)->end);
+            ASSERT_EQ(1, extendee->extension_range_count());
+            EXPECT_EQ(1, extendee->extension_range(0)->start);
+            EXPECT_EQ(FieldDescriptor::kMaxNumber + 1, extendee->extension_range(0)->end);
         }
 
         TEST_P(AllowUnknownDependenciesTest, CustomOption) {
@@ -3043,7 +3043,7 @@ namespace shark {
             ASSERT_TRUE(TextFormat::ParseFromString(
                 "name: \"unknown_custom_options.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { "
+                "extension { "
                 "  extendee: \"shark.FileOptions\" "
                 "  name: \"some_option\" "
                 "  number: 123456 "
@@ -3724,7 +3724,7 @@ namespace shark {
             file_proto.add_dependency("shark/descriptor.shark");
 
             // Add the "required_enum_opt" extension.
-            FieldDescriptorProto* extension = file_proto.add_anonymous_extension();
+            FieldDescriptorProto* extension = file_proto.add_extension();
             sharkbuf_unittest::OldOptionType::descriptor()
                 ->file()
                 ->FindExtensionByName("required_enum_opt")
@@ -3795,7 +3795,7 @@ namespace shark {
                 "    positive_int_value: 2 "
                 "  } "
                 "} "
-                "anonymous_extension { "
+                "extension { "
                 "  name: \"cc_option1\" "
                 "  extendee: \".shark.FileOptions\" "
                 // This field number is intentionally chosen to be the same as
@@ -3807,7 +3807,7 @@ namespace shark {
                 "  label: OPTIONAL "
                 "  type:INT32 "
                 "}"
-                "anonymous_extension { "
+                "extension { "
                 "  name: \"cc_option2\" "
                 "  extendee: \".shark.FileOptions\" "
                 "  number: 7736975 "
@@ -3818,7 +3818,7 @@ namespace shark {
             const FileDescriptor* descriptor = pool.BuildFile(file_proto);
             ASSERT_TRUE(descriptor != nullptr);
 
-            EXPECT_EQ(2, descriptor->anonymous_extension_count());
+            EXPECT_EQ(2, descriptor->extension_count());
 
             ASSERT_EQ(
                 "syntax = \"proto2\";\n"
@@ -4500,7 +4500,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  anonymous_extension { name: \"foo\" number: 1 label: OPTIONAL"
+                "  extension { name: \"foo\" number: 1 label: OPTIONAL"
                 "              type_name: \"Foo\" }"
                 "}",
 
@@ -4642,7 +4642,7 @@ namespace shark {
                 "}"
                 "message_type {"
                 "  name: \"Foo\""
-                "  anonymous_extension { name:\"foo\" number:4 label:OPTIONAL type:INT32"
+                "  extension { name:\"foo\" number:4 label:OPTIONAL type:INT32"
                 "              extendee: \"MessageSet\" }"
                 "}",
 
@@ -4660,7 +4660,7 @@ namespace shark {
                 "}"
                 "message_type {"
                 "  name: \"Foo\""
-                "  anonymous_extension { name:\"foo\" number:4 label:REPEATED "
+                "  extension { name:\"foo\" number:4 label:REPEATED "
                 "type:MESSAGE"
                 "              type_name: \"Foo\" extendee: \"MessageSet\" }"
                 "}",
@@ -4746,7 +4746,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  anonymous_extension { name:\"foo\" number:1 label:OPTIONAL type:INT32"
+                "  extension { name:\"foo\" number:1 label:OPTIONAL type:INT32"
                 "              extendee: \"Bar\" }"
                 "}",
 
@@ -4759,7 +4759,7 @@ namespace shark {
                 "enum_type { name: \"Bar\" value { name:\"DUMMY\" number:0 } }"
                 "message_type {"
                 "  name: \"Foo\""
-                "  anonymous_extension { name:\"foo\" number:1 label:OPTIONAL type:INT32"
+                "  extension { name:\"foo\" number:1 label:OPTIONAL type:INT32"
                 "              extendee: \"Bar\" }"
                 "}",
 
@@ -4774,7 +4774,7 @@ namespace shark {
                 "}"
                 "message_type {"
                 "  name: \"Foo\""
-                "  anonymous_extension { name:\"foo\" number:1 label:OPTIONAL type:INT32"
+                "  extension { name:\"foo\" number:1 label:OPTIONAL type:INT32"
                 "              extendee: \"Bar\" }"
                 "}",
 
@@ -4791,7 +4791,7 @@ namespace shark {
                 "}"
                 "message_type {"
                 "  name: \"Foo\""
-                "  anonymous_extension {"
+                "  extension {"
                 "    name:\"foo\""
                 "    number:1000"
                 "    label:REQUIRED"
@@ -5417,7 +5417,7 @@ namespace shark {
                 "message_type: { name: \"Bar\" field: { "
                 "  name: \"foo\" number: 1 label: OPTIONAL type:INT32 } "
                 "} "
-                "anonymous_extension { name: \"bar\" number: 7672757 label: REPEATED "
+                "extension { name: \"bar\" number: 7672757 label: REPEATED "
                 "            type:MESSAGE type_name: \"Bar\" "
                 "            extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"bar\" "
@@ -5456,7 +5456,7 @@ namespace shark {
                 "message_type: { name: \"Bar\" field: { "
                 "  name: \"foo\" number: 1 label: OPTIONAL type:INT32 } "
                 "} "
-                "anonymous_extension { name: \"bar\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"bar\" number: 7672757 label: OPTIONAL "
                 "            type:MESSAGE type_name: \"Bar\" "
                 "            extendee: \"shark.FileOptions\" }");
 
@@ -5498,9 +5498,9 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"foo1\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo1\" number: 7672757 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FieldOptions\" }"
-                "anonymous_extension { name: \"foo2\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo2\" number: 7672757 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FieldOptions\" }",
 
                 "foo.shark: foo2: NUMBER: Extension number 7672757 has already been used "
@@ -5513,7 +5513,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5530,7 +5530,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5547,7 +5547,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5563,7 +5563,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:INT64 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5581,7 +5581,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:INT64 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5597,7 +5597,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:UINT32 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5613,7 +5613,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:UINT32 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5629,7 +5629,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:UINT64 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5645,7 +5645,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:FLOAT extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5661,7 +5661,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:DOUBLE extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5677,7 +5677,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:BOOL extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5695,7 +5695,7 @@ namespace shark {
                 "dependency: \"shark/descriptor.shark\" "
                 "enum_type { name: \"FooEnum\" value { name: \"BAR\" number: 1 } "
                 "                              value { name: \"BAZ\" number: 2 } }"
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:ENUM type_name: \"FooEnum\" "
                 "            extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
@@ -5714,7 +5714,7 @@ namespace shark {
                 "dependency: \"shark/descriptor.shark\" "
                 "enum_type { name: \"FooEnum\" value { name: \"BAR\" number: 1 } "
                 "                              value { name: \"BAZ\" number: 2 } }"
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:ENUM type_name: \"FooEnum\" "
                 "            extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
@@ -5735,7 +5735,7 @@ namespace shark {
                 "                               value { name: \"BAZ\" number: 2 } }"
                 "enum_type { name: \"FooEnum2\" value { name: \"MOO\" number: 1 } "
                 "                               value { name: \"MOOO\" number: 2 } }"
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:ENUM type_name: \"FooEnum1\" "
                 "            extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
@@ -5751,7 +5751,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:STRING extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5770,7 +5770,7 @@ namespace shark {
                 "  name: \"Foo\""
                 "  extension_range { start: 10 end: 20 }"
                 "}"
-                "anonymous_extension {"
+                "extension {"
                 "  name: \"value\""
                 "  number: 10"
                 "  label: OPTIONAL"
@@ -5788,13 +5788,13 @@ namespace shark {
             BuildFile(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"option1\" number: 1000 label: OPTIONAL "
+                "extension { name: \"option1\" number: 1000 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FileOptions\" }");
 
             BuildFileWithWarnings(
                 "name: \"bar.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "anonymous_extension { name: \"option2\" number: 1000 label: OPTIONAL "
+                "extension { name: \"option2\" number: 1000 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FileOptions\" }",
                 "bar.shark: option2: NUMBER: Extension number 1000 has already been used "
                 "in \"shark.FileOptions\" by extension \"option1\" defined in "
@@ -5809,7 +5809,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
                 "message_type { name: \"Foo\" } "
-                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:MESSAGE type_name: \"Foo\" "
                 "            extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
@@ -5873,7 +5873,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "dependency: \"bar.shark\" "
                 "options { optimize_for: LITE_RUNTIME } "
-                "anonymous_extension { name: \"ext\" number: 123 label: OPTIONAL "
+                "extension { name: \"ext\" number: 123 label: OPTIONAL "
                 "            type:INT32 extendee: \"Bar\" }",
 
                 "foo.shark: ext: EXTENDEE: Extensions to non-lite types can only be "
@@ -6099,7 +6099,7 @@ namespace shark {
             FileDescriptorProto file_proto;
             FillValidMapEntry(&file_proto);
             TextFormat::MergeFromString(
-                "anonymous_extension { "
+                "extension { "
                 "  name: 'foo_ext' extendee: '.Bar' number: 5"
                 "} ",
                 file_proto.mutable_message_type(0)->mutable_nested_type(0));
@@ -6736,7 +6736,7 @@ namespace shark {
                 "name: 'bar.shark' "
                 "syntax: 'proto2' "
                 "dependency: 'shark.shark' "
-                "anonymous_extension { "
+                "extension { "
                 "  name: 'bar' number: 1 label: OPTIONAL type:INT32 "
                 "  extendee: 'Container' "
                 "}");
@@ -6777,7 +6777,7 @@ namespace shark {
                 "dependency: 'bar.shark' "
                 "message_type {"
                 "  name: 'Foo'"
-                "  anonymous_extension { name:'foo' number:1 label:OPTIONAL type:INT32"
+                "  extension { name:'foo' number:1 label:OPTIONAL type:INT32"
                 "              extendee: 'Baz' }"
                 "}",
 
@@ -6836,7 +6836,7 @@ namespace shark {
                     "name: 'bar.shark' "
                     "dependency: 'foo.shark' "
                     "message_type { name:'Bar' } "
-                    "anonymous_extension { name:'foo_ext' extendee: '.Foo' number:5 "
+                    "extension { name:'foo_ext' extendee: '.Foo' number:5 "
                     "            label:OPTIONAL type:INT32 } ");
                 // Baz has an undeclared dependency on Foo.
                 AddToDatabase(
@@ -7873,10 +7873,10 @@ namespace shark {
 
             // Field option on extension
             {
-                int path[] = { FileDescriptorProto::kAnonymousExtensionFieldNumber, 0,
+                int path[] = { FileDescriptorProto::kExtensionFieldNumber, 0,
                     FieldDescriptorProto::kOptionsFieldNumber,
                     FieldOptions::kPackedFieldNumber };
-                int unint[] = { FileDescriptorProto::kAnonymousExtensionFieldNumber, 0,
+                int unint[] = { FileDescriptorProto::kExtensionFieldNumber, 0,
                     FieldDescriptorProto::kOptionsFieldNumber,
                     FieldOptions::kUninterpretedOptionFieldNumber, 0 };
                 std::vector<int> vpath(path, path + 4);
@@ -8173,7 +8173,7 @@ namespace shark {
                 "package: 'sharkbuf_unittest' "
                 "dependency: 'bar.shark' "
                 "dependency: 'baz.shark' "
-                "anonymous_extension { extendee: '.sharkbuf_unittest.Bar' name:'bar' number:11"
+                "extension { extendee: '.sharkbuf_unittest.Bar' name:'bar' number:11"
                 "            label:OPTIONAL type_name:'.sharkbuf_unittest.Baz' }");
             ParseProtoAndAddToDb(
                 "name: 'bar.shark' "

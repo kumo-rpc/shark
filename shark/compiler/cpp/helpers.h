@@ -629,8 +629,8 @@ namespace shark::compiler::cpp {
         for (int i = 0; i < d->nested_type_count(); i++) {
             ForEachField(d->nested_type(i), std::forward<T&&>(func));
         }
-        for (int i = 0; i < d->anonymous_extension_count(); i++) {
-            func(d->anonymous_extension(i));
+        for (int i = 0; i < d->extension_count(); i++) {
+            func(d->extension(i));
         }
         for (int i = 0; i < d->field_count(); i++) {
             func(d->field(i));
@@ -642,8 +642,8 @@ namespace shark::compiler::cpp {
         for (int i = 0; i < d->message_type_count(); i++) {
             ForEachField(d->message_type(i), std::forward<T&&>(func));
         }
-        for (int i = 0; i < d->anonymous_extension_count(); i++) {
-            func(d->anonymous_extension(i));
+        for (int i = 0; i < d->extension_count(); i++) {
+            func(d->extension(i));
         }
     }
 
@@ -661,7 +661,7 @@ namespace shark::compiler::cpp {
     inline bool HasSimpleBaseClass(const Descriptor* desc, const Options& options) {
         if (!HasDescriptorMethods(desc->file(), options))
             return false;
-        if (desc->anonymous_extension_range_count() != 0)
+        if (desc->extension_range_count() != 0)
             return false;
         if (desc->field_count() == 0)
             return true;
@@ -683,7 +683,7 @@ namespace shark::compiler::cpp {
         const Options& options) {
         if (!HasDescriptorMethods(desc->file(), options))
             return "";
-        if (desc->anonymous_extension_range_count() != 0)
+        if (desc->extension_range_count() != 0)
             return "";
         if (desc->field_count() == 0) {
             return "ZeroFieldsBase";

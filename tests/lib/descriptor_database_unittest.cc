@@ -216,7 +216,7 @@ TEST_P(DescriptorDatabaseTest, FindFileContainingSymbol) {
       "  name: \"Waldo\" "
       "  value { name:\"FRED\" } "
       "} "
-      "anonymous_extension { name: \"plugh\" } "
+      "extension { name: \"plugh\" } "
       "servlet { "
       "  name: \"Xyzzy\" "
       "  method { name: \"Thud\" } "
@@ -318,7 +318,7 @@ TEST_P(DescriptorDatabaseTest, FindFileContainingExtension) {
       "message_type { "
       "  name: \"Foo\" "
       "  extension_range { start: 1 end: 1000 } "
-      "  anonymous_extension { name:\"qux\" label:OPTIONAL type:INT32 "
+      "  extension { name:\"qux\" label:OPTIONAL type:INT32 "
       "number:5 "
       "              extendee: \".Foo\" }"
       "}");
@@ -330,9 +330,9 @@ TEST_P(DescriptorDatabaseTest, FindFileContainingExtension) {
       "  name: \"Bar\" "
       "  extension_range { start: 1 end: 1000 } "
       "} "
-      "anonymous_extension { name:\"grault\" extendee: \".Foo\"       number:32 } "
-      "anonymous_extension { name:\"garply\" extendee: \".corge.Bar\" number:70 } "
-      "anonymous_extension { name:\"waldo\"  extendee: \"Bar\"        number:56 } ");
+      "extension { name:\"grault\" extendee: \".Foo\"       number:32 } "
+      "extension { name:\"garply\" extendee: \".corge.Bar\" number:70 } "
+      "extension { name:\"waldo\"  extendee: \"Bar\"        number:56 } ");
 
   {
     FileDescriptorProto file;
@@ -388,7 +388,7 @@ TEST_P(DescriptorDatabaseTest, FindAllExtensionNumbers) {
       "message_type { "
       "  name: \"Foo\" "
       "  extension_range { start: 1 end: 1000 } "
-      "  anonymous_extension { name:\"qux\" label:OPTIONAL type:INT32 "
+      "  extension { name:\"qux\" label:OPTIONAL type:INT32 "
       "number:5 "
       "              extendee: \".Foo\" }"
       "}");
@@ -400,9 +400,9 @@ TEST_P(DescriptorDatabaseTest, FindAllExtensionNumbers) {
       "  name: \"Bar\" "
       "  extension_range { start: 1 end: 1000 } "
       "} "
-      "anonymous_extension { name:\"grault\" extendee: \".Foo\"       number:32 } "
-      "anonymous_extension { name:\"garply\" extendee: \".corge.Bar\" number:70 } "
-      "anonymous_extension { name:\"waldo\"  extendee: \"Bar\"        number:56 } ");
+      "extension { name:\"grault\" extendee: \".Foo\"       number:32 } "
+      "extension { name:\"garply\" extendee: \".corge.Bar\" number:70 } "
+      "extension { name:\"waldo\"  extendee: \"Bar\"        number:56 } ");
 
   {
     std::vector<int> numbers;
@@ -463,11 +463,11 @@ TEST_P(DescriptorDatabaseTest, ConflictingTypeError) {
 TEST_P(DescriptorDatabaseTest, ConflictingExtensionError) {
   AddToDatabase(
       "name: \"foo.shark\" "
-      "anonymous_extension { name:\"foo\" label:OPTIONAL type:INT32 number:5 "
+      "extension { name:\"foo\" label:OPTIONAL type:INT32 number:5 "
       "            extendee: \".Foo\" }");
   AddToDatabaseWithError(
       "name: \"bar.shark\" "
-      "anonymous_extension { name:\"bar\" label:OPTIONAL type:INT32 number:5 "
+      "extension { name:\"bar\" label:OPTIONAL type:INT32 number:5 "
       "            extendee: \".Foo\" }");
 }
 
@@ -584,13 +584,13 @@ class MergedDescriptorDatabaseTest : public testing::Test {
         &database1_,
         "name: \"foo.shark\" "
         "message_type { name:\"Foo\" extension_range { start: 1 end: 100 } } "
-        "anonymous_extension { name:\"foo_ext\" extendee: \".Foo\" number:3 "
+        "extension { name:\"foo_ext\" extendee: \".Foo\" number:3 "
         "            label:OPTIONAL type:INT32 } ");
     AddToDatabase(
         &database2_,
         "name: \"bar.shark\" "
         "message_type { name:\"Bar\" extension_range { start: 1 end: 100 } } "
-        "anonymous_extension { name:\"bar_ext\" extendee: \".Bar\" number:5 "
+        "extension { name:\"bar_ext\" extendee: \".Bar\" number:5 "
         "            label:OPTIONAL type:INT32 } ");
 
     // baz.shark exists in both pools, with different definitions.
@@ -599,16 +599,16 @@ class MergedDescriptorDatabaseTest : public testing::Test {
         "name: \"baz.shark\" "
         "message_type { name:\"Baz\" extension_range { start: 1 end: 100 } } "
         "message_type { name:\"FromPool1\" } "
-        "anonymous_extension { name:\"baz_ext\" extendee: \".Baz\" number:12 "
+        "extension { name:\"baz_ext\" extendee: \".Baz\" number:12 "
         "            label:OPTIONAL type:INT32 } "
-        "anonymous_extension { name:\"database1_only_ext\" extendee: \".Baz\" number:13 "
+        "extension { name:\"database1_only_ext\" extendee: \".Baz\" number:13 "
         "            label:OPTIONAL type:INT32 } ");
     AddToDatabase(
         &database2_,
         "name: \"baz.shark\" "
         "message_type { name:\"Baz\" extension_range { start: 1 end: 100 } } "
         "message_type { name:\"FromPool2\" } "
-        "anonymous_extension { name:\"baz_ext\" extendee: \".Baz\" number:12 "
+        "extension { name:\"baz_ext\" extendee: \".Baz\" number:12 "
         "            label:OPTIONAL type:INT32 } ");
   }
 

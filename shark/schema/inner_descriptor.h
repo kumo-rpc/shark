@@ -112,20 +112,20 @@ namespace shark {
         return enum_types_ + index;
     }
 
-    inline int Descriptor::anonymous_extension_range_count() const {
-        return anonymous_extension_range_count_;
+    inline int Descriptor::extension_range_count() const {
+        return extension_range_count_;
     }
 
-    inline int Descriptor::anonymous_extension_count() const {
-        return anonymous_extension_count_;
+    inline int Descriptor::extension_count() const {
+        return extension_count_;
     }
 
-    inline const Descriptor::ExtensionRange* Descriptor::anonymous_extension_range(int index) const {
-        return anonymous_extension_ranges_ + index;
+    inline const Descriptor::ExtensionRange* Descriptor::extension_range(int index) const {
+        return extension_ranges_ + index;
     }
 
-    inline const FieldDescriptor* Descriptor::anonymous_extension(int index) const {
-        return anonymous_extensions_ + index;
+    inline const FieldDescriptor* Descriptor::extension(int index) const {
+        return extensions_ + index;
     }
 
     inline int Descriptor::reserved_range_count() const {
@@ -386,8 +386,8 @@ namespace shark {
         return servlets_count_;
     }
 
-    inline int FileDescriptor::anonymous_extension_count() const {
-        return anonymous_extension_count_;
+    inline int FileDescriptor::extension_count() const {
+        return extension_count_;
     }
 
     inline const FileOptions& FileDescriptor::options() const {
@@ -410,8 +410,8 @@ namespace shark {
         return servlets_ + index;
     }
 
-    inline const FieldDescriptor* FileDescriptor::anonymous_extension(int index) const {
-        return anonymous_extensions_ + index;
+    inline const FieldDescriptor* FileDescriptor::extension(int index) const {
+        return extensions_ + index;
     }
 
 
@@ -537,9 +537,9 @@ namespace shark {
         if (!is_extension_) {
             return static_cast<int>(this - containing_type()->fields_);
         } else if (extension_scope() != nullptr) {
-            return static_cast<int>(this - extension_scope()->anonymous_extensions_);
+            return static_cast<int>(this - extension_scope()->extensions_);
         } else {
-            return static_cast<int>(this - file_->anonymous_extensions_);
+            return static_cast<int>(this - file_->extensions_);
         }
     }
 

@@ -777,11 +777,11 @@ namespace shark {
         };
 
 
-        result->anonymous_extension_count_ = proto.anonymous_extension_size();
-        result->anonymous_extensions_ =
-            alloc.AllocateArray<typename std::remove_pointer<decltype(result->anonymous_extensions_)>::type>(proto.anonymous_extension_size());
-        for (int i = 0; i < proto.anonymous_extension_size(); i++) {
-            BuildExtension(proto.anonymous_extension(i), nullptr, result->anonymous_extensions_ + i, alloc);
+        result->extension_count_ = proto.extension_size();
+        result->extensions_ =
+            alloc.AllocateArray<typename std::remove_pointer<decltype(result->extensions_)>::type>(proto.extension_size());
+        for (int i = 0; i < proto.extension_size(); i++) {
+            BuildExtension(proto.extension(i), nullptr, result->extensions_ + i, alloc);
         }
 
 
@@ -1545,8 +1545,8 @@ namespace shark {
                 // lookup returned a Message, and the enclosing Message has
                 // message_set_wire_format = true, then return the message set
                 // extension, if one exists.
-                for (int i = 0; i < foreign_type->anonymous_extension_count(); i++) {
-                    const FieldDescriptor* extension = foreign_type->anonymous_extension(i);
+                for (int i = 0; i < foreign_type->extension_count(); i++) {
+                    const FieldDescriptor* extension = foreign_type->extension(i);
                     if (extension->containing_type() == descriptor && extension->type() == SharkFieldType::MESSAGE && extension->is_optional() && extension->message_type() == foreign_type) {
                         // Found it.
                         return extension;
@@ -1604,14 +1604,14 @@ namespace shark {
         BUILD_ARRAY(proto, result, field, BuildField, result);
         BUILD_ARRAY(proto, result, enum_type, BuildEnum, result);
 
-         result->anonymous_extension_range_count_ = proto.extension_range_size();
-         result->anonymous_extension_ranges_ =
-             alloc.AllocateArray<typename std::remove_pointer<decltype(result->anonymous_extension_ranges_)>::type>(proto.extension_range_size());
+         result->extension_range_count_ = proto.extension_range_size();
+         result->extension_ranges_ =
+             alloc.AllocateArray<typename std::remove_pointer<decltype(result->extension_ranges_)>::type>(proto.extension_range_size());
          for (int i = 0; i < proto.extension_range_size(); i++) {
-             BuildExtensionRange(proto.extension_range(i), result, result->anonymous_extension_ranges_ + i, alloc);
+             BuildExtensionRange(proto.extension_range(i), result, result->extension_ranges_ + i, alloc);
          }
 
-        BUILD_ARRAY(proto, result, anonymous_extension, BuildExtension, result);
+        BUILD_ARRAY(proto, result, extension, BuildExtension, result);
         BUILD_ARRAY(proto, result, reserved_range, BuildReservedRange, result);
 
         // Before building submessages, check recursion limit.
@@ -1672,8 +1672,8 @@ namespace shark {
 
         for (int i = 0; i < result->field_count(); i++) {
             const FieldDescriptor* field = result->field(i);
-            for (int j = 0; j < result->anonymous_extension_range_count(); j++) {
-                const Descriptor::ExtensionRange* range = result->anonymous_extension_range(j);
+            for (int j = 0; j < result->extension_range_count(); j++) {
+                const Descriptor::ExtensionRange* range = result->extension_range(j);
                 if (range->start <= field->number() && field->number() < range->end) {
                     message_hints_[result].RequestHintOnFieldNumbers(
                         proto.extension_range(j), DescriptorPool::ErrorCollector::NUMBER);
@@ -1706,8 +1706,8 @@ namespace shark {
 
         // Check that extension ranges don't overlap and don't include
         // reserved field numbers or names.
-        for (int i = 0; i < result->anonymous_extension_range_count(); i++) {
-            const Descriptor::ExtensionRange* range1 = result->anonymous_extension_range(i);
+        for (int i = 0; i < result->extension_range_count(); i++) {
+            const Descriptor::ExtensionRange* range1 = result->extension_range(i);
             for (int j = 0; j < result->reserved_range_count(); j++) {
                 const Descriptor::ReservedRange* range2 = result->reserved_range(j);
                 if (range1->end > range2->start && range2->end > range1->start) {
@@ -1719,8 +1719,8 @@ namespace shark {
                             range2->end - 1));
                 }
             }
-            for (int j = i + 1; j < result->anonymous_extension_range_count(); j++) {
-                const Descriptor::ExtensionRange* range2 = result->anonymous_extension_range(j);
+            for (int j = i + 1; j < result->extension_range_count(); j++) {
+                const Descriptor::ExtensionRange* range2 = result->extension_range(j);
                 if (range1->end > range2->start && range2->end > range1->start) {
                     add_error(result->full_name(), proto.extension_range(i),
                         DescriptorPool::ErrorCollector::NUMBER,
@@ -2044,7 +2044,7 @@ namespace shark {
             options_path.push_back(DescriptorProto::kExtensionRangeFieldNumber);
             // find index of this extension range in order to compute path
             int index;
-            for (index = 0; parent->anonymous_extension_ranges_ + index != result; index++) {
+            for (index = 0; parent->extension_ranges_ + index != result; index++) {
             }
             options_path.push_back(index);
             options_path.push_back(DescriptorProto_ExtensionRange::kOptionsFieldNumber);
@@ -2389,8 +2389,8 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             CrossLinkMessage(&file->message_types_[i], proto.message_type(i));
         }
 
-        for (int i = 0; i < file->anonymous_extension_count(); i++) {
-            CrossLinkField(&file->anonymous_extensions_[i], proto.anonymous_extension(i));
+        for (int i = 0; i < file->extension_count(); i++) {
+            CrossLinkField(&file->extensions_[i], proto.extension(i));
         }
 
         for (int i = 0; i < file->enum_type_count(); i++) {
@@ -2420,12 +2420,12 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             CrossLinkField(&message->fields_[i], proto.field(i));
         }
 
-        for (int i = 0; i < message->anonymous_extension_count(); i++) {
-            CrossLinkField(&message->anonymous_extensions_[i], proto.anonymous_extension(i));
+        for (int i = 0; i < message->extension_count(); i++) {
+            CrossLinkField(&message->extensions_[i], proto.extension(i));
         }
 
-        for (int i = 0; i < message->anonymous_extension_range_count(); i++) {
-            CrossLinkExtensionRange(&message->anonymous_extension_ranges_[i],
+        for (int i = 0; i < message->extension_range_count(); i++) {
+            CrossLinkExtensionRange(&message->extension_ranges_[i],
                 proto.extension_range(i));
         }
 
@@ -2893,15 +2893,15 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             for (int i = 0; i < message->field_count(); i++) {
                 add_ordinal(message->field(i)->number());
             }
-            for (int i = 0; i < message->anonymous_extension_count(); i++) {
-                add_ordinal(message->anonymous_extension(i)->number());
+            for (int i = 0; i < message->extension_count(); i++) {
+                add_ordinal(message->extension(i)->number());
             }
             for (int i = 0; i < message->reserved_range_count(); i++) {
                 auto range = message->reserved_range(i);
                 add_range(range->start, range->end);
             }
-            for (int i = 0; i < message->anonymous_extension_range_count(); i++) {
-                auto range = message->anonymous_extension_range(i);
+            for (int i = 0; i < message->extension_range_count(); i++) {
+                auto range = message->extension_range(i);
                 add_range(range->start, range->end);
             }
             used_ordinals.push_back(
@@ -2943,8 +2943,8 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
              (file->servlets_ + i)->ValidateServletOptions(proto.servlet(i), this);
          }
 
-         for (int i = 0; i < file->anonymous_extension_count(); ++i) {
-             ValidateFieldOptions(file->anonymous_extensions_ + i, proto.anonymous_extension(i));
+         for (int i = 0; i < file->extension_count(); ++i) {
+             ValidateFieldOptions(file->extensions_ + i, proto.extension(i));
          }
 
         // Lite files can only be imported by other Lite files.
@@ -2977,15 +2977,15 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
              (message->enum_types_ + i)->ValidateEnumOptions(proto.enum_type(i), this);
          }
 
-         for (int i = 0; i < message->anonymous_extension_count(); ++i) {
-             ValidateFieldOptions(message->anonymous_extensions_ + i, proto.anonymous_extension(i));
+         for (int i = 0; i < message->extension_count(); ++i) {
+             ValidateFieldOptions(message->extensions_ + i, proto.extension(i));
          }
 
         const int64_t max_extension_range = static_cast<int64_t>(message->options().message_set_wire_format()
                 ? std::numeric_limits<int32_t>::max()
                 : FieldDescriptor::kMaxNumber);
-        for (int i = 0; i < message->anonymous_extension_range_count(); ++i) {
-            if (message->anonymous_extension_range(i)->end > max_extension_range + 1) {
+        for (int i = 0; i < message->extension_range_count(); ++i) {
+            if (message->extension_range(i)->end > max_extension_range + 1) {
                 add_error(message->full_name(), proto.extension_range(i),
                     DescriptorPool::ErrorCollector::NUMBER,
                     turbo::substitute("Extension numbers cannot be greater than $0.",
@@ -2993,7 +2993,7 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
             }
 
             ValidateExtensionRangeOptions(message->full_name(),
-                message->anonymous_extension_ranges_ + i,
+                message->extension_ranges_ + i,
                 proto.extension_range(i));
         }
     }
@@ -3083,9 +3083,9 @@ void DescriptorBuilder::CrossLinkFile(FileDescriptor* file,
         const Descriptor* message = field->message_type();
         if ( // Must not contain extensions, extension range or nested message or
              // enums
-            message->anonymous_extension_count() != 0 ||
+            message->extension_count() != 0 ||
             field->label() != FieldLabel::REPEATED ||
-            message->anonymous_extension_range_count() != 0 ||
+            message->extension_range_count() != 0 ||
             message->nested_type_count() != 0 || message->enum_type_count() != 0 ||
             // Must contain exactly two fields
             message->field_count() != 2 ||
