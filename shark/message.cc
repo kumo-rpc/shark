@@ -59,7 +59,7 @@
 #include <shark/types/map_field_inl.h>
 #include <shark/unknown_field_set.h>
 #include <turbo/strings/str_join.h>
-
+#include <fermat/hashmaps/flat_hash_map.h>
 // Must be included last.
 #include <shark/port_def.inc>
 
@@ -220,9 +220,6 @@ namespace shark {
 
     namespace {
 
-#define HASH_MAP std::unordered_map
-#define STR_HASH_FXN hash<::std::string_view>
-
         class GeneratedMessageFactory final : public MessageFactory {
         public:
             static GeneratedMessageFactory* singleton();
@@ -235,8 +232,7 @@ namespace shark {
 
         private:
             // Only written at static init time, so does not require locking.
-            HASH_MAP<std::string_view, const shark::internal::DescriptorTable*,
-                STR_HASH_FXN>
+            fermat::flat_hash_map<std::string_view, const shark::internal::DescriptorTable*>
                 file_map_;
 
             internal::WrappedMutex mutex_;

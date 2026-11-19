@@ -80,23 +80,23 @@ namespace shark {
         // execution of the current public API call, but for compatibility with
         // legacy clients, this is cleared at the beginning of each public API call.
         // Not used when fallback_database_ == nullptr.
-        HASH_SET<std::string> known_bad_files_;
+        fermat::flat_hash_set<std::string> known_bad_files_;
 
         // A set of symbols which we have tried to load from the fallback database
         // and encountered errors. We will not attempt to load them again during
         // execution of the current public API call, but for compatibility with
         // legacy clients, this is cleared at the beginning of each public API call.
-        HASH_SET<std::string> known_bad_symbols_;
+        fermat::flat_hash_set<std::string> known_bad_symbols_;
 
         // The set of descriptors for which we've already loaded the full
         // set of extensions numbers from fallback_database_.
-        HASH_SET<const Descriptor*> extensions_loaded_from_db_;
+        fermat::flat_hash_set<const Descriptor*> extensions_loaded_from_db_;
 
         // Maps type name to Descriptor::WellKnownType.  This is logically global
         // and const, but we make it a member here to simplify its construction and
         // destruction.  This only has 20-ish entries and is one per DescriptorPool,
         // so the overhead is small.
-        HASH_MAP<std::string, Descriptor::WellKnownType> well_known_types_;
+        fermat::flat_hash_map<std::string, Descriptor::WellKnownType> well_known_types_;
 
         // -----------------------------------------------------------------
         // Finding items.

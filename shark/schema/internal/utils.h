@@ -55,7 +55,8 @@
 #include <turbo/strings/substitute.h>
 #include <shark/types/any.h>
 #include <shark/unknown_field_set.h>
-
+#include <fermat/hashmaps/flat_hash_map.h>
+#include <fermat/hashmaps/flat_hash_set.h>
 #undef PACKAGE // autoheader #defines this.  :(
 
 // Must be included last.
@@ -245,8 +246,6 @@ namespace shark {
 
         typedef std::pair<const Descriptor*, int> DescriptorIntPair;
 
-#define HASH_MAP std::unordered_map
-#define HASH_SET std::unordered_set
 #define HASH_FXN hash
 
         template <typename PairType>
@@ -301,7 +300,7 @@ namespace shark {
                 return a.full_name() == b.full_name();
             }
         };
-        using SymbolsByNameSet = HASH_SET<Symbol, SymbolByFullNameHash, SymbolByFullNameEq>;
+        using SymbolsByNameSet = fermat::flat_hash_set<Symbol, SymbolByFullNameHash, SymbolByFullNameEq>;
 
         struct SymbolByParentHash {
             using is_transparent = void;
@@ -319,13 +318,13 @@ namespace shark {
                 return a.parent_name_key() == b.parent_name_key();
             }
         };
-        using SymbolsByParentSet = HASH_SET<Symbol, SymbolByParentHash, SymbolByParentEq>;
+        using SymbolsByParentSet = fermat::flat_hash_set<Symbol, SymbolByParentHash, SymbolByParentEq>;
 
-        typedef HASH_MAP<std::string_view, const FileDescriptor*,
+        typedef fermat::flat_hash_map<std::string_view, const FileDescriptor*,
             HASH_FXN<std::string_view>>
             FilesByNameMap;
 
-        typedef HASH_MAP<PointerStringPair, const FieldDescriptor*,
+        typedef fermat::flat_hash_map<PointerStringPair, const FieldDescriptor*,
             PointerStringPairHash>
             FieldsByNameMap;
 
@@ -346,7 +345,7 @@ namespace shark {
                 return a.parent_number_key() == b.parent_number_key();
             }
         };
-        using FieldsByNumberSet = HASH_SET<Symbol, FieldsByNumberHash, FieldsByNumberEq>;
+        using FieldsByNumberSet = fermat::flat_hash_set<Symbol, FieldsByNumberHash, FieldsByNumberEq>;
         using EnumValuesByNumberSet = FieldsByNumberSet;
 
         // This is a map rather than a hash-map, since we use it to iterate
@@ -355,7 +354,7 @@ namespace shark {
         // for that.
         typedef std::map<DescriptorIntPair, const FieldDescriptor*>
             ExtensionsGroupedByDescriptorMap;
-        typedef HASH_MAP<std::string, const SourceCodeInfo_Location*>
+        typedef fermat::flat_hash_map<std::string, const SourceCodeInfo_Location*>
             LocationsByPathMap;
 
         //////////////////////////////////////////

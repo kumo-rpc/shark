@@ -1658,7 +1658,7 @@ namespace shark {
             }
         }
 
-        HASH_SET<std::string> reserved_name_set;
+        fermat::flat_hash_set<std::string> reserved_name_set;
         for (int i = 0; i < proto.reserved_name_size(); i++) {
             const std::string& name = proto.reserved_name(i);
             if (reserved_name_set.find(name) == reserved_name_set.end()) {
@@ -2238,7 +2238,7 @@ namespace shark {
             }
         }
 
-        HASH_SET<std::string> reserved_name_set;
+        fermat::flat_hash_set<std::string> reserved_name_set;
         for (int i = 0; i < proto.reserved_name_size(); i++) {
             const std::string& name = proto.reserved_name(i);
             if (reserved_name_set.find(name) == reserved_name_set.end()) {
