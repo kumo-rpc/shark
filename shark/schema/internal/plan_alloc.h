@@ -108,7 +108,7 @@ namespace shark {
                 alloc.PlanArray<MessageOptions>(1);
             plan_allocation_size(message.nested_type(), alloc);
             plan_allocation_size(message.field(), alloc);
-            plan_allocation_size(message.extension(), alloc);
+            plan_allocation_size(message.anonymous_extension(), alloc);
             plan_allocation_size(message.extension_range(), alloc);
             alloc.PlanArray<Descriptor::ReservedRange>(message.reserved_range_size());
             alloc.PlanArray<const std::string*>(message.reserved_name_size());
@@ -154,7 +154,7 @@ namespace shark {
         plan_allocation_size(proto.servlet(), alloc);
         plan_allocation_size(proto.message_type(), alloc);
         plan_allocation_size(proto.enum_type(), alloc);
-        plan_allocation_size(proto.extension(), alloc);
+        plan_allocation_size(proto.anonymous_extension(), alloc);
 
         alloc.PlanArray<int>(proto.weak_dependency_size());
         alloc.PlanArray<int>(proto.public_dependency_size());

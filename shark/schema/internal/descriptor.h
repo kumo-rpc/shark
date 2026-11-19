@@ -195,11 +195,11 @@ namespace shark {
         };
 
         // The number of extension ranges in this message type.
-        int extension_range_count() const;
+        int anonymous_extension_range_count() const;
         // Gets an extension range by index, where 0 <= index <
         // extension_range_count(). These are returned in the order they were defined
         // in the .shark file.
-        const ExtensionRange* extension_range(int index) const;
+        const ExtensionRange* anonymous_extension_range(int index) const;
 
         // Returns true if the number is in one of the extension ranges.
         bool IsExtensionNumber(int number) const;
@@ -227,14 +227,14 @@ namespace shark {
         // In this case,
         // DescriptorPool::generated_pool()
         //     ->FindMessageTypeByName("M2")
-        //     ->extension(0)
+        //     ->anonymous_extension(0)
         // will return "foo", even though "foo" is an extension of M1.
         // To find all known extensions of a given message, instead use
         // DescriptorPool::FindAllExtensions.
-        int extension_count() const;
+        int anonymous_extension_count() const;
         // Get an extension by index, where 0 <= index < extension_count().
         // These are returned in the order they were defined in the .shark file.
-        const FieldDescriptor* extension(int index) const;
+        const FieldDescriptor* anonymous_extension(int index) const;
 
         // Looks up a named extension (which extends some *other* message type)
         // defined within this message type's scope.
@@ -353,8 +353,8 @@ namespace shark {
         OneofDescriptor* oneof_decls_;
         Descriptor* nested_types_;
         EnumDescriptor* enum_types_;
-        ExtensionRange* extension_ranges_;
-        FieldDescriptor* extensions_;
+        ExtensionRange* anonymous_extension_ranges_;
+        FieldDescriptor* anonymous_extensions_;
         ReservedRange* reserved_ranges_;
         const std::string** reserved_names_;
 
@@ -362,8 +362,8 @@ namespace shark {
         int real_oneof_decl_count_;
         int nested_type_count_;
         int enum_type_count_;
-        int extension_range_count_;
-        int extension_count_;
+        int anonymous_extension_range_count_;
+        int anonymous_extension_count_;
         int reserved_range_count_;
         int reserved_name_count_;
 

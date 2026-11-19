@@ -675,9 +675,9 @@ namespace shark {
                 return parse_servlet_definition(file->add_servlet(), location, file);
             } else if (looking_at("extend")) {
                 LocationRecorder location(root_location,
-                    FileDescriptorProto::kExtensionFieldNumber);
+                    FileDescriptorProto::kAnonymousExtensionFieldNumber);
                 return parse_extend(
-                    file->mutable_extension(), file->mutable_message_type(), root_location,
+                    file->mutable_anonymous_extension(), file->mutable_message_type(), root_location,
                     FileDescriptorProto::kMessageTypeFieldNumber, location, file);
             } else if (looking_at("import")) {
                 return ParseImport(file->mutable_dependency(),
@@ -818,8 +818,8 @@ namespace shark {
                 return ParseReserved(message, message_location);
             } else if (looking_at("extend")) {
                 LocationRecorder location(message_location,
-                    DescriptorProto::kExtensionFieldNumber);
-                return parse_extend(message->mutable_extension(),
+                    DescriptorProto::kAnonymousExtensionFieldNumber);
+                return parse_extend(message->mutable_anonymous_extension(),
                     message->mutable_nested_type(), message_location,
                     DescriptorProto::kNestedTypeFieldNumber, location,
                     containing_file);

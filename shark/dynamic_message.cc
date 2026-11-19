@@ -782,7 +782,7 @@ const Message* DynamicMessageFactory::GetPrototypeNoLock(
   }
 
   // The ExtensionSet, if any.
-  if (type->extension_range_count() > 0) {
+  if (type->anonymous_extension_range_count() > 0) {
     type_info->extensions_offset = size;
     size += sizeof(ExtensionSet);
     size = AlignOffset(size);

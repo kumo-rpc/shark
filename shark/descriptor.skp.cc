@@ -42,7 +42,7 @@ constexpr FileDescriptorProto::FileDescriptorProto(
     , /*decltype(_impl_.message_type_)*/{}
     , /*decltype(_impl_.enum_type_)*/{}
     , /*decltype(_impl_.servlet_)*/{}
-    , /*decltype(_impl_.extension_)*/{}
+    , /*decltype(_impl_.anonymous_extension_)*/{}
     , /*decltype(_impl_.public_dependency_)*/{}
     , /*decltype(_impl_.weak_dependency_)*/{}
     , /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
@@ -98,10 +98,11 @@ constexpr DescriptorProto::DescriptorProto(
     , /*decltype(_impl_.nested_type_)*/{}
     , /*decltype(_impl_.enum_type_)*/{}
     , /*decltype(_impl_.extension_range_)*/{}
-    , /*decltype(_impl_.extension_)*/{}
+    , /*decltype(_impl_.anonymous_extension_)*/{}
     , /*decltype(_impl_.oneof_decl_)*/{}
     , /*decltype(_impl_.reserved_range_)*/{}
     , /*decltype(_impl_.reserved_name_)*/{}
+    , /*decltype(_impl_.derived_)*/{}
     , /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
     , /*decltype(_impl_.options_)*/nullptr} {}
 struct DescriptorProtoDefaultTypeInternal {
@@ -529,7 +530,7 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     SHARK_FIELD_OFFSET(::shark::FileDescriptorProto, _impl_.message_type_),
     SHARK_FIELD_OFFSET(::shark::FileDescriptorProto, _impl_.enum_type_),
     SHARK_FIELD_OFFSET(::shark::FileDescriptorProto, _impl_.servlet_),
-    SHARK_FIELD_OFFSET(::shark::FileDescriptorProto, _impl_.extension_),
+    SHARK_FIELD_OFFSET(::shark::FileDescriptorProto, _impl_.anonymous_extension_),
     SHARK_FIELD_OFFSET(::shark::FileDescriptorProto, _impl_.options_),
     SHARK_FIELD_OFFSET(::shark::FileDescriptorProto, _impl_.source_code_info_),
     SHARK_FIELD_OFFSET(::shark::FileDescriptorProto, _impl_.syntax_),
@@ -575,7 +576,7 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     ~0u,  // no _inlined_string_donated_
     SHARK_FIELD_OFFSET(::shark::DescriptorProto, _impl_.name_),
     SHARK_FIELD_OFFSET(::shark::DescriptorProto, _impl_.field_),
-    SHARK_FIELD_OFFSET(::shark::DescriptorProto, _impl_.extension_),
+    SHARK_FIELD_OFFSET(::shark::DescriptorProto, _impl_.anonymous_extension_),
     SHARK_FIELD_OFFSET(::shark::DescriptorProto, _impl_.nested_type_),
     SHARK_FIELD_OFFSET(::shark::DescriptorProto, _impl_.enum_type_),
     SHARK_FIELD_OFFSET(::shark::DescriptorProto, _impl_.extension_range_),
@@ -583,6 +584,7 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     SHARK_FIELD_OFFSET(::shark::DescriptorProto, _impl_.options_),
     SHARK_FIELD_OFFSET(::shark::DescriptorProto, _impl_.reserved_range_),
     SHARK_FIELD_OFFSET(::shark::DescriptorProto, _impl_.reserved_name_),
+    SHARK_FIELD_OFFSET(::shark::DescriptorProto, _impl_.derived_),
     0,
     ~0u,
     ~0u,
@@ -591,6 +593,7 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
     ~0u,
     ~0u,
     1,
+    ~0u,
     ~0u,
     ~0u,
     ~0u,  // no _has_bits_
@@ -915,29 +918,29 @@ static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_
     { 7, 25, -1, sizeof(::shark::FileDescriptorProto)},
     { 37, 46, -1, sizeof(::shark::DescriptorProto_ExtensionRange)},
     { 49, 57, -1, sizeof(::shark::DescriptorProto_ReservedRange)},
-    { 59, 75, -1, sizeof(::shark::DescriptorProto)},
-    { 85, -1, -1, sizeof(::shark::ExtensionRangeOptions)},
-    { 93, 110, -1, sizeof(::shark::FieldDescriptorProto)},
-    { 121, 129, -1, sizeof(::shark::OneofDescriptorProto)},
-    { 131, 139, -1, sizeof(::shark::EnumDescriptorProto_EnumReservedRange)},
-    { 141, 152, -1, sizeof(::shark::EnumDescriptorProto)},
-    { 157, 166, -1, sizeof(::shark::EnumValueDescriptorProto)},
-    { 169, 178, -1, sizeof(::shark::ServletDescriptorProto)},
-    { 181, 193, -1, sizeof(::shark::MethodDescriptorProto)},
-    { 199, 213, -1, sizeof(::shark::FileOptions)},
-    { 221, 233, -1, sizeof(::shark::MessageOptions)},
-    { 239, 254, -1, sizeof(::shark::FieldOptions)},
-    { 263, -1, -1, sizeof(::shark::OneofOptions)},
-    { 271, 283, -1, sizeof(::shark::EnumOptions)},
-    { 289, 298, -1, sizeof(::shark::EnumValueOptions)},
-    { 301, 310, -1, sizeof(::shark::ServletOptions)},
-    { 313, 323, -1, sizeof(::shark::MethodOptions)},
-    { 327, 335, -1, sizeof(::shark::UninterpretedOption_NamePart)},
-    { 337, 350, -1, sizeof(::shark::UninterpretedOption)},
-    { 357, 368, -1, sizeof(::shark::SourceCodeInfo_Location)},
-    { 373, -1, -1, sizeof(::shark::SourceCodeInfo)},
-    { 380, 390, -1, sizeof(::shark::GeneratedCodeInfo_Annotation)},
-    { 394, -1, -1, sizeof(::shark::GeneratedCodeInfo)},
+    { 59, 76, -1, sizeof(::shark::DescriptorProto)},
+    { 87, -1, -1, sizeof(::shark::ExtensionRangeOptions)},
+    { 95, 112, -1, sizeof(::shark::FieldDescriptorProto)},
+    { 123, 131, -1, sizeof(::shark::OneofDescriptorProto)},
+    { 133, 141, -1, sizeof(::shark::EnumDescriptorProto_EnumReservedRange)},
+    { 143, 154, -1, sizeof(::shark::EnumDescriptorProto)},
+    { 159, 168, -1, sizeof(::shark::EnumValueDescriptorProto)},
+    { 171, 180, -1, sizeof(::shark::ServletDescriptorProto)},
+    { 183, 195, -1, sizeof(::shark::MethodDescriptorProto)},
+    { 201, 215, -1, sizeof(::shark::FileOptions)},
+    { 223, 235, -1, sizeof(::shark::MessageOptions)},
+    { 241, 256, -1, sizeof(::shark::FieldOptions)},
+    { 265, -1, -1, sizeof(::shark::OneofOptions)},
+    { 273, 285, -1, sizeof(::shark::EnumOptions)},
+    { 291, 300, -1, sizeof(::shark::EnumValueOptions)},
+    { 303, 312, -1, sizeof(::shark::ServletOptions)},
+    { 315, 325, -1, sizeof(::shark::MethodOptions)},
+    { 329, 337, -1, sizeof(::shark::UninterpretedOption_NamePart)},
+    { 339, 352, -1, sizeof(::shark::UninterpretedOption)},
+    { 359, 370, -1, sizeof(::shark::SourceCodeInfo_Location)},
+    { 375, -1, -1, sizeof(::shark::SourceCodeInfo)},
+    { 382, 392, -1, sizeof(::shark::GeneratedCodeInfo_Annotation)},
+    { 396, -1, -1, sizeof(::shark::GeneratedCodeInfo)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -973,149 +976,151 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_shark_2fdescriptor_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
     "\n\026shark/descriptor.shark\022\005shark\032\020shark/m"
     "eta.shark\"=\n\021FileDescriptorSet\022(\n\004file\030\001"
-    " \003(\0172\032.shark.FileDescriptorProto\"\237\003\n\023Fil"
+    " \003(\0172\032.shark.FileDescriptorProto\"\251\003\n\023Fil"
     "eDescriptorProto\022\014\n\004name\030\001 \001(\020\022\017\n\007packag"
     "e\030\002 \001(\020\022\022\n\ndependency\030\003 \003(\020\022\031\n\021public_de"
     "pendency\030\n \003(\006\022\027\n\017weak_dependency\030\013 \003(\006\022"
     ",\n\014message_type\030\004 \003(\0172\026.shark.Descriptor"
     "Proto\022-\n\tenum_type\030\005 \003(\0172\032.shark.EnumDes"
     "criptorProto\022.\n\007servlet\030\006 \003(\0172\035.shark.Se"
-    "rvletDescriptorProto\022.\n\textension\030\007 \003(\0172"
-    "\033.shark.FieldDescriptorProto\022#\n\007options\030"
-    "\010 \001(\0172\022.shark.FileOptions\022/\n\020source_code"
-    "_info\030\t \001(\0172\025.shark.SourceCodeInfo\022\016\n\006sy"
-    "ntax\030\014 \001(\020\"\317\004\n\017DescriptorProto\022\014\n\004name\030\001"
-    " \001(\020\022*\n\005field\030\002 \003(\0172\033.shark.FieldDescrip"
-    "torProto\022.\n\textension\030\006 \003(\0172\033.shark.Fiel"
-    "dDescriptorProto\022+\n\013nested_type\030\003 \003(\0172\026."
-    "shark.DescriptorProto\022-\n\tenum_type\030\004 \003(\017"
-    "2\032.shark.EnumDescriptorProto\022>\n\017extensio"
-    "n_range\030\005 \003(\0172%.shark.DescriptorProto.Ex"
-    "tensionRange\022/\n\noneof_decl\030\010 \003(\0172\033.shark"
-    ".OneofDescriptorProto\022&\n\007options\030\007 \001(\0172\025"
-    ".shark.MessageOptions\022<\n\016reserved_range\030"
-    "\t \003(\0172$.shark.DescriptorProto.ReservedRa"
-    "nge\022\025\n\rreserved_name\030\n \003(\020\032[\n\016ExtensionR"
-    "ange\022\r\n\005start\030\001 \001(\006\022\013\n\003end\030\002 \001(\006\022-\n\007opti"
-    "ons\030\003 \001(\0172\034.shark.ExtensionRangeOptions\032"
-    "+\n\rReservedRange\022\r\n\005start\030\001 \001(\006\022\013\n\003end\030\002"
-    " \001(\006\"\200\001\n\025ExtensionRangeOptions\0229\n\024uninte"
-    "rpreted_option\030\347\007 \003(\0172\032.shark.Uninterpre"
-    "tedOption\022!\n\nattributes\030< \003(\0172\r.shark.Op"
-    "tion*\t\010\350\007\020\200\200\200\200\002\"\237\002\n\024FieldDescriptorProto"
-    "\022\014\n\004name\030\001 \001(\020\022\016\n\006number\030\003 \001(\006\022&\n\005label\030"
-    "\004 \001(\0162\027.shark.FieldCardinality\022\036\n\004type\030\005"
-    " \001(\0162\020.shark.SharkType\022\021\n\ttype_name\030\006 \001("
-    "\020\022\020\n\010extendee\030\002 \001(\020\022\025\n\rdefault_value\030\007 \001"
-    "(\020\022\023\n\013oneof_index\030\t \001(\006\022\021\n\tjson_name\030\n \001"
-    "(\020\022$\n\007options\030\010 \001(\0172\023.shark.FieldOptions"
-    "\022\027\n\017proto3_optional\030\021 \001(\001\"J\n\024OneofDescri"
-    "ptorProto\022\014\n\004name\030\001 \001(\020\022$\n\007options\030\002 \001(\017"
-    "2\023.shark.OneofOptions\"\206\002\n\023EnumDescriptor"
-    "Proto\022\014\n\004name\030\001 \001(\020\022.\n\005value\030\002 \003(\0172\037.sha"
-    "rk.EnumValueDescriptorProto\022#\n\007options\030\003"
-    " \001(\0172\022.shark.EnumOptions\022D\n\016reserved_ran"
-    "ge\030\004 \003(\0172,.shark.EnumDescriptorProto.Enu"
-    "mReservedRange\022\025\n\rreserved_name\030\005 \003(\020\032/\n"
-    "\021EnumReservedRange\022\r\n\005start\030\001 \001(\006\022\013\n\003end"
-    "\030\002 \001(\006\"b\n\030EnumValueDescriptorProto\022\014\n\004na"
-    "me\030\001 \001(\020\022\016\n\006number\030\002 \001(\006\022(\n\007options\030\003 \001("
-    "\0172\027.shark.EnumValueOptions\"|\n\026ServletDes"
-    "criptorProto\022\014\n\004name\030\001 \001(\020\022,\n\006method\030\002 \003"
-    "(\0172\034.shark.MethodDescriptorProto\022&\n\007opti"
-    "ons\030\003 \001(\0172\025.shark.ServletOptions\"\267\001\n\025Met"
-    "hodDescriptorProto\022\014\n\004name\030\001 \001(\020\022\022\n\ninpu"
-    "t_type\030\002 \001(\020\022\023\n\013output_type\030\003 \001(\020\022%\n\007opt"
-    "ions\030\004 \001(\0172\024.shark.MethodOptions\022\037\n\020clie"
-    "nt_streaming\030\005 \001(\001:\005false\022\037\n\020server_stre"
-    "aming\030\006 \001(\001:\005false\"\345\003\n\013FileOptions\022<\n\014op"
-    "timize_for\030\t \001(\0162\037.shark.FileOptions.Opt"
-    "imizeMode:\005SPEED\022\022\n\ngo_package\030\013 \001(\020\022\"\n\023"
-    "cc_generic_servlets\030\020 \001(\001:\005false\022\"\n\023py_g"
-    "eneric_servlets\030\022 \001(\001:\005false\022\031\n\ndeprecat"
-    "ed\030\027 \001(\001:\005false\022\036\n\020cc_enable_arenas\030\037 \001("
-    "\001:\004true\022!\n\nattributes\030< \003(\0172\r.shark.Opti"
-    "on\0229\n\024uninterpreted_option\030\347\007 \003(\0172\032.shar"
-    "k.UninterpretedOption\">\n\014OptimizeMode\022\t\n"
-    "\005SPEED\020\001\022\r\n\tCODE_SIZE\020\002\022\020\n\014LITE_RUNTIME\020"
-    "\003\032\0028\005*\t\010\350\007\020\200\200\200\200\002J\004\010\001\020\002J\004\010\010\020\tJ\004\010\n\020\013J\004\010\021\020\022"
-    "J\004\010\024\020\025J\004\010\033\020\034J\004\010$\020%J\004\010%\020&J\004\010&\020\'J\004\010\'\020(J\004\010("
-    "\020)J\004\010)\020*J\004\010*\020+J\004\010,\020-J\004\010-\020.\"\235\002\n\016MessageOp"
-    "tions\022&\n\027message_set_wire_format\030\001 \001(\001:\005"
-    "false\022.\n\037no_standard_descriptor_accessor"
-    "\030\002 \001(\001:\005false\022\031\n\ndeprecated\030\003 \001(\001:\005false"
-    "\022\021\n\tmap_entry\030\007 \001(\001\022!\n\nattributes\030< \003(\0172"
-    "\r.shark.Option\0229\n\024uninterpreted_option\030\347"
-    "\007 \003(\0172\032.shark.UninterpretedOption*\t\010\350\007\020\200"
-    "\200\200\200\002J\004\010\004\020\005J\004\010\005\020\006J\004\010\006\020\007J\004\010\010\020\tJ\004\010\t\020\n\"\313\003\n\014F"
-    "ieldOptions\0220\n\005ctype\030\001 \001(\0162\031.shark.Field"
-    "Options.CType:\006STRING\022\016\n\006packed\030\002 \001(\001\0225\n"
-    "\006jstype\030\006 \001(\0162\032.shark.FieldOptions.JSTyp"
-    "e:\tJS_NORMAL\022\023\n\004lazy\030\005 \001(\001:\005false\022\036\n\017unv"
-    "erified_lazy\030\017 \001(\001:\005false\022\031\n\ndeprecated\030"
-    "\003 \001(\001:\005false\022\023\n\004weak\030\n \001(\001:\005false\022!\n\natt"
-    "ributes\030\024 \003(\0172\r.shark.Option\0229\n\024uninterp"
-    "reted_option\030\347\007 \003(\0172\032.shark.Uninterprete"
-    "dOption\"3\n\005CType\022\n\n\006STRING\020\000\022\010\n\004CORD\020\001\022\020"
-    "\n\014STRING_PIECE\020\002\032\0028\005\"9\n\006JSType\022\r\n\tJS_NOR"
-    "MAL\020\000\022\r\n\tJS_STRING\020\001\022\r\n\tJS_NUMBER\020\002\032\0028\005*"
-    "\t\010\350\007\020\200\200\200\200\002J\004\010\004\020\005\"w\n\014OneofOptions\0229\n\024unin"
-    "terpreted_option\030\347\007 \003(\0172\032.shark.Uninterp"
-    "retedOption\022!\n\nattributes\030< \003(\0172\r.shark."
-    "Option*\t\010\350\007\020\200\200\200\200\002\"\200\002\n\013EnumOptions\022\023\n\013all"
-    "ow_alias\030\002 \001(\001\022\031\n\ndeprecated\030\003 \001(\001:\005fals"
-    "e\022\036\n\017enable_operator\030\006 \001(\001:\005false\0222\n\017und"
-    "erlying_type\030\007 \001(\0162\031.shark.EnumUnderlyin"
-    "gType\022!\n\nattributes\030< \003(\0172\r.shark.Option"
-    "\0229\n\024uninterpreted_option\030\347\007 \003(\0172\032.shark."
-    "UninterpretedOption*\t\010\350\007\020\200\200\200\200\002J\004\010\005\020\006\"\226\001\n"
-    "\020EnumValueOptions\022\031\n\ndeprecated\030\001 \001(\001:\005f"
-    "alse\022!\n\nattributes\030< \003(\0172\r.shark.Option\022"
-    "9\n\024uninterpreted_option\030\347\007 \003(\0172\032.shark.U"
-    "ninterpretedOption*\t\010\350\007\020\200\200\200\200\002\"\224\001\n\016Servle"
-    "tOptions\022!\n\nattributes\030< \003(\0172\r.shark.Opt"
-    "ion\022\031\n\ndeprecated\030! \001(\001:\005false\0229\n\024uninte"
-    "rpreted_option\030\347\007 \003(\0172\032.shark.Uninterpre"
-    "tedOption*\t\010\350\007\020\200\200\200\200\002\"\300\002\n\rMethodOptions\022\031"
-    "\n\ndeprecated\030! \001(\001:\005false\022!\n\nattributes\030"
-    "< \003(\0172\r.shark.Option\022U\n\021idempotency_leve"
-    "l\030\" \001(\0162%.shark.MethodOptions.Idempotenc"
-    "yLevel:\023IDEMPOTENCY_UNKNOWN\0229\n\024uninterpr"
-    "eted_option\030\347\007 \003(\0172\032.shark.Uninterpreted"
-    "Option\"T\n\020IdempotencyLevel\022\027\n\023IDEMPOTENC"
-    "Y_UNKNOWN\020\000\022\023\n\017NO_SIDE_EFFECTS\020\001\022\016\n\nIDEM"
-    "POTENT\020\002\032\0028\005*\t\010\350\007\020\200\200\200\200\002\"\224\002\n\023Uninterprete"
-    "dOption\0221\n\004name\030\002 \003(\0172#.shark.Uninterpre"
-    "tedOption.NamePart\022\030\n\020identifier_value\030\003"
-    " \001(\020\022\032\n\022positive_int_value\030\004 \001(\t\022\032\n\022nega"
-    "tive_int_value\030\005 \001(\010\022\024\n\014double_value\030\006 \001"
-    "(\r\022\024\n\014string_value\030\007 \001(\021\022\027\n\017aggregate_va"
-    "lue\030\010 \001(\020\0323\n\010NamePart\022\021\n\tname_part\030\001 \002(\020"
-    "\022\024\n\014is_extension\030\002 \002(\001\"\313\001\n\016SourceCodeInf"
-    "o\0220\n\010location\030\001 \003(\0172\036.shark.SourceCodeIn"
-    "fo.Location\032\206\001\n\010Location\022\020\n\004path\030\001 \003(\006B\002"
-    "\020\001\022\020\n\004span\030\002 \003(\006B\002\020\001\022\030\n\020leading_comments"
-    "\030\003 \001(\020\022\031\n\021trailing_comments\030\004 \001(\020\022!\n\031lea"
-    "ding_detached_comments\030\006 \003(\020\"\235\001\n\021Generat"
-    "edCodeInfo\0227\n\nannotation\030\001 \003(\0172#.shark.G"
-    "eneratedCodeInfo.Annotation\032O\n\nAnnotatio"
-    "n\022\020\n\004path\030\001 \003(\006B\002\020\001\022\023\n\013source_file\030\002 \001(\020"
-    "\022\r\n\005begin\030\003 \001(\006\022\013\n\003end\030\004 \001(\006*\377\001\n\022EnumUnd"
-    "erlyingType\022$\n ENUM_UNDERLYING_TYPE_UNSP"
-    "ECIFIED\020\000\022\035\n\031ENUM_UNDERLYING_TYPE_INT8\020\001"
-    "\022\036\n\032ENUM_UNDERLYING_TYPE_UINT8\020\002\022\036\n\032ENUM"
-    "_UNDERLYING_TYPE_INT16\020\003\022\037\n\033ENUM_UNDERLY"
-    "ING_TYPE_UINT16\020\004\022\036\n\032ENUM_UNDERLYING_TYP"
-    "E_INT32\020\005\022\037\n\033ENUM_UNDERLYING_TYPE_UINT32"
-    "\020\006\032\0028\005B4H\001Z-google.golang.org/protobuf/t"
-    "ypes/descriptorpb\370\001\001"
+    "rvletDescriptorProto\0228\n\023anonymous_extens"
+    "ion\030\007 \003(\0172\033.shark.FieldDescriptorProto\022#"
+    "\n\007options\030\010 \001(\0172\022.shark.FileOptions\022/\n\020s"
+    "ource_code_info\030\t \001(\0172\025.shark.SourceCode"
+    "Info\022\016\n\006syntax\030\014 \001(\020\"\202\005\n\017DescriptorProto"
+    "\022\014\n\004name\030\001 \001(\020\022*\n\005field\030\002 \003(\0172\033.shark.Fi"
+    "eldDescriptorProto\0228\n\023anonymous_extensio"
+    "n\030\006 \003(\0172\033.shark.FieldDescriptorProto\022+\n\013"
+    "nested_type\030\003 \003(\0172\026.shark.DescriptorProt"
+    "o\022-\n\tenum_type\030\004 \003(\0172\032.shark.EnumDescrip"
+    "torProto\022>\n\017extension_range\030\005 \003(\0172%.shar"
+    "k.DescriptorProto.ExtensionRange\022/\n\noneo"
+    "f_decl\030\010 \003(\0172\033.shark.OneofDescriptorProt"
+    "o\022&\n\007options\030\007 \001(\0172\025.shark.MessageOption"
+    "s\022<\n\016reserved_range\030\t \003(\0172$.shark.Descri"
+    "ptorProto.ReservedRange\022\025\n\rreserved_name"
+    "\030\n \003(\020\022\'\n\007derived\030\013 \003(\0172\026.shark.Descript"
+    "orProto\032[\n\016ExtensionRange\022\r\n\005start\030\001 \001(\006"
+    "\022\013\n\003end\030\002 \001(\006\022-\n\007options\030\003 \001(\0172\034.shark.E"
+    "xtensionRangeOptions\032+\n\rReservedRange\022\r\n"
+    "\005start\030\001 \001(\006\022\013\n\003end\030\002 \001(\006\"\200\001\n\025ExtensionR"
+    "angeOptions\0229\n\024uninterpreted_option\030\347\007 \003"
+    "(\0172\032.shark.UninterpretedOption\022!\n\nattrib"
+    "utes\030< \003(\0172\r.shark.Option*\t\010\350\007\020\200\200\200\200\002\"\237\002\n"
+    "\024FieldDescriptorProto\022\014\n\004name\030\001 \001(\020\022\016\n\006n"
+    "umber\030\003 \001(\006\022&\n\005label\030\004 \001(\0162\027.shark.Field"
+    "Cardinality\022\036\n\004type\030\005 \001(\0162\020.shark.SharkT"
+    "ype\022\021\n\ttype_name\030\006 \001(\020\022\020\n\010extendee\030\002 \001(\020"
+    "\022\025\n\rdefault_value\030\007 \001(\020\022\023\n\013oneof_index\030\t"
+    " \001(\006\022\021\n\tjson_name\030\n \001(\020\022$\n\007options\030\010 \001(\017"
+    "2\023.shark.FieldOptions\022\027\n\017proto3_optional"
+    "\030\021 \001(\001\"J\n\024OneofDescriptorProto\022\014\n\004name\030\001"
+    " \001(\020\022$\n\007options\030\002 \001(\0172\023.shark.OneofOptio"
+    "ns\"\206\002\n\023EnumDescriptorProto\022\014\n\004name\030\001 \001(\020"
+    "\022.\n\005value\030\002 \003(\0172\037.shark.EnumValueDescrip"
+    "torProto\022#\n\007options\030\003 \001(\0172\022.shark.EnumOp"
+    "tions\022D\n\016reserved_range\030\004 \003(\0172,.shark.En"
+    "umDescriptorProto.EnumReservedRange\022\025\n\rr"
+    "eserved_name\030\005 \003(\020\032/\n\021EnumReservedRange\022"
+    "\r\n\005start\030\001 \001(\006\022\013\n\003end\030\002 \001(\006\"b\n\030EnumValue"
+    "DescriptorProto\022\014\n\004name\030\001 \001(\020\022\016\n\006number\030"
+    "\002 \001(\006\022(\n\007options\030\003 \001(\0172\027.shark.EnumValue"
+    "Options\"|\n\026ServletDescriptorProto\022\014\n\004nam"
+    "e\030\001 \001(\020\022,\n\006method\030\002 \003(\0172\034.shark.MethodDe"
+    "scriptorProto\022&\n\007options\030\003 \001(\0172\025.shark.S"
+    "ervletOptions\"\267\001\n\025MethodDescriptorProto\022"
+    "\014\n\004name\030\001 \001(\020\022\022\n\ninput_type\030\002 \001(\020\022\023\n\013out"
+    "put_type\030\003 \001(\020\022%\n\007options\030\004 \001(\0172\024.shark."
+    "MethodOptions\022\037\n\020client_streaming\030\005 \001(\001:"
+    "\005false\022\037\n\020server_streaming\030\006 \001(\001:\005false\""
+    "\345\003\n\013FileOptions\022<\n\014optimize_for\030\t \001(\0162\037."
+    "shark.FileOptions.OptimizeMode:\005SPEED\022\022\n"
+    "\ngo_package\030\013 \001(\020\022\"\n\023cc_generic_servlets"
+    "\030\020 \001(\001:\005false\022\"\n\023py_generic_servlets\030\022 \001"
+    "(\001:\005false\022\031\n\ndeprecated\030\027 \001(\001:\005false\022\036\n\020"
+    "cc_enable_arenas\030\037 \001(\001:\004true\022!\n\nattribut"
+    "es\030< \003(\0172\r.shark.Option\0229\n\024uninterpreted"
+    "_option\030\347\007 \003(\0172\032.shark.UninterpretedOpti"
+    "on\">\n\014OptimizeMode\022\t\n\005SPEED\020\001\022\r\n\tCODE_SI"
+    "ZE\020\002\022\020\n\014LITE_RUNTIME\020\003\032\0028\005*\t\010\350\007\020\200\200\200\200\002J\004\010"
+    "\001\020\002J\004\010\010\020\tJ\004\010\n\020\013J\004\010\021\020\022J\004\010\024\020\025J\004\010\033\020\034J\004\010$\020%J"
+    "\004\010%\020&J\004\010&\020\'J\004\010\'\020(J\004\010(\020)J\004\010)\020*J\004\010*\020+J\004\010,\020"
+    "-J\004\010-\020.\"\235\002\n\016MessageOptions\022&\n\027message_se"
+    "t_wire_format\030\001 \001(\001:\005false\022.\n\037no_standar"
+    "d_descriptor_accessor\030\002 \001(\001:\005false\022\031\n\nde"
+    "precated\030\003 \001(\001:\005false\022\021\n\tmap_entry\030\007 \001(\001"
+    "\022!\n\nattributes\030< \003(\0172\r.shark.Option\0229\n\024u"
+    "ninterpreted_option\030\347\007 \003(\0172\032.shark.Unint"
+    "erpretedOption*\t\010\350\007\020\200\200\200\200\002J\004\010\004\020\005J\004\010\005\020\006J\004\010"
+    "\006\020\007J\004\010\010\020\tJ\004\010\t\020\n\"\313\003\n\014FieldOptions\0220\n\005ctyp"
+    "e\030\001 \001(\0162\031.shark.FieldOptions.CType:\006STRI"
+    "NG\022\016\n\006packed\030\002 \001(\001\0225\n\006jstype\030\006 \001(\0162\032.sha"
+    "rk.FieldOptions.JSType:\tJS_NORMAL\022\023\n\004laz"
+    "y\030\005 \001(\001:\005false\022\036\n\017unverified_lazy\030\017 \001(\001:"
+    "\005false\022\031\n\ndeprecated\030\003 \001(\001:\005false\022\023\n\004wea"
+    "k\030\n \001(\001:\005false\022!\n\nattributes\030\024 \003(\0172\r.sha"
+    "rk.Option\0229\n\024uninterpreted_option\030\347\007 \003(\017"
+    "2\032.shark.UninterpretedOption\"3\n\005CType\022\n\n"
+    "\006STRING\020\000\022\010\n\004CORD\020\001\022\020\n\014STRING_PIECE\020\002\032\0028"
+    "\005\"9\n\006JSType\022\r\n\tJS_NORMAL\020\000\022\r\n\tJS_STRING\020"
+    "\001\022\r\n\tJS_NUMBER\020\002\032\0028\005*\t\010\350\007\020\200\200\200\200\002J\004\010\004\020\005\"w\n"
+    "\014OneofOptions\0229\n\024uninterpreted_option\030\347\007"
+    " \003(\0172\032.shark.UninterpretedOption\022!\n\nattr"
+    "ibutes\030< \003(\0172\r.shark.Option*\t\010\350\007\020\200\200\200\200\002\"\200"
+    "\002\n\013EnumOptions\022\023\n\013allow_alias\030\002 \001(\001\022\031\n\nd"
+    "eprecated\030\003 \001(\001:\005false\022\036\n\017enable_operato"
+    "r\030\006 \001(\001:\005false\0222\n\017underlying_type\030\007 \001(\0162"
+    "\031.shark.EnumUnderlyingType\022!\n\nattributes"
+    "\030< \003(\0172\r.shark.Option\0229\n\024uninterpreted_o"
+    "ption\030\347\007 \003(\0172\032.shark.UninterpretedOption"
+    "*\t\010\350\007\020\200\200\200\200\002J\004\010\005\020\006\"\226\001\n\020EnumValueOptions\022\031"
+    "\n\ndeprecated\030\001 \001(\001:\005false\022!\n\nattributes\030"
+    "< \003(\0172\r.shark.Option\0229\n\024uninterpreted_op"
+    "tion\030\347\007 \003(\0172\032.shark.UninterpretedOption*"
+    "\t\010\350\007\020\200\200\200\200\002\"\224\001\n\016ServletOptions\022!\n\nattribu"
+    "tes\030< \003(\0172\r.shark.Option\022\031\n\ndeprecated\030!"
+    " \001(\001:\005false\0229\n\024uninterpreted_option\030\347\007 \003"
+    "(\0172\032.shark.UninterpretedOption*\t\010\350\007\020\200\200\200\200"
+    "\002\"\300\002\n\rMethodOptions\022\031\n\ndeprecated\030! \001(\001:"
+    "\005false\022!\n\nattributes\030< \003(\0172\r.shark.Optio"
+    "n\022U\n\021idempotency_level\030\" \001(\0162%.shark.Met"
+    "hodOptions.IdempotencyLevel:\023IDEMPOTENCY"
+    "_UNKNOWN\0229\n\024uninterpreted_option\030\347\007 \003(\0172"
+    "\032.shark.UninterpretedOption\"T\n\020Idempoten"
+    "cyLevel\022\027\n\023IDEMPOTENCY_UNKNOWN\020\000\022\023\n\017NO_S"
+    "IDE_EFFECTS\020\001\022\016\n\nIDEMPOTENT\020\002\032\0028\005*\t\010\350\007\020\200"
+    "\200\200\200\002\"\224\002\n\023UninterpretedOption\0221\n\004name\030\002 \003"
+    "(\0172#.shark.UninterpretedOption.NamePart\022"
+    "\030\n\020identifier_value\030\003 \001(\020\022\032\n\022positive_in"
+    "t_value\030\004 \001(\t\022\032\n\022negative_int_value\030\005 \001("
+    "\010\022\024\n\014double_value\030\006 \001(\r\022\024\n\014string_value\030"
+    "\007 \001(\021\022\027\n\017aggregate_value\030\010 \001(\020\0323\n\010NamePa"
+    "rt\022\021\n\tname_part\030\001 \002(\020\022\024\n\014is_extension\030\002 "
+    "\002(\001\"\313\001\n\016SourceCodeInfo\0220\n\010location\030\001 \003(\017"
+    "2\036.shark.SourceCodeInfo.Location\032\206\001\n\010Loc"
+    "ation\022\020\n\004path\030\001 \003(\006B\002\020\001\022\020\n\004span\030\002 \003(\006B\002\020"
+    "\001\022\030\n\020leading_comments\030\003 \001(\020\022\031\n\021trailing_"
+    "comments\030\004 \001(\020\022!\n\031leading_detached_comme"
+    "nts\030\006 \003(\020\"\235\001\n\021GeneratedCodeInfo\0227\n\nannot"
+    "ation\030\001 \003(\0172#.shark.GeneratedCodeInfo.An"
+    "notation\032O\n\nAnnotation\022\020\n\004path\030\001 \003(\006B\002\020\001"
+    "\022\023\n\013source_file\030\002 \001(\020\022\r\n\005begin\030\003 \001(\006\022\013\n\003"
+    "end\030\004 \001(\006*\377\001\n\022EnumUnderlyingType\022$\n ENUM"
+    "_UNDERLYING_TYPE_UNSPECIFIED\020\000\022\035\n\031ENUM_U"
+    "NDERLYING_TYPE_INT8\020\001\022\036\n\032ENUM_UNDERLYING"
+    "_TYPE_UINT8\020\002\022\036\n\032ENUM_UNDERLYING_TYPE_IN"
+    "T16\020\003\022\037\n\033ENUM_UNDERLYING_TYPE_UINT16\020\004\022\036"
+    "\n\032ENUM_UNDERLYING_TYPE_INT32\020\005\022\037\n\033ENUM_U"
+    "NDERLYING_TYPE_UINT32\020\006\032\0028\005B4H\001Z-google."
+    "golang.org/protobuf/types/descriptorpb\370\001"
+    "\001"
     ;
 static const ::_pbi::DescriptorTable* const descriptor_table_shark_2fdescriptor_2eshark_deps[1] = {
   &::descriptor_table_shark_2fmeta_2eshark,
 };
 static ::_pbi::once_flag descriptor_table_shark_2fdescriptor_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fdescriptor_2eshark = {
-    false, false, 5500, descriptor_table_protodef_shark_2fdescriptor_2eshark,
+    false, false, 5561, descriptor_table_protodef_shark_2fdescriptor_2eshark,
     "shark/descriptor.shark",
     &descriptor_table_shark_2fdescriptor_2eshark_once, descriptor_table_shark_2fdescriptor_2eshark_deps, 1, 27,
     schemas, file_default_instances, TableStruct_shark_2fdescriptor_2eshark::offsets,
@@ -1499,7 +1504,7 @@ FileDescriptorProto::FileDescriptorProto(const FileDescriptorProto& from)
         , decltype(_impl_.message_type_){from._impl_.message_type_}
         , decltype(_impl_.enum_type_){from._impl_.enum_type_}
         , decltype(_impl_.servlet_){from._impl_.servlet_}
-        , decltype(_impl_.extension_){from._impl_.extension_}
+        , decltype(_impl_.anonymous_extension_){from._impl_.anonymous_extension_}
         , decltype(_impl_.public_dependency_){from._impl_.public_dependency_}
         , decltype(_impl_.weak_dependency_){from._impl_.weak_dependency_}
         , decltype(_impl_.name_){}
@@ -1553,7 +1558,7 @@ inline void FileDescriptorProto::SharedCtor(
         , decltype(_impl_.message_type_){arena}
         , decltype(_impl_.enum_type_){arena}
         , decltype(_impl_.servlet_){arena}
-        , decltype(_impl_.extension_){arena}
+        , decltype(_impl_.anonymous_extension_){arena}
         , decltype(_impl_.public_dependency_){arena}
         , decltype(_impl_.weak_dependency_){arena}
         , decltype(_impl_.name_){}
@@ -1591,7 +1596,7 @@ inline void FileDescriptorProto::SharedDtor() {
     _impl_.message_type_.~RepeatedPtrField();
     _impl_.enum_type_.~RepeatedPtrField();
     _impl_.servlet_.~RepeatedPtrField();
-    _impl_.extension_.~RepeatedPtrField();
+    _impl_.anonymous_extension_.~RepeatedPtrField();
     _impl_.public_dependency_.~RepeatedField();
     _impl_.weak_dependency_.~RepeatedField();
     _impl_.name_.Destroy();
@@ -1615,7 +1620,7 @@ void FileDescriptorProto::Clear() {
     _impl_.message_type_.Clear();
     _impl_.enum_type_.Clear();
     _impl_.servlet_.Clear();
-    _impl_.extension_.Clear();
+    _impl_.anonymous_extension_.Clear();
     _impl_.public_dependency_.Clear();
     _impl_.weak_dependency_.Clear();
     cached_has_bits = _impl_._has_bits_[0];
@@ -1729,13 +1734,13 @@ const char* FileDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseCo
                 } else
                   goto handle_unusual;
                 continue;
-            // list<.shark.FieldDescriptorProto> extension = 7;
+            // list<.shark.FieldDescriptorProto> anonymous_extension = 7;
             case 7:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
                     ptr -= 1;
                     do {
                       ptr += 1;
-                        ptr = ctx->ParseMessage(_internal_add_extension(), ptr);
+                        ptr = ctx->ParseMessage(_internal_add_anonymous_extension(), ptr);
                         CHK_(ptr);
                       if (!ctx->DataAvailable(ptr)) break;
                     } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<58>(ptr));
@@ -1887,10 +1892,10 @@ uint8_t* FileDescriptorProto::_InternalSerialize(
           InternalWriteMessage(6, repfield, repfield.GetCachedSize(), target, stream);
     }
 
-    // list<.shark.FieldDescriptorProto> extension = 7;
+    // list<.shark.FieldDescriptorProto> anonymous_extension = 7;
     for (unsigned i = 0,
-        n = static_cast<unsigned>(this->_internal_extension_size()); i < n; i++) {
-      const auto& repfield = this->_internal_extension(i);
+        n = static_cast<unsigned>(this->_internal_anonymous_extension_size()); i < n; i++) {
+      const auto& repfield = this->_internal_anonymous_extension(i);
       target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
           InternalWriteMessage(7, repfield, repfield.GetCachedSize(), target, stream);
     }
@@ -1976,9 +1981,9 @@ size_t FileDescriptorProto::ByteSizeLong() const {
         ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
     }
 
-    // list<.shark.FieldDescriptorProto> extension = 7;
-    total_size += 1UL * this->_internal_extension_size();
-    for (const auto& msg : this->_impl_.extension_) {
+    // list<.shark.FieldDescriptorProto> anonymous_extension = 7;
+    total_size += 1UL * this->_internal_anonymous_extension_size();
+    for (const auto& msg : this->_impl_.anonymous_extension_) {
       total_size +=
         ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
     }
@@ -2061,7 +2066,7 @@ void FileDescriptorProto::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const
     _this->_impl_.message_type_.MergeFrom(from._impl_.message_type_);
     _this->_impl_.enum_type_.MergeFrom(from._impl_.enum_type_);
     _this->_impl_.servlet_.MergeFrom(from._impl_.servlet_);
-    _this->_impl_.extension_.MergeFrom(from._impl_.extension_);
+    _this->_impl_.anonymous_extension_.MergeFrom(from._impl_.anonymous_extension_);
     _this->_impl_.public_dependency_.MergeFrom(from._impl_.public_dependency_);
     _this->_impl_.weak_dependency_.MergeFrom(from._impl_.weak_dependency_);
     cached_has_bits = from._impl_._has_bits_[0];
@@ -2101,7 +2106,7 @@ bool FileDescriptorProto::IsInitialized() const {
       return false;
     if (!::SHARK_NAMESPACE_ID::internal::AllAreInitialized(_impl_.servlet_))
       return false;
-    if (!::SHARK_NAMESPACE_ID::internal::AllAreInitialized(_impl_.extension_))
+    if (!::SHARK_NAMESPACE_ID::internal::AllAreInitialized(_impl_.anonymous_extension_))
       return false;
     if (_internal_has_options()) {
       if (!_impl_.options_->IsInitialized()) return false;
@@ -2119,7 +2124,7 @@ void FileDescriptorProto::InternalSwap(FileDescriptorProto* other) {
     _impl_.message_type_.InternalSwap(&other->_impl_.message_type_);
     _impl_.enum_type_.InternalSwap(&other->_impl_.enum_type_);
     _impl_.servlet_.InternalSwap(&other->_impl_.servlet_);
-    _impl_.extension_.InternalSwap(&other->_impl_.extension_);
+    _impl_.anonymous_extension_.InternalSwap(&other->_impl_.anonymous_extension_);
     _impl_.public_dependency_.InternalSwap(&other->_impl_.public_dependency_);
     _impl_.weak_dependency_.InternalSwap(&other->_impl_.weak_dependency_);
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
@@ -2703,10 +2708,11 @@ DescriptorProto::DescriptorProto(const DescriptorProto& from)
         , decltype(_impl_.nested_type_){from._impl_.nested_type_}
         , decltype(_impl_.enum_type_){from._impl_.enum_type_}
         , decltype(_impl_.extension_range_){from._impl_.extension_range_}
-        , decltype(_impl_.extension_){from._impl_.extension_}
+        , decltype(_impl_.anonymous_extension_){from._impl_.anonymous_extension_}
         , decltype(_impl_.oneof_decl_){from._impl_.oneof_decl_}
         , decltype(_impl_.reserved_range_){from._impl_.reserved_range_}
         , decltype(_impl_.reserved_name_){from._impl_.reserved_name_}
+        , decltype(_impl_.derived_){from._impl_.derived_}
         , decltype(_impl_.name_){}
         , decltype(_impl_.options_){nullptr}};
 
@@ -2736,10 +2742,11 @@ inline void DescriptorProto::SharedCtor(
         , decltype(_impl_.nested_type_){arena}
         , decltype(_impl_.enum_type_){arena}
         , decltype(_impl_.extension_range_){arena}
-        , decltype(_impl_.extension_){arena}
+        , decltype(_impl_.anonymous_extension_){arena}
         , decltype(_impl_.oneof_decl_){arena}
         , decltype(_impl_.reserved_range_){arena}
         , decltype(_impl_.reserved_name_){arena}
+        , decltype(_impl_.derived_){arena}
         , decltype(_impl_.name_){}
         , decltype(_impl_.options_){nullptr}
     };
@@ -2764,10 +2771,11 @@ inline void DescriptorProto::SharedDtor() {
     _impl_.nested_type_.~RepeatedPtrField();
     _impl_.enum_type_.~RepeatedPtrField();
     _impl_.extension_range_.~RepeatedPtrField();
-    _impl_.extension_.~RepeatedPtrField();
+    _impl_.anonymous_extension_.~RepeatedPtrField();
     _impl_.oneof_decl_.~RepeatedPtrField();
     _impl_.reserved_range_.~RepeatedPtrField();
     _impl_.reserved_name_.~RepeatedPtrField();
+    _impl_.derived_.~RepeatedPtrField();
     _impl_.name_.Destroy();
     if (this != internal_default_instance()) delete _impl_.options_;
 }
@@ -2786,10 +2794,11 @@ void DescriptorProto::Clear() {
     _impl_.nested_type_.Clear();
     _impl_.enum_type_.Clear();
     _impl_.extension_range_.Clear();
-    _impl_.extension_.Clear();
+    _impl_.anonymous_extension_.Clear();
     _impl_.oneof_decl_.Clear();
     _impl_.reserved_range_.Clear();
     _impl_.reserved_name_.Clear();
+    _impl_.derived_.Clear();
     cached_has_bits = _impl_._has_bits_[0];
     if (cached_has_bits & 0x00000003u) {
         if (cached_has_bits & 0x00000001u) {
@@ -2875,13 +2884,13 @@ const char* DescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseContex
                 } else
                   goto handle_unusual;
                 continue;
-            // list<.shark.FieldDescriptorProto> extension = 6;
+            // list<.shark.FieldDescriptorProto> anonymous_extension = 6;
             case 6:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
                     ptr -= 1;
                     do {
                       ptr += 1;
-                        ptr = ctx->ParseMessage(_internal_add_extension(), ptr);
+                        ptr = ctx->ParseMessage(_internal_add_anonymous_extension(), ptr);
                         CHK_(ptr);
                       if (!ctx->DataAvailable(ptr)) break;
                     } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<50>(ptr));
@@ -2936,6 +2945,19 @@ const char* DescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseContex
                         #endif  // !NDEBUG
                       if (!ctx->DataAvailable(ptr)) break;
                     } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<82>(ptr));
+                } else
+                  goto handle_unusual;
+                continue;
+            // list<.shark.DescriptorProto> derived = 11;
+            case 11:
+                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 90)) {
+                    ptr -= 1;
+                    do {
+                      ptr += 1;
+                        ptr = ctx->ParseMessage(_internal_add_derived(), ptr);
+                        CHK_(ptr);
+                      if (!ctx->DataAvailable(ptr)) break;
+                    } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<90>(ptr));
                 } else
                   goto handle_unusual;
                 continue;
@@ -3012,10 +3034,10 @@ uint8_t* DescriptorProto::_InternalSerialize(
           InternalWriteMessage(5, repfield, repfield.GetCachedSize(), target, stream);
     }
 
-    // list<.shark.FieldDescriptorProto> extension = 6;
+    // list<.shark.FieldDescriptorProto> anonymous_extension = 6;
     for (unsigned i = 0,
-        n = static_cast<unsigned>(this->_internal_extension_size()); i < n; i++) {
-      const auto& repfield = this->_internal_extension(i);
+        n = static_cast<unsigned>(this->_internal_anonymous_extension_size()); i < n; i++) {
+      const auto& repfield = this->_internal_anonymous_extension(i);
       target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
           InternalWriteMessage(6, repfield, repfield.GetCachedSize(), target, stream);
     }
@@ -3051,6 +3073,14 @@ uint8_t* DescriptorProto::_InternalSerialize(
             ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
             "shark.DescriptorProto.reserved_name");
       target = stream->WriteString(10, s, target);
+    }
+
+    // list<.shark.DescriptorProto> derived = 11;
+    for (unsigned i = 0,
+        n = static_cast<unsigned>(this->_internal_derived_size()); i < n; i++) {
+      const auto& repfield = this->_internal_derived(i);
+      target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
+          InternalWriteMessage(11, repfield, repfield.GetCachedSize(), target, stream);
     }
 
     if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3097,9 +3127,9 @@ size_t DescriptorProto::ByteSizeLong() const {
         ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
     }
 
-    // list<.shark.FieldDescriptorProto> extension = 6;
-    total_size += 1UL * this->_internal_extension_size();
-    for (const auto& msg : this->_impl_.extension_) {
+    // list<.shark.FieldDescriptorProto> anonymous_extension = 6;
+    total_size += 1UL * this->_internal_anonymous_extension_size();
+    for (const auto& msg : this->_impl_.anonymous_extension_) {
       total_size +=
         ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
     }
@@ -3124,6 +3154,13 @@ size_t DescriptorProto::ByteSizeLong() const {
     for (int i = 0, n = _impl_.reserved_name_.size(); i < n; i++) {
       total_size += ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         _impl_.reserved_name_.Get(i));
+    }
+
+    // list<.shark.DescriptorProto> derived = 11;
+    total_size += 1UL * this->_internal_derived_size();
+    for (const auto& msg : this->_impl_.derived_) {
+      total_size +=
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
     }
 
     cached_has_bits = _impl_._has_bits_[0];
@@ -3165,10 +3202,11 @@ void DescriptorProto::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::S
     _this->_impl_.nested_type_.MergeFrom(from._impl_.nested_type_);
     _this->_impl_.enum_type_.MergeFrom(from._impl_.enum_type_);
     _this->_impl_.extension_range_.MergeFrom(from._impl_.extension_range_);
-    _this->_impl_.extension_.MergeFrom(from._impl_.extension_);
+    _this->_impl_.anonymous_extension_.MergeFrom(from._impl_.anonymous_extension_);
     _this->_impl_.oneof_decl_.MergeFrom(from._impl_.oneof_decl_);
     _this->_impl_.reserved_range_.MergeFrom(from._impl_.reserved_range_);
     _this->_impl_.reserved_name_.MergeFrom(from._impl_.reserved_name_);
+    _this->_impl_.derived_.MergeFrom(from._impl_.derived_);
     cached_has_bits = from._impl_._has_bits_[0];
     if (cached_has_bits & 0x00000003u) {
         if (cached_has_bits & 0x00000001u) {
@@ -3198,9 +3236,11 @@ bool DescriptorProto::IsInitialized() const {
       return false;
     if (!::SHARK_NAMESPACE_ID::internal::AllAreInitialized(_impl_.extension_range_))
       return false;
-    if (!::SHARK_NAMESPACE_ID::internal::AllAreInitialized(_impl_.extension_))
+    if (!::SHARK_NAMESPACE_ID::internal::AllAreInitialized(_impl_.anonymous_extension_))
       return false;
     if (!::SHARK_NAMESPACE_ID::internal::AllAreInitialized(_impl_.oneof_decl_))
+      return false;
+    if (!::SHARK_NAMESPACE_ID::internal::AllAreInitialized(_impl_.derived_))
       return false;
     if (_internal_has_options()) {
       if (!_impl_.options_->IsInitialized()) return false;
@@ -3218,10 +3258,11 @@ void DescriptorProto::InternalSwap(DescriptorProto* other) {
     _impl_.nested_type_.InternalSwap(&other->_impl_.nested_type_);
     _impl_.enum_type_.InternalSwap(&other->_impl_.enum_type_);
     _impl_.extension_range_.InternalSwap(&other->_impl_.extension_range_);
-    _impl_.extension_.InternalSwap(&other->_impl_.extension_);
+    _impl_.anonymous_extension_.InternalSwap(&other->_impl_.anonymous_extension_);
     _impl_.oneof_decl_.InternalSwap(&other->_impl_.oneof_decl_);
     _impl_.reserved_range_.InternalSwap(&other->_impl_.reserved_range_);
     _impl_.reserved_name_.InternalSwap(&other->_impl_.reserved_name_);
+    _impl_.derived_.InternalSwap(&other->_impl_.derived_);
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
         &_impl_.name_, lhs_arena,
         &other->_impl_.name_, rhs_arena

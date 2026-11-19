@@ -427,7 +427,7 @@ namespace shark::compiler::cpp {
         // If there are no fallback fields, and at most one extension range, the
         // parser can use a generic fallback function. Otherwise, a message-specific
         // fallback routine is needed.
-        use_generated_fallback = !fallback_fields.empty() || descriptor->extension_range_count() > 1;
+        use_generated_fallback = !fallback_fields.empty() || descriptor->anonymous_extension_range_count() > 1;
     }
 
     ParseFunctionGenerator::ParseFunctionGenerator(
@@ -786,12 +786,12 @@ namespace shark::compiler::cpp {
                 } else {
                     format("0,  // no _has_bits_\n");
                 }
-                if (descriptor_->extension_range_count() == 1) {
+                if (descriptor_->anonymous_extension_range_count() == 1) {
                     format(
                         "SHARK_FIELD_OFFSET($classname$, $extensions$),\n"
                         "$1$, $2$,  // extension_range_{low,high}\n",
-                        descriptor_->extension_range(0)->start,
-                        descriptor_->extension_range(0)->end);
+                        descriptor_->anonymous_extension_range(0)->start,
+                        descriptor_->anonymous_extension_range(0)->end);
                 } else {
                     format("0, 0, 0,  // no _extensions_\n");
                 }
@@ -1549,10 +1549,10 @@ namespace shark::compiler::cpp {
         if (IsMapEntryMessage(descriptor)) {
             format("$next_tag$;\n");
         } else {
-            if (descriptor->extension_range_count() > 0) {
+            if (descriptor->anonymous_extension_range_count() > 0) {
                 format("if (");
-                for (int i = 0; i < descriptor->extension_range_count(); i++) {
-                    const Descriptor::ExtensionRange* range = descriptor->extension_range(i);
+                for (int i = 0; i < descriptor->anonymous_extension_range_count(); i++) {
+                    const Descriptor::ExtensionRange* range = descriptor->anonymous_extension_range(i);
                     if (i > 0)
                         format(" ||\n    ");
 

@@ -73,7 +73,7 @@ struct FileDescriptorProto {
   list<DescriptorProto> message_type = 4;
   list<EnumDescriptorProto> enum_type = 5;
   list<ServletDescriptorProto> servlet = 6;
-  list<FieldDescriptorProto> extension = 7;
+  list<FieldDescriptorProto> anonymous_extension = 7;
 
   optional FileOptions options = 8;
 
@@ -93,7 +93,7 @@ struct DescriptorProto {
   optional string name = 1;
 
   list<FieldDescriptorProto> field = 2;
-  list<FieldDescriptorProto> extension = 6;
+  list<FieldDescriptorProto> anonymous_extension = 6;
 
   list<DescriptorProto> nested_type = 3;
   list<EnumDescriptorProto> enum_type = 4;
@@ -121,6 +121,7 @@ struct DescriptorProto {
   // Reserved field names, which may not be used by fields in the same message.
   // A given name may only be reserved once.
   list<string> reserved_name = 10;
+  list<DescriptorProto> derived = 11;
 }
 
 struct ExtensionRangeOptions {

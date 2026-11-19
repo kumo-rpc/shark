@@ -1,0 +1,189 @@
+shark/descriptor_database.cc:  for (int i = 0; i < file.anonymous_extension_size(); i++) {
+shark/descriptor_database.cc:    if (!AddSymbol(path + file.anonymous_extension(i).name(), value)) return false;
+shark/descriptor_database.cc:    if (!AddExtension(file.name(), file.anonymous_extension(i), value)) return false;
+shark/descriptor_database.cc:  for (int i = 0; i < message_type.anonymous_extension_size(); i++) {
+shark/descriptor_database.cc:    if (!AddExtension(filename, message_type.anonymous_extension(i), value)) return false;
+shark/descriptor_database.cc:  for (const auto& extension : file.anonymous_extension()) {
+shark/descriptor_database.cc:  for (const auto& extension : message_type.anonymous_extension()) {
+shark/descriptor.shark:  list<FieldDescriptorProto> anonymous_extension = 7;
+shark/descriptor.shark:  list<FieldDescriptorProto> anonymous_extension = 6;
+shark/parser/parser.cc:                    file->mutable_anonymous_extension(), file->mutable_message_type(), root_location,
+shark/parser/parser.cc:                return parse_extend(message->mutable_anonymous_extension(),
+shark/schema/internal/plan_alloc.h:            plan_allocation_size(message.anonymous_extension(), alloc);
+shark/schema/internal/plan_alloc.h:        plan_allocation_size(proto.anonymous_extension(), alloc);
+shark/schema/internal/descriptor_pool.cc:        if (extendee->anonymous_extension_range_count() == 0)
+shark/schema/internal/descriptor_pool.cc:        if (extendee->anonymous_extension_range_count() == 0)
+shark/schema/internal/descriptor_pool.cc:        if (extendee->anonymous_extension_range_count() == 0)
+shark/schema/internal/descriptor_pool.cc:                const int type_extension_count = type->anonymous_extension_count();
+shark/schema/internal/descriptor_pool.cc:                    const FieldDescriptor* extension = type->anonymous_extension(i);
+shark/schema/internal/descriptor_pool.cc:                placeholder_message->anonymous_extension_range_count_ = 1;
+shark/schema/internal/descriptor_pool.cc:                placeholder_message->anonymous_extension_ranges_ = alloc.AllocateArray<Descriptor::ExtensionRange>(1);
+shark/schema/internal/descriptor_pool.cc:                placeholder_message->anonymous_extension_ranges_[0].start = 1;
+shark/schema/internal/descriptor_pool.cc:                placeholder_message->anonymous_extension_ranges_[0].end = FieldDescriptor::kMaxNumber + 1;
+shark/schema/internal/descriptor_pool.cc:                placeholder_message->anonymous_extension_ranges_[0].options_ = nullptr;
+shark/schema/internal/file_descriptor.h:        int anonymous_extension_count() const;
+shark/schema/internal/file_descriptor.h:        const FieldDescriptor* anonymous_extension(int index) const;
+shark/schema/internal/file_descriptor.h:        int anonymous_extension_count_;
+shark/schema/internal/file_descriptor.h:        FieldDescriptor* anonymous_extensions_;
+shark/schema/internal/descriptor.h:        int anonymous_extension_range_count() const;
+shark/schema/internal/descriptor.h:        const ExtensionRange* anonymous_extension_range(int index) const;
+shark/schema/internal/descriptor.h:        //     ->anonymous_extension(0)
+shark/schema/internal/descriptor.h:        int anonymous_extension_count() const;
+shark/schema/internal/descriptor.h:        const FieldDescriptor* anonymous_extension(int index) const;
+shark/schema/internal/descriptor.h:        ExtensionRange* anonymous_extension_ranges_;
+shark/schema/internal/descriptor.h:        FieldDescriptor* anonymous_extensions_;
+shark/schema/internal/descriptor.h:        int anonymous_extension_range_count_;
+shark/schema/internal/descriptor.h:        int anonymous_extension_count_;
+shark/schema/internal/descriptor_builder.cc:        result->anonymous_extension_count_ = proto.anonymous_extension_size();
+shark/schema/internal/descriptor_builder.cc:        result->anonymous_extensions_ =
+shark/schema/internal/descriptor_builder.cc:            alloc.AllocateArray<typename std::remove_pointer<decltype(result->anonymous_extensions_)>::type>(proto.anonymous_extension_size());
+shark/schema/internal/descriptor_builder.cc:        for (int i = 0; i < proto.anonymous_extension_size(); i++) {
+shark/schema/internal/descriptor_builder.cc:            BuildExtension(proto.anonymous_extension(i), nullptr, result->anonymous_extensions_ + i, alloc);
+shark/schema/internal/descriptor_builder.cc:                for (int i = 0; i < foreign_type->anonymous_extension_count(); i++) {
+shark/schema/internal/descriptor_builder.cc:                    const FieldDescriptor* extension = foreign_type->anonymous_extension(i);
+shark/schema/internal/descriptor_builder.cc:         result->anonymous_extension_range_count_ = proto.extension_range_size();
+shark/schema/internal/descriptor_builder.cc:         result->anonymous_extension_ranges_ =
+shark/schema/internal/descriptor_builder.cc:             alloc.AllocateArray<typename std::remove_pointer<decltype(result->anonymous_extension_ranges_)>::type>(proto.extension_range_size());
+shark/schema/internal/descriptor_builder.cc:             BuildExtensionRange(proto.extension_range(i), result, result->anonymous_extension_ranges_ + i, alloc);
+shark/schema/internal/descriptor_builder.cc:        BUILD_ARRAY(proto, result, anonymous_extension, BuildExtension, result);
+shark/schema/internal/descriptor_builder.cc:            for (int j = 0; j < result->anonymous_extension_range_count(); j++) {
+shark/schema/internal/descriptor_builder.cc:                const Descriptor::ExtensionRange* range = result->anonymous_extension_range(j);
+shark/schema/internal/descriptor_builder.cc:        for (int i = 0; i < result->anonymous_extension_range_count(); i++) {
+shark/schema/internal/descriptor_builder.cc:            const Descriptor::ExtensionRange* range1 = result->anonymous_extension_range(i);
+shark/schema/internal/descriptor_builder.cc:            for (int j = i + 1; j < result->anonymous_extension_range_count(); j++) {
+shark/schema/internal/descriptor_builder.cc:                const Descriptor::ExtensionRange* range2 = result->anonymous_extension_range(j);
+shark/schema/internal/descriptor_builder.cc:            for (index = 0; parent->anonymous_extension_ranges_ + index != result; index++) {
+shark/schema/internal/descriptor_builder.cc:        for (int i = 0; i < file->anonymous_extension_count(); i++) {
+shark/schema/internal/descriptor_builder.cc:            CrossLinkField(&file->anonymous_extensions_[i], proto.anonymous_extension(i));
+shark/schema/internal/descriptor_builder.cc:        for (int i = 0; i < message->anonymous_extension_count(); i++) {
+shark/schema/internal/descriptor_builder.cc:            CrossLinkField(&message->anonymous_extensions_[i], proto.anonymous_extension(i));
+shark/schema/internal/descriptor_builder.cc:        for (int i = 0; i < message->anonymous_extension_range_count(); i++) {
+shark/schema/internal/descriptor_builder.cc:            CrossLinkExtensionRange(&message->anonymous_extension_ranges_[i],
+shark/schema/internal/descriptor_builder.cc:            for (int i = 0; i < message->anonymous_extension_count(); i++) {
+shark/schema/internal/descriptor_builder.cc:                add_ordinal(message->anonymous_extension(i)->number());
+shark/schema/internal/descriptor_builder.cc:            for (int i = 0; i < message->anonymous_extension_range_count(); i++) {
+shark/schema/internal/descriptor_builder.cc:                auto range = message->anonymous_extension_range(i);
+shark/schema/internal/descriptor_builder.cc:         for (int i = 0; i < file->anonymous_extension_count(); ++i) {
+shark/schema/internal/descriptor_builder.cc:             ValidateFieldOptions(file->anonymous_extensions_ + i, proto.anonymous_extension(i));
+shark/schema/internal/descriptor_builder.cc:         for (int i = 0; i < message->anonymous_extension_count(); ++i) {
+shark/schema/internal/descriptor_builder.cc:             ValidateFieldOptions(message->anonymous_extensions_ + i, proto.anonymous_extension(i));
+shark/schema/internal/descriptor_builder.cc:        for (int i = 0; i < message->anonymous_extension_range_count(); ++i) {
+shark/schema/internal/descriptor_builder.cc:            if (message->anonymous_extension_range(i)->end > max_extension_range + 1) {
+shark/schema/internal/descriptor_builder.cc:                message->anonymous_extension_ranges_ + i,
+shark/schema/internal/descriptor_builder.cc:            message->anonymous_extension_count() != 0 ||
+shark/schema/internal/descriptor_builder.cc:            message->anonymous_extension_range_count() != 0 ||
+shark/schema/internal/file_descriptor.cc:        for (int i = 0; i < anonymous_extension_count(); i++) {
+shark/schema/internal/file_descriptor.cc:            anonymous_extension(i)->CopyTo(proto->add_anonymous_extension());
+shark/schema/internal/file_descriptor.cc:            anonymous_extension_count() != proto->anonymous_extension_size()) {
+shark/schema/internal/file_descriptor.cc:        for (int i = 0; i < anonymous_extension_count(); i++) {
+shark/schema/internal/file_descriptor.cc:            anonymous_extension(i)->CopyJsonNameTo(proto->mutable_anonymous_extension(i));
+shark/schema/internal/file_descriptor.cc:        for (int i = 0; i < anonymous_extension_count(); i++) {
+shark/schema/internal/file_descriptor.cc:            if (anonymous_extension(i)->containing_type() != containing_type) {
+shark/schema/internal/file_descriptor.cc:                containing_type = anonymous_extension(i)->containing_type();
+shark/schema/internal/file_descriptor.cc:            anonymous_extension(i)->DebugString(1, &contents, debug_string_options);
+shark/schema/internal/file_descriptor.cc:        if (anonymous_extension_count() > 0)
+shark/schema/internal/descriptor.cc:        for (int i = 0; i < anonymous_extension_range_count(); i++) {
+shark/schema/internal/descriptor.cc:            if (number >= anonymous_extension_range(i)->start && number < anonymous_extension_range(i)->end) {
+shark/schema/internal/descriptor.cc:                return anonymous_extension_range(i);
+shark/schema/internal/descriptor.cc:        for (int i = 0; i < anonymous_extension_range_count(); i++) {
+shark/schema/internal/descriptor.cc:            anonymous_extension_range(i)->CopyTo(proto->add_extension_range());
+shark/schema/internal/descriptor.cc:        for (int i = 0; i < anonymous_extension_count(); i++) {
+shark/schema/internal/descriptor.cc:            anonymous_extension(i)->CopyTo(proto->add_anonymous_extension());
+shark/schema/internal/descriptor.cc:            anonymous_extension_count() != proto->anonymous_extension_size()) {
+shark/schema/internal/descriptor.cc:        for (int i = 0; i < anonymous_extension_count(); i++) {
+shark/schema/internal/descriptor.cc:            anonymous_extension(i)->CopyJsonNameTo(proto->mutable_anonymous_extension(i));
+shark/schema/internal/descriptor.cc:        for (int i = 0; i < anonymous_extension_range_count(); i++) {
+shark/schema/internal/descriptor.cc:                anonymous_extension_range(i)->start,
+shark/schema/internal/descriptor.cc:                anonymous_extension_range(i)->end - 1);
+shark/schema/internal/descriptor.cc:        for (int i = 0; i < anonymous_extension_count(); i++) {
+shark/schema/internal/descriptor.cc:            if (anonymous_extension(i)->containing_type() != containing_type) {
+shark/schema/internal/descriptor.cc:                containing_type = anonymous_extension(i)->containing_type();
+shark/schema/internal/descriptor.cc:            anonymous_extension(i)->DebugString(depth + 1, contents, debug_string_options);
+shark/schema/internal/descriptor.cc:        if (anonymous_extension_count() > 0)
+shark/schema/inner_descriptor.h:    inline int Descriptor::anonymous_extension_range_count() const {
+shark/schema/inner_descriptor.h:        return anonymous_extension_range_count_;
+shark/schema/inner_descriptor.h:    inline int Descriptor::anonymous_extension_count() const {
+shark/schema/inner_descriptor.h:        return anonymous_extension_count_;
+shark/schema/inner_descriptor.h:    inline const Descriptor::ExtensionRange* Descriptor::anonymous_extension_range(int index) const {
+shark/schema/inner_descriptor.h:        return anonymous_extension_ranges_ + index;
+shark/schema/inner_descriptor.h:    inline const FieldDescriptor* Descriptor::anonymous_extension(int index) const {
+shark/schema/inner_descriptor.h:        return anonymous_extensions_ + index;
+shark/schema/inner_descriptor.h:    inline int FileDescriptor::anonymous_extension_count() const {
+shark/schema/inner_descriptor.h:        return anonymous_extension_count_;
+shark/schema/inner_descriptor.h:    inline const FieldDescriptor* FileDescriptor::anonymous_extension(int index) const {
+shark/schema/inner_descriptor.h:        return anonymous_extensions_ + index;
+shark/schema/inner_descriptor.h:            return static_cast<int>(this - extension_scope()->anonymous_extensions_);
+shark/schema/inner_descriptor.h:            return static_cast<int>(this - file_->anonymous_extensions_);
+shark/dynamic_message.cc:  if (type->anonymous_extension_range_count() > 0) {
+shark/compiler/command_line_interface.cc:                for (int i = 0; i < descriptor->anonymous_extension_range_count(); ++i) {
+shark/compiler/command_line_interface.cc:                    ranges->insert(FieldRange(descriptor->anonymous_extension_range(i)->start,
+shark/compiler/command_line_interface.cc:                        descriptor->anonymous_extension_range(i)->end));
+shark/compiler/python/generator.cc:            message_descriptor.anonymous_extension_range_count() > 0 ? "True" : "False",
+shark/compiler/python/generator.cc:        for (int i = 0; i < message_descriptor.anonymous_extension_range_count(); ++i) {
+shark/compiler/python/generator.cc:            const Descriptor::ExtensionRange* range = message_descriptor.anonymous_extension_range(i);
+shark/compiler/python/generator.cc:        for (int i = 0; i < file_->anonymous_extension_count(); ++i) {
+shark/compiler/python/generator.cc:            AddExtensionToFileDescriptor(*file_->anonymous_extension(i));
+shark/compiler/python/generator.cc:        for (int i = 0; i < file_->anonymous_extension_count(); ++i) {
+shark/compiler/python/generator.cc:            FixForeignFieldsInExtension(*file_->anonymous_extension(i));
+shark/compiler/python/generator.cc:        for (int i = 0; i < descriptor.anonymous_extension_count(); ++i) {
+shark/compiler/python/generator.cc:            FixForeignFieldsInExtension(*descriptor.anonymous_extension(i));
+shark/compiler/python/generator.cc:            "extensions", &Descriptor::anonymous_extension_count,
+shark/compiler/python/generator.cc:            &Descriptor::anonymous_extension);
+shark/compiler/python/generator.cc:        for (int i = 0; i < file_->anonymous_extension_count(); ++i) {
+shark/compiler/python/generator.cc:            const FieldDescriptor& field = *file_->anonymous_extension(i);
+shark/compiler/python/generator.cc:        for (int i = 0; i < descriptor.anonymous_extension_count(); ++i) {
+shark/compiler/python/generator.cc:            const FieldDescriptor& field = *descriptor.anonymous_extension(i);
+shark/compiler/python/pyi_generator.cc:        if (descriptor->anonymous_extension_range_count() > 0) {
+shark/compiler/python/pyi_generator.cc:        for (int i = 0; i < descriptor.anonymous_extension_count(); ++i) {
+shark/compiler/python/pyi_generator.cc:            const FieldDescriptor* extension_field = descriptor.anonymous_extension(i);
+shark/compiler/python/pyi_generator.cc:        if (message_descriptor.anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/helpers.cc:        for (int idx = 0; idx < descriptor->anonymous_extension_count(); idx++) {
+shark/compiler/cpp/helpers.cc:            if (IsLazy(descriptor->anonymous_extension(idx), options, scc_analyzer)) {
+shark/compiler/cpp/helpers.cc:        for (int field_idx = 0; field_idx < file->anonymous_extension_count(); field_idx++) {
+shark/compiler/cpp/helpers.cc:            if (IsLazy(file->anonymous_extension(field_idx), options, scc_analyzer)) {
+shark/compiler/cpp/helpers.cc:        if (descriptor->anonymous_extension_range_count() > 0)
+shark/compiler/cpp/helpers.cc:        if (descriptor->anonymous_extension_count() > 0)
+shark/compiler/cpp/helpers.cc:        if (file->anonymous_extension_count() > 0)
+shark/compiler/cpp/helpers.cc:            if (descriptor->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/helpers.cc:        for (int i = 0; i < d->anonymous_extension_count(); i++) {
+shark/compiler/cpp/helpers.cc:            fields->push_back(d->anonymous_extension(i));
+shark/compiler/cpp/helpers.cc:        for (int i = 0; i < d->anonymous_extension_count(); i++) {
+shark/compiler/cpp/helpers.cc:            fields->push_back(d->anonymous_extension(i));
+shark/compiler/cpp/helpers.cc:        if (desc->anonymous_extension_range_count() > 0)
+shark/compiler/cpp/file.cc:        for (int i = 0; i < file->anonymous_extension_count(); i++) {
+shark/compiler/cpp/file.cc:                new ExtensionGenerator(file->anonymous_extension(i), options, &scc_analyzer_));
+shark/compiler/cpp/message.cc:                for (int i = 0; i < descriptor_->anonymous_extension_count(); i++) {
+shark/compiler/cpp/message.cc:                        descriptor_->anonymous_extension(i), options_, scc_analyzer_));
+shark/compiler/cpp/message.cc:                if (descriptor_->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/message.cc:                for (int i = 0; i < descriptor_->anonymous_extension_count(); i++) {
+shark/compiler/cpp/message.cc:                if (descriptor_->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/message.cc:                if (descriptor_->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/message.cc:                if (descriptor_->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/message.cc:                if (descriptor_->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/message.cc:                if (descriptor_->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/message.cc:                        if (descriptor_->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/message.cc:                    if (descriptor_->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/message.cc:                if (descriptor_->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/message.cc:                    if (descriptor_->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/message.cc:                if (descriptor_->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/message.cc:                sorted_extensions.reserve(descriptor_->anonymous_extension_range_count());
+shark/compiler/cpp/message.cc:                for (int i = 0; i < descriptor_->anonymous_extension_range_count(); ++i) {
+shark/compiler/cpp/message.cc:                    sorted_extensions.push_back(descriptor_->anonymous_extension_range(i));
+shark/compiler/cpp/message.cc:                sorted_extensions.reserve(descriptor_->anonymous_extension_range_count());
+shark/compiler/cpp/message.cc:                for (int i = 0; i < descriptor_->anonymous_extension_range_count(); ++i) {
+shark/compiler/cpp/message.cc:                    sorted_extensions.push_back(descriptor_->anonymous_extension_range(i));
+shark/compiler/cpp/message.cc:                if (descriptor_->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/message.cc:                if (descriptor_->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/parse_function_generator.cc:        use_generated_fallback = !fallback_fields.empty() || descriptor->anonymous_extension_range_count() > 1;
+shark/compiler/cpp/parse_function_generator.cc:                if (descriptor_->anonymous_extension_range_count() == 1) {
+shark/compiler/cpp/parse_function_generator.cc:                        descriptor_->anonymous_extension_range(0)->start,
+shark/compiler/cpp/parse_function_generator.cc:                        descriptor_->anonymous_extension_range(0)->end);
+shark/compiler/cpp/parse_function_generator.cc:            if (descriptor->anonymous_extension_range_count() > 0) {
+shark/compiler/cpp/parse_function_generator.cc:                for (int i = 0; i < descriptor->anonymous_extension_range_count(); i++) {
+shark/compiler/cpp/parse_function_generator.cc:                    const Descriptor::ExtensionRange* range = descriptor->anonymous_extension_range(i);
+shark/compiler/cpp/helpers.h:        for (int i = 0; i < d->anonymous_extension_count(); i++) {
+shark/compiler/cpp/helpers.h:            func(d->anonymous_extension(i));
+shark/compiler/cpp/helpers.h:        for (int i = 0; i < d->anonymous_extension_count(); i++) {
+shark/compiler/cpp/helpers.h:            func(d->anonymous_extension(i));
+shark/compiler/cpp/helpers.h:        if (desc->anonymous_extension_range_count() != 0)
+shark/compiler/cpp/helpers.h:        if (desc->anonymous_extension_range_count() != 0)

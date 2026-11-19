@@ -728,9 +728,9 @@ namespace shark {
                         new EnumGenerator(descriptor_->enum_type(i), variables_, options_));
                     enum_generators_.push_back(enum_generators->back().get());
                 }
-                for (int i = 0; i < descriptor_->extension_count(); i++) {
+                for (int i = 0; i < descriptor_->anonymous_extension_count(); i++) {
                     extension_generators->emplace_back(new ExtensionGenerator(
-                        descriptor_->extension(i), options_, scc_analyzer_));
+                        descriptor_->anonymous_extension(i), options_, scc_analyzer_));
                     extension_generators_.push_back(extension_generators->back().get());
                 }
             }
@@ -813,7 +813,7 @@ namespace shark {
                     format("\n");
                 }
 
-                if (descriptor_->extension_range_count() > 0) {
+                if (descriptor_->anonymous_extension_range_count() > 0) {
                     // Generate accessors for extensions.
                     // We use "_proto_TypeTraits" as a type name below because "TypeTraits"
                     // causes problems if the class has a nested message or enum type with that
@@ -1784,7 +1784,7 @@ $annotate_repeated_extension_list_mutable$
                 GenerateFieldAccessorDeclarations(printer);
 
                 // Declare extension identifiers.
-                for (int i = 0; i < descriptor_->extension_count(); i++) {
+                for (int i = 0; i < descriptor_->anonymous_extension_count(); i++) {
                     extension_generators_[i]->GenerateDeclaration(printer);
                 }
 
@@ -1851,7 +1851,7 @@ $annotate_repeated_extension_list_mutable$
 
                 // Members assumed to align to 8 bytes:
 
-                if (descriptor_->extension_range_count() > 0) {
+                if (descriptor_->anonymous_extension_range_count() > 0) {
                     format(
                         "::$proto_ns$::internal::ExtensionSet _extensions_;\n"
                         "\n");
@@ -2233,7 +2233,7 @@ $annotate_repeated_extension_list_mutable$
                     format("~0u,  // no _has_bits_\n");
                 }
                 format("SHARK_FIELD_OFFSET($classtype$, _internal_metadata_),\n");
-                if (descriptor_->extension_range_count() > 0) {
+                if (descriptor_->anonymous_extension_range_count() > 0) {
                     format("SHARK_FIELD_OFFSET($classtype$, $extensions$),\n");
                 } else {
                     format("~0u,  // no _extensions_\n");
@@ -2347,7 +2347,7 @@ $annotate_repeated_extension_list_mutable$
 
                 // Note: any fields without move/copy constructors can't be explicitly
                 // aggregate initialized pre-C++17.
-                if (descriptor_->extension_range_count() > 0) {
+                if (descriptor_->anonymous_extension_range_count() > 0) {
                     put_sep();
                     format("/*decltype($extensions$)*/{::_pbi::ArenaInitialized(), arena}");
                 }
@@ -2514,7 +2514,7 @@ $annotate_repeated_extension_list_mutable$
                 format.Indent();
                 format("$DCHK$(GetArenaForAllocation() == nullptr);\n");
 
-                if (descriptor_->extension_range_count() > 0) {
+                if (descriptor_->anonymous_extension_range_count() > 0) {
                     format("$extensions$.~ExtensionSet();\n");
                 }
 
@@ -2646,7 +2646,7 @@ $annotate_repeated_extension_list_mutable$
                     format("\n$1$ ", field_sep);
                     field_sep = ",";
                 };
-                if (descriptor_->extension_range_count() > 0) {
+                if (descriptor_->anonymous_extension_range_count() > 0) {
                     put_sep();
                     format("/*decltype($extensions$)*/{}");
                 }
@@ -2814,7 +2814,7 @@ $annotate_repeated_extension_list_mutable$
                         format("new (&_impl_) Impl_{");
                         format.Indent();
 
-                        if (descriptor_->extension_range_count() > 0) {
+                        if (descriptor_->anonymous_extension_range_count() > 0) {
                             put_sep();
                             format("/*decltype($extensions$)*/{}");
                         }
@@ -2879,7 +2879,7 @@ $annotate_repeated_extension_list_mutable$
                         "_internal_metadata_.MergeFrom<$unknown_fields_type$>(from._internal_"
                         "metadata_);\n");
 
-                    if (descriptor_->extension_range_count() > 0) {
+                    if (descriptor_->anonymous_extension_range_count() > 0) {
                         format(
                             "$extensions$.MergeFrom(internal_default_instance(), "
                             "from.$extensions$);\n");
@@ -3002,7 +3002,7 @@ $annotate_repeated_extension_list_mutable$
                     "// Prevent compiler warnings about cached_has_bits being unused\n"
                     "(void) cached_has_bits;\n\n");
 
-                if (descriptor_->extension_range_count() > 0) {
+                if (descriptor_->anonymous_extension_range_count() > 0) {
                     format("$extensions$.Clear();\n");
                 }
 
@@ -3218,7 +3218,7 @@ $annotate_repeated_extension_list_mutable$
                 format("using std::swap;\n");
 
                 if (HasGeneratedMethods(descriptor_->file(), options_)) {
-                    if (descriptor_->extension_range_count() > 0) {
+                    if (descriptor_->anonymous_extension_range_count() > 0) {
                         format(
                             "$extensions$.InternalSwap(&other->$extensions$);"
                             "\n");
@@ -3532,7 +3532,7 @@ $annotate_repeated_extension_list_mutable$
 
                 // Merging of extensions and unknown fields is done last, to maximize
                 // the opportunity for tail calls.
-                if (descriptor_->extension_range_count() > 0) {
+                if (descriptor_->anonymous_extension_range_count() > 0) {
                     format(
                         "_this->$extensions$.MergeFrom(internal_default_instance(), "
                         "from.$extensions$);\n");
@@ -3893,9 +3893,9 @@ $annotate_repeated_extension_list_mutable$
                 std::vector<const FieldDescriptor*> ordered_fields = SortFieldsByNumber(descriptor_);
 
                 std::vector<const Descriptor::ExtensionRange*> sorted_extensions;
-                sorted_extensions.reserve(descriptor_->extension_range_count());
-                for (int i = 0; i < descriptor_->extension_range_count(); ++i) {
-                    sorted_extensions.push_back(descriptor_->extension_range(i));
+                sorted_extensions.reserve(descriptor_->anonymous_extension_range_count());
+                for (int i = 0; i < descriptor_->anonymous_extension_range_count(); ++i) {
+                    sorted_extensions.push_back(descriptor_->anonymous_extension_range(i));
                 }
                 std::sort(sorted_extensions.begin(), sorted_extensions.end(),
                     ExtensionRangeSorter());
@@ -3973,9 +3973,9 @@ $annotate_repeated_extension_list_mutable$
                     ordered_fields.end());
 
                 std::vector<const Descriptor::ExtensionRange*> sorted_extensions;
-                sorted_extensions.reserve(descriptor_->extension_range_count());
-                for (int i = 0; i < descriptor_->extension_range_count(); ++i) {
-                    sorted_extensions.push_back(descriptor_->extension_range(i));
+                sorted_extensions.reserve(descriptor_->anonymous_extension_range_count());
+                for (int i = 0; i < descriptor_->anonymous_extension_range_count(); ++i) {
+                    sorted_extensions.push_back(descriptor_->anonymous_extension_range(i));
                 }
                 std::sort(sorted_extensions.begin(), sorted_extensions.end(),
                     ExtensionRangeSorter());
@@ -4132,7 +4132,7 @@ $annotate_repeated_extension_list_mutable$
                     "size_t total_size = 0;\n"
                     "\n");
 
-                if (descriptor_->extension_range_count() > 0) {
+                if (descriptor_->anonymous_extension_range_count() > 0) {
                     format(
                         "total_size += $extensions$.ByteSize();\n"
                         "\n");
@@ -4334,7 +4334,7 @@ $annotate_repeated_extension_list_mutable$
                 format("bool $classname$::IsInitialized() const {\n");
                 format.Indent();
 
-                if (descriptor_->extension_range_count() > 0) {
+                if (descriptor_->anonymous_extension_range_count() > 0) {
                     format(
                         "if (!$extensions$.IsInitialized()) {\n"
                         "  return false;\n"

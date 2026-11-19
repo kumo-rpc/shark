@@ -257,7 +257,7 @@ namespace shark {
 
     const FieldDescriptor* DescriptorPool::FindExtensionByNumber(
         const Descriptor* extendee, int number) const {
-        if (extendee->extension_range_count() == 0)
+        if (extendee->anonymous_extension_range_count() == 0)
             return nullptr;
         // A faster path to reduce lock contention in finding extensions, assuming
         // most extensions will be cache hit.
@@ -293,7 +293,7 @@ namespace shark {
 
     const FieldDescriptor* DescriptorPool::InternalFindExtensionByNumberNoLock(
         const Descriptor* extendee, int number) const {
-        if (extendee->extension_range_count() == 0)
+        if (extendee->anonymous_extension_range_count() == 0)
             return nullptr;
 
         const FieldDescriptor* result = tables_->FindExtension(extendee, number);
@@ -312,7 +312,7 @@ namespace shark {
 
     const FieldDescriptor* DescriptorPool::FindExtensionByPrintableName(
         const Descriptor* extendee, ConstStringParam printable_name) const {
-        if (extendee->extension_range_count() == 0)
+        if (extendee->anonymous_extension_range_count() == 0)
             return nullptr;
         const FieldDescriptor* result = FindExtensionByName(printable_name);
         if (result != nullptr && result->containing_type() == extendee) {
@@ -323,9 +323,9 @@ namespace shark {
             const Descriptor* type = FindMessageTypeByName(printable_name);
             if (type != nullptr) {
                 // Look for a matching extension in the foreign type's scope.
-                const int type_extension_count = type->extension_count();
+                const int type_extension_count = type->anonymous_extension_count();
                 for (int i = 0; i < type_extension_count; i++) {
-                    const FieldDescriptor* extension = type->extension(i);
+                    const FieldDescriptor* extension = type->anonymous_extension(i);
                     if (extension->containing_type() == extendee && extension->type() == SharkFieldType::MESSAGE && extension->is_optional() && extension->message_type() == type) {
                         // Found it.
                         return extension;
@@ -650,12 +650,12 @@ namespace shark {
             placeholder_message->is_unqualified_placeholder_ = (name[0] != '.');
 
             if (placeholder_type == PLACEHOLDER_EXTENDABLE_MESSAGE) {
-                placeholder_message->extension_range_count_ = 1;
-                placeholder_message->extension_ranges_ = alloc.AllocateArray<Descriptor::ExtensionRange>(1);
-                placeholder_message->extension_ranges_[0].start = 1;
+                placeholder_message->anonymous_extension_range_count_ = 1;
+                placeholder_message->anonymous_extension_ranges_ = alloc.AllocateArray<Descriptor::ExtensionRange>(1);
+                placeholder_message->anonymous_extension_ranges_[0].start = 1;
                 // kMaxNumber + 1 because ExtensionRange::end is exclusive.
-                placeholder_message->extension_ranges_[0].end = FieldDescriptor::kMaxNumber + 1;
-                placeholder_message->extension_ranges_[0].options_ = nullptr;
+                placeholder_message->anonymous_extension_ranges_[0].end = FieldDescriptor::kMaxNumber + 1;
+                placeholder_message->anonymous_extension_ranges_[0].options_ = nullptr;
             }
 
             return Symbol(placeholder_message);

@@ -516,13 +516,13 @@ namespace shark {
                     UNITTEST::TestMessageSetExtension1 message1;
                     message1.set_i(123);
                     write_item(UNITTEST::TestMessageSetExtension1::descriptor()
-                                   ->extension(0)
+                                   ->anonymous_extension(0)
                                    ->number(),
                         message1.SerializeAsString());
                     UNITTEST::TestMessageSetExtension2 message2;
                     message2.set_str("foo");
                     write_item(UNITTEST::TestMessageSetExtension2::descriptor()
-                                   ->extension(0)
+                                   ->anonymous_extension(0)
                                    ->number(),
                         message2.SerializeAsString());
                     write_item(kUnknownTypeId, "bar");
@@ -639,7 +639,7 @@ namespace shark {
                 std::string start;
                 std::string end;
                 std::string id = BuildMessageSetItemTypeId(
-                    UNITTEST::TestMessageSetExtension1::descriptor()->extension(0)->number());
+                    UNITTEST::TestMessageSetExtension1::descriptor()->anonymous_extension(0)->number());
                 std::string message = BuildMessageSetTestExtension1();
 
                 ValidateTestMessageSet("id + message", start + id + message + end);
@@ -650,7 +650,7 @@ namespace shark {
                 std::string start;
                 std::string end;
                 std::string id = BuildMessageSetItemTypeId(
-                    UNITTEST::TestMessageSetExtension1::descriptor()->extension(0)->number());
+                    UNITTEST::TestMessageSetExtension1::descriptor()->anonymous_extension(0)->number());
                 std::string other_id = BuildMessageSetItemTypeId(123456);
                 std::string message = BuildMessageSetTestExtension1();
                 std::string other_message = BuildMessageSetTestExtension1(321);
@@ -702,7 +702,7 @@ namespace shark {
                 coded_output->WriteVarint32(message.GetCachedSize());
                 SerializeReverseOrder(message, coded_output);
                 // Write the type id.
-                uint32_t type_id = message.GetDescriptor()->extension(0)->number();
+                uint32_t type_id = message.GetDescriptor()->anonymous_extension(0)->number();
                 WireFormatLite::WriteUInt32(WireFormatLite::kMessageSetTypeIdNumber, type_id,
                     coded_output);
             }

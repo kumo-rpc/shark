@@ -131,9 +131,9 @@ namespace shark {
     Descriptor::FindExtensionRangeContainingNumber(int number) const {
         // Linear search should be fine because we don't expect a message to have
         // more than a couple extension ranges.
-        for (int i = 0; i < extension_range_count(); i++) {
-            if (number >= extension_range(i)->start && number < extension_range(i)->end) {
-                return extension_range(i);
+        for (int i = 0; i < anonymous_extension_range_count(); i++) {
+            if (number >= anonymous_extension_range(i)->start && number < anonymous_extension_range(i)->end) {
+                return anonymous_extension_range(i);
             }
         }
         return nullptr;
@@ -176,11 +176,11 @@ namespace shark {
         for (int i = 0; i < enum_type_count(); i++) {
             enum_type(i)->CopyTo(proto->add_enum_type());
         }
-        for (int i = 0; i < extension_range_count(); i++) {
-            extension_range(i)->CopyTo(proto->add_extension_range());
+        for (int i = 0; i < anonymous_extension_range_count(); i++) {
+            anonymous_extension_range(i)->CopyTo(proto->add_extension_range());
         }
-        for (int i = 0; i < extension_count(); i++) {
-            extension(i)->CopyTo(proto->add_extension());
+        for (int i = 0; i < anonymous_extension_count(); i++) {
+            anonymous_extension(i)->CopyTo(proto->add_anonymous_extension());
         }
         for (int i = 0; i < reserved_range_count(); i++) {
             DescriptorProto::ReservedRange* range = proto->add_reserved_range();
@@ -197,7 +197,8 @@ namespace shark {
     }
 
     void Descriptor::CopyJsonNameTo(DescriptorProto* proto) const {
-        if (field_count() != proto->field_size() || nested_type_count() != proto->nested_type_size() || extension_count() != proto->extension_size()) {
+        if (field_count() != proto->field_size() || nested_type_count() != proto->nested_type_size() ||
+            anonymous_extension_count() != proto->anonymous_extension_size()) {
             SHARK_LOG(ERROR) << "Cannot copy json_name to a proto of a different size.";
             return;
         }
@@ -207,8 +208,8 @@ namespace shark {
         for (int i = 0; i < nested_type_count(); i++) {
             nested_type(i)->CopyJsonNameTo(proto->mutable_nested_type(i));
         }
-        for (int i = 0; i < extension_count(); i++) {
-            extension(i)->CopyJsonNameTo(proto->mutable_extension(i));
+        for (int i = 0; i < anonymous_extension_count(); i++) {
+            anonymous_extension(i)->CopyJsonNameTo(proto->mutable_anonymous_extension(i));
         }
     }
 
@@ -262,25 +263,25 @@ namespace shark {
             }
         }
 
-        for (int i = 0; i < extension_range_count(); i++) {
+        for (int i = 0; i < anonymous_extension_range_count(); i++) {
             turbo::substitute_and_append(contents, "$0  extensions $1 to $2;\n", prefix,
-                extension_range(i)->start,
-                extension_range(i)->end - 1);
+                anonymous_extension_range(i)->start,
+                anonymous_extension_range(i)->end - 1);
         }
 
         // Group extensions by what they extend, so they can be printed out together.
         const Descriptor* containing_type = nullptr;
-        for (int i = 0; i < extension_count(); i++) {
-            if (extension(i)->containing_type() != containing_type) {
+        for (int i = 0; i < anonymous_extension_count(); i++) {
+            if (anonymous_extension(i)->containing_type() != containing_type) {
                 if (i > 0)
                     turbo::substitute_and_append(contents, "$0  }\n", prefix);
-                containing_type = extension(i)->containing_type();
+                containing_type = anonymous_extension(i)->containing_type();
                 turbo::substitute_and_append(contents, "$0  extend .$1 {\n", prefix,
                     containing_type->full_name());
             }
-            extension(i)->DebugString(depth + 1, contents, debug_string_options);
+            anonymous_extension(i)->DebugString(depth + 1, contents, debug_string_options);
         }
-        if (extension_count() > 0)
+        if (anonymous_extension_count() > 0)
             turbo::substitute_and_append(contents, "$0  }\n", prefix);
 
         if (reserved_range_count() > 0) {

@@ -2496,9 +2496,9 @@ Parse PROTO_FILES and generate output based on the options given:
                     const FieldDescriptor* fd = descriptor->field(i);
                     ranges->insert(FieldRange(fd->number(), fd->number() + 1));
                 }
-                for (int i = 0; i < descriptor->extension_range_count(); ++i) {
-                    ranges->insert(FieldRange(descriptor->extension_range(i)->start,
-                        descriptor->extension_range(i)->end));
+                for (int i = 0; i < descriptor->anonymous_extension_range_count(); ++i) {
+                    ranges->insert(FieldRange(descriptor->anonymous_extension_range(i)->start,
+                        descriptor->anonymous_extension_range(i)->end));
                 }
                 for (int i = 0; i < descriptor->reserved_range_count(); ++i) {
                     ranges->insert(FieldRange(descriptor->reserved_range(i)->start,

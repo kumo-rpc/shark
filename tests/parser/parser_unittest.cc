@@ -834,9 +834,9 @@ namespace shark {
                     "extend Extendee1 { optional int32 foo = 12; }\n"
                     "extend Extendee2 { list<TestMessage> bar = 22; }\n",
 
-                    "extension { name:\"foo\" label:OPTIONAL type:INT32 number:12"
+                    "anonymous_extension { name:\"foo\" label:OPTIONAL type:INT32 number:12"
                     "            extendee: \"Extendee1\" } "
-                    "extension { name:\"bar\" label:REPEATED number:22"
+                    "anonymous_extension { name:\"bar\" label:REPEATED number:22"
                     "            type_name:\"TestMessage\" extendee: \"Extendee2\" }");
             }
 
@@ -849,10 +849,10 @@ namespace shark {
 
                     "message_type {"
                     "  name: \"TestMessage\""
-                    "  extension { name:\"foo\" label:OPTIONAL type:INT32 "
+                    "  anonymous_extension { name:\"foo\" label:OPTIONAL type:INT32 "
                     "number:12"
                     "              extendee: \"Extendee1\" }"
-                    "  extension { name:\"bar\" label:REPEATED number:22"
+                    "  anonymous_extension { name:\"bar\" label:REPEATED number:22"
                     "              type_name:\"TestMessage\" extendee: \"Extendee2\" }"
                     "}");
             }
@@ -864,31 +864,12 @@ namespace shark {
                     "  list<TestMessage> bar = 22;\n"
                     "}\n",
 
-                    "extension { name:\"foo\" label:OPTIONAL type:INT32 number:12"
+                    "anonymous_extension { name:\"foo\" label:OPTIONAL type:INT32 number:12"
                     "            extendee: \"Extendee1\" } "
-                    "extension { name:\"bar\" label:REPEATED number:22"
+                    "anonymous_extension { name:\"bar\" label:REPEATED number:22"
                     "            type_name:\"TestMessage\" extendee: \"Extendee1\" }");
             }
 
-            TEST_F(ParseMessageTest, OptionalLabelProto3) {
-                ExpectHasEarlyExitErrors(
-                    "syntax = \"proto3\";\n"
-                    "struct TestMessage {\n"
-                    "  int32 foo = 1;\n"
-                    "}\n",
-                    "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
-                    "only recognizes \"proto2\".\n");
-            }
-
-            TEST_F(ParseMessageTest, ExplicitOptionalLabelProto3) {
-                ExpectHasEarlyExitErrors(
-                    "syntax = 'proto3';\n"
-                    "struct TestMessage {\n"
-                    "  optional int32 foo = 1;\n"
-                    "}\n",
-                    "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
-                    "only recognizes \"proto2\".\n");
-            }
 
             // ===================================================================
 
@@ -1685,7 +1666,7 @@ namespace shark {
                 field->set_label(FieldCardinality::OPTIONAL);
                 field->set_type(SharkType::INT32);
 
-                FieldDescriptorProto* extension(other_file.add_extension());
+                FieldDescriptorProto* extension(other_file.add_anonymous_extension());
                 extension->set_name("bar");
                 extension->set_number(7672757);
                 extension->set_label(FieldCardinality::OPTIONAL);
@@ -2107,12 +2088,12 @@ namespace shark {
                           "  $n$optional int32 qux = 1;$o$\n"
                           "}$p$\n"));
 
-                const FieldDescriptorProto& field1 = file_.extension(0);
-                const FieldDescriptorProto& field2 = file_.extension(1);
-                const FieldDescriptorProto& field3 = file_.extension(2);
+                const FieldDescriptorProto& field1 = file_.anonymous_extension(0);
+                const FieldDescriptorProto& field2 = file_.anonymous_extension(1);
+                const FieldDescriptorProto& field3 = file_.anonymous_extension(2);
 
-                EXPECT_TRUE(HasSpan('a', 'j', file_, "extension"));
-                EXPECT_TRUE(HasSpan('k', 'p', file_, "extension"));
+                EXPECT_TRUE(HasSpan('a', 'j', file_, "anonymous_extension"));
+                EXPECT_TRUE(HasSpan('k', 'p', file_, "anonymous_extension"));
 
                 EXPECT_TRUE(HasSpan('d', 'f', field1));
                 EXPECT_TRUE(HasSpan('d', 'e', field1, "label"));
@@ -2151,12 +2132,12 @@ namespace shark {
                           "  }$p$\n"
                           "}\n"));
 
-                const FieldDescriptorProto& field1 = file_.message_type(0).extension(0);
-                const FieldDescriptorProto& field2 = file_.message_type(0).extension(1);
-                const FieldDescriptorProto& field3 = file_.message_type(0).extension(2);
+                const FieldDescriptorProto& field1 = file_.message_type(0).anonymous_extension(0);
+                const FieldDescriptorProto& field2 = file_.message_type(0).anonymous_extension(1);
+                const FieldDescriptorProto& field3 = file_.message_type(0).anonymous_extension(2);
 
-                EXPECT_TRUE(HasSpan('a', 'j', file_.message_type(0), "extension"));
-                EXPECT_TRUE(HasSpan('k', 'p', file_.message_type(0), "extension"));
+                EXPECT_TRUE(HasSpan('a', 'j', file_.message_type(0), "anonymous_extension"));
+                EXPECT_TRUE(HasSpan('k', 'p', file_.message_type(0), "anonymous_extension"));
 
                 EXPECT_TRUE(HasSpan('d', 'f', field1));
                 EXPECT_TRUE(HasSpan('d', 'e', field1, "label"));

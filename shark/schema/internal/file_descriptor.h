@@ -85,10 +85,10 @@ namespace shark {
 
         // Number of extensions defined at file scope.  (This does not include
         // extensions nested within message types.)
-        int extension_count() const;
+        int anonymous_extension_count() const;
         // Gets an extension's descriptor, where 0 <= index < extension_count().
         // These are returned in the order they were defined in the .shark file.
-        const FieldDescriptor* extension(int index) const;
+        const FieldDescriptor* anonymous_extension(int index) const;
 
         // Get options for this file.  These are specified in the .shark file by
         // placing lines like "option foo = 1234;" at the top level, outside of any
@@ -171,7 +171,7 @@ namespace shark {
         // Actually a `Syntax` but stored as uint8_t to save space.
         SyntaxEdition syntax_;
         // This one is here to fill the padding.
-        int extension_count_;
+        int anonymous_extension_count_;
 
         const std::string* name_;
         const std::string* package_;
@@ -198,7 +198,7 @@ namespace shark {
         Descriptor* message_types_;
         EnumDescriptor* enum_types_;
         ServletDescriptor* servlets_;
-        FieldDescriptor* extensions_;
+        FieldDescriptor* anonymous_extensions_;
         const FileOptions* options_;
 
         const FileDescriptorTables* tables_;

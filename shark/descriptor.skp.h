@@ -647,7 +647,7 @@ class SHARK_EXPORT FileDescriptorProto final :
     static constexpr int  kMessageTypeFieldNumber = 4;
     static constexpr int  kEnumTypeFieldNumber = 5;
     static constexpr int  kServletFieldNumber = 6;
-    static constexpr int  kExtensionFieldNumber = 7;
+    static constexpr int  kAnonymousExtensionFieldNumber = 7;
     static constexpr int  kPublicDependencyFieldNumber = 10;
     static constexpr int  kWeakDependencyFieldNumber = 11;
     static constexpr int  kNameFieldNumber = 1;
@@ -734,23 +734,23 @@ class SHARK_EXPORT FileDescriptorProto final :
     const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServletDescriptorProto >&
         servlet() const;
 
-    // list<.shark.FieldDescriptorProto> extension = 7;
-    int extension_size() const;
+    // list<.shark.FieldDescriptorProto> anonymous_extension = 7;
+    int anonymous_extension_size() const;
     private:
-    int _internal_extension_size() const;
+    int _internal_anonymous_extension_size() const;
     public:
-    void clear_extension();
-    ::shark::FieldDescriptorProto* mutable_extension(int index);
+    void clear_anonymous_extension();
+    ::shark::FieldDescriptorProto* mutable_anonymous_extension(int index);
     ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >*
-        mutable_extension();
+        mutable_anonymous_extension();
     private:
-    const ::shark::FieldDescriptorProto& _internal_extension(int index) const;
-    ::shark::FieldDescriptorProto* _internal_add_extension();
+    const ::shark::FieldDescriptorProto& _internal_anonymous_extension(int index) const;
+    ::shark::FieldDescriptorProto* _internal_add_anonymous_extension();
     public:
-    const ::shark::FieldDescriptorProto& extension(int index) const;
-    ::shark::FieldDescriptorProto* add_extension();
+    const ::shark::FieldDescriptorProto& anonymous_extension(int index) const;
+    ::shark::FieldDescriptorProto* add_anonymous_extension();
     const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >&
-        extension() const;
+        anonymous_extension() const;
 
     // list<int32> public_dependency = 10;
     int public_dependency_size() const;
@@ -900,7 +900,7 @@ class SHARK_EXPORT FileDescriptorProto final :
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto > message_type_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto > enum_type_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServletDescriptorProto > servlet_;
-        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto > extension_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto > anonymous_extension_;
         ::SHARK_NAMESPACE_ID::RepeatedField< int32_t > public_dependency_;
         ::SHARK_NAMESPACE_ID::RepeatedField< int32_t > weak_dependency_;
         ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
@@ -1416,10 +1416,11 @@ class SHARK_EXPORT DescriptorProto final :
     static constexpr int  kNestedTypeFieldNumber = 3;
     static constexpr int  kEnumTypeFieldNumber = 4;
     static constexpr int  kExtensionRangeFieldNumber = 5;
-    static constexpr int  kExtensionFieldNumber = 6;
+    static constexpr int  kAnonymousExtensionFieldNumber = 6;
     static constexpr int  kOneofDeclFieldNumber = 8;
     static constexpr int  kReservedRangeFieldNumber = 9;
     static constexpr int  kReservedNameFieldNumber = 10;
+    static constexpr int  kDerivedFieldNumber = 11;
     static constexpr int  kNameFieldNumber = 1;
     static constexpr int  kOptionsFieldNumber = 7;
 
@@ -1495,23 +1496,23 @@ class SHARK_EXPORT DescriptorProto final :
     const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ExtensionRange >&
         extension_range() const;
 
-    // list<.shark.FieldDescriptorProto> extension = 6;
-    int extension_size() const;
+    // list<.shark.FieldDescriptorProto> anonymous_extension = 6;
+    int anonymous_extension_size() const;
     private:
-    int _internal_extension_size() const;
+    int _internal_anonymous_extension_size() const;
     public:
-    void clear_extension();
-    ::shark::FieldDescriptorProto* mutable_extension(int index);
+    void clear_anonymous_extension();
+    ::shark::FieldDescriptorProto* mutable_anonymous_extension(int index);
     ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >*
-        mutable_extension();
+        mutable_anonymous_extension();
     private:
-    const ::shark::FieldDescriptorProto& _internal_extension(int index) const;
-    ::shark::FieldDescriptorProto* _internal_add_extension();
+    const ::shark::FieldDescriptorProto& _internal_anonymous_extension(int index) const;
+    ::shark::FieldDescriptorProto* _internal_add_anonymous_extension();
     public:
-    const ::shark::FieldDescriptorProto& extension(int index) const;
-    ::shark::FieldDescriptorProto* add_extension();
+    const ::shark::FieldDescriptorProto& anonymous_extension(int index) const;
+    ::shark::FieldDescriptorProto* add_anonymous_extension();
     const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >&
-        extension() const;
+        anonymous_extension() const;
 
     // list<.shark.OneofDescriptorProto> oneof_decl = 8;
     int oneof_decl_size() const;
@@ -1573,6 +1574,24 @@ class SHARK_EXPORT DescriptorProto final :
     std::string* _internal_add_reserved_name();
     public:
 
+    // list<.shark.DescriptorProto> derived = 11;
+    int derived_size() const;
+    private:
+    int _internal_derived_size() const;
+    public:
+    void clear_derived();
+    ::shark::DescriptorProto* mutable_derived(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >*
+        mutable_derived();
+    private:
+    const ::shark::DescriptorProto& _internal_derived(int index) const;
+    ::shark::DescriptorProto* _internal_add_derived();
+    public:
+    const ::shark::DescriptorProto& derived(int index) const;
+    ::shark::DescriptorProto* add_derived();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >&
+        derived() const;
+
     // optional string name = 1;
     bool has_name() const;
     private:
@@ -1623,10 +1642,11 @@ class SHARK_EXPORT DescriptorProto final :
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto > nested_type_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto > enum_type_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ExtensionRange > extension_range_;
-        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto > extension_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto > anonymous_extension_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::OneofDescriptorProto > oneof_decl_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ReservedRange > reserved_range_;
         ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string> reserved_name_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto > derived_;
         ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
         ::shark::MessageOptions* options_;
     };
@@ -8755,44 +8775,44 @@ FileDescriptorProto::servlet() const {
   return _impl_.servlet_;
 }
 
-// list<.shark.FieldDescriptorProto> extension = 7;
-inline int FileDescriptorProto::_internal_extension_size() const {
-  return _impl_.extension_.size();
+// list<.shark.FieldDescriptorProto> anonymous_extension = 7;
+inline int FileDescriptorProto::_internal_anonymous_extension_size() const {
+  return _impl_.anonymous_extension_.size();
 }
-inline int FileDescriptorProto::extension_size() const {
-  return _internal_extension_size();
+inline int FileDescriptorProto::anonymous_extension_size() const {
+  return _internal_anonymous_extension_size();
 }
-inline void FileDescriptorProto::clear_extension() {
-    _impl_.extension_.Clear();
+inline void FileDescriptorProto::clear_anonymous_extension() {
+    _impl_.anonymous_extension_.Clear();
 }
-inline ::shark::FieldDescriptorProto* FileDescriptorProto::mutable_extension(int index) {
-  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.extension)
-  return _impl_.extension_.Mutable(index);
+inline ::shark::FieldDescriptorProto* FileDescriptorProto::mutable_anonymous_extension(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.anonymous_extension)
+  return _impl_.anonymous_extension_.Mutable(index);
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >*
-FileDescriptorProto::mutable_extension() {
-  // @@protoc_insertion_point(field_mutable_list:shark.FileDescriptorProto.extension)
-  return &_impl_.extension_;
+FileDescriptorProto::mutable_anonymous_extension() {
+  // @@protoc_insertion_point(field_mutable_list:shark.FileDescriptorProto.anonymous_extension)
+  return &_impl_.anonymous_extension_;
 }
-inline const ::shark::FieldDescriptorProto& FileDescriptorProto::_internal_extension(int index) const {
-  return _impl_.extension_.Get(index);
+inline const ::shark::FieldDescriptorProto& FileDescriptorProto::_internal_anonymous_extension(int index) const {
+  return _impl_.anonymous_extension_.Get(index);
 }
-inline const ::shark::FieldDescriptorProto& FileDescriptorProto::extension(int index) const {
-  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.extension)
-  return _internal_extension(index);
+inline const ::shark::FieldDescriptorProto& FileDescriptorProto::anonymous_extension(int index) const {
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.anonymous_extension)
+  return _internal_anonymous_extension(index);
 }
-inline ::shark::FieldDescriptorProto* FileDescriptorProto::_internal_add_extension() {
-  return _impl_.extension_.Add();
+inline ::shark::FieldDescriptorProto* FileDescriptorProto::_internal_add_anonymous_extension() {
+  return _impl_.anonymous_extension_.Add();
 }
-inline ::shark::FieldDescriptorProto* FileDescriptorProto::add_extension() {
-  ::shark::FieldDescriptorProto* _add = _internal_add_extension();
-  // @@protoc_insertion_point(field_add:shark.FileDescriptorProto.extension)
+inline ::shark::FieldDescriptorProto* FileDescriptorProto::add_anonymous_extension() {
+  ::shark::FieldDescriptorProto* _add = _internal_add_anonymous_extension();
+  // @@protoc_insertion_point(field_add:shark.FileDescriptorProto.anonymous_extension)
   return _add;
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >&
-FileDescriptorProto::extension() const {
-  // @@protoc_insertion_point(field_list:shark.FileDescriptorProto.extension)
-  return _impl_.extension_;
+FileDescriptorProto::anonymous_extension() const {
+  // @@protoc_insertion_point(field_list:shark.FileDescriptorProto.anonymous_extension)
+  return _impl_.anonymous_extension_;
 }
 
 // optional .shark.FileOptions options = 8;
@@ -9365,44 +9385,44 @@ DescriptorProto::field() const {
   return _impl_.field_;
 }
 
-// list<.shark.FieldDescriptorProto> extension = 6;
-inline int DescriptorProto::_internal_extension_size() const {
-  return _impl_.extension_.size();
+// list<.shark.FieldDescriptorProto> anonymous_extension = 6;
+inline int DescriptorProto::_internal_anonymous_extension_size() const {
+  return _impl_.anonymous_extension_.size();
 }
-inline int DescriptorProto::extension_size() const {
-  return _internal_extension_size();
+inline int DescriptorProto::anonymous_extension_size() const {
+  return _internal_anonymous_extension_size();
 }
-inline void DescriptorProto::clear_extension() {
-    _impl_.extension_.Clear();
+inline void DescriptorProto::clear_anonymous_extension() {
+    _impl_.anonymous_extension_.Clear();
 }
-inline ::shark::FieldDescriptorProto* DescriptorProto::mutable_extension(int index) {
-  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.extension)
-  return _impl_.extension_.Mutable(index);
+inline ::shark::FieldDescriptorProto* DescriptorProto::mutable_anonymous_extension(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.anonymous_extension)
+  return _impl_.anonymous_extension_.Mutable(index);
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >*
-DescriptorProto::mutable_extension() {
-  // @@protoc_insertion_point(field_mutable_list:shark.DescriptorProto.extension)
-  return &_impl_.extension_;
+DescriptorProto::mutable_anonymous_extension() {
+  // @@protoc_insertion_point(field_mutable_list:shark.DescriptorProto.anonymous_extension)
+  return &_impl_.anonymous_extension_;
 }
-inline const ::shark::FieldDescriptorProto& DescriptorProto::_internal_extension(int index) const {
-  return _impl_.extension_.Get(index);
+inline const ::shark::FieldDescriptorProto& DescriptorProto::_internal_anonymous_extension(int index) const {
+  return _impl_.anonymous_extension_.Get(index);
 }
-inline const ::shark::FieldDescriptorProto& DescriptorProto::extension(int index) const {
-  // @@protoc_insertion_point(field_get:shark.DescriptorProto.extension)
-  return _internal_extension(index);
+inline const ::shark::FieldDescriptorProto& DescriptorProto::anonymous_extension(int index) const {
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.anonymous_extension)
+  return _internal_anonymous_extension(index);
 }
-inline ::shark::FieldDescriptorProto* DescriptorProto::_internal_add_extension() {
-  return _impl_.extension_.Add();
+inline ::shark::FieldDescriptorProto* DescriptorProto::_internal_add_anonymous_extension() {
+  return _impl_.anonymous_extension_.Add();
 }
-inline ::shark::FieldDescriptorProto* DescriptorProto::add_extension() {
-  ::shark::FieldDescriptorProto* _add = _internal_add_extension();
-  // @@protoc_insertion_point(field_add:shark.DescriptorProto.extension)
+inline ::shark::FieldDescriptorProto* DescriptorProto::add_anonymous_extension() {
+  ::shark::FieldDescriptorProto* _add = _internal_add_anonymous_extension();
+  // @@protoc_insertion_point(field_add:shark.DescriptorProto.anonymous_extension)
   return _add;
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >&
-DescriptorProto::extension() const {
-  // @@protoc_insertion_point(field_list:shark.DescriptorProto.extension)
-  return _impl_.extension_;
+DescriptorProto::anonymous_extension() const {
+  // @@protoc_insertion_point(field_list:shark.DescriptorProto.anonymous_extension)
+  return _impl_.anonymous_extension_;
 }
 
 // list<.shark.DescriptorProto> nested_type = 3;
@@ -9768,6 +9788,46 @@ inline ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>*
 DescriptorProto::mutable_reserved_name() {
   // @@protoc_insertion_point(field_mutable_list:shark.DescriptorProto.reserved_name)
   return &_impl_.reserved_name_;
+}
+
+// list<.shark.DescriptorProto> derived = 11;
+inline int DescriptorProto::_internal_derived_size() const {
+  return _impl_.derived_.size();
+}
+inline int DescriptorProto::derived_size() const {
+  return _internal_derived_size();
+}
+inline void DescriptorProto::clear_derived() {
+    _impl_.derived_.Clear();
+}
+inline ::shark::DescriptorProto* DescriptorProto::mutable_derived(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.derived)
+  return _impl_.derived_.Mutable(index);
+}
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >*
+DescriptorProto::mutable_derived() {
+  // @@protoc_insertion_point(field_mutable_list:shark.DescriptorProto.derived)
+  return &_impl_.derived_;
+}
+inline const ::shark::DescriptorProto& DescriptorProto::_internal_derived(int index) const {
+  return _impl_.derived_.Get(index);
+}
+inline const ::shark::DescriptorProto& DescriptorProto::derived(int index) const {
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.derived)
+  return _internal_derived(index);
+}
+inline ::shark::DescriptorProto* DescriptorProto::_internal_add_derived() {
+  return _impl_.derived_.Add();
+}
+inline ::shark::DescriptorProto* DescriptorProto::add_derived() {
+  ::shark::DescriptorProto* _add = _internal_add_derived();
+  // @@protoc_insertion_point(field_add:shark.DescriptorProto.derived)
+  return _add;
+}
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >&
+DescriptorProto::derived() const {
+  // @@protoc_insertion_point(field_list:shark.DescriptorProto.derived)
+  return _impl_.derived_;
 }
 
 // -------------------------------------------------------------------

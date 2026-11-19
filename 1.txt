@@ -1,0 +1,174 @@
+tests/parser/parser_unittest.cc:                    "anonymous_extension { name:\"foo\" label:OPTIONAL type:INT32 number:12"
+tests/parser/parser_unittest.cc:                    "anonymous_extension { name:\"bar\" label:REPEATED number:22"
+tests/parser/parser_unittest.cc:                    "  anonymous_extension { name:\"foo\" label:OPTIONAL type:INT32 "
+tests/parser/parser_unittest.cc:                    "  anonymous_extension { name:\"bar\" label:REPEATED number:22"
+tests/parser/parser_unittest.cc:                    "anonymous_extension { name:\"foo\" label:OPTIONAL type:INT32 number:12"
+tests/parser/parser_unittest.cc:                    "anonymous_extension { name:\"bar\" label:REPEATED number:22"
+tests/parser/parser_unittest.cc:                FieldDescriptorProto* extension(other_file.add_anonymous_extension());
+tests/parser/parser_unittest.cc:                const FieldDescriptorProto& field1 = file_.anonymous_extension(0);
+tests/parser/parser_unittest.cc:                const FieldDescriptorProto& field2 = file_.anonymous_extension(1);
+tests/parser/parser_unittest.cc:                const FieldDescriptorProto& field3 = file_.anonymous_extension(2);
+tests/parser/parser_unittest.cc:                EXPECT_TRUE(HasSpan('a', 'j', file_, "anonymous_extension"));
+tests/parser/parser_unittest.cc:                EXPECT_TRUE(HasSpan('k', 'p', file_, "anonymous_extension"));
+tests/parser/parser_unittest.cc:                const FieldDescriptorProto& field1 = file_.message_type(0).anonymous_extension(0);
+tests/parser/parser_unittest.cc:                const FieldDescriptorProto& field2 = file_.message_type(0).anonymous_extension(1);
+tests/parser/parser_unittest.cc:                const FieldDescriptorProto& field3 = file_.message_type(0).anonymous_extension(2);
+tests/parser/parser_unittest.cc:                EXPECT_TRUE(HasSpan('a', 'j', file_.message_type(0), "anonymous_extension"));
+tests/parser/parser_unittest.cc:                EXPECT_TRUE(HasSpan('k', 'p', file_.message_type(0), "anonymous_extension"));
+tests/lib/extension_set_test.cc:  dynamic_proto.mutable_anonymous_extension()->MergeFrom(
+tests/lib/extension_set_test.cc:  for (int i = 0; i < dynamic_proto.anonymous_extension_size(); i++) {
+tests/lib/extension_set_test.cc:    FieldDescriptorProto* extension = dynamic_proto.mutable_anonymous_extension(i);
+tests/lib/descriptor_unittest.cc:            FieldDescriptorProto* result = file->add_anonymous_extension();
+tests/lib/descriptor_unittest.cc:            FieldDescriptorProto* result = parent->add_anonymous_extension();
+tests/lib/descriptor_unittest.cc:                ASSERT_EQ(1, foo_file_->anonymous_extension_count());
+tests/lib/descriptor_unittest.cc:                foo_extension_ = foo_file_->anonymous_extension(0);
+tests/lib/descriptor_unittest.cc:                ASSERT_EQ(1, bar_file_->anonymous_extension_count());
+tests/lib/descriptor_unittest.cc:                bar_extension_ = bar_file_->anonymous_extension(0);
+tests/lib/descriptor_unittest.cc:                ASSERT_EQ(5, message_->anonymous_extension_count());
+tests/lib/descriptor_unittest.cc:                ASSERT_EQ(5, file_->anonymous_extension_count());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("bar_foo", message_->anonymous_extension(0)->lowercase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("barbar", message_->anonymous_extension(1)->lowercase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("barbaz", message_->anonymous_extension(2)->lowercase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("barfoo", message_->anonymous_extension(3)->lowercase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("barbar", message_->anonymous_extension(4)->lowercase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("baz_foo", file_->anonymous_extension(0)->lowercase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("bazbar", file_->anonymous_extension(1)->lowercase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("bazbaz", file_->anonymous_extension(2)->lowercase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("bazfoo", file_->anonymous_extension(3)->lowercase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("bazbar", file_->anonymous_extension(4)->lowercase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("barFoo", message_->anonymous_extension(0)->camelcase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("barBar", message_->anonymous_extension(1)->camelcase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("barBaz", message_->anonymous_extension(2)->camelcase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("barFoo", message_->anonymous_extension(3)->camelcase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("barbar", message_->anonymous_extension(4)->camelcase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("bazFoo", file_->anonymous_extension(0)->camelcase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("bazBar", file_->anonymous_extension(1)->camelcase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("bazBaz", file_->anonymous_extension(2)->camelcase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("bazFoo", file_->anonymous_extension(3)->camelcase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("bazbar", file_->anonymous_extension(4)->camelcase_name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(message_->anonymous_extension(0),
+tests/lib/descriptor_unittest.cc:                AnyOf(message_->anonymous_extension(1), message_->anonymous_extension(4)));
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(message_->anonymous_extension(2),
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(file_->anonymous_extension(0),
+tests/lib/descriptor_unittest.cc:                AnyOf(file_->anonymous_extension(1), file_->anonymous_extension(4)));
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(file_->anonymous_extension(2), file_->FindExtensionByLowercaseName("bazbaz"));
+tests/lib/descriptor_unittest.cc:                AnyOf(message_->anonymous_extension(0), message_->anonymous_extension(3)));
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(message_->anonymous_extension(1),
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(message_->anonymous_extension(2),
+tests/lib/descriptor_unittest.cc:                AnyOf(file_->anonymous_extension(0), file_->anonymous_extension(3)));
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(file_->anonymous_extension(1), file_->FindExtensionByCamelcaseName("bazBar"));
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(file_->anonymous_extension(2), file_->FindExtensionByCamelcaseName("bazBaz"));
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(0, bar_->anonymous_extension_range_count());
+tests/lib/descriptor_unittest.cc:            ASSERT_EQ(2, foo_->anonymous_extension_range_count());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(10, foo_->anonymous_extension_range(0)->start);
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(30, foo_->anonymous_extension_range(1)->start);
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(20, foo_->anonymous_extension_range(0)->end);
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(40, foo_->anonymous_extension_range(1)->end);
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(0, foo_->anonymous_extension_count());
+tests/lib/descriptor_unittest.cc:            ASSERT_EQ(2, foo_file_->anonymous_extension_count());
+tests/lib/descriptor_unittest.cc:            ASSERT_EQ(2, bar_->anonymous_extension_count());
+tests/lib/descriptor_unittest.cc:            EXPECT_TRUE(foo_file_->anonymous_extension(0)->is_extension());
+tests/lib/descriptor_unittest.cc:            EXPECT_TRUE(foo_file_->anonymous_extension(1)->is_extension());
+tests/lib/descriptor_unittest.cc:            EXPECT_TRUE(bar_->anonymous_extension(0)->is_extension());
+tests/lib/descriptor_unittest.cc:            EXPECT_TRUE(bar_->anonymous_extension(1)->is_extension());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("foo_int32", foo_file_->anonymous_extension(0)->name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("foo_enum", foo_file_->anonymous_extension(1)->name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("foo_message", bar_->anonymous_extension(0)->name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ("foo_group", bar_->anonymous_extension(1)->name());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(10, foo_file_->anonymous_extension(0)->number());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(19, foo_file_->anonymous_extension(1)->number());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(30, bar_->anonymous_extension(0)->number());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(39, bar_->anonymous_extension(1)->number());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(SharkFieldType::INT32, foo_file_->anonymous_extension(0)->type());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(SharkFieldType::ENUM, foo_file_->anonymous_extension(1)->type());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(SharkFieldType::MESSAGE, bar_->anonymous_extension(0)->type());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(SharkFieldType::MESSAGE, bar_->anonymous_extension(1)->type());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(baz_, foo_file_->anonymous_extension(1)->enum_type());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(moo_, bar_->anonymous_extension(0)->message_type());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(moo_, bar_->anonymous_extension(1)->message_type());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(FieldLabel::OPTIONAL, foo_file_->anonymous_extension(0)->label());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(FieldLabel::REPEATED, foo_file_->anonymous_extension(1)->label());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(FieldLabel::OPTIONAL, bar_->anonymous_extension(0)->label());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(FieldLabel::REPEATED, bar_->anonymous_extension(1)->label());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(foo_, foo_file_->anonymous_extension(0)->containing_type());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(foo_, foo_file_->anonymous_extension(1)->containing_type());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(foo_, bar_->anonymous_extension(0)->containing_type());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(foo_, bar_->anonymous_extension(1)->containing_type());
+tests/lib/descriptor_unittest.cc:            EXPECT_TRUE(foo_file_->anonymous_extension(0)->extension_scope() == nullptr);
+tests/lib/descriptor_unittest.cc:            EXPECT_TRUE(foo_file_->anonymous_extension(1)->extension_scope() == nullptr);
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(bar_, bar_->anonymous_extension(0)->extension_scope());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(bar_, bar_->anonymous_extension(1)->extension_scope());
+tests/lib/descriptor_unittest.cc:            ASSERT_EQ(2, bar_->anonymous_extension_count());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(bar_->anonymous_extension(0), bar_->FindExtensionByName("foo_message"));
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(bar_->anonymous_extension(1), bar_->FindExtensionByName("foo_group"));
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(0, baz_type->anonymous_extension_range_count());
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { extendee: 'UnknownType' name:'some_extension' number:123"
+tests/lib/descriptor_unittest.cc:            ASSERT_EQ(1, file->anonymous_extension_count());
+tests/lib/descriptor_unittest.cc:            const Descriptor* extendee = file->anonymous_extension(0)->containing_type();
+tests/lib/descriptor_unittest.cc:            ASSERT_EQ(1, extendee->anonymous_extension_range_count());
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(1, extendee->anonymous_extension_range(0)->start);
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(FieldDescriptor::kMaxNumber + 1, extendee->anonymous_extension_range(0)->end);
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { "
+tests/lib/descriptor_unittest.cc:            FieldDescriptorProto* extension = file_proto.add_anonymous_extension();
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { "
+tests/lib/descriptor_unittest.cc:            EXPECT_EQ(2, descriptor->anonymous_extension_count());
+tests/lib/descriptor_unittest.cc:                "  anonymous_extension { name: \"foo\" number: 1 label: OPTIONAL"
+tests/lib/descriptor_unittest.cc:                "  anonymous_extension { name:\"foo\" number:4 label:OPTIONAL type:INT32"
+tests/lib/descriptor_unittest.cc:                "  anonymous_extension { name:\"foo\" number:4 label:REPEATED "
+tests/lib/descriptor_unittest.cc:                "  anonymous_extension { name:\"foo\" number:1 label:OPTIONAL type:INT32"
+tests/lib/descriptor_unittest.cc:                "  anonymous_extension { name:\"foo\" number:1 label:OPTIONAL type:INT32"
+tests/lib/descriptor_unittest.cc:                "  anonymous_extension { name:\"foo\" number:1 label:OPTIONAL type:INT32"
+tests/lib/descriptor_unittest.cc:                "  anonymous_extension {"
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"bar\" number: 7672757 label: REPEATED "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"bar\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo1\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo2\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension {"
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"option1\" number: 1000 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"option2\" number: 1000 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"foo\" number: 7672757 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { name: \"ext\" number: 123 label: OPTIONAL "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { "
+tests/lib/descriptor_unittest.cc:                "  anonymous_extension { name:'foo' number:1 label:OPTIONAL type:INT32"
+tests/lib/descriptor_unittest.cc:                    "anonymous_extension { name:'foo_ext' extendee: '.Foo' number:5 "
+tests/lib/descriptor_unittest.cc:                "anonymous_extension { extendee: '.sharkbuf_unittest.Bar' name:'bar' number:11"
+tests/lib/descriptor_database_unittest.cc:      "anonymous_extension { name: \"plugh\" } "
+tests/lib/descriptor_database_unittest.cc:      "  anonymous_extension { name:\"qux\" label:OPTIONAL type:INT32 "
+tests/lib/descriptor_database_unittest.cc:      "anonymous_extension { name:\"grault\" extendee: \".Foo\"       number:32 } "
+tests/lib/descriptor_database_unittest.cc:      "anonymous_extension { name:\"garply\" extendee: \".corge.Bar\" number:70 } "
+tests/lib/descriptor_database_unittest.cc:      "anonymous_extension { name:\"waldo\"  extendee: \"Bar\"        number:56 } ");
+tests/lib/descriptor_database_unittest.cc:      "  anonymous_extension { name:\"qux\" label:OPTIONAL type:INT32 "
+tests/lib/descriptor_database_unittest.cc:      "anonymous_extension { name:\"grault\" extendee: \".Foo\"       number:32 } "
+tests/lib/descriptor_database_unittest.cc:      "anonymous_extension { name:\"garply\" extendee: \".corge.Bar\" number:70 } "
+tests/lib/descriptor_database_unittest.cc:      "anonymous_extension { name:\"waldo\"  extendee: \"Bar\"        number:56 } ");
+tests/lib/descriptor_database_unittest.cc:      "anonymous_extension { name:\"foo\" label:OPTIONAL type:INT32 number:5 "
+tests/lib/descriptor_database_unittest.cc:      "anonymous_extension { name:\"bar\" label:OPTIONAL type:INT32 number:5 "
+tests/lib/descriptor_database_unittest.cc:        "anonymous_extension { name:\"foo_ext\" extendee: \".Foo\" number:3 "
+tests/lib/descriptor_database_unittest.cc:        "anonymous_extension { name:\"bar_ext\" extendee: \".Bar\" number:5 "
+tests/lib/descriptor_database_unittest.cc:        "anonymous_extension { name:\"baz_ext\" extendee: \".Baz\" number:12 "
+tests/lib/descriptor_database_unittest.cc:        "anonymous_extension { name:\"database1_only_ext\" extendee: \".Baz\" number:13 "
+tests/lib/descriptor_database_unittest.cc:        "anonymous_extension { name:\"baz_ext\" extendee: \".Baz\" number:12 "
+tests/persist/wired/wire_format_unittest.inc:                                   ->anonymous_extension(0)
+tests/persist/wired/wire_format_unittest.inc:                                   ->anonymous_extension(0)
+tests/persist/wired/wire_format_unittest.inc:                    UNITTEST::TestMessageSetExtension1::descriptor()->anonymous_extension(0)->number());
+tests/persist/wired/wire_format_unittest.inc:                    UNITTEST::TestMessageSetExtension1::descriptor()->anonymous_extension(0)->number());
+tests/persist/wired/wire_format_unittest.inc:                uint32_t type_id = message.GetDescriptor()->anonymous_extension(0)->number();
+tests/compiler/command_line_interface_unittest.cc:                FieldDescriptorProto* extension_option = file_descriptor_proto->add_anonymous_extension();
+tests/compiler/cpp/unittest.inc:  p.add_anonymous_extension()->set_name(long_string);
