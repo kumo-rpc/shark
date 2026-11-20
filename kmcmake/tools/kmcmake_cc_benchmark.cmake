@@ -63,11 +63,6 @@ function(kmcmake_cc_benchmark)
         kmcmake_print_list_label("Liniks" KMCMAKE_CC_BM_LINKS)
         message("-----------------------------------")
     endif ()
-    set(${KMCMAKE_CC_BM_NAME}_INCLUDE_SYSTEM SYSTEM)
-    if (KMCMAKE_CC_BM_EXCLUDE_SYSTEM)
-        set(${KMCMAKE_CC_BM_NAME}_INCLUDE_SYSTEM "")
-    endif ()
-
     set(testcase ${KMCMAKE_CC_BM_MODULE}_${KMCMAKE_CC_BM_NAME})
 
     add_executable(${testcase} ${KMCMAKE_CC_BM_SOURCES})
@@ -84,7 +79,8 @@ function(kmcmake_cc_benchmark)
             ${KMCMAKE_CC_BM_DEFINES}
     )
 
-    target_include_directories(${testcase} ${${KMCMAKE_CC_BM_NAME}_INCLUDE_SYSTEM}
+    target_include_directories(${testcase}
+            BEFORE
             PUBLIC
             ${KMCMAKE_CC_BM_INCLUDES}
             "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>"
