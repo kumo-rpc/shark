@@ -27,3 +27,66 @@ kmcmake_cc_interface(
         ${KMCMAKE_CXX_OPTIONS}
         PUBLIC
 )
+
+
+kmcmake_cc_library(
+        NAME sharkc
+        NAMESPACE ${PROJECT_NAME}
+        SOURCES
+        compiler/thriftl.cc
+        compiler/thrifty.cc
+        compiler/audit/t_audit.cc
+        compiler/common.cc
+        compiler/generate/go_validator_generator.cc
+        compiler/generate/t_c_glib_generator.cc
+        compiler/generate/t_cl_generator.cc
+        compiler/generate/t_cpp_generator.cc
+        compiler/generate/t_d_generator.cc
+        compiler/generate/t_dart_generator.cc
+        compiler/generate/t_delphi_generator.cc
+        compiler/generate/t_erl_generator.cc
+        compiler/generate/t_generator.cc
+        compiler/generate/t_go_generator.cc
+        compiler/generate/t_gv_generator.cc
+        compiler/generate/t_haxe_generator.cc
+        compiler/generate/t_html_generator.cc
+        compiler/generate/t_java_generator.cc
+        compiler/generate/t_javame_generator.cc
+        compiler/generate/t_js_generator.cc
+        compiler/generate/t_json_generator.cc
+        compiler/generate/t_kotlin_generator.cc
+        compiler/generate/t_lua_generator.cc
+        compiler/generate/t_markdown_generator.cc
+        compiler/generate/t_mmd_generator.cc
+        compiler/generate/t_netstd_generator.cc
+        compiler/generate/t_ocaml_generator.cc
+        compiler/generate/t_perl_generator.cc
+        compiler/generate/t_php_generator.cc
+        compiler/generate/t_py_generator.cc
+        compiler/generate/t_rb_generator.cc
+        compiler/generate/t_rs_generator.cc
+        compiler/generate/t_st_generator.cc
+        compiler/generate/t_xml_generator.cc
+        compiler/generate/t_xsd_generator.cc
+        compiler/generate/validator_parser.cc
+        compiler/parse/parse.cc
+        compiler/parse/t_typedef.cc
+        CXXOPTS
+            ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+            ${KMCMAKE_DEPS_LINK}
+        PUBLIC
+)
+
+
+kmcmake_cc_binary(
+        NAME sharkc
+        NAMESPACE ${PROJECT_NAME}
+        SOURCES
+        compiler/main.cc
+        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        shark::sharkc_static
+        ${KMCMAKE_DEPS_LINK}
+        PUBLIC
+)
