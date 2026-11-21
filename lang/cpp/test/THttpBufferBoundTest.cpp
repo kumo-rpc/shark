@@ -23,12 +23,12 @@
 #include <string>
 #include <vector>
 
-#include <thrift/TConfiguration.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/THttpClient.h>
-#include <thrift/transport/THttpServer.h>
-#include <thrift/transport/TTransportException.h>
-#include <thrift/transport/TVirtualTransport.h>
+#include <shark/TConfiguration.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/THttpClient.h>
+#include <shark/transport/THttpServer.h>
+#include <shark/transport/TTransportException.h>
+#include <shark/transport/TVirtualTransport.h>
 
 /*
  * THttpTransport keeps the line it is reading in httpBuf_, and grows that

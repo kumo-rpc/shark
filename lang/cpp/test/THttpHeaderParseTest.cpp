@@ -18,11 +18,11 @@
 #include <memory>
 #include <string>
 
-#include <thrift/TConfiguration.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/THttpClient.h>
-#include <thrift/transport/THttpServer.h>
-#include <thrift/transport/TTransportException.h>
+#include <shark/TConfiguration.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/THttpClient.h>
+#include <shark/transport/THttpServer.h>
+#include <shark/transport/TTransportException.h>
 
 /*
  * THttpServer::parseHeader compared a header name for as many characters as

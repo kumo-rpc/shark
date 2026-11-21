@@ -39,10 +39,10 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/version.hpp>
 
-#include <thrift/protocol/TJSONProtocol.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/TZlibTransport.h>
-#include <thrift/TConfiguration.h>
+#include <shark/protocol/TJSONProtocol.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/TZlibTransport.h>
+#include <shark/TConfiguration.h>
 
 using namespace apache::thrift::transport;
 using apache::thrift::TConfiguration;

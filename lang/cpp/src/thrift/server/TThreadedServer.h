@@ -17,10 +17,10 @@
 #define _THRIFT_SERVER_TTHREADEDSERVER_H_ 1
 
 #include <map>
-#include <thrift/concurrency/Monitor.h>
-#include <thrift/concurrency/ThreadFactory.h>
-#include <thrift/concurrency/Thread.h>
-#include <thrift/server/TServerFramework.h>
+#include <shark/concurrency/Monitor.h>
+#include <shark/concurrency/ThreadFactory.h>
+#include <shark/concurrency/Thread.h>
+#include <shark/server/TServerFramework.h>
 
 namespace apache {
 namespace thrift {

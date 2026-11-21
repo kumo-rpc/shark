@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/protocol/TJSONProtocol.h>
+#include <shark/protocol/TJSONProtocol.h>
 
 #include <boost/locale.hpp>
 
@@ -23,9 +23,9 @@
 #include <sstream>
 #include <stdexcept>
 
-#include <thrift/protocol/TBase64Utils.h>
-#include <thrift/transport/TTransportException.h>
-#include <thrift/TToString.h>
+#include <shark/protocol/TBase64Utils.h>
+#include <shark/transport/TTransportException.h>
+#include <shark/TToString.h>
 
 using namespace apache::thrift::transport;
 

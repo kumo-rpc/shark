@@ -16,18 +16,18 @@
 #ifndef _THRIFT_TRANSPORT_TFILETRANSPORT_H_
 #define _THRIFT_TRANSPORT_TFILETRANSPORT_H_ 1
 
-#include <thrift/transport/TTransport.h>
-#include <thrift/Thrift.h>
-#include <thrift/TProcessor.h>
+#include <shark/transport/TTransport.h>
+#include <shark/Thrift.h>
+#include <shark/TProcessor.h>
 
 #include <atomic>
 #include <string>
 #include <stdio.h>
 
-#include <thrift/concurrency/Mutex.h>
-#include <thrift/concurrency/Monitor.h>
-#include <thrift/concurrency/ThreadFactory.h>
-#include <thrift/concurrency/Thread.h>
+#include <shark/concurrency/Mutex.h>
+#include <shark/concurrency/Monitor.h>
+#include <shark/concurrency/ThreadFactory.h>
+#include <shark/concurrency/Thread.h>
 
 namespace apache {
 namespace thrift {

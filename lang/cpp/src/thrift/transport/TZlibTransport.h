@@ -16,9 +16,9 @@
 #ifndef _THRIFT_TRANSPORT_TZLIBTRANSPORT_H_
 #define _THRIFT_TRANSPORT_TZLIBTRANSPORT_H_ 1
 
-#include <thrift/transport/TTransport.h>
-#include <thrift/transport/TVirtualTransport.h>
-#include <thrift/TToString.h>
+#include <shark/transport/TTransport.h>
+#include <shark/transport/TVirtualTransport.h>
+#include <shark/TToString.h>
 #include <zlib.h>
 
 struct z_stream_s;

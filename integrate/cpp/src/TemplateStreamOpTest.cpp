@@ -31,7 +31,7 @@
 
 // Include generated thrift types with template_streamop option
 #include "ThriftTest_types.h"
-#include <thrift/TToString.h>
+#include <shark/TToString.h>
 
 using namespace thrift::test;
 

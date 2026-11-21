@@ -19,7 +19,7 @@
 
 cmake_minimum_required(VERSION 3.31)
 
-project(shark CXX)
+project(shark CXX C)
 
 option(${PROJECT_NAME}_IS_TOP_PROJECT "shark project is the top level project or not" ON)
 

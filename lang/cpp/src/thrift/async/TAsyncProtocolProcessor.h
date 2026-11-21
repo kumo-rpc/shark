@@ -16,9 +16,9 @@
 #ifndef _THRIFT_TNAME_ME_H_
 #define _THRIFT_TNAME_ME_H_ 1
 
-#include <thrift/async/TAsyncProcessor.h>
-#include <thrift/async/TAsyncBufferProcessor.h>
-#include <thrift/protocol/TProtocol.h>
+#include <shark/async/TAsyncProcessor.h>
+#include <shark/async/TAsyncBufferProcessor.h>
+#include <shark/protocol/TProtocol.h>
 
 namespace apache {
 namespace thrift {

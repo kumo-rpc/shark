@@ -16,17 +16,17 @@
 #ifndef _THRIFT_TRANSPORT_TPIPE_H_
 #define _THRIFT_TRANSPORT_TPIPE_H_ 1
 
-#include <thrift/transport/TTransport.h>
-#include <thrift/transport/TVirtualTransport.h>
+#include <shark/transport/TTransport.h>
+#include <shark/transport/TVirtualTransport.h>
 #ifndef _WIN32
-#include <thrift/transport/TSocket.h>
+#include <shark/transport/TSocket.h>
 #endif
 #ifdef _WIN32
-#include <thrift/windows/Sync.h>
+#include <shark/windows/Sync.h>
 #endif
-#include <thrift/TNonCopyable.h>
+#include <shark/TNonCopyable.h>
 #ifdef _WIN32
-#include <thrift/windows/Sync.h>
+#include <shark/windows/Sync.h>
 #endif
 
 namespace apache {

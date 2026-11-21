@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
 #include <algorithm>
 #include <iostream>
@@ -22,7 +22,7 @@
 #include <random>
 #endif
 
-#include <thrift/transport/TSocketPool.h>
+#include <shark/transport/TSocketPool.h>
 
 using std::pair;
 using std::string;

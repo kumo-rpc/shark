@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
 #include <cstring>
 #include <memory>
@@ -46,11 +46,11 @@
 #include <sys/stat.h>
 #endif
 
-#include <thrift/transport/PlatformSocket.h>
-#include <thrift/transport/TServerSocket.h>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/TSocketUtils.h>
-#include <thrift/transport/SocketCommon.h>
+#include <shark/transport/PlatformSocket.h>
+#include <shark/transport/TServerSocket.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/TSocketUtils.h>
+#include <shark/transport/SocketCommon.h>
 
 #ifndef AF_LOCAL
 #define AF_LOCAL AF_UNIX
@@ -72,7 +72,7 @@
 #include <windows.h>
 #undef NOMINMAX
 #undef WIN32_LEAN_AND_MEAN
-#include <thrift/windows/TWinsockSingleton.h>
+#include <shark/windows/TWinsockSingleton.h>
 #endif
 
 template <class T>

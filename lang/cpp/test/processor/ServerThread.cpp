@@ -17,11 +17,11 @@
 
 #include "ServerThread.h"
 
-#include <thrift/concurrency/ThreadFactory.h>
-#include <thrift/concurrency/ThreadManager.h>
-#include <thrift/server/TThreadPoolServer.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/TServerSocket.h>
+#include <shark/concurrency/ThreadFactory.h>
+#include <shark/concurrency/ThreadManager.h>
+#include <shark/server/TThreadPoolServer.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/TServerSocket.h>
 
 namespace apache {
 namespace thrift {

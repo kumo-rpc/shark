@@ -17,10 +17,10 @@
 #include <signal.h>
 #include <sys/wait.h>
 
-#include <thrift/c_glib/transport/thrift_transport.h>
-#include <thrift/c_glib/transport/thrift_socket.h>
-#include <thrift/c_glib/transport/thrift_server_transport.h>
-#include <thrift/c_glib/transport/thrift_server_socket.h>
+#include <shark/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/transport/thrift_socket.h>
+#include <shark/c_glib/transport/thrift_server_transport.h>
+#include <shark/c_glib/transport/thrift_server_socket.h>
 
 #define TEST_DATA { 'a', 'b', 'c' }
 

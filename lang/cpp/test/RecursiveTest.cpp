@@ -22,9 +22,9 @@
  */
 
 #include "gen-cpp/Recursive_types.h"
-#include <thrift/protocol/TBinaryProtocol.h>
+#include <shark/protocol/TBinaryProtocol.h>
 #include <memory>
-#include <thrift/transport/TBufferTransports.h>
+#include <shark/transport/TBufferTransports.h>
 
 #define BOOST_TEST_MODULE RecursiveTest
 #include <boost/test/unit_test.hpp>

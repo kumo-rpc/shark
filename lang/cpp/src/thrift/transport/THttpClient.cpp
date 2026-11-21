@@ -20,9 +20,9 @@
 #include <sstream>
 #include <vector>
 
-#include <thrift/config.h>
-#include <thrift/transport/THttpClient.h>
-#include <thrift/transport/TSocket.h>
+#include <shark/config.h>
+#include <shark/transport/THttpClient.h>
+#include <shark/transport/TSocket.h>
 
 using std::string;
 

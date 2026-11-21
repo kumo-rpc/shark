@@ -33,10 +33,10 @@
 #include <string>
 #include <vector>
 
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/THeaderTransport.h>
-#include <thrift/transport/THttpServer.h>
-#include <thrift/transport/TTransportUtils.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/THeaderTransport.h>
+#include <shark/transport/THttpServer.h>
+#include <shark/transport/TTransportUtils.h>
 
 #define BOOST_TEST_MODULE TTransportFactoryConfigTest
 #include <boost/test/unit_test.hpp>

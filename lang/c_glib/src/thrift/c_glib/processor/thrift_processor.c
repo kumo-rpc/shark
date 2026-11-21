@@ -13,8 +13,8 @@
 // limitations under the License.
 //
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/processor/thrift_processor.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/processor/thrift_processor.h>
 
 G_DEFINE_ABSTRACT_TYPE(ThriftProcessor, thrift_processor, G_TYPE_OBJECT)
 

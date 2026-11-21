@@ -16,7 +16,7 @@
 #ifndef _THRIFT_TAPPLICATIONEXCEPTION_H_
 #define _THRIFT_TAPPLICATIONEXCEPTION_H_ 1
 
-#include <thrift/Thrift.h>
+#include <shark/Thrift.h>
 
 namespace apache {
 namespace thrift {

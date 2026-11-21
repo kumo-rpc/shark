@@ -17,7 +17,7 @@
 #define _THRIFT_TRANSPORT_TSOCKETPOOL_H_ 1
 
 #include <vector>
-#include <thrift/transport/TSocket.h>
+#include <shark/transport/TSocket.h>
 
 namespace apache {
 namespace thrift {

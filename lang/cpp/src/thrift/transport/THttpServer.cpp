@@ -17,9 +17,9 @@
 #include <sstream>
 #include <iostream>
 
-#include <thrift/config.h>
-#include <thrift/transport/THttpServer.h>
-#include <thrift/transport/TSocket.h>
+#include <shark/config.h>
+#include <shark/transport/THttpServer.h>
+#include <shark/transport/TSocket.h>
 #if defined(_MSC_VER) || defined(__MINGW32__)
   #include <shlwapi.h>
 #endif

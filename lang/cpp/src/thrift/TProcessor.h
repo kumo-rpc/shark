@@ -17,7 +17,7 @@
 #define _THRIFT_TPROCESSOR_H_ 1
 
 #include <string>
-#include <thrift/protocol/TProtocol.h>
+#include <shark/protocol/TProtocol.h>
 
 namespace apache {
 namespace thrift {

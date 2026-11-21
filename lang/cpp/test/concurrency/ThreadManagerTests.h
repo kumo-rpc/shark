@@ -13,10 +13,10 @@
 // limitations under the License.
 //
 
-#include <thrift/thrift-config.h>
-#include <thrift/concurrency/ThreadManager.h>
-#include <thrift/concurrency/ThreadFactory.h>
-#include <thrift/concurrency/Monitor.h>
+#include <shark/thrift-config.h>
+#include <shark/concurrency/ThreadManager.h>
+#include <shark/concurrency/ThreadFactory.h>
+#include <shark/concurrency/Monitor.h>
 
 #include <assert.h>
 #include <deque>

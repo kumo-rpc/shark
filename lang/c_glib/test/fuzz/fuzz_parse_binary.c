@@ -13,11 +13,11 @@
 // limitations under the License.
 //
 
-#include <thrift/c_glib/protocol/thrift_binary_protocol.h>
-#include <thrift/c_glib/protocol/thrift_protocol.h>
-#include <thrift/c_glib/transport/thrift_memory_buffer.h>
-#include <thrift/c_glib/transport/thrift_transport.h>
-#include <thrift/c_glib/thrift_configuration.h>
+#include <shark/c_glib/protocol/thrift_binary_protocol.h>
+#include <shark/c_glib/protocol/thrift_protocol.h>
+#include <shark/c_glib/transport/thrift_memory_buffer.h>
+#include <shark/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/thrift_configuration.h>
 #include <stdint.h>
 #include "gen-c_glib/fuzz_test_no_uuid_types.h"
 #include <stdio.h>

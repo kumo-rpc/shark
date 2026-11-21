@@ -16,8 +16,8 @@
 #ifndef _THRIFT_TRANSPORT_TNONBLOCKINGSERVERSOCKET_H_
 #define _THRIFT_TRANSPORT_TNONBLOCKINGSERVERSOCKET_H_ 1
 
-#include <thrift/transport/TNonblockingServerTransport.h>
-#include <thrift/transport/PlatformSocket.h>
+#include <shark/transport/TNonblockingServerTransport.h>
+#include <shark/transport/PlatformSocket.h>
 
 namespace apache {
 namespace thrift {

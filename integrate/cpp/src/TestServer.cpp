@@ -13,31 +13,31 @@
 // limitations under the License.
 //
 
-#include <thrift/async/TAsyncBufferProcessor.h>
-#include <thrift/async/TAsyncProtocolProcessor.h>
-#include <thrift/async/TEvhttpServer.h>
-#include <thrift/concurrency/ThreadFactory.h>
-#include <thrift/concurrency/ThreadManager.h>
-#include <thrift/processor/TMultiplexedProcessor.h>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/protocol/TCompactProtocol.h>
-#include <thrift/protocol/THeaderProtocol.h>
-#include <thrift/protocol/TJSONProtocol.h>
-#include <thrift/server/TNonblockingServer.h>
-#include <thrift/server/TSimpleServer.h>
-#include <thrift/server/TThreadPoolServer.h>
-#include <thrift/server/TThreadedServer.h>
-#include <thrift/transport/PlatformSocket.h>
-#include <thrift/transport/THttpServer.h>
-#include <thrift/transport/THttpTransport.h>
-#include <thrift/transport/TNonblockingSSLServerSocket.h>
-#include <thrift/transport/TNonblockingServerSocket.h>
-#include <thrift/transport/TSSLServerSocket.h>
-#include <thrift/transport/TSSLSocket.h>
-#include <thrift/transport/TServerSocket.h>
-#include <thrift/transport/TTransportUtils.h>
-#include <thrift/transport/TWebSocketServer.h>
-#include <thrift/transport/TZlibTransport.h>
+#include <shark/async/TAsyncBufferProcessor.h>
+#include <shark/async/TAsyncProtocolProcessor.h>
+#include <shark/async/TEvhttpServer.h>
+#include <shark/concurrency/ThreadFactory.h>
+#include <shark/concurrency/ThreadManager.h>
+#include <shark/processor/TMultiplexedProcessor.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/protocol/TCompactProtocol.h>
+#include <shark/protocol/THeaderProtocol.h>
+#include <shark/protocol/TJSONProtocol.h>
+#include <shark/server/TNonblockingServer.h>
+#include <shark/server/TSimpleServer.h>
+#include <shark/server/TThreadPoolServer.h>
+#include <shark/server/TThreadedServer.h>
+#include <shark/transport/PlatformSocket.h>
+#include <shark/transport/THttpServer.h>
+#include <shark/transport/THttpTransport.h>
+#include <shark/transport/TNonblockingSSLServerSocket.h>
+#include <shark/transport/TNonblockingServerSocket.h>
+#include <shark/transport/TSSLServerSocket.h>
+#include <shark/transport/TSSLSocket.h>
+#include <shark/transport/TServerSocket.h>
+#include <shark/transport/TTransportUtils.h>
+#include <shark/transport/TWebSocketServer.h>
+#include <shark/transport/TZlibTransport.h>
 
 #include "SecondService.h"
 #include "ThriftTest.h"
@@ -68,7 +68,7 @@
 #include <boost/program_options.hpp>
 
 #if _WIN32
-#include <thrift/windows/TWinsockSingleton.h>
+#include <shark/windows/TWinsockSingleton.h>
 #endif
 
 using namespace std;

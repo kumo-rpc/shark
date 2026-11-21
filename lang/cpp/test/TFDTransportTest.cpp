@@ -15,8 +15,8 @@
 
 #include <cstdlib>
 #include <stdexcept>
-#include <thrift/Thrift.h>
-#include <thrift/transport/TFDTransport.h>
+#include <shark/Thrift.h>
+#include <shark/transport/TFDTransport.h>
 
 #define BOOST_TEST_MODULE TFDTransportTest
 #include <boost/test/unit_test.hpp>

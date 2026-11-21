@@ -22,10 +22,10 @@
 #include <cmath>
 #include <iostream>
 
-#include <thrift/protocol/TDebugProtocol.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/TToString.h>
-#include <thrift/TConfiguration.h>
+#include <shark/protocol/TDebugProtocol.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/TToString.h>
+#include <shark/TConfiguration.h>
 
 #include "gen-cpp/FuzzTest_types.h"
 

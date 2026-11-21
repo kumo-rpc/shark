@@ -16,7 +16,7 @@
 #include <algorithm>
 #include <cmath>
 
-#include <thrift/transport/TBufferTransports.h>
+#include <shark/transport/TBufferTransports.h>
 
 using std::string;
 

@@ -14,7 +14,7 @@
 //
 
 
-#include <thrift/protocol/TJSONProtocol.h>
+#include <shark/protocol/TJSONProtocol.h>
 #include "FuzzCommon.tcc"
 
 using namespace apache::thrift::protocol;

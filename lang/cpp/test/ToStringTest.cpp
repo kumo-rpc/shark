@@ -19,7 +19,7 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <thrift/TToString.h>
+#include <shark/TToString.h>
 
 #include "gen-cpp/ThriftTest_types.h"
 #include "gen-cpp/OptionalRequiredTest_types.h"

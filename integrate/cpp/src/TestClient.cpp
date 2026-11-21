@@ -20,18 +20,18 @@
 #include <sstream>
 #include <fstream>
 #include <stdexcept>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/protocol/TCompactProtocol.h>
-#include <thrift/protocol/THeaderProtocol.h>
-#include <thrift/protocol/TJSONProtocol.h>
-#include <thrift/protocol/TMultiplexedProtocol.h>
-#include <thrift/transport/THttpClient.h>
-#include <thrift/transport/TTransportUtils.h>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/TSSLSocket.h>
-#include <thrift/transport/TZlibTransport.h>
-#include <thrift/async/TEvhttpClientChannel.h>
-#include <thrift/server/TNonblockingServer.h> // <event.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/protocol/TCompactProtocol.h>
+#include <shark/protocol/THeaderProtocol.h>
+#include <shark/protocol/TJSONProtocol.h>
+#include <shark/protocol/TMultiplexedProtocol.h>
+#include <shark/transport/THttpClient.h>
+#include <shark/transport/TTransportUtils.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/TSSLSocket.h>
+#include <shark/transport/TZlibTransport.h>
+#include <shark/async/TEvhttpClientChannel.h>
+#include <shark/server/TNonblockingServer.h> // <event.h>
 
 #ifdef HAVE_STDINT_H
 #include <stdint.h>
@@ -45,7 +45,7 @@
 #include <boost/program_options.hpp>
 #include <boost/random/random_device.hpp>
 #if _WIN32
-#include <thrift/windows/TWinsockSingleton.h>
+#include <shark/windows/TWinsockSingleton.h>
 #endif
 
 #include "SecondService.h"

@@ -18,7 +18,7 @@
 
 #include <cstdint>
 #include <memory>
-#include <thrift/TNonCopyable.h>
+#include <shark/TNonCopyable.h>
 
 namespace apache {
 namespace thrift {

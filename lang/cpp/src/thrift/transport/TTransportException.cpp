@@ -13,10 +13,10 @@
 // limitations under the License.
 //
 
-#include <thrift/transport/TTransportException.h>
+#include <shark/transport/TTransportException.h>
 #include <cstring>
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
 using std::string;
 

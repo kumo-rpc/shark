@@ -21,9 +21,9 @@
 #include <boost/thread.hpp>
 #include <memory>
 #include <openssl/opensslv.h>
-#include <thrift/transport/TSSLServerSocket.h>
-#include <thrift/transport/TSSLSocket.h>
-#include <thrift/transport/TTransport.h>
+#include <shark/transport/TSSLServerSocket.h>
+#include <shark/transport/TSSLSocket.h>
+#include <shark/transport/TTransport.h>
 #include <vector>
 #ifdef HAVE_SIGNAL_H
 #include <signal.h>

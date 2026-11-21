@@ -16,7 +16,7 @@
 #ifndef _THRIFT_TRANSPORT_TSSLSERVERSOCKET_H_
 #define _THRIFT_TRANSPORT_TSSLSERVERSOCKET_H_ 1
 
-#include <thrift/transport/TServerSocket.h>
+#include <shark/transport/TServerSocket.h>
 
 namespace apache {
 namespace thrift {

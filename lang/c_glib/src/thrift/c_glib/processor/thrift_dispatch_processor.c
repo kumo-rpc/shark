@@ -13,9 +13,9 @@
 // limitations under the License.
 //
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/thrift_application_exception.h>
-#include <thrift/c_glib/processor/thrift_dispatch_processor.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/thrift_application_exception.h>
+#include <shark/c_glib/processor/thrift_dispatch_processor.h>
 
 G_DEFINE_ABSTRACT_TYPE (ThriftDispatchProcessor,
                         thrift_dispatch_processor,

@@ -16,7 +16,7 @@
 #ifndef _THRIFT_PROTOCOL_TJSONPROTOCOL_H_
 #define _THRIFT_PROTOCOL_TJSONPROTOCOL_H_ 1
 
-#include <thrift/protocol/TVirtualProtocol.h>
+#include <shark/protocol/TVirtualProtocol.h>
 
 #include <stack>
 
@@ -317,7 +317,7 @@ public:
 } // apache::thrift::protocol
 
 // TODO(dreiss): Move part of ThriftJSONString into a .cpp file and remove this.
-#include <thrift/transport/TBufferTransports.h>
+#include <shark/transport/TBufferTransports.h>
 
 namespace apache {
 namespace thrift {

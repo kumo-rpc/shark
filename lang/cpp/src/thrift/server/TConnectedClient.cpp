@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/server/TConnectedClient.h>
+#include <shark/server/TConnectedClient.h>
 
 #include <exception>
 

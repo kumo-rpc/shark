@@ -24,13 +24,13 @@
 
 #include <glib-object.h>
 
-#include <thrift/c_glib/thrift_application_exception.h>
-#include <thrift/c_glib/transport/thrift_buffered_transport.h>
-#include <thrift/c_glib/transport/thrift_fd_transport.h>
-#include <thrift/c_glib/transport/thrift_framed_transport.h>
-#include <thrift/c_glib/transport/thrift_memory_buffer.h>
-#include <thrift/c_glib/transport/thrift_server_socket.h>
-#include <thrift/c_glib/transport/thrift_socket.h>
+#include <shark/c_glib/thrift_application_exception.h>
+#include <shark/c_glib/transport/thrift_buffered_transport.h>
+#include <shark/c_glib/transport/thrift_fd_transport.h>
+#include <shark/c_glib/transport/thrift_framed_transport.h>
+#include <shark/c_glib/transport/thrift_memory_buffer.h>
+#include <shark/c_glib/transport/thrift_server_socket.h>
+#include <shark/c_glib/transport/thrift_socket.h>
 #include "gen-c_glib/t_test_thrift_test_types.h"
 
 static void

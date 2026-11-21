@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/windows/WinFcntl.h>
+#include <shark/windows/WinFcntl.h>
 
 int thrift_fcntl(THRIFT_SOCKET fd, int cmd, int flags) {
   if (cmd != THRIFT_F_GETFL && cmd != THRIFT_F_SETFL) {

@@ -13,8 +13,8 @@
 // limitations under the License.
 //
 
-#include <thrift/windows/GetTimeOfDay.h>
-#include <thrift/thrift-config.h>
+#include <shark/windows/GetTimeOfDay.h>
+#include <shark/thrift-config.h>
 
 // win32
 #if defined(__MINGW32__)
@@ -37,7 +37,7 @@ int thrift_gettimeofday(struct timeval* tv, struct timezone* tz) {
 #include <winsock2.h>
 #include <cstdint>
 #include <sstream>
-#include <thrift/transport/TTransportException.h>
+#include <shark/transport/TTransportException.h>
 
 // This code started from a "FREE implementation" posted to Stack Overflow at:
 // https://stackoverflow.com/questions/10905892/equivalent-of-gettimeday-for-windows

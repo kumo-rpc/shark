@@ -41,16 +41,16 @@
 #include <event2/event.h>
 #include <evhttp.h>
 
-#include <thrift/async/TAsyncBufferProcessor.h>
-#include <thrift/async/TEvhttpServer.h>
-#include <thrift/concurrency/Thread.h>
-#include <thrift/concurrency/ThreadFactory.h>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/transport/PlatformSocket.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/TServerSocket.h>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/TTransportException.h>
+#include <shark/async/TAsyncBufferProcessor.h>
+#include <shark/async/TEvhttpServer.h>
+#include <shark/concurrency/Thread.h>
+#include <shark/concurrency/ThreadFactory.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/transport/PlatformSocket.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/TServerSocket.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/TTransportException.h>
 
 using apache::thrift::async::TAsyncBufferProcessor;
 using apache::thrift::async::TEvhttpServer;

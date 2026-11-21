@@ -17,10 +17,10 @@
 #define _THRIFT_SERVER_TCONNECTEDCLIENT_H_ 1
 
 #include <memory>
-#include <thrift/TProcessor.h>
-#include <thrift/protocol/TProtocol.h>
-#include <thrift/server/TServer.h>
-#include <thrift/transport/TTransport.h>
+#include <shark/TProcessor.h>
+#include <shark/protocol/TProtocol.h>
+#include <shark/server/TServer.h>
+#include <shark/transport/TTransport.h>
 
 namespace apache {
 namespace thrift {

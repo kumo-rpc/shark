@@ -15,8 +15,8 @@
 
 #include <algorithm>
 #include <boost/test/unit_test.hpp>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/TShortReadTransport.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/TShortReadTransport.h>
 #include <memory>
 
 using std::shared_ptr;

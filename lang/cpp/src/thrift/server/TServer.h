@@ -16,10 +16,10 @@
 #ifndef _THRIFT_SERVER_TSERVER_H_
 #define _THRIFT_SERVER_TSERVER_H_ 1
 
-#include <thrift/TProcessor.h>
-#include <thrift/transport/TServerTransport.h>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/concurrency/Thread.h>
+#include <shark/TProcessor.h>
+#include <shark/transport/TServerTransport.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/concurrency/Thread.h>
 
 #include <memory>
 

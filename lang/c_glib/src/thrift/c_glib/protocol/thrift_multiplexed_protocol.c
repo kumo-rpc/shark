@@ -18,10 +18,10 @@
 #include <glib.h>
 #include <glib-object.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/protocol/thrift_protocol.h>
-#include <thrift/c_glib/protocol/thrift_protocol_decorator.h>
-#include <thrift/c_glib/protocol/thrift_multiplexed_protocol.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/protocol/thrift_protocol.h>
+#include <shark/c_glib/protocol/thrift_protocol_decorator.h>
+#include <shark/c_glib/protocol/thrift_multiplexed_protocol.h>
 
 
 enum

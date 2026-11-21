@@ -25,9 +25,9 @@
 
 #include <netdb.h>
 
-#include <thrift/c_glib/thrift_configuration.h>
-#include <thrift/c_glib/transport/thrift_transport.h>
-#include <thrift/c_glib/transport/thrift_memory_buffer.h>
+#include <shark/c_glib/thrift_configuration.h>
+#include <shark/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/transport/thrift_memory_buffer.h>
 
 #include "../src/thrift/c_glib/transport/thrift_framed_transport.c"
 

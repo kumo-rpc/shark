@@ -28,10 +28,10 @@
 #include <string.h>
 #include <zlib.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/transport/thrift_transport.h>
-#include <thrift/c_glib/transport/thrift_memory_buffer.h>
-#include <thrift/c_glib/transport/thrift_zlib_transport.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/transport/thrift_memory_buffer.h>
+#include <shark/c_glib/transport/thrift_zlib_transport.h>
 
 #define PAYLOAD_BYTES 11
 #define SENTINEL 0x5a

@@ -13,8 +13,8 @@
 // limitations under the License.
 //
 
-#include <thrift/TApplicationException.h>
-#include <thrift/protocol/TProtocol.h>
+#include <shark/TApplicationException.h>
+#include <shark/protocol/TProtocol.h>
 
 namespace apache {
 namespace thrift {

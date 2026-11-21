@@ -15,9 +15,9 @@
 
 #include <stdio.h>
 
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/protocol/TCompactProtocol.h>
-#include <thrift/transport/TBufferTransports.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/protocol/TCompactProtocol.h>
+#include <shark/transport/TBufferTransports.h>
 
 #define BOOST_TEST_MODULE AllProtocolTests
 #include <boost/test/unit_test.hpp>

@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/transport/TTransportUtils.h>
+#include <shark/transport/TTransportUtils.h>
 
 using std::string;
 

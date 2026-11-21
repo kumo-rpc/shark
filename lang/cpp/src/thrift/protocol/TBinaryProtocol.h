@@ -16,8 +16,8 @@
 #ifndef _THRIFT_PROTOCOL_TBINARYPROTOCOL_H_
 #define _THRIFT_PROTOCOL_TBINARYPROTOCOL_H_ 1
 
-#include <thrift/protocol/TProtocol.h>
-#include <thrift/protocol/TVirtualProtocol.h>
+#include <shark/protocol/TProtocol.h>
+#include <shark/protocol/TVirtualProtocol.h>
 
 #include <memory>
 
@@ -263,6 +263,6 @@ typedef TBinaryProtocolFactoryT<TTransport, TNetworkLittleEndian> TLEBinaryProto
 }
 } // apache::thrift::protocol
 
-#include <thrift/protocol/TBinaryProtocol.tcc>
+#include <shark/protocol/TBinaryProtocol.tcc>
 
 #endif // #ifndef _THRIFT_PROTOCOL_TBINARYPROTOCOL_H_

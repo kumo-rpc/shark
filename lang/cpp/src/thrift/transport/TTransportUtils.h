@@ -20,10 +20,10 @@
 #include <cstring>
 #include <string>
 #include <algorithm>
-#include <thrift/transport/TTransport.h>
+#include <shark/transport/TTransport.h>
 // Include the buffered transports that used to be defined here.
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/TFileTransport.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/TFileTransport.h>
 
 namespace apache {
 namespace thrift {

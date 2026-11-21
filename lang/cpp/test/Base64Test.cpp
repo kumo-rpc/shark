@@ -14,7 +14,7 @@
 //
 
 #include <boost/test/unit_test.hpp>
-#include <thrift/protocol/TBase64Utils.h>
+#include <shark/protocol/TBase64Utils.h>
 
 using apache::thrift::protocol::base64_encode;
 using apache::thrift::protocol::base64_decode;

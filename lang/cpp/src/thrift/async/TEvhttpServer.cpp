@@ -13,9 +13,9 @@
 // limitations under the License.
 //
 
-#include <thrift/async/TEvhttpServer.h>
-#include <thrift/async/TAsyncBufferProcessor.h>
-#include <thrift/transport/TBufferTransports.h>
+#include <shark/async/TEvhttpServer.h>
+#include <shark/async/TAsyncBufferProcessor.h>
+#include <shark/transport/TBufferTransports.h>
 #include <memory>
 #include <evhttp.h>
 #include <event2/buffer.h>

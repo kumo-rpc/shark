@@ -36,9 +36,9 @@
 #include <string.h>
 #include <unistd.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/transport/thrift_transport.h>
-#include <thrift/c_glib/transport/thrift_fd_transport.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/transport/thrift_fd_transport.h>
 
 #define TEST_TIMEOUT_US (10 * G_USEC_PER_SEC)
 

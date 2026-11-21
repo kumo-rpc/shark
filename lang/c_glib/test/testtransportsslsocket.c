@@ -21,11 +21,11 @@
 #include <sys/socket.h>
 #include <netdb.h>
 
-#include <thrift/c_glib/transport/thrift_transport.h>
-#include <thrift/c_glib/transport/thrift_buffered_transport.h>
-#include <thrift/c_glib/transport/thrift_server_transport.h>
-#include <thrift/c_glib/transport/thrift_server_socket.h>
-#include <thrift/c_glib/transport/thrift_ssl_socket.h>
+#include <shark/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/transport/thrift_buffered_transport.h>
+#include <shark/c_glib/transport/thrift_server_transport.h>
+#include <shark/c_glib/transport/thrift_server_socket.h>
+#include <shark/c_glib/transport/thrift_ssl_socket.h>
 
 /* #define TEST_DATA { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' } */
 #define TEST_DATA { "GET / HTTP/1.1\n\n" }

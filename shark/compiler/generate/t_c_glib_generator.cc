@@ -240,8 +240,8 @@ void t_c_glib_generator::init_generator() {
 
   /* include base types */
   f_types_ << "/* base includes */" << '\n' << "#include <glib-object.h>" << '\n'
-           << "#include <thrift/c_glib/thrift_struct.h>" << '\n'
-           << "#include <thrift/c_glib/protocol/thrift_protocol.h>" << '\n';
+           << "#include <shark/c_glib/thrift_struct.h>" << '\n'
+           << "#include <shark/c_glib/protocol/thrift_protocol.h>" << '\n';
 
   /* include other thrift includes */
   const vector<t_program*>& includes = program_->get_includes();
@@ -277,7 +277,7 @@ void t_c_glib_generator::init_generator() {
 
   // include the types file
   f_types_impl_ << '\n' << "#include \"" << this->nspace_lc << program_name_u << "_types.h\""
-                << '\n' << "#include <thrift/c_glib/thrift.h>" << '\n' << '\n';
+                << '\n' << "#include <shark/c_glib/thrift.h>" << '\n' << '\n';
 
   f_types_ << "/* begin types */" << '\n' << '\n';
 }
@@ -461,7 +461,7 @@ void t_c_glib_generator::generate_service(t_service* tservice) {
             << '\n';
 
   // add standard includes
-  f_header_ << "#include <thrift/c_glib/processor/thrift_dispatch_processor.h>" << '\n' << '\n';
+  f_header_ << "#include <shark/c_glib/processor/thrift_dispatch_processor.h>" << '\n' << '\n';
   f_header_ << "#include \"" << this->nspace_lc << program_name_lc << "_types.h\"" << '\n';
 
   // if we are inheriting from another service, include its header
@@ -481,8 +481,8 @@ void t_c_glib_generator::generate_service(t_service* tservice) {
   f_service_ << autogen_comment();
 
   // include the headers
-  f_service_ << "#include <string.h>" << '\n' << "#include <thrift/c_glib/thrift.h>" << '\n'
-             << "#include <thrift/c_glib/thrift_application_exception.h>" << '\n' << "#include \""
+  f_service_ << "#include <string.h>" << '\n' << "#include <shark/c_glib/thrift.h>" << '\n'
+             << "#include <shark/c_glib/thrift_application_exception.h>" << '\n' << "#include \""
              << filename << ".h\"" << '\n' << '\n';
 
   // generate the service-helper classes

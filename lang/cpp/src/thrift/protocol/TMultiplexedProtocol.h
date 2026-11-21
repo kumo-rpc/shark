@@ -16,7 +16,7 @@
 #ifndef THRIFT_TMULTIPLEXEDPROTOCOL_H_
 #define THRIFT_TMULTIPLEXEDPROTOCOL_H_ 1
 
-#include <thrift/protocol/TProtocolDecorator.h>
+#include <shark/protocol/TProtocolDecorator.h>
 
 namespace apache {
 namespace thrift {

@@ -16,7 +16,7 @@
 #ifndef _THRIFT_SERVER_TSIMPLESERVER_H_
 #define _THRIFT_SERVER_TSIMPLESERVER_H_ 1
 
-#include <thrift/server/TServerFramework.h>
+#include <shark/server/TServerFramework.h>
 
 namespace apache {
 namespace thrift {

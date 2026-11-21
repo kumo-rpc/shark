@@ -20,14 +20,14 @@
 #include <io.h>
 #endif
 
-#include <thrift/config.h>
+#include <shark/config.h>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
 
-#include <thrift/transport/PlatformSocket.h>
-#include <thrift/transport/TFDTransport.h>
+#include <shark/transport/PlatformSocket.h>
+#include <shark/transport/TFDTransport.h>
 
 using std::string;
 

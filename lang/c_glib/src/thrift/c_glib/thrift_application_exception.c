@@ -14,7 +14,7 @@
 //
 
 #include "thrift_application_exception.h"
-#include <thrift/c_glib/protocol/thrift_protocol.h>
+#include <shark/c_glib/protocol/thrift_protocol.h>
 
 /* object properties */
 enum _ThriftApplicationExceptionProperties

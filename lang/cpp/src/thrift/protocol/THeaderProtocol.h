@@ -16,10 +16,10 @@
 #ifndef THRIFT_PROTOCOL_THEADERPROTOCOL_H_
 #define THRIFT_PROTOCOL_THEADERPROTOCOL_H_ 1
 
-#include <thrift/protocol/TProtocol.h>
-#include <thrift/protocol/TProtocolTypes.h>
-#include <thrift/protocol/TVirtualProtocol.h>
-#include <thrift/transport/THeaderTransport.h>
+#include <shark/protocol/TProtocol.h>
+#include <shark/protocol/TProtocolTypes.h>
+#include <shark/protocol/TVirtualProtocol.h>
+#include <shark/transport/THeaderTransport.h>
 
 #include <memory>
 

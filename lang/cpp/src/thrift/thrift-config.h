@@ -14,6 +14,6 @@
 //
 
 #ifdef _WIN32
-#include <thrift/windows/config.h>
+#include <shark/windows/config.h>
 #endif
-#include <thrift/config.h>
+#include <shark/config.h>

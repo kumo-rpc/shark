@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/concurrency/Mutex.h>
+#include <shark/concurrency/Mutex.h>
 
 #include <chrono>
 #include <mutex>

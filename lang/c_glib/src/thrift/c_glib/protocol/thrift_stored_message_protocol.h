@@ -18,9 +18,9 @@
 
 #include <glib-object.h>
 
-#include <thrift/c_glib/protocol/thrift_protocol.h>
-#include <thrift/c_glib/protocol/thrift_protocol_decorator.h>
-#include <thrift/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/protocol/thrift_protocol.h>
+#include <shark/c_glib/protocol/thrift_protocol_decorator.h>
+#include <shark/c_glib/transport/thrift_transport.h>
 
 G_BEGIN_DECLS
 

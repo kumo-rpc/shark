@@ -16,7 +16,7 @@
 #ifndef THRIFT_TPROTOCOLDECORATOR_H_
 #define THRIFT_TPROTOCOLDECORATOR_H_ 1
 
-#include <thrift/protocol/TProtocol.h>
+#include <shark/protocol/TProtocol.h>
 #include <memory>
 
 namespace apache {

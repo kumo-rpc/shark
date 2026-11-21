@@ -17,10 +17,10 @@
 #define PEEKPROCESSOR_H
 
 #include <string>
-#include <thrift/TProcessor.h>
-#include <thrift/transport/TTransport.h>
-#include <thrift/transport/TTransportUtils.h>
-#include <thrift/transport/TBufferTransports.h>
+#include <shark/TProcessor.h>
+#include <shark/transport/TTransport.h>
+#include <shark/transport/TTransportUtils.h>
+#include <shark/transport/TBufferTransports.h>
 #include <memory>
 
 namespace apache {

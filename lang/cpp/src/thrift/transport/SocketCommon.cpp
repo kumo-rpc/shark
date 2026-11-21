@@ -19,10 +19,10 @@
  * @author: David Suárez <david.sephirot@gmail.com>
  */
 
-#include <thrift/transport/SocketCommon.h>
-#include <thrift/transport/PlatformSocket.h>
-#include <thrift/transport/TTransportException.h>
-#include <thrift/TOutput.h>
+#include <shark/transport/SocketCommon.h>
+#include <shark/transport/PlatformSocket.h>
+#include <shark/transport/TTransportException.h>
+#include <shark/TOutput.h>
 
 #include <cstring>
 

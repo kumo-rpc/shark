@@ -21,8 +21,8 @@
 #include <boost/chrono/duration.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
 #include <boost/thread/thread.hpp>
-#include <thrift/transport/TPipe.h>
-#include <thrift/transport/TPipeServer.h>
+#include <shark/transport/TPipe.h>
+#include <shark/transport/TPipeServer.h>
 #include <memory>
 
 using apache::thrift::transport::TPipeServer;

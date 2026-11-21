@@ -18,10 +18,10 @@
 
 #include <limits>
 
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/Thrift.h>
-#include <thrift/TUuid.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/Thrift.h>
+#include <shark/TUuid.h>
 
 #include "GenericHelpers.h"
 

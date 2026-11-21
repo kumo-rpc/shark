@@ -13,9 +13,9 @@
 // limitations under the License.
 //
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/protocol/thrift_protocol.h>
-#include <thrift/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/protocol/thrift_protocol.h>
+#include <shark/c_glib/transport/thrift_transport.h>
 
 /* define the GError domain string */
 #define THRIFT_PROTOCOL_ERROR_DOMAIN "thrift-protocol-error-quark"

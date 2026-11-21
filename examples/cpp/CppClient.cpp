@@ -15,9 +15,9 @@
 
 #include <iostream>
 
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/TTransportUtils.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/TTransportUtils.h>
 
 #include "../gen-cpp/Calculator.h"
 

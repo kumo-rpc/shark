@@ -20,10 +20,10 @@
 #include <string.h>
 #include <unistd.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/thrift_configuration.h>
-#include <thrift/c_glib/transport/thrift_transport.h>
-#include <thrift/c_glib/transport/thrift_memory_buffer.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/thrift_configuration.h>
+#include <shark/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/transport/thrift_memory_buffer.h>
 
 /* object properties */
 enum _ThriftMemoryBufferProperties

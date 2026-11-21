@@ -16,8 +16,8 @@
 #ifndef _THRIFT_TBASE_H_
 #define _THRIFT_TBASE_H_ 1
 
-#include <thrift/Thrift.h>
-#include <thrift/protocol/TProtocol.h>
+#include <shark/Thrift.h>
+#include <shark/protocol/TProtocol.h>
 
 namespace apache {
 namespace thrift {

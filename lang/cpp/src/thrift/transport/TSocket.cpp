@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
 #include <cstring>
 #include <sstream>
@@ -45,11 +45,11 @@
 #endif
 #include <fcntl.h>
 
-#include <thrift/concurrency/Monitor.h>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/TTransportException.h>
-#include <thrift/transport/PlatformSocket.h>
-#include <thrift/transport/SocketCommon.h>
+#include <shark/concurrency/Monitor.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/TTransportException.h>
+#include <shark/transport/PlatformSocket.h>
+#include <shark/transport/SocketCommon.h>
 
 #ifndef SOCKOPT_CAST_T
 #ifndef _WIN32
@@ -60,7 +60,7 @@
 #endif
 
 #if _WIN32
-#include <thrift/windows/TWinsockSingleton.h>
+#include <shark/windows/TWinsockSingleton.h>
 #endif
 
 template <class T>

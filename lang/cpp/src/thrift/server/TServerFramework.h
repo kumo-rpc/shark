@@ -18,12 +18,12 @@
 
 #include <memory>
 #include <stdint.h>
-#include <thrift/TProcessor.h>
-#include <thrift/concurrency/Monitor.h>
-#include <thrift/server/TConnectedClient.h>
-#include <thrift/server/TServer.h>
-#include <thrift/transport/TServerTransport.h>
-#include <thrift/transport/TTransport.h>
+#include <shark/TProcessor.h>
+#include <shark/concurrency/Monitor.h>
+#include <shark/server/TConnectedClient.h>
+#include <shark/server/TServer.h>
+#include <shark/transport/TServerTransport.h>
+#include <shark/transport/TTransport.h>
 
 namespace apache {
 namespace thrift {

@@ -16,7 +16,7 @@
 #ifndef _THRIFT_TRANSPORT_TSIMPLEFILETRANSPORT_H_
 #define _THRIFT_TRANSPORT_TSIMPLEFILETRANSPORT_H_ 1
 
-#include <thrift/transport/TFDTransport.h>
+#include <shark/transport/TFDTransport.h>
 
 namespace apache {
 namespace thrift {

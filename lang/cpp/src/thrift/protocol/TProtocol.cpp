@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/protocol/TProtocol.h>
+#include <shark/protocol/TProtocol.h>
 
 namespace apache {
 namespace thrift {

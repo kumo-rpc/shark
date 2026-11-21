@@ -17,9 +17,9 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/thread.hpp>
 #include <boost/version.hpp>
-#include <thrift/transport/TSSLSocket.h>
-#include <thrift/transport/TSSLServerSocket.h>
-#include <thrift/transport/TTransportException.h>
+#include <shark/transport/TSSLSocket.h>
+#include <shark/transport/TSSLServerSocket.h>
+#include <shark/transport/TTransportException.h>
 
 #include <openssl/pem.h>
 #include <openssl/x509v3.h>

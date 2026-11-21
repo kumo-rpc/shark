@@ -13,11 +13,11 @@
 // limitations under the License.
 //
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
-#include <thrift/concurrency/Monitor.h>
-#include <thrift/concurrency/Exception.h>
-#include <thrift/transport/PlatformSocket.h>
+#include <shark/concurrency/Monitor.h>
+#include <shark/concurrency/Exception.h>
+#include <shark/transport/PlatformSocket.h>
 #include <assert.h>
 
 #include <condition_variable>

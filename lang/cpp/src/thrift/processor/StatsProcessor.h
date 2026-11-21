@@ -17,8 +17,8 @@
 #define STATSPROCESSOR_H
 
 #include <memory>
-#include <thrift/transport/TTransport.h>
-#include <thrift/protocol/TProtocol.h>
+#include <shark/transport/TTransport.h>
+#include <shark/protocol/TProtocol.h>
 #include <TProcessor.h>
 
 namespace apache {

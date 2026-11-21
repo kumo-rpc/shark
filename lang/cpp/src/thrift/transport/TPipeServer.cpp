@@ -13,16 +13,16 @@
 // limitations under the License.
 //
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 #include <cstring>
 
-#include <thrift/transport/TPipe.h>
-#include <thrift/transport/TPipeServer.h>
-#include <thrift/TNonCopyable.h>
+#include <shark/transport/TPipe.h>
+#include <shark/transport/TPipeServer.h>
+#include <shark/TNonCopyable.h>
 
 #ifdef _WIN32
-#include <thrift/windows/OverlappedSubmissionThread.h>
-#include <thrift/windows/Sync.h>
+#include <shark/windows/OverlappedSubmissionThread.h>
+#include <shark/windows/Sync.h>
 #include <accctrl.h>
 #include <aclapi.h>
 #include <sddl.h>

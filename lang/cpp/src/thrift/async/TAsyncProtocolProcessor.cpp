@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/async/TAsyncProtocolProcessor.h>
+#include <shark/async/TAsyncProtocolProcessor.h>
 
 using apache::thrift::transport::TBufferBase;
 using apache::thrift::protocol::TProtocol;

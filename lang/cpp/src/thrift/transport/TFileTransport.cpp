@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>
@@ -40,10 +40,10 @@
 #include <io.h>
 #endif
 
-#include <thrift/transport/TFileTransport.h>
-#include <thrift/transport/TTransportUtils.h>
-#include <thrift/transport/PlatformSocket.h>
-#include <thrift/concurrency/FunctionRunner.h>
+#include <shark/transport/TFileTransport.h>
+#include <shark/transport/TTransportUtils.h>
+#include <shark/transport/PlatformSocket.h>
+#include <shark/concurrency/FunctionRunner.h>
 
 namespace apache {
 namespace thrift {

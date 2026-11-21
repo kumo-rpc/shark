@@ -13,9 +13,9 @@
 // limitations under the License.
 //
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
-#include <thrift/concurrency/ThreadFactory.h>
+#include <shark/concurrency/ThreadFactory.h>
 #include <memory>
 
 namespace apache {

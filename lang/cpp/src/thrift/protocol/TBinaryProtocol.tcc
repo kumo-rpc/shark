@@ -16,8 +16,8 @@
 #ifndef _THRIFT_PROTOCOL_TBINARYPROTOCOL_TCC_
 #define _THRIFT_PROTOCOL_TBINARYPROTOCOL_TCC_ 1
 
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/transport/TTransportException.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/transport/TTransportException.h>
 
 #include <limits>
 

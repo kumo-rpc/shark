@@ -17,9 +17,9 @@
 * under the License.
 */
 
-#include <thrift/windows/OverlappedSubmissionThread.h>
-#include <thrift/transport/TTransportException.h>
-#include <thrift/TNonCopyable.h>
+#include <shark/windows/OverlappedSubmissionThread.h>
+#include <shark/transport/TTransportException.h>
+#include <shark/TNonCopyable.h>
 #include <boost/scope_exit.hpp>
 #include <process.h>
 

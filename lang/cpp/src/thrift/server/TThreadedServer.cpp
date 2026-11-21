@@ -15,8 +15,8 @@
 
 #include <string>
 #include <memory>
-#include <thrift/concurrency/ThreadFactory.h>
-#include <thrift/server/TThreadedServer.h>
+#include <shark/concurrency/ThreadFactory.h>
+#include <shark/server/TThreadedServer.h>
 
 namespace apache {
 namespace thrift {

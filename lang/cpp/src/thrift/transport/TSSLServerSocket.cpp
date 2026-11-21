@@ -13,9 +13,9 @@
 // limitations under the License.
 //
 
-//#include <thrift/thrift_export.h>
-#include <thrift/transport/TSSLServerSocket.h>
-#include <thrift/transport/TSSLSocket.h>
+//#include <shark/thrift_export.h>
+#include <shark/transport/TSSLServerSocket.h>
+#include <shark/transport/TSSLSocket.h>
 
 namespace apache {
 namespace thrift {

@@ -15,9 +15,9 @@
 // specific language governing permissions and limitations
 // under the License.
 
-#include <thrift/parse/t_program.h>
+#include <shark/parse/t_program.h>
 #include <shark/compiler/common.h>
-#include <thrift/generate/t_netstd_generator.h>
+#include <shark/generate/t_netstd_generator.h>
 #include "t_netstd_generator_functional_tests_helpers.h"
 
 const string TestDataGenerator::DEFAULT_FILE_HEADER = "/**" "\n"

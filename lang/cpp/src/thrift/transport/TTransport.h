@@ -16,9 +16,9 @@
 #ifndef _THRIFT_TRANSPORT_TTRANSPORT_H_
 #define _THRIFT_TRANSPORT_TTRANSPORT_H_ 1
 
-#include <thrift/Thrift.h>
-#include <thrift/TConfiguration.h>
-#include <thrift/transport/TTransportException.h>
+#include <shark/Thrift.h>
+#include <shark/TConfiguration.h>
+#include <shark/transport/TTransportException.h>
 #include <cstdint>
 #include <memory>
 #include <string>

@@ -24,9 +24,9 @@
 #include <openssl/x509v3.h>
 #include <sys/socket.h>
 
-#include <thrift/c_glib/transport/thrift_transport.h>
-#include <thrift/c_glib/transport/thrift_socket.h>
-#include <thrift/c_glib/transport/thrift_platform_socket.h>
+#include <shark/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/transport/thrift_socket.h>
+#include <shark/c_glib/transport/thrift_platform_socket.h>
 
 G_BEGIN_DECLS
 

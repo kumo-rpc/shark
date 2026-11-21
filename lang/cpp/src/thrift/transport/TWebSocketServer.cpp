@@ -20,7 +20,7 @@
 #include <openssl/bio.h>
 #include <openssl/evp.h>
 
-#include <thrift/Thrift.h>
+#include <shark/Thrift.h>
 
 using std::string;
 

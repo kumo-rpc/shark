@@ -18,7 +18,7 @@
 
 #include <glib-object.h>
 
-#include <thrift/c_glib/processor/thrift_processor.h>
+#include <shark/c_glib/processor/thrift_processor.h>
 
 G_BEGIN_DECLS
 

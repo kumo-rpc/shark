@@ -13,9 +13,9 @@
 // limitations under the License.
 //
 
-#include <thrift/concurrency/TimerManager.h>
-#include <thrift/concurrency/ThreadFactory.h>
-#include <thrift/concurrency/Monitor.h>
+#include <shark/concurrency/TimerManager.h>
+#include <shark/concurrency/ThreadFactory.h>
+#include <shark/concurrency/Monitor.h>
 
 #include <assert.h>
 #include <chrono>

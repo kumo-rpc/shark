@@ -16,7 +16,7 @@
 #ifndef _THRIFT_TUUID_H_
 #define _THRIFT_TUUID_H_ 1
 
-#include <thrift/Thrift.h>
+#include <shark/Thrift.h>
 
 #ifdef THRIFT_TUUID_SUPPORT_BOOST_UUID
 #include <boost/uuid/uuid.hpp>

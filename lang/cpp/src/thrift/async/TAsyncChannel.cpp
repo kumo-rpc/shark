@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/async/TAsyncChannel.h>
+#include <shark/async/TAsyncChannel.h>
 
 namespace apache {
 namespace thrift {

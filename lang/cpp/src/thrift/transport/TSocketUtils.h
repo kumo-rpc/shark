@@ -29,7 +29,7 @@
 #include <netdb.h>
 #endif
 
-#include <thrift/transport/PlatformSocket.h>
+#include <shark/transport/PlatformSocket.h>
 
 namespace apache {
 namespace thrift {

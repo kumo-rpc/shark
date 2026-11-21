@@ -16,17 +16,17 @@
 #include "gen-c_glib/t_test_container_test_types.h"
 #include "gen-c_glib/t_test_container_service.h"
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/protocol/thrift_binary_protocol_factory.h>
-#include <thrift/c_glib/protocol/thrift_binary_protocol.h>
-#include <thrift/c_glib/protocol/thrift_protocol_factory.h>
-#include <thrift/c_glib/server/thrift_server.h>
-#include <thrift/c_glib/server/thrift_simple_server.h>
-#include <thrift/c_glib/transport/thrift_buffered_transport_factory.h>
-#include <thrift/c_glib/transport/thrift_buffered_transport.h>
-#include <thrift/c_glib/transport/thrift_server_socket.h>
-#include <thrift/c_glib/transport/thrift_server_transport.h>
-#include <thrift/c_glib/transport/thrift_socket.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/protocol/thrift_binary_protocol_factory.h>
+#include <shark/c_glib/protocol/thrift_binary_protocol.h>
+#include <shark/c_glib/protocol/thrift_protocol_factory.h>
+#include <shark/c_glib/server/thrift_server.h>
+#include <shark/c_glib/server/thrift_simple_server.h>
+#include <shark/c_glib/transport/thrift_buffered_transport_factory.h>
+#include <shark/c_glib/transport/thrift_buffered_transport.h>
+#include <shark/c_glib/transport/thrift_server_socket.h>
+#include <shark/c_glib/transport/thrift_server_transport.h>
+#include <shark/c_glib/transport/thrift_socket.h>
 
 #include <glib-object.h>
 #include <glib.h>

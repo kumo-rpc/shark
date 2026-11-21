@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/server/TSimpleServer.h>
+#include <shark/server/TSimpleServer.h>
 
 namespace apache {
 namespace thrift {

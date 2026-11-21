@@ -13,9 +13,9 @@
 // limitations under the License.
 //
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/transport/thrift_transport.h>
-#include <thrift/c_glib/transport/thrift_server_transport.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/transport/thrift_server_transport.h>
 
 /* object properties */
 enum _ThriftServerTransportProperties

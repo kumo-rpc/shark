@@ -22,7 +22,7 @@
 #ifndef THRIFT_SOCKETCOMMON_H
 #define THRIFT_SOCKETCOMMON_H
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>

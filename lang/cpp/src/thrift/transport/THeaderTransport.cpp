@@ -13,11 +13,11 @@
 // limitations under the License.
 //
 
-#include <thrift/transport/THeaderTransport.h>
-#include <thrift/TApplicationException.h>
-#include <thrift/protocol/TProtocolTypes.h>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/protocol/TCompactProtocol.h>
+#include <shark/transport/THeaderTransport.h>
+#include <shark/TApplicationException.h>
+#include <shark/protocol/TProtocolTypes.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/protocol/TCompactProtocol.h>
 
 #include <boost/numeric/conversion/cast.hpp>
 

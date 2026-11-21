@@ -18,7 +18,7 @@
 
 #include <memory>
 
-#include <thrift/transport/TVirtualTransport.h>
+#include <shark/transport/TVirtualTransport.h>
 
 class QIODevice;
 

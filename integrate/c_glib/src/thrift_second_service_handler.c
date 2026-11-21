@@ -17,8 +17,8 @@
 #include <string.h>
 #include <unistd.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/thrift_application_exception.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/thrift_application_exception.h>
 
 #include "thrift_second_service_handler.h"
 

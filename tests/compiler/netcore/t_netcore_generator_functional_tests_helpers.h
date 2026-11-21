@@ -15,7 +15,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-#include <thrift/parse/t_program.h>
+#include <shark/parse/t_program.h>
 
 class TestDataGenerator
 {

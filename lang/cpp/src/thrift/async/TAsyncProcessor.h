@@ -19,8 +19,8 @@
 #include <functional>
 #include <memory>
 
-#include <thrift/TProcessor.h>
-#include <thrift/protocol/TProtocol.h>
+#include <shark/TProcessor.h>
+#include <shark/protocol/TProtocol.h>
 
 namespace apache {
 namespace thrift {

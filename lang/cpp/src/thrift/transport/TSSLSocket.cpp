@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
 #include <cstring>
 #include <errno.h>
@@ -48,10 +48,10 @@
 #include <openssl/rand.h>
 #include <openssl/ssl.h>
 #include <openssl/x509v3.h>
-#include <thrift/concurrency/Mutex.h>
-#include <thrift/transport/TSSLSocket.h>
-#include <thrift/transport/PlatformSocket.h>
-#include <thrift/TToString.h>
+#include <shark/concurrency/Mutex.h>
+#include <shark/transport/TSSLSocket.h>
+#include <shark/transport/PlatformSocket.h>
+#include <shark/TToString.h>
 
 using namespace apache::thrift::concurrency;
 using std::string;

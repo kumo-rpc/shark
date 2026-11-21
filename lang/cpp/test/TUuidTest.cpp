@@ -19,7 +19,7 @@
 #include <boost/uuid/uuid_io.hpp>
 #include <boost/uuid/string_generator.hpp>
 
-#include <thrift/TUuid.h>
+#include <shark/TUuid.h>
 
 using apache::thrift::TUuid;
 

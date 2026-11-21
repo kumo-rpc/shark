@@ -18,7 +18,7 @@
 
 #include <glib-object.h>
 
-#include <thrift/c_glib/protocol/thrift_protocol_factory.h>
+#include <shark/c_glib/protocol/thrift_protocol_factory.h>
 
 G_BEGIN_DECLS
 

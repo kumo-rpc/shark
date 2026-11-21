@@ -18,10 +18,10 @@
 
 #include <glib-object.h>
 
-#include <thrift/c_glib/processor/thrift_processor.h>
-#include <thrift/c_glib/transport/thrift_server_transport.h>
-#include <thrift/c_glib/transport/thrift_transport_factory.h>
-#include <thrift/c_glib/protocol/thrift_protocol_factory.h>
+#include <shark/c_glib/processor/thrift_processor.h>
+#include <shark/c_glib/transport/thrift_server_transport.h>
+#include <shark/c_glib/transport/thrift_transport_factory.h>
+#include <shark/c_glib/protocol/thrift_protocol_factory.h>
 
 G_BEGIN_DECLS
 

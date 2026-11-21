@@ -22,9 +22,9 @@
  */
 
 #include <map>
-#include <thrift/protocol/TDebugProtocol.h>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/transport/TBufferTransports.h>
+#include <shark/protocol/TDebugProtocol.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/transport/TBufferTransports.h>
 #include "gen-cpp/OptionalRequiredTest_types.h"
 
 #define BOOST_TEST_MODULE OptionalRequiredTest

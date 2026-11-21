@@ -13,8 +13,8 @@
 // limitations under the License.
 //
 
-#include <thrift/concurrency/TimerManager.h>
-#include <thrift/concurrency/Exception.h>
+#include <shark/concurrency/TimerManager.h>
+#include <shark/concurrency/Exception.h>
 
 #include <assert.h>
 #include <iostream>

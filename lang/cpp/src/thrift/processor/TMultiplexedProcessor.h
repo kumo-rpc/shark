@@ -16,9 +16,9 @@
 #ifndef THRIFT_TMULTIPLEXEDPROCESSOR_H_
 #define THRIFT_TMULTIPLEXEDPROCESSOR_H_ 1
 
-#include <thrift/protocol/TProtocolDecorator.h>
-#include <thrift/TApplicationException.h>
-#include <thrift/TProcessor.h>
+#include <shark/protocol/TProtocolDecorator.h>
+#include <shark/TApplicationException.h>
+#include <shark/TProcessor.h>
 #include <boost/tokenizer.hpp>
 
 namespace apache {

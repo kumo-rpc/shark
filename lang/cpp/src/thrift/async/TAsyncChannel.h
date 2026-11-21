@@ -18,7 +18,7 @@
 
 #include <functional>
 #include <memory>
-#include <thrift/Thrift.h>
+#include <shark/Thrift.h>
 
 namespace apache {
 namespace thrift {

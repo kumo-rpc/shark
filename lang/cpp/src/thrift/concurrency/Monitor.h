@@ -17,9 +17,9 @@
 #define _THRIFT_CONCURRENCY_MONITOR_H_ 1
 
 #include <chrono>
-#include <thrift/concurrency/Exception.h>
-#include <thrift/concurrency/Mutex.h>
-#include <thrift/TNonCopyable.h>
+#include <shark/concurrency/Exception.h>
+#include <shark/concurrency/Mutex.h>
+#include <shark/TNonCopyable.h>
 
 namespace apache {
 namespace thrift {

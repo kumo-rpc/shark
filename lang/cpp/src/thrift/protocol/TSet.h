@@ -16,8 +16,8 @@
 #ifndef _THRIFT_TSET_H_
 #define _THRIFT_TSET_H_
 
-#include <thrift/protocol/TEnum.h>
-#include <thrift/protocol/TList.h>
+#include <shark/protocol/TEnum.h>
+#include <shark/protocol/TList.h>
 
 namespace apache {
 namespace thrift {

@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/protocol/TBinaryProtocol.h>
+#include <shark/protocol/TBinaryProtocol.h>
 #include "FuzzCommon.tcc"
 
 using namespace apache::thrift::protocol;

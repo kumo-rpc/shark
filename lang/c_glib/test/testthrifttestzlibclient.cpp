@@ -18,12 +18,12 @@
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/protocol/TDebugProtocol.h>
-#include <thrift/server/TSimpleServer.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/protocol/TDebugProtocol.h>
+#include <shark/server/TSimpleServer.h>
 #include <memory>
-#include <thrift/transport/TServerSocket.h>
-#include <thrift/transport/TZlibTransport.h>
+#include <shark/transport/TServerSocket.h>
+#include <shark/transport/TZlibTransport.h>
 #include "ThriftTest.h"
 #include "ThriftTest_types.h"
 
@@ -345,10 +345,10 @@ extern "C" {
 
 #include "t_test_thrift_test.h"
 #include "t_test_thrift_test_types.h"
-#include <thrift/c_glib/transport/thrift_socket.h>
-#include <thrift/c_glib/transport/thrift_zlib_transport.h>
-#include <thrift/c_glib/protocol/thrift_protocol.h>
-#include <thrift/c_glib/protocol/thrift_binary_protocol.h>
+#include <shark/c_glib/transport/thrift_socket.h>
+#include <shark/c_glib/transport/thrift_zlib_transport.h>
+#include <shark/c_glib/protocol/thrift_protocol.h>
+#include <shark/c_glib/protocol/thrift_binary_protocol.h>
 
 static void
 test_thrift_client (void)

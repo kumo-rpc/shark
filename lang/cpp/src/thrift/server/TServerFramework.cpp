@@ -17,7 +17,7 @@
 #include <functional>
 #include <stdexcept>
 #include <stdint.h>
-#include <thrift/server/TServerFramework.h>
+#include <shark/server/TServerFramework.h>
 
 namespace apache {
 namespace thrift {

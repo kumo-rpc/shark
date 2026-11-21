@@ -13,12 +13,12 @@
 // limitations under the License.
 //
 
-#include <thrift/async/TEvhttpClientChannel.h>
+#include <shark/async/TEvhttpClientChannel.h>
 #include <evhttp.h>
 #include <event2/buffer.h>
 #include <event2/buffer_compat.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/protocol/TProtocolException.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/protocol/TProtocolException.h>
 
 #include <iostream>
 #include <sstream>

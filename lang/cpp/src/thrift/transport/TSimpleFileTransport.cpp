@@ -13,9 +13,9 @@
 // limitations under the License.
 //
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
-#include <thrift/transport/TSimpleFileTransport.h>
+#include <shark/transport/TSimpleFileTransport.h>
 
 #include <sys/types.h>
 #ifdef HAVE_SYS_STAT_H

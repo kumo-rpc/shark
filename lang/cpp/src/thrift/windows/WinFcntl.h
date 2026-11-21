@@ -30,7 +30,7 @@
 
 // Win32
 #include <winsock2.h>
-#include <thrift/transport/PlatformSocket.h>
+#include <shark/transport/PlatformSocket.h>
 
 extern "C" {
 int thrift_fcntl(THRIFT_SOCKET fd, int cmd, int flags);

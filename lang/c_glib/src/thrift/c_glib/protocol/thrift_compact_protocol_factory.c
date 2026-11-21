@@ -13,9 +13,9 @@
 // limitations under the License.
 //
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/protocol/thrift_compact_protocol.h>
-#include <thrift/c_glib/protocol/thrift_compact_protocol_factory.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/protocol/thrift_compact_protocol.h>
+#include <shark/c_glib/protocol/thrift_compact_protocol_factory.h>
 
 /* object properties */
 enum _ThriftCompactProtocolFactoryProperties

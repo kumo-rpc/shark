@@ -16,7 +16,7 @@
 #define _GNU_SOURCE // needed for getopt_long
 #endif
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>
@@ -24,7 +24,7 @@
 #include <getopt.h>
 #include <boost/test/unit_test.hpp>
 
-#include <thrift/transport/TFileTransport.h>
+#include <shark/transport/TFileTransport.h>
 
 #ifdef __MINGW32__
   #include <io.h>

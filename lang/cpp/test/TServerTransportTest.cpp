@@ -14,8 +14,8 @@
 //
 
 #include <boost/test/unit_test.hpp>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/TServerTransport.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/TServerTransport.h>
 #include <memory>
 
 using apache::thrift::transport::TServerTransport;

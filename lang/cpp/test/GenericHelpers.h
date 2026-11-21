@@ -16,10 +16,10 @@
 #ifndef _THRIFT_TEST_GENERICHELPERS_H_
 #define _THRIFT_TEST_GENERICHELPERS_H_ 1
 
-#include <thrift/protocol/TProtocol.h>
+#include <shark/protocol/TProtocol.h>
 #include <memory>
-#include <thrift/Thrift.h>
-#include <thrift/TUuid.h>
+#include <shark/Thrift.h>
+#include <shark/TUuid.h>
 
 /* ClassName Helper for cleaner exceptions */
 class ClassNames {

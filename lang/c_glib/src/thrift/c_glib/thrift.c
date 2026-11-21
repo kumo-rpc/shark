@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/c_glib/thrift.h>
+#include <shark/c_glib/thrift.h>
 
 /**
  * GHashTable callback to add keys to a GList.

@@ -16,19 +16,19 @@
 #ifndef _THRIFT_SERVER_TNONBLOCKINGSERVER_H_
 #define _THRIFT_SERVER_TNONBLOCKINGSERVER_H_ 1
 
-#include <thrift/Thrift.h>
-#include <thrift/TConfiguration.h>
+#include <shark/Thrift.h>
+#include <shark/TConfiguration.h>
 #include <memory>
-#include <thrift/server/TServer.h>
-#include <thrift/transport/PlatformSocket.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/TNonblockingServerTransport.h>
-#include <thrift/concurrency/ThreadManager.h>
+#include <shark/server/TServer.h>
+#include <shark/transport/PlatformSocket.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/TNonblockingServerTransport.h>
+#include <shark/concurrency/ThreadManager.h>
 #include <climits>
-#include <thrift/concurrency/Thread.h>
-#include <thrift/concurrency/ThreadFactory.h>
-#include <thrift/concurrency/Mutex.h>
+#include <shark/concurrency/Thread.h>
+#include <shark/concurrency/ThreadFactory.h>
+#include <shark/concurrency/Mutex.h>
 #include <stack>
 #include <vector>
 #include <string>

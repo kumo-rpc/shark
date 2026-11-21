@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/c_glib/thrift.h>
+#include <shark/c_glib/thrift.h>
 #include "thrift_struct.h"
 
 G_DEFINE_ABSTRACT_TYPE(ThriftStruct, thrift_struct, G_TYPE_OBJECT)

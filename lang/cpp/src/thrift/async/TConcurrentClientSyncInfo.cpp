@@ -15,9 +15,9 @@
 
 #include <limits>
 #include <memory>
-#include <thrift/TApplicationException.h>
-#include <thrift/async/TConcurrentClientSyncInfo.h>
-#include <thrift/transport/TTransportException.h>
+#include <shark/TApplicationException.h>
+#include <shark/async/TConcurrentClientSyncInfo.h>
+#include <shark/transport/TTransportException.h>
 
 namespace apache { namespace thrift { namespace async {
 

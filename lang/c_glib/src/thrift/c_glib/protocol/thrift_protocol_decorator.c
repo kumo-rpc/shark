@@ -18,10 +18,10 @@
 #include <glib.h>
 #include <glib-object.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/protocol/thrift_protocol.h>
-#include <thrift/c_glib/protocol/thrift_binary_protocol.h>
-#include <thrift/c_glib/protocol/thrift_protocol_decorator.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/protocol/thrift_protocol.h>
+#include <shark/c_glib/protocol/thrift_binary_protocol.h>
+#include <shark/c_glib/protocol/thrift_protocol_decorator.h>
 
 G_DEFINE_TYPE(ThriftProtocolDecorator, thrift_protocol_decorator, THRIFT_TYPE_PROTOCOL)
 

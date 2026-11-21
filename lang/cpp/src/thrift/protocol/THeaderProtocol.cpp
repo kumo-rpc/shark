@@ -15,10 +15,10 @@
 #ifndef THRIFT_PROTOCOL_THEADERPROTOCOL_CPP_
 #define THRIFT_PROTOCOL_THEADERPROTOCOL_CPP_ 1
 
-#include <thrift/protocol/THeaderProtocol.h>
-#include <thrift/protocol/TCompactProtocol.h>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/TApplicationException.h>
+#include <shark/protocol/THeaderProtocol.h>
+#include <shark/protocol/TCompactProtocol.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/TApplicationException.h>
 
 #include <limits>
 

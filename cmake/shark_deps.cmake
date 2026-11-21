@@ -62,6 +62,13 @@ find_package(Threads REQUIRED)
 kmcmake_private_find_package(Threads REQUIRED)
 list(APPEND KMCMAKE_SYSTEM_DYLINK Threads::Threads)
 
+find_package(OpenSSL REQUIRED)
+find_package(ZLIB REQUIRED)
+
+set(BOOST_MINREV 1.56)
+find_package(Boost ${BOOST_MINREV} QUIET REQUIRED)
+find_package(Libevent REQUIRED)
+
 ############################################################
 #
 # add you libs to the KMCMAKE_DEPS_LINK variable eg as turbo
@@ -69,9 +76,17 @@ list(APPEND KMCMAKE_SYSTEM_DYLINK Threads::Threads)
 # KMCMAKE_SYSTEM_DYLINK, using it for fun.
 # CPM packages already appended above when KMCMAKE_USE_CPM=ON.
 ##########################################################
+if(WIN32)
+    list(APPEND KMCMAKE_DEPS_LINK iphlpapi)
+endif()
 list(APPEND KMCMAKE_DEPS_LINK
         #${TURBO_LIB}
+        libevent::core libevent::extra
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        ZLIB::ZLIB
         ${KMCMAKE_SYSTEM_DYLINK}
         )
+
 list(REMOVE_DUPLICATES KMCMAKE_DEPS_LINK)
 kmcmake_print_list_label("Denpendcies:" KMCMAKE_DEPS_LINK)

@@ -20,11 +20,11 @@
 #include <string>
 #include <vector>
 
-#include <thrift/TConfiguration.h>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/protocol/TList.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/TTransportException.h>
+#include <shark/TConfiguration.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/protocol/TList.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/TTransportException.h>
 
 /*
  * TFramedTransport::readFrame() learns the exact size of the message it is

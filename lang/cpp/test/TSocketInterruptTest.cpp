@@ -19,8 +19,8 @@
 #include <boost/chrono/duration.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
 #include <boost/thread/thread.hpp>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/TServerSocket.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/TServerSocket.h>
 #include <memory>
 
 using apache::thrift::transport::TServerSocket;

@@ -17,7 +17,7 @@
  *  under the License.
  */
 
-#include <thrift/c_glib/thrift.h>
+#include <shark/c_glib/thrift.h>
 #include "thrift_configuration.h"
 
 /* object properties */

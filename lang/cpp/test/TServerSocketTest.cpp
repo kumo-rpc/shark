@@ -14,8 +14,8 @@
 //
 
 #include <boost/test/unit_test.hpp>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/TServerSocket.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/TServerSocket.h>
 #include <memory>
 #include "TTransportCheckThrow.h"
 #include <iostream>

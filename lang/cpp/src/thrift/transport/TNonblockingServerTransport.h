@@ -16,9 +16,9 @@
 #ifndef _THRIFT_TRANSPORT_TNONBLOCKINGSERVERTRANSPORT_H_
 #define _THRIFT_TRANSPORT_TNONBLOCKINGSERVERTRANSPORT_H_ 1
 
-#include <thrift/TConfiguration.h>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/TTransportException.h>
+#include <shark/TConfiguration.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/TTransportException.h>
 
 namespace apache {
 namespace thrift {

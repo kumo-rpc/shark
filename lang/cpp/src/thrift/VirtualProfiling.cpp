@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/Thrift.h>
+#include <shark/Thrift.h>
 
 // Do nothing if virtual call profiling is not enabled
 #if T_GLOBAL_DEBUG_VIRTUAL > 1
@@ -31,7 +31,7 @@
 #error "Thrift virtual function profiling currently requires glibc"
 #endif // !__GLIBC__
 
-#include <thrift/concurrency/Mutex.h>
+#include <shark/concurrency/Mutex.h>
 
 #include <ext/hash_map>
 #include <execinfo.h>

@@ -21,8 +21,8 @@
 #include <boost/filesystem.hpp>
 #include <boost/format.hpp>
 #include <memory>
-#include <thrift/transport/TSSLSocket.h>
-#include <thrift/transport/TSSLServerSocket.h>
+#include <shark/transport/TSSLSocket.h>
+#include <shark/transport/TSSLServerSocket.h>
 #ifdef HAVE_SIGNAL_H
 #include <signal.h>
 #endif

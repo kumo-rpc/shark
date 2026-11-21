@@ -18,7 +18,7 @@
 #include <list>
 #include <memory>
 #include "../catch/catch.hpp"
-#include <thrift/generate/t_ocaml_generator.cc>
+#include <shark/generate/t_ocaml_generator.cc>
 
 using defs_t = std::list<t_type*>;
 

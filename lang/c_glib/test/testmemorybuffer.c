@@ -15,10 +15,10 @@
 
 #include <netdb.h>
 
-#include <thrift/c_glib/transport/thrift_transport.h>
-#include <thrift/c_glib/transport/thrift_socket.h>
-#include <thrift/c_glib/transport/thrift_server_transport.h>
-#include <thrift/c_glib/transport/thrift_server_socket.h>
+#include <shark/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/transport/thrift_socket.h>
+#include <shark/c_glib/transport/thrift_server_transport.h>
+#include <shark/c_glib/transport/thrift_server_socket.h>
 
 static const gchar TEST_DATA[11] = "abcdefghij";
 

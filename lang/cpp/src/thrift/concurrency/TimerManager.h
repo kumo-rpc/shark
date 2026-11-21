@@ -16,8 +16,8 @@
 #ifndef _THRIFT_CONCURRENCY_TIMERMANAGER_H_
 #define _THRIFT_CONCURRENCY_TIMERMANAGER_H_ 1
 
-#include <thrift/concurrency/Monitor.h>
-#include <thrift/concurrency/ThreadFactory.h>
+#include <shark/concurrency/Monitor.h>
+#include <shark/concurrency/ThreadFactory.h>
 
 #include <memory>
 #include <map>

@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/protocol/TBase64Utils.h>
+#include <shark/protocol/TBase64Utils.h>
 
 using std::string;
 

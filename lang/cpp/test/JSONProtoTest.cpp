@@ -17,13 +17,13 @@
 #include <cmath>
 #include <iomanip>
 #include <sstream>
-#include <thrift/protocol/TJSONProtocol.h>
+#include <shark/protocol/TJSONProtocol.h>
 #include <memory>
 #include <string>
-#include <thrift/TConfiguration.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/TTransportException.h>
-#include <thrift/transport/TVirtualTransport.h>
+#include <shark/TConfiguration.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/TTransportException.h>
+#include <shark/transport/TVirtualTransport.h>
 #include "gen-cpp/DebugProtoTest_types.h"
 
 #define BOOST_TEST_MODULE JSONProtoTest

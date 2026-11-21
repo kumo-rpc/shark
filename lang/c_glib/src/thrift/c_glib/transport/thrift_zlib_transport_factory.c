@@ -13,9 +13,9 @@
 // limitations under the License.
 //
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/transport/thrift_zlib_transport.h>
-#include <thrift/c_glib/transport/thrift_zlib_transport_factory.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/transport/thrift_zlib_transport.h>
+#include <shark/c_glib/transport/thrift_zlib_transport_factory.h>
 
 G_DEFINE_TYPE (ThriftZlibTransportFactory,
                thrift_zlib_transport_factory,

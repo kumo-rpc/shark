@@ -17,16 +17,16 @@
 // You should copy it to another filename to avoid overwriting it.
 
 #include "ThreadsTest.h"
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/server/TThreadPoolServer.h>
-#include <thrift/server/TThreadedServer.h>
-#include <thrift/transport/TServerSocket.h>
-#include <thrift/transport/TTransportUtils.h>
-#include <thrift/concurrency/Monitor.h>
-#include <thrift/concurrency/ThreadManager.h>
-#include <thrift/concurrency/ThreadFactory.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/server/TThreadPoolServer.h>
+#include <shark/server/TThreadedServer.h>
+#include <shark/transport/TServerSocket.h>
+#include <shark/transport/TTransportUtils.h>
+#include <shark/concurrency/Monitor.h>
+#include <shark/concurrency/ThreadManager.h>
+#include <shark/concurrency/ThreadFactory.h>
 #if _WIN32
-   #include <thrift/windows/TWinsockSingleton.h>
+   #include <shark/windows/TWinsockSingleton.h>
 #endif
 
 using boost::shared_ptr;

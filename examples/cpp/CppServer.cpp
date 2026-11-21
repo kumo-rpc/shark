@@ -13,16 +13,16 @@
 // limitations under the License.
 //
 
-#include <thrift/concurrency/ThreadManager.h>
-#include <thrift/concurrency/ThreadFactory.h>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/server/TSimpleServer.h>
-#include <thrift/server/TThreadPoolServer.h>
-#include <thrift/server/TThreadedServer.h>
-#include <thrift/transport/TServerSocket.h>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/TTransportUtils.h>
-#include <thrift/TToString.h>
+#include <shark/concurrency/ThreadManager.h>
+#include <shark/concurrency/ThreadFactory.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/server/TSimpleServer.h>
+#include <shark/server/TThreadPoolServer.h>
+#include <shark/server/TThreadedServer.h>
+#include <shark/transport/TServerSocket.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/TTransportUtils.h>
+#include <shark/TToString.h>
 
 #include <iostream>
 #include <stdexcept>

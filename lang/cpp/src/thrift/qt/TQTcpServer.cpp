@@ -16,14 +16,14 @@
 #include <functional>
 #include <memory>
 
-#include <thrift/qt/TQTcpServer.h>
-#include <thrift/qt/TQIODeviceTransport.h>
+#include <shark/qt/TQTcpServer.h>
+#include <shark/qt/TQIODeviceTransport.h>
 
 #include <QMetaType>
 #include <QTcpSocket>
 
-#include <thrift/protocol/TProtocol.h>
-#include <thrift/async/TAsyncProcessor.h>
+#include <shark/protocol/TProtocol.h>
+#include <shark/async/TAsyncProcessor.h>
 
 using apache::thrift::protocol::TProtocol;
 using apache::thrift::protocol::TProtocolFactory;

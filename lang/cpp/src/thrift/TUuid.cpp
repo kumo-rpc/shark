@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/TUuid.h>
+#include <shark/TUuid.h>
 
 #include <boost/uuid/string_generator.hpp>
 #include <boost/uuid/uuid.hpp>

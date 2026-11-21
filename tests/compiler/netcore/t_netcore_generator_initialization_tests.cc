@@ -16,8 +16,8 @@
 // under the License.
 
 #include "../catch/catch.hpp"
-#include <thrift/parse/t_program.h>
-#include <thrift/generate/t_netstd_generator.h>
+#include <shark/parse/t_program.h>
+#include <shark/generate/t_netstd_generator.h>
 
 TEST_CASE( "t_netstd_generator should throw error with unknown options", "[initialization]" )
 {

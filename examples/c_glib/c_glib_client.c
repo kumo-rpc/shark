@@ -16,9 +16,9 @@
 #include <stdio.h>
 #include <glib-object.h>
 
-#include <thrift/c_glib/protocol/thrift_binary_protocol.h>
-#include <thrift/c_glib/transport/thrift_buffered_transport.h>
-#include <thrift/c_glib/transport/thrift_socket.h>
+#include <shark/c_glib/protocol/thrift_binary_protocol.h>
+#include <shark/c_glib/transport/thrift_buffered_transport.h>
+#include <shark/c_glib/transport/thrift_socket.h>
 
 #include "gen-c_glib/calculator.h"
 

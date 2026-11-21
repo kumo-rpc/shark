@@ -20,7 +20,7 @@
 #include <string>
 #include <utility>
 #include <memory>
-#include <thrift/async/TAsyncChannel.h>
+#include <shark/async/TAsyncChannel.h>
 
 struct event_base;
 struct evdns_base;

@@ -19,11 +19,11 @@
 #define T_CPP_GENERATOR_TEST_UTILS_H
 
 #include "../catch/catch.hpp"
-#include <thrift/parse/t_program.h>
-#include <thrift/generate/t_generator.h>
-#include <thrift/generate/t_generator_registry.h>
-#include <thrift/globals.h>
-#include <thrift/main.h>
+#include <shark/parse/t_program.h>
+#include <shark/generate/t_generator.h>
+#include <shark/generate/t_generator_registry.h>
+#include <shark/globals.h>
+#include <shark/main.h>
 #include <fstream>
 #include <memory>
 #include <string>

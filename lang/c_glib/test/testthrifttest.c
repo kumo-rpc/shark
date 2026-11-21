@@ -1,8 +1,8 @@
 #include <netdb.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/transport/thrift_server_transport.h>
-#include <thrift/c_glib/transport/thrift_server_socket.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/transport/thrift_server_transport.h>
+#include <shark/c_glib/transport/thrift_server_socket.h>
 
 #include "t_test_thrift_test_types.h"
 #include "thrift_test_handler.h"

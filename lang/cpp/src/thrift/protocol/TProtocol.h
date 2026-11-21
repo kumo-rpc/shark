@@ -39,13 +39,13 @@
 #endif
 #endif
 
-#include <thrift/transport/TTransport.h>
-#include <thrift/protocol/TProtocolException.h>
-#include <thrift/protocol/TEnum.h>
-#include <thrift/protocol/TList.h>
-#include <thrift/protocol/TSet.h>
-#include <thrift/protocol/TMap.h>
-#include <thrift/TUuid.h>
+#include <shark/transport/TTransport.h>
+#include <shark/protocol/TProtocolException.h>
+#include <shark/protocol/TEnum.h>
+#include <shark/protocol/TList.h>
+#include <shark/protocol/TSet.h>
+#include <shark/protocol/TMap.h>
+#include <shark/TUuid.h>
 
 #include <memory>
 

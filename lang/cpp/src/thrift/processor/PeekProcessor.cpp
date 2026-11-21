@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/processor/PeekProcessor.h>
+#include <shark/processor/PeekProcessor.h>
 
 using namespace apache::thrift::transport;
 using namespace apache::thrift::protocol;

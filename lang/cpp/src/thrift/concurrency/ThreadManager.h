@@ -18,7 +18,7 @@
 
 #include <functional>
 #include <memory>
-#include <thrift/concurrency/ThreadFactory.h>
+#include <shark/concurrency/ThreadFactory.h>
 
 namespace apache {
 namespace thrift {

@@ -15,9 +15,9 @@
 #ifndef _THRIFT_TCONCURRENTCLIENTSYNCINFO_H_
 #define _THRIFT_TCONCURRENTCLIENTSYNCINFO_H_ 1
 
-#include <thrift/protocol/TProtocol.h>
-#include <thrift/concurrency/Mutex.h>
-#include <thrift/concurrency/Monitor.h>
+#include <shark/protocol/TProtocol.h>
+#include <shark/concurrency/Mutex.h>
+#include <shark/concurrency/Monitor.h>
 #include <memory>
 #include <vector>
 #include <string>

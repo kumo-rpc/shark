@@ -13,21 +13,21 @@
 // limitations under the License.
 //
 
-#include <thrift/concurrency/ThreadManager.h>
-#include <thrift/concurrency/ThreadFactory.h>
-#include <thrift/concurrency/Monitor.h>
-#include <thrift/concurrency/Mutex.h>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/server/TSimpleServer.h>
-#include <thrift/server/TThreadPoolServer.h>
-#include <thrift/server/TThreadedServer.h>
-#include <thrift/server/TNonblockingServer.h>
-#include <thrift/transport/TServerSocket.h>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/TNonblockingServerSocket.h>
-#include <thrift/transport/TTransportUtils.h>
-#include <thrift/transport/TFileTransport.h>
-#include <thrift/TLogging.h>
+#include <shark/concurrency/ThreadManager.h>
+#include <shark/concurrency/ThreadFactory.h>
+#include <shark/concurrency/Monitor.h>
+#include <shark/concurrency/Mutex.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/server/TSimpleServer.h>
+#include <shark/server/TThreadPoolServer.h>
+#include <shark/server/TThreadedServer.h>
+#include <shark/server/TNonblockingServer.h>
+#include <shark/transport/TServerSocket.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/TNonblockingServerSocket.h>
+#include <shark/transport/TTransportUtils.h>
+#include <shark/transport/TFileTransport.h>
+#include <shark/TLogging.h>
 
 #include "Service.h"
 
@@ -37,7 +37,7 @@
 #include <sstream>
 #include <map>
 #if _WIN32
-#include <thrift/windows/TWinsockSingleton.h>
+#include <shark/windows/TWinsockSingleton.h>
 #endif
 
 using namespace std;

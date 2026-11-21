@@ -16,7 +16,7 @@
 #include <cassert>
 #include <cstring>
 #include <algorithm>
-#include <thrift/transport/TZlibTransport.h>
+#include <shark/transport/TZlibTransport.h>
 
 using std::string;
 

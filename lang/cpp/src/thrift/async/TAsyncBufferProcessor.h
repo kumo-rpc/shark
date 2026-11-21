@@ -18,7 +18,7 @@
 
 #include <functional>
 #include <memory>
-#include <thrift/transport/TBufferTransports.h>
+#include <shark/transport/TBufferTransports.h>
 
 namespace apache {
 namespace thrift {

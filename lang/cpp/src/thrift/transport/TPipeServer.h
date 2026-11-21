@@ -17,9 +17,9 @@
 #define _THRIFT_TRANSPORT_TSERVERWINPIPES_H_ 1
 
 #include <memory>
-#include <thrift/transport/TServerTransport.h>
+#include <shark/transport/TServerTransport.h>
 #ifndef _WIN32
-#include <thrift/transport/TServerSocket.h>
+#include <shark/transport/TServerSocket.h>
 #endif
 
 #define TPIPE_SERVER_MAX_CONNS_DEFAULT PIPE_UNLIMITED_INSTANCES

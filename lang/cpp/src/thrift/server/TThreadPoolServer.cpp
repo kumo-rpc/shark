@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/server/TThreadPoolServer.h>
+#include <shark/server/TThreadPoolServer.h>
 
 namespace apache {
 namespace thrift {

@@ -16,7 +16,7 @@
 #ifndef _THRIFT_CONCURRENCY_THREADFACTORY_H_
 #define _THRIFT_CONCURRENCY_THREADFACTORY_H_ 1
 
-#include <thrift/concurrency/Thread.h>
+#include <shark/concurrency/Thread.h>
 
 #include <memory>
 namespace apache {

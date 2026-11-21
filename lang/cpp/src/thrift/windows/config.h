@@ -45,11 +45,11 @@
 
 #include <stdint.h>
 
-#include <thrift/transport/PlatformSocket.h>
-#include <thrift/windows/GetTimeOfDay.h>
-#include <thrift/windows/Operators.h>
-#include <thrift/windows/WinFcntl.h>
-#include <thrift/windows/SocketPair.h>
+#include <shark/transport/PlatformSocket.h>
+#include <shark/windows/GetTimeOfDay.h>
+#include <shark/windows/Operators.h>
+#include <shark/windows/WinFcntl.h>
+#include <shark/windows/SocketPair.h>
 
 // windows
 #include <winsock2.h>

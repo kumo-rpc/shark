@@ -17,12 +17,12 @@
 #define _THRIFT_TRANSPORT_TSSLSOCKET_H_ 1
 
 // Put this first to avoid WIN32 build failure
-#include <thrift/transport/TSocket.h>
+#include <shark/transport/TSocket.h>
 
 #include <functional>
 #include <openssl/ssl.h>
 #include <string>
-#include <thrift/concurrency/Mutex.h>
+#include <shark/concurrency/Mutex.h>
 
 namespace apache {
 namespace thrift {

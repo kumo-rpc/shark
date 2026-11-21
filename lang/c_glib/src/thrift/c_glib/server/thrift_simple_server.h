@@ -18,7 +18,7 @@
 
 #include <glib-object.h>
 
-#include <thrift/c_glib/server/thrift_server.h>
+#include <shark/c_glib/server/thrift_server.h>
 
 G_BEGIN_DECLS
 

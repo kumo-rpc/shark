@@ -13,9 +13,9 @@
 // limitations under the License.
 //
 
-#include <thrift/protocol/TDebugProtocol.h>
+#include <shark/protocol/TDebugProtocol.h>
 
-#include <thrift/TToString.h>
+#include <shark/TToString.h>
 #include <cassert>
 #include <cctype>
 #include <cstdio>

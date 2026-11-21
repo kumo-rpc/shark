@@ -17,8 +17,8 @@
 #define _THRIFT_SERVER_TTHREADPOOLSERVER_H_ 1
 
 #include <atomic>
-#include <thrift/concurrency/ThreadManager.h>
-#include <thrift/server/TServerFramework.h>
+#include <shark/concurrency/ThreadManager.h>
+#include <shark/server/TServerFramework.h>
 
 namespace apache {
 namespace thrift {

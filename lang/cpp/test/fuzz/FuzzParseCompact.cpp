@@ -14,7 +14,7 @@
 //
 
 
-#include <thrift/protocol/TCompactProtocol.h>
+#include <shark/protocol/TCompactProtocol.h>
 #include "FuzzCommon.tcc"
 
 using namespace apache::thrift::protocol;

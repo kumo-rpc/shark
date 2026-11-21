@@ -20,15 +20,15 @@
 #include <iostream>
 #include <memory>
 #include <sstream>
-#include <thrift/concurrency/Monitor.h>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/protocol/TJSONProtocol.h>
-#include <thrift/server/TThreadedServer.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/THttpClient.h>
-#include <thrift/transport/THttpServer.h>
-#include <thrift/transport/TServerSocket.h>
-#include <thrift/transport/TSocket.h>
+#include <shark/concurrency/Monitor.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/protocol/TJSONProtocol.h>
+#include <shark/server/TThreadedServer.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/THttpClient.h>
+#include <shark/transport/THttpServer.h>
+#include <shark/transport/TServerSocket.h>
+#include <shark/transport/TSocket.h>
 #include <vector>
 
 BOOST_AUTO_TEST_SUITE(OneWayHTTPTest)

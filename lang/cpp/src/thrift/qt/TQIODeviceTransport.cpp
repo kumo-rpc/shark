@@ -13,12 +13,12 @@
 // limitations under the License.
 //
 
-#include <thrift/qt/TQIODeviceTransport.h>
+#include <shark/qt/TQIODeviceTransport.h>
 
 #include <QAbstractSocket>
 #include <QIODevice>
 
-#include <thrift/transport/TBufferTransports.h>
+#include <shark/transport/TBufferTransports.h>
 #include <memory>
 
 namespace apache {

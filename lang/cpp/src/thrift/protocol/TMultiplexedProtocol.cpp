@@ -13,9 +13,9 @@
 // limitations under the License.
 //
 
-#include <thrift/protocol/TMultiplexedProtocol.h>
-#include <thrift/processor/TMultiplexedProcessor.h>
-#include <thrift/protocol/TProtocolDecorator.h>
+#include <shark/protocol/TMultiplexedProtocol.h>
+#include <shark/processor/TMultiplexedProcessor.h>
+#include <shark/protocol/TProtocolDecorator.h>
 
 namespace apache {
 namespace thrift {

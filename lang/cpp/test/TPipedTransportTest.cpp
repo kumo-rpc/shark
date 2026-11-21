@@ -13,10 +13,10 @@
 // limitations under the License.
 //
 
-#include <thrift/Thrift.h>
+#include <shark/Thrift.h>
 #include <memory>
-#include <thrift/transport/TTransportUtils.h>
-#include <thrift/transport/TBufferTransports.h>
+#include <shark/transport/TTransportUtils.h>
+#include <shark/transport/TBufferTransports.h>
 
 #define BOOST_TEST_MODULE TPipedTransportTest
 #include <boost/test/unit_test.hpp>

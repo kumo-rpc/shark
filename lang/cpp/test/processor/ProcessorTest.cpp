@@ -21,15 +21,15 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <thrift/concurrency/ThreadFactory.h>
-#include <thrift/concurrency/Monitor.h>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/server/TThreadedServer.h>
-#include <thrift/server/TThreadPoolServer.h>
-#include <thrift/server/TNonblockingServer.h>
-#include <thrift/server/TSimpleServer.h>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/TNonblockingServerSocket.h>
+#include <shark/concurrency/ThreadFactory.h>
+#include <shark/concurrency/Monitor.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/server/TThreadedServer.h>
+#include <shark/server/TThreadPoolServer.h>
+#include <shark/server/TNonblockingServer.h>
+#include <shark/server/TSimpleServer.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/TNonblockingServerSocket.h>
 
 #include "EventLog.h"
 #include "ServerThread.h"

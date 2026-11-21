@@ -13,8 +13,8 @@
 // limitations under the License.
 //
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/protocol/thrift_protocol_factory.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/protocol/thrift_protocol_factory.h>
 
 G_DEFINE_ABSTRACT_TYPE(ThriftProtocolFactory, thrift_protocol_factory, G_TYPE_OBJECT)
 

@@ -20,8 +20,8 @@
 #include <iostream>
 #include <memory>
 #include <numeric>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/transport/TBufferTransports.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/transport/TBufferTransports.h>
 #include <vector>
 
 #include "gen-cpp/ThriftTest_types.h"

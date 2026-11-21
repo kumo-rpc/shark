@@ -13,8 +13,8 @@
 // limitations under the License.
 //
 
-#include <thrift/transport/TNonblockingSSLServerSocket.h>
-#include <thrift/transport/TSSLSocket.h>
+#include <shark/transport/TNonblockingSSLServerSocket.h>
+#include <shark/transport/TSSLSocket.h>
 
 namespace apache {
 namespace thrift {

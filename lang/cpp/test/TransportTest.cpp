@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
 #include <stdlib.h>
 #include <time.h>
@@ -30,16 +30,16 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/version.hpp>
 
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/TFDTransport.h>
-#include <thrift/transport/TFileTransport.h>
-#include <thrift/transport/TZlibTransport.h>
-#include <thrift/transport/TSocket.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/TFDTransport.h>
+#include <shark/transport/TFileTransport.h>
+#include <shark/transport/TZlibTransport.h>
+#include <shark/transport/TSocket.h>
 
-#include <thrift/concurrency/FunctionRunner.h>
+#include <shark/concurrency/FunctionRunner.h>
 #if _WIN32
-#include <thrift/transport/TPipe.h>
-#include <thrift/windows/TWinsockSingleton.h>
+#include <shark/transport/TPipe.h>
+#include <shark/windows/TWinsockSingleton.h>
 #endif
 
 using namespace apache::thrift::transport;

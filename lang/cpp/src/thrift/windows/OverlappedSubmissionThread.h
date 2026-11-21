@@ -20,8 +20,8 @@
 #error "OverlappedSubmissionThread.h is only usable on Windows"
 #endif
 
-#include <thrift/windows/Sync.h>
-#include <thrift/TNonCopyable.h>
+#include <shark/windows/Sync.h>
+#include <shark/TNonCopyable.h>
 
 /*
   *** Why does this class exist?

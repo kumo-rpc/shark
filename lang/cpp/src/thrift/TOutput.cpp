@@ -13,8 +13,8 @@
 // limitations under the License.
 //
 
-#include <thrift/Thrift.h>
-#include <thrift/TToString.h>
+#include <shark/Thrift.h>
+#include <shark/TToString.h>
 #include <cstring>
 #include <cstdlib>
 #include <stdarg.h>

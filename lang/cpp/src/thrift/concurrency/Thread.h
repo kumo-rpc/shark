@@ -19,7 +19,7 @@
 #include <memory>
 #include <thread>
 
-#include <thrift/concurrency/Monitor.h>
+#include <shark/concurrency/Monitor.h>
 
 namespace apache {
 namespace thrift {

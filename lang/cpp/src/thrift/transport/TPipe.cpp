@@ -17,11 +17,11 @@
 * under the License.
 */
 
-#include <thrift/transport/TTransportException.h>
-#include <thrift/transport/TPipe.h>
+#include <shark/transport/TTransportException.h>
+#include <shark/transport/TPipe.h>
 #ifdef _WIN32
-#include <thrift/windows/OverlappedSubmissionThread.h>
-#include <thrift/windows/Sync.h>
+#include <shark/windows/OverlappedSubmissionThread.h>
+#include <shark/windows/Sync.h>
 #endif
 
 namespace apache {

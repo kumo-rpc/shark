@@ -23,9 +23,9 @@
 #include <sys/un.h>
 #include <netinet/in.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/transport/thrift_transport.h>
-#include <thrift/c_glib/transport/thrift_zlib_transport.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/transport/thrift_zlib_transport.h>
 
 #define DEFAULT_URBUF_SIZE      128
 #define DEFAULT_CRBUF_SIZE      1024

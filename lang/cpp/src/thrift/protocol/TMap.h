@@ -16,7 +16,7 @@
 #ifndef _THRIFT_TMAP_H_
 #define _THRIFT_TMAP_H_
 
-#include <thrift/protocol/TEnum.h>
+#include <shark/protocol/TEnum.h>
 
 namespace apache {
 namespace thrift {

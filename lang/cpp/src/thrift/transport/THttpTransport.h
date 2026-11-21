@@ -16,8 +16,8 @@
 #ifndef _THRIFT_TRANSPORT_THTTPTRANSPORT_H_
 #define _THRIFT_TRANSPORT_THTTPTRANSPORT_H_ 1
 
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/TVirtualTransport.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/TVirtualTransport.h>
 
 namespace apache {
 namespace thrift {

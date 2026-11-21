@@ -19,7 +19,7 @@
 #include <functional>
 #include <memory>
 
-#include <thrift/concurrency/Thread.h>
+#include <shark/concurrency/Thread.h>
 
 namespace apache {
 namespace thrift {

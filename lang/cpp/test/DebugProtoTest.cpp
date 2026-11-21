@@ -16,7 +16,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include "gen-cpp/DebugProtoTest_types.h"
-#include <thrift/protocol/TDebugProtocol.h>
+#include <shark/protocol/TDebugProtocol.h>
 #include <memory>
 
 #define BOOST_TEST_MODULE DebugProtoTest

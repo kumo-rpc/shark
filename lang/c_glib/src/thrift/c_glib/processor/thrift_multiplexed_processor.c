@@ -15,12 +15,12 @@
 #include <string.h>
 #include <stdio.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/processor/thrift_processor.h>
-#include <thrift/c_glib/processor/thrift_multiplexed_processor.h>
-#include <thrift/c_glib/protocol/thrift_multiplexed_protocol.h>
-#include <thrift/c_glib/protocol/thrift_stored_message_protocol.h>
-#include <thrift/c_glib/thrift_application_exception.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/processor/thrift_processor.h>
+#include <shark/c_glib/processor/thrift_multiplexed_processor.h>
+#include <shark/c_glib/protocol/thrift_multiplexed_protocol.h>
+#include <shark/c_glib/protocol/thrift_stored_message_protocol.h>
+#include <shark/c_glib/thrift_application_exception.h>
 
 G_DEFINE_TYPE(ThriftMultiplexedProcessor, thrift_multiplexed_processor, THRIFT_TYPE_PROCESSOR)
 

@@ -22,10 +22,10 @@
 
 #include <openssl/sha.h>
 
-#include <thrift/config.h>
-#include <thrift/protocol/TProtocol.h>
-#include <thrift/transport/TSocket.h>
-#include <thrift/transport/THttpServer.h>
+#include <shark/config.h>
+#include <shark/protocol/TProtocol.h>
+#include <shark/transport/TSocket.h>
+#include <shark/transport/THttpServer.h>
 #if defined(_MSC_VER) || defined(__MINGW32__)
 #include <shlwapi.h>
 #define THRIFT_strncasecmp(str1, str2, len) _strnicmp(str1, str2, len)

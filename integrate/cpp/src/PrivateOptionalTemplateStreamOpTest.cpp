@@ -29,7 +29,7 @@
 
 // Include generated thrift types with private_optional,template_streamop options
 #include "ThriftTest_types.h"
-#include <thrift/TToString.h>
+#include <shark/TToString.h>
 
 using namespace thrift::test;
 

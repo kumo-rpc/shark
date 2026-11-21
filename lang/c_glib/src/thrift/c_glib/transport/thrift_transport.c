@@ -15,9 +15,9 @@
 
 #include <errno.h>
 #include <glib.h>
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/transport/thrift_transport.h>
-#include <thrift/c_glib/thrift_configuration.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/thrift_configuration.h>
 
 /* object properties */
 enum _ThriftTransportProperties

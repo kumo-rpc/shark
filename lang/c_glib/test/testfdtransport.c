@@ -22,8 +22,8 @@
 #include <glib.h>
 #include <glib/gstdio.h>
 
-#include <thrift/c_glib/transport/thrift_transport.h>
-#include <thrift/c_glib/transport/thrift_fd_transport.h>
+#include <shark/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/transport/thrift_fd_transport.h>
 
 static const gchar TEST_DATA[12] = "abcde01234!";
 

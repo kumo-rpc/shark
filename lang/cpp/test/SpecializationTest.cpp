@@ -1,7 +1,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
-#include <thrift/transport/TTransportUtils.h>
-#include <thrift/protocol/TBinaryProtocol.h>
+#include <shark/transport/TTransportUtils.h>
+#include <shark/protocol/TBinaryProtocol.h>
 #include <gen-cpp/DebugProtoTest_types.h>
 
 using namespace thrift::test::debug;

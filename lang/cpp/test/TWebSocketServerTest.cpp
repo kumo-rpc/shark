@@ -22,9 +22,9 @@
 #include <memory>
 #include <string>
 
-#include <thrift/TConfiguration.h>
-#include <thrift/transport/TVirtualTransport.h>
-#include <thrift/transport/TWebSocketServer.h>
+#include <shark/TConfiguration.h>
+#include <shark/transport/TVirtualTransport.h>
+#include <shark/transport/TWebSocketServer.h>
 
 /*
  * A WebSocket frame header carries the payload length, and readFrame() used it

@@ -16,11 +16,11 @@
 #include <string.h>
 #include <stdio.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/protocol/thrift_protocol.h>
-#include <thrift/c_glib/protocol/thrift_compact_protocol.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/protocol/thrift_protocol.h>
+#include <shark/c_glib/protocol/thrift_compact_protocol.h>
 
-#include <thrift/config.h>
+#include <shark/config.h>
 
 /*
  * *_to_zigzag depend on the fact that the right shift

@@ -20,8 +20,8 @@
 #error "windows/Sync.h is only usable on Windows"
 #endif
 
-#include <thrift/concurrency/Exception.h>
-#include <thrift/TNonCopyable.h>
+#include <shark/concurrency/Exception.h>
+#include <shark/TNonCopyable.h>
 
 // Including Windows.h can conflict with Winsock2 usage, and also
 // adds problematic macros like min() and max(). Try to work around:

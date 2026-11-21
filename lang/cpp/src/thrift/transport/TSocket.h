@@ -18,10 +18,10 @@
 
 #include <string>
 
-#include <thrift/transport/TTransport.h>
-#include <thrift/transport/TVirtualTransport.h>
-#include <thrift/transport/TServerSocket.h>
-#include <thrift/transport/PlatformSocket.h>
+#include <shark/transport/TTransport.h>
+#include <shark/transport/TVirtualTransport.h>
+#include <shark/transport/TServerSocket.h>
+#include <shark/transport/PlatformSocket.h>
 
 #ifdef HAVE_ARPA_INET_H
 #include <arpa/inet.h>

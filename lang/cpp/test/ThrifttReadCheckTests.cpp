@@ -21,23 +21,23 @@
 #include <random>
 #include <vector>
 #include <zlib.h>
-#include <thrift/TConfiguration.h>
-#include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/protocol/TCompactProtocol.h>
-#include <thrift/protocol/TJSONProtocol.h>
-#include <thrift/Thrift.h>
+#include <shark/TConfiguration.h>
+#include <shark/protocol/TBinaryProtocol.h>
+#include <shark/protocol/TCompactProtocol.h>
+#include <shark/protocol/TJSONProtocol.h>
+#include <shark/Thrift.h>
 #include <memory>
-#include <thrift/transport/TTransportUtils.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/THeaderTransport.h>
-#include <thrift/protocol/THeaderProtocol.h>
-#include <thrift/TApplicationException.h>
-#include <thrift/transport/TSimpleFileTransport.h>
-#include <thrift/transport/TFileTransport.h>
-#include <thrift/protocol/TEnum.h>
-#include <thrift/protocol/TList.h>
-#include <thrift/protocol/TSet.h>
-#include <thrift/protocol/TMap.h>
+#include <shark/transport/TTransportUtils.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/THeaderTransport.h>
+#include <shark/protocol/THeaderProtocol.h>
+#include <shark/TApplicationException.h>
+#include <shark/transport/TSimpleFileTransport.h>
+#include <shark/transport/TFileTransport.h>
+#include <shark/protocol/TEnum.h>
+#include <shark/protocol/TList.h>
+#include <shark/protocol/TSet.h>
+#include <shark/protocol/TMap.h>
 
 BOOST_AUTO_TEST_SUITE(ThriftReadCheckExceptionTest)
 

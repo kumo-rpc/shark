@@ -23,8 +23,8 @@
 // limitations under the License.
 //
 
-#include <thrift/windows/SocketPair.h>
-#include <thrift/Thrift.h>
+#include <shark/windows/SocketPair.h>
+#include <shark/Thrift.h>
 
 // stl
 #include <string.h>

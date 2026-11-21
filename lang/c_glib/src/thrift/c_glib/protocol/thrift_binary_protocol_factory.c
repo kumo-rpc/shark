@@ -13,9 +13,9 @@
 // limitations under the License.
 //
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/protocol/thrift_binary_protocol.h>
-#include <thrift/c_glib/protocol/thrift_binary_protocol_factory.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/protocol/thrift_binary_protocol.h>
+#include <shark/c_glib/protocol/thrift_binary_protocol_factory.h>
 
 G_DEFINE_TYPE(ThriftBinaryProtocolFactory, thrift_binary_protocol_factory, THRIFT_TYPE_PROTOCOL_FACTORY)
 

@@ -24,10 +24,10 @@
 #error This is a MSVC header only.
 #endif
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
 // boost
-#include <thrift/TNonCopyable.h>
+#include <shark/TNonCopyable.h>
 
 #include <memory>
 #include <mutex>

@@ -22,7 +22,7 @@
 
 #include <boost/test/unit_test.hpp>
 #include <openssl/evp.h>
-#include <thrift/transport/TSSLSocket.h>
+#include <shark/transport/TSSLSocket.h>
 
 using namespace apache::thrift::transport;
 

@@ -16,12 +16,12 @@
 #include <glib.h>
 #include <glib-object.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/processor/thrift_dispatch_processor.h>
-#include <thrift/c_glib/protocol/thrift_binary_protocol.h>
-#include <thrift/c_glib/transport/thrift_memory_buffer.h>
-#include <thrift/c_glib/thrift_application_exception.h>
-#include <thrift/c_glib/thrift_struct.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/processor/thrift_dispatch_processor.h>
+#include <shark/c_glib/protocol/thrift_binary_protocol.h>
+#include <shark/c_glib/transport/thrift_memory_buffer.h>
+#include <shark/c_glib/thrift_application_exception.h>
+#include <shark/c_glib/thrift_struct.h>
 
 #include "gen-c_glib/t_test_srv.h"
 

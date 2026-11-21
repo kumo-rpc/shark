@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>

@@ -21,15 +21,15 @@
 
 #include <sys/time.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/protocol/thrift_binary_protocol.h>
-#include <thrift/c_glib/protocol/thrift_compact_protocol.h>
-#include <thrift/c_glib/protocol/thrift_multiplexed_protocol.h>
-#include <thrift/c_glib/transport/thrift_buffered_transport.h>
-#include <thrift/c_glib/transport/thrift_framed_transport.h>
-#include <thrift/c_glib/transport/thrift_ssl_socket.h>
-#include <thrift/c_glib/transport/thrift_socket.h>
-#include <thrift/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/protocol/thrift_binary_protocol.h>
+#include <shark/c_glib/protocol/thrift_compact_protocol.h>
+#include <shark/c_glib/protocol/thrift_multiplexed_protocol.h>
+#include <shark/c_glib/transport/thrift_buffered_transport.h>
+#include <shark/c_glib/transport/thrift_framed_transport.h>
+#include <shark/c_glib/transport/thrift_ssl_socket.h>
+#include <shark/c_glib/transport/thrift_socket.h>
+#include <shark/c_glib/transport/thrift_transport.h>
 
 #include "../gen-c_glib/t_test_second_service.h"
 #include "../gen-c_glib/t_test_thrift_test.h"

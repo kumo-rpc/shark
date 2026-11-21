@@ -29,10 +29,10 @@
 #include <inttypes.h>
 #endif
 
-#include <thrift/protocol/TProtocolTypes.h>
-#include <thrift/transport/TBufferTransports.h>
-#include <thrift/transport/TTransport.h>
-#include <thrift/transport/TVirtualTransport.h>
+#include <shark/protocol/TProtocolTypes.h>
+#include <shark/transport/TBufferTransports.h>
+#include <shark/transport/TTransport.h>
+#include <shark/transport/TVirtualTransport.h>
 
 enum CLIENT_TYPE {
   THRIFT_HEADER_CLIENT_TYPE = 0,

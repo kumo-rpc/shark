@@ -20,7 +20,7 @@
 #include <limits>
 #include <string>
 
-#include <thrift/transport/THttpTransport.h>
+#include <shark/transport/THttpTransport.h>
 
 using std::string;
 

@@ -26,7 +26,7 @@
 
 // Win32
 #include <winsock2.h>
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
 int thrift_socketpair(int d, int type, int protocol, THRIFT_SOCKET sv[2]);
 

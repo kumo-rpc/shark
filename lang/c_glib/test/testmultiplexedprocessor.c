@@ -16,11 +16,11 @@
 #include <glib.h>
 #include <glib-object.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/processor/thrift_multiplexed_processor.h>
-#include <thrift/c_glib/protocol/thrift_binary_protocol.h>
-#include <thrift/c_glib/protocol/thrift_multiplexed_protocol.h>
-#include <thrift/c_glib/transport/thrift_memory_buffer.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/processor/thrift_multiplexed_processor.h>
+#include <shark/c_glib/protocol/thrift_binary_protocol.h>
+#include <shark/c_glib/protocol/thrift_multiplexed_protocol.h>
+#include <shark/c_glib/transport/thrift_memory_buffer.h>
 
 #define TEST_SERVICE_NAME "aService"
 

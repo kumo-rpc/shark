@@ -13,13 +13,13 @@
 // limitations under the License.
 //
 
-#include <thrift/thrift-config.h>
+#include <shark/thrift-config.h>
 
-#include <thrift/server/TNonblockingServer.h>
-#include <thrift/concurrency/Exception.h>
-#include <thrift/transport/TSocket.h>
-#include <thrift/concurrency/ThreadFactory.h>
-#include <thrift/transport/PlatformSocket.h>
+#include <shark/server/TNonblockingServer.h>
+#include <shark/concurrency/Exception.h>
+#include <shark/transport/TSocket.h>
+#include <shark/concurrency/ThreadFactory.h>
+#include <shark/transport/PlatformSocket.h>
 
 #include <algorithm>
 #include <iostream>

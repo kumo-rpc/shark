@@ -17,9 +17,9 @@
 #include <string.h>
 #include <stdio.h>
 
-#include <thrift/c_glib/thrift.h>
-#include <thrift/c_glib/protocol/thrift_protocol.h>
-#include <thrift/c_glib/protocol/thrift_binary_protocol.h>
+#include <shark/c_glib/thrift.h>
+#include <shark/c_glib/protocol/thrift_protocol.h>
+#include <shark/c_glib/protocol/thrift_binary_protocol.h>
 
 /* object properties */
 enum _ThriftBinaryProtocolProperties

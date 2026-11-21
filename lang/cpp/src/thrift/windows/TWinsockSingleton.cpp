@@ -13,7 +13,7 @@
 // limitations under the License.
 //
 
-#include <thrift/windows/TWinsockSingleton.h>
+#include <shark/windows/TWinsockSingleton.h>
 
 // boost
 #include <stdexcept>

@@ -18,9 +18,9 @@
 
 #include <functional>
 
-#include <thrift/concurrency/Mutex.h>
-#include <thrift/transport/PlatformSocket.h>
-#include <thrift/transport/TServerTransport.h>
+#include <shark/concurrency/Mutex.h>
+#include <shark/transport/PlatformSocket.h>
+#include <shark/transport/TServerTransport.h>
 
 #include <sys/types.h>
 #ifdef HAVE_SYS_SOCKET_H

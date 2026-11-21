@@ -1,7 +1,7 @@
-#include <thrift/c_glib/protocol/thrift_binary_protocol.h>
-#include <thrift/c_glib/protocol/thrift_protocol.h>
-#include <thrift/c_glib/transport/thrift_memory_buffer.h>
-#include <thrift/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/protocol/thrift_binary_protocol.h>
+#include <shark/c_glib/protocol/thrift_protocol.h>
+#include <shark/c_glib/transport/thrift_memory_buffer.h>
+#include <shark/c_glib/transport/thrift_transport.h>
 #include "gen-c_glib/t_test_debug_proto_test_types.h"
 #include "gen-c_glib/t_test_enum_test_types.h"
 

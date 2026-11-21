@@ -21,8 +21,8 @@
 #include <sys/time.h>
 #endif
 
-#include <thrift/transport/TTransport.h>
-#include <thrift/transport/TVirtualTransport.h>
+#include <shark/transport/TTransport.h>
+#include <shark/transport/TVirtualTransport.h>
 
 namespace apache {
 namespace thrift {

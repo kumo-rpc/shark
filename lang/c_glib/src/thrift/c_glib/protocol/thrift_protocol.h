@@ -18,7 +18,7 @@
 
 #include <glib-object.h>
 
-#include <thrift/c_glib/transport/thrift_transport.h>
+#include <shark/c_glib/transport/thrift_transport.h>
 
 G_BEGIN_DECLS
 

@@ -16,7 +16,7 @@
 #ifndef _THRIFT_PROTOCOL_TCOMPACTPROTOCOL_H_
 #define _THRIFT_PROTOCOL_TCOMPACTPROTOCOL_H_ 1
 
-#include <thrift/protocol/TVirtualProtocol.h>
+#include <shark/protocol/TVirtualProtocol.h>
 
 #include <stack>
 #include <memory>
@@ -279,6 +279,6 @@ typedef TCompactProtocolFactoryT<TTransport> TCompactProtocolFactory;
 }
 } // apache::thrift::protocol
 
-#include <thrift/protocol/TCompactProtocol.tcc>
+#include <shark/protocol/TCompactProtocol.tcc>
 
 #endif
