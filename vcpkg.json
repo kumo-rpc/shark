@@ -1,0 +1,7 @@
+{
+  "dependencies": [
+    "fermat",
+    "turbo",
+    "qtest"
+  ]
+}
