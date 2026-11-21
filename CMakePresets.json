@@ -1,0 +1,168 @@
+{
+  "version": 2,
+  "configurePresets": [
+    {
+      "name": "gen-ninja",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build"
+    },
+    {
+      "name": "gen-make",
+      "hidden": true,
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build-make"
+    },
+    {
+      "name": "deps-cpm",
+      "hidden": true,
+      "description": "CPM: small projects, or test-only deps (gtest/doctest) not shipped with the product.",
+      "cacheVariables": {
+        "KMCMAKE_USE_CPM": "ON"
+      }
+    },
+    {
+      "name": "deps-vcpkg",
+      "hidden": true,
+      "description": "vcpkg: large-scale dependency management (needs VCPKG_ROOT).",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": {
+          "type": "FILEPATH",
+          "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+        }
+      }
+    },
+    {
+      "name": "feat-lib",
+      "hidden": true,
+      "cacheVariables": {
+        "KMCMAKE_BUILD_TEST": "OFF",
+        "KMCMAKE_BUILD_BENCHMARK": "OFF",
+        "KMCMAKE_BUILD_EXAMPLES": "OFF"
+      }
+    },
+    {
+      "name": "feat-test",
+      "hidden": true,
+      "cacheVariables": {
+        "KMCMAKE_BUILD_TEST": "ON",
+        "KMCMAKE_BUILD_BENCHMARK": "OFF",
+        "KMCMAKE_BUILD_EXAMPLES": "OFF"
+      }
+    },
+    {
+      "name": "feat-test-bm",
+      "hidden": true,
+      "cacheVariables": {
+        "KMCMAKE_BUILD_TEST": "ON",
+        "KMCMAKE_BUILD_BENCHMARK": "ON",
+        "KMCMAKE_BUILD_EXAMPLES": "OFF"
+      }
+    },
+    {
+      "name": "feat-all",
+      "hidden": true,
+      "cacheVariables": {
+        "KMCMAKE_BUILD_TEST": "ON",
+        "KMCMAKE_BUILD_BENCHMARK": "ON",
+        "KMCMAKE_BUILD_EXAMPLES": "ON"
+      }
+    },
+    {
+      "name": "default",
+      "inherits": ["gen-ninja"]
+    },
+    {
+      "name": "test",
+      "inherits": ["gen-ninja", "feat-test"]
+    },
+    {
+      "name": "test-bm",
+      "inherits": ["gen-ninja", "feat-test-bm"]
+    },
+    {
+      "name": "all",
+      "inherits": ["gen-ninja", "feat-all"]
+    },
+    {
+      "name": "cpm",
+      "inherits": ["gen-ninja", "deps-cpm", "feat-lib"]
+    },
+    {
+      "name": "cpm-test",
+      "inherits": ["gen-ninja", "deps-cpm", "feat-test"]
+    },
+    {
+      "name": "cpm-test-bm",
+      "inherits": ["gen-ninja", "deps-cpm", "feat-test-bm"]
+    },
+    {
+      "name": "cpm-all",
+      "inherits": ["gen-ninja", "deps-cpm", "feat-all"]
+    },
+    {
+      "name": "vcpkg",
+      "inherits": ["gen-ninja", "deps-vcpkg", "feat-lib"]
+    },
+    {
+      "name": "vcpkg-test",
+      "inherits": ["gen-ninja", "deps-vcpkg", "feat-test"]
+    },
+    {
+      "name": "vcpkg-test-bm",
+      "inherits": ["gen-ninja", "deps-vcpkg", "feat-test-bm"]
+    },
+    {
+      "name": "vcpkg-all",
+      "inherits": ["gen-ninja", "deps-vcpkg", "feat-all"]
+    },
+    {
+      "name": "default-make",
+      "inherits": ["gen-make"]
+    },
+    {
+      "name": "test-make",
+      "inherits": ["gen-make", "feat-test"]
+    },
+    {
+      "name": "test-bm-make",
+      "inherits": ["gen-make", "feat-test-bm"]
+    },
+    {
+      "name": "all-make",
+      "inherits": ["gen-make", "feat-all"]
+    },
+    {
+      "name": "cpm-make",
+      "inherits": ["gen-make", "deps-cpm", "feat-lib"]
+    },
+    {
+      "name": "cpm-test-make",
+      "inherits": ["gen-make", "deps-cpm", "feat-test"]
+    },
+    {
+      "name": "cpm-test-bm-make",
+      "inherits": ["gen-make", "deps-cpm", "feat-test-bm"]
+    },
+    {
+      "name": "cpm-all-make",
+      "inherits": ["gen-make", "deps-cpm", "feat-all"]
+    },
+    {
+      "name": "vcpkg-make",
+      "inherits": ["gen-make", "deps-vcpkg", "feat-lib"]
+    },
+    {
+      "name": "vcpkg-test-make",
+      "inherits": ["gen-make", "deps-vcpkg", "feat-test"]
+    },
+    {
+      "name": "vcpkg-test-bm-make",
+      "inherits": ["gen-make", "deps-vcpkg", "feat-test-bm"]
+    },
+    {
+      "name": "vcpkg-all-make",
+      "inherits": ["gen-make", "deps-vcpkg", "feat-all"]
+    }
+  ]
+}

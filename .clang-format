@@ -1,0 +1,12 @@
+BasedOnStyle: WebKit
+IndentWidth: 4
+ColumnLimit: 0
+BreakBeforeBraces: Attach
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AccessModifierOffset: -4
+NamespaceIndentation: All
+PointerAlignment: Left
+SpaceAfterTemplateKeyword: true
+SpaceBeforeParens: ControlStatements

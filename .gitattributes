@@ -1,0 +1,6 @@
+# Embedded / generated assets: exact bytes, no CRLF conversion.
+assets/** -text
+*.xxd.h -text
+*.xxd.cc -text
+**/xxd_gen.h -text
+**/xxd_gen.cc -text
