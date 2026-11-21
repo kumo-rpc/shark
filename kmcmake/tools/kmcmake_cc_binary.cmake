@@ -41,11 +41,6 @@ function(kmcmake_cc_binary)
             ${ARGN}
     )
 
-    set(${KMCMAKE_CC_BINARY_NAME}_INCLUDE_SYSTEM SYSTEM)
-    if (KMCMAKE_CC_BINARY_EXCLUDE_SYSTEM)
-        set(${KMCMAKE_CC_BINARY_NAME}_INCLUDE_SYSTEM "")
-    endif ()
-
     kmcmake_raw("-----------------------------------")
     kmcmake_print_label("Building Binary" "${KMCMAKE_CC_BINARY_NAME}")
     kmcmake_raw("-----------------------------------")
@@ -90,13 +85,16 @@ function(kmcmake_cc_binary)
     target_link_options(${exec_case} PRIVATE ${KMCMAKE_CC_BINARY_LINKOPTS})
 
 
-    target_include_directories(${exec_case} ${${KMCMAKE_CC_BINARY_NAME}_INCLUDE_SYSTEM}
+    target_include_directories(${exec_case}
+            BEFORE
             PRIVATE
             ${KMCMAKE_CC_BINARY_INCLUDES}
             "$<BUILD_INTERFACE:${${PROJECT_NAME}_SOURCE_DIR}>"
             "$<BUILD_INTERFACE:${${PROJECT_NAME}_BINARY_DIR}>"
             "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
     )
+    add_executable(${PROJECT_NAME}::${exec_case} ALIAS ${exec_case})
+
     if (KMCMAKE_CC_BINARY_PUBLIC)
         install(TARGETS ${exec_case}
                 EXPORT ${PROJECT_NAME}Targets
