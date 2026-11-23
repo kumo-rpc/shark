@@ -35,6 +35,7 @@ namespace shark::parser {
 
         bool parse(Lexer<ExpressionLexer> &lexer);
 
+        CommentNode      *leading_comment{nullptr};
         std::string_view edition;
     };
 }  // namespace shark::parser

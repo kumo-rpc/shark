@@ -78,21 +78,37 @@ namespace shark::parser {
     /// 3. parse package
     /// return true
     bool FileNode::parse() {
-        KLOG(INFO)<<1;
         if (!lexer) {
             report_error(ErrorType::INTERNAL, "lexer is null");
             return false;
         }
 
+        ///////////////////////////////
+        /// parse edition
         lexer->consume_white_space(true);
         edition = pool->create_node<Edition>(this);
+        auto* edition_leading = pool->create_node<CommentNode>(this);
+        if (!edition_leading->parse_leading(*lexer)) {
+            return false;
+        }
+        if (!edition_leading->empty()) {
+            edition->leading_comment = edition_leading;
+        }
         if (!edition->parse(*lexer)) {
             return false;
         }
 
+        ///////////////////////////////
+        /// parse package
         lexer->consume_white_space(true);
         auto* package = pool->create_node<PackageNode>(this);
-        KLOG(INFO)<<1;
+        auto* leading = pool->create_node<CommentNode>(this);
+        if (!leading->parse_leading(*lexer)) {
+            return false;
+        }
+        if (!leading->empty()) {
+            package->leading_comment = leading;
+        }
         if (!package->parse(*lexer)) {
             return false;
         }

@@ -24,7 +24,7 @@ namespace shark::common {
 
     MessageOnlySink clog_sink;
     static void init_clog_once() {
-        //turbo::set_stderr_threshold(turbo::LogSeverityAtLeast::kFatal);
+        turbo::set_stderr_threshold(turbo::LogSeverityAtLeast::kFatal);
         turbo::initialize_log();
         turbo::add_log_sink(&clog_sink);
         if (clog_debug) {

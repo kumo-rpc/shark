@@ -31,7 +31,6 @@ int main(int argc, char** argv) {
 
     shark::common::clog_enable_debug();
     if (!shark::parser::RegistryPool::instance().build_file(file, includes, false)) {
-        std::cout<<1<<std::endl;
         return 1;
     }
     return 0;

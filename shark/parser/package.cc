@@ -34,6 +34,8 @@ namespace shark::parser {
             return false;
         }
 
+        start_location = {t.line, t.column};
+
         lexer.consume();
         lexer.consume_white_space(true);
         t = lexer.look_at();
