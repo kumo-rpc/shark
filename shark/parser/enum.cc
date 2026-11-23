@@ -37,6 +37,8 @@ namespace shark::parser {
             return false;
         }
 
+        start_location = {t.line, t.column};
+
         lexer.consume();
         lexer.consume_white_space(true);
         t = lexer.look_at();
@@ -144,6 +146,7 @@ namespace shark::parser {
         // Parse trailing comment before checking the optional semicolon.
         tailing_comment = pool->create_node<CommentNode>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
+            report_debug(ErrorType::NONE, "enum `%s` class `%d` values `%zu`", name, static_cast<int>(is_class), values.size());
             return false;
         }
 
@@ -159,10 +162,12 @@ namespace shark::parser {
             lexer.consume();
 
             if (!tailing_comment->parse_tailing(lexer)) {
+                report_debug(ErrorType::NONE, "enum `%s` class `%d` values `%zu`", name, static_cast<int>(is_class), values.size());
                 return false;
             }
         }
 
+        report_debug(ErrorType::NONE, "enum `%s` class `%d` values `%zu`", name, static_cast<int>(is_class), values.size());
         return true;
     }
 

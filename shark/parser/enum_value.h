@@ -50,7 +50,7 @@ namespace shark::parser {
         bool parse(Lexer<ExpressionLexer> &lexer);
 
         std::vector<CommentNode*>      leading_comment;
-        CommentNode                   *tailing_comment;
+        CommentNode                   *tailing_comment{nullptr};
         int64_t                       value{0};
         std::vector<AnnotationNode*>  annotations;
         const EnumNode *parent_enum{nullptr};

@@ -1,0 +1,38 @@
+edition = "sk2026";
+package.cpp "shark.parser"; //! default cpp package for the header idl
+package "shark.parser";
+
+annotation@ scope = "file";
+annotation@.cpp header = "shark/parser/color.h";
+
+/// Color values.
+annotation key = "color";
+annotation.cpp type = "enum class";
+enum class Color : uint16 {
+    /// Red.
+    annotation key = "red";
+    RED = 0; //! red
+
+    annotation.go name = "Green";
+    GREEN = 1;
+
+    /// Blue.
+    annotation key = "blue";
+    annotation.cpp name = "kBlue";
+    BLUE = 2; //! blue
+};
+
+annotation key = "plain";
+enum Kind {
+    NONE = 0;
+    FILE = 1;
+    DIR = 2;
+}
+
+annotation key = "plain";
+enum KindW {
+    annotation@ key = "plain";
+    NONE = 0;
+    FILE = 1;
+    DIR = 2;
+}

@@ -16,6 +16,7 @@
 #pragma once
 
 
+#include <shark/parser/annotation.h>
 #include <shark/parser/comment.h>
 #include <shark/parser/lexer.h>
 #include <string>
@@ -47,8 +48,9 @@ namespace shark::parser {
 
         bool parse(Lexer<ExpressionLexer> &lexer);
 
-        CommentNode      *leading_comment;
-        CommentNode      *tailing_comment;
+        CommentNode      *leading_comment{nullptr};
+        CommentNode      *tailing_comment{nullptr};
+        std::vector<AnnotationNode*> annotations;
         std::string_view  classify;
         std::string_view  path;
 

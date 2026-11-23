@@ -33,6 +33,8 @@ namespace shark::parser {
             return false;
         }
 
+        start_location = {t.line, t.column};
+
         lexer.consume();
         lexer.consume_white_space(true);
         t = lexer.look_at();
@@ -102,9 +104,11 @@ namespace shark::parser {
         // Parse trailing comments.
         tailing_comment = pool->create_node<CommentNode>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
+            report_debug(ErrorType::NONE, "import `%s` classify `%s`", path, classify);
             return false;
         }
 
+        report_debug(ErrorType::NONE, "import `%s` classify `%s`", path, classify);
         return true;
     }
 

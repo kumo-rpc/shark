@@ -56,7 +56,14 @@ namespace shark::parser {
                     return false;
                 }
 
-                annotations.emplace_back(annotation);
+                if (annotation->file_level) {
+                    annotation->report_warn(
+                        ErrorType::SYNTAX,
+                        "file-level annotation belongs in the file scope, not inside an object definition");
+                    file->annotations.push_back(annotation);
+                } else {
+                    annotations.emplace_back(annotation);
+                }
                 continue;
             }
 
@@ -86,6 +93,7 @@ namespace shark::parser {
         }
 
         name = t.view();
+        start_location = {t.line, t.column};
 
         lexer.consume();
         lexer.consume_white_space(true);
@@ -171,9 +179,11 @@ namespace shark::parser {
         // Parse trailing comment.
         tailing_comment = pool->create_node<CommentNode>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
+            report_debug(ErrorType::NONE, "enum value `%s` = `%lld`", name, static_cast<long long>(value));
             return false;
         }
 
+        report_debug(ErrorType::NONE, "enum value `%s` = `%lld`", name, static_cast<long long>(value));
         return true;
     }
 

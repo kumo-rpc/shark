@@ -93,6 +93,8 @@ namespace shark::parser {
             return false;
         }
 
+        start_location = {t.line, t.column};
+
         lexer.consume();
         lexer.consume_white_space(true);
         t = lexer.look_at();
@@ -100,6 +102,19 @@ namespace shark::parser {
         if (t.is_error()) {
             report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
             return false;
+        }
+
+        file_level = false;
+        if (t.type == TokenType::At) {
+            file_level = true;
+            lexer.consume();
+            lexer.consume_white_space(true);
+            t = lexer.look_at();
+
+            if (t.is_error()) {
+                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+                return false;
+            }
         }
 
         // Parse optional classification.

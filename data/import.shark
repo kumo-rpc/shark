@@ -1,0 +1,7 @@
+edition = "sk2026";
+package.cpp "shark.parser"; //! default cpp package for the header idl
+package "shark.parser";
+
+import "shark/cpp.shark";
+import.cpp "shark/cpp.shark";
+import.go "shark/cpp.shark";

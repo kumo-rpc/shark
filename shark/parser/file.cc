@@ -13,6 +13,8 @@
 // limitations under the License.
 //
 
+#include <shark/parser/constants.h>
+#include <shark/parser/enum.h>
 #include <shark/parser/file.h>
 #include <shark/parser/pool.h>
 
@@ -73,18 +75,13 @@ namespace shark::parser {
         return true;
     }
 
-    /// 1. lexer not all
-    /// 2. parse edition
-    /// 3. parse package
-    /// return true
-    bool FileNode::parse() {
+    /// The file must start with edition. Package is a top-level element.
+    bool FileNode::parse_header() {
         if (!lexer) {
             report_error(ErrorType::INTERNAL, "lexer is null");
             return false;
         }
 
-        ///////////////////////////////
-        /// parse edition
         lexer->consume_white_space(true);
         edition = pool->create_node<Edition>(this);
         auto* edition_leading = pool->create_node<CommentNode>(this);
@@ -94,26 +91,101 @@ namespace shark::parser {
         if (!edition_leading->empty()) {
             edition->leading_comment = edition_leading;
         }
-        if (!edition->parse(*lexer)) {
+        return edition->parse(*lexer);
+    }
+
+    bool FileNode::parse_leading(std::vector<CommentNode*>& comments, std::vector<AnnotationNode*>& annotations) {
+        while (true) {
+            auto* comment = pool->create_node<CommentNode>(this);
+            if (!comment->parse_leading(*lexer)) {
+                return false;
+            }
+            if (!comment->empty()) {
+                comments.push_back(comment);
+            }
+
+            auto t = lexer->look_at();
+            if (t.is_error()) {
+                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+                return false;
+            }
+            if (t.type == TokenType::EndOfStream) {
+                return true;
+            }
+            if (t.type == TokenType::BareWord && t == "annotation") {
+                auto* annotation = pool->create_node<AnnotationNode>(this);
+                if (!annotation->parse(*lexer)) {
+                    return false;
+                }
+                if (annotation->file_level) {
+                    this->annotations.push_back(annotation);
+                } else {
+                    annotations.push_back(annotation);
+                }
+                continue;
+            }
+            return true;
+        }
+    }
+
+    bool FileNode::parse() {
+        if (!parse_header()) {
             return false;
         }
 
-        ///////////////////////////////
-        /// parse package
-        lexer->consume_white_space(true);
-        auto* package = pool->create_node<PackageNode>(this);
-        auto* leading = pool->create_node<CommentNode>(this);
-        if (!leading->parse_leading(*lexer)) {
+        while (true) {
+            lexer->consume_white_space(true);
+            std::vector<CommentNode*> comments;
+            std::vector<AnnotationNode*> annotations;
+            if (!parse_leading(comments, annotations)) {
+                return false;
+            }
+
+            auto t = lexer->look_at();
+            if (t.type == TokenType::EndOfStream) {
+                return true;
+            }
+            if (t.is_error()) {
+                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+                return false;
+            }
+            if (t.type == TokenType::BareWord && t == "package") {
+                auto* package = pool->create_node<PackageNode>(this);
+                if (!comments.empty()) {
+                    package->leading_comment = comments.front();
+                }
+                if (!package->parse(*lexer)) {
+                    return false;
+                }
+                packages.push_back(package);
+                continue;
+            }
+            if (t.type == TokenType::BareWord && t == "enum") {
+                auto* enum_node = pool->create_symbol<EnumNode>(this);
+                enum_node->leading_comment = std::move(comments);
+                enum_node->annotations = std::move(annotations);
+                if (!enum_node->parse(*lexer)) {
+                    return false;
+                }
+                enums.push_back(enum_node);
+                continue;
+            }
+            if (t.type == TokenType::BareWord && t == kImportKey) {
+                auto* import_node = pool->create_node<ImportNode>(this);
+                if (!comments.empty()) {
+                    import_node->leading_comment = comments.front();
+                }
+                import_node->annotations = std::move(annotations);
+                if (!import_node->parse(*lexer)) {
+                    return false;
+                }
+                imports.push_back(import_node);
+                continue;
+            }
+
+            report_error(ErrorType::SYNTAX, "expected `package`, `enum` or `import`, but got `%s`", t.view());
             return false;
         }
-        if (!leading->empty()) {
-            package->leading_comment = leading;
-        }
-        if (!package->parse(*lexer)) {
-            return false;
-        }
-        packages.push_back(package);
-        return true;
     }
 }  // namespace shark::parser
 

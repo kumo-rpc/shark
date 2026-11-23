@@ -52,8 +52,8 @@ namespace shark::parser {
         std::vector<ImportNode*>     imports;
 
         std::vector<CommentNode*>    leading_comment;
-        CommentNode                 *tailing_comment;
-        std::vector<AnnotationNode*> annotations;
+        CommentNode                 *tailing_comment{nullptr};
+        mutable std::vector<AnnotationNode*> annotations;
 
         std::vector<EnumNode*>       enums;
         std::vector<StructNode*>     structs;
@@ -69,6 +69,9 @@ namespace shark::parser {
             return path;
         }
 
+    private:
+        bool parse_header();
+        bool parse_leading(std::vector<CommentNode*>& comments, std::vector<AnnotationNode*>& annotations);
     protected:
         friend class RegistryPool;
         FileNode(const FileNode* f, RegistryPool * pool) :SymbolNode(NodeType::FILE, nullptr, pool) {}

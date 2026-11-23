@@ -36,6 +36,9 @@ namespace shark::parser {
     /// annotation key2 = [123.123, "abc",456];
     /// annotation.cpp key = "value cpp";
     /// annotation.go key = "value go";
+    /// annotation@ key = "file";
+    /// annotation@.cpp key = "file cpp";
+    /// `@` marks a file-level annotation. It is not attached to the next declaration.
     /// default annotation = annotation.cpp
     ////////////////////////////////////////////////
     class AnnotationNode : public Node {
@@ -53,6 +56,7 @@ namespace shark::parser {
 
         CommentNode      *leading_comment;
         CommentNode      *tailing_comment;
+        bool              file_level{false};
         std::string_view classify;
         std::string_view key;
         std::vector<value_type>       payload;
