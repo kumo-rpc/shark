@@ -14,3 +14,7 @@
 #
 
 configure_file(${PROJECT_SOURCE_DIR}/tests/config.h.in ${PROJECT_SOURCE_DIR}/tests/config.h @ONLY)
+
+find_package(qtest REQUIRED)
+
+add_subdirectory(parser)

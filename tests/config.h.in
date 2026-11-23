@@ -22,4 +22,8 @@ namespace testing {
     inline std::string testing_root() {
         return "@PROJECT_SOURCE_DIR@/tests";
     }
+
+    inline std::string lexer_markdown_dir() {
+        return testing_root() + "/parser/md/lexer";
+    }
 }  // namespace testing

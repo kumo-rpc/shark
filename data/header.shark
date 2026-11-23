@@ -1,0 +1,2 @@
+edition = "sk2026";
+package.cpp "shark.parser"; //! default cpp package for the header idl

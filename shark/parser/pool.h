@@ -1,0 +1,154 @@
+// Copyright (C) 2026 Kumo inc. and its affiliates. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+#pragma once
+
+#include <shark/parser/symbol.h>
+#include <fermat/maps/btree_map.h>
+#include <fermat/maps/btree_set.h>
+#include <deque>
+
+namespace shark::parser {
+
+    class RegistryPool {
+    public:
+        static RegistryPool& instance() {
+            static RegistryPool ins;
+            return ins;
+        }
+
+        /// no lock, parser always single thread
+        [[nodiscard]] bool has_symbol(std::string_view url) const {
+            auto it = _symbols.find(url);
+            if (it == _symbols.end()) {
+                return false;
+            }
+            return true;
+        }
+        [[nodiscard]] bool add_symbol(SymbolNode* ptr) {
+            std::string_view uri = ptr->full_name;
+            auto it = _symbols.find(uri);
+            if (it == _symbols.end()) {
+                return false;
+            }
+            _symbols[uri] = ptr;
+            return true;
+        }
+
+        [[nodiscard]] const SymbolNode* get_symbol(std::string_view url) const {
+            auto it = _symbols.find(url);
+            if (it == _symbols.end()) {
+                return nullptr;
+            }
+            return it->second;
+        }
+
+        [[nodiscard]] SymbolNode* get_symbol(std::string_view url) {
+            auto it = _symbols.find(url);
+            if (it == _symbols.end()) {
+                return nullptr;
+            }
+            return it->second;
+        }
+
+        void add_file(FileNode *ptr);
+
+        [[nodiscard]] bool has_file(std::string_view path) {
+            auto it = _files.find(path);
+            if (it == _files.end()) {
+                return false;
+            }
+            return true;
+        }
+
+        [[nodiscard]] const FileNode* get_file(std::string_view path) const {
+            auto it = _files.find(path);
+            if (it == _files.end()) {
+                return nullptr;
+            }
+            return it->second;
+        }
+
+        [[nodiscard]] FileNode* get_file(std::string_view path) {
+            auto it = _files.find(path);
+            if (it == _files.end()) {
+                return nullptr;
+            }
+            return it->second;
+        }
+
+        void add_include(std::string_view path) {
+            if (_includes_set.find(path) == _includes_set.end()) {
+                return;
+            }
+            _includes_set.insert(std::string(path));
+            _includes.push_back(std::string(path));
+        }
+
+        [[nodiscard]] const std::vector<std::string>& includes() const {
+            return _includes;
+        }
+
+       [[nodiscard]] std::vector<SymbolNode*> not_emit_symbol() const {
+            std::vector<SymbolNode*> ret;
+            for (auto &it : _all_symbols) {
+                if (!it->emit) {
+                    ret.push_back(it.get());
+                }
+            }
+            return ret;
+        }
+
+        template <typename T>
+        T* create_symbol(const FileNode* f) {
+            static_assert(std::is_base_of_v<SymbolNode, T>, "must be");
+            auto npr = new T(f, this);
+            std::unique_ptr<T> ptr(npr);
+            auto ret = ptr.get();
+            _all_symbols.push_back(std::move(ptr));
+            return ret;
+        }
+
+        template <typename T>
+        T* create_node(const FileNode* f) {
+            static_assert(std::is_base_of_v<Node, T>, "must be");
+            static_assert(!std::is_base_of_v<SymbolNode, T>, "must be");
+            auto npr = new T(f, this);
+            std::unique_ptr<T> ptr(npr);
+            auto ret = ptr.get();
+            _all_node.push_back(std::move(ptr));
+            return ret;
+        }
+
+
+        bool build_file(std::string_view file, bool recursive);
+
+        bool build_file(std::string_view file, const std::vector<std::string> &includes, bool recursive) {
+            for (const auto &it : includes) {
+                add_include(it);
+            }
+            return build_file(file,recursive);
+        }
+    private:
+        std::vector<std::unique_ptr<SymbolNode>>           _all_symbols;
+        std::vector<std::unique_ptr<Node>>                  _all_node;
+        fermat::btree_map<std::string_view, SymbolNode*>    _symbols;
+        fermat::btree_map<std::string_view, FileNode*>      _files;
+        fermat::btree_set<std::string>                      _includes_set;
+        std::vector<std::string>                            _includes;
+        std::deque<FileNode*>                               _files_queue;
+    };
+
+}  // namespace shark::parser

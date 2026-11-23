@@ -1,0 +1,181 @@
+// Copyright (C) 2026 Kumo inc. and its affiliates. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+#include <shark/parser/constants.h>
+#include <shark/parser/enum_value.h>
+
+#include "file.h"
+#include "pool.h"
+
+#include <shark/parser/enum.h>
+#include <shark/parser/struct.h>
+
+namespace shark::parser {
+
+    bool EnumValueNode::parse(
+        Lexer<ExpressionLexer>& lexer) {
+        return parse_leading(lexer) && parse_value(lexer);
+    }
+
+    bool EnumValueNode::parse_leading(
+        Lexer<ExpressionLexer>& lexer) {
+        while (true) {
+            // Parse a leading comment block.
+            auto comment = pool->create_node<CommentNode>(file);
+            if (!comment->parse_leading(lexer)) {
+                return false;
+            }
+
+            if (!comment->empty()) {
+                leading_comment.emplace_back(comment);
+            }
+
+            auto t = lexer.look_at();
+
+            if (t.is_error()) {
+                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+                return false;
+            }
+
+            // Parse annotations preceding the enum value.
+            if (t.type == TokenType::BareWord && t == "annotation") {
+                auto annotation = pool->create_node<AnnotationNode>(file);
+                if (!annotation->parse(lexer)) {
+                    return false;
+                }
+
+                annotations.emplace_back(annotation);
+                continue;
+            }
+
+            // The next token must be the enum value name.
+            if (t.type != TokenType::BareWord) {
+                report_error(ErrorType::SYNTAX, "expected an enum value name, but got `%s`", t.view());
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+    bool EnumValueNode::parse_value(
+        Lexer<ExpressionLexer>& lexer) {
+        auto t = lexer.look_at();
+
+        if (t.is_error()) {
+            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+            return false;
+        }
+
+        // Parse enum value name.
+        if (t.type != TokenType::BareWord) {
+            report_error(ErrorType::SYNTAX, "expected an enum value name, but got `%s`", t.view());
+            return false;
+        }
+
+        name = t.view();
+
+        lexer.consume();
+        lexer.consume_white_space(true);
+        t = lexer.look_at();
+
+        if (t.is_error()) {
+            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+            return false;
+        }
+
+        // Parse '='.
+        if (t.type != TokenType::Equals) {
+            report_error(ErrorType::SYNTAX, "expected `=`, but got `%s`", t.view());
+            return false;
+        }
+
+        lexer.consume();
+        lexer.consume_white_space(true);
+        t = lexer.look_at();
+
+        if (t.is_error()) {
+            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+            return false;
+        }
+
+        // Parse optional sign.
+        bool negative = false;
+        if (t.type == TokenType::Minus) {
+            negative = true;
+            lexer.consume();
+            lexer.consume_white_space(true);
+            t = lexer.look_at();
+
+            if (t.is_error()) {
+                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+                return false;
+            }
+        }
+
+        // Parse integer value.
+        if (t.type != TokenType::Number) {
+            report_error(ErrorType::SYNTAX, "expected an integer value, but got `%s`", t.view());
+            return false;
+        }
+
+        std::string number(t.view());
+        char* end = nullptr;
+
+        errno = 0;
+        const auto parsed = std::strtoll(number.c_str(), &end, 10);
+
+        if (errno == ERANGE || end != number.c_str() + number.size()) {
+            report_error(ErrorType::SYNTAX, "invalid integer value `%s`", number);
+            return false;
+        }
+
+        const auto signed_value = negative ? -parsed : parsed;
+
+        if (signed_value < std::numeric_limits<int64_t>::min() || signed_value > std::numeric_limits<int64_t>::max()) {
+            report_error(ErrorType::SYNTAX, "enum value `%s` is out of int64_t range", number);
+            return false;
+        }
+
+        value = static_cast<int64_t>(signed_value);
+
+        lexer.consume();
+        lexer.consume_white_space(true);
+        t = lexer.look_at();
+
+        if (t.is_error()) {
+            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+            return false;
+        }
+
+        // Parse ';'.
+        if (t.type != TokenType::Semicolon) {
+            report_error(ErrorType::SYNTAX, "expected `;`, but got `%s`", t.view());
+            return false;
+        }
+
+        lexer.consume();
+
+        // Parse trailing comment.
+        tailing_comment = pool->create_node<CommentNode>(file);
+        if (!tailing_comment->parse_tailing(lexer)) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+} // namespace shark::parser

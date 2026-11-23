@@ -27,3 +27,46 @@ kmcmake_cc_interface(
         ${KMCMAKE_CXX_OPTIONS}
         PUBLIC
 )
+
+kmcmake_cc_library(
+        NAME shark-parser
+        NAMESPACE shark
+        SOURCES
+        common/filepath.cc
+        common/clog.cc
+        parser/lexer.cc
+        parser/parser.cc
+        parser/comment.cc
+        parser/edition.cc
+        parser/import.cc
+        parser/package.cc
+        parser/annotation.cc
+        parser/enum_value.cc
+        parser/enum.cc
+        parser/symbol.cc
+        parser/file.cc
+        parser/pool.cc
+        parser/node.cc
+        CXXOPTS
+        ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        ${KMCMAKE_DEPS_LINK}
+        PUBLIC
+)
+
+
+
+
+kmcmake_cc_binary(
+        NAME sharkc
+        NAMESPACE shark
+        SOURCES
+        compiler/main.cc
+        CXXOPTS
+        ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        shark::shark-parser_static
+        ${KMCMAKE_DEPS_LINK}
+        PUBLIC
+)
+
