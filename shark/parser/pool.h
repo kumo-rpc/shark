@@ -15,10 +15,12 @@
 
 #pragma once
 
-#include <shark/parser/symbol.h>
+#include <shark/common/filepath.h>
+#include <turbo/log/logging.h>
+#include <deque>
 #include <fermat/maps/btree_map.h>
 #include <fermat/maps/btree_set.h>
-#include <deque>
+#include <shark/parser/symbol.h>
 
 namespace shark::parser {
 
@@ -90,7 +92,7 @@ namespace shark::parser {
         }
 
         void add_include(std::string_view path) {
-            if (_includes_set.find(path) == _includes_set.end()) {
+            if (_includes_set.find(path) != _includes_set.end()) {
                 return;
             }
             _includes_set.insert(std::string(path));
@@ -137,7 +139,11 @@ namespace shark::parser {
 
         bool build_file(std::string_view file, const std::vector<std::string> &includes, bool recursive) {
             for (const auto &it : includes) {
-                add_include(it);
+                auto r = shark::common::absolute_path(it);
+                if (!r.ok()) {
+                    KLOG(ERROR)<<r;
+                }
+                add_include(r.value());
             }
             return build_file(file,recursive);
         }

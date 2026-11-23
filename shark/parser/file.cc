@@ -17,7 +17,7 @@
 #include <shark/parser/pool.h>
 
 #include <turbo/strings/match.h>
-
+#include <turbo/log/logging.h>
 #include <filesystem>
 #include <fstream>
 #include <iterator>
@@ -26,6 +26,7 @@
 namespace shark::parser {
 
     bool FileNode::load(std::string_view absolute_path_in, std::string_view path_in) {
+        KLOG(INFO)<<1<<222;
         if (absolute_path_in.empty() || path_in.empty()) {
             report_error(ErrorType::IO, "path and absolute_path must both be non-empty");
             return false;
@@ -77,6 +78,7 @@ namespace shark::parser {
     /// 3. parse package
     /// return true
     bool FileNode::parse() {
+        KLOG(INFO)<<1;
         if (!lexer) {
             report_error(ErrorType::INTERNAL, "lexer is null");
             return false;
@@ -90,6 +92,7 @@ namespace shark::parser {
 
         lexer->consume_white_space(true);
         auto* package = pool->create_node<PackageNode>(this);
+        KLOG(INFO)<<1;
         if (!package->parse(*lexer)) {
             return false;
         }

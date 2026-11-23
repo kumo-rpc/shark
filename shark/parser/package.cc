@@ -15,12 +15,14 @@
 
 #include <shark/parser/constants.h>
 #include <shark/parser/package.h>
-
-#include "pool.h"
+#include <turbo/log/logging.h>
+#include <shark/parser/pool.h>
 
 namespace shark::parser {
 
     bool PackageNode::parse(Lexer<ExpressionLexer>& lexer) {
+
+        KLOG(INFO)<<1;
         auto t = lexer.look_at();
         if (t.is_error()) {
             report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
@@ -101,9 +103,12 @@ namespace shark::parser {
         // Parse trailing comments.
         tailing_comment = pool->create_node<CommentNode>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
+            report_debug(ErrorType::NONE, "package `%s` classify `%s`", package, classify);
+
             return false;
         }
 
+        report_debug(ErrorType::NONE, "package `%s` classify `%s`", package, classify);
         return true;
     }
 

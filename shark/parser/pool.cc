@@ -16,6 +16,7 @@
 #include <shark/parser/pool.h>
 #include <shark/parser/file.h>
 #include <shark/common/filepath.h>
+#include <turbo/log/logging.h>
 
 namespace shark::parser {
 
@@ -30,6 +31,7 @@ namespace shark::parser {
         std::string prefix;
         auto rel = shark::common::relative_path(file, includes(), &prefix);
         if (!rel.ok()) {
+            KLOG(INFO)<<rel;
             return false;
         }
 

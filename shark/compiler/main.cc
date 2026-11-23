@@ -17,6 +17,8 @@
 #include <turbo/cli/cli.h>
 
 #include <string>
+#include <shark/common/clog.h>
+#include <turbo/log/logging.h>
 #include <vector>
 
 int main(int argc, char** argv) {
@@ -27,7 +29,9 @@ int main(int argc, char** argv) {
     app.add_option("-I,--include", includes, "include prefix")->required();
     XCLI_PARSE(app, argc, argv);
 
+    shark::common::clog_enable_debug();
     if (!shark::parser::RegistryPool::instance().build_file(file, includes, false)) {
+        std::cout<<1<<std::endl;
         return 1;
     }
     return 0;

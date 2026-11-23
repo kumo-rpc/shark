@@ -20,12 +20,16 @@
 namespace shark::common {
 
     static std::once_flag clog_init;
+    static bool clog_debug { false };
 
     MessageOnlySink clog_sink;
     static void init_clog_once() {
-        turbo::set_stderr_threshold(turbo::LogSeverityAtLeast::kFatal);
+        //turbo::set_stderr_threshold(turbo::LogSeverityAtLeast::kFatal);
         turbo::initialize_log();
         turbo::add_log_sink(&clog_sink);
+        if (clog_debug) {
+            turbo::set_min_log_level(turbo::LogSeverityAtLeast::kDebug);
+        }
         turbo::flush_log_sinks();
     }
 
@@ -54,6 +58,8 @@ namespace shark::common {
     }
 
     void clog_enable_debug() {
+        clog_debug = true;
+        init_clog();
         turbo::set_min_log_level(turbo::LogSeverityAtLeast::kDebug);
     }
 }  // namespace shark::common
