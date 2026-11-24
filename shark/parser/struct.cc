@@ -28,6 +28,15 @@ namespace shark::parser {
         if (bind) {
             return BindStep::DONE;
         }
+        for (std::size_t i = 0; i < fields.size(); ++i) {
+            for (std::size_t j = i + 1; j < fields.size(); ++j) {
+                if (fields[i]->id != fields[j]->id) {
+                    continue;
+                }
+                report_error(ErrorType::SEMANTIC, "field `%s` number `%u` duplicates field `%s`", fields[j]->name, static_cast<unsigned>(fields[j]->id), fields[i]->name);
+                return BindStep::FAIL;
+            }
+        }
         bool waiting = false;
         for (FieldNode* field : fields) {
             if (field->bind) {

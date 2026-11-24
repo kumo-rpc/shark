@@ -69,6 +69,15 @@ namespace shark::parser {
         }
         ret_type = struct_type;
         ret_enum = enum_type;
+        for (std::size_t i = 0; i < params.size(); ++i) {
+            for (std::size_t j = i + 1; j < params.size(); ++j) {
+                if (params[i]->id != params[j]->id) {
+                    continue;
+                }
+                report_error(ErrorType::SEMANTIC, "parameter `%s` number `%u` duplicates parameter `%s`", params[j]->name, static_cast<unsigned>(params[j]->id), params[i]->name);
+                return false;
+            }
+        }
         for (FieldNode* param : params) {
             const StructNode* param_struct = nullptr;
             const EnumNode* param_enum = nullptr;

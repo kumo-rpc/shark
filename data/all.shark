@@ -73,7 +73,7 @@ servlet Query : shark.io.Read, shark.io.Write, {
 
 struct CppAttr {
     optional int32 level @1;
-    optional bool  export @1;
+    optional bool  export @2;
 }
 
 /// export from cpp
@@ -81,6 +81,12 @@ annotation.cpp extern = true;
 annotation.cpp include = "shark/sub.h";
 annotation.cpp namespace = "shark.math";
 annotation.cpp cppattr<CppAttr> = {level = 0,export = false};
+annotation.cpp ids<list<int32>> = [1, 2, 3];
+annotation.cpp names<list<string>> = ["shark", "math"];
+annotation.cpp flags<set<bool>> = [true, false];
+annotation.cpp table<map<string, int32>> = {"limit" = 64, "zero" = 0};
+annotation.cpp attrs<map<string, CppAttr>> = {"core" = {level = 1, export = true}};
+annotation.cpp points<list<Point>> = [{x = 1, y = 2}, {x = 3, y = 4}];
 
 function void sub(required int64 a @ 1,
                    optional int64 b @ 2);

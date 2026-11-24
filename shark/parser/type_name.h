@@ -21,6 +21,11 @@
 
 namespace shark::parser {
 
+    class Node;
+    class ExpressionLexer;
+    template <typename Lex>
+    class Lexer;
+
     /// A type written in source. Plain names stay in `string_view`.
     /// A generic use stores nested arguments in `TypeName`.
     struct TypeName {
@@ -51,5 +56,8 @@ namespace shark::parser {
     }
 
     std::string format_type_ref(const TypeRef& ref);
+
+    // Reads a dotted name and optional `<...>` arguments. The caller owns errors.
+    bool parse_type_ref(Node& node, Lexer<ExpressionLexer>& lexer, TypeRef& out);
 
 }  // namespace shark::parser

@@ -70,6 +70,5 @@ namespace shark::parser {
     private:
         bool skip_gap(Lexer<ExpressionLexer>& lexer);
         bool parse_type_name(Lexer<ExpressionLexer>& lexer);
-        bool parse_type_ref(Lexer<ExpressionLexer>& lexer, TypeRef& out);
     };
 }  // namespace shark::parser

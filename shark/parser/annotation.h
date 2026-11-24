@@ -18,6 +18,7 @@
 
 #include <shark/parser/comment.h>
 #include <shark/parser/lexer.h>
+#include <shark/parser/type_name.h>
 #include <string>
 #include <vector>
 #include <optional>
@@ -25,6 +26,8 @@
 #include <variant>
 
 namespace shark::parser {
+
+    class ConstValue;
 
     ////////////////////////////////////////////////
     /// Annotation declarations.
@@ -34,6 +37,8 @@ namespace shark::parser {
     /// annotation key2 = 123.123;
     /// annotation key = true;
     /// annotation key2 = [123.123];
+    /// annotation.cpp cppattr<CppAttr> = {level = 0, export = false};
+    /// annotation.cpp ids<list<int32>> = [1, 2];
     /// annotation key2 = [123.123, "abc",456];
     /// annotation.cpp key = "value cpp";
     /// annotation.go key = "value go";
@@ -55,6 +60,7 @@ namespace shark::parser {
             >;
 
         bool parse(Lexer<ExpressionLexer> &lexer);
+        bool bind_typed();
 
         CommentNode      *leading_comment;
         CommentNode      *tailing_comment;
@@ -62,8 +68,14 @@ namespace shark::parser {
         std::string_view classify;
         std::string_view key;
         std::vector<value_type>       payload;
+        /// Set when the key is `key<Type>`. The value is `object`, a ConstValue,
+        /// the same node a field default uses.
+        bool              typed{false};
+        TypeRef           type_ref;
+        ConstValue*       object{nullptr};
 
     private:
         bool parse_one(Lexer<ExpressionLexer> &lexer);
+        bool parse_typed_value(Lexer<ExpressionLexer>& lexer);
     };
 }  // namespace shark::parser

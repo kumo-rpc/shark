@@ -14,6 +14,7 @@
 //
 
 #include <shark/parser/alias.h>
+#include <shark/parser/import.h>
 #include <shark/parser/constants.h>
 #include <shark/parser/enum.h>
 #include <shark/parser/field.h>
@@ -27,6 +28,7 @@
 #include <turbo/log/logging.h>
 #include <filesystem>
 #include <fstream>
+#include <functional>
 #include <iterator>
 #include <memory>
 
@@ -88,6 +90,9 @@ namespace shark::parser {
             return false;
         }
         if (!bind_structs()) {
+            return false;
+        }
+        if (!bind_annotations()) {
             return false;
         }
         if (!bind_functions()) {
@@ -593,6 +598,103 @@ namespace shark::parser {
                 return false;
             }
         }
+    }
+
+    bool FileNode::bind_annotations() {
+        std::function<bool(const std::vector<AnnotationNode*>&)> bind_list;
+        std::function<bool(StructNode*)> bind_struct;
+        std::function<bool(EnumNode*)> bind_enum;
+        std::function<bool(const std::vector<FieldNode*>&)> bind_fields;
+
+        bind_list = [](const std::vector<AnnotationNode*>& list) {
+            for (AnnotationNode* node : list) {
+                if (node != nullptr && !node->bind_typed()) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        bind_fields = [&](const std::vector<FieldNode*>& fields) {
+            for (FieldNode* field : fields) {
+                if (!bind_list(field->annotations)) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        bind_enum = [&](EnumNode* node) {
+            if (!bind_list(node->annotations)) {
+                return false;
+            }
+            for (EnumValueNode* value : node->values) {
+                if (!bind_list(value->annotations)) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        bind_struct = [&](StructNode* node) {
+            if (!bind_list(node->annotations)) {
+                return false;
+            }
+            if (!bind_fields(node->fields)) {
+                return false;
+            }
+            for (EnumNode* child : node->nested_enums) {
+                if (!bind_enum(child)) {
+                    return false;
+                }
+            }
+            for (AliasNode* alias : node->aliases) {
+                if (!bind_list(alias->annotations)) {
+                    return false;
+                }
+            }
+            for (StructNode* child : node->nested_types) {
+                if (!bind_struct(child)) {
+                    return false;
+                }
+            }
+            return true;
+        };
+
+        if (!bind_list(annotations)) {
+            return false;
+        }
+        for (ImportNode* node : imports) {
+            if (!bind_list(node->annotations)) {
+                return false;
+            }
+        }
+        for (EnumNode* node : enums) {
+            if (!bind_enum(node)) {
+                return false;
+            }
+        }
+        for (StructNode* node : structs) {
+            if (!bind_struct(node)) {
+                return false;
+            }
+        }
+        if (!bind_fields(constexprs)) {
+            return false;
+        }
+        for (FunctionNode* node : functions) {
+            if (!bind_list(node->annotations) || !bind_fields(node->params)) {
+                return false;
+            }
+        }
+        for (ServletNode* node : servlets) {
+            if (!bind_list(node->annotations)) {
+                return false;
+            }
+            for (FunctionNode* method : node->method) {
+                if (!bind_list(method->annotations) || !bind_fields(method->params)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     bool FileNode::bind_functions() {

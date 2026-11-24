@@ -99,6 +99,7 @@ namespace shark::parser {
         bool bind_struct_pass(StructNode* node, bool& progress, bool& pending);
         bool bind_functions();
         bool bind_servlets();
+        bool bind_annotations();
         SymbolNode* find_local(std::string_view name) const;
         SymbolNode* find_local_struct(const StructNode* node, std::string_view name) const;
 
