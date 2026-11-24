@@ -62,7 +62,7 @@ servlet Read {
 };
 
 annotation key = "query";
-servlet Query : shark.Read, shark.Write, {
+servlet Query : shark.io.Read, shark.io.Write, {
     function void ping();
     function int64 add(
         required int64 a @ 1,

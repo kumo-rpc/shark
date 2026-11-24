@@ -54,6 +54,10 @@ namespace shark::parser {
                 if (type->builtin || type->bind) {
                     field->type = type;
                     field->bind = true;
+                    if (!field->emit_to_pool()) {
+                        report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", field->full_name);
+                        return BindStep::FAIL;
+                    }
                     continue;
                 }
                 waiting = true;
@@ -67,6 +71,10 @@ namespace shark::parser {
                 }
                 field->enum_type = enum_type;
                 field->bind = true;
+                if (!field->emit_to_pool()) {
+                    report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", field->full_name);
+                    return BindStep::FAIL;
+                }
                 continue;
             }
             report_error(ErrorType::SEMANTIC, "field `%s` type `%s` must be a struct, union, enum, or builtin", name, type_ref_name(field->type_ref));
@@ -76,6 +84,10 @@ namespace shark::parser {
             return BindStep::WAIT;
         }
         bind = true;
+        if (!emit_to_pool()) {
+            report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name);
+            return BindStep::FAIL;
+        }
         return BindStep::DONE;
     }
 

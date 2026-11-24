@@ -49,6 +49,10 @@ namespace shark::parser {
         }
         bases = std::move(resolved);
         bind = true;
+        if (!emit_to_pool()) {
+            report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name);
+            return BindStep::FAIL;
+        }
         return BindStep::DONE;
     }
 

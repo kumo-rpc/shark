@@ -438,6 +438,10 @@ namespace shark::parser {
                 if (enum_type->bind) {
                     field->enum_type = enum_type;
                     field->bind = true;
+                    if (!field->emit_to_pool()) {
+                        report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", field->full_name);
+                        return false;
+                    }
                     return true;
                 }
             }
@@ -448,6 +452,10 @@ namespace shark::parser {
             auto* type = static_cast<StructNode*>(symbol);
             field->type = type;
             field->bind = true;
+            if (!field->emit_to_pool()) {
+                report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", field->full_name);
+                return false;
+            }
             if (!is_scalar_builtin(type)) {
                 field->static_const = true;
                 report_warn(ErrorType::SEMANTIC, "constexpr `%s` type `%s` is downgraded to static const and is not a compile-time constant", field->name, type_ref_name(field->type_ref));
@@ -461,6 +469,10 @@ namespace shark::parser {
             }
             field->enum_type = enum_type;
             field->bind = true;
+            if (!field->emit_to_pool()) {
+                report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", field->full_name);
+                return false;
+            }
             return true;
         }
         report_error(ErrorType::SEMANTIC, "constexpr `%s` type `%s` was not bound", field->name, type_ref_name(field->type_ref));

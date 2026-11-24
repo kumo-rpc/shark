@@ -1,0 +1,13 @@
+edition = "sk2026";
+package "shark.io";
+
+servlet Read {
+    function int64 get(required string key @ 1);
+};
+
+servlet Write {
+    function void put(
+        required string key @ 1,
+        required string value @ 2,
+    );
+};

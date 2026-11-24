@@ -31,6 +31,10 @@ namespace shark::parser {
         }
         target = symbol;
         bind = true;
+        if (!emit_to_pool()) {
+            report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name);
+            return false;
+        }
         return true;
     }
 
