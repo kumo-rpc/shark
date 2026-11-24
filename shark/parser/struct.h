@@ -102,6 +102,7 @@ namespace shark::parser {
         std::vector<FieldNode*>       fields;
         std::vector<StructNode*>      nested_types;
         std::vector<EnumNode*>        nested_enums;
+        std::vector<AliasNode*>       aliases;
         const StructNode*             container{nullptr};
         bool                          is_union{false};
         PhysicalType                  phy_type{PhysicalType::VOID};
@@ -117,6 +118,9 @@ namespace shark::parser {
             std::vector<CommentNode*>& comments,
             std::vector<AnnotationNode*>& annotations);
         bool parse_nested_union(Lexer<ExpressionLexer>& lexer,
+            std::vector<CommentNode*>& comments,
+            std::vector<AnnotationNode*>& annotations);
+        bool parse_alias(Lexer<ExpressionLexer>& lexer,
             std::vector<CommentNode*>& comments,
             std::vector<AnnotationNode*>& annotations);
     };

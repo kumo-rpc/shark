@@ -13,6 +13,7 @@
 // limitations under the License.
 //
 
+#include <shark/parser/alias.h>
 #include <shark/parser/constants.h>
 #include <shark/parser/enum.h>
 #include <shark/parser/field.h>
@@ -41,6 +42,20 @@ namespace {
             return false;
         }
         fields.push_back(field);
+        return true;
+    }
+
+    bool StructNode::parse_alias(Lexer<ExpressionLexer>& lexer,
+        std::vector<CommentNode*>& comments,
+        std::vector<AnnotationNode*>& annotations) {
+        auto* alias = pool->create_symbol<AliasNode>(file);
+        alias->container = this;
+        alias->leading_comment = std::move(comments);
+        alias->annotations = std::move(annotations);
+        if (!alias->parse(lexer)) {
+            return false;
+        }
+        aliases.push_back(alias);
         return true;
     }
 
@@ -162,6 +177,12 @@ namespace {
             }
             if (is_field_label(t)) {
                 if (!parse_field(lexer, comments, annotations)) {
+                    return false;
+                }
+                continue;
+            }
+            if (t.type == TokenType::BareWord && (t == kUsingKey || t == kTypeDefKey)) {
+                if (!parse_alias(lexer, comments, annotations)) {
                     return false;
                 }
                 continue;

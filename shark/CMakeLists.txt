@@ -51,6 +51,7 @@ kmcmake_cc_library(
         parser/field.cc
         parser/struct.cc
         parser/function.cc
+        parser/alias.cc
         parser/servlet.cc
         CXXOPTS
         ${KMCMAKE_CXX_OPTIONS}

@@ -21,6 +21,7 @@
 #include <shark/parser/annotation.h>
 #include <shark/parser/lexer.h>
 #include <string>
+#include <string_view>
 #include <vector>
 #include <optional>
 #include <functional>
@@ -28,78 +29,42 @@
 namespace shark::parser {
 
     ////////////////////////////////////////////////
-    /// Enum declarations.
+    /// Alias declarations. The node is a symbol. `name` is the alias.
     ///
-    /// enum Color {
-    ///     RED = 0;
-    ///     GREEN = 1;
-    ///     BLUE = 2;
-    /// }
+    /// `using` names the alias first. `typedef` names the target symbol first.
+    /// The target is a dotted name and is not bound here.
+    /// Leading comments and annotations are set by the caller.
     ///
-    /// Enum declarations can use the `class` keyword.
-    /// The default underlying type is `int32`.
+    /// using Id = int64;
+    /// using PointId = shark.Point;
     ///
-    /// enum class Color {
-    ///     RED = 0;
-    ///     GREEN = 1;
-    /// }
-    ///
-    /// An explicit underlying integer type can be specified
-    /// for enum class declarations.
-    ///
-    /// enum class Color : uint16 {
-    ///     RED = 0;
-    ///     GREEN = 1;
-    /// }
-    ///
-    /// Supported underlying types:
-    ///     int8
-    ///     uint8
-    ///     int16
-    ///     uint16
-    ///     int32
-    ///     uint32
-    ///
-    /// Enum declarations support leading comments and annotations.
-    /// Comments and annotations can appear before the enum declaration.
-    ///
-    /// /// Enum comment.
-    /// annotation key = "value";
-    /// enum class Color {
-    ///     RED = 0;
-    /// }
-    ///
-    /// Enum values also support leading comments, annotations,
-    /// and trailing comments.
-    ///
-    /// enum Color {
-    ///     /// Value comment.
-    ///     annotation key = "value";
-    ///     RED = 0;
-    ///
-    ///     GREEN = 1;  ///! Value trailing comment.
-    /// }
-    ///
-    /// The closing brace can optionally be followed by a semicolon.
+    /// /// File id.
+    /// annotation key = "id";
+    /// typedef int64 Id;
     ///
     ////////////////////////////////////////////////
-    ///
-    /// using or typedef
     class AliasNode : public SymbolNode {
     public:
         ~AliasNode() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);
 
-        std::vector<CommentNode>     *leading_comment;
-        CommentNode                  *tailing_comment;
+        std::vector<CommentNode*>     leading_comment;
+        CommentNode                  *tailing_comment{nullptr};
         std::vector<AnnotationNode*>  annotations;
-        const StructNode*            container{nullptr};
-        /// using or typedef
-        bool                         is_using{false};
+        std::string_view              target_name;
+        const SymbolNode*             target{nullptr};
+        const StructNode*             container{nullptr};
+        bool                          is_using{false};
 
     private:
         friend class RegistryPool;
-        AliasNode(const FileNode* f, RegistryPool * pool) :SymbolNode(NodeType::STRUCT, f, pool) {}
+        AliasNode(const FileNode* f, RegistryPool * pool) :SymbolNode(NodeType::ALIAS, f, pool) {}
+
+        bool skip_gap(Lexer<ExpressionLexer>& lexer);
+        bool parse_target_name(Lexer<ExpressionLexer>& lexer);
+        bool finish(Lexer<ExpressionLexer>& lexer);
+        bool parse_using(Lexer<ExpressionLexer>& lexer);
+        bool parse_typedef(Lexer<ExpressionLexer>& lexer);
     };
 }  // namespace shark::parser
