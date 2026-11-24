@@ -12,4 +12,6 @@ An `enum class` value includes the enum name in its path. A plain `enum` value u
 
 ## Next
 
-Import dependency analysis: bind the import graph before naming and binding the file being built.
+Parsing currently covers one file. Imported files are not parsed.
+
+The next work is in `RegistryPool::build_file`: walk that file's imports, parse the dependency tree first, and parse the file being built last. Naming, emit, and binding stay after that tree is complete.
