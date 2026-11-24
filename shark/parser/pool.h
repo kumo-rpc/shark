@@ -136,9 +136,9 @@ namespace shark::parser {
         }
 
 
-        bool build_file(std::string_view file);
+        FileNode* build_file(std::string_view file);
 
-        bool build_file(std::string_view file, const std::vector<std::string> &includes) {
+        FileNode* build_file(std::string_view file, const std::vector<std::string> &includes) {
             for (const auto &it : includes) {
                 auto r = shark::common::absolute_path(it);
                 if (!r.ok()) {
@@ -149,9 +149,9 @@ namespace shark::parser {
             return build_file(file);
         }
 
-        bool build_file_recursive(std::string_view file);
+        FileNode* build_file_recursive(std::string_view file);
 
-        bool build_file_recursive(std::string_view file, const std::vector<std::string> &includes) {
+        FileNode* build_file_recursive(std::string_view file, const std::vector<std::string> &includes) {
             for (const auto &it : includes) {
                 auto r = shark::common::absolute_path(it);
                 if (!r.ok()) {

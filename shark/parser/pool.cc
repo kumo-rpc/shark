@@ -32,25 +32,28 @@ namespace shark::parser {
         _files[path] = ptr;
     }
 
-    bool RegistryPool::build_file(std::string_view file) {
+    FileNode* RegistryPool::build_file(std::string_view file) {
         std::string prefix;
         auto rel = shark::common::relative_path(file, includes(), &prefix);
         if (!rel.ok()) {
             shark::common::report_error("file `" + std::string(file) + "` was not found under include paths");
-            return false;
+            return nullptr;
         }
 
         const std::string absolute = prefix + "/" + *rel;
-        if (get_file(*rel) != nullptr) {
-            return true;
+        if (FileNode* existing = get_file(*rel)) {
+            return existing;
         }
 
         auto* node = create_symbol<FileNode>(nullptr);
         if (!node->load(absolute, *rel)) {
-            return false;
+            return nullptr;
         }
         add_file(node);
-        return node->parse();
+        if (!node->parse()) {
+            return nullptr;
+        }
+        return node;
     }
 
     bool RegistryPool::link_imports(FileNode* node) {
@@ -107,14 +110,14 @@ namespace shark::parser {
         return true;
     }
 
-    bool RegistryPool::build_file_recursive(std::string_view file) {
+    FileNode* RegistryPool::build_file_recursive(std::string_view file) {
         _files_queue.clear();
 
         std::string prefix;
         auto rel = shark::common::relative_path(file, includes(), &prefix);
         if (!rel.ok()) {
             KLOG(INFO) << rel;
-            return false;
+            return nullptr;
         }
 
         FileNode* node = get_file(*rel);
@@ -122,22 +125,22 @@ namespace shark::parser {
             const std::string absolute = prefix + "/" + *rel;
             node = create_symbol<FileNode>(nullptr);
             if (!node->load(absolute, *rel)) {
-                return false;
+                return nullptr;
             }
             add_file(node);
             if (!node->parse()) {
-                return false;
+                return nullptr;
             }
         }
         _import_graph.add_file(node);
 
         if (!link_imports(node)) {
-            return false;
+            return nullptr;
         }
         if (!_import_graph.build_queue()) {
             shark::common::report_debug("import queue failed");
             _files_queue.clear();
-            return false;
+            return nullptr;
         }
         _files_queue.assign(_import_graph.queue().begin(), _import_graph.queue().end());
         int index = 1;
@@ -150,7 +153,7 @@ namespace shark::parser {
         }
         for (FileNode* queued : _files_queue) {
             if (!queued->bind_file()) {
-                return false;
+                return nullptr;
             }
         }
         bool bound = true;
@@ -172,6 +175,6 @@ namespace shark::parser {
         if (bound) {
             shark::common::report_debug("bind success");
         }
-        return true;
+        return node;
     }
 }  // namespace shark::parser
