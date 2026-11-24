@@ -15,8 +15,11 @@
 
 #include <shark/parser/constants.h>
 #include <shark/parser/enum.h>
+#include <shark/parser/field.h>
 #include <shark/parser/file.h>
+#include <shark/parser/function.h>
 #include <shark/parser/pool.h>
+#include <shark/parser/servlet.h>
 #include <shark/parser/struct.h>
 
 #include <turbo/strings/match.h>
@@ -181,6 +184,36 @@ namespace shark::parser {
                 structs.push_back(struct_node);
                 continue;
             }
+            if (t.type == TokenType::BareWord && t == kConstExprKey) {
+                auto* constant = pool->create_symbol<FieldNode>(this);
+                constant->leading_comment = std::move(comments);
+                constant->annotations = std::move(annotations);
+                if (!constant->parse(*lexer)) {
+                    return false;
+                }
+                constexprs.push_back(constant);
+                continue;
+            }
+            if (t.type == TokenType::BareWord && t == kFunctionKey) {
+                auto* function = pool->create_symbol<FunctionNode>(this);
+                function->leading_comment = std::move(comments);
+                function->annotations = std::move(annotations);
+                if (!function->parse(*lexer)) {
+                    return false;
+                }
+                functions.push_back(function);
+                continue;
+            }
+            if (t.type == TokenType::BareWord && t == kServletKey) {
+                auto* servlet = pool->create_symbol<ServletNode>(this);
+                servlet->leading_comment = std::move(comments);
+                servlet->annotations = std::move(annotations);
+                if (!servlet->parse(*lexer)) {
+                    return false;
+                }
+                servlets.push_back(servlet);
+                continue;
+            }
             if (t.type == TokenType::BareWord && t == kImportKey) {
                 auto* import_node = pool->create_node<ImportNode>(this);
                 if (!comments.empty()) {
@@ -194,7 +227,7 @@ namespace shark::parser {
                 continue;
             }
 
-            report_error(ErrorType::SYNTAX, "expected `package`, `enum`, `struct`, `union` or `import`, but got `%s`", t.view());
+            report_error(ErrorType::SYNTAX, "expected `package`, `enum`, `struct`, `union`, `servlet`, `function`, `constexpr` or `import`, but got `%s`", t.view());
             return false;
         }
     }

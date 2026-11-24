@@ -27,6 +27,7 @@ namespace shark::parser {
     class RegistryPool;
     class FieldNode;
     class ServiceNode;
+    class ServletNode;
     class FunctionNode;
     class ConstValue;
 

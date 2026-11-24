@@ -1,0 +1,71 @@
+edition = "sk2026";
+
+annotation@ scope = "file";
+annotation@.cpp header = "shark/all.h";
+
+package.cpp "shark.parser";
+package "shark.parser";
+
+import "shark/cpp.shark";
+import.cpp "shark/cpp.shark";
+import.go "shark/cpp.shark";
+
+constexpr int32 kLimit @ 1 = 64;
+constexpr string kName @ 2 = "shark";
+constexpr Point kOrigin @ 3 = { x = 0, y = 0, };
+
+annotation key = "color";
+enum class Color : uint16 {
+    annotation key = "red";
+    RED = 0; //! red
+    GREEN = 1;
+    BLUE = 2;
+};
+
+annotation key = "point";
+struct Point {
+    required int64 x @ 1 = 0;
+    optional int64 y @ 2;
+    atomic int32 z @ 3 = 1;
+    constexpr int32 zero @ 4 = 0;
+
+    enum class Kind : int32 {
+        NONE = 0;
+        FILE = 1;
+    };
+
+    struct Inner {
+        optional string name @ 1 = "inner";
+    };
+
+    union Choice {
+        optional int64 i @ 1;
+        optional string s @ 2;
+    };
+};
+
+union Payload {
+    required int64 number @ 1;
+    optional string text @ 2 = "text";
+};
+
+annotation key = "add";
+function int64 add(
+    required int64 a @ 1,
+    optional int64 b @ 2 = 0,
+);
+
+function void ping();
+
+servlet Read {
+    function int64 get(required string key @ 1);
+};
+
+annotation key = "query";
+servlet Query : shark.Read, shark.Write, {
+    function void ping();
+    function int64 add(
+        required int64 a @ 1,
+        optional int64 b @ 2 = 0,
+    );
+};

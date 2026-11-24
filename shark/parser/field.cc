@@ -75,7 +75,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool FieldNode::parse(Lexer<ExpressionLexer>& lexer) {
+    bool FieldNode::parse(Lexer<ExpressionLexer>& lexer, End end) {
         auto t = lexer.look_at();
         if (t.is_error()) {
             report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
@@ -170,6 +170,18 @@ namespace shark::parser {
             t = lexer.look_at();
         } else if (label == FieldLabel::CONSTEXPR) {
             report_error(ErrorType::SYNTAX, "constexpr field `%s` requires a value", name);
+            return false;
+        }
+
+        if (end == End::PARAMETER) {
+            if (!skip_gap(lexer)) {
+                return false;
+            }
+            t = lexer.look_at();
+            if (t.type == TokenType::Comma || t.type == TokenType::ClosingRoundBracket) {
+                return true;
+            }
+            report_error(ErrorType::SYNTAX, "expected `,` or `)`, but got `%s`", t.view());
             return false;
         }
 

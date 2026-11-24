@@ -28,6 +28,8 @@ namespace shark::parser {
     static constexpr std::string_view kUnionKey = "union";
     static constexpr std::string_view kUsingKey = "using";
     static constexpr std::string_view kTypeDefKey = "typedef";
+    static constexpr std::string_view kFunctionKey = "function";
+    static constexpr std::string_view kServletKey = "servlet";
 
     static constexpr std::string_view kRequiredKey    = "required";
     static constexpr std::string_view kOptionalKey    = "optional";
@@ -59,6 +61,7 @@ namespace shark::parser {
         STRUCT,
         FIELD,
         FUNCTION,
+        SERVLET,
         ALIAS,
         SYMBOL_MAX = ALIAS
     };

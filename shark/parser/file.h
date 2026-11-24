@@ -58,6 +58,9 @@ namespace shark::parser {
         std::vector<EnumNode*>       enums;
         std::vector<StructNode*>     structs;
         std::vector<ServiceNode*>    services;
+        std::vector<ServletNode*>    servlets;
+        std::vector<FunctionNode*>   functions;
+        std::vector<FieldNode*>      constexprs;
         std::vector<FileNode*>       dependencies;
         std::unique_ptr<Lexer<ExpressionLexer>>    lexer;
 

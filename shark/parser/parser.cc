@@ -13,14 +13,14 @@
 // limitations under the License.
 //
 
-#include <shark/parser/comment.h>
-#include <shark/parser/file.h>
-#include <shark/parser/symbol.h>
-#include <shark/parser/pool.h>
-#include <shark/parser/function.h>
-#include <shark/parser/field.h>
-#include <shark/parser/service.h>
 #include <shark/parser/alias.h>
+#include <shark/parser/comment.h>
+#include <shark/parser/field.h>
+#include <shark/parser/file.h>
+#include <shark/parser/function.h>
+#include <shark/parser/pool.h>
+#include <shark/parser/servlet.h>
+#include <shark/parser/symbol.h>
 
 namespace shark::parser {
 

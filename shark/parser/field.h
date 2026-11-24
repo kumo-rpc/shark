@@ -40,7 +40,13 @@ namespace shark::parser {
         FieldNode(const FileNode* f, RegistryPool * pool) :SymbolNode(NodeType::FIELD, f, pool) {}
         ~FieldNode() override = default;
 
-        bool parse(Lexer<ExpressionLexer> &lexer);
+        enum class End {
+            STATEMENT,
+            PARAMETER,
+        };
+
+        // STATEMENT consumes `;`. PARAMETER stops at `,` or `)` and leaves that token.
+        bool parse(Lexer<ExpressionLexer> &lexer, End end = End::STATEMENT);
 
         std::vector<CommentNode*>      leading_comment;
         CommentNode                   *tailing_comment{nullptr};

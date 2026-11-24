@@ -21,6 +21,7 @@
 #include <shark/parser/annotation.h>
 #include <shark/parser/lexer.h>
 #include <string>
+#include <string_view>
 #include <vector>
 #include <optional>
 #include <functional>
@@ -28,59 +29,22 @@
 namespace shark::parser {
 
     ////////////////////////////////////////////////
-    /// Enum declarations.
+    /// Function declarations.
     ///
-    /// enum Color {
-    ///     RED = 0;
-    ///     GREEN = 1;
-    ///     BLUE = 2;
-    /// }
+    /// Leading comments and annotations are set by the caller.
+    /// The return type and parameter types are dotted names.
+    /// They are not bound here.
+    /// Parameters use the same form as struct fields.
+    /// A trailing comma inside the parameter list is allowed.
     ///
-    /// Enum declarations can use the `class` keyword.
-    /// The default underlying type is `int32`.
+    /// /// Add two numbers.
+    /// annotation key = "add";
+    /// function int64 add(
+    ///     required int64 a @ 1,
+    ///     optional int64 b @ 2 = 0,
+    /// );
     ///
-    /// enum class Color {
-    ///     RED = 0;
-    ///     GREEN = 1;
-    /// }
-    ///
-    /// An explicit underlying integer type can be specified
-    /// for enum class declarations.
-    ///
-    /// enum class Color : uint16 {
-    ///     RED = 0;
-    ///     GREEN = 1;
-    /// }
-    ///
-    /// Supported underlying types:
-    ///     int8
-    ///     uint8
-    ///     int16
-    ///     uint16
-    ///     int32
-    ///     uint32
-    ///
-    /// Enum declarations support leading comments and annotations.
-    /// Comments and annotations can appear before the enum declaration.
-    ///
-    /// /// Enum comment.
-    /// annotation key = "value";
-    /// enum class Color {
-    ///     RED = 0;
-    /// }
-    ///
-    /// Enum values also support leading comments, annotations,
-    /// and trailing comments.
-    ///
-    /// enum Color {
-    ///     /// Value comment.
-    ///     annotation key = "value";
-    ///     RED = 0;
-    ///
-    ///     GREEN = 1;  ///! Value trailing comment.
-    /// }
-    ///
-    /// The closing brace can optionally be followed by a semicolon.
+    /// function void ping();
     ///
     ////////////////////////////////////////////////
     class FunctionNode : public SymbolNode {
@@ -92,12 +56,16 @@ namespace shark::parser {
         bool parse(Lexer<ExpressionLexer> &lexer);
 
         std::vector<CommentNode*>        leading_comment;
-        CommentNode                     *tailing_comment;
+        CommentNode                     *tailing_comment{nullptr};
         std::vector<AnnotationNode*>     annotations;
+        std::string_view                  return_type_name;
+        std::vector<FieldNode*>          params;
         std::vector<const StructNode*>   args;
         const StructNode*                ret_type{nullptr};
         const StructNode*                container{nullptr};
 
-
+    private:
+        bool skip_gap(Lexer<ExpressionLexer>& lexer);
+        bool parse_type_name(Lexer<ExpressionLexer>& lexer);
     };
 }  // namespace shark::parser
