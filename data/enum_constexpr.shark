@@ -1,0 +1,45 @@
+edition = "sk2026";
+package "shark.parser";
+
+constexpr int32 kRed @ 1 = 0;
+constexpr int32 kGreen @ 2 = 1;
+constexpr uint16 kBlue @ 3 = 2;
+constexpr int32 kNeg @ 4 = -1;
+constexpr int8 kMin @ 5 = -128;
+constexpr uint32 kMax16 @ 6 = 65535;
+
+/// Values taken from integer constexpr names.
+annotation key = "color";
+enum class Color : uint16 {
+    RED = kRed;
+    GREEN = kGreen;
+    BLUE = kBlue;
+    LITERAL = 3;
+    MAX = kMax16;
+};
+
+enum class Narrow : int8 {
+    MIN = kMin;
+    ZERO = 0;
+};
+
+enum class Signed : int32 {
+    NEG = kNeg;
+    ZERO = 0;
+};
+
+annotation key = "plain";
+enum Kind {
+    NONE = kRed;
+    FILE = 1;
+    DIR = kGreen;
+};
+
+struct Box {
+    constexpr int32 limit @ 1 = 7;
+
+    enum class Bound : int32 {
+        LIMIT = Box.limit;
+        ZERO = 0;
+    };
+};

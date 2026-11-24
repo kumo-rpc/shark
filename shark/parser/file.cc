@@ -246,6 +246,45 @@ namespace shark::parser {
             return symbol->full_name == name || symbol->full_name_without_package == name;
         }
 
+        FieldNode* find_constexpr_in(const StructNode* node, std::string_view name) {
+            for (FieldNode* field : node->fields) {
+                if (field->label == FieldLabel::CONSTEXPR && same_name(field, name)) {
+                    return field;
+                }
+            }
+            for (StructNode* child : node->nested_types) {
+                if (FieldNode* found = find_constexpr_in(child, name)) {
+                    return found;
+                }
+            }
+            return nullptr;
+        }
+
+        bool is_scalar_builtin(const StructNode* node) {
+            if (node == nullptr || !node->builtin) {
+                return false;
+            }
+            switch (node->phy_type) {
+            case PhysicalType::BOOL:
+            case PhysicalType::INT8:
+            case PhysicalType::UINT8:
+            case PhysicalType::INT16:
+            case PhysicalType::UINT16:
+            case PhysicalType::INT32:
+            case PhysicalType::UINT32:
+            case PhysicalType::INT64:
+            case PhysicalType::UINT64:
+            case PhysicalType::INT128:
+            case PhysicalType::UINT128:
+            case PhysicalType::FLOAT32:
+            case PhysicalType::FLOAT64:
+            case PhysicalType::STRING:
+                return true;
+            default:
+                return false;
+            }
+        }
+
         bool is_integer_builtin(const StructNode* node) {
             if (!node->builtin) {
                 return false;
@@ -297,6 +336,20 @@ namespace shark::parser {
         }
         for (StructNode* node : structs) {
             if (SymbolNode* found = find_local_struct(node, name)) {
+                return found;
+            }
+        }
+        return nullptr;
+    }
+
+    FieldNode* FileNode::find_constexpr(std::string_view name) const {
+        for (FieldNode* field : constexprs) {
+            if (same_name(field, name)) {
+                return field;
+            }
+        }
+        for (const StructNode* node : structs) {
+            if (FieldNode* found = find_constexpr_in(node, name)) {
                 return found;
             }
         }
@@ -393,12 +446,12 @@ namespace shark::parser {
         }
         if (symbol->node_type == NodeType::STRUCT) {
             auto* type = static_cast<StructNode*>(symbol);
-            if (!is_integer_builtin(type)) {
-                report_error(ErrorType::SEMANTIC, "constexpr `%s` type `%s` must be an integer or an enum", field->name, type_ref_name(field->type_ref));
-                return false;
-            }
             field->type = type;
             field->bind = true;
+            if (!is_scalar_builtin(type)) {
+                field->static_const = true;
+                report_warn(ErrorType::SEMANTIC, "constexpr `%s` type `%s` is downgraded to static const and is not a compile-time constant", field->name, type_ref_name(field->type_ref));
+            }
             return true;
         }
         if (symbol->node_type == NodeType::ENUM) {
@@ -410,7 +463,7 @@ namespace shark::parser {
             field->bind = true;
             return true;
         }
-        report_error(ErrorType::SEMANTIC, "constexpr `%s` type `%s` must be an integer or an enum", field->name, type_ref_name(field->type_ref));
+        report_error(ErrorType::SEMANTIC, "constexpr `%s` type `%s` was not bound", field->name, type_ref_name(field->type_ref));
         return false;
     }
 

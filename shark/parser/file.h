@@ -44,6 +44,7 @@ namespace shark::parser {
         bool bind_file();
 
         SymbolNode* find_type(std::string_view name) const;
+        FieldNode* find_constexpr(std::string_view name) const;
         SymbolNode* concrete_type(SymbolNode* symbol) const;
 
 

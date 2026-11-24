@@ -63,6 +63,9 @@ namespace shark::parser {
         const StructNode*              container{nullptr};
         uint16_t                       id{0};
         ConstValue*                    default_value{nullptr};
+        /// True when a constexpr struct, union, or container is kept but is not a
+        /// compile-time constant. Codegen should emit static const.
+        bool                           static_const{false};
 
     private:
         bool skip_gap(Lexer<ExpressionLexer>& lexer);

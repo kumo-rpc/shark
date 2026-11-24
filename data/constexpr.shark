@@ -1,0 +1,36 @@
+edition = "sk2026";
+package "shark.parser";
+
+enum class Color : int32 {
+    RED = 0;
+    GREEN = 1;
+};
+
+/// Scalar builtins and enums stay compile-time constants.
+constexpr bool kFlag @ 1 = true;
+constexpr int32 kCount @ 2 = 42;
+constexpr int64 kNeg @ 3 = -1;
+constexpr float32 kRatio @ 4 = 1.5;
+constexpr float64 kWide @ 5 = 2.5;
+constexpr string kName @ 6 = "shark";
+constexpr Color kColor @ 7 = Color.RED;
+
+struct Point {
+    required int64 x @ 1 = 0;
+    optional int64 y @ 2;
+};
+
+union Payload {
+    optional int64 i @ 1;
+    optional string s @ 2;
+};
+
+/// Struct, union, and containers are accepted and downgraded to static const.
+constexpr Point kOrigin @ 8 = { x = 0, y = 0 };
+constexpr Payload kPayload @ 9 = { i = 1 };
+constexpr list<int32> kIds @ 10 = [1, 2, 3];
+
+struct Box {
+    constexpr string label @ 1 = "box";
+    constexpr Point nested @ 2 = { x = 1, y = 2 };
+};

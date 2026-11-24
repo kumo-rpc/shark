@@ -13,20 +13,88 @@
 // limitations under the License.
 //
 
+#include <shark/parser/const_value.h>
 #include <shark/parser/constants.h>
 #include <shark/parser/enum.h>
+#include <shark/parser/enum_value.h>
+#include <shark/parser/field.h>
 #include <shark/parser/file.h>
 #include <shark/parser/pool.h>
 #include <shark/parser/struct.h>
-#include <shark/parser/enum_value.h>
+
+#include <cstdint>
+#include <limits>
+#include <variant>
 
 namespace shark::parser {
 
-    bool EnumNode::bind_enum() {
-        bind = true;
-        for (EnumValueNode* value : values) {
-            value->bind = true;
+    namespace {
+
+        bool is_integer_builtin(const StructNode* node) {
+            if (node == nullptr || !node->builtin) {
+                return false;
+            }
+            switch (node->phy_type) {
+            case PhysicalType::INT8:
+            case PhysicalType::UINT8:
+            case PhysicalType::INT16:
+            case PhysicalType::UINT16:
+            case PhysicalType::INT32:
+            case PhysicalType::UINT32:
+            case PhysicalType::INT64:
+            case PhysicalType::UINT64:
+                return true;
+            default:
+                return false;
+            }
         }
+
+        bool value_in_underlying(EnumNode::UnderlyingType type, int64_t number) {
+            switch (type) {
+            case EnumNode::UnderlyingType::INT8:
+                return number >= std::numeric_limits<int8_t>::min() && number <= std::numeric_limits<int8_t>::max();
+            case EnumNode::UnderlyingType::UINT8:
+                return number >= 0 && number <= std::numeric_limits<uint8_t>::max();
+            case EnumNode::UnderlyingType::INT16:
+                return number >= std::numeric_limits<int16_t>::min() && number <= std::numeric_limits<int16_t>::max();
+            case EnumNode::UnderlyingType::UINT16:
+                return number >= 0 && number <= std::numeric_limits<uint16_t>::max();
+            case EnumNode::UnderlyingType::NONE:
+            case EnumNode::UnderlyingType::INT32:
+                return number >= std::numeric_limits<int32_t>::min() && number <= std::numeric_limits<int32_t>::max();
+            case EnumNode::UnderlyingType::UINT32:
+                return number >= 0 && number <= std::numeric_limits<uint32_t>::max();
+            }
+            return false;
+        }
+
+    }  // namespace
+
+    bool EnumNode::bind_enum() {
+        for (EnumValueNode* node : values) {
+            if (!node->constexpr_ref.empty()) {
+                FieldNode* field = file->find_constexpr(node->constexpr_ref);
+                if (field == nullptr) {
+                    report_error(ErrorType::SEMANTIC, "enum value `%s` constexpr `%s` was not found", node->name, node->constexpr_ref);
+                    return false;
+                }
+                if (!field->bind || !is_integer_builtin(field->type)) {
+                    report_error(ErrorType::SEMANTIC, "enum value `%s` constexpr `%s` is not an integer", node->name, node->constexpr_ref);
+                    return false;
+                }
+                if (field->default_value == nullptr || !std::holds_alternative<int64_t>(field->default_value->value)) {
+                    report_error(ErrorType::SEMANTIC, "enum value `%s` constexpr `%s` is not an integer constant", node->name, node->constexpr_ref);
+                    return false;
+                }
+                node->value = std::get<int64_t>(field->default_value->value);
+            }
+            if (!value_in_underlying(underlying, node->value)) {
+                report_error(ErrorType::SEMANTIC, "enum value `%s` is out of range", node->name);
+                return false;
+            }
+            node->bind = true;
+        }
+        bind = true;
         return true;
     }
 

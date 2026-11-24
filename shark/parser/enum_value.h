@@ -22,6 +22,7 @@
 #include <shark/parser/annotation.h>
 #include <shark/parser/fwd.h>
 #include <string>
+#include <string_view>
 #include <vector>
 #include <optional>
 #include <functional>
@@ -41,6 +42,7 @@ namespace shark::parser {
     ///     annotation key2 = "value2";
     ///     annotation.go key2 = "value2";
     ///     ENUM_VALUE1 = 5;  ///! tailing comment
+    ///     ENUM_VALUE2 = SOME_CONSTEXPR;
     /// }[;]
     ////////////////////////////////////////////////
     class EnumValueNode : public SymbolNode {
@@ -52,6 +54,9 @@ namespace shark::parser {
         std::vector<CommentNode*>      leading_comment;
         CommentNode                   *tailing_comment{nullptr};
         int64_t                       value{0};
+        /// Empty when `value` is an integer literal. Otherwise a constexpr name
+        /// viewed from the source buffer. `bind_enum` resolves it into `value`.
+        std::string_view              constexpr_ref;
         std::vector<AnnotationNode*>  annotations;
         const EnumNode *parent_enum{nullptr};
 

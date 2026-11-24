@@ -133,33 +133,60 @@ namespace shark::parser {
             }
         }
 
-        // Parse integer value.
-        if (t.type != TokenType::Number) {
-            report_error(ErrorType::SYNTAX, "expected an integer value, but got `%s`", t.view());
+        if (negative) {
+            if (t.type != TokenType::Number) {
+                report_error(ErrorType::SYNTAX, "expected an integer value, but got `%s`", t.view());
+                return false;
+            }
+        } else if (t.type == TokenType::BareWord) {
+            const char* begin = t.begin;
+            const char* end = t.end;
+            lexer.consume();
+
+            while (true) {
+                auto dot = lexer.look_at();
+                if (dot.is_error()) {
+                    report_error(ErrorType::SYNTAX, "%s", get_error_token_description(dot.type));
+                    return false;
+                }
+                if (dot.type != TokenType::Dot || dot.begin != end) {
+                    break;
+                }
+                lexer.consume();
+                auto part = lexer.look_at();
+                if (part.is_error()) {
+                    report_error(ErrorType::SYNTAX, "%s", get_error_token_description(part.type));
+                    return false;
+                }
+                if (part.type != TokenType::BareWord || part.begin != dot.end) {
+                    report_error(ErrorType::SYNTAX, "expected an identifier, but got `%s`", part.view());
+                    return false;
+                }
+                end = part.end;
+                lexer.consume();
+            }
+
+            constexpr_ref = std::string_view(begin, static_cast<size_t>(end - begin));
+        } else if (t.type != TokenType::Number) {
+            report_error(ErrorType::SYNTAX, "enum value must be an integer or a constexpr, but got `%s`", t.view());
             return false;
         }
 
-        std::string number(t.view());
-        char* end = nullptr;
+        if (constexpr_ref.empty()) {
+            std::string number(t.view());
+            char* end = nullptr;
 
-        errno = 0;
-        const auto parsed = std::strtoll(number.c_str(), &end, 10);
+            errno = 0;
+            const auto parsed = std::strtoll(number.c_str(), &end, 10);
 
-        if (errno == ERANGE || end != number.c_str() + number.size()) {
-            report_error(ErrorType::SYNTAX, "invalid integer value `%s`", number);
-            return false;
+            if (errno == ERANGE || end != number.c_str() + number.size()) {
+                report_error(ErrorType::SYNTAX, "invalid integer value `%s`", number);
+                return false;
+            }
+
+            value = negative ? -parsed : parsed;
+            lexer.consume();
         }
-
-        const auto signed_value = negative ? -parsed : parsed;
-
-        if (signed_value < std::numeric_limits<int64_t>::min() || signed_value > std::numeric_limits<int64_t>::max()) {
-            report_error(ErrorType::SYNTAX, "enum value `%s` is out of int64_t range", number);
-            return false;
-        }
-
-        value = static_cast<int64_t>(signed_value);
-
-        lexer.consume();
         lexer.consume_white_space(true);
         t = lexer.look_at();
 
