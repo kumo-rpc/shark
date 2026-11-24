@@ -15,9 +15,24 @@
 
 #include <shark/parser/alias.h>
 #include <shark/parser/constants.h>
+#include <shark/parser/file.h>
 #include <shark/parser/pool.h>
 
 namespace shark::parser {
+
+    bool AliasNode::bind_alias() {
+        if (bind) {
+            return true;
+        }
+        SymbolNode* symbol = file->find_type(target_name);
+        if (symbol == nullptr) {
+            report_error(ErrorType::SEMANTIC, "alias `%s` target `%s` was not found", name, target_name);
+            return false;
+        }
+        target = symbol;
+        bind = true;
+        return true;
+    }
 
     bool AliasNode::skip_gap(Lexer<ExpressionLexer>& lexer) {
         while (true) {

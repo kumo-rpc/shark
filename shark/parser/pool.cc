@@ -13,6 +13,7 @@
 // limitations under the License.
 //
 
+#include <shark/parser/builtin.h>
 #include <shark/parser/pool.h>
 #include <shark/parser/file.h>
 #include <shark/common/clog.h>
@@ -21,6 +22,10 @@
 #include <string>
 
 namespace shark::parser {
+
+    RegistryPool::RegistryPool() {
+        load_builtin_types(*this);
+    }
 
     void RegistryPool::add_file(FileNode *ptr) {
         std::string_view path = ptr->path;
@@ -142,6 +147,30 @@ namespace shark::parser {
                 shark::common::report_debug("\t- `" + dep->path + "`");
             }
             ++index;
+        }
+        for (FileNode* queued : _files_queue) {
+            if (!queued->bind_file()) {
+                return false;
+            }
+        }
+        bool bound = true;
+        for (FileNode* queued : _files_queue) {
+            if (queued->bind) {
+                continue;
+            }
+            bound = false;
+            shark::common::report_debug("unbound file `" + queued->path + "`");
+        }
+        for (const auto& symbol : _all_symbols) {
+            if (symbol->node_type == NodeType::FILE || symbol->bind) {
+                continue;
+            }
+            bound = false;
+            std::string label = symbol->full_name.empty() ? std::string(symbol->name) : symbol->full_name;
+            shark::common::report_debug("unbound symbol `" + label + "`");
+        }
+        if (bound) {
+            shark::common::report_debug("bind success");
         }
         return true;
     }

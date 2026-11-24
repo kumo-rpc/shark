@@ -48,6 +48,7 @@ namespace shark::parser {
         ~AliasNode() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);
+        bool bind_alias();
 
         std::vector<CommentNode*>     leading_comment;
         CommentNode                  *tailing_comment{nullptr};

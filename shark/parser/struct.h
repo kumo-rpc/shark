@@ -91,6 +91,14 @@ namespace shark::parser {
 
         bool parse(Lexer<ExpressionLexer> &lexer);
 
+        enum class BindStep {
+            DONE,
+            WAIT,
+            FAIL,
+        };
+
+        BindStep bind_struct();
+
         bool is_container_type() const {
             return phy_type >= PhysicalType::CONTAINER_MIN &&
                    phy_type <= PhysicalType::CONTAINER_MAX;
@@ -105,6 +113,8 @@ namespace shark::parser {
         std::vector<AliasNode*>       aliases;
         const StructNode*             container{nullptr};
         bool                          is_union{false};
+        bool                          builtin{false};
+        bool                          generic{false};
         PhysicalType                  phy_type{PhysicalType::VOID};
 
     private:

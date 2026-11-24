@@ -56,6 +56,14 @@ namespace shark::parser {
 
         bool parse(Lexer<ExpressionLexer> &lexer);
 
+        enum class BindStep {
+            DONE,
+            WAIT,
+            FAIL,
+        };
+
+        BindStep bind_servlet();
+
         std::vector<CommentNode*>    leading_comment;
         CommentNode                  *tailing_comment{nullptr};
         std::vector<AnnotationNode*>  annotations;

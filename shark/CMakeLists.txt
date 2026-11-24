@@ -42,6 +42,8 @@ kmcmake_cc_library(
         parser/import_graph.cc
         parser/package.cc
         parser/annotation.cc
+        parser/builtin.cc
+        parser/placeholder.cc
         parser/enum_value.cc
         parser/enum.cc
         parser/symbol.cc
@@ -50,6 +52,7 @@ kmcmake_cc_library(
         parser/node.cc
         parser/const_value.cc
         parser/field.cc
+        parser/type_name.cc
         parser/struct.cc
         parser/function.cc
         parser/alias.cc

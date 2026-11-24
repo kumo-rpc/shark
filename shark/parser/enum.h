@@ -99,6 +99,7 @@ namespace shark::parser {
             UINT32
         };
         bool parse(Lexer<ExpressionLexer> &lexer);
+        bool bind_enum();
 
         std::vector<CommentNode*>    leading_comment;
         CommentNode                 *tailing_comment{nullptr};

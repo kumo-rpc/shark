@@ -16,6 +16,7 @@
 #include <shark/parser/constants.h>
 #include <shark/parser/field.h>
 #include <shark/parser/pool.h>
+#include <shark/parser/type_name.h>
 
 #include <cerrno>
 #include <cstdint>
@@ -39,6 +40,14 @@ namespace shark::parser {
     }
 
     bool FieldNode::parse_type_name(Lexer<ExpressionLexer>& lexer) {
+        if (!parse_type_ref(lexer, type_ref)) {
+            return false;
+        }
+        generic = std::holds_alternative<TypeName>(type_ref);
+        return true;
+    }
+
+    bool FieldNode::parse_type_ref(Lexer<ExpressionLexer>& lexer, TypeRef& out) {
         auto t = lexer.look_at();
         if (t.type != TokenType::BareWord) {
             report_error(ErrorType::SYNTAX, "expected a type name, but got `%s`", t.view());
@@ -71,7 +80,63 @@ namespace shark::parser {
             lexer.consume();
         }
 
-        type_name = std::string_view(begin, static_cast<size_t>(end - begin));
+        std::string_view name(begin, static_cast<size_t>(end - begin));
+        if (!skip_gap(lexer)) {
+            return false;
+        }
+        t = lexer.look_at();
+        if (t.type != TokenType::Less) {
+            out = name;
+            return true;
+        }
+        lexer.consume();
+        if (!skip_gap(lexer)) {
+            return false;
+        }
+
+        TypeName type;
+        type.name = name;
+        while (true) {
+            t = lexer.look_at();
+            if (t.type == TokenType::Greater) {
+                break;
+            }
+            TypeRef arg;
+            if (!parse_type_ref(lexer, arg)) {
+                return false;
+            }
+            type.args.push_back(TypeName::Arg{std::move(arg)});
+            if (!skip_gap(lexer)) {
+                return false;
+            }
+            t = lexer.look_at();
+            if (t.type == TokenType::Comma) {
+                lexer.consume();
+                if (!skip_gap(lexer)) {
+                    return false;
+                }
+                continue;
+            }
+            if (t.type == TokenType::Greater) {
+                break;
+            }
+            report_error(ErrorType::SYNTAX, "expected `,` or `>` in type `%s`, but got `%s`", name, t.view());
+            return false;
+        }
+        if (type.args.empty()) {
+            report_error(ErrorType::SYNTAX, "type `%s` requires type arguments", name);
+            return false;
+        }
+        if ((name == "list" || name == "set") && type.args.size() != 1) {
+            report_error(ErrorType::SYNTAX, "type `%s` requires 1 type argument", name);
+            return false;
+        }
+        if (name == "map" && type.args.size() != 2) {
+            report_error(ErrorType::SYNTAX, "type `map` requires 2 type arguments");
+            return false;
+        }
+        lexer.consume();
+        out = std::move(type);
         return true;
     }
 
@@ -179,6 +244,7 @@ namespace shark::parser {
             }
             t = lexer.look_at();
             if (t.type == TokenType::Comma || t.type == TokenType::ClosingRoundBracket) {
+                report_debug(ErrorType::NONE, "field `%s` generic `%d` type `%s`", name, static_cast<int>(generic), format_type_ref(type_ref).c_str());
                 return true;
             }
             report_error(ErrorType::SYNTAX, "expected `,` or `)`, but got `%s`", t.view());
@@ -195,6 +261,7 @@ namespace shark::parser {
         if (!tailing_comment->parse_tailing(lexer)) {
             return false;
         }
+        report_debug(ErrorType::NONE, "field `%s` generic `%d` type `%s`", name, static_cast<int>(generic), format_type_ref(type_ref).c_str());
         return true;
     }
 

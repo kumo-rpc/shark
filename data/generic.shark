@@ -1,0 +1,16 @@
+edition = "sk2026";
+package "shark.parser";
+
+struct Box {
+    required int64 id @ 1;
+
+    required list<string> names @ 2;
+
+    required set<int64> ids @ 3;
+
+    required map<string, int64> scores @ 4;
+
+    optional list<map<string, int64>> groups @ 5;
+
+    optional map<int32, list<string>> buckets @ 6;
+};

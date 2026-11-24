@@ -43,7 +43,7 @@ namespace shark::parser {
         [[nodiscard]] bool add_symbol(SymbolNode* ptr) {
             std::string_view uri = ptr->full_name;
             auto it = _symbols.find(uri);
-            if (it == _symbols.end()) {
+            if (it != _symbols.end()) {
                 return false;
             }
             _symbols[uri] = ptr;
@@ -163,6 +163,7 @@ namespace shark::parser {
         }
 
     private:
+        RegistryPool();
         bool link_imports(FileNode* node);
         std::vector<std::unique_ptr<SymbolNode>>           _all_symbols;
         std::vector<std::unique_ptr<Node>>                  _all_node;

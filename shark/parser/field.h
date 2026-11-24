@@ -22,6 +22,7 @@
 #include <shark/parser/constants.h>
 #include <shark/parser/lexer.h>
 #include <shark/parser/symbol.h>
+#include <shark/parser/type_name.h>
 #include <string>
 #include <vector>
 #include <optional>
@@ -52,8 +53,11 @@ namespace shark::parser {
         CommentNode                   *tailing_comment{nullptr};
         std::vector<AnnotationNode*>   annotations;
         FieldLabel                     label{FieldLabel::REQUIRED};
-        std::string_view               type_name;
+        TypeRef                        type_ref;
+        bool                           generic{false};
         const StructNode*              type{nullptr};
+        const EnumNode*                enum_type{nullptr};
+        const PlaceholderNode*         placeholder{nullptr};
         /// Set by the caller before parse. It is already fixed while parsing.
         /// nullptr means the field is declared at file scope, not inside a struct.
         const StructNode*              container{nullptr};
@@ -63,5 +67,6 @@ namespace shark::parser {
     private:
         bool skip_gap(Lexer<ExpressionLexer>& lexer);
         bool parse_type_name(Lexer<ExpressionLexer>& lexer);
+        bool parse_type_ref(Lexer<ExpressionLexer>& lexer, TypeRef& out);
     };
 }  // namespace shark::parser

@@ -21,6 +21,37 @@
 
 namespace shark::parser {
 
+    ServletNode::BindStep ServletNode::bind_servlet() {
+        if (bind) {
+            return BindStep::DONE;
+        }
+        std::vector<const ServletNode*> resolved;
+        bool waiting = false;
+        for (std::string_view base_name : base_names) {
+            SymbolNode* symbol = file->find_type(base_name);
+            if (symbol == nullptr) {
+                report_error(ErrorType::SEMANTIC, "servlet `%s` base `%s` was not found", name, base_name);
+                return BindStep::FAIL;
+            }
+            if (symbol->node_type != NodeType::SERVLET) {
+                report_error(ErrorType::SEMANTIC, "servlet `%s` base `%s` is not a servlet", name, base_name);
+                return BindStep::FAIL;
+            }
+            auto* base = static_cast<ServletNode*>(symbol);
+            if (!base->bind) {
+                waiting = true;
+                continue;
+            }
+            resolved.push_back(base);
+        }
+        if (waiting) {
+            return BindStep::WAIT;
+        }
+        bases = std::move(resolved);
+        bind = true;
+        return BindStep::DONE;
+    }
+
     bool ServletNode::skip_gap(Lexer<ExpressionLexer>& lexer) {
         while (true) {
             auto t = lexer.look_at();

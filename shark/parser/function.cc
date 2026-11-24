@@ -14,11 +14,74 @@
 //
 
 #include <shark/parser/constants.h>
+#include <shark/parser/enum.h>
 #include <shark/parser/field.h>
+#include <shark/parser/file.h>
 #include <shark/parser/function.h>
 #include <shark/parser/pool.h>
+#include <shark/parser/struct.h>
+#include <shark/parser/type_name.h>
 
 namespace shark::parser {
+
+    bool FunctionNode::bind_named_type(std::string_view type_name, bool allow_void, const StructNode*& struct_type, const EnumNode*& enum_type) {
+        if (type_name == "void") {
+            if (!allow_void) {
+                report_error(ErrorType::SEMANTIC, "function `%s` parameter type `void` is not allowed", name);
+                return false;
+            }
+            struct_type = nullptr;
+            enum_type = nullptr;
+            return true;
+        }
+        SymbolNode* symbol = file->find_type(type_name);
+        if (symbol != nullptr) {
+            symbol = file->concrete_type(symbol);
+        }
+        if (symbol == nullptr) {
+            report_error(ErrorType::SEMANTIC, "function `%s` type `%s` was not found", name, type_name);
+            return false;
+        }
+        if (symbol->node_type == NodeType::STRUCT) {
+            auto* type = static_cast<StructNode*>(symbol);
+            if (type->builtin || type->bind) {
+                struct_type = type;
+                enum_type = nullptr;
+                return true;
+            }
+        } else if (symbol->node_type == NodeType::ENUM) {
+            auto* type = static_cast<EnumNode*>(symbol);
+            if (type->bind) {
+                struct_type = nullptr;
+                enum_type = type;
+                return true;
+            }
+        }
+        report_error(ErrorType::SEMANTIC, "function `%s` type `%s` was not bound", name, type_name);
+        return false;
+    }
+
+    bool FunctionNode::bind_function() {
+        const StructNode* struct_type = nullptr;
+        const EnumNode* enum_type = nullptr;
+        if (!bind_named_type(return_type_name, true, struct_type, enum_type)) {
+            return false;
+        }
+        ret_type = struct_type;
+        ret_enum = enum_type;
+        for (FieldNode* param : params) {
+            const StructNode* param_struct = nullptr;
+            const EnumNode* param_enum = nullptr;
+            if (!bind_named_type(type_ref_name(param->type_ref), false, param_struct, param_enum)) {
+                return false;
+            }
+            param->type = param_struct;
+            param->enum_type = param_enum;
+            param->bind = true;
+        }
+        bind = true;
+        return true;
+    }
 
     bool FunctionNode::skip_gap(Lexer<ExpressionLexer>& lexer) {
         while (true) {

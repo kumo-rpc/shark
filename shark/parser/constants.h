@@ -63,6 +63,7 @@ namespace shark::parser {
         FUNCTION,
         SERVLET,
         ALIAS,
-        SYMBOL_MAX = ALIAS
+        PLACEHOLDER,
+        SYMBOL_MAX = PLACEHOLDER
     };
 }  // namespace shark::parser

@@ -22,6 +22,14 @@
 
 namespace shark::parser {
 
+    bool EnumNode::bind_enum() {
+        bind = true;
+        for (EnumValueNode* value : values) {
+            value->bind = true;
+        }
+        return true;
+    }
+
     bool EnumNode::parse(
         Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();

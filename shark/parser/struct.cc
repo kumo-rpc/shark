@@ -20,8 +20,65 @@
 #include <shark/parser/file.h>
 #include <shark/parser/pool.h>
 #include <shark/parser/struct.h>
+#include <shark/parser/type_name.h>
 
 namespace shark::parser {
+
+    StructNode::BindStep StructNode::bind_struct() {
+        if (bind) {
+            return BindStep::DONE;
+        }
+        bool waiting = false;
+        for (FieldNode* field : fields) {
+            if (field->bind) {
+                continue;
+            }
+            SymbolNode* symbol = file->find_type(type_ref_name(field->type_ref));
+            if (symbol != nullptr) {
+                symbol = file->concrete_type(symbol);
+            }
+            if (symbol == nullptr) {
+                report_error(ErrorType::SEMANTIC, "field `%s` type `%s` was not found", name, type_ref_name(field->type_ref));
+                return BindStep::FAIL;
+            }
+            if (symbol->node_type == NodeType::ALIAS) {
+                if (!symbol->bind) {
+                    waiting = true;
+                    continue;
+                }
+                report_error(ErrorType::SEMANTIC, "field `%s` type `%s` alias is cyclic", name, type_ref_name(field->type_ref));
+                return BindStep::FAIL;
+            }
+            if (symbol->node_type == NodeType::STRUCT) {
+                auto* type = static_cast<StructNode*>(symbol);
+                if (type->builtin || type->bind) {
+                    field->type = type;
+                    field->bind = true;
+                    continue;
+                }
+                waiting = true;
+                continue;
+            }
+            if (symbol->node_type == NodeType::ENUM) {
+                auto* enum_type = static_cast<EnumNode*>(symbol);
+                if (!enum_type->bind) {
+                    report_error(ErrorType::SEMANTIC, "field `%s` type `%s` was not bound", name, type_ref_name(field->type_ref));
+                    return BindStep::FAIL;
+                }
+                field->enum_type = enum_type;
+                field->bind = true;
+                continue;
+            }
+            report_error(ErrorType::SEMANTIC, "field `%s` type `%s` must be a struct, union, enum, or builtin", name, type_ref_name(field->type_ref));
+            return BindStep::FAIL;
+        }
+        if (waiting) {
+            return BindStep::WAIT;
+        }
+        bind = true;
+        return BindStep::DONE;
+    }
+
 namespace {
 
     bool is_field_label(const Token& t) {
