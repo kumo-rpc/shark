@@ -69,3 +69,19 @@ servlet Query : shark.io.Read, shark.io.Write, {
         optional int64 b @ 2 = 0,
     );
 };
+
+
+struct CppAttr {
+    optional int32 level @1;
+    optional bool  export @1;
+}
+
+/// export from cpp
+annotation.cpp extern = true;
+annotation.cpp include = "shark/sub.h";
+annotation.cpp namespace = "shark.math";
+annotation.cpp cppattr<CppAttr> = {level = 0,export = false};
+
+function void sub(required int64 a @ 1,
+                   optional int64 b @ 2);
+

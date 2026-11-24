@@ -32,6 +32,7 @@ namespace shark::parser {
     /// annotation key = "value1";
     /// annotation key1 = 123;
     /// annotation key2 = 123.123;
+    /// annotation key = true;
     /// annotation key2 = [123.123];
     /// annotation key2 = [123.123, "abc",456];
     /// annotation.cpp key = "value cpp";
@@ -49,7 +50,8 @@ namespace shark::parser {
         using value_type = std::variant<
             std::string_view,
             int64_t,
-            float
+            float,
+            bool
             >;
 
         bool parse(Lexer<ExpressionLexer> &lexer);

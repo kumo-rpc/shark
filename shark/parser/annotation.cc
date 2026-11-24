@@ -37,6 +37,12 @@ namespace shark::parser {
             return true;
         }
 
+        if (t.type == TokenType::BareWord && (t == "true" || t == "false")) {
+            payload.emplace_back(t == "true");
+            lexer.consume();
+            return true;
+        }
+
         if (t.type != TokenType::Number) {
             report_error(ErrorType::SYNTAX, "expected an annotation value, but got `%s`", t.view());
             return false;
