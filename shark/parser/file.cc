@@ -22,7 +22,6 @@
 #include <shark/parser/servlet.h>
 #include <shark/parser/struct.h>
 
-#include <turbo/strings/match.h>
 #include <turbo/log/logging.h>
 #include <filesystem>
 #include <fstream>
@@ -35,18 +34,6 @@ namespace shark::parser {
         KLOG(INFO)<<1<<222;
         if (absolute_path_in.empty() || path_in.empty()) {
             report_error(ErrorType::IO, "path and absolute_path must both be non-empty");
-            return false;
-        }
-
-        const bool prefixed = absolute_path_in.size() > path_in.size()
-            && turbo::ends_with(absolute_path_in, path_in)
-            && absolute_path_in[absolute_path_in.size() - path_in.size() - 1] == '/';
-        if (!prefixed) {
-            report_error(
-                ErrorType::IO,
-                "absolute_path `%s` is not of the form prefix/path for `%s`",
-                absolute_path_in,
-                path_in);
             return false;
         }
 

@@ -20,6 +20,7 @@
 #include <deque>
 #include <fermat/maps/btree_map.h>
 #include <fermat/maps/btree_set.h>
+#include <shark/parser/import_graph.h>
 #include <shark/parser/symbol.h>
 
 namespace shark::parser {
@@ -135,9 +136,9 @@ namespace shark::parser {
         }
 
 
-        bool build_file(std::string_view file, bool recursive);
+        bool build_file(std::string_view file);
 
-        bool build_file(std::string_view file, const std::vector<std::string> &includes, bool recursive) {
+        bool build_file(std::string_view file, const std::vector<std::string> &includes) {
             for (const auto &it : includes) {
                 auto r = shark::common::absolute_path(it);
                 if (!r.ok()) {
@@ -145,9 +146,24 @@ namespace shark::parser {
                 }
                 add_include(r.value());
             }
-            return build_file(file,recursive);
+            return build_file(file);
         }
+
+        bool build_file_recursive(std::string_view file);
+
+        bool build_file_recursive(std::string_view file, const std::vector<std::string> &includes) {
+            for (const auto &it : includes) {
+                auto r = shark::common::absolute_path(it);
+                if (!r.ok()) {
+                    KLOG(ERROR)<<r;
+                }
+                add_include(r.value());
+            }
+            return build_file_recursive(file);
+        }
+
     private:
+        bool link_imports(FileNode* node);
         std::vector<std::unique_ptr<SymbolNode>>           _all_symbols;
         std::vector<std::unique_ptr<Node>>                  _all_node;
         fermat::btree_map<std::string_view, SymbolNode*>    _symbols;
@@ -155,6 +171,7 @@ namespace shark::parser {
         fermat::btree_set<std::string>                      _includes_set;
         std::vector<std::string>                            _includes;
         std::deque<FileNode*>                               _files_queue;
+        ImportGraph                                         _import_graph;
     };
 
 }  // namespace shark::parser

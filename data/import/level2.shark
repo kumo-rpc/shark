@@ -1,0 +1,8 @@
+edition = "sk2026";
+package "shark.import";
+
+/// No Shark import. This file is the bottom of the tree.
+enum Level2 {
+    NONE = 0;
+    READY = 1;
+}

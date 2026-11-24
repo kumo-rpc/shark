@@ -39,6 +39,7 @@ kmcmake_cc_library(
         parser/comment.cc
         parser/edition.cc
         parser/import.cc
+        parser/import_graph.cc
         parser/package.cc
         parser/annotation.cc
         parser/enum_value.cc

@@ -15,8 +15,10 @@
 
 #include <shark/parser/pool.h>
 #include <shark/parser/file.h>
+#include <shark/common/clog.h>
 #include <shark/common/filepath.h>
 #include <turbo/log/logging.h>
+#include <string>
 
 namespace shark::parser {
 
@@ -25,13 +27,11 @@ namespace shark::parser {
         _files[path] = ptr;
     }
 
-    bool RegistryPool::build_file(std::string_view file, bool recursive) {
-        (void)recursive;
-
+    bool RegistryPool::build_file(std::string_view file) {
         std::string prefix;
         auto rel = shark::common::relative_path(file, includes(), &prefix);
         if (!rel.ok()) {
-            KLOG(INFO)<<rel;
+            shark::common::report_error("file `" + std::string(file) + "` was not found under include paths");
             return false;
         }
 
@@ -46,5 +46,103 @@ namespace shark::parser {
         }
         add_file(node);
         return node->parse();
+    }
+
+    bool RegistryPool::link_imports(FileNode* node) {
+        for (ImportNode* import_node : node->imports) {
+            if (!import_node->classify.empty()) {
+                continue;
+            }
+
+            std::string_view raw = import_node->path;
+            if (raw.size() < 2) {
+                shark::common::report_error("import path in `" + node->path + "` is empty");
+                return false;
+            }
+            std::string_view path = raw.substr(1, raw.size() - 2);
+
+            auto found = shark::common::absolute_path(path, includes());
+            if (!found.ok()) {
+                shark::common::report_error("import `" + std::string(path) + "` from `" + node->path + "` was not found under include paths");
+                return false;
+            }
+
+            std::string prefix;
+            auto rel = shark::common::relative_path(*found, includes(), &prefix);
+            if (!rel.ok()) {
+                shark::common::report_error("import `" + std::string(path) + "` from `" + node->path + "` was not found under include paths");
+                return false;
+            }
+
+            if (FileNode* existing = get_file(*rel)) {
+                if (!_import_graph.add_dependency(node, existing)) {
+                    shark::common::report_error("import `" + std::string(path) + "` from `" + node->path + "` forms a cycle");
+                    return false;
+                }
+                continue;
+            }
+
+            auto* dep = create_symbol<FileNode>(nullptr);
+            if (!dep->load(*found, *rel)) {
+                return false;
+            }
+            add_file(dep);
+            if (!dep->parse()) {
+                return false;
+            }
+            _import_graph.add_file(dep);
+            if (!_import_graph.add_dependency(node, dep)) {
+                return false;
+            }
+            if (!link_imports(dep)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    bool RegistryPool::build_file_recursive(std::string_view file) {
+        _files_queue.clear();
+
+        std::string prefix;
+        auto rel = shark::common::relative_path(file, includes(), &prefix);
+        if (!rel.ok()) {
+            KLOG(INFO) << rel;
+            return false;
+        }
+
+        FileNode* node = get_file(*rel);
+        if (node == nullptr) {
+            const std::string absolute = prefix + "/" + *rel;
+            node = create_symbol<FileNode>(nullptr);
+            if (!node->load(absolute, *rel)) {
+                return false;
+            }
+            add_file(node);
+            if (!node->parse()) {
+                return false;
+            }
+        }
+        _import_graph.add_file(node);
+
+        if (!link_imports(node)) {
+            return false;
+        }
+        if (!_import_graph.build_queue()) {
+            shark::common::report_debug("import queue failed");
+            _files_queue.clear();
+            return false;
+        }
+        _files_queue.assign(_import_graph.queue().begin(), _import_graph.queue().end());
+        int index = 1;
+        for (FileNode* queued : _files_queue) {
+            shark::common::report_debug("bind " + std::to_string(index) + " `" + queued->path + "`");
+            for (FileNode* dep : _import_graph.direct(queued)) {
+                shark::common::report_debug("\t- `" + dep->path + "`");
+            }
+            ++index;
+        }
+        return true;
     }
 }  // namespace shark::parser

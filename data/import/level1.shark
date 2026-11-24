@@ -1,0 +1,10 @@
+edition = "sk2026";
+package "shark.import";
+
+import "data/import/level2.shark";
+
+/// Directly depends on level2.
+enum Level1 {
+    NONE = 0;
+    OPEN = 1;
+}

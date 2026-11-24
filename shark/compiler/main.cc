@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     XCLI_PARSE(app, argc, argv);
 
     shark::common::clog_enable_debug();
-    if (!shark::parser::RegistryPool::instance().build_file(file, includes, false)) {
+    if (!shark::parser::RegistryPool::instance().build_file_recursive(file, includes)) {
         return 1;
     }
     return 0;

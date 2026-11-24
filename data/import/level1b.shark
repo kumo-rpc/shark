@@ -1,0 +1,11 @@
+edition = "sk2026";
+package "shark.import";
+
+import "data/import/level2.shark";
+import "data/import/level2.shark";
+
+/// Same leaf as level1. The second import is a duplicate edge.
+enum Level1b {
+    NONE = 0;
+    HOLD = 1;
+}

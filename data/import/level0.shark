@@ -1,0 +1,15 @@
+edition = "sk2026";
+package "shark.import";
+
+import "data/import/level1.shark";
+import "data/import/level1b.shark";
+import.cpp "data/import/level2.shark";
+
+/// Entry file.
+/// Direct Shark deps are level1 and level1b.
+/// level2 is only reached through those two files.
+/// The classified import is not a Shark file dependency.
+enum Level0 {
+    NONE = 0;
+    RUN = 1;
+}
