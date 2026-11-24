@@ -32,6 +32,10 @@
 
 namespace shark::parser {
 
+    AnnotationValue::AnnotationValue(AnnotationValue&&) noexcept = default;
+    AnnotationValue& AnnotationValue::operator=(AnnotationValue&&) noexcept = default;
+    AnnotationValue::~AnnotationValue() = default;
+
     bool AnnotationNode::parse_one(
         Lexer<ExpressionLexer>& lexer) {
 
@@ -518,8 +522,8 @@ namespace shark::parser {
             return false;
         }
 
-        std::function<bool(const TypeRef&, const ConstValue*)> check;
-        check = [&](const TypeRef& ref, const ConstValue* value) -> bool {
+        std::function<bool(const TypeRef&, const ConstValue*, AnnotationValue&)> check;
+        check = [&](const TypeRef& ref, const ConstValue* value, AnnotationValue& out) -> bool {
             if (value == nullptr) {
                 report_error(ErrorType::SEMANTIC, "annotation `%s` value is missing", key);
                 return false;
@@ -564,10 +568,15 @@ namespace shark::parser {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires a list", key, format_type_ref(ref).c_str());
                             return false;
                         }
+                        out.kind_ = AnnotationKind::LIST;
+                        out.type_ = type;
+                        out.literal_ = value;
                         for (const ConstValue* element : list->elements) {
-                            if (!check(named->args[0].value, element)) {
+                            AnnotationValue child;
+                            if (!check(named->args[0].value, element, child)) {
                                 return false;
                             }
+                            out.elements_.push_back(std::move(child));
                         }
                         return true;
                     }
@@ -588,10 +597,15 @@ namespace shark::parser {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires a map", key, format_type_ref(ref).c_str());
                             return false;
                         }
+                        out.kind_ = AnnotationKind::MAP;
+                        out.type_ = type;
+                        out.literal_ = value;
                         for (const auto& entry : map->entries) {
-                            if (!check(named->args[0].value, entry.first) || !check(named->args[1].value, entry.second)) {
+                            AnnotationValue::Entry child;
+                            if (!check(named->args[0].value, entry.first, child.key) || !check(named->args[1].value, entry.second, child.value)) {
                                 return false;
                             }
+                            out.entries_.push_back(std::move(child));
                         }
                         return true;
                     }
@@ -609,12 +623,18 @@ namespace shark::parser {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `bool` requires a bool", key);
                             return false;
                         }
+                        out.kind_ = AnnotationKind::SCALAR;
+                        out.type_ = type;
+                        out.literal_ = value;
                         return true;
                     case PhysicalType::STRING:
                         if (!std::holds_alternative<std::string_view>(value->value)) {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `string` requires a string", key);
                             return false;
                         }
+                        out.kind_ = AnnotationKind::SCALAR;
+                        out.type_ = type;
+                        out.literal_ = value;
                         return true;
                     case PhysicalType::FLOAT32:
                     case PhysicalType::FLOAT64:
@@ -622,6 +642,9 @@ namespace shark::parser {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires a float", key, type->name);
                             return false;
                         }
+                        out.kind_ = AnnotationKind::SCALAR;
+                        out.type_ = type;
+                        out.literal_ = value;
                         return true;
                     case PhysicalType::INT8:
                     case PhysicalType::UINT8:
@@ -635,6 +658,9 @@ namespace shark::parser {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires an integer in range", key, type->name);
                             return false;
                         }
+                        out.kind_ = AnnotationKind::SCALAR;
+                        out.type_ = type;
+                        out.literal_ = value;
                         return true;
                     default:
                         report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` cannot be constructed", key, type->name);
@@ -646,7 +672,7 @@ namespace shark::parser {
                     report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires a struct value", key, type->name);
                     return false;
                 }
-                std::vector<const FieldNode*> seen;
+                std::vector<std::pair<const FieldNode*, AnnotationValue>> seen;
                 for (const auto& entry : map->entries) {
                     const auto* id = std::get_if<ConstValue::Identifier>(&entry.first->value);
                     if (id == nullptr) {
@@ -664,29 +690,42 @@ namespace shark::parser {
                         report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` has no field `%s`", key, type->name, id->name);
                         return false;
                     }
-                    for (const FieldNode* previous : seen) {
-                        if (previous == field) {
+                    for (const auto& previous : seen) {
+                        if (previous.first == field) {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` field `%s` is repeated", key, field->name);
                             return false;
                         }
                     }
-                    seen.push_back(field);
-                    if (!check(field->type_ref, entry.second)) {
+                    AnnotationValue child;
+                    if (!check(field->type_ref, entry.second, child)) {
                         return false;
                     }
+                    seen.push_back({field, std::move(child)});
                 }
+                out.kind_ = AnnotationKind::STRUCT;
+                out.type_ = type;
+                out.literal_ = value;
                 for (const FieldNode* field : type->fields) {
-                    bool present = false;
-                    for (const FieldNode* previous : seen) {
-                        if (previous == field) {
-                            present = true;
+                    const AnnotationValue* present = nullptr;
+                    for (const auto& previous : seen) {
+                        if (previous.first == field) {
+                            present = &previous.second;
                             break;
                         }
                     }
-                    if (!present && field->default_value == nullptr) {
-                        report_error(ErrorType::SEMANTIC, "annotation `%s` field `%s` is missing", key, field->name);
-                        return false;
+                    if (present == nullptr) {
+                        if (field->default_value == nullptr) {
+                            report_error(ErrorType::SEMANTIC, "annotation `%s` field `%s` is missing", key, field->name);
+                            return false;
+                        }
+                        AnnotationValue child;
+                        if (!check(field->type_ref, field->default_value, child)) {
+                            return false;
+                        }
+                        out.fields_.push_back(AnnotationValue::Field{field, std::move(child)});
+                        continue;
                     }
+                    out.fields_.push_back(AnnotationValue::Field{field, *present});
                 }
                 return true;
             }
@@ -701,6 +740,15 @@ namespace shark::parser {
                         report_error(ErrorType::SEMANTIC, "annotation `%s` enum `%s` value is out of range", key, enum_type->name);
                         return false;
                     }
+                    out.kind_ = AnnotationKind::ENUM;
+                    out.type_ = enum_type;
+                    out.literal_ = value;
+                    for (const EnumValueNode* item : enum_type->values) {
+                        if (item->value == *number) {
+                            out.enumerator_ = item;
+                            break;
+                        }
+                    }
                     return true;
                 }
                 const auto* id = std::get_if<ConstValue::Identifier>(&value->value);
@@ -710,6 +758,10 @@ namespace shark::parser {
                 }
                 for (const EnumValueNode* item : enum_type->values) {
                     if (item->name == id->name || item->full_name == id->name) {
+                        out.kind_ = AnnotationKind::ENUM;
+                        out.type_ = enum_type;
+                        out.literal_ = value;
+                        out.enumerator_ = item;
                         return true;
                     }
                 }
@@ -720,7 +772,24 @@ namespace shark::parser {
             return false;
         };
 
-        return check(type_ref, object);
+        AnnotationValue built;
+        if (!check(type_ref, object, built)) {
+            return false;
+        }
+        value = std::move(built);
+        return true;
+    }
+
+    const AnnotationValue* AnnotationValue::field(std::string_view name) const {
+        if (kind_ != AnnotationKind::STRUCT) {
+            return nullptr;
+        }
+        for (const Field& item : fields_) {
+            if (item.field != nullptr && item.field->name == name) {
+                return &item.value;
+            }
+        }
+        return nullptr;
     }
 
 } // namespace shark::parser

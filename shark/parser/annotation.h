@@ -17,9 +17,11 @@
 
 
 #include <shark/parser/comment.h>
+#include <shark/parser/const_value.h>
 #include <shark/parser/lexer.h>
 #include <shark/parser/type_name.h>
 #include <string>
+#include <string_view>
 #include <vector>
 #include <optional>
 #include <functional>
@@ -27,7 +29,104 @@
 
 namespace shark::parser {
 
-    class ConstValue;
+    class EnumValueNode;
+    class FieldNode;
+    class SymbolNode;
+
+    enum class AnnotationKind {
+        SCALAR,
+        LIST,
+        MAP,
+        STRUCT,
+        ENUM,
+    };
+
+    // Filled for `key<Type>` after binding. Accessors return null when `kind` does not match.
+    struct AnnotationValue {
+        struct Entry;
+        struct Field;
+
+        AnnotationValue() = default;
+        AnnotationValue(const AnnotationValue&) = default;
+        AnnotationValue& operator=(const AnnotationValue&) = default;
+        AnnotationValue(AnnotationValue&&) noexcept;
+        AnnotationValue& operator=(AnnotationValue&&) noexcept;
+        ~AnnotationValue();
+
+        AnnotationKind kind() const {
+            return kind_;
+        }
+        const SymbolNode* type() const {
+            return type_;
+        }
+        const bool* boolean() const {
+            if (kind_ != AnnotationKind::SCALAR || literal_ == nullptr) {
+                return nullptr;
+            }
+            return std::get_if<bool>(&literal_->value);
+        }
+        const int64_t* integer() const {
+            if ((kind_ != AnnotationKind::SCALAR && kind_ != AnnotationKind::ENUM) || literal_ == nullptr) {
+                return nullptr;
+            }
+            return std::get_if<int64_t>(&literal_->value);
+        }
+        const double* floating() const {
+            if (kind_ != AnnotationKind::SCALAR || literal_ == nullptr) {
+                return nullptr;
+            }
+            return std::get_if<double>(&literal_->value);
+        }
+        const std::string_view* string() const {
+            if (kind_ != AnnotationKind::SCALAR || literal_ == nullptr) {
+                return nullptr;
+            }
+            return std::get_if<std::string_view>(&literal_->value);
+        }
+        const EnumValueNode* enumerator() const {
+            if (kind_ != AnnotationKind::ENUM) {
+                return nullptr;
+            }
+            return enumerator_;
+        }
+        const std::vector<AnnotationValue>* elements() const {
+            if (kind_ != AnnotationKind::LIST) {
+                return nullptr;
+            }
+            return &elements_;
+        }
+        const std::vector<Entry>* entries() const {
+            if (kind_ != AnnotationKind::MAP) {
+                return nullptr;
+            }
+            return &entries_;
+        }
+        const std::vector<Field>* fields() const {
+            if (kind_ != AnnotationKind::STRUCT) {
+                return nullptr;
+            }
+            return &fields_;
+        }
+        const AnnotationValue* field(std::string_view name) const;
+
+        AnnotationKind                   kind_{AnnotationKind::SCALAR};
+        const SymbolNode*                type_{nullptr};
+        const ConstValue*                literal_{nullptr};
+        const EnumValueNode*             enumerator_{nullptr};
+        std::vector<AnnotationValue>     elements_;
+        std::vector<Entry>               entries_;
+        std::vector<Field>               fields_;
+    };
+
+    struct AnnotationValue::Entry {
+        AnnotationValue key;
+        AnnotationValue value;
+    };
+
+    struct AnnotationValue::Field {
+        const FieldNode* field{nullptr};
+        AnnotationValue  value;
+    };
 
     ////////////////////////////////////////////////
     /// Annotation declarations.
@@ -73,6 +172,8 @@ namespace shark::parser {
         bool              typed{false};
         TypeRef           type_ref;
         ConstValue*       object{nullptr};
+        /// Valid when `typed` is true and `bind_typed` succeeded.
+        AnnotationValue   value;
 
     private:
         bool parse_one(Lexer<ExpressionLexer> &lexer);
