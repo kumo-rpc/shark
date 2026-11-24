@@ -25,8 +25,24 @@ namespace shark::parser {
     static constexpr std::string_view kAnnotationKey = "annotation";
     static constexpr std::string_view kEnumKey = "enum";
     static constexpr std::string_view kStructKey = "struct";
+    static constexpr std::string_view kUnionKey = "union";
     static constexpr std::string_view kUsingKey = "using";
     static constexpr std::string_view kTypeDefKey = "typedef";
+
+    static constexpr std::string_view kRequiredKey    = "required";
+    static constexpr std::string_view kOptionalKey    = "optional";
+    static constexpr std::string_view kConstExprKey   = "constexpr";
+    static constexpr std::string_view kAtomicKey      = "atomic";
+
+    // Field qualifier. The four values do not combine.
+    // CONSTEXPR requires a ConstValue and is not serialized.
+    // ATOMIC has the same presence as REQUIRED and is accessed atomically.
+    enum class FieldLabel : uint8_t {
+        REQUIRED,
+        OPTIONAL,
+        CONSTEXPR,
+        ATOMIC,
+    };
 
     enum class NodeType {
         NONE = 0,
@@ -36,6 +52,7 @@ namespace shark::parser {
         PACKAGE,
         IMPORT,
         ANNOTATION,
+        CONST,
         SYMBOL_MIN,
         ENUM_VALUE = SYMBOL_MIN,
         ENUM,

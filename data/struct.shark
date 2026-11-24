@@ -1,0 +1,39 @@
+edition = "sk2026";
+package "shark.parser";
+
+annotation@ scope = "file";
+
+/// A point.
+annotation key = "point";
+struct Point {
+    annotation key = "x";
+    required int64 x @ 1 = 0;
+
+    optional int64 y @ 2;
+
+    atomic int32 z @ 3 = 1;
+
+    constexpr int32 origin @ 4 = 0;
+
+    /// Nested color.
+    annotation key = "color";
+    enum class Color : uint16 {
+        RED = 0;
+        GREEN = 1;
+    };
+
+    struct Inner {
+        optional string name @ 1 = "inner";
+    };
+
+    union Choice {
+        optional int64 i @ 1;
+        optional string s @ 2;
+    };
+};
+
+annotation key = "payload";
+union Payload {
+    required int64 number @ 1;
+    optional string text @ 2 = "text";
+};

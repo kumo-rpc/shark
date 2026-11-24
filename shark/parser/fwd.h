@@ -28,6 +28,7 @@ namespace shark::parser {
     class FieldNode;
     class ServiceNode;
     class FunctionNode;
+    class ConstValue;
 
     enum class PhysicalType {
         VOID    = 0,

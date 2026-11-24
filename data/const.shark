@@ -1,0 +1,30 @@
+edition = "sk2026";
+package "shark.parser";
+
+flag = true;
+off = false;
+count = 42;
+neg = -1;
+ratio = 1.5;
+name = "shark";
+path = 'shark/parser/const.h';
+color = Color.RED;
+
+ids = [1, 2, 3,];
+mixed = [true, 1, 1.5, "abc", Color.RED];
+nested = [[1, 2], [3, 4], { x = 1, y = 2 }];
+
+point = {
+    x = 1,
+    y = 2,
+};
+
+item = {
+    name = "origin",
+    enabled = true,
+    tags = ["a", "b"],
+    at = {
+        x = 0,
+        y = 0
+    }
+};

@@ -17,6 +17,7 @@
 #include <shark/parser/enum.h>
 #include <shark/parser/file.h>
 #include <shark/parser/pool.h>
+#include <shark/parser/struct.h>
 
 #include <turbo/strings/match.h>
 #include <turbo/log/logging.h>
@@ -170,6 +171,16 @@ namespace shark::parser {
                 enums.push_back(enum_node);
                 continue;
             }
+            if (t.type == TokenType::BareWord && (t == kStructKey || t == kUnionKey)) {
+                auto* struct_node = pool->create_symbol<StructNode>(this);
+                struct_node->leading_comment = std::move(comments);
+                struct_node->annotations = std::move(annotations);
+                if (!struct_node->parse(*lexer)) {
+                    return false;
+                }
+                structs.push_back(struct_node);
+                continue;
+            }
             if (t.type == TokenType::BareWord && t == kImportKey) {
                 auto* import_node = pool->create_node<ImportNode>(this);
                 if (!comments.empty()) {
@@ -183,7 +194,7 @@ namespace shark::parser {
                 continue;
             }
 
-            report_error(ErrorType::SYNTAX, "expected `package`, `enum` or `import`, but got `%s`", t.view());
+            report_error(ErrorType::SYNTAX, "expected `package`, `enum`, `struct`, `union` or `import`, but got `%s`", t.view());
             return false;
         }
     }
