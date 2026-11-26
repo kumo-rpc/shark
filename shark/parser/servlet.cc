@@ -13,7 +13,6 @@
 // limitations under the License.
 //
 
-#include <shark/parser/constants.h>
 #include <shark/parser/function.h>
 #include <shark/parser/pool.h>
 #include <shark/parser/file.h>
@@ -33,7 +32,7 @@ namespace shark::parser {
                 report_error(ErrorType::SEMANTIC, "servlet `%s` base `%s` was not found", name, base_name);
                 return BindStep::FAIL;
             }
-            if (symbol->node_type != NodeType::SERVLET) {
+            if (symbol->node_type != SymbolType::SERVLET) {
                 report_error(ErrorType::SEMANTIC, "servlet `%s` base `%s` is not a servlet", name, base_name);
                 return BindStep::FAIL;
             }

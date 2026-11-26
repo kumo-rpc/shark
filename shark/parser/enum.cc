@@ -14,7 +14,6 @@
 //
 
 #include <shark/parser/const_value.h>
-#include <shark/parser/constants.h>
 #include <shark/parser/enum.h>
 #include <shark/parser/enum_value.h>
 #include <shark/parser/field.h>

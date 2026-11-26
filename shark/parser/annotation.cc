@@ -21,8 +21,6 @@
 #include <shark/parser/pool.h>
 #include <shark/parser/struct.h>
 
-#include <shark/parser/constants.h>
-
 #include <cstdint>
 #include <cstdio>
 #include <functional>
@@ -536,13 +534,13 @@ namespace shark::parser {
                 report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` was not found", key, format_type_ref(ref).c_str());
                 return false;
             }
-            if (symbol->node_type == NodeType::ALIAS) {
+            if (symbol->node_type == SymbolType::ALIAS) {
                 report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` was not bound", key, format_type_ref(ref).c_str());
                 return false;
             }
 
             const auto* named = std::get_if<TypeName>(&ref);
-            if (symbol->node_type == NodeType::STRUCT) {
+            if (symbol->node_type == SymbolType::STRUCT) {
                 auto* type = static_cast<StructParser*>(symbol);
                 if (type->generic) {
                     if (named == nullptr) {
@@ -555,7 +553,7 @@ namespace shark::parser {
                             if (element != nullptr) {
                                 element = file->concrete_type(element);
                             }
-                            auto* element_type = element != nullptr && element->node_type == NodeType::STRUCT
+                            auto* element_type = element != nullptr && element->node_type == SymbolType::STRUCT
                                 ? static_cast<StructParser*>(element)
                                 : nullptr;
                             if (!is_key_type(element_type)) {
@@ -585,7 +583,7 @@ namespace shark::parser {
                         if (key_symbol != nullptr) {
                             key_symbol = file->concrete_type(key_symbol);
                         }
-                        auto* key_type = key_symbol != nullptr && key_symbol->node_type == NodeType::STRUCT
+                        auto* key_type = key_symbol != nullptr && key_symbol->node_type == SymbolType::STRUCT
                             ? static_cast<StructParser*>(key_symbol)
                             : nullptr;
                         if (!is_key_type(key_type)) {
@@ -729,7 +727,7 @@ namespace shark::parser {
                 }
                 return true;
             }
-            if (symbol->node_type == NodeType::ENUM) {
+            if (symbol->node_type == SymbolType::ENUM) {
                 if (named != nullptr) {
                     report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` does not take type arguments", key, format_type_ref(ref).c_str());
                     return false;

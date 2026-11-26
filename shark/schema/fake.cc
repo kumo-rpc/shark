@@ -14,3 +14,4 @@
 //
 
 #include <shark/schema/schema_data.h>
+#include <shark/schema/schema_pool.h>

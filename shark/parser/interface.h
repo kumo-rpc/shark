@@ -86,7 +86,7 @@ namespace shark::parser {
     class InterfaceParser : public SymbolNode {
     public:
         friend class RegistryPool;
-        InterfaceParser(RegistryPool * pool) :SymbolNode(NodeType::STRUCT, pool) {}
+        InterfaceParser(RegistryPool * pool) :SymbolNode(SymbolType::STRUCT, pool) {}
         ~InterfaceParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);

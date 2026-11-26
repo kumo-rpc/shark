@@ -20,6 +20,7 @@
 #include <string_view>
 #include <string>
 #include <shark/parser/node.h>
+#include <shark/schema/schema_defines.h>
 
 namespace shark::parser {
 

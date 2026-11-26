@@ -20,15 +20,9 @@
 #include <cstdint>
 #include <optional>
 #include <vector>
+#include <shark/schema/schema_defines.h>
 
 namespace shark::schema {
-
-    /// 1-based line and column of the declaration in the source file.
-    /// Same meaning as shark::parser::SourceLocation.
-    struct SourceLocation {
-        int32_t line{0};
-        int32_t column{0};
-    };
 
     /// Where a declaration sits in its source file.
     /// sequence is the 0-based order among declarations of the same scope,
@@ -62,8 +56,42 @@ namespace shark::schema {
         std::string path;
     };
 
-    /// Empty until constraint checks are defined.
+    struct TypeNameInfo;
+
+    /// One predicate call. is_integer has an empty argument list.
+    /// is_subclass_of<Myclass> stores name "is_subclass_of" and one TypeNameInfo argument.
+    struct ConstraintFunction {
+        ConstraintFunction();
+        ~ConstraintFunction();
+        ConstraintFunction(const ConstraintFunction&);
+        ConstraintFunction& operator=(const ConstraintFunction&);
+        ConstraintFunction(ConstraintFunction&&) noexcept;
+        ConstraintFunction& operator=(ConstraintFunction&&) noexcept;
+
+        std::string name;
+        std::vector<TypeNameInfo> arguments;
+    };
+
+    /// Boolean expression inside []. CALL is one ConstraintFunction.
+    /// NOT has one operand. AND and OR have two.
     struct TypeConstraint {
+        enum class Op : uint8_t {
+            CALL,
+            NOT,
+            AND,
+            OR,
+        };
+
+        TypeConstraint();
+        ~TypeConstraint();
+        TypeConstraint(const TypeConstraint&);
+        TypeConstraint& operator=(const TypeConstraint&);
+        TypeConstraint(TypeConstraint&&) noexcept;
+        TypeConstraint& operator=(TypeConstraint&&) noexcept;
+
+        Op op{Op::CALL};
+        ConstraintFunction function;
+        std::vector<TypeConstraint> operands;
     };
 
     /// A type written in source.
@@ -71,6 +99,13 @@ namespace shark::schema {
     /// list<int32> stores name "list" and one argument "int32".
     /// The full name, such as "list<int32>", is produced from name and arguments. It is not stored.
     struct TypeNameInfo {
+        TypeNameInfo();
+        ~TypeNameInfo();
+        TypeNameInfo(const TypeNameInfo&);
+        TypeNameInfo& operator=(const TypeNameInfo&);
+        TypeNameInfo(TypeNameInfo&&) noexcept;
+        TypeNameInfo& operator=(TypeNameInfo&&) noexcept;
+
         /// Scoped name. "list" for list<int32>, "pkg.Foo" for a dotted name.
         std::string name;
         /// True when this name is a placeholder declared for a generic, such as K in struct<K>.
@@ -80,9 +115,30 @@ namespace shark::schema {
         /// Specialization arguments. Empty when the type is not generic.
         /// Nested parameters are further TypeNameInfo values here.
         std::vector<TypeNameInfo> arguments;
-        /// Requirements on this type. Empty when nothing is required.
-        std::vector<TypeConstraint> constraints;
+        /// The [] expression on this name. Empty when the name has no constraint.
+        std::optional<TypeConstraint> constraint;
     };
+
+    inline ConstraintFunction::ConstraintFunction() = default;
+    inline ConstraintFunction::~ConstraintFunction() = default;
+    inline ConstraintFunction::ConstraintFunction(const ConstraintFunction&) = default;
+    inline ConstraintFunction& ConstraintFunction::operator=(const ConstraintFunction&) = default;
+    inline ConstraintFunction::ConstraintFunction(ConstraintFunction&&) noexcept = default;
+    inline ConstraintFunction& ConstraintFunction::operator=(ConstraintFunction&&) noexcept = default;
+
+    inline TypeConstraint::TypeConstraint() = default;
+    inline TypeConstraint::~TypeConstraint() = default;
+    inline TypeConstraint::TypeConstraint(const TypeConstraint&) = default;
+    inline TypeConstraint& TypeConstraint::operator=(const TypeConstraint&) = default;
+    inline TypeConstraint::TypeConstraint(TypeConstraint&&) noexcept = default;
+    inline TypeConstraint& TypeConstraint::operator=(TypeConstraint&&) noexcept = default;
+
+    inline TypeNameInfo::TypeNameInfo() = default;
+    inline TypeNameInfo::~TypeNameInfo() = default;
+    inline TypeNameInfo::TypeNameInfo(const TypeNameInfo&) = default;
+    inline TypeNameInfo& TypeNameInfo::operator=(const TypeNameInfo&) = default;
+    inline TypeNameInfo::TypeNameInfo(TypeNameInfo&&) noexcept = default;
+    inline TypeNameInfo& TypeNameInfo::operator=(TypeNameInfo&&) noexcept = default;
 
     /// One serializable value. kind selects which fields are meaningful.
     /// Nested values (list items, map keys and values, struct fields) each

@@ -148,7 +148,7 @@ namespace shark::parser {
     ////////////////////////////////////////////////
     class AnnotationParser : public Node {
     public:
-        AnnotationParser(const FileParser* f, RegistryPool *p) :Node(NodeType::ANNOTATION, f, p){}
+        AnnotationParser(const FileParser* f, RegistryPool *p) :Node(SymbolType::ANNOTATION, f, p){}
         ~AnnotationParser() override = default;
 
         using value_type = std::variant<

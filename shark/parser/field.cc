@@ -13,7 +13,6 @@
 // limitations under the License.
 //
 
-#include <shark/parser/constants.h>
 #include <shark/parser/field.h>
 #include <shark/parser/pool.h>
 #include <shark/parser/type_name.h>

@@ -29,7 +29,7 @@ namespace shark::parser {
         };
 
         PlaceholderParser(const FileParser* f, RegistryPool* pool)
-            : SymbolNode(NodeType::PLACEHOLDER, f, pool) {}
+            : SymbolNode(SymbolType::PLACEHOLDER, f, pool) {}
 
         bool allows(const SymbolNode* symbol) const;
 

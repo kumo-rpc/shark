@@ -13,11 +13,10 @@
 // limitations under the License.
 //
 
-#include <shark/parser/constants.h>
 #include <shark/parser/enum_value.h>
 
-#include "file.h"
-#include "pool.h"
+#include <shark/parser/file.h>
+#include <shark/parser/pool.h>
 
 #include <shark/parser/enum.h>
 #include <shark/parser/struct.h>

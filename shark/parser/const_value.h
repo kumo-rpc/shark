@@ -56,7 +56,7 @@ namespace shark::parser {
             Map>;
 
         ConstValueParser(const FileParser* f, RegistryPool* p)
-            : Node(NodeType::CONST, f, p) {}
+            : Node(SymbolType::CONST, f, p) {}
 
         // Parses one value. Skips whitespace and comments.
         // Does not consume a trailing comma or semicolon.

@@ -15,8 +15,7 @@
 
 #pragma once
 
-
-#include <shark/parser/constants.h>
+#include <shark/schema/schema_defines.h>
 
 namespace shark::parser {
 
@@ -32,31 +31,6 @@ namespace shark::parser {
     class FunctionParser;
     class ConstValueParser;
     class PlaceholderParser;
-
-    enum class PhysicalType {
-        VOID    = 0,
-        BOOL    = 1,
-        INT8    = 2,
-        UINT8   = 3,
-        INT16   = 4,
-        UINT16  = 5,
-        INT32   = 6,
-        UINT32  = 7,
-        INT64   = 8,
-        UINT64  = 9,
-        INT128  = 10,
-        UINT128 = 11,
-        FLOAT32 = 12,
-        FLOAT64 = 13,
-        STRING  = 14,
-        STRUCT  = 15,
-        CONTAINER_MIN = 16,
-        LIST    = CONTAINER_MIN,
-        SET     = 17,
-        MAP     = 18,
-        OPTIONAL = 19,
-        CONTAINER_MAX = MAP,
-    };
 
 
 }  // namespace shark::parser

@@ -13,7 +13,6 @@
 // limitations under the License.
 //
 
-#include <shark/parser/constants.h>
 #include <shark/parser/edition.h>
 
 namespace shark::parser {

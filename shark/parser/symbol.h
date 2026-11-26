@@ -16,7 +16,6 @@
 #pragma once
 
 #include <shark/parser/node.h>
-#include <shark/parser/constants.h>
 #include <shark/parser/fwd.h>
 #include <string>
 
@@ -34,7 +33,7 @@ namespace shark::parser {
         bool                     bind{false};
 
     protected:
-        SymbolNode(NodeType type, const FileParser *f, RegistryPool *pool): Node(type, f, pool) {}
+        SymbolNode(SymbolType type, const FileParser *f, RegistryPool *pool): Node(type, f, pool) {}
     };
 
 }  // namespace shark::parser

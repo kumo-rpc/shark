@@ -62,7 +62,7 @@ namespace shark::parser {
 
     private:
         friend class RegistryPool;
-        EnumValueParser(const FileParser* f, RegistryPool *pool) :SymbolNode(NodeType::ENUM_VALUE, f, pool) {}
+        EnumValueParser(const FileParser* f, RegistryPool *pool) :SymbolNode(SymbolType::ENUM_VALUE, f, pool) {}
         bool parse_leading(Lexer<ExpressionLexer> &lexer);
 
         bool parse_value(Lexer<ExpressionLexer> &lexer);

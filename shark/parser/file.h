@@ -107,7 +107,7 @@ namespace shark::parser {
         bool parse_leading(std::vector<CommentParser*>& comments, std::vector<AnnotationParser*>& annotations);
     protected:
         friend class RegistryPool;
-        FileParser(const FileParser* f, RegistryPool * pool) :SymbolNode(NodeType::FILE, nullptr, pool) {}
+        FileParser(const FileParser* f, RegistryPool * pool) :SymbolNode(SymbolType::FILE, nullptr, pool) {}
 
     };
 }  // namespace shark::parser

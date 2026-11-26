@@ -34,7 +34,7 @@ namespace shark::parser {
     std::string Node::make_node_info(ErrorType err) const {
         return turbo::str_sprintf("%s:%d:%d [%s]",
             get_absolute_path(),
-            start_location.lineno,
+            start_location.line,
             start_location.column,
             to_string(err)
             );

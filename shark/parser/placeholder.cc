@@ -24,13 +24,13 @@ namespace shark::parser {
             return false;
         }
         if (constraint == Constraint::ALL) {
-            if (symbol->node_type == NodeType::STRUCT) {
+            if (symbol->node_type == SymbolType::STRUCT) {
                 auto* type = static_cast<const StructParser*>(symbol);
                 return type->builtin || type->bind;
             }
-            return symbol->node_type == NodeType::ENUM && symbol->bind;
+            return symbol->node_type == SymbolType::ENUM && symbol->bind;
         }
-        if (symbol->node_type != NodeType::STRUCT) {
+        if (symbol->node_type != SymbolType::STRUCT) {
             return false;
         }
         auto* type = static_cast<const StructParser*>(symbol);

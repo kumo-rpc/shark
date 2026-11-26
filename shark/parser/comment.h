@@ -26,7 +26,7 @@ namespace shark::parser {
 
     class CommentParser : public Node {
     public:
-        CommentParser(const FileParser*f,  RegistryPool *p) :Node(NodeType::COMMENT, f, p){}
+        CommentParser(const FileParser*f,  RegistryPool *p) :Node(SymbolType::COMMENT, f, p){}
         ~CommentParser() override = default;
 
         static bool is_tailing_prefix(std::string_view comment);

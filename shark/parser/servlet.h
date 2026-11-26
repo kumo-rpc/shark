@@ -51,7 +51,7 @@ namespace shark::parser {
     class ServletParser : public SymbolNode {
     public:
         friend class RegistryPool;
-        ServletParser(const FileParser* f, RegistryPool * pool) :SymbolNode(NodeType::SERVLET, f, pool) {}
+        ServletParser(const FileParser* f, RegistryPool * pool) :SymbolNode(SymbolType::SERVLET, f, pool) {}
         ~ServletParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);

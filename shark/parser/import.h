@@ -43,7 +43,7 @@ namespace shark::parser {
     ///
     class ImportParser : public Node {
     public:
-        ImportParser(const FileParser *f, RegistryPool *p) : Node(NodeType::IMPORT, f, p){}
+        ImportParser(const FileParser *f, RegistryPool *p) : Node(SymbolType::IMPORT, f, p){}
         ~ImportParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);

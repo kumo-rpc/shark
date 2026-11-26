@@ -14,7 +14,6 @@
 //
 
 #include <shark/parser/alias.h>
-#include <shark/parser/constants.h>
 #include <shark/parser/file.h>
 #include <shark/parser/pool.h>
 

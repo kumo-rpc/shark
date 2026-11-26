@@ -86,7 +86,7 @@ namespace shark::parser {
     class EnumParser : public SymbolNode {
     public:
         friend class RegistryPool;
-        EnumParser(const FileParser* f, RegistryPool * pool) :SymbolNode(NodeType::ENUM, f, pool) {}
+        EnumParser(const FileParser* f, RegistryPool * pool) :SymbolNode(SymbolType::ENUM, f, pool) {}
         ~EnumParser() override = default;
 
         enum class UnderlyingType {

@@ -45,7 +45,7 @@ namespace shark::parser {
     ////////////////////////////////////////////////
     class PackageParser : public Node {
     public:
-        PackageParser(const FileParser* f, RegistryPool *p) :Node(NodeType::PACKAGE, f,p){}
+        PackageParser(const FileParser* f, RegistryPool *p) :Node(SymbolType::PACKAGE, f,p){}
         ~PackageParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);

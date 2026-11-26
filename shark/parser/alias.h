@@ -60,7 +60,7 @@ namespace shark::parser {
 
     private:
         friend class RegistryPool;
-        AliasParser(const FileParser* f, RegistryPool * pool) :SymbolNode(NodeType::ALIAS, f, pool) {}
+        AliasParser(const FileParser* f, RegistryPool * pool) :SymbolNode(SymbolType::ALIAS, f, pool) {}
 
         bool skip_gap(Lexer<ExpressionLexer>& lexer);
         bool parse_target_name(Lexer<ExpressionLexer>& lexer);

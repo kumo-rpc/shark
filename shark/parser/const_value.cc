@@ -14,7 +14,6 @@
 //
 
 #include <shark/parser/const_value.h>
-#include <shark/parser/constants.h>
 #include <shark/parser/pool.h>
 
 #include <cerrno>

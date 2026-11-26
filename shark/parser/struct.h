@@ -86,7 +86,7 @@ namespace shark::parser {
     class StructParser : public SymbolNode {
     public:
         friend class RegistryPool;
-        StructParser(const FileParser* f, RegistryPool * pool) :SymbolNode(NodeType::STRUCT, f,pool) {}
+        StructParser(const FileParser* f, RegistryPool * pool) :SymbolNode(SymbolType::STRUCT, f,pool) {}
         ~StructParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);

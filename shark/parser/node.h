@@ -17,7 +17,6 @@
 
 #include <cstdint>
 #include <shark/common/clog.h>
-#include <shark/parser/constants.h>
 #include <shark/parser/fwd.h>
 #include <string>
 #include <turbo/format/str_format.h>
@@ -80,18 +79,13 @@ namespace shark::parser {
         return "UNKNOWN";
     }
 
-    struct SourceLocation {
-        int32_t lineno { 0 };
-        int32_t column { 0 };
-    };
-
     class Node {
     public:
         virtual ~Node() = default;
 
         [[nodiscard]] bool is_symbol() const {
-            static constexpr auto kMin = static_cast<int32_t>(NodeType::SYMBOL_MIN);
-            static constexpr auto kMax = static_cast<int32_t>(NodeType::SYMBOL_MIN);
+            static constexpr auto kMin = static_cast<int32_t>(SymbolType::SYMBOL_MIN);
+            static constexpr auto kMax = static_cast<int32_t>(SymbolType::SYMBOL_MIN);
             auto n = static_cast<int32_t>(node_type);
             return n >= kMin && n <= kMax;
         }
@@ -125,7 +119,7 @@ namespace shark::parser {
         /// only hold store, not enum but,
         /// leave it to user.
         /// 0 mean no type, reserved.
-        NodeType node_type { NodeType::NONE };
+        SymbolType node_type { SymbolType::NONE };
         SourceLocation start_location;
         const FileParser* file { nullptr };
         RegistryPool* pool { nullptr };
@@ -134,7 +128,7 @@ namespace shark::parser {
         std::string make_node_info(ErrorType err) const;
 
     protected:
-        Node(NodeType type, const FileParser* f, RegistryPool* p)
+        Node(SymbolType type, const FileParser* f, RegistryPool* p)
             : node_type(type)
             , file(f)
             , pool(p) {

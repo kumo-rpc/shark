@@ -13,7 +13,6 @@
 // limitations under the License.
 //
 
-#include <shark/parser/constants.h>
 #include <shark/parser/enum.h>
 #include <shark/parser/field.h>
 #include <shark/parser/file.h>
@@ -42,14 +41,14 @@ namespace shark::parser {
             report_error(ErrorType::SEMANTIC, "function `%s` type `%s` was not found", name, type_name);
             return false;
         }
-        if (symbol->node_type == NodeType::STRUCT) {
+        if (symbol->node_type == SymbolType::STRUCT) {
             auto* type = static_cast<StructParser*>(symbol);
             if (type->builtin || type->bind) {
                 struct_type = type;
                 enum_type = nullptr;
                 return true;
             }
-        } else if (symbol->node_type == NodeType::ENUM) {
+        } else if (symbol->node_type == SymbolType::ENUM) {
             auto* type = static_cast<EnumParser*>(symbol);
             if (type->bind) {
                 struct_type = nullptr;

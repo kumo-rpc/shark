@@ -19,7 +19,6 @@
 #include <shark/parser/annotation.h>
 #include <shark/parser/comment.h>
 #include <shark/parser/const_value.h>
-#include <shark/parser/constants.h>
 #include <shark/parser/lexer.h>
 #include <shark/parser/symbol.h>
 #include <shark/parser/type_name.h>
@@ -38,7 +37,7 @@ namespace shark::parser {
     class FieldParser : public SymbolNode {
     public:
         friend class RegistryPool;
-        FieldParser(const FileParser* f, RegistryPool * pool) :SymbolNode(NodeType::FIELD, f, pool) {}
+        FieldParser(const FileParser* f, RegistryPool * pool) :SymbolNode(SymbolType::FIELD, f, pool) {}
         ~FieldParser() override = default;
 
         enum class End {

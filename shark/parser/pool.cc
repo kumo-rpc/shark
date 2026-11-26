@@ -165,7 +165,7 @@ namespace shark::parser {
             shark::common::report_debug("unbound file `" + queued->path + "`");
         }
         for (const auto& symbol : _all_symbols) {
-            if (symbol->node_type == NodeType::FILE || symbol->bind) {
+            if (symbol->node_type == SymbolType::FILE || symbol->bind) {
                 continue;
             }
             bound = false;

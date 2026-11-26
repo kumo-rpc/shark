@@ -14,7 +14,6 @@
 //
 
 #include <shark/parser/alias.h>
-#include <shark/parser/constants.h>
 #include <shark/parser/enum.h>
 #include <shark/parser/field.h>
 #include <shark/parser/file.h>
@@ -50,7 +49,7 @@ namespace shark::parser {
                 report_error(ErrorType::SEMANTIC, "field `%s` type `%s` was not found", name, type_ref_name(field->type_ref));
                 return BindStep::FAIL;
             }
-            if (symbol->node_type == NodeType::ALIAS) {
+            if (symbol->node_type == SymbolType::ALIAS) {
                 if (!symbol->bind) {
                     waiting = true;
                     continue;
@@ -58,7 +57,7 @@ namespace shark::parser {
                 report_error(ErrorType::SEMANTIC, "field `%s` type `%s` alias is cyclic", name, type_ref_name(field->type_ref));
                 return BindStep::FAIL;
             }
-            if (symbol->node_type == NodeType::STRUCT) {
+            if (symbol->node_type == SymbolType::STRUCT) {
                 auto* type = static_cast<StructParser*>(symbol);
                 if (type->builtin || type->bind) {
                     field->type = type;
@@ -72,7 +71,7 @@ namespace shark::parser {
                 waiting = true;
                 continue;
             }
-            if (symbol->node_type == NodeType::ENUM) {
+            if (symbol->node_type == SymbolType::ENUM) {
                 auto* enum_type = static_cast<EnumParser*>(symbol);
                 if (!enum_type->bind) {
                     report_error(ErrorType::SEMANTIC, "field `%s` type `%s` was not bound", name, type_ref_name(field->type_ref));

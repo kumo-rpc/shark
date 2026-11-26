@@ -30,7 +30,7 @@ namespace shark::parser {
     /// edition = 'sk2026';
     class EditionParser : public Node {
     public:
-        EditionParser(const FileParser* f,  RegistryPool *p) :Node(NodeType::EDITION, f, p){}
+        EditionParser(const FileParser* f,  RegistryPool *p) :Node(SymbolType::EDITION, f, p){}
         ~EditionParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);

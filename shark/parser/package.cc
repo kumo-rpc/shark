@@ -13,7 +13,6 @@
 // limitations under the License.
 //
 
-#include <shark/parser/constants.h>
 #include <shark/parser/package.h>
 #include <turbo/log/logging.h>
 #include <shark/parser/pool.h>

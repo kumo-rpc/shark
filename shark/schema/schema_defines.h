@@ -16,8 +16,46 @@
 #pragma once
 
 #include <string_view>
+#include <string>
 
-namespace shark::parser {
+namespace shark {
+
+    enum class PhysicalType {
+        VOID    = 0,
+        BOOL    = 1,
+        INT8    = 2,
+        UINT8   = 3,
+        INT16   = 4,
+        UINT16  = 5,
+        INT32   = 6,
+        UINT32  = 7,
+        INT64   = 8,
+        UINT64  = 9,
+        INT128  = 10,
+        UINT128 = 11,
+        FLOAT32 = 12,
+        FLOAT64 = 13,
+        STRING  = 14,
+        STRUCT  = 15,
+        CONTAINER_MIN = 16,
+        LIST    = CONTAINER_MIN,
+        SET     = 17,
+        MAP     = 18,
+        OPTIONAL = 19,
+        CONTAINER_MAX = MAP,
+    };
+
+    /// Field qualifier. The four values do not combine.
+    /// CONSTEXPR requires a ConstValueParser and is not serialized.
+    /// ATOMIC has the same presence as REQUIRED and is accessed atomically.
+    enum class FieldLabel : uint8_t {
+        REQUIRED,
+        OPTIONAL,
+        CONSTEXPR,
+        ATOMIC,
+    };
+
+
 
     static constexpr std::string_view kEditionKey = "edition";
     static constexpr std::string_view kImportKey = "import";
@@ -36,17 +74,8 @@ namespace shark::parser {
     static constexpr std::string_view kConstExprKey   = "constexpr";
     static constexpr std::string_view kAtomicKey      = "atomic";
 
-    // Field qualifier. The four values do not combine.
-    // CONSTEXPR requires a ConstValueParser and is not serialized.
-    // ATOMIC has the same presence as REQUIRED and is accessed atomically.
-    enum class FieldLabel : uint8_t {
-        REQUIRED,
-        OPTIONAL,
-        CONSTEXPR,
-        ATOMIC,
-    };
 
-    enum class NodeType {
+    enum class SymbolType {
         NONE = 0,
         FILE,
         EDITION,
@@ -54,9 +83,9 @@ namespace shark::parser {
         PACKAGE,
         IMPORT,
         ANNOTATION,
-        CONST,
         SYMBOL_MIN,
         ENUM_VALUE = SYMBOL_MIN,
+        CONST,
         ENUM,
         STRUCT,
         FIELD,
@@ -66,4 +95,13 @@ namespace shark::parser {
         PLACEHOLDER,
         SYMBOL_MAX = PLACEHOLDER
     };
-}  // namespace shark::parser
+
+    /// 1-based line and column of the declaration in the source file.
+    /// Same meaning as shark::parser::SourceLocation.
+    struct SourceLocation {
+        int32_t line{0};
+        int32_t column{0};
+    };
+
+
+}  // namespace shark

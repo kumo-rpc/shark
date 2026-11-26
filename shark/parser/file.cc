@@ -15,7 +15,6 @@
 
 #include <shark/parser/alias.h>
 #include <shark/parser/import.h>
-#include <shark/parser/constants.h>
 #include <shark/parser/enum.h>
 #include <shark/parser/field.h>
 #include <shark/parser/file.h>
@@ -408,7 +407,7 @@ namespace shark::parser {
 
     SymbolNode* FileParser::concrete_type(SymbolNode* symbol) const {
         SymbolNode* current = symbol;
-        while (current != nullptr && current->node_type == NodeType::ALIAS) {
+        while (current != nullptr && current->node_type == SymbolType::ALIAS) {
             auto* alias = static_cast<AliasParser*>(current);
             if (!alias->bind || alias->target == nullptr) {
                 return current;
@@ -433,12 +432,12 @@ namespace shark::parser {
             report_error(ErrorType::SEMANTIC, "constexpr `%s` type `%s` was not found", field->name, type_ref_name(field->type_ref));
             return false;
         }
-        if (symbol->node_type == NodeType::ALIAS) {
+        if (symbol->node_type == SymbolType::ALIAS) {
             report_error(ErrorType::SEMANTIC, "constexpr `%s` type `%s` was not bound", field->name, type_ref_name(field->type_ref));
             return false;
         }
         if (final_round) {
-            if (symbol->node_type == NodeType::ENUM) {
+            if (symbol->node_type == SymbolType::ENUM) {
                 auto* enum_type = static_cast<EnumParser*>(symbol);
                 if (enum_type->bind) {
                     field->enum_type = enum_type;
@@ -453,7 +452,7 @@ namespace shark::parser {
             report_error(ErrorType::SEMANTIC, "constexpr `%s` type `%s` was not bound", field->name, type_ref_name(field->type_ref));
             return false;
         }
-        if (symbol->node_type == NodeType::STRUCT) {
+        if (symbol->node_type == SymbolType::STRUCT) {
             auto* type = static_cast<StructParser*>(symbol);
             field->type = type;
             field->bind = true;
@@ -467,7 +466,7 @@ namespace shark::parser {
             }
             return true;
         }
-        if (symbol->node_type == NodeType::ENUM) {
+        if (symbol->node_type == SymbolType::ENUM) {
             auto* enum_type = static_cast<EnumParser*>(symbol);
             if (!enum_type->bind) {
                 return true;
