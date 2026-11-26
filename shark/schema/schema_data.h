@@ -62,12 +62,26 @@ namespace shark::schema {
         std::string path;
     };
 
-    /// A type name written in source, including generic arguments.
-    /// A plain name has an empty argument list. A generic argument that is
-    /// itself a type is nested here; a bare type argument is a name with no arguments.
+    /// Empty until constraint checks are defined.
+    struct TypeConstraint {
+    };
+
+    /// A type written in source.
+    /// name is the scoped type or template name, dots included, without arguments.
+    /// list<int32> stores name "list" and one argument "int32".
+    /// The full name, such as "list<int32>", is produced from name and arguments. It is not stored.
     struct TypeNameInfo {
+        /// Scoped name. "list" for list<int32>, "pkg.Foo" for a dotted name.
         std::string name;
+        /// True when this name is a placeholder declared for a generic, such as K in struct<K>.
+        /// False when the type is instantiated. list<int32> is a fixed type, so this flag is false.
+        /// Default is false.
+        bool is_parameter{false};
+        /// Specialization arguments. Empty when the type is not generic.
+        /// Nested parameters are further TypeNameInfo values here.
         std::vector<TypeNameInfo> arguments;
+        /// Requirements on this type. Empty when nothing is required.
+        std::vector<TypeConstraint> constraints;
     };
 
     /// One serializable value. kind selects which fields are meaningful.
@@ -112,8 +126,7 @@ namespace shark::schema {
         std::string classify;
         std::string key;
         bool file_level{false};
-        bool typed{false};
-        /// Set when typed is true. Empty name when the annotation has no `<Type>`.
+        /// Empty name when the annotation has no `<Type>`.
         TypeNameInfo type_name;
         /// Bound value. An untyped payload with several scalars is a LIST.
         Value value;
@@ -133,7 +146,8 @@ namespace shark::schema {
         SourceSite site;
         std::string name;
         int64_t value{0};
-        /// Empty when value is an integer literal. Otherwise the constexpr name.
+        /// Empty when value is an integer literal.
+        /// Otherwise the constexpr reference as written, dots included.
         std::string constexpr_ref;
         std::vector<AnnotationInfo> annotations;
     };
@@ -150,8 +164,8 @@ namespace shark::schema {
     struct AliasInfo {
         SourceSite site;
         std::string name;
-        /// Name written after typedef or using. The resolved target symbol is not stored.
-        std::string target_name;
+        /// Target type as written, including generic arguments. The resolved symbol is not stored.
+        TypeNameInfo target;
         /// True for `using Name = Target`, false for `typedef Target Name`.
         bool is_using{false};
         std::vector<AnnotationInfo> annotations;
@@ -207,7 +221,6 @@ namespace shark::schema {
         FieldLabel label{FieldLabel::REQUIRED};
         /// Written type, including generic arguments. Resolved type pointers are not stored.
         TypeNameInfo type_name;
-        bool generic{false};
         uint16_t number{0};
         /// EMPTY when the field has no default.
         Value default_value;
@@ -222,6 +235,8 @@ namespace shark::schema {
         bool is_union{false};
         bool builtin{false};
         bool generic{false};
+        /// Generic parameters. Each entry is a type parameter (is_parameter) or a nested generic.
+        std::vector<TypeNameInfo> parameters;
         PhysicalType phy_type{PhysicalType::VOID};
         std::vector<FieldInfo> fields;
         std::vector<StructInfo> nested_structs;
@@ -234,7 +249,7 @@ namespace shark::schema {
         SourceSite site;
         std::string name;
         /// Return type as written. Resolved struct and enum pointers are not stored.
-        std::string return_type_name;
+        TypeNameInfo return_type;
         std::vector<FieldInfo> params;
         std::vector<AnnotationInfo> annotations;
     };
@@ -242,8 +257,8 @@ namespace shark::schema {
     struct ServletInfo {
         SourceSite site;
         std::string name;
-        /// Base servlet names as written. Resolved base servlet pointers are not stored.
-        std::vector<std::string> base_names;
+        /// Base types as written, including generic arguments. Resolved servlet pointers are not stored.
+        std::vector<TypeNameInfo> bases;
         std::vector<FunctionInfo> methods;
         std::vector<AnnotationInfo> annotations;
     };
@@ -251,9 +266,6 @@ namespace shark::schema {
     struct FileData {
         SourceSite site;
         std::string path;
-        std::string absolute_path;
-        /// Effective package name. The package declarations themselves are in packages.
-        std::string package;
         std::optional<EditionInfo> edition;
         std::vector<CommentInfo> comments;
         std::vector<PackageInfo> packages;
@@ -264,6 +276,7 @@ namespace shark::schema {
         std::vector<FunctionInfo> functions;
         std::vector<ServletInfo> servlets;
         std::vector<FieldInfo> constexprs;
+        /// Debug only. Not used by codegen or by loading symbols into the pool.
         std::vector<std::string> indirect_dependencies;
     };
 }  // namespace shark::schema
