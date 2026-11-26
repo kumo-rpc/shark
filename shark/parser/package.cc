@@ -20,7 +20,7 @@
 
 namespace shark::parser {
 
-    bool PackageNode::parse(Lexer<ExpressionLexer>& lexer) {
+    bool PackageParser::parse(Lexer<ExpressionLexer>& lexer) {
 
         KLOG(INFO)<<1;
         auto t = lexer.look_at();
@@ -103,7 +103,7 @@ namespace shark::parser {
         lexer.consume();
 
         // Parse trailing comments.
-        tailing_comment = pool->create_node<CommentNode>(file);
+        tailing_comment = pool->create_node<CommentParser>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
             report_debug(ErrorType::NONE, "package `%s` classify `%s`", package, classify);
 

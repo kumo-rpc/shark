@@ -24,17 +24,17 @@
 
 namespace shark::parser {
 
-    class CommentNode : public Node {
+    class CommentParser : public Node {
     public:
-        CommentNode(const FileNode*f,  RegistryPool *p) :Node(NodeType::COMMENT, f, p){}
-        ~CommentNode() override = default;
+        CommentParser(const FileParser*f,  RegistryPool *p) :Node(NodeType::COMMENT, f, p){}
+        ~CommentParser() override = default;
 
         static bool is_tailing_prefix(std::string_view comment);
 
-        bool parse_tailing(Lexer<ExpressionLexer> &lexer, const std::function<bool(std::string_view)> & func =CommentNode::is_tailing_prefix);
+        bool parse_tailing(Lexer<ExpressionLexer> &lexer, const std::function<bool(std::string_view)> & func =CommentParser::is_tailing_prefix);
 
         bool parse_leading(Lexer<ExpressionLexer> &lexer,
-            const std::function<bool(std::string_view)> & func =CommentNode::is_tailing_prefix);
+            const std::function<bool(std::string_view)> & func =CommentParser::is_tailing_prefix);
 
         [[nodiscard]] bool empty() const {
             return content.empty();

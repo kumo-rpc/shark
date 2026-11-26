@@ -22,35 +22,35 @@
 
 namespace shark::parser {
 
-    /// Direct import edges between files. FileNode lifetime stays in RegistryPool.
+    /// Direct import edges between files. FileParser lifetime stays in RegistryPool.
     class ImportGraph {
     public:
-        void add_file(FileNode* file);
+        void add_file(FileParser* file);
 
         /// One direct edge. The same pair is stored once. A self-edge fails.
-        bool add_dependency(FileNode* from, FileNode* to);
+        bool add_dependency(FileParser* from, FileParser* to);
 
-        [[nodiscard]] const std::vector<FileNode*>& direct(FileNode* file) const;
-        [[nodiscard]] const std::vector<FileNode*>& dependents(FileNode* file) const;
+        [[nodiscard]] const std::vector<FileParser*>& direct(FileParser* file) const;
+        [[nodiscard]] const std::vector<FileParser*>& dependents(FileParser* file) const;
 
         /// Files with no direct imports come first. Fails when the graph has a cycle.
         bool build_queue();
 
-        [[nodiscard]] const std::deque<FileNode*>& queue() const {
+        [[nodiscard]] const std::deque<FileParser*>& queue() const {
             return _queue;
         }
 
     private:
         struct Entry {
-            FileNode* file{nullptr};
-            std::vector<FileNode*> direct;
-            std::vector<FileNode*> dependents;
+            FileParser* file{nullptr};
+            std::vector<FileParser*> direct;
+            std::vector<FileParser*> dependents;
         };
 
-        [[nodiscard]] const Entry* find(FileNode* file) const;
+        [[nodiscard]] const Entry* find(FileParser* file) const;
 
-        fermat::btree_map<FileNode*, Entry> _nodes;
-        std::deque<FileNode*> _queue;
+        fermat::btree_map<FileParser*, Entry> _nodes;
+        std::deque<FileParser*> _queue;
     };
 
 }  // namespace shark::parser

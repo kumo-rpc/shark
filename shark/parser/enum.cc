@@ -30,7 +30,7 @@ namespace shark::parser {
 
     namespace {
 
-        bool is_integer_builtin(const StructNode* node) {
+        bool is_integer_builtin(const StructParser* node) {
             if (node == nullptr || !node->builtin) {
                 return false;
             }
@@ -49,20 +49,20 @@ namespace shark::parser {
             }
         }
 
-        bool value_in_underlying(EnumNode::UnderlyingType type, int64_t number) {
+        bool value_in_underlying(EnumParser::UnderlyingType type, int64_t number) {
             switch (type) {
-            case EnumNode::UnderlyingType::INT8:
+            case EnumParser::UnderlyingType::INT8:
                 return number >= std::numeric_limits<int8_t>::min() && number <= std::numeric_limits<int8_t>::max();
-            case EnumNode::UnderlyingType::UINT8:
+            case EnumParser::UnderlyingType::UINT8:
                 return number >= 0 && number <= std::numeric_limits<uint8_t>::max();
-            case EnumNode::UnderlyingType::INT16:
+            case EnumParser::UnderlyingType::INT16:
                 return number >= std::numeric_limits<int16_t>::min() && number <= std::numeric_limits<int16_t>::max();
-            case EnumNode::UnderlyingType::UINT16:
+            case EnumParser::UnderlyingType::UINT16:
                 return number >= 0 && number <= std::numeric_limits<uint16_t>::max();
-            case EnumNode::UnderlyingType::NONE:
-            case EnumNode::UnderlyingType::INT32:
+            case EnumParser::UnderlyingType::NONE:
+            case EnumParser::UnderlyingType::INT32:
                 return number >= std::numeric_limits<int32_t>::min() && number <= std::numeric_limits<int32_t>::max();
-            case EnumNode::UnderlyingType::UINT32:
+            case EnumParser::UnderlyingType::UINT32:
                 return number >= 0 && number <= std::numeric_limits<uint32_t>::max();
             }
             return false;
@@ -70,10 +70,10 @@ namespace shark::parser {
 
     }  // namespace
 
-    bool EnumNode::bind_enum() {
-        for (EnumValueNode* node : values) {
+    bool EnumParser::bind_enum() {
+        for (EnumValueParser* node : values) {
             if (!node->constexpr_ref.empty()) {
-                FieldNode* field = file->find_constexpr(node->constexpr_ref);
+                FieldParser* field = file->find_constexpr(node->constexpr_ref);
                 if (field == nullptr) {
                     report_error(ErrorType::SEMANTIC, "enum value `%s` constexpr `%s` was not found", node->name, node->constexpr_ref);
                     return false;
@@ -106,7 +106,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool EnumNode::parse(
+    bool EnumParser::parse(
         Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
 
@@ -216,7 +216,7 @@ namespace shark::parser {
                 return false;
             }
 
-            auto value = pool->create_symbol<EnumValueNode>(file);
+            auto value = pool->create_symbol<EnumValueParser>(file);
             if (!value->parse(lexer)) {
                 return false;
             }
@@ -228,7 +228,7 @@ namespace shark::parser {
         lexer.consume();
 
         // Parse trailing comment before checking the optional semicolon.
-        tailing_comment = pool->create_node<CommentNode>(file);
+        tailing_comment = pool->create_node<CommentParser>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
             report_debug(ErrorType::NONE, "enum `%s` class `%d` values `%zu`", name, static_cast<int>(is_class), values.size());
             return false;
@@ -255,7 +255,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool EnumNode::parse_underlying(
+    bool EnumParser::parse_underlying(
         Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
 

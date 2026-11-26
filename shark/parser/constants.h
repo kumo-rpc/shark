@@ -37,7 +37,7 @@ namespace shark::parser {
     static constexpr std::string_view kAtomicKey      = "atomic";
 
     // Field qualifier. The four values do not combine.
-    // CONSTEXPR requires a ConstValue and is not serialized.
+    // CONSTEXPR requires a ConstValueParser and is not serialized.
     // ATOMIC has the same presence as REQUIRED and is accessed atomically.
     enum class FieldLabel : uint8_t {
         REQUIRED,

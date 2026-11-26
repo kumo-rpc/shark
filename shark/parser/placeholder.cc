@@ -19,13 +19,13 @@
 
 namespace shark::parser {
 
-    bool PlaceholderNode::allows(const SymbolNode* symbol) const {
+    bool PlaceholderParser::allows(const SymbolNode* symbol) const {
         if (symbol == nullptr) {
             return false;
         }
         if (constraint == Constraint::ALL) {
             if (symbol->node_type == NodeType::STRUCT) {
-                auto* type = static_cast<const StructNode*>(symbol);
+                auto* type = static_cast<const StructParser*>(symbol);
                 return type->builtin || type->bind;
             }
             return symbol->node_type == NodeType::ENUM && symbol->bind;
@@ -33,7 +33,7 @@ namespace shark::parser {
         if (symbol->node_type != NodeType::STRUCT) {
             return false;
         }
-        auto* type = static_cast<const StructNode*>(symbol);
+        auto* type = static_cast<const StructParser*>(symbol);
         if (!type->builtin || type->generic) {
             return false;
         }

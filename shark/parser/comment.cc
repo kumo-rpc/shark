@@ -19,7 +19,7 @@
 
 namespace shark::parser {
 
-    bool CommentNode::is_tailing_prefix(std::string_view comment) {
+    bool CommentParser::is_tailing_prefix(std::string_view comment) {
         if (turbo::starts_with(comment, "//!") ||
                 turbo::starts_with(comment, "//<") ||
                 turbo::starts_with(comment, "///!") ||
@@ -33,7 +33,7 @@ namespace shark::parser {
                 }
         return false;
     }
-    bool CommentNode::parse_tailing(Lexer<ExpressionLexer> &lexer,
+    bool CommentParser::parse_tailing(Lexer<ExpressionLexer> &lexer,
         const std::function<bool(std::string_view)> & func) {
         /// advance white space
         auto t = lexer.look_at();
@@ -74,7 +74,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool CommentNode::parse_leading(Lexer<ExpressionLexer> &lexer,
+    bool CommentParser::parse_leading(Lexer<ExpressionLexer> &lexer,
         const std::function<bool(std::string_view)> & func) {
         /// advance white space
         auto t = lexer.look_at();

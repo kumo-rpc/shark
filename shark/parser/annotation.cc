@@ -36,7 +36,7 @@ namespace shark::parser {
     AnnotationValue& AnnotationValue::operator=(AnnotationValue&&) noexcept = default;
     AnnotationValue::~AnnotationValue() = default;
 
-    bool AnnotationNode::parse_one(
+    bool AnnotationParser::parse_one(
         Lexer<ExpressionLexer>& lexer) {
 
         auto t = lexer.look_at();
@@ -119,7 +119,7 @@ namespace shark::parser {
             return false;
         }
 
-        void append_const(std::string& out, const ConstValue* value) {
+        void append_const(std::string& out, const ConstValueParser* value) {
             if (value == nullptr) {
                 return;
             }
@@ -133,9 +133,9 @@ namespace shark::parser {
                 out.append(buf);
             } else if (const auto* text = std::get_if<std::string_view>(&value->value)) {
                 out.append(text->data(), text->size());
-            } else if (const auto* id = std::get_if<ConstValue::Identifier>(&value->value)) {
+            } else if (const auto* id = std::get_if<ConstValueParser::Identifier>(&value->value)) {
                 out.append(id->name.data(), id->name.size());
-            } else if (const auto* list = std::get_if<ConstValue::List>(&value->value)) {
+            } else if (const auto* list = std::get_if<ConstValueParser::List>(&value->value)) {
                 out.push_back('[');
                 for (std::size_t i = 0; i < list->elements.size(); ++i) {
                     if (i != 0) {
@@ -144,7 +144,7 @@ namespace shark::parser {
                     append_const(out, list->elements[i]);
                 }
                 out.push_back(']');
-            } else if (const auto* map = std::get_if<ConstValue::Map>(&value->value)) {
+            } else if (const auto* map = std::get_if<ConstValueParser::Map>(&value->value)) {
                 out.push_back('{');
                 for (std::size_t i = 0; i < map->entries.size(); ++i) {
                     if (i != 0) {
@@ -158,7 +158,7 @@ namespace shark::parser {
             }
         }
 
-        void append_payload(std::string& out, const AnnotationNode::value_type& value) {
+        void append_payload(std::string& out, const AnnotationParser::value_type& value) {
             if (const auto* text = std::get_if<std::string_view>(&value)) {
                 out.append(text->data(), text->size());
             } else if (const auto* number = std::get_if<int64_t>(&value)) {
@@ -172,20 +172,20 @@ namespace shark::parser {
             }
         }
 
-        std::size_t const_size(const ConstValue* value) {
+        std::size_t const_size(const ConstValueParser* value) {
             if (value == nullptr) {
                 return 0;
             }
-            if (const auto* list = std::get_if<ConstValue::List>(&value->value)) {
+            if (const auto* list = std::get_if<ConstValueParser::List>(&value->value)) {
                 return list->elements.size();
             }
-            if (const auto* map = std::get_if<ConstValue::Map>(&value->value)) {
+            if (const auto* map = std::get_if<ConstValueParser::Map>(&value->value)) {
                 return map->entries.size();
             }
             return 1;
         }
 
-        std::string format_payload(const std::vector<AnnotationNode::value_type>& payload) {
+        std::string format_payload(const std::vector<AnnotationParser::value_type>& payload) {
             std::string out;
             if (payload.size() == 1) {
                 append_payload(out, payload[0]);
@@ -204,7 +204,7 @@ namespace shark::parser {
 
     }  // namespace
 
-    bool AnnotationNode::parse_typed_value(Lexer<ExpressionLexer>& lexer) {
+    bool AnnotationParser::parse_typed_value(Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
         if (t.type != TokenType::Less) {
             report_error(ErrorType::SYNTAX, "expected `<`, but got `%s`", t.view());
@@ -233,11 +233,11 @@ namespace shark::parser {
             return false;
         }
         lexer.consume();
-        object = pool->create_node<ConstValue>(file);
+        object = pool->create_node<ConstValueParser>(file);
         return object->parse(lexer);
     }
 
-    bool AnnotationNode::parse(
+    bool AnnotationParser::parse(
         Lexer<ExpressionLexer>& lexer) {
 
         auto t = lexer.look_at();
@@ -338,7 +338,7 @@ namespace shark::parser {
                 return false;
             }
             lexer.consume();
-            tailing_comment = pool->create_node<CommentNode>(file);
+            tailing_comment = pool->create_node<CommentParser>(file);
             if (!tailing_comment->parse_tailing(lexer)) {
                 return false;
             }
@@ -432,7 +432,7 @@ namespace shark::parser {
         lexer.consume();
 
         // Parse trailing comments.
-        tailing_comment = pool->create_node<CommentNode>(file);
+        tailing_comment = pool->create_node<CommentParser>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
             return false;
         }
@@ -444,7 +444,7 @@ namespace shark::parser {
 
     namespace {
 
-        bool is_key_type(const StructNode* node) {
+        bool is_key_type(const StructParser* node) {
             if (node == nullptr || !node->builtin || node->generic) {
                 return false;
             }
@@ -488,20 +488,20 @@ namespace shark::parser {
             }
         }
 
-        bool enum_in_width(EnumNode::UnderlyingType type, int64_t number) {
+        bool enum_in_width(EnumParser::UnderlyingType type, int64_t number) {
             switch (type) {
-            case EnumNode::UnderlyingType::INT8:
+            case EnumParser::UnderlyingType::INT8:
                 return number >= std::numeric_limits<int8_t>::min() && number <= std::numeric_limits<int8_t>::max();
-            case EnumNode::UnderlyingType::UINT8:
+            case EnumParser::UnderlyingType::UINT8:
                 return number >= 0 && number <= std::numeric_limits<uint8_t>::max();
-            case EnumNode::UnderlyingType::INT16:
+            case EnumParser::UnderlyingType::INT16:
                 return number >= std::numeric_limits<int16_t>::min() && number <= std::numeric_limits<int16_t>::max();
-            case EnumNode::UnderlyingType::UINT16:
+            case EnumParser::UnderlyingType::UINT16:
                 return number >= 0 && number <= std::numeric_limits<uint16_t>::max();
-            case EnumNode::UnderlyingType::NONE:
-            case EnumNode::UnderlyingType::INT32:
+            case EnumParser::UnderlyingType::NONE:
+            case EnumParser::UnderlyingType::INT32:
                 return number >= std::numeric_limits<int32_t>::min() && number <= std::numeric_limits<int32_t>::max();
-            case EnumNode::UnderlyingType::UINT32:
+            case EnumParser::UnderlyingType::UINT32:
                 return number >= 0 && number <= std::numeric_limits<uint32_t>::max();
             }
             return false;
@@ -513,7 +513,7 @@ namespace shark::parser {
 
     }  // namespace
 
-    bool AnnotationNode::bind_typed() {
+    bool AnnotationParser::bind_typed() {
         if (!typed) {
             return true;
         }
@@ -522,8 +522,8 @@ namespace shark::parser {
             return false;
         }
 
-        std::function<bool(const TypeRef&, const ConstValue*, AnnotationValue&)> check;
-        check = [&](const TypeRef& ref, const ConstValue* value, AnnotationValue& out) -> bool {
+        std::function<bool(const TypeRef&, const ConstValueParser*, AnnotationValue&)> check;
+        check = [&](const TypeRef& ref, const ConstValueParser* value, AnnotationValue& out) -> bool {
             if (value == nullptr) {
                 report_error(ErrorType::SEMANTIC, "annotation `%s` value is missing", key);
                 return false;
@@ -543,7 +543,7 @@ namespace shark::parser {
 
             const auto* named = std::get_if<TypeName>(&ref);
             if (symbol->node_type == NodeType::STRUCT) {
-                auto* type = static_cast<StructNode*>(symbol);
+                auto* type = static_cast<StructParser*>(symbol);
                 if (type->generic) {
                     if (named == nullptr) {
                         report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires type arguments", key, type->name);
@@ -556,14 +556,14 @@ namespace shark::parser {
                                 element = file->concrete_type(element);
                             }
                             auto* element_type = element != nullptr && element->node_type == NodeType::STRUCT
-                                ? static_cast<StructNode*>(element)
+                                ? static_cast<StructParser*>(element)
                                 : nullptr;
                             if (!is_key_type(element_type)) {
                                 report_error(ErrorType::SEMANTIC, "annotation `%s` set element `%s` cannot be a key", key, format_type_ref(named->args[0].value).c_str());
                                 return false;
                             }
                         }
-                        const auto* list = std::get_if<ConstValue::List>(&value->value);
+                        const auto* list = std::get_if<ConstValueParser::List>(&value->value);
                         if (list == nullptr) {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires a list", key, format_type_ref(ref).c_str());
                             return false;
@@ -571,7 +571,7 @@ namespace shark::parser {
                         out.kind_ = AnnotationKind::LIST;
                         out.type_ = type;
                         out.literal_ = value;
-                        for (const ConstValue* element : list->elements) {
+                        for (const ConstValueParser* element : list->elements) {
                             AnnotationValue child;
                             if (!check(named->args[0].value, element, child)) {
                                 return false;
@@ -586,13 +586,13 @@ namespace shark::parser {
                             key_symbol = file->concrete_type(key_symbol);
                         }
                         auto* key_type = key_symbol != nullptr && key_symbol->node_type == NodeType::STRUCT
-                            ? static_cast<StructNode*>(key_symbol)
+                            ? static_cast<StructParser*>(key_symbol)
                             : nullptr;
                         if (!is_key_type(key_type)) {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` map key `%s` cannot be a key", key, format_type_ref(named->args[0].value).c_str());
                             return false;
                         }
-                        const auto* map = std::get_if<ConstValue::Map>(&value->value);
+                        const auto* map = std::get_if<ConstValueParser::Map>(&value->value);
                         if (map == nullptr) {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires a map", key, format_type_ref(ref).c_str());
                             return false;
@@ -667,20 +667,20 @@ namespace shark::parser {
                         return false;
                     }
                 }
-                const auto* map = std::get_if<ConstValue::Map>(&value->value);
+                const auto* map = std::get_if<ConstValueParser::Map>(&value->value);
                 if (map == nullptr) {
                     report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires a struct value", key, type->name);
                     return false;
                 }
-                std::vector<std::pair<const FieldNode*, AnnotationValue>> seen;
+                std::vector<std::pair<const FieldParser*, AnnotationValue>> seen;
                 for (const auto& entry : map->entries) {
-                    const auto* id = std::get_if<ConstValue::Identifier>(&entry.first->value);
+                    const auto* id = std::get_if<ConstValueParser::Identifier>(&entry.first->value);
                     if (id == nullptr) {
                         report_error(ErrorType::SEMANTIC, "annotation `%s` field name is not an identifier", key);
                         return false;
                     }
-                    const FieldNode* field = nullptr;
-                    for (const FieldNode* candidate : type->fields) {
+                    const FieldParser* field = nullptr;
+                    for (const FieldParser* candidate : type->fields) {
                         if (same_field(candidate, id->name)) {
                             field = candidate;
                             break;
@@ -705,7 +705,7 @@ namespace shark::parser {
                 out.kind_ = AnnotationKind::STRUCT;
                 out.type_ = type;
                 out.literal_ = value;
-                for (const FieldNode* field : type->fields) {
+                for (const FieldParser* field : type->fields) {
                     const AnnotationValue* present = nullptr;
                     for (const auto& previous : seen) {
                         if (previous.first == field) {
@@ -734,7 +734,7 @@ namespace shark::parser {
                     report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` does not take type arguments", key, format_type_ref(ref).c_str());
                     return false;
                 }
-                auto* enum_type = static_cast<EnumNode*>(symbol);
+                auto* enum_type = static_cast<EnumParser*>(symbol);
                 if (const auto* number = std::get_if<int64_t>(&value->value)) {
                     if (!enum_in_width(enum_type->underlying, *number)) {
                         report_error(ErrorType::SEMANTIC, "annotation `%s` enum `%s` value is out of range", key, enum_type->name);
@@ -743,7 +743,7 @@ namespace shark::parser {
                     out.kind_ = AnnotationKind::ENUM;
                     out.type_ = enum_type;
                     out.literal_ = value;
-                    for (const EnumValueNode* item : enum_type->values) {
+                    for (const EnumValueParser* item : enum_type->values) {
                         if (item->value == *number) {
                             out.enumerator_ = item;
                             break;
@@ -751,12 +751,12 @@ namespace shark::parser {
                     }
                     return true;
                 }
-                const auto* id = std::get_if<ConstValue::Identifier>(&value->value);
+                const auto* id = std::get_if<ConstValueParser::Identifier>(&value->value);
                 if (id == nullptr) {
                     report_error(ErrorType::SEMANTIC, "annotation `%s` enum `%s` requires an integer or an enumerator", key, enum_type->name);
                     return false;
                 }
-                for (const EnumValueNode* item : enum_type->values) {
+                for (const EnumValueParser* item : enum_type->values) {
                     if (item->name == id->name || item->full_name == id->name) {
                         out.kind_ = AnnotationKind::ENUM;
                         out.type_ = enum_type;

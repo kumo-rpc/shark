@@ -34,7 +34,7 @@ namespace shark::parser {
         bool                     bind{false};
 
     protected:
-        SymbolNode(NodeType type, const FileNode *f, RegistryPool *pool): Node(type, f, pool) {}
+        SymbolNode(NodeType type, const FileParser *f, RegistryPool *pool): Node(type, f, pool) {}
     };
 
 }  // namespace shark::parser

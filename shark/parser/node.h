@@ -127,14 +127,14 @@ namespace shark::parser {
         /// 0 mean no type, reserved.
         NodeType node_type { NodeType::NONE };
         SourceLocation start_location;
-        const FileNode* file { nullptr };
+        const FileParser* file { nullptr };
         RegistryPool* pool { nullptr };
 
     protected:
         std::string make_node_info(ErrorType err) const;
 
     protected:
-        Node(NodeType type, const FileNode* f, RegistryPool* p)
+        Node(NodeType type, const FileParser* f, RegistryPool* p)
             : node_type(type)
             , file(f)
             , pool(p) {

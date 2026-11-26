@@ -20,7 +20,7 @@
 
 namespace shark::parser {
 
-    bool AliasNode::bind_alias() {
+    bool AliasParser::bind_alias() {
         if (bind) {
             return true;
         }
@@ -38,7 +38,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool AliasNode::skip_gap(Lexer<ExpressionLexer>& lexer) {
+    bool AliasParser::skip_gap(Lexer<ExpressionLexer>& lexer) {
         while (true) {
             auto t = lexer.look_at();
             if (t.is_error()) {
@@ -52,7 +52,7 @@ namespace shark::parser {
         }
     }
 
-    bool AliasNode::parse_target_name(Lexer<ExpressionLexer>& lexer) {
+    bool AliasParser::parse_target_name(Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
         if (t.type != TokenType::BareWord) {
             report_error(ErrorType::SYNTAX, "expected a symbol name, but got `%s`", t.view());
@@ -89,7 +89,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool AliasNode::finish(Lexer<ExpressionLexer>& lexer) {
+    bool AliasParser::finish(Lexer<ExpressionLexer>& lexer) {
         if (!skip_gap(lexer)) {
             return false;
         }
@@ -100,7 +100,7 @@ namespace shark::parser {
         }
         lexer.consume();
 
-        tailing_comment = pool->create_node<CommentNode>(file);
+        tailing_comment = pool->create_node<CommentParser>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
             report_debug(ErrorType::NONE, "%s `%s` = `%s`", is_using ? "using" : "typedef", name, target_name);
             return false;
@@ -109,7 +109,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool AliasNode::parse_using(Lexer<ExpressionLexer>& lexer) {
+    bool AliasParser::parse_using(Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
         is_using = true;
         start_location = {t.line, t.column};
@@ -142,7 +142,7 @@ namespace shark::parser {
         return finish(lexer);
     }
 
-    bool AliasNode::parse_typedef(Lexer<ExpressionLexer>& lexer) {
+    bool AliasParser::parse_typedef(Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
         is_using = false;
         start_location = {t.line, t.column};
@@ -161,7 +161,7 @@ namespace shark::parser {
         return finish(lexer);
     }
 
-    bool AliasNode::parse(Lexer<ExpressionLexer>& lexer) {
+    bool AliasParser::parse(Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
         if (t.is_error()) {
             report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));

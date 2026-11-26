@@ -20,18 +20,18 @@
 
 namespace shark::parser {
 
-    class EnumValueNode;
-    class EnumNode;
-    class FileNode;
-    class StructNode;
+    class EnumValueParser;
+    class EnumParser;
+    class FileParser;
+    class StructParser;
     class RegistryPool;
-    class FieldNode;
-    class AliasNode;
-    class ServiceNode;
-    class ServletNode;
-    class FunctionNode;
-    class ConstValue;
-    class PlaceholderNode;
+    class FieldParser;
+    class AliasParser;
+    class ServiceParser;
+    class ServletParser;
+    class FunctionParser;
+    class ConstValueParser;
+    class PlaceholderParser;
 
     enum class PhysicalType {
         VOID    = 0,

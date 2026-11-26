@@ -29,8 +29,8 @@
 
 namespace shark::parser {
 
-    class EnumValueNode;
-    class FieldNode;
+    class EnumValueParser;
+    class FieldParser;
     class SymbolNode;
 
     enum class AnnotationKind {
@@ -83,7 +83,7 @@ namespace shark::parser {
             }
             return std::get_if<std::string_view>(&literal_->value);
         }
-        const EnumValueNode* enumerator() const {
+        const EnumValueParser* enumerator() const {
             if (kind_ != AnnotationKind::ENUM) {
                 return nullptr;
             }
@@ -111,8 +111,8 @@ namespace shark::parser {
 
         AnnotationKind                   kind_{AnnotationKind::SCALAR};
         const SymbolNode*                type_{nullptr};
-        const ConstValue*                literal_{nullptr};
-        const EnumValueNode*             enumerator_{nullptr};
+        const ConstValueParser*                literal_{nullptr};
+        const EnumValueParser*             enumerator_{nullptr};
         std::vector<AnnotationValue>     elements_;
         std::vector<Entry>               entries_;
         std::vector<Field>               fields_;
@@ -124,7 +124,7 @@ namespace shark::parser {
     };
 
     struct AnnotationValue::Field {
-        const FieldNode* field{nullptr};
+        const FieldParser* field{nullptr};
         AnnotationValue  value;
     };
 
@@ -146,10 +146,10 @@ namespace shark::parser {
     /// `@` marks a file-level annotation. It is not attached to the next declaration.
     /// default annotation = annotation.cpp
     ////////////////////////////////////////////////
-    class AnnotationNode : public Node {
+    class AnnotationParser : public Node {
     public:
-        AnnotationNode(const FileNode* f, RegistryPool *p) :Node(NodeType::ANNOTATION, f, p){}
-        ~AnnotationNode() override = default;
+        AnnotationParser(const FileParser* f, RegistryPool *p) :Node(NodeType::ANNOTATION, f, p){}
+        ~AnnotationParser() override = default;
 
         using value_type = std::variant<
             std::string_view,
@@ -161,17 +161,17 @@ namespace shark::parser {
         bool parse(Lexer<ExpressionLexer> &lexer);
         bool bind_typed();
 
-        CommentNode      *leading_comment;
-        CommentNode      *tailing_comment;
+        CommentParser      *leading_comment;
+        CommentParser      *tailing_comment;
         bool              file_level{false};
         std::string_view classify;
         std::string_view key;
         std::vector<value_type>       payload;
-        /// Set when the key is `key<Type>`. The value is `object`, a ConstValue,
+        /// Set when the key is `key<Type>`. The value is `object`, a ConstValueParser,
         /// the same node a field default uses.
         bool              typed{false};
         TypeRef           type_ref;
-        ConstValue*       object{nullptr};
+        ConstValueParser*       object{nullptr};
         /// Valid when `typed` is true and `bind_typed` succeeded.
         AnnotationValue   value;
 

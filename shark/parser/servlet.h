@@ -48,11 +48,11 @@ namespace shark::parser {
     /// }
     ///
     ////////////////////////////////////////////////
-    class ServletNode : public SymbolNode {
+    class ServletParser : public SymbolNode {
     public:
         friend class RegistryPool;
-        ServletNode(const FileNode* f, RegistryPool * pool) :SymbolNode(NodeType::SERVLET, f, pool) {}
-        ~ServletNode() override = default;
+        ServletParser(const FileParser* f, RegistryPool * pool) :SymbolNode(NodeType::SERVLET, f, pool) {}
+        ~ServletParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);
 
@@ -64,19 +64,19 @@ namespace shark::parser {
 
         BindStep bind_servlet();
 
-        std::vector<CommentNode*>    leading_comment;
-        CommentNode                  *tailing_comment{nullptr};
-        std::vector<AnnotationNode*>  annotations;
+        std::vector<CommentParser*>    leading_comment;
+        CommentParser                  *tailing_comment{nullptr};
+        std::vector<AnnotationParser*>  annotations;
         std::vector<std::string_view> base_names;
-        std::vector<const ServletNode*> bases;
-        std::vector<FunctionNode*>    method;
-        const StructNode*            container{nullptr};
+        std::vector<const ServletParser*> bases;
+        std::vector<FunctionParser*>    method;
+        const StructParser*            container{nullptr};
 
     private:
         bool skip_gap(Lexer<ExpressionLexer>& lexer);
         bool parse_base_name(Lexer<ExpressionLexer>& lexer);
         bool parse_function(Lexer<ExpressionLexer>& lexer,
-            std::vector<CommentNode*>& comments,
-            std::vector<AnnotationNode*>& annotations);
+            std::vector<CommentParser*>& comments,
+            std::vector<AnnotationParser*>& annotations);
     };
 }  // namespace shark::parser

@@ -34,7 +34,7 @@
 
 namespace shark::parser {
 
-    bool FileNode::load(std::string_view absolute_path_in, std::string_view path_in) {
+    bool FileParser::load(std::string_view absolute_path_in, std::string_view path_in) {
         KLOG(INFO)<<1<<222;
         if (absolute_path_in.empty() || path_in.empty()) {
             report_error(ErrorType::IO, "path and absolute_path must both be non-empty");
@@ -70,7 +70,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::bind_file() {
+    bool FileParser::bind_file() {
         if (!assign_names()) {
             return false;
         }
@@ -105,8 +105,8 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::take_package() {
-        for (PackageNode* node : packages) {
+    bool FileParser::take_package() {
+        for (PackageParser* node : packages) {
             if (!node->classify.empty()) {
                 continue;
             }
@@ -122,7 +122,7 @@ namespace shark::parser {
         return false;
     }
 
-    bool FileNode::assign_symbol(SymbolNode* symbol, std::string_view scope, std::vector<std::string>& seen) {
+    bool FileParser::assign_symbol(SymbolNode* symbol, std::string_view scope, std::vector<std::string>& seen) {
         if (scope.empty()) {
             symbol->full_name_without_package.assign(symbol->name.data(), symbol->name.size());
         } else {
@@ -145,12 +145,12 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::assign_enum(EnumNode* node, std::string_view scope, std::vector<std::string>& seen) {
+    bool FileParser::assign_enum(EnumParser* node, std::string_view scope, std::vector<std::string>& seen) {
         if (!assign_symbol(node, scope, seen)) {
             return false;
         }
         std::string_view value_scope = node->is_class ? std::string_view(node->full_name_without_package) : scope;
-        for (EnumValueNode* value : node->values) {
+        for (EnumValueParser* value : node->values) {
             if (!assign_symbol(value, value_scope, seen)) {
                 return false;
             }
@@ -158,27 +158,27 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::assign_struct(StructNode* node, std::string_view scope, std::vector<std::string>& seen) {
+    bool FileParser::assign_struct(StructParser* node, std::string_view scope, std::vector<std::string>& seen) {
         if (!assign_symbol(node, scope, seen)) {
             return false;
         }
         std::string_view nested = node->full_name_without_package;
-        for (EnumNode* child : node->nested_enums) {
+        for (EnumParser* child : node->nested_enums) {
             if (!assign_enum(child, nested, seen)) {
                 return false;
             }
         }
-        for (StructNode* child : node->nested_types) {
+        for (StructParser* child : node->nested_types) {
             if (!assign_struct(child, nested, seen)) {
                 return false;
             }
         }
-        for (FieldNode* field : node->fields) {
+        for (FieldParser* field : node->fields) {
             if (!assign_symbol(field, nested, seen)) {
                 return false;
             }
         }
-        for (AliasNode* alias : node->aliases) {
+        for (AliasParser* alias : node->aliases) {
             if (!assign_symbol(alias, nested, seen)) {
                 return false;
             }
@@ -186,12 +186,12 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::assign_function(FunctionNode* node, std::string_view scope, std::vector<std::string>& seen) {
+    bool FileParser::assign_function(FunctionParser* node, std::string_view scope, std::vector<std::string>& seen) {
         if (!assign_symbol(node, scope, seen)) {
             return false;
         }
         std::string_view nested = node->full_name_without_package;
-        for (FieldNode* param : node->params) {
+        for (FieldParser* param : node->params) {
             if (!assign_symbol(param, nested, seen)) {
                 return false;
             }
@@ -199,12 +199,12 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::assign_servlet(ServletNode* node, std::string_view scope, std::vector<std::string>& seen) {
+    bool FileParser::assign_servlet(ServletParser* node, std::string_view scope, std::vector<std::string>& seen) {
         if (!assign_symbol(node, scope, seen)) {
             return false;
         }
         std::string_view nested = node->full_name_without_package;
-        for (FunctionNode* method : node->method) {
+        for (FunctionParser* method : node->method) {
             if (!assign_function(method, nested, seen)) {
                 return false;
             }
@@ -212,32 +212,32 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::assign_names() {
+    bool FileParser::assign_names() {
         if (!take_package()) {
             return false;
         }
         std::vector<std::string> seen;
-        for (EnumNode* node : enums) {
+        for (EnumParser* node : enums) {
             if (!assign_enum(node, {}, seen)) {
                 return false;
             }
         }
-        for (StructNode* node : structs) {
+        for (StructParser* node : structs) {
             if (!assign_struct(node, {}, seen)) {
                 return false;
             }
         }
-        for (ServletNode* node : servlets) {
+        for (ServletParser* node : servlets) {
             if (!assign_servlet(node, {}, seen)) {
                 return false;
             }
         }
-        for (FunctionNode* node : functions) {
+        for (FunctionParser* node : functions) {
             if (!assign_function(node, {}, seen)) {
                 return false;
             }
         }
-        for (FieldNode* node : constexprs) {
+        for (FieldParser* node : constexprs) {
             if (!assign_symbol(node, {}, seen)) {
                 return false;
             }
@@ -251,21 +251,21 @@ namespace shark::parser {
             return symbol->full_name == name || symbol->full_name_without_package == name;
         }
 
-        FieldNode* find_constexpr_in(const StructNode* node, std::string_view name) {
-            for (FieldNode* field : node->fields) {
+        FieldParser* find_constexpr_in(const StructParser* node, std::string_view name) {
+            for (FieldParser* field : node->fields) {
                 if (field->label == FieldLabel::CONSTEXPR && same_name(field, name)) {
                     return field;
                 }
             }
-            for (StructNode* child : node->nested_types) {
-                if (FieldNode* found = find_constexpr_in(child, name)) {
+            for (StructParser* child : node->nested_types) {
+                if (FieldParser* found = find_constexpr_in(child, name)) {
                     return found;
                 }
             }
             return nullptr;
         }
 
-        bool is_scalar_builtin(const StructNode* node) {
+        bool is_scalar_builtin(const StructParser* node) {
             if (node == nullptr || !node->builtin) {
                 return false;
             }
@@ -290,7 +290,7 @@ namespace shark::parser {
             }
         }
 
-        bool is_integer_builtin(const StructNode* node) {
+        bool is_integer_builtin(const StructParser* node) {
             if (!node->builtin) {
                 return false;
             }
@@ -311,21 +311,21 @@ namespace shark::parser {
 
     }  // namespace
 
-    SymbolNode* FileNode::find_local_struct(const StructNode* node, std::string_view name) const {
+    SymbolNode* FileParser::find_local_struct(const StructParser* node, std::string_view name) const {
         if (same_name(node, name)) {
-            return const_cast<StructNode*>(node);
+            return const_cast<StructParser*>(node);
         }
-        for (EnumNode* child : node->nested_enums) {
+        for (EnumParser* child : node->nested_enums) {
             if (same_name(child, name)) {
                 return child;
             }
         }
-        for (StructNode* child : node->nested_types) {
+        for (StructParser* child : node->nested_types) {
             if (SymbolNode* found = find_local_struct(child, name)) {
                 return found;
             }
         }
-        for (AliasNode* alias : node->aliases) {
+        for (AliasParser* alias : node->aliases) {
             if (same_name(alias, name)) {
                 return alias;
             }
@@ -333,13 +333,13 @@ namespace shark::parser {
         return nullptr;
     }
 
-    SymbolNode* FileNode::find_local(std::string_view name) const {
-        for (EnumNode* node : enums) {
+    SymbolNode* FileParser::find_local(std::string_view name) const {
+        for (EnumParser* node : enums) {
             if (same_name(node, name)) {
                 return node;
             }
         }
-        for (StructNode* node : structs) {
+        for (StructParser* node : structs) {
             if (SymbolNode* found = find_local_struct(node, name)) {
                 return found;
             }
@@ -347,21 +347,21 @@ namespace shark::parser {
         return nullptr;
     }
 
-    FieldNode* FileNode::find_constexpr(std::string_view name) const {
-        for (FieldNode* field : constexprs) {
+    FieldParser* FileParser::find_constexpr(std::string_view name) const {
+        for (FieldParser* field : constexprs) {
             if (same_name(field, name)) {
                 return field;
             }
         }
-        for (const StructNode* node : structs) {
-            if (FieldNode* found = find_constexpr_in(node, name)) {
+        for (const StructParser* node : structs) {
+            if (FieldParser* found = find_constexpr_in(node, name)) {
                 return found;
             }
         }
         return nullptr;
     }
 
-    SymbolNode* FileNode::find_type(std::string_view name) const {
+    SymbolNode* FileParser::find_type(std::string_view name) const {
         SymbolNode* symbol = pool->get_symbol(name);
         if (symbol != nullptr) {
             return symbol;
@@ -369,13 +369,13 @@ namespace shark::parser {
         return find_local(name);
     }
 
-    bool FileNode::bind_alias_struct(StructNode* node, bool& progress) {
-        for (StructNode* child : node->nested_types) {
+    bool FileParser::bind_alias_struct(StructParser* node, bool& progress) {
+        for (StructParser* child : node->nested_types) {
             if (!bind_alias_struct(child, progress)) {
                 return false;
             }
         }
-        for (AliasNode* alias : node->aliases) {
+        for (AliasParser* alias : node->aliases) {
             if (alias->bind) {
                 continue;
             }
@@ -387,9 +387,9 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::bind_aliases() {
+    bool FileParser::bind_aliases() {
         bool progress = false;
-        for (StructNode* node : structs) {
+        for (StructParser* node : structs) {
             if (!bind_alias_struct(node, progress)) {
                 return false;
             }
@@ -397,8 +397,8 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::bind_alias_struct_list(bool& progress) {
-        for (StructNode* node : structs) {
+    bool FileParser::bind_alias_struct_list(bool& progress) {
+        for (StructParser* node : structs) {
             if (!bind_alias_struct(node, progress)) {
                 return false;
             }
@@ -406,10 +406,10 @@ namespace shark::parser {
         return true;
     }
 
-    SymbolNode* FileNode::concrete_type(SymbolNode* symbol) const {
+    SymbolNode* FileParser::concrete_type(SymbolNode* symbol) const {
         SymbolNode* current = symbol;
         while (current != nullptr && current->node_type == NodeType::ALIAS) {
-            auto* alias = static_cast<AliasNode*>(current);
+            auto* alias = static_cast<AliasParser*>(current);
             if (!alias->bind || alias->target == nullptr) {
                 return current;
             }
@@ -421,7 +421,7 @@ namespace shark::parser {
         return current;
     }
 
-    bool FileNode::bind_constexpr_field(FieldNode* field, bool final_round) {
+    bool FileParser::bind_constexpr_field(FieldParser* field, bool final_round) {
         if (field->bind) {
             return true;
         }
@@ -439,7 +439,7 @@ namespace shark::parser {
         }
         if (final_round) {
             if (symbol->node_type == NodeType::ENUM) {
-                auto* enum_type = static_cast<EnumNode*>(symbol);
+                auto* enum_type = static_cast<EnumParser*>(symbol);
                 if (enum_type->bind) {
                     field->enum_type = enum_type;
                     field->bind = true;
@@ -454,7 +454,7 @@ namespace shark::parser {
             return false;
         }
         if (symbol->node_type == NodeType::STRUCT) {
-            auto* type = static_cast<StructNode*>(symbol);
+            auto* type = static_cast<StructParser*>(symbol);
             field->type = type;
             field->bind = true;
             if (!field->emit_to_pool()) {
@@ -468,7 +468,7 @@ namespace shark::parser {
             return true;
         }
         if (symbol->node_type == NodeType::ENUM) {
-            auto* enum_type = static_cast<EnumNode*>(symbol);
+            auto* enum_type = static_cast<EnumParser*>(symbol);
             if (!enum_type->bind) {
                 return true;
             }
@@ -484,8 +484,8 @@ namespace shark::parser {
         return false;
     }
 
-    bool FileNode::bind_constexpr_struct(StructNode* node, bool final_round) {
-        for (FieldNode* field : node->fields) {
+    bool FileParser::bind_constexpr_struct(StructParser* node, bool final_round) {
+        for (FieldParser* field : node->fields) {
             if (field->label != FieldLabel::CONSTEXPR) {
                 continue;
             }
@@ -493,7 +493,7 @@ namespace shark::parser {
                 return false;
             }
         }
-        for (StructNode* child : node->nested_types) {
+        for (StructParser* child : node->nested_types) {
             if (!bind_constexpr_struct(child, final_round)) {
                 return false;
             }
@@ -501,13 +501,13 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::bind_constexpr_round1() {
-        for (FieldNode* field : constexprs) {
+    bool FileParser::bind_constexpr_round1() {
+        for (FieldParser* field : constexprs) {
             if (!bind_constexpr_field(field, false)) {
                 return false;
             }
         }
-        for (StructNode* node : structs) {
+        for (StructParser* node : structs) {
             if (!bind_constexpr_struct(node, false)) {
                 return false;
             }
@@ -515,13 +515,13 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::bind_constexpr_round2() {
-        for (FieldNode* field : constexprs) {
+    bool FileParser::bind_constexpr_round2() {
+        for (FieldParser* field : constexprs) {
             if (!bind_constexpr_field(field, true)) {
                 return false;
             }
         }
-        for (StructNode* node : structs) {
+        for (StructParser* node : structs) {
             if (!bind_constexpr_struct(node, true)) {
                 return false;
             }
@@ -529,13 +529,13 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::bind_enums_in(StructNode* node) {
-        for (EnumNode* child : node->nested_enums) {
+    bool FileParser::bind_enums_in(StructParser* node) {
+        for (EnumParser* child : node->nested_enums) {
             if (!child->bind_enum()) {
                 return false;
             }
         }
-        for (StructNode* child : node->nested_types) {
+        for (StructParser* child : node->nested_types) {
             if (!bind_enums_in(child)) {
                 return false;
             }
@@ -543,13 +543,13 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::bind_enums() {
-        for (EnumNode* node : enums) {
+    bool FileParser::bind_enums() {
+        for (EnumParser* node : enums) {
             if (!node->bind_enum()) {
                 return false;
             }
         }
-        for (StructNode* node : structs) {
+        for (StructParser* node : structs) {
             if (!bind_enums_in(node)) {
                 return false;
             }
@@ -557,8 +557,8 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::bind_struct_pass(StructNode* node, bool& progress, bool& pending) {
-        for (StructNode* child : node->nested_types) {
+    bool FileParser::bind_struct_pass(StructParser* node, bool& progress, bool& pending) {
+        for (StructParser* child : node->nested_types) {
             if (!bind_struct_pass(child, progress, pending)) {
                 return false;
             }
@@ -566,11 +566,11 @@ namespace shark::parser {
         if (node->bind) {
             return true;
         }
-        StructNode::BindStep step = node->bind_struct();
-        if (step == StructNode::BindStep::FAIL) {
+        StructParser::BindStep step = node->bind_struct();
+        if (step == StructParser::BindStep::FAIL) {
             return false;
         }
-        if (step == StructNode::BindStep::DONE) {
+        if (step == StructParser::BindStep::DONE) {
             progress = true;
             return true;
         }
@@ -578,11 +578,11 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::bind_structs() {
+    bool FileParser::bind_structs() {
         while (true) {
             bool progress = false;
             bool pending = false;
-            for (StructNode* node : structs) {
+            for (StructParser* node : structs) {
                 if (!bind_struct_pass(node, progress, pending)) {
                     return false;
                 }
@@ -600,57 +600,57 @@ namespace shark::parser {
         }
     }
 
-    bool FileNode::bind_annotations() {
-        std::function<bool(const std::vector<AnnotationNode*>&)> bind_list;
-        std::function<bool(StructNode*)> bind_struct;
-        std::function<bool(EnumNode*)> bind_enum;
-        std::function<bool(const std::vector<FieldNode*>&)> bind_fields;
+    bool FileParser::bind_annotations() {
+        std::function<bool(const std::vector<AnnotationParser*>&)> bind_list;
+        std::function<bool(StructParser*)> bind_struct;
+        std::function<bool(EnumParser*)> bind_enum;
+        std::function<bool(const std::vector<FieldParser*>&)> bind_fields;
 
-        bind_list = [](const std::vector<AnnotationNode*>& list) {
-            for (AnnotationNode* node : list) {
+        bind_list = [](const std::vector<AnnotationParser*>& list) {
+            for (AnnotationParser* node : list) {
                 if (node != nullptr && !node->bind_typed()) {
                     return false;
                 }
             }
             return true;
         };
-        bind_fields = [&](const std::vector<FieldNode*>& fields) {
-            for (FieldNode* field : fields) {
+        bind_fields = [&](const std::vector<FieldParser*>& fields) {
+            for (FieldParser* field : fields) {
                 if (!bind_list(field->annotations)) {
                     return false;
                 }
             }
             return true;
         };
-        bind_enum = [&](EnumNode* node) {
+        bind_enum = [&](EnumParser* node) {
             if (!bind_list(node->annotations)) {
                 return false;
             }
-            for (EnumValueNode* value : node->values) {
+            for (EnumValueParser* value : node->values) {
                 if (!bind_list(value->annotations)) {
                     return false;
                 }
             }
             return true;
         };
-        bind_struct = [&](StructNode* node) {
+        bind_struct = [&](StructParser* node) {
             if (!bind_list(node->annotations)) {
                 return false;
             }
             if (!bind_fields(node->fields)) {
                 return false;
             }
-            for (EnumNode* child : node->nested_enums) {
+            for (EnumParser* child : node->nested_enums) {
                 if (!bind_enum(child)) {
                     return false;
                 }
             }
-            for (AliasNode* alias : node->aliases) {
+            for (AliasParser* alias : node->aliases) {
                 if (!bind_list(alias->annotations)) {
                     return false;
                 }
             }
-            for (StructNode* child : node->nested_types) {
+            for (StructParser* child : node->nested_types) {
                 if (!bind_struct(child)) {
                     return false;
                 }
@@ -661,17 +661,17 @@ namespace shark::parser {
         if (!bind_list(annotations)) {
             return false;
         }
-        for (ImportNode* node : imports) {
+        for (ImportParser* node : imports) {
             if (!bind_list(node->annotations)) {
                 return false;
             }
         }
-        for (EnumNode* node : enums) {
+        for (EnumParser* node : enums) {
             if (!bind_enum(node)) {
                 return false;
             }
         }
-        for (StructNode* node : structs) {
+        for (StructParser* node : structs) {
             if (!bind_struct(node)) {
                 return false;
             }
@@ -679,16 +679,16 @@ namespace shark::parser {
         if (!bind_fields(constexprs)) {
             return false;
         }
-        for (FunctionNode* node : functions) {
+        for (FunctionParser* node : functions) {
             if (!bind_list(node->annotations) || !bind_fields(node->params)) {
                 return false;
             }
         }
-        for (ServletNode* node : servlets) {
+        for (ServletParser* node : servlets) {
             if (!bind_list(node->annotations)) {
                 return false;
             }
-            for (FunctionNode* method : node->method) {
+            for (FunctionParser* method : node->method) {
                 if (!bind_list(method->annotations) || !bind_fields(method->params)) {
                     return false;
                 }
@@ -697,14 +697,14 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::bind_functions() {
-        for (FunctionNode* node : functions) {
+    bool FileParser::bind_functions() {
+        for (FunctionParser* node : functions) {
             if (!node->bind_function()) {
                 return false;
             }
         }
-        for (ServletNode* servlet : servlets) {
-            for (FunctionNode* method : servlet->method) {
+        for (ServletParser* servlet : servlets) {
+            for (FunctionParser* method : servlet->method) {
                 if (!method->bind_function()) {
                     return false;
                 }
@@ -713,19 +713,19 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileNode::bind_servlets() {
+    bool FileParser::bind_servlets() {
         while (true) {
             bool progress = false;
             bool pending = false;
-            for (ServletNode* node : servlets) {
+            for (ServletParser* node : servlets) {
                 if (node->bind) {
                     continue;
                 }
-                ServletNode::BindStep step = node->bind_servlet();
-                if (step == ServletNode::BindStep::FAIL) {
+                ServletParser::BindStep step = node->bind_servlet();
+                if (step == ServletParser::BindStep::FAIL) {
                     return false;
                 }
-                if (step == ServletNode::BindStep::DONE) {
+                if (step == ServletParser::BindStep::DONE) {
                     progress = true;
                     continue;
                 }
@@ -742,15 +742,15 @@ namespace shark::parser {
     }
 
     /// The file must start with edition. Package is a top-level element.
-    bool FileNode::parse_header() {
+    bool FileParser::parse_header() {
         if (!lexer) {
             report_error(ErrorType::INTERNAL, "lexer is null");
             return false;
         }
 
         lexer->consume_white_space(true);
-        edition = pool->create_node<Edition>(this);
-        auto* edition_leading = pool->create_node<CommentNode>(this);
+        edition = pool->create_node<EditionParser>(this);
+        auto* edition_leading = pool->create_node<CommentParser>(this);
         if (!edition_leading->parse_leading(*lexer)) {
             return false;
         }
@@ -760,9 +760,9 @@ namespace shark::parser {
         return edition->parse(*lexer);
     }
 
-    bool FileNode::parse_leading(std::vector<CommentNode*>& comments, std::vector<AnnotationNode*>& annotations) {
+    bool FileParser::parse_leading(std::vector<CommentParser*>& comments, std::vector<AnnotationParser*>& annotations) {
         while (true) {
-            auto* comment = pool->create_node<CommentNode>(this);
+            auto* comment = pool->create_node<CommentParser>(this);
             if (!comment->parse_leading(*lexer)) {
                 return false;
             }
@@ -779,7 +779,7 @@ namespace shark::parser {
                 return true;
             }
             if (t.type == TokenType::BareWord && t == "annotation") {
-                auto* annotation = pool->create_node<AnnotationNode>(this);
+                auto* annotation = pool->create_node<AnnotationParser>(this);
                 if (!annotation->parse(*lexer)) {
                     return false;
                 }
@@ -794,15 +794,15 @@ namespace shark::parser {
         }
     }
 
-    bool FileNode::parse() {
+    bool FileParser::parse() {
         if (!parse_header()) {
             return false;
         }
 
         while (true) {
             lexer->consume_white_space(true);
-            std::vector<CommentNode*> comments;
-            std::vector<AnnotationNode*> annotations;
+            std::vector<CommentParser*> comments;
+            std::vector<AnnotationParser*> annotations;
             if (!parse_leading(comments, annotations)) {
                 return false;
             }
@@ -816,7 +816,7 @@ namespace shark::parser {
                 return false;
             }
             if (t.type == TokenType::BareWord && t == "package") {
-                auto* package = pool->create_node<PackageNode>(this);
+                auto* package = pool->create_node<PackageParser>(this);
                 if (!comments.empty()) {
                     package->leading_comment = comments.front();
                 }
@@ -827,7 +827,7 @@ namespace shark::parser {
                 continue;
             }
             if (t.type == TokenType::BareWord && t == "enum") {
-                auto* enum_node = pool->create_symbol<EnumNode>(this);
+                auto* enum_node = pool->create_symbol<EnumParser>(this);
                 enum_node->leading_comment = std::move(comments);
                 enum_node->annotations = std::move(annotations);
                 if (!enum_node->parse(*lexer)) {
@@ -837,7 +837,7 @@ namespace shark::parser {
                 continue;
             }
             if (t.type == TokenType::BareWord && (t == kStructKey || t == kUnionKey)) {
-                auto* struct_node = pool->create_symbol<StructNode>(this);
+                auto* struct_node = pool->create_symbol<StructParser>(this);
                 struct_node->leading_comment = std::move(comments);
                 struct_node->annotations = std::move(annotations);
                 if (!struct_node->parse(*lexer)) {
@@ -847,7 +847,7 @@ namespace shark::parser {
                 continue;
             }
             if (t.type == TokenType::BareWord && t == kConstExprKey) {
-                auto* constant = pool->create_symbol<FieldNode>(this);
+                auto* constant = pool->create_symbol<FieldParser>(this);
                 constant->leading_comment = std::move(comments);
                 constant->annotations = std::move(annotations);
                 if (!constant->parse(*lexer)) {
@@ -857,7 +857,7 @@ namespace shark::parser {
                 continue;
             }
             if (t.type == TokenType::BareWord && t == kFunctionKey) {
-                auto* function = pool->create_symbol<FunctionNode>(this);
+                auto* function = pool->create_symbol<FunctionParser>(this);
                 function->leading_comment = std::move(comments);
                 function->annotations = std::move(annotations);
                 if (!function->parse(*lexer)) {
@@ -867,7 +867,7 @@ namespace shark::parser {
                 continue;
             }
             if (t.type == TokenType::BareWord && t == kServletKey) {
-                auto* servlet = pool->create_symbol<ServletNode>(this);
+                auto* servlet = pool->create_symbol<ServletParser>(this);
                 servlet->leading_comment = std::move(comments);
                 servlet->annotations = std::move(annotations);
                 if (!servlet->parse(*lexer)) {
@@ -877,7 +877,7 @@ namespace shark::parser {
                 continue;
             }
             if (t.type == TokenType::BareWord && t == kImportKey) {
-                auto* import_node = pool->create_node<ImportNode>(this);
+                auto* import_node = pool->create_node<ImportParser>(this);
                 if (!comments.empty()) {
                     import_node->leading_comment = comments.front();
                 }

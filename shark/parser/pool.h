@@ -66,7 +66,7 @@ namespace shark::parser {
             return it->second;
         }
 
-        void add_file(FileNode *ptr);
+        void add_file(FileParser *ptr);
 
         [[nodiscard]] bool has_file(std::string_view path) {
             auto it = _files.find(path);
@@ -76,7 +76,7 @@ namespace shark::parser {
             return true;
         }
 
-        [[nodiscard]] const FileNode* get_file(std::string_view path) const {
+        [[nodiscard]] const FileParser* get_file(std::string_view path) const {
             auto it = _files.find(path);
             if (it == _files.end()) {
                 return nullptr;
@@ -84,7 +84,7 @@ namespace shark::parser {
             return it->second;
         }
 
-        [[nodiscard]] FileNode* get_file(std::string_view path) {
+        [[nodiscard]] FileParser* get_file(std::string_view path) {
             auto it = _files.find(path);
             if (it == _files.end()) {
                 return nullptr;
@@ -115,7 +115,7 @@ namespace shark::parser {
         }
 
         template <typename T>
-        T* create_symbol(const FileNode* f) {
+        T* create_symbol(const FileParser* f) {
             static_assert(std::is_base_of_v<SymbolNode, T>, "must be");
             auto npr = new T(f, this);
             std::unique_ptr<T> ptr(npr);
@@ -125,7 +125,7 @@ namespace shark::parser {
         }
 
         template <typename T>
-        T* create_node(const FileNode* f) {
+        T* create_node(const FileParser* f) {
             static_assert(std::is_base_of_v<Node, T>, "must be");
             static_assert(!std::is_base_of_v<SymbolNode, T>, "must be");
             auto npr = new T(f, this);
@@ -136,9 +136,9 @@ namespace shark::parser {
         }
 
 
-        FileNode* build_file(std::string_view file);
+        FileParser* build_file(std::string_view file);
 
-        FileNode* build_file(std::string_view file, const std::vector<std::string> &includes) {
+        FileParser* build_file(std::string_view file, const std::vector<std::string> &includes) {
             for (const auto &it : includes) {
                 auto r = shark::common::absolute_path(it);
                 if (!r.ok()) {
@@ -149,9 +149,9 @@ namespace shark::parser {
             return build_file(file);
         }
 
-        FileNode* build_file_recursive(std::string_view file);
+        FileParser* build_file_recursive(std::string_view file);
 
-        FileNode* build_file_recursive(std::string_view file, const std::vector<std::string> &includes) {
+        FileParser* build_file_recursive(std::string_view file, const std::vector<std::string> &includes) {
             for (const auto &it : includes) {
                 auto r = shark::common::absolute_path(it);
                 if (!r.ok()) {
@@ -164,14 +164,14 @@ namespace shark::parser {
 
     private:
         RegistryPool();
-        bool link_imports(FileNode* node);
+        bool link_imports(FileParser* node);
         std::vector<std::unique_ptr<SymbolNode>>           _all_symbols;
         std::vector<std::unique_ptr<Node>>                  _all_node;
         fermat::btree_map<std::string_view, SymbolNode*>    _symbols;
-        fermat::btree_map<std::string_view, FileNode*>      _files;
+        fermat::btree_map<std::string_view, FileParser*>      _files;
         fermat::btree_set<std::string>                      _includes_set;
         std::vector<std::string>                            _includes;
-        std::deque<FileNode*>                               _files_queue;
+        std::deque<FileParser*>                               _files_queue;
         ImportGraph                                         _import_graph;
     };
 

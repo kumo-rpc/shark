@@ -45,24 +45,24 @@ namespace shark::parser {
     ///     ENUM_VALUE2 = SOME_CONSTEXPR;
     /// }[;]
     ////////////////////////////////////////////////
-    class EnumValueNode : public SymbolNode {
+    class EnumValueParser : public SymbolNode {
     public:
-        ~EnumValueNode() override = default;
+        ~EnumValueParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);
 
-        std::vector<CommentNode*>      leading_comment;
-        CommentNode                   *tailing_comment{nullptr};
+        std::vector<CommentParser*>      leading_comment;
+        CommentParser                   *tailing_comment{nullptr};
         int64_t                       value{0};
         /// Empty when `value` is an integer literal. Otherwise a constexpr name
         /// viewed from the source buffer. `bind_enum` resolves it into `value`.
         std::string_view              constexpr_ref;
-        std::vector<AnnotationNode*>  annotations;
-        const EnumNode *parent_enum{nullptr};
+        std::vector<AnnotationParser*>  annotations;
+        const EnumParser *parent_enum{nullptr};
 
     private:
         friend class RegistryPool;
-        EnumValueNode(const FileNode* f, RegistryPool *pool) :SymbolNode(NodeType::ENUM_VALUE, f, pool) {}
+        EnumValueParser(const FileParser* f, RegistryPool *pool) :SymbolNode(NodeType::ENUM_VALUE, f, pool) {}
         bool parse_leading(Lexer<ExpressionLexer> &lexer);
 
         bool parse_value(Lexer<ExpressionLexer> &lexer);

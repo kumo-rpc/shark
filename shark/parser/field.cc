@@ -25,7 +25,7 @@
 
 namespace shark::parser {
 
-    bool FieldNode::skip_gap(Lexer<ExpressionLexer>& lexer) {
+    bool FieldParser::skip_gap(Lexer<ExpressionLexer>& lexer) {
         while (true) {
             auto t = lexer.look_at();
             if (t.is_error()) {
@@ -39,7 +39,7 @@ namespace shark::parser {
         }
     }
 
-    bool FieldNode::parse_type_name(Lexer<ExpressionLexer>& lexer) {
+    bool FieldParser::parse_type_name(Lexer<ExpressionLexer>& lexer) {
         if (!parse_type_ref(*this, lexer, type_ref)) {
             return false;
         }
@@ -47,7 +47,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool FieldNode::parse(Lexer<ExpressionLexer>& lexer, End end) {
+    bool FieldParser::parse(Lexer<ExpressionLexer>& lexer, End end) {
         auto t = lexer.look_at();
         if (t.is_error()) {
             report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
@@ -132,7 +132,7 @@ namespace shark::parser {
         t = lexer.look_at();
         if (t.type == TokenType::Equals) {
             lexer.consume();
-            default_value = pool->create_node<ConstValue>(file);
+            default_value = pool->create_node<ConstValueParser>(file);
             if (!default_value->parse(lexer)) {
                 return false;
             }
@@ -164,7 +164,7 @@ namespace shark::parser {
         }
         lexer.consume();
 
-        tailing_comment = pool->create_node<CommentNode>(file);
+        tailing_comment = pool->create_node<CommentParser>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
             return false;
         }

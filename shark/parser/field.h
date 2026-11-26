@@ -35,11 +35,11 @@ namespace shark::parser {
     // atomic: same presence as required, and the generated field is atomic.
     // constexpr: a public compile-time constant. It is not serialized.
     // These four qualifiers do not combine. `static` is not a field qualifier.
-    class FieldNode : public SymbolNode {
+    class FieldParser : public SymbolNode {
     public:
         friend class RegistryPool;
-        FieldNode(const FileNode* f, RegistryPool * pool) :SymbolNode(NodeType::FIELD, f, pool) {}
-        ~FieldNode() override = default;
+        FieldParser(const FileParser* f, RegistryPool * pool) :SymbolNode(NodeType::FIELD, f, pool) {}
+        ~FieldParser() override = default;
 
         enum class End {
             STATEMENT,
@@ -49,20 +49,20 @@ namespace shark::parser {
         // STATEMENT consumes `;`. PARAMETER stops at `,` or `)` and leaves that token.
         bool parse(Lexer<ExpressionLexer> &lexer, End end = End::STATEMENT);
 
-        std::vector<CommentNode*>      leading_comment;
-        CommentNode                   *tailing_comment{nullptr};
-        std::vector<AnnotationNode*>   annotations;
+        std::vector<CommentParser*>      leading_comment;
+        CommentParser                   *tailing_comment{nullptr};
+        std::vector<AnnotationParser*>   annotations;
         FieldLabel                     label{FieldLabel::REQUIRED};
         TypeRef                        type_ref;
         bool                           generic{false};
-        const StructNode*              type{nullptr};
-        const EnumNode*                enum_type{nullptr};
-        const PlaceholderNode*         placeholder{nullptr};
+        const StructParser*              type{nullptr};
+        const EnumParser*                enum_type{nullptr};
+        const PlaceholderParser*         placeholder{nullptr};
         /// Set by the caller before parse. It is already fixed while parsing.
         /// nullptr means the field is declared at file scope, not inside a struct.
-        const StructNode*              container{nullptr};
+        const StructParser*              container{nullptr};
         uint16_t                       id{0};
-        ConstValue*                    default_value{nullptr};
+        ConstValueParser*                    default_value{nullptr};
         /// True when a constexpr struct, union, or container is kept but is not a
         /// compile-time constant. Codegen should emit static const.
         bool                           static_const{false};

@@ -29,20 +29,20 @@ namespace shark::parser {
 
     // A parsed constant node. Not a symbol.
     // Strings and identifiers view the source buffer.
-    // List and map elements are pool-allocated ConstValue nodes.
-    class ConstValue : public Node {
+    // List and map elements are pool-allocated ConstValueParser nodes.
+    class ConstValueParser : public Node {
     public:
         struct List {
-            std::vector<ConstValue*> elements;
+            std::vector<ConstValueParser*> elements;
         };
 
         struct Map {
-            std::vector<std::pair<ConstValue*, ConstValue*>> entries;
+            std::vector<std::pair<ConstValueParser*, ConstValueParser*>> entries;
         };
 
         struct Identifier {
             std::string_view name;
-            const EnumNode* enum_type{nullptr};
+            const EnumParser* enum_type{nullptr};
         };
 
         using Value = std::variant<
@@ -55,7 +55,7 @@ namespace shark::parser {
             List,
             Map>;
 
-        ConstValue(const FileNode* f, RegistryPool* p)
+        ConstValueParser(const FileParser* f, RegistryPool* p)
             : Node(NodeType::CONST, f, p) {}
 
         // Parses one value. Skips whitespace and comments.

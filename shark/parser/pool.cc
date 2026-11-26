@@ -27,12 +27,12 @@ namespace shark::parser {
         load_builtin_types(*this);
     }
 
-    void RegistryPool::add_file(FileNode *ptr) {
+    void RegistryPool::add_file(FileParser *ptr) {
         std::string_view path = ptr->path;
         _files[path] = ptr;
     }
 
-    FileNode* RegistryPool::build_file(std::string_view file) {
+    FileParser* RegistryPool::build_file(std::string_view file) {
         std::string prefix;
         auto rel = shark::common::relative_path(file, includes(), &prefix);
         if (!rel.ok()) {
@@ -41,11 +41,11 @@ namespace shark::parser {
         }
 
         const std::string absolute = prefix + "/" + *rel;
-        if (FileNode* existing = get_file(*rel)) {
+        if (FileParser* existing = get_file(*rel)) {
             return existing;
         }
 
-        auto* node = create_symbol<FileNode>(nullptr);
+        auto* node = create_symbol<FileParser>(nullptr);
         if (!node->load(absolute, *rel)) {
             return nullptr;
         }
@@ -56,8 +56,8 @@ namespace shark::parser {
         return node;
     }
 
-    bool RegistryPool::link_imports(FileNode* node) {
-        for (ImportNode* import_node : node->imports) {
+    bool RegistryPool::link_imports(FileParser* node) {
+        for (ImportParser* import_node : node->imports) {
             if (!import_node->classify.empty()) {
                 continue;
             }
@@ -82,7 +82,7 @@ namespace shark::parser {
                 return false;
             }
 
-            if (FileNode* existing = get_file(*rel)) {
+            if (FileParser* existing = get_file(*rel)) {
                 if (!_import_graph.add_dependency(node, existing)) {
                     shark::common::report_error("import `" + std::string(path) + "` from `" + node->path + "` forms a cycle");
                     return false;
@@ -90,7 +90,7 @@ namespace shark::parser {
                 continue;
             }
 
-            auto* dep = create_symbol<FileNode>(nullptr);
+            auto* dep = create_symbol<FileParser>(nullptr);
             if (!dep->load(*found, *rel)) {
                 return false;
             }
@@ -110,7 +110,7 @@ namespace shark::parser {
         return true;
     }
 
-    FileNode* RegistryPool::build_file_recursive(std::string_view file) {
+    FileParser* RegistryPool::build_file_recursive(std::string_view file) {
         _files_queue.clear();
 
         std::string prefix;
@@ -120,10 +120,10 @@ namespace shark::parser {
             return nullptr;
         }
 
-        FileNode* node = get_file(*rel);
+        FileParser* node = get_file(*rel);
         if (node == nullptr) {
             const std::string absolute = prefix + "/" + *rel;
-            node = create_symbol<FileNode>(nullptr);
+            node = create_symbol<FileParser>(nullptr);
             if (!node->load(absolute, *rel)) {
                 return nullptr;
             }
@@ -144,20 +144,20 @@ namespace shark::parser {
         }
         _files_queue.assign(_import_graph.queue().begin(), _import_graph.queue().end());
         int index = 1;
-        for (FileNode* queued : _files_queue) {
+        for (FileParser* queued : _files_queue) {
             shark::common::report_debug("bind " + std::to_string(index) + " `" + queued->path + "`");
-            for (FileNode* dep : _import_graph.direct(queued)) {
+            for (FileParser* dep : _import_graph.direct(queued)) {
                 shark::common::report_debug("\t- `" + dep->path + "`");
             }
             ++index;
         }
-        for (FileNode* queued : _files_queue) {
+        for (FileParser* queued : _files_queue) {
             if (!queued->bind_file()) {
                 return nullptr;
             }
         }
         bool bound = true;
-        for (FileNode* queued : _files_queue) {
+        for (FileParser* queued : _files_queue) {
             if (queued->bind) {
                 continue;
             }

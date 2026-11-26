@@ -83,46 +83,46 @@ namespace shark::parser {
     /// The closing brace can optionally be followed by a semicolon.
     ///
     ////////////////////////////////////////////////
-    class InterfaceNode : public SymbolNode {
+    class InterfaceParser : public SymbolNode {
     public:
         friend class RegistryPool;
-        InterfaceNode(RegistryPool * pool) :SymbolNode(NodeType::STRUCT, pool) {}
-        ~InterfaceNode() override = default;
+        InterfaceParser(RegistryPool * pool) :SymbolNode(NodeType::STRUCT, pool) {}
+        ~InterfaceParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);
 
-        void set_leading_comment(std::vector<CommentNode> c) {
+        void set_leading_comment(std::vector<CommentParser> c) {
             _leading_comment = std::move(c);
         }
 
-        void set_annotations(std::vector<AnnotationNode> a) {
+        void set_annotations(std::vector<AnnotationParser> a) {
             _annotations = std::move(a);
         }
 
-        [[nodiscard]] const std::vector<CommentNode>&  leading_comment() const {
+        [[nodiscard]] const std::vector<CommentParser>&  leading_comment() const {
             return _leading_comment;
         }
 
-        [[nodiscard]] std::vector<AnnotationNode> annotations() const {
+        [[nodiscard]] std::vector<AnnotationParser> annotations() const {
             return _annotations;
         }
-        [[nodiscard]] CommentNode tailing_comment() const {
+        [[nodiscard]] CommentParser tailing_comment() const {
             return _tailing_comment;
         }
 
-        [[nodiscard]] const StructNode* container() const {
+        [[nodiscard]] const StructParser* container() const {
             return _container;
         }
-        void set_container(const StructNode*s) {
+        void set_container(const StructParser*s) {
             _container = s;
         }
 
     private:
-        std::vector<CommentNode>     _leading_comment;
-        CommentNode                  _tailing_comment;
-        std::vector<AnnotationNode>  _annotations;
-        std::vector<FunctionNode*>   _method;
-        const StructNode*            _container{nullptr};
-        const StructNode*            _extendee{nullptr};
+        std::vector<CommentParser>     _leading_comment;
+        CommentParser                  _tailing_comment;
+        std::vector<AnnotationParser>  _annotations;
+        std::vector<FunctionParser*>   _method;
+        const StructParser*            _container{nullptr};
+        const StructParser*            _extendee{nullptr};
     };
 }  // namespace shark::parser

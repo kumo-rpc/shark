@@ -30,7 +30,7 @@
 
 namespace shark::parser {
 
-    class FileNode : public SymbolNode {
+    class FileParser : public SymbolNode {
     public:
 
         /// 1. setting
@@ -44,7 +44,7 @@ namespace shark::parser {
         bool bind_file();
 
         SymbolNode* find_type(std::string_view name) const;
-        FieldNode* find_constexpr(std::string_view name) const;
+        FieldParser* find_constexpr(std::string_view name) const;
         SymbolNode* concrete_type(SymbolNode* symbol) const;
 
 
@@ -53,21 +53,21 @@ namespace shark::parser {
         std::string                 absolute_path;
         std::string                 package;
 
-        Edition                     *edition{nullptr};
-        std::vector<PackageNode*>    packages;
-        std::vector<ImportNode*>     imports;
+        EditionParser                     *edition{nullptr};
+        std::vector<PackageParser*>    packages;
+        std::vector<ImportParser*>     imports;
 
-        std::vector<CommentNode*>    leading_comment;
-        CommentNode                 *tailing_comment{nullptr};
-        mutable std::vector<AnnotationNode*> annotations;
+        std::vector<CommentParser*>    leading_comment;
+        CommentParser                 *tailing_comment{nullptr};
+        mutable std::vector<AnnotationParser*> annotations;
 
-        std::vector<EnumNode*>       enums;
-        std::vector<StructNode*>     structs;
-        std::vector<ServiceNode*>    services;
-        std::vector<ServletNode*>    servlets;
-        std::vector<FunctionNode*>   functions;
-        std::vector<FieldNode*>      constexprs;
-        std::vector<FileNode*>       dependencies;
+        std::vector<EnumParser*>       enums;
+        std::vector<StructParser*>     structs;
+        std::vector<ServiceParser*>    services;
+        std::vector<ServletParser*>    servlets;
+        std::vector<FunctionParser*>   functions;
+        std::vector<FieldParser*>      constexprs;
+        std::vector<FileParser*>       dependencies;
         std::unique_ptr<Lexer<ExpressionLexer>>    lexer;
 
 
@@ -82,32 +82,32 @@ namespace shark::parser {
         bool assign_names();
         bool take_package();
         bool assign_symbol(SymbolNode* symbol, std::string_view scope, std::vector<std::string>& seen);
-        bool assign_enum(EnumNode* node, std::string_view scope, std::vector<std::string>& seen);
-        bool assign_struct(StructNode* node, std::string_view scope, std::vector<std::string>& seen);
-        bool assign_function(FunctionNode* node, std::string_view scope, std::vector<std::string>& seen);
-        bool assign_servlet(ServletNode* node, std::string_view scope, std::vector<std::string>& seen);
+        bool assign_enum(EnumParser* node, std::string_view scope, std::vector<std::string>& seen);
+        bool assign_struct(StructParser* node, std::string_view scope, std::vector<std::string>& seen);
+        bool assign_function(FunctionParser* node, std::string_view scope, std::vector<std::string>& seen);
+        bool assign_servlet(ServletParser* node, std::string_view scope, std::vector<std::string>& seen);
         bool bind_constexpr_round1();
         bool bind_constexpr_round2();
         bool bind_aliases();
-        bool bind_alias_struct(StructNode* node, bool& progress);
+        bool bind_alias_struct(StructParser* node, bool& progress);
         bool bind_alias_struct_list(bool& progress);
-        bool bind_constexpr_field(FieldNode* field, bool final_round);
-        bool bind_constexpr_struct(StructNode* node, bool final_round);
+        bool bind_constexpr_field(FieldParser* field, bool final_round);
+        bool bind_constexpr_struct(StructParser* node, bool final_round);
         bool bind_enums();
-        bool bind_enums_in(StructNode* node);
+        bool bind_enums_in(StructParser* node);
         bool bind_structs();
-        bool bind_struct_pass(StructNode* node, bool& progress, bool& pending);
+        bool bind_struct_pass(StructParser* node, bool& progress, bool& pending);
         bool bind_functions();
         bool bind_servlets();
         bool bind_annotations();
         SymbolNode* find_local(std::string_view name) const;
-        SymbolNode* find_local_struct(const StructNode* node, std::string_view name) const;
+        SymbolNode* find_local_struct(const StructParser* node, std::string_view name) const;
 
         bool parse_header();
-        bool parse_leading(std::vector<CommentNode*>& comments, std::vector<AnnotationNode*>& annotations);
+        bool parse_leading(std::vector<CommentParser*>& comments, std::vector<AnnotationParser*>& annotations);
     protected:
         friend class RegistryPool;
-        FileNode(const FileNode* f, RegistryPool * pool) :SymbolNode(NodeType::FILE, nullptr, pool) {}
+        FileParser(const FileParser* f, RegistryPool * pool) :SymbolNode(NodeType::FILE, nullptr, pool) {}
 
     };
 }  // namespace shark::parser

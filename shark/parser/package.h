@@ -43,15 +43,15 @@ namespace shark::parser {
     ///
     /// package[.identify] 'shark.compiler.idl';
     ////////////////////////////////////////////////
-    class PackageNode : public Node {
+    class PackageParser : public Node {
     public:
-        PackageNode(const FileNode* f, RegistryPool *p) :Node(NodeType::PACKAGE, f,p){}
-        ~PackageNode() override = default;
+        PackageParser(const FileParser* f, RegistryPool *p) :Node(NodeType::PACKAGE, f,p){}
+        ~PackageParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);
 
-        CommentNode      *leading_comment{nullptr};
-        CommentNode      *tailing_comment{nullptr};
+        CommentParser      *leading_comment{nullptr};
+        CommentParser      *tailing_comment{nullptr};
         std::string_view  classify;
         std::string_view  package;
     };

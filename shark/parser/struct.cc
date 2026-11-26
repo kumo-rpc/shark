@@ -24,7 +24,7 @@
 
 namespace shark::parser {
 
-    StructNode::BindStep StructNode::bind_struct() {
+    StructParser::BindStep StructParser::bind_struct() {
         if (bind) {
             return BindStep::DONE;
         }
@@ -38,7 +38,7 @@ namespace shark::parser {
             }
         }
         bool waiting = false;
-        for (FieldNode* field : fields) {
+        for (FieldParser* field : fields) {
             if (field->bind) {
                 continue;
             }
@@ -59,7 +59,7 @@ namespace shark::parser {
                 return BindStep::FAIL;
             }
             if (symbol->node_type == NodeType::STRUCT) {
-                auto* type = static_cast<StructNode*>(symbol);
+                auto* type = static_cast<StructParser*>(symbol);
                 if (type->builtin || type->bind) {
                     field->type = type;
                     field->bind = true;
@@ -73,7 +73,7 @@ namespace shark::parser {
                 continue;
             }
             if (symbol->node_type == NodeType::ENUM) {
-                auto* enum_type = static_cast<EnumNode*>(symbol);
+                auto* enum_type = static_cast<EnumParser*>(symbol);
                 if (!enum_type->bind) {
                     report_error(ErrorType::SEMANTIC, "field `%s` type `%s` was not bound", name, type_ref_name(field->type_ref));
                     return BindStep::FAIL;
@@ -109,10 +109,10 @@ namespace {
 
 } // namespace
 
-    bool StructNode::parse_field(Lexer<ExpressionLexer>& lexer,
-        std::vector<CommentNode*>& comments,
-        std::vector<AnnotationNode*>& annotations) {
-        auto* field = pool->create_symbol<FieldNode>(file);
+    bool StructParser::parse_field(Lexer<ExpressionLexer>& lexer,
+        std::vector<CommentParser*>& comments,
+        std::vector<AnnotationParser*>& annotations) {
+        auto* field = pool->create_symbol<FieldParser>(file);
         field->container = this;
         field->leading_comment = std::move(comments);
         field->annotations = std::move(annotations);
@@ -123,10 +123,10 @@ namespace {
         return true;
     }
 
-    bool StructNode::parse_alias(Lexer<ExpressionLexer>& lexer,
-        std::vector<CommentNode*>& comments,
-        std::vector<AnnotationNode*>& annotations) {
-        auto* alias = pool->create_symbol<AliasNode>(file);
+    bool StructParser::parse_alias(Lexer<ExpressionLexer>& lexer,
+        std::vector<CommentParser*>& comments,
+        std::vector<AnnotationParser*>& annotations) {
+        auto* alias = pool->create_symbol<AliasParser>(file);
         alias->container = this;
         alias->leading_comment = std::move(comments);
         alias->annotations = std::move(annotations);
@@ -137,10 +137,10 @@ namespace {
         return true;
     }
 
-    bool StructNode::parse_nested_enum(Lexer<ExpressionLexer>& lexer,
-        std::vector<CommentNode*>& comments,
-        std::vector<AnnotationNode*>& annotations) {
-        auto* enum_node = pool->create_symbol<EnumNode>(file);
+    bool StructParser::parse_nested_enum(Lexer<ExpressionLexer>& lexer,
+        std::vector<CommentParser*>& comments,
+        std::vector<AnnotationParser*>& annotations) {
+        auto* enum_node = pool->create_symbol<EnumParser>(file);
         enum_node->container = this;
         enum_node->leading_comment = std::move(comments);
         enum_node->annotations = std::move(annotations);
@@ -151,10 +151,10 @@ namespace {
         return true;
     }
 
-    bool StructNode::parse_nested_struct(Lexer<ExpressionLexer>& lexer,
-        std::vector<CommentNode*>& comments,
-        std::vector<AnnotationNode*>& annotations) {
-        auto* nested = pool->create_symbol<StructNode>(file);
+    bool StructParser::parse_nested_struct(Lexer<ExpressionLexer>& lexer,
+        std::vector<CommentParser*>& comments,
+        std::vector<AnnotationParser*>& annotations) {
+        auto* nested = pool->create_symbol<StructParser>(file);
         nested->container = this;
         nested->leading_comment = std::move(comments);
         nested->annotations = std::move(annotations);
@@ -165,10 +165,10 @@ namespace {
         return true;
     }
 
-    bool StructNode::parse_nested_union(Lexer<ExpressionLexer>& lexer,
-        std::vector<CommentNode*>& comments,
-        std::vector<AnnotationNode*>& annotations) {
-        auto* nested = pool->create_symbol<StructNode>(file);
+    bool StructParser::parse_nested_union(Lexer<ExpressionLexer>& lexer,
+        std::vector<CommentParser*>& comments,
+        std::vector<AnnotationParser*>& annotations) {
+        auto* nested = pool->create_symbol<StructParser>(file);
         nested->container = this;
         nested->leading_comment = std::move(comments);
         nested->annotations = std::move(annotations);
@@ -179,7 +179,7 @@ namespace {
         return true;
     }
 
-    bool StructNode::parse(Lexer<ExpressionLexer>& lexer) {
+    bool StructParser::parse(Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
         if (t.is_error()) {
             report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
@@ -216,10 +216,10 @@ namespace {
         lexer.consume();
 
         while (true) {
-            std::vector<CommentNode*> comments;
-            std::vector<AnnotationNode*> annotations;
+            std::vector<CommentParser*> comments;
+            std::vector<AnnotationParser*> annotations;
             while (true) {
-                auto* comment = pool->create_node<CommentNode>(file);
+                auto* comment = pool->create_node<CommentParser>(file);
                 if (!comment->parse_leading(lexer)) {
                     return false;
                 }
@@ -233,7 +233,7 @@ namespace {
                     return false;
                 }
                 if (t.type == TokenType::BareWord && t == kAnnotationKey) {
-                    auto* annotation = pool->create_node<AnnotationNode>(file);
+                    auto* annotation = pool->create_node<AnnotationParser>(file);
                     if (!annotation->parse(lexer)) {
                         return false;
                     }
@@ -290,7 +290,7 @@ namespace {
 
         lexer.consume();
 
-        tailing_comment = pool->create_node<CommentNode>(file);
+        tailing_comment = pool->create_node<CommentParser>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
             report_debug(ErrorType::NONE, "%s `%s` fields `%zu`", is_union ? "union" : "struct", name, fields.size());
             return false;

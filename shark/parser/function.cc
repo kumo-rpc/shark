@@ -24,7 +24,7 @@
 
 namespace shark::parser {
 
-    bool FunctionNode::bind_named_type(std::string_view type_name, bool allow_void, const StructNode*& struct_type, const EnumNode*& enum_type) {
+    bool FunctionParser::bind_named_type(std::string_view type_name, bool allow_void, const StructParser*& struct_type, const EnumParser*& enum_type) {
         if (type_name == "void") {
             if (!allow_void) {
                 report_error(ErrorType::SEMANTIC, "function `%s` parameter type `void` is not allowed", name);
@@ -43,14 +43,14 @@ namespace shark::parser {
             return false;
         }
         if (symbol->node_type == NodeType::STRUCT) {
-            auto* type = static_cast<StructNode*>(symbol);
+            auto* type = static_cast<StructParser*>(symbol);
             if (type->builtin || type->bind) {
                 struct_type = type;
                 enum_type = nullptr;
                 return true;
             }
         } else if (symbol->node_type == NodeType::ENUM) {
-            auto* type = static_cast<EnumNode*>(symbol);
+            auto* type = static_cast<EnumParser*>(symbol);
             if (type->bind) {
                 struct_type = nullptr;
                 enum_type = type;
@@ -61,9 +61,9 @@ namespace shark::parser {
         return false;
     }
 
-    bool FunctionNode::bind_function() {
-        const StructNode* struct_type = nullptr;
-        const EnumNode* enum_type = nullptr;
+    bool FunctionParser::bind_function() {
+        const StructParser* struct_type = nullptr;
+        const EnumParser* enum_type = nullptr;
         if (!bind_named_type(return_type_name, true, struct_type, enum_type)) {
             return false;
         }
@@ -78,9 +78,9 @@ namespace shark::parser {
                 return false;
             }
         }
-        for (FieldNode* param : params) {
-            const StructNode* param_struct = nullptr;
-            const EnumNode* param_enum = nullptr;
+        for (FieldParser* param : params) {
+            const StructParser* param_struct = nullptr;
+            const EnumParser* param_enum = nullptr;
             if (!bind_named_type(type_ref_name(param->type_ref), false, param_struct, param_enum)) {
                 return false;
             }
@@ -100,7 +100,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool FunctionNode::skip_gap(Lexer<ExpressionLexer>& lexer) {
+    bool FunctionParser::skip_gap(Lexer<ExpressionLexer>& lexer) {
         while (true) {
             auto t = lexer.look_at();
             if (t.is_error()) {
@@ -114,7 +114,7 @@ namespace shark::parser {
         }
     }
 
-    bool FunctionNode::parse_type_name(Lexer<ExpressionLexer>& lexer) {
+    bool FunctionParser::parse_type_name(Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
         if (t.type != TokenType::BareWord) {
             report_error(ErrorType::SYNTAX, "expected a type name, but got `%s`", t.view());
@@ -151,7 +151,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool FunctionNode::parse(Lexer<ExpressionLexer>& lexer) {
+    bool FunctionParser::parse(Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
         if (t.is_error()) {
             report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
@@ -192,8 +192,8 @@ namespace shark::parser {
         t = lexer.look_at();
         if (t.type != TokenType::ClosingRoundBracket) {
             while (true) {
-                auto* param = pool->create_symbol<FieldNode>(file);
-                if (!param->parse(lexer, FieldNode::End::PARAMETER)) {
+                auto* param = pool->create_symbol<FieldParser>(file);
+                if (!param->parse(lexer, FieldParser::End::PARAMETER)) {
                     return false;
                 }
                 params.push_back(param);
@@ -232,7 +232,7 @@ namespace shark::parser {
         }
         lexer.consume();
 
-        tailing_comment = pool->create_node<CommentNode>(file);
+        tailing_comment = pool->create_node<CommentParser>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
             report_debug(ErrorType::NONE, "function `%s` %s params `%zu`", name, return_type_name, params.size());
             return false;

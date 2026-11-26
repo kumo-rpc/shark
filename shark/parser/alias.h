@@ -43,24 +43,24 @@ namespace shark::parser {
     /// typedef int64 Id;
     ///
     ////////////////////////////////////////////////
-    class AliasNode : public SymbolNode {
+    class AliasParser : public SymbolNode {
     public:
-        ~AliasNode() override = default;
+        ~AliasParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);
         bool bind_alias();
 
-        std::vector<CommentNode*>     leading_comment;
-        CommentNode                  *tailing_comment{nullptr};
-        std::vector<AnnotationNode*>  annotations;
+        std::vector<CommentParser*>     leading_comment;
+        CommentParser                  *tailing_comment{nullptr};
+        std::vector<AnnotationParser*>  annotations;
         std::string_view              target_name;
         const SymbolNode*             target{nullptr};
-        const StructNode*             container{nullptr};
+        const StructParser*             container{nullptr};
         bool                          is_using{false};
 
     private:
         friend class RegistryPool;
-        AliasNode(const FileNode* f, RegistryPool * pool) :SymbolNode(NodeType::ALIAS, f, pool) {}
+        AliasParser(const FileParser* f, RegistryPool * pool) :SymbolNode(NodeType::ALIAS, f, pool) {}
 
         bool skip_gap(Lexer<ExpressionLexer>& lexer);
         bool parse_target_name(Lexer<ExpressionLexer>& lexer);

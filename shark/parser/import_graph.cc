@@ -21,18 +21,18 @@ namespace shark::parser {
 
     namespace {
 
-        const std::vector<FileNode*>& empty_files() {
-            static const std::vector<FileNode*> kEmpty;
+        const std::vector<FileParser*>& empty_files() {
+            static const std::vector<FileParser*> kEmpty;
             return kEmpty;
         }
 
-        bool contains_file(const std::vector<FileNode*>& files, FileNode* file) {
+        bool contains_file(const std::vector<FileParser*>& files, FileParser* file) {
             return std::find(files.begin(), files.end(), file) != files.end();
         }
 
     }  // namespace
 
-    void ImportGraph::add_file(FileNode* file) {
+    void ImportGraph::add_file(FileParser* file) {
         if (file == nullptr) {
             return;
         }
@@ -40,7 +40,7 @@ namespace shark::parser {
         entry.file = file;
     }
 
-    bool ImportGraph::add_dependency(FileNode* from, FileNode* to) {
+    bool ImportGraph::add_dependency(FileParser* from, FileParser* to) {
         if (from == nullptr || to == nullptr || from == to) {
             return false;
         }
@@ -55,7 +55,7 @@ namespace shark::parser {
         return true;
     }
 
-    const ImportGraph::Entry* ImportGraph::find(FileNode* file) const {
+    const ImportGraph::Entry* ImportGraph::find(FileParser* file) const {
         auto it = _nodes.find(file);
         if (it == _nodes.end()) {
             return nullptr;
@@ -63,7 +63,7 @@ namespace shark::parser {
         return &it->second;
     }
 
-    const std::vector<FileNode*>& ImportGraph::direct(FileNode* file) const {
+    const std::vector<FileParser*>& ImportGraph::direct(FileParser* file) const {
         const Entry* entry = find(file);
         if (entry == nullptr) {
             return empty_files();
@@ -71,7 +71,7 @@ namespace shark::parser {
         return entry->direct;
     }
 
-    const std::vector<FileNode*>& ImportGraph::dependents(FileNode* file) const {
+    const std::vector<FileParser*>& ImportGraph::dependents(FileParser* file) const {
         const Entry* entry = find(file);
         if (entry == nullptr) {
             return empty_files();
@@ -82,8 +82,8 @@ namespace shark::parser {
     bool ImportGraph::build_queue() {
         _queue.clear();
 
-        fermat::btree_map<FileNode*, int> pending;
-        std::deque<FileNode*> ready;
+        fermat::btree_map<FileParser*, int> pending;
+        std::deque<FileParser*> ready;
         for (auto& it : _nodes) {
             int count = static_cast<int>(it.second.direct.size());
             pending[it.first] = count;
@@ -93,10 +93,10 @@ namespace shark::parser {
         }
 
         while (!ready.empty()) {
-            FileNode* file = ready.front();
+            FileParser* file = ready.front();
             ready.pop_front();
             _queue.push_back(file);
-            for (FileNode* user : _nodes[file].dependents) {
+            for (FileParser* user : _nodes[file].dependents) {
                 int& left = pending[user];
                 --left;
                 if (left == 0) {

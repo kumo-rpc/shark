@@ -18,7 +18,7 @@
 
 namespace shark::parser {
 
-    bool Edition::parse(Lexer<ExpressionLexer>& lexer) {
+    bool EditionParser::parse(Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
         if (t.is_error()) {
             report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));

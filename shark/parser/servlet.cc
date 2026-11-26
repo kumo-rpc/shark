@@ -21,11 +21,11 @@
 
 namespace shark::parser {
 
-    ServletNode::BindStep ServletNode::bind_servlet() {
+    ServletParser::BindStep ServletParser::bind_servlet() {
         if (bind) {
             return BindStep::DONE;
         }
-        std::vector<const ServletNode*> resolved;
+        std::vector<const ServletParser*> resolved;
         bool waiting = false;
         for (std::string_view base_name : base_names) {
             SymbolNode* symbol = file->find_type(base_name);
@@ -37,7 +37,7 @@ namespace shark::parser {
                 report_error(ErrorType::SEMANTIC, "servlet `%s` base `%s` is not a servlet", name, base_name);
                 return BindStep::FAIL;
             }
-            auto* base = static_cast<ServletNode*>(symbol);
+            auto* base = static_cast<ServletParser*>(symbol);
             if (!base->bind) {
                 waiting = true;
                 continue;
@@ -56,7 +56,7 @@ namespace shark::parser {
         return BindStep::DONE;
     }
 
-    bool ServletNode::skip_gap(Lexer<ExpressionLexer>& lexer) {
+    bool ServletParser::skip_gap(Lexer<ExpressionLexer>& lexer) {
         while (true) {
             auto t = lexer.look_at();
             if (t.is_error()) {
@@ -70,7 +70,7 @@ namespace shark::parser {
         }
     }
 
-    bool ServletNode::parse_base_name(Lexer<ExpressionLexer>& lexer) {
+    bool ServletParser::parse_base_name(Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
         if (t.type != TokenType::BareWord) {
             report_error(ErrorType::SYNTAX, "expected a base name, but got `%s`", t.view());
@@ -107,10 +107,10 @@ namespace shark::parser {
         return true;
     }
 
-    bool ServletNode::parse_function(Lexer<ExpressionLexer>& lexer,
-        std::vector<CommentNode*>& comments,
-        std::vector<AnnotationNode*>& annotations) {
-        auto* function = pool->create_symbol<FunctionNode>(file);
+    bool ServletParser::parse_function(Lexer<ExpressionLexer>& lexer,
+        std::vector<CommentParser*>& comments,
+        std::vector<AnnotationParser*>& annotations) {
+        auto* function = pool->create_symbol<FunctionParser>(file);
         function->leading_comment = std::move(comments);
         function->annotations = std::move(annotations);
         if (!function->parse(lexer)) {
@@ -120,7 +120,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool ServletNode::parse(Lexer<ExpressionLexer>& lexer) {
+    bool ServletParser::parse(Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
         if (t.is_error()) {
             report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
@@ -181,10 +181,10 @@ namespace shark::parser {
         lexer.consume();
 
         while (true) {
-            std::vector<CommentNode*> comments;
-            std::vector<AnnotationNode*> annotations;
+            std::vector<CommentParser*> comments;
+            std::vector<AnnotationParser*> annotations;
             while (true) {
-                auto* comment = pool->create_node<CommentNode>(file);
+                auto* comment = pool->create_node<CommentParser>(file);
                 if (!comment->parse_leading(lexer)) {
                     return false;
                 }
@@ -198,7 +198,7 @@ namespace shark::parser {
                     return false;
                 }
                 if (t.type == TokenType::BareWord && t == kAnnotationKey) {
-                    auto* annotation = pool->create_node<AnnotationNode>(file);
+                    auto* annotation = pool->create_node<AnnotationParser>(file);
                     if (!annotation->parse(lexer)) {
                         return false;
                     }
@@ -231,7 +231,7 @@ namespace shark::parser {
 
         lexer.consume();
 
-        tailing_comment = pool->create_node<CommentNode>(file);
+        tailing_comment = pool->create_node<CommentParser>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
             report_debug(ErrorType::NONE, "servlet `%s` bases `%zu` functions `%zu`", name, base_names.size(), method.size());
             return false;

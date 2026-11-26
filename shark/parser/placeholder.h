@@ -21,14 +21,14 @@
 
 namespace shark::parser {
 
-    class PlaceholderNode : public SymbolNode {
+    class PlaceholderParser : public SymbolNode {
     public:
         enum class Constraint {
             KEY,
             ALL,
         };
 
-        PlaceholderNode(const FileNode* f, RegistryPool* pool)
+        PlaceholderParser(const FileParser* f, RegistryPool* pool)
             : SymbolNode(NodeType::PLACEHOLDER, f, pool) {}
 
         bool allows(const SymbolNode* symbol) const;

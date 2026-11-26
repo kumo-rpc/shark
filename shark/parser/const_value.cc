@@ -23,7 +23,7 @@
 
 namespace shark::parser {
 
-    bool ConstValue::skip(Lexer<ExpressionLexer>& lexer) {
+    bool ConstValueParser::skip(Lexer<ExpressionLexer>& lexer) {
         while (true) {
             auto t = lexer.look_at();
             if (t.is_error()) {
@@ -37,7 +37,7 @@ namespace shark::parser {
         }
     }
 
-    bool ConstValue::parse_number(Lexer<ExpressionLexer>& lexer, bool negative) {
+    bool ConstValueParser::parse_number(Lexer<ExpressionLexer>& lexer, bool negative) {
         auto t = lexer.look_at();
         if (t.type != TokenType::Number) {
             report_error(ErrorType::SYNTAX, "expected a number, but got `%s`", t.view());
@@ -80,7 +80,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool ConstValue::parse_identifier(Lexer<ExpressionLexer>& lexer) {
+    bool ConstValueParser::parse_identifier(Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
         const char* begin = t.begin;
         const char* end = t.end;
@@ -113,7 +113,7 @@ namespace shark::parser {
         return true;
     }
 
-    bool ConstValue::parse_list(Lexer<ExpressionLexer>& lexer) {
+    bool ConstValueParser::parse_list(Lexer<ExpressionLexer>& lexer) {
         lexer.consume();
         List list;
 
@@ -128,7 +128,7 @@ namespace shark::parser {
         }
 
         while (true) {
-            auto* element = pool->create_node<ConstValue>(file);
+            auto* element = pool->create_node<ConstValueParser>(file);
             if (!element->parse(lexer)) {
                 return false;
             }
@@ -161,7 +161,7 @@ namespace shark::parser {
         }
     }
 
-    bool ConstValue::parse_map(Lexer<ExpressionLexer>& lexer) {
+    bool ConstValueParser::parse_map(Lexer<ExpressionLexer>& lexer) {
         lexer.consume();
         Map map;
 
@@ -176,7 +176,7 @@ namespace shark::parser {
         }
 
         while (true) {
-            auto* key = pool->create_node<ConstValue>(file);
+            auto* key = pool->create_node<ConstValueParser>(file);
             if (!key->parse(lexer)) {
                 return false;
             }
@@ -190,7 +190,7 @@ namespace shark::parser {
             }
             lexer.consume();
 
-            auto* entry = pool->create_node<ConstValue>(file);
+            auto* entry = pool->create_node<ConstValueParser>(file);
             if (!entry->parse(lexer)) {
                 return false;
             }
@@ -223,7 +223,7 @@ namespace shark::parser {
         }
     }
 
-    bool ConstValue::parse(Lexer<ExpressionLexer>& lexer) {
+    bool ConstValueParser::parse(Lexer<ExpressionLexer>& lexer) {
         if (!skip(lexer)) {
             return false;
         }

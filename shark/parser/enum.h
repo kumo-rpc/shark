@@ -83,11 +83,11 @@ namespace shark::parser {
     /// The closing brace can optionally be followed by a semicolon.
     ///
     ////////////////////////////////////////////////
-    class EnumNode : public SymbolNode {
+    class EnumParser : public SymbolNode {
     public:
         friend class RegistryPool;
-        EnumNode(const FileNode* f, RegistryPool * pool) :SymbolNode(NodeType::ENUM, f, pool) {}
-        ~EnumNode() override = default;
+        EnumParser(const FileParser* f, RegistryPool * pool) :SymbolNode(NodeType::ENUM, f, pool) {}
+        ~EnumParser() override = default;
 
         enum class UnderlyingType {
             NONE,
@@ -101,13 +101,13 @@ namespace shark::parser {
         bool parse(Lexer<ExpressionLexer> &lexer);
         bool bind_enum();
 
-        std::vector<CommentNode*>    leading_comment;
-        CommentNode                 *tailing_comment{nullptr};
-        std::vector<AnnotationNode*> annotations;
-        std::vector<EnumValueNode*>  values;
+        std::vector<CommentParser*>    leading_comment;
+        CommentParser                 *tailing_comment{nullptr};
+        std::vector<AnnotationParser*> annotations;
+        std::vector<EnumValueParser*>  values;
         bool                         is_class{false};
         UnderlyingType               underlying{UnderlyingType::NONE};
-        const StructNode*            container{nullptr};
+        const StructParser*            container{nullptr};
     private:
         bool parse_underlying(Lexer<ExpressionLexer> &lexer);
 

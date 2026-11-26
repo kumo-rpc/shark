@@ -20,7 +20,7 @@
 
 namespace shark::parser {
 
-    bool ImportNode::parse(Lexer<ExpressionLexer>& lexer) {
+    bool ImportParser::parse(Lexer<ExpressionLexer>& lexer) {
         // Parse leading comments.
         auto t = lexer.look_at();
         if (t.is_error()) {
@@ -102,7 +102,7 @@ namespace shark::parser {
         lexer.consume();
 
         // Parse trailing comments.
-        tailing_comment = pool->create_node<CommentNode>(file);
+        tailing_comment = pool->create_node<CommentParser>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
             report_debug(ErrorType::NONE, "import `%s` classify `%s`", path, classify);
             return false;

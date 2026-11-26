@@ -24,16 +24,16 @@
 
 namespace shark::parser {
 
-    bool EnumValueNode::parse(
+    bool EnumValueParser::parse(
         Lexer<ExpressionLexer>& lexer) {
         return parse_leading(lexer) && parse_value(lexer);
     }
 
-    bool EnumValueNode::parse_leading(
+    bool EnumValueParser::parse_leading(
         Lexer<ExpressionLexer>& lexer) {
         while (true) {
             // Parse a leading comment block.
-            auto comment = pool->create_node<CommentNode>(file);
+            auto comment = pool->create_node<CommentParser>(file);
             if (!comment->parse_leading(lexer)) {
                 return false;
             }
@@ -51,7 +51,7 @@ namespace shark::parser {
 
             // Parse annotations preceding the enum value.
             if (t.type == TokenType::BareWord && t == "annotation") {
-                auto annotation = pool->create_node<AnnotationNode>(file);
+                auto annotation = pool->create_node<AnnotationParser>(file);
                 if (!annotation->parse(lexer)) {
                     return false;
                 }
@@ -77,7 +77,7 @@ namespace shark::parser {
         }
     }
 
-    bool EnumValueNode::parse_value(
+    bool EnumValueParser::parse_value(
         Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
 
@@ -204,7 +204,7 @@ namespace shark::parser {
         lexer.consume();
 
         // Parse trailing comment.
-        tailing_comment = pool->create_node<CommentNode>(file);
+        tailing_comment = pool->create_node<CommentParser>(file);
         if (!tailing_comment->parse_tailing(lexer)) {
             report_debug(ErrorType::NONE, "enum value `%s` = `%lld`", name, static_cast<long long>(value));
             return false;

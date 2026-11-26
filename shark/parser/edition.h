@@ -28,14 +28,14 @@ namespace shark::parser {
     ////////////////////////////////////////////////
     /// edition = "sk2026";
     /// edition = 'sk2026';
-    class Edition : public Node {
+    class EditionParser : public Node {
     public:
-        Edition(const FileNode* f,  RegistryPool *p) :Node(NodeType::EDITION, f, p){}
-        ~Edition() override = default;
+        EditionParser(const FileParser* f,  RegistryPool *p) :Node(NodeType::EDITION, f, p){}
+        ~EditionParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);
 
-        CommentNode      *leading_comment{nullptr};
+        CommentParser      *leading_comment{nullptr};
         std::string_view edition;
     };
 }  // namespace shark::parser

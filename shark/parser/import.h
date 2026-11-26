@@ -41,16 +41,16 @@ namespace shark::parser {
     ///
     /// import[.identify] 'shark/compiler/idl.h';
     ///
-    class ImportNode : public Node {
+    class ImportParser : public Node {
     public:
-        ImportNode(const FileNode *f, RegistryPool *p) : Node(NodeType::IMPORT, f, p){}
-        ~ImportNode() override = default;
+        ImportParser(const FileParser *f, RegistryPool *p) : Node(NodeType::IMPORT, f, p){}
+        ~ImportParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);
 
-        CommentNode      *leading_comment{nullptr};
-        CommentNode      *tailing_comment{nullptr};
-        std::vector<AnnotationNode*> annotations;
+        CommentParser      *leading_comment{nullptr};
+        CommentParser      *tailing_comment{nullptr};
+        std::vector<AnnotationParser*> annotations;
         std::string_view  classify;
         std::string_view  path;
 

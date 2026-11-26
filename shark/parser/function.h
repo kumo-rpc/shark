@@ -47,28 +47,28 @@ namespace shark::parser {
     /// function void ping();
     ///
     ////////////////////////////////////////////////
-    class FunctionNode : public SymbolNode {
+    class FunctionParser : public SymbolNode {
     public:
         friend class RegistryPool;
-        FunctionNode(const FileNode* f, RegistryPool * pool) :SymbolNode(NodeType::FUNCTION, f, pool) {}
-        ~FunctionNode() override = default;
+        FunctionParser(const FileParser* f, RegistryPool * pool) :SymbolNode(NodeType::FUNCTION, f, pool) {}
+        ~FunctionParser() override = default;
 
         bool parse(Lexer<ExpressionLexer> &lexer);
 
-        std::vector<CommentNode*>        leading_comment;
-        CommentNode                     *tailing_comment{nullptr};
-        std::vector<AnnotationNode*>     annotations;
+        std::vector<CommentParser*>        leading_comment;
+        CommentParser                     *tailing_comment{nullptr};
+        std::vector<AnnotationParser*>     annotations;
         std::string_view                  return_type_name;
-        std::vector<FieldNode*>          params;
-        std::vector<const StructNode*>   args;
-        const StructNode*                ret_type{nullptr};
-        const EnumNode*                  ret_enum{nullptr};
-        const StructNode*                container{nullptr};
+        std::vector<FieldParser*>          params;
+        std::vector<const StructParser*>   args;
+        const StructParser*                ret_type{nullptr};
+        const EnumParser*                  ret_enum{nullptr};
+        const StructParser*                container{nullptr};
 
         bool bind_function();
 
     private:
-        bool bind_named_type(std::string_view type_name, bool allow_void, const StructNode*& struct_type, const EnumNode*& enum_type);
+        bool bind_named_type(std::string_view type_name, bool allow_void, const StructParser*& struct_type, const EnumParser*& enum_type);
         bool skip_gap(Lexer<ExpressionLexer>& lexer);
         bool parse_type_name(Lexer<ExpressionLexer>& lexer);
     };
