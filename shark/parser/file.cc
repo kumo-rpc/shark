@@ -14,6 +14,7 @@
 //
 
 #include <shark/parser/alias.h>
+#include <shark/parser/export.h>
 #include <shark/parser/import.h>
 #include <shark/parser/enum.h>
 #include <shark/parser/field.h>
@@ -101,7 +102,7 @@ namespace shark::parser {
             return false;
         }
         bind = true;
-        return true;
+        return export_file(pool->schema_pool(), *this);
     }
 
     bool FileParser::take_package() {

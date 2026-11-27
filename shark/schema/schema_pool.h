@@ -289,10 +289,10 @@ namespace shark {
         bool                              builtin_{false};
         bool                              generic_{false};
         PhysicalType                      phy_type_{PhysicalType::VOID};
+        ~StructBase() override;
 
     private:
         StructBase();
-        ~StructBase() override;
     };
 
     class AliasBase : public SymbolBase {
@@ -330,10 +330,10 @@ namespace shark {
         const EnumBase                   *ret_enum_{nullptr};
         const StructBase                 *container_{nullptr};
         const ServletBase                *servlet_{nullptr};
+        ~FunctionBase() override;
 
     private:
         FunctionBase();
-        ~FunctionBase() override;
     };
 
     class ServletBase : public SymbolBase {
@@ -416,10 +416,10 @@ namespace shark {
         std::string                   key_;
         TypeName                      type_name_;
         ConstValue                   *value_{nullptr};
+        ~AnnotationBase() override;
 
     private:
         AnnotationBase();
-        ~AnnotationBase() override;
     };
 
     inline StructBase::StructBase() = default;

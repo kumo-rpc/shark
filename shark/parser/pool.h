@@ -22,6 +22,7 @@
 #include <fermat/maps/btree_set.h>
 #include <shark/parser/import_graph.h>
 #include <shark/parser/symbol.h>
+#include <shark/schema/schema_pool.h>
 
 namespace shark::parser {
 
@@ -136,6 +137,10 @@ namespace shark::parser {
         }
 
 
+        SchemaPoolBase& schema_pool() {
+            return schema_pool_;
+        }
+
         FileParser* build_file(std::string_view file);
 
         FileParser* build_file(std::string_view file, const std::vector<std::string> &includes) {
@@ -171,6 +176,7 @@ namespace shark::parser {
         fermat::btree_map<std::string_view, FileParser*>      _files;
         fermat::btree_set<std::string>                      _includes_set;
         std::vector<std::string>                            _includes;
+        SchemaPoolBase                                      schema_pool_;
         std::deque<FileParser*>                               _files_queue;
         ImportGraph                                         _import_graph;
     };
