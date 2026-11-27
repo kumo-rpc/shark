@@ -250,20 +250,6 @@ namespace shark::schema {
         OPTIONAL,
     };
 
-    enum class PlaceholderConstraint : uint8_t {
-        KEY,
-        ALL,
-    };
-
-    struct PlaceholderInfo {
-        SourceSite site;
-        std::string name;
-        PlaceholderConstraint constraint{PlaceholderConstraint::ALL};
-        /// Types this placeholder accepts. Empty when every type is allowed.
-        /// The count is the size of this list.
-        std::vector<PhysicalType> allowed;
-    };
-
     enum class FieldLabel : uint8_t {
         REQUIRED,
         OPTIONAL,
@@ -277,6 +263,8 @@ namespace shark::schema {
         FieldLabel label{FieldLabel::REQUIRED};
         /// Written type, including generic arguments. Resolved type pointers are not stored.
         TypeNameInfo type_name;
+        /// True when the written type uses a generic parameter.
+        bool generic{false};
         uint16_t number{0};
         /// EMPTY when the field has no default.
         Value default_value;
@@ -287,12 +275,11 @@ namespace shark::schema {
 
     struct StructInfo {
         SourceSite site;
-        std::string name;
+        /// Declaration name. Generic parameters are arguments on this name.
+        TypeNameInfo name;
         bool is_union{false};
         bool builtin{false};
         bool generic{false};
-        /// Generic parameters. Each entry is a type parameter (is_parameter) or a nested generic.
-        std::vector<TypeNameInfo> parameters;
         PhysicalType phy_type{PhysicalType::VOID};
         std::vector<FieldInfo> fields;
         std::vector<StructInfo> nested_structs;
@@ -304,6 +291,8 @@ namespace shark::schema {
     struct FunctionInfo {
         SourceSite site;
         std::string name;
+        /// Type parameters written after function. Empty when the function is not generic.
+        std::vector<TypeNameInfo> parameters;
         /// Return type as written. Resolved struct and enum pointers are not stored.
         TypeNameInfo return_type;
         std::vector<FieldInfo> params;
@@ -312,7 +301,8 @@ namespace shark::schema {
 
     struct ServletInfo {
         SourceSite site;
-        std::string name;
+        /// Declaration name. Generic parameters are arguments on this name.
+        TypeNameInfo name;
         /// Base types as written, including generic arguments. Resolved servlet pointers are not stored.
         std::vector<TypeNameInfo> bases;
         std::vector<FunctionInfo> methods;

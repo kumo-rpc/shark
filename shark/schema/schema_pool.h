@@ -322,12 +322,14 @@ namespace shark {
         std::vector<CommentBase*>         leading_comment_;
         CommentBase                      *tailing_comment_{nullptr};
         std::vector<AnnotationBase*>     annotations_;
+        std::vector<TypeName>             parameters_;
         TypeName                          return_type_;
         std::vector<FieldBase*>           params_;
         std::vector<const StructBase*>    args_;
         const StructBase                 *ret_type_{nullptr};
         const EnumBase                   *ret_enum_{nullptr};
         const StructBase                 *container_{nullptr};
+        const ServletBase                *servlet_{nullptr};
 
     private:
         FunctionBase();
