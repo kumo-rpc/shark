@@ -91,3 +91,39 @@ annotation.cpp points<list<Point>> = [{x = 1, y = 2}, {x = 3, y = 4}];
 function void sub(required int64 a @ 1,
                    optional int64 b @ 2);
 
+struct Slot<T[is_integer]> {
+    optional T n @ 1;
+};
+
+struct Pair<K[is_integer or is_string or has_hash], V[not is_void and is_subclass_of<Point>]> {
+    optional list<K> keys @ 1;
+    optional list<int32> key32 @ 3;
+    optional map<string, Point> values @ 2;
+};
+
+struct Holder {
+    optional Slot<int32> slot @ 1;
+    optional list<Point> items @ 2;
+    optional map<string, Point> index @ 3;
+    optional Pair<int32, Point> pair @ 4;
+};
+
+function<K> K identity(required K value @ 1);
+
+function<K[is_integer], V[is_subclass_of<Point>]> V pick(
+    required K key @ 1,
+    required V value @ 2,
+);
+
+function<K[(is_integer or is_string) and not is_void]> K keep(required K value @ 1);
+
+servlet Store<T[is_integer]> {
+    function void ping();
+    function void agg(required T key @ 1);
+    function<K> void agg(required T key @ 1,required K value @ 2);
+};
+
+servlet IntStore : Store<int32> {
+    function void ping();
+};
+

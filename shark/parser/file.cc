@@ -185,10 +185,80 @@ namespace shark::parser {
         return true;
     }
 
-    bool FileParser::assign_function(FunctionParser* node, std::string_view scope, std::vector<std::string>& seen) {
-        if (!assign_symbol(node, scope, seen)) {
-            return false;
+    void append_signature_type(std::string& out, const TypeName& type, const std::vector<std::string_view>& slots) {
+        if (type.arguments.empty()) {
+            for (std::size_t i = 0; i < slots.size(); ++i) {
+                if (slots[i] != type.name) {
+                    continue;
+                }
+                out.push_back('$');
+                out += std::to_string(i);
+                return;
+            }
         }
+        out.append(type.name.data(), type.name.size());
+        if (type.arguments.empty()) {
+            return;
+        }
+        out.push_back('<');
+        for (std::size_t i = 0; i < type.arguments.size(); ++i) {
+            if (i != 0) {
+                out.push_back(',');
+            }
+            append_signature_type(out, type.arguments[i], slots);
+        }
+        out.push_back('>');
+    }
+
+    bool FileParser::assign_function(FunctionParser* node, std::string_view scope, std::vector<std::string>& seen) {
+        std::vector<std::string_view> slots;
+        if (node->servlet != nullptr) {
+            for (const TypeName& parameter : node->servlet->declared_name.arguments) {
+                slots.push_back(parameter.name);
+            }
+        }
+        for (const TypeName& parameter : node->parameters) {
+            slots.push_back(parameter.name);
+        }
+
+        std::string qualified;
+        if (!scope.empty()) {
+            qualified.append(scope);
+            if (node->servlet != nullptr && !node->servlet->declared_name.arguments.empty()) {
+                qualified.push_back('<');
+                for (std::size_t i = 0; i < node->servlet->declared_name.arguments.size(); ++i) {
+                    if (i != 0) {
+                        qualified.push_back(',');
+                    }
+                    qualified.push_back('$');
+                    qualified += std::to_string(i);
+                }
+                qualified.push_back('>');
+            }
+            qualified.push_back('.');
+        }
+        qualified.append(node->name.data(), node->name.size());
+        qualified.push_back('(');
+        for (std::size_t i = 0; i < node->params.size(); ++i) {
+            if (i != 0) {
+                qualified.push_back(',');
+            }
+            append_signature_type(qualified, node->params[i]->type_ref, slots);
+        }
+        qualified.push_back(')');
+
+        node->full_name_without_package = qualified;
+        node->full_name = package;
+        node->full_name.push_back('.');
+        node->full_name += node->full_name_without_package;
+        for (const std::string& existing : seen) {
+            if (existing == node->full_name) {
+                report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", node->full_name);
+                return false;
+            }
+        }
+        seen.push_back(node->full_name);
+
         std::string_view nested = node->full_name_without_package;
         for (FieldParser* param : node->params) {
             if (!assign_symbol(param, nested, seen)) {
@@ -343,6 +413,11 @@ namespace shark::parser {
                 return found;
             }
         }
+        for (ServletParser* node : servlets) {
+            if (same_name(node, name)) {
+                return node;
+            }
+        }
         return nullptr;
     }
 
@@ -366,6 +441,57 @@ namespace shark::parser {
             return symbol;
         }
         return find_local(name);
+    }
+
+    namespace {
+
+        const std::vector<TypeName>* generic_parameters(SymbolNode* symbol) {
+            if (symbol == nullptr) {
+                return nullptr;
+            }
+            if (symbol->node_type == SymbolType::STRUCT) {
+                auto* type = static_cast<StructParser*>(symbol);
+                if (!type->generic) {
+                    return nullptr;
+                }
+                return &type->declared_name.arguments;
+            }
+            if (symbol->node_type == SymbolType::SERVLET) {
+                auto* type = static_cast<ServletParser*>(symbol);
+                if (type->declared_name.arguments.empty()) {
+                    return nullptr;
+                }
+                return &type->declared_name.arguments;
+            }
+            return nullptr;
+        }
+
+    }  // namespace
+
+    SymbolNode* FileParser::find_type(const TypeName& type) const {
+        SymbolNode* symbol = find_type(type.name);
+        if (symbol == nullptr) {
+            return nullptr;
+        }
+        const std::vector<TypeName>* parameters = generic_parameters(symbol);
+        if (type.arguments.empty()) {
+            if (parameters != nullptr) {
+                return nullptr;
+            }
+            return symbol;
+        }
+        if (parameters == nullptr || parameters->size() != type.arguments.size()) {
+            return nullptr;
+        }
+        for (std::size_t i = 0; i < parameters->size(); ++i) {
+            if (!parameters->at(i).constraint.has_value()) {
+                continue;
+            }
+            if (!check_constraint(*parameters->at(i).constraint, type.arguments[i])) {
+                return nullptr;
+            }
+        }
+        return symbol;
     }
 
     bool FileParser::bind_alias_struct(StructParser* node, bool& progress) {
@@ -424,7 +550,7 @@ namespace shark::parser {
         if (field->bind) {
             return true;
         }
-        SymbolNode* symbol = find_type(type_ref_name(field->type_ref));
+        SymbolNode* symbol = find_type(field->type_ref);
         if (symbol != nullptr) {
             symbol = concrete_type(symbol);
         }

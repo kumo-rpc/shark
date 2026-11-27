@@ -20,6 +20,7 @@
 #include <shark/parser/enum_value.h>
 #include <shark/parser/annotation.h>
 #include <shark/parser/lexer.h>
+#include <shark/parser/type_name.h>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -37,13 +38,11 @@ namespace shark::parser {
     /// Bases after `:` are dotted names and are not bound here.
     /// A trailing comma in the base list is allowed.
     ///
-    /// servlet Read {
+    /// servlet MyStraits<T> {
     ///     function int64 get(required string key @ 1);
     /// }
     ///
-    /// /// Query service.
-    /// annotation key = "query";
-    /// servlet Query : shark.Read, shark.Write, {
+    /// servlet Query : shark.Read, shark.Write<int32>, {
     ///     function void ping();
     /// }
     ///
@@ -67,7 +66,9 @@ namespace shark::parser {
         std::vector<CommentParser*>    leading_comment;
         CommentParser                  *tailing_comment{nullptr};
         std::vector<AnnotationParser*>  annotations;
-        std::vector<std::string_view> base_names;
+        /// Declaration name, including generic arguments. `name` stays the bare symbol name.
+        TypeName                        declared_name;
+        std::vector<TypeName>           base_names;
         std::vector<const ServletParser*> bases;
         std::vector<FunctionParser*>    method;
         const StructParser*            container{nullptr};

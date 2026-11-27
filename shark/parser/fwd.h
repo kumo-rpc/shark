@@ -30,7 +30,5 @@ namespace shark::parser {
     class ServletParser;
     class FunctionParser;
     class ConstValueParser;
-    class PlaceholderParser;
-
 
 }  // namespace shark::parser

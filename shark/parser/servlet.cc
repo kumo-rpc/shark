@@ -17,6 +17,7 @@
 #include <shark/parser/pool.h>
 #include <shark/parser/file.h>
 #include <shark/parser/servlet.h>
+#include <shark/parser/type_name.h>
 
 namespace shark::parser {
 
@@ -26,14 +27,14 @@ namespace shark::parser {
         }
         std::vector<const ServletParser*> resolved;
         bool waiting = false;
-        for (std::string_view base_name : base_names) {
+        for (const TypeName& base_name : base_names) {
             SymbolNode* symbol = file->find_type(base_name);
             if (symbol == nullptr) {
-                report_error(ErrorType::SEMANTIC, "servlet `%s` base `%s` was not found", name, base_name);
+                report_error(ErrorType::SEMANTIC, "servlet `%s` base `%s` was not found", name, format_type_ref(base_name).c_str());
                 return BindStep::FAIL;
             }
             if (symbol->node_type != SymbolType::SERVLET) {
-                report_error(ErrorType::SEMANTIC, "servlet `%s` base `%s` is not a servlet", name, base_name);
+                report_error(ErrorType::SEMANTIC, "servlet `%s` base `%s` is not a servlet", name, format_type_ref(base_name).c_str());
                 return BindStep::FAIL;
             }
             auto* base = static_cast<ServletParser*>(symbol);
@@ -70,39 +71,11 @@ namespace shark::parser {
     }
 
     bool ServletParser::parse_base_name(Lexer<ExpressionLexer>& lexer) {
-        auto t = lexer.look_at();
-        if (t.type != TokenType::BareWord) {
-            report_error(ErrorType::SYNTAX, "expected a base name, but got `%s`", t.view());
+        TypeName base_name;
+        if (!parse_type_ref(*this, lexer, base_name)) {
             return false;
         }
-        const char* begin = t.begin;
-        const char* end = t.end;
-        lexer.consume();
-
-        while (true) {
-            auto dot = lexer.look_at();
-            if (dot.is_error()) {
-                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(dot.type));
-                return false;
-            }
-            if (dot.type != TokenType::Dot || dot.begin != end) {
-                break;
-            }
-            lexer.consume();
-            auto part = lexer.look_at();
-            if (part.is_error()) {
-                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(part.type));
-                return false;
-            }
-            if (part.type != TokenType::BareWord || part.begin != dot.end) {
-                report_error(ErrorType::SYNTAX, "expected a base name, but got `%s`", part.view());
-                return false;
-            }
-            end = part.end;
-            lexer.consume();
-        }
-
-        base_names.emplace_back(begin, static_cast<size_t>(end - begin));
+        base_names.push_back(std::move(base_name));
         return true;
     }
 
@@ -110,6 +83,7 @@ namespace shark::parser {
         std::vector<CommentParser*>& comments,
         std::vector<AnnotationParser*>& annotations) {
         auto* function = pool->create_symbol<FunctionParser>(file);
+        function->servlet = this;
         function->leading_comment = std::move(comments);
         function->annotations = std::move(annotations);
         if (!function->parse(lexer)) {
@@ -135,13 +109,10 @@ namespace shark::parser {
         if (!skip_gap(lexer)) {
             return false;
         }
-        t = lexer.look_at();
-        if (t.type != TokenType::BareWord) {
-            report_error(ErrorType::SYNTAX, "expected a servlet name, but got `%s`", t.view());
+        if (!parse_type_ref(*this, lexer, declared_name)) {
             return false;
         }
-        name = t.view();
-        lexer.consume();
+        name = declared_name.name;
 
         if (!skip_gap(lexer)) {
             return false;

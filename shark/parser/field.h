@@ -52,11 +52,10 @@ namespace shark::parser {
         CommentParser                   *tailing_comment{nullptr};
         std::vector<AnnotationParser*>   annotations;
         FieldLabel                     label{FieldLabel::REQUIRED};
-        TypeRef                        type_ref;
+        TypeName                       type_ref;
         bool                           generic{false};
         const StructParser*              type{nullptr};
         const EnumParser*                enum_type{nullptr};
-        const PlaceholderParser*         placeholder{nullptr};
         /// Set by the caller before parse. It is already fixed while parsing.
         /// nullptr means the field is declared at file scope, not inside a struct.
         const StructParser*              container{nullptr};

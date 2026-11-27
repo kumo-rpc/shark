@@ -108,7 +108,7 @@ namespace shark::parser {
             lexer.consume();
         }
 
-        value = Identifier{std::string_view(begin, static_cast<size_t>(end - begin)), nullptr};
+        value = Identifier{std::string_view(begin, static_cast<size_t>(end - begin)), nullptr, nullptr};
         return true;
     }
 

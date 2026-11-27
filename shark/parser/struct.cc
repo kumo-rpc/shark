@@ -23,6 +23,49 @@
 
 namespace shark::parser {
 
+namespace {
+
+    void mark_parameters(const std::vector<TypeName>& parameters, TypeName& type) {
+        if (type.arguments.empty()) {
+            for (const TypeName& parameter : parameters) {
+                if (parameter.name == type.name) {
+                    type.is_parameter = true;
+                    return;
+                }
+            }
+            return;
+        }
+        for (TypeName& argument : type.arguments) {
+            mark_parameters(parameters, argument);
+        }
+    }
+
+    bool type_uses(const TypeName& type, std::string_view parameter) {
+        if (type.arguments.empty() && type.name == parameter) {
+            return true;
+        }
+        for (const TypeName& argument : type.arguments) {
+            if (type_uses(argument, parameter)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool uses_parameter(const TypeName& type) {
+        if (type.is_parameter) {
+            return true;
+        }
+        for (const TypeName& argument : type.arguments) {
+            if (uses_parameter(argument)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+}  // namespace
+
     StructParser::BindStep StructParser::bind_struct() {
         if (bind) {
             return BindStep::DONE;
@@ -41,7 +84,20 @@ namespace shark::parser {
             if (field->bind) {
                 continue;
             }
-            SymbolNode* symbol = file->find_type(type_ref_name(field->type_ref));
+            mark_parameters(declared_name.arguments, field->type_ref);
+            if (field->type_ref.is_parameter) {
+                field->generic = true;
+                field->bind = true;
+                if (!field->emit_to_pool()) {
+                    report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", field->full_name);
+                    return BindStep::FAIL;
+                }
+                continue;
+            }
+            if (uses_parameter(field->type_ref)) {
+                field->generic = true;
+            }
+            SymbolNode* symbol = file->find_type(field->type_ref);
             if (symbol != nullptr) {
                 symbol = file->concrete_type(symbol);
             }
@@ -90,6 +146,18 @@ namespace shark::parser {
         }
         if (waiting) {
             return BindStep::WAIT;
+        }
+        for (const TypeName& parameter : declared_name.arguments) {
+            bool used = false;
+            for (const FieldParser* field : fields) {
+                if (type_uses(field->type_ref, parameter.name)) {
+                    used = true;
+                    break;
+                }
+            }
+            if (!used) {
+                report_debug(ErrorType::SEMANTIC, "generic parameter `%s` of `%s` is unused", parameter.name, name);
+            }
         }
         bind = true;
         if (!emit_to_pool()) {
@@ -194,18 +262,11 @@ namespace {
         lexer.consume();
         lexer.consume_white_space(true);
 
-        t = lexer.look_at();
-        if (t.is_error()) {
-            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+        if (!parse_type_ref(*this, lexer, declared_name)) {
             return false;
         }
-        if (t.type != TokenType::BareWord) {
-            report_error(ErrorType::SYNTAX, "expected a type name, but got `%s`", t.view());
-            return false;
-        }
-        name = t.view();
-        lexer.consume();
-        lexer.consume_white_space(true);
+        name = declared_name.name;
+        generic = !declared_name.arguments.empty();
 
         t = lexer.look_at();
         if (t.type != TokenType::OpeningCurlyBrace) {

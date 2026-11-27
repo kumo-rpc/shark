@@ -20,6 +20,7 @@
 #include <shark/parser/enum_value.h>
 #include <shark/parser/annotation.h>
 #include <shark/parser/lexer.h>
+#include <shark/parser/type_name.h>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -27,6 +28,8 @@
 #include <functional>
 
 namespace shark::parser {
+
+    class ServletParser;
 
     ////////////////////////////////////////////////
     /// Function declarations.
@@ -39,11 +42,8 @@ namespace shark::parser {
     ///
     /// /// Add two numbers.
     /// annotation key = "add";
-    /// function int64 add(
-    ///     required int64 a @ 1,
-    ///     optional int64 b @ 2 = 0,
-    /// );
-    ///
+    /// function<K[is_integer]> K add(K a, K b);
+    /// function int64 add(required int64 a @ 1);
     /// function void ping();
     ///
     ////////////////////////////////////////////////
@@ -58,18 +58,21 @@ namespace shark::parser {
         std::vector<CommentParser*>        leading_comment;
         CommentParser                     *tailing_comment{nullptr};
         std::vector<AnnotationParser*>     annotations;
-        std::string_view                  return_type_name;
+        /// Type parameters or specialization arguments written after `function`.
+        std::vector<TypeName>              parameters;
+        TypeName                           return_type;
         std::vector<FieldParser*>          params;
         std::vector<const StructParser*>   args;
         const StructParser*                ret_type{nullptr};
         const EnumParser*                  ret_enum{nullptr};
         const StructParser*                container{nullptr};
+        const ServletParser*               servlet{nullptr};
 
         bool bind_function();
 
     private:
-        bool bind_named_type(std::string_view type_name, bool allow_void, const StructParser*& struct_type, const EnumParser*& enum_type);
+        bool bind_named_type(TypeName& type_name, bool allow_void, const StructParser*& struct_type, const EnumParser*& enum_type);
         bool skip_gap(Lexer<ExpressionLexer>& lexer);
-        bool parse_type_name(Lexer<ExpressionLexer>& lexer);
+        bool parse_parameters(Lexer<ExpressionLexer>& lexer);
     };
 }  // namespace shark::parser

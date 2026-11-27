@@ -43,7 +43,6 @@ kmcmake_cc_library(
         parser/package.cc
         parser/annotation.cc
         parser/builtin.cc
-        parser/placeholder.cc
         parser/enum_value.cc
         parser/enum.cc
         parser/symbol.cc

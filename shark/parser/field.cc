@@ -42,7 +42,7 @@ namespace shark::parser {
         if (!parse_type_ref(*this, lexer, type_ref)) {
             return false;
         }
-        generic = std::holds_alternative<TypeName>(type_ref);
+        generic = !type_ref.arguments.empty();
         return true;
     }
 

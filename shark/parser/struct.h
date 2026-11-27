@@ -20,6 +20,7 @@
 #include <shark/parser/enum_value.h>
 #include <shark/parser/annotation.h>
 #include <shark/parser/lexer.h>
+#include <shark/parser/type_name.h>
 #include <string>
 #include <vector>
 #include <optional>
@@ -116,6 +117,8 @@ namespace shark::parser {
         bool                          builtin{false};
         bool                          generic{false};
         PhysicalType                  phy_type{PhysicalType::VOID};
+        /// Declaration name, including generic arguments. `name` stays the bare symbol name.
+        TypeName                      declared_name;
 
     private:
         bool parse_field(Lexer<ExpressionLexer>& lexer,

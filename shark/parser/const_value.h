@@ -40,9 +40,19 @@ namespace shark::parser {
             std::vector<std::pair<ConstValueParser*, ConstValueParser*>> entries;
         };
 
+        struct StructField {
+            const FieldParser* field{nullptr};
+            ConstValueParser* value{nullptr};
+        };
+
+        struct Struct {
+            std::vector<StructField> fields;
+        };
+
         struct Identifier {
             std::string_view name;
             const EnumParser* enum_type{nullptr};
+            const EnumValueParser* enumerator{nullptr};
         };
 
         using Value = std::variant<
@@ -53,7 +63,8 @@ namespace shark::parser {
             std::string_view,
             Identifier,
             List,
-            Map>;
+            Map,
+            Struct>;
 
         ConstValueParser(const FileParser* f, RegistryPool* p)
             : Node(SymbolType::CONST, f, p) {}

@@ -18,13 +18,70 @@
 #include <shark/parser/file.h>
 #include <shark/parser/function.h>
 #include <shark/parser/pool.h>
+#include <shark/parser/servlet.h>
 #include <shark/parser/struct.h>
 #include <shark/parser/type_name.h>
 
 namespace shark::parser {
 
-    bool FunctionParser::bind_named_type(std::string_view type_name, bool allow_void, const StructParser*& struct_type, const EnumParser*& enum_type) {
-        if (type_name == "void") {
+    bool in_scope(FunctionParser& function, std::string_view name) {
+        for (TypeName& parameter : function.parameters) {
+            if (parameter.name != name) {
+                continue;
+            }
+            parameter.is_parameter = true;
+            return true;
+        }
+        if (function.servlet != nullptr) {
+            for (const TypeName& parameter : function.servlet->declared_name.arguments) {
+                if (parameter.name == name) {
+                    return true;
+                }
+            }
+        }
+        if (function.container == nullptr) {
+            return false;
+        }
+        for (const TypeName& parameter : function.container->declared_name.arguments) {
+            if (parameter.name == name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool contains_parameter(const TypeName& type) {
+        if (type.is_parameter) {
+            return true;
+        }
+        for (const TypeName& argument : type.arguments) {
+            if (contains_parameter(argument)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void mark_scope_parameters(FunctionParser& function, TypeName& type_name) {
+        if (type_name.arguments.empty()) {
+            if (in_scope(function, type_name.name)) {
+                type_name.is_parameter = true;
+            }
+            return;
+        }
+        for (TypeName& argument : type_name.arguments) {
+            mark_scope_parameters(function, argument);
+        }
+    }
+
+    bool FunctionParser::bind_named_type(TypeName& type_name, bool allow_void, const StructParser*& struct_type, const EnumParser*& enum_type) {
+        mark_scope_parameters(*this, type_name);
+        if (type_name.is_parameter) {
+            struct_type = nullptr;
+            enum_type = nullptr;
+            return true;
+        }
+        if (type_name.name == "void") {
             if (!allow_void) {
                 report_error(ErrorType::SEMANTIC, "function `%s` parameter type `void` is not allowed", name);
                 return false;
@@ -38,7 +95,7 @@ namespace shark::parser {
             symbol = file->concrete_type(symbol);
         }
         if (symbol == nullptr) {
-            report_error(ErrorType::SEMANTIC, "function `%s` type `%s` was not found", name, type_name);
+            report_error(ErrorType::SEMANTIC, "function `%s` type `%s` was not found", name, type_name.name);
             return false;
         }
         if (symbol->node_type == SymbolType::STRUCT) {
@@ -56,14 +113,14 @@ namespace shark::parser {
                 return true;
             }
         }
-        report_error(ErrorType::SEMANTIC, "function `%s` type `%s` was not bound", name, type_name);
+        report_error(ErrorType::SEMANTIC, "function `%s` type `%s` was not bound", name, type_name.name);
         return false;
     }
 
     bool FunctionParser::bind_function() {
         const StructParser* struct_type = nullptr;
         const EnumParser* enum_type = nullptr;
-        if (!bind_named_type(return_type_name, true, struct_type, enum_type)) {
+        if (!bind_named_type(return_type, true, struct_type, enum_type)) {
             return false;
         }
         ret_type = struct_type;
@@ -80,11 +137,14 @@ namespace shark::parser {
         for (FieldParser* param : params) {
             const StructParser* param_struct = nullptr;
             const EnumParser* param_enum = nullptr;
-            if (!bind_named_type(type_ref_name(param->type_ref), false, param_struct, param_enum)) {
+            if (!bind_named_type(param->type_ref, false, param_struct, param_enum)) {
                 return false;
             }
             param->type = param_struct;
             param->enum_type = param_enum;
+            if (contains_parameter(param->type_ref)) {
+                param->generic = true;
+            }
             param->bind = true;
             if (!param->emit_to_pool()) {
                 report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", param->full_name);
@@ -113,40 +173,47 @@ namespace shark::parser {
         }
     }
 
-    bool FunctionParser::parse_type_name(Lexer<ExpressionLexer>& lexer) {
+    bool FunctionParser::parse_parameters(Lexer<ExpressionLexer>& lexer) {
         auto t = lexer.look_at();
-        if (t.type != TokenType::BareWord) {
-            report_error(ErrorType::SYNTAX, "expected a type name, but got `%s`", t.view());
+        if (t.type != TokenType::Less) {
+            return true;
+        }
+        lexer.consume();
+        if (!skip_gap(lexer)) {
             return false;
         }
-        const char* begin = t.begin;
-        const char* end = t.end;
-        lexer.consume();
-
         while (true) {
-            auto dot = lexer.look_at();
-            if (dot.is_error()) {
-                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(dot.type));
-                return false;
-            }
-            if (dot.type != TokenType::Dot || dot.begin != end) {
+            t = lexer.look_at();
+            if (t.type == TokenType::Greater) {
                 break;
             }
-            lexer.consume();
-            auto part = lexer.look_at();
-            if (part.is_error()) {
-                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(part.type));
+            TypeName parameter;
+            if (!parse_type_ref(*this, lexer, parameter)) {
                 return false;
             }
-            if (part.type != TokenType::BareWord || part.begin != dot.end) {
-                report_error(ErrorType::SYNTAX, "expected a type name, but got `%s`", part.view());
+            parameters.push_back(std::move(parameter));
+            if (!skip_gap(lexer)) {
                 return false;
             }
-            end = part.end;
-            lexer.consume();
+            t = lexer.look_at();
+            if (t.type == TokenType::Comma) {
+                lexer.consume();
+                if (!skip_gap(lexer)) {
+                    return false;
+                }
+                continue;
+            }
+            if (t.type == TokenType::Greater) {
+                break;
+            }
+            report_error(ErrorType::SYNTAX, "expected `,` or `>` in function `%s`, but got `%s`", name, t.view());
+            return false;
         }
-
-        return_type_name = std::string_view(begin, static_cast<size_t>(end - begin));
+        if (parameters.empty()) {
+            report_error(ErrorType::SYNTAX, "function type parameter list is empty");
+            return false;
+        }
+        lexer.consume();
         return true;
     }
 
@@ -163,7 +230,7 @@ namespace shark::parser {
         start_location = {t.line, t.column};
         lexer.consume();
 
-        if (!skip_gap(lexer) || !parse_type_name(lexer) || !skip_gap(lexer)) {
+        if (!skip_gap(lexer) || !parse_parameters(lexer) || !skip_gap(lexer) || !parse_type_ref(*this, lexer, return_type) || !skip_gap(lexer)) {
             return false;
         }
 
@@ -232,12 +299,13 @@ namespace shark::parser {
         lexer.consume();
 
         tailing_comment = pool->create_node<CommentParser>(file);
+        const std::string shown = format_type_ref(return_type);
         if (!tailing_comment->parse_tailing(lexer)) {
-            report_debug(ErrorType::NONE, "function `%s` %s params `%zu`", name, return_type_name, params.size());
+            report_debug(ErrorType::NONE, "function `%s` %s params `%zu`", name, shown.c_str(), params.size());
             return false;
         }
 
-        report_debug(ErrorType::NONE, "function `%s` %s params `%zu`", name, return_type_name, params.size());
+        report_debug(ErrorType::NONE, "function `%s` %s params `%zu`", name, shown.c_str(), params.size());
         return true;
     }
 

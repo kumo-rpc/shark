@@ -15,9 +15,9 @@
 
 #include <shark/parser/builtin.h>
 #include <shark/parser/field.h>
-#include <shark/parser/placeholder.h>
 #include <shark/parser/pool.h>
 #include <shark/parser/struct.h>
+#include <string>
 #include <string_view>
 
 namespace shark::parser {
@@ -46,21 +46,6 @@ namespace shark::parser {
             {"string", PhysicalType::STRING},
         };
 
-        constexpr PhysicalType kKeyTypes[] = {
-            PhysicalType::BOOL,
-            PhysicalType::INT8,
-            PhysicalType::UINT8,
-            PhysicalType::INT16,
-            PhysicalType::UINT16,
-            PhysicalType::INT32,
-            PhysicalType::UINT32,
-            PhysicalType::INT64,
-            PhysicalType::UINT64,
-            PhysicalType::INT128,
-            PhysicalType::UINT128,
-            PhysicalType::STRING,
-        };
-
         void export_symbol(SymbolNode* node, std::string_view name) {
             node->name = name;
             node->full_name_without_package.assign(name.data(), name.size());
@@ -69,29 +54,23 @@ namespace shark::parser {
             node->emit_to_pool();
         }
 
-        PlaceholderParser* add_placeholder(RegistryPool& pool, std::string_view name, PlaceholderParser::Constraint constraint, const PhysicalType* allowed, std::size_t allowed_count) {
-            if (SymbolNode* existing = pool.get_symbol(name)) {
-                return static_cast<PlaceholderParser*>(existing);
-            }
-            auto* node = pool.create_symbol<PlaceholderParser>(nullptr);
-            node->constraint = constraint;
-            node->allowed = allowed;
-            node->allowed_count = allowed_count;
-            export_symbol(node, name);
-            return node;
-        }
-
-        void add_placeholder_field(RegistryPool& pool, StructParser* owner, PlaceholderParser* placeholder) {
+        void add_parameter_field(RegistryPool& pool, StructParser* owner, std::string_view parameter) {
             auto* field = pool.create_symbol<FieldParser>(nullptr);
             field->container = owner;
-            field->placeholder = placeholder;
-            field->type_ref = placeholder->name;
-            field->name = placeholder->name;
-            field->full_name_without_package = owner->full_name_without_package + "." + std::string(placeholder->name);
+            field->type_ref.name = parameter;
+            field->type_ref.is_parameter = true;
+            field->name = parameter;
+            field->full_name_without_package = owner->full_name_without_package + "." + std::string(parameter);
             field->full_name = field->full_name_without_package;
             field->bind = true;
             field->emit_to_pool();
             owner->fields.push_back(field);
+
+            TypeName argument;
+            argument.name = parameter;
+            argument.is_parameter = true;
+            owner->declared_name.arguments.push_back(std::move(argument));
+            owner->generic = true;
         }
 
         StructParser* add_container(RegistryPool& pool, std::string_view name, PhysicalType type) {
@@ -102,6 +81,7 @@ namespace shark::parser {
             node->builtin = true;
             node->generic = true;
             node->phy_type = type;
+            node->declared_name.name = name;
             export_symbol(node, name);
             return node;
         }
@@ -119,21 +99,18 @@ namespace shark::parser {
             export_symbol(node, spec.name);
         }
 
-        PlaceholderParser* key = add_placeholder(pool, "key", PlaceholderParser::Constraint::KEY, kKeyTypes, sizeof(kKeyTypes) / sizeof(kKeyTypes[0]));
-        PlaceholderParser* value = add_placeholder(pool, "value", PlaceholderParser::Constraint::ALL, nullptr, 0);
-
         StructParser* list = add_container(pool, "list", PhysicalType::LIST);
         if (list->fields.empty()) {
-            add_placeholder_field(pool, list, value);
+            add_parameter_field(pool, list, "value");
         }
         StructParser* set = add_container(pool, "set", PhysicalType::SET);
         if (set->fields.empty()) {
-            add_placeholder_field(pool, set, key);
+            add_parameter_field(pool, set, "key");
         }
         StructParser* map = add_container(pool, "map", PhysicalType::MAP);
         if (map->fields.empty()) {
-            add_placeholder_field(pool, map, key);
-            add_placeholder_field(pool, map, value);
+            add_parameter_field(pool, map, "key");
+            add_parameter_field(pool, map, "value");
         }
         return true;
     }

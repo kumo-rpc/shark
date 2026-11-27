@@ -26,91 +26,19 @@
 #include <functional>
 #include <limits>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace shark::parser {
 
-    AnnotationValue::AnnotationValue(AnnotationValue&&) noexcept = default;
-    AnnotationValue& AnnotationValue::operator=(AnnotationValue&&) noexcept = default;
-    AnnotationValue::~AnnotationValue() = default;
-
-    bool AnnotationParser::parse_one(
-        Lexer<ExpressionLexer>& lexer) {
-
-        auto t = lexer.look_at();
-
-        if (t.is_error()) {
-            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
-            return false;
-        }
-
-        if (t.type == TokenType::StringLiteral || t.type == TokenType::QuotedIdentifier) {
-            payload.emplace_back(t.view());
-            lexer.consume();
-            return true;
-        }
-
-        if (t.type == TokenType::BareWord && (t == "true" || t == "false")) {
-            payload.emplace_back(t == "true");
-            lexer.consume();
-            return true;
-        }
-
-        if (t.type != TokenType::Number) {
-            report_error(ErrorType::SYNTAX, "expected an annotation value, but got `%s`", t.view());
-            return false;
-        }
-
-        auto value = t.view();
-        std::string number(value);
-        char* end = nullptr;
-
-        // Determine whether the number is an integer or a floating-point value.
-        bool is_hex = value.size() > 2 && value[0] == '0' && (value[1] == 'x' || value[1] == 'X');
-
-        bool is_float = is_hex
-            ? value.find_first_of(".pP") != std::string_view::npos
-            : value.find_first_of(".eE") != std::string_view::npos;
-
-        errno = 0;
-
-        if (is_float) {
-            float result = std::strtof(number.c_str(), &end);
-
-            if (errno == ERANGE || end != number.c_str() + number.size()) {
-                report_error(ErrorType::SYNTAX, "invalid floating-point annotation value `%s`", t.view());
-                return false;
-            }
-
-            payload.emplace_back(result);
-        } else {
-            int64_t result = std::strtoll(number.c_str(), &end, is_hex ? 16 : 10);
-
-            if (errno == ERANGE || end != number.c_str() + number.size()) {
-                report_error(ErrorType::SYNTAX, "invalid integer annotation value `%s`", t.view());
-                return false;
-            }
-
-            payload.emplace_back(result);
-        }
-
-        lexer.consume();
-        return true;
-    }
-
     namespace {
 
-        bool unsupported_width(const TypeRef& ref) {
-            const std::string_view name = type_ref_name(ref);
-            if (name == "int128" || name == "uint128") {
+        bool unsupported_width(const TypeName& ref) {
+            if (ref.name == "int128" || ref.name == "uint128") {
                 return true;
             }
-            const auto* type = std::get_if<TypeName>(&ref);
-            if (type == nullptr) {
-                return false;
-            }
-            for (const TypeName::Arg& arg : type->args) {
-                if (unsupported_width(arg.value)) {
+            for (const TypeName& arg : ref.arguments) {
+                if (unsupported_width(arg)) {
                     return true;
                 }
             }
@@ -153,20 +81,19 @@ namespace shark::parser {
                     append_const(out, map->entries[i].second);
                 }
                 out.push_back('}');
-            }
-        }
-
-        void append_payload(std::string& out, const AnnotationParser::value_type& value) {
-            if (const auto* text = std::get_if<std::string_view>(&value)) {
-                out.append(text->data(), text->size());
-            } else if (const auto* number = std::get_if<int64_t>(&value)) {
-                out.append(std::to_string(*number));
-            } else if (const auto* number = std::get_if<float>(&value)) {
-                char buf[64];
-                std::snprintf(buf, sizeof(buf), "%g", static_cast<double>(*number));
-                out.append(buf);
-            } else if (const auto* flag = std::get_if<bool>(&value)) {
-                out.append(*flag ? "true" : "false");
+            } else if (const auto* fields = std::get_if<ConstValueParser::Struct>(&value->value)) {
+                out.push_back('{');
+                for (std::size_t i = 0; i < fields->fields.size(); ++i) {
+                    if (i != 0) {
+                        out.append(", ");
+                    }
+                    if (fields->fields[i].field != nullptr) {
+                        out.append(fields->fields[i].field->name.data(), fields->fields[i].field->name.size());
+                    }
+                    out.append(" = ");
+                    append_const(out, fields->fields[i].value);
+                }
+                out.push_back('}');
             }
         }
 
@@ -180,267 +107,11 @@ namespace shark::parser {
             if (const auto* map = std::get_if<ConstValueParser::Map>(&value->value)) {
                 return map->entries.size();
             }
+            if (const auto* fields = std::get_if<ConstValueParser::Struct>(&value->value)) {
+                return fields->fields.size();
+            }
             return 1;
         }
-
-        std::string format_payload(const std::vector<AnnotationParser::value_type>& payload) {
-            std::string out;
-            if (payload.size() == 1) {
-                append_payload(out, payload[0]);
-                return out;
-            }
-            out.push_back('[');
-            for (std::size_t i = 0; i < payload.size(); ++i) {
-                if (i != 0) {
-                    out.append(", ");
-                }
-                append_payload(out, payload[i]);
-            }
-            out.push_back(']');
-            return out;
-        }
-
-    }  // namespace
-
-    bool AnnotationParser::parse_typed_value(Lexer<ExpressionLexer>& lexer) {
-        auto t = lexer.look_at();
-        if (t.type != TokenType::Less) {
-            report_error(ErrorType::SYNTAX, "expected `<`, but got `%s`", t.view());
-            return false;
-        }
-        lexer.consume();
-        lexer.consume_white_space(true);
-        if (!parse_type_ref(*this, lexer, type_ref)) {
-            return false;
-        }
-        if (unsupported_width(type_ref)) {
-            report_error(ErrorType::SYNTAX, "annotation type `%s` is wider than int64", format_type_ref(type_ref).c_str());
-            return false;
-        }
-        lexer.consume_white_space(true);
-        t = lexer.look_at();
-        if (t.type != TokenType::Greater) {
-            report_error(ErrorType::SYNTAX, "expected `>`, but got `%s`", t.view());
-            return false;
-        }
-        lexer.consume();
-        lexer.consume_white_space(true);
-        t = lexer.look_at();
-        if (t.type != TokenType::Equals) {
-            report_error(ErrorType::SYNTAX, "expected `=`, but got `%s`", t.view());
-            return false;
-        }
-        lexer.consume();
-        object = pool->create_node<ConstValueParser>(file);
-        return object->parse(lexer);
-    }
-
-    bool AnnotationParser::parse(
-        Lexer<ExpressionLexer>& lexer) {
-
-        auto t = lexer.look_at();
-        if (t.is_error()) {
-            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
-            return false;
-        }
-
-        if (t.type != TokenType::BareWord || t != kAnnotationKey) {
-            report_error(ErrorType::SYNTAX, "expected `annotation`, but got `%s`", t.view());
-            return false;
-        }
-
-        start_location = {t.line, t.column};
-
-        lexer.consume();
-        lexer.consume_white_space(true);
-        t = lexer.look_at();
-
-        if (t.is_error()) {
-            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
-            return false;
-        }
-
-        file_level = false;
-        if (t.type == TokenType::At) {
-            file_level = true;
-            lexer.consume();
-            lexer.consume_white_space(true);
-            t = lexer.look_at();
-
-            if (t.is_error()) {
-                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
-                return false;
-            }
-        }
-
-        // Parse optional classification.
-        classify = { };
-
-        if (t.type == TokenType::Dot) {
-            lexer.consume();
-            lexer.consume_white_space(true);
-            t = lexer.look_at();
-
-            if (t.is_error()) {
-                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
-                return false;
-            }
-
-            if (t.type != TokenType::BareWord) {
-                report_error(ErrorType::SYNTAX, "expected an annotation classification, but got `%s`", t.view());
-                return false;
-            }
-
-            classify = t.view();
-
-            lexer.consume();
-            lexer.consume_white_space(true);
-            t = lexer.look_at();
-        }
-
-        if (t.is_error()) {
-            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
-            return false;
-        }
-
-        // Parse annotation key.
-        if (t.type != TokenType::BareWord) {
-            report_error(ErrorType::SYNTAX, "expected an annotation key, but got `%s`", t.view());
-            return false;
-        }
-
-        key = t.view();
-
-        lexer.consume();
-        lexer.consume_white_space(true);
-        t = lexer.look_at();
-
-        if (t.is_error()) {
-            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
-            return false;
-        }
-
-        if (t.type == TokenType::Less) {
-            typed = true;
-            if (!parse_typed_value(lexer)) {
-                return false;
-            }
-            lexer.consume_white_space(true);
-            t = lexer.look_at();
-            if (t.is_error()) {
-                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
-                return false;
-            }
-            if (t.type != TokenType::Semicolon) {
-                report_error(ErrorType::SYNTAX, "expected `;`, but got `%s`", t.view());
-                return false;
-            }
-            lexer.consume();
-            tailing_comment = pool->create_node<CommentParser>(file);
-            if (!tailing_comment->parse_tailing(lexer)) {
-                return false;
-            }
-            std::string shown;
-            append_const(shown, object);
-            report_debug(ErrorType::NONE, "annotation `%s` classify `%s` type `%s` value size `%zu` value `%s`", key, classify, format_type_ref(type_ref).c_str(), const_size(object), shown.c_str());
-            return true;
-        }
-
-        if (t.type != TokenType::Equals) {
-            report_error(ErrorType::SYNTAX, "expected `=`, but got `%s`", t.view());
-            return false;
-        }
-
-        lexer.consume();
-        lexer.consume_white_space(true);
-        t = lexer.look_at();
-
-        if (t.is_error()) {
-            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
-            return false;
-        }
-
-        payload.clear();
-
-        // Parse a single value or an array.
-        if (t.type == TokenType::OpeningSquareBracket) {
-            lexer.consume();
-            lexer.consume_white_space(true);
-            t = lexer.look_at();
-
-            if (t.is_error()) {
-                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
-                return false;
-            }
-
-            if (t.type != TokenType::ClosingSquareBracket) {
-                while (true) {
-                    if (!parse_one(lexer)) {
-                        return false;
-                    }
-
-                    lexer.consume_white_space(true);
-                    t = lexer.look_at();
-
-                    if (t.is_error()) {
-                        report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
-                        return false;
-                    }
-
-                    if (t.type == TokenType::ClosingSquareBracket) {
-                        break;
-                    }
-
-                    if (t.type != TokenType::Comma) {
-                        report_error(ErrorType::SYNTAX, "expected `,` or `]`, but got `%s`", t.view());
-                        return false;
-                    }
-
-                    lexer.consume();
-                    lexer.consume_white_space(true);
-                    t = lexer.look_at();
-
-                    if (t.is_error()) {
-                        report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
-                        return false;
-                    }
-                }
-            }
-
-            lexer.consume();
-        } else {
-            if (!parse_one(lexer)) {
-                return false;
-            }
-        }
-
-        lexer.consume_white_space(true);
-        t = lexer.look_at();
-
-        if (t.is_error()) {
-            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
-            return false;
-        }
-
-        if (t.type != TokenType::Semicolon) {
-            report_error(ErrorType::SYNTAX, "expected `;`, but got `%s`", t.view());
-            return false;
-        }
-
-        lexer.consume();
-
-        // Parse trailing comments.
-        tailing_comment = pool->create_node<CommentParser>(file);
-        if (!tailing_comment->parse_tailing(lexer)) {
-            return false;
-        }
-
-        const std::string shown = format_payload(payload);
-        report_debug(ErrorType::NONE, "annotation `%s` classify `%s` value size `%zu` value `%s`", key, classify, payload.size(), shown.c_str());
-        return true;
-    }
-
-    namespace {
 
         bool is_key_type(const StructParser* node) {
             if (node == nullptr || !node->builtin || node->generic) {
@@ -511,6 +182,158 @@ namespace shark::parser {
 
     }  // namespace
 
+    bool AnnotationParser::parse_typed_value(Lexer<ExpressionLexer>& lexer) {
+        auto t = lexer.look_at();
+        if (t.type != TokenType::Less) {
+            report_error(ErrorType::SYNTAX, "expected `<`, but got `%s`", t.view());
+            return false;
+        }
+        lexer.consume();
+        lexer.consume_white_space(true);
+        if (!parse_type_ref(*this, lexer, type_ref)) {
+            return false;
+        }
+        if (unsupported_width(type_ref)) {
+            report_error(ErrorType::SYNTAX, "annotation type `%s` is wider than int64", format_type_ref(type_ref).c_str());
+            return false;
+        }
+        lexer.consume_white_space(true);
+        t = lexer.look_at();
+        if (t.type != TokenType::Greater) {
+            report_error(ErrorType::SYNTAX, "expected `>`, but got `%s`", t.view());
+            return false;
+        }
+        lexer.consume();
+        lexer.consume_white_space(true);
+        t = lexer.look_at();
+        if (t.type != TokenType::Equals) {
+            report_error(ErrorType::SYNTAX, "expected `=`, but got `%s`", t.view());
+            return false;
+        }
+        lexer.consume();
+        object = pool->create_node<ConstValueParser>(file);
+        return object->parse(lexer);
+    }
+
+    bool AnnotationParser::parse(Lexer<ExpressionLexer>& lexer) {
+        auto t = lexer.look_at();
+        if (t.is_error()) {
+            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+            return false;
+        }
+
+        if (t.type != TokenType::BareWord || t != kAnnotationKey) {
+            report_error(ErrorType::SYNTAX, "expected `annotation`, but got `%s`", t.view());
+            return false;
+        }
+
+        start_location = {t.line, t.column};
+
+        lexer.consume();
+        lexer.consume_white_space(true);
+        t = lexer.look_at();
+
+        if (t.is_error()) {
+            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+            return false;
+        }
+
+        file_level = false;
+        if (t.type == TokenType::At) {
+            file_level = true;
+            lexer.consume();
+            lexer.consume_white_space(true);
+            t = lexer.look_at();
+
+            if (t.is_error()) {
+                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+                return false;
+            }
+        }
+
+        classify = {};
+
+        if (t.type == TokenType::Dot) {
+            lexer.consume();
+            lexer.consume_white_space(true);
+            t = lexer.look_at();
+
+            if (t.is_error()) {
+                report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+                return false;
+            }
+
+            if (t.type != TokenType::BareWord) {
+                report_error(ErrorType::SYNTAX, "expected an annotation classification, but got `%s`", t.view());
+                return false;
+            }
+
+            classify = t.view();
+
+            lexer.consume();
+            lexer.consume_white_space(true);
+            t = lexer.look_at();
+        }
+
+        if (t.is_error()) {
+            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+            return false;
+        }
+
+        if (t.type != TokenType::BareWord) {
+            report_error(ErrorType::SYNTAX, "expected an annotation key, but got `%s`", t.view());
+            return false;
+        }
+
+        key = t.view();
+
+        lexer.consume();
+        lexer.consume_white_space(true);
+        t = lexer.look_at();
+
+        if (t.is_error()) {
+            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+            return false;
+        }
+
+        if (t.type == TokenType::Less) {
+            typed = true;
+            if (!parse_typed_value(lexer)) {
+                return false;
+            }
+        } else if (t.type == TokenType::Equals) {
+            lexer.consume();
+            object = pool->create_node<ConstValueParser>(file);
+            if (!object->parse(lexer)) {
+                return false;
+            }
+        } else {
+            report_error(ErrorType::SYNTAX, "expected `=` or `<`, but got `%s`", t.view());
+            return false;
+        }
+
+        lexer.consume_white_space(true);
+        t = lexer.look_at();
+        if (t.is_error()) {
+            report_error(ErrorType::SYNTAX, "%s", get_error_token_description(t.type));
+            return false;
+        }
+        if (t.type != TokenType::Semicolon) {
+            report_error(ErrorType::SYNTAX, "expected `;`, but got `%s`", t.view());
+            return false;
+        }
+        lexer.consume();
+
+        tailing_comment = pool->create_node<CommentParser>(file);
+        if (!tailing_comment->parse_tailing(lexer)) {
+            return false;
+        }
+        std::string shown;
+        append_const(shown, object);
+        report_debug(ErrorType::NONE, "annotation `%s` classify `%s` type `%s` value size `%zu` value `%s`", key, classify, format_type_ref(type_ref).c_str(), const_size(object), shown.c_str());
+        return true;
+    }
+
     bool AnnotationParser::bind_typed() {
         if (!typed) {
             return true;
@@ -520,13 +343,13 @@ namespace shark::parser {
             return false;
         }
 
-        std::function<bool(const TypeRef&, const ConstValueParser*, AnnotationValue&)> check;
-        check = [&](const TypeRef& ref, const ConstValueParser* value, AnnotationValue& out) -> bool {
+        std::function<bool(const TypeName&, ConstValueParser*)> check;
+        check = [&](const TypeName& ref, ConstValueParser* value) -> bool {
             if (value == nullptr) {
                 report_error(ErrorType::SEMANTIC, "annotation `%s` value is missing", key);
                 return false;
             }
-            SymbolNode* symbol = file->find_type(type_ref_name(ref));
+            SymbolNode* symbol = file->find_type(ref);
             if (symbol != nullptr) {
                 symbol = file->concrete_type(symbol);
             }
@@ -539,17 +362,17 @@ namespace shark::parser {
                 return false;
             }
 
-            const auto* named = std::get_if<TypeName>(&ref);
+            const bool has_arguments = !ref.arguments.empty();
             if (symbol->node_type == SymbolType::STRUCT) {
                 auto* type = static_cast<StructParser*>(symbol);
                 if (type->generic) {
-                    if (named == nullptr) {
+                    if (!has_arguments) {
                         report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires type arguments", key, type->name);
                         return false;
                     }
                     if (type->phy_type == PhysicalType::LIST || type->phy_type == PhysicalType::SET) {
                         if (type->phy_type == PhysicalType::SET) {
-                            SymbolNode* element = file->find_type(type_ref_name(named->args[0].value));
+                            SymbolNode* element = file->find_type(ref.arguments[0]);
                             if (element != nullptr) {
                                 element = file->concrete_type(element);
                             }
@@ -557,7 +380,7 @@ namespace shark::parser {
                                 ? static_cast<StructParser*>(element)
                                 : nullptr;
                             if (!is_key_type(element_type)) {
-                                report_error(ErrorType::SEMANTIC, "annotation `%s` set element `%s` cannot be a key", key, format_type_ref(named->args[0].value).c_str());
+                                report_error(ErrorType::SEMANTIC, "annotation `%s` set element `%s` cannot be a key", key, format_type_ref(ref.arguments[0]).c_str());
                                 return false;
                             }
                         }
@@ -566,20 +389,15 @@ namespace shark::parser {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires a list", key, format_type_ref(ref).c_str());
                             return false;
                         }
-                        out.kind_ = AnnotationKind::LIST;
-                        out.type_ = type;
-                        out.literal_ = value;
-                        for (const ConstValueParser* element : list->elements) {
-                            AnnotationValue child;
-                            if (!check(named->args[0].value, element, child)) {
+                        for (ConstValueParser* element : list->elements) {
+                            if (!check(ref.arguments[0], element)) {
                                 return false;
                             }
-                            out.elements_.push_back(std::move(child));
                         }
                         return true;
                     }
                     if (type->phy_type == PhysicalType::MAP) {
-                        SymbolNode* key_symbol = file->find_type(type_ref_name(named->args[0].value));
+                        SymbolNode* key_symbol = file->find_type(ref.arguments[0]);
                         if (key_symbol != nullptr) {
                             key_symbol = file->concrete_type(key_symbol);
                         }
@@ -587,7 +405,7 @@ namespace shark::parser {
                             ? static_cast<StructParser*>(key_symbol)
                             : nullptr;
                         if (!is_key_type(key_type)) {
-                            report_error(ErrorType::SEMANTIC, "annotation `%s` map key `%s` cannot be a key", key, format_type_ref(named->args[0].value).c_str());
+                            report_error(ErrorType::SEMANTIC, "annotation `%s` map key `%s` cannot be a key", key, format_type_ref(ref.arguments[0]).c_str());
                             return false;
                         }
                         const auto* map = std::get_if<ConstValueParser::Map>(&value->value);
@@ -595,22 +413,17 @@ namespace shark::parser {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires a map", key, format_type_ref(ref).c_str());
                             return false;
                         }
-                        out.kind_ = AnnotationKind::MAP;
-                        out.type_ = type;
-                        out.literal_ = value;
                         for (const auto& entry : map->entries) {
-                            AnnotationValue::Entry child;
-                            if (!check(named->args[0].value, entry.first, child.key) || !check(named->args[1].value, entry.second, child.value)) {
+                            if (!check(ref.arguments[0], entry.first) || !check(ref.arguments[1], entry.second)) {
                                 return false;
                             }
-                            out.entries_.push_back(std::move(child));
                         }
                         return true;
                     }
                     report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` cannot be constructed", key, format_type_ref(ref).c_str());
                     return false;
                 }
-                if (named != nullptr) {
+                if (has_arguments) {
                     report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` does not take type arguments", key, format_type_ref(ref).c_str());
                     return false;
                 }
@@ -621,18 +434,12 @@ namespace shark::parser {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `bool` requires a bool", key);
                             return false;
                         }
-                        out.kind_ = AnnotationKind::SCALAR;
-                        out.type_ = type;
-                        out.literal_ = value;
                         return true;
                     case PhysicalType::STRING:
                         if (!std::holds_alternative<std::string_view>(value->value)) {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `string` requires a string", key);
                             return false;
                         }
-                        out.kind_ = AnnotationKind::SCALAR;
-                        out.type_ = type;
-                        out.literal_ = value;
                         return true;
                     case PhysicalType::FLOAT32:
                     case PhysicalType::FLOAT64:
@@ -640,9 +447,6 @@ namespace shark::parser {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires a float", key, type->name);
                             return false;
                         }
-                        out.kind_ = AnnotationKind::SCALAR;
-                        out.type_ = type;
-                        out.literal_ = value;
                         return true;
                     case PhysicalType::INT8:
                     case PhysicalType::UINT8:
@@ -656,9 +460,6 @@ namespace shark::parser {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires an integer in range", key, type->name);
                             return false;
                         }
-                        out.kind_ = AnnotationKind::SCALAR;
-                        out.type_ = type;
-                        out.literal_ = value;
                         return true;
                     default:
                         report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` cannot be constructed", key, type->name);
@@ -670,7 +471,7 @@ namespace shark::parser {
                     report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires a struct value", key, type->name);
                     return false;
                 }
-                std::vector<std::pair<const FieldParser*, AnnotationValue>> seen;
+                std::vector<std::pair<const FieldParser*, ConstValueParser*>> seen;
                 for (const auto& entry : map->entries) {
                     const auto* id = std::get_if<ConstValueParser::Identifier>(&entry.first->value);
                     if (id == nullptr) {
@@ -694,20 +495,17 @@ namespace shark::parser {
                             return false;
                         }
                     }
-                    AnnotationValue child;
-                    if (!check(field->type_ref, entry.second, child)) {
+                    if (!check(field->type_ref, entry.second)) {
                         return false;
                     }
-                    seen.push_back({field, std::move(child)});
+                    seen.push_back({field, entry.second});
                 }
-                out.kind_ = AnnotationKind::STRUCT;
-                out.type_ = type;
-                out.literal_ = value;
+                ConstValueParser::Struct built;
                 for (const FieldParser* field : type->fields) {
-                    const AnnotationValue* present = nullptr;
+                    ConstValueParser* present = nullptr;
                     for (const auto& previous : seen) {
                         if (previous.first == field) {
-                            present = &previous.second;
+                            present = previous.second;
                             break;
                         }
                     }
@@ -716,19 +514,19 @@ namespace shark::parser {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` field `%s` is missing", key, field->name);
                             return false;
                         }
-                        AnnotationValue child;
-                        if (!check(field->type_ref, field->default_value, child)) {
+                        if (!check(field->type_ref, field->default_value)) {
                             return false;
                         }
-                        out.fields_.push_back(AnnotationValue::Field{field, std::move(child)});
+                        built.fields.push_back(ConstValueParser::StructField{field, field->default_value});
                         continue;
                     }
-                    out.fields_.push_back(AnnotationValue::Field{field, *present});
+                    built.fields.push_back(ConstValueParser::StructField{field, present});
                 }
+                value->value = std::move(built);
                 return true;
             }
             if (symbol->node_type == SymbolType::ENUM) {
-                if (named != nullptr) {
+                if (has_arguments) {
                     report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` does not take type arguments", key, format_type_ref(ref).c_str());
                     return false;
                 }
@@ -738,28 +536,22 @@ namespace shark::parser {
                         report_error(ErrorType::SEMANTIC, "annotation `%s` enum `%s` value is out of range", key, enum_type->name);
                         return false;
                     }
-                    out.kind_ = AnnotationKind::ENUM;
-                    out.type_ = enum_type;
-                    out.literal_ = value;
                     for (const EnumValueParser* item : enum_type->values) {
                         if (item->value == *number) {
-                            out.enumerator_ = item;
-                            break;
+                            return true;
                         }
                     }
                     return true;
                 }
-                const auto* id = std::get_if<ConstValueParser::Identifier>(&value->value);
+                auto* id = std::get_if<ConstValueParser::Identifier>(&value->value);
                 if (id == nullptr) {
                     report_error(ErrorType::SEMANTIC, "annotation `%s` enum `%s` requires an integer or an enumerator", key, enum_type->name);
                     return false;
                 }
                 for (const EnumValueParser* item : enum_type->values) {
                     if (item->name == id->name || item->full_name == id->name) {
-                        out.kind_ = AnnotationKind::ENUM;
-                        out.type_ = enum_type;
-                        out.literal_ = value;
-                        out.enumerator_ = item;
+                        id->enum_type = enum_type;
+                        id->enumerator = item;
                         return true;
                     }
                 }
@@ -770,24 +562,7 @@ namespace shark::parser {
             return false;
         };
 
-        AnnotationValue built;
-        if (!check(type_ref, object, built)) {
-            return false;
-        }
-        value = std::move(built);
-        return true;
-    }
-
-    const AnnotationValue* AnnotationValue::field(std::string_view name) const {
-        if (kind_ != AnnotationKind::STRUCT) {
-            return nullptr;
-        }
-        for (const Field& item : fields_) {
-            if (item.field != nullptr && item.field->name == name) {
-                return &item.value;
-            }
-        }
-        return nullptr;
+        return check(type_ref, object);
     }
 
 } // namespace shark::parser
