@@ -17,6 +17,9 @@ edition = "sk2026";
 
 package "shark.__builtin";
 
+annotation@.export include_package = true;
+annotation@.export exclude_package = true;
+
 /// No value. Function return only.
 annotation.builtin phy_type = "VOID";
 annotation.builtin traits = ["is_void"];
@@ -93,6 +96,7 @@ annotation.cpp type = "uint64_t";
 annotation.cpp include = "<cstdint>";
 annotation.go type = "uint64";
 struct uint64 {};
+
 
 /// 128-bit signed integer.
 annotation.builtin phy_type = "INT128";

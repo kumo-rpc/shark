@@ -18,6 +18,3 @@ edition = "sk2026";
 package "shark";
 
 import "shark/schema/types.shark";
-
-struct Testing {
-};

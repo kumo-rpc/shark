@@ -13,29 +13,95 @@
 // limitations under the License.
 //
 
-#include <shark/parser/symbol.h>
+#include <shark/parser/alias.h>
+#include <shark/parser/annotation.h>
+#include <shark/parser/const_value.h>
+#include <shark/parser/enum.h>
+#include <shark/parser/enum_value.h>
+#include <shark/parser/field.h>
 #include <shark/parser/file.h>
-#include <shark/parser/symbol.h>
+#include <shark/parser/function.h>
 #include <shark/parser/pool.h>
+#include <shark/parser/servlet.h>
+#include <shark/parser/struct.h>
+#include <shark/parser/symbol.h>
+
+#include <optional>
 
 namespace shark::parser {
 
+    namespace {
+
+        const std::vector<AnnotationParser*>* own_annotations(SymbolNode* node) {
+            switch (node->node_type) {
+                case SymbolType::STRUCT:
+                    return &static_cast<StructParser*>(node)->annotations;
+                case SymbolType::ENUM:
+                    return &static_cast<EnumParser*>(node)->annotations;
+                case SymbolType::ENUM_VALUE:
+                    return &static_cast<EnumValueParser*>(node)->annotations;
+                case SymbolType::FIELD:
+                    return &static_cast<FieldParser*>(node)->annotations;
+                case SymbolType::FUNCTION:
+                    return &static_cast<FunctionParser*>(node)->annotations;
+                case SymbolType::SERVLET:
+                    return &static_cast<ServletParser*>(node)->annotations;
+                case SymbolType::ALIAS:
+                    return &static_cast<AliasParser*>(node)->annotations;
+                default:
+                    return nullptr;
+            }
+        }
+
+        std::optional<bool> export_flag(const std::vector<AnnotationParser*>* annotations, std::string_view key) {
+            if (annotations == nullptr) {
+                return std::nullopt;
+            }
+            for (AnnotationParser* annotation : *annotations) {
+                if (annotation->classify != "export" || annotation->key != key || annotation->object == nullptr) {
+                    continue;
+                }
+                if (const bool* value = std::get_if<bool>(&annotation->object->value)) {
+                    return *value;
+                }
+            }
+            return std::nullopt;
+        }
+
+        bool export_setting(SymbolNode* node, std::string_view key, bool fallback) {
+            if (std::optional<bool> own = export_flag(own_annotations(node), key)) {
+                return *own;
+            }
+            if (node->file != nullptr) {
+                if (std::optional<bool> file_level = export_flag(&node->file->annotations, key)) {
+                    return *file_level;
+                }
+            }
+            return fallback;
+        }
+
+    }  // namespace
+
     bool SymbolNode::emit_to_pool() {
-        if (pool->get_symbol(full_name) != nullptr) {
-            report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name);
-            return false;
+        const bool include_package = export_setting(this, "include_package", true);
+        const bool exclude_package = export_setting(this, "exclude_package", false);
+        if (include_package) {
+            if (pool->get_symbol(full_name) != nullptr) {
+                report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name);
+                return false;
+            }
+            if (!pool->add_symbol(this)) {
+                report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name);
+                return false;
+            }
         }
-        if (!pool->add_symbol(this)) {
-            report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name);
-            return false;
-        }
-        emit = true;
-        if (file != nullptr && file->package == "shark.__builtin" && full_name_without_package != full_name) {
+        if (exclude_package && full_name_without_package != full_name) {
             if (!pool->add_symbol_name(full_name_without_package, this)) {
                 report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name_without_package);
                 return false;
             }
         }
+        emit = true;
         return true;
     }
 }  // namespace shark::parser
