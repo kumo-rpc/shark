@@ -18,6 +18,7 @@
 #include <shark/common/filepath.h>
 #include <turbo/log/logging.h>
 #include <deque>
+#include <unordered_set>
 #include <fermat/maps/btree_map.h>
 #include <fermat/maps/btree_set.h>
 #include <shark/parser/import_graph.h>
@@ -48,6 +49,15 @@ namespace shark::parser {
                 return false;
             }
             _symbols[uri] = ptr;
+            return true;
+        }
+
+        [[nodiscard]] bool add_symbol_name(std::string_view name, SymbolNode* ptr) {
+            auto it = _symbols.find(name);
+            if (it != _symbols.end()) {
+                return false;
+            }
+            _symbols[name] = ptr;
             return true;
         }
 
@@ -170,6 +180,8 @@ namespace shark::parser {
     private:
         RegistryPool();
         bool link_imports(FileParser* node);
+        bool load_std();
+        FileParser* load_rel(std::string_view rel);
         std::vector<std::unique_ptr<SymbolNode>>           _all_symbols;
         std::vector<std::unique_ptr<Node>>                  _all_node;
         fermat::btree_map<std::string_view, SymbolNode*>    _symbols;
@@ -179,6 +191,7 @@ namespace shark::parser {
         SchemaPoolBase                                      schema_pool_;
         std::deque<FileParser*>                               _files_queue;
         ImportGraph                                         _import_graph;
+        std::unordered_set<FileParser*>                     _builtin_files;
     };
 
 }  // namespace shark::parser

@@ -14,6 +14,7 @@
 //
 
 #include <shark/parser/alias.h>
+#include <shark/parser/builtin.h>
 #include <shark/parser/enum.h>
 #include <shark/parser/field.h>
 #include <shark/parser/file.h>
@@ -70,6 +71,24 @@ namespace {
         if (bind) {
             return BindStep::DONE;
         }
+        for (AnnotationParser* annotation : annotations) {
+            if (annotation->classify != "builtin" || annotation->key != "phy_type") {
+                continue;
+            }
+            const auto* text = annotation->object == nullptr ? nullptr : std::get_if<std::string_view>(&annotation->object->value);
+            if (text == nullptr || text->size() < 2) {
+                report_error(ErrorType::SEMANTIC, "struct `%s` physical type is missing", name);
+                return BindStep::FAIL;
+            }
+            std::string_view phy_name = text->substr(1, text->size() - 2);
+            std::optional<PhysicalType> phy = physical_type(phy_name);
+            if (!phy.has_value()) {
+                report_error(ErrorType::SEMANTIC, "struct `%s` physical type `%s` is unknown", name, phy_name);
+                return BindStep::FAIL;
+            }
+            phy_type = *phy;
+            builtin = true;
+        }
         for (std::size_t i = 0; i < fields.size(); ++i) {
             for (std::size_t j = i + 1; j < fields.size(); ++j) {
                 if (fields[i]->id != fields[j]->id) {
@@ -89,7 +108,6 @@ namespace {
                 field->generic = true;
                 field->bind = true;
                 if (!field->emit_to_pool()) {
-                    report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", field->full_name);
                     return BindStep::FAIL;
                 }
                 continue;
@@ -119,7 +137,6 @@ namespace {
                     field->type = type;
                     field->bind = true;
                     if (!field->emit_to_pool()) {
-                        report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", field->full_name);
                         return BindStep::FAIL;
                     }
                     continue;
@@ -136,7 +153,6 @@ namespace {
                 field->enum_type = enum_type;
                 field->bind = true;
                 if (!field->emit_to_pool()) {
-                    report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", field->full_name);
                     return BindStep::FAIL;
                 }
                 continue;
@@ -161,7 +177,6 @@ namespace {
         }
         bind = true;
         if (!emit_to_pool()) {
-            report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name);
             return BindStep::FAIL;
         }
         return BindStep::DONE;

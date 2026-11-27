@@ -147,13 +147,11 @@ namespace shark::parser {
             }
             param->bind = true;
             if (!param->emit_to_pool()) {
-                report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", param->full_name);
                 return false;
             }
         }
         bind = true;
         if (!emit_to_pool()) {
-            report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name);
             return false;
         }
         return true;

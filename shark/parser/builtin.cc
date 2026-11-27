@@ -17,6 +17,7 @@
 #include <shark/parser/field.h>
 #include <shark/parser/pool.h>
 #include <shark/parser/struct.h>
+#include <optional>
 #include <string>
 #include <string_view>
 
@@ -87,6 +88,28 @@ namespace shark::parser {
         }
 
     }  // namespace
+
+    std::optional<PhysicalType> physical_type(std::string_view name) {
+        if (name == "VOID") return PhysicalType::VOID;
+        if (name == "BOOL") return PhysicalType::BOOL;
+        if (name == "INT8") return PhysicalType::INT8;
+        if (name == "UINT8") return PhysicalType::UINT8;
+        if (name == "INT16") return PhysicalType::INT16;
+        if (name == "UINT16") return PhysicalType::UINT16;
+        if (name == "INT32") return PhysicalType::INT32;
+        if (name == "UINT32") return PhysicalType::UINT32;
+        if (name == "INT64") return PhysicalType::INT64;
+        if (name == "UINT64") return PhysicalType::UINT64;
+        if (name == "INT128") return PhysicalType::INT128;
+        if (name == "UINT128") return PhysicalType::UINT128;
+        if (name == "FLOAT32") return PhysicalType::FLOAT32;
+        if (name == "FLOAT64") return PhysicalType::FLOAT64;
+        if (name == "STRING") return PhysicalType::STRING;
+        if (name == "LIST") return PhysicalType::LIST;
+        if (name == "SET") return PhysicalType::SET;
+        if (name == "MAP") return PhysicalType::MAP;
+        return std::nullopt;
+    }
 
     bool load_builtin_types(RegistryPool& pool) {
         for (const BuiltinType& spec : kBuiltinTypes) {

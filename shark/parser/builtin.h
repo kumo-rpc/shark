@@ -16,10 +16,17 @@
 #pragma once
 
 #include <shark/parser/fwd.h>
+#include <shark/schema/schema_defines.h>
+
+#include <optional>
+#include <string_view>
 
 namespace shark::parser {
 
     /// Registers builtin scalar types on `pool`. Nodes are allocated by the pool.
     bool load_builtin_types(RegistryPool& pool);
+
+    /// Maps a builtin phy_type annotation value, such as "INT32", to PhysicalType.
+    std::optional<PhysicalType> physical_type(std::string_view name);
 
 }  // namespace shark::parser

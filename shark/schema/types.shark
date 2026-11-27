@@ -1,0 +1,144 @@
+// Copyright (C) 2026 Kumo inc. and its affiliates. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+edition = "sk2026";
+
+package "shark.__builtin";
+
+/// No value. Function return only.
+annotation.builtin phy_type = "VOID";
+annotation.builtin traits = ["is_void"];
+annotation.cpp type = "void";
+struct void {};
+
+/// Boolean.
+annotation.builtin phy_type = "BOOL";
+annotation.builtin traits = ["is_primitive", "is_pod", "has_hash"];
+annotation.cpp type = "bool";
+annotation.go type = "bool";
+struct bool {};
+
+/// 8-bit signed integer.
+annotation.builtin phy_type = "INT8";
+annotation.builtin traits = ["is_primitive", "is_integer", "is_signed", "is_numeric", "has_hash", "is_pod"];
+annotation.cpp type = "int8_t";
+annotation.cpp include = "<cstdint>";
+annotation.go type = "int8";
+struct int8 {};
+
+/// 8-bit unsigned integer.
+annotation.builtin phy_type = "UINT8";
+annotation.builtin traits = ["is_primitive", "is_integer", "is_numeric", "has_hash", "is_pod"];
+annotation.cpp type = "uint8_t";
+annotation.cpp include = "<cstdint>";
+annotation.go type = "uint8";
+struct uint8 {};
+
+/// 16-bit signed integer.
+annotation.builtin phy_type = "INT16";
+annotation.builtin traits = ["is_primitive", "is_integer", "is_signed", "is_numeric", "has_hash", "is_pod"];
+annotation.cpp type = "int16_t";
+annotation.cpp include = "<cstdint>";
+annotation.go type = "int16";
+struct int16 {};
+
+/// 16-bit unsigned integer.
+annotation.builtin phy_type = "UINT16";
+annotation.builtin traits = ["is_primitive", "is_integer", "is_numeric", "has_hash", "is_pod"];
+annotation.cpp type = "uint16_t";
+annotation.cpp include = "<cstdint>";
+annotation.go type = "uint16";
+struct uint16 {};
+
+/// 32-bit signed integer.
+annotation.builtin phy_type = "INT32";
+annotation.builtin traits = ["is_primitive", "is_integer", "is_signed", "is_numeric", "has_hash", "is_pod"];
+annotation.cpp type = "int32_t";
+annotation.cpp include = "<cstdint>";
+annotation.go type = "int32";
+struct int32 {};
+
+/// 32-bit unsigned integer.
+annotation.builtin phy_type = "UINT32";
+annotation.builtin traits = ["is_primitive", "is_integer", "is_numeric", "has_hash", "is_pod"];
+annotation.cpp type = "uint32_t";
+annotation.cpp include = "<cstdint>";
+annotation.go type = "uint32";
+struct uint32 {};
+
+/// 64-bit signed integer.
+annotation.builtin phy_type = "INT64";
+annotation.builtin traits = ["is_primitive", "is_integer", "is_signed", "is_numeric", "has_hash", "is_pod"];
+annotation.cpp type = "int64_t";
+annotation.cpp include = "<cstdint>";
+annotation.go type = "int64";
+struct int64 {};
+
+/// 64-bit unsigned integer.
+annotation.builtin phy_type = "UINT64";
+annotation.builtin traits = ["is_primitive", "is_integer", "is_numeric", "has_hash", "is_pod"];
+annotation.cpp type = "uint64_t";
+annotation.cpp include = "<cstdint>";
+annotation.go type = "uint64";
+struct uint64 {};
+
+/// 128-bit signed integer.
+annotation.builtin phy_type = "INT128";
+annotation.builtin traits = ["is_primitive", "is_integer", "is_signed", "is_numeric", "has_hash", "is_pod"];
+annotation.cpp type = "__int128";
+struct int128 {};
+
+/// 128-bit unsigned integer.
+annotation.builtin phy_type = "UINT128";
+annotation.builtin traits = ["is_primitive", "is_integer", "is_numeric", "has_hash", "is_pod"];
+annotation.cpp type = "unsigned __int128";
+struct uint128 {};
+
+/// 32-bit float.
+annotation.builtin phy_type = "FLOAT32";
+annotation.builtin traits = ["is_primitive", "is_numeric", "is_pod"];
+annotation.cpp type = "float";
+annotation.go type = "float32";
+struct float32 {};
+
+/// 64-bit float.
+annotation.builtin phy_type = "FLOAT64";
+annotation.builtin traits = ["is_primitive", "is_numeric", "is_pod"];
+annotation.cpp type = "double";
+annotation.go type = "float64";
+struct float64 {};
+
+/// UTF-8 string.
+annotation.builtin phy_type = "STRING";
+annotation.builtin traits = ["is_primitive", "has_hash"];
+annotation.cpp type = "std::string";
+annotation.cpp include = "<string>";
+annotation.go type = "string";
+struct string {};
+
+/// Ordered list. One type parameter.
+annotation.builtin phy_type = "LIST";
+annotation.builtin traits = ["is_container"];
+struct list<T> {};
+
+/// Unique keys. One type parameter.
+annotation.builtin phy_type = "SET";
+annotation.builtin traits = ["is_container"];
+struct set<K> {};
+
+/// Key to value mapping. Two type parameters.
+annotation.builtin phy_type = "MAP";
+annotation.builtin traits = ["is_container"];
+struct map<K, V> {};

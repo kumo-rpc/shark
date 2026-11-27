@@ -14,18 +14,32 @@
 //
 
 #include <shark/parser/builtin.h>
+#include <shark/parser/import.h>
 #include <shark/parser/pool.h>
 #include <shark/parser/file.h>
 #include <shark/common/clog.h>
 #include <shark/common/filepath.h>
 #include <turbo/log/logging.h>
+#include <filesystem>
 #include <string>
 
 namespace shark::parser {
 
-    RegistryPool::RegistryPool() {
-        load_builtin_types(*this);
-    }
+    namespace {
+
+        constexpr std::string_view kStdRel = "shark/schema/std.shark";
+        constexpr std::string_view kStdImport = "\"shark/schema/std.shark\"";
+
+        bool is_std_import(std::string_view raw) {
+            if (raw.size() < 2) {
+                return false;
+            }
+            return raw.substr(1, raw.size() - 2) == kStdRel;
+        }
+
+    }  // namespace
+
+    RegistryPool::RegistryPool() = default;
 
     void RegistryPool::add_file(FileParser *ptr) {
         std::string_view path = ptr->path;
@@ -56,7 +70,60 @@ namespace shark::parser {
         return node;
     }
 
+    FileParser* RegistryPool::load_rel(std::string_view rel) {
+        if (FileParser* existing = get_file(rel)) {
+            return existing;
+        }
+        std::string prefix;
+        auto found = shark::common::absolute_path(rel, includes());
+        if (!found.ok()) {
+            shark::common::report_error("file `" + std::string(rel) + "` was not found under include paths");
+            return nullptr;
+        }
+        auto resolved = shark::common::relative_path(*found, includes(), &prefix);
+        if (!resolved.ok()) {
+            shark::common::report_error("file `" + std::string(rel) + "` was not found under include paths");
+            return nullptr;
+        }
+        const std::string absolute = prefix + "/" + *resolved;
+        auto* node = create_symbol<FileParser>(nullptr);
+        if (!node->load(absolute, *resolved)) {
+            return nullptr;
+        }
+        add_file(node);
+        if (!node->parse()) {
+            return nullptr;
+        }
+        return node;
+    }
+
+    bool RegistryPool::load_std() {
+        std::filesystem::path source = std::filesystem::path(__FILE__).parent_path().parent_path().parent_path();
+        add_include(source.string());
+        FileParser* std_file = load_rel(kStdRel);
+        if (std_file == nullptr) {
+            return false;
+        }
+        _builtin_files.insert(std_file);
+        _import_graph.add_file(std_file);
+        return link_imports(std_file);
+    }
+
     bool RegistryPool::link_imports(FileParser* node) {
+        if (_builtin_files.find(node) == _builtin_files.end()) {
+            bool has_std = false;
+            for (ImportParser* import_node : node->imports) {
+                if (is_std_import(import_node->path)) {
+                    has_std = true;
+                    break;
+                }
+            }
+            if (!has_std) {
+                auto* import_node = create_node<ImportParser>(node);
+                import_node->path = kStdImport;
+                node->imports.push_back(import_node);
+            }
+        }
         for (ImportParser* import_node : node->imports) {
             if (!import_node->classify.empty()) {
                 continue;
@@ -98,6 +165,9 @@ namespace shark::parser {
             if (!dep->parse()) {
                 return false;
             }
+            if (_builtin_files.find(node) != _builtin_files.end()) {
+                _builtin_files.insert(dep);
+            }
             _import_graph.add_file(dep);
             if (!_import_graph.add_dependency(node, dep)) {
                 return false;
@@ -134,6 +204,9 @@ namespace shark::parser {
         }
         _import_graph.add_file(node);
 
+        if (!load_std()) {
+            return nullptr;
+        }
         if (!link_imports(node)) {
             return nullptr;
         }

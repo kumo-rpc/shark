@@ -21,15 +21,22 @@
 namespace shark::parser {
 
     bool SymbolNode::emit_to_pool() {
-        auto ptr= pool->get_symbol(full_name);
-        if (ptr != nullptr) {
+        if (pool->get_symbol(full_name) != nullptr) {
+            report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name);
             return false;
         }
-        auto r=  pool->add_symbol(this);
-        if (r) {
-            emit = true;
+        if (!pool->add_symbol(this)) {
+            report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name);
+            return false;
         }
-        return r;
+        emit = true;
+        if (file != nullptr && file->package == "shark.__builtin" && full_name_without_package != full_name) {
+            if (!pool->add_symbol_name(full_name_without_package, this)) {
+                report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name_without_package);
+                return false;
+            }
+        }
+        return true;
     }
 }  // namespace shark::parser
 

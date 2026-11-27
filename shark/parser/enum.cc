@@ -93,13 +93,11 @@ namespace shark::parser {
             }
             node->bind = true;
             if (!node->emit_to_pool()) {
-                report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", node->full_name);
                 return false;
             }
         }
         bind = true;
         if (!emit_to_pool()) {
-            report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", full_name);
             return false;
         }
         return true;

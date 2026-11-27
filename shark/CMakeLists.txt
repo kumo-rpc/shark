@@ -58,7 +58,7 @@ kmcmake_cc_library(
         parser/servlet.cc
         parser/export.cc
         schema/schema_pool.cc
-        schema/fake.cc
+        schema/schema_pool_api.cc
         CXXOPTS
         ${KMCMAKE_CXX_OPTIONS}
         LINKS

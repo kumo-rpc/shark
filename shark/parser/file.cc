@@ -570,7 +570,6 @@ namespace shark::parser {
                     field->enum_type = enum_type;
                     field->bind = true;
                     if (!field->emit_to_pool()) {
-                        report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", field->full_name);
                         return false;
                     }
                     return true;
@@ -584,7 +583,6 @@ namespace shark::parser {
             field->type = type;
             field->bind = true;
             if (!field->emit_to_pool()) {
-                report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", field->full_name);
                 return false;
             }
             if (!is_scalar_builtin(type)) {
@@ -601,7 +599,6 @@ namespace shark::parser {
             field->enum_type = enum_type;
             field->bind = true;
             if (!field->emit_to_pool()) {
-                report_error(ErrorType::SEMANTIC, "duplicate symbol `%s`", field->full_name);
                 return false;
             }
             return true;
