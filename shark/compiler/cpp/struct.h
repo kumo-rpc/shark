@@ -29,6 +29,8 @@ namespace shark::compiler::cpp {
         void generate_fwd_declare(io::Printer& printer);
         void generate_generic_fwd_declare(io::Printer& printer);
         void generate_alias_declare(io::Printer& printer);
+        void generate_define(io::Printer& printer);
+        void generate_contained_fwd(io::Printer& printer);
 
     private:
         const SchemaStruct* _struct;

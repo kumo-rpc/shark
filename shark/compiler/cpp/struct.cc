@@ -14,7 +14,10 @@
 //
 
 #include <shark/common/clog.h>
+#include <shark/compiler/cpp/constexpr.h>
+#include <shark/compiler/cpp/enum.h>
 #include <shark/compiler/cpp/struct.h>
+#include <shark/schema/constrain.h>
 #include <shark/schema/schema_defines.h>
 
 #include <map>
@@ -55,6 +58,35 @@ std::string alias_type_name(const SchemaType* type) {
         }
         std::map<std::string, std::string> vars;
         vars["name"] = type_name->name();
+        printer.print(vars, _struct->is_union() ? "union $name$;\n" : "class $name$;\n");
+    }
+
+    void StructGenerator::generate_contained_fwd(io::Printer& printer) {
+        const SchemaTypeName* type_name = _struct->type_name();
+        if (type_name == nullptr || type_name->name().empty()) {
+            return;
+        }
+        std::map<std::string, std::string> vars;
+        vars["name"] = type_name->name();
+        if (_struct->generic()) {
+            if (type_name->argument_size() == 0) {
+                return;
+            }
+            std::string params;
+            for (uint32_t i = 0; i < type_name->argument_size(); ++i) {
+                const SchemaTypeName* argument = type_name->argument(i);
+                if (argument == nullptr || argument->name().empty()) {
+                    return;
+                }
+                if (!params.empty()) {
+                    params.append(", ");
+                }
+                params.append("typename ");
+                params.append(argument->name());
+            }
+            vars["params"] = params;
+            printer.print(vars, "template <$params$>\n");
+        }
         printer.print(vars, _struct->is_union() ? "union $name$;\n" : "class $name$;\n");
     }
 
@@ -104,6 +136,85 @@ std::string alias_type_name(const SchemaType* type) {
             vars["type"] = type;
             printer.print(vars, alias->is_using() ? "using $name$ = $type$;\n" : "typedef $type$ $name$;\n");
         }
+    }
+
+    void StructGenerator::generate_define(io::Printer& printer) {
+        if (_struct->container() != nullptr) {
+            return;
+        }
+        const SchemaTypeName* type_name = _struct->type_name();
+        if (type_name == nullptr || type_name->name().empty()) {
+            return;
+        }
+        std::map<std::string, std::string> vars;
+        vars["name"] = type_name->name();
+        if (_struct->generic()) {
+            if (type_name->argument_size() == 0) {
+                return;
+            }
+            std::string params;
+            for (uint32_t i = 0; i < type_name->argument_size(); ++i) {
+                const SchemaTypeName* argument = type_name->argument(i);
+                if (argument == nullptr || argument->name().empty()) {
+                    return;
+                }
+                if (!params.empty()) {
+                    params.append(", ");
+                }
+                params.append("typename ");
+                params.append(argument->name());
+            }
+            vars["params"] = params;
+            printer.print(vars, "template <$params$>\n");
+        }
+        printer.print(vars, _struct->is_union() ? "union $name$ {\n" : "class $name$ {\n");
+        printer.indent();
+        for (uint32_t i = 0; i < _struct->field_size(); ++i) {
+            const SchemaField* field = _struct->field(i);
+            if (field == nullptr || field->label() != FieldLabel::CONSTEXPR || field->type() == nullptr) {
+                continue;
+            }
+            if (!type_is_primitive(field->type()) || !type_is_constexpr(field->type())) {
+                continue;
+            }
+            ConstexprGenerator generator(field);
+            generator.generate_primitive_constexpr_declare(printer);
+        }
+        for (uint32_t i = 0; i < _struct->nested_enum_size(); ++i) {
+            const SchemaEnum* item = _struct->nested_enum(i);
+            if (item == nullptr) {
+                continue;
+            }
+            EnumGenerator generator(item);
+            generator.generate_nested_declare(printer);
+        }
+        for (uint32_t i = 0; i < _struct->field_size(); ++i) {
+            const SchemaField* field = _struct->field(i);
+            if (field == nullptr || field->label() != FieldLabel::CONSTEXPR) {
+                continue;
+            }
+            ConstexprGenerator generator(field);
+            generator.generate_enum_constexpr_declare(printer);
+        }
+        for (uint32_t i = 0; i < _struct->nested_type_size(); ++i) {
+            const SchemaStruct* nested = _struct->nested_type(i);
+            if (nested == nullptr || nested->generic()) {
+                continue;
+            }
+            StructGenerator generator(nested);
+            generator.generate_contained_fwd(printer);
+        }
+        for (uint32_t i = 0; i < _struct->nested_type_size(); ++i) {
+            const SchemaStruct* nested = _struct->nested_type(i);
+            if (nested == nullptr || !nested->generic()) {
+                continue;
+            }
+            StructGenerator generator(nested);
+            generator.generate_contained_fwd(printer);
+        }
+        generate_alias_declare(printer);
+        printer.outdent();
+        printer.print("};\n");
     }
 
 }  // namespace shark::compiler::cpp

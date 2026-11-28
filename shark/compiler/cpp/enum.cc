@@ -123,6 +123,10 @@ namespace shark::compiler::cpp {
         if (!global_enum(_enum)) {
             return;
         }
+        generate_nested_declare(printer);
+    }
+
+    void EnumGenerator::generate_nested_declare(io::Printer& printer) {
         for (uint32_t i = 0; i < _enum->leading_comment_size(); ++i) {
             print_comment(printer, _enum->leading_comment(i));
         }
@@ -293,7 +297,6 @@ namespace shark::compiler::cpp {
             "}\n");
     }
 
-    void EnumGenerator::generate_nested_declare(io::Printer& printer) { }
 
     void EnumGenerator::generate_inline_define(io::Printer& printer) { }
 

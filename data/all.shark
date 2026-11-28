@@ -53,7 +53,6 @@ struct Point {
     optional int64 y @ 2;
     atomic int32 z @ 3 = 1;
     constexpr int32 zero @ 4 = 0;
-
     enum class Kind : int32 {
         NONE = 0;
         FILE = 1;
@@ -69,6 +68,13 @@ struct Point {
     };
 };
 
+struct PointW {
+    optional PointX i @ 1;
+}
+
+struct PointX {
+    optional int64 i @ 1;
+}
 union Payload {
     required int64 number @ 1;
     optional string text @ 2 = "text";
