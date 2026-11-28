@@ -197,6 +197,9 @@ void FileGenerator::generate_header(io::Printer& printer) {
         for (auto &it : _enum_generators) {
             it.generate_global_declare(printer);
         }
+        for (auto &it : _constexpr_generators) {
+            it.generate_enum_constexpr_declare(printer);
+        }
 
     }
     //////////////////////////////////////////////////////////////////////////////

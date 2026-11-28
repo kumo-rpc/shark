@@ -589,6 +589,24 @@ namespace shark::parser {
                 }
                 return true;
             }
+            auto* enum_type = static_cast<EnumParser*>(symbol);
+            if (field->default_value != nullptr) {
+                if (auto* id = std::get_if<ConstValueParser::Identifier>(&field->default_value->value)) {
+                    const EnumValueParser* found = nullptr;
+                    for (const EnumValueParser* item : enum_type->values) {
+                        if (item->name == id->name || item->full_name == id->name || item->full_name_without_package == id->name) {
+                            found = item;
+                            break;
+                        }
+                    }
+                    if (found == nullptr) {
+                        report_error(ErrorType::SEMANTIC, "constexpr `%s` enum `%s` has no value `%s`", field->name, enum_type->name, id->name);
+                        return false;
+                    }
+                    id->enum_type = enum_type;
+                    id->enumerator = found;
+                }
+            }
         } else if (symbol->node_type != SymbolType::PRIMITIVE && symbol->node_type != SymbolType::STRUCT) {
             report_error(ErrorType::SEMANTIC, "constexpr `%s` type `%s` was not bound", field->name, type_ref_name(field->type_ref));
             return false;

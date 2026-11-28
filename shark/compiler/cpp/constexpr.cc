@@ -21,6 +21,8 @@
 #include <map>
 #include <string>
 
+#include <turbo/strings/str_replace.h>
+
 namespace shark::compiler::cpp {
 namespace {
 
@@ -121,7 +123,31 @@ void ConstexprGenerator::generate_primitive_constexpr_define(io::Printer& printe
     printer.print(vars, "const $type$ $name$ = $value$;\n");
 }
 
-void ConstexprGenerator::generate_enum_constexpr_declare(io::Printer&) {}
+void ConstexprGenerator::generate_enum_constexpr_declare(io::Printer& printer) {
+    const SchemaField* field = _field;
+    if (field == nullptr || field->type() == nullptr || type_is_primitive(field->type()) || !type_is_constexpr(field->type())) {
+        return;
+    }
+    const SchemaConstValue* value = field->default_value();
+    if (value == nullptr || value->kind() != SchemaConstValue::Kind::IDENTIFIER || value->identifier_enumerator() == nullptr || value->identifier_enum() == nullptr) {
+        shark::common::report_error(field->full_name() + " constexpr value is missing");
+        return;
+    }
+    const std::string type_name = turbo::StrReplaceAll(field->type()->full_name_without_package(), {{".", "::"}});
+    if (type_name.empty()) {
+        shark::common::report_error(field->full_name() + " constexpr value is missing");
+        return;
+    }
+    std::string literal = value->identifier_enumerator()->name();
+    if (value->identifier_enum()->is_class()) {
+        literal = type_name + "::" + literal;
+    }
+    std::map<std::string, std::string> vars;
+    vars["type"] = type_name;
+    vars["name"] = field->name();
+    vars["value"] = literal;
+    printer.print(vars, "static constexpr $type$ $name$ = $value$;\n");
+}
 
 void ConstexprGenerator::generate_enum_constexpr_define(io::Printer&) {}
 

@@ -42,6 +42,8 @@ enum class Color : uint16 {
     MAX = kLimit;
 };
 
+constexpr Color kMyColor@4 = Color.GREEN;
+
 annotation key = "point";
 struct Point {
     required int64 x @ 1 = 0;
