@@ -60,6 +60,7 @@ kmcmake_cc_library(
         schema/schema_pool.cc
         schema/schema_pool_api.cc
         schema/constrain.cc
+        schema/uri.cc
         io/printer.cc
         io/zero_copy_stream.cc
         io/memory_zero_copy_stream.cc
@@ -72,6 +73,7 @@ kmcmake_cc_library(
         compiler/cpp/function.cc
         compiler/cpp/servlet.cc
         compiler/cpp/file.cc
+        compiler/cpp/constexpr.cc
         CXXOPTS
         ${KMCMAKE_CXX_OPTIONS}
         LINKS

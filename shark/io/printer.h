@@ -226,7 +226,7 @@ namespace shark::io {
         template <typename... Args>
         void print(const char* text, const Args&... args) {
             std::map<std::string, std::string> vars;
-            PrintInternal(&vars, text, args...);
+            print_internal(&vars, text, args...);
         }
 
         // Indent text by two spaces.  After calling Indent(), two spaces will be
@@ -285,7 +285,7 @@ namespace shark::io {
             const char* key, const std::string& value,
             const Args&... args) {
             (*vars)[key] = value;
-            PrintInternal(vars, text, args...);
+            print_internal(vars, text, args...);
         }
 
         // Copy size worth of bytes from data to buffer_.

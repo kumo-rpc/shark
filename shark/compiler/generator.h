@@ -18,9 +18,16 @@
 #include <shark/schema/schema_pool.h>
 #include <shark/schema/schema_pool_api.h>
 #include <turbo/flags/declare.h>
-#include <shark/io//printer.h>
+#include <shark/io/printer.h>
 
-TURBO_DECLARE_FLAG(std::string, out_put);
+#include <string>
+#include <vector>
+
+TURBO_DECLARE_FLAG(bool, debug);
+TURBO_DECLARE_FLAG(std::string, file);
+TURBO_DECLARE_FLAG(std::vector<std::string>, include);
+TURBO_DECLARE_FLAG(std::string, lang);
+TURBO_DECLARE_FLAG(std::string, out);
 
 namespace shark::compiler {
 
@@ -28,7 +35,7 @@ namespace shark::compiler {
     public:
         virtual ~Generator() = default;
 
-        virtual void generate_code(const SchemaFile* file) = 0;
+        virtual bool generate_code(const SchemaFile* file) = 0;
     };
 
 }  // namespace shark::compiler

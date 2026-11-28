@@ -19,6 +19,9 @@
 
 namespace shark {
 
+    class SchemaStruct;
+    class SchemaEnum;
+
     void register_constrain(SchemaPoolBase *pool);
 
     bool check_type_name(SchemaPoolBase* pool, const FileBase* file, const SourceLocation& location, const TypeName& type);
@@ -37,7 +40,22 @@ namespace shark {
     bool is_numeric(const StructBase *type);
     bool is_container(const StructBase *type);
     bool is_string(const StructBase *type);
+    bool is_constexpr(const StructBase *type);
     bool is_list(const StructBase *type);
     bool is_map(const StructBase *type);
     bool is_set(const StructBase *type);
+
+    bool type_is_integer(const SchemaStruct *type);
+    bool type_is_void(const SchemaStruct *type);
+    bool type_is_primitive(const SchemaStruct *type);
+    bool type_is_pod(const SchemaStruct *type);
+    bool type_is_signed(const SchemaStruct *type);
+    bool type_is_numeric(const SchemaStruct *type);
+    bool type_is_container(const SchemaStruct *type);
+    bool type_is_string(const SchemaStruct *type);
+    bool type_is_constexpr(const SchemaStruct *type);
+    bool type_is_list(const SchemaStruct *type);
+    bool type_is_map(const SchemaStruct *type);
+    bool type_is_set(const SchemaStruct *type);
+    bool type_is_constexpr(const SchemaEnum *type);
 }  // namespace shark

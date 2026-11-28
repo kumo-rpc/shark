@@ -16,17 +16,30 @@
 #pragma once
 
 #include <shark/compiler/generator.h>
+#include <shark/compiler/cpp/constexpr.h>
 
 namespace shark::compiler::cpp {
 
     class FileGenerator {
     public:
-        FileGenerator(const shark::FileBase* file) : _file(file){}
+        explicit FileGenerator(const shark::SchemaFile* file) : _file(file) {
+
+        }
         ~FileGenerator() = default;
 
         void generate_header(io::Printer &printer);
         void generate_source(io::Printer &printer);
     private:
-        const shark::FileBase* _file{nullptr};
+        void generate_file_comment(io::Printer &printer);
+        void generate_namespace_start(io::Printer &printer);
+        void generate_namespace_end(io::Printer &printer);
+
+        void generate_header_include(io::Printer &printer);
+        void generate_source_include(io::Printer &printer);
+
+        void initialize();
+    private:
+        const shark::SchemaFile* _file{nullptr};
+        std::vector<ConstexprGenerator> _constexpr_generators;
     };
 }  // namespace shark::compiler::cpp

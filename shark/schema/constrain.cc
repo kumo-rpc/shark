@@ -14,6 +14,7 @@
 //
 
 #include <shark/schema/constrain.h>
+#include <shark/schema/schema_pool_api.h>
 #include <shark/common/clog.h>
 
 #include <string>
@@ -63,9 +64,24 @@ namespace shark {
     bool is_numeric(const StructBase *type) { return has_trait(type, "is_numeric"); }
     bool is_container(const StructBase *type) { return has_trait(type, "is_container"); }
     bool is_string(const StructBase *type) { return type != nullptr && type->phy_type_ == PhysicalType::STRING; }
+    bool is_constexpr(const StructBase *type) { return is_primitive(type) && !is_string(type); }
     bool is_list(const StructBase *type) { return type != nullptr && type->phy_type_ == PhysicalType::LIST; }
     bool is_map(const StructBase *type) { return type != nullptr && type->phy_type_ == PhysicalType::MAP; }
     bool is_set(const StructBase *type) { return type != nullptr && type->phy_type_ == PhysicalType::SET; }
+
+    bool type_is_integer(const SchemaStruct *type) { return is_integer(static_cast<const StructBase *>(type)); }
+    bool type_is_void(const SchemaStruct *type) { return is_void(static_cast<const StructBase *>(type)); }
+    bool type_is_primitive(const SchemaStruct *type) { return is_primitive(static_cast<const StructBase *>(type)); }
+    bool type_is_pod(const SchemaStruct *type) { return is_pod(static_cast<const StructBase *>(type)); }
+    bool type_is_signed(const SchemaStruct *type) { return is_signed(static_cast<const StructBase *>(type)); }
+    bool type_is_numeric(const SchemaStruct *type) { return is_numeric(static_cast<const StructBase *>(type)); }
+    bool type_is_container(const SchemaStruct *type) { return is_container(static_cast<const StructBase *>(type)); }
+    bool type_is_string(const SchemaStruct *type) { return is_string(static_cast<const StructBase *>(type)); }
+    bool type_is_constexpr(const SchemaStruct *type) { return is_constexpr(static_cast<const StructBase *>(type)); }
+    bool type_is_list(const SchemaStruct *type) { return is_list(static_cast<const StructBase *>(type)); }
+    bool type_is_map(const SchemaStruct *type) { return is_map(static_cast<const StructBase *>(type)); }
+    bool type_is_set(const SchemaStruct *type) { return is_set(static_cast<const StructBase *>(type)); }
+    bool type_is_constexpr(const SchemaEnum *type) { return type != nullptr; }
 
     void register_constrain(SchemaPoolBase *pool) {
         pool->add_constrain("is_integer", is_integer);
@@ -76,6 +92,7 @@ namespace shark {
         pool->add_constrain("is_numeric", is_numeric);
         pool->add_constrain("is_container", is_container);
         pool->add_constrain("is_string", is_string);
+        pool->add_constrain("is_constexpr", is_constexpr);
         pool->add_constrain("is_list", is_list);
         pool->add_constrain("is_map", is_map);
         pool->add_constrain("is_set", is_set);
@@ -83,7 +100,7 @@ namespace shark {
 
     namespace {
 
-        const StructBase* lookup_struct(SchemaPoolBase* pool, const FileBase* file, const TypeName& type) {
+        SymbolBase* lookup_symbol(SchemaPoolBase* pool, const FileBase* file, const TypeName& type) {
             if (pool == nullptr || type.is_parameter_) {
                 return nullptr;
             }
@@ -91,10 +108,23 @@ namespace shark {
             if (symbol == nullptr && file != nullptr && !file->package_.empty()) {
                 symbol = pool->get_symbol(file->package_ + "." + type.name_);
             }
+            return symbol;
+        }
+
+        const StructBase* lookup_struct(SchemaPoolBase* pool, const FileBase* file, const TypeName& type) {
+            SymbolBase* symbol = lookup_symbol(pool, file, type);
             if (symbol == nullptr || symbol->symbol_type_ != SymbolType::STRUCT) {
                 return nullptr;
             }
             return static_cast<const StructBase*>(symbol);
+        }
+
+        const ServletBase* lookup_servlet(SchemaPoolBase* pool, const FileBase* file, const TypeName& type) {
+            SymbolBase* symbol = lookup_symbol(pool, file, type);
+            if (symbol == nullptr || symbol->symbol_type_ != SymbolType::SERVLET) {
+                return nullptr;
+            }
+            return static_cast<const ServletBase*>(symbol);
         }
 
         std::string located(const FileBase* file, const SourceLocation& location, std::string_view level, const std::string& message) {
@@ -137,17 +167,22 @@ namespace shark {
             if (use.arguments_.empty() || use.is_parameter_) {
                 return true;
             }
-            const StructBase* generic = use.type_;
-            if (generic == nullptr) {
+            const std::vector<TypeName>* parameters = nullptr;
+            if (use.type_ != nullptr) {
+                parameters = &use.type_->name_.arguments_;
+            } else if (const ServletBase* servlet = lookup_servlet(pool, file, use)) {
+                parameters = &servlet->name_.arguments_;
+            }
+            if (parameters == nullptr) {
                 shark::common::report_error(located(file, location, "error", "constrain `" + use.name_ + "` type was not bound"));
                 return false;
             }
-            if (generic->name_.arguments_.size() != use.arguments_.size()) {
+            if (parameters->size() != use.arguments_.size()) {
                 shark::common::report_error(located(file, location, "error", "constrain `" + use.name_ + "` argument count mismatch"));
                 return false;
             }
-            for (std::size_t i = 0; i < generic->name_.arguments_.size(); ++i) {
-                const TypeName& parameter = generic->name_.arguments_[i];
+            for (std::size_t i = 0; i < parameters->size(); ++i) {
+                const TypeName& parameter = (*parameters)[i];
                 const TypeName& argument = use.arguments_[i];
                 if (argument.is_parameter_ || !parameter.constraint_.has_value()) {
                     continue;
@@ -157,6 +192,23 @@ namespace shark {
                     return false;
                 }
                 if (!eval_constrain(pool, file, location, *parameter.constraint_, const_cast<StructBase*>(argument.type_))) {
+                    std::string detail = "constrain failed `" + use.name_ + "` argument `" + argument.name_
+                        + "` type `" + argument.type_->full_name_ + "` builtin `"
+                        + (argument.type_->builtin_ ? "1" : "0") + "`";
+                    for (const AnnotationBase* annotation : argument.type_->annotations_) {
+                        if (annotation == nullptr) {
+                            continue;
+                        }
+                        detail += " annotation `" + annotation->classify_ + "." + annotation->key_ + "`";
+                        if (annotation->value_ != nullptr && std::holds_alternative<ConstValue::List>(annotation->value_->value_)) {
+                            for (const ConstValue* element : std::get<ConstValue::List>(annotation->value_->value_).elements_) {
+                                if (element != nullptr && std::holds_alternative<std::string>(element->value_)) {
+                                    detail += " [" + std::get<std::string>(element->value_) + "]";
+                                }
+                            }
+                        }
+                    }
+                    shark::common::report_debug(located(file, location, "debug", detail));
                     return false;
                 }
             }
@@ -209,6 +261,19 @@ namespace shark {
             }
         }
 
+        void bind_constexpr_field(SchemaPoolBase* pool, const FileBase* file, FieldBase* field) {
+            if (field == nullptr) {
+                return;
+            }
+            bind_type_name(pool, file, field->type_ref_);
+            field->type_ = field->type_ref_.type_;
+            SymbolBase* symbol = lookup_symbol(pool, file, field->type_ref_);
+            if (symbol != nullptr && symbol->symbol_type_ == SymbolType::ENUM) {
+                field->enum_type_ = static_cast<const EnumBase*>(symbol);
+                field->type_ = nullptr;
+            }
+        }
+
         void bind_struct(SchemaPoolBase* pool, const FileBase* file, StructBase* node) {
             if (node == nullptr) {
                 return;
@@ -256,6 +321,9 @@ namespace shark {
         SchemaPoolBase* pool = file->pool_;
         for (StructBase* node : file->structs_) {
             bind_struct(pool, file, node);
+        }
+        for (FieldBase* field : file->constexprs_) {
+            bind_constexpr_field(pool, file, field);
         }
         for (FunctionBase* node : file->functions_) {
             bind_function(pool, file, node);

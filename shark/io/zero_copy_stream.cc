@@ -79,6 +79,10 @@ bool ZeroCopyInputStream::read_cord(turbo::Cord* cord, int count) {
   return true;
 }
 
+bool ZeroCopyOutputStream::write_aliased_raw(const void*, int) {
+    return false;
+}
+
 bool ZeroCopyOutputStream::write_cord(const turbo::Cord& cord) {
   if (cord.empty()) return true;
 

@@ -206,6 +206,7 @@ namespace shark {
     };
 
     class SchemaEnum : protected EnumBase {
+        friend bool type_is_constexpr(const SchemaEnum *type);
     public:
         SchemaEnum() = delete;
         static const SchemaEnum* from(const EnumBase* node) {
@@ -306,6 +307,18 @@ namespace shark {
     };
 
     class SchemaStruct : protected StructBase {
+        friend bool type_is_integer(const SchemaStruct *type);
+        friend bool type_is_void(const SchemaStruct *type);
+        friend bool type_is_primitive(const SchemaStruct *type);
+        friend bool type_is_pod(const SchemaStruct *type);
+        friend bool type_is_signed(const SchemaStruct *type);
+        friend bool type_is_numeric(const SchemaStruct *type);
+        friend bool type_is_container(const SchemaStruct *type);
+        friend bool type_is_string(const SchemaStruct *type);
+        friend bool type_is_constexpr(const SchemaStruct *type);
+        friend bool type_is_list(const SchemaStruct *type);
+        friend bool type_is_map(const SchemaStruct *type);
+        friend bool type_is_set(const SchemaStruct *type);
     public:
         SchemaStruct() = delete;
         static const SchemaStruct* from(const StructBase* node) {

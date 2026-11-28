@@ -19,11 +19,11 @@
 
 namespace shark::compiler::cpp {
 
-    class CppGenerator: public Generator {
+    class CppGenerator : public Generator {
     public:
         CppGenerator();
         ~CppGenerator() override = default;
 
-        void generate_code(const SchemaFile* file) override;
+        bool generate_code(const SchemaFile* file) override;
     };
-}  // namespace shark::compiler::cpp
+} // namespace shark::compiler::cpp

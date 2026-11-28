@@ -16,4 +16,8 @@
 #include <shark/compiler/generator.h>
 #include <turbo/flags/flag.h>
 
-TURBO_FLAG(std::string, out_put,".", "generated file output dir");
+TURBO_FLAG(bool, debug, false, "enable debug log");
+TURBO_FLAG(std::string, file, "", "shark idl file");
+TURBO_FLAG(std::vector<std::string>, include, {}, "include search path");
+TURBO_FLAG(std::string, lang, "", "generated language");
+TURBO_FLAG(std::string, out, "", "generated file output directory");

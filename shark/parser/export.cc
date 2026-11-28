@@ -30,6 +30,7 @@
 #include <shark/parser/servlet.h>
 #include <shark/parser/struct.h>
 #include <shark/schema/schema_pool.h>
+#include <turbo/strings/escaping.h>
 
 #include <optional>
 #include <string>
@@ -39,6 +40,13 @@
 namespace shark::parser {
 
     namespace {
+
+        bool unescape_literal(std::string_view raw, std::string* out) {
+            if (raw.size() >= 2 && (raw.front() == '"' || raw.front() == '\'' || raw.front() == '`') && raw.back() == raw.front()) {
+                raw = raw.substr(1, raw.size() - 2);
+            }
+            return turbo::c_unescape(raw, out);
+        }
 
         class Exporter {
         public:
@@ -163,7 +171,11 @@ namespace shark::parser {
             } else if (const auto* item = std::get_if<double>(&node->value)) {
                 out->value_ = *item;
             } else if (const auto* item = std::get_if<std::string_view>(&node->value)) {
-                out->value_ = std::string(item->data(), item->size());
+                std::string unescaped;
+                if (!unescape_literal(*item, &unescaped)) {
+                    return nullptr;
+                }
+                out->value_ = std::move(unescaped);
             } else if (const auto* item = std::get_if<ConstValueParser::Identifier>(&node->value)) {
                 ConstValue::Identifier id;
                 id.name_.assign(item->name.data(), item->name.size());
@@ -559,7 +571,9 @@ namespace shark::parser {
                     copied->annotations_.push_back(copy_annotation(annotation));
                 }
                 copied->classify_.assign(node->classify.data(), node->classify.size());
-                copied->path_.assign(node->path.data(), node->path.size());
+                if (!unescape_literal(node->path, &copied->path_)) {
+                    return false;
+                }
                 out->imports_.push_back(copied);
             }
             for (CommentParser* comment : file.leading_comment) {
