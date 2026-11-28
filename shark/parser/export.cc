@@ -616,6 +616,11 @@ namespace shark::parser {
                     return false;
                 }
             }
+            for (AliasParser* alias : file.aliases) {
+                if (!create_alias(alias)) {
+                    return false;
+                }
+            }
             for (ServletParser* node : file.servlets) {
                 ServletBase* copied = make<ServletParser, ServletBase>(node, SymbolType::SERVLET);
                 copied->full_name_ = node->full_name;
@@ -681,6 +686,25 @@ namespace shark::parser {
                     return false;
                 }
                 out->primitives_.push_back(static_cast<PrimitiveBase*>(made_[node]));
+            }
+            for (AliasParser* alias : file.aliases) {
+                SymbolBase* copied = made_[alias];
+                SymbolBase* target = made_[alias->target];
+                if (copied == nullptr || copied->symbol_type_ != SymbolType::TYPE_ALIAS) {
+                    alias->report_error(ErrorType::SEMANTIC, "alias `%s` target `%s` was not bound", alias->name, alias->target_name);
+                    return false;
+                }
+                TypeAlias* type_alias = static_cast<TypeAlias*>(copied);
+                for (CommentParser* comment : alias->leading_comment) {
+                    type_alias->leading_comment_.push_back(copy_comment(comment));
+                }
+                type_alias->tailing_comment_ = copy_comment(alias->tailing_comment);
+                for (AnnotationParser* annotation : alias->annotations) {
+                    type_alias->annotations_.push_back(copy_annotation(annotation));
+                }
+                type_alias->target_ = static_cast<const TypeInfo*>(target);
+                type_alias->is_using_ = alias->is_using;
+                out->aliases_.push_back(type_alias);
             }
             for (FieldParser* node : file.constexprs) {
                 if (!fill_field(node)) {

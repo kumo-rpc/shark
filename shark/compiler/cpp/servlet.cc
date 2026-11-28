@@ -13,8 +13,51 @@
 // limitations under the License.
 //
 
-#include <shark/compiler/cpp/struct.h>
+#include <shark/compiler/cpp/servlet.h>
+
+#include <map>
+#include <string>
 
 namespace shark::compiler::cpp {
+
+    void ServletGenerator::generate_fwd_declare(io::Printer& printer) {
+        if (_servlet->container() != nullptr) {
+            return;
+        }
+        const SchemaTypeName* type_name = _servlet->type_name();
+        if (type_name == nullptr || type_name->name().empty() || type_name->argument_size() != 0) {
+            return;
+        }
+        std::map<std::string, std::string> vars;
+        vars["name"] = type_name->name();
+        printer.print(vars, "class $name$;\n");
+    }
+
+    void ServletGenerator::generate_generic_fwd_declare(io::Printer& printer) {
+        if (_servlet->container() != nullptr) {
+            return;
+        }
+        const SchemaTypeName* type_name = _servlet->type_name();
+        if (type_name == nullptr || type_name->name().empty() || type_name->argument_size() == 0) {
+            return;
+        }
+        std::string params;
+        for (uint32_t i = 0; i < type_name->argument_size(); ++i) {
+            const SchemaTypeName* argument = type_name->argument(i);
+            if (argument == nullptr || argument->name().empty()) {
+                return;
+            }
+            if (!params.empty()) {
+                params.append(", ");
+            }
+            params.append("typename ");
+            params.append(argument->name());
+        }
+        std::map<std::string, std::string> vars;
+        vars["params"] = params;
+        vars["name"] = type_name->name();
+        printer.print(vars, "template <$params$>\n");
+        printer.print(vars, "class $name$;\n");
+    }
 
 }  // namespace shark::compiler::cpp

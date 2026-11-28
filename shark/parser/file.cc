@@ -333,6 +333,11 @@ namespace shark::parser {
                 return false;
             }
         }
+        for (AliasParser* node : aliases) {
+            if (!assign_symbol(node, {}, seen)) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -430,6 +435,11 @@ namespace shark::parser {
             }
         }
         for (ServletParser* node : servlets) {
+            if (same_name(node, name)) {
+                return node;
+            }
+        }
+        for (AliasParser* node : aliases) {
             if (same_name(node, name)) {
                 return node;
             }
@@ -542,6 +552,19 @@ namespace shark::parser {
     }
 
     bool FileParser::bind_alias_struct_list(bool& progress, bool& pending) {
+        for (AliasParser* alias : aliases) {
+            if (alias->bind) {
+                continue;
+            }
+            if (!alias->bind_alias()) {
+                return false;
+            }
+            if (alias->bind) {
+                progress = true;
+            } else {
+                pending = true;
+            }
+        }
         for (StructParser* node : structs) {
             if (!bind_alias_struct(node, progress, pending)) {
                 return false;
@@ -816,6 +839,11 @@ namespace shark::parser {
                 return false;
             }
         }
+        for (AliasParser* alias : aliases) {
+            if (!bind_list(alias->annotations)) {
+                return false;
+            }
+        }
         if (!bind_fields(constexprs)) {
             return false;
         }
@@ -1026,6 +1054,16 @@ namespace shark::parser {
                 servlets.push_back(servlet);
                 continue;
             }
+            if (t.type == TokenType::BareWord && (t == kUsingKey || t == kTypeDefKey)) {
+                auto* alias = pool->create_symbol<AliasParser>(this);
+                alias->leading_comment = std::move(comments);
+                alias->annotations = std::move(annotations);
+                if (!alias->parse(*lexer)) {
+                    return false;
+                }
+                aliases.push_back(alias);
+                continue;
+            }
             if (t.type == TokenType::BareWord && t == kImportKey) {
                 auto* import_node = pool->create_node<ImportParser>(this);
                 if (!comments.empty()) {
@@ -1039,7 +1077,7 @@ namespace shark::parser {
                 continue;
             }
 
-            report_error(ErrorType::SYNTAX, "expected `package`, `enum`, `struct`, `union`, `servlet`, `function`, `constexpr` or `import`, but got `%s`", t.view());
+            report_error(ErrorType::SYNTAX, "expected `package`, `enum`, `struct`, `union`, `servlet`, `function`, `constexpr`, `using`, `typedef` or `import`, but got `%s`", t.view());
             return false;
         }
     }

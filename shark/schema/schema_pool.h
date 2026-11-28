@@ -416,6 +416,7 @@ namespace shark {
         std::vector<ServletBase*>         servlets_;
         std::vector<FunctionBase*>        functions_;
         std::vector<FieldBase*>           constexprs_;
+        std::vector<TypeAlias*>           aliases_;
         std::vector<FileBase*>            dependencies_;
 
     private:

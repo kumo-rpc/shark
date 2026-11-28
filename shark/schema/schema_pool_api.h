@@ -517,6 +517,8 @@ namespace shark {
         [[nodiscard]] const SchemaServlet* servlet(uint32_t index) const { return SchemaServlet::from(servlets_[index]); }
         [[nodiscard]] uint32_t function_size() const { return static_cast<uint32_t>(functions_.size()); }
         [[nodiscard]] const SchemaFunction* function(uint32_t index) const { return SchemaFunction::from(functions_[index]); }
+        [[nodiscard]] uint32_t alias_size() const { return static_cast<uint32_t>(aliases_.size()); }
+        [[nodiscard]] const SchemaTypeAlias* alias(uint32_t index) const { return SchemaTypeAlias::from(aliases_[index]); }
         [[nodiscard]] uint32_t constexpr_size() const { return static_cast<uint32_t>(constexprs_.size()); }
         [[nodiscard]] const SchemaField* constexpr_at(uint32_t index) const { return SchemaField::from(constexprs_[index]); }
         [[nodiscard]] uint32_t dependency_size() const { return static_cast<uint32_t>(dependencies_.size()); }

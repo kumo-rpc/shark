@@ -19,4 +19,19 @@
 
 namespace shark::compiler::cpp {
 
+    class StructGenerator {
+    public:
+        StructGenerator(const SchemaStruct* item)
+            : _struct(item) {
+            KCHECK(_struct != nullptr);
+        }
+
+        void generate_fwd_declare(io::Printer& printer);
+        void generate_generic_fwd_declare(io::Printer& printer);
+        void generate_alias_declare(io::Printer& printer);
+
+    private:
+        const SchemaStruct* _struct;
+    };
+
 }  // namespace shark::compiler::cpp

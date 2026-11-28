@@ -19,4 +19,18 @@
 
 namespace shark::compiler::cpp {
 
+    class ServletGenerator {
+    public:
+        ServletGenerator(const SchemaServlet* item)
+            : _servlet(item) {
+            KCHECK(_servlet != nullptr);
+        }
+
+        void generate_fwd_declare(io::Printer& printer);
+        void generate_generic_fwd_declare(io::Printer& printer);
+
+    private:
+        const SchemaServlet* _servlet;
+    };
+
 }  // namespace shark::compiler::cpp

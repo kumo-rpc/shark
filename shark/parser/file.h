@@ -30,6 +30,8 @@
 
 namespace shark::parser {
 
+    class AliasParser;
+
     class FileParser : public SymbolNode {
     public:
 
@@ -69,6 +71,7 @@ namespace shark::parser {
         std::vector<ServletParser*>    servlets;
         std::vector<FunctionParser*>   functions;
         std::vector<FieldParser*>      constexprs;
+        std::vector<AliasParser*>      aliases;
         std::vector<FileParser*>       dependencies;
         std::unique_ptr<Lexer<ExpressionLexer>>    lexer;
 

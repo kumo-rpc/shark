@@ -44,6 +44,9 @@ enum class Color : uint16 {
 
 constexpr Color kMyColor@4 = Color.GREEN;
 
+using Color1 = Color;
+typedef Color Color2;
+
 annotation key = "point";
 struct Point {
     required int64 x @ 1 = 0;
@@ -78,6 +81,9 @@ function int64 add(
 );
 
 function void ping();
+
+
+typedef Point Point2;
 
 servlet Read {
     function int64 get(required string key @ 1);

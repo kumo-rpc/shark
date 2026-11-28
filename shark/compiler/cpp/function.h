@@ -19,4 +19,18 @@
 
 namespace shark::compiler::cpp {
 
+    class FunctionGenerator {
+    public:
+        FunctionGenerator(const SchemaFunction* item)
+            : _function(item) {
+            KCHECK(_function != nullptr);
+        }
+
+        void generate_declare(io::Printer& printer);
+        void generate_generic_declare(io::Printer& printer);
+
+    private:
+        const SchemaFunction* _function;
+    };
+
 }  // namespace shark::compiler::cpp

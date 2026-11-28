@@ -18,6 +18,9 @@
 #include <shark/compiler/generator.h>
 #include <shark/compiler/cpp/constexpr.h>
 #include <shark/compiler/cpp/enum.h>
+#include <shark/compiler/cpp/function.h>
+#include <shark/compiler/cpp/servlet.h>
+#include <shark/compiler/cpp/struct.h>
 
 namespace shark::compiler::cpp {
 
@@ -43,5 +46,8 @@ namespace shark::compiler::cpp {
         const shark::SchemaFile* _file{nullptr};
         std::vector<ConstexprGenerator> _constexpr_generators;
         std::vector<EnumGenerator> _enum_generators;
+        std::vector<StructGenerator> _struct_generators;
+        std::vector<ServletGenerator> _servlet_generators;
+        std::vector<FunctionGenerator> _function_generators;
     };
 }  // namespace shark::compiler::cpp
