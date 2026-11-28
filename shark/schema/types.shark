@@ -37,7 +37,7 @@ type bool;
 annotation.builtin phy_type = "INT8";
 annotation.builtin traits = ["is_primitive", "is_integer", "is_signed", "is_numeric", "has_hash", "is_pod"];
 annotation.cpp type = "int8_t";
-annotation.cpp include = "<cstdint>";
+annotation.cpp include = "cstdint";
 annotation.go type = "int8";
 type int8;
 
@@ -45,7 +45,7 @@ type int8;
 annotation.builtin phy_type = "UINT8";
 annotation.builtin traits = ["is_primitive", "is_integer", "is_numeric", "has_hash", "is_pod"];
 annotation.cpp type = "uint8_t";
-annotation.cpp include = "<cstdint>";
+annotation.cpp include = "cstdint";
 annotation.go type = "uint8";
 type uint8;
 
@@ -53,7 +53,7 @@ type uint8;
 annotation.builtin phy_type = "INT16";
 annotation.builtin traits = ["is_primitive", "is_integer", "is_signed", "is_numeric", "has_hash", "is_pod"];
 annotation.cpp type = "int16_t";
-annotation.cpp include = "<cstdint>";
+annotation.cpp include = "cstdint";
 annotation.go type = "int16";
 type int16;
 
@@ -61,7 +61,7 @@ type int16;
 annotation.builtin phy_type = "UINT16";
 annotation.builtin traits = ["is_primitive", "is_integer", "is_numeric", "has_hash", "is_pod"];
 annotation.cpp type = "uint16_t";
-annotation.cpp include = "<cstdint>";
+annotation.cpp include = "cstdint";
 annotation.go type = "uint16";
 type uint16;
 
@@ -69,7 +69,7 @@ type uint16;
 annotation.builtin phy_type = "INT32";
 annotation.builtin traits = ["is_primitive", "is_integer", "is_signed", "is_numeric", "has_hash", "is_pod"];
 annotation.cpp type = "int32_t";
-annotation.cpp include = "<cstdint>";
+annotation.cpp include = "cstdint";
 annotation.go type = "int32";
 type int32;
 
@@ -77,7 +77,7 @@ type int32;
 annotation.builtin phy_type = "UINT32";
 annotation.builtin traits = ["is_primitive", "is_integer", "is_numeric", "has_hash", "is_pod"];
 annotation.cpp type = "uint32_t";
-annotation.cpp include = "<cstdint>";
+annotation.cpp include = "cstdint";
 annotation.go type = "uint32";
 type uint32;
 
@@ -85,7 +85,7 @@ type uint32;
 annotation.builtin phy_type = "INT64";
 annotation.builtin traits = ["is_primitive", "is_integer", "is_signed", "is_numeric", "has_hash", "is_pod"];
 annotation.cpp type = "int64_t";
-annotation.cpp include = "<cstdint>";
+annotation.cpp include = "cstdint";
 annotation.go type = "int64";
 type int64;
 
@@ -93,7 +93,7 @@ type int64;
 annotation.builtin phy_type = "UINT64";
 annotation.builtin traits = ["is_primitive", "is_integer", "is_numeric", "has_hash", "is_pod"];
 annotation.cpp type = "uint64_t";
-annotation.cpp include = "<cstdint>";
+annotation.cpp include = "cstdint";
 annotation.go type = "uint64";
 type uint64;
 
@@ -128,7 +128,7 @@ type float64;
 annotation.builtin phy_type = "STRING";
 annotation.builtin traits = ["is_primitive", "has_hash"];
 annotation.cpp type = "std::string";
-annotation.cpp include = "<string>";
+annotation.cpp include = "string";
 annotation.go type = "string";
 type string;
 

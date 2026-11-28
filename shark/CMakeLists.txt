@@ -62,6 +62,7 @@ kmcmake_cc_library(
         schema/schema_pool_api.cc
         schema/constrain.cc
         schema/uri.cc
+        schema/annotation.cc
         io/printer.cc
         io/zero_copy_stream.cc
         io/memory_zero_copy_stream.cc

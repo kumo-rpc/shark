@@ -16,6 +16,7 @@
 #include <shark/compiler/cpp/constexpr.h>
 #include <shark/common/clog.h>
 #include <shark/schema/constrain.h>
+#include <shark/schema/schema_defines.h>
 
 #include <map>
 #include <string>
@@ -36,7 +37,7 @@ std::string cpp_type_name(const SchemaType* type) {
     }
     for (uint32_t i = 0; i < type->annotation_size(); ++i) {
         const SchemaAnnotation* annotation = type->annotation(i);
-        if (annotation == nullptr || annotation->classify() != "cpp" || annotation->key() != "type") {
+        if (annotation == nullptr || annotation->classify() != kCppClassify || annotation->key() != kTypeKey) {
             continue;
         }
         const SchemaConstValue* value = annotation->value();

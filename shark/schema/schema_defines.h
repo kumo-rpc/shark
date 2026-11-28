@@ -69,6 +69,8 @@ namespace shark {
     static constexpr std::string_view kTypeDefKey = "typedef";
     static constexpr std::string_view kFunctionKey = "function";
     static constexpr std::string_view kServletKey = "servlet";
+    static constexpr std::string_view kCppClassify = "cpp";
+    static constexpr std::string_view kIncludeKey = "include";
 
     static constexpr std::string_view kRequiredKey    = "required";
     static constexpr std::string_view kOptionalKey    = "optional";

@@ -15,6 +15,7 @@
 
 #include <shark/compiler/cpp/file.h>
 #include <shark/common/clog.h>
+#include <shark/schema/annotation.h>
 #include <shark/schema/uri.h>
 
 #include <map>
@@ -88,6 +89,9 @@ bool collect_header_includes(const SchemaFile* file, std::vector<std::string>& h
     add_include(headers, seen, "shark/runtime.h");
     if (file == nullptr) {
         return true;
+    }
+    for (const std::string& header : Annotations::cpp_includes(file)) {
+        add_include(headers, seen, header);
     }
     for (uint32_t i = 0; i < file->import_size(); ++i) {
         const SchemaImport* import = file->import(i);
