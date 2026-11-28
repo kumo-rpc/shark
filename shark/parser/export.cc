@@ -31,6 +31,7 @@
 #include <shark/parser/struct.h>
 #include <shark/schema/schema_pool.h>
 
+#include <optional>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -44,6 +45,7 @@ namespace shark::parser {
             explicit Exporter(SchemaPoolBase& destination) : destination_(destination) {}
 
             bool run(FileParser& file);
+            bool register_symbol(SymbolBase* out, SymbolNode* node);
 
         private:
             template <typename Parser, typename Schema>
@@ -210,6 +212,82 @@ namespace shark::parser {
             return out;
         }
 
+        namespace {
+
+            const std::vector<AnnotationParser*>* own_annotations(SymbolNode* node) {
+                switch (node->node_type) {
+                    case SymbolType::STRUCT:
+                        return &static_cast<StructParser*>(node)->annotations;
+                    case SymbolType::ENUM:
+                        return &static_cast<EnumParser*>(node)->annotations;
+                    case SymbolType::ENUM_VALUE:
+                        return &static_cast<EnumValueParser*>(node)->annotations;
+                    case SymbolType::FIELD:
+                        return &static_cast<FieldParser*>(node)->annotations;
+                    case SymbolType::FUNCTION:
+                        return &static_cast<FunctionParser*>(node)->annotations;
+                    case SymbolType::SERVLET:
+                        return &static_cast<ServletParser*>(node)->annotations;
+                    case SymbolType::ALIAS:
+                        return &static_cast<AliasParser*>(node)->annotations;
+                    default:
+                        return nullptr;
+                }
+            }
+
+            std::optional<bool> export_flag(const std::vector<AnnotationParser*>* annotations, std::string_view key) {
+                if (annotations == nullptr) {
+                    return std::nullopt;
+                }
+                for (AnnotationParser* annotation : *annotations) {
+                    if (annotation->classify != "export" || annotation->key != key || annotation->object == nullptr) {
+                        continue;
+                    }
+                    if (const bool* value = std::get_if<bool>(&annotation->object->value)) {
+                        return *value;
+                    }
+                }
+                return std::nullopt;
+            }
+
+            bool export_setting(SymbolNode* node, std::string_view key, bool fallback) {
+                if (std::optional<bool> own = export_flag(own_annotations(node), key)) {
+                    return *own;
+                }
+                if (node->file != nullptr) {
+                    if (std::optional<bool> file_level = export_flag(&node->file->annotations, key)) {
+                        return *file_level;
+                    }
+                }
+                return fallback;
+            }
+
+        }  // namespace
+
+        bool Exporter::register_symbol(SymbolBase* out, SymbolNode* node) {
+            const bool type_name = node->node_type == SymbolType::STRUCT
+                || node->node_type == SymbolType::ENUM
+                || node->node_type == SymbolType::ALIAS
+                || node->node_type == SymbolType::SERVLET;
+            const bool builtin = node->node_type == SymbolType::STRUCT && static_cast<StructParser*>(node)->builtin;
+            if (type_name && !builtin) {
+                SymbolBase* existing = destination_.get_symbol(node->name);
+                if (existing != nullptr && existing->symbol_type_ == SymbolType::STRUCT && static_cast<StructBase*>(existing)->builtin_) {
+                    node->report_error(ErrorType::SEMANTIC, "type `%s` duplicates builtin type", node->name);
+                    return false;
+                }
+            }
+            const bool include_package = export_setting(node, "include_package", true);
+            const bool exclude_package = export_setting(node, "exclude_package", false);
+            if (include_package && !destination_.add_symbol(out)) {
+                return false;
+            }
+            if (exclude_package && node->full_name_without_package != node->full_name) {
+                return destination_.add_symbol_name(node->full_name_without_package, out);
+            }
+            return true;
+        }
+
         bool Exporter::create_enum(EnumParser* node) {
             EnumBase* out = make<EnumParser, EnumBase>(node, SymbolType::ENUM);
             if (out == nullptr) {
@@ -220,7 +298,7 @@ namespace shark::parser {
                 EnumValueBase* copied = make<EnumValueParser, EnumValueBase>(value, SymbolType::ENUM_VALUE);
                 copy_symbol_name(copied->name_, copied->full_name_, copied->full_name_without_package_, *value);
             }
-            return destination_.add_symbol(out);
+            return register_symbol(out, node);
         }
 
         bool Exporter::create_function(FunctionParser* node) {
@@ -233,11 +311,11 @@ namespace shark::parser {
                 FieldBase* copied = make<FieldParser, FieldBase>(param, SymbolType::FIELD);
                 copy_symbol_name(copied->name_, copied->full_name_, copied->full_name_without_package_, *param);
             }
-            if (!destination_.add_symbol(out)) {
+            if (!register_symbol(out, node)) {
                 return false;
             }
             for (FieldParser* param : node->params) {
-                if (!destination_.add_symbol(static_cast<FieldBase*>(made_[param]))) {
+                if (!register_symbol(static_cast<FieldBase*>(made_[param]), param)) {
                     return false;
                 }
             }
@@ -264,18 +342,18 @@ namespace shark::parser {
             for (FieldParser* field : node->fields) {
                 FieldBase* copied = make<FieldParser, FieldBase>(field, SymbolType::FIELD);
                 copy_symbol_name(copied->name_, copied->full_name_, copied->full_name_without_package_, *field);
-                if (!destination_.add_symbol(copied)) {
+                if (!register_symbol(copied, field)) {
                     return false;
                 }
             }
             for (AliasParser* alias : node->aliases) {
                 AliasBase* copied = make<AliasParser, AliasBase>(alias, SymbolType::ALIAS);
                 copy_symbol_name(copied->name_, copied->full_name_, copied->full_name_without_package_, *alias);
-                if (!destination_.add_symbol(copied)) {
+                if (!register_symbol(copied, alias)) {
                     return false;
                 }
             }
-            return destination_.add_symbol(out);
+            return register_symbol(out, node);
         }
 
         bool Exporter::fill_field(FieldParser* node) {
@@ -326,7 +404,7 @@ namespace shark::parser {
                 }
                 copied->parent_enum_ = out;
                 out->values_.push_back(copied);
-                if (!destination_.add_symbol(copied)) {
+                if (!register_symbol(copied, value)) {
                     return false;
                 }
             }
@@ -417,6 +495,7 @@ namespace shark::parser {
             out->full_name_ = file.full_name;
             out->full_name_without_package_ = file.full_name_without_package;
             out->path_ = file.path;
+            out->absolute_path_ = file.absolute_path;
             out->package_ = file.package;
             if (!destination_.add_file(out)) {
                 return false;
@@ -435,7 +514,7 @@ namespace shark::parser {
             for (FieldParser* node : file.constexprs) {
                 FieldBase* copied = make<FieldParser, FieldBase>(node, SymbolType::FIELD);
                 copy_symbol_name(copied->name_, copied->full_name_, copied->full_name_without_package_, *node);
-                if (!destination_.add_symbol(copied)) {
+                if (!register_symbol(copied, node)) {
                     return false;
                 }
             }
@@ -448,7 +527,7 @@ namespace shark::parser {
                 ServletBase* copied = make<ServletParser, ServletBase>(node, SymbolType::SERVLET);
                 copied->full_name_ = node->full_name;
                 copied->full_name_without_package_ = node->full_name_without_package;
-                if (!destination_.add_symbol(copied)) {
+                if (!register_symbol(copied, node)) {
                     return false;
                 }
                 for (FunctionParser* method : node->method) {

@@ -16,11 +16,12 @@
 #pragma once
 
 #include <shark/schema/schema_defines.h>
-
+#include <fermat/hashmaps/flat_hash_map.h>
 #include <fermat/maps/btree_map.h>
 
 #include <cstddef>
 #include <cstdint>
+#include <functional>
 #include <memory>
 #include <optional>
 #include <type_traits>
@@ -248,6 +249,7 @@ namespace shark {
         bool                             is_parameter_{false};
         std::vector<TypeName>            arguments_;
         std::optional<TypeConstraint>    constraint_;
+        const StructBase                *type_{nullptr};
     };
 
     inline ConstraintFunction::ConstraintFunction() = default;
@@ -361,6 +363,7 @@ namespace shark {
         std::string                       full_name_;
         std::string                       full_name_without_package_;
         std::string                       path_;
+        std::string                       absolute_path_;
         std::string                       package_;
         EditionBase                      *edition_{nullptr};
         std::vector<PackageBase*>         packages_;
@@ -379,8 +382,11 @@ namespace shark {
         FileBase() = default;
     };
 
+    using constrain_func = std::function<bool(StructBase*)>;
     class SchemaPoolBase {
     public:
+        SchemaPoolBase();
+
         template <typename T>
         T* create() {
             static_assert(std::is_base_of_v<SymbolBase, T>);
@@ -393,6 +399,7 @@ namespace shark {
         }
 
         bool add_symbol(SymbolBase* symbol);
+        bool add_symbol_name(std::string_view name, SymbolBase* symbol);
         SymbolBase* get_symbol(std::string_view full_name);
         const SymbolBase* get_symbol(std::string_view full_name) const;
 
@@ -400,10 +407,15 @@ namespace shark {
         FileBase* get_file(std::string_view path);
         const FileBase* get_file(std::string_view path) const;
 
+        bool add_constrain(std::string_view name, constrain_func func);
+        constrain_func* get_constrain(std::string_view name);
+        const constrain_func* get_constrain(std::string_view name) const;
+
     private:
         std::vector<std::unique_ptr<SymbolBase>>          nodes_;
         fermat::btree_map<std::string, SymbolBase*>       symbols_;
         fermat::btree_map<std::string, FileBase*>         files_;
+        fermat::flat_hash_map<std::string, constrain_func> constrains_;
     };
 
     class AnnotationBase : public SymbolBase {

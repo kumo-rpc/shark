@@ -13,13 +13,16 @@
 // limitations under the License.
 //
 
+#include <shark/parser/file.h>
 #include <shark/parser/pool.h>
+#include <shark/compiler/generator.h>
 #include <turbo/cli/cli.h>
 
 #include <string>
 #include <shark/common/clog.h>
 #include <turbo/log/logging.h>
 #include <vector>
+#include <shark/compiler/generator.h>
 
 int main(int argc, char** argv) {
     xcli::App app{"shark compiler"};
@@ -27,10 +30,16 @@ int main(int argc, char** argv) {
     std::vector<std::string> includes;
     app.add_option("file", file, "idl file")->required();
     app.add_option("-I,--include", includes, "include prefix")->required();
+    app.add_option("-L,--lang", includes, "include prefix")->required();
     XCLI_PARSE(app, argc, argv);
 
     shark::common::clog_enable_debug();
-    if (shark::parser::RegistryPool::instance().build_file_recursive(file, includes) == nullptr) {
+    shark::parser::FileParser* parsed = shark::parser::RegistryPool::instance().build_file_recursive(file, includes);
+    if (parsed == nullptr) {
+        return 1;
+    }
+    shark::SchemaPoolBase& schema = shark::parser::RegistryPool::instance().schema_pool();
+    if (schema.get_file(parsed->path) == nullptr) {
         return 1;
     }
     return 0;

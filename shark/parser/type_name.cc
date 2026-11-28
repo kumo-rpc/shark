@@ -360,24 +360,4 @@ namespace shark::parser {
         return out;
     }
 
-    bool check_constraint(const TypeConstraint& constraint, const TypeName& argument) {
-        switch (constraint.op) {
-            case TypeConstraint::Op::CALL:
-                return true;
-            case TypeConstraint::Op::NOT:
-                if (constraint.operands.empty()) {
-                    return true;
-                }
-                return check_constraint(constraint.operands[0], argument);
-            case TypeConstraint::Op::AND:
-            case TypeConstraint::Op::OR:
-                if (constraint.operands.size() < 2) {
-                    return true;
-                }
-                return check_constraint(constraint.operands[0], argument)
-                    && check_constraint(constraint.operands[1], argument);
-        }
-        return true;
-    }
-
 }  // namespace shark::parser

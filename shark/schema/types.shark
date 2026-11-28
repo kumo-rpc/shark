@@ -145,4 +145,4 @@ struct set<K> {};
 /// Key to value mapping. Two type parameters.
 annotation.builtin phy_type = "MAP";
 annotation.builtin traits = ["is_container"];
-struct map<K, V> {};
+struct map<K[is_integer or is_string], V> {};

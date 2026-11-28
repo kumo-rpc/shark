@@ -127,3 +127,6 @@ servlet IntStore : Store<int32> {
     function void ping();
 };
 
+struct TestConstrain {
+
+}

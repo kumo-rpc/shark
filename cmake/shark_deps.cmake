@@ -62,6 +62,7 @@ find_package(Threads REQUIRED)
 kmcmake_private_find_package(Threads REQUIRED)
 list(APPEND KMCMAKE_SYSTEM_DYLINK Threads::Threads)
 find_package(turbo REQUIRED)
+find_package(fermat REQUIRED)
 ############################################################
 #
 # add you libs to the KMCMAKE_DEPS_LINK variable eg as turbo
@@ -71,6 +72,7 @@ find_package(turbo REQUIRED)
 ##########################################################
 list(APPEND KMCMAKE_DEPS_LINK
         #${TURBO_LIB}
+        fermat::fermat_static
         turbo::turbo_static
         ${KMCMAKE_SYSTEM_DYLINK}
         )

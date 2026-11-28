@@ -13,6 +13,7 @@
 // limitations under the License.
 //
 
+#include <shark/schema/constrain.h>
 #include <shark/parser/alias.h>
 #include <shark/parser/export.h>
 #include <shark/parser/import.h>
@@ -102,7 +103,14 @@ namespace shark::parser {
             return false;
         }
         bind = true;
-        return export_file(pool->schema_pool(), *this);
+        if (!export_file(pool->schema_pool(), *this)) {
+            return false;
+        }
+        shark::FileBase* schema_file = pool->schema_pool().get_file(path);
+        if (!shark::bind_schema_types(schema_file)) {
+            return false;
+        }
+        return shark::run_constrain_check(schema_file);
     }
 
     bool FileParser::take_package() {
@@ -483,14 +491,6 @@ namespace shark::parser {
         }
         if (parameters == nullptr || parameters->size() != type.arguments.size()) {
             return nullptr;
-        }
-        for (std::size_t i = 0; i < parameters->size(); ++i) {
-            if (!parameters->at(i).constraint.has_value()) {
-                continue;
-            }
-            if (!check_constraint(*parameters->at(i).constraint, type.arguments[i])) {
-                return nullptr;
-            }
         }
         return symbol;
     }

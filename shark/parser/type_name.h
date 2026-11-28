@@ -112,7 +112,4 @@ namespace shark::parser {
     // Reads a dotted name, optional <...> arguments, and an optional [constraint].
     bool parse_type_ref(Node& node, Lexer<ExpressionLexer>& lexer, TypeName& out);
 
-    // Binding entry. Walks not/and/or down to each call. Calls return true until builtins are registered.
-    bool check_constraint(const TypeConstraint& constraint, const TypeName& argument);
-
 }  // namespace shark::parser

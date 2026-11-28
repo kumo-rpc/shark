@@ -59,6 +59,19 @@ kmcmake_cc_library(
         parser/export.cc
         schema/schema_pool.cc
         schema/schema_pool_api.cc
+        schema/constrain.cc
+        io/printer.cc
+        io/zero_copy_stream.cc
+        io/memory_zero_copy_stream.cc
+        io/file_zero_copy_stream.cc
+        compiler/generator.cc
+        compiler/cpp/generator.cc
+        compiler/cpp/enum.cc
+        compiler/cpp/struct.cc
+        compiler/cpp/field.cc
+        compiler/cpp/function.cc
+        compiler/cpp/servlet.cc
+        compiler/cpp/file.cc
         CXXOPTS
         ${KMCMAKE_CXX_OPTIONS}
         LINKS

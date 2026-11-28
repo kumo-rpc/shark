@@ -14,6 +14,7 @@
 //
 
 #include <shark/schema/schema_pool.h>
+#include <shark/schema/constrain.h>
 
 #include <string>
 #include <string_view>
@@ -48,12 +49,24 @@ namespace shark {
 
     }  // namespace
 
+    SchemaPoolBase::SchemaPoolBase() {
+        register_constrain(this);
+    }
+
     bool SchemaPoolBase::add_symbol(SymbolBase* symbol) {
         if (symbol == nullptr) {
             return false;
         }
         std::string_view name = registered_name(symbol);
         if (name.empty()) {
+            return false;
+        }
+        auto inserted = symbols_.insert(std::make_pair(std::string(name), symbol));
+        return inserted.second;
+    }
+
+    bool SchemaPoolBase::add_symbol_name(std::string_view name, SymbolBase* symbol) {
+        if (symbol == nullptr || name.empty()) {
             return false;
         }
         auto inserted = symbols_.insert(std::make_pair(std::string(name), symbol));
@@ -98,6 +111,30 @@ namespace shark {
             return nullptr;
         }
         return it->second;
+    }
+
+    bool SchemaPoolBase::add_constrain(std::string_view name, constrain_func func) {
+        if (name.empty() || !func) {
+            return false;
+        }
+        auto inserted = constrains_.insert(std::make_pair(std::string(name), std::move(func)));
+        return inserted.second;
+    }
+
+    constrain_func* SchemaPoolBase::get_constrain(std::string_view name) {
+        auto it = constrains_.find(std::string(name));
+        if (it == constrains_.end()) {
+            return nullptr;
+        }
+        return &it->second;
+    }
+
+    const constrain_func* SchemaPoolBase::get_constrain(std::string_view name) const {
+        auto it = constrains_.find(std::string(name));
+        if (it == constrains_.end()) {
+            return nullptr;
+        }
+        return &it->second;
     }
 
 }  // namespace shark
