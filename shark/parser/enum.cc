@@ -15,6 +15,7 @@
 
 #include <shark/parser/const_value.h>
 #include <shark/parser/enum.h>
+#include <shark/parser/primitive.h>
 #include <shark/parser/enum_value.h>
 #include <shark/parser/field.h>
 #include <shark/parser/file.h>
@@ -29,11 +30,19 @@ namespace shark::parser {
 
     namespace {
 
-        bool is_integer_builtin(const StructParser* node) {
-            if (node == nullptr || !node->builtin) {
+        bool is_integer_builtin(SymbolNode* node) {
+            if (node == nullptr) {
                 return false;
             }
-            switch (node->phy_type) {
+            PhysicalType phy = PhysicalType::VOID;
+            if (node->node_type == SymbolType::PRIMITIVE) {
+                phy = static_cast<PrimitiveParser*>(node)->phy_type;
+            } else if (node->node_type == SymbolType::STRUCT && static_cast<StructParser*>(node)->builtin) {
+                phy = static_cast<StructParser*>(node)->phy_type;
+            } else {
+                return false;
+            }
+            switch (phy) {
             case PhysicalType::INT8:
             case PhysicalType::UINT8:
             case PhysicalType::INT16:

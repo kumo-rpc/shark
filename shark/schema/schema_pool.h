@@ -36,7 +36,11 @@ namespace shark {
     class EnumValueBase;
     class FieldBase;
     class StructBase;
-    class AliasBase;
+    class TypeInfo;
+    class PrimitiveBase;
+    class TypeAlias;
+    class FunctionAlias;
+    class ServletAlias;
     class FunctionBase;
     class ServletBase;
     class FileBase;
@@ -52,7 +56,11 @@ namespace shark {
         friend class EnumValueBase;
         friend class EnumBase;
         friend class StructBase;
-        friend class AliasBase;
+        friend class TypeInfo;
+        friend class PrimitiveBase;
+        friend class TypeAlias;
+        friend class FunctionAlias;
+        friend class ServletAlias;
         friend class FunctionBase;
         friend class ServletBase;
         friend class FileBase;
@@ -175,7 +183,22 @@ namespace shark {
         EnumValueBase() = default;
     };
 
-    class EnumBase : public SymbolBase {
+    class TypeInfo : public SymbolBase {
+        friend class SchemaPoolBase;
+    public:
+        std::string                       full_name_;
+        std::string                       full_name_without_package_;
+        std::vector<CommentBase*>         leading_comment_;
+        CommentBase                      *tailing_comment_{nullptr};
+        std::vector<AnnotationBase*>     annotations_;
+        const StructBase                 *container_{nullptr};
+        PhysicalType                      phy_type_{PhysicalType::VOID};
+
+    protected:
+        TypeInfo() = default;
+    };
+
+    class EnumBase : public TypeInfo {
         friend class SchemaPoolBase;
     public:
         enum class UnderlyingType {
@@ -189,15 +212,9 @@ namespace shark {
         };
 
         std::string                       name_;
-        std::string                       full_name_;
-        std::string                       full_name_without_package_;
-        std::vector<CommentBase*>         leading_comment_;
-        CommentBase                      *tailing_comment_{nullptr};
-        std::vector<AnnotationBase*>     annotations_;
         std::vector<EnumValueBase*>       values_;
         bool                              is_class_{false};
         UnderlyingType                    underlying_{UnderlyingType::NONE};
-        const StructBase                 *container_{nullptr};
 
     private:
         EnumBase() = default;
@@ -249,7 +266,7 @@ namespace shark {
         bool                             is_parameter_{false};
         std::vector<TypeName>            arguments_;
         std::optional<TypeConstraint>    constraint_;
-        const StructBase                *type_{nullptr};
+        const TypeInfo                  *type_{nullptr};
     };
 
     inline ConstraintFunction::ConstraintFunction() = default;
@@ -273,46 +290,44 @@ namespace shark {
     inline TypeName::TypeName(TypeName&&) noexcept = default;
     inline TypeName& TypeName::operator=(TypeName&&) noexcept = default;
 
-    class StructBase : public SymbolBase {
+    class StructBase : public TypeInfo {
         friend class SchemaPoolBase;
     public:
         TypeName                          name_;
-        std::string                       full_name_;
-        std::string                       full_name_without_package_;
-        std::vector<CommentBase*>         leading_comment_;
-        CommentBase                      *tailing_comment_{nullptr};
-        std::vector<AnnotationBase*>     annotations_;
         std::vector<FieldBase*>           fields_;
         std::vector<StructBase*>          nested_types_;
         std::vector<EnumBase*>            nested_enums_;
-        std::vector<AliasBase*>           aliases_;
-        const StructBase                 *container_{nullptr};
+        std::vector<TypeAlias*>           aliases_;
+        std::vector<FunctionAlias*>       function_aliases_;
+        std::vector<ServletAlias*>        servlet_aliases_;
         bool                              is_union_{false};
-        bool                              builtin_{false};
         bool                              generic_{false};
-        PhysicalType                      phy_type_{PhysicalType::VOID};
         ~StructBase() override;
 
     private:
         StructBase();
     };
 
-    class AliasBase : public SymbolBase {
+    class PrimitiveBase : public TypeInfo {
         friend class SchemaPoolBase;
     public:
         std::string                       name_;
-        std::string                       full_name_;
-        std::string                       full_name_without_package_;
-        std::vector<CommentBase*>         leading_comment_;
-        CommentBase                      *tailing_comment_{nullptr};
-        std::vector<AnnotationBase*>     annotations_;
-        std::string                       target_name_;
-        const SymbolBase                 *target_{nullptr};
-        const StructBase                 *container_{nullptr};
-        bool                              is_using_{false};
+        ~PrimitiveBase() override;
 
     private:
-        AliasBase() = default;
+        PrimitiveBase() = default;
+    };
+
+    class TypeAlias : public TypeInfo {
+        friend class SchemaPoolBase;
+    public:
+        std::string                       name_;
+        const TypeInfo                   *target_{nullptr};
+        bool                              is_using_{false};
+        ~TypeAlias() override;
+
+    private:
+        TypeAlias() = default;
     };
 
     class FunctionBase : public SymbolBase {
@@ -328,14 +343,15 @@ namespace shark {
         TypeName                          return_type_;
         std::vector<FieldBase*>           params_;
         std::vector<const StructBase*>    args_;
-        const StructBase                 *ret_type_{nullptr};
-        const EnumBase                   *ret_enum_{nullptr};
+        const TypeInfo                   *ret_type_{nullptr};
         const StructBase                 *container_{nullptr};
         const ServletBase                *servlet_{nullptr};
         ~FunctionBase() override;
 
-    private:
+    protected:
         FunctionBase();
+
+    private:
     };
 
     class ServletBase : public SymbolBase {
@@ -352,8 +368,30 @@ namespace shark {
         std::vector<FunctionBase*>        method_;
         const StructBase                 *container_{nullptr};
 
-    private:
+    protected:
         ServletBase() = default;
+    };
+
+    class FunctionAlias : public FunctionBase {
+        friend class SchemaPoolBase;
+    public:
+        const FunctionBase               *target_{nullptr};
+        bool                              is_using_{false};
+        ~FunctionAlias() override;
+
+    private:
+        FunctionAlias() = default;
+    };
+
+    class ServletAlias : public ServletBase {
+        friend class SchemaPoolBase;
+    public:
+        const ServletBase                *target_{nullptr};
+        bool                              is_using_{false};
+        ~ServletAlias() override;
+
+    private:
+        ServletAlias() = default;
     };
 
     class FileBase : public SymbolBase {
@@ -373,6 +411,7 @@ namespace shark {
         std::vector<AnnotationBase*>     annotations_;
         std::vector<EnumBase*>            enums_;
         std::vector<StructBase*>          structs_;
+        std::vector<PrimitiveBase*>       primitives_;
         std::vector<ServletBase*>         servlets_;
         std::vector<FunctionBase*>        functions_;
         std::vector<FieldBase*>           constexprs_;
@@ -382,7 +421,7 @@ namespace shark {
         FileBase() = default;
     };
 
-    using constrain_func = std::function<bool(StructBase*)>;
+    using constrain_func = std::function<bool(const TypeInfo*)>;
     class SchemaPoolBase {
     public:
         SchemaPoolBase();
@@ -436,6 +475,10 @@ namespace shark {
 
     inline StructBase::StructBase() = default;
     inline StructBase::~StructBase() = default;
+    inline PrimitiveBase::~PrimitiveBase() = default;
+    inline TypeAlias::~TypeAlias() = default;
+    inline FunctionAlias::~FunctionAlias() = default;
+    inline ServletAlias::~ServletAlias() = default;
     inline FunctionBase::FunctionBase() = default;
     inline FunctionBase::~FunctionBase() = default;
     inline AnnotationBase::AnnotationBase() = default;
@@ -453,8 +496,7 @@ namespace shark {
         FieldLabel                        label_{FieldLabel::REQUIRED};
         TypeName                          type_ref_;
         bool                              generic_{false};
-        const StructBase                 *type_{nullptr};
-        const EnumBase                   *enum_type_{nullptr};
+        const TypeInfo                   *type_{nullptr};
         const StructBase                 *container_{nullptr};
         uint16_t                          id_{0};
         ConstValue                       *default_value_{nullptr};

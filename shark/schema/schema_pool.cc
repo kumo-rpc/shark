@@ -34,14 +34,20 @@ namespace shark {
                     return static_cast<EnumBase*>(symbol)->full_name_;
                 case SymbolType::STRUCT:
                     return static_cast<StructBase*>(symbol)->full_name_;
+                case SymbolType::PRIMITIVE:
+                    return static_cast<PrimitiveBase*>(symbol)->full_name_;
                 case SymbolType::FIELD:
                     return static_cast<FieldBase*>(symbol)->full_name_;
                 case SymbolType::FUNCTION:
                     return static_cast<FunctionBase*>(symbol)->full_name_;
                 case SymbolType::SERVLET:
                     return static_cast<ServletBase*>(symbol)->full_name_;
-                case SymbolType::ALIAS:
-                    return static_cast<AliasBase*>(symbol)->full_name_;
+                case SymbolType::TYPE_ALIAS:
+                    return static_cast<TypeAlias*>(symbol)->full_name_;
+                case SymbolType::FUNCTION_ALIAS:
+                    return static_cast<FunctionAlias*>(symbol)->full_name_;
+                case SymbolType::SERVLET_ALIAS:
+                    return static_cast<ServletAlias*>(symbol)->full_name_;
                 default:
                     return {};
             }

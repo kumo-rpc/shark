@@ -23,6 +23,7 @@ namespace shark::parser {
     class EnumParser;
     class FileParser;
     class StructParser;
+    class PrimitiveParser;
     class RegistryPool;
     class FieldParser;
     class AliasParser;

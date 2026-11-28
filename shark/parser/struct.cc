@@ -133,32 +133,25 @@ namespace {
             }
             if (symbol->node_type == SymbolType::STRUCT) {
                 auto* type = static_cast<StructParser*>(symbol);
-                if (type->builtin || type->bind) {
-                    field->type = type;
-                    field->bind = true;
-                    if (!field->emit_to_pool()) {
-                        return BindStep::FAIL;
-                    }
+                if (!(type->builtin || type->bind)) {
+                    waiting = true;
                     continue;
                 }
-                waiting = true;
-                continue;
-            }
-            if (symbol->node_type == SymbolType::ENUM) {
-                auto* enum_type = static_cast<EnumParser*>(symbol);
-                if (!enum_type->bind) {
+            } else if (symbol->node_type == SymbolType::ENUM) {
+                if (!symbol->bind) {
                     report_error(ErrorType::SEMANTIC, "field `%s` type `%s` was not bound", name, type_ref_name(field->type_ref));
                     return BindStep::FAIL;
                 }
-                field->enum_type = enum_type;
-                field->bind = true;
-                if (!field->emit_to_pool()) {
-                    return BindStep::FAIL;
-                }
-                continue;
+            } else if (symbol->node_type != SymbolType::PRIMITIVE) {
+                report_error(ErrorType::SEMANTIC, "field `%s` type `%s` must be a struct, union, enum, or builtin", name, type_ref_name(field->type_ref));
+                return BindStep::FAIL;
             }
-            report_error(ErrorType::SEMANTIC, "field `%s` type `%s` must be a struct, union, enum, or builtin", name, type_ref_name(field->type_ref));
-            return BindStep::FAIL;
+            field->type = symbol;
+            field->bind = true;
+            if (!field->emit_to_pool()) {
+                return BindStep::FAIL;
+            }
+            continue;
         }
         if (waiting) {
             return BindStep::WAIT;

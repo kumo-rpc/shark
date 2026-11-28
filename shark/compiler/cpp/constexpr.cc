@@ -30,7 +30,7 @@ bool primitive_const(const SchemaField* field) {
     return type_is_primitive(field->type());
 }
 
-std::string cpp_type_name(const SchemaStruct* type) {
+std::string cpp_type_name(const SchemaType* type) {
     if (type == nullptr) {
         return {};
     }

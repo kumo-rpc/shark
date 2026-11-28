@@ -74,20 +74,10 @@ namespace shark::parser {
         }
     }
 
-    bool FunctionParser::bind_named_type(TypeName& type_name, bool allow_void, const StructParser*& struct_type, const EnumParser*& enum_type) {
+    bool FunctionParser::bind_named_type(TypeName& type_name, bool allow_void, SymbolNode*& resolved) {
         mark_scope_parameters(*this, type_name);
+        resolved = nullptr;
         if (type_name.is_parameter) {
-            struct_type = nullptr;
-            enum_type = nullptr;
-            return true;
-        }
-        if (type_name.name == "void") {
-            if (!allow_void) {
-                report_error(ErrorType::SEMANTIC, "function `%s` parameter type `void` is not allowed", name);
-                return false;
-            }
-            struct_type = nullptr;
-            enum_type = nullptr;
             return true;
         }
         SymbolNode* symbol = file->find_type(type_name);
@@ -98,33 +88,35 @@ namespace shark::parser {
             report_error(ErrorType::SEMANTIC, "function `%s` type `%s` was not found", name, type_name.name);
             return false;
         }
+        if (!allow_void && symbol->name == "void") {
+            report_error(ErrorType::SEMANTIC, "function `%s` parameter type `void` is not allowed", name);
+            return false;
+        }
         if (symbol->node_type == SymbolType::STRUCT) {
             auto* type = static_cast<StructParser*>(symbol);
-            if (type->builtin || type->bind) {
-                struct_type = type;
-                enum_type = nullptr;
-                return true;
+            if (!(type->builtin || type->bind)) {
+                report_error(ErrorType::SEMANTIC, "function `%s` type `%s` was not bound", name, type_name.name);
+                return false;
             }
         } else if (symbol->node_type == SymbolType::ENUM) {
-            auto* type = static_cast<EnumParser*>(symbol);
-            if (type->bind) {
-                struct_type = nullptr;
-                enum_type = type;
-                return true;
+            if (!symbol->bind) {
+                report_error(ErrorType::SEMANTIC, "function `%s` type `%s` was not bound", name, type_name.name);
+                return false;
             }
+        } else if (symbol->node_type != SymbolType::PRIMITIVE) {
+            report_error(ErrorType::SEMANTIC, "function `%s` type `%s` was not bound", name, type_name.name);
+            return false;
         }
-        report_error(ErrorType::SEMANTIC, "function `%s` type `%s` was not bound", name, type_name.name);
-        return false;
+        resolved = symbol;
+        return true;
     }
 
     bool FunctionParser::bind_function() {
-        const StructParser* struct_type = nullptr;
-        const EnumParser* enum_type = nullptr;
-        if (!bind_named_type(return_type, true, struct_type, enum_type)) {
+        SymbolNode* resolved = nullptr;
+        if (!bind_named_type(return_type, true, resolved)) {
             return false;
         }
-        ret_type = struct_type;
-        ret_enum = enum_type;
+        ret_type = resolved;
         for (std::size_t i = 0; i < params.size(); ++i) {
             for (std::size_t j = i + 1; j < params.size(); ++j) {
                 if (params[i]->id != params[j]->id) {
@@ -135,13 +127,11 @@ namespace shark::parser {
             }
         }
         for (FieldParser* param : params) {
-            const StructParser* param_struct = nullptr;
-            const EnumParser* param_enum = nullptr;
-            if (!bind_named_type(param->type_ref, false, param_struct, param_enum)) {
+            SymbolNode* param_type = nullptr;
+            if (!bind_named_type(param->type_ref, false, param_type)) {
                 return false;
             }
-            param->type = param_struct;
-            param->enum_type = param_enum;
+            param->type = param_type;
             if (contains_parameter(param->type_ref)) {
                 param->generic = true;
             }

@@ -63,15 +63,14 @@ namespace shark::parser {
         TypeName                           return_type;
         std::vector<FieldParser*>          params;
         std::vector<const StructParser*>   args;
-        const StructParser*                ret_type{nullptr};
-        const EnumParser*                  ret_enum{nullptr};
+        SymbolNode*                        ret_type{nullptr};
         const StructParser*                container{nullptr};
         const ServletParser*               servlet{nullptr};
 
         bool bind_function();
 
     private:
-        bool bind_named_type(TypeName& type_name, bool allow_void, const StructParser*& struct_type, const EnumParser*& enum_type);
+        bool bind_named_type(TypeName& type_name, bool allow_void, SymbolNode*& resolved);
         bool skip_gap(Lexer<ExpressionLexer>& lexer);
         bool parse_parameters(Lexer<ExpressionLexer>& lexer);
     };

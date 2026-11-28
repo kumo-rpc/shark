@@ -22,6 +22,7 @@
 #include <shark/parser/file.h>
 #include <shark/parser/function.h>
 #include <shark/parser/pool.h>
+#include <shark/parser/primitive.h>
 #include <shark/parser/servlet.h>
 #include <shark/parser/struct.h>
 #include <shark/parser/symbol.h>
@@ -36,6 +37,8 @@ namespace shark::parser {
             switch (node->node_type) {
                 case SymbolType::STRUCT:
                     return &static_cast<StructParser*>(node)->annotations;
+                case SymbolType::PRIMITIVE:
+                    return &static_cast<PrimitiveParser*>(node)->annotations;
                 case SymbolType::ENUM:
                     return &static_cast<EnumParser*>(node)->annotations;
                 case SymbolType::ENUM_VALUE:

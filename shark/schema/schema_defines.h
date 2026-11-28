@@ -62,6 +62,7 @@ namespace shark {
     static constexpr std::string_view kPackageKey = "package";
     static constexpr std::string_view kAnnotationKey = "annotation";
     static constexpr std::string_view kEnumKey = "enum";
+    static constexpr std::string_view kTypeKey = "type";
     static constexpr std::string_view kStructKey = "struct";
     static constexpr std::string_view kUnionKey = "union";
     static constexpr std::string_view kUsingKey = "using";
@@ -88,10 +89,14 @@ namespace shark {
         CONST,
         ENUM,
         STRUCT,
+        PRIMITIVE,
         FIELD,
         FUNCTION,
         SERVLET,
         ALIAS,
+        TYPE_ALIAS,
+        FUNCTION_ALIAS,
+        SERVLET_ALIAS,
         PLACEHOLDER,
         SYMBOL_MAX = PLACEHOLDER
     };

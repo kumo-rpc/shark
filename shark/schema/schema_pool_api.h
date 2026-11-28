@@ -30,7 +30,9 @@ namespace shark {
     class SchemaTypeName;
     class SchemaTypeConstraint;
     class SchemaField;
-    class SchemaAlias;
+    class SchemaTypeAlias;
+    class SchemaFunctionAlias;
+    class SchemaServletAlias;
     class SchemaStruct;
     class SchemaFunction;
     class SchemaServlet;
@@ -205,8 +207,40 @@ namespace shark {
         [[nodiscard]] const std::string& path() const { return path_; }
     };
 
+    class SchemaType : protected TypeInfo {
+        friend bool type_is_integer(const SchemaType *type);
+        friend bool type_is_void(const SchemaType *type);
+        friend bool type_is_primitive(const SchemaType *type);
+        friend bool type_is_pod(const SchemaType *type);
+        friend bool type_is_signed(const SchemaType *type);
+        friend bool type_is_numeric(const SchemaType *type);
+        friend bool type_is_container(const SchemaType *type);
+        friend bool type_is_string(const SchemaType *type);
+        friend bool type_is_constexpr(const SchemaType *type);
+        friend bool type_is_list(const SchemaType *type);
+        friend bool type_is_map(const SchemaType *type);
+        friend bool type_is_set(const SchemaType *type);
+    public:
+        SchemaType() = delete;
+        static const SchemaType* from(const TypeInfo* node) {
+            return static_cast<const SchemaType*>(node);
+        }
+        [[nodiscard]] const std::string& full_name() const { return full_name_; }
+        [[nodiscard]] const std::string& full_name_without_package() const { return full_name_without_package_; }
+        [[nodiscard]] uint32_t leading_comment_size() const { return static_cast<uint32_t>(leading_comment_.size()); }
+        [[nodiscard]] const SchemaComment* leading_comment(uint32_t index) const {
+            return SchemaComment::from(leading_comment_[index]);
+        }
+        [[nodiscard]] const SchemaComment* tailing_comment() const { return SchemaComment::from(tailing_comment_); }
+        [[nodiscard]] uint32_t annotation_size() const { return static_cast<uint32_t>(annotations_.size()); }
+        [[nodiscard]] const SchemaAnnotation* annotation(uint32_t index) const {
+            return SchemaAnnotation::from(annotations_[index]);
+        }
+        [[nodiscard]] const SchemaStruct* container() const;
+        [[nodiscard]] PhysicalType phy_type() const { return phy_type_; }
+    };
+
     class SchemaEnum : protected EnumBase {
-        friend bool type_is_constexpr(const SchemaEnum *type);
     public:
         SchemaEnum() = delete;
         static const SchemaEnum* from(const EnumBase* node) {
@@ -274,19 +308,18 @@ namespace shark {
         [[nodiscard]] FieldLabel label() const { return label_; }
         [[nodiscard]] const SchemaTypeName* type_name() const { return SchemaTypeName::from(&type_ref_); }
         [[nodiscard]] bool generic() const { return generic_; }
-        [[nodiscard]] const SchemaStruct* type() const;
-        [[nodiscard]] const SchemaEnum* enum_type() const { return SchemaEnum::from(enum_type_); }
+        [[nodiscard]] const SchemaType* type() const;
         [[nodiscard]] const SchemaStruct* container() const;
         [[nodiscard]] uint16_t id() const { return id_; }
         [[nodiscard]] const SchemaConstValue* default_value() const { return SchemaConstValue::from(default_value_); }
         [[nodiscard]] bool static_const() const { return static_const_; }
     };
 
-    class SchemaAlias : protected AliasBase {
+    class SchemaTypeAlias : protected TypeAlias {
     public:
-        SchemaAlias() = delete;
-        static const SchemaAlias* from(const AliasBase* node) {
-            return static_cast<const SchemaAlias*>(node);
+        SchemaTypeAlias() = delete;
+        static const SchemaTypeAlias* from(const TypeAlias* node) {
+            return static_cast<const SchemaTypeAlias*>(node);
         }
         [[nodiscard]] const std::string& name() const { return name_; }
         [[nodiscard]] const std::string& full_name() const { return full_name_; }
@@ -300,25 +333,12 @@ namespace shark {
         [[nodiscard]] const SchemaAnnotation* annotation(uint32_t index) const {
             return SchemaAnnotation::from(annotations_[index]);
         }
-        [[nodiscard]] const std::string& target_name() const { return target_name_; }
-        [[nodiscard]] const SymbolBase* target() const { return target_; }
+        [[nodiscard]] const SchemaType* target() const { return SchemaType::from(target_); }
         [[nodiscard]] const SchemaStruct* container() const;
         [[nodiscard]] bool is_using() const { return is_using_; }
     };
 
     class SchemaStruct : protected StructBase {
-        friend bool type_is_integer(const SchemaStruct *type);
-        friend bool type_is_void(const SchemaStruct *type);
-        friend bool type_is_primitive(const SchemaStruct *type);
-        friend bool type_is_pod(const SchemaStruct *type);
-        friend bool type_is_signed(const SchemaStruct *type);
-        friend bool type_is_numeric(const SchemaStruct *type);
-        friend bool type_is_container(const SchemaStruct *type);
-        friend bool type_is_string(const SchemaStruct *type);
-        friend bool type_is_constexpr(const SchemaStruct *type);
-        friend bool type_is_list(const SchemaStruct *type);
-        friend bool type_is_map(const SchemaStruct *type);
-        friend bool type_is_set(const SchemaStruct *type);
     public:
         SchemaStruct() = delete;
         static const SchemaStruct* from(const StructBase* node) {
@@ -343,11 +363,36 @@ namespace shark {
         [[nodiscard]] uint32_t nested_enum_size() const { return static_cast<uint32_t>(nested_enums_.size()); }
         [[nodiscard]] const SchemaEnum* nested_enum(uint32_t index) const { return SchemaEnum::from(nested_enums_[index]); }
         [[nodiscard]] uint32_t alias_size() const { return static_cast<uint32_t>(aliases_.size()); }
-        [[nodiscard]] const SchemaAlias* alias(uint32_t index) const { return SchemaAlias::from(aliases_[index]); }
+        [[nodiscard]] const SchemaTypeAlias* alias(uint32_t index) const { return SchemaTypeAlias::from(aliases_[index]); }
+        [[nodiscard]] uint32_t function_alias_size() const { return static_cast<uint32_t>(function_aliases_.size()); }
+        [[nodiscard]] const SchemaFunctionAlias* function_alias(uint32_t index) const;
+        [[nodiscard]] uint32_t servlet_alias_size() const { return static_cast<uint32_t>(servlet_aliases_.size()); }
+        [[nodiscard]] const SchemaServletAlias* servlet_alias(uint32_t index) const;
         [[nodiscard]] const SchemaStruct* container() const { return from(container_); }
         [[nodiscard]] bool is_union() const { return is_union_; }
-        [[nodiscard]] bool builtin() const { return builtin_; }
         [[nodiscard]] bool generic() const { return generic_; }
+        [[nodiscard]] PhysicalType phy_type() const { return phy_type_; }
+    };
+
+    class SchemaPrimitive : protected PrimitiveBase {
+    public:
+        SchemaPrimitive() = delete;
+        static const SchemaPrimitive* from(const PrimitiveBase* node) {
+            return static_cast<const SchemaPrimitive*>(node);
+        }
+        [[nodiscard]] const std::string& name() const { return name_; }
+        [[nodiscard]] const std::string& full_name() const { return full_name_; }
+        [[nodiscard]] const std::string& full_name_without_package() const { return full_name_without_package_; }
+        [[nodiscard]] uint32_t leading_comment_size() const { return static_cast<uint32_t>(leading_comment_.size()); }
+        [[nodiscard]] const SchemaComment* leading_comment(uint32_t index) const {
+            return SchemaComment::from(leading_comment_[index]);
+        }
+        [[nodiscard]] const SchemaComment* tailing_comment() const { return SchemaComment::from(tailing_comment_); }
+        [[nodiscard]] uint32_t annotation_size() const { return static_cast<uint32_t>(annotations_.size()); }
+        [[nodiscard]] const SchemaAnnotation* annotation(uint32_t index) const {
+            return SchemaAnnotation::from(annotations_[index]);
+        }
+        [[nodiscard]] const SchemaStruct* container() const { return SchemaStruct::from(container_); }
         [[nodiscard]] PhysicalType phy_type() const { return phy_type_; }
     };
 
@@ -378,8 +423,7 @@ namespace shark {
         [[nodiscard]] const SchemaField* param(uint32_t index) const { return SchemaField::from(params_[index]); }
         [[nodiscard]] uint32_t arg_size() const { return static_cast<uint32_t>(args_.size()); }
         [[nodiscard]] const SchemaStruct* arg(uint32_t index) const;
-        [[nodiscard]] const SchemaStruct* ret_type() const;
-        [[nodiscard]] const SchemaEnum* ret_enum() const { return SchemaEnum::from(ret_enum_); }
+        [[nodiscard]] const SchemaType* ret_type() const;
         [[nodiscard]] const SchemaStruct* container() const;
         [[nodiscard]] const SchemaServlet* servlet() const;
     };
@@ -413,6 +457,29 @@ namespace shark {
         [[nodiscard]] const SchemaStruct* container() const { return SchemaStruct::from(container_); }
     };
 
+    class SchemaFunctionAlias : protected FunctionAlias {
+    public:
+        SchemaFunctionAlias() = delete;
+        static const SchemaFunctionAlias* from(const FunctionAlias* node) {
+            return static_cast<const SchemaFunctionAlias*>(node);
+        }
+        [[nodiscard]] const std::string& name() const { return name_; }
+        [[nodiscard]] const std::string& full_name() const { return full_name_; }
+        [[nodiscard]] const SchemaFunction* target() const { return SchemaFunction::from(target_); }
+        [[nodiscard]] bool is_using() const { return is_using_; }
+    };
+
+    class SchemaServletAlias : protected ServletAlias {
+    public:
+        SchemaServletAlias() = delete;
+        static const SchemaServletAlias* from(const ServletAlias* node) {
+            return static_cast<const SchemaServletAlias*>(node);
+        }
+        [[nodiscard]] const std::string& full_name() const { return full_name_; }
+        [[nodiscard]] const SchemaServlet* target() const { return SchemaServlet::from(target_); }
+        [[nodiscard]] bool is_using() const { return is_using_; }
+    };
+
     class SchemaFile : protected FileBase {
     public:
         SchemaFile() = delete;
@@ -442,6 +509,8 @@ namespace shark {
         [[nodiscard]] const SchemaEnum* enum_at(uint32_t index) const { return SchemaEnum::from(enums_[index]); }
         [[nodiscard]] uint32_t struct_size() const { return static_cast<uint32_t>(structs_.size()); }
         [[nodiscard]] const SchemaStruct* struct_at(uint32_t index) const { return SchemaStruct::from(structs_[index]); }
+        [[nodiscard]] uint32_t primitive_size() const { return static_cast<uint32_t>(primitives_.size()); }
+        [[nodiscard]] const SchemaPrimitive* primitive_at(uint32_t index) const { return SchemaPrimitive::from(primitives_[index]); }
         [[nodiscard]] uint32_t servlet_size() const { return static_cast<uint32_t>(servlets_.size()); }
         [[nodiscard]] const SchemaServlet* servlet(uint32_t index) const { return SchemaServlet::from(servlets_[index]); }
         [[nodiscard]] uint32_t function_size() const { return static_cast<uint32_t>(functions_.size()); }
@@ -477,23 +546,32 @@ namespace shark {
     inline const SchemaEnumValue* SchemaEnum::value(uint32_t index) const {
         return SchemaEnumValue::from(values_[index]);
     }
+    inline const SchemaStruct* SchemaType::container() const {
+        return SchemaStruct::from(container_);
+    }
     inline const SchemaStruct* SchemaEnum::container() const {
         return SchemaStruct::from(container_);
     }
-    inline const SchemaStruct* SchemaField::type() const {
-        return SchemaStruct::from(type_);
+    inline const SchemaType* SchemaField::type() const {
+        return SchemaType::from(type_);
     }
     inline const SchemaStruct* SchemaField::container() const {
         return SchemaStruct::from(container_);
     }
-    inline const SchemaStruct* SchemaAlias::container() const {
+    inline const SchemaFunctionAlias* SchemaStruct::function_alias(uint32_t index) const {
+        return SchemaFunctionAlias::from(function_aliases_[index]);
+    }
+    inline const SchemaServletAlias* SchemaStruct::servlet_alias(uint32_t index) const {
+        return SchemaServletAlias::from(servlet_aliases_[index]);
+    }
+    inline const SchemaStruct* SchemaTypeAlias::container() const {
         return SchemaStruct::from(container_);
     }
     inline const SchemaStruct* SchemaFunction::arg(uint32_t index) const {
         return SchemaStruct::from(args_[index]);
     }
-    inline const SchemaStruct* SchemaFunction::ret_type() const {
-        return SchemaStruct::from(ret_type_);
+    inline const SchemaType* SchemaFunction::ret_type() const {
+        return SchemaType::from(ret_type_);
     }
     inline const SchemaStruct* SchemaFunction::container() const {
         return SchemaStruct::from(container_);

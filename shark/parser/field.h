@@ -54,8 +54,7 @@ namespace shark::parser {
         FieldLabel                     label{FieldLabel::REQUIRED};
         TypeName                       type_ref;
         bool                           generic{false};
-        const StructParser*              type{nullptr};
-        const EnumParser*                enum_type{nullptr};
+        SymbolNode*                      type{nullptr};
         /// Set by the caller before parse. It is already fixed while parsing.
         /// nullptr means the field is declared at file scope, not inside a struct.
         const StructParser*              container{nullptr};

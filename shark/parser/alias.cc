@@ -15,16 +15,64 @@
 
 #include <shark/parser/alias.h>
 #include <shark/parser/file.h>
+#include <shark/parser/function.h>
 #include <shark/parser/pool.h>
+#include <shark/parser/servlet.h>
 
 namespace shark::parser {
+
+    bool same_symbol(const SymbolNode* node, std::string_view target) {
+        return node->name == target || node->full_name == target || node->full_name_without_package == target;
+    }
+
+    SymbolNode* find_alias_target(const FileParser* owner, std::string_view target) {
+        if (SymbolNode* symbol = owner->find_type(target)) {
+            return symbol;
+        }
+        for (FunctionParser* function : owner->functions) {
+            if (same_symbol(function, target)) {
+                return function;
+            }
+        }
+        for (ServletParser* servlet : owner->servlets) {
+            if (same_symbol(servlet, target)) {
+                return servlet;
+            }
+            for (FunctionParser* method : servlet->method) {
+                if (same_symbol(method, target)) {
+                    return method;
+                }
+            }
+        }
+        return nullptr;
+    }
+
+    bool is_type_symbol(SymbolNode* symbol) {
+        return symbol != nullptr && (symbol->node_type == SymbolType::STRUCT || symbol->node_type == SymbolType::ENUM || symbol->node_type == SymbolType::PRIMITIVE);
+    }
 
     bool AliasParser::bind_alias() {
         if (bind) {
             return true;
         }
-        SymbolNode* symbol = file->find_type(target_name);
+        SymbolNode* symbol = find_alias_target(file, target_name);
         if (symbol == nullptr) {
+            report_error(ErrorType::SEMANTIC, "alias `%s` target `%s` was not found", name, target_name);
+            return false;
+        }
+        if (symbol->node_type == SymbolType::ALIAS && !symbol->bind) {
+            return true;
+        }
+        SymbolNode* concrete = file->concrete_type(symbol);
+        if (concrete != nullptr && concrete->node_type == SymbolType::ALIAS) {
+            return true;
+        }
+        const bool type_target = is_type_symbol(concrete);
+        if (!is_using && !type_target) {
+            report_error(ErrorType::SEMANTIC, "typedef `%s` target `%s` is not a type", name, target_name);
+            return false;
+        }
+        if (concrete == nullptr || (is_using && !type_target && concrete->node_type != SymbolType::FUNCTION && concrete->node_type != SymbolType::SERVLET)) {
             report_error(ErrorType::SEMANTIC, "alias `%s` target `%s` was not found", name, target_name);
             return false;
         }

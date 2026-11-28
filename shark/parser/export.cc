@@ -27,6 +27,7 @@
 #include <shark/parser/function.h>
 #include <shark/parser/import.h>
 #include <shark/parser/package.h>
+#include <shark/parser/primitive.h>
 #include <shark/parser/servlet.h>
 #include <shark/parser/struct.h>
 #include <shark/schema/schema_pool.h>
@@ -67,10 +68,13 @@ namespace shark::parser {
             void copy_symbol_name(std::string& name, std::string& full, std::string& bare, const SymbolNode& node);
 
             bool create_struct(StructParser* node);
+            bool create_alias(AliasParser* alias);
             bool create_enum(EnumParser* node);
+            bool create_primitive(PrimitiveParser* node);
             bool create_function(FunctionParser* node);
             bool fill_struct(StructParser* node);
             bool fill_enum(EnumParser* node);
+            bool fill_primitive(PrimitiveParser* node);
             bool fill_function(FunctionParser* node);
             bool fill_field(FieldParser* node);
 
@@ -230,6 +234,8 @@ namespace shark::parser {
                 switch (node->node_type) {
                     case SymbolType::STRUCT:
                         return &static_cast<StructParser*>(node)->annotations;
+                    case SymbolType::PRIMITIVE:
+                        return &static_cast<PrimitiveParser*>(node)->annotations;
                     case SymbolType::ENUM:
                         return &static_cast<EnumParser*>(node)->annotations;
                     case SymbolType::ENUM_VALUE:
@@ -279,12 +285,12 @@ namespace shark::parser {
         bool Exporter::register_symbol(SymbolBase* out, SymbolNode* node) {
             const bool type_name = node->node_type == SymbolType::STRUCT
                 || node->node_type == SymbolType::ENUM
+                || node->node_type == SymbolType::PRIMITIVE
                 || node->node_type == SymbolType::ALIAS
                 || node->node_type == SymbolType::SERVLET;
-            const bool builtin = node->node_type == SymbolType::STRUCT && static_cast<StructParser*>(node)->builtin;
-            if (type_name && !builtin) {
+            if (type_name && node->node_type != SymbolType::PRIMITIVE) {
                 SymbolBase* existing = destination_.get_symbol(node->name);
-                if (existing != nullptr && existing->symbol_type_ == SymbolType::STRUCT && static_cast<StructBase*>(existing)->builtin_) {
+                if (existing != nullptr && existing->symbol_type_ == SymbolType::PRIMITIVE) {
                     node->report_error(ErrorType::SEMANTIC, "type `%s` duplicates builtin type", node->name);
                     return false;
                 }
@@ -313,6 +319,15 @@ namespace shark::parser {
             return register_symbol(out, node);
         }
 
+        bool Exporter::create_primitive(PrimitiveParser* node) {
+            PrimitiveBase* out = make<PrimitiveParser, PrimitiveBase>(node, SymbolType::PRIMITIVE);
+            if (out == nullptr) {
+                return false;
+            }
+            copy_symbol_name(out->name_, out->full_name_, out->full_name_without_package_, *node);
+            return register_symbol(out, node);
+        }
+
         bool Exporter::create_function(FunctionParser* node) {
             FunctionBase* out = make<FunctionParser, FunctionBase>(node, SymbolType::FUNCTION);
             if (out == nullptr) {
@@ -332,6 +347,28 @@ namespace shark::parser {
                 }
             }
             return true;
+        }
+
+        bool Exporter::create_alias(AliasParser* alias) {
+            SymbolNode* concrete = alias->file->concrete_type(const_cast<SymbolNode*>(alias->target));
+            if (concrete != nullptr && (concrete->node_type == SymbolType::STRUCT || concrete->node_type == SymbolType::ENUM || concrete->node_type == SymbolType::PRIMITIVE)) {
+                TypeAlias* copied = make<AliasParser, TypeAlias>(alias, SymbolType::TYPE_ALIAS);
+                copy_symbol_name(copied->name_, copied->full_name_, copied->full_name_without_package_, *alias);
+                return register_symbol(copied, alias);
+            }
+            if (concrete != nullptr && concrete->node_type == SymbolType::FUNCTION) {
+                FunctionAlias* copied = make<AliasParser, FunctionAlias>(alias, SymbolType::FUNCTION_ALIAS);
+                copy_symbol_name(copied->name_, copied->full_name_, copied->full_name_without_package_, *alias);
+                return register_symbol(copied, alias);
+            }
+            if (concrete != nullptr && concrete->node_type == SymbolType::SERVLET) {
+                ServletAlias* copied = make<AliasParser, ServletAlias>(alias, SymbolType::SERVLET_ALIAS);
+                copied->full_name_ = alias->full_name;
+                copied->full_name_without_package_ = alias->full_name_without_package;
+                return register_symbol(copied, alias);
+            }
+            alias->report_error(ErrorType::SEMANTIC, "alias `%s` target `%s` was not bound", alias->name, alias->target_name);
+            return false;
         }
 
         bool Exporter::create_struct(StructParser* node) {
@@ -359,9 +396,7 @@ namespace shark::parser {
                 }
             }
             for (AliasParser* alias : node->aliases) {
-                AliasBase* copied = make<AliasParser, AliasBase>(alias, SymbolType::ALIAS);
-                copy_symbol_name(copied->name_, copied->full_name_, copied->full_name_without_package_, *alias);
-                if (!register_symbol(copied, alias)) {
+                if (!create_alias(alias)) {
                     return false;
                 }
             }
@@ -383,8 +418,7 @@ namespace shark::parser {
             out->label_ = node->label;
             copy_type(out->type_ref_, node->type_ref);
             out->generic_ = node->generic;
-            out->type_ = static_cast<const StructBase*>(made_[node->type]);
-            out->enum_type_ = static_cast<const EnumBase*>(made_[node->enum_type]);
+            out->type_ = static_cast<const TypeInfo*>(made_[node->type]);
             out->container_ = static_cast<const StructBase*>(made_[node->container]);
             out->id_ = node->id;
             out->default_value_ = copy_value(node->default_value);
@@ -443,8 +477,7 @@ namespace shark::parser {
                 }
                 out->params_.push_back(static_cast<FieldBase*>(made_[param]));
             }
-            out->ret_type_ = static_cast<const StructBase*>(made_[node->ret_type]);
-            out->ret_enum_ = static_cast<const EnumBase*>(made_[node->ret_enum]);
+            out->ret_type_ = static_cast<const TypeInfo*>(made_[node->ret_type]);
             out->container_ = static_cast<const StructBase*>(made_[node->container]);
             out->servlet_ = static_cast<const ServletBase*>(made_[node->servlet]);
             return true;
@@ -461,7 +494,6 @@ namespace shark::parser {
             }
             copy_type(out->name_, node->declared_name);
             out->is_union_ = node->is_union;
-            out->builtin_ = node->builtin;
             out->generic_ = node->generic;
             out->phy_type_ = node->phy_type;
             out->container_ = static_cast<const StructBase*>(made_[node->container]);
@@ -484,20 +516,63 @@ namespace shark::parser {
                 out->fields_.push_back(static_cast<FieldBase*>(made_[field]));
             }
             for (AliasParser* alias : node->aliases) {
-                AliasBase* copied = static_cast<AliasBase*>(made_[alias]);
-                for (CommentParser* comment : alias->leading_comment) {
-                    copied->leading_comment_.push_back(copy_comment(comment));
+                SymbolBase* copied = made_[alias];
+                SymbolBase* target = made_[alias->target];
+                if (copied->symbol_type_ == SymbolType::TYPE_ALIAS) {
+                    TypeAlias* type_alias = static_cast<TypeAlias*>(copied);
+                    for (CommentParser* comment : alias->leading_comment) {
+                        type_alias->leading_comment_.push_back(copy_comment(comment));
+                    }
+                    type_alias->tailing_comment_ = copy_comment(alias->tailing_comment);
+                    for (AnnotationParser* annotation : alias->annotations) {
+                        type_alias->annotations_.push_back(copy_annotation(annotation));
+                    }
+                    type_alias->target_ = static_cast<const TypeInfo*>(target);
+                    type_alias->container_ = out;
+                    type_alias->is_using_ = alias->is_using;
+                    out->aliases_.push_back(type_alias);
+                } else if (copied->symbol_type_ == SymbolType::FUNCTION_ALIAS) {
+                    FunctionAlias* function_alias = static_cast<FunctionAlias*>(copied);
+                    for (CommentParser* comment : alias->leading_comment) {
+                        function_alias->leading_comment_.push_back(copy_comment(comment));
+                    }
+                    function_alias->tailing_comment_ = copy_comment(alias->tailing_comment);
+                    for (AnnotationParser* annotation : alias->annotations) {
+                        function_alias->annotations_.push_back(copy_annotation(annotation));
+                    }
+                    function_alias->target_ = static_cast<const FunctionBase*>(target);
+                    function_alias->container_ = out;
+                    function_alias->is_using_ = alias->is_using;
+                    out->function_aliases_.push_back(function_alias);
+                } else {
+                    ServletAlias* servlet_alias = static_cast<ServletAlias*>(copied);
+                    for (CommentParser* comment : alias->leading_comment) {
+                        servlet_alias->leading_comment_.push_back(copy_comment(comment));
+                    }
+                    servlet_alias->tailing_comment_ = copy_comment(alias->tailing_comment);
+                    for (AnnotationParser* annotation : alias->annotations) {
+                        servlet_alias->annotations_.push_back(copy_annotation(annotation));
+                    }
+                    servlet_alias->target_ = static_cast<const ServletBase*>(target);
+                    servlet_alias->container_ = out;
+                    servlet_alias->is_using_ = alias->is_using;
+                    out->servlet_aliases_.push_back(servlet_alias);
                 }
-                copied->tailing_comment_ = copy_comment(alias->tailing_comment);
-                for (AnnotationParser* annotation : alias->annotations) {
-                    copied->annotations_.push_back(copy_annotation(annotation));
-                }
-                copied->target_name_.assign(alias->target_name.data(), alias->target_name.size());
-                copied->target_ = made_[alias->target];
-                copied->container_ = out;
-                copied->is_using_ = alias->is_using;
-                out->aliases_.push_back(copied);
             }
+            return true;
+        }
+
+        bool Exporter::fill_primitive(PrimitiveParser* node) {
+            PrimitiveBase* out = static_cast<PrimitiveBase*>(made_[node]);
+            for (CommentParser* comment : node->leading_comment) {
+                out->leading_comment_.push_back(copy_comment(comment));
+            }
+            out->tailing_comment_ = copy_comment(node->tailing_comment);
+            for (AnnotationParser* annotation : node->annotations) {
+                out->annotations_.push_back(copy_annotation(annotation));
+            }
+            out->phy_type_ = node->phy_type;
+            out->container_ = static_cast<const StructBase*>(made_[node->container]);
             return true;
         }
 
@@ -520,6 +595,11 @@ namespace shark::parser {
             }
             for (StructParser* node : file.structs) {
                 if (!create_struct(node)) {
+                    return false;
+                }
+            }
+            for (PrimitiveParser* node : file.primitives) {
+                if (!create_primitive(node)) {
                     return false;
                 }
             }
@@ -594,6 +674,12 @@ namespace shark::parser {
                     return false;
                 }
                 out->structs_.push_back(static_cast<StructBase*>(made_[node]));
+            }
+            for (PrimitiveParser* node : file.primitives) {
+                if (!fill_primitive(node)) {
+                    return false;
+                }
+                out->primitives_.push_back(static_cast<PrimitiveBase*>(made_[node]));
             }
             for (FieldParser* node : file.constexprs) {
                 if (!fill_field(node)) {

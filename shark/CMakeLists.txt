@@ -45,6 +45,7 @@ kmcmake_cc_library(
         parser/builtin.cc
         parser/enum_value.cc
         parser/enum.cc
+        parser/primitive.cc
         parser/symbol.cc
         parser/file.cc
         parser/pool.cc

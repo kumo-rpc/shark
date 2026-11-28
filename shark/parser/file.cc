@@ -22,6 +22,7 @@
 #include <shark/parser/file.h>
 #include <shark/parser/function.h>
 #include <shark/parser/pool.h>
+#include <shark/parser/primitive.h>
 #include <shark/parser/servlet.h>
 #include <shark/parser/struct.h>
 #include <shark/parser/type_name.h>
@@ -74,6 +75,12 @@ namespace shark::parser {
     bool FileParser::bind_file() {
         if (!assign_names()) {
             return false;
+        }
+        for (PrimitiveParser* node : primitives) {
+            node->bind = true;
+            if (!node->emit_to_pool()) {
+                return false;
+            }
         }
         if (!bind_aliases()) {
             return false;
@@ -305,6 +312,11 @@ namespace shark::parser {
                 return false;
             }
         }
+        for (PrimitiveParser* node : primitives) {
+            if (!assign_symbol(node, {}, seen)) {
+                return false;
+            }
+        }
         for (ServletParser* node : servlets) {
             if (!assign_servlet(node, {}, seen)) {
                 return false;
@@ -343,11 +355,19 @@ namespace shark::parser {
             return nullptr;
         }
 
-        bool is_scalar_builtin(const StructParser* node) {
-            if (node == nullptr || !node->builtin) {
+        bool is_scalar_type(SymbolNode* node) {
+            if (node == nullptr) {
                 return false;
             }
-            switch (node->phy_type) {
+            PhysicalType phy = PhysicalType::VOID;
+            if (node->node_type == SymbolType::PRIMITIVE) {
+                phy = static_cast<PrimitiveParser*>(node)->phy_type;
+            } else if (node->node_type == SymbolType::STRUCT && static_cast<StructParser*>(node)->builtin) {
+                phy = static_cast<StructParser*>(node)->phy_type;
+            } else {
+                return false;
+            }
+            switch (phy) {
             case PhysicalType::BOOL:
             case PhysicalType::INT8:
             case PhysicalType::UINT8:
@@ -362,25 +382,6 @@ namespace shark::parser {
             case PhysicalType::FLOAT32:
             case PhysicalType::FLOAT64:
             case PhysicalType::STRING:
-                return true;
-            default:
-                return false;
-            }
-        }
-
-        bool is_integer_builtin(const StructParser* node) {
-            if (!node->builtin) {
-                return false;
-            }
-            switch (node->phy_type) {
-            case PhysicalType::INT8:
-            case PhysicalType::UINT8:
-            case PhysicalType::INT16:
-            case PhysicalType::UINT16:
-            case PhysicalType::INT32:
-            case PhysicalType::UINT32:
-            case PhysicalType::INT64:
-            case PhysicalType::UINT64:
                 return true;
             default:
                 return false;
@@ -413,6 +414,11 @@ namespace shark::parser {
 
     SymbolNode* FileParser::find_local(std::string_view name) const {
         for (EnumParser* node : enums) {
+            if (same_name(node, name)) {
+                return node;
+            }
+        }
+        for (PrimitiveParser* node : primitives) {
             if (same_name(node, name)) {
                 return node;
             }
@@ -495,9 +501,9 @@ namespace shark::parser {
         return symbol;
     }
 
-    bool FileParser::bind_alias_struct(StructParser* node, bool& progress) {
+    bool FileParser::bind_alias_struct(StructParser* node, bool& progress, bool& pending) {
         for (StructParser* child : node->nested_types) {
-            if (!bind_alias_struct(child, progress)) {
+            if (!bind_alias_struct(child, progress, pending)) {
                 return false;
             }
         }
@@ -508,24 +514,35 @@ namespace shark::parser {
             if (!alias->bind_alias()) {
                 return false;
             }
-            progress = true;
-        }
-        return true;
-    }
-
-    bool FileParser::bind_aliases() {
-        bool progress = false;
-        for (StructParser* node : structs) {
-            if (!bind_alias_struct(node, progress)) {
-                return false;
+            if (alias->bind) {
+                progress = true;
+            } else {
+                pending = true;
             }
         }
         return true;
     }
 
-    bool FileParser::bind_alias_struct_list(bool& progress) {
+    bool FileParser::bind_aliases() {
+        while (true) {
+            bool progress = false;
+            bool pending = false;
+            if (!bind_alias_struct_list(progress, pending)) {
+                return false;
+            }
+            if (!pending) {
+                return true;
+            }
+            if (!progress) {
+                report_error(ErrorType::SEMANTIC, "alias target was not bound in `%s`", path);
+                return false;
+            }
+        }
+    }
+
+    bool FileParser::bind_alias_struct_list(bool& progress, bool& pending) {
         for (StructParser* node : structs) {
-            if (!bind_alias_struct(node, progress)) {
+            if (!bind_alias_struct(node, progress, pending)) {
                 return false;
             }
         }
@@ -563,48 +580,28 @@ namespace shark::parser {
             report_error(ErrorType::SEMANTIC, "constexpr `%s` type `%s` was not bound", field->name, type_ref_name(field->type_ref));
             return false;
         }
-        if (final_round) {
-            if (symbol->node_type == SymbolType::ENUM) {
-                auto* enum_type = static_cast<EnumParser*>(symbol);
-                if (enum_type->bind) {
-                    field->enum_type = enum_type;
-                    field->bind = true;
-                    if (!field->emit_to_pool()) {
-                        return false;
-                    }
-                    return true;
+        if (symbol->node_type == SymbolType::ENUM) {
+            if (!symbol->bind) {
+                if (final_round) {
+                    report_error(ErrorType::SEMANTIC, "constexpr `%s` type `%s` was not bound", field->name, type_ref_name(field->type_ref));
+                    return false;
                 }
+                return true;
             }
+        } else if (symbol->node_type != SymbolType::PRIMITIVE && symbol->node_type != SymbolType::STRUCT) {
             report_error(ErrorType::SEMANTIC, "constexpr `%s` type `%s` was not bound", field->name, type_ref_name(field->type_ref));
             return false;
         }
-        if (symbol->node_type == SymbolType::STRUCT) {
-            auto* type = static_cast<StructParser*>(symbol);
-            field->type = type;
-            field->bind = true;
-            if (!field->emit_to_pool()) {
-                return false;
-            }
-            if (!is_scalar_builtin(type)) {
-                field->static_const = true;
-                report_warn(ErrorType::SEMANTIC, "constexpr `%s` type `%s` is downgraded to static const and is not a compile-time constant", field->name, type_ref_name(field->type_ref));
-            }
-            return true;
+        field->type = symbol;
+        field->bind = true;
+        if (!field->emit_to_pool()) {
+            return false;
         }
-        if (symbol->node_type == SymbolType::ENUM) {
-            auto* enum_type = static_cast<EnumParser*>(symbol);
-            if (!enum_type->bind) {
-                return true;
-            }
-            field->enum_type = enum_type;
-            field->bind = true;
-            if (!field->emit_to_pool()) {
-                return false;
-            }
-            return true;
+        if (symbol->node_type != SymbolType::PRIMITIVE && !is_scalar_type(symbol)) {
+            field->static_const = true;
+            report_warn(ErrorType::SEMANTIC, "constexpr `%s` type `%s` is downgraded to static const and is not a compile-time constant", field->name, type_ref_name(field->type_ref));
         }
-        report_error(ErrorType::SEMANTIC, "constexpr `%s` type `%s` was not bound", field->name, type_ref_name(field->type_ref));
-        return false;
+        return true;
     }
 
     bool FileParser::bind_constexpr_struct(StructParser* node, bool final_round) {
@@ -710,7 +707,8 @@ namespace shark::parser {
                     return false;
                 }
             }
-            if (!bind_alias_struct_list(progress)) {
+            bool alias_pending = false;
+            if (!bind_alias_struct_list(progress, alias_pending)) {
                 return false;
             }
             if (!pending) {
@@ -957,6 +955,16 @@ namespace shark::parser {
                     return false;
                 }
                 enums.push_back(enum_node);
+                continue;
+            }
+            if (t.type == TokenType::BareWord && t == kTypeKey) {
+                auto* primitive = pool->create_symbol<PrimitiveParser>(this);
+                primitive->leading_comment = std::move(comments);
+                primitive->annotations = std::move(annotations);
+                if (!primitive->parse(*lexer)) {
+                    return false;
+                }
+                primitives.push_back(primitive);
                 continue;
             }
             if (t.type == TokenType::BareWord && (t == kStructKey || t == kUnionKey)) {

@@ -19,6 +19,7 @@
 #include <shark/parser/field.h>
 #include <shark/parser/file.h>
 #include <shark/parser/pool.h>
+#include <shark/parser/primitive.h>
 #include <shark/parser/struct.h>
 
 #include <cstdint>
@@ -113,11 +114,8 @@ namespace shark::parser {
             return 1;
         }
 
-        bool is_key_type(const StructParser* node) {
-            if (node == nullptr || !node->builtin || node->generic) {
-                return false;
-            }
-            switch (node->phy_type) {
+        bool is_key_phy(PhysicalType phy) {
+            switch (phy) {
             case PhysicalType::BOOL:
             case PhysicalType::INT8:
             case PhysicalType::UINT8:
@@ -132,6 +130,26 @@ namespace shark::parser {
             default:
                 return false;
             }
+        }
+
+        bool is_key_type(const StructParser* node) {
+            if (node == nullptr || !node->builtin || node->generic) {
+                return false;
+            }
+            return is_key_phy(node->phy_type);
+        }
+
+        bool is_key_symbol(SymbolNode* node) {
+            if (node == nullptr) {
+                return false;
+            }
+            if (node->node_type == SymbolType::PRIMITIVE) {
+                return is_key_phy(static_cast<PrimitiveParser*>(node)->phy_type);
+            }
+            if (node->node_type == SymbolType::STRUCT) {
+                return is_key_type(static_cast<StructParser*>(node));
+            }
+            return false;
         }
 
         bool integer_in_width(PhysicalType type, int64_t number) {
@@ -363,6 +381,50 @@ namespace shark::parser {
             }
 
             const bool has_arguments = !ref.arguments.empty();
+            if (symbol->node_type == SymbolType::PRIMITIVE) {
+                auto* type = static_cast<PrimitiveParser*>(symbol);
+                if (has_arguments) {
+                    report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` does not take type arguments", key, type->name);
+                    return false;
+                }
+                switch (type->phy_type) {
+                case PhysicalType::BOOL:
+                    if (!std::holds_alternative<bool>(value->value)) {
+                        report_error(ErrorType::SEMANTIC, "annotation `%s` type `bool` requires a bool", key);
+                        return false;
+                    }
+                    return true;
+                case PhysicalType::STRING:
+                    if (!std::holds_alternative<std::string_view>(value->value)) {
+                        report_error(ErrorType::SEMANTIC, "annotation `%s` type `string` requires a string", key);
+                        return false;
+                    }
+                    return true;
+                case PhysicalType::FLOAT32:
+                case PhysicalType::FLOAT64:
+                    if (!std::holds_alternative<double>(value->value)) {
+                        report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires a float", key, type->name);
+                        return false;
+                    }
+                    return true;
+                case PhysicalType::INT8:
+                case PhysicalType::UINT8:
+                case PhysicalType::INT16:
+                case PhysicalType::UINT16:
+                case PhysicalType::INT32:
+                case PhysicalType::UINT32:
+                case PhysicalType::INT64:
+                case PhysicalType::UINT64:
+                    if (!std::holds_alternative<int64_t>(value->value) || !integer_in_width(type->phy_type, std::get<int64_t>(value->value))) {
+                        report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` requires an integer in range", key, type->name);
+                        return false;
+                    }
+                    return true;
+                default:
+                    report_error(ErrorType::SEMANTIC, "annotation `%s` type `%s` cannot be constructed", key, type->name);
+                    return false;
+                }
+            }
             if (symbol->node_type == SymbolType::STRUCT) {
                 auto* type = static_cast<StructParser*>(symbol);
                 if (type->generic) {
@@ -376,10 +438,7 @@ namespace shark::parser {
                             if (element != nullptr) {
                                 element = file->concrete_type(element);
                             }
-                            auto* element_type = element != nullptr && element->node_type == SymbolType::STRUCT
-                                ? static_cast<StructParser*>(element)
-                                : nullptr;
-                            if (!is_key_type(element_type)) {
+                            if (!is_key_symbol(element)) {
                                 report_error(ErrorType::SEMANTIC, "annotation `%s` set element `%s` cannot be a key", key, format_type_ref(ref.arguments[0]).c_str());
                                 return false;
                             }
@@ -401,10 +460,7 @@ namespace shark::parser {
                         if (key_symbol != nullptr) {
                             key_symbol = file->concrete_type(key_symbol);
                         }
-                        auto* key_type = key_symbol != nullptr && key_symbol->node_type == SymbolType::STRUCT
-                            ? static_cast<StructParser*>(key_symbol)
-                            : nullptr;
-                        if (!is_key_type(key_type)) {
+                        if (!is_key_symbol(key_symbol)) {
                             report_error(ErrorType::SEMANTIC, "annotation `%s` map key `%s` cannot be a key", key, format_type_ref(ref.arguments[0]).c_str());
                             return false;
                         }

@@ -64,6 +64,7 @@ namespace shark::parser {
 
         std::vector<EnumParser*>       enums;
         std::vector<StructParser*>     structs;
+        std::vector<PrimitiveParser*>  primitives;
         std::vector<ServiceParser*>    services;
         std::vector<ServletParser*>    servlets;
         std::vector<FunctionParser*>   functions;
@@ -90,8 +91,8 @@ namespace shark::parser {
         bool bind_constexpr_round1();
         bool bind_constexpr_round2();
         bool bind_aliases();
-        bool bind_alias_struct(StructParser* node, bool& progress);
-        bool bind_alias_struct_list(bool& progress);
+        bool bind_alias_struct(StructParser* node, bool& progress, bool& pending);
+        bool bind_alias_struct_list(bool& progress, bool& pending);
         bool bind_constexpr_field(FieldParser* field, bool final_round);
         bool bind_constexpr_struct(StructParser* node, bool final_round);
         bool bind_enums();

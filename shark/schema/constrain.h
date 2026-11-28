@@ -19,8 +19,7 @@
 
 namespace shark {
 
-    class SchemaStruct;
-    class SchemaEnum;
+    class SchemaType;
 
     void register_constrain(SchemaPoolBase *pool);
 
@@ -32,30 +31,29 @@ namespace shark {
 
     //////////////////////////////////////////////////////////////
     /// traits operators
-    bool is_integer(const StructBase *type);
-    bool is_void(const StructBase *type);
-    bool is_primitive(const StructBase *type);
-    bool is_pod(const StructBase *type);
-    bool is_signed(const StructBase *type);
-    bool is_numeric(const StructBase *type);
-    bool is_container(const StructBase *type);
-    bool is_string(const StructBase *type);
-    bool is_constexpr(const StructBase *type);
-    bool is_list(const StructBase *type);
-    bool is_map(const StructBase *type);
-    bool is_set(const StructBase *type);
+    bool is_integer(const TypeInfo *type);
+    bool is_void(const TypeInfo *type);
+    bool is_primitive(const TypeInfo *type);
+    bool is_pod(const TypeInfo *type);
+    bool is_signed(const TypeInfo *type);
+    bool is_numeric(const TypeInfo *type);
+    bool is_container(const TypeInfo *type);
+    bool is_string(const TypeInfo *type);
+    bool is_constexpr(const TypeInfo *type);
+    bool is_list(const TypeInfo *type);
+    bool is_map(const TypeInfo *type);
+    bool is_set(const TypeInfo *type);
 
-    bool type_is_integer(const SchemaStruct *type);
-    bool type_is_void(const SchemaStruct *type);
-    bool type_is_primitive(const SchemaStruct *type);
-    bool type_is_pod(const SchemaStruct *type);
-    bool type_is_signed(const SchemaStruct *type);
-    bool type_is_numeric(const SchemaStruct *type);
-    bool type_is_container(const SchemaStruct *type);
-    bool type_is_string(const SchemaStruct *type);
-    bool type_is_constexpr(const SchemaStruct *type);
-    bool type_is_list(const SchemaStruct *type);
-    bool type_is_map(const SchemaStruct *type);
-    bool type_is_set(const SchemaStruct *type);
-    bool type_is_constexpr(const SchemaEnum *type);
+    bool type_is_integer(const SchemaType *type);
+    bool type_is_void(const SchemaType *type);
+    bool type_is_primitive(const SchemaType *type);
+    bool type_is_pod(const SchemaType *type);
+    bool type_is_signed(const SchemaType *type);
+    bool type_is_numeric(const SchemaType *type);
+    bool type_is_container(const SchemaType *type);
+    bool type_is_string(const SchemaType *type);
+    bool type_is_constexpr(const SchemaType *type);
+    bool type_is_list(const SchemaType *type);
+    bool type_is_map(const SchemaType *type);
+    bool type_is_set(const SchemaType *type);
 }  // namespace shark
