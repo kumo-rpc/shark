@@ -30,11 +30,16 @@ constexpr string kName @ 2 = "shark";
 constexpr Point kOrigin @ 3 = { x = 0, y = 0, };
 
 annotation key = "color";
+annotation allow_alias = true;
+/// color.
 enum class Color : uint16 {
     annotation key = "red";
     RED = 0; //! red
+    /// GREEN
     GREEN = 1;
     BLUE = 2;
+    MIN = 2;
+    MAX = kLimit;
 };
 
 annotation key = "point";

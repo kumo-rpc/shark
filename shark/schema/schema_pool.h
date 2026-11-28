@@ -176,6 +176,7 @@ namespace shark {
         std::vector<CommentBase*>         leading_comment_;
         CommentBase                      *tailing_comment_{nullptr};
         int64_t                           value_{0};
+        const FieldBase                  *constexpr_field_{nullptr};
         std::vector<AnnotationBase*>     annotations_;
         const EnumBase                   *parent_enum_{nullptr};
 

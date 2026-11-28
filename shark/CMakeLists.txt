@@ -61,6 +61,7 @@ kmcmake_cc_library(
         schema/schema_pool.cc
         schema/schema_pool_api.cc
         schema/constrain.cc
+        schema/pass_check.cc
         schema/uri.cc
         schema/annotation.cc
         io/printer.cc

@@ -13,5 +13,13 @@
 // limitations under the License.
 //
 
-#include <shark/schema/schema_data.h>
-#include <shark/schema/schema_pool.h>
+#pragma once
+
+namespace shark {
+
+    class FileBase;
+
+    /// Entry for every check that runs after binding finishes.
+    bool run_pass_check(const FileBase* file);
+
+}  // namespace shark

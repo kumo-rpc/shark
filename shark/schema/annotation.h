@@ -23,6 +23,8 @@
 
 namespace shark {
 
+    static constexpr std::string_view kAllowEnumAliasKey = "allow_alias";
+
     class Annotations {
     public:
         /// Drops one matching wrapper at a time: `<>`, `""`, or `''`.
@@ -62,6 +64,12 @@ namespace shark {
         ///
         ////////////////////////////////////////////////
         static std::vector<std::string> cpp_includes(const SchemaFile* file);
+
+        /// True when this enum has `annotation allow_alias = true`.
+        static bool allow_enum_alias(const SchemaEnum* item);
+
+        /// True when this value has `annotation allow_alias = true`, or its enum does.
+        static bool allow_enum_alias(const SchemaEnumValue* value);
     };
 
 }  // namespace shark

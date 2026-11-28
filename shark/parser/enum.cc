@@ -95,6 +95,7 @@ namespace shark::parser {
                     return false;
                 }
                 node->value = std::get<int64_t>(field->default_value->value);
+                node->constexpr_field = field;
             }
             if (!value_in_underlying(underlying, node->value)) {
                 report_error(ErrorType::SEMANTIC, "enum value `%s` is out of range", node->name);

@@ -55,8 +55,10 @@ namespace shark::parser {
         CommentParser                   *tailing_comment{nullptr};
         int64_t                       value{0};
         /// Empty when `value` is an integer literal. Otherwise a constexpr name
-        /// viewed from the source buffer. `bind_enum` resolves it into `value`.
+        /// viewed from the source buffer. `bind_enum` resolves it into `value`
+        /// and stores the field in `constexpr_field`.
         std::string_view              constexpr_ref;
+        FieldParser                  *constexpr_field{nullptr};
         std::vector<AnnotationParser*>  annotations;
         const EnumParser *parent_enum{nullptr};
 

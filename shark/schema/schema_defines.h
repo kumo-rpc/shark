@@ -56,7 +56,8 @@ namespace shark {
     };
 
 
-
+    ///////////////////////////////////////////////////////////////////////
+    ///  key word
     static constexpr std::string_view kEditionKey = "edition";
     static constexpr std::string_view kImportKey = "import";
     static constexpr std::string_view kPackageKey = "package";
@@ -69,14 +70,22 @@ namespace shark {
     static constexpr std::string_view kTypeDefKey = "typedef";
     static constexpr std::string_view kFunctionKey = "function";
     static constexpr std::string_view kServletKey = "servlet";
-    static constexpr std::string_view kCppClassify = "cpp";
-    static constexpr std::string_view kIncludeKey = "include";
 
     static constexpr std::string_view kRequiredKey    = "required";
     static constexpr std::string_view kOptionalKey    = "optional";
     static constexpr std::string_view kConstExprKey   = "constexpr";
     static constexpr std::string_view kAtomicKey      = "atomic";
 
+    ///////////////////////////////////////////////////////////////////////
+    /// global annotation keys
+
+    static constexpr std::string_view kCppClassify = "cpp";
+    static constexpr std::string_view kIncludeKey = "include";
+
+    ///////////////////////////////////////////////////////////////////////
+    /// enum annotation
+
+    static constexpr std::string_view kAllowAliasKey = "allow_alias";
 
     enum class SymbolType {
         NONE = 0,

@@ -154,8 +154,16 @@ void FileGenerator::generate_namespace_end(io::Printer& printer) {
 
 void FileGenerator::initialize() {
     _constexpr_generators.clear();
+    _enum_generators.clear();
     if (_file == nullptr) {
         return;
+    }
+    for (uint32_t i = 0; i < _file->enum_size(); ++i) {
+        const SchemaEnum* item = _file->enum_at(i);
+        if (item == nullptr) {
+            continue;
+        }
+        _enum_generators.emplace_back(item);
     }
     for (uint32_t i = 0; i < _file->constexpr_size(); ++i) {
         const SchemaField* field = _file->constexpr_at(i);
@@ -183,6 +191,11 @@ void FileGenerator::generate_header(io::Printer& printer) {
         printer.print("/// primitive constexpr scope\n");
         for (auto &it : _constexpr_generators) {
             it.generate_primitive_constexpr_declare(printer);
+        }
+        printer.print("//////////////////////////////////////////////////////////////////////////////\n");
+        printer.print("/// enum scope\n");
+        for (auto &it : _enum_generators) {
+            it.generate_global_declare(printer);
         }
 
     }

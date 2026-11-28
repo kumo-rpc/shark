@@ -14,6 +14,7 @@
 //
 
 #include <shark/schema/constrain.h>
+#include <shark/schema/pass_check.h>
 #include <shark/parser/alias.h>
 #include <shark/parser/export.h>
 #include <shark/parser/import.h>
@@ -117,7 +118,7 @@ namespace shark::parser {
         if (!shark::bind_schema_types(schema_file)) {
             return false;
         }
-        return shark::run_constrain_check(schema_file);
+        return shark::run_pass_check(schema_file);
     }
 
     bool FileParser::take_package() {

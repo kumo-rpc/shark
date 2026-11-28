@@ -445,6 +445,7 @@ namespace shark::parser {
                 }
                 copied->tailing_comment_ = copy_comment(value->tailing_comment);
                 copied->value_ = value->value;
+                copied->constexpr_field_ = static_cast<const FieldBase*>(made_[value->constexpr_field]);
                 for (AnnotationParser* annotation : value->annotations) {
                     copied->annotations_.push_back(copy_annotation(annotation));
                 }

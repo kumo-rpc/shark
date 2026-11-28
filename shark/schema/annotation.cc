@@ -38,6 +38,35 @@ std::string Annotations::cpp_include(const SchemaType* type) {
     return {};
 }
 
+template <typename Node>
+bool allow_alias_flag(const Node* node) {
+    if (node == nullptr) {
+        return false;
+    }
+    for (uint32_t i = 0; i < node->annotation_size(); ++i) {
+        const SchemaAnnotation* annotation = node->annotation(i);
+        if (annotation == nullptr || !annotation->classify().empty() || annotation->key() != kAllowEnumAliasKey) {
+            continue;
+        }
+        const SchemaConstValue* value = annotation->value();
+        if (value != nullptr && value->kind() == SchemaConstValue::Kind::BOOL && value->bool_value()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Annotations::allow_enum_alias(const SchemaEnum* item) {
+    return allow_alias_flag(item);
+}
+
+bool Annotations::allow_enum_alias(const SchemaEnumValue* value) {
+    if (allow_alias_flag(value)) {
+        return true;
+    }
+    return value == nullptr ? false : allow_enum_alias(value->parent_enum());
+}
+
 std::string Annotations::normalize_include(std::string_view text) {
     while (text.size() >= 2) {
         const char open = text.front();

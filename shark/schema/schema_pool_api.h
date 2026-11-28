@@ -280,6 +280,8 @@ namespace shark {
         }
         [[nodiscard]] const SchemaComment* tailing_comment() const { return SchemaComment::from(tailing_comment_); }
         [[nodiscard]] int64_t value() const { return value_; }
+        [[nodiscard]] int32_t line() const { return source_location_.line; }
+        [[nodiscard]] const SchemaField* constexpr_field() const;
         [[nodiscard]] uint32_t annotation_size() const { return static_cast<uint32_t>(annotations_.size()); }
         [[nodiscard]] const SchemaAnnotation* annotation(uint32_t index) const {
             return SchemaAnnotation::from(annotations_[index]);
@@ -542,6 +544,9 @@ namespace shark {
     }
     inline const SchemaField* SchemaConstValue::field(uint32_t index) const {
         return SchemaField::from(std::get<Struct>(value_).fields_[index].field_);
+    }
+    inline const SchemaField* SchemaEnumValue::constexpr_field() const {
+        return SchemaField::from(constexpr_field_);
     }
     inline const SchemaEnumValue* SchemaEnum::value(uint32_t index) const {
         return SchemaEnumValue::from(values_[index]);
