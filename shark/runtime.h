@@ -15,6 +15,9 @@
 
 #pragma once
 
+#include <shark/enum.h>
+#include <fermat/hashmaps/flat_hash_map.h>
+
 namespace shark {
 
 }  // namespace shark

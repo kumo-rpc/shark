@@ -21,21 +21,25 @@ namespace shark::compiler::cpp {
 
     class EnumGenerator {
     public:
-        EnumGenerator(const SchemaEnum* e): _enum(e) {
+        EnumGenerator(const SchemaEnum* e)
+            : _enum(e) {
             KCHECK(_enum != nullptr);
         }
 
         /// run first
         /// header declare
-        void generate_global_declare(io::Printer &printer);
-        void generate_nested_declare(io::Printer &printer);
+        void generate_global_declare(io::Printer& printer);
+        void generate_nested_declare(io::Printer& printer);
+
+        void generate_traits_declare(io::Printer& printer);
+        void generate_traits_define(io::Printer& printer);
 
         /// header source define if need.
-        void generate_inline_define(io::Printer &printer);
-        void generate_source_define(io::Printer &printer);
+        void generate_inline_define(io::Printer& printer);
+        void generate_source_define(io::Printer& printer);
 
     private:
         const SchemaEnum* _enum;
     };
 
-}  // namespace shark::compiler::cpp
+} // namespace shark::compiler::cpp

@@ -202,6 +202,21 @@ void FileGenerator::generate_header(io::Printer& printer) {
     //////////////////////////////////////////////////////////////////////////////
     printer.outdent();
     generate_namespace_end(printer);
+    //////////////////////////////////////////////////////////////////////////////
+    printer.print("namespace shark {\n\n");
+    printer.indent();
+    {
+
+        printer.print("//////////////////////////////////////////////////////////////////////////////\n");
+        printer.print("/// enum scope\n");
+        for (auto &it : _enum_generators) {
+            it.generate_traits_declare(printer);
+        }
+
+    }
+    printer.outdent();
+    printer.print("}  // namespace shark \n\n");
+
 }
 
 void FileGenerator::generate_source(io::Printer& printer) {
@@ -227,6 +242,21 @@ void FileGenerator::generate_source(io::Printer& printer) {
     //////////////////////////////////////////////////////////////////////////////
     printer.outdent();
     generate_namespace_end(printer);
+    //////////////////////////////////////////////////////////////////////////////
+    printer.print("namespace shark {\n\n");
+    printer.indent();
+    {
+
+        printer.print("//////////////////////////////////////////////////////////////////////////////\n");
+        printer.print("/// enum scope\n");
+        for (auto &it : _enum_generators) {
+            it.generate_traits_define(printer);
+        }
+
+
+    }
+    printer.outdent();
+    printer.print("}  // namespace shark \n\n");
 }
 
 }  // namespace shark::compiler::cpp

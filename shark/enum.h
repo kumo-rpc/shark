@@ -30,7 +30,7 @@
 //   - `enum_min`, `enum_max`        constexpr bounds
 //   - `value_count`                 number of enumerators
 //   - `is_valid(int64_t)`           raw wire value is a known enumerator
-//   - `descriptor()`                const EnumDescriptor* (nullptr in lite)
+//   - `schema()`                const SchemaEnum* (nullptr in lite)
 //   - `enum_name(E)`                canonical name ("" in lite)
 //   - `enum_parse(string_view, E*)  name -> value (false in lite)
 //
@@ -50,16 +50,14 @@
 #pragma once
 
 #include <cstdint>
-#include <string>
 #include <type_traits>
 #include <string_view>
 #include <limits>
-#include <shark/port.h>
-#include <shark/stubs/port.h>
+#include <shark/schema/schema_pool_api.h>
 
 namespace shark {
 
-    class EnumDescriptor;
+    class SchemaEnum;
 
     ////////////////////////////////////////////////////////////////////////
     /// generated
@@ -77,8 +75,8 @@ namespace shark {
     ///   static constexpr E enum_max;
     ///   static constexpr uint32_t enum_array_size;
     ///   static bool is_valid(int64_t);        // range already checked by caller
-    ///   static const EnumDescriptor* descriptor();
-    ///   static const std::string& enum_name(E);
+    ///   static const SchemaEnum* schema();
+    ///   static std::string_view enum_name(E);
     ///   static bool enum_parse(std::string_view, E*);
     ///
     /// Example generated output:
@@ -92,12 +90,12 @@ namespace shark {
     ///       static constexpr Color enum_max = Color::BLUE;
     ///       static constexpr uint32_t enum_array_size = 3;
     ///       static bool is_valid(int64_t v);
-    ///       static const EnumDescriptor* descriptor();
-    ///       static const std::string& enum_name(Color v);
+    ///       static const SchemaEnum* schema();
+    ///       static std::string_view enum_name(Color v);
     ///       static bool enum_parse(std::string_view name, Color* out);
     ///   };
     ///
-    ///   // bodies of is_valid / descriptor / enum_name / enum_parse go to
+    ///   // bodies of is_valid / schema / enum_name / enum_parse go to
     ///   // the generated .cc (lite mode: nullptr / "" / false).
     template <typename E>
     struct EnumTraitImpl {
@@ -107,19 +105,18 @@ namespace shark {
 
         static constexpr uint32_t value_count = 0;
 
-        static constexpr bool has_descriptor = false;
+        static constexpr bool has_schema = false;
 
-        static inline const EnumDescriptor* descriptor() {
+        static inline const SchemaEnum* schema() {
             return nullptr;
         }
 
-        static inline const std::string& enum_name(E enum_t_value) {
+        static inline std::string_view enum_name(E enum_t_value) {
             (void)enum_t_value;
-            static const std::string kEmpty;
-            return kEmpty;
+            return {};
         }
 
-        static inline bool enum_parse(ConstStringParam name, E* value) {
+        static inline bool enum_parse(std::string_view name, E* value) {
             (void)name;
             (void)value;
             return false;
@@ -133,17 +130,17 @@ namespace shark {
     };
 
     template <typename E, bool Has>
-    struct EnumDescriptorProvider {};
+    struct SchemaEnumProvider {};
 
     template <typename E>
-    struct EnumDescriptorProvider<E, true> {
-        static inline const EnumDescriptor* descriptor() {
-            return EnumTraitImpl<E>::descriptor();
+    struct SchemaEnumProvider<E, true> {
+        static inline const SchemaEnum* schema() {
+            return EnumTraitImpl<E>::schema();
         }
     };
 
     template <typename E>
-    struct EnumTrait : public EnumDescriptorProvider<E,EnumTraitImpl<E>::has_descriptor>{
+    struct EnumTrait : public SchemaEnumProvider<E,EnumTraitImpl<E>::has_schema>{
         using underlying = typename EnumTraitImpl<E>::underlying;
         using enum_type = E;
 
@@ -165,7 +162,7 @@ namespace shark {
         static constexpr underlying underlying_min = static_cast<underlying>(enum_min);
         static constexpr underlying underlying_max = static_cast<underlying>(enum_max);
 
-        static constexpr bool has_descriptor = EnumTraitImpl<E>::has_descriptor;
+        static constexpr bool has_schema = EnumTraitImpl<E>::has_schema;
 
         static constexpr bool fits_underlying(int64_t value) {
             return EnumTraitImpl<E>::fits_underlying(value);
@@ -179,17 +176,17 @@ namespace shark {
             return static_cast<underlying>(value);
         }
 
-        static inline const std::string& enum_name(enum_type enum_t_value) {
+        static inline std::string_view enum_name(enum_type enum_t_value) {
             return EnumTraitImpl<E>::enum_name(enum_t_value);
         }
 
         template<typename T>
-        static inline const std::string& enum_name(T enum_t_value) {
+        static inline std::string_view enum_name(T enum_t_value) {
             static_assert(std::is_integral_v<T> || std::is_enum_v<T>,"must be integer or enum");
             return EnumTraitImpl<E>::enum_name(static_cast<E>(enum_t_value));
         }
 
-        static inline bool enum_parse(ConstStringParam name, enum_type* value) {
+        static inline bool enum_parse(std::string_view name, enum_type* value) {
             return EnumTraitImpl<E>::enum_parse(name, value);
         }
 

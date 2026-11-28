@@ -77,6 +77,7 @@ kmcmake_cc_library(
         compiler/cpp/servlet.cc
         compiler/cpp/file.cc
         compiler/cpp/constexpr.cc
+        compiler/cpp/keyword.cc
         CXXOPTS
         ${KMCMAKE_CXX_OPTIONS}
         LINKS
@@ -100,3 +101,27 @@ kmcmake_cc_binary(
         PUBLIC
 )
 
+
+kmcmake_cc_library(
+        NAME shark
+        NAMESPACE shark
+        SOURCES
+        common/filepath.cc
+        common/clog.cc
+        schema/schema_pool.cc
+        schema/schema_pool_api.cc
+        schema/constrain.cc
+        schema/pass_check.cc
+        schema/uri.cc
+        schema/annotation.cc
+        io/printer.cc
+        io/zero_copy_stream.cc
+        io/memory_zero_copy_stream.cc
+        io/file_zero_copy_stream.cc
+        runtime.cc
+        CXXOPTS
+        ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        ${KMCMAKE_DEPS_LINK}
+        PUBLIC
+)
